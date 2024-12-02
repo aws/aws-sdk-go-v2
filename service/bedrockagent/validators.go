@@ -390,6 +390,26 @@ func (m *validateOpDeleteFlowVersion) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteKnowledgeBaseDocuments struct {
+}
+
+func (*validateOpDeleteKnowledgeBaseDocuments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteKnowledgeBaseDocuments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteKnowledgeBaseDocumentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteKnowledgeBaseDocumentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteKnowledgeBase struct {
 }
 
@@ -650,6 +670,26 @@ func (m *validateOpGetIngestionJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetKnowledgeBaseDocuments struct {
+}
+
+func (*validateOpGetKnowledgeBaseDocuments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetKnowledgeBaseDocuments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetKnowledgeBaseDocumentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetKnowledgeBaseDocumentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetKnowledgeBase struct {
 }
 
@@ -685,6 +725,26 @@ func (m *validateOpGetPrompt) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetPromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpIngestKnowledgeBaseDocuments struct {
+}
+
+func (*validateOpIngestKnowledgeBaseDocuments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpIngestKnowledgeBaseDocuments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*IngestKnowledgeBaseDocumentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpIngestKnowledgeBaseDocumentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -845,6 +905,26 @@ func (m *validateOpListIngestionJobs) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListIngestionJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListKnowledgeBaseDocuments struct {
+}
+
+func (*validateOpListKnowledgeBaseDocuments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListKnowledgeBaseDocuments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListKnowledgeBaseDocumentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListKnowledgeBaseDocumentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1266,6 +1346,10 @@ func addOpDeleteFlowVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFlowVersion{}, middleware.After)
 }
 
+func addOpDeleteKnowledgeBaseDocumentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteKnowledgeBaseDocuments{}, middleware.After)
+}
+
 func addOpDeleteKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKnowledgeBase{}, middleware.After)
 }
@@ -1318,12 +1402,20 @@ func addOpGetIngestionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIngestionJob{}, middleware.After)
 }
 
+func addOpGetKnowledgeBaseDocumentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetKnowledgeBaseDocuments{}, middleware.After)
+}
+
 func addOpGetKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKnowledgeBase{}, middleware.After)
 }
 
 func addOpGetPromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPrompt{}, middleware.After)
+}
+
+func addOpIngestKnowledgeBaseDocumentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpIngestKnowledgeBaseDocuments{}, middleware.After)
 }
 
 func addOpListAgentActionGroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -1356,6 +1448,10 @@ func addOpListFlowVersionsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListIngestionJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIngestionJobs{}, middleware.After)
+}
+
+func addOpListKnowledgeBaseDocumentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListKnowledgeBaseDocuments{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1453,6 +1549,24 @@ func validateBedrockFoundationModelConfiguration(v *types.BedrockFoundationModel
 		if err := validateParsingPrompt(v.ParsingPrompt); err != nil {
 			invalidParams.AddNested("ParsingPrompt", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateByteContentDoc(v *types.ByteContentDoc) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ByteContentDoc"}
+	if v.MimeType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MimeType"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1619,6 +1733,68 @@ func validateCrawlFilterConfiguration(v *types.CrawlFilterConfiguration) error {
 	}
 }
 
+func validateCustomContent(v *types.CustomContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomContent"}
+	if v.CustomDocumentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDocumentIdentifier"))
+	} else if v.CustomDocumentIdentifier != nil {
+		if err := validateCustomDocumentIdentifier(v.CustomDocumentIdentifier); err != nil {
+			invalidParams.AddNested("CustomDocumentIdentifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if v.S3Location != nil {
+		if err := validateCustomS3Location(v.S3Location); err != nil {
+			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InlineContent != nil {
+		if err := validateInlineContent(v.InlineContent); err != nil {
+			invalidParams.AddNested("InlineContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomDocumentIdentifier(v *types.CustomDocumentIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomDocumentIdentifier"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomS3Location(v *types.CustomS3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomS3Location"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomTransformationConfiguration(v *types.CustomTransformationConfiguration) error {
 	if v == nil {
 		return nil
@@ -1676,6 +1852,98 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	if v.SharePointConfiguration != nil {
 		if err := validateSharePointDataSourceConfiguration(v.SharePointConfiguration); err != nil {
 			invalidParams.AddNested("SharePointConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentContent(v *types.DocumentContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentContent"}
+	if len(v.DataSourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
+	}
+	if v.Custom != nil {
+		if err := validateCustomContent(v.Custom); err != nil {
+			invalidParams.AddNested("Custom", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3 != nil {
+		if err := validateS3Content(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentIdentifier(v *types.DocumentIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentIdentifier"}
+	if len(v.DataSourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
+	}
+	if v.S3 != nil {
+		if err := validateS3Location(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Custom != nil {
+		if err := validateCustomDocumentIdentifier(v.Custom); err != nil {
+			invalidParams.AddNested("Custom", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentIdentifiers(v []types.DocumentIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentIdentifiers"}
+	for i := range v {
+		if err := validateDocumentIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentMetadata(v *types.DocumentMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentMetadata"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.InlineAttributes != nil {
+		if err := validateMetadataAttributes(v.InlineAttributes); err != nil {
+			invalidParams.AddNested("InlineAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3Location != nil {
+		if err := validateCustomS3Location(v.S3Location); err != nil {
+			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2203,6 +2471,31 @@ func validateIngestionJobSortBy(v *types.IngestionJobSortBy) error {
 	}
 }
 
+func validateInlineContent(v *types.InlineContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlineContent"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ByteContent != nil {
+		if err := validateByteContentDoc(v.ByteContent); err != nil {
+			invalidParams.AddNested("ByteContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TextContent != nil {
+		if err := validateTextContentDoc(v.TextContent); err != nil {
+			invalidParams.AddNested("TextContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIntermediateStorage(v *types.IntermediateStorage) error {
 	if v == nil {
 		return nil
@@ -2233,6 +2526,47 @@ func validateKnowledgeBaseConfiguration(v *types.KnowledgeBaseConfiguration) err
 	if v.VectorKnowledgeBaseConfiguration != nil {
 		if err := validateVectorKnowledgeBaseConfiguration(v.VectorKnowledgeBaseConfiguration); err != nil {
 			invalidParams.AddNested("VectorKnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKnowledgeBaseDocument(v *types.KnowledgeBaseDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseDocument"}
+	if v.Metadata != nil {
+		if err := validateDocumentMetadata(v.Metadata); err != nil {
+			invalidParams.AddNested("Metadata", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateDocumentContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKnowledgeBaseDocuments(v []types.KnowledgeBaseDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseDocuments"}
+	for i := range v {
+		if err := validateKnowledgeBaseDocument(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2332,6 +2666,60 @@ func validateMessages(v []types.Message) error {
 		if err := validateMessage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataAttribute(v *types.MetadataAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataAttribute"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	} else if v.Value != nil {
+		if err := validateMetadataAttributeValue(v.Value); err != nil {
+			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataAttributes(v []types.MetadataAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataAttributes"}
+	for i := range v {
+		if err := validateMetadataAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataAttributeValue(v *types.MetadataAttributeValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataAttributeValue"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3003,6 +3391,25 @@ func validateRetrievalFlowNodeServiceConfiguration(v types.RetrievalFlowNodeServ
 	}
 }
 
+func validateS3Content(v *types.S3Content) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Content"}
+	if v.S3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Location"))
+	} else if v.S3Location != nil {
+		if err := validateS3Location(v.S3Location); err != nil {
+			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3DataSourceConfiguration(v *types.S3DataSourceConfiguration) error {
 	if v == nil {
 		return nil
@@ -3284,6 +3691,21 @@ func validateStorageFlowNodeServiceConfiguration(v types.StorageFlowNodeServiceC
 			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextContentDoc(v *types.TextContentDoc) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextContentDoc"}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3943,6 +4365,31 @@ func validateOpDeleteFlowVersionInput(v *DeleteFlowVersionInput) error {
 	}
 }
 
+func validateOpDeleteKnowledgeBaseDocumentsInput(v *DeleteKnowledgeBaseDocumentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteKnowledgeBaseDocumentsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if v.DocumentIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentIdentifiers"))
+	} else if v.DocumentIdentifiers != nil {
+		if err := validateDocumentIdentifiers(v.DocumentIdentifiers); err != nil {
+			invalidParams.AddNested("DocumentIdentifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteKnowledgeBaseInput(v *DeleteKnowledgeBaseInput) error {
 	if v == nil {
 		return nil
@@ -4177,6 +4624,31 @@ func validateOpGetIngestionJobInput(v *GetIngestionJobInput) error {
 	}
 }
 
+func validateOpGetKnowledgeBaseDocumentsInput(v *GetKnowledgeBaseDocumentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetKnowledgeBaseDocumentsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if v.DocumentIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentIdentifiers"))
+	} else if v.DocumentIdentifiers != nil {
+		if err := validateDocumentIdentifiers(v.DocumentIdentifiers); err != nil {
+			invalidParams.AddNested("DocumentIdentifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetKnowledgeBaseInput(v *GetKnowledgeBaseInput) error {
 	if v == nil {
 		return nil
@@ -4199,6 +4671,31 @@ func validateOpGetPromptInput(v *GetPromptInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetPromptInput"}
 	if v.PromptIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PromptIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpIngestKnowledgeBaseDocumentsInput(v *IngestKnowledgeBaseDocumentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngestKnowledgeBaseDocumentsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if v.Documents == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Documents"))
+	} else if v.Documents != nil {
+		if err := validateKnowledgeBaseDocuments(v.Documents); err != nil {
+			invalidParams.AddNested("Documents", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4338,6 +4835,24 @@ func validateOpListIngestionJobsInput(v *ListIngestionJobsInput) error {
 		if err := validateIngestionJobSortBy(v.SortBy); err != nil {
 			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListKnowledgeBaseDocumentsInput(v *ListKnowledgeBaseDocumentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListKnowledgeBaseDocumentsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

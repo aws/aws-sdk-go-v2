@@ -39,7 +39,7 @@ type UpdateServiceNetworkInput struct {
 	// This member is required.
 	AuthType types.AuthType
 
-	// The ID or Amazon Resource Name (ARN) of the service network.
+	// The ID or ARN of the service network.
 	//
 	// This member is required.
 	ServiceNetworkIdentifier *string

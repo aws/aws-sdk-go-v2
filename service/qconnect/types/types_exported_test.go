@@ -17,6 +17,9 @@ func ExampleAIAgentConfiguration_outputUsage() {
 	case *types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration:
 		_ = v.Value // Value is types.ManualSearchAIAgentConfiguration
 
+	case *types.AIAgentConfigurationMemberSelfServiceAIAgentConfiguration:
+		_ = v.Value // Value is types.SelfServiceAIAgentConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -26,6 +29,7 @@ func ExampleAIAgentConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.SelfServiceAIAgentConfiguration
 var _ *types.ManualSearchAIAgentConfiguration
 var _ *types.AnswerRecommendationAIAgentConfiguration
 
@@ -224,6 +228,24 @@ func ExampleManagedSourceConfiguration_outputUsage() {
 }
 
 var _ *types.WebCrawlerConfiguration
+
+func ExampleMessageData_outputUsage() {
+	var union types.MessageData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MessageDataMemberText:
+		_ = v.Value // Value is types.TextMessage
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TextMessage
 
 func ExampleMessageTemplateBodyContentProvider_outputUsage() {
 	var union types.MessageTemplateBodyContentProvider

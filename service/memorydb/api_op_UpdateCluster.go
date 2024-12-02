@@ -31,19 +31,18 @@ func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, 
 
 type UpdateClusterInput struct {
 
-	// The name of the cluster to update
+	// The name of the cluster to update.
 	//
 	// This member is required.
 	ClusterName *string
 
-	// The Access Control List that is associated with the cluster
+	// The Access Control List that is associated with the cluster.
 	ACLName *string
 
-	// The description of the cluster to update
+	// The description of the cluster to update.
 	Description *string
 
-	// The name of the engine to be used for the nodes in this cluster. The value must
-	// be set to either Redis or Valkey.
+	// The name of the engine to be used for the cluster.
 	Engine *string
 
 	// The upgraded version of the engine to be run on the nodes. You can upgrade to a
@@ -78,16 +77,16 @@ type UpdateClusterInput struct {
 	// A valid node type that you want to scale this cluster up or down to.
 	NodeType *string
 
-	// The name of the parameter group to update
+	// The name of the parameter group to update.
 	ParameterGroupName *string
 
-	// The number of replicas that will reside in each shard
+	// The number of replicas that will reside in each shard.
 	ReplicaConfiguration *types.ReplicaConfigurationRequest
 
-	// The SecurityGroupIds to update
+	// The SecurityGroupIds to update.
 	SecurityGroupIds []string
 
-	// The number of shards in the cluster
+	// The number of shards in the cluster.
 	ShardConfiguration *types.ShardConfigurationRequest
 
 	// The number of days for which MemoryDB retains automatic cluster snapshots
@@ -99,7 +98,7 @@ type UpdateClusterInput struct {
 	// snapshot of your cluster.
 	SnapshotWindow *string
 
-	// The SNS topic ARN to update
+	// The SNS topic ARN to update.
 	SnsTopicArn *string
 
 	// The status of the Amazon SNS notification topic. Notifications are sent only if
@@ -111,7 +110,7 @@ type UpdateClusterInput struct {
 
 type UpdateClusterOutput struct {
 
-	// The updated cluster
+	// The updated cluster.
 	Cluster *types.Cluster
 
 	// Metadata pertaining to the operation's result.

@@ -28,12 +28,12 @@ func (c *Client) DeleteListener(ctx context.Context, params *DeleteListenerInput
 
 type DeleteListenerInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// The ID or ARN of the listener.
 	//
 	// This member is required.
 	ListenerIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

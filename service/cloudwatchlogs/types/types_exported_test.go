@@ -7,6 +7,42 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
 
+func ExampleIntegrationDetails_outputUsage() {
+	var union types.IntegrationDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IntegrationDetailsMemberOpenSearchIntegrationDetails:
+		_ = v.Value // Value is types.OpenSearchIntegrationDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OpenSearchIntegrationDetails
+
+func ExampleResourceConfig_outputUsage() {
+	var union types.ResourceConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ResourceConfigMemberOpenSearchResourceConfig:
+		_ = v.Value // Value is types.OpenSearchResourceConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OpenSearchResourceConfig
+
 func ExampleStartLiveTailResponseStream_outputUsage() {
 	var union types.StartLiveTailResponseStream
 	// type switches can be used to check the union value

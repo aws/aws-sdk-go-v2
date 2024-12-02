@@ -43,6 +43,10 @@ type PutIntegrationInput struct {
 	// This member is required.
 	DomainName *string
 
+	// A list of unique names for active event triggers associated with the
+	// integration.
+	EventTriggerNames []string
+
 	// The configuration that controls how Customer Profiles retrieves data from the
 	// source.
 	FlowDefinition *types.FlowDefinition
@@ -91,6 +95,11 @@ type PutIntegrationOutput struct {
 	//
 	// This member is required.
 	Uri *string
+
+	// A list of unique names for active event triggers associated with the
+	// integration. This list would be empty if no Event Trigger is associated with the
+	// integration.
+	EventTriggerNames []string
 
 	// Boolean that shows if the Flow that's associated with the Integration is
 	// created in Amazon Appflow, or with ObjectTypeName equals _unstructured via

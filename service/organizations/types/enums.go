@@ -262,6 +262,7 @@ const (
 	EffectivePolicyTypeBackupPolicy           EffectivePolicyType = "BACKUP_POLICY"
 	EffectivePolicyTypeAiservicesOptOutPolicy EffectivePolicyType = "AISERVICES_OPT_OUT_POLICY"
 	EffectivePolicyTypeChatbotPolicy          EffectivePolicyType = "CHATBOT_POLICY"
+	EffectivePolicyTypeDeclarativePolicyEc2   EffectivePolicyType = "DECLARATIVE_POLICY_EC2"
 )
 
 // Values returns all known values for EffectivePolicyType. Note that this can be
@@ -274,6 +275,7 @@ func (EffectivePolicyType) Values() []EffectivePolicyType {
 		"BACKUP_POLICY",
 		"AISERVICES_OPT_OUT_POLICY",
 		"CHATBOT_POLICY",
+		"DECLARATIVE_POLICY_EC2",
 	}
 }
 
@@ -534,6 +536,7 @@ const (
 	PolicyTypeBackupPolicy           PolicyType = "BACKUP_POLICY"
 	PolicyTypeAiservicesOptOutPolicy PolicyType = "AISERVICES_OPT_OUT_POLICY"
 	PolicyTypeChatbotPolicy          PolicyType = "CHATBOT_POLICY"
+	PolicyTypeDeclarativePolicyEc2   PolicyType = "DECLARATIVE_POLICY_EC2"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -548,6 +551,7 @@ func (PolicyType) Values() []PolicyType {
 		"BACKUP_POLICY",
 		"AISERVICES_OPT_OUT_POLICY",
 		"CHATBOT_POLICY",
+		"DECLARATIVE_POLICY_EC2",
 	}
 }
 

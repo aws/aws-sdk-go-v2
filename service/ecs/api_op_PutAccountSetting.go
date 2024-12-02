@@ -69,12 +69,22 @@ type PutAccountSettingInput struct {
 	//   feature are launched have the increased ENI limits available to them. For more
 	//   information, see [Elastic Network Interface Trunking]in the Amazon Elastic Container Service Developer Guide.
 	//
-	//   - containerInsights - When modified, the default setting indicating whether
-	//   Amazon Web Services CloudWatch Container Insights is turned on for your clusters
-	//   is changed. If containerInsights is turned on, any new clusters that are
-	//   created will have Container Insights turned on unless you disable it during
-	//   cluster creation. For more information, see [CloudWatch Container Insights]in the Amazon Elastic Container
-	//   Service Developer Guide.
+	//   - containerInsights - Container Insights with enhanced observability provides
+	//   all the Container Insights metrics, plus additional task and container metrics.
+	//   This version supports enhanced observability for Amazon ECS clusters using the
+	//   Amazon EC2 and Fargate launch types. After you configure Container Insights with
+	//   enhanced observability on Amazon ECS, Container Insights auto-collects detailed
+	//   infrastructure telemetry from the cluster level down to the container level in
+	//   your environment and displays these critical performance data in curated
+	//   dashboards removing the heavy lifting in observability set-up.
+	//
+	// To use Container Insights with enhanced observability, set the containerInsights
+	//   account setting to enhanced .
+	//
+	// To use Container Insights, set the containerInsights account setting to enabled .
+	//
+	// For more information, see [Monitor Amazon ECS containers using Container Insights with enhanced observability]in the Amazon Elastic Container Service Developer
+	//   Guide.
 	//
 	//   - dualStackIPv6 - When turned on, when using a VPC in dual stack mode, your
 	//   tasks using the awsvpc network mode can have an IPv6 address assigned. For
@@ -106,13 +116,13 @@ type PutAccountSettingInput struct {
 	// [Amazon Web Services Fargate task maintenance]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
 	// [Elastic Network Interface Trunking]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
 	// [Protecting Amazon ECS workloads with Amazon ECS Runtime Monitoring]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
-	// [CloudWatch Container Insights]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
+	// [Monitor Amazon ECS containers using Container Insights with enhanced observability]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
 	//
 	// This member is required.
 	Name types.SettingName
 
 	// The account setting value for the specified principal ARN. Accepted values are
-	// enabled , disabled , on , and off .
+	// enabled , disabled , enhanced , on , and off .
 	//
 	// When you specify fargateTaskRetirementWaitPeriod for the name , the following
 	// are the valid values:

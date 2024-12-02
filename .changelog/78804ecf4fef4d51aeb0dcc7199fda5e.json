@@ -1,0 +1,8 @@
+{
+    "id": "78804ecf-4fef-4d51-aeb0-dcc7199fda5e",
+    "type": "feature",
+    "description": "Amazon RDS supports CloudWatch Database Insights. You can use the SDK to create, modify, and describe the DatabaseInsightsMode for your DB instances and clusters.",
+    "modules": [
+        "service/rds"
+    ]
+}

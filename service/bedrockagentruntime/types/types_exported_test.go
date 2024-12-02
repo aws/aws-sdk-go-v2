@@ -422,6 +422,27 @@ func ExamplePreProcessingTrace_outputUsage() {
 var _ *types.ModelInvocationInput
 var _ *types.PreProcessingModelInvocationOutput
 
+func ExampleRerankingMetadataSelectiveModeConfiguration_outputUsage() {
+	var union types.RerankingMetadataSelectiveModeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude:
+		_ = v.Value // Value is []types.FieldForReranking
+
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude:
+		_ = v.Value // Value is []types.FieldForReranking
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.FieldForReranking
+
 func ExampleResponseStream_outputUsage() {
 	var union types.ResponseStream
 	// type switches can be used to check the union value
@@ -506,6 +527,32 @@ func ExampleRetrievalFilter_outputUsage() {
 
 var _ []types.RetrievalFilter
 var _ *types.FilterAttribute
+
+func ExampleRetrieveAndGenerateStreamResponseOutput_outputUsage() {
+	var union types.RetrieveAndGenerateStreamResponseOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RetrieveAndGenerateStreamResponseOutputMemberCitation:
+		_ = v.Value // Value is types.CitationEvent
+
+	case *types.RetrieveAndGenerateStreamResponseOutputMemberGuardrail:
+		_ = v.Value // Value is types.GuardrailEvent
+
+	case *types.RetrieveAndGenerateStreamResponseOutputMemberOutput:
+		_ = v.Value // Value is types.RetrieveAndGenerateOutputEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GuardrailEvent
+var _ *types.CitationEvent
+var _ *types.RetrieveAndGenerateOutputEvent
 
 func ExampleTrace_outputUsage() {
 	var union types.Trace

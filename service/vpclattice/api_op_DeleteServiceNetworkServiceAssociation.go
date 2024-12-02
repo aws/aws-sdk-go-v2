@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the association between a specified service and the specific service
-// network. This operation fails if an association is still in progress.
+// Deletes the association between a service and a service network. This operation
+// fails if an association is still in progress.
 func (c *Client) DeleteServiceNetworkServiceAssociation(ctx context.Context, params *DeleteServiceNetworkServiceAssociationInput, optFns ...func(*Options)) (*DeleteServiceNetworkServiceAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteServiceNetworkServiceAssociationInput{}
@@ -30,7 +30,7 @@ func (c *Client) DeleteServiceNetworkServiceAssociation(ctx context.Context, par
 
 type DeleteServiceNetworkServiceAssociationInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the association.
+	// The ID or ARN of the association.
 	//
 	// This member is required.
 	ServiceNetworkServiceAssociationIdentifier *string

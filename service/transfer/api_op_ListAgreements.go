@@ -38,7 +38,7 @@ type ListAgreementsInput struct {
 	// This member is required.
 	ServerId *string
 
-	// The maximum number of agreements to return.
+	// The maximum number of items to return.
 	MaxResults *int32
 
 	// When you can get additional results from the ListAgreements call, a NextToken
@@ -168,7 +168,7 @@ func (c *Client) addOperationListAgreementsMiddlewares(stack *middleware.Stack, 
 
 // ListAgreementsPaginatorOptions is the paginator options for ListAgreements
 type ListAgreementsPaginatorOptions struct {
-	// The maximum number of agreements to return.
+	// The maximum number of items to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

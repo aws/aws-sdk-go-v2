@@ -386,6 +386,35 @@ func (e *InvalidKMSKeyFault) ErrorCode() string {
 }
 func (e *InvalidKMSKeyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The requested operation cannot be performed on the multi-Region cluster in its
+// current state.
+type InvalidMultiRegionClusterStateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidMultiRegionClusterStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidMultiRegionClusterStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidMultiRegionClusterStateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidMultiRegionClusterStateFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidMultiRegionClusterStateFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 type InvalidNodeStateFault struct {
 	Message *string
 
@@ -587,6 +616,88 @@ func (e *InvalidVPCNetworkStateFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A multi-Region cluster with the specified name already exists.
+type MultiRegionClusterAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MultiRegionClusterAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MultiRegionClusterAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MultiRegionClusterAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MultiRegionClusterAlreadyExistsFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MultiRegionClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The specified multi-Region cluster does not exist.
+type MultiRegionClusterNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MultiRegionClusterNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MultiRegionClusterNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MultiRegionClusterNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MultiRegionClusterNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MultiRegionClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified multi-Region parameter group does not exist.
+type MultiRegionParameterGroupNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MultiRegionParameterGroupNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MultiRegionParameterGroupNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MultiRegionParameterGroupNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MultiRegionParameterGroupNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MultiRegionParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 type NodeQuotaForClusterExceededFault struct {
 	Message *string

@@ -155,6 +155,25 @@ func (ConfluenceHostType) Values() []ConfluenceHostType {
 	}
 }
 
+type ContentDataSourceType string
+
+// Enum values for ContentDataSourceType
+const (
+	ContentDataSourceTypeCustom ContentDataSourceType = "CUSTOM"
+	ContentDataSourceTypeS3     ContentDataSourceType = "S3"
+)
+
+// Values returns all known values for ContentDataSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentDataSourceType) Values() []ContentDataSourceType {
+	return []ContentDataSourceType{
+		"CUSTOM",
+		"S3",
+	}
+}
+
 type ConversationRole string
 
 // Enum values for ConversationRole
@@ -228,6 +247,25 @@ func (CustomControlMethod) Values() []CustomControlMethod {
 	}
 }
 
+type CustomSourceType string
+
+// Enum values for CustomSourceType
+const (
+	CustomSourceTypeInLine     CustomSourceType = "IN_LINE"
+	CustomSourceTypeS3Location CustomSourceType = "S3_LOCATION"
+)
+
+// Values returns all known values for CustomSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomSourceType) Values() []CustomSourceType {
+	return []CustomSourceType{
+		"IN_LINE",
+		"S3_LOCATION",
+	}
+}
+
 type DataDeletionPolicy string
 
 // Enum values for DataDeletionPolicy
@@ -277,6 +315,7 @@ const (
 	DataSourceTypeConfluence DataSourceType = "CONFLUENCE"
 	DataSourceTypeSalesforce DataSourceType = "SALESFORCE"
 	DataSourceTypeSharepoint DataSourceType = "SHAREPOINT"
+	DataSourceTypeCustom     DataSourceType = "CUSTOM"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -290,6 +329,46 @@ func (DataSourceType) Values() []DataSourceType {
 		"CONFLUENCE",
 		"SALESFORCE",
 		"SHAREPOINT",
+		"CUSTOM",
+	}
+}
+
+type DocumentStatus string
+
+// Enum values for DocumentStatus
+const (
+	DocumentStatusIndexed                  DocumentStatus = "INDEXED"
+	DocumentStatusPartiallyIndexed         DocumentStatus = "PARTIALLY_INDEXED"
+	DocumentStatusPending                  DocumentStatus = "PENDING"
+	DocumentStatusFailed                   DocumentStatus = "FAILED"
+	DocumentStatusMetadataPartiallyIndexed DocumentStatus = "METADATA_PARTIALLY_INDEXED"
+	DocumentStatusMetadataUpdateFailed     DocumentStatus = "METADATA_UPDATE_FAILED"
+	DocumentStatusIgnored                  DocumentStatus = "IGNORED"
+	DocumentStatusNotFound                 DocumentStatus = "NOT_FOUND"
+	DocumentStatusStarting                 DocumentStatus = "STARTING"
+	DocumentStatusInProgress               DocumentStatus = "IN_PROGRESS"
+	DocumentStatusDeleting                 DocumentStatus = "DELETING"
+	DocumentStatusDeleteInProgress         DocumentStatus = "DELETE_IN_PROGRESS"
+)
+
+// Values returns all known values for DocumentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentStatus) Values() []DocumentStatus {
+	return []DocumentStatus{
+		"INDEXED",
+		"PARTIALLY_INDEXED",
+		"PENDING",
+		"FAILED",
+		"METADATA_PARTIALLY_INDEXED",
+		"METADATA_UPDATE_FAILED",
+		"IGNORED",
+		"NOT_FOUND",
+		"STARTING",
+		"IN_PROGRESS",
+		"DELETING",
+		"DELETE_IN_PROGRESS",
 	}
 }
 
@@ -582,6 +661,25 @@ func (IngestionJobStatus) Values() []IngestionJobStatus {
 	}
 }
 
+type InlineContentType string
+
+// Enum values for InlineContentType
+const (
+	InlineContentTypeByte InlineContentType = "BYTE"
+	InlineContentTypeText InlineContentType = "TEXT"
+)
+
+// Values returns all known values for InlineContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InlineContentType) Values() []InlineContentType {
+	return []InlineContentType{
+		"BYTE",
+		"TEXT",
+	}
+}
+
 type KnowledgeBaseState string
 
 // Enum values for KnowledgeBaseState
@@ -684,6 +782,48 @@ const (
 func (MemoryType) Values() []MemoryType {
 	return []MemoryType{
 		"SESSION_SUMMARY",
+	}
+}
+
+type MetadataSourceType string
+
+// Enum values for MetadataSourceType
+const (
+	MetadataSourceTypeInLineAttribute MetadataSourceType = "IN_LINE_ATTRIBUTE"
+	MetadataSourceTypeS3Location      MetadataSourceType = "S3_LOCATION"
+)
+
+// Values returns all known values for MetadataSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataSourceType) Values() []MetadataSourceType {
+	return []MetadataSourceType{
+		"IN_LINE_ATTRIBUTE",
+		"S3_LOCATION",
+	}
+}
+
+type MetadataValueType string
+
+// Enum values for MetadataValueType
+const (
+	MetadataValueTypeBoolean    MetadataValueType = "BOOLEAN"
+	MetadataValueTypeNumber     MetadataValueType = "NUMBER"
+	MetadataValueTypeString     MetadataValueType = "STRING"
+	MetadataValueTypeStringList MetadataValueType = "STRING_LIST"
+)
+
+// Values returns all known values for MetadataValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataValueType) Values() []MetadataValueType {
+	return []MetadataValueType{
+		"BOOLEAN",
+		"NUMBER",
+		"STRING",
+		"STRING_LIST",
 	}
 }
 

@@ -2,6 +2,25 @@
 
 package types
 
+type ActorSessionMfaStatus string
+
+// Enum values for ActorSessionMfaStatus
+const (
+	ActorSessionMfaStatusEnabled  ActorSessionMfaStatus = "ENABLED"
+	ActorSessionMfaStatusDisabled ActorSessionMfaStatus = "DISABLED"
+)
+
+// Values returns all known values for ActorSessionMfaStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActorSessionMfaStatus) Values() []ActorSessionMfaStatus {
+	return []ActorSessionMfaStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type AdminStatus string
 
 // Enum values for AdminStatus
@@ -176,6 +195,25 @@ func (ConfigurationPolicyAssociationStatus) Values() []ConfigurationPolicyAssoci
 		"PENDING",
 		"SUCCESS",
 		"FAILED",
+	}
+}
+
+type ConnectionDirection string
+
+// Enum values for ConnectionDirection
+const (
+	ConnectionDirectionInbound  ConnectionDirection = "INBOUND"
+	ConnectionDirectionOutbound ConnectionDirection = "OUTBOUND"
+)
+
+// Values returns all known values for ConnectionDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionDirection) Values() []ConnectionDirection {
+	return []ConnectionDirection{
+		"INBOUND",
+		"OUTBOUND",
 	}
 }
 

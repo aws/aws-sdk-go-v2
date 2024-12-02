@@ -32,7 +32,7 @@ func (c *Client) ListProfiles(ctx context.Context, params *ListProfilesInput, op
 
 type ListProfilesInput struct {
 
-	// The maximum number of profiles to return.
+	// The maximum number of items to return.
 	MaxResults *int32
 
 	// When there are additional results that were not returned, a NextToken parameter
@@ -164,7 +164,7 @@ func (c *Client) addOperationListProfilesMiddlewares(stack *middleware.Stack, op
 
 // ListProfilesPaginatorOptions is the paginator options for ListProfiles
 type ListProfilesPaginatorOptions struct {
-	// The maximum number of profiles to return.
+	// The maximum number of items to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

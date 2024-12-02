@@ -34,7 +34,7 @@ type ListAccessesInput struct {
 	// This member is required.
 	ServerId *string
 
-	// Specifies the maximum number of access SIDs to return.
+	// The maximum number of items to return.
 	MaxResults *int32
 
 	// When you can get additional results from the ListAccesses call, a NextToken
@@ -171,7 +171,7 @@ func (c *Client) addOperationListAccessesMiddlewares(stack *middleware.Stack, op
 
 // ListAccessesPaginatorOptions is the paginator options for ListAccesses
 type ListAccessesPaginatorOptions struct {
-	// Specifies the maximum number of access SIDs to return.
+	// The maximum number of items to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

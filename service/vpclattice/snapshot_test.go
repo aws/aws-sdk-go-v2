@@ -98,6 +98,30 @@ func TestCheckSnapshot_CreateListener(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateResourceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateResourceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateResourceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateResourceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRule(context.Background(), nil, func(o *Options) {
@@ -127,6 +151,18 @@ func TestCheckSnapshot_CreateServiceNetwork(t *testing.T) {
 	_, err := svc.CreateServiceNetwork(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateServiceNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateServiceNetworkResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateServiceNetworkResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateServiceNetworkResourceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -206,6 +242,42 @@ func TestCheckSnapshot_DeleteListener(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteResourceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteResourceEndpointAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceEndpointAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourceEndpointAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteResourceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
@@ -247,6 +319,18 @@ func TestCheckSnapshot_DeleteServiceNetwork(t *testing.T) {
 	_, err := svc.DeleteServiceNetwork(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteServiceNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteServiceNetworkResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceNetworkResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteServiceNetworkResourceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -338,6 +422,30 @@ func TestCheckSnapshot_GetListener(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetResourceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
@@ -379,6 +487,18 @@ func TestCheckSnapshot_GetServiceNetwork(t *testing.T) {
 	_, err := svc.GetServiceNetwork(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetServiceNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetServiceNetworkResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetServiceNetworkResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetServiceNetworkResourceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -446,11 +566,59 @@ func TestCheckSnapshot_ListListeners(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListResourceConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourceConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResourceEndpointAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceEndpointAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourceEndpointAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResourceGateways(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceGateways(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourceGateways")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListServiceNetworkResourceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceNetworkResourceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListServiceNetworkResourceAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -487,6 +655,18 @@ func TestCheckSnapshot_ListServiceNetworkVpcAssociations(t *testing.T) {
 	_, err := svc.ListServiceNetworkVpcAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListServiceNetworkVpcAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListServiceNetworkVpcEndpointAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceNetworkVpcEndpointAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListServiceNetworkVpcEndpointAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -626,6 +806,30 @@ func TestCheckSnapshot_UpdateListener(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateResourceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResourceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateResourceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateResourceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResourceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateResourceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateRule(context.Background(), nil, func(o *Options) {
@@ -721,6 +925,30 @@ func TestUpdateSnapshot_CreateListener(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateResourceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateResourceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateResourceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateResourceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRule(context.Background(), nil, func(o *Options) {
@@ -750,6 +978,18 @@ func TestUpdateSnapshot_CreateServiceNetwork(t *testing.T) {
 	_, err := svc.CreateServiceNetwork(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateServiceNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateServiceNetworkResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateServiceNetworkResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateServiceNetworkResourceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -829,6 +1069,42 @@ func TestUpdateSnapshot_DeleteListener(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteResourceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteResourceEndpointAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceEndpointAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourceEndpointAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteResourceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
@@ -870,6 +1146,18 @@ func TestUpdateSnapshot_DeleteServiceNetwork(t *testing.T) {
 	_, err := svc.DeleteServiceNetwork(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteServiceNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteServiceNetworkResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceNetworkResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteServiceNetworkResourceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -961,6 +1249,30 @@ func TestUpdateSnapshot_GetListener(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetResourceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
@@ -1002,6 +1314,18 @@ func TestUpdateSnapshot_GetServiceNetwork(t *testing.T) {
 	_, err := svc.GetServiceNetwork(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetServiceNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetServiceNetworkResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetServiceNetworkResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetServiceNetworkResourceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1069,11 +1393,59 @@ func TestUpdateSnapshot_ListListeners(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListResourceConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourceConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResourceEndpointAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceEndpointAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourceEndpointAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResourceGateways(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceGateways(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourceGateways")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListServiceNetworkResourceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceNetworkResourceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListServiceNetworkResourceAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1110,6 +1482,18 @@ func TestUpdateSnapshot_ListServiceNetworkVpcAssociations(t *testing.T) {
 	_, err := svc.ListServiceNetworkVpcAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListServiceNetworkVpcAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListServiceNetworkVpcEndpointAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceNetworkVpcEndpointAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListServiceNetworkVpcEndpointAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1242,6 +1626,30 @@ func TestUpdateSnapshot_UpdateListener(t *testing.T) {
 	_, err := svc.UpdateListener(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateListener")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateResourceConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResourceConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateResourceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateResourceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResourceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateResourceGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

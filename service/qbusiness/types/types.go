@@ -297,17 +297,55 @@ type AppliedCreatorModeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A file directly uploaded into a web experience chat.
+// An attachment in an Amazon Q Business conversation.
+type Attachment struct {
+
+	// The identifier of the Amazon Q Business attachment.
+	AttachmentId *string
+
+	// The identifier of the Amazon Q Business conversation the attachment is
+	// associated with.
+	ConversationId *string
+
+	// A CopyFromSource containing a reference to the original source of the Amazon Q
+	// Business attachment.
+	CopyFrom CopyFromSource
+
+	// The Unix timestamp when the Amazon Q Business attachment was created.
+	CreatedAt *time.Time
+
+	// ErrorDetail providing information about a Amazon Q Business attachment error.
+	Error *ErrorDetail
+
+	// Size in bytes of the Amazon Q Business attachment.
+	FileSize *int32
+
+	// Filetype of the Amazon Q Business attachment.
+	FileType *string
+
+	// MD5 checksum of the Amazon Q Business attachment contents.
+	Md5chksum *string
+
+	// Filename of the Amazon Q Business attachment.
+	Name *string
+
+	// AttachmentStatus of the Amazon Q Business attachment.
+	Status AttachmentStatus
+
+	noSmithyDocumentSerde
+}
+
+// This is either a file directly uploaded into a web experience chat or a
+// reference to an existing attachment that is part of a web experience chat.
 type AttachmentInput struct {
 
-	// The data contained within the uploaded file.
-	//
-	// This member is required.
+	// A reference to an existing attachment.
+	CopyFrom CopyFromSource
+
+	// The contents of the attachment.
 	Data []byte
 
-	// The name of the file.
-	//
-	// This member is required.
+	// The filename of the attachment.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -317,7 +355,8 @@ type AttachmentInput struct {
 // web experience chat.
 type AttachmentInputEvent struct {
 
-	// A file directly uploaded into a web experience chat.
+	// This is either a file directly uploaded into a web experience chat or a
+	// reference to an existing attachment that is part of a web experience chat.
 	Attachment *AttachmentInput
 
 	noSmithyDocumentSerde
@@ -325,6 +364,12 @@ type AttachmentInputEvent struct {
 
 // The details of a file uploaded during chat.
 type AttachmentOutput struct {
+
+	// The unique identifier of the Amazon Q Business attachment.
+	AttachmentId *string
+
+	// The unique identifier of the Amazon Q Business conversation.
+	ConversationId *string
 
 	// An error associated with a file uploaded during chat.
 	Error *ErrorDetail
@@ -523,6 +568,26 @@ type BlockedPhrasesConfigurationUpdate struct {
 	// The configured custom message displayed to your end user when they use blocked
 	// phrase during chat.
 	SystemMessageOverride *string
+
+	noSmithyDocumentSerde
+}
+
+// The container for browser extension configuration for an Amazon Q Business web
+// experience.
+type BrowserExtensionConfiguration struct {
+
+	// Specify the browser extensions allowed for your Amazon Q web experience.
+	//
+	//   - CHROME — Enables the extension for Chromium-based browsers (Google Chrome,
+	//   Microsoft Edge, Opera, etc.).
+	//
+	//   - FIREFOX — Enables the extension for Mozilla Firefox.
+	//
+	//   - CHROME and FIREFOX — Enable the extension for Chromium-based browsers and
+	//   Mozilla Firefox.
+	//
+	// This member is required.
+	EnabledBrowserExtensions []BrowserExtension
 
 	noSmithyDocumentSerde
 }
@@ -760,6 +825,40 @@ type Conversation struct {
 	noSmithyDocumentSerde
 }
 
+// The source reference for an existing attachment in an existing conversation.
+type ConversationSource struct {
+
+	// The unique identifier of the Amazon Q Business attachment.
+	//
+	// This member is required.
+	AttachmentId *string
+
+	// The unique identifier of the Amazon Q Business conversation.
+	//
+	// This member is required.
+	ConversationId *string
+
+	noSmithyDocumentSerde
+}
+
+// The source reference for an existing attachment.
+//
+// The following types satisfy this interface:
+//
+//	CopyFromSourceMemberConversation
+type CopyFromSource interface {
+	isCopyFromSource()
+}
+
+// A reference to an attachment in an existing conversation.
+type CopyFromSourceMemberConversation struct {
+	Value ConversationSource
+
+	noSmithyDocumentSerde
+}
+
+func (*CopyFromSourceMemberConversation) isCopyFromSource() {}
+
 // Configuration information required to invoke chat in CREATOR_MODE .
 //
 // For more information, see [Admin controls and guardrails] and [Conversation settings].
@@ -963,6 +1062,9 @@ type Document struct {
 	// The configuration information for altering document metadata and content during
 	// the document ingestion process.
 	DocumentEnrichmentConfiguration *DocumentEnrichmentConfiguration
+
+	// The configuration for extracting information from media in the document.
+	MediaExtractionConfiguration *MediaExtractionConfiguration
 
 	// The title of the document.
 	Title *string
@@ -1350,13 +1452,13 @@ type EndOfInputEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a data source sync error.
+// Provides information about a Amazon Q Business request error.
 type ErrorDetail struct {
 
-	// The code associated with the data source sync error.
+	// The code associated with the Amazon Q Business request error.
 	ErrorCode ErrorCode
 
-	// The message explaining the data source sync error.
+	// The message explaining the Amazon Q Business request error.
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
@@ -1522,6 +1624,21 @@ type IdentityProviderConfigurationMemberSamlConfiguration struct {
 
 func (*IdentityProviderConfigurationMemberSamlConfiguration) isIdentityProviderConfiguration() {}
 
+// The configuration for extracting semantic meaning from images in documents. For
+// more information, see [Extracting semantic meaning from images and visuals].
+//
+// [Extracting semantic meaning from images and visuals]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html
+type ImageExtractionConfiguration struct {
+
+	// Specify whether to extract semantic meaning from images and visuals from
+	// documents.
+	//
+	// This member is required.
+	ImageExtractionStatus ImageExtractionStatus
+
+	noSmithyDocumentSerde
+}
+
 // Summary information for your Amazon Q Business index.
 type Index struct {
 
@@ -1624,6 +1741,18 @@ type KendraIndexConfiguration struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for extracting information from media in documents.
+type MediaExtractionConfiguration struct {
+
+	// The configuration for extracting semantic meaning from images in documents. For
+	// more information, see [Extracting semantic meaning from images and visuals].
+	//
+	// [Extracting semantic meaning from images and visuals]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html
+	ImageExtractionConfiguration *ImageExtractionConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2319,6 +2448,14 @@ type TextSegment struct {
 	// ends.
 	EndOffset *int32
 
+	// The identifier of the media object associated with the text segment in the
+	// source attribution.
+	MediaId *string
+
+	// The MIME type (image/png) of the media object associated with the text segment
+	// in the source attribution.
+	MediaMimeType *string
+
 	// The relevant text excerpt from a source that was used to generate a citation
 	// text segment in an Amazon Q Business chat response.
 	SnippetExcerpt *SnippetExcerpt
@@ -2455,6 +2592,7 @@ func (*UnknownUnionMember) isAPISchema()                              {}
 func (*UnknownUnionMember) isChatInputStream()                        {}
 func (*UnknownUnionMember) isChatModeConfiguration()                  {}
 func (*UnknownUnionMember) isChatOutputStream()                       {}
+func (*UnknownUnionMember) isCopyFromSource()                         {}
 func (*UnknownUnionMember) isDocumentAttributeBoostingConfiguration() {}
 func (*UnknownUnionMember) isDocumentAttributeValue()                 {}
 func (*UnknownUnionMember) isDocumentContent()                        {}

@@ -77,6 +77,13 @@ type UpdateClusterConfigInput struct {
 	// of the request.
 	ClientRequestToken *string
 
+	// Update the configuration of the compute capability of your EKS Auto Mode
+	// cluster. For example, enable the capability.
+	ComputeConfig *types.ComputeConfigRequest
+
+	// The Kubernetes network configuration for the cluster.
+	KubernetesNetworkConfig *types.KubernetesNetworkConfigRequest
+
 	// Enable or disable exporting the Kubernetes control plane logs for your cluster
 	// to CloudWatch Logs. By default, cluster control plane logs aren't exported to
 	// CloudWatch Logs. For more information, see [Amazon EKS cluster control plane logs]in the Amazon EKS User Guide .
@@ -90,6 +97,10 @@ type UpdateClusterConfigInput struct {
 
 	// An object representing the VPC configuration to use for an Amazon EKS cluster.
 	ResourcesVpcConfig *types.VpcConfigRequest
+
+	// Update the configuration of the block storage capability of your EKS Auto Mode
+	// cluster. For example, enable the capability.
+	StorageConfig *types.StorageConfigRequest
 
 	// You can enable or disable extended support for clusters currently on standard
 	// support. You cannot disable extended support once it starts. You must enable

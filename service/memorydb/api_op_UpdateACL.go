@@ -29,15 +29,15 @@ func (c *Client) UpdateACL(ctx context.Context, params *UpdateACLInput, optFns .
 
 type UpdateACLInput struct {
 
-	// The name of the Access Control List
+	// The name of the Access Control List.
 	//
 	// This member is required.
 	ACLName *string
 
-	// The list of users to add to the Access Control List
+	// The list of users to add to the Access Control List.
 	UserNamesToAdd []string
 
-	// The list of users to remove from the Access Control List
+	// The list of users to remove from the Access Control List.
 	UserNamesToRemove []string
 
 	noSmithyDocumentSerde
@@ -45,7 +45,7 @@ type UpdateACLInput struct {
 
 type UpdateACLOutput struct {
 
-	// The updated Access Control List
+	// The updated Access Control List.
 	ACL *types.ACL
 
 	// Metadata pertaining to the operation's result.

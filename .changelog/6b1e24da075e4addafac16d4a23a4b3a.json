@@ -1,0 +1,8 @@
+{
+    "id": "6b1e24da-075e-4add-afac-16d4a23a4b3a",
+    "type": "feature",
+    "description": "Amazon S3 introduces support for AWS Dedicated Local Zones",
+    "modules": [
+        "service/s3control"
+    ]
+}

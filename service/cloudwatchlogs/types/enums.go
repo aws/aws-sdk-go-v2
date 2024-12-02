@@ -230,6 +230,44 @@ func (InheritedProperty) Values() []InheritedProperty {
 	}
 }
 
+type IntegrationStatus string
+
+// Enum values for IntegrationStatus
+const (
+	IntegrationStatusProvisioning IntegrationStatus = "PROVISIONING"
+	IntegrationStatusActive       IntegrationStatus = "ACTIVE"
+	IntegrationStatusFailed       IntegrationStatus = "FAILED"
+)
+
+// Values returns all known values for IntegrationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationStatus) Values() []IntegrationStatus {
+	return []IntegrationStatus{
+		"PROVISIONING",
+		"ACTIVE",
+		"FAILED",
+	}
+}
+
+type IntegrationType string
+
+// Enum values for IntegrationType
+const (
+	IntegrationTypeOpensearch IntegrationType = "OPENSEARCH"
+)
+
+// Values returns all known values for IntegrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationType) Values() []IntegrationType {
+	return []IntegrationType{
+		"OPENSEARCH",
+	}
+}
+
 type LogGroupClass string
 
 // Enum values for LogGroupClass
@@ -246,6 +284,28 @@ func (LogGroupClass) Values() []LogGroupClass {
 	return []LogGroupClass{
 		"STANDARD",
 		"INFREQUENT_ACCESS",
+	}
+}
+
+type OpenSearchResourceStatusType string
+
+// Enum values for OpenSearchResourceStatusType
+const (
+	OpenSearchResourceStatusTypeActive   OpenSearchResourceStatusType = "ACTIVE"
+	OpenSearchResourceStatusTypeNotFound OpenSearchResourceStatusType = "NOT_FOUND"
+	OpenSearchResourceStatusTypeError    OpenSearchResourceStatusType = "ERROR"
+)
+
+// Values returns all known values for OpenSearchResourceStatusType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OpenSearchResourceStatusType) Values() []OpenSearchResourceStatusType {
+	return []OpenSearchResourceStatusType{
+		"ACTIVE",
+		"NOT_FOUND",
+		"ERROR",
 	}
 }
 
@@ -313,6 +373,27 @@ func (PolicyType) Values() []PolicyType {
 		"SUBSCRIPTION_FILTER_POLICY",
 		"FIELD_INDEX_POLICY",
 		"TRANSFORMER_POLICY",
+	}
+}
+
+type QueryLanguage string
+
+// Enum values for QueryLanguage
+const (
+	QueryLanguageCwli QueryLanguage = "CWLI"
+	QueryLanguageSql  QueryLanguage = "SQL"
+	QueryLanguagePpl  QueryLanguage = "PPL"
+)
+
+// Values returns all known values for QueryLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryLanguage) Values() []QueryLanguage {
+	return []QueryLanguage{
+		"CWLI",
+		"SQL",
+		"PPL",
 	}
 }
 

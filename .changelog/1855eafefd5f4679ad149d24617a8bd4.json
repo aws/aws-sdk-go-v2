@@ -1,0 +1,8 @@
+{
+    "id": "1855eafe-fd5f-4679-ad14-9d24617a8bd4",
+    "type": "feature",
+    "description": "Adds PutIntegration, GetIntegration, ListIntegrations and DeleteIntegration APIs. Adds QueryLanguage support to StartQuery, GetQueryResults, DescribeQueries, DescribeQueryDefinitions, and PutQueryDefinition APIs.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

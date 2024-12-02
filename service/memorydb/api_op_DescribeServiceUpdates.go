@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns details of the service updates
+// Returns details of the service updates.
 func (c *Client) DescribeServiceUpdates(ctx context.Context, params *DescribeServiceUpdatesInput, optFns ...func(*Options)) (*DescribeServiceUpdatesOutput, error) {
 	if params == nil {
 		params = &DescribeServiceUpdatesInput{}
@@ -29,7 +29,7 @@ func (c *Client) DescribeServiceUpdates(ctx context.Context, params *DescribeSer
 
 type DescribeServiceUpdatesInput struct {
 
-	// The list of cluster names to identify service updates to apply
+	// The list of cluster names to identify service updates to apply.
 	ClusterNames []string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -47,7 +47,7 @@ type DescribeServiceUpdatesInput struct {
 	// The unique ID of the service update to describe.
 	ServiceUpdateName *string
 
-	// The status(es) of the service updates to filter on
+	// The status(es) of the service updates to filter on.
 	Status []types.ServiceUpdateStatus
 
 	noSmithyDocumentSerde

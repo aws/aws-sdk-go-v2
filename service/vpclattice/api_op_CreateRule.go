@@ -39,7 +39,7 @@ type CreateRuleInput struct {
 	// This member is required.
 	Action types.RuleAction
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// The ID or ARN of the listener.
 	//
 	// This member is required.
 	ListenerIdentifier *string
@@ -62,7 +62,7 @@ type CreateRuleInput struct {
 	// This member is required.
 	Priority *int32
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

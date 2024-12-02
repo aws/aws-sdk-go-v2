@@ -756,6 +756,65 @@ type BedrockFoundationModelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about content defined inline in bytes.
+type ByteContentDoc struct {
+
+	// The base64-encoded string of the content.
+	//
+	// This member is required.
+	Data []byte
+
+	// The MIME type of the content. For a list of MIME types, see [Media Types]. The following
+	// MIME types are supported:
+	//
+	//   - text/plain
+	//
+	//   - text/html
+	//
+	//   - text/csv
+	//
+	//   - text/vtt
+	//
+	//   - message/rfc822
+	//
+	//   - application/xhtml+xml
+	//
+	//   - application/pdf
+	//
+	//   - application/msword
+	//
+	//   - application/vnd.ms-word.document.macroenabled.12
+	//
+	//   - application/vnd.ms-word.template.macroenabled.12
+	//
+	//   - application/vnd.ms-excel
+	//
+	//   - application/vnd.ms-excel.addin.macroenabled.12
+	//
+	//   - application/vnd.ms-excel.sheet.macroenabled.12
+	//
+	//   - application/vnd.ms-excel.template.macroenabled.12
+	//
+	//   - application/vnd.ms-excel.sheet.binary.macroenabled.12
+	//
+	//   - application/vnd.ms-spreadsheetml
+	//
+	//   - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+	//
+	//   - application/vnd.openxmlformats-officedocument.spreadsheetml.template
+	//
+	//   - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+	//
+	//   - application/vnd.openxmlformats-officedocument.wordprocessingml.template
+	//
+	// [Media Types]: https://www.iana.org/assignments/media-types/media-types.xhtml
+	//
+	// This member is required.
+	MimeType *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains configurations to use a prompt in a conversational format. For more
 // information, see [Create a prompt using Prompt management].
 //
@@ -949,11 +1008,65 @@ type CrawlFilterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the content to ingest into a knowledge base
+// connected to a custom data source. Choose a sourceType and include the field
+// that corresponds to it.
+type CustomContent struct {
+
+	// A unique identifier for the document.
+	//
+	// This member is required.
+	CustomDocumentIdentifier *CustomDocumentIdentifier
+
+	// The source of the data to ingest.
+	//
+	// This member is required.
+	SourceType CustomSourceType
+
+	// Contains information about content defined inline to ingest into a knowledge
+	// base.
+	InlineContent *InlineContent
+
+	// Contains information about the Amazon S3 location of the file from which to
+	// ingest data.
+	S3Location *CustomS3Location
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the identifier of the document to ingest into a
+// custom data source.
+type CustomDocumentIdentifier struct {
+
+	// The identifier of the document to ingest into a custom data source.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Details of custom orchestration.
 type CustomOrchestration struct {
 
 	//  The structure of the executor invoking the actions in custom orchestration.
 	Executor OrchestrationExecutor
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the Amazon S3 location of the file containing the
+// content to ingest into a knowledge base connected to a custom data source.
+type CustomS3Location struct {
+
+	// The S3 URI of the file containing the content to ingest.
+	//
+	// This member is required.
+	Uri *string
+
+	// The identifier of the Amazon Web Services account that owns the S3 bucket
+	// containing the content to ingest.
+	BucketOwnerAccountId *string
 
 	noSmithyDocumentSerde
 }
@@ -1122,6 +1235,66 @@ type DataSourceSummary struct {
 
 	// The description of the data source.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the content of a document. Choose a dataSourceType
+// and include the field that corresponds to it.
+type DocumentContent struct {
+
+	// The type of data source that is connected to the knowledge base to which to
+	// ingest this document.
+	//
+	// This member is required.
+	DataSourceType ContentDataSourceType
+
+	// Contains information about the content to ingest into a knowledge base
+	// connected to a custom data source.
+	Custom *CustomContent
+
+	// Contains information about the content to ingest into a knowledge base
+	// connected to an Amazon S3 data source
+	S3 *S3Content
+
+	noSmithyDocumentSerde
+}
+
+// Contains information that identifies the document.
+type DocumentIdentifier struct {
+
+	// The type of data source connected to the knowledge base that contains the
+	// document.
+	//
+	// This member is required.
+	DataSourceType ContentDataSourceType
+
+	// Contains information that identifies the document in a custom data source.
+	Custom *CustomDocumentIdentifier
+
+	// Contains information that identifies the document in an S3 data source.
+	S3 *S3Location
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the metadata associate with the content to ingest
+// into a knowledge base. Choose a type and include the field that corresponds to
+// it.
+type DocumentMetadata struct {
+
+	// The type of the source source from which to add metadata.
+	//
+	// This member is required.
+	Type MetadataSourceType
+
+	// An array of objects, each of which defines a metadata attribute to associate
+	// with the content to ingest. You define the attributes inline.
+	InlineAttributes []MetadataAttribute
+
+	// The Amazon S3 location of the file containing metadata to associate with the
+	// content to ingest.
+	S3Location *CustomS3Location
 
 	noSmithyDocumentSerde
 }
@@ -2316,6 +2489,24 @@ type IngestionJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about content defined inline to ingest into a data source.
+// Choose a type and include the field that corresponds to it.
+type InlineContent struct {
+
+	// The type of inline content to define.
+	//
+	// This member is required.
+	Type InlineContentType
+
+	// Contains information about content defined inline in bytes.
+	ByteContent *ByteContentDoc
+
+	// Contains information about content defined inline in text.
+	TextContent *TextContentDoc
+
+	noSmithyDocumentSerde
+}
+
 // Contains configurations for the input flow node for a flow. This node takes the
 // input from flow invocation and passes it to the next node in the data type that
 // you specify.
@@ -2426,6 +2617,81 @@ type KnowledgeBaseConfiguration struct {
 	// Contains details about the model that's used to convert the data source into
 	// vector embeddings.
 	VectorKnowledgeBaseConfiguration *VectorKnowledgeBaseConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a document to ingest into a knowledge base and
+// metadata to associate with it.
+type KnowledgeBaseDocument struct {
+
+	// Contains the content of the document.
+	//
+	// This member is required.
+	Content *DocumentContent
+
+	// Contains the metadata to associate with the document.
+	Metadata *DocumentMetadata
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details for a document that was ingested or deleted.
+type KnowledgeBaseDocumentDetail struct {
+
+	// The identifier of the data source connected to the knowledge base that the
+	// document was ingested into or deleted from.
+	//
+	// This member is required.
+	DataSourceId *string
+
+	// Contains information that identifies the document.
+	//
+	// This member is required.
+	Identifier *DocumentIdentifier
+
+	// The identifier of the knowledge base that the document was ingested into or
+	// deleted from.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The ingestion status of the document. The following statuses are possible:
+	//
+	//   - STARTED – You submitted the ingestion job containing the document.
+	//
+	//   - PENDING – The document is waiting to be ingested.
+	//
+	//   - IN_PROGRESS – The document is being ingested.
+	//
+	//   - INDEXED – The document was successfully indexed.
+	//
+	//   - PARTIALLY_INDEXED – The document was partially indexed.
+	//
+	//   - METADATA_PARTIALLY_INDEXED – You submitted metadata for an existing
+	//   document and it was partially indexed.
+	//
+	//   - METADATA_UPDATE_FAILED – You submitted a metadata update for an existing
+	//   document but it failed.
+	//
+	//   - FAILED – The document failed to be ingested.
+	//
+	//   - NOT_FOUND – The document wasn't found.
+	//
+	//   - IGNORED – The document was ignored during ingestion.
+	//
+	//   - DELETING – You submitted the delete job containing the document.
+	//
+	//   - DELETE_IN_PROGRESS – The document is being deleted.
+	//
+	// This member is required.
+	Status DocumentStatus
+
+	// The reason for the status. Appears alongside the status IGNORED .
+	StatusReason *string
+
+	// The date and time at which the document was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -2593,6 +2859,46 @@ type Message struct {
 	//
 	// This member is required.
 	Role ConversationRole
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a metadata attribute.
+type MetadataAttribute struct {
+
+	// The key of the metadata attribute.
+	//
+	// This member is required.
+	Key *string
+
+	// Contains the value of the metadata attribute.
+	//
+	// This member is required.
+	Value *MetadataAttributeValue
+
+	noSmithyDocumentSerde
+}
+
+// Contains the value of the metadata attribute. Choose a type and include the
+// field that corresponds to it.
+type MetadataAttributeValue struct {
+
+	// The type of the metadata attribute.
+	//
+	// This member is required.
+	Type MetadataValueType
+
+	// The value of the Boolean metadata attribute.
+	BooleanValue *bool
+
+	// The value of the numeric metadata attribute.
+	NumberValue *float64
+
+	// An array of strings that define the value of the metadata attribute.
+	StringListValue []string
+
+	// The value of the string metadata attribute.
+	StringValue *string
 
 	noSmithyDocumentSerde
 }
@@ -3605,6 +3911,18 @@ type RetrievalFlowNodeServiceConfigurationMemberS3 struct {
 
 func (*RetrievalFlowNodeServiceConfigurationMemberS3) isRetrievalFlowNodeServiceConfiguration() {}
 
+// Contains information about the content to ingest into a knowledge base
+// connected to an Amazon S3 data source.
+type S3Content struct {
+
+	// The S3 location of the file containing the content to ingest.
+	//
+	// This member is required.
+	S3Location *S3Location
+
+	noSmithyDocumentSerde
+}
+
 // The configuration information to connect to Amazon S3 as your data source.
 type S3DataSourceConfiguration struct {
 
@@ -3933,6 +4251,17 @@ type SystemContentBlockMemberText struct {
 }
 
 func (*SystemContentBlockMemberText) isSystemContentBlock() {}
+
+// Contains information about content defined inline in text.
+type TextContentDoc struct {
+
+	// The text of the content.
+	//
+	// This member is required.
+	Data *string
+
+	noSmithyDocumentSerde
+}
 
 // Contains configurations for a text prompt template. To include a variable,
 // enclose a word in double curly braces as in {{variable}} .

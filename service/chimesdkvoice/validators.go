@@ -370,6 +370,26 @@ func (m *validateOpDeleteVoiceConnectorEmergencyCallingConfiguration) HandleInit
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteVoiceConnectorExternalSystemsConfiguration struct {
+}
+
+func (*validateOpDeleteVoiceConnectorExternalSystemsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVoiceConnectorExternalSystemsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVoiceConnectorExternalSystemsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVoiceConnectorExternalSystemsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteVoiceConnectorGroup struct {
 }
 
@@ -770,6 +790,26 @@ func (m *validateOpGetVoiceConnectorEmergencyCallingConfiguration) HandleInitial
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetVoiceConnectorExternalSystemsConfiguration struct {
+}
+
+func (*validateOpGetVoiceConnectorExternalSystemsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVoiceConnectorExternalSystemsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVoiceConnectorExternalSystemsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVoiceConnectorExternalSystemsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetVoiceConnectorGroup struct {
 }
 
@@ -1145,6 +1185,26 @@ func (m *validateOpPutVoiceConnectorEmergencyCallingConfiguration) HandleInitial
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutVoiceConnectorEmergencyCallingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutVoiceConnectorExternalSystemsConfiguration struct {
+}
+
+func (*validateOpPutVoiceConnectorExternalSystemsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutVoiceConnectorExternalSystemsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutVoiceConnectorExternalSystemsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutVoiceConnectorExternalSystemsConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1702,6 +1762,10 @@ func addOpDeleteVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(
 	return stack.Initialize.Add(&validateOpDeleteVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
 }
 
+func addOpDeleteVoiceConnectorExternalSystemsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVoiceConnectorExternalSystemsConfiguration{}, middleware.After)
+}
+
 func addOpDeleteVoiceConnectorGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVoiceConnectorGroup{}, middleware.After)
 }
@@ -1782,6 +1846,10 @@ func addOpGetVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(sta
 	return stack.Initialize.Add(&validateOpGetVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
 }
 
+func addOpGetVoiceConnectorExternalSystemsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVoiceConnectorExternalSystemsConfiguration{}, middleware.After)
+}
+
 func addOpGetVoiceConnectorGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetVoiceConnectorGroup{}, middleware.After)
 }
@@ -1856,6 +1924,10 @@ func addOpPutSipMediaApplicationLoggingConfigurationValidationMiddleware(stack *
 
 func addOpPutVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
+}
+
+func addOpPutVoiceConnectorExternalSystemsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutVoiceConnectorExternalSystemsConfiguration{}, middleware.After)
 }
 
 func addOpPutVoiceConnectorLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2522,6 +2594,21 @@ func validateOpDeleteVoiceConnectorEmergencyCallingConfigurationInput(v *DeleteV
 	}
 }
 
+func validateOpDeleteVoiceConnectorExternalSystemsConfigurationInput(v *DeleteVoiceConnectorExternalSystemsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVoiceConnectorExternalSystemsConfigurationInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteVoiceConnectorGroupInput(v *DeleteVoiceConnectorGroupInput) error {
 	if v == nil {
 		return nil
@@ -2837,6 +2924,21 @@ func validateOpGetVoiceConnectorEmergencyCallingConfigurationInput(v *GetVoiceCo
 	}
 }
 
+func validateOpGetVoiceConnectorExternalSystemsConfigurationInput(v *GetVoiceConnectorExternalSystemsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVoiceConnectorExternalSystemsConfigurationInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetVoiceConnectorGroupInput(v *GetVoiceConnectorGroupInput) error {
 	if v == nil {
 		return nil
@@ -3132,6 +3234,21 @@ func validateOpPutVoiceConnectorEmergencyCallingConfigurationInput(v *PutVoiceCo
 		if err := validateEmergencyCallingConfiguration(v.EmergencyCallingConfiguration); err != nil {
 			invalidParams.AddNested("EmergencyCallingConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutVoiceConnectorExternalSystemsConfigurationInput(v *PutVoiceConnectorExternalSystemsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutVoiceConnectorExternalSystemsConfigurationInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

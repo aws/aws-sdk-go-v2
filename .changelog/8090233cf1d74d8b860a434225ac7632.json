@@ -1,0 +1,8 @@
+{
+    "id": "8090233c-f1d7-4d8b-860a-434225ac7632",
+    "type": "feature",
+    "description": "This release introduces APIs to upload documents directly into a Knowledge Base",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

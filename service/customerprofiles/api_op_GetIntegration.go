@@ -64,6 +64,11 @@ type GetIntegrationOutput struct {
 	// This member is required.
 	Uri *string
 
+	// A list of unique names for active event triggers associated with the
+	// integration. This list would be empty if no Event Trigger is associated with the
+	// integration.
+	EventTriggerNames []string
+
 	// Boolean that shows if the Flow that's associated with the Integration is
 	// created in Amazon Appflow, or with ObjectTypeName equals _unstructured via
 	// API/CLI in flowDefinition.

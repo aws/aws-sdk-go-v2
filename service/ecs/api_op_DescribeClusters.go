@@ -12,6 +12,10 @@ import (
 )
 
 // Describes one or more of your clusters.
+//
+// For CLI examples, see [describe-clusters.rst] on GitHub.
+//
+// [describe-clusters.rst]: https://github.com/aws/aws-cli/blob/develop/awscli/examples/ecs/describe-clusters.rst
 func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersInput, optFns ...func(*Options)) (*DescribeClustersOutput, error) {
 	if params == nil {
 		params = &DescribeClustersInput{}

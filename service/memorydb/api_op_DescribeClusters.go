@@ -30,7 +30,7 @@ func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersI
 
 type DescribeClustersInput struct {
 
-	// The name of the cluster
+	// The name of the cluster.
 	ClusterName *string
 
 	// The maximum number of records to include in the response. If more records exist

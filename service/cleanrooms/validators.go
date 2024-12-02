@@ -2039,6 +2039,27 @@ func validateAnalysisRuleList(v *types.AnalysisRuleList) error {
 	}
 }
 
+func validateAthenaTableReference(v *types.AthenaTableReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AthenaTableReference"}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConfiguredTableAnalysisRulePolicy(v types.ConfiguredTableAnalysisRulePolicy) error {
 	if v == nil {
 		return nil
@@ -2696,15 +2717,113 @@ func validateSchemaAnalysisRuleRequestList(v []types.SchemaAnalysisRuleRequest) 
 	}
 }
 
+func validateSnowflakeTableReference(v *types.SnowflakeTableReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeTableReference"}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.AccountIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIdentifier"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
+	}
+	if v.TableSchema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableSchema"))
+	} else if v.TableSchema != nil {
+		if err := validateSnowflakeTableSchema(v.TableSchema); err != nil {
+			invalidParams.AddNested("TableSchema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakeTableSchema(v types.SnowflakeTableSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeTableSchema"}
+	switch uv := v.(type) {
+	case *types.SnowflakeTableSchemaMemberV1:
+		if err := validateSnowflakeTableSchemaList(uv.Value); err != nil {
+			invalidParams.AddNested("[v1]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakeTableSchemaList(v []types.SnowflakeTableSchemaV1) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeTableSchemaList"}
+	for i := range v {
+		if err := validateSnowflakeTableSchemaV1(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakeTableSchemaV1(v *types.SnowflakeTableSchemaV1) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeTableSchemaV1"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.ColumnType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTableReference(v types.TableReference) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TableReference"}
 	switch uv := v.(type) {
+	case *types.TableReferenceMemberAthena:
+		if err := validateAthenaTableReference(&uv.Value); err != nil {
+			invalidParams.AddNested("[athena]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.TableReferenceMemberGlue:
 		if err := validateGlueTableReference(&uv.Value); err != nil {
 			invalidParams.AddNested("[glue]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.TableReferenceMemberSnowflake:
+		if err := validateSnowflakeTableReference(&uv.Value); err != nil {
+			invalidParams.AddNested("[snowflake]", err.(smithy.InvalidParamsError))
 		}
 
 	}

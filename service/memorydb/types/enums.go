@@ -146,3 +146,22 @@ func (SourceType) Values() []SourceType {
 		"acl",
 	}
 }
+
+type UpdateStrategy string
+
+// Enum values for UpdateStrategy
+const (
+	UpdateStrategyCoordinated   UpdateStrategy = "coordinated"
+	UpdateStrategyUncoordinated UpdateStrategy = "uncoordinated"
+)
+
+// Values returns all known values for UpdateStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateStrategy) Values() []UpdateStrategy {
+	return []UpdateStrategy{
+		"coordinated",
+		"uncoordinated",
+	}
+}

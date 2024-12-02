@@ -680,6 +680,13 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.ComputeConfig != nil {
+		ok := object.Key("computeConfig")
+		if err := awsRestjson1_serializeDocumentComputeConfigRequest(v.ComputeConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EncryptionConfig != nil {
 		ok := object.Key("encryptionConfig")
 		if err := awsRestjson1_serializeDocumentEncryptionConfigList(v.EncryptionConfig, ok); err != nil {
@@ -713,6 +720,13 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.RemoteNetworkConfig != nil {
+		ok := object.Key("remoteNetworkConfig")
+		if err := awsRestjson1_serializeDocumentRemoteNetworkConfigRequest(v.RemoteNetworkConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourcesVpcConfig != nil {
 		ok := object.Key("resourcesVpcConfig")
 		if err := awsRestjson1_serializeDocumentVpcConfigRequest(v.ResourcesVpcConfig, ok); err != nil {
@@ -723,6 +737,13 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	if v.StorageConfig != nil {
+		ok := object.Key("storageConfig")
+		if err := awsRestjson1_serializeDocumentStorageConfigRequest(v.StorageConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -4757,6 +4778,20 @@ func awsRestjson1_serializeOpDocumentUpdateClusterConfigInput(v *UpdateClusterCo
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.ComputeConfig != nil {
+		ok := object.Key("computeConfig")
+		if err := awsRestjson1_serializeDocumentComputeConfigRequest(v.ComputeConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KubernetesNetworkConfig != nil {
+		ok := object.Key("kubernetesNetworkConfig")
+		if err := awsRestjson1_serializeDocumentKubernetesNetworkConfigRequest(v.KubernetesNetworkConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Logging != nil {
 		ok := object.Key("logging")
 		if err := awsRestjson1_serializeDocumentLogging(v.Logging, ok); err != nil {
@@ -4767,6 +4802,13 @@ func awsRestjson1_serializeOpDocumentUpdateClusterConfigInput(v *UpdateClusterCo
 	if v.ResourcesVpcConfig != nil {
 		ok := object.Key("resourcesVpcConfig")
 		if err := awsRestjson1_serializeDocumentVpcConfigRequest(v.ResourcesVpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StorageConfig != nil {
+		ok := object.Key("storageConfig")
+		if err := awsRestjson1_serializeDocumentStorageConfigRequest(v.StorageConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -5399,6 +5441,18 @@ func awsRestjson1_serializeDocumentAddonPodIdentityAssociationsList(v []types.Ad
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBlockStorage(v *types.BlockStorage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCategoryList(v []types.Category, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5407,6 +5461,30 @@ func awsRestjson1_serializeDocumentCategoryList(v []types.Category, value smithy
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComputeConfigRequest(v *types.ComputeConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.NodePools != nil {
+		ok := object.Key("nodePools")
+		if err := awsRestjson1_serializeDocumentStringList(v.NodePools, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NodeRoleArn != nil {
+		ok := object.Key("nodeRoleArn")
+		ok.String(*v.NodeRoleArn)
+	}
+
 	return nil
 }
 
@@ -5468,6 +5546,18 @@ func awsRestjson1_serializeDocumentEksAnywhereSubscriptionTerm(v *types.EksAnywh
 	if len(v.Unit) > 0 {
 		ok := object.Key("unit")
 		ok.String(string(v.Unit))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentElasticLoadBalancing(v *types.ElasticLoadBalancing, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil
@@ -5609,6 +5699,13 @@ func awsRestjson1_serializeDocumentInsightStatusValueList(v []types.InsightStatu
 func awsRestjson1_serializeDocumentKubernetesNetworkConfigRequest(v *types.KubernetesNetworkConfigRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ElasticLoadBalancing != nil {
+		ok := object.Key("elasticLoadBalancing")
+		if err := awsRestjson1_serializeDocumentElasticLoadBalancing(v.ElasticLoadBalancing, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.IpFamily) > 0 {
 		ok := object.Key("ipFamily")
@@ -5869,6 +5966,81 @@ func awsRestjson1_serializeDocumentRemoteAccessConfig(v *types.RemoteAccessConfi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRemoteNetworkConfigRequest(v *types.RemoteNetworkConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RemoteNodeNetworks != nil {
+		ok := object.Key("remoteNodeNetworks")
+		if err := awsRestjson1_serializeDocumentRemoteNodeNetworkList(v.RemoteNodeNetworks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RemotePodNetworks != nil {
+		ok := object.Key("remotePodNetworks")
+		if err := awsRestjson1_serializeDocumentRemotePodNetworkList(v.RemotePodNetworks, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRemoteNodeNetwork(v *types.RemoteNodeNetwork, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Cidrs != nil {
+		ok := object.Key("cidrs")
+		if err := awsRestjson1_serializeDocumentStringList(v.Cidrs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRemoteNodeNetworkList(v []types.RemoteNodeNetwork, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRemoteNodeNetwork(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRemotePodNetwork(v *types.RemotePodNetwork, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Cidrs != nil {
+		ok := object.Key("cidrs")
+		if err := awsRestjson1_serializeDocumentStringList(v.Cidrs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRemotePodNetworkList(v []types.RemotePodNetwork, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRemotePodNetwork(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRequiredClaimsMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5877,6 +6049,20 @@ func awsRestjson1_serializeDocumentRequiredClaimsMap(v map[string]string, value 
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStorageConfigRequest(v *types.StorageConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BlockStorage != nil {
+		ok := object.Key("blockStorage")
+		if err := awsRestjson1_serializeDocumentBlockStorage(v.BlockStorage, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

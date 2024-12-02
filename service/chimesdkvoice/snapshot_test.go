@@ -290,6 +290,18 @@ func TestCheckSnapshot_DeleteVoiceConnectorEmergencyCallingConfiguration(t *test
 	}
 }
 
+func TestCheckSnapshot_DeleteVoiceConnectorExternalSystemsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVoiceConnectorExternalSystemsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteVoiceConnectorExternalSystemsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteVoiceConnectorGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteVoiceConnectorGroup(context.Background(), nil, func(o *Options) {
@@ -547,6 +559,18 @@ func TestCheckSnapshot_GetVoiceConnectorEmergencyCallingConfiguration(t *testing
 	_, err := svc.GetVoiceConnectorEmergencyCallingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetVoiceConnectorEmergencyCallingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetVoiceConnectorExternalSystemsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVoiceConnectorExternalSystemsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetVoiceConnectorExternalSystemsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -859,6 +883,18 @@ func TestCheckSnapshot_PutVoiceConnectorEmergencyCallingConfiguration(t *testing
 	_, err := svc.PutVoiceConnectorEmergencyCallingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutVoiceConnectorEmergencyCallingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutVoiceConnectorExternalSystemsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutVoiceConnectorExternalSystemsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutVoiceConnectorExternalSystemsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1405,6 +1441,18 @@ func TestUpdateSnapshot_DeleteVoiceConnectorEmergencyCallingConfiguration(t *tes
 	}
 }
 
+func TestUpdateSnapshot_DeleteVoiceConnectorExternalSystemsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVoiceConnectorExternalSystemsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteVoiceConnectorExternalSystemsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteVoiceConnectorGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteVoiceConnectorGroup(context.Background(), nil, func(o *Options) {
@@ -1662,6 +1710,18 @@ func TestUpdateSnapshot_GetVoiceConnectorEmergencyCallingConfiguration(t *testin
 	_, err := svc.GetVoiceConnectorEmergencyCallingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetVoiceConnectorEmergencyCallingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetVoiceConnectorExternalSystemsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVoiceConnectorExternalSystemsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetVoiceConnectorExternalSystemsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1974,6 +2034,18 @@ func TestUpdateSnapshot_PutVoiceConnectorEmergencyCallingConfiguration(t *testin
 	_, err := svc.PutVoiceConnectorEmergencyCallingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutVoiceConnectorEmergencyCallingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutVoiceConnectorExternalSystemsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutVoiceConnectorExternalSystemsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutVoiceConnectorExternalSystemsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

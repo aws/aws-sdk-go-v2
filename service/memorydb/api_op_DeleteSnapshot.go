@@ -31,7 +31,7 @@ func (c *Client) DeleteSnapshot(ctx context.Context, params *DeleteSnapshotInput
 
 type DeleteSnapshotInput struct {
 
-	// The name of the snapshot to delete
+	// The name of the snapshot to delete.
 	//
 	// This member is required.
 	SnapshotName *string

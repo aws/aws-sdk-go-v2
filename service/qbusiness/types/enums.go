@@ -90,8 +90,8 @@ type AttachmentStatus string
 
 // Enum values for AttachmentStatus
 const (
-	AttachmentStatusFailed    AttachmentStatus = "FAILED"
-	AttachmentStatusSucceeded AttachmentStatus = "SUCCEEDED"
+	AttachmentStatusFailed  AttachmentStatus = "FAILED"
+	AttachmentStatusSuccess AttachmentStatus = "SUCCESS"
 )
 
 // Values returns all known values for AttachmentStatus. Note that this can be
@@ -101,7 +101,7 @@ const (
 func (AttachmentStatus) Values() []AttachmentStatus {
 	return []AttachmentStatus{
 		"FAILED",
-		"SUCCEEDED",
+		"SUCCESS",
 	}
 }
 
@@ -161,6 +161,25 @@ func (AutoSubscriptionStatus) Values() []AutoSubscriptionStatus {
 	return []AutoSubscriptionStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type BrowserExtension string
+
+// Enum values for BrowserExtension
+const (
+	BrowserExtensionFirefox BrowserExtension = "FIREFOX"
+	BrowserExtensionChrome  BrowserExtension = "CHROME"
+)
+
+// Values returns all known values for BrowserExtension. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BrowserExtension) Values() []BrowserExtension {
+	return []BrowserExtension{
+		"FIREFOX",
+		"CHROME",
 	}
 }
 
@@ -477,6 +496,25 @@ func (IdentityType) Values() []IdentityType {
 		"AWS_IAM_IDP_SAML",
 		"AWS_IAM_IDP_OIDC",
 		"AWS_IAM_IDC",
+	}
+}
+
+type ImageExtractionStatus string
+
+// Enum values for ImageExtractionStatus
+const (
+	ImageExtractionStatusEnabled  ImageExtractionStatus = "ENABLED"
+	ImageExtractionStatusDisabled ImageExtractionStatus = "DISABLED"
+)
+
+// Values returns all known values for ImageExtractionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageExtractionStatus) Values() []ImageExtractionStatus {
+	return []ImageExtractionStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

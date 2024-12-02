@@ -29,7 +29,7 @@ func (c *Client) ListConnectors(ctx context.Context, params *ListConnectorsInput
 
 type ListConnectorsInput struct {
 
-	// The maximum number of connectors to return.
+	// The maximum number of items to return.
 	MaxResults *int32
 
 	// When you can get additional results from the ListConnectors call, a NextToken
@@ -156,7 +156,7 @@ func (c *Client) addOperationListConnectorsMiddlewares(stack *middleware.Stack, 
 
 // ListConnectorsPaginatorOptions is the paginator options for ListConnectors
 type ListConnectorsPaginatorOptions struct {
-	// The maximum number of connectors to return.
+	// The maximum number of items to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

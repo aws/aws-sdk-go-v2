@@ -530,6 +530,26 @@ func (m *validateOpGetIndex) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMedia struct {
+}
+
+func (*validateOpGetMedia) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMedia) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMediaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMediaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPlugin struct {
 }
 
@@ -605,6 +625,26 @@ func (m *validateOpGetWebExperience) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetWebExperienceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAttachments struct {
+}
+
+func (*validateOpListAttachments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAttachments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAttachmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAttachmentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1214,6 +1254,10 @@ func addOpGetIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIndex{}, middleware.After)
 }
 
+func addOpGetMediaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMedia{}, middleware.After)
+}
+
 func addOpGetPluginValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPlugin{}, middleware.After)
 }
@@ -1228,6 +1272,10 @@ func addOpGetUserValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetWebExperienceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWebExperience{}, middleware.After)
+}
+
+func addOpListAttachmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAttachments{}, middleware.After)
 }
 
 func addOpListConversationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1492,11 +1540,10 @@ func validateAttachmentInput(v *types.AttachmentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachmentInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Data == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	if v.CopyFrom != nil {
+		if err := validateCopyFromSource(v.CopyFrom); err != nil {
+			invalidParams.AddNested("CopyFrom", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1696,6 +1743,21 @@ func validateBasicAuthConfiguration(v *types.BasicAuthConfiguration) error {
 	}
 }
 
+func validateBrowserExtensionConfiguration(v *types.BrowserExtensionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrowserExtensionConfiguration"}
+	if v.EnabledBrowserExtensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledBrowserExtensions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateChatInputStream(v types.ChatInputStream) error {
 	if v == nil {
 		return nil
@@ -1768,6 +1830,43 @@ func validateConfigurationEvent(v *types.ConfigurationEvent) error {
 		if err := validateAttributeFilter(v.AttributeFilter); err != nil {
 			invalidParams.AddNested("AttributeFilter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConversationSource(v *types.ConversationSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConversationSource"}
+	if v.ConversationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConversationId"))
+	}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCopyFromSource(v types.CopyFromSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CopyFromSource"}
+	switch uv := v.(type) {
+	case *types.CopyFromSourceMemberConversation:
+		if err := validateConversationSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[conversation]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1907,6 +2006,11 @@ func validateDocument(v *types.Document) error {
 	if v.DocumentEnrichmentConfiguration != nil {
 		if err := validateDocumentEnrichmentConfiguration(v.DocumentEnrichmentConfiguration); err != nil {
 			invalidParams.AddNested("DocumentEnrichmentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MediaExtractionConfiguration != nil {
+		if err := validateMediaExtractionConfiguration(v.MediaExtractionConfiguration); err != nil {
+			invalidParams.AddNested("MediaExtractionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2166,6 +2270,21 @@ func validateIdentityProviderConfiguration(v types.IdentityProviderConfiguration
 	}
 }
 
+func validateImageExtractionConfiguration(v *types.ImageExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageExtractionConfiguration"}
+	if len(v.ImageExtractionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageExtractionStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInlineDocumentEnrichmentConfiguration(v *types.InlineDocumentEnrichmentConfiguration) error {
 	if v == nil {
 		return nil
@@ -2212,6 +2331,23 @@ func validateKendraIndexConfiguration(v *types.KendraIndexConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "KendraIndexConfiguration"}
 	if v.IndexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaExtractionConfiguration(v *types.MediaExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaExtractionConfiguration"}
+	if v.ImageExtractionConfiguration != nil {
+		if err := validateImageExtractionConfiguration(v.ImageExtractionConfiguration); err != nil {
+			invalidParams.AddNested("ImageExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2965,6 +3101,11 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 			invalidParams.AddNested("DocumentEnrichmentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MediaExtractionConfiguration != nil {
+		if err := validateMediaExtractionConfiguration(v.MediaExtractionConfiguration); err != nil {
+			invalidParams.AddNested("MediaExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3105,6 +3246,11 @@ func validateOpCreateWebExperienceInput(v *CreateWebExperienceInput) error {
 	if v.IdentityProviderConfiguration != nil {
 		if err := validateIdentityProviderConfiguration(v.IdentityProviderConfiguration); err != nil {
 			invalidParams.AddNested("IdentityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BrowserExtensionConfiguration != nil {
+		if err := validateBrowserExtensionConfiguration(v.BrowserExtensionConfiguration); err != nil {
+			invalidParams.AddNested("BrowserExtensionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3384,6 +3530,30 @@ func validateOpGetIndexInput(v *GetIndexInput) error {
 	}
 }
 
+func validateOpGetMediaInput(v *GetMediaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMediaInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.ConversationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConversationId"))
+	}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if v.MediaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPluginInput(v *GetPluginInput) error {
 	if v == nil {
 		return nil
@@ -3448,6 +3618,21 @@ func validateOpGetWebExperienceInput(v *GetWebExperienceInput) error {
 	}
 	if v.WebExperienceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WebExperienceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAttachmentsInput(v *ListAttachmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAttachmentsInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3870,6 +4055,11 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 			invalidParams.AddNested("DocumentEnrichmentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MediaExtractionConfiguration != nil {
+		if err := validateMediaExtractionConfiguration(v.MediaExtractionConfiguration); err != nil {
+			invalidParams.AddNested("MediaExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3993,6 +4183,11 @@ func validateOpUpdateWebExperienceInput(v *UpdateWebExperienceInput) error {
 	if v.IdentityProviderConfiguration != nil {
 		if err := validateIdentityProviderConfiguration(v.IdentityProviderConfiguration); err != nil {
 			invalidParams.AddNested("IdentityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BrowserExtensionConfiguration != nil {
+		if err := validateBrowserExtensionConfiguration(v.BrowserExtensionConfiguration); err != nil {
+			invalidParams.AddNested("BrowserExtensionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

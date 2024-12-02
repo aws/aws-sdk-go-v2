@@ -95,6 +95,8 @@ import (
 //
 //   - DiskIopsConfiguration
 //
+//   - ReadCacheConfiguration
+//
 //   - RemoveRouteTableIds
 //
 //   - StorageCapacity

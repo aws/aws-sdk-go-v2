@@ -35,17 +35,17 @@ func (c *Client) DeleteRule(ctx context.Context, params *DeleteRuleInput, optFns
 
 type DeleteRuleInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// The ID or ARN of the listener.
 	//
 	// This member is required.
 	ListenerIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the rule.
+	// The ID or ARN of the rule.
 	//
 	// This member is required.
 	RuleIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

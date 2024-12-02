@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified set of tags from an Amazon OpenSearch Service domain. For
-// more information, see [Tagging Amazon OpenSearch Service domains].
+// Removes the specified set of tags from an Amazon OpenSearch Service domain,
+// data source, or application. For more information, see [Tagging Amazon OpenSearch Service resources].
 //
-// [Tagging Amazon OpenSearch Service domains]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging
+// [Tagging Amazon OpenSearch Service resources]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging
 func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns ...func(*Options)) (*RemoveTagsOutput, error) {
 	if params == nil {
 		params = &RemoveTagsInput{}
@@ -32,13 +32,13 @@ func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns
 // Container for the request parameters to the RemoveTags operation.
 type RemoveTagsInput struct {
 
-	// The Amazon Resource Name (ARN) of the domain from which you want to delete the
-	// specified tags.
+	// The Amazon Resource Name (ARN) of the domain, data source, or application from
+	// which you want to delete the specified tags.
 	//
 	// This member is required.
 	ARN *string
 
-	// The list of tag keys to remove from the domain.
+	// The list of tag keys to remove from the domain, data source, or application.
 	//
 	// This member is required.
 	TagKeys []string

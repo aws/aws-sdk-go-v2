@@ -86,6 +86,18 @@ func TestCheckSnapshot_AddDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AddDirectQueryDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddDirectQueryDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddDirectQueryDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AddTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddTags(context.Background(), nil, func(o *Options) {
@@ -235,6 +247,18 @@ func TestCheckSnapshot_DeleteDataSource(t *testing.T) {
 	_, err := svc.DeleteDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDirectQueryDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDirectQueryDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDirectQueryDataSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -542,6 +566,18 @@ func TestCheckSnapshot_GetDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDirectQueryDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDirectQueryDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDirectQueryDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDomainMaintenanceStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDomainMaintenanceStatus(context.Background(), nil, func(o *Options) {
@@ -607,6 +643,18 @@ func TestCheckSnapshot_ListDataSources(t *testing.T) {
 	_, err := svc.ListDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDirectQueryDataSources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDirectQueryDataSources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDirectQueryDataSources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -842,6 +890,18 @@ func TestCheckSnapshot_UpdateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDirectQueryDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDirectQueryDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDirectQueryDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDomainConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDomainConfig(context.Background(), nil, func(o *Options) {
@@ -930,6 +990,18 @@ func TestUpdateSnapshot_AddDataSource(t *testing.T) {
 	_, err := svc.AddDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AddDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AddDirectQueryDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddDirectQueryDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddDirectQueryDataSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1086,6 +1158,18 @@ func TestUpdateSnapshot_DeleteDataSource(t *testing.T) {
 	_, err := svc.DeleteDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDirectQueryDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDirectQueryDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDirectQueryDataSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1393,6 +1477,18 @@ func TestUpdateSnapshot_GetDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDirectQueryDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDirectQueryDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDirectQueryDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDomainMaintenanceStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDomainMaintenanceStatus(context.Background(), nil, func(o *Options) {
@@ -1458,6 +1554,18 @@ func TestUpdateSnapshot_ListDataSources(t *testing.T) {
 	_, err := svc.ListDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDirectQueryDataSources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDirectQueryDataSources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDirectQueryDataSources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1686,6 +1794,18 @@ func TestUpdateSnapshot_UpdateDataSource(t *testing.T) {
 	_, err := svc.UpdateDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDirectQueryDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDirectQueryDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDirectQueryDataSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -33,12 +33,12 @@ func (c *Client) FailoverShard(ctx context.Context, params *FailoverShardInput, 
 
 type FailoverShardInput struct {
 
-	// The cluster being failed over
+	// The cluster being failed over.
 	//
 	// This member is required.
 	ClusterName *string
 
-	// The name of the shard
+	// The name of the shard.
 	//
 	// This member is required.
 	ShardName *string
@@ -48,7 +48,7 @@ type FailoverShardInput struct {
 
 type FailoverShardOutput struct {
 
-	// The cluster being failed over
+	// The cluster being failed over.
 	Cluster *types.Cluster
 
 	// Metadata pertaining to the operation's result.

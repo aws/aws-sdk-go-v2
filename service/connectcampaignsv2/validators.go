@@ -390,6 +390,26 @@ func (m *validateOpPutOutboundRequestBatch) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutProfileOutboundRequestBatch struct {
+}
+
+func (*validateOpPutProfileOutboundRequestBatch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutProfileOutboundRequestBatch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutProfileOutboundRequestBatchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutProfileOutboundRequestBatchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpResumeCampaign struct {
 }
 
@@ -724,6 +744,10 @@ func addOpPutConnectInstanceIntegrationValidationMiddleware(stack *middleware.St
 
 func addOpPutOutboundRequestBatchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutOutboundRequestBatch{}, middleware.After)
+}
+
+func addOpPutProfileOutboundRequestBatchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutProfileOutboundRequestBatch{}, middleware.After)
 }
 
 func addOpResumeCampaignValidationMiddleware(stack *middleware.Stack) error {
@@ -1224,6 +1248,41 @@ func validatePredictiveConfig(v *types.PredictiveConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PredictiveConfig"}
 	if v.BandwidthAllocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BandwidthAllocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProfileOutboundRequest(v *types.ProfileOutboundRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfileOutboundRequest"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProfileOutboundRequestList(v []types.ProfileOutboundRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfileOutboundRequestList"}
+	for i := range v {
+		if err := validateProfileOutboundRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1892,6 +1951,28 @@ func validateOpPutOutboundRequestBatchInput(v *PutOutboundRequestBatchInput) err
 	} else if v.OutboundRequests != nil {
 		if err := validateOutboundRequestList(v.OutboundRequests); err != nil {
 			invalidParams.AddNested("OutboundRequests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutProfileOutboundRequestBatchInput(v *PutProfileOutboundRequestBatchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutProfileOutboundRequestBatchInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.ProfileOutboundRequests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileOutboundRequests"))
+	} else if v.ProfileOutboundRequests != nil {
+		if err := validateProfileOutboundRequestList(v.ProfileOutboundRequests); err != nil {
+			invalidParams.AddNested("ProfileOutboundRequests", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

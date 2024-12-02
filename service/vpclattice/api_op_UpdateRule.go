@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a rule for the listener. You can't modify a default listener rule. To
-// modify a default listener rule, use UpdateListener .
+// Updates a specified rule for the listener. You can't modify a default listener
+// rule. To modify a default listener rule, use UpdateListener .
 func (c *Client) UpdateRule(ctx context.Context, params *UpdateRuleInput, optFns ...func(*Options)) (*UpdateRuleOutput, error) {
 	if params == nil {
 		params = &UpdateRuleInput{}
@@ -30,17 +30,17 @@ func (c *Client) UpdateRule(ctx context.Context, params *UpdateRuleInput, optFns
 
 type UpdateRuleInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// The ID or ARN of the listener.
 	//
 	// This member is required.
 	ListenerIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the rule.
+	// The ID or ARN of the rule.
 	//
 	// This member is required.
 	RuleIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

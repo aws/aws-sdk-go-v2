@@ -18,7 +18,7 @@ import (
 // DestinationEndpoint only supports Endpoints with TELEPHONE_NUMBER as Type.
 // ContactFlowId initiates the flow to manage the new SMS contact created.
 //
-// This API can be used to initiate outbound SMS contacts for an agent or it can
+// This API can be used to initiate outbound SMS contacts for an agent, or it can
 // also deflect an ongoing contact to an outbound SMS contact by using the [StartOutboundChatContact]Flow
 // Action.
 //

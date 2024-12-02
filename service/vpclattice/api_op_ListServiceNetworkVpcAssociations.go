@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the service network and VPC associations. You can filter the list either
-// by VPC or service network. You must provide either the service network
-// identifier or the VPC identifier.
+// Lists the associations between a service network and a VPC. You can filter the
+// list either by VPC or service network. You must provide either the ID of the
+// service network identifier or the ID of the VPC.
 func (c *Client) ListServiceNetworkVpcAssociations(ctx context.Context, params *ListServiceNetworkVpcAssociationsInput, optFns ...func(*Options)) (*ListServiceNetworkVpcAssociationsOutput, error) {
 	if params == nil {
 		params = &ListServiceNetworkVpcAssociationsInput{}
@@ -37,10 +37,10 @@ type ListServiceNetworkVpcAssociationsInput struct {
 	// A pagination token for the next page of results.
 	NextToken *string
 
-	// The ID or Amazon Resource Name (ARN) of the service network.
+	// The ID or ARN of the service network.
 	ServiceNetworkIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the VPC.
+	// The ID or ARN of the VPC.
 	VpcIdentifier *string
 
 	noSmithyDocumentSerde

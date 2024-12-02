@@ -826,8 +826,9 @@ type ClaimedPhoneNumberSummary struct {
 	PhoneNumberType PhoneNumberType
 
 	// The claimed phone number ARN that was previously imported from the external
-	// service, such as Amazon Pinpoint. If it is from Amazon Pinpoint, it looks like
-	// the ARN of the phone number that was imported from Amazon Pinpoint.
+	// service, such as Amazon Web Services End User Messaging. If it is from Amazon
+	// Web Services End User Messaging, it looks like the ARN of the phone number that
+	// was imported from Amazon Web Services End User Messaging.
 	SourcePhoneNumberArn *string
 
 	// The tags used to organize, track, or control access for this resource. For
@@ -3578,8 +3579,9 @@ type ListPhoneNumbersSummary struct {
 	PhoneNumberType PhoneNumberType
 
 	// The claimed phone number ARN that was previously imported from the external
-	// service, such as Amazon Pinpoint. If it is from Amazon Pinpoint, it looks like
-	// the ARN of the phone number that was imported from Amazon Pinpoint.
+	// service, such as Amazon Web Services End User Messaging. If it is from Amazon
+	// Web Services End User Messaging, it looks like the ARN of the phone number that
+	// was imported from Amazon Web Services End User Messaging.
 	SourcePhoneNumberArn *string
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
@@ -3724,8 +3726,20 @@ type MetricFilterV2 struct {
 	// For valid values of the metric-level filter FLOWS_OUTCOME_TYPE , see the
 	// description for the [Flow outcome]metric in the Amazon Connect Administrator Guide.
 	//
+	// For valid values of the metric-level filter BOT_CONVERSATION_OUTCOME_TYPE , see
+	// the description for the [Bot conversations completed]
+	//
+	// in the Amazon Connect Administrator Guide.
+	//
+	// For valid values of the metric-level filter BOT_INTENT_OUTCOME_TYPE , see the
+	// description for the [Bot intents completed]
+	//
+	// metric in the Amazon Connect Administrator Guide.
+	//
+	// [Bot intents completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric
 	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
 	// [Flow outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
+	// [Bot conversations completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed-metric
 	MetricFilterValues []string
 
 	// If set to true , the API response contains results that filter out the results
@@ -4413,6 +4427,15 @@ type QueueInfo struct {
 	EnqueueTimestamp *time.Time
 
 	// The unique identifier for the queue.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a queue.
+type QueueInfoInput struct {
+
+	// The identifier of the queue.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -5815,7 +5838,7 @@ type SecurityProfile struct {
 	// in Amazon Connect.
 	AllowedAccessControlTags map[string]string
 
-	// The Amazon Resource Name (ARN) for the secruity profile.
+	// The Amazon Resource Name (ARN) for the security profile.
 	Arn *string
 
 	// The description of the security profile.
@@ -6183,7 +6206,7 @@ type TagSearchCondition struct {
 // A tag set contains tag key and tag value.
 type TagSet struct {
 
-	// The tag key in the tagSet.
+	// The tag key in the TagSet.
 	Key *string
 
 	// The tag value in the tagSet.
@@ -7262,6 +7285,9 @@ type VocabularySummary struct {
 
 // Contains information about the recording configuration settings.
 type VoiceRecordingConfiguration struct {
+
+	// Identifies which IVR track is being recorded.
+	IvrRecordingTrack IvrRecordingTrack
 
 	// Identifies which track is being recorded.
 	VoiceRecordingTrack VoiceRecordingTrack

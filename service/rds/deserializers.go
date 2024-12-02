@@ -28476,6 +28476,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				return err
 			}
 
+		case strings.EqualFold("DatabaseInsightsMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DatabaseInsightsMode = types.DatabaseInsightsMode(xtv)
+			}
+
 		case strings.EqualFold("DatabaseName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -33077,6 +33090,19 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 			{
 				xtv := string(val)
 				sv.CustomIamInstanceProfile = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DatabaseInsightsMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DatabaseInsightsMode = types.DatabaseInsightsMode(xtv)
 			}
 
 		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):

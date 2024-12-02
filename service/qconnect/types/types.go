@@ -25,6 +25,7 @@ type AgentAttributes struct {
 //
 //	AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration
 //	AIAgentConfigurationMemberManualSearchAIAgentConfiguration
+//	AIAgentConfigurationMemberSelfServiceAIAgentConfiguration
 type AIAgentConfiguration interface {
 	isAIAgentConfiguration()
 }
@@ -46,6 +47,15 @@ type AIAgentConfigurationMemberManualSearchAIAgentConfiguration struct {
 }
 
 func (*AIAgentConfigurationMemberManualSearchAIAgentConfiguration) isAIAgentConfiguration() {}
+
+// The configuration for AI Agents of type SELF_SERVICE.
+type AIAgentConfigurationMemberSelfServiceAIAgentConfiguration struct {
+	Value SelfServiceAIAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAgentConfigurationMemberSelfServiceAIAgentConfiguration) isAIAgentConfiguration() {}
 
 // A type that specifies the AI Agent ID configuration data when mapping an AI
 // Agents to be used for an AI Agent type on a session or assistant.
@@ -192,6 +202,204 @@ type AIAgentVersionSummary struct {
 
 	// The version number for this AI Agent version.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about how to handle harmful content.
+type AIGuardrailContentPolicyConfig struct {
+
+	// Contains the type of the content filter and how strongly it should apply to
+	// prompts and model responses.
+	//
+	// This member is required.
+	FiltersConfig []GuardrailContentFilterConfig
+
+	noSmithyDocumentSerde
+}
+
+// The policy configuration details for the AI Guardrail's contextual grounding
+// policy.
+type AIGuardrailContextualGroundingPolicyConfig struct {
+
+	// The filter configuration details for the AI Guardrails contextual grounding
+	// policy.
+	//
+	// This member is required.
+	FiltersConfig []GuardrailContextualGroundingFilterConfig
+
+	noSmithyDocumentSerde
+}
+
+// The data for the AI Guardrail
+type AIGuardrailData struct {
+
+	// The Amazon Resource Name (ARN) of the AI Guardrail.
+	//
+	// This member is required.
+	AiGuardrailArn *string
+
+	// The identifier of the Amazon Q in Connect AI Guardrail.
+	//
+	// This member is required.
+	AiGuardrailId *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
+	//
+	// This member is required.
+	AssistantArn *string
+
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
+	//
+	// This member is required.
+	AssistantId *string
+
+	// The message to return when the AI Guardrail blocks a prompt.
+	//
+	// This member is required.
+	BlockedInputMessaging *string
+
+	// The message to return when the AI Guardrail blocks a model response.
+	//
+	// This member is required.
+	BlockedOutputsMessaging *string
+
+	// The name of the AI Guardrail.
+	//
+	// This member is required.
+	Name *string
+
+	// The visibility status of the AI Guardrail.
+	//
+	// This member is required.
+	VisibilityStatus VisibilityStatus
+
+	// Contains details about how to handle harmful content.
+	ContentPolicyConfig *AIGuardrailContentPolicyConfig
+
+	// The policy configuration details for the AI Guardrail's contextual grounding
+	// policy.
+	ContextualGroundingPolicyConfig *AIGuardrailContextualGroundingPolicyConfig
+
+	// A description of the AI Guardrail.
+	Description *string
+
+	// The time the AI Guardrail was last modified.
+	ModifiedTime *time.Time
+
+	// Contains details about PII entities and regular expressions to configure for
+	// the AI Guardrail.
+	SensitiveInformationPolicyConfig *AIGuardrailSensitiveInformationPolicyConfig
+
+	// The status of the AI Guardrail.
+	Status Status
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	// Contains details about topics that the AI Guardrail should identify and deny.
+	TopicPolicyConfig *AIGuardrailTopicPolicyConfig
+
+	// Contains details about the word policy to configured for the AI Guardrail.
+	WordPolicyConfig *AIGuardrailWordPolicyConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about PII entities and regular expressions to configure for
+// the AI Guardrail.
+type AIGuardrailSensitiveInformationPolicyConfig struct {
+
+	// A list of PII entities to configure to the AI Guardrail.
+	PiiEntitiesConfig []GuardrailPiiEntityConfig
+
+	// A list of regular expressions to configure to the AI Guardrail.
+	RegexesConfig []GuardrailRegexConfig
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the AI Guardrail.
+type AIGuardrailSummary struct {
+
+	// The Amazon Resource Name (ARN) of the AI Guardrail.
+	//
+	// This member is required.
+	AiGuardrailArn *string
+
+	// The identifier of the Amazon Q in Connect AI Guardrail.
+	//
+	// This member is required.
+	AiGuardrailId *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
+	//
+	// This member is required.
+	AssistantArn *string
+
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
+	//
+	// This member is required.
+	AssistantId *string
+
+	// The name of the AI Guardrail.
+	//
+	// This member is required.
+	Name *string
+
+	// The visibility status of the AI Guardrail.
+	//
+	// This member is required.
+	VisibilityStatus VisibilityStatus
+
+	// A description of the AI Guardrail.
+	Description *string
+
+	// The time the AI Guardrail was last modified.
+	ModifiedTime *time.Time
+
+	// The status of the AI Guardrail.
+	Status Status
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about topics that the AI Guardrail should identify and deny.
+type AIGuardrailTopicPolicyConfig struct {
+
+	// A list of policies related to topics that the AI Guardrail should deny.
+	//
+	// This member is required.
+	TopicsConfig []GuardrailTopicConfig
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the AI Guardrail version.
+type AIGuardrailVersionSummary struct {
+
+	// The data for the summary of the AI Guardrail version.
+	AiGuardrailSummary *AIGuardrailSummary
+
+	// The version number for this AI Guardrail version.
+	VersionNumber *int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the word policy to configured for the AI Guardrail.
+type AIGuardrailWordPolicyConfig struct {
+
+	// A list of managed words to configure for the AI Guardrail.
+	ManagedWordListsConfig []GuardrailManagedWordsConfig
+
+	// A list of words to configure for the AI Guardrail.
+	WordsConfig []GuardrailWordConfig
 
 	noSmithyDocumentSerde
 }
@@ -398,6 +606,10 @@ type AmazonConnectGuideAssociationData struct {
 
 // The configuration for the ANSWER_RECOMMENDATION AI Agent type.
 type AnswerRecommendationAIAgentConfiguration struct {
+
+	// The AI Guardrail identifier for the Answer Generation Guardrail used by the
+	// ANSWER_RECOMMENDATION AI Agent.
+	AnswerGenerationAIGuardrailId *string
 
 	// The AI Prompt identifier for the Answer Generation prompt used by the
 	// ANSWER_RECOMMENDATION AI Agent.
@@ -1177,6 +1389,31 @@ type ContentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The conversation context to include in SendMessage.
+type ConversationContext struct {
+
+	// The self service conversation history before the Amazon Q in Connect session.
+	//
+	// This member is required.
+	SelfServiceConversationHistory []SelfServiceConversationHistory
+
+	noSmithyDocumentSerde
+}
+
+// The conversation state associated to a message.
+type ConversationState struct {
+
+	// The status of the conversation state.
+	//
+	// This member is required.
+	Status ConversationStatus
+
+	// The reason of the conversation state.
+	Reason ConversationStatusReason
+
+	noSmithyDocumentSerde
+}
+
 // The customer profile attributes that are used with the message template.
 type CustomerProfileAttributes struct {
 
@@ -1746,6 +1983,364 @@ type GroupingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains filter strengths for harmful content. AI Guardrail's support the
+// following content filters to detect and filter harmful user inputs and
+// FM-generated outputs.
+//
+//   - Hate: Describes input prompts and model responses that discriminate,
+//     criticize, insult, denounce, or dehumanize a person or group on the basis of an
+//     identity (such as race, ethnicity, gender, religion, sexual orientation,
+//     ability, and national origin).
+//
+//   - Insults: Describes input prompts and model responses that includes
+//     demeaning, humiliating, mocking, insulting, or belittling language. This type of
+//     language is also labeled as bullying.
+//
+//   - Sexual: Describes input prompts and model responses that indicates sexual
+//     interest, activity, or arousal using direct or indirect references to body
+//     parts, physical traits, or sex.
+//
+//   - Violence: Describes input prompts and model responses that includes
+//     glorification of, or threats to inflict physical pain, hurt, or injury toward a
+//     person, group, or thing.
+//
+// Content filtering depends on the confidence classification of user inputs and
+// FM responses across each of the four harmful categories. All input and output
+// statements are classified into one of four confidence levels (NONE, LOW, MEDIUM,
+// HIGH) for each harmful category. For example, if a statement is classified as
+// Hate with HIGH confidence, the likelihood of the statement representing hateful
+// content is high. A single statement can be classified across multiple categories
+// with varying confidence levels. For example, a single statement can be
+// classified as Hate with HIGH confidence, Insults with LOW confidence, Sexual
+// with NONE confidence, and Violence with MEDIUM confidence.
+type GuardrailContentFilterConfig struct {
+
+	// The strength of the content filter to apply to prompts. As you increase the
+	// filter strength, the likelihood of filtering harmful content increases and the
+	// probability of seeing harmful content in your application reduces.
+	//
+	// This member is required.
+	InputStrength GuardrailFilterStrength
+
+	// The strength of the content filter to apply to model responses. As you increase
+	// the filter strength, the likelihood of filtering harmful content increases and
+	// the probability of seeing harmful content in your application reduces.
+	//
+	// This member is required.
+	OutputStrength GuardrailFilterStrength
+
+	// The harmful category that the content filter is applied to.
+	//
+	// This member is required.
+	Type GuardrailContentFilterType
+
+	noSmithyDocumentSerde
+}
+
+// The filter configuration details for the AI Guardrail's contextual grounding
+// filter.
+type GuardrailContextualGroundingFilterConfig struct {
+
+	// The threshold details for the AI Guardrail's contextual grounding filter.
+	//
+	// This member is required.
+	Threshold float64
+
+	// The filter type for the AI Guardrail's contextual grounding filter.
+	//
+	// This member is required.
+	Type GuardrailContextualGroundingFilterType
+
+	noSmithyDocumentSerde
+}
+
+// The managed word list to configure for the AI Guardrail.
+type GuardrailManagedWordsConfig struct {
+
+	// The managed word type to configure for the AI Guardrail.
+	//
+	// This member is required.
+	Type GuardrailManagedWordsType
+
+	noSmithyDocumentSerde
+}
+
+// The PII entity to configure for the AI Guardrail.
+type GuardrailPiiEntityConfig struct {
+
+	// Configure AI Guardrail's action when the PII entity is detected.
+	//
+	// This member is required.
+	Action GuardrailSensitiveInformationAction
+
+	// Configure AI Guardrail type when the PII entity is detected.
+	//
+	// The following PIIs are used to block or mask sensitive information:
+	//
+	//   - General
+	//
+	//   - ADDRESS
+	//
+	// A physical address, such as "100 Main Street, Anytown, USA" or "Suite #12,
+	//   Building 123". An address can include information such as the street, building,
+	//   location, city, state, country, county, zip code, precinct, and neighborhood.
+	//
+	//   - AGE
+	//
+	// An individual's age, including the quantity and unit of time. For example, in
+	//   the phrase "I am 40 years old," Guarrails recognizes "40 years" as an age.
+	//
+	//   - NAME
+	//
+	// An individual's name. This entity type does not include titles, such as Dr.,
+	//   Mr., Mrs., or Miss. AI Guardrail doesn't apply this entity type to names that
+	//   are part of organizations or addresses. For example, AI Guardrail recognizes the
+	//   "John Doe Organization" as an organization, and it recognizes "Jane Doe Street"
+	//   as an address.
+	//
+	//   - EMAIL
+	//
+	// An email address, such as marymajor@email.com.
+	//
+	//   - PHONE
+	//
+	// A phone number. This entity type also includes fax and pager numbers.
+	//
+	//   - USERNAME
+	//
+	// A user name that identifies an account, such as a login name, screen name, nick
+	//   name, or handle.
+	//
+	//   - PASSWORD
+	//
+	// An alphanumeric string that is used as a password, such as "*
+	//   very20special#pass*".
+	//
+	//   - DRIVER_ID
+	//
+	// The number assigned to a driver's license, which is an official document
+	//   permitting an individual to operate one or more motorized vehicles on a public
+	//   road. A driver's license number consists of alphanumeric characters.
+	//
+	//   - LICENSE_PLATE
+	//
+	// A license plate for a vehicle is issued by the state or country where the
+	//   vehicle is registered. The format for passenger vehicles is typically five to
+	//   eight digits, consisting of upper-case letters and numbers. The format varies
+	//   depending on the location of the issuing state or country.
+	//
+	//   - VEHICLE_IDENTIFICATION_NUMBER
+	//
+	// A Vehicle Identification Number (VIN) uniquely identifies a vehicle. VIN
+	//   content and format are defined in the ISO 3779 specification. Each country has
+	//   specific codes and formats for VINs.
+	//
+	//   - Finance
+	//
+	//   - REDIT_DEBIT_CARD_CVV
+	//
+	// A three-digit card verification code (CVV) that is present on VISA, MasterCard,
+	//   and Discover credit and debit cards. For American Express credit or debit cards,
+	//   the CVV is a four-digit numeric code.
+	//
+	//   - CREDIT_DEBIT_CARD_EXPIRY
+	//
+	// The expiration date for a credit or debit card. This number is usually four
+	//   digits long and is often formatted as month/year or MM/YY. AI Guardrail
+	//   recognizes expiration dates such as 01/21, 01/2021, and Jan 2021.
+	//
+	//   - CREDIT_DEBIT_CARD_NUMBER
+	//
+	// The number for a credit or debit card. These numbers can vary from 13 to 16
+	//   digits in length. However, Amazon Comprehend also recognizes credit or debit
+	//   card numbers when only the last four digits are present.
+	//
+	//   - PIN
+	//
+	// A four-digit personal identification number (PIN) with which you can access
+	//   your bank account.
+	//
+	//   - INTERNATIONAL_BANK_ACCOUNT_NUMBER
+	//
+	// An International Bank Account Number has specific formats in each country. For
+	//   more information, see [www.iban.com/structure].
+	//
+	//   - SWIFT_CODE
+	//
+	// A SWIFT code is a standard format of Bank Identifier Code (BIC) used to specify
+	//   a particular bank or branch. Banks use these codes for money transfers such as
+	//   international wire transfers.
+	//
+	// SWIFT codes consist of eight or 11 characters. The 11-digit codes refer to
+	//   specific branches, while eight-digit codes (or 11-digit codes ending in 'XXX')
+	//   refer to the head or primary office.
+	//
+	//   - IT
+	//
+	//   - IP_ADDRESS
+	//
+	// An IPv4 address, such as 198.51.100.0.
+	//
+	//   - MAC_ADDRESS
+	//
+	// A media access control (MAC) address is a unique identifier assigned to a
+	//   network interface controller (NIC).
+	//
+	//   - URL
+	//
+	// A web address, such as www.example.com.
+	//
+	//   - AWS_ACCESS_KEY
+	//
+	// A unique identifier that's associated with a secret access key; you use the
+	//   access key ID and secret access key to sign programmatic Amazon Web Services
+	//   requests cryptographically.
+	//
+	//   - AWS_SECRET_KEY
+	//
+	// A unique identifier that's associated with an access key. You use the access
+	//   key ID and secret access key to sign programmatic Amazon Web Services requests
+	//   cryptographically.
+	//
+	//   - USA specific
+	//
+	//   - US_BANK_ACCOUNT_NUMBER
+	//
+	// A US bank account number, which is typically 10 to 12 digits long.
+	//
+	//   - US_BANK_ROUTING_NUMBER
+	//
+	// A US bank account routing number. These are typically nine digits long,
+	//
+	//   - US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER
+	//
+	// A US Individual Taxpayer Identification Number (ITIN) is a nine-digit number
+	//   that starts with a "9" and contain a "7" or "8" as the fourth digit. An ITIN can
+	//   be formatted with a space or a dash after the third and forth digits.
+	//
+	//   - US_PASSPORT_NUMBER
+	//
+	// A US passport number. Passport numbers range from six to nine alphanumeric
+	//   characters.
+	//
+	//   - US_SOCIAL_SECURITY_NUMBER
+	//
+	// A US Social Security Number (SSN) is a nine-digit number that is issued to US
+	//   citizens, permanent residents, and temporary working residents.
+	//
+	//   - Canada specific
+	//
+	//   - CA_HEALTH_NUMBER
+	//
+	// A Canadian Health Service Number is a 10-digit unique identifier, required for
+	//   individuals to access healthcare benefits.
+	//
+	//   - CA_SOCIAL_INSURANCE_NUMBER
+	//
+	// A Canadian Social Insurance Number (SIN) is a nine-digit unique identifier,
+	//   required for individuals to access government programs and benefits.
+	//
+	// The SIN is formatted as three groups of three digits, such as 123-456-789. A
+	//   SIN can be validated through a simple check-digit process called the [Luhn algorithm].
+	//
+	//   - UK Specific
+	//
+	//   - UK_NATIONAL_HEALTH_SERVICE_NUMBER
+	//
+	// A UK National Health Service Number is a 10-17 digit number, such as 485 555
+	//   3456. The current system formats the 10-digit number with spaces after the third
+	//   and sixth digits. The final digit is an error-detecting checksum.
+	//
+	//   - UK_NATIONAL_INSURANCE_NUMBER
+	//
+	// A UK National Insurance Number (NINO) provides individuals with access to
+	//   National Insurance (social security) benefits. It is also used for some purposes
+	//   in the UK tax system.
+	//
+	// The number is nine digits long and starts with two letters, followed by six
+	//   numbers and one letter. A NINO can be formatted with a space or a dash after the
+	//   two letters and after the second, forth, and sixth digits.
+	//
+	//   - UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+	//
+	// A UK Unique Taxpayer Reference (UTR) is a 10-digit number that identifies a
+	//   taxpayer or a business.
+	//
+	//   - Custom
+	//
+	//   - Regex filter - You can use a regular expressions to define patterns for an
+	//   AI Guardrail to recognize and act upon such as serial number, booking ID etc..
+	//
+	// [Luhn algorithm]: https://www.wikipedia.org/wiki/Luhn_algorithm
+	// [www.iban.com/structure]: https://www.iban.com/structure
+	//
+	// This member is required.
+	Type GuardrailPiiEntityType
+
+	noSmithyDocumentSerde
+}
+
+// The regular expression to configure for the AI Guardrail.
+type GuardrailRegexConfig struct {
+
+	// The AI Guardrail action to configure when matching regular expression is
+	// detected.
+	//
+	// This member is required.
+	Action GuardrailSensitiveInformationAction
+
+	// The name of the regular expression to configure for the AI Guardrail.
+	//
+	// This member is required.
+	Name *string
+
+	// The regular expression pattern to configure for the AI Guardrail.
+	//
+	// This member is required.
+	Pattern *string
+
+	// The description of the regular expression to configure for the AI Guardrail.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about topics for the AI Guardrail to identify and deny.
+type GuardrailTopicConfig struct {
+
+	// A definition of the topic to deny.
+	//
+	// This member is required.
+	Definition *string
+
+	// The name of the topic to deny.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies to deny the topic.
+	//
+	// This member is required.
+	Type GuardrailTopicType
+
+	// A list of prompts, each of which is an example of a prompt that can be
+	// categorized as belonging to the topic.
+	Examples []string
+
+	noSmithyDocumentSerde
+}
+
+// A word to configure for the AI Guardrail.
+type GuardrailWordConfig struct {
+
+	// Text of the word configured for the AI Guardrail to block.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // Settings for hierarchical document chunking for a data source. Hierarchical
 // chunking splits documents into layers of chunks where the first layer contains
 // large chunks, and the second layer contains smaller chunks derived from the
@@ -2116,12 +2711,71 @@ func (*ManagedSourceConfigurationMemberWebCrawlerConfiguration) isManagedSourceC
 // The configuration for the MANUAL_SEARCH AI Agent type.
 type ManualSearchAIAgentConfiguration struct {
 
+	// The AI Guardrail identifier for the Answer Generation guardrail used by the
+	// MANUAL_SEARCH AI Agent.
+	AnswerGenerationAIGuardrailId *string
+
 	// The AI Prompt identifier for the Answer Generation prompt used by the
 	// MANUAL_SEARCH AI Agent.
 	AnswerGenerationAIPromptId *string
 
 	// The association configurations for overriding behavior on this AI Agent.
 	AssociationConfigurations []AssociationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The message data.
+//
+// The following types satisfy this interface:
+//
+//	MessageDataMemberText
+type MessageData interface {
+	isMessageData()
+}
+
+// The message data in text type.
+type MessageDataMemberText struct {
+	Value TextMessage
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageDataMemberText) isMessageData() {}
+
+// The message input.
+type MessageInput struct {
+
+	// The message input value.
+	//
+	// This member is required.
+	Value MessageData
+
+	noSmithyDocumentSerde
+}
+
+// The message output.
+type MessageOutput struct {
+
+	// The identifier of a message.
+	//
+	// This member is required.
+	MessageId *string
+
+	// The participant of a message.
+	//
+	// This member is required.
+	Participant Participant
+
+	// The timestamp of a message.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The value of a message data.
+	//
+	// This member is required.
+	Value MessageData
 
 	noSmithyDocumentSerde
 }
@@ -3435,6 +4089,44 @@ type SeedUrl struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for AI Agents of type SELF_SERVICE.
+type SelfServiceAIAgentConfiguration struct {
+
+	// The association configurations for overriding behavior on this AI Agent.
+	AssociationConfigurations []AssociationConfiguration
+
+	// The AI Guardrail identifier used by the SELF_SERVICE AI Agent.
+	SelfServiceAIGuardrailId *string
+
+	// The AI Prompt identifier for the Self Service Answer Generation prompt used by
+	// the SELF_SERVICE AI Agent
+	SelfServiceAnswerGenerationAIPromptId *string
+
+	// The AI Prompt identifier for the Self Service Pre-Processing prompt used by the
+	// SELF_SERVICE AI Agent
+	SelfServicePreProcessingAIPromptId *string
+
+	noSmithyDocumentSerde
+}
+
+// The conversation history data to included in conversation context data before
+// the the Amazon Q in Connect session..
+type SelfServiceConversationHistory struct {
+
+	// The number of turn of the conversation history data.
+	//
+	// This member is required.
+	TurnNumber *int32
+
+	// The bot response of the conversation history data.
+	BotResponse *string
+
+	// The input transcript of the conversation history data.
+	InputTranscript *string
+
+	noSmithyDocumentSerde
+}
+
 // Settings for semantic document chunking for a data source. Semantic chunking
 // splits a document into smaller documents based on groups of similar content
 // derived from the text with natural language processing.
@@ -3723,6 +4415,15 @@ type TextFullAIPromptEditTemplateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The message data in text type.
+type TextMessage struct {
+
+	// The value of the message data in text type.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the URL/URLs for the web content that you want to crawl.
 // You should be authorized to crawl the URLs.
 type UrlConfiguration struct {
@@ -3814,6 +4515,7 @@ func (*UnknownUnionMember) isContentFeedbackData()                {}
 func (*UnknownUnionMember) isDataDetails()                        {}
 func (*UnknownUnionMember) isDataReference()                      {}
 func (*UnknownUnionMember) isManagedSourceConfiguration()         {}
+func (*UnknownUnionMember) isMessageData()                        {}
 func (*UnknownUnionMember) isMessageTemplateBodyContentProvider() {}
 func (*UnknownUnionMember) isMessageTemplateContentProvider()     {}
 func (*UnknownUnionMember) isOrCondition()                        {}

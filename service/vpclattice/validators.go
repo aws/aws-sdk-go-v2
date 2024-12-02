@@ -70,6 +70,46 @@ func (m *validateOpCreateListener) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateResourceConfiguration struct {
+}
+
+func (*validateOpCreateResourceConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateResourceConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateResourceConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateResourceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateResourceGateway struct {
+}
+
+func (*validateOpCreateResourceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateResourceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateResourceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateResourceGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRule struct {
 }
 
@@ -125,6 +165,26 @@ func (m *validateOpCreateServiceNetwork) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateServiceNetworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateServiceNetworkResourceAssociation struct {
+}
+
+func (*validateOpCreateServiceNetworkResourceAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateServiceNetworkResourceAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateServiceNetworkResourceAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateServiceNetworkResourceAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +310,66 @@ func (m *validateOpDeleteListener) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResourceConfiguration struct {
+}
+
+func (*validateOpDeleteResourceConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourceConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourceConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteResourceEndpointAssociation struct {
+}
+
+func (*validateOpDeleteResourceEndpointAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourceEndpointAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourceEndpointAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourceEndpointAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteResourceGateway struct {
+}
+
+func (*validateOpDeleteResourceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourceGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResourcePolicy struct {
 }
 
@@ -325,6 +445,26 @@ func (m *validateOpDeleteServiceNetwork) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteServiceNetworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteServiceNetworkResourceAssociation struct {
+}
+
+func (*validateOpDeleteServiceNetworkResourceAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteServiceNetworkResourceAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteServiceNetworkResourceAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteServiceNetworkResourceAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +610,46 @@ func (m *validateOpGetListener) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourceConfiguration struct {
+}
+
+func (*validateOpGetResourceConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourceGateway struct {
+}
+
+func (*validateOpGetResourceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourcePolicy struct {
 }
 
@@ -545,6 +725,26 @@ func (m *validateOpGetServiceNetwork) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetServiceNetworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetServiceNetworkResourceAssociation struct {
+}
+
+func (*validateOpGetServiceNetworkResourceAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetServiceNetworkResourceAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetServiceNetworkResourceAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetServiceNetworkResourceAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +850,26 @@ func (m *validateOpListListeners) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListResourceEndpointAssociations struct {
+}
+
+func (*validateOpListResourceEndpointAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourceEndpointAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourceEndpointAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourceEndpointAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRules struct {
 }
 
@@ -665,6 +885,26 @@ func (m *validateOpListRules) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListServiceNetworkVpcEndpointAssociations struct {
+}
+
+func (*validateOpListServiceNetworkVpcEndpointAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServiceNetworkVpcEndpointAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServiceNetworkVpcEndpointAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServiceNetworkVpcEndpointAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -850,6 +1090,46 @@ func (m *validateOpUpdateListener) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateResourceConfiguration struct {
+}
+
+func (*validateOpUpdateResourceConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResourceConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResourceConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResourceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateResourceGateway struct {
+}
+
+func (*validateOpUpdateResourceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResourceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResourceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResourceGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRule struct {
 }
 
@@ -962,6 +1242,14 @@ func addOpCreateListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateListener{}, middleware.After)
 }
 
+func addOpCreateResourceConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateResourceConfiguration{}, middleware.After)
+}
+
+func addOpCreateResourceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateResourceGateway{}, middleware.After)
+}
+
 func addOpCreateRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRule{}, middleware.After)
 }
@@ -972,6 +1260,10 @@ func addOpCreateServiceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateServiceNetworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateServiceNetwork{}, middleware.After)
+}
+
+func addOpCreateServiceNetworkResourceAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateServiceNetworkResourceAssociation{}, middleware.After)
 }
 
 func addOpCreateServiceNetworkServiceAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -998,6 +1290,18 @@ func addOpDeleteListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteListener{}, middleware.After)
 }
 
+func addOpDeleteResourceConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourceConfiguration{}, middleware.After)
+}
+
+func addOpDeleteResourceEndpointAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourceEndpointAssociation{}, middleware.After)
+}
+
+func addOpDeleteResourceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourceGateway{}, middleware.After)
+}
+
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
 }
@@ -1012,6 +1316,10 @@ func addOpDeleteServiceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteServiceNetworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteServiceNetwork{}, middleware.After)
+}
+
+func addOpDeleteServiceNetworkResourceAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteServiceNetworkResourceAssociation{}, middleware.After)
 }
 
 func addOpDeleteServiceNetworkServiceAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -1042,6 +1350,14 @@ func addOpGetListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetListener{}, middleware.After)
 }
 
+func addOpGetResourceConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceConfiguration{}, middleware.After)
+}
+
+func addOpGetResourceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceGateway{}, middleware.After)
+}
+
 func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
 }
@@ -1056,6 +1372,10 @@ func addOpGetServiceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetServiceNetworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetServiceNetwork{}, middleware.After)
+}
+
+func addOpGetServiceNetworkResourceAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetServiceNetworkResourceAssociation{}, middleware.After)
 }
 
 func addOpGetServiceNetworkServiceAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -1078,8 +1398,16 @@ func addOpListListenersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListListeners{}, middleware.After)
 }
 
+func addOpListResourceEndpointAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourceEndpointAssociations{}, middleware.After)
+}
+
 func addOpListRulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRules{}, middleware.After)
+}
+
+func addOpListServiceNetworkVpcEndpointAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServiceNetworkVpcEndpointAssociations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1116,6 +1444,14 @@ func addOpUpdateAccessLogSubscriptionValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateListener{}, middleware.After)
+}
+
+func addOpUpdateResourceConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResourceConfiguration{}, middleware.After)
+}
+
+func addOpUpdateResourceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResourceGateway{}, middleware.After)
 }
 
 func addOpUpdateRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -1464,6 +1800,45 @@ func validateOpCreateListenerInput(v *CreateListenerInput) error {
 	}
 }
 
+func validateOpCreateResourceConfigurationInput(v *CreateResourceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateResourceGatewayInput(v *CreateResourceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceGatewayInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.VpcIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcIdentifier"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRuleInput(v *CreateRuleInput) error {
 	if v == nil {
 		return nil
@@ -1524,6 +1899,24 @@ func validateOpCreateServiceNetworkInput(v *CreateServiceNetworkInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateServiceNetworkInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateServiceNetworkResourceAssociationInput(v *CreateServiceNetworkResourceAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateServiceNetworkResourceAssociationInput"}
+	if v.ResourceConfigurationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfigurationIdentifier"))
+	}
+	if v.ServiceNetworkIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceNetworkIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1634,6 +2027,51 @@ func validateOpDeleteListenerInput(v *DeleteListenerInput) error {
 	}
 }
 
+func validateOpDeleteResourceConfigurationInput(v *DeleteResourceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourceConfigurationInput"}
+	if v.ResourceConfigurationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfigurationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResourceEndpointAssociationInput(v *DeleteResourceEndpointAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourceEndpointAssociationInput"}
+	if v.ResourceEndpointAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceEndpointAssociationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResourceGatewayInput(v *DeleteResourceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourceGatewayInput"}
+	if v.ResourceGatewayIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGatewayIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -1692,6 +2130,21 @@ func validateOpDeleteServiceNetworkInput(v *DeleteServiceNetworkInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceNetworkInput"}
 	if v.ServiceNetworkIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNetworkIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteServiceNetworkResourceAssociationInput(v *DeleteServiceNetworkResourceAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceNetworkResourceAssociationInput"}
+	if v.ServiceNetworkResourceAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceNetworkResourceAssociationIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1815,6 +2268,36 @@ func validateOpGetListenerInput(v *GetListenerInput) error {
 	}
 }
 
+func validateOpGetResourceConfigurationInput(v *GetResourceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceConfigurationInput"}
+	if v.ResourceConfigurationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfigurationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourceGatewayInput(v *GetResourceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceGatewayInput"}
+	if v.ResourceGatewayIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGatewayIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -1873,6 +2356,21 @@ func validateOpGetServiceNetworkInput(v *GetServiceNetworkInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetServiceNetworkInput"}
 	if v.ServiceNetworkIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNetworkIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetServiceNetworkResourceAssociationInput(v *GetServiceNetworkResourceAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetServiceNetworkResourceAssociationInput"}
+	if v.ServiceNetworkResourceAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceNetworkResourceAssociationIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1956,6 +2454,21 @@ func validateOpListListenersInput(v *ListListenersInput) error {
 	}
 }
 
+func validateOpListResourceEndpointAssociationsInput(v *ListResourceEndpointAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourceEndpointAssociationsInput"}
+	if v.ResourceConfigurationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfigurationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListRulesInput(v *ListRulesInput) error {
 	if v == nil {
 		return nil
@@ -1966,6 +2479,21 @@ func validateOpListRulesInput(v *ListRulesInput) error {
 	}
 	if v.ListenerIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ListenerIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListServiceNetworkVpcEndpointAssociationsInput(v *ListServiceNetworkVpcEndpointAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServiceNetworkVpcEndpointAssociationsInput"}
+	if v.ServiceNetworkIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceNetworkIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2138,6 +2666,36 @@ func validateOpUpdateListenerInput(v *UpdateListenerInput) error {
 		if err := validateRuleAction(v.DefaultAction); err != nil {
 			invalidParams.AddNested("DefaultAction", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResourceConfigurationInput(v *UpdateResourceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceConfigurationInput"}
+	if v.ResourceConfigurationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfigurationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResourceGatewayInput(v *UpdateResourceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceGatewayInput"}
+	if v.ResourceGatewayIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGatewayIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

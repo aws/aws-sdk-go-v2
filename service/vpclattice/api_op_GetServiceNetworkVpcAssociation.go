@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves information about the association between a service network and a VPC.
+// Retrieves information about the specified association between a service network
+// and a VPC.
 func (c *Client) GetServiceNetworkVpcAssociation(ctx context.Context, params *GetServiceNetworkVpcAssociationInput, optFns ...func(*Options)) (*GetServiceNetworkVpcAssociationOutput, error) {
 	if params == nil {
 		params = &GetServiceNetworkVpcAssociationInput{}
@@ -30,7 +31,7 @@ func (c *Client) GetServiceNetworkVpcAssociation(ctx context.Context, params *Ge
 
 type GetServiceNetworkVpcAssociationInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the association.
+	// The ID or ARN of the association.
 	//
 	// This member is required.
 	ServiceNetworkVpcAssociationIdentifier *string
@@ -43,8 +44,7 @@ type GetServiceNetworkVpcAssociationOutput struct {
 	// The Amazon Resource Name (ARN) of the association.
 	Arn *string
 
-	// The date and time that the association was created, specified in ISO-8601
-	// format.
+	// The date and time that the association was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The account that created the association.
@@ -56,11 +56,10 @@ type GetServiceNetworkVpcAssociationOutput struct {
 	// The failure message.
 	FailureMessage *string
 
-	// The ID of the specified association between the service network and the VPC.
+	// The ID of the association.
 	Id *string
 
-	// The date and time that the association was last updated, specified in ISO-8601
-	// format.
+	// The date and time that the association was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The IDs of the security groups.

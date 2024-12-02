@@ -45,6 +45,8 @@ type ComponentStatus string
 // Enum values for ComponentStatus
 const (
 	ComponentStatusDeprecated ComponentStatus = "DEPRECATED"
+	ComponentStatusDisabled   ComponentStatus = "DISABLED"
+	ComponentStatusActive     ComponentStatus = "ACTIVE"
 )
 
 // Values returns all known values for ComponentStatus. Note that this can be
@@ -54,6 +56,8 @@ const (
 func (ComponentStatus) Values() []ComponentStatus {
 	return []ComponentStatus{
 		"DEPRECATED",
+		"DISABLED",
+		"ACTIVE",
 	}
 }
 
@@ -448,6 +452,25 @@ func (LifecyclePolicyTimeUnit) Values() []LifecyclePolicyTimeUnit {
 	}
 }
 
+type MarketplaceResourceType string
+
+// Enum values for MarketplaceResourceType
+const (
+	MarketplaceResourceTypeComponentData     MarketplaceResourceType = "COMPONENT_DATA"
+	MarketplaceResourceTypeComponentArtifact MarketplaceResourceType = "COMPONENT_ARTIFACT"
+)
+
+// Values returns all known values for MarketplaceResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MarketplaceResourceType) Values() []MarketplaceResourceType {
+	return []MarketplaceResourceType{
+		"COMPONENT_DATA",
+		"COMPONENT_ARTIFACT",
+	}
+}
+
 type OnWorkflowFailure string
 
 // Enum values for OnWorkflowFailure
@@ -471,10 +494,11 @@ type Ownership string
 
 // Enum values for Ownership
 const (
-	OwnershipSelf       Ownership = "Self"
-	OwnershipShared     Ownership = "Shared"
-	OwnershipAmazon     Ownership = "Amazon"
-	OwnershipThirdparty Ownership = "ThirdParty"
+	OwnershipSelf           Ownership = "Self"
+	OwnershipShared         Ownership = "Shared"
+	OwnershipAmazon         Ownership = "Amazon"
+	OwnershipThirdparty     Ownership = "ThirdParty"
+	OwnershipAwsMarketplace Ownership = "AWSMarketplace"
 )
 
 // Values returns all known values for Ownership. Note that this can be expanded
@@ -487,6 +511,7 @@ func (Ownership) Values() []Ownership {
 		"Shared",
 		"Amazon",
 		"ThirdParty",
+		"AWSMarketplace",
 	}
 }
 
@@ -547,6 +572,23 @@ func (Platform) Values() []Platform {
 		"Windows",
 		"Linux",
 		"macOS",
+	}
+}
+
+type ProductCodeType string
+
+// Enum values for ProductCodeType
+const (
+	ProductCodeTypeMarketplace ProductCodeType = "marketplace"
+)
+
+// Values returns all known values for ProductCodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProductCodeType) Values() []ProductCodeType {
+	return []ProductCodeType{
+		"marketplace",
 	}
 }
 

@@ -290,6 +290,18 @@ func TestCheckSnapshot_PutOutboundRequestBatch(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutProfileOutboundRequestBatch(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutProfileOutboundRequestBatch(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutProfileOutboundRequestBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ResumeCampaign(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ResumeCampaign(context.Background(), nil, func(o *Options) {
@@ -666,6 +678,18 @@ func TestUpdateSnapshot_PutOutboundRequestBatch(t *testing.T) {
 	_, err := svc.PutOutboundRequestBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutOutboundRequestBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutProfileOutboundRequestBatch(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutProfileOutboundRequestBatch(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutProfileOutboundRequestBatch")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

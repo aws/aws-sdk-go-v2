@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set
-// of case-sensitive key-value pairs. A domain can have up to 10 tags. For more
-// information, see [Tagging Amazon OpenSearch Service domains].
+// Attaches tags to an existing Amazon OpenSearch Service domain, data source, or
+// application.
 //
-// [Tagging Amazon OpenSearch Service domains]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html
+// Tags are a set of case-sensitive key-value pairs. A domain, data source, or
+// application can have up to 10 tags. For more information, see [Tagging Amazon OpenSearch Service resources].
+//
+// [Tagging Amazon OpenSearch Service resources]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}
@@ -32,11 +34,11 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 }
 
 // Container for the parameters to the AddTags operation. Specifies the tags to
-// attach to the domain.
+// attach to the domain, data source, or application.
 type AddTagsInput struct {
 
-	// Amazon Resource Name (ARN) for the OpenSearch Service domain to which you want
-	// to attach resource tags.
+	// Amazon Resource Name (ARN) for the OpenSearch Service domain, data source, or
+	// application to which you want to attach resource tags.
 	//
 	// This member is required.
 	ARN *string

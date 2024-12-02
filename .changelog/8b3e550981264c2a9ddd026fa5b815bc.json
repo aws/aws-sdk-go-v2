@@ -1,0 +1,8 @@
+{
+    "id": "8b3e5509-8126-4c2a-9ddd-026fa5b815bc",
+    "type": "feature",
+    "description": "Added support for EC2 Image Builder's integration with AWS Marketplace for Marketplace components.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

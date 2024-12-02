@@ -1,0 +1,8 @@
+{
+    "id": "1a92f01a-7856-41aa-9a13-87132ca76cb6",
+    "type": "feature",
+    "description": "This feature introduces support for CRUDL APIs, enabling the creation and management of Connected data sources.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

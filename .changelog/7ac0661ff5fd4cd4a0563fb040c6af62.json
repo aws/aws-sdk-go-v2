@@ -1,0 +1,8 @@
+{
+    "id": "7ac0661f-f5fd-4cd4-a056-3fb040c6af62",
+    "type": "feature",
+    "description": "Lattice APIs that allow sharing and access of VPC resources across accounts.",
+    "modules": [
+        "service/vpclattice"
+    ]
+}

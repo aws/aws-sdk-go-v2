@@ -41,6 +41,7 @@
         "api_op_GetInfrastructureConfiguration.go",
         "api_op_GetLifecycleExecution.go",
         "api_op_GetLifecyclePolicy.go",
+        "api_op_GetMarketplaceResource.go",
         "api_op_GetWorkflow.go",
         "api_op_GetWorkflowExecution.go",
         "api_op_GetWorkflowStepExecution.go",

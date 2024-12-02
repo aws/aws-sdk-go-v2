@@ -33,7 +33,7 @@ func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesI
 
 type ListCertificatesInput struct {
 
-	// The maximum number of certificates to return.
+	// The maximum number of items to return.
 	MaxResults *int32
 
 	// When you can get additional results from the ListCertificates call, a NextToken
@@ -160,7 +160,7 @@ func (c *Client) addOperationListCertificatesMiddlewares(stack *middleware.Stack
 
 // ListCertificatesPaginatorOptions is the paginator options for ListCertificates
 type ListCertificatesPaginatorOptions struct {
-	// The maximum number of certificates to return.
+	// The maximum number of items to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

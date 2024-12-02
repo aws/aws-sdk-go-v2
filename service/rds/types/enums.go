@@ -204,6 +204,25 @@ func (CustomEngineVersionStatus) Values() []CustomEngineVersionStatus {
 	}
 }
 
+type DatabaseInsightsMode string
+
+// Enum values for DatabaseInsightsMode
+const (
+	DatabaseInsightsModeStandard DatabaseInsightsMode = "standard"
+	DatabaseInsightsModeAdvanced DatabaseInsightsMode = "advanced"
+)
+
+// Values returns all known values for DatabaseInsightsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseInsightsMode) Values() []DatabaseInsightsMode {
+	return []DatabaseInsightsMode{
+		"standard",
+		"advanced",
+	}
+}
+
 type DBProxyEndpointStatus string
 
 // Enum values for DBProxyEndpointStatus

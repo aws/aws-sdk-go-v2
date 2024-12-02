@@ -670,6 +670,26 @@ func (m *validateOpGetLifecyclePolicy) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMarketplaceResource struct {
+}
+
+func (*validateOpGetMarketplaceResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMarketplaceResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMarketplaceResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMarketplaceResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWorkflowExecution struct {
 }
 
@@ -1360,6 +1380,10 @@ func addOpGetLifecycleExecutionValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetLifecyclePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLifecyclePolicy{}, middleware.After)
+}
+
+func addOpGetMarketplaceResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMarketplaceResource{}, middleware.After)
 }
 
 func addOpGetWorkflowExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -2602,6 +2626,24 @@ func validateOpGetLifecyclePolicyInput(v *GetLifecyclePolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetLifecyclePolicyInput"}
 	if v.LifecyclePolicyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LifecyclePolicyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMarketplaceResourceInput(v *GetMarketplaceResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMarketplaceResourceInput"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

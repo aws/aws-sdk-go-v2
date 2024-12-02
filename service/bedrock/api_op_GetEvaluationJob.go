@@ -12,10 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves the properties associated with a model evaluation job, including the
-// status of the job. For more information, see [Model evaluation].
-//
-// [Model evaluation]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html
+// Gets information about an evaluation job, such as the status of the job.
 func (c *Client) GetEvaluationJob(ctx context.Context, params *GetEvaluationJobInput, optFns ...func(*Options)) (*GetEvaluationJobOutput, error) {
 	if params == nil {
 		params = &GetEvaluationJobInput{}
@@ -33,7 +30,8 @@ func (c *Client) GetEvaluationJob(ctx context.Context, params *GetEvaluationJobI
 
 type GetEvaluationJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the model evaluation job.
+	// The Amazon Resource Name (ARN) of the evaluation job you want get information
+	// on.
 	//
 	// This member is required.
 	JobIdentifier *string
@@ -43,64 +41,70 @@ type GetEvaluationJobInput struct {
 
 type GetEvaluationJobOutput struct {
 
-	// When the model evaluation job was created.
+	// The time the evaluation job was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// Contains details about the type of model evaluation job, the metrics used, the
-	// task type selected, the datasets used, and any custom metrics you defined.
+	// Contains the configuration details of either an automated or human-based
+	// evaluation job.
 	//
 	// This member is required.
 	EvaluationConfig types.EvaluationConfig
 
-	// Details about the models you specified in your model evaluation job.
+	// Contains the configuration details of the inference model used for the
+	// evaluation job.
 	//
 	// This member is required.
 	InferenceConfig types.EvaluationInferenceConfig
 
-	// The Amazon Resource Name (ARN) of the model evaluation job.
+	// The Amazon Resource Name (ARN) of the evaluation job.
 	//
 	// This member is required.
 	JobArn *string
 
-	// The name of the model evaluation job.
+	// The name for the evaluation job.
 	//
 	// This member is required.
 	JobName *string
 
-	// The type of model evaluation job.
+	// Specifies whether the evaluation job is automated or human-based.
 	//
 	// This member is required.
 	JobType types.EvaluationJobType
 
-	// Amazon S3 location for where output data is saved.
+	// Contains the configuration details of the Amazon S3 bucket for storing the
+	// results of the evaluation job.
 	//
 	// This member is required.
 	OutputDataConfig *types.EvaluationOutputDataConfig
 
-	// The Amazon Resource Name (ARN) of the IAM service role used in the model
-	// evaluation job.
+	// The Amazon Resource Name (ARN) of the IAM service role used in the evaluation
+	// job.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The status of the model evaluation job.
+	// The current status of the evaluation job.
 	//
 	// This member is required.
 	Status types.EvaluationJobStatus
 
-	// The Amazon Resource Name (ARN) of the customer managed key specified when the
-	// model evaluation job was created.
+	// Specifies whether the evaluation job is for evaluating a model or evaluating a
+	// knowledge base (retrieval and response generation).
+	ApplicationType types.ApplicationType
+
+	// The Amazon Resource Name (ARN) of the customer managed encryption key specified
+	// when the evaluation job was created.
 	CustomerEncryptionKeyId *string
 
-	// An array of strings the specify why the model evaluation job has failed.
+	// A list of strings that specify why the evaluation job failed to create.
 	FailureMessages []string
 
-	// The description of the model evaluation job.
+	// The description of the evaluation job.
 	JobDescription *string
 
-	// When the model evaluation job was last modified.
+	// The time the evaluation job was last modified.
 	LastModifiedTime *time.Time
 
 	// Metadata pertaining to the operation's result.

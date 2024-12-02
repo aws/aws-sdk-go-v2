@@ -57,6 +57,9 @@ type GetWebExperienceOutput struct {
 	// of using AWS IAM Identity Center for user management.
 	AuthenticationConfiguration types.WebExperienceAuthConfiguration
 
+	// The browser extension configuration for an Amazon Q Business web experience.
+	BrowserExtensionConfiguration *types.BrowserExtensionConfiguration
+
 	// The Unix timestamp when the Amazon Q Business web experience was last created.
 	CreatedAt *time.Time
 

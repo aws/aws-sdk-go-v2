@@ -44,7 +44,7 @@ type DescribeUsersInput struct {
 	// arguments unchanged.
 	NextToken *string
 
-	// The name of the user
+	// The name of the user.
 	UserName *string
 
 	noSmithyDocumentSerde

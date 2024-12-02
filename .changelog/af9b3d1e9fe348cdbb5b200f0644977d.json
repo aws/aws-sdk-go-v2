@@ -1,0 +1,8 @@
+{
+    "id": "af9b3d1e-9fe3-48cd-bb5b-200f0644977d",
+    "type": "feature",
+    "description": "Add new Multi Domain Correlation findings.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

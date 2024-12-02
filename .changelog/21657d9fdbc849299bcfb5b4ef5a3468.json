@@ -1,0 +1,8 @@
+{
+    "id": "21657d9f-dbc8-4929-9bcf-b5b4ef5a3468",
+    "type": "feature",
+    "description": "This release introduces Event Trigger APIs as part of Amazon Connect Customer Profiles service.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

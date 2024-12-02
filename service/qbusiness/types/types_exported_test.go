@@ -120,6 +120,24 @@ var _ *types.ActionReviewEvent
 var _ *types.MetadataEvent
 var _ *types.TextOutputEvent
 
+func ExampleCopyFromSource_outputUsage() {
+	var union types.CopyFromSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CopyFromSourceMemberConversation:
+		_ = v.Value // Value is types.ConversationSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ConversationSource
+
 func ExampleDocumentAttributeBoostingConfiguration_outputUsage() {
 	var union types.DocumentAttributeBoostingConfiguration
 	// type switches can be used to check the union value

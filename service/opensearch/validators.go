@@ -50,6 +50,26 @@ func (m *validateOpAddDataSource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAddDirectQueryDataSource struct {
+}
+
+func (*validateOpAddDirectQueryDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddDirectQueryDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddDirectQueryDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddDirectQueryDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAddTags struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpDeleteDataSource) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDirectQueryDataSource struct {
+}
+
+func (*validateOpDeleteDirectQueryDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDirectQueryDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDirectQueryDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDirectQueryDataSourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -685,6 +725,26 @@ func (m *validateOpGetDataSource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDirectQueryDataSource struct {
+}
+
+func (*validateOpGetDirectQueryDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDirectQueryDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDirectQueryDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDirectQueryDataSourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1110,6 +1170,26 @@ func (m *validateOpUpdateDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDirectQueryDataSource struct {
+}
+
+func (*validateOpUpdateDirectQueryDataSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDirectQueryDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDirectQueryDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDirectQueryDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDomainConfig struct {
 }
 
@@ -1238,6 +1318,10 @@ func addOpAddDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddDataSource{}, middleware.After)
 }
 
+func addOpAddDirectQueryDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddDirectQueryDataSource{}, middleware.After)
+}
+
 func addOpAddTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTags{}, middleware.After)
 }
@@ -1288,6 +1372,10 @@ func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSource{}, middleware.After)
+}
+
+func addOpDeleteDirectQueryDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDirectQueryDataSource{}, middleware.After)
 }
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -1364,6 +1452,10 @@ func addOpGetApplicationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSource{}, middleware.After)
+}
+
+func addOpGetDirectQueryDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDirectQueryDataSource{}, middleware.After)
 }
 
 func addOpGetDomainMaintenanceStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -1450,6 +1542,10 @@ func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataSource{}, middleware.After)
 }
 
+func addOpUpdateDirectQueryDataSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDirectQueryDataSource{}, middleware.After)
+}
+
 func addOpUpdateDomainConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDomainConfig{}, middleware.After)
 }
@@ -1506,6 +1602,21 @@ func validateAWSDomainInformation(v *types.AWSDomainInformation) error {
 	}
 }
 
+func validateCloudWatchDirectQueryDataSource(v *types.CloudWatchDirectQueryDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchDirectQueryDataSource"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClusterConfig(v *types.ClusterConfig) error {
 	if v == nil {
 		return nil
@@ -1530,6 +1641,30 @@ func validateColdStorageOptions(v *types.ColdStorageOptions) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ColdStorageOptions"}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDirectQueryDataSourceType(v types.DirectQueryDataSourceType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DirectQueryDataSourceType"}
+	switch uv := v.(type) {
+	case *types.DirectQueryDataSourceTypeMemberCloudWatchLog:
+		if err := validateCloudWatchDirectQueryDataSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[CloudWatchLog]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DirectQueryDataSourceTypeMemberSecurityLake:
+		if err := validateSecurityLakeDirectQueryDataSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[SecurityLake]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1741,6 +1876,21 @@ func validateSAMLOptionsInput(v *types.SAMLOptionsInput) error {
 	}
 }
 
+func validateSecurityLakeDirectQueryDataSource(v *types.SecurityLakeDirectQueryDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecurityLakeDirectQueryDataSource"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -1816,6 +1966,36 @@ func validateOpAddDataSourceInput(v *AddDataSourceInput) error {
 	}
 	if v.DataSourceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddDirectQueryDataSourceInput(v *AddDirectQueryDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddDirectQueryDataSourceInput"}
+	if v.DataSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
+	}
+	if v.DataSourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
+	} else if v.DataSourceType != nil {
+		if err := validateDirectQueryDataSourceType(v.DataSourceType); err != nil {
+			invalidParams.AddNested("DataSourceType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenSearchArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenSearchArns"))
+	}
+	if v.TagList != nil {
+		if err := validateTagList(v.TagList); err != nil {
+			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2099,6 +2279,21 @@ func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDirectQueryDataSourceInput(v *DeleteDirectQueryDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDirectQueryDataSourceInput"}
+	if v.DataSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2396,6 +2591,21 @@ func validateOpGetDataSourceInput(v *GetDataSourceInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDirectQueryDataSourceInput(v *GetDirectQueryDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDirectQueryDataSourceInput"}
+	if v.DataSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2729,6 +2939,31 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 	}
 	if v.DataSourceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDirectQueryDataSourceInput(v *UpdateDirectQueryDataSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDirectQueryDataSourceInput"}
+	if v.DataSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
+	}
+	if v.DataSourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
+	} else if v.DataSourceType != nil {
+		if err := validateDirectQueryDataSourceType(v.DataSourceType); err != nil {
+			invalidParams.AddNested("DataSourceType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenSearchArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenSearchArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

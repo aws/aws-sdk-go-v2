@@ -16558,6 +16558,11 @@ func awsRestjson1_serializeOpDocumentResumeContactRecordingInput(v *ResumeContac
 		ok.String(*v.ContactId)
 	}
 
+	if len(v.ContactRecordingType) > 0 {
+		ok := object.Key("ContactRecordingType")
+		ok.String(string(v.ContactRecordingType))
+	}
+
 	if v.InitialContactId != nil {
 		ok := object.Key("InitialContactId")
 		ok.String(*v.InitialContactId)
@@ -20304,6 +20309,11 @@ func awsRestjson1_serializeOpDocumentStopContactRecordingInput(v *StopContactRec
 		ok.String(*v.ContactId)
 	}
 
+	if len(v.ContactRecordingType) > 0 {
+		ok := object.Key("ContactRecordingType")
+		ok.String(string(v.ContactRecordingType))
+	}
+
 	if v.InitialContactId != nil {
 		ok := object.Key("InitialContactId")
 		ok.String(*v.InitialContactId)
@@ -20596,6 +20606,11 @@ func awsRestjson1_serializeOpDocumentSuspendContactRecordingInput(v *SuspendCont
 	if v.ContactId != nil {
 		ok := object.Key("ContactId")
 		ok.String(*v.ContactId)
+	}
+
+	if len(v.ContactRecordingType) > 0 {
+		ok := object.Key("ContactRecordingType")
+		ok.String(string(v.ContactRecordingType))
 	}
 
 	if v.InitialContactId != nil {
@@ -21414,6 +21429,13 @@ func awsRestjson1_serializeOpDocumentUpdateContactInput(v *UpdateContactInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomerEndpoint != nil {
+		ok := object.Key("CustomerEndpoint")
+		if err := awsRestjson1_serializeDocumentEndpoint(v.CustomerEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -21422,6 +21444,13 @@ func awsRestjson1_serializeOpDocumentUpdateContactInput(v *UpdateContactInput, v
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.QueueInfo != nil {
+		ok := object.Key("QueueInfo")
+		if err := awsRestjson1_serializeDocumentQueueInfoInput(v.QueueInfo, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.References != nil {
@@ -21434,6 +21463,20 @@ func awsRestjson1_serializeOpDocumentUpdateContactInput(v *UpdateContactInput, v
 	if v.SegmentAttributes != nil {
 		ok := object.Key("SegmentAttributes")
 		if err := awsRestjson1_serializeDocumentSegmentAttributes(v.SegmentAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SystemEndpoint != nil {
+		ok := object.Key("SystemEndpoint")
+		if err := awsRestjson1_serializeDocumentEndpoint(v.SystemEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UserInfo != nil {
+		ok := object.Key("UserInfo")
+		if err := awsRestjson1_serializeDocumentUserInfo(v.UserInfo, ok); err != nil {
 			return err
 		}
 	}
@@ -29494,6 +29537,18 @@ func awsRestjson1_serializeDocumentQueueIdList(v []string, value smithyjson.Valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentQueueInfoInput(v *types.QueueInfoInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentQueueQuickConnectConfig(v *types.QueueQuickConnectConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -31545,6 +31600,11 @@ func awsRestjson1_serializeDocumentViewInputContent(v *types.ViewInputContent, v
 func awsRestjson1_serializeDocumentVoiceRecordingConfiguration(v *types.VoiceRecordingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.IvrRecordingTrack) > 0 {
+		ok := object.Key("IvrRecordingTrack")
+		ok.String(string(v.IvrRecordingTrack))
+	}
 
 	if len(v.VoiceRecordingTrack) > 0 {
 		ok := object.Key("VoiceRecordingTrack")

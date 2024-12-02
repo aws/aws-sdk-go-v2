@@ -37,7 +37,7 @@ type ListExecutionsInput struct {
 	// This member is required.
 	WorkflowId *string
 
-	// Specifies the maximum number of executions to return.
+	// The maximum number of items to return.
 	MaxResults *int32
 
 	// ListExecutions returns the NextToken parameter in the output. You can then pass
@@ -190,7 +190,7 @@ func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, 
 
 // ListExecutionsPaginatorOptions is the paginator options for ListExecutions
 type ListExecutionsPaginatorOptions struct {
-	// Specifies the maximum number of executions to return.
+	// The maximum number of items to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

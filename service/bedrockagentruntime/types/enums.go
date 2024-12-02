@@ -42,6 +42,29 @@ func (ActionInvocationType) Values() []ActionInvocationType {
 	}
 }
 
+type AttributeType string
+
+// Enum values for AttributeType
+const (
+	AttributeTypeString     AttributeType = "STRING"
+	AttributeTypeNumber     AttributeType = "NUMBER"
+	AttributeTypeBoolean    AttributeType = "BOOLEAN"
+	AttributeTypeStringList AttributeType = "STRING_LIST"
+)
+
+// Values returns all known values for AttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttributeType) Values() []AttributeType {
+	return []AttributeType{
+		"STRING",
+		"NUMBER",
+		"BOOLEAN",
+		"STRING_LIST",
+	}
+}
+
 type ConfirmationState string
 
 // Enum values for ConfirmationState
@@ -636,6 +659,96 @@ func (RequireConfirmation) Values() []RequireConfirmation {
 	}
 }
 
+type RerankDocumentType string
+
+// Enum values for RerankDocumentType
+const (
+	RerankDocumentTypeText RerankDocumentType = "TEXT"
+	RerankDocumentTypeJson RerankDocumentType = "JSON"
+)
+
+// Values returns all known values for RerankDocumentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RerankDocumentType) Values() []RerankDocumentType {
+	return []RerankDocumentType{
+		"TEXT",
+		"JSON",
+	}
+}
+
+type RerankingConfigurationType string
+
+// Enum values for RerankingConfigurationType
+const (
+	RerankingConfigurationTypeBedrockRerankingModel RerankingConfigurationType = "BEDROCK_RERANKING_MODEL"
+)
+
+// Values returns all known values for RerankingConfigurationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RerankingConfigurationType) Values() []RerankingConfigurationType {
+	return []RerankingConfigurationType{
+		"BEDROCK_RERANKING_MODEL",
+	}
+}
+
+type RerankingMetadataSelectionMode string
+
+// Enum values for RerankingMetadataSelectionMode
+const (
+	RerankingMetadataSelectionModeSelective RerankingMetadataSelectionMode = "SELECTIVE"
+	RerankingMetadataSelectionModeAll       RerankingMetadataSelectionMode = "ALL"
+)
+
+// Values returns all known values for RerankingMetadataSelectionMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RerankingMetadataSelectionMode) Values() []RerankingMetadataSelectionMode {
+	return []RerankingMetadataSelectionMode{
+		"SELECTIVE",
+		"ALL",
+	}
+}
+
+type RerankQueryContentType string
+
+// Enum values for RerankQueryContentType
+const (
+	RerankQueryContentTypeText RerankQueryContentType = "TEXT"
+)
+
+// Values returns all known values for RerankQueryContentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RerankQueryContentType) Values() []RerankQueryContentType {
+	return []RerankQueryContentType{
+		"TEXT",
+	}
+}
+
+type RerankSourceType string
+
+// Enum values for RerankSourceType
+const (
+	RerankSourceTypeInline RerankSourceType = "INLINE"
+)
+
+// Values returns all known values for RerankSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RerankSourceType) Values() []RerankSourceType {
+	return []RerankSourceType{
+		"INLINE",
+	}
+}
+
 type ResponseState string
 
 // Enum values for ResponseState
@@ -664,6 +777,7 @@ const (
 	RetrievalResultLocationTypeConfluence RetrievalResultLocationType = "CONFLUENCE"
 	RetrievalResultLocationTypeSalesforce RetrievalResultLocationType = "SALESFORCE"
 	RetrievalResultLocationTypeSharepoint RetrievalResultLocationType = "SHAREPOINT"
+	RetrievalResultLocationTypeCustom     RetrievalResultLocationType = "CUSTOM"
 )
 
 // Values returns all known values for RetrievalResultLocationType. Note that this
@@ -677,6 +791,7 @@ func (RetrievalResultLocationType) Values() []RetrievalResultLocationType {
 		"CONFLUENCE",
 		"SALESFORCE",
 		"SHAREPOINT",
+		"CUSTOM",
 	}
 }
 
@@ -761,5 +876,23 @@ func (Type) Values() []Type {
 		"FINISH",
 		"ASK_USER",
 		"REPROMPT",
+	}
+}
+
+type VectorSearchRerankingConfigurationType string
+
+// Enum values for VectorSearchRerankingConfigurationType
+const (
+	VectorSearchRerankingConfigurationTypeBedrockRerankingModel VectorSearchRerankingConfigurationType = "BEDROCK_RERANKING_MODEL"
+)
+
+// Values returns all known values for VectorSearchRerankingConfigurationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VectorSearchRerankingConfigurationType) Values() []VectorSearchRerankingConfigurationType {
+	return []VectorSearchRerankingConfigurationType{
+		"BEDROCK_RERANKING_MODEL",
 	}
 }

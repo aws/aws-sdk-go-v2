@@ -1,0 +1,8 @@
+{
+    "id": "794fc469-31ac-4c27-a191-6a7230f0ba08",
+    "type": "feature",
+    "description": "Adds support for WhatsApp Business messaging, IVR call recording, enabling Contact Lens for existing on-premise contact centers and telephony platforms, and enabling telephony and IVR migration to Amazon Connect independent of their contact center agents.",
+    "modules": [
+        "service/connect"
+    ]
+}

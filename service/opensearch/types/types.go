@@ -567,6 +567,20 @@ type ChangeProgressStatusDetails struct {
 	noSmithyDocumentSerde
 }
 
+//	Configuration details for a CloudWatch Logs data source that can be used for
+//
+// direct queries.
+type CloudWatchDirectQueryDataSource struct {
+
+	//  The unique identifier of the IAM role that grants OpenSearch Service
+	// permission to access the specified data source.
+	//
+	// This member is required.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Container for the cluster configuration of an OpenSearch Service domain. For
 // more information, see [Creating and managing Amazon OpenSearch Service domains].
 //
@@ -798,6 +812,64 @@ type DescribePackagesFilter struct {
 
 	noSmithyDocumentSerde
 }
+
+// The configuration details for a data source that can be directly queried.
+type DirectQueryDataSource struct {
+
+	//  The unique, system-generated identifier that represents the data source.
+	DataSourceArn *string
+
+	//  A unique, user-defined label to identify the data source within your
+	// OpenSearch Service environment.
+	DataSourceName *string
+
+	//  The supported Amazon Web Services service that is used as the source for
+	// direct queries in OpenSearch Service.
+	DataSourceType DirectQueryDataSourceType
+
+	//  A description that provides additional context and details about the data
+	// source.
+	Description *string
+
+	//  A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are
+	// associated with the direct query data source.
+	OpenSearchArns []string
+
+	//  A list of tags attached to a direct query data source.
+	TagList []Tag
+
+	noSmithyDocumentSerde
+}
+
+//	The type of data source that is used for direct queries. This is a supported
+//
+// Amazon Web Services service, such as CloudWatch Logs or Security Lake.
+//
+// The following types satisfy this interface:
+//
+//	DirectQueryDataSourceTypeMemberCloudWatchLog
+//	DirectQueryDataSourceTypeMemberSecurityLake
+type DirectQueryDataSourceType interface {
+	isDirectQueryDataSourceType()
+}
+
+// Specifies CloudWatch Logs as a type of data source for direct queries.
+type DirectQueryDataSourceTypeMemberCloudWatchLog struct {
+	Value CloudWatchDirectQueryDataSource
+
+	noSmithyDocumentSerde
+}
+
+func (*DirectQueryDataSourceTypeMemberCloudWatchLog) isDirectQueryDataSourceType() {}
+
+// Specifies Security Lake as a type of data source for direct queries.
+type DirectQueryDataSourceTypeMemberSecurityLake struct {
+	Value SecurityLakeDirectQueryDataSource
+
+	noSmithyDocumentSerde
+}
+
+func (*DirectQueryDataSourceTypeMemberSecurityLake) isDirectQueryDataSourceType() {}
 
 // Container for the configuration of an OpenSearch Service domain.
 type DomainConfig struct {
@@ -2402,6 +2474,20 @@ type ScheduledAutoTuneDetails struct {
 	noSmithyDocumentSerde
 }
 
+//	Configuration details for a Security Lake data source that can be used for
+//
+// direct queries.
+type SecurityLakeDirectQueryDataSource struct {
+
+	//  The unique identifier of the IAM role that grants OpenSearch Service
+	// permission to access the specified data source.
+	//
+	// This member is required.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The current status of the service software for an Amazon OpenSearch Service
 // domain. For more information, see [Service software updates in Amazon OpenSearch Service].
 //
@@ -2808,4 +2894,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isDataSourceType() {}
+func (*UnknownUnionMember) isDataSourceType()            {}
+func (*UnknownUnionMember) isDirectQueryDataSourceType() {}

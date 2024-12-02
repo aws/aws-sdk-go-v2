@@ -672,6 +672,9 @@ type DBCluster struct {
 	// Reserved for future use.
 	DBSystemId *string
 
+	// The mode of Database Insights that is enabled for the cluster.
+	DatabaseInsightsMode DatabaseInsightsMode
+
 	// The name of the initial database that was specified for the DB cluster when it
 	// was created, if one was provided. This same name is returned for the life of the
 	// DB cluster.
@@ -1762,6 +1765,9 @@ type DBInstance struct {
 	// SID is also the name of the CDB. This setting is only valid for RDS Custom DB
 	// instances.
 	DBSystemId *string
+
+	// The mode of Database Insights that is enabled for the instance.
+	DatabaseInsightsMode DatabaseInsightsMode
 
 	// The port that the DB instance listens on. If the DB instance is part of a DB
 	// cluster, this can be a different port than the DB cluster port.

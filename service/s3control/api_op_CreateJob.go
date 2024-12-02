@@ -76,7 +76,7 @@ type CreateJobInput struct {
 	// manifest. For more information about the available actions, see [Operations]in the Amazon
 	// S3 User Guide.
 	//
-	// [Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html
+	// [Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html
 	//
 	// This member is required.
 	Operation *types.JobOperation

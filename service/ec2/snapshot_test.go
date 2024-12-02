@@ -638,6 +638,18 @@ func TestCheckSnapshot_CancelConversionTask(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelDeclarativePoliciesReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelDeclarativePoliciesReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelDeclarativePoliciesReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelExportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelExportTask(context.Background(), nil, func(o *Options) {
@@ -3086,6 +3098,18 @@ func TestCheckSnapshot_DescribeCustomerGateways(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeDeclarativePoliciesReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDeclarativePoliciesReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDeclarativePoliciesReports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDhcpOptions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDhcpOptions(context.Background(), nil, func(o *Options) {
@@ -4574,6 +4598,18 @@ func TestCheckSnapshot_DescribeVpcClassicLinkDnsSupport(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeVpcEndpointAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcEndpointAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeVpcEndpointAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeVpcEndpointConnectionNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeVpcEndpointConnectionNotifications(context.Background(), nil, func(o *Options) {
@@ -4771,6 +4807,18 @@ func TestCheckSnapshot_DisableAddressTransfer(t *testing.T) {
 	_, err := svc.DisableAddressTransfer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisableAddressTransfer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisableAllowedImagesSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableAllowedImagesSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableAllowedImagesSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5174,6 +5222,18 @@ func TestCheckSnapshot_EnableAddressTransfer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_EnableAllowedImagesSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableAllowedImagesSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableAwsNetworkPerformanceMetricSubscription(context.Background(), nil, func(o *Options) {
@@ -5426,6 +5486,30 @@ func TestCheckSnapshot_ExportTransitGatewayRoutes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ExportVerifiedAccessInstanceClientConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportVerifiedAccessInstanceClientConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ExportVerifiedAccessInstanceClientConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAllowedImagesSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAllowedImagesSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAssociatedEnclaveCertificateIamRoles(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAssociatedEnclaveCertificateIamRoles(context.Background(), nil, func(o *Options) {
@@ -5503,6 +5587,18 @@ func TestCheckSnapshot_GetConsoleScreenshot(t *testing.T) {
 	_, err := svc.GetConsoleScreenshot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetConsoleScreenshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDeclarativePoliciesReportSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDeclarativePoliciesReportSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDeclarativePoliciesReportSummary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5959,6 +6055,18 @@ func TestCheckSnapshot_GetVerifiedAccessEndpointPolicy(t *testing.T) {
 	_, err := svc.GetVerifiedAccessEndpointPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetVerifiedAccessEndpointPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetVerifiedAccessEndpointTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVerifiedAccessEndpointTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetVerifiedAccessEndpointTargets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7274,6 +7382,18 @@ func TestCheckSnapshot_ReplaceIamInstanceProfileAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReplaceImageCriteriaInAllowedImagesSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ReplaceImageCriteriaInAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ReplaceNetworkAclAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ReplaceNetworkAclAssociation(context.Background(), nil, func(o *Options) {
@@ -7627,6 +7747,18 @@ func TestCheckSnapshot_SendDiagnosticInterrupt(t *testing.T) {
 	_, err := svc.SendDiagnosticInterrupt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SendDiagnosticInterrupt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartDeclarativePoliciesReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDeclarativePoliciesReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDeclarativePoliciesReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8382,6 +8514,18 @@ func TestUpdateSnapshot_CancelConversionTask(t *testing.T) {
 	_, err := svc.CancelConversionTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CancelConversionTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelDeclarativePoliciesReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelDeclarativePoliciesReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelDeclarativePoliciesReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10837,6 +10981,18 @@ func TestUpdateSnapshot_DescribeCustomerGateways(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeDeclarativePoliciesReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDeclarativePoliciesReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDeclarativePoliciesReports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDhcpOptions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDhcpOptions(context.Background(), nil, func(o *Options) {
@@ -12325,6 +12481,18 @@ func TestUpdateSnapshot_DescribeVpcClassicLinkDnsSupport(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeVpcEndpointAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcEndpointAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeVpcEndpointAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeVpcEndpointConnectionNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeVpcEndpointConnectionNotifications(context.Background(), nil, func(o *Options) {
@@ -12522,6 +12690,18 @@ func TestUpdateSnapshot_DisableAddressTransfer(t *testing.T) {
 	_, err := svc.DisableAddressTransfer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisableAddressTransfer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisableAllowedImagesSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableAllowedImagesSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableAllowedImagesSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12925,6 +13105,18 @@ func TestUpdateSnapshot_EnableAddressTransfer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_EnableAllowedImagesSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableAllowedImagesSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableAwsNetworkPerformanceMetricSubscription(context.Background(), nil, func(o *Options) {
@@ -13177,6 +13369,30 @@ func TestUpdateSnapshot_ExportTransitGatewayRoutes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ExportVerifiedAccessInstanceClientConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportVerifiedAccessInstanceClientConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ExportVerifiedAccessInstanceClientConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAllowedImagesSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAllowedImagesSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAssociatedEnclaveCertificateIamRoles(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAssociatedEnclaveCertificateIamRoles(context.Background(), nil, func(o *Options) {
@@ -13254,6 +13470,18 @@ func TestUpdateSnapshot_GetConsoleScreenshot(t *testing.T) {
 	_, err := svc.GetConsoleScreenshot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetConsoleScreenshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDeclarativePoliciesReportSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDeclarativePoliciesReportSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDeclarativePoliciesReportSummary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13710,6 +13938,18 @@ func TestUpdateSnapshot_GetVerifiedAccessEndpointPolicy(t *testing.T) {
 	_, err := svc.GetVerifiedAccessEndpointPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetVerifiedAccessEndpointPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetVerifiedAccessEndpointTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVerifiedAccessEndpointTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetVerifiedAccessEndpointTargets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15025,6 +15265,18 @@ func TestUpdateSnapshot_ReplaceIamInstanceProfileAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReplaceImageCriteriaInAllowedImagesSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ReplaceImageCriteriaInAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ReplaceNetworkAclAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ReplaceNetworkAclAssociation(context.Background(), nil, func(o *Options) {
@@ -15378,6 +15630,18 @@ func TestUpdateSnapshot_SendDiagnosticInterrupt(t *testing.T) {
 	_, err := svc.SendDiagnosticInterrupt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SendDiagnosticInterrupt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartDeclarativePoliciesReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDeclarativePoliciesReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDeclarativePoliciesReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

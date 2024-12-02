@@ -31,7 +31,7 @@ func (c *Client) GetAuthPolicy(ctx context.Context, params *GetAuthPolicyInput, 
 
 type GetAuthPolicyInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service.
+	// The ID or ARN of the service network or service.
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -41,12 +41,10 @@ type GetAuthPolicyInput struct {
 
 type GetAuthPolicyOutput struct {
 
-	// The date and time that the auth policy was created, specified in ISO-8601
-	// format.
+	// The date and time that the auth policy was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
-	// The date and time that the auth policy was last updated, specified in ISO-8601
-	// format.
+	// The date and time that the auth policy was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The auth policy.

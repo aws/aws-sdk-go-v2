@@ -46,7 +46,7 @@ type CreateConfiguredTableInput struct {
 	// This member is required.
 	Name *string
 
-	// A reference to the Glue table being configured.
+	// A reference to the table being configured.
 	//
 	// This member is required.
 	TableReference types.TableReference

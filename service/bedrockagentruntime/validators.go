@@ -130,6 +130,26 @@ func (m *validateOpOptimizePrompt) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRerank struct {
+}
+
+func (*validateOpRerank) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRerank) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RerankInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRerankInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRetrieveAndGenerate struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpRetrieveAndGenerate) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRetrieveAndGenerateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRetrieveAndGenerateStream struct {
+}
+
+func (*validateOpRetrieveAndGenerateStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRetrieveAndGenerateStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RetrieveAndGenerateStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRetrieveAndGenerateStreamInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -194,8 +234,16 @@ func addOpOptimizePromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpOptimizePrompt{}, middleware.After)
 }
 
+func addOpRerankValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRerank{}, middleware.After)
+}
+
 func addOpRetrieveAndGenerateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRetrieveAndGenerate{}, middleware.After)
+}
+
+func addOpRetrieveAndGenerateStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRetrieveAndGenerateStream{}, middleware.After)
 }
 
 func addOpRetrieveValidationMiddleware(stack *middleware.Stack) error {
@@ -246,6 +294,40 @@ func validateApiResult(v *types.ApiResult) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ApiResult"}
 	if v.ActionGroup == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBedrockRerankingConfiguration(v *types.BedrockRerankingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockRerankingConfiguration"}
+	if v.ModelConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelConfiguration"))
+	} else if v.ModelConfiguration != nil {
+		if err := validateBedrockRerankingModelConfiguration(v.ModelConfiguration); err != nil {
+			invalidParams.AddNested("ModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBedrockRerankingModelConfiguration(v *types.BedrockRerankingModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockRerankingModelConfiguration"}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -370,6 +452,38 @@ func validateExternalSourcesRetrieveAndGenerateConfiguration(v *types.ExternalSo
 	if v.GenerationConfiguration != nil {
 		if err := validateExternalSourcesGenerationConfiguration(v.GenerationConfiguration); err != nil {
 			invalidParams.AddNested("GenerationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldForReranking(v *types.FieldForReranking) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldForReranking"}
+	if v.FieldName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldsForReranking(v []types.FieldForReranking) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldsForReranking"}
+	for i := range v {
+		if err := validateFieldForReranking(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -576,6 +690,28 @@ func validateGuardrailConfigurationWithArn(v *types.GuardrailConfigurationWithAr
 	}
 	if v.GuardrailVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GuardrailVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImplicitFilterConfiguration(v *types.ImplicitFilterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImplicitFilterConfiguration"}
+	if v.MetadataAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataAttributes"))
+	} else if v.MetadataAttributes != nil {
+		if err := validateMetadataAttributeSchemaList(v.MetadataAttributes); err != nil {
+			invalidParams.AddNested("MetadataAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -847,6 +983,74 @@ func validateKnowledgeBaseVectorSearchConfiguration(v *types.KnowledgeBaseVector
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RerankingConfiguration != nil {
+		if err := validateVectorSearchRerankingConfiguration(v.RerankingConfiguration); err != nil {
+			invalidParams.AddNested("RerankingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ImplicitFilterConfiguration != nil {
+		if err := validateImplicitFilterConfiguration(v.ImplicitFilterConfiguration); err != nil {
+			invalidParams.AddNested("ImplicitFilterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataAttributeSchema(v *types.MetadataAttributeSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataAttributeSchema"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataAttributeSchemaList(v []types.MetadataAttributeSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataAttributeSchemaList"}
+	for i := range v {
+		if err := validateMetadataAttributeSchema(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataConfigurationForReranking(v *types.MetadataConfigurationForReranking) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataConfigurationForReranking"}
+	if len(v.SelectionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionMode"))
+	}
+	if v.SelectiveModeConfiguration != nil {
+		if err := validateRerankingMetadataSelectiveModeConfiguration(v.SelectiveModeConfiguration); err != nil {
+			invalidParams.AddNested("SelectiveModeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -926,6 +1130,141 @@ func validateQueryTransformationConfiguration(v *types.QueryTransformationConfig
 	invalidParams := smithy.InvalidParamsError{Context: "QueryTransformationConfiguration"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRerankDocument(v *types.RerankDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RerankDocument"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRerankingConfiguration(v *types.RerankingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RerankingConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.BedrockRerankingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BedrockRerankingConfiguration"))
+	} else if v.BedrockRerankingConfiguration != nil {
+		if err := validateBedrockRerankingConfiguration(v.BedrockRerankingConfiguration); err != nil {
+			invalidParams.AddNested("BedrockRerankingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRerankingMetadataSelectiveModeConfiguration(v types.RerankingMetadataSelectiveModeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RerankingMetadataSelectiveModeConfiguration"}
+	switch uv := v.(type) {
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude:
+		if err := validateFieldsForReranking(uv.Value); err != nil {
+			invalidParams.AddNested("[fieldsToExclude]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude:
+		if err := validateFieldsForReranking(uv.Value); err != nil {
+			invalidParams.AddNested("[fieldsToInclude]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRerankQueriesList(v []types.RerankQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RerankQueriesList"}
+	for i := range v {
+		if err := validateRerankQuery(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRerankQuery(v *types.RerankQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RerankQuery"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.TextQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextQuery"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRerankSource(v *types.RerankSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RerankSource"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.InlineDocumentSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InlineDocumentSource"))
+	} else if v.InlineDocumentSource != nil {
+		if err := validateRerankDocument(v.InlineDocumentSource); err != nil {
+			invalidParams.AddNested("InlineDocumentSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRerankSourcesList(v []types.RerankSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RerankSourcesList"}
+	for i := range v {
+		if err := validateRerankSource(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1174,6 +1513,65 @@ func validateTextPrompt(v *types.TextPrompt) error {
 	}
 }
 
+func validateVectorSearchBedrockRerankingConfiguration(v *types.VectorSearchBedrockRerankingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VectorSearchBedrockRerankingConfiguration"}
+	if v.ModelConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelConfiguration"))
+	} else if v.ModelConfiguration != nil {
+		if err := validateVectorSearchBedrockRerankingModelConfiguration(v.ModelConfiguration); err != nil {
+			invalidParams.AddNested("ModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetadataConfiguration != nil {
+		if err := validateMetadataConfigurationForReranking(v.MetadataConfiguration); err != nil {
+			invalidParams.AddNested("MetadataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVectorSearchBedrockRerankingModelConfiguration(v *types.VectorSearchBedrockRerankingModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VectorSearchBedrockRerankingModelConfiguration"}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVectorSearchRerankingConfiguration(v *types.VectorSearchRerankingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VectorSearchRerankingConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.BedrockRerankingConfiguration != nil {
+		if err := validateVectorSearchBedrockRerankingConfiguration(v.BedrockRerankingConfiguration); err != nil {
+			invalidParams.AddNested("BedrockRerankingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAgentMemoryInput(v *DeleteAgentMemoryInput) error {
 	if v == nil {
 		return nil
@@ -1335,11 +1733,73 @@ func validateOpOptimizePromptInput(v *OptimizePromptInput) error {
 	}
 }
 
+func validateOpRerankInput(v *RerankInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RerankInput"}
+	if v.Queries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Queries"))
+	} else if v.Queries != nil {
+		if err := validateRerankQueriesList(v.Queries); err != nil {
+			invalidParams.AddNested("Queries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	} else if v.Sources != nil {
+		if err := validateRerankSourcesList(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RerankingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RerankingConfiguration"))
+	} else if v.RerankingConfiguration != nil {
+		if err := validateRerankingConfiguration(v.RerankingConfiguration); err != nil {
+			invalidParams.AddNested("RerankingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRetrieveAndGenerateInput(v *RetrieveAndGenerateInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RetrieveAndGenerateInput"}
+	if v.Input == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	} else if v.Input != nil {
+		if err := validateRetrieveAndGenerateInput(v.Input); err != nil {
+			invalidParams.AddNested("Input", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetrieveAndGenerateConfiguration != nil {
+		if err := validateRetrieveAndGenerateConfiguration(v.RetrieveAndGenerateConfiguration); err != nil {
+			invalidParams.AddNested("RetrieveAndGenerateConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SessionConfiguration != nil {
+		if err := validateRetrieveAndGenerateSessionConfiguration(v.SessionConfiguration); err != nil {
+			invalidParams.AddNested("SessionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRetrieveAndGenerateStreamInput(v *RetrieveAndGenerateStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetrieveAndGenerateStreamInput"}
 	if v.Input == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Input"))
 	} else if v.Input != nil {
@@ -1382,6 +1842,11 @@ func validateOpRetrieveInput(v *RetrieveInput) error {
 	if v.RetrievalConfiguration != nil {
 		if err := validateKnowledgeBaseRetrievalConfiguration(v.RetrievalConfiguration); err != nil {
 			invalidParams.AddNested("RetrievalConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GuardrailConfiguration != nil {
+		if err := validateGuardrailConfiguration(v.GuardrailConfiguration); err != nil {
+			invalidParams.AddNested("GuardrailConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

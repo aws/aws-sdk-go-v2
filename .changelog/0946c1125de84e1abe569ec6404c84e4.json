@@ -1,0 +1,8 @@
+{
+    "id": "0946c112-5de8-4e1a-be56-9ec6404c84e4",
+    "type": "feature",
+    "description": "Add support for Knowledge Base Evaluations \u0026 LLM as a judge",
+    "modules": [
+        "service/bedrock"
+    ]
+}

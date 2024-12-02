@@ -37,7 +37,7 @@ func (c *Client) BatchUpdateRule(ctx context.Context, params *BatchUpdateRuleInp
 
 type BatchUpdateRuleInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// The ID or ARN of the listener.
 	//
 	// This member is required.
 	ListenerIdentifier *string
@@ -47,7 +47,7 @@ type BatchUpdateRuleInput struct {
 	// This member is required.
 	Rules []types.RuleUpdate
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

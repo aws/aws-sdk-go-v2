@@ -31,7 +31,7 @@ func (c *Client) DeleteAuthPolicy(ctx context.Context, params *DeleteAuthPolicyI
 
 type DeleteAuthPolicyInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the resource.
+	// The ID or ARN of the resource.
 	//
 	// This member is required.
 	ResourceIdentifier *string

@@ -24,8 +24,8 @@ import (
 // an active chat contact, a new chat contact is also created before handling chat
 // action.
 //
-// Access to this API is currently restricted to Amazon Pinpoint for supporting
-// SMS integration.
+// Access to this API is currently restricted to Amazon Web Services End User
+// Messaging for supporting SMS integration.
 func (c *Client) SendChatIntegrationEvent(ctx context.Context, params *SendChatIntegrationEventInput, optFns ...func(*Options)) (*SendChatIntegrationEventOutput, error) {
 	if params == nil {
 		params = &SendChatIntegrationEventInput{}
@@ -45,8 +45,9 @@ type SendChatIntegrationEventInput struct {
 
 	// Chat system identifier, used in part to uniquely identify chat. This is
 	// associated with the Amazon Connect instance and flow to be used to start chats.
-	// For SMS, this is the phone number destination of inbound SMS messages
-	// represented by an Amazon Pinpoint phone number ARN.
+	// For Server Migration Service, this is the phone number destination of inbound
+	// Server Migration Service messages represented by an Amazon Web Services End User
+	// Messaging phone number ARN.
 	//
 	// This member is required.
 	DestinationId *string
@@ -69,7 +70,7 @@ type SendChatIntegrationEventInput struct {
 
 	// Classification of a channel. This is used in part to uniquely identify chat.
 	//
-	// Valid value: ["connect:sms"]
+	// Valid value: ["connect:sms", connect:"WhatsApp"]
 	Subtype *string
 
 	noSmithyDocumentSerde

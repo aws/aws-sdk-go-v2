@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the resource policy. The resource policy is an IAM
-// policy created on behalf of the resource owner when they share a resource.
+// Retrieves information about the specified resource policy. The resource policy
+// is an IAM policy created on behalf of the resource owner when they share a
+// resource.
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetResourcePolicyInput{}

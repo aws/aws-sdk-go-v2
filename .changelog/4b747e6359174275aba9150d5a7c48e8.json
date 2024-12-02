@@ -1,0 +1,8 @@
+{
+    "id": "4b747e63-5917-4275-aba9-150d5a7c48e8",
+    "type": "feature",
+    "description": "Amazon S3 introduces support for AWS Dedicated Local Zones",
+    "modules": [
+        "service/s3"
+    ]
+}

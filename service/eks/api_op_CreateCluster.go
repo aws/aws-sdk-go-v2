@@ -115,6 +115,11 @@ type CreateClusterInput struct {
 	// of the request.
 	ClientRequestToken *string
 
+	// Enable or disable the compute capability of EKS Auto Mode when creating your
+	// EKS Auto Mode cluster. If the compute capability is enabled, EKS Auto Mode will
+	// create and delete EC2 Managed Instances in your Amazon Web Services account
+	ComputeConfig *types.ComputeConfigRequest
+
 	// The encryption configuration for the cluster.
 	EncryptionConfig []types.EncryptionConfig
 
@@ -139,6 +144,15 @@ type CreateClusterInput struct {
 	//
 	// [Local clusters for Amazon EKS on Amazon Web Services Outposts]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html
 	OutpostConfig *types.OutpostConfigRequest
+
+	// The configuration in the cluster for EKS Hybrid Nodes. You can't change or
+	// update this configuration after the cluster is created.
+	RemoteNetworkConfig *types.RemoteNetworkConfigRequest
+
+	// Enable or disable the block storage capability of EKS Auto Mode when creating
+	// your EKS Auto Mode cluster. If the block storage capability is enabled, EKS Auto
+	// Mode will create and delete EBS volumes in your Amazon Web Services account.
+	StorageConfig *types.StorageConfigRequest
 
 	// Metadata that assists with categorization and organization. Each tag consists
 	// of a key and an optional value. You define both. Tags don't propagate to any

@@ -481,6 +481,9 @@ type CreateDBInstanceInput struct {
 	// The Oracle SID is also the name of your CDB.
 	DBSystemId *string
 
+	// Specifies the mode of Database Insights to enable for the instance.
+	DatabaseInsightsMode types.DatabaseInsightsMode
+
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
 	DedicatedLogVolume *bool
 

@@ -56,6 +56,9 @@ type CreateServiceNetworkInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
+	// Specify if the service network should be enabled for sharing.
+	SharingConfig *types.SharingConfig
+
 	// The tags for the service network.
 	Tags map[string]string
 
@@ -75,6 +78,9 @@ type CreateServiceNetworkOutput struct {
 
 	// The name of the service network.
 	Name *string
+
+	// Specifies if the service network is enabled for sharing.
+	SharingConfig *types.SharingConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

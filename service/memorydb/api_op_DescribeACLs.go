@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of ACLs
+// Returns a list of ACLs.
 func (c *Client) DescribeACLs(ctx context.Context, params *DescribeACLsInput, optFns ...func(*Options)) (*DescribeACLsOutput, error) {
 	if params == nil {
 		params = &DescribeACLsInput{}
@@ -29,7 +29,7 @@ func (c *Client) DescribeACLs(ctx context.Context, params *DescribeACLsInput, op
 
 type DescribeACLsInput struct {
 
-	// The name of the ACL
+	// The name of the ACL.
 	ACLName *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -49,7 +49,7 @@ type DescribeACLsInput struct {
 
 type DescribeACLsOutput struct {
 
-	// The list of ACLs
+	// The list of ACLs.
 	ACLs []types.ACL
 
 	// If nextToken is returned, there are more results available. The value of

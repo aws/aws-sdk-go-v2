@@ -687,6 +687,73 @@ type EventStreamSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the circumstances under which the event should trigger the
+// destination.
+type EventTriggerCondition struct {
+
+	// A list of dimensions to be evaluated for the event.
+	//
+	// This member is required.
+	EventTriggerDimensions []EventTriggerDimension
+
+	// The operator used to combine multiple dimensions.
+	//
+	// This member is required.
+	LogicalOperator EventTriggerLogicalOperator
+
+	noSmithyDocumentSerde
+}
+
+// A specific event dimension to be assessed.
+type EventTriggerDimension struct {
+
+	// A list of object attributes to be evaluated.
+	//
+	// This member is required.
+	ObjectAttributes []ObjectAttribute
+
+	noSmithyDocumentSerde
+}
+
+// Defines limits controlling whether an event triggers the destination, based on
+// ingestion latency and the number of invocations per profile over specific time
+// periods.
+type EventTriggerLimits struct {
+
+	// In milliseconds. Specifies that an event will only trigger the destination if
+	// it is processed within a certain latency period.
+	EventExpiration *int64
+
+	// A list of time periods during which the limits apply.
+	Periods []Period
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the event trigger.
+type EventTriggerSummaryItem struct {
+
+	// The timestamp of when the event trigger was created.
+	CreatedAt *time.Time
+
+	// The description of the event trigger.
+	Description *string
+
+	// The unique name of the event trigger.
+	EventTriggerName *string
+
+	// The timestamp of when the event trigger was most recently updated.
+	LastUpdatedAt *time.Time
+
+	// The unique name of the object type.
+	ObjectTypeName *string
+
+	// An array of key-value pairs to apply to this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information about the S3 bucket where Identity Resolution Jobs
 // writes result files.
 //
@@ -1126,6 +1193,10 @@ type ListIntegrationItem struct {
 	// This member is required.
 	Uri *string
 
+	// A list of unique names for active event triggers associated with the
+	// integration.
+	EventTriggerNames []string
+
 	// Boolean that shows if the Flow that's associated with the Integration is
 	// created in Amazon Appflow, or with ObjectTypeName equals _unstructured via
 	// API/CLI in flowDefinition.
@@ -1390,6 +1461,29 @@ type MatchItem struct {
 	noSmithyDocumentSerde
 }
 
+// The criteria that a specific object attribute must meet to trigger the
+// destination.
+type ObjectAttribute struct {
+
+	// The operator used to compare an attribute against a list of values.
+	//
+	// This member is required.
+	ComparisonOperator ComparisonOperator
+
+	// A list of attribute values used for comparison.
+	//
+	// This member is required.
+	Values []string
+
+	// A field defined within an object type.
+	FieldName *string
+
+	// An attribute contained within a source object.
+	Source *string
+
+	noSmithyDocumentSerde
+}
+
 // The filter applied to ListProfileObjects response to include profile objects
 // with the specified index values.
 type ObjectFilter struct {
@@ -1446,6 +1540,29 @@ type ObjectTypeKey struct {
 	// before the object is ingested, otherwise it is only used for matching objects to
 	// profiles.
 	StandardIdentifiers []StandardIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// Defines a limit and the time period during which it is enforced.
+type Period struct {
+
+	// The unit of time.
+	//
+	// This member is required.
+	Unit PeriodUnit
+
+	// The amount of time of the specified unit.
+	//
+	// This member is required.
+	Value *int32
+
+	// The maximum allowed number of destination invocations per profile.
+	MaxInvocationsPerProfile *int32
+
+	// If set to true, there is no limit on the number of destination invocations per
+	// profile. The default is false.
+	Unlimited bool
 
 	noSmithyDocumentSerde
 }

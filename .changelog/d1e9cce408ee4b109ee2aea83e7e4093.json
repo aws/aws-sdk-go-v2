@@ -1,0 +1,8 @@
+{
+    "id": "d1e9cce4-08ee-4b10-9ee2-aea83e7e4093",
+    "type": "feature",
+    "description": "This release allows customers and their partners to easily collaborate with data stored in Snowflake and Amazon Athena, without having to move or share their underlying data among collaborators.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

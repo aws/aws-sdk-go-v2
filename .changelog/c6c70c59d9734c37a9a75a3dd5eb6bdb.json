@@ -1,0 +1,8 @@
+{
+    "id": "c6c70c59-d973-4c37-a9a7-5a3dd5eb6bdb",
+    "type": "feature",
+    "description": "Amazon MemoryDB SDK now supports all APIs for Multi-Region. Please refer to the updated Amazon MemoryDB public documentation for detailed information on API usage.",
+    "modules": [
+        "service/memorydb"
+    ]
+}

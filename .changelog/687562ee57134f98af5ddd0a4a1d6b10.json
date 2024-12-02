@@ -1,0 +1,8 @@
+{
+    "id": "687562ee-5713-4f98-af5d-dd0a4a1d6b10",
+    "type": "feature",
+    "description": "Amazon Q Business now supports capabilities to extract insights and answer questions from visual elements embedded within documents, a browser extension for Google Chrome, Mozilla Firefox, and Microsoft Edge, and attachments across conversations.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

@@ -15,8 +15,8 @@ type AccessLogSubscriptionSummary struct {
 	// This member is required.
 	Arn *string
 
-	// The date and time that the access log subscription was created, specified in
-	// ISO-8601 format.
+	// The date and time that the access log subscription was created, in ISO-8601
+	// format.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -31,8 +31,8 @@ type AccessLogSubscriptionSummary struct {
 	// This member is required.
 	Id *string
 
-	// The date and time that the access log subscription was last updated, specified
-	// in ISO-8601 format.
+	// The date and time that the access log subscription was last updated, in
+	// ISO-8601 format.
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
@@ -47,6 +47,18 @@ type AccessLogSubscriptionSummary struct {
 	// This member is required.
 	ResourceId *string
 
+	// Log type of the service network.
+	ServiceNetworkLogType ServiceNetworkLogType
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Resource Name (ARN) of the resource.
+type ArnResource struct {
+
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -58,6 +70,18 @@ type DnsEntry struct {
 
 	// The ID of the hosted zone.
 	HostedZoneId *string
+
+	noSmithyDocumentSerde
+}
+
+// The DNS name of the resource.
+type DnsResource struct {
+
+	// The domain name of the resource.
+	DomainName *string
+
+	// The type of IP address.
+	IpAddressType ResourceConfigurationIpAddressType
 
 	noSmithyDocumentSerde
 }
@@ -215,20 +239,28 @@ type HttpMatch struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an IP resource.
+type IpResource struct {
+
+	// The IP address of the IP resource.
+	IpAddress *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary information about a listener.
 type ListenerSummary struct {
 
 	// The Amazon Resource Name (ARN) of the listener.
 	Arn *string
 
-	// The date and time that the listener was created, specified in ISO-8601 format.
+	// The date and time that the listener was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The ID of the listener.
 	Id *string
 
-	// The date and time that the listener was last updated, specified in ISO-8601
-	// format.
+	// The date and time that the listener was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The name of the listener.
@@ -306,6 +338,163 @@ type PathMatchTypeMemberPrefix struct {
 
 func (*PathMatchTypeMemberPrefix) isPathMatchType() {}
 
+// Describes a resource configuration.
+//
+// The following types satisfy this interface:
+//
+//	ResourceConfigurationDefinitionMemberArnResource
+//	ResourceConfigurationDefinitionMemberDnsResource
+//	ResourceConfigurationDefinitionMemberIpResource
+type ResourceConfigurationDefinition interface {
+	isResourceConfigurationDefinition()
+}
+
+// The Amazon Resource Name (ARN) of the resource.
+type ResourceConfigurationDefinitionMemberArnResource struct {
+	Value ArnResource
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceConfigurationDefinitionMemberArnResource) isResourceConfigurationDefinition() {}
+
+// The DNS name of the resource.
+type ResourceConfigurationDefinitionMemberDnsResource struct {
+	Value DnsResource
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceConfigurationDefinitionMemberDnsResource) isResourceConfigurationDefinition() {}
+
+// The IP resource.
+type ResourceConfigurationDefinitionMemberIpResource struct {
+	Value IpResource
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceConfigurationDefinitionMemberIpResource) isResourceConfigurationDefinition() {}
+
+// Summary information about a resource configuration.
+type ResourceConfigurationSummary struct {
+
+	// Indicates whether the resource configuration was created and is managed by
+	// Amazon.
+	AmazonManaged *bool
+
+	// The Amazon Resource Name (ARN) of the resource configuration.
+	Arn *string
+
+	// The date and time that the resource configuration was created, in ISO-8601
+	// format.
+	CreatedAt *time.Time
+
+	// The ID of the resource configuration.
+	Id *string
+
+	// The most recent date and time that the resource configuration was updated, in
+	// ISO-8601 format.
+	LastUpdatedAt *time.Time
+
+	// The name of the resource configuration.
+	Name *string
+
+	// The ID of the group resource configuration.
+	ResourceConfigurationGroupId *string
+
+	// The ID of the resource gateway.
+	ResourceGatewayId *string
+
+	// The status of the resource configuration.
+	Status ResourceConfigurationStatus
+
+	// The type of resource configuration.
+	//
+	//   - SINGLE - A single resource.
+	//
+	//   - GROUP - A group of resources.
+	//
+	//   - CHILD - A single resource that is part of a group resource configuration.
+	//
+	//   - ARN - An Amazon Web Services resource.
+	Type ResourceConfigurationType
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a VPC endpoint association.
+type ResourceEndpointAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the VPC endpoint association.
+	Arn *string
+
+	// The date and time that the VPC endpoint association was created, in ISO-8601
+	// format.
+	CreatedAt *time.Time
+
+	// The account that created the association.
+	CreatedBy *string
+
+	// The ID of the VPC endpoint association.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the resource configuration.
+	ResourceConfigurationArn *string
+
+	// The ID of the resource configuration.
+	ResourceConfigurationId *string
+
+	// The name of the resource configuration.
+	ResourceConfigurationName *string
+
+	// The ID of the VPC endpoint.
+	VpcEndpointId *string
+
+	// The owner of the VPC endpoint.
+	VpcEndpointOwner *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a resource gateway.
+type ResourceGatewaySummary struct {
+
+	// The Amazon Resource Name (ARN) of the resource gateway.
+	Arn *string
+
+	// The date and time that the VPC endpoint association was created, in ISO-8601
+	// format.
+	CreatedAt *time.Time
+
+	// The ID of the resource gateway.
+	Id *string
+
+	// The type of IP address used by the resource gateway.
+	IpAddressType ResourceGatewayIpAddressType
+
+	// The most recent date and time that the resource gateway was updated, in
+	// ISO-8601 format.
+	LastUpdatedAt *time.Time
+
+	// The name of the resource gateway.
+	Name *string
+
+	// The IDs of the security groups applied to the resource gateway.
+	SecurityGroupIds []string
+
+	// The name of the resource gateway.
+	Status ResourceGatewayStatus
+
+	// The IDs of the VPC subnets for the resource gateway.
+	SubnetIds []string
+
+	// The ID of the VPC for the resource gateway.
+	VpcIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the action for a rule.
 //
 // The following types satisfy this interface:
@@ -353,14 +542,13 @@ type RuleMatchMemberHttpMatch struct {
 
 func (*RuleMatchMemberHttpMatch) isRuleMatch() {}
 
-// Summary information about the listener rule.
+// Summary information about a listener rule.
 type RuleSummary struct {
 
 	// The Amazon Resource Name (ARN) of the rule.
 	Arn *string
 
-	// The date and time that the listener rule was created, specified in ISO-8601
-	// format.
+	// The date and time that the listener rule was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The ID of the rule.
@@ -369,8 +557,7 @@ type RuleSummary struct {
 	// Indicates whether this is the default listener rule.
 	IsDefault *bool
 
-	// The date and time that the listener rule was last updated, specified in
-	// ISO-8601 format.
+	// The date and time that the listener rule was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The name of the rule.
@@ -385,7 +572,7 @@ type RuleSummary struct {
 // Describes a rule update.
 type RuleUpdate struct {
 
-	// The ID or Amazon Resource Name (ARN) of the rule.
+	// The ID or ARN of the rule.
 	//
 	// This member is required.
 	RuleIdentifier *string
@@ -411,7 +598,7 @@ type RuleUpdateFailure struct {
 	// The failure message.
 	FailureMessage *string
 
-	// The ID or Amazon Resource Name (ARN) of the rule.
+	// The ID or ARN of the rule.
 	RuleIdentifier *string
 
 	noSmithyDocumentSerde
@@ -444,15 +631,95 @@ type RuleUpdateSuccess struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about the association between a service network and a
+// Describes the association between a service network and a VPC endpoint.
+type ServiceNetworkEndpointAssociation struct {
+
+	// The date and time that the association was created, in ISO-8601 format.
+	CreatedAt *time.Time
+
+	// The ID of the association.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the service network.
+	ServiceNetworkArn *string
+
+	// The state of the association.
+	State *string
+
+	// The ID of the VPC endpoint associated with the service network.
+	VpcEndpointId *string
+
+	// The owner of the VPC endpoint associated with the service network.
+	VpcEndpointOwnerId *string
+
+	// The ID of the VPC for the association.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an association between a service network and a
+// resource configuration.
+type ServiceNetworkResourceAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the association.
+	Arn *string
+
+	// The date and time that the association was created, in ISO-8601 format.
+	CreatedAt *time.Time
+
+	// The account that created the association.
+	CreatedBy *string
+
+	// The DNS entry for the service.
+	DnsEntry *DnsEntry
+
+	// The failure code.
+	FailureCode *string
+
+	// The ID of the association between the service network and resource
+	// configuration.
+	Id *string
+
+	// Specifies whether the association is managed by Amazon.
+	IsManagedAssociation *bool
+
+	// The private DNS entry for the service.
+	PrivateDnsEntry *DnsEntry
+
+	// The Amazon Resource Name (ARN) of the association.
+	ResourceConfigurationArn *string
+
+	// The ID of the resource configuration associated with the service network.
+	ResourceConfigurationId *string
+
+	// The name of the resource configuration associated with the service network.
+	ResourceConfigurationName *string
+
+	// The Amazon Resource Name (ARN) of the service network associated with the
+	// resource configuration.
+	ServiceNetworkArn *string
+
+	// The ID of the service network associated with the resource configuration.
+	ServiceNetworkId *string
+
+	// The name of the service network associated with the resource configuration.
+	ServiceNetworkName *string
+
+	// The status of the service network associated with the resource configuration.
+	Status ServiceNetworkResourceAssociationStatus
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an association between a service network and a
 // service.
 type ServiceNetworkServiceAssociationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the association.
 	Arn *string
 
-	// The date and time that the association was created, specified in ISO-8601
-	// format.
+	// The date and time that the association was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The account that created the association.
@@ -497,19 +764,20 @@ type ServiceNetworkSummary struct {
 	// The Amazon Resource Name (ARN) of the service network.
 	Arn *string
 
-	// The date and time that the service network was created, specified in ISO-8601
-	// format.
+	// The date and time that the service network was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The ID of the service network.
 	Id *string
 
-	// The date and time that the service network was last updated, specified in
-	// ISO-8601 format.
+	// The date and time that the service network was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The name of the service network.
 	Name *string
+
+	// The number of resource configurations associated with a service network.
+	NumberOfAssociatedResourceConfigurations *int64
 
 	// The number of services associated with the service network.
 	NumberOfAssociatedServices *int64
@@ -526,8 +794,7 @@ type ServiceNetworkVpcAssociationSummary struct {
 	// The Amazon Resource Name (ARN) of the association.
 	Arn *string
 
-	// The date and time that the association was created, specified in ISO-8601
-	// format.
+	// The date and time that the association was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The account that created the association.
@@ -536,8 +803,7 @@ type ServiceNetworkVpcAssociationSummary struct {
 	// The ID of the association.
 	Id *string
 
-	// The date and time that the association was last updated, specified in ISO-8601
-	// format.
+	// The date and time that the association was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the service network.
@@ -564,7 +830,7 @@ type ServiceSummary struct {
 	// The Amazon Resource Name (ARN) of the service.
 	Arn *string
 
-	// The date and time that the service was created, specified in ISO-8601 format.
+	// The date and time that the service was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The custom domain name of the service.
@@ -576,7 +842,7 @@ type ServiceSummary struct {
 	// The ID of the service.
 	Id *string
 
-	// The date and time that the service was last updated. The format is ISO-8601.
+	// The date and time that the service was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The name of the service.
@@ -584,6 +850,15 @@ type ServiceSummary struct {
 
 	// The status.
 	Status ServiceStatus
+
+	noSmithyDocumentSerde
+}
+
+// Specifies if the service network should be enabled for sharing.
+type SharingConfig struct {
+
+	// Specifies if the service network is enabled for sharing.
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -675,8 +950,7 @@ type TargetGroupSummary struct {
 	// The ARN (Amazon Resource Name) of the target group.
 	Arn *string
 
-	// The date and time that the target group was created, specified in ISO-8601
-	// format.
+	// The date and time that the target group was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The ID of the target group.
@@ -690,8 +964,7 @@ type TargetGroupSummary struct {
 	// Supported only if the target group type is LAMBDA .
 	LambdaEventStructureVersion LambdaEventStructureVersion
 
-	// The date and time that the target group was last updated, specified in ISO-8601
-	// format.
+	// The date and time that the target group was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The name of the target group.
@@ -772,7 +1045,7 @@ type ValidationExceptionField struct {
 // Describes the weight of a target group.
 type WeightedTargetGroup struct {
 
-	// The ID or Amazon Resource Name (ARN) of the target group.
+	// The ID or ARN of the target group.
 	//
 	// This member is required.
 	TargetGroupIdentifier *string
@@ -800,8 +1073,9 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isHeaderMatchType() {}
-func (*UnknownUnionMember) isMatcher()         {}
-func (*UnknownUnionMember) isPathMatchType()   {}
-func (*UnknownUnionMember) isRuleAction()      {}
-func (*UnknownUnionMember) isRuleMatch()       {}
+func (*UnknownUnionMember) isHeaderMatchType()                 {}
+func (*UnknownUnionMember) isMatcher()                         {}
+func (*UnknownUnionMember) isPathMatchType()                   {}
+func (*UnknownUnionMember) isResourceConfigurationDefinition() {}
+func (*UnknownUnionMember) isRuleAction()                      {}
+func (*UnknownUnionMember) isRuleMatch()                       {}

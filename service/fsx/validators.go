@@ -1848,9 +1848,6 @@ func validateOpCreateFileSystemInput(v *CreateFileSystemInput) error {
 	if len(v.FileSystemType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemType"))
 	}
-	if v.StorageCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageCapacity"))
-	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}

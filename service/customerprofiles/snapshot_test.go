@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateEventStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateEventTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEventTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateEventTrigger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIntegrationWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIntegrationWorkflow(context.Background(), nil, func(o *Options) {
@@ -223,6 +235,18 @@ func TestCheckSnapshot_DeleteEventStream(t *testing.T) {
 	_, err := svc.DeleteEventStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteEventStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteEventTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEventTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteEventTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -379,6 +403,18 @@ func TestCheckSnapshot_GetEventStream(t *testing.T) {
 	_, err := svc.GetEventStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetEventStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetEventTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEventTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEventTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -583,6 +619,18 @@ func TestCheckSnapshot_ListEventStreams(t *testing.T) {
 	_, err := svc.ListEventStreams(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEventStreams")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEventTriggers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventTriggers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEventTriggers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -830,6 +878,18 @@ func TestCheckSnapshot_UpdateDomain(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateEventTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEventTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateEventTrigger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateProfile(context.Background(), nil, func(o *Options) {
@@ -906,6 +966,18 @@ func TestUpdateSnapshot_CreateEventStream(t *testing.T) {
 	_, err := svc.CreateEventStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateEventStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateEventTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEventTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateEventTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1002,6 +1074,18 @@ func TestUpdateSnapshot_DeleteEventStream(t *testing.T) {
 	_, err := svc.DeleteEventStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteEventStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteEventTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEventTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteEventTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1158,6 +1242,18 @@ func TestUpdateSnapshot_GetEventStream(t *testing.T) {
 	_, err := svc.GetEventStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetEventStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEventTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEventTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEventTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1362,6 +1458,18 @@ func TestUpdateSnapshot_ListEventStreams(t *testing.T) {
 	_, err := svc.ListEventStreams(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEventStreams")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEventTriggers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventTriggers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEventTriggers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1602,6 +1710,18 @@ func TestUpdateSnapshot_UpdateDomain(t *testing.T) {
 	_, err := svc.UpdateDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateEventTrigger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEventTrigger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateEventTrigger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

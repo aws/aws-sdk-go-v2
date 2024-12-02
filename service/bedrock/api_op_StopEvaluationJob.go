@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops an in progress model evaluation job.
+// Stops an evaluation job that is current being created or running.
 func (c *Client) StopEvaluationJob(ctx context.Context, params *StopEvaluationJobInput, optFns ...func(*Options)) (*StopEvaluationJobOutput, error) {
 	if params == nil {
 		params = &StopEvaluationJobInput{}
@@ -28,7 +28,7 @@ func (c *Client) StopEvaluationJob(ctx context.Context, params *StopEvaluationJo
 
 type StopEvaluationJobInput struct {
 
-	// The ARN of the model evaluation job you want to stop.
+	// The Amazon Resource Name (ARN) of the evaluation job you want to stop.
 	//
 	// This member is required.
 	JobIdentifier *string

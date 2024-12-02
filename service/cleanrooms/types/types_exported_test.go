@@ -403,12 +403,36 @@ func ExampleSchemaTypeProperties_outputUsage() {
 
 var _ *types.IdMappingTableSchemaTypeProperties
 
+func ExampleSnowflakeTableSchema_outputUsage() {
+	var union types.SnowflakeTableSchema
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SnowflakeTableSchemaMemberV1:
+		_ = v.Value // Value is []types.SnowflakeTableSchemaV1
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.SnowflakeTableSchemaV1
+
 func ExampleTableReference_outputUsage() {
 	var union types.TableReference
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.TableReferenceMemberAthena:
+		_ = v.Value // Value is types.AthenaTableReference
+
 	case *types.TableReferenceMemberGlue:
 		_ = v.Value // Value is types.GlueTableReference
+
+	case *types.TableReferenceMemberSnowflake:
+		_ = v.Value // Value is types.SnowflakeTableReference
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -420,3 +444,5 @@ func ExampleTableReference_outputUsage() {
 }
 
 var _ *types.GlueTableReference
+var _ *types.SnowflakeTableReference
+var _ *types.AthenaTableReference

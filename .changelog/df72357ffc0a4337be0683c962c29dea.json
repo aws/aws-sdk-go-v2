@@ -1,0 +1,8 @@
+{
+    "id": "df72357f-fc0a-4337-be06-83c962c29dea",
+    "type": "feature",
+    "description": "Add new Multi Domain Correlation findings.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

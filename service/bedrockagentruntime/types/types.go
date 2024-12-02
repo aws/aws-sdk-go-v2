@@ -309,6 +309,35 @@ type Attribution struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for an Amazon Bedrock reranker model.
+type BedrockRerankingConfiguration struct {
+
+	// Contains configurations for a reranker model.
+	//
+	// This member is required.
+	ModelConfiguration *BedrockRerankingModelConfiguration
+
+	// The number of results to return after reranking.
+	NumberOfResults *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a reranker model.
+type BedrockRerankingModelConfiguration struct {
+
+	// The ARN of the reranker model.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// A JSON object whose keys are request fields for the model and whose values are
+	// values for those fields.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // This property contains the document to chat with, along with its attributes.
 type ByteContentDoc struct {
 
@@ -371,6 +400,15 @@ type Citation struct {
 	noSmithyDocumentSerde
 }
 
+// A citation event.
+type CitationEvent struct {
+
+	// The citation.
+	Citation *Citation
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the code interpreter being invoked.
 type CodeInterpreterInvocationInput struct {
 
@@ -420,7 +458,7 @@ type ContentBody struct {
 // The trace behavior for the custom orchestration.
 type CustomOrchestrationTrace struct {
 
-	//  The trace event details used with the custom orchestration.
+	//  The event details used with the custom orchestration.
 	Event *CustomOrchestrationTraceEvent
 
 	//  The unique identifier of the trace.
@@ -429,7 +467,9 @@ type CustomOrchestrationTrace struct {
 	noSmithyDocumentSerde
 }
 
-// The event in the custom orchestration sequence.
+//	The event in the custom orchestration sequence. Events are the responses which
+//
+// the custom orchestration Lambda function sends as response to the agent.
 type CustomOrchestrationTraceEvent struct {
 
 	//  The text that prompted the event at this step.
@@ -507,6 +547,19 @@ type FailureTrace struct {
 
 	// The unique identifier of the trace.
 	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information for a metadata field to include in or exclude from
+// consideration when reranking.
+type FieldForReranking struct {
+
+	// The name of a metadata field to include in or exclude from consideration when
+	// reranking.
+	//
+	// This member is required.
+	FieldName *string
 
 	noSmithyDocumentSerde
 }
@@ -1185,6 +1238,15 @@ type GuardrailCustomWord struct {
 	noSmithyDocumentSerde
 }
 
+// A guardrail event.
+type GuardrailEvent struct {
+
+	// The guardrail action.
+	Action GuadrailAction
+
+	noSmithyDocumentSerde
+}
+
 // The managed word details for the filter in the Guardrail.
 type GuardrailManagedWord struct {
 
@@ -1298,6 +1360,23 @@ type GuardrailWordPolicyAssessment struct {
 
 	// The managed word lists for words defined in the Guardrail filter.
 	ManagedWordLists []GuardrailManagedWord
+
+	noSmithyDocumentSerde
+}
+
+// Settings for implicit filtering, where a model generates a metadata filter
+// based on the prompt.
+type ImplicitFilterConfiguration struct {
+
+	// Metadata that can be used in a filter.
+	//
+	// This member is required.
+	MetadataAttributes []MetadataAttributeSchema
+
+	// The model that generates the filter.
+	//
+	// This member is required.
+	ModelArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1852,6 +1931,9 @@ type KnowledgeBaseVectorSearchConfiguration struct {
 	// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
 	Filter RetrievalFilter
 
+	// Settings for implicit filtering.
+	ImplicitFilterConfiguration *ImplicitFilterConfiguration
+
 	// The number of source chunks to retrieve.
 	NumberOfResults *int32
 
@@ -1864,6 +1946,12 @@ type KnowledgeBaseVectorSearchConfiguration struct {
 	//
 	// [Test a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-test.html
 	OverrideSearchType SearchType
+
+	// Contains configurations for reranking the retrieved results. For more
+	// information, see [Improve the relevance of query responses with a reranker model].
+	//
+	// [Improve the relevance of query responses with a reranker model]: https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html
+	RerankingConfiguration *VectorSearchRerankingConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1912,6 +2000,44 @@ type Metadata struct {
 
 	// Contains details of the foundation model usage.
 	Usage *Usage
+
+	noSmithyDocumentSerde
+}
+
+// Details about a metadata attribute.
+type MetadataAttributeSchema struct {
+
+	// The attribute's description.
+	//
+	// This member is required.
+	Description *string
+
+	// The attribute's key.
+	//
+	// This member is required.
+	Key *string
+
+	// The attribute's type.
+	//
+	// This member is required.
+	Type AttributeType
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the metadata to use in reranking.
+type MetadataConfigurationForReranking struct {
+
+	// Specifies whether to consider all metadata when reranking, or only the metadata
+	// that you select. If you specify SELECTIVE , include the
+	// selectiveModeConfiguration field.
+	//
+	// This member is required.
+	SelectionMode RerankingMetadataSelectionMode
+
+	// Contains configurations for the metadata fields to include or exclude when
+	// considering reranking.
+	SelectiveModeConfiguration RerankingMetadataSelectiveModeConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2552,6 +2678,137 @@ type RequestBody struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a document to rerank. Choose the type to define and
+// include the field that corresponds to the type.
+type RerankDocument struct {
+
+	// The type of document to rerank.
+	//
+	// This member is required.
+	Type RerankDocumentType
+
+	// Contains a JSON document to rerank.
+	JsonDocument document.Interface
+
+	// Contains information about a text document to rerank.
+	TextDocument *RerankTextDocument
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for reranking.
+type RerankingConfiguration struct {
+
+	// Contains configurations for an Amazon Bedrock reranker.
+	//
+	// This member is required.
+	BedrockRerankingConfiguration *BedrockRerankingConfiguration
+
+	// The type of reranker that the configurations apply to.
+	//
+	// This member is required.
+	Type RerankingConfigurationType
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the metadata fields to include or exclude when
+// considering reranking. If you include the fieldsToExclude field, the reranker
+// ignores all the metadata fields that you specify. If you include the
+// fieldsToInclude field, the reranker uses only the metadata fields that you
+// specify and ignores all others. You can include only one of these fields.
+//
+// The following types satisfy this interface:
+//
+//	RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude
+//	RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude
+type RerankingMetadataSelectiveModeConfiguration interface {
+	isRerankingMetadataSelectiveModeConfiguration()
+}
+
+// An array of objects, each of which specifies a metadata field to exclude from
+// consideration when reranking.
+type RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude struct {
+	Value []FieldForReranking
+
+	noSmithyDocumentSerde
+}
+
+func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude) isRerankingMetadataSelectiveModeConfiguration() {
+}
+
+// An array of objects, each of which specifies a metadata field to include in
+// consideration when reranking. The remaining metadata fields are ignored.
+type RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude struct {
+	Value []FieldForReranking
+
+	noSmithyDocumentSerde
+}
+
+func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude) isRerankingMetadataSelectiveModeConfiguration() {
+}
+
+// Contains information about a query to submit to the reranker model.
+type RerankQuery struct {
+
+	// Contains information about a text query.
+	//
+	// This member is required.
+	TextQuery *RerankTextDocument
+
+	// The type of the query.
+	//
+	// This member is required.
+	Type RerankQueryContentType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a document that was reranked.
+type RerankResult struct {
+
+	// The ranking of the document. The lower a number, the higher the document is
+	// ranked.
+	//
+	// This member is required.
+	Index *int32
+
+	// The relevance score of the document.
+	//
+	// This member is required.
+	RelevanceScore *float32
+
+	// Contains information about the document.
+	Document *RerankDocument
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a source for reranking.
+type RerankSource struct {
+
+	// Contains an inline definition of a source for reranking.
+	//
+	// This member is required.
+	InlineDocumentSource *RerankDocument
+
+	// The type of the source.
+	//
+	// This member is required.
+	Type RerankSourceType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a text document to rerank.
+type RerankTextDocument struct {
+
+	// The text of the document.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // The response from invoking the agent and associated citations and trace
 // information.
 //
@@ -2882,6 +3139,15 @@ type RetrievalResultContent struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the location of a document in a custom data source.
+type RetrievalResultCustomDocumentLocation struct {
+
+	// The ID of the document.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the data source location.
 //
 // This data type is used in the following API operations:
@@ -2907,6 +3173,9 @@ type RetrievalResultLocation struct {
 
 	// The Confluence data source location.
 	ConfluenceLocation *RetrievalResultConfluenceLocation
+
+	// Specifies the location of a document in a custom data source.
+	CustomDocumentLocation *RetrievalResultCustomDocumentLocation
 
 	// The S3 data source location.
 	S3Location *RetrievalResultS3Location
@@ -3040,6 +3309,17 @@ type RetrieveAndGenerateOutput struct {
 	noSmithyDocumentSerde
 }
 
+// A retrieve and generate output event.
+type RetrieveAndGenerateOutputEvent struct {
+
+	// A text response.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains configuration about the session with the knowledge base.
 //
 // This data type is used in the following API operations:
@@ -3056,6 +3336,47 @@ type RetrieveAndGenerateSessionConfiguration struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
+}
+
+// A retrieve and generate stream response output.
+//
+// The following types satisfy this interface:
+//
+//	RetrieveAndGenerateStreamResponseOutputMemberCitation
+//	RetrieveAndGenerateStreamResponseOutputMemberGuardrail
+//	RetrieveAndGenerateStreamResponseOutputMemberOutput
+type RetrieveAndGenerateStreamResponseOutput interface {
+	isRetrieveAndGenerateStreamResponseOutput()
+}
+
+// A citation event.
+type RetrieveAndGenerateStreamResponseOutputMemberCitation struct {
+	Value CitationEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrieveAndGenerateStreamResponseOutputMemberCitation) isRetrieveAndGenerateStreamResponseOutput() {
+}
+
+// A guardrail event.
+type RetrieveAndGenerateStreamResponseOutputMemberGuardrail struct {
+	Value GuardrailEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrieveAndGenerateStreamResponseOutputMemberGuardrail) isRetrieveAndGenerateStreamResponseOutput() {
+}
+
+// An output event.
+type RetrieveAndGenerateStreamResponseOutputMemberOutput struct {
+	Value RetrieveAndGenerateOutputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrieveAndGenerateStreamResponseOutputMemberOutput) isRetrieveAndGenerateStreamResponseOutput() {
 }
 
 // Contains metadata about a source cited for the generated response.
@@ -3425,6 +3746,52 @@ type Usage struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for reranking with an Amazon Bedrock reranker model.
+type VectorSearchBedrockRerankingConfiguration struct {
+
+	// Contains configurations for the reranker model.
+	//
+	// This member is required.
+	ModelConfiguration *VectorSearchBedrockRerankingModelConfiguration
+
+	// Contains configurations for the metadata to use in reranking.
+	MetadataConfiguration *MetadataConfigurationForReranking
+
+	// The number of results to return after reranking.
+	NumberOfRerankedResults *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for an Amazon Bedrock reranker model.
+type VectorSearchBedrockRerankingModelConfiguration struct {
+
+	// The ARN of the reranker model to use.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// A JSON object whose keys are request fields for the model and whose values are
+	// values for those fields.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for reranking the retrieved results.
+type VectorSearchRerankingConfiguration struct {
+
+	// The type of reranker model.
+	//
+	// This member is required.
+	Type VectorSearchRerankingConfigurationType
+
+	// Contains configurations for an Amazon Bedrock reranker model.
+	BedrockRerankingConfiguration *VectorSearchBedrockRerankingConfiguration
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -3436,25 +3803,27 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isActionGroupExecutor()        {}
-func (*UnknownUnionMember) isAPISchema()                  {}
-func (*UnknownUnionMember) isFlowInputContent()           {}
-func (*UnknownUnionMember) isFlowOutputContent()          {}
-func (*UnknownUnionMember) isFlowResponseStream()         {}
-func (*UnknownUnionMember) isFlowTrace()                  {}
-func (*UnknownUnionMember) isFlowTraceNodeInputContent()  {}
-func (*UnknownUnionMember) isFlowTraceNodeOutputContent() {}
-func (*UnknownUnionMember) isFunctionSchema()             {}
-func (*UnknownUnionMember) isInlineAgentResponseStream()  {}
-func (*UnknownUnionMember) isInputPrompt()                {}
-func (*UnknownUnionMember) isInvocationInputMember()      {}
-func (*UnknownUnionMember) isInvocationResultMember()     {}
-func (*UnknownUnionMember) isMemory()                     {}
-func (*UnknownUnionMember) isOptimizedPrompt()            {}
-func (*UnknownUnionMember) isOptimizedPromptStream()      {}
-func (*UnknownUnionMember) isOrchestrationTrace()         {}
-func (*UnknownUnionMember) isPostProcessingTrace()        {}
-func (*UnknownUnionMember) isPreProcessingTrace()         {}
-func (*UnknownUnionMember) isResponseStream()             {}
-func (*UnknownUnionMember) isRetrievalFilter()            {}
-func (*UnknownUnionMember) isTrace()                      {}
+func (*UnknownUnionMember) isActionGroupExecutor()                         {}
+func (*UnknownUnionMember) isAPISchema()                                   {}
+func (*UnknownUnionMember) isFlowInputContent()                            {}
+func (*UnknownUnionMember) isFlowOutputContent()                           {}
+func (*UnknownUnionMember) isFlowResponseStream()                          {}
+func (*UnknownUnionMember) isFlowTrace()                                   {}
+func (*UnknownUnionMember) isFlowTraceNodeInputContent()                   {}
+func (*UnknownUnionMember) isFlowTraceNodeOutputContent()                  {}
+func (*UnknownUnionMember) isFunctionSchema()                              {}
+func (*UnknownUnionMember) isInlineAgentResponseStream()                   {}
+func (*UnknownUnionMember) isInputPrompt()                                 {}
+func (*UnknownUnionMember) isInvocationInputMember()                       {}
+func (*UnknownUnionMember) isInvocationResultMember()                      {}
+func (*UnknownUnionMember) isMemory()                                      {}
+func (*UnknownUnionMember) isOptimizedPrompt()                             {}
+func (*UnknownUnionMember) isOptimizedPromptStream()                       {}
+func (*UnknownUnionMember) isOrchestrationTrace()                          {}
+func (*UnknownUnionMember) isPostProcessingTrace()                         {}
+func (*UnknownUnionMember) isPreProcessingTrace()                          {}
+func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration() {}
+func (*UnknownUnionMember) isResponseStream()                              {}
+func (*UnknownUnionMember) isRetrievalFilter()                             {}
+func (*UnknownUnionMember) isRetrieveAndGenerateStreamResponseOutput()     {}
+func (*UnknownUnionMember) isTrace()                                       {}

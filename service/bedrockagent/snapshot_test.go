@@ -302,6 +302,18 @@ func TestCheckSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteKnowledgeBaseDocuments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteKnowledgeBaseDocuments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteKnowledgeBaseDocuments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeletePrompt(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeletePrompt(context.Background(), nil, func(o *Options) {
@@ -458,11 +470,35 @@ func TestCheckSnapshot_GetKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetKnowledgeBaseDocuments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetKnowledgeBaseDocuments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetKnowledgeBaseDocuments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPrompt(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetPrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_IngestKnowledgeBaseDocuments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.IngestKnowledgeBaseDocuments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "IngestKnowledgeBaseDocuments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -583,6 +619,18 @@ func TestCheckSnapshot_ListIngestionJobs(t *testing.T) {
 	_, err := svc.ListIngestionJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListIngestionJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListKnowledgeBaseDocuments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListKnowledgeBaseDocuments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListKnowledgeBaseDocuments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1057,6 +1105,18 @@ func TestUpdateSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteKnowledgeBaseDocuments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteKnowledgeBaseDocuments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteKnowledgeBaseDocuments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeletePrompt(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeletePrompt(context.Background(), nil, func(o *Options) {
@@ -1213,11 +1273,35 @@ func TestUpdateSnapshot_GetKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetKnowledgeBaseDocuments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetKnowledgeBaseDocuments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetKnowledgeBaseDocuments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetPrompt(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_IngestKnowledgeBaseDocuments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.IngestKnowledgeBaseDocuments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "IngestKnowledgeBaseDocuments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1338,6 +1422,18 @@ func TestUpdateSnapshot_ListIngestionJobs(t *testing.T) {
 	_, err := svc.ListIngestionJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIngestionJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListKnowledgeBaseDocuments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListKnowledgeBaseDocuments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListKnowledgeBaseDocuments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

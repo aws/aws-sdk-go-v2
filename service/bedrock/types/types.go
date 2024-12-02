@@ -3,55 +3,98 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
-// Use to specify a automatic model evaluation job. The
+// The configuration details of an automated evaluation job. The
 // EvaluationDatasetMetricConfig object is used to specify the prompt datasets,
 // task type, and metric names.
 type AutomatedEvaluationConfig struct {
 
-	// Specifies the required elements for an automatic model evaluation job.
+	// Configuration details of the prompt datasets and metrics you want to use for
+	// your evaluation job.
 	//
 	// This member is required.
 	DatasetMetricConfigs []EvaluationDatasetMetricConfig
 
+	// Contains the evaluator model configuration details. EvaluatorModelConfig is
+	// required for evaluation jobs that use a knowledge base or in model evaluation
+	// job that use a model as judge. This model computes all evaluation related
+	// metrics.
+	EvaluatorModelConfig EvaluatorModelConfig
+
 	noSmithyDocumentSerde
 }
 
-// A JSON array that provides the status of the model evaluation jobs being
-// deleted.
+// A JSON array that provides the status of the evaluation jobs being deleted.
 type BatchDeleteEvaluationJobError struct {
 
-	// A HTTP status code of the model evaluation job being deleted.
+	// A HTTP status code of the evaluation job being deleted.
 	//
 	// This member is required.
 	Code *string
 
-	// The ARN of the model evaluation job being deleted.
+	// The ARN of the evaluation job being deleted.
 	//
 	// This member is required.
 	JobIdentifier *string
 
-	// A status message about the model evaluation job deletion.
+	// A status message about the evaluation job deletion.
 	Message *string
 
 	noSmithyDocumentSerde
 }
 
-// An array of model evaluation jobs to be deleted, and their associated statuses.
+// An evaluation job for deletion, and it’s current status.
 type BatchDeleteEvaluationJobItem struct {
 
-	// The ARN of model evaluation job to be deleted.
+	// The Amazon Resource Name (ARN) of the evaluation job for deletion.
 	//
 	// This member is required.
 	JobIdentifier *string
 
-	// The status of the job's deletion.
+	// The status of the evaluation job for deletion.
 	//
 	// This member is required.
 	JobStatus EvaluationJobStatus
+
+	noSmithyDocumentSerde
+}
+
+// The evaluator model used in knowledge base evaluation job or in model
+// evaluation job that use a model as judge. This model computes all evaluation
+// related metrics.
+type BedrockEvaluatorModel struct {
+
+	// The Amazon Resource Name (ARN) of the evaluator model used used in knowledge
+	// base evaluation job or in model evaluation job that use a model as judge.
+	//
+	// This member is required.
+	ModelIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the document contained in the wrapper object, along with its
+// attributes/fields.
+type ByteContentDoc struct {
+
+	// The MIME type of the document contained in the wrapper object.
+	//
+	// This member is required.
+	ContentType *string
+
+	// The byte value of the file to upload, encoded as a Base-64 string.
+	//
+	// This member is required.
+	Data []byte
+
+	// The file name of the document contained in the wrapper object.
+	//
+	// This member is required.
+	Identifier *string
 
 	noSmithyDocumentSerde
 }
@@ -115,10 +158,9 @@ type CustomModelSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the ARN of the Amazon Bedrock model or [inference profile] specified in your model
-// evaluation job. Each Amazon Bedrock model supports different inferenceParams .
-// To learn more about supported inference parameters for Amazon Bedrock models,
-// see [Inference parameters for foundation models].
+// Contains the ARN of the Amazon Bedrock model or [inference profile] specified in your evaluation
+// job. Each Amazon Bedrock model supports different inferenceParams . To learn
+// more about supported inference parameters for Amazon Bedrock models, see [Inference parameters for foundation models].
 //
 // The inferenceParams are specified using JSON. To successfully insert JSON as
 // string make sure that all quotations are properly escaped. For example,
@@ -129,22 +171,19 @@ type CustomModelSummary struct {
 // [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 type EvaluationBedrockModel struct {
 
-	// Each Amazon Bedrock support different inference parameters that change how the
-	// model behaves during inference.
-	//
-	// This member is required.
-	InferenceParams *string
-
 	// The ARN of the Amazon Bedrock model or inference profile specified.
 	//
 	// This member is required.
 	ModelIdentifier *string
 
+	// Each Amazon Bedrock support different inference parameters that change how the
+	// model behaves during inference.
+	InferenceParams *string
+
 	noSmithyDocumentSerde
 }
 
-// Used to specify either a AutomatedEvaluationConfig or HumanEvaluationConfig
-// object.
+// The configuration details of either an automated or human-based evaluation job.
 //
 // The following types satisfy this interface:
 //
@@ -154,8 +193,8 @@ type EvaluationConfig interface {
 	isEvaluationConfig()
 }
 
-// Used to specify an automated model evaluation job. See AutomatedEvaluationConfig
-// to view the required parameters.
+// Contains the configuration details of an automated evaluation job that computes
+// metrics.
 type EvaluationConfigMemberAutomated struct {
 	Value AutomatedEvaluationConfig
 
@@ -164,8 +203,7 @@ type EvaluationConfigMemberAutomated struct {
 
 func (*EvaluationConfigMemberAutomated) isEvaluationConfig() {}
 
-// Used to specify a model evaluation job that uses human workers.See
-// HumanEvaluationConfig to view the required parameters.
+// Contains the configuration details of an evaluation job that uses human workers.
 type EvaluationConfigMemberHuman struct {
 	Value HumanEvaluationConfig
 
@@ -211,8 +249,8 @@ type EvaluationDatasetLocationMemberS3Uri struct {
 
 func (*EvaluationDatasetLocationMemberS3Uri) isEvaluationDatasetLocation() {}
 
-// Defines the built-in prompt datasets, built-in metric names and custom metric
-// names, and the task type.
+// Defines the prompt datasets, built-in metric names and custom metric names, and
+// the task type.
 type EvaluationDatasetMetricConfig struct {
 
 	// Specifies the prompt dataset.
@@ -220,15 +258,33 @@ type EvaluationDatasetMetricConfig struct {
 	// This member is required.
 	Dataset *EvaluationDataset
 
-	// The names of the metrics used. For automated model evaluation jobs valid values
-	// are "Builtin.Accuracy" , "Builtin.Robustness" , and "Builtin.Toxicity" . In
-	// human-based model evaluation jobs the array of strings must match the name
+	// The names of the metrics you want to use for your evaluation job.
+	//
+	// For knowledge base evaluation jobs that evaluate retrieval only, valid values
+	// are " Builtin.ContextRelevance ", " Builtin.ContextConverage ".
+	//
+	// For knowledge base evaluation jobs that evaluate retrieval with response
+	// generation, valid values are " Builtin.Correctness ", " Builtin.Completeness ", "
+	// Builtin.Helpfulness ", " Builtin.LogicalCoherence ", " Builtin.Faithfulness ", "
+	// Builtin.Harmfulness ", " Builtin.Stereotyping ", " Builtin.Refusal ".
+	//
+	// For automated model evaluation jobs, valid values are " Builtin.Accuracy ", "
+	// Builtin.Robustness ", and " Builtin.Toxicity ". In model evaluation jobs that
+	// use a LLM as judge you can specify " Builtin.Correctness ", "
+	// Builtin.Completeness" , " Builtin.Faithfulness" , " Builtin.Helpfulness ", "
+	// Builtin.Coherence ", " Builtin.Relevance ", " Builtin.FollowingInstructions ", "
+	// Builtin.ProfessionalStyleAndTone ", You can also specify the following
+	// responsible AI related metrics only for model evaluation job that use a LLM as
+	// judge " Builtin.Harmfulness ", " Builtin.Stereotyping ", and " Builtin.Refusal ".
+	//
+	// For human-based model evaluation jobs, the list of strings must match the name
 	// parameter specified in HumanEvaluationCustomMetric .
 	//
 	// This member is required.
 	MetricNames []string
 
-	// The task type you want the model to carry out.
+	// The the type of task you want to evaluate for your evaluation job. This applies
+	// only to model evaluation jobs and is ignored for knowledge base evaluation jobs.
 	//
 	// This member is required.
 	TaskType EvaluationTaskType
@@ -236,19 +292,22 @@ type EvaluationDatasetMetricConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Used to define the models you want used in your model evaluation job. Automated
-// model evaluation jobs support only a single model. In a human-based model
-// evaluation job, your annotator can compare the responses for up to two different
-// models.
+// The configuration details of the inference model for an evaluation job.
+//
+// For automated model evaluation jobs, only a single model is supported.
+//
+// For human-based model evaluation jobs, your annotator can compare the responses
+// for up to two different models.
 //
 // The following types satisfy this interface:
 //
 //	EvaluationInferenceConfigMemberModels
+//	EvaluationInferenceConfigMemberRagConfigs
 type EvaluationInferenceConfig interface {
 	isEvaluationInferenceConfig()
 }
 
-// Used to specify the models.
+// Specifies the inference models.
 type EvaluationInferenceConfigMemberModels struct {
 	Value []EvaluationModelConfig
 
@@ -256,6 +315,17 @@ type EvaluationInferenceConfigMemberModels struct {
 }
 
 func (*EvaluationInferenceConfigMemberModels) isEvaluationInferenceConfig() {}
+
+// Contains the configuration details of the inference for a knowledge base
+// evaluation job, including either the retrieval only configuration or the
+// retrieval with response generation configuration.
+type EvaluationInferenceConfigMemberRagConfigs struct {
+	Value []RAGConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationInferenceConfigMemberRagConfigs) isEvaluationInferenceConfig() {}
 
 // Defines the models used in the model evaluation job.
 //
@@ -276,10 +346,10 @@ type EvaluationModelConfigMemberBedrockModel struct {
 
 func (*EvaluationModelConfigMemberBedrockModel) isEvaluationModelConfig() {}
 
-// The Amazon S3 location where the results of your model evaluation job are saved.
+// The Amazon S3 location where the results of your evaluation job are saved.
 type EvaluationOutputDataConfig struct {
 
-	// The Amazon S3 URI where the results of model evaluation job are saved.
+	// The Amazon S3 URI where the results of the evaluation job are saved.
 	//
 	// This member is required.
 	S3Uri *string
@@ -287,44 +357,157 @@ type EvaluationOutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of the model evaluation job.
+// Summary information of an evaluation job.
 type EvaluationSummary struct {
 
-	// When the model evaluation job was created.
+	// The time the evaluation job was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// What task type was used in the model evaluation job.
+	// The type of task for model evaluation.
 	//
 	// This member is required.
 	EvaluationTaskTypes []EvaluationTaskType
 
-	// The Amazon Resource Name (ARN) of the model evaluation job.
+	// The Amazon Resource Name (ARN) of the evaluation job.
 	//
 	// This member is required.
 	JobArn *string
 
-	// The name of the model evaluation job.
+	// The name for the evaluation job.
 	//
 	// This member is required.
 	JobName *string
 
-	// The type, either human or automatic, of model evaluation job.
+	// Specifies whether the evaluation job is automated or human-based.
 	//
 	// This member is required.
 	JobType EvaluationJobType
 
-	// The Amazon Resource Names (ARNs) of the model(s) used in the model evaluation
-	// job.
-	//
-	// This member is required.
-	ModelIdentifiers []string
-
-	// The current status of the model evaluation job.
+	// The current status of the evaluation job.
 	//
 	// This member is required.
 	Status EvaluationJobStatus
+
+	// Specifies whether the evaluation job is for evaluating a model or evaluating a
+	// knowledge base (retrieval and response generation).
+	ApplicationType ApplicationType
+
+	// The Amazon Resource Names (ARNs) of the models used to compute the metrics for
+	// a knowledge base evaluation job.
+	EvaluatorModelIdentifiers []string
+
+	// The Amazon Resource Names (ARNs) of the model(s) used for the evaluation job.
+	ModelIdentifiers []string
+
+	// The Amazon Resource Names (ARNs) of the knowledge base resources used for a
+	// knowledge base evaluation job.
+	RagIdentifiers []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the model configuration for the evaluator model. EvaluatorModelConfig
+// is required for evaluation jobs that use a knowledge base or in model evaluation
+// job that use a model as judge. This model computes all evaluation related
+// metrics.
+//
+// The following types satisfy this interface:
+//
+//	EvaluatorModelConfigMemberBedrockEvaluatorModels
+type EvaluatorModelConfig interface {
+	isEvaluatorModelConfig()
+}
+
+// The evaluator model used in knowledge base evaluation job or in model
+// evaluation job that use a model as judge. This model computes all evaluation
+// related metrics.
+type EvaluatorModelConfigMemberBedrockEvaluatorModels struct {
+	Value []BedrockEvaluatorModel
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluatorModelConfigMemberBedrockEvaluatorModels) isEvaluatorModelConfig() {}
+
+// The unique external source of the content contained in the wrapper object.
+type ExternalSource struct {
+
+	// The source type of the external source wrapper object.
+	//
+	// This member is required.
+	SourceType ExternalSourceType
+
+	// The identifier, content type, and data of the external source wrapper object.
+	ByteContent *ByteContentDoc
+
+	// The S3 location of the external source wrapper object.
+	S3Location *S3ObjectDoc
+
+	noSmithyDocumentSerde
+}
+
+// The response generation configuration of the external source wrapper object.
+type ExternalSourcesGenerationConfiguration struct {
+
+	// Additional model parameters and their corresponding values not included in the
+	// text inference configuration for an external source. Takes in custom model
+	// parameters specific to the language model being used.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	// Configuration details for the guardrail.
+	GuardrailConfiguration *GuardrailConfiguration
+
+	// Configuration details for inference when using RetrieveAndGenerate to generate
+	// responses while using an external source.
+	KbInferenceConfig *KbInferenceConfig
+
+	// Contains the template for the prompt for the external source wrapper object.
+	PromptTemplate *PromptTemplate
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the external source wrapper object in the
+// retrieveAndGenerate function.
+type ExternalSourcesRetrieveAndGenerateConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the foundation model or [inference profile] used to generate
+	// responses.
+	//
+	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
+	//
+	// This member is required.
+	ModelArn *string
+
+	// The document for the external source wrapper object in the retrieveAndGenerate
+	// function.
+	//
+	// This member is required.
+	Sources []ExternalSource
+
+	// Contains configurations details for response generation based on retrieved text
+	// chunks.
+	GenerationConfiguration *ExternalSourcesGenerationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the name of the metadata attribute/field to apply filters. You must
+// match the name of the attribute/field in your data source/document metadata.
+type FilterAttribute struct {
+
+	// The name of metadata attribute/field, which must match the name in your data
+	// source/document metadata.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the metadata attribute/field.
+	//
+	// This member is required.
+	Value document.Interface
 
 	noSmithyDocumentSerde
 }
@@ -417,6 +600,45 @@ type FoundationModelSummary struct {
 
 	// Indicates whether the model supports streaming.
 	ResponseStreamingSupported *bool
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for response generation based on retrieved text
+// chunks.
+type GenerationConfiguration struct {
+
+	// Additional model parameters and corresponding values not included in the
+	// textInferenceConfig structure for a knowledge base. This allows you to provide
+	// custom model parameters specific to the language model being used.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	// Contains configuration details for the guardrail.
+	GuardrailConfiguration *GuardrailConfiguration
+
+	// Contains configuration details for inference for knowledge base retrieval and
+	// response generation.
+	KbInferenceConfig *KbInferenceConfig
+
+	// Contains the template for the prompt that's sent to the model for response
+	// generation.
+	PromptTemplate *PromptTemplate
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for the guardrail.
+type GuardrailConfiguration struct {
+
+	// The unique identifier for the guardrail.
+	//
+	// This member is required.
+	GuardrailId *string
+
+	// The version of the guardrail.
+	//
+	// This member is required.
+	GuardrailVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -1313,6 +1535,111 @@ type InferenceProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configuration details of the inference for knowledge base retrieval
+// and response generation.
+type KbInferenceConfig struct {
+
+	// Contains configuration details for text generation using a language model via
+	// the RetrieveAndGenerate function.
+	TextInferenceConfig *TextInferenceConfig
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for retrieving information from a knowledge base and
+// generating responses.
+//
+// The following types satisfy this interface:
+//
+//	KnowledgeBaseConfigMemberRetrieveAndGenerateConfig
+//	KnowledgeBaseConfigMemberRetrieveConfig
+type KnowledgeBaseConfig interface {
+	isKnowledgeBaseConfig()
+}
+
+// Contains configuration details for retrieving information from a knowledge base
+// and generating responses.
+type KnowledgeBaseConfigMemberRetrieveAndGenerateConfig struct {
+	Value RetrieveAndGenerateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*KnowledgeBaseConfigMemberRetrieveAndGenerateConfig) isKnowledgeBaseConfig() {}
+
+// Contains configuration details for retrieving information from a knowledge base.
+type KnowledgeBaseConfigMemberRetrieveConfig struct {
+	Value RetrieveConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*KnowledgeBaseConfigMemberRetrieveConfig) isKnowledgeBaseConfig() {}
+
+// Contains configuration details for retrieving information from a knowledge base.
+type KnowledgeBaseRetrievalConfiguration struct {
+
+	// Contains configuration details for returning the results from the vector search.
+	//
+	// This member is required.
+	VectorSearchConfiguration *KnowledgeBaseVectorSearchConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details for retrieving information from a knowledge base
+// and generating responses.
+type KnowledgeBaseRetrieveAndGenerateConfiguration struct {
+
+	// The unique identifier of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The Amazon Resource Name (ARN) of the foundation model or [inference profile] used to generate
+	// responses.
+	//
+	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
+	//
+	// This member is required.
+	ModelArn *string
+
+	// Contains configurations details for response generation based on retrieved text
+	// chunks.
+	GenerationConfiguration *GenerationConfiguration
+
+	// Contains configuration details for the model to process the prompt prior to
+	// retrieval and response generation.
+	OrchestrationConfiguration *OrchestrationConfiguration
+
+	// Contains configuration details for retrieving text chunks.
+	RetrievalConfiguration *KnowledgeBaseRetrievalConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for returning the results from the knowledge base
+// vector search.
+type KnowledgeBaseVectorSearchConfiguration struct {
+
+	// Specifies the filters to use on the metadata fields in the knowledge base data
+	// sources before returning results.
+	Filter RetrievalFilter
+
+	// The number of text chunks to retrieve; the number of results to return.
+	NumberOfResults *int32
+
+	// By default, Amazon Bedrock decides a search strategy for you. If you're using
+	// an Amazon OpenSearch Serverless vector store that contains a filterable text
+	// field, you can specify whether to query the knowledge base with a HYBRID search
+	// using both vector embeddings and raw text, or SEMANTIC search using only vector
+	// embeddings. For other vector store configurations, only SEMANTIC search is
+	// available.
+	OverrideSearchType SearchType
+
+	noSmithyDocumentSerde
+}
+
 // Configuration fields for invocation logging.
 type LoggingConfig struct {
 
@@ -1650,6 +1977,18 @@ type ModelInvocationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration details for the model to process the prompt prior to
+// retrieval and response generation.
+type OrchestrationConfiguration struct {
+
+	// Contains configuration details for transforming the prompt.
+	//
+	// This member is required.
+	QueryTransformationConfiguration *QueryTransformationConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // S3 Location of the output data.
 type OutputDataConfig struct {
 
@@ -1657,6 +1996,24 @@ type OutputDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// The template for the prompt that's sent to the model for response generation.
+type PromptTemplate struct {
+
+	// The template for the prompt that's sent to the model for response generation.
+	// You can include prompt placeholders, which become replaced before the prompt is
+	// sent to the model to provide instructions and context to the model. In addition,
+	// you can include XML tags to delineate meaningful sections of the prompt
+	// template.
+	//
+	// For more information, see [Knowledge base prompt template] and [Use XML tags with Anthropic Claude models].
+	//
+	// [Knowledge base prompt template]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+	// [Use XML tags with Anthropic Claude models]: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags
+	TextPromptTemplate *string
 
 	noSmithyDocumentSerde
 }
@@ -1736,6 +2093,282 @@ type ProvisionedModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration details for transforming the prompt.
+type QueryTransformationConfiguration struct {
+
+	// The type of transformation to apply to the prompt.
+	//
+	// This member is required.
+	Type QueryTransformationType
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details for retrieval of information and response
+// generation.
+//
+// The following types satisfy this interface:
+//
+//	RAGConfigMemberKnowledgeBaseConfig
+type RAGConfig interface {
+	isRAGConfig()
+}
+
+// Contains configuration details for knowledge base retrieval and response
+// generation.
+type RAGConfigMemberKnowledgeBaseConfig struct {
+	Value KnowledgeBaseConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*RAGConfigMemberKnowledgeBaseConfig) isRAGConfig() {}
+
+// Specifies the filters to use on the metadata attributes/fields in the knowledge
+// base data sources before returning results.
+//
+// The following types satisfy this interface:
+//
+//	RetrievalFilterMemberAndAll
+//	RetrievalFilterMemberEquals
+//	RetrievalFilterMemberGreaterThan
+//	RetrievalFilterMemberGreaterThanOrEquals
+//	RetrievalFilterMemberIn
+//	RetrievalFilterMemberLessThan
+//	RetrievalFilterMemberLessThanOrEquals
+//	RetrievalFilterMemberListContains
+//	RetrievalFilterMemberNotEquals
+//	RetrievalFilterMemberNotIn
+//	RetrievalFilterMemberOrAll
+//	RetrievalFilterMemberStartsWith
+//	RetrievalFilterMemberStringContains
+type RetrievalFilter interface {
+	isRetrievalFilter()
+}
+
+// Knowledge base data sources are returned if their metadata attributes fulfill
+// all the filter conditions inside this list.
+type RetrievalFilterMemberAndAll struct {
+	Value []RetrievalFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberAndAll) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value matches the value in this object.
+//
+// The following example would return data sources with an animal attribute whose
+// value is 'cat': "equals": { "key": "animal", "value": "cat" }
+type RetrievalFilterMemberEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is greater than the value in this
+// object.
+//
+// The following example would return data sources with an year attribute whose
+// value is greater than '1989': "greaterThan": { "key": "year", "value": 1989 }
+type RetrievalFilterMemberGreaterThan struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberGreaterThan) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is greater than or equal to the value
+// in this object.
+//
+// The following example would return data sources with an year attribute whose
+// value is greater than or equal to '1989': "greaterThanOrEquals": { "key":
+// "year", "value": 1989 }
+type RetrievalFilterMemberGreaterThanOrEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberGreaterThanOrEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is in the list specified in the value
+// in this object.
+//
+// The following example would return data sources with an animal attribute that
+// is either 'cat' or 'dog': "in": { "key": "animal", "value": ["cat", "dog"] }
+type RetrievalFilterMemberIn struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberIn) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is less than the value in this
+// object.
+//
+// The following example would return data sources with an year attribute whose
+// value is less than to '1989': "lessThan": { "key": "year", "value": 1989 }
+type RetrievalFilterMemberLessThan struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberLessThan) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is less than or equal to the value in
+// this object.
+//
+// The following example would return data sources with an year attribute whose
+// value is less than or equal to '1989': "lessThanOrEquals": { "key": "year",
+// "value": 1989 }
+type RetrievalFilterMemberLessThanOrEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberLessThanOrEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is a list that contains the value as
+// one of its members.
+//
+// The following example would return data sources with an animals attribute that
+// is a list containing a cat member (for example, ["dog", "cat"] ):
+// "listContains": { "key": "animals", "value": "cat" }
+type RetrievalFilterMemberListContains struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberListContains) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value doesn't match the value in this object are
+// returned.
+//
+// The following example would return data sources that don't contain an animal
+// attribute whose value is 'cat': "notEquals": { "key": "animal", "value": "cat" }
+type RetrievalFilterMemberNotEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberNotEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value isn't in the list specified in the
+// value in this object.
+//
+// The following example would return data sources whose animal attribute is
+// neither 'cat' nor 'dog': "notIn": { "key": "animal", "value": ["cat", "dog"] }
+type RetrievalFilterMemberNotIn struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberNotIn) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if their metadata attributes fulfill
+// at least one of the filter conditions inside this list.
+type RetrievalFilterMemberOrAll struct {
+	Value []RetrievalFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberOrAll) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value starts with the value in this object.
+// This filter is currently only supported for Amazon OpenSearch Serverless vector
+// stores.
+//
+// The following example would return data sources with an animal attribute starts
+// with 'ca' (for example, 'cat' or 'camel'). "startsWith": { "key": "animal",
+// "value": "ca" }
+type RetrievalFilterMemberStartsWith struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberStartsWith) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is one of the following:
+//
+// A string that contains the value as a substring. The following example would
+// return data sources with an animal attribute that contains the substring at (for
+// example, 'cat'): "stringContains": { "key": "animal", "value": "at" }
+//
+// A list with a member that contains the value as a substring. The following
+// example would return data sources with an animals attribute that is a list
+// containing a member that contains the substring at (for example, ["dog", "cat"]
+// ): "stringContains": { "key": "animals", "value": "at" }
+type RetrievalFilterMemberStringContains struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberStringContains) isRetrievalFilter() {}
+
+// Contains configuration details for a knowledge base retrieval and response
+// generation.
+type RetrieveAndGenerateConfiguration struct {
+
+	// The type of resource that contains your data for retrieving information and
+	// generating responses.
+	//
+	// If you choose to use EXTERNAL_SOURCES , then currently only Claude 3 Sonnet
+	// models for knowledge bases are supported.
+	//
+	// This member is required.
+	Type RetrieveAndGenerateType
+
+	// The configuration for the external source wrapper object in the
+	// retrieveAndGenerate function.
+	ExternalSourcesConfiguration *ExternalSourcesRetrieveAndGenerateConfiguration
+
+	// Contains configuration details for the knowledge base retrieval and response
+	// generation.
+	KnowledgeBaseConfiguration *KnowledgeBaseRetrieveAndGenerateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for retrieving information from a knowledge base.
+type RetrieveConfig struct {
+
+	// The unique identifier of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// Contains configuration details for knowledge base retrieval.
+	//
+	// This member is required.
+	KnowledgeBaseRetrievalConfiguration *KnowledgeBaseRetrievalConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // S3 configuration for storing log data.
 type S3Config struct {
 
@@ -1761,6 +2394,17 @@ type S3DataSource struct {
 	noSmithyDocumentSerde
 }
 
+// The unique wrapper object of the document from the S3 location.
+type S3ObjectDoc struct {
+
+	// The S3 URI location for the wrapper object of the document.
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Definition of the key/value pair for a tag.
 type Tag struct {
 
@@ -1773,6 +2417,37 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for text generation using a language model via the
+// RetrieveAndGenerate function.
+type TextInferenceConfig struct {
+
+	// The maximum number of tokens to generate in the output text. Do not use the
+	// minimum of 0 or the maximum of 65536. The limit values described here are
+	// arbitrary values, for actual values consult the limits defined by your specific
+	// model.
+	MaxTokens *int32
+
+	// A list of sequences of characters that, if generated, will cause the model to
+	// stop generating further tokens. Do not use a minimum length of 1 or a maximum
+	// length of 1000. The limit values described here are arbitrary values, for actual
+	// values consult the limits defined by your specific model.
+	StopSequences []string
+
+	// Controls the random-ness of text generated by the language model, influencing
+	// how much the model sticks to the most predictable next words versus exploring
+	// more surprising options. A lower temperature value (e.g. 0.2 or 0.3) makes model
+	// outputs more deterministic or predictable, while a higher temperature (e.g. 0.8
+	// or 0.9) makes the outputs more creative or unpredictable.
+	Temperature *float32
+
+	// A probability distribution threshold which controls what the model considers
+	// for the set of possible next tokens. The model will only consider the top p% of
+	// the probability distribution when generating the next token.
+	TopP *float32
 
 	noSmithyDocumentSerde
 }
@@ -1861,7 +2536,11 @@ func (*UnknownUnionMember) isEvaluationConfig()                   {}
 func (*UnknownUnionMember) isEvaluationDatasetLocation()          {}
 func (*UnknownUnionMember) isEvaluationInferenceConfig()          {}
 func (*UnknownUnionMember) isEvaluationModelConfig()              {}
+func (*UnknownUnionMember) isEvaluatorModelConfig()               {}
 func (*UnknownUnionMember) isInferenceProfileModelSource()        {}
+func (*UnknownUnionMember) isKnowledgeBaseConfig()                {}
 func (*UnknownUnionMember) isModelDataSource()                    {}
 func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()  {}
 func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig() {}
+func (*UnknownUnionMember) isRAGConfig()                          {}
+func (*UnknownUnionMember) isRetrievalFilter()                    {}

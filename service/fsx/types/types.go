@@ -428,6 +428,10 @@ type Backup struct {
 	// Specifies the resource type that's backed up.
 	ResourceType ResourceType
 
+	//  The size of the backup in bytes. This represents the amount of data that the
+	// file system would contain if you restore this backup.
+	SizeInBytes *int64
+
 	// The ID of the source backup. Specifies the backup that you are copying.
 	SourceBackupId *string
 
@@ -1046,6 +1050,10 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// which you want the preferred file server to be located.
 	PreferredSubnetId *string
 
+	//  Specifies the optional provisioned SSD read cache on file systems that use the
+	// Intelligent-Tiering storage class.
+	ReadCacheConfiguration *OpenZFSReadCacheConfiguration
+
 	// The configuration Amazon FSx uses when creating the root value of the Amazon
 	// FSx for OpenZFS file system. All volumes are children of the root volume.
 	RootVolumeConfiguration *OpenZFSCreateRootVolumeConfiguration
@@ -1410,13 +1418,15 @@ type CreateOpenZFSVolumeConfiguration struct {
 	ReadOnly *bool
 
 	// Specifies the suggested block size for a volume in a ZFS dataset, in kibibytes
-	// (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The
-	// default is 128 KiB. We recommend using the default setting for the majority of
-	// use cases. Generally, workloads that write in fixed small or large record sizes
-	// may benefit from setting a custom record size, like database workloads (small
-	// record size) or media streaming workloads (large record size). For additional
-	// guidance on when to set a custom record size, see [ZFS Record size]in the Amazon FSx for OpenZFS
-	// User Guide.
+	// (KiB). For file systems using the Intelligent-Tiering storage class, valid
+	// values are 128, 256, 512, 1024, 2048, or 4096 KiB, with a default of 2048 KiB.
+	// For all other file systems, valid values are 4, 8, 16, 32, 64, 128, 256, 512, or
+	// 1024 KiB, with a default of 128 KiB. We recommend using the default setting for
+	// the majority of use cases. Generally, workloads that write in fixed small or
+	// large record sizes may benefit from setting a custom record size, like database
+	// workloads (small record size) or media streaming workloads (large record size).
+	// For additional guidance on when to set a custom record size, see [ZFS Record size]in the Amazon
+	// FSx for OpenZFS User Guide.
 	//
 	// [ZFS Record size]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#record-size-performance
 	RecordSizeKiB *int32
@@ -3365,6 +3375,10 @@ type OpenZFSFileSystemConfiguration struct {
 	// which you want the preferred file server to be located.
 	PreferredSubnetId *string
 
+	//  Required when StorageType is set to INTELLIGENT_TIERING . Specifies the
+	// optional provisioned SSD read cache.
+	ReadCacheConfiguration *OpenZFSReadCacheConfiguration
+
 	// The ID of the root volume of the OpenZFS file system.
 	RootVolumeId *string
 
@@ -3431,6 +3445,29 @@ type OpenZFSOriginSnapshotConfiguration struct {
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	SnapshotARN *string
+
+	noSmithyDocumentSerde
+}
+
+//	The configuration for the optional provisioned SSD read cache on file systems
+//
+// that use the Intelligent-Tiering storage class.
+type OpenZFSReadCacheConfiguration struct {
+
+	//  Required if SizingMode is set to USER_PROVISIONED . Specifies the size of the
+	// file system's SSD read cache, in gibibytes (GiB).
+	SizeGiB *int32
+
+	//  Specifies how the provisioned SSD read cache is sized, as follows:
+	//
+	//   - Set to NO_CACHE if you do not want to use an SSD read cache with your
+	//   Intelligent-Tiering file system.
+	//
+	//   - Set to USER_PROVISIONED to specify the exact size of your SSD read cache.
+	//
+	//   - Set to PROPORTIONAL_TO_THROUGHPUT_CAPACITY to have your SSD read cache
+	//   automatically sized based on your throughput capacity.
+	SizingMode OpenZFSReadCacheSizingMode
 
 	noSmithyDocumentSerde
 }
@@ -4440,6 +4477,10 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	// configuration consists of the total number of provisioned SSD IOPS and how it is
 	// was provisioned, or the mode (by the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
+
+	//  The configuration for the optional provisioned SSD read cache on file systems
+	// that use the Intelligent-Tiering storage class.
+	ReadCacheConfiguration *OpenZFSReadCacheConfiguration
 
 	// (Multi-AZ only) A list of IDs of existing virtual private cloud (VPC) route
 	// tables to disassociate (remove) from your Amazon FSx for OpenZFS file system.

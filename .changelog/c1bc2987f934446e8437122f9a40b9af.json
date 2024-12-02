@@ -1,0 +1,8 @@
+{
+    "id": "c1bc2987-f934-446e-8437-122f9a40b9af",
+    "type": "feature",
+    "description": "This release adds documentation for a new feature in Amazon CloudWatch called Network Flow Monitor. You can use Network Flow Monitor to get near real-time metrics, including retransmissions and data transferred, for your actual workloads.",
+    "modules": [
+        "service/networkflowmonitor"
+    ]
+}

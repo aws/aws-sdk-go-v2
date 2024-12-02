@@ -16,8 +16,9 @@ import (
 // specified type that the account inherits, plus any policy of that type that is
 // directly attached to the account.
 //
-// This operation applies only to policy types other than service control policies
-// (SCPs).
+// This operation applies only to management policies. It does not apply to
+// authorization policies: service control policies (SCPs) and resource control
+// policies (RCPs).
 //
 // For more information about policy inheritance, see [Understanding management policy inheritance] in the Organizations User
 // Guide.
@@ -45,6 +46,8 @@ type DescribeEffectivePolicyInput struct {
 	// The type of policy that you want information about. You can specify one of the
 	// following values:
 	//
+	// [DECLARATIVE_POLICY_EC2]
+	//
 	// [BACKUP_POLICY]
 	//
 	// [TAG_POLICY]
@@ -57,6 +60,7 @@ type DescribeEffectivePolicyInput struct {
 	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 	// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
 	// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+	// [DECLARATIVE_POLICY_EC2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
 	//
 	// This member is required.
 	PolicyType types.EffectivePolicyType

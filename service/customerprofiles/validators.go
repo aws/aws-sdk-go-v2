@@ -130,6 +130,26 @@ func (m *validateOpCreateEventStream) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEventTrigger struct {
+}
+
+func (*validateOpCreateEventTrigger) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEventTrigger) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEventTriggerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEventTriggerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIntegrationWorkflow struct {
 }
 
@@ -285,6 +305,26 @@ func (m *validateOpDeleteEventStream) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEventStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEventTrigger struct {
+}
+
+func (*validateOpDeleteEventTrigger) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEventTrigger) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEventTriggerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEventTriggerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -545,6 +585,26 @@ func (m *validateOpGetEventStream) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEventStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEventTrigger struct {
+}
+
+func (*validateOpGetEventTrigger) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEventTrigger) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventTriggerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventTriggerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -865,6 +925,26 @@ func (m *validateOpListEventStreams) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEventStreamsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEventTriggers struct {
+}
+
+func (*validateOpListEventTriggers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEventTriggers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEventTriggersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEventTriggersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1250,6 +1330,26 @@ func (m *validateOpUpdateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEventTrigger struct {
+}
+
+func (*validateOpUpdateEventTrigger) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEventTrigger) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEventTriggerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEventTriggerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProfile struct {
 }
 
@@ -1294,6 +1394,10 @@ func addOpCreateEventStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEventStream{}, middleware.After)
 }
 
+func addOpCreateEventTriggerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEventTrigger{}, middleware.After)
+}
+
 func addOpCreateIntegrationWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIntegrationWorkflow{}, middleware.After)
 }
@@ -1324,6 +1428,10 @@ func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteEventStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEventStream{}, middleware.After)
+}
+
+func addOpDeleteEventTriggerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEventTrigger{}, middleware.After)
 }
 
 func addOpDeleteIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -1376,6 +1484,10 @@ func addOpGetDomainValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetEventStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventStream{}, middleware.After)
+}
+
+func addOpGetEventTriggerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEventTrigger{}, middleware.After)
 }
 
 func addOpGetIdentityResolutionJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1440,6 +1552,10 @@ func addOpListCalculatedAttributesForProfileValidationMiddleware(stack *middlewa
 
 func addOpListEventStreamsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEventStreams{}, middleware.After)
+}
+
+func addOpListEventTriggersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEventTriggers{}, middleware.After)
 }
 
 func addOpListIdentityResolutionJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -1516,6 +1632,10 @@ func addOpUpdateCalculatedAttributeDefinitionValidationMiddleware(stack *middlew
 
 func addOpUpdateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDomain{}, middleware.After)
+}
+
+func addOpUpdateEventTriggerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEventTrigger{}, middleware.After)
 }
 
 func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -1975,6 +2095,98 @@ func validateDimensionList(v []types.Dimension) error {
 	}
 }
 
+func validateEventTriggerCondition(v *types.EventTriggerCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventTriggerCondition"}
+	if v.EventTriggerDimensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTriggerDimensions"))
+	} else if v.EventTriggerDimensions != nil {
+		if err := validateEventTriggerDimensions(v.EventTriggerDimensions); err != nil {
+			invalidParams.AddNested("EventTriggerDimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.LogicalOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogicalOperator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventTriggerConditions(v []types.EventTriggerCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventTriggerConditions"}
+	for i := range v {
+		if err := validateEventTriggerCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventTriggerDimension(v *types.EventTriggerDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventTriggerDimension"}
+	if v.ObjectAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectAttributes"))
+	} else if v.ObjectAttributes != nil {
+		if err := validateObjectAttributes(v.ObjectAttributes); err != nil {
+			invalidParams.AddNested("ObjectAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventTriggerDimensions(v []types.EventTriggerDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventTriggerDimensions"}
+	for i := range v {
+		if err := validateEventTriggerDimension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventTriggerLimits(v *types.EventTriggerLimits) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventTriggerLimits"}
+	if v.Periods != nil {
+		if err := validatePeriods(v.Periods); err != nil {
+			invalidParams.AddNested("Periods", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExportingConfig(v *types.ExportingConfig) error {
 	if v == nil {
 		return nil
@@ -2293,6 +2505,41 @@ func validateMatchingRules(v []types.MatchingRule) error {
 	}
 }
 
+func validateObjectAttribute(v *types.ObjectAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectAttribute"}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateObjectAttributes(v []types.ObjectAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectAttributes"}
+	for i := range v {
+		if err := validateObjectAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateObjectFilter(v *types.ObjectFilter) error {
 	if v == nil {
 		return nil
@@ -2303,6 +2550,41 @@ func validateObjectFilter(v *types.ObjectFilter) error {
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePeriod(v *types.Period) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Period"}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePeriods(v []types.Period) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Periods"}
+	for i := range v {
+		if err := validatePeriod(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2962,6 +3244,39 @@ func validateOpCreateEventStreamInput(v *CreateEventStreamInput) error {
 	}
 }
 
+func validateOpCreateEventTriggerInput(v *CreateEventTriggerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEventTriggerInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.EventTriggerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTriggerName"))
+	}
+	if v.ObjectTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectTypeName"))
+	}
+	if v.EventTriggerConditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTriggerConditions"))
+	} else if v.EventTriggerConditions != nil {
+		if err := validateEventTriggerConditions(v.EventTriggerConditions); err != nil {
+			invalidParams.AddNested("EventTriggerConditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventTriggerLimits != nil {
+		if err := validateEventTriggerLimits(v.EventTriggerLimits); err != nil {
+			invalidParams.AddNested("EventTriggerLimits", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateIntegrationWorkflowInput(v *CreateIntegrationWorkflowInput) error {
 	if v == nil {
 		return nil
@@ -3122,6 +3437,24 @@ func validateOpDeleteEventStreamInput(v *DeleteEventStreamInput) error {
 	}
 	if v.EventStreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEventTriggerInput(v *DeleteEventTriggerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventTriggerInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.EventTriggerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTriggerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3379,6 +3712,24 @@ func validateOpGetEventStreamInput(v *GetEventStreamInput) error {
 	}
 	if v.EventStreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEventTriggerInput(v *GetEventTriggerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventTriggerInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.EventTriggerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTriggerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3662,6 +4013,21 @@ func validateOpListEventStreamsInput(v *ListEventStreamsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListEventStreamsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEventTriggersInput(v *ListEventTriggersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEventTriggersInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
@@ -4023,6 +4389,34 @@ func validateOpUpdateDomainInput(v *UpdateDomainInput) error {
 	if v.RuleBasedMatching != nil {
 		if err := validateRuleBasedMatchingRequest(v.RuleBasedMatching); err != nil {
 			invalidParams.AddNested("RuleBasedMatching", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEventTriggerInput(v *UpdateEventTriggerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEventTriggerInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.EventTriggerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTriggerName"))
+	}
+	if v.EventTriggerConditions != nil {
+		if err := validateEventTriggerConditions(v.EventTriggerConditions); err != nil {
+			invalidParams.AddNested("EventTriggerConditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventTriggerLimits != nil {
+		if err := validateEventTriggerLimits(v.EventTriggerLimits); err != nil {
+			invalidParams.AddNested("EventTriggerLimits", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

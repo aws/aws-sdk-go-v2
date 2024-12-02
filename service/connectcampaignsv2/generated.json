@@ -27,6 +27,7 @@
         "api_op_PauseCampaign.go",
         "api_op_PutConnectInstanceIntegration.go",
         "api_op_PutOutboundRequestBatch.go",
+        "api_op_PutProfileOutboundRequestBatch.go",
         "api_op_ResumeCampaign.go",
         "api_op_StartCampaign.go",
         "api_op_StartInstanceOnboardingJob.go",

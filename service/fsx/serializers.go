@@ -3153,6 +3153,13 @@ func awsAwsjson11_serializeDocumentCreateFileSystemOpenZFSConfiguration(v *types
 		ok.String(*v.PreferredSubnetId)
 	}
 
+	if v.ReadCacheConfiguration != nil {
+		ok := object.Key("ReadCacheConfiguration")
+		if err := awsAwsjson11_serializeDocumentOpenZFSReadCacheConfiguration(v.ReadCacheConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RootVolumeConfiguration != nil {
 		ok := object.Key("RootVolumeConfiguration")
 		if err := awsAwsjson11_serializeDocumentOpenZFSCreateRootVolumeConfiguration(v.RootVolumeConfiguration, ok); err != nil {
@@ -4003,6 +4010,23 @@ func awsAwsjson11_serializeDocumentOpenZFSNfsExports(v []types.OpenZFSNfsExport,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOpenZFSReadCacheConfiguration(v *types.OpenZFSReadCacheConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SizeGiB != nil {
+		ok := object.Key("SizeGiB")
+		ok.Integer(*v.SizeGiB)
+	}
+
+	if len(v.SizingMode) > 0 {
+		ok := object.Key("SizingMode")
+		ok.String(string(v.SizingMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOpenZFSUserAndGroupQuotas(v []types.OpenZFSUserOrGroupQuota, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4623,6 +4647,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOpenZFSConfiguration(v *types
 	if v.DiskIopsConfiguration != nil {
 		ok := object.Key("DiskIopsConfiguration")
 		if err := awsAwsjson11_serializeDocumentDiskIopsConfiguration(v.DiskIopsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReadCacheConfiguration != nil {
+		ok := object.Key("ReadCacheConfiguration")
+		if err := awsAwsjson11_serializeDocumentOpenZFSReadCacheConfiguration(v.ReadCacheConfiguration, ok); err != nil {
 			return err
 		}
 	}

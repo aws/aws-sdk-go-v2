@@ -10431,6 +10431,11 @@ func awsRestjson1_deserializeDocumentAddonVersionInfo(v **types.AddonVersionInfo
 				return err
 			}
 
+		case "computeTypes":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.ComputeTypes, value); err != nil {
+				return err
+			}
+
 		case "requiresConfiguration":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10717,6 +10722,46 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBlockStorage(v **types.BlockStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BlockStorage
+	if *v == nil {
+		sv = &types.BlockStorage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCertificate(v **types.Certificate, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10986,6 +11031,11 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				sv.ClientRequestToken = ptr.String(jtv)
 			}
 
+		case "computeConfig":
+			if err := awsRestjson1_deserializeDocumentComputeConfigResponse(&sv.ComputeConfig, value); err != nil {
+				return err
+			}
+
 		case "connectorConfig":
 			if err := awsRestjson1_deserializeDocumentConnectorConfigResponse(&sv.ConnectorConfig, value); err != nil {
 				return err
@@ -11073,6 +11123,11 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				sv.PlatformVersion = ptr.String(jtv)
 			}
 
+		case "remoteNetworkConfig":
+			if err := awsRestjson1_deserializeDocumentRemoteNetworkConfigResponse(&sv.RemoteNetworkConfig, value); err != nil {
+				return err
+			}
+
 		case "resourcesVpcConfig":
 			if err := awsRestjson1_deserializeDocumentVpcConfigResponse(&sv.ResourcesVpcConfig, value); err != nil {
 				return err
@@ -11094,6 +11149,11 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 					return fmt.Errorf("expected ClusterStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.ClusterStatus(jtv)
+			}
+
+		case "storageConfig":
+			if err := awsRestjson1_deserializeDocumentStorageConfigResponse(&sv.StorageConfig, value); err != nil {
+				return err
 			}
 
 		case "tags":
@@ -11330,6 +11390,60 @@ func awsRestjson1_deserializeDocumentCompatibility(v **types.Compatibility, valu
 		case "platformVersions":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.PlatformVersions, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComputeConfigResponse(v **types.ComputeConfigResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComputeConfigResponse
+	if *v == nil {
+		sv = &types.ComputeConfigResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "nodePools":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.NodePools, value); err != nil {
+				return err
+			}
+
+		case "nodeRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NodeRoleArn = ptr.String(jtv)
 			}
 
 		default:
@@ -11798,6 +11912,46 @@ func awsRestjson1_deserializeDocumentEksAnywhereSubscriptionTerm(v **types.EksAn
 					return fmt.Errorf("expected EksAnywhereSubscriptionTermUnit to be of type string, got %T instead", value)
 				}
 				sv.Unit = types.EksAnywhereSubscriptionTermUnit(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentElasticLoadBalancing(v **types.ElasticLoadBalancing, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ElasticLoadBalancing
+	if *v == nil {
+		sv = &types.ElasticLoadBalancing{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -13206,6 +13360,11 @@ func awsRestjson1_deserializeDocumentKubernetesNetworkConfigResponse(v **types.K
 
 	for key, value := range shape {
 		switch key {
+		case "elasticLoadBalancing":
+			if err := awsRestjson1_deserializeDocumentElasticLoadBalancing(&sv.ElasticLoadBalancing, value); err != nil {
+				return err
+			}
+
 		case "ipFamily":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14552,6 +14711,187 @@ func awsRestjson1_deserializeDocumentRemoteAccessConfig(v **types.RemoteAccessCo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRemoteNetworkConfigResponse(v **types.RemoteNetworkConfigResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RemoteNetworkConfigResponse
+	if *v == nil {
+		sv = &types.RemoteNetworkConfigResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "remoteNodeNetworks":
+			if err := awsRestjson1_deserializeDocumentRemoteNodeNetworkList(&sv.RemoteNodeNetworks, value); err != nil {
+				return err
+			}
+
+		case "remotePodNetworks":
+			if err := awsRestjson1_deserializeDocumentRemotePodNetworkList(&sv.RemotePodNetworks, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRemoteNodeNetwork(v **types.RemoteNodeNetwork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RemoteNodeNetwork
+	if *v == nil {
+		sv = &types.RemoteNodeNetwork{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cidrs":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.Cidrs, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRemoteNodeNetworkList(v *[]types.RemoteNodeNetwork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RemoteNodeNetwork
+	if *v == nil {
+		cv = []types.RemoteNodeNetwork{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RemoteNodeNetwork
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRemoteNodeNetwork(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRemotePodNetwork(v **types.RemotePodNetwork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RemotePodNetwork
+	if *v == nil {
+		sv = &types.RemotePodNetwork{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cidrs":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.Cidrs, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRemotePodNetworkList(v *[]types.RemotePodNetwork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RemotePodNetwork
+	if *v == nil {
+		cv = []types.RemotePodNetwork{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RemotePodNetwork
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRemotePodNetwork(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRequiredClaimsMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14952,6 +15292,42 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStorageConfigResponse(v **types.StorageConfigResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StorageConfigResponse
+	if *v == nil {
+		sv = &types.StorageConfigResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "blockStorage":
+			if err := awsRestjson1_deserializeDocumentBlockStorage(&sv.BlockStorage, value); err != nil {
+				return err
 			}
 
 		default:

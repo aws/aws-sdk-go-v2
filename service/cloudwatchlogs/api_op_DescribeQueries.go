@@ -40,6 +40,10 @@ type DescribeQueriesInput struct {
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
+	// Limits the returned queries to only the queries that use the specified query
+	// language.
+	QueryLanguage types.QueryLanguage
+
 	// Limits the returned queries to only those that have the specified status. Valid
 	// values are Cancelled , Complete , Failed , Running , and Scheduled .
 	Status types.QueryStatus

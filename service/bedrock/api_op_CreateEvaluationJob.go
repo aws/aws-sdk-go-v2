@@ -11,11 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// API operation for creating and managing Amazon Bedrock automatic model
-// evaluation jobs and model evaluation jobs that use human workers. To learn more
-// about the requirements for creating a model evaluation job see, [Model evaluation].
-//
-// [Model evaluation]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html
+// Creates an evaluation job.
 func (c *Client) CreateEvaluationJob(ctx context.Context, params *CreateEvaluationJobInput, optFns ...func(*Options)) (*CreateEvaluationJobOutput, error) {
 	if params == nil {
 		params = &CreateEvaluationJobInput{}
@@ -33,43 +29,47 @@ func (c *Client) CreateEvaluationJob(ctx context.Context, params *CreateEvaluati
 
 type CreateEvaluationJobInput struct {
 
-	// Specifies whether the model evaluation job is automatic or uses human worker.
+	// Contains the configuration details of either an automated or human-based
+	// evaluation job.
 	//
 	// This member is required.
 	EvaluationConfig types.EvaluationConfig
 
-	// Specify the models you want to use in your model evaluation job. Automatic
-	// model evaluation jobs support a single model or [inference profile], and model evaluation job that
-	// use human workers support two models or inference profiles.
+	// Contains the configuration details of the inference model for the evaluation
+	// job.
+	//
+	// For model evaluation jobs, automated jobs support a single model or [inference profile], and jobs
+	// that use human workers support two models or inference profiles.
 	//
 	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	//
 	// This member is required.
 	InferenceConfig types.EvaluationInferenceConfig
 
-	// The name of the model evaluation job. Model evaluation job names must unique
-	// with your AWS account, and your account's AWS region.
+	// A name for the evaluation job. Names must unique with your Amazon Web Services
+	// account, and your account's Amazon Web Services region.
 	//
 	// This member is required.
 	JobName *string
 
-	// An object that defines where the results of model evaluation job will be saved
-	// in Amazon S3.
+	// Contains the configuration details of the Amazon S3 bucket for storing the
+	// results of the evaluation job.
 	//
 	// This member is required.
 	OutputDataConfig *types.EvaluationOutputDataConfig
 
 	// The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock can
-	// assume to perform tasks on your behalf. The service role must have Amazon
-	// Bedrock as the service principal, and provide access to any Amazon S3 buckets
-	// specified in the EvaluationConfig object. To pass this role to Amazon Bedrock,
-	// the caller of this API must have the iam:PassRole permission. To learn more
-	// about the required permissions, see [Required permissions].
+	// assume to perform tasks on your behalf. To learn more about the required
+	// permissions, see [Required permissions for model evaluations].
 	//
-	// [Required permissions]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-security.html
+	// [Required permissions for model evaluations]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-security.html
 	//
 	// This member is required.
 	RoleArn *string
+
+	// Specifies whether the evaluation job is for evaluating a model or evaluating a
+	// knowledge base (retrieval and response generation).
+	ApplicationType types.ApplicationType
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
@@ -78,11 +78,11 @@ type CreateEvaluationJobInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
 
-	// Specify your customer managed key ARN that will be used to encrypt your model
-	// evaluation job.
+	// Specify your customer managed encryption key Amazon Resource Name (ARN) that
+	// will be used to encrypt your evaluation job.
 	CustomerEncryptionKeyId *string
 
-	// A description of the model evaluation job.
+	// A description of the evaluation job.
 	JobDescription *string
 
 	// Tags to attach to the model evaluation job.
@@ -93,7 +93,7 @@ type CreateEvaluationJobInput struct {
 
 type CreateEvaluationJobOutput struct {
 
-	// The ARN of the model evaluation job.
+	// The Amazon Resource Name (ARN) of the evaluation job.
 	//
 	// This member is required.
 	JobArn *string
