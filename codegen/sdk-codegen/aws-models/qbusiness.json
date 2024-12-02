@@ -516,7 +516,13 @@
             },
             "resources": [
                 {
+                    "target": "com.amazonaws.qbusiness#DataAccessorResource"
+                },
+                {
                     "target": "com.amazonaws.qbusiness#IndexResource"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#IntegrationResource"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#PluginResource"
@@ -604,26 +610,104 @@
                 "smithy.api#documentation": "<p>The creator mode specific admin controls configured for an Amazon Q Business application.\n            Determines whether an end user can generate LLM-only responses when they use the web\n            experience.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html\">Admin controls and guardrails</a> and <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope\">Conversation settings</a>.</p>"
             }
         },
-        "com.amazonaws.qbusiness#AttachmentInput": {
+        "com.amazonaws.qbusiness#Attachment": {
             "type": "structure",
             "members": {
+                "attachmentId": {
+                    "target": "com.amazonaws.qbusiness#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business attachment.</p>"
+                    }
+                },
+                "conversationId": {
+                    "target": "com.amazonaws.qbusiness#ConversationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business conversation the attachment is associated with.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.qbusiness#AttachmentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the file.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Filename of the Amazon Q Business attachment.</p>"
                     }
                 },
-                "data": {
-                    "target": "com.amazonaws.qbusiness#Blob",
+                "copyFrom": {
+                    "target": "com.amazonaws.qbusiness#CopyFromSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data contained within the uploaded file.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A CopyFromSource containing a reference to the original source of the Amazon Q Business attachment.</p>"
+                    }
+                },
+                "fileType": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filetype of the Amazon Q Business attachment.</p>"
+                    }
+                },
+                "fileSize": {
+                    "target": "com.amazonaws.qbusiness#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Size in bytes of the Amazon Q Business attachment.</p>"
+                    }
+                },
+                "md5chksum": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>MD5 checksum of the Amazon Q Business attachment contents.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.qbusiness#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp when the Amazon Q Business attachment was created.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qbusiness#AttachmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AttachmentStatus of the Amazon Q Business attachment.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.qbusiness#ErrorDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ErrorDetail providing information about a Amazon Q Business attachment error. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A file directly uploaded into a web experience chat.</p>"
+                "smithy.api#documentation": "<p>An attachment in an Amazon Q Business conversation.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#AttachmentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.qbusiness#AttachmentInput": {
+            "type": "structure",
+            "members": {
+                "data": {
+                    "target": "com.amazonaws.qbusiness#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the attachment.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qbusiness#AttachmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filename of the attachment.</p>"
+                    }
+                },
+                "copyFrom": {
+                    "target": "com.amazonaws.qbusiness#CopyFromSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reference to an existing attachment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This is either a file directly uploaded into a web experience chat or a reference to an existing attachment that is part of a web experience chat.</p>"
             }
         },
         "com.amazonaws.qbusiness#AttachmentInputEvent": {
@@ -635,6 +719,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A file input event activated by a end user request to upload files into their web\n            experience chat.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#AttachmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qbusiness#Attachment"
             }
         },
         "com.amazonaws.qbusiness#AttachmentName": {
@@ -667,6 +757,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An error associated with a file uploaded during chat.</p>"
                     }
+                },
+                "attachmentId": {
+                    "target": "com.amazonaws.qbusiness#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business attachment.</p>"
+                    }
+                },
+                "conversationId": {
+                    "target": "com.amazonaws.qbusiness#ConversationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business conversation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -682,10 +784,10 @@
                         "smithy.api#enumValue": "FAILED"
                     }
                 },
-                "SUCCEEDED": {
+                "SUCCESS": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "SUCCEEDED"
+                        "smithy.api#enumValue": "SUCCESS"
                     }
                 }
             }
@@ -1199,11 +1301,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qbusiness#BlockedPhrase"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "max": 5
-                }
             }
         },
         "com.amazonaws.qbusiness#BlockedPhrasesConfiguration": {
@@ -1261,6 +1358,49 @@
                 }
             }
         },
+        "com.amazonaws.qbusiness#BrowserExtension": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FIREFOX",
+                        "name": "FIREFOX"
+                    },
+                    {
+                        "value": "CHROME",
+                        "name": "CHROME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qbusiness#BrowserExtensionConfiguration": {
+            "type": "structure",
+            "members": {
+                "enabledBrowserExtensions": {
+                    "target": "com.amazonaws.qbusiness#BrowserExtensionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the browser extensions allowed for your Amazon Q web experience.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHROME</code> — Enables the extension for Chromium-based browsers (Google Chrome, Microsoft\n                    Edge, Opera, etc.).</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIREFOX</code> — Enables the extension for Mozilla Firefox.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHROME</code> and <code>FIREFOX</code> — Enable the extension for Chromium-based browsers\n                    and Mozilla Firefox.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for browser extension configuration for an Amazon Q Business web experience.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#BrowserExtensionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qbusiness#BrowserExtension"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.qbusiness#Chat": {
             "type": "operation",
             "input": {
@@ -1275,6 +1415,9 @@
                 },
                 {
                     "target": "com.amazonaws.qbusiness#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ExternalResourceException"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#InternalServerException"
@@ -1511,6 +1654,9 @@
                     "target": "com.amazonaws.qbusiness#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.qbusiness#ExternalResourceException"
+                },
+                {
                     "target": "com.amazonaws.qbusiness#InternalServerException"
                 },
                 {
@@ -1604,7 +1750,7 @@
                 "chatMode": {
                     "target": "com.amazonaws.qbusiness#ChatMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The chat modes available to an Amazon Q Business end user.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RETRIEVAL_MODE</code> - The default chat mode for an\n                    Amazon Q Business application. When this mode is enabled, Amazon Q Business generates\n                    responses only from data sources connected to an Amazon Q Business\n                    application.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATOR_MODE</code> - By selecting this mode, users can choose to\n                    generate responses only from the LLM knowledge, without consulting connected\n                    data sources, for a chat request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PLUGIN_MODE</code> - By selecting this mode, users can choose to\n                    use plugins in chat.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html\">Admin controls and guardrails</a>, <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html\">Plugins</a>,\n            and <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope\">Conversation settings</a>.</p>"
+                        "smithy.api#documentation": "<p>The <code>chatMode</code> parameter determines the chat modes available to \n            Amazon Q Business users:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RETRIEVAL_MODE</code> - If you choose this mode, Amazon Q generates responses solely from the data sources connected and\n                    indexed by the application. If an answer is not found in the data sources or\n                    there are no data sources available, Amazon Q will respond with a\n                        \"<i>No Answer Found</i>\" message, unless LLM knowledge has\n                    been enabled. In that case, Amazon Q will generate a response from\n                    the LLM knowledge</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATOR_MODE</code> - By selecting this mode, you can choose to generate \n                    responses only from the LLM knowledge. You can also attach files and have Amazon Q \n                    generate a response based on the data in those files. \n                    If the attached files do not contain an answer for the query, Amazon Q \n                    will automatically fall back to generating a response from the LLM knowledge.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PLUGIN_MODE</code> - By selecting this mode, users can choose to\n                    use plugins in chat to get their responses.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If none of the modes are selected, Amazon Q will only respond using the information\n                from the attached files.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html\">Admin controls and guardrails</a>, <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html\">Plugins</a>,\n            and <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope\">Response sources</a>.</p>"
                     }
                 },
                 "chatModeConfiguration": {
@@ -1687,7 +1833,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.:/()*?=-]*$"
             }
         },
         "com.amazonaws.qbusiness#ClientIdsForOIDC": {
@@ -1751,7 +1898,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You are trying to perform an action that conflicts with the current status of your\n            resource. Fix any inconsistences with your resources and try again.</p>",
+                "smithy.api#documentation": "<p>You are trying to perform an action that conflicts with the current status of your\n            resource. Fix any inconsistencies with your resources and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1897,6 +2044,28 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
             }
         },
+        "com.amazonaws.qbusiness#ConversationSource": {
+            "type": "structure",
+            "members": {
+                "conversationId": {
+                    "target": "com.amazonaws.qbusiness#ConversationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business conversation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "attachmentId": {
+                    "target": "com.amazonaws.qbusiness#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source reference for an existing attachment in an existing conversation.</p>"
+            }
+        },
         "com.amazonaws.qbusiness#ConversationTitle": {
             "type": "string"
         },
@@ -1904,6 +2073,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qbusiness#Conversation"
+            }
+        },
+        "com.amazonaws.qbusiness#CopyFromSource": {
+            "type": "union",
+            "members": {
+                "conversation": {
+                    "target": "com.amazonaws.qbusiness#ConversationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reference to an attachment in an existing conversation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source reference for an existing attachment.</p>"
             }
         },
         "com.amazonaws.qbusiness#CreateApplication": {
@@ -1938,15 +2121,29 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "aws.iam#requiredActions": [
                     "qbusiness:GetApplication",
+                    "qbusiness:UpdateApplication",
                     "qbusiness:TagResource",
                     "qbusiness:ListTagsForResource",
                     "iam:PassRole",
                     "kms:DescribeKey",
-                    "kms:CreateGrant"
+                    "kms:CreateGrant",
+                    "sso:CreateApplication",
+                    "sso:PutApplicationAuthenticationMethod",
+                    "sso:PutApplicationAccessScope",
+                    "sso:PutApplicationGrant",
+                    "sso:DeleteApplication",
+                    "sso:DescribeInstance",
+                    "iam:GetSAMLProvider",
+                    "quicksight:DescribeAccountSubscription",
+                    "quicksight:ListNamespaces"
                 ],
-                "smithy.api#documentation": "<p>Creates an Amazon Q Business application.</p>\n         <note>\n            <p>There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are\n                also available in Amazon Q Business Lite. For information on what's included in\n                Amazon Q Business Lite and what's included in Amazon Q Business Pro, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#user-sub-tiers\">Amazon Q Business tiers</a>. You must use the Amazon Q Business console to assign\n                subscription tiers to users.\n            </p>\n            <p>\n                A Amazon Q Apps service linked role will be created if it's absent in the \n                Amazon Web Services account when the QAppsConfiguration is enabled in the request. \n                For more information, see \n                <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles-qapps.html\">\n                    Using service-linked roles for Q Apps\n                </a>\n            </p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates an Amazon Q Business application.</p>\n         <note>\n            <p>There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are\n                also available in Amazon Q Business Lite. For information on what's included in\n                Amazon Q Business Lite and what's included in Amazon Q Business Pro, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#user-sub-tiers\">Amazon Q Business tiers</a>. You must use the Amazon Q Business console to assign\n                subscription tiers to users. </p>\n            <p>An Amazon Q Apps service linked role will be created if it's absent in the\n                    Amazon Web Services account when <code>QAppsConfiguration</code> is enabled in\n                the request. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles-qapps.html\"> Using\n                    service-linked roles for Q Apps</a>.</p>\n            <p>When you create an application, Amazon Q Business may securely transmit data for\n                processing from your selected Amazon Web Services region, but within your geography.\n                For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cross-region-inference.html\">Cross region\n                    inference in Amazon Q Business</a>.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/applications",
                     "method": "POST"
@@ -1977,7 +2174,7 @@
                     }
                 },
                 "iamIdentityProviderArn": {
-                    "target": "com.amazonaws.qbusiness#IamIdentityProviderArn",
+                    "target": "com.amazonaws.qbusiness#IAMIdentityProviderArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an identity provider being used by an Amazon Q Business application.</p>"
                     }
@@ -2096,6 +2293,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "aws.iam#requiredActions": [
                     "qbusiness:GetDataSource",
                     "qbusiness:TagResource",
@@ -2184,6 +2385,12 @@
                 },
                 "documentEnrichmentConfiguration": {
                     "target": "com.amazonaws.qbusiness#DocumentEnrichmentConfiguration"
+                },
+                "mediaExtractionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#MediaExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for extracting information from media in documents during ingestion.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2242,6 +2449,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "aws.iam#requiredActions": [
                     "qbusiness:GetIndex",
                     "qbusiness:TagResource",
@@ -2273,16 +2484,16 @@
                         "smithy.api#required": {}
                     }
                 },
-                "type": {
-                    "target": "com.amazonaws.qbusiness#IndexType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The index type that's suitable for your needs. For more information on what's included\n            in each type of index, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#index-tiers\">Amazon Q Business\n            tiers</a>.</p>"
-                    }
-                },
                 "description": {
                     "target": "com.amazonaws.qbusiness#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the Amazon Q Business index.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qbusiness#IndexType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index type that's suitable for your needs. For more information on what's included\n            in each type of index, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#index-tiers\">Amazon Q Business\n            tiers</a>.</p>"
                     }
                 },
                 "tags": {
@@ -2500,6 +2711,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "aws.iam#requiredActions": [
                     "qbusiness:TagResource",
                     "qbusiness:ListTagsForResource",
@@ -2709,11 +2924,17 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "aws.iam#requiredActions": [
                     "qbusiness:GetWebExperience",
                     "qbusiness:TagResource",
                     "qbusiness:ListTagsForResource",
-                    "iam:PassRole"
+                    "iam:PassRole",
+                    "sso:PutApplicationGrant",
+                    "sso:UpdateApplication"
                 ],
                 "smithy.api#documentation": "<p>Creates an Amazon Q Business web experience.</p>",
                 "smithy.api#http": {
@@ -2787,6 +3008,12 @@
                     "target": "com.amazonaws.qbusiness#IdentityProviderConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the identity provider (IdP) used to authenticate end users of an\n                Amazon Q Business web experience.</p>"
+                    }
+                },
+                "browserExtensionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#BrowserExtensionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser extension configuration for an Amazon Q Business web experience.</p>\n         <note>\n            <p>\n                For Amazon Q Business application using external OIDC-compliant identity providers (IdPs).\n                The IdP administrator must add the browser extension sign-in redirect URLs to the IdP application.\n                For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/browser-extensions.html\">Configure external OIDC identity provider for your browser extensions.</a>.\n            </p>\n         </note>"
                     }
                 }
             },
@@ -2873,6 +3100,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Configuration information required to create a custom plugin.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#DataAccessorId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
+            }
+        },
+        "com.amazonaws.qbusiness#DataAccessorResource": {
+            "type": "resource",
+            "identifiers": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId"
+                },
+                "dataAccessorId": {
+                    "target": "com.amazonaws.qbusiness#DataAccessorId"
+                }
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "DataAccessor"
+                }
             }
         },
         "com.amazonaws.qbusiness#DataSource": {
@@ -3273,7 +3526,8 @@
             "traits": {
                 "aws.iam#requiredActions": [
                     "qbusiness:GetApplication",
-                    "kms:RetireGrant"
+                    "kms:RetireGrant",
+                    "sso:DeleteApplication"
                 ],
                 "smithy.api#documentation": "<p>Deletes an Amazon Q Business application.</p>",
                 "smithy.api#http": {
@@ -3981,7 +4235,7 @@
                     "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^\\P{C}*$"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.qbusiness#Document": {
@@ -4028,6 +4282,12 @@
                     "target": "com.amazonaws.qbusiness#DocumentEnrichmentConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration information for altering document metadata and content during the\n            document ingestion process.</p>"
+                    }
+                },
+                "mediaExtractionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#MediaExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for extracting information from media in the document.</p>"
                     }
                 }
             },
@@ -4634,18 +4894,18 @@
                 "errorMessage": {
                     "target": "com.amazonaws.qbusiness#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The message explaining the data source sync error.</p>"
+                        "smithy.api#documentation": "<p>The message explaining the Amazon Q Business request error.</p>"
                     }
                 },
                 "errorCode": {
                     "target": "com.amazonaws.qbusiness#ErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The code associated with the data source sync error.</p>"
+                        "smithy.api#documentation": "<p>The code associated with the Amazon Q Business request error.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about a data source sync error.</p>"
+                "smithy.api#documentation": "<p>Provides information about a Amazon Q Business request error.</p>"
             }
         },
         "com.amazonaws.qbusiness#ErrorMessage": {
@@ -4655,7 +4915,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^\\P{C}*$"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.qbusiness#ExampleChatMessage": {
@@ -4726,7 +4986,13 @@
                     "target": "com.amazonaws.qbusiness#GetGroup"
                 },
                 {
+                    "target": "com.amazonaws.qbusiness#GetMedia"
+                },
+                {
                     "target": "com.amazonaws.qbusiness#GetUser"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ListAttachments"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#ListConversations"
@@ -5165,6 +5431,22 @@
                 }
             }
         },
+        "com.amazonaws.qbusiness#ExternalResourceException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.qbusiness#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An external resource that you configured with your application is returning errors and\n            preventing this operation from succeeding. Fix those errors and try again.\n        </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 424
+            }
+        },
         "com.amazonaws.qbusiness#FailedAttachmentEvent": {
             "type": "structure",
             "members": {
@@ -5307,7 +5589,7 @@
                     }
                 },
                 "iamIdentityProviderArn": {
-                    "target": "com.amazonaws.qbusiness#IamIdentityProviderArn",
+                    "target": "com.amazonaws.qbusiness#IAMIdentityProviderArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an identity provider being used by an Amazon Q Business application.</p>"
                     }
@@ -5672,6 +5954,12 @@
                 },
                 "documentEnrichmentConfiguration": {
                     "target": "com.amazonaws.qbusiness#DocumentEnrichmentConfiguration"
+                },
+                "mediaExtractionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#MediaExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for extracting information from media in documents for the data source.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -5856,12 +6144,6 @@
                         "smithy.api#documentation": "<p>The name of the Amazon Q Business index.</p>"
                     }
                 },
-                "type": {
-                    "target": "com.amazonaws.qbusiness#IndexType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The type of index attached to your Amazon Q Business application.</p>"
-                    }
-                },
                 "indexArn": {
                     "target": "com.amazonaws.qbusiness#IndexArn",
                     "traits": {
@@ -5872,6 +6154,12 @@
                     "target": "com.amazonaws.qbusiness#IndexStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the index. When the value is <code>ACTIVE</code>, the index is\n            ready for use. If the <code>Status</code> field value is <code>FAILED</code>, the\n                <code>ErrorMessage</code> field contains a message that explains why.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qbusiness#IndexType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of index attached to your Amazon Q Business application.</p>"
                     }
                 },
                 "description": {
@@ -5915,6 +6203,106 @@
                     "target": "com.amazonaws.qbusiness#IndexStatistics",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides information about the number of documents indexed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qbusiness#GetMedia": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#GetMediaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#GetMediaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#LicenseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#MediaTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the image bytes corresponding to a media object. If you have implemented your own application with the Chat and ChatSync APIs, and\n            have enabled content extraction from visual data in Amazon Q Business, you use the GetMedia API operation to download \n            the images so you can show them in your UI with responses.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html\">Extracting semantic meaning from images and visuals</a>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{applicationId}/conversations/{conversationId}/messages/{messageId}/media/{mediaId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qbusiness#GetMediaRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business which contains the media object.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "conversationId": {
+                    "target": "com.amazonaws.qbusiness#ConversationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business conversation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageId": {
+                    "target": "com.amazonaws.qbusiness#MessageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business message.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "mediaId": {
+                    "target": "com.amazonaws.qbusiness#MediaId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the media object. You can find this in the <code>sourceAttributions</code> returned by the <code>Chat</code>, <code>ChatSync</code>, and <code>ListMessages</code> API responses.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#GetMediaResponse": {
+            "type": "structure",
+            "members": {
+                "mediaBytes": {
+                    "target": "com.amazonaws.qbusiness#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base64-encoded bytes of the media object.</p>"
+                    }
+                },
+                "mediaMimeType": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the media object (image/png).</p>"
                     }
                 }
             },
@@ -6424,6 +6812,12 @@
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>When the <code>Status</code> field value is <code>FAILED</code>, the\n                <code>ErrorMessage</code> field contains a description of the error that caused the\n            data source connector to fail.</p>"
                     }
+                },
+                "browserExtensionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#BrowserExtensionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser extension configuration for an Amazon Q Business web experience.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6582,7 +6976,7 @@
                 "smithy.api#documentation": "<p>Provides the configuration information for invoking a Lambda function in\n                Lambda to alter document metadata and content when ingesting\n            documents into Amazon Q Business.</p>\n         <p>You can configure your Lambda function using the\n                <code>PreExtractionHookConfiguration</code> parameter if you want to apply advanced\n            alterations on the original or raw documents.</p>\n         <p>If you want to apply advanced alterations on the Amazon Q Business structured documents,\n            you must configure your Lambda function using\n                <code>PostExtractionHookConfiguration</code>.</p>\n         <p>You can only invoke one Lambda function. However, this function can invoke\n            other functions it requires.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html\">Custom document enrichment</a>. </p>"
             }
         },
-        "com.amazonaws.qbusiness#IamIdentityProviderArn": {
+        "com.amazonaws.qbusiness#IAMIdentityProviderArn": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -6635,6 +7029,38 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS_IAM_IDC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#ImageExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "imageExtractionStatus": {
+                    "target": "com.amazonaws.qbusiness#ImageExtractionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify whether to extract semantic meaning from images and visuals from documents.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for extracting semantic meaning from images in documents. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html\">Extracting semantic meaning from images and visuals</a>.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#ImageExtractionStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
                 }
             }
@@ -6898,6 +7324,32 @@
         "com.amazonaws.qbusiness#Integer": {
             "type": "integer"
         },
+        "com.amazonaws.qbusiness#IntegrationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
+            }
+        },
+        "com.amazonaws.qbusiness#IntegrationResource": {
+            "type": "resource",
+            "identifiers": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId"
+                },
+                "integrationId": {
+                    "target": "com.amazonaws.qbusiness#IntegrationId"
+                }
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "Integration"
+                }
+            }
+        },
         "com.amazonaws.qbusiness#InternalServerException": {
             "type": "structure",
             "members": {
@@ -6998,7 +7450,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists Amazon Q Business applications.</p>",
+                "smithy.api#documentation": "<p>Lists Amazon Q Business applications.</p>\n         <note>\n            <p>Amazon Q Business applications may securely transmit data for processing across\n                    Amazon Web Services Regions within your geography. For more information, see\n                    <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cross-region-inference.html\">Cross region\n                    inference in Amazon Q Business</a>.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/applications",
                     "method": "GET"
@@ -7047,6 +7499,113 @@
                     "target": "com.amazonaws.qbusiness#Applications",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of summary information on the configuration of one or more Amazon Q Business\n            applications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qbusiness#ListAttachments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#ListAttachmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#ListAttachmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#LicenseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of attachments associated with an Amazon Q Business web experience or a list of attachements associated with a specific Amazon Q Business conversation.</p>",
+                "smithy.api#http": {
+                    "uri": "/applications/{applicationId}/attachments",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "attachments"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qbusiness#ListAttachmentsRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Q Business application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "conversationId": {
+                    "target": "com.amazonaws.qbusiness#ConversationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business web experience conversation.</p>",
+                        "smithy.api#httpQuery": "conversationId"
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.qbusiness#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the user involved in the Amazon Q Business web experience conversation.</p>",
+                        "smithy.api#httpQuery": "userId"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qbusiness#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the number of attachments returned exceeds <code>maxResults</code>, Amazon Q Business\n            returns a next token as a pagination token to retrieve the next set of attachments.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qbusiness#MaxResultsIntegerForListAttachments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of attachements to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#ListAttachmentsResponse": {
+            "type": "structure",
+            "members": {
+                "attachments": {
+                    "target": "com.amazonaws.qbusiness#AttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of information on one or more attachments.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qbusiness#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Q Business returns this token, which you can use in a\n            later request to list the next set of attachments.</p>"
                     }
                 }
             },
@@ -7165,6 +7724,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#InternalServerException"
@@ -7762,7 +8324,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.qbusiness#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the number of retrievers returned exceeds <code>maxResults</code>, Amazon Q Business\n            returns a next token as a pagination token to retrieve the next set of messages.</p>",
+                        "smithy.api#documentation": "<p>If the number of messages returned exceeds <code>maxResults</code>, Amazon Q Business\n            returns a next token as a pagination token to retrieve the next set of messages.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -8153,6 +8715,15 @@
                 }
             }
         },
+        "com.amazonaws.qbusiness#MaxResultsIntegerForListAttachments": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.qbusiness#MaxResultsIntegerForListConversations": {
             "type": "integer",
             "traits": {
@@ -8243,6 +8814,46 @@
                 }
             }
         },
+        "com.amazonaws.qbusiness#MediaExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "imageExtractionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#ImageExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for extracting semantic meaning from images in documents. \n            For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html\">Extracting semantic meaning from images and visuals</a>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for extracting information from media in documents.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#MediaId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
+            }
+        },
+        "com.amazonaws.qbusiness#MediaTooLargeException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.qbusiness#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested media object is too large to be returned.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.qbusiness#MemberGroup": {
             "type": "structure",
             "members": {
@@ -8268,12 +8879,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qbusiness#MemberGroup"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 1000
-                }
             }
         },
         "com.amazonaws.qbusiness#MemberRelation": {
@@ -8318,12 +8923,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qbusiness#MemberUser"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 1000
-                }
             }
         },
         "com.amazonaws.qbusiness#MembershipType": {
@@ -9918,6 +10517,16 @@
                 "smithy.api#documentation": "<p>The documents used to generate an Amazon Q Business web experience response.</p>"
             }
         },
+        "com.amazonaws.qbusiness#SourceAttributionMediaId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
+            }
+        },
         "com.amazonaws.qbusiness#SourceAttributions": {
             "type": "list",
             "member": {
@@ -10040,6 +10649,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#InternalServerException"
@@ -10229,7 +10841,7 @@
                 "smithy.api#length": {
                     "max": 998
                 },
-                "smithy.api#pattern": "^\\P{C}*$"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.qbusiness#SystemMessageId": {
@@ -10323,6 +10935,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
                 "smithy.api#documentation": "<p>Adds the specified tag to the specified Amazon Q Business application or data source\n            resource. If the tag already exists, the existing value is replaced with the new\n            value.</p>",
                 "smithy.api#http": {
                     "uri": "/v1/tags/{resourceARN}",
@@ -10469,6 +11085,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The relevant text excerpt from a source that was used to generate a citation text\n            segment in an Amazon Q Business chat response.</p>"
                     }
+                },
+                "mediaId": {
+                    "target": "com.amazonaws.qbusiness#SourceAttributionMediaId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the media object associated with the text segment in the source attribution.</p>"
+                    }
+                },
+                "mediaMimeType": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type (image/png) of the media object associated with the text segment in the source attribution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10600,6 +11228,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys"
+                ],
                 "smithy.api#documentation": "<p>Removes a tag from an Amazon Q Business application or a data source.</p>",
                 "smithy.api#http": {
                     "uri": "/v1/tags/{resourceARN}",
@@ -10673,9 +11304,15 @@
                     "qbusiness:TagResource",
                     "qbusiness:UntagResource",
                     "qbusiness:ListTagsForResource",
-                    "iam:PassRole"
+                    "iam:PassRole",
+                    "sso:CreateApplication",
+                    "sso:PutApplicationAuthenticationMethod",
+                    "sso:PutApplicationAccessScope",
+                    "sso:PutApplicationGrant",
+                    "sso:DeleteApplication",
+                    "sso:DescribeInstance"
                 ],
-                "smithy.api#documentation": "<p>Updates an existing Amazon Q Business application.</p>\n         <note>\n            <p>\n                A Amazon Q Apps service-linked role will be created if it's absent in the Amazon Web Services account\n                when the QAppsConfiguration is enabled in the request.\n                For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles-qapps.html\">\n                    Using service-linked roles for Q Apps\n                </a>\n            </p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates an existing Amazon Q Business application.</p>\n         <note>\n            <p>Amazon Q Business applications may securely transmit data for processing across\n                    Amazon Web Services Regions within your geography. For more information, see\n                    <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cross-region-inference.html\">Cross region\n                    inference in Amazon Q Business</a>.</p>\n         </note>\n         <note>\n            <p>An Amazon Q Apps service-linked role will be created if it's absent in the\n                    Amazon Web Services account when <code>QAppsConfiguration</code> is enabled in\n                the request. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles-qapps.html\">Using\n                    service-linked roles for Q Apps</a>. </p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}",
                     "method": "PUT"
@@ -10958,6 +11595,12 @@
                 },
                 "documentEnrichmentConfiguration": {
                     "target": "com.amazonaws.qbusiness#DocumentEnrichmentConfiguration"
+                },
+                "mediaExtractionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#MediaExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for extracting information from media in documents for your data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11406,7 +12049,9 @@
                     "qbusiness:TagResource",
                     "qbusiness:UntagResource",
                     "qbusiness:ListTagsForResource",
-                    "iam:PassRole"
+                    "iam:PassRole",
+                    "sso:PutApplicationGrant",
+                    "sso:UpdateApplication"
                 ],
                 "smithy.api#documentation": "<p>Updates an Amazon Q Business web experience. </p>",
                 "smithy.api#http": {
@@ -11484,6 +12129,12 @@
                     "target": "com.amazonaws.qbusiness#WebExperienceOrigins",
                     "traits": {
                         "smithy.api#documentation": "<p>Updates the website domain origins that \n            are allowed to embed the Amazon Q Business web experience.\n            \n            The <i>domain origin</i> refers to the \n            <i>base URL</i> for accessing a website including the protocol \n            (<code>http/https</code>), the domain name, and the port number (if specified).</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Any values except <code>null</code> submitted as part of this \n                update will replace all previous values.</p>\n               </li>\n               <li>\n                  <p>You must only submit a <i>base URL</i> and \n                    not a full path. For example, <code>https://docs.aws.amazon.com</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                },
+                "browserExtensionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#BrowserExtensionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser extension configuration for an Amazon Q Business web experience.</p>\n         <note>\n            <p>\n                For Amazon Q Business application using external OIDC-compliant identity providers (IdPs).\n                The IdP administrator must add the browser extension sign-in redirect URLs to the IdP application.\n                For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/browser-extensions.html\">Configure external OIDC identity provider for your browser extensions.</a>.\n            </p>\n         </note>"
                     }
                 }
             },
@@ -11564,13 +12215,7 @@
             }
         },
         "com.amazonaws.qbusiness#UserMessage": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 7000
-                }
-            }
+            "type": "string"
         },
         "com.amazonaws.qbusiness#UsersAndGroups": {
             "type": "structure",
@@ -11844,7 +12489,7 @@
                     "min": 0,
                     "max": 500
                 },
-                "smithy.api#pattern": "^\\P{C}*$"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.qbusiness#WebExperienceTitle": {
@@ -11854,7 +12499,7 @@
                     "min": 0,
                     "max": 500
                 },
-                "smithy.api#pattern": "^\\P{C}*$"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.qbusiness#WebExperienceWelcomeMessage": {

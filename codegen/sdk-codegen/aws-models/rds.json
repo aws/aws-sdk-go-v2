@@ -4471,6 +4471,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. \n            An example is <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role,\n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling\">Setting \n                up and enabling Enhanced Monitoring</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>If <code>MonitoringInterval</code> is set to a value other than <code>0</code>, supply a <code>MonitoringRoleArn</code> value.</p>\n         <p>Valid for Cluster Type: Multi-AZ DB clusters only</p>"
                     }
                 },
+                "DatabaseInsightsMode": {
+                    "target": "com.amazonaws.rds#DatabaseInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the cluster.</p>"
+                    }
+                },
                 "EnablePerformanceInsights": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
@@ -5217,6 +5223,12 @@
                         "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access Management\n            (IAM) accounts to database accounts. By default, mapping isn't enabled.</p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html\">\n                IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting doesn't apply to the following DB instances:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora (Mapping Amazon Web Services IAM accounts to database accounts is managed by the DB cluster.)</p>\n            </li>\n            <li>\n               <p>RDS Custom</p>\n            </li>\n         </ul>"
                     }
                 },
+                "DatabaseInsightsMode": {
+                    "target": "com.amazonaws.rds#DatabaseInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the instance.</p>"
+                    }
+                },
                 "EnablePerformanceInsights": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
@@ -5568,6 +5580,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access Management\n            (IAM) accounts to database accounts. By default, mapping isn't enabled.</p>\n         <p>For more information about IAM database authentication, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html\">\n              IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>"
+                    }
+                },
+                "DatabaseInsightsMode": {
+                    "target": "com.amazonaws.rds#DatabaseInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights.</p>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -7519,6 +7537,12 @@
                         "smithy.api#documentation": "<p>The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs.</p>\n         <p>This setting is only for non-Aurora Multi-AZ DB clusters.</p>"
                     }
                 },
+                "DatabaseInsightsMode": {
+                    "target": "com.amazonaws.rds#DatabaseInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of Database Insights that is enabled for the cluster.</p>"
+                    }
+                },
                 "PerformanceInsightsEnabled": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
@@ -9333,6 +9357,12 @@
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled for the DB instance.</p>\n         <p>For a list of engine versions that support IAM database authentication, see \n              <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.html\">IAM database authentication</a>\n              in the <i>Amazon RDS User Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.Aurora_Fea_Regions_DB-eng.Feature.IAMdbauth.html\">IAM \n              database authentication in Aurora</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+                    }
+                },
+                "DatabaseInsightsMode": {
+                    "target": "com.amazonaws.rds#DatabaseInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of Database Insights that is enabled for the instance.</p>"
                     }
                 },
                 "PerformanceInsightsEnabled": {
@@ -11964,6 +11994,23 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:[A-Za-z][0-9A-Za-z-:._]*$"
+            }
+        },
+        "com.amazonaws.rds#DatabaseInsightsMode": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
+                    }
+                },
+                "ADVANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "advanced"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#DeleteBlueGreenDeployment": {
@@ -18357,7 +18404,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables the HTTP endpoint for the specified DB cluster. Disabling this endpoint disables RDS Data API.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using RDS Data API</a> in the \n            <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This operation applies only to Aurora PostgreSQL Serverless v2 and provisioned DB clusters. To disable the HTTP endpoint for Aurora Serverless v1 DB clusters, \n        use the <code>EnableHttpEndpoint</code> parameter of the <code>ModifyDBCluster</code> operation.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Disables the HTTP endpoint for the specified DB cluster. Disabling this endpoint disables RDS Data API.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using RDS Data API</a> in the \n            <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This operation applies only to Aurora Serverless v2 and provisioned DB clusters. To disable the HTTP endpoint for Aurora Serverless v1 DB clusters, \n        use the <code>EnableHttpEndpoint</code> parameter of the <code>ModifyDBCluster</code> operation.</p>\n         </note>"
             }
         },
         "com.amazonaws.rds#DisableHttpEndpointRequest": {
@@ -18710,7 +18757,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the HTTP endpoint for the DB cluster. By default, the HTTP endpoint \n          isn't enabled.</p>\n         <p>When enabled, this endpoint provides a connectionless web service API (RDS Data API) \n          for running SQL queries on the Aurora DB cluster. You can also query your database from inside the RDS console \n          with the RDS query editor.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using RDS Data API</a> in the \n            <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This operation applies only to Aurora PostgreSQL Serverless v2 and provisioned DB clusters. To enable the HTTP endpoint for Aurora Serverless v1 DB clusters, \n        use the <code>EnableHttpEndpoint</code> parameter of the <code>ModifyDBCluster</code> operation.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Enables the HTTP endpoint for the DB cluster. By default, the HTTP endpoint \n          isn't enabled.</p>\n         <p>When enabled, this endpoint provides a connectionless web service API (RDS Data API) \n          for running SQL queries on the Aurora DB cluster. You can also query your database from inside the RDS console \n          with the RDS query editor.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using RDS Data API</a> in the \n            <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This operation applies only to Aurora Serverless v2 and provisioned DB clusters. To enable the HTTP endpoint for Aurora Serverless v1 DB clusters, \n        use the <code>EnableHttpEndpoint</code> parameter of the <code>ModifyDBCluster</code> operation.</p>\n         </note>"
             }
         },
         "com.amazonaws.rds#EnableHttpEndpointRequest": {
@@ -21776,7 +21823,7 @@
                 "EnableHttpEndpoint": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable the HTTP endpoint for an Aurora Serverless v1 DB cluster. By default, the HTTP endpoint \n            isn't enabled.</p>\n         <p>When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running\n            SQL queries on the Aurora Serverless v1 DB cluster. You can also query your database\n            from inside the RDS console with the RDS query editor.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using RDS Data API</a> in the \n            <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This parameter applies only to Aurora Serverless v1 DB clusters. To enable or disable the HTTP endpoint for an Aurora PostgreSQL \n        Serverless v2 or provisioned DB cluster, use the <code>EnableHttpEndpoint</code> and <code>DisableHttpEndpoint</code> operations.</p>\n         </note>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to enable the HTTP endpoint for an Aurora Serverless v1 DB cluster. By default, the HTTP endpoint \n            isn't enabled.</p>\n         <p>When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running\n            SQL queries on the Aurora Serverless v1 DB cluster. You can also query your database\n            from inside the RDS console with the RDS query editor.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using RDS Data API</a> in the \n            <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This parameter applies only to Aurora Serverless v1 DB clusters. To enable or disable the HTTP endpoint for an Aurora\n        Serverless v2 or provisioned DB cluster, use the <code>EnableHttpEndpoint</code> and <code>DisableHttpEndpoint</code> operations.</p>\n         </note>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
                     }
                 },
                 "CopyTagsToSnapshot": {
@@ -21831,6 +21878,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An\n            example is <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role,\n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole\">To \n                create an IAM role for Amazon RDS Enhanced Monitoring</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>If <code>MonitoringInterval</code> is set to a value other than <code>0</code>, supply a <code>MonitoringRoleArn</code> value.</p>\n         <p>Valid for Cluster Type: Multi-AZ DB clusters only</p>"
+                    }
+                },
+                "DatabaseInsightsMode": {
+                    "target": "com.amazonaws.rds#DatabaseInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the cluster.</p>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -22450,6 +22503,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access Management\n            (IAM) accounts to database accounts. By default, mapping isn't enabled.</p>\n         <p>This setting doesn't apply to Amazon Aurora. Mapping Amazon Web Services IAM accounts to database accounts is managed by the DB\n          cluster.</p>\n         <p>For more information about IAM database authentication, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html\">\n              IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>"
+                    }
+                },
+                "DatabaseInsightsMode": {
+                    "target": "com.amazonaws.rds#DatabaseInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the instance.</p>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -28564,6 +28623,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>An Amazon Web Services Identity and Access Management (IAM) role with a trust policy and a permissions policy that allows Amazon RDS to access your Amazon S3 bucket. \n        For information about this role,\n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html#MySQL.Procedural.Importing.Enabling.IAM\">\n            Creating an IAM role manually</a> in the <i>Amazon RDS User Guide.</i>\n         </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DatabaseInsightsMode": {
+                    "target": "com.amazonaws.rds#DatabaseInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the instance.</p>"
                     }
                 },
                 "EnablePerformanceInsights": {

@@ -878,7 +878,7 @@
                 "ConditionOverrides": {
                     "target": "com.amazonaws.customerprofiles#ConditionOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Overrides the condition block within the original calculated attribute definition.</p>"
+                        "smithy.api#documentation": "<p>Overrides the condition block within the original calculated attribute\n         definition.</p>"
                     }
                 }
             },
@@ -904,7 +904,7 @@
                 "ConditionOverrides": {
                     "target": "com.amazonaws.customerprofiles#ConditionOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Overrides the condition block within the original calculated attribute definition.</p>"
+                        "smithy.api#documentation": "<p>Overrides the condition block within the original calculated attribute\n         definition.</p>"
                     }
                 }
             },
@@ -1022,7 +1022,7 @@
                 "Errors": {
                     "target": "com.amazonaws.customerprofiles#BatchGetProfileErrorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>For information about the errors that are common to all actions, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p>"
+                        "smithy.api#documentation": "<p>For information about the errors that are common to all actions, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/CommonErrors.html\">Common\n            Errors</a>.</p>"
                     }
                 },
                 "Profiles": {
@@ -1120,7 +1120,7 @@
                 "IsDataPartial": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the calculated attribute's value is based on partial data. If the data is partial, it is set to true.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the calculated attribute's value is based on partial data. If the data\n         is partial, it is set to true.</p>"
                     }
                 },
                 "ProfileId": {
@@ -1161,13 +1161,108 @@
                 "target": "com.amazonaws.customerprofiles#CalculatedAttributeDimension"
             }
         },
+        "com.amazonaws.customerprofiles#ComparisonOperator": {
+            "type": "enum",
+            "members": {
+                "INCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUSIVE"
+                    }
+                },
+                "EXCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUSIVE"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "BEGINS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEGINS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL"
+                    }
+                },
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL"
+                    }
+                },
+                "BEFORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEFORE"
+                    }
+                },
+                "AFTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFTER"
+                    }
+                },
+                "ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "NOT_BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_BETWEEN"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#ConditionOverrides": {
             "type": "structure",
             "members": {
                 "Range": {
                     "target": "com.amazonaws.customerprofiles#RangeOverride",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative time period over which data is included in the aggregation for this override.</p>"
+                        "smithy.api#documentation": "<p>The relative time period over which data is included in the aggregation for this\n         override.</p>"
                     }
                 }
             },
@@ -1385,7 +1480,7 @@
                 "Filter": {
                     "target": "com.amazonaws.customerprofiles#Filter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines how to filter incoming objects to include part of the Calculated Attribute.</p>"
+                        "smithy.api#documentation": "<p>Defines how to filter incoming objects to include part of the Calculated\n         Attribute.</p>"
                     }
                 },
                 "Statistic": {
@@ -1712,6 +1807,164 @@
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateEventTrigger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateEventTriggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateEventTriggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an event trigger, which specifies the rules when to perform action based on\n         customer's ingested data.</p>\n         <p>Each event stream can be associated with only one integration in the same region and AWS\n         account as the event stream. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/event-triggers/{EventTriggerName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateEventTriggerRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventTriggerName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the event trigger.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the event trigger.</p>"
+                    }
+                },
+                "EventTriggerConditions": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that determine when an event should trigger the destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentFilter": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination is triggered only for profiles that meet the criteria of a segment\n         definition.</p>"
+                    }
+                },
+                "EventTriggerLimits": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines limits controlling whether an event triggers the destination, based on ingestion\n         latency and the number of invocations per profile over specific time periods.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs to apply to this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateEventTriggerResponse": {
+            "type": "structure",
+            "members": {
+                "EventTriggerName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the event trigger.</p>"
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the object type.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the event trigger.</p>"
+                    }
+                },
+                "EventTriggerConditions": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that determine when an event should trigger the destination.</p>"
+                    }
+                },
+                "SegmentFilter": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination is triggered only for profiles that meet the criteria of a segment\n         definition.</p>"
+                    }
+                },
+                "EventTriggerLimits": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines limits controlling whether an event triggers the destination, based on ingestion\n         latency and the number of invocations per profile over specific time periods.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the event trigger was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the event trigger was most recently updated.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs to apply to this resource.</p>"
                     }
                 }
             },
@@ -2098,7 +2351,7 @@
                 "SegmentGroups": {
                     "target": "com.amazonaws.customerprofiles#SegmentGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the base segments and dimensions for a segment definition along with their respective relationship.</p>",
+                        "smithy.api#documentation": "<p>Specifies the base segments and dimensions for a segment definition along with their\n         respective relationship.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2233,7 +2486,7 @@
                 "EstimateId": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the resource. The value can be passed to <code>GetSegmentEstimate</code> to retrieve the result of segment estimate status.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the resource. The value can be passed to\n            <code>GetSegmentEstimate</code> to retrieve the result of segment estimate\n         status.</p>"
                     }
                 },
                 "StatusCode": {
@@ -2312,19 +2565,19 @@
                 "EncryptionKey": {
                     "target": "com.amazonaws.customerprofiles#encryptionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported segment.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported\n         segment.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.customerprofiles#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for conducting KMS and S3 operations.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service\n         principal to assume the role for conducting KMS and S3 operations.</p>"
                     }
                 },
                 "DestinationUri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if the request is not submitted from the Amazon Connect Admin Website.</p>"
+                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Amazon Connect Admin Website.</p>"
                     }
                 }
             },
@@ -2379,6 +2632,9 @@
                     "target": "com.amazonaws.customerprofiles#CreateEventStream"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#CreateEventTrigger"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#CreateIntegrationWorkflow"
                 },
                 {
@@ -2401,6 +2657,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteEventStream"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteEventTrigger"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteIntegration"
@@ -2440,6 +2699,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetEventStream"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetEventTrigger"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetIdentityResolutionJob"
@@ -2491,6 +2753,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListEventStreams"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListEventTriggers"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListIdentityResolutionJobs"
@@ -2551,6 +2816,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#UpdateDomain"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#UpdateEventTrigger"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#UpdateProfile"
@@ -3637,6 +3905,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#DeleteEventTrigger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteEventTriggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteEventTriggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disable and deletes the Event Trigger.</p>\n         <note>\n            <p>You cannot delete an Event Trigger with an active Integration associated.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/event-triggers/{EventTriggerName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteEventTriggerRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventTriggerName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the event trigger.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteEventTriggerResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the delete request is done.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#DeleteIntegration": {
             "type": "operation",
             "input": {
@@ -4558,6 +4899,188 @@
                 "target": "com.amazonaws.customerprofiles#EventStreamSummary"
             }
         },
+        "com.amazonaws.customerprofiles#EventTriggerCondition": {
+            "type": "structure",
+            "members": {
+                "EventTriggerDimensions": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dimensions to be evaluated for the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogicalOperator": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerLogicalOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator used to combine multiple dimensions.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the circumstances under which the event should trigger the destination.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#EventTriggerConditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#EventTriggerCondition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#EventTriggerDimension": {
+            "type": "structure",
+            "members": {
+                "ObjectAttributes": {
+                    "target": "com.amazonaws.customerprofiles#ObjectAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of object attributes to be evaluated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A specific event dimension to be assessed.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#EventTriggerDimensions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#EventTriggerDimension"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#EventTriggerLimits": {
+            "type": "structure",
+            "members": {
+                "EventExpiration": {
+                    "target": "com.amazonaws.customerprofiles#optionalLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In milliseconds. Specifies that an event will only trigger the destination if it is processed within a certain latency period.</p>"
+                    }
+                },
+                "Periods": {
+                    "target": "com.amazonaws.customerprofiles#Periods",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of time periods during which the limits apply.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#EventTriggerLogicalOperator": {
+            "type": "enum",
+            "members": {
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#EventTriggerNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#name"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#EventTriggerSummaryItem": {
+            "type": "structure",
+            "members": {
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the object type.</p>"
+                    }
+                },
+                "EventTriggerName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the event trigger.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the event trigger.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the event trigger was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the event trigger was most recently updated.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs to apply to this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the event trigger.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#EventTriggerSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#EventTriggerSummaryItem"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#EventTriggerValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#ExportingConfig": {
             "type": "structure",
             "members": {
@@ -4607,7 +5130,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object that segments on various Customer profile's fields that are larger than normal.</p>"
+                "smithy.api#documentation": "<p>Object that segments on various Customer profile's fields that are larger than\n         normal.</p>"
             }
         },
         "com.amazonaws.customerprofiles#ExtraLengthValues": {
@@ -4821,7 +5344,7 @@
                 "Include": {
                     "target": "com.amazonaws.customerprofiles#Include",
                     "traits": {
-                        "smithy.api#documentation": "<p>Define whether to include or exclude objects for Calculated Attributed calculation that fit the filter groups criteria.</p>",
+                        "smithy.api#documentation": "<p>Define whether to include or exclude objects for Calculated Attributed calculation that\n         fit the filter groups criteria.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4856,7 +5379,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object that defines how to filter the incoming objects for the calculated attribute.</p>"
+                "smithy.api#documentation": "<p>Object that defines how to filter the incoming objects for the calculated\n         attribute.</p>"
             }
         },
         "com.amazonaws.customerprofiles#FilterDimension": {
@@ -5684,6 +6207,126 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#GetEventTrigger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetEventTriggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetEventTriggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a specific Event Trigger from the domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/event-triggers/{EventTriggerName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetEventTriggerRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventTriggerName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the event trigger.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetEventTriggerResponse": {
+            "type": "structure",
+            "members": {
+                "EventTriggerName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the event trigger.</p>"
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the object type.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the event trigger.</p>"
+                    }
+                },
+                "EventTriggerConditions": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that determine when an event should trigger the destination.</p>"
+                    }
+                },
+                "SegmentFilter": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination is triggered only for profiles that meet the criteria of a segment\n         definition.</p>"
+                    }
+                },
+                "EventTriggerLimits": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the event trigger was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the event trigger was most recently updated.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs to apply to this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#GetIdentityResolutionJob": {
             "type": "operation",
             "input": {
@@ -5938,6 +6581,12 @@
                     "target": "com.amazonaws.customerprofiles#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make\n         Customer Profiles requests on your behalf.</p>"
+                    }
+                },
+                "EventTriggerNames": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique names for active event triggers associated with the integration. This\n         list would be empty if no Event Trigger is associated with the integration.</p>"
                     }
                 }
             },
@@ -6481,7 +7130,7 @@
                 "EstimateId": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>QueryId</code> which is the same as the value passed in <code>QueryId</code>.</p>"
+                        "smithy.api#documentation": "<p>The <code>QueryId</code> which is the same as the value passed in\n         <code>QueryId</code>.</p>"
                     }
                 },
                 "Status": {
@@ -6605,7 +7254,7 @@
                 "Failures": {
                     "target": "com.amazonaws.customerprofiles#Failures",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of maps where each contains a response per profile failed for the request.</p>",
+                        "smithy.api#documentation": "<p>An array of maps where each contains a response per profile failed for the\n         request.</p>",
                         "smithy.api#jsonName": "Failures"
                     }
                 }
@@ -6716,19 +7365,19 @@
                 "EncryptionKey": {
                     "target": "com.amazonaws.customerprofiles#encryptionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported segment.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported\n         segment.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.customerprofiles#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for conducting KMS and S3 operations.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service\n         principal to assume the role for conducting KMS and S3 operations.</p>"
                     }
                 },
                 "DestinationUri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if the request is not submitted from the Amazon Connect Admin Website.</p>"
+                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Amazon Connect Admin Website.</p>"
                     }
                 }
             },
@@ -8014,6 +8663,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#ListEventTriggers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListEventTriggersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListEventTriggersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all Event Triggers under a domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/event-triggers",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListEventTriggersRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use with ListEventTriggers.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListEventTriggersResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Event Triggers.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListEventTriggers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#ListIdentityResolutionJobs": {
             "type": "operation",
             "input": {
@@ -8163,6 +8902,12 @@
                     "target": "com.amazonaws.customerprofiles#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make\n         Customer Profiles requests on your behalf.</p>"
+                    }
+                },
+                "EventTriggerNames": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique names for active event triggers associated with the integration.</p>"
                     }
                 }
             },
@@ -9604,6 +10349,52 @@
                 "smithy.api#pattern": "^\\S+$"
             }
         },
+        "com.amazonaws.customerprofiles#ObjectAttribute": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute contained within a source object.</p>"
+                    }
+                },
+                "FieldName": {
+                    "target": "com.amazonaws.customerprofiles#fieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field defined within an object type.</p>"
+                    }
+                },
+                "ComparisonOperator": {
+                    "target": "com.amazonaws.customerprofiles#ComparisonOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator used to compare an attribute against a list of values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of attribute values used for comparison.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The criteria that a specific object attribute must meet to trigger the destination.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ObjectAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ObjectAttribute"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#ObjectCount": {
             "type": "integer",
             "traits": {
@@ -9852,6 +10643,82 @@
             "traits": {
                 "smithy.api#deprecated": {},
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#Period": {
+            "type": "structure",
+            "members": {
+                "Unit": {
+                    "target": "com.amazonaws.customerprofiles#PeriodUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.customerprofiles#maxSize24",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time of the specified unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxInvocationsPerProfile": {
+                    "target": "com.amazonaws.customerprofiles#maxSize1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum allowed number of destination invocations per profile.</p>"
+                    }
+                },
+                "Unlimited": {
+                    "target": "com.amazonaws.customerprofiles#boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If set to true, there is no limit on the number of destination invocations per profile. The default is false.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a limit and the time period during which it is enforced.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#PeriodUnit": {
+            "type": "enum",
+            "members": {
+                "HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURS"
+                    }
+                },
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
+                    }
+                },
+                "WEEKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKS"
+                    }
+                },
+                "MONTHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#Periods": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#Period"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
             }
         },
         "com.amazonaws.customerprofiles#PhoneNumberList": {
@@ -10479,6 +11346,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make\n         Customer Profiles requests on your behalf.</p>"
                     }
+                },
+                "EventTriggerNames": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique names for active event triggers associated with the integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10550,6 +11423,12 @@
                     "target": "com.amazonaws.customerprofiles#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make\n         Customer Profiles requests on your behalf.</p>"
+                    }
+                },
+                "EventTriggerNames": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique names for active event triggers associated with the integration. This\n         list would be empty if no Event Trigger is associated with the integration.</p>"
                     }
                 }
             },
@@ -13027,6 +13906,156 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#UpdateEventTrigger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#UpdateEventTriggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#UpdateEventTriggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the properties of an Event Trigger.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/event-triggers/{EventTriggerName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateEventTriggerRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventTriggerName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the event trigger.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the object type.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the event trigger.</p>"
+                    }
+                },
+                "EventTriggerConditions": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that determine when an event should trigger the destination.</p>"
+                    }
+                },
+                "SegmentFilter": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination is triggered only for profiles that meet the criteria of a segment\n         definition.</p>"
+                    }
+                },
+                "EventTriggerLimits": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateEventTriggerResponse": {
+            "type": "structure",
+            "members": {
+                "EventTriggerName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the event trigger.</p>"
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the object type.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the event trigger.</p>"
+                    }
+                },
+                "EventTriggerConditions": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that determine when an event should trigger the destination.</p>"
+                    }
+                },
+                "SegmentFilter": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination is triggered only for profiles that meet the criteria of a segment\n         definition.</p>"
+                    }
+                },
+                "EventTriggerLimits": {
+                    "target": "com.amazonaws.customerprofiles#EventTriggerLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the event trigger was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the event trigger was most recently updated.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs to apply to this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#UpdateProfile": {
             "type": "operation",
             "input": {
@@ -13495,6 +14524,16 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#fieldName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
+            }
+        },
         "com.amazonaws.customerprofiles#foundByList": {
             "type": "list",
             "member": {
@@ -13547,6 +14586,24 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#maxSize1000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#maxSize24": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 24
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#message": {
             "type": "string"
         },
@@ -13578,6 +14635,9 @@
         },
         "com.amazonaws.customerprofiles#optionalBoolean": {
             "type": "boolean"
+        },
+        "com.amazonaws.customerprofiles#optionalLong": {
+            "type": "long"
         },
         "com.amazonaws.customerprofiles#requestValueList": {
             "type": "list",

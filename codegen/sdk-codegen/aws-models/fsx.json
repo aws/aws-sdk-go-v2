@@ -1912,6 +1912,12 @@
                 },
                 "Volume": {
                     "target": "com.amazonaws.fsx#Volume"
+                },
+                "SizeInBytes": {
+                    "target": "com.amazonaws.fsx#SizeInBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The size of the backup in bytes. This represents the amount of data that the file system would contain if you restore this backup.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -3419,6 +3425,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>(Multi-AZ only) Specifies the route tables in which Amazon FSx  creates the rules\n            for routing traffic to the correct file server. You should specify all virtual private cloud\n            (VPC) route tables associated with the subnets in which your clients are located. By default,\n            Amazon FSx  selects your VPC's default route table.</p>"
                     }
+                },
+                "ReadCacheConfiguration": {
+                    "target": "com.amazonaws.fsx#OpenZFSReadCacheConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies the optional provisioned SSD read cache on file systems that use the Intelligent-Tiering storage class. \n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -3446,15 +3458,13 @@
                 "StorageCapacity": {
                     "target": "com.amazonaws.fsx#StorageCapacity",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Sets the storage capacity of the file system that you're creating, in gibibytes (GiB).</p>\n         <p>\n            <b>FSx for Lustre file systems</b> - The amount of\n            storage capacity that you can configure depends on the value that you set for\n                <code>StorageType</code> and the Lustre <code>DeploymentType</code>, as\n            follows:</p>\n         <ul>\n            <li>\n               <p>For <code>SCRATCH_2</code>, <code>PERSISTENT_2</code>, and <code>PERSISTENT_1</code> deployment types \n                using SSD storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.</p>\n            </li>\n            <li>\n               <p>For <code>PERSISTENT_1</code> HDD file systems, valid values are increments of 6000 GiB for \n                12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.</p>\n            </li>\n            <li>\n               <p>For <code>SCRATCH_1</code> deployment type, valid values are \n                1200 GiB, 2400 GiB, and increments of 3600 GiB.</p>\n            </li>\n         </ul>\n         <p>\n            <b>FSx for ONTAP file systems</b> - The amount of storage capacity \n            that you can configure depends on the value of the <code>HAPairs</code> property. The minimum value is calculated as 1,024 * <code>HAPairs</code> and the maximum is calculated as 524,288 * <code>HAPairs</code>. </p>\n         <p>\n            <b>FSx for OpenZFS file systems</b> - The amount of storage capacity that \n            you can configure is from 64 GiB up to 524,288 GiB (512 TiB).</p>\n         <p>\n            <b>FSx for Windows File Server file systems</b> - The amount\n            of storage capacity that you can configure depends on the value that you set for\n                <code>StorageType</code> as follows:</p>\n         <ul>\n            <li>\n               <p>For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).</p>\n            </li>\n            <li>\n               <p>For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).</p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Sets the storage capacity of the file system that you're creating, in gibibytes (GiB).</p>\n         <p>\n            <b>FSx for Lustre file systems</b> - The amount of\n            storage capacity that you can configure depends on the value that you set for\n                <code>StorageType</code> and the Lustre <code>DeploymentType</code>, as\n            follows:</p>\n         <ul>\n            <li>\n               <p>For <code>SCRATCH_2</code>, <code>PERSISTENT_2</code>, and <code>PERSISTENT_1</code> deployment types \n                using SSD storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.</p>\n            </li>\n            <li>\n               <p>For <code>PERSISTENT_1</code> HDD file systems, valid values are increments of 6000 GiB for \n                12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.</p>\n            </li>\n            <li>\n               <p>For <code>SCRATCH_1</code> deployment type, valid values are \n                1200 GiB, 2400 GiB, and increments of 3600 GiB.</p>\n            </li>\n         </ul>\n         <p>\n            <b>FSx for ONTAP file systems</b> - The amount of storage capacity \n            that you can configure depends on the value of the <code>HAPairs</code> property. The minimum value is calculated as 1,024 * <code>HAPairs</code> and the maximum is calculated as 524,288 * <code>HAPairs</code>. </p>\n         <p>\n            <b>FSx for OpenZFS file systems</b> - The amount of storage capacity that \n            you can configure is from 64 GiB up to 524,288 GiB (512 TiB).</p>\n         <p>\n            <b>FSx for Windows File Server file systems</b> - The amount\n            of storage capacity that you can configure depends on the value that you set for\n                <code>StorageType</code> as follows:</p>\n         <ul>\n            <li>\n               <p>For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).</p>\n            </li>\n            <li>\n               <p>For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StorageType": {
                     "target": "com.amazonaws.fsx#StorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the storage type for the file system that you're creating. Valid values are\n                <code>SSD</code> and <code>HDD</code>.</p>\n         <ul>\n            <li>\n               <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows,\n                    Lustre, ONTAP, and OpenZFS deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>HDD</code> to use hard disk drive storage. \n                HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types,\n                and on <code>PERSISTENT_1</code> Lustre file system deployment types.</p>\n            </li>\n         </ul>\n         <p>Default value is <code>SSD</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options\"> Storage\n                type options</a> in the <i>FSx for Windows File Server User\n                Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options\">Multiple storage\n                options</a> in the <i>FSx for Lustre User\n            Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>Sets the storage class for the file system that you're creating. Valid values are\n                <code>SSD</code>, <code>HDD</code>, and <code>INTELLIGENT_TIERING</code>.</p>\n         <ul>\n            <li>\n               <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows,\n                    Lustre, ONTAP, and OpenZFS deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>HDD</code> to use hard disk drive storage. \n                HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types,\n                and on <code>PERSISTENT_1</code> Lustre file system deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>INTELLIGENT_TIERING</code> to use fully elastic, intelligently-tiered storage. Intelligent-Tiering is only available for OpenZFS file systems with the Multi-AZ deployment type.</p>\n            </li>\n         </ul>\n         <p>Default value is <code>SSD</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options\"> Storage\n                type options</a> in the <i>FSx for Windows File Server User\n                Guide</i>, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options\">Multiple storage\n                options</a> in the <i>FSx for Lustre User\n                    Guide</i>, and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance-intelligent-tiering\">Working with Intelligent-Tiering</a> in the <i>Amazon FSx for OpenZFS User\n                            Guide</i>. </p>"
                     }
                 },
                 "SubnetIds": {
@@ -3741,7 +3751,7 @@
                 "RecordSizeKiB": {
                     "target": "com.amazonaws.fsx#IntegerRecordSizeKiB",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the suggested block size for a volume in a ZFS dataset, in kibibytes (KiB). Valid values are 4, 8,\n            16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB.\n            We recommend using the default setting for the majority of use cases. \n            Generally, workloads that write in fixed small or large record sizes \n            may benefit from setting a custom record size, like database workloads \n            (small record size) or media streaming workloads (large record size). \n            For additional guidance on when\n            to set a custom record size, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#record-size-performance\">\n            ZFS Record size</a> in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the suggested block size for a volume in a ZFS dataset, in kibibytes (KiB). \n            For file systems using the Intelligent-Tiering storage class, valid values are 128, 256, 512, 1024, 2048, or 4096 KiB, with a default of 2048 KiB. \n            For all other file systems, valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB, with a default of 128 KiB. \n            We recommend using the default setting for the majority of use cases. Generally, workloads that write in fixed small or large record sizes may benefit from setting a custom record size, like database workloads (small record size) or media streaming workloads (large record size).\n            For additional guidance on when to set a custom record size, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#record-size-performance\">\n            ZFS Record size</a> in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
                     }
                 },
                 "DataCompressionType": {
@@ -7652,7 +7662,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 4,
-                    "max": 1024
+                    "max": 4096
                 }
             }
         },
@@ -8898,6 +8908,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address of the endpoint\n            that is used to access data or to manage the file system.</p>"
                     }
+                },
+                "ReadCacheConfiguration": {
+                    "target": "com.amazonaws.fsx#OpenZFSReadCacheConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Required when <code>StorageType</code> is set to <code>INTELLIGENT_TIERING</code>. Specifies the optional provisioned SSD read cache. </p>"
+                    }
                 }
             },
             "traits": {
@@ -8984,6 +9000,49 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GROUP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fsx#OpenZFSReadCacheConfiguration": {
+            "type": "structure",
+            "members": {
+                "SizingMode": {
+                    "target": "com.amazonaws.fsx#OpenZFSReadCacheSizingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies how the provisioned SSD read cache is sized, as follows:\n        </p>\n         <ul>\n            <li>\n               <p>Set to <code>NO_CACHE</code> if you do not want to use an SSD read cache with your Intelligent-Tiering file system.</p>\n            </li>\n            <li>\n               <p>Set to <code>USER_PROVISIONED</code> to specify the exact size of your SSD read cache.</p>\n            </li>\n            <li>\n               <p>Set to <code>PROPORTIONAL_TO_THROUGHPUT_CAPACITY</code> to have your SSD read cache automatically sized based on your throughput capacity.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SizeGiB": {
+                    "target": "com.amazonaws.fsx#StorageCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Required if <code>SizingMode</code> is set to <code>USER_PROVISIONED</code>. Specifies the size of the file system's SSD read cache, in gibibytes (GiB).\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The configuration for the optional provisioned SSD read cache on file systems that use the Intelligent-Tiering storage class.\n        </p>"
+            }
+        },
+        "com.amazonaws.fsx#OpenZFSReadCacheSizingMode": {
+            "type": "enum",
+            "members": {
+                "NO_CACHE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_CACHE"
+                    }
+                },
+                "USER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_PROVISIONED"
+                    }
+                },
+                "PROPORTIONAL_TO_THROUGHPUT_CAPACITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
                     }
                 }
             }
@@ -9921,6 +9980,14 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.fsx#SizeInBytes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.fsx#SnaplockConfiguration": {
             "type": "structure",
             "members": {
@@ -10376,6 +10443,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "HDD"
+                    }
+                },
+                "INTELLIGENT_TIERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTELLIGENT_TIERING"
                     }
                 }
             },
@@ -11336,7 +11409,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file\n      system. You can update multiple properties in a single request.</p>\n         <p>For FSx for Windows File Server file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AuditLogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SelfManagedActiveDirectoryConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for Lustre file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutoImportPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DataCompressionType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LustreRootSquashConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MetadataConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerUnitStorageThroughput</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for ONTAP file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AddRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FsxAdminPassword</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HAPairs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RemoveRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacityPerHAPair</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for OpenZFS file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AddRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToBackups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToVolumes</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RemoveRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file\n      system. You can update multiple properties in a single request.</p>\n         <p>For FSx for Windows File Server file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AuditLogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SelfManagedActiveDirectoryConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for Lustre file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutoImportPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DataCompressionType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LustreRootSquashConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MetadataConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerUnitStorageThroughput</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for ONTAP file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AddRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FsxAdminPassword</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HAPairs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RemoveRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacityPerHAPair</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for OpenZFS file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AddRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToBackups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToVolumes</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadCacheConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RemoveRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.fsx#UpdateFileSystemLustreConfiguration": {
@@ -11520,6 +11593,12 @@
                     "target": "com.amazonaws.fsx#RouteTableIds",
                     "traits": {
                         "smithy.api#documentation": "<p>(Multi-AZ only) A list of IDs of existing virtual private cloud (VPC)\n            route tables to disassociate (remove) from your Amazon FSx for OpenZFS file system. You can use\n            the  API operation to retrieve the\n            list of VPC route table IDs for a file system.</p>"
+                    }
+                },
+                "ReadCacheConfiguration": {
+                    "target": "com.amazonaws.fsx#OpenZFSReadCacheConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The configuration for the optional provisioned SSD read cache on file systems that use the Intelligent-Tiering storage class.</p>"
                     }
                 }
             },

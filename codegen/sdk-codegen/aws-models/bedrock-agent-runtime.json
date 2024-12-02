@@ -296,7 +296,13 @@
                     "target": "com.amazonaws.bedrockagentruntime#OptimizePromptResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankResource"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStreamResource"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentruntime#RetrieveResource"
@@ -1153,6 +1159,35 @@
                 "smithy.api#documentation": "<p>Contains information about the API operation that was called from the action group and the response body that was returned.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>In the <code>returnControlInvocationResults</code> of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax\">InvokeAgent request</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.bedrockagentruntime#AttributeType": {
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
+                    }
+                },
+                "NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "STRING_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_LIST"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentruntime#Attribution": {
             "type": "structure",
             "members": {
@@ -1204,6 +1239,62 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(arn:aws(-[^:]+)?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#BedrockRerankingConfiguration": {
+            "type": "structure",
+            "members": {
+                "numberOfResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to return after reranking.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "modelConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockRerankingModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for a reranker model.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for an Amazon Bedrock reranker model.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#BedrockRerankingModelArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/(.*))?$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#BedrockRerankingModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the reranker model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "com.amazonaws.bedrockagentruntime#AdditionalModelRequestFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object whose keys are request fields for the model and whose values are values for those fields.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for a reranker model.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#ByteContentBlob": {
@@ -1285,6 +1376,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object containing a segment of the generated response that is based on a source in the knowledge base, alongside information about the source.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax\">InvokeAgent response</a> – in the <code>citations</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>citations</code> field</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CitationEvent": {
+            "type": "structure",
+            "members": {
+                "citation": {
+                    "target": "com.amazonaws.bedrockagentruntime#Citation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The citation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A citation event.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#Citations": {
@@ -1444,7 +1549,7 @@
                 "event": {
                     "target": "com.amazonaws.bedrockagentruntime#CustomOrchestrationTraceEvent",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The trace event details used with the custom orchestration.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The event details used with the custom orchestration.\n        </p>"
                     }
                 }
             },
@@ -1464,7 +1569,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n           The event in the custom orchestration sequence.\n        </p>",
+                "smithy.api#documentation": "<p>\n           The event in the custom orchestration sequence. Events are the responses which the custom orchestration Lambda function sends as response to the agent.  \n        </p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1736,6 +1841,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the failure of the interaction.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FieldForReranking": {
+            "type": "structure",
+            "members": {
+                "fieldName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a metadata field to include in or exclude from consideration when reranking.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for a metadata field to include in or exclude from consideration when reranking.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FieldsForReranking": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#FieldForReranking"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
                 "smithy.api#sensitive": {}
             }
         },
@@ -3009,6 +3146,20 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentruntime#GuardrailEvent": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuadrailAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The guardrail action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A guardrail event.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#GuardrailIdentifierWithArn": {
             "type": "string",
             "traits": {
@@ -3528,6 +3679,28 @@
                     "max": 1024
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ImplicitFilterConfiguration": {
+            "type": "structure",
+            "members": {
+                "metadataAttributes": {
+                    "target": "com.amazonaws.bedrockagentruntime#MetadataAttributeSchemaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that can be used in a filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model that generates the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for implicit filtering, where a model generates a metadata filter based on the prompt.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#InferenceConfig": {
@@ -4682,6 +4855,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the filters to use on the metadata in the knowledge base data sources before returning results. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p>"
                     }
+                },
+                "rerankingConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#VectorSearchRerankingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for reranking the retrieved results. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html\">Improve the relevance of query responses with a reranker model</a>.</p>"
+                    }
+                },
+                "implicitFilterConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#ImplicitFilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for implicit filtering.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4837,6 +5022,79 @@
             "traits": {
                 "smithy.api#documentation": "<p>Provides details of the foundation model.</p>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#MetadataAttributeSchema": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute's key.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[\\s\\S]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#AttributeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute's type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute's description.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^[\\s\\S]+$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a metadata attribute.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#MetadataAttributeSchemaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#MetadataAttributeSchema"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#MetadataConfigurationForReranking": {
+            "type": "structure",
+            "members": {
+                "selectionMode": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankingMetadataSelectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to consider all metadata when reranking, or only the metadata that you select. If you specify <code>SELECTIVE</code>, include the <code>selectiveModeConfiguration</code> field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "selectiveModeConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankingMetadataSelectiveModeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for the metadata fields to include or exclude when considering reranking.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for the metadata to use in reranking.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#MimeType": {
@@ -5966,6 +6224,387 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#Rerank": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#RerankRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#RerankResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#DependencyFailedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Reranks the relevance of sources based on queries. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html\">Improve the relevance of query responses with a reranker model</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/rerank"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "results"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankDocument": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of document to rerank.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "textDocument": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankTextDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about a text document to rerank.</p>"
+                    }
+                },
+                "jsonDocument": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a JSON document to rerank.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a document to rerank. Choose the <code>type</code> to define and include the field that corresponds to the type.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankDocumentType": {
+            "type": "enum",
+            "members": {
+                "TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT"
+                    }
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankQueriesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#RerankQuery"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankQuery": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankQueryContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "textQuery": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankTextDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about a text query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a query to submit to the reranker model.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankQueryContentType": {
+            "type": "enum",
+            "members": {
+                "TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankRequest": {
+            "type": "structure",
+            "members": {
+                "queries": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankQueriesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, each of which contains information about a query to submit to the reranker model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sources": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankSourcesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, each of which contains information about the sources to rerank.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "rerankingConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for reranking.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results was greater than could fit in a response, a token is returned in the <code>nextToken</code> field. You can enter that token in this field to return the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#Rerank"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentruntime#RerankResponse": {
+            "type": "structure",
+            "members": {
+                "results": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankResultsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, each of which contains information about the results of reranking.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than can fit in the response, use this token in the <code>nextToken</code> field when making another request to return the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankResult": {
+            "type": "structure",
+            "members": {
+                "index": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ranking of the document. The lower a number, the higher the document is ranked.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "relevanceScore": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relevance score of the document.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "document": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a document that was reranked.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankResultsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#RerankResult"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankSource": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inlineDocumentSource": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an inline definition of a source for reranking.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a source for reranking.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankSourceType": {
+            "type": "enum",
+            "members": {
+                "INLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INLINE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankSourcesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#RerankSource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankTextDocument": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the document.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 9000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a text document to rerank.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankingConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#RerankingConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reranker that the configurations apply to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bedrockRerankingConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockRerankingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for an Amazon Bedrock reranker.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for reranking.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankingConfigurationType": {
+            "type": "enum",
+            "members": {
+                "BEDROCK_RERANKING_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEDROCK_RERANKING_MODEL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankingMetadataSelectionMode": {
+            "type": "enum",
+            "members": {
+                "SELECTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELECTIVE"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RerankingMetadataSelectiveModeConfiguration": {
+            "type": "union",
+            "members": {
+                "fieldsToInclude": {
+                    "target": "com.amazonaws.bedrockagentruntime#FieldsForReranking",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, each of which specifies a metadata field to include in consideration when reranking. The remaining metadata fields are ignored.</p>"
+                    }
+                },
+                "fieldsToExclude": {
+                    "target": "com.amazonaws.bedrockagentruntime#FieldsForReranking",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, each of which specifies a metadata field to exclude from consideration when reranking.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for the metadata fields to include or exclude when considering reranking. If you include the <code>fieldsToExclude</code> field, the reranker ignores all the metadata fields that you specify. If you include the <code>fieldsToInclude</code> field, the reranker uses only the metadata fields that you specify and ignores all others. You can include only one of these fields.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#ResourceDescription": {
             "type": "string",
             "traits": {
@@ -6238,6 +6877,20 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentruntime#RetrievalResultCustomDocumentLocation": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the location of a document in a custom data source.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#RetrievalResultLocation": {
             "type": "structure",
             "members": {
@@ -6277,6 +6930,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The SharePoint data source location.</p>"
                     }
+                },
+                "customDocumentLocation": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievalResultCustomDocumentLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the location of a document in a custom data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6315,6 +6974,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SHAREPOINT"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
                     }
                 }
             }
@@ -6562,6 +7227,22 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateOutputEvent": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A text response.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A retrieve and generate output event.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateRequest": {
             "type": "structure",
             "members": {
@@ -6652,6 +7333,198 @@
                 "smithy.api#documentation": "<p>Contains configuration about the session with the knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>sessionConfiguration</code> field</p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStreamRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStreamResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#DependencyFailedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Queries a knowledge base and generates responses based on the retrieved results, with output in streaming format.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeModelWithResponseStream</code>.</p>\n         </note>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/retrieveAndGenerateStream"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStreamRequest": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session. When you first make a <code>RetrieveAndGenerate</code> request, Amazon Bedrock automatically generates this value. You must reuse this value for all subsequent requests in the same conversational session. This value allows Amazon Bedrock to maintain context and knowledge from previous interactions. You can't explicitly set the <code>sessionId</code> yourself.</p>"
+                    }
+                },
+                "input": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the query to be made to the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retrieveAndGenerateConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for the knowledge base query and retrieval process. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p>"
+                    }
+                },
+                "sessionConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateSessionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the session with the knowledge base.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStreamResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStream"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStreamResponse": {
+            "type": "structure",
+            "members": {
+                "stream": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStreamResponseOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stream of events from the model.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session ID.</p>",
+                        "smithy.api#httpHeader": "x-amzn-bedrock-knowledge-base-session-id",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateStreamResponseOutput": {
+            "type": "union",
+            "members": {
+                "output": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateOutputEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An output event.</p>"
+                    }
+                },
+                "citation": {
+                    "target": "com.amazonaws.bedrockagentruntime#CitationEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A citation event.</p>"
+                    }
+                },
+                "guardrail": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A guardrail event.</p>"
+                    }
+                },
+                "internalServerException": {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An internal server error occurred. Retry your request.</p>"
+                    }
+                },
+                "validationException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, \n          see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error\">ValidationError</a> in the Amazon Bedrock User Guide.</p>"
+                    }
+                },
+                "resourceNotFoundException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified resource ARN was not found. For troubleshooting this error, \n        see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-resource-not-found\">ResourceNotFound</a> in the Amazon Bedrock User Guide.</p>"
+                    }
+                },
+                "serviceQuotaExceededException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your request exceeds the service quota for your account. You can view your quotas at <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/gs-request-quota.html\">Viewing service quotas</a>. You can resubmit your request later.</p>"
+                    }
+                },
+                "throttlingException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For\n        troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception\">ThrottlingException</a> in the Amazon Bedrock User Guide.</p>"
+                    }
+                },
+                "accessDeniedException": {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request is denied because you do not have sufficient permissions to perform the requested action. For troubleshooting this error, \n        see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-access-denied\">AccessDeniedException</a> in the Amazon Bedrock User Guide.</p>"
+                    }
+                },
+                "conflictException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error occurred because of a conflict while performing an operation.</p>"
+                    }
+                },
+                "dependencyFailedException": {
+                    "target": "com.amazonaws.bedrockagentruntime#DependencyFailedException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request failed due to a dependency error.</p>"
+                    }
+                },
+                "badGatewayException": {
+                    "target": "com.amazonaws.bedrockagentruntime#BadGatewayException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request failed due to a bad gateway error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A retrieve and generate stream response output.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateType": {
             "type": "enum",
             "members": {
@@ -6693,6 +7566,12 @@
                         "smithy.api#documentation": "<p>Contains configurations for the knowledge base query and retrieval process. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p>"
                     }
                 },
+                "guardrailConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuardrailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Guardrail settings.</p>"
+                    }
+                },
                 "nextToken": {
                     "target": "com.amazonaws.bedrockagentruntime#NextToken",
                     "traits": {
@@ -6720,6 +7599,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of results from querying the knowledge base.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "guardrailAction": {
+                    "target": "com.amazonaws.bedrockagentruntime#GuadrailAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if there is a guardrail intervention in the response.</p>"
                     }
                 },
                 "nextToken": {
@@ -7366,6 +8251,90 @@
                 "smithy.api#documentation": "<p>Input validation failed. Check your request parameters and retry the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#VectorSearchBedrockRerankingConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#VectorSearchBedrockRerankingModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for the reranker model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "numberOfRerankedResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to return after reranking.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "metadataConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#MetadataConfigurationForReranking",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for the metadata to use in reranking.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for reranking with an Amazon Bedrock reranker model.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#VectorSearchBedrockRerankingModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockRerankingModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the reranker model to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "com.amazonaws.bedrockagentruntime#AdditionalModelRequestFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object whose keys are request fields for the model and whose values are values for those fields.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for an Amazon Bedrock reranker model.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#VectorSearchRerankingConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentruntime#VectorSearchRerankingConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reranker model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bedrockRerankingConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#VectorSearchBedrockRerankingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for an Amazon Bedrock reranker model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for reranking the retrieved results.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#VectorSearchRerankingConfigurationType": {
+            "type": "enum",
+            "members": {
+                "BEDROCK_RERANKING_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEDROCK_RERANKING_MODEL"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentruntime#Verb": {

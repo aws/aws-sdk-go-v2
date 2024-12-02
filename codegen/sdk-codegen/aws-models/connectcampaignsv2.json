@@ -92,6 +92,9 @@
                     "target": "com.amazonaws.connectcampaignsv2#PutOutboundRequestBatch"
                 },
                 {
+                    "target": "com.amazonaws.connectcampaignsv2#PutProfileOutboundRequestBatch"
+                },
+                {
                     "target": "com.amazonaws.connectcampaignsv2#ResumeCampaign"
                 },
                 {
@@ -2208,6 +2211,17 @@
                 ]
             }
         },
+        "com.amazonaws.connectcampaignsv2#EventTrigger": {
+            "type": "structure",
+            "members": {
+                "customerProfilesDomainArn": {
+                    "target": "com.amazonaws.connectcampaignsv2#Arn"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Event trigger of the campaign"
+            }
+        },
         "com.amazonaws.connectcampaignsv2#EventType": {
             "type": "string",
             "traits": {
@@ -2256,6 +2270,36 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#FailedProfileOutboundRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.connectcampaignsv2#ClientToken"
+                },
+                "id": {
+                    "target": "com.amazonaws.connectcampaignsv2#ProfileOutboundRequestId"
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.connectcampaignsv2#ProfileOutboundRequestFailureCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Failure details for a profile outbound request"
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#FailedProfileOutboundRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaignsv2#FailedProfileOutboundRequest"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of failed profile outbound requests",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
                 }
             }
         },
@@ -3284,6 +3328,93 @@
                 "smithy.api#documentation": "Predictive config"
             }
         },
+        "com.amazonaws.connectcampaignsv2#ProfileId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier of the customer profile",
+                "smithy.api#pattern": "^[a-f0-9]{32}$"
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#ProfileOutboundRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.connectcampaignsv2#ClientToken",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileId": {
+                    "target": "com.amazonaws.connectcampaignsv2#ProfileId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "expirationTime": {
+                    "target": "com.amazonaws.connectcampaignsv2#TimeStamp"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Information about a profile outbound request"
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#ProfileOutboundRequestFailureCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Predefined code indicating the error that caused the failure",
+                "smithy.api#enum": [
+                    {
+                        "value": "UnknownError",
+                        "name": "UNKNOWN_ERROR",
+                        "documentation": "Unexpected error during processing of request"
+                    },
+                    {
+                        "value": "ResourceNotFound",
+                        "name": "RESOURCE_NOT_FOUND",
+                        "documentation": "The specified resource was not found"
+                    },
+                    {
+                        "value": "Conflict",
+                        "name": "CONFLICT",
+                        "documentation": "The specified resource conflicts with another resource"
+                    },
+                    {
+                        "value": "RequestThrottled",
+                        "name": "REQUEST_THROTTLED",
+                        "documentation": "Request throttled due to large number of requests"
+                    },
+                    {
+                        "value": "InvalidInput",
+                        "name": "INVALID_INPUT",
+                        "documentation": "The request failed to satisfy the constraints specified by the service"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#ProfileOutboundRequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier of the profile outbound request",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-.]*$"
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#ProfileOutboundRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaignsv2#ProfileOutboundRequest"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of profile outbound requests",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.connectcampaignsv2#ProgressiveConfig": {
             "type": "structure",
             "members": {
@@ -3431,6 +3562,83 @@
             },
             "traits": {
                 "smithy.api#documentation": "The response for PutOutboundRequestBatch API.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#PutProfileOutboundRequestBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaignsv2#PutProfileOutboundRequestBatchRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaignsv2#PutProfileOutboundRequestBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#InvalidCampaignStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Takes in a list of profile outbound requests to be placed as part of an outbound campaign. This API is idempotent.",
+                "smithy.api#http": {
+                    "uri": "/v2/campaigns/{id}/profile-outbound-requests",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#PutProfileOutboundRequestBatchRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaignsv2#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileOutboundRequests": {
+                    "target": "com.amazonaws.connectcampaignsv2#ProfileOutboundRequestList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for PutProfileOutboundRequestBatch API",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#PutProfileOutboundRequestBatchResponse": {
+            "type": "structure",
+            "members": {
+                "successfulRequests": {
+                    "target": "com.amazonaws.connectcampaignsv2#SuccessfulProfileOutboundRequestList"
+                },
+                "failedRequests": {
+                    "target": "com.amazonaws.connectcampaignsv2#FailedProfileOutboundRequestList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response for PutProfileOutboundRequestBatch API",
                 "smithy.api#output": {}
             }
         },
@@ -3754,6 +3962,9 @@
             "members": {
                 "customerProfilesSegmentArn": {
                     "target": "com.amazonaws.connectcampaignsv2#Arn"
+                },
+                "eventTrigger": {
+                    "target": "com.amazonaws.connectcampaignsv2#EventTrigger"
                 }
             },
             "traits": {
@@ -3974,6 +4185,33 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#SuccessfulProfileOutboundRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.connectcampaignsv2#ClientToken"
+                },
+                "id": {
+                    "target": "com.amazonaws.connectcampaignsv2#ProfileOutboundRequestId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Success details for a profile outbound request"
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#SuccessfulProfileOutboundRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaignsv2#SuccessfulProfileOutboundRequest"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of successful profile outbound requests",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
                 }
             }
         },

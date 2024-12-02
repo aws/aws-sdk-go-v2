@@ -406,6 +406,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.opensearch#AddDirectQueryDataSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#AddDirectQueryDataSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#AddDirectQueryDataSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Adds a new data source in Amazon OpenSearch Service \n   so that you can perform direct queries on external data.\n  </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/opensearch/directQueryDataSource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#AddDirectQueryDataSourceRequest": {
+            "type": "structure",
+            "members": {
+                "DataSourceName": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data source \n   within your OpenSearch Service environment.\n  </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The supported Amazon Web Services service that you want to use as the source for direct queries in OpenSearch Service.\n  </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   An optional text field for providing additional context and details about the data source.\n  </p>"
+                    }
+                },
+                "OpenSearchArns": {
+                    "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A list of Amazon Resource Names (ARNs) for the OpenSearch \n   collections that are associated with the direct query data source.\n  </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.opensearch#TagList"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#AddDirectQueryDataSourceResponse": {
+            "type": "structure",
+            "members": {
+                "DataSourceArn": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The unique, system-generated identifier that represents the data source.\n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearch#AddTags": {
             "type": "operation",
             "input": {
@@ -429,7 +518,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of\n   case-sensitive key-value pairs. A domain can have up to 10 tags. For more information, see\n    <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html\">Tagging Amazon OpenSearch Service domains</a>.\n  </p>",
+                "smithy.api#documentation": "<p>Attaches tags to an existing Amazon OpenSearch Service domain, data source, or application. </p>\n         <p>Tags are a set of case-sensitive key-value pairs. A domain, data source, or application can\n   have up to 10 tags. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html\">Tagging\n    Amazon OpenSearch Service resources</a>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/tags",
@@ -443,7 +532,7 @@
                 "ARN": {
                     "target": "com.amazonaws.opensearch#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) for the OpenSearch Service domain to which you want to attach\n   resource tags.</p>",
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) for the OpenSearch Service domain, data source, or application to\n   which you want to attach resource tags.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -456,7 +545,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>AddTags</code> operation. Specifies the tags to\n   attach to the domain.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>AddTags</code> operation. Specifies the tags to\n   attach to the domain, data source, or application.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -641,6 +730,9 @@
                     "target": "com.amazonaws.opensearch#AddDataSource"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#AddDirectQueryDataSource"
+                },
+                {
                     "target": "com.amazonaws.opensearch#AddTags"
                 },
                 {
@@ -678,6 +770,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#DeleteDataSource"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DeleteDirectQueryDataSource"
                 },
                 {
                     "target": "com.amazonaws.opensearch#DeleteDomain"
@@ -755,6 +850,9 @@
                     "target": "com.amazonaws.opensearch#GetDataSource"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#GetDirectQueryDataSource"
+                },
+                {
                     "target": "com.amazonaws.opensearch#GetDomainMaintenanceStatus"
                 },
                 {
@@ -771,6 +869,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#ListDataSources"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ListDirectQueryDataSources"
                 },
                 {
                     "target": "com.amazonaws.opensearch#ListDomainMaintenances"
@@ -828,6 +929,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#UpdateDataSource"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#UpdateDirectQueryDataSource"
                 },
                 {
                     "target": "com.amazonaws.opensearch#UpdateDomainConfig"
@@ -3143,6 +3247,21 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#CloudWatchDirectQueryDataSource": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The unique identifier of the IAM role that grants \n   OpenSearch Service permission to access the specified data source.\n  </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Configuration details for a CloudWatch Logs data source \n   that can be used for direct queries.\n  </p>"
+            }
+        },
         "com.amazonaws.opensearch#CloudWatchLogsLogGroupArn": {
             "type": "string",
             "traits": {
@@ -4404,6 +4523,56 @@
             "traits": {
                 "smithy.api#documentation": "<p>The result of a <code>GetDataSource</code> operation.</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#DeleteDirectQueryDataSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#DeleteDirectQueryDataSourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Deletes a previously configured direct query data \n   source from Amazon OpenSearch Service.\n  </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#DeleteDirectQueryDataSourceRequest": {
+            "type": "structure",
+            "members": {
+                "DataSourceName": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data source \n   within your OpenSearch Service environment.\n  </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.opensearch#DeleteDomain": {
@@ -6083,6 +6252,112 @@
         "com.amazonaws.opensearch#Description": {
             "type": "string"
         },
+        "com.amazonaws.opensearch#DirectQueryDataSource": {
+            "type": "structure",
+            "members": {
+                "DataSourceName": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data source \n   within your OpenSearch Service environment.\n  </p>"
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The supported Amazon Web Services service that is used as the source for direct queries in OpenSearch Service. \n  </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A description that provides additional context and details about the data source.</p>"
+                    }
+                },
+                "OpenSearchArns": {
+                    "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A list of Amazon Resource Names (ARNs) for the OpenSearch \n   collections that are associated with the direct query data source.\n  </p>"
+                    }
+                },
+                "DataSourceArn": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The unique, system-generated identifier that represents the data source.</p>"
+                    }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.opensearch#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A list of tags attached to a direct query data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   The configuration details for a data source that can be directly queried.\n  </p>"
+            }
+        },
+        "com.amazonaws.opensearch#DirectQueryDataSourceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9_])*[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$"
+            }
+        },
+        "com.amazonaws.opensearch#DirectQueryDataSourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#DirectQueryDataSource"
+            }
+        },
+        "com.amazonaws.opensearch#DirectQueryDataSourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 80
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.opensearch#DirectQueryDataSourceRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:role(\\/service-role)?\\/[A-Za-z0-9+=,.@\\-_]{1,64}$"
+            }
+        },
+        "com.amazonaws.opensearch#DirectQueryDataSourceType": {
+            "type": "union",
+            "members": {
+                "CloudWatchLog": {
+                    "target": "com.amazonaws.opensearch#CloudWatchDirectQueryDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Specifies CloudWatch Logs as a type of data source for direct queries.\n  </p>"
+                    }
+                },
+                "SecurityLake": {
+                    "target": "com.amazonaws.opensearch#SecurityLakeDirectQueryDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Specifies Security Lake as a type of data source for direct queries.\n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   The type of data source that is used for direct queries. \n   This is a supported Amazon Web Services service, such as CloudWatch Logs or Security Lake.\n  </p>"
+            }
+        },
+        "com.amazonaws.opensearch#DirectQueryOpenSearchARNList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#ARN"
+            }
+        },
         "com.amazonaws.opensearch#DisableTimestamp": {
             "type": "timestamp"
         },
@@ -7725,6 +8000,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.opensearch#GetDirectQueryDataSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#GetDirectQueryDataSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#GetDirectQueryDataSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Returns detailed configuration information for \n   a specific direct query data source in Amazon OpenSearch Service.\n  </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#GetDirectQueryDataSourceRequest": {
+            "type": "structure",
+            "members": {
+                "DataSourceName": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A unique, user-defined label that identifies the data source within \n   your OpenSearch Service environment.\n  </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#GetDirectQueryDataSourceResponse": {
+            "type": "structure",
+            "members": {
+                "DataSourceName": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data source \n   within your OpenSearch Service environment.\n  </p>"
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The supported Amazon Web Services service that is used as the source for \n   direct queries in OpenSearch Service. \n  </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A description that provides additional context and details about the data source.\n  </p>"
+                    }
+                },
+                "OpenSearchArns": {
+                    "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A list of Amazon Resource Names (ARNs) for the OpenSearch \n   collections that are associated with the direct query data source.\n  </p>"
+                    }
+                },
+                "DataSourceArn": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The unique, system-generated identifier that represents the data source.\n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearch#GetDomainMaintenanceStatus": {
             "type": "operation",
             "input": {
@@ -8988,6 +9351,71 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.opensearch#ListDirectQueryDataSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#ListDirectQueryDataSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#ListDirectQueryDataSourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Lists an inventory of all the direct query data sources that you\n   have configured within Amazon OpenSearch Service.\n  </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2021-01-01/opensearch/directQueryDataSource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#ListDirectQueryDataSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.opensearch#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nexttoken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#ListDirectQueryDataSourcesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.opensearch#NextToken"
+                },
+                "DirectQueryDataSources": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A list of the direct query data sources that are returned by \n   the <code>ListDirectQueryDataSources</code> API operation.\n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearch#ListDomainMaintenances": {
             "type": "operation",
             "input": {
@@ -9555,7 +9983,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all resource tags for an Amazon OpenSearch Service domain. For more information, see\n   <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html\">Tagging Amazon OpenSearch Service domains</a>.</p>",
+                "smithy.api#documentation": "<p>Returns all resource tags for an Amazon OpenSearch Service domain, data source, or\n   application. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html\">Tagging\n    Amazon OpenSearch Service resources</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/tags",
@@ -9569,7 +9997,7 @@
                 "ARN": {
                     "target": "com.amazonaws.opensearch#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) for the domain to view tags for.</p>",
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) for the domain, data source, or application to view tags\n   for.</p>",
                         "smithy.api#httpQuery": "arn",
                         "smithy.api#required": {}
                     }
@@ -9586,7 +10014,7 @@
                 "TagList": {
                     "target": "com.amazonaws.opensearch#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of resource tags associated with the specified domain.</p>"
+                        "smithy.api#documentation": "<p>List of resource tags associated with the specified domain, data source, or\n   application.</p>"
                     }
                 }
             },
@@ -12187,7 +12615,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified set of tags from an Amazon OpenSearch Service domain. For more\n   information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging\"> Tagging Amazon OpenSearch Service domains</a>.</p>",
+                "smithy.api#documentation": "<p>Removes the specified set of tags from an Amazon OpenSearch Service domain, data source, or\n   application. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging\"> Tagging Amazon OpenSearch Service resources</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/tags-removal",
@@ -12201,14 +12629,14 @@
                 "ARN": {
                     "target": "com.amazonaws.opensearch#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain from which you want to delete the specified\n   tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain, data source, or application from which you\n   want to delete the specified tags.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TagKeys": {
                     "target": "com.amazonaws.opensearch#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tag keys to remove from the domain.</p>",
+                        "smithy.api#documentation": "<p>The list of tag keys to remove from the domain, data source, or application.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12961,6 +13389,21 @@
                         "smithy.api#enumValue": "SYSTEM"
                     }
                 }
+            }
+        },
+        "com.amazonaws.opensearch#SecurityLakeDirectQueryDataSource": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The unique identifier of the IAM role that grants OpenSearch \n   Service permission to access the specified data source.\n  </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Configuration details for a Security Lake data source \n   that can be used for direct queries.\n  </p>"
             }
         },
         "com.amazonaws.opensearch#ServiceSoftwareOptions": {
@@ -13758,6 +14201,90 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The result of an <code>UpdateDataSource</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#UpdateDirectQueryDataSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#UpdateDirectQueryDataSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#UpdateDirectQueryDataSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Updates the configuration or properties of an existing\n   direct query data source in Amazon OpenSearch Service.\n  </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#UpdateDirectQueryDataSourceRequest": {
+            "type": "structure",
+            "members": {
+                "DataSourceName": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data \n   source within your OpenSearch Service environment.\n  </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The supported Amazon Web Services service that you want to use as the source for \n   direct queries in OpenSearch Service. \n  </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   An optional text field for providing additional context and \n   details about the data source.\n  </p>"
+                    }
+                },
+                "OpenSearchArns": {
+                    "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A list of Amazon Resource Names (ARNs) for the OpenSearch \n   collections that are associated with the direct query data source.\n  </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#UpdateDirectQueryDataSourceResponse": {
+            "type": "structure",
+            "members": {
+                "DataSourceArn": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The unique, system-generated identifier that represents the data source.\n  </p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },

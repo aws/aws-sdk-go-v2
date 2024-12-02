@@ -20,6 +20,27 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.bedrock#AdditionalModelRequestFields": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrock#AdditionalModelRequestFieldsKey"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrock#AdditionalModelRequestFieldsValue"
+            }
+        },
+        "com.amazonaws.bedrock#AdditionalModelRequestFieldsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrock#AdditionalModelRequestFieldsValue": {
+            "type": "document"
+        },
         "com.amazonaws.bedrock#AmazonBedrockControlPlaneService": {
             "type": "service",
             "version": "2023-04-20",
@@ -738,19 +759,42 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#ApplicationType": {
+            "type": "enum",
+            "members": {
+                "MODEL_EVALUATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ModelEvaluation"
+                    }
+                },
+                "RAG_EVALUATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RagEvaluation"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrock#AutomatedEvaluationConfig": {
             "type": "structure",
             "members": {
                 "datasetMetricConfigs": {
                     "target": "com.amazonaws.bedrock#EvaluationDatasetMetricConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the required elements for an automatic model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>Configuration details of the prompt datasets and metrics you want to use for your evaluation job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "evaluatorModelConfig": {
+                    "target": "com.amazonaws.bedrock#EvaluatorModelConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the evaluator model configuration details. <code>EvaluatorModelConfig</code> is required for evaluation jobs that use a knowledge base or in model evaluation job that use a model as judge. This model computes all evaluation related metrics.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use to specify a automatic model evaluation job. The <code>EvaluationDatasetMetricConfig</code> object is used to specify the prompt datasets, task type, and metric names.</p>"
+                "smithy.api#documentation": "<p>The configuration details of an automated evaluation job. The <code>EvaluationDatasetMetricConfig</code> object \n         is used to specify the prompt datasets, task type, and metric names.</p>"
             }
         },
         "com.amazonaws.bedrock#BaseModelIdentifier": {
@@ -792,7 +836,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a batch deletion job. A model evaluation job can only be deleted if it has following status <code>FAILED</code>, <code>COMPLETED</code>, and <code>STOPPED</code>. You can request up to 25 model evaluation jobs be deleted in a single request.</p>",
+                "smithy.api#documentation": "<p>Deletes a batch of evaluation jobs. An evaluation job can only be deleted if it has \n         following status <code>FAILED</code>, <code>COMPLETED</code>, and <code>STOPPED</code>. \n         You can request up to 25 model evaluation jobs be deleted in a single request.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -806,26 +850,26 @@
                 "jobIdentifier": {
                     "target": "com.amazonaws.bedrock#EvaluationJobIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the model evaluation job being deleted.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the evaluation job being deleted.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "code": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A HTTP status code of the model evaluation job being deleted.</p>",
+                        "smithy.api#documentation": "<p>A HTTP status code of the evaluation job being deleted.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status message about the model evaluation job deletion.</p>"
+                        "smithy.api#documentation": "<p>A status message about the evaluation job deletion.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A JSON array that provides the status of the model evaluation jobs being deleted.</p>"
+                "smithy.api#documentation": "<p>A JSON array that provides the status of the evaluation jobs being deleted.</p>"
             }
         },
         "com.amazonaws.bedrock#BatchDeleteEvaluationJobErrors": {
@@ -846,20 +890,20 @@
                 "jobIdentifier": {
                     "target": "com.amazonaws.bedrock#EvaluationJobIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of model evaluation job to be deleted.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the evaluation job for deletion.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobStatus": {
                     "target": "com.amazonaws.bedrock#EvaluationJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the job's deletion.</p>",
+                        "smithy.api#documentation": "<p>The status of the evaluation job for deletion.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of model evaluation jobs to be deleted, and their associated statuses.</p>"
+                "smithy.api#documentation": "<p>An evaluation job for deletion, and it’s current status.</p>"
             }
         },
         "com.amazonaws.bedrock#BatchDeleteEvaluationJobItems": {
@@ -874,7 +918,7 @@
                 "jobIdentifiers": {
                     "target": "com.amazonaws.bedrock#EvaluationJobIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of model evaluation job ARNs to be deleted.</p>",
+                        "smithy.api#documentation": "<p>A list of one or more evaluation job Amazon Resource Names (ARNs) you want to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -889,20 +933,57 @@
                 "errors": {
                     "target": "com.amazonaws.bedrock#BatchDeleteEvaluationJobErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON object containing the HTTP status codes and the ARNs of model evaluation jobs that failed to be deleted.</p>",
+                        "smithy.api#documentation": "<p>A JSON object containing the HTTP status codes and the ARNs of evaluation jobs that failed to be deleted.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "evaluationJobs": {
                     "target": "com.amazonaws.bedrock#BatchDeleteEvaluationJobItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of model evaluation jobs to be deleted.</p>",
+                        "smithy.api#documentation": "<p>The list of evaluation jobs for deletion.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#BedrockEvaluatorModel": {
+            "type": "structure",
+            "members": {
+                "modelIdentifier": {
+                    "target": "com.amazonaws.bedrock#EvaluatorModelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the evaluator model used used in knowledge base evaluation job or in model evaluation job that use a model as judge.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The evaluator model used in knowledge base evaluation job or in model evaluation job that use a model as judge. This model computes all evaluation related metrics.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#BedrockEvaluatorModels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#BedrockEvaluatorModel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrock#BedrockModelArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))))|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):inference-profile/[a-zA-Z0-9-:.]+)|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$"
             }
         },
         "com.amazonaws.bedrock#BedrockModelId": {
@@ -931,6 +1012,45 @@
                     "min": 3,
                     "max": 63
                 }
+            }
+        },
+        "com.amazonaws.bedrock#ByteContentBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10485760
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrock#ByteContentDoc": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.bedrock#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file name of the document contained in the wrapper object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.bedrock#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the document contained in the wrapper object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.bedrock#ByteContentBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The byte value of the file to upload, encoded as a Base-64 string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the document contained in the wrapper object, along with its attributes/fields.</p>"
             }
         },
         "com.amazonaws.bedrock#CloudWatchConfig": {
@@ -991,6 +1111,12 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.bedrock#ContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[a-z]{1,20}/.{1,20}"
+            }
+        },
         "com.amazonaws.bedrock#CreateEvaluationJob": {
             "type": "operation",
             "input": {
@@ -1023,7 +1149,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>API operation for creating and managing Amazon Bedrock automatic model evaluation jobs and model evaluation jobs that use human workers. To learn more about the requirements for creating a model evaluation job see, <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html\">Model evaluation</a>.</p>",
+                "smithy.api#documentation": "<p>Creates an evaluation job.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -1038,14 +1164,14 @@
                 "jobName": {
                     "target": "com.amazonaws.bedrock#EvaluationJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model evaluation job. Model evaluation job names must unique with your AWS account, and your account's AWS region.</p>",
+                        "smithy.api#documentation": "<p>A name for the evaluation job. Names must unique with your Amazon Web Services account, \n         and your account's Amazon Web Services region.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobDescription": {
                     "target": "com.amazonaws.bedrock#EvaluationJobDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the model evaluation job.</p>"
+                        "smithy.api#documentation": "<p>A description of the evaluation job.</p>"
                     }
                 },
                 "clientRequestToken": {
@@ -1058,14 +1184,14 @@
                 "roleArn": {
                     "target": "com.amazonaws.bedrock#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock can assume to perform tasks on your behalf. The service role must have Amazon Bedrock as the service principal, and provide access to any Amazon S3 buckets specified in the <code>EvaluationConfig</code> object. To pass this role to Amazon Bedrock, the caller of this API must have the <code>iam:PassRole</code> permission. To learn more about the required permissions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-security.html\">Required permissions</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock can \n         assume to perform tasks on your behalf. To learn more about the required permissions, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-security.html\">Required \n            permissions for model evaluations</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "customerEncryptionKeyId": {
                     "target": "com.amazonaws.bedrock#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify your customer managed key ARN that will be used to encrypt your model evaluation job.</p>"
+                        "smithy.api#documentation": "<p>Specify your customer managed encryption key Amazon Resource Name (ARN) that will be used to encrypt your evaluation job.</p>"
                     }
                 },
                 "jobTags": {
@@ -1074,24 +1200,30 @@
                         "smithy.api#documentation": "<p>Tags to attach to the model evaluation job.</p>"
                     }
                 },
+                "applicationType": {
+                    "target": "com.amazonaws.bedrock#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the evaluation job is for evaluating a model or evaluating a knowledge base\n         (retrieval and response generation).</p>"
+                    }
+                },
                 "evaluationConfig": {
                     "target": "com.amazonaws.bedrock#EvaluationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the model evaluation job is automatic or uses human worker.</p>",
+                        "smithy.api#documentation": "<p>Contains the configuration details of either an automated or human-based evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "inferenceConfig": {
                     "target": "com.amazonaws.bedrock#EvaluationInferenceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the models you want to use in your model evaluation job. Automatic model evaluation jobs support a single model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a>, and model evaluation job that use human workers support two models or inference profiles.</p>",
+                        "smithy.api#documentation": "<p>Contains the configuration details of the inference model for the evaluation job.</p>\n         <p>For model evaluation jobs, automated jobs support a single model or \n         <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a>, and jobs that use human workers support \n         two models or inference profiles.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "outputDataConfig": {
                     "target": "com.amazonaws.bedrock#EvaluationOutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that defines where the results of model evaluation job will be saved in Amazon S3.</p>",
+                        "smithy.api#documentation": "<p>Contains the configuration details of the Amazon S3 bucket for storing the results \n         of the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1106,7 +1238,7 @@
                 "jobArn": {
                     "target": "com.amazonaws.bedrock#EvaluationJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2560,13 +2692,14 @@
                 "inferenceParams": {
                     "target": "com.amazonaws.bedrock#EvaluationModelInferenceParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each Amazon Bedrock support different inference parameters that change how the model behaves during inference.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "{}",
+                        "smithy.api#documentation": "<p>Each Amazon Bedrock support different inference parameters that change how the model behaves during inference.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the ARN of the Amazon Bedrock model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> specified in your model evaluation job. Each Amazon Bedrock model supports different <code>inferenceParams</code>. To learn more about supported inference parameters for Amazon Bedrock models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>.</p>\n         <p>The <code>inferenceParams</code> are specified using JSON. To successfully insert JSON as string make sure that all quotations are properly escaped. For example, <code>\"temperature\":\"0.25\"</code> key value pair would need to be formatted as <code>\\\"temperature\\\":\\\"0.25\\\"</code> to successfully accepted in the request.</p>"
+                "smithy.api#documentation": "<p>Contains the ARN of the Amazon Bedrock model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> specified in your evaluation job. Each Amazon Bedrock model supports different <code>inferenceParams</code>. To learn more about supported inference parameters for Amazon Bedrock models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>.</p>\n         <p>The <code>inferenceParams</code> are specified using JSON. To successfully insert JSON as string make sure that all quotations are properly escaped. For example, <code>\"temperature\":\"0.25\"</code> key value pair would need to be formatted as <code>\\\"temperature\\\":\\\"0.25\\\"</code> to successfully accepted in the request.</p>"
             }
         },
         "com.amazonaws.bedrock#EvaluationConfig": {
@@ -2575,18 +2708,18 @@
                 "automated": {
                     "target": "com.amazonaws.bedrock#AutomatedEvaluationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used to specify an automated model evaluation job.\n         See <code>AutomatedEvaluationConfig</code> to view the required parameters.</p>"
+                        "smithy.api#documentation": "<p>Contains the configuration details of an automated evaluation job that computes metrics.</p>"
                     }
                 },
                 "human": {
                     "target": "com.amazonaws.bedrock#HumanEvaluationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used to specify a model evaluation job that uses human workers.See <code>HumanEvaluationConfig</code> to view the required parameters.</p>"
+                        "smithy.api#documentation": "<p>Contains the configuration details of an evaluation job that uses human workers.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Used to specify either a <code>AutomatedEvaluationConfig</code> or <code>HumanEvaluationConfig</code> object.</p>"
+                "smithy.api#documentation": "<p>The configuration details of either an automated or human-based evaluation job.</p>"
             }
         },
         "com.amazonaws.bedrock#EvaluationDataset": {
@@ -2630,7 +2763,7 @@
                 "taskType": {
                     "target": "com.amazonaws.bedrock#EvaluationTaskType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task type you want the model to carry out.  </p>",
+                        "smithy.api#documentation": "<p>The the type of task you want to evaluate for your evaluation job. This applies only \n         to model evaluation jobs and is ignored for knowledge base evaluation jobs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2644,13 +2777,13 @@
                 "metricNames": {
                     "target": "com.amazonaws.bedrock#EvaluationMetricNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the metrics used. For automated model evaluation jobs valid values are <code>\"Builtin.Accuracy\"</code>, <code>\"Builtin.Robustness\"</code>, and <code>\"Builtin.Toxicity\"</code>. In human-based model evaluation jobs the array of strings must match the <code>name</code> parameter specified in <code>HumanEvaluationCustomMetric</code>. </p>",
+                        "smithy.api#documentation": "<p>The names of the metrics you want to use for your evaluation job.</p>\n         <p>For knowledge base evaluation jobs that evaluate retrieval only, valid values are  \n         \"<code>Builtin.ContextRelevance</code>\", \"<code>Builtin.ContextConverage</code>\".</p>\n         <p>For knowledge base evaluation jobs that evaluate retrieval with response generation, \n         valid values are  \"<code>Builtin.Correctness</code>\", \"<code>Builtin.Completeness</code>\", \n         \"<code>Builtin.Helpfulness</code>\", \"<code>Builtin.LogicalCoherence</code>\", \n         \"<code>Builtin.Faithfulness</code>\", \"<code>Builtin.Harmfulness</code>\", \n         \"<code>Builtin.Stereotyping</code>\", \"<code>Builtin.Refusal</code>\".</p>\n         <p>For automated model evaluation jobs, valid values are \"<code>Builtin.Accuracy</code>\", \"<code>Builtin.Robustness</code>\", and \"<code>Builtin.Toxicity</code>\". In model evaluation jobs that use a LLM as judge you can specify \"<code>Builtin.Correctness</code>\", \"<code>Builtin.Completeness\"</code>, \"<code>Builtin.Faithfulness\"</code>, \"<code>Builtin.Helpfulness</code>\", \"<code>Builtin.Coherence</code>\", \"<code>Builtin.Relevance</code>\", \"<code>Builtin.FollowingInstructions</code>\", \"<code>Builtin.ProfessionalStyleAndTone</code>\", You can also specify the following responsible AI related metrics only for model evaluation job that use a LLM as judge \"<code>Builtin.Harmfulness</code>\", \"<code>Builtin.Stereotyping</code>\", and \"<code>Builtin.Refusal</code>\".</p>\n         <p>For human-based model evaluation jobs, the list of strings must match the \n         <code>name</code> parameter specified in <code>HumanEvaluationCustomMetric</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the built-in prompt datasets, built-in metric names and custom metric names, and the task type.</p>"
+                "smithy.api#documentation": "<p>Defines the prompt datasets, built-in metric names and custom metric names, and the task type.</p>"
             }
         },
         "com.amazonaws.bedrock#EvaluationDatasetMetricConfigs": {
@@ -2682,12 +2815,18 @@
                 "models": {
                     "target": "com.amazonaws.bedrock#EvaluationModelConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used to specify the models.</p>"
+                        "smithy.api#documentation": "<p>Specifies the inference models.</p>"
+                    }
+                },
+                "ragConfigs": {
+                    "target": "com.amazonaws.bedrock#RagConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration details of the inference for a knowledge base evaluation \n         job, including either the retrieval only configuration or the retrieval with response \n         generation configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Used to define the models you want used in your model evaluation job. Automated model evaluation jobs support only a single model. In a human-based model evaluation job, your annotator can compare the responses for up to two different models.</p>"
+                "smithy.api#documentation": "<p>The configuration details of the inference model for an evaluation job.</p>\n         <p>For automated model evaluation jobs, only a single model is supported.</p>\n         <p>For human-based model evaluation jobs, your annotator can compare the responses for up to two different models.</p>"
             }
         },
         "com.amazonaws.bedrock#EvaluationJobArn": {
@@ -2850,7 +2989,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10
+                    "max": 15
                 }
             }
         },
@@ -2897,7 +3036,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 2
                 }
             }
@@ -2918,13 +3057,13 @@
                 "s3Uri": {
                     "target": "com.amazonaws.bedrock#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 URI where the results of model evaluation job are saved.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 URI where the results of the evaluation job are saved.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The  Amazon S3 location where the results of your model evaluation job are saved.</p>"
+                "smithy.api#documentation": "<p>The  Amazon S3 location where the results of your evaluation job are saved.</p>"
             }
         },
         "com.amazonaws.bedrock#EvaluationRatingMethod": {
@@ -2955,55 +3094,74 @@
                 "jobArn": {
                     "target": "com.amazonaws.bedrock#EvaluationJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobName": {
                     "target": "com.amazonaws.bedrock#EvaluationJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>The name for the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrock#EvaluationJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the model evaluation job. </p>",
+                        "smithy.api#documentation": "<p>The current status of the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "creationTime": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the model evaluation job was created.</p>",
+                        "smithy.api#documentation": "<p>The time the evaluation job was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobType": {
                     "target": "com.amazonaws.bedrock#EvaluationJobType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type, either human or automatic, of model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the evaluation job is automated or human-based.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "evaluationTaskTypes": {
                     "target": "com.amazonaws.bedrock#EvaluationTaskTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>What task type was used in the model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>The type of task for model evaluation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "modelIdentifiers": {
                     "target": "com.amazonaws.bedrock#EvaluationModelIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the model(s) used in the model evaluation job.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the model(s) used for the evaluation job.</p>"
+                    }
+                },
+                "ragIdentifiers": {
+                    "target": "com.amazonaws.bedrock#RAGIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the knowledge base resources used for a knowledge base evaluation job.</p>"
+                    }
+                },
+                "evaluatorModelIdentifiers": {
+                    "target": "com.amazonaws.bedrock#EvaluatorModelIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the models used to compute the metrics for a knowledge base evaluation job.</p>"
+                    }
+                },
+                "applicationType": {
+                    "target": "com.amazonaws.bedrock#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the evaluation job is for evaluating a model or evaluating a knowledge base (retrieval and response generation).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of the model evaluation job.</p>"
+                "smithy.api#documentation": "<p>Summary information of an evaluation job.</p>"
             }
         },
         "com.amazonaws.bedrock#EvaluationTaskType": {
@@ -3059,6 +3217,192 @@
                     "max": 5
                 }
             }
+        },
+        "com.amazonaws.bedrock#EvaluatorModelConfig": {
+            "type": "union",
+            "members": {
+                "bedrockEvaluatorModels": {
+                    "target": "com.amazonaws.bedrock#BedrockEvaluatorModels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluator model used in knowledge base evaluation job or in model evaluation job that use a model as judge. This model computes all evaluation related metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the model configuration for the evaluator model. <code>EvaluatorModelConfig</code> is required for evaluation jobs that use a knowledge base or in model evaluation job that use a model as judge. This model computes all evaluation related metrics.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluatorModelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}$|(^[a-z0-9-]+[.][a-z0-9-]+([.][a-z0-9-]+)*(:[a-z0-9-]+)?$)|^[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}|)$"
+            }
+        },
+        "com.amazonaws.bedrock#EvaluatorModelIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#EvaluatorModelIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrock#ExternalSource": {
+            "type": "structure",
+            "members": {
+                "sourceType": {
+                    "target": "com.amazonaws.bedrock#ExternalSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source type of the external source wrapper object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.bedrock#S3ObjectDoc",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the external source wrapper object.</p>"
+                    }
+                },
+                "byteContent": {
+                    "target": "com.amazonaws.bedrock#ByteContentDoc",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier, content type, and data of the external source wrapper object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The unique external source of the content contained in the wrapper object.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ExternalSourceType": {
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                },
+                "BYTE_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYTE_CONTENT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrock#ExternalSources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#ExternalSource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrock#ExternalSourcesGenerationConfiguration": {
+            "type": "structure",
+            "members": {
+                "promptTemplate": {
+                    "target": "com.amazonaws.bedrock#PromptTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the template for the prompt for the external source wrapper object.</p>"
+                    }
+                },
+                "guardrailConfiguration": {
+                    "target": "com.amazonaws.bedrock#GuardrailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration details for the guardrail.</p>"
+                    }
+                },
+                "kbInferenceConfig": {
+                    "target": "com.amazonaws.bedrock#KbInferenceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration details for inference when using <code>RetrieveAndGenerate</code> to generate \n            responses while using an external source.</p>"
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "com.amazonaws.bedrock#AdditionalModelRequestFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional model parameters and their corresponding values not included in the \n            text inference configuration for an external source. Takes in custom model parameters \n            specific to the language model being used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response generation configuration of the external source wrapper object.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ExternalSourcesRetrieveAndGenerateConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.bedrock#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the foundation model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a>\n            used to generate responses.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sources": {
+                    "target": "com.amazonaws.bedrock#ExternalSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document for the external source wrapper object in the <code>retrieveAndGenerate</code> function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "generationConfiguration": {
+                    "target": "com.amazonaws.bedrock#ExternalSourcesGenerationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations details for response generation based on retrieved text chunks.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the external source wrapper object in the <code>retrieveAndGenerate</code> \n            function.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#FilterAttribute": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.bedrock#FilterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of metadata attribute/field, which must match the name in your \n            data source/document metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.bedrock#FilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the metadata attribute/field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the name of the metadata attribute/field to apply filters. \n            You must match the name of the attribute/field in your data source/document metadata.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#FilterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrock#FilterValue": {
+            "type": "document"
         },
         "com.amazonaws.bedrock#FineTuningJobStatus": {
             "type": "enum",
@@ -3279,6 +3623,38 @@
                 "target": "com.amazonaws.bedrock#FoundationModelSummary"
             }
         },
+        "com.amazonaws.bedrock#GenerationConfiguration": {
+            "type": "structure",
+            "members": {
+                "promptTemplate": {
+                    "target": "com.amazonaws.bedrock#PromptTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the template for the prompt that's sent to the model for response generation.</p>"
+                    }
+                },
+                "guardrailConfiguration": {
+                    "target": "com.amazonaws.bedrock#GuardrailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for the guardrail.</p>"
+                    }
+                },
+                "kbInferenceConfig": {
+                    "target": "com.amazonaws.bedrock#KbInferenceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for inference for knowledge base retrieval and response generation.</p>"
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "com.amazonaws.bedrock#AdditionalModelRequestFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional model parameters and corresponding values not included in the \n            <code>textInferenceConfig</code> structure for a knowledge base. This allows \n            you to provide custom model parameters specific to the language model being \n            used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for response generation based on retrieved text chunks.</p>"
+            }
+        },
         "com.amazonaws.bedrock#GetCustomModel": {
             "type": "operation",
             "input": {
@@ -3455,7 +3831,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the properties associated with a model evaluation job, including the\n         status of the job. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html\">Model evaluation</a>.</p>",
+                "smithy.api#documentation": "<p>Gets information about an evaluation job, such as the status of the job.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -3470,7 +3846,7 @@
                 "jobIdentifier": {
                     "target": "com.amazonaws.bedrock#EvaluationJobIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the evaluation job you want get information on.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3486,88 +3862,94 @@
                 "jobName": {
                     "target": "com.amazonaws.bedrock#EvaluationJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>The name for the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrock#EvaluationJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>The current status of the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobArn": {
                     "target": "com.amazonaws.bedrock#EvaluationJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobDescription": {
                     "target": "com.amazonaws.bedrock#EvaluationJobDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the model evaluation job.</p>"
+                        "smithy.api#documentation": "<p>The description of the evaluation job.</p>"
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.bedrock#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role used in the model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role used in the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "customerEncryptionKeyId": {
                     "target": "com.amazonaws.bedrock#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed key specified when the model evaluation job was created.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed encryption key specified when the evaluation job was created.</p>"
                     }
                 },
                 "jobType": {
                     "target": "com.amazonaws.bedrock#EvaluationJobType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the evaluation job is automated or human-based.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "applicationType": {
+                    "target": "com.amazonaws.bedrock#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the evaluation job is for evaluating a model or evaluating a knowledge base (retrieval and response generation).</p>"
                     }
                 },
                 "evaluationConfig": {
                     "target": "com.amazonaws.bedrock#EvaluationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about the type of model evaluation job, the metrics used, the task type selected, the datasets used, and any custom metrics you defined.</p>",
+                        "smithy.api#documentation": "<p>Contains the configuration details of either an automated or human-based evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "inferenceConfig": {
                     "target": "com.amazonaws.bedrock#EvaluationInferenceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the models you specified in your model evaluation job.</p>",
+                        "smithy.api#documentation": "<p>Contains the configuration details of the inference model used for the evaluation job. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "outputDataConfig": {
                     "target": "com.amazonaws.bedrock#EvaluationOutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon S3 location for where output data is saved.</p>",
+                        "smithy.api#documentation": "<p>Contains the configuration details of the Amazon S3 bucket for \n         storing the results of the evaluation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "creationTime": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the model evaluation job was created.</p>",
+                        "smithy.api#documentation": "<p>The time the evaluation job was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "lastModifiedTime": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the model evaluation job was last modified.</p>"
+                        "smithy.api#documentation": "<p>The time the evaluation job was last modified.</p>"
                     }
                 },
                 "failureMessages": {
                     "target": "com.amazonaws.bedrock#ErrorMessages",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings the specify why the model evaluation job has failed.</p>"
+                        "smithy.api#documentation": "<p>A list of strings that specify why the evaluation job failed to create.</p>"
                     }
                 }
             },
@@ -4887,6 +5269,37 @@
                     "max": 500
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailConfiguration": {
+            "type": "structure",
+            "members": {
+                "guardrailId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the guardrail.</p>",
+                        "smithy.api#length": {
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[a-z0-9]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "guardrailVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the guardrail.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5
+                        },
+                        "smithy.api#pattern": "^(([1-9][0-9]{0,7})|(DRAFT))$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for the guardrail.</p>"
             }
         },
         "com.amazonaws.bedrock#GuardrailContentFilter": {
@@ -6309,6 +6722,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
+        "com.amazonaws.bedrock#Identifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrock#ImportedModelArn": {
             "type": "string",
             "traits": {
@@ -6663,6 +7086,20 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9\\+\\-\\.])*$"
             }
         },
+        "com.amazonaws.bedrock#KbInferenceConfig": {
+            "type": "structure",
+            "members": {
+                "textInferenceConfig": {
+                    "target": "com.amazonaws.bedrock#TextInferenceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for text generation using a language model via the \n            <code>RetrieveAndGenerate</code> function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details of the inference for knowledge base retrieval and response generation.</p>"
+            }
+        },
         "com.amazonaws.bedrock#KeyPrefix": {
             "type": "string",
             "traits": {
@@ -6689,6 +7126,120 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)$"
+            }
+        },
+        "com.amazonaws.bedrock#KnowledgeBaseConfig": {
+            "type": "union",
+            "members": {
+                "retrieveConfig": {
+                    "target": "com.amazonaws.bedrock#RetrieveConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for retrieving information from a knowledge base.</p>"
+                    }
+                },
+                "retrieveAndGenerateConfig": {
+                    "target": "com.amazonaws.bedrock#RetrieveAndGenerateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for retrieving information from a knowledge base and generating responses.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for retrieving information from a knowledge base and generating responses.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#KnowledgeBaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.bedrock#KnowledgeBaseRetrievalConfiguration": {
+            "type": "structure",
+            "members": {
+                "vectorSearchConfiguration": {
+                    "target": "com.amazonaws.bedrock#KnowledgeBaseVectorSearchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for returning the results from the vector search.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details for retrieving information from a knowledge base.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#KnowledgeBaseRetrieveAndGenerateConfiguration": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.bedrock#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.bedrock#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the foundation model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> \n            used to generate responses.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retrievalConfiguration": {
+                    "target": "com.amazonaws.bedrock#KnowledgeBaseRetrievalConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for retrieving text chunks.</p>"
+                    }
+                },
+                "generationConfiguration": {
+                    "target": "com.amazonaws.bedrock#GenerationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations details for response generation based on retrieved text chunks.</p>"
+                    }
+                },
+                "orchestrationConfiguration": {
+                    "target": "com.amazonaws.bedrock#OrchestrationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for the model to process the prompt prior to retrieval and response generation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details for retrieving information from a knowledge base and generating responses.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#KnowledgeBaseVectorSearchConfiguration": {
+            "type": "structure",
+            "members": {
+                "numberOfResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of text chunks to retrieve; the number of results to return.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "overrideSearchType": {
+                    "target": "com.amazonaws.bedrock#SearchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default, Amazon Bedrock decides a search strategy for you. If you're using an \n            Amazon OpenSearch Serverless vector store that contains a filterable text field, you \n            can specify whether to query the knowledge base with a <code>HYBRID</code> search \n            using both vector embeddings and raw text, or <code>SEMANTIC</code> search using \n            only vector embeddings. For other vector store configurations, only <code>SEMANTIC</code> \n            search is available.</p>"
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.bedrock#RetrievalFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the filters to use on the metadata fields in the knowledge base data sources before returning results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for returning the results from the knowledge base vector search.</p>"
             }
         },
         "com.amazonaws.bedrock#ListCustomModels": {
@@ -6850,7 +7401,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists model evaluation jobs.</p>",
+                "smithy.api#documentation": "<p>Lists all existing evaluation jobs.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -6871,28 +7422,35 @@
                 "creationTimeAfter": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that includes model evaluation jobs created after the time specified.</p>",
+                        "smithy.api#documentation": "<p>A filter to only list evaluation jobs created after a specified time.</p>",
                         "smithy.api#httpQuery": "creationTimeAfter"
                     }
                 },
                 "creationTimeBefore": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that includes model evaluation jobs created prior to the time specified.</p>",
+                        "smithy.api#documentation": "<p>A filter to only list evaluation jobs created before a specified time.</p>",
                         "smithy.api#httpQuery": "creationTimeBefore"
                     }
                 },
                 "statusEquals": {
                     "target": "com.amazonaws.bedrock#EvaluationJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Only return jobs where the status condition is met.</p>",
+                        "smithy.api#documentation": "<p>A filter to only list evaluation jobs that are of a certain status.</p>",
                         "smithy.api#httpQuery": "statusEquals"
+                    }
+                },
+                "applicationTypeEquals": {
+                    "target": "com.amazonaws.bedrock#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter to only list evaluation jobs that are either model evaluations or knowledge base evaluations.</p>",
+                        "smithy.api#httpQuery": "applicationTypeEquals"
                     }
                 },
                 "nameContains": {
                     "target": "com.amazonaws.bedrock#EvaluationJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Query parameter string for model evaluation job names.</p>",
+                        "smithy.api#documentation": "<p>A filter to only list evaluation jobs that contain a specified string in the job name.</p>",
                         "smithy.api#httpQuery": "nameContains"
                     }
                 },
@@ -6913,14 +7471,14 @@
                 "sortBy": {
                     "target": "com.amazonaws.bedrock#SortJobsBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allows you to sort model evaluation jobs by when they were created.</p>",
+                        "smithy.api#documentation": "<p>Specifies a creation time to sort the list of evaluation jobs by when they were created.</p>",
                         "smithy.api#httpQuery": "sortBy"
                     }
                 },
                 "sortOrder": {
                     "target": "com.amazonaws.bedrock#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>How you want the order of jobs sorted.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether to sort the list of evaluation jobs by either ascending or descending order.</p>",
                         "smithy.api#httpQuery": "sortOrder"
                     }
                 }
@@ -6941,7 +7499,7 @@
                 "jobSummaries": {
                     "target": "com.amazonaws.bedrock#EvaluationSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A summary of the model evaluation jobs.</p>"
+                        "smithy.api#documentation": "<p>A list of summaries of the evaluation jobs.</p>"
                     }
                 }
             },
@@ -8091,6 +8649,15 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#MaxTokens": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65536
+                }
+            }
+        },
         "com.amazonaws.bedrock#Message": {
             "type": "string",
             "traits": {
@@ -8963,6 +9530,21 @@
                 "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
+        "com.amazonaws.bedrock#OrchestrationConfiguration": {
+            "type": "structure",
+            "members": {
+                "queryTransformationConfiguration": {
+                    "target": "com.amazonaws.bedrock#QueryTransformationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for transforming the prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for the model to process the prompt prior to retrieval and response generation.</p>"
+            }
+        },
         "com.amazonaws.bedrock#OutputDataConfig": {
             "type": "structure",
             "members": {
@@ -8994,6 +9576,20 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.bedrock#PromptTemplate": {
+            "type": "structure",
+            "members": {
+                "textPromptTemplate": {
+                    "target": "com.amazonaws.bedrock#TextPromptTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template for the prompt that's sent to the model for response generation. You can include \n            prompt placeholders, which become replaced before the prompt is sent to the model to provide \n            instructions and context to the model. In addition, you can include XML tags to delineate \n            meaningful sections of the prompt template.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Knowledge base prompt template</a> and \n            <a href=\"https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags\">Use XML tags with Anthropic Claude models</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The template for the prompt that's sent to the model for response generation.</p>"
             }
         },
         "com.amazonaws.bedrock#Provider": {
@@ -9223,6 +9819,88 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#QueryTransformationConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrock#QueryTransformationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of transformation to apply to the prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for transforming the prompt.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#QueryTransformationType": {
+            "type": "enum",
+            "members": {
+                "QUERY_DECOMPOSITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_DECOMPOSITION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrock#RAGConfig": {
+            "type": "union",
+            "members": {
+                "knowledgeBaseConfig": {
+                    "target": "com.amazonaws.bedrock#KnowledgeBaseConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for knowledge base retrieval and response generation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details for retrieval of information and response generation.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#RAGIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#KnowledgeBaseId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrock#RAGStopSequences": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 1000
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.bedrock#RagConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#RAGConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.bedrock#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -9234,6 +9912,170 @@
                 "smithy.api#documentation": "<p>The specified resource Amazon Resource Name (ARN) was not found. Check the Amazon Resource Name (ARN) and try your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.bedrock#RetrievalFilter": {
+            "type": "union",
+            "members": {
+                "equals": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose \n            name matches the key and whose value matches the value in this object.</p>\n         <p>The following example would return data sources with an animal attribute whose value is 'cat':\n            <code>\"equals\": { \"key\": \"animal\", \"value\": \"cat\" }</code>\n         </p>"
+                    }
+                },
+                "notEquals": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value \n            doesn't match the value in this object are returned.</p>\n         <p>The following example would return data sources that don't contain an animal attribute whose value is 'cat': \n            <code>\"notEquals\": { \"key\": \"animal\", \"value\": \"cat\" }</code>\n         </p>"
+                    }
+                },
+                "greaterThan": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name \n            matches the key and whose value is greater than the value in this object.</p>\n         <p>The following example would return data sources with an year attribute whose value is \n            greater than '1989': <code>\"greaterThan\": { \"key\": \"year\", \"value\": 1989 }</code>\n         </p>"
+                    }
+                },
+                "greaterThanOrEquals": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name \n            matches the key and whose value is greater than or equal to the value in this object.</p>\n         <p>The following example would return data sources with an year attribute whose value is \n            greater than or equal to '1989': <code>\"greaterThanOrEquals\": { \"key\": \"year\", \"value\": 1989 }</code>\n         </p>"
+                    }
+                },
+                "lessThan": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the \n            key and whose value is less than the value in this object.</p>\n         <p>The following example would return data sources with an year attribute whose value is less than to '1989':\n            <code>\"lessThan\": { \"key\": \"year\", \"value\": 1989 }</code>\n         </p>"
+                    }
+                },
+                "lessThanOrEquals": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key \n            and whose value is less than or equal to the value in this object.</p>\n         <p>The following example would return data sources with an year attribute whose value is less than or equal \n            to '1989': <code>\"lessThanOrEquals\": { \"key\": \"year\", \"value\": 1989 }</code>\n         </p>"
+                    }
+                },
+                "in": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose \n            name matches the key and whose value is in the list specified in the value in this object.</p>\n         <p>The following example would return data sources with an animal attribute that is either 'cat' or 'dog':\n            <code>\"in\": { \"key\": \"animal\", \"value\": [\"cat\", \"dog\"] }</code>\n         </p>"
+                    }
+                },
+                "notIn": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key \n            and whose value isn't in the list specified in the value in this object.</p>\n         <p>The following example would return data sources whose animal attribute is neither 'cat' nor 'dog':\n            <code>\"notIn\": { \"key\": \"animal\", \"value\": [\"cat\", \"dog\"] }</code>\n         </p>"
+                    }
+                },
+                "startsWith": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key \n            and whose value starts with the value in this object. This filter is currently only supported for \n            Amazon OpenSearch Serverless vector stores.</p>\n         <p>The following example would return data sources with an animal attribute starts with 'ca' (for example, 'cat' or 'camel').\n            <code>\"startsWith\": { \"key\": \"animal\", \"value\": \"ca\" }</code>\n         </p>"
+                    }
+                },
+                "listContains": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key \n            and whose value is a list that contains the value as one of its members.</p>\n         <p>The following example would return data sources with an animals attribute that is a list containing a cat \n            member (for example, <code>[\"dog\", \"cat\"]</code>): <code>\"listContains\": { \"key\": \"animals\", \"value\": \"cat\" }</code>\n         </p>"
+                    }
+                },
+                "stringContains": {
+                    "target": "com.amazonaws.bedrock#FilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key \n            and whose value is one of the following:</p>\n         <p>A string that contains the value as a substring. The following example would return data sources with an \n            animal attribute that contains the substring at (for example, 'cat'): \n            <code>\"stringContains\": { \"key\": \"animal\", \"value\": \"at\" }</code>\n         </p>\n         <p>A list with a member that contains the value as a substring. The following example would return data \n            sources with an animals attribute that is a list containing a member that contains the substring at \n            (for example, <code>[\"dog\", \"cat\"]</code>): <code>\"stringContains\": { \"key\": \"animals\", \"value\": \"at\" }</code>\n         </p>"
+                    }
+                },
+                "andAll": {
+                    "target": "com.amazonaws.bedrock#RetrievalFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if their metadata attributes fulfill all the \n            filter conditions inside this list.</p>"
+                    }
+                },
+                "orAll": {
+                    "target": "com.amazonaws.bedrock#RetrievalFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base data sources are returned if their metadata attributes fulfill at least one of the filter \n            conditions inside this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the filters to use on the metadata attributes/fields in the knowledge base data \n            sources before returning results.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrock#RetrievalFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#RetrievalFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2
+                }
+            }
+        },
+        "com.amazonaws.bedrock#RetrieveAndGenerateConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrock#RetrieveAndGenerateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that contains your data for retrieving information and generating responses.</p>\n         <p>If you choose to use <code>EXTERNAL_SOURCES</code>, then currently only Claude 3 Sonnet models for knowledge bases are supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseConfiguration": {
+                    "target": "com.amazonaws.bedrock#KnowledgeBaseRetrieveAndGenerateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for the knowledge base retrieval and response generation.</p>"
+                    }
+                },
+                "externalSourcesConfiguration": {
+                    "target": "com.amazonaws.bedrock#ExternalSourcesRetrieveAndGenerateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the external source wrapper object in the \n            <code>retrieveAndGenerate</code> function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details for a knowledge base retrieval and response generation.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#RetrieveAndGenerateType": {
+            "type": "enum",
+            "members": {
+                "KNOWLEDGE_BASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE"
+                    }
+                },
+                "EXTERNAL_SOURCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL_SOURCES"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrock#RetrieveConfig": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.bedrock#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseRetrievalConfiguration": {
+                    "target": "com.amazonaws.bedrock#KnowledgeBaseRetrievalConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for knowledge base retrieval.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for retrieving information from a knowledge base.</p>"
             }
         },
         "com.amazonaws.bedrock#RoleArn": {
@@ -9293,6 +10135,21 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#S3ObjectDoc": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "com.amazonaws.bedrock#kBS3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI location for the wrapper object of the document.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The unique wrapper object of the document from the S3 location.</p>"
+            }
+        },
         "com.amazonaws.bedrock#S3Uri": {
             "type": "string",
             "traits": {
@@ -9310,6 +10167,23 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:sagemaker:[a-z0-9-]{1,20}:[0-9]{12}:flow-definition/.*$"
+            }
+        },
+        "com.amazonaws.bedrock#SearchType": {
+            "type": "enum",
+            "members": {
+                "HYBRID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HYBRID"
+                    }
+                },
+                "SEMANTIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEMANTIC"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrock#SecurityGroupId": {
@@ -9425,7 +10299,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops an in progress model evaluation job.</p>",
+                "smithy.api#documentation": "<p>Stops an evaluation job that is current being created or running.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -9439,7 +10313,7 @@
                 "jobIdentifier": {
                     "target": "com.amazonaws.bedrock#EvaluationJobIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the model evaluation job you want to stop.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the evaluation job you want to stop.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9757,6 +10631,57 @@
                 }
             ]
         },
+        "com.amazonaws.bedrock#Temperature": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrock#TextInferenceConfig": {
+            "type": "structure",
+            "members": {
+                "temperature": {
+                    "target": "com.amazonaws.bedrock#Temperature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the random-ness of text generated by the language model, influencing how \n            much the model sticks to the most predictable next words versus exploring more \n            surprising options. A lower temperature value (e.g. 0.2 or 0.3) makes model outputs \n            more deterministic or predictable, while a higher temperature (e.g. 0.8 or 0.9) makes \n            the outputs more creative or unpredictable.</p>"
+                    }
+                },
+                "topP": {
+                    "target": "com.amazonaws.bedrock#TopP",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A probability distribution threshold which controls what the model considers for \n            the set of possible next tokens. The model will only consider the top p% of the \n            probability distribution when generating the next token.</p>"
+                    }
+                },
+                "maxTokens": {
+                    "target": "com.amazonaws.bedrock#MaxTokens",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tokens to generate in the output text. Do not use the minimum of 0 \n            or the maximum of 65536. The limit values described here are arbitrary values, for actual \n            values consult the limits defined by your specific model.</p>"
+                    }
+                },
+                "stopSequences": {
+                    "target": "com.amazonaws.bedrock#RAGStopSequences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of sequences of characters that, if generated, will cause the model to stop \n            generating further tokens. Do not use a minimum length of 1 or a maximum length of 1000. \n            The limit values described here are arbitrary values, for actual values consult the \n            limits defined by your specific model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for text generation using a language model via the \n            <code>RetrieveAndGenerate</code> function.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#TextPromptTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrock#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -9793,6 +10718,15 @@
                 "smithy.api#documentation": "<p>The request contains more tags than can be associated with a resource (50 tags per resource). \n         The maximum number of tags includes both existing tags and those included in your current request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bedrock#TopP": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.bedrock#TrainingDataConfig": {
@@ -10224,6 +11158,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration of a virtual private cloud (VPC). For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/usingVPC.html\">Protect your data using Amazon Virtual Private Cloud and Amazon Web Services PrivateLink</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#kBS3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.{1,1024}$"
             }
         }
     }
