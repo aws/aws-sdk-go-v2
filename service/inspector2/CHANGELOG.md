@@ -1,3 +1,7 @@
+# v1.34.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2024-11-22)
 
 * **Feature**: Extend inspector2 service model to include ServiceQuotaExceededException.

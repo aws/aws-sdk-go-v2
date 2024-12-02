@@ -1,3 +1,8 @@
+# v1.44.0 (2024-12-02)
+
+* **Feature**: This release introduces Event Trigger APIs as part of Amazon Connect Customer Profiles service.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2024-11-18)
 
 * **Feature**: This release introduces Segmentation APIs and new Calculated Attribute Event Filters as part of Amazon Connect Customer Profiles service.

@@ -1,3 +1,8 @@
+# v1.17.0 (2024-12-02)
+
+* **Feature**: Amazon Q Business now supports capabilities to extract insights and answer questions from visual elements embedded within documents, a browser extension for Google Chrome, Mozilla Firefox, and Microsoft Edge, and attachments across conversations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

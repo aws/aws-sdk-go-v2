@@ -1,3 +1,8 @@
+# v1.119.0 (2024-12-02)
+
+* **Feature**: Adds support for WhatsApp Business messaging, IVR call recording, enabling Contact Lens for existing on-premise contact centers and telephony platforms, and enabling telephony and IVR migration to Amazon Connect independent of their contact center agents.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.118.0 (2024-11-26)
 
 * **Feature**: Enables access to ValueMap and ValueInteger types for SegmentAttributes and fixes deserialization bug for DescribeContactFlow in AmazonConnect Public API

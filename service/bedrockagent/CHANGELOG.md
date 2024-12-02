@@ -1,3 +1,8 @@
+# v1.30.0 (2024-12-02)
+
+* **Feature**: This release introduces APIs to upload documents directly into a Knowledge Base
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2024-11-27)
 
 * **Feature**: Add support for specifying embeddingDataType, either FLOAT32 or BINARY

@@ -1,8 +1,0 @@
-{
-    "id": "66947a97-e977-4436-ae4b-178ca2b426fc",
-    "type": "feature",
-    "description": "AWS Transfer Family now offers Web apps that enables simple and secure access to data stored in Amazon S3.",
-    "modules": [
-        "service/transfer"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.20.0 (2024-12-02)
+
+* **Feature**: This release adds supports for enterprises to integrate Amazon Connect with other voice systems. It supports directly transferring voice calls and metadata without using the public telephone network. It also supports real-time and post-call analytics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

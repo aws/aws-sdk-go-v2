@@ -1,3 +1,8 @@
+# v1.55.0 (2024-12-02)
+
+* **Feature**: Add new Multi Domain Correlation findings.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.7 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

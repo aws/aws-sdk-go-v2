@@ -1,3 +1,7 @@
+# v1.28.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2024-11-22)
 
 * **Feature**: This release adds support for resource policy based cross account S3 access to sequence store read sets.

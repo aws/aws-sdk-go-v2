@@ -1,3 +1,7 @@
+# v1.29.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2024-11-22)
 
 * **Feature**: This release adds support for starting email contacts in your Amazon Connect instance as an email receiving action.

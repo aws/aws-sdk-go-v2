@@ -1,3 +1,8 @@
+# v1.23.0 (2024-12-02)
+
+* **Feature**: Add support for Knowledge Base Evaluations & LLM as a judge
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

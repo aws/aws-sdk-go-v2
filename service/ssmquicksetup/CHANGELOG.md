@@ -1,3 +1,7 @@
+# v1.3.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.0 (2024-11-21)
 
 * **Feature**: Add methods that retrieve details about deployed configurations: ListConfigurations, GetConfiguration

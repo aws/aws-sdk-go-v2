@@ -1,3 +1,7 @@
+# v1.44.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2024-11-21)
 
 * **Feature**: Added support to modify the engine type for existing ElastiCache Users and User Groups. Customers can now modify the engine type from redis to valkey.

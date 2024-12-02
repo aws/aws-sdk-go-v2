@@ -1,3 +1,7 @@
+# v1.43.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2024-11-22)
 
 * **Feature**: This release adds support for advertising trusted CA certificate names in associated trust stores.

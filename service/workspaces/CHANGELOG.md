@@ -1,3 +1,7 @@
+# v1.50.2 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.1 (2024-11-22)
 
 * **Documentation**: While integrating WSP-DCV rebrand, a few mentions were erroneously renamed from WSP to DCV. This release reverts those mentions back to WSP.

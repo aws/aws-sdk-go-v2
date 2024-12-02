@@ -1,3 +1,7 @@
+# v1.63.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.0 (2024-11-20)
 
 * **Feature**: This release adds the ability to reconfigure concurrent job settings for existing queues and create queues with custom concurrent job settings.

@@ -1,8 +1,0 @@
-{
-    "id": "c6616d8e-7f9f-4e87-b8b7-c679ccc4fc8d",
-    "type": "feature",
-    "description": "This release adds following capabilities: Configuring safeguards via AIGuardrails for Q in Connect inferencing, and APIs to support Q\u0026A self-service use cases",
-    "modules": [
-        "service/qconnect"
-    ]
-}

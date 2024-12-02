@@ -1,8 +1,0 @@
-{
-    "id": "168fb1f4-ce78-48d4-bd63-934a9857b34a",
-    "type": "feature",
-    "description": "Add support for policy operations on the DECLARATIVE_POLICY_EC2 policy type.",
-    "modules": [
-        "service/organizations"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.51.0 (2024-12-02)
+
+* **Feature**: Amazon S3 introduces support for AWS Dedicated Local Zones
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

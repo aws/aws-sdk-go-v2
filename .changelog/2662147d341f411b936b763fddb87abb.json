@@ -1,8 +1,0 @@
-{
-    "id": "2662147d-341f-411b-936b-763fddb87abb",
-    "type": "feature",
-    "description": "Added support for Auto Mode Clusters, Hybrid Nodes, and specifying computeTypes in the DescribeAddonVersions API.",
-    "modules": [
-        "service/eks"
-    ]
-}

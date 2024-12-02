@@ -1,3 +1,7 @@
+# v1.26.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2024-11-18)
 
 * **Feature**: Add support for the automatic pause/resume feature of Aurora Serverless v2.

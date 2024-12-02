@@ -1,8 +1,0 @@
-{
-    "id": "cb8cac73-11f0-4eb0-93e9-36d4e0539450",
-    "type": "feature",
-    "description": "Call private APIs by configuring Connections with VPC connectivity through PrivateLink and VPC Lattice",
-    "modules": [
-        "service/eventbridge"
-    ]
-}

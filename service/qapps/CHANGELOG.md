@@ -1,3 +1,7 @@
+# v1.5.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2024-11-26)
 
 * **Feature**: Private sharing, file upload and data collection feature support for Q Apps

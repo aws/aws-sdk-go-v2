@@ -1,3 +1,7 @@
+# v1.24.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2024-11-20)
 
 * **Feature**: This release supports Metadata Enforcement Rule feature for Create Subscription Request action.

@@ -1,3 +1,8 @@
+# v1.45.0 (2024-12-02)
+
+* **Feature**: This feature introduces support for CRUDL APIs, enabling the creation and management of Connected data sources.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

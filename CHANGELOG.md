@@ -1,3 +1,75 @@
+# Release (2024-12-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.32.6
+  * **Bug Fix**: Fix user agent to add business metrics at the end instead of prepend them
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.23.0](service/bedrock/CHANGELOG.md#v1230-2024-12-02)
+  * **Feature**: Add support for Knowledge Base Evaluations & LLM as a judge
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.30.0](service/bedrockagent/CHANGELOG.md#v1300-2024-12-02)
+  * **Feature**: This release introduces APIs to upload documents directly into a Knowledge Base
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.28.0](service/bedrockagentruntime/CHANGELOG.md#v1280-2024-12-02)
+  * **Feature**: This release introduces a new Rerank API to leverage reranking models (with integration into Knowledge Bases); APIs to upload documents directly into Knowledge Base; RetrieveAndGenerateStream API for streaming response; Guardrails on Retrieve API; and ability to automatically generate filters
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.20.0](service/chimesdkvoice/CHANGELOG.md#v1200-2024-12-02)
+  * **Feature**: This release adds supports for enterprises to integrate Amazon Connect with other voice systems. It supports directly transferring voice calls and metadata without using the public telephone network. It also supports real-time and post-call analytics.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.21.0](service/cleanrooms/CHANGELOG.md#v1210-2024-12-02)
+  * **Feature**: This release allows customers and their partners to easily collaborate with data stored in Snowflake and Amazon Athena, without having to move or share their underlying data among collaborators.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.45.0](service/cloudwatchlogs/CHANGELOG.md#v1450-2024-12-02)
+  * **Feature**: Adds PutIntegration, GetIntegration, ListIntegrations and DeleteIntegration APIs. Adds QueryLanguage support to StartQuery, GetQueryResults, DescribeQueries, DescribeQueryDefinitions, and PutQueryDefinition APIs.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.119.0](service/connect/CHANGELOG.md#v11190-2024-12-02)
+  * **Feature**: Adds support for WhatsApp Business messaging, IVR call recording, enabling Contact Lens for existing on-premise contact centers and telephony platforms, and enabling telephony and IVR migration to Amazon Connect independent of their contact center agents.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.1.0](service/connectcampaignsv2/CHANGELOG.md#v110-2024-12-02)
+  * **Feature**: Amazon Connect Outbound Campaigns V2 / Features : Adds support for Event-Triggered Campaigns.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.44.0](service/customerprofiles/CHANGELOG.md#v1440-2024-12-02)
+  * **Feature**: This release introduces Event Trigger APIs as part of Amazon Connect Customer Profiles service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.195.0](service/ec2/CHANGELOG.md#v11950-2024-12-02)
+  * **Feature**: Adds support for declarative policies that allow you to enforce desired configuration across an AWS organization through configuring account attributes. Adds support for Allowed AMIs that allows you to limit the use of AMIs in AWS accounts. Adds support for connectivity over non-HTTP protocols.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.52.1](service/ecs/CHANGELOG.md#v1521-2024-12-02)
+  * **Documentation**: This release adds support for Container Insights with Enhanced Observability for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.53.0](service/eks/CHANGELOG.md#v1530-2024-12-02)
+  * **Feature**: Added support for Auto Mode Clusters, Hybrid Nodes, and specifying computeTypes in the DescribeAddonVersions API.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.36.0](service/eventbridge/CHANGELOG.md#v1360-2024-12-02)
+  * **Feature**: Call private APIs by configuring Connections with VPC connectivity through PrivateLink and VPC Lattice
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.51.0](service/fsx/CHANGELOG.md#v1510-2024-12-02)
+  * **Feature**: FSx API changes to support the public launch of the Amazon FSx Intelligent Tiering for OpenZFS storage class.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.52.0](service/guardduty/CHANGELOG.md#v1520-2024-12-02)
+  * **Feature**: Add new Multi Domain Correlation findings.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.39.0](service/imagebuilder/CHANGELOG.md#v1390-2024-12-02)
+  * **Feature**: Added support for EC2 Image Builder's integration with AWS Marketplace for Marketplace components.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.0.0](service/invoicing/CHANGELOG.md#v100-2024-12-02)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Invoice Configuration allows you to receive separate AWS invoices based on your organizational needs. You can use the AWS SDKs to manage Invoice Units and programmatically fetch the information of the invoice receiver.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.25.0](service/memorydb/CHANGELOG.md#v1250-2024-12-02)
+  * **Feature**: Amazon MemoryDB SDK now supports all APIs for Multi-Region. Please refer to the updated Amazon MemoryDB public documentation for detailed information on API usage.
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.0.0](service/networkflowmonitor/CHANGELOG.md#v100-2024-12-02)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds documentation for a new feature in Amazon CloudWatch called Network Flow Monitor. You can use Network Flow Monitor to get near real-time metrics, including retransmissions and data transferred, for your actual workloads.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.45.0](service/opensearch/CHANGELOG.md#v1450-2024-12-02)
+  * **Feature**: This feature introduces support for CRUDL APIs, enabling the creation and management of Connected data sources.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.36.0](service/organizations/CHANGELOG.md#v1360-2024-12-02)
+  * **Feature**: Add support for policy operations on the DECLARATIVE_POLICY_EC2 policy type.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.17.0](service/qbusiness/CHANGELOG.md#v1170-2024-12-02)
+  * **Feature**: Amazon Q Business now supports capabilities to extract insights and answer questions from visual elements embedded within documents, a browser extension for Google Chrome, Mozilla Firefox, and Microsoft Edge, and attachments across conversations.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.14.0](service/qconnect/CHANGELOG.md#v1140-2024-12-02)
+  * **Feature**: This release adds following capabilities: Configuring safeguards via AIGuardrails for Q in Connect inferencing, and APIs to support Q&A self-service use cases
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.92.0](service/rds/CHANGELOG.md#v1920-2024-12-02)
+  * **Feature**: Amazon RDS supports CloudWatch Database Insights. You can use the SDK to create, modify, and describe the DatabaseInsightsMode for your DB instances and clusters.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.70.0](service/s3/CHANGELOG.md#v1700-2024-12-02)
+  * **Feature**: Amazon S3 introduces support for AWS Dedicated Local Zones
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.51.0](service/s3control/CHANGELOG.md#v1510-2024-12-02)
+  * **Feature**: Amazon S3 introduces support for AWS Dedicated Local Zones
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.55.0](service/securityhub/CHANGELOG.md#v1550-2024-12-02)
+  * **Feature**: Add new Multi Domain Correlation findings.
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.0.0](service/securityir/CHANGELOG.md#v100-2024-12-02)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Security Incident Response is a purpose-built security incident solution designed to help customers prepare for, respond to, and recover from security incidents.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.54.0](service/transfer/CHANGELOG.md#v1540-2024-12-02)
+  * **Feature**: AWS Transfer Family now offers Web apps that enables simple and secure access to data stored in Amazon S3.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.13.0](service/vpclattice/CHANGELOG.md#v1130-2024-12-02)
+  * **Feature**: Lattice APIs that allow sharing and access of VPC resources across accounts.
+
 # Release (2024-11-27)
 
 ## Module Highlights

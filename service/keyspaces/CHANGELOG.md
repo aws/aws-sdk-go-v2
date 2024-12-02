@@ -1,3 +1,7 @@
+# v1.16.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2024-11-19)
 
 * **Feature**: Amazon Keyspaces Multi-Region Replication: Adds support to add new regions to multi and single-region keyspaces.

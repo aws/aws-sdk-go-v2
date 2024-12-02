@@ -1,3 +1,8 @@
+# v1.51.0 (2024-12-02)
+
+* **Feature**: FSx API changes to support the public launch of the Amazon FSx Intelligent Tiering for OpenZFS storage class.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2024-11-27)
 
 * **Feature**: This release adds EFA support to increase FSx for Lustre file systems' throughput performance to a single client instance. This can be done by specifying EfaEnabled=true at the time of creation of Persistent_2 file systems.

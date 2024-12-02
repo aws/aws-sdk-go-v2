@@ -1,3 +1,7 @@
+# v1.47.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2024-11-22)
 
 * **Feature**: Advanced Scaling in Amazon EMR Managed Scaling

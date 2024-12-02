@@ -1,3 +1,7 @@
+# v1.69.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.69.0 (2024-11-22)
 
 * **Feature**: Add ProvisionedPollerConfig to Lambda event-source-mapping API.

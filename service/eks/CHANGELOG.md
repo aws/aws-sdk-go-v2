@@ -1,3 +1,8 @@
+# v1.53.0 (2024-12-02)
+
+* **Feature**: Added support for Auto Mode Clusters, Hybrid Nodes, and specifying computeTypes in the DescribeAddonVersions API.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

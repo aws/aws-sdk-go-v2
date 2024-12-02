@@ -1,8 +1,0 @@
-{
-    "id": "65b6adb3-7558-4e55-ad79-5eecbdb831de",
-    "type": "documentation",
-    "description": "This release adds support for Container Insights with Enhanced Observability for Amazon ECS.",
-    "modules": [
-        "service/ecs"
-    ]
-}

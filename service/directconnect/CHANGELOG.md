@@ -1,3 +1,7 @@
+# v1.30.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2024-11-25)
 
 * **Feature**: Update DescribeDirectConnectGatewayAssociations API to return associated core network information if a Direct Connect gateway is attached to a Cloud WAN core network.

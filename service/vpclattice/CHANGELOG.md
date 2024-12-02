@@ -1,3 +1,8 @@
+# v1.13.0 (2024-12-02)
+
+* **Feature**: Lattice APIs that allow sharing and access of VPC resources across accounts.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.9 (2024-11-22)
 
 * No change notes available for this release.
