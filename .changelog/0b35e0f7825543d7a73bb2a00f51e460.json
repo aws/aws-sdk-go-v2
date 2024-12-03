@@ -1,8 +1,0 @@
-{
-    "id": "0b35e0f7-8255-43d7-a73b-b2a00f51e460",
-    "type": "feature",
-    "description": "Added support for passing role arn corresponding to the supported event destination",
-    "modules": [
-        "service/socialmessaging"
-    ]
-}

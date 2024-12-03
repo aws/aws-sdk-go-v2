@@ -1,8 +1,0 @@
-{
-    "id": "3b18c5da-e00d-432f-b0c3-17978c710516",
-    "type": "feature",
-    "description": "Add an API parameter that allows customers to set performance configuration for invoking a model.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.52.0 (2024-12-03)
+
+* **Feature**: It allows customers to pass CRC64NVME as a header in S3 Batch Operations copy requests
+
 # v1.51.0 (2024-12-02)
 
 * **Feature**: Amazon S3 introduces support for AWS Dedicated Local Zones

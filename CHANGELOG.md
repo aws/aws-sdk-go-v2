@@ -1,3 +1,16 @@
+# Release (2024-12-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.21.0](service/bedrockruntime/CHANGELOG.md#v1210-2024-12-03)
+  * **Feature**: Add an API parameter that allows customers to set performance configuration for invoking a model.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.52.0](service/s3control/CHANGELOG.md#v1520-2024-12-03)
+  * **Feature**: It allows customers to pass CRC64NVME as a header in S3 Batch Operations copy requests
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.1.0](service/socialmessaging/CHANGELOG.md#v110-2024-12-03)
+  * **Feature**: Added support for passing role arn corresponding to the supported event destination
+
 # Release (2024-12-02)
 
 ## General Highlights

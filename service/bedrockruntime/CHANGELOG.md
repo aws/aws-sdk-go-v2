@@ -1,3 +1,7 @@
+# v1.21.0 (2024-12-03)
+
+* **Feature**: Add an API parameter that allows customers to set performance configuration for invoking a model.
+
 # v1.20.2 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions
