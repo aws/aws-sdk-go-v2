@@ -249,6 +249,13 @@ func awsRestjson1_serializeOpDocumentConverseInput(v *ConverseInput, value smith
 		}
 	}
 
+	if v.PerformanceConfig != nil {
+		ok := object.Key("performanceConfig")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PromptVariables != nil {
 		ok := object.Key("promptVariables")
 		if err := awsRestjson1_serializeDocumentPromptVariableMap(v.PromptVariables, ok); err != nil {
@@ -394,6 +401,13 @@ func awsRestjson1_serializeOpDocumentConverseStreamInput(v *ConverseStreamInput,
 		}
 	}
 
+	if v.PerformanceConfig != nil {
+		ok := object.Key("performanceConfig")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PromptVariables != nil {
 		ok := object.Key("promptVariables")
 		if err := awsRestjson1_serializeDocumentPromptVariableMap(v.PromptVariables, ok); err != nil {
@@ -518,6 +532,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelInput(v *InvokeModelInput, e
 		}
 	}
 
+	if len(v.PerformanceConfigLatency) > 0 {
+		locationName := "X-Amzn-Bedrock-Performanceconfig-Latency"
+		encoder.SetHeader(locationName).String(string(v.PerformanceConfigLatency))
+	}
+
 	if len(v.Trace) > 0 {
 		locationName := "X-Amzn-Bedrock-Trace"
 		encoder.SetHeader(locationName).String(string(v.Trace))
@@ -624,6 +643,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelWithResponseStreamInput(v *I
 		if err := encoder.SetURI("modelId").String(*v.ModelId); err != nil {
 			return err
 		}
+	}
+
+	if len(v.PerformanceConfigLatency) > 0 {
+		locationName := "X-Amzn-Bedrock-Performanceconfig-Latency"
+		encoder.SetHeader(locationName).String(string(v.PerformanceConfigLatency))
 	}
 
 	if len(v.Trace) > 0 {
@@ -1052,6 +1076,18 @@ func awsRestjson1_serializeDocumentNonEmptyStringList(v []string, value smithyjs
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPerformanceConfiguration(v *types.PerformanceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Latency) > 0 {
+		ok := object.Key("latency")
+		ok.String(string(v.Latency))
+	}
+
 	return nil
 }
 

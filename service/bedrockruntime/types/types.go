@@ -233,6 +233,9 @@ type ConverseStreamMetadataEvent struct {
 	// This member is required.
 	Usage *TokenUsage
 
+	// Model performance configuration metadata for the conversation stream event.
+	PerformanceConfig *PerformanceConfiguration
+
 	// The trace object in the response from [ConverseStream] that contains information about the
 	// guardrail behavior.
 	//
@@ -990,6 +993,15 @@ type PayloadPart struct {
 
 	// Base64-encoded bytes of payload data.
 	Bytes []byte
+
+	noSmithyDocumentSerde
+}
+
+// Performance settings for a model.
+type PerformanceConfiguration struct {
+
+	// To use a latency-optimized version of the model, set to optimized .
+	Latency PerformanceConfigLatency
 
 	noSmithyDocumentSerde
 }

@@ -2259,17 +2259,10 @@ type S3CopyObjectOperation struct {
 	//   arn:aws:s3:::destinationBucket .
 	//
 	//   - Directory buckets - For example, to copy objects to a directory bucket
-	//   named destinationBucket in the Availability Zone identified by the AZ ID
+	//   named destinationBucket in the Availability Zone; identified by the AZ ID
 	//   usw2-az1 , set the TargetResource property to
 	//   arn:aws:s3express:region:account_id:/bucket/destination_bucket_base_name--usw2-az1--x-s3
-	//   . A directory bucket as a destination bucket can be in Availability Zone or
-	//   Local Zone.
-	//
-	// Copying objects across different Amazon Web Services Regions isn't supported
-	//   when the source or destination bucket is in Amazon Web Services Local Zones. The
-	//   source and destination buckets must have the same parent Amazon Web Services
-	//   Region. Otherwise, you get an HTTP 400 Bad Request error with the error code
-	//   InvalidRequest .
+	//   .
 	TargetResource *string
 
 	//

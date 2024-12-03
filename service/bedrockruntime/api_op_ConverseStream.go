@@ -51,7 +51,20 @@ import (
 // This operation requires permission for the bedrock:InvokeModelWithResponseStream
 // action.
 //
+// To deny all inference access to resources that you specify in the modelId
+// field, you need to deny access to the bedrock:InvokeModel and
+// bedrock:InvokeModelWithResponseStream actions. Doing this also denies access to
+// the resource through the base inference actions ([InvokeModel] and [InvokeModelWithResponseStream]). For more information
+// see [Deny access for inference on specific models].
+//
+// For troubleshooting some of the common errors you might encounter when using
+// the ConverseStream API, see [Troubleshooting Amazon Bedrock API Error Codes] in the Amazon Bedrock User Guide
+//
+// [InvokeModelWithResponseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html
 // [GetFoundationModel]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html
+// [Troubleshooting Amazon Bedrock API Error Codes]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html
+// [Deny access for inference on specific models]: https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference
+// [InvokeModel]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
 // [Use a prompt from Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html
 func (c *Client) ConverseStream(ctx context.Context, params *ConverseStreamInput, optFns ...func(*Options)) (*ConverseStreamOutput, error) {
 	if params == nil {
@@ -87,13 +100,14 @@ type ConverseStreamInput struct {
 	//   Then specify the ARN of the resulting provisioned model. For more information,
 	//   see [Use a custom model in Amazon Bedrock]in the Amazon Bedrock User Guide.
 	//
-	//   - To include a prompt that was defined in Prompt management, specify the ARN
-	//   of the prompt version to use.
+	//   - To include a prompt that was defined in [Prompt management], specify the ARN of the prompt
+	//   version to use.
 	//
 	// The Converse API doesn't support [imported models].
 	//
 	// [Run inference using a Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
 	// [Use a custom model in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+	// [Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html
 	// [Supported Regions and models for cross-region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
 	// [imported models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
 	// [Amazon Bedrock base model IDs (on-demand throughput)]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
@@ -138,6 +152,9 @@ type ConverseStreamInput struct {
 
 	// The messages that you want to send to the model.
 	Messages []types.Message
+
+	// Model performance settings for the request.
+	PerformanceConfig *types.PerformanceConfiguration
 
 	// Contains a map of variables in a prompt from Prompt management to objects
 	// containing the values to fill in for them when running model invocation. This

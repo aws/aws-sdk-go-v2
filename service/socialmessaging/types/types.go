@@ -67,6 +67,9 @@ type LinkedWhatsAppBusinessAccountIdMetaData struct {
 	// The details for unregistered WhatsApp phone numbers.
 	UnregisteredWhatsAppPhoneNumbers []WhatsAppPhoneNumberDetail
 
+	// The Amazon Resource Name (ARN) of the WhatsApp Business Account ID.
+	WabaId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -257,6 +260,10 @@ type WhatsAppBusinessAccountEventDestination struct {
 	//
 	// This member is required.
 	EventDestinationArn *string
+
+	// The Amazon Resource Name (ARN) of an Identity and Access Management role that
+	// is able to import phone numbers and write events.
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }

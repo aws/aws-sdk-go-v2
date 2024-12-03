@@ -1,0 +1,8 @@
+{
+    "id": "12faa025-f62d-466e-bddd-b0032bc6ba5a",
+    "type": "feature",
+    "description": "It allows customers to pass CRC64NVME as a header in S3 Batch Operations copy requests",
+    "modules": [
+        "service/s3control"
+    ]
+}

@@ -7,7 +7,11 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The request is denied because of missing access permissions.
+// The request is denied because you do not have sufficient permissions to perform
+// the requested action. For troubleshooting this error, see [AccessDeniedException]in the Amazon Bedrock
+// User Guide
+//
+// [AccessDeniedException]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-access-denied
 type AccessDeniedException struct {
 	Message *string
 
@@ -33,7 +37,10 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An internal server error occurred. Retry your request.
+// An internal server error occurred. For troubleshooting this error, see [InternalFailure] in the
+// Amazon Bedrock User Guide
+//
+// [InternalFailure]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-internal-failure
 type InternalServerException struct {
 	Message *string
 
@@ -175,8 +182,10 @@ func (e *ModelTimeoutException) ErrorCode() string {
 }
 func (e *ModelTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified resource ARN was not found. Check the ARN and try your request
-// again.
+// The specified resource ARN was not found. For troubleshooting this error, see [ResourceNotFound]
+// in the Amazon Bedrock User Guide
+//
+// [ResourceNotFound]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-resource-not-found
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -231,7 +240,10 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service isn't currently available. Try again later.
+// The service isn't currently available. For troubleshooting this error, see [ServiceUnavailable] in
+// the Amazon Bedrock User Guide
+//
+// [ServiceUnavailable]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-service-unavailable
 type ServiceUnavailableException struct {
 	Message *string
 
@@ -257,11 +269,10 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Your request was throttled because of service-wide limitations. Resubmit your
-// request later or in a different region. You can also purchase [Provisioned Throughput]to increase the
-// rate or number of tokens you can process.
+// Your request was denied due to exceeding the account quotas for Amazon Bedrock.
+// For troubleshooting this error, see [ThrottlingException]in the Amazon Bedrock User Guide
 //
-// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+// [ThrottlingException]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception
 type ThrottlingException struct {
 	Message *string
 
@@ -287,7 +298,10 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Input validation failed. Check your request parameters and retry the request.
+// The input fails to satisfy the constraints specified by Amazon Bedrock. For
+// troubleshooting this error, see [ValidationError]in the Amazon Bedrock User Guide
+//
+// [ValidationError]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error
 type ValidationException struct {
 	Message *string
 

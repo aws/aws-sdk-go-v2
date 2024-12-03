@@ -1229,6 +1229,11 @@ func awsRestjson1_serializeDocumentWhatsAppBusinessAccountEventDestination(v *ty
 		ok.String(*v.EventDestinationArn)
 	}
 
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
 	return nil
 }
 

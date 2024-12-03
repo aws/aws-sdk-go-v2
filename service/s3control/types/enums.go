@@ -780,10 +780,11 @@ type S3ChecksumAlgorithm string
 
 // Enum values for S3ChecksumAlgorithm
 const (
-	S3ChecksumAlgorithmCrc32  S3ChecksumAlgorithm = "CRC32"
-	S3ChecksumAlgorithmCrc32c S3ChecksumAlgorithm = "CRC32C"
-	S3ChecksumAlgorithmSha1   S3ChecksumAlgorithm = "SHA1"
-	S3ChecksumAlgorithmSha256 S3ChecksumAlgorithm = "SHA256"
+	S3ChecksumAlgorithmCrc32     S3ChecksumAlgorithm = "CRC32"
+	S3ChecksumAlgorithmCrc32c    S3ChecksumAlgorithm = "CRC32C"
+	S3ChecksumAlgorithmSha1      S3ChecksumAlgorithm = "SHA1"
+	S3ChecksumAlgorithmSha256    S3ChecksumAlgorithm = "SHA256"
+	S3ChecksumAlgorithmCrc64nvme S3ChecksumAlgorithm = "CRC64NVME"
 )
 
 // Values returns all known values for S3ChecksumAlgorithm. Note that this can be
@@ -796,6 +797,7 @@ func (S3ChecksumAlgorithm) Values() []S3ChecksumAlgorithm {
 		"CRC32C",
 		"SHA1",
 		"SHA256",
+		"CRC64NVME",
 	}
 }
 
