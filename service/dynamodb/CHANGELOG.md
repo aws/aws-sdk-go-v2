@@ -1,3 +1,7 @@
+# v1.38.0 (2024-12-03.2)
+
+* **Feature**: This change adds support for global tables with multi-Region strong consistency (in preview). The UpdateTable API now supports a new attribute MultiRegionConsistency to set consistency when creating global tables. The DescribeTable output now optionally includes the MultiRegionConsistency attribute.
+
 # v1.37.2 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

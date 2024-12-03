@@ -1,8 +1,0 @@
-{
-    "id": "166f4f27-c9f3-4a45-9efc-7e72b51b2e6b",
-    "type": "feature",
-    "description": "This release includes(1)Zero-ETL integration to ingest data from 3P SaaS and DynamoDB to Redshift/Redlake (2)new properties on Connections to enable reuse; new connection APIs for retrieve/preview metadata (3)support of CRUD operations for Multi-catalog (4)support of automatic statistics collections",
-    "modules": [
-        "service/glue"
-    ]
-}

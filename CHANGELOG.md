@@ -1,3 +1,50 @@
+# Release (2024-12-03.2)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/rds/auth`: [v1.5.0](feature/rds/auth/CHANGELOG.md#v150-2024-12-032)
+  * **Feature**: feat: Add Xanadu Auth Token Generator
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.49.0](service/athena/CHANGELOG.md#v1490-2024-12-032)
+  * **Feature**: Add FEDERATED type to CreateDataCatalog. This creates Athena Data Catalog, AWS Lambda connector, and AWS Glue connection. Create/DeleteDataCatalog returns DataCatalog. Add Status, ConnectionType, and Error to DataCatalog and DataCatalogSummary. Add DeleteCatalogOnly to delete Athena Catalog only.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.24.0](service/bedrock/CHANGELOG.md#v1240-2024-12-032)
+  * **Feature**: Tagging support for Async Invoke resources. Added support for Distillation in CreateModelCustomizationJob API. Support for videoDataDeliveryEnabled flag in invocation logging.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.31.0](service/bedrockagent/CHANGELOG.md#v1310-2024-12-032)
+  * **Feature**: Releasing SDK for Multi-Agent Collaboration.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.29.0](service/bedrockagentruntime/CHANGELOG.md#v1290-2024-12-032)
+  * **Feature**: Releasing SDK for multi agent collaboration
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.22.0](service/bedrockruntime/CHANGELOG.md#v1220-2024-12-032)
+  * **Feature**: Added support for Async Invoke Operations Start, List and Get. Support for invocation logs with `requestMetadata` field in Converse, ConverseStream, Invoke and InvokeStream. Video content blocks in Converse/ConverseStream accept raw bytes or S3 URI.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.43.3](service/cloudwatch/CHANGELOG.md#v1433-2024-12-032)
+  * **Documentation**: Support for configuring AiOps investigation as alarm action
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.25.0](service/datazone/CHANGELOG.md#v1250-2024-12-032)
+  * **Feature**: Adds support for Connections, ProjectProfiles, and JobRuns APIs. Supports the new Lineage feature at GA. Adjusts optionality of a parameter for DataSource and SubscriptionTarget APIs which may adjust types in some clients.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.0.0](service/dsql/CHANGELOG.md#v100-2024-12-032)
+  * **Release**: New AWS service client module
+  * **Feature**: Add new API operations for Amazon Aurora DSQL. Amazon Aurora DSQL is a serverless, distributed SQL database with virtually unlimited scale, highest availability, and zero infrastructure management.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.38.0](service/dynamodb/CHANGELOG.md#v1380-2024-12-032)
+  * **Feature**: This change adds support for global tables with multi-Region strong consistency (in preview). The UpdateTable API now supports a new attribute MultiRegionConsistency to set consistency when creating global tables. The DescribeTable output now optionally includes the MultiRegionConsistency attribute.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.103.0](service/glue/CHANGELOG.md#v11030-2024-12-032)
+  * **Feature**: This release includes(1)Zero-ETL integration to ingest data from 3P SaaS and DynamoDB to Redshift/Redlake (2)new properties on Connections to enable reuse; new connection APIs for retrieve/preview metadata (3)support of CRUD operations for Multi-catalog (4)support of automatic statistics collections
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.39.0](service/lakeformation/CHANGELOG.md#v1390-2024-12-032)
+  * **Feature**: This release added two new LakeFormation Permissions (CREATE_CATALOG, SUPER_USER) and added Id field for CatalogResource. It also added new conditon and expression field.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.6.0](service/qapps/CHANGELOG.md#v160-2024-12-032)
+  * **Feature**: Add support for 11 new plugins as action cards to help automate repetitive tasks and improve productivity.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.18.0](service/qbusiness/CHANGELOG.md#v1180-2024-12-032)
+  * **Feature**: Amazon Q Business now supports customization options for your web experience, 11 new Plugins, and QuickSight support. Amazon Q index allows software providers to enrich their native generative AI experiences with their customer's enterprise knowledge and user context spanning multiple applications.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.81.0](service/quicksight/CHANGELOG.md#v1810-2024-12-032)
+  * **Feature**: This release includes API needed to support for Unstructured Data in Q in QuickSight Q&A (IDC).
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.53.0](service/redshift/CHANGELOG.md#v1530-2024-12-032)
+  * **Feature**: Adds support for Amazon Redshift RegisterNamespace and DeregisterNamespace APIs to share data to AWS Glue Data Catalog.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.25.0](service/redshiftserverless/CHANGELOG.md#v1250-2024-12-032)
+  * **Feature**: Adds support for the ListManagedWorkgroups API to get an overview of existing managed workgroups.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.71.0](service/s3/CHANGELOG.md#v1710-2024-12-032)
+  * **Feature**: Amazon S3 Metadata stores object metadata in read-only, fully managed Apache Iceberg metadata tables that you can query. You can create metadata table configurations for S3 general purpose buckets.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.0.0](service/s3tables/CHANGELOG.md#v100-2024-12-032)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon S3 Tables deliver the first cloud object store with built-in open table format support, and the easiest way to store tabular data at scale.
+
 # Release (2024-12-03)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.53.0 (2024-12-03.2)
+
+* **Feature**: Adds support for Amazon Redshift RegisterNamespace and DeregisterNamespace APIs to share data to AWS Glue Data Catalog.
+
 # v1.52.2 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

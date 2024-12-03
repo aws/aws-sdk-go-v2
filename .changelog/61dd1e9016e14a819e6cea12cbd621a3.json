@@ -1,8 +1,0 @@
-{
-    "id": "61dd1e90-16e1-4a81-9e6c-ea12cbd621a3",
-    "type": "feature",
-    "description": "Amazon Q Business now supports customization options for your web experience, 11 new Plugins, and QuickSight support. Amazon Q index allows software providers to enrich their native generative AI experiences with their customer's enterprise knowledge and user context spanning multiple applications.",
-    "modules": [
-        "service/qbusiness"
-    ]
-}

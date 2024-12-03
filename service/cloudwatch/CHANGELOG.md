@@ -1,3 +1,7 @@
+# v1.43.3 (2024-12-03.2)
+
+* **Documentation**: Support for configuring AiOps investigation as alarm action
+
 # v1.43.2 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

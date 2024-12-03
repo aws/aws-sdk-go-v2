@@ -1,3 +1,7 @@
+# v1.81.0 (2024-12-03.2)
+
+* **Feature**: This release includes API needed to support for Unstructured Data in Q in QuickSight Q&A (IDC).
+
 # v1.80.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

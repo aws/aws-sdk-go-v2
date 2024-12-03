@@ -1,3 +1,7 @@
+# v1.18.0 (2024-12-03.2)
+
+* **Feature**: Amazon Q Business now supports customization options for your web experience, 11 new Plugins, and QuickSight support. Amazon Q index allows software providers to enrich their native generative AI experiences with their customer's enterprise knowledge and user context spanning multiple applications.
+
 # v1.17.0 (2024-12-02)
 
 * **Feature**: Amazon Q Business now supports capabilities to extract insights and answer questions from visual elements embedded within documents, a browser extension for Google Chrome, Mozilla Firefox, and Microsoft Edge, and attachments across conversations.

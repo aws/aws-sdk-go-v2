@@ -1,3 +1,7 @@
+# v1.22.0 (2024-12-03.2)
+
+* **Feature**: Added support for Async Invoke Operations Start, List and Get. Support for invocation logs with `requestMetadata` field in Converse, ConverseStream, Invoke and InvokeStream. Video content blocks in Converse/ConverseStream accept raw bytes or S3 URI.
+
 # v1.21.0 (2024-12-03)
 
 * **Feature**: Add an API parameter that allows customers to set performance configuration for invoking a model.

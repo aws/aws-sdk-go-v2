@@ -1,8 +1,0 @@
-{
-    "id": "c3084743-2047-4f91-bb3d-c286f554d575",
-    "type": "feature",
-    "description": "feat: Add Xanadu Auth Token Generator",
-    "modules": [
-        "feature/rds/auth"
-    ]
-}

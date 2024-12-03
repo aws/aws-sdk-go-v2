@@ -1,3 +1,7 @@
+# v1.24.0 (2024-12-03.2)
+
+* **Feature**: Tagging support for Async Invoke resources. Added support for Distillation in CreateModelCustomizationJob API. Support for videoDataDeliveryEnabled flag in invocation logging.
+
 # v1.23.0 (2024-12-02)
 
 * **Feature**: Add support for Knowledge Base Evaluations & LLM as a judge

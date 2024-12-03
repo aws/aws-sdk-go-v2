@@ -1,8 +1,0 @@
-{
-    "id": "42293b05-7022-418b-b660-912fbf08e464",
-    "type": "feature",
-    "description": "Add support for 11 new plugins as action cards to help automate repetitive tasks and improve productivity.",
-    "modules": [
-        "service/qapps"
-    ]
-}

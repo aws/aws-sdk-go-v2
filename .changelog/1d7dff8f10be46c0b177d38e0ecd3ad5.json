@@ -1,8 +1,0 @@
-{
-    "id": "1d7dff8f-10be-46c0-b177-d38e0ecd3ad5",
-    "type": "feature",
-    "description": "Releasing SDK for Multi-Agent Collaboration.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

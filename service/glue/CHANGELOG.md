@@ -1,3 +1,7 @@
+# v1.103.0 (2024-12-03.2)
+
+* **Feature**: This release includes(1)Zero-ETL integration to ingest data from 3P SaaS and DynamoDB to Redshift/Redlake (2)new properties on Connections to enable reuse; new connection APIs for retrieve/preview metadata (3)support of CRUD operations for Multi-catalog (4)support of automatic statistics collections
+
 # v1.102.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

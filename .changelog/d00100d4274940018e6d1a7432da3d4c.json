@@ -1,8 +1,0 @@
-{
-    "id": "d00100d4-2749-4001-8e6d-1a7432da3d4c",
-    "type": "feature",
-    "description": "Add new API operations for Amazon Aurora DSQL. Amazon Aurora DSQL is a serverless, distributed SQL database with virtually unlimited scale, highest availability, and zero infrastructure management.",
-    "modules": [
-        "service/dsql"
-    ]
-}

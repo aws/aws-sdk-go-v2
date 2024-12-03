@@ -1,8 +1,0 @@
-{
-    "id": "b1abcb04-5029-463e-ad1e-b1c275c44a95",
-    "type": "feature",
-    "description": "Amazon S3 Metadata stores object metadata in read-only, fully managed Apache Iceberg metadata tables that you can query. You can create metadata table configurations for S3 general purpose buckets.",
-    "modules": [
-        "service/s3"
-    ]
-}

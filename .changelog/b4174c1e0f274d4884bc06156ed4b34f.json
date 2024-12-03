@@ -1,8 +1,0 @@
-{
-    "id": "b4174c1e-0f27-4d48-84bc-06156ed4b34f",
-    "type": "documentation",
-    "description": "Support for configuring AiOps investigation as alarm action",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "6b1d9b29-b71f-4b76-856e-1e72724d15e8",
-    "type": "feature",
-    "description": "This release added two new LakeFormation Permissions (CREATE_CATALOG, SUPER_USER) and added Id field for CatalogResource. It also added new conditon and expression field.",
-    "modules": [
-        "service/lakeformation"
-    ]
-}

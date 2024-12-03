@@ -1,3 +1,7 @@
+# v1.31.0 (2024-12-03.2)
+
+* **Feature**: Releasing SDK for Multi-Agent Collaboration.
+
 # v1.30.0 (2024-12-02)
 
 * **Feature**: This release introduces APIs to upload documents directly into a Knowledge Base
