@@ -2534,6 +2534,18 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.redshift#ConsumerIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.redshift#CopyClusterSnapshot": {
             "type": "operation",
             "input": {
@@ -2784,7 +2796,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new cluster with the specified parameters.</p>\n         <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster\n            subnet group name. The cluster subnet group identifies the subnets of your VPC that\n            Amazon Redshift uses when creating the cluster. \nFor more information about managing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a new cluster with the specified parameters.</p>\n         <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster\n            subnet group name. The cluster subnet group identifies the subnets of your VPC that\n            Amazon Redshift uses when creating the cluster. \nFor more information about managing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>\n         <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that\n            you own in a Region from reaching or being reached from the internet through internet\n            gateways and egress-only internet gateways. If a subnet group for a\n            provisioned cluster is in an account with VPC BPA turned on, the following capabilities\n            are blocked:</p>\n         <ul>\n            <li>\n               <p>Creating a public cluster</p>\n            </li>\n            <li>\n               <p>Restoring a public cluster</p>\n            </li>\n            <li>\n               <p>Modifying a private cluster to be public</p>\n            </li>\n            <li>\n               <p>Adding a subnet with VPC BPA turned on to the subnet group when there's at\n                    least one public cluster within the group</p>\n            </li>\n         </ul>\n         <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and\n            subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshift#CreateClusterMessage": {
@@ -4529,6 +4541,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of a datashare to show its managing entity.</p>"
                     }
+                },
+                "DataShareType": {
+                    "target": "com.amazonaws.redshift#DataShareType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of the datashare created by RegisterNamespace.</p>"
+                    }
                 }
             }
         },
@@ -4683,6 +4701,17 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "REJECTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DataShareType": {
+            "type": "enum",
+            "members": {
+                "INTERNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL"
                     }
                 }
             }
@@ -5734,6 +5763,67 @@
                 "smithy.api#documentation": "<p>Your request cannot be completed because a dependent internal service is\n            temporarily unavailable. Wait 30 to 60 seconds and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#DeregisterNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DeregisterNamespaceInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DeregisterNamespaceOutputMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidNamespaceFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deregisters a cluster or serverless namespace from the Amazon Web Services Glue Data Catalog.</p>"
+            }
+        },
+        "com.amazonaws.redshift#DeregisterNamespaceInputMessage": {
+            "type": "structure",
+            "members": {
+                "NamespaceIdentifier": {
+                    "target": "com.amazonaws.redshift#NamespaceIdentifierUnion",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster or \n            serverless namespace that you want to deregister.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConsumerIdentifiers": {
+                    "target": "com.amazonaws.redshift#ConsumerIdentifierList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array containing the ID of the consumer account \n            that you want to deregister the cluster or serverless namespace from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#DeregisterNamespaceOutputMessage": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.redshift#NamespaceRegistrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registration status of the cluster or \n            serverless namespace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DescribeAccountAttributes": {
@@ -11755,7 +11845,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the settings for a cluster.</p>\n         <p>You can also change node type and the number of nodes to scale up or down the\n            cluster. When resizing a cluster, you must specify both the number of nodes and the node\n            type even if one of the parameters does not change.</p>\n         <p>You can add another security or\n            parameter group, or change the admin user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. \nFor more information about managing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Modifies the settings for a cluster.</p>\n         <p>You can also change node type and the number of nodes to scale up or down the\n            cluster. When resizing a cluster, you must specify both the number of nodes and the node\n            type even if one of the parameters does not change.</p>\n         <p>You can add another security or\n            parameter group, or change the admin user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. \nFor more information about managing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>\n         <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that\n            you own in a Region from reaching or being reached from the internet through internet\n            gateways and egress-only internet gateways. If a subnet group for a\n            provisioned cluster is in an account with VPC BPA turned on, the following capabilities\n            are blocked:</p>\n         <ul>\n            <li>\n               <p>Creating a public cluster</p>\n            </li>\n            <li>\n               <p>Restoring a public cluster</p>\n            </li>\n            <li>\n               <p>Modifying a private cluster to be public</p>\n            </li>\n            <li>\n               <p>Adding a subnet with VPC BPA turned on to the subnet group when there's at\n                    least one public cluster within the group</p>\n            </li>\n         </ul>\n         <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and\n            subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshift#ModifyClusterDbRevision": {
@@ -12345,7 +12435,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies a cluster subnet group to include the specified list of VPC subnets. The\n            operation replaces the existing list of subnets with the new list of subnets.</p>"
+                "smithy.api#documentation": "<p>Modifies a cluster subnet group to include the specified list of VPC subnets. The\n            operation replaces the existing list of subnets with the new list of subnets.</p>\n         <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that\n            you own in a Region from reaching or being reached from the internet through internet\n            gateways and egress-only internet gateways. If a subnet group for a\n            provisioned cluster is in an account with VPC BPA turned on, the following capabilities\n            are blocked:</p>\n         <ul>\n            <li>\n               <p>Creating a public cluster</p>\n            </li>\n            <li>\n               <p>Restoring a public cluster</p>\n            </li>\n            <li>\n               <p>Modifying a private cluster to be public</p>\n            </li>\n            <li>\n               <p>Adding a subnet with VPC BPA turned on to the subnet group when there's at\n                    least one public cluster within the group</p>\n            </li>\n         </ul>\n         <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and\n            subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshift#ModifyClusterSubnetGroupMessage": {
@@ -13039,6 +13129,43 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#NamespaceIdentifierUnion": {
+            "type": "union",
+            "members": {
+                "ServerlessIdentifier": {
+                    "target": "com.amazonaws.redshift#ServerlessIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a serverless namespace.</p>"
+                    }
+                },
+                "ProvisionedIdentifier": {
+                    "target": "com.amazonaws.redshift#ProvisionedIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a provisioned cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object to store union of values for a \n            provisioned cluster or serverless namespace’s identifier.</p>"
+            }
+        },
+        "com.amazonaws.redshift#NamespaceRegistrationStatus": {
+            "type": "enum",
+            "members": {
+                "REGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Registering"
+                    }
+                },
+                "DEREGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deregistering"
+                    }
+                }
             }
         },
         "com.amazonaws.redshift#NetworkInterface": {
@@ -13787,6 +13914,22 @@
                 "smithy.api#documentation": "<p>Describes cluster attributes that are in a pending state. A change to one or more\n            the attributes was requested and is in progress or will be applied.</p>"
             }
         },
+        "com.amazonaws.redshift#ProvisionedIdentifier": {
+            "type": "structure",
+            "members": {
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the provisioned cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier for a provisioned cluster.</p>"
+            }
+        },
         "com.amazonaws.redshift#PurchaseReservedNodeOffering": {
             "type": "operation",
             "input": {
@@ -14441,6 +14584,9 @@
                     "target": "com.amazonaws.redshift#DeleteUsageLimit"
                 },
                 {
+                    "target": "com.amazonaws.redshift#DeregisterNamespace"
+                },
+                {
                     "target": "com.amazonaws.redshift#DescribeAccountAttributes"
                 },
                 {
@@ -14667,6 +14813,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#RebootCluster"
+                },
+                {
+                    "target": "com.amazonaws.redshift#RegisterNamespace"
                 },
                 {
                     "target": "com.amazonaws.redshift#RejectDataShare"
@@ -15780,6 +15929,67 @@
                 }
             }
         },
+        "com.amazonaws.redshift#RegisterNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#RegisterNamespaceInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#RegisterNamespaceOutputMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidNamespaceFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers a cluster or serverless namespace to the Amazon Web Services Glue Data Catalog.</p>"
+            }
+        },
+        "com.amazonaws.redshift#RegisterNamespaceInputMessage": {
+            "type": "structure",
+            "members": {
+                "NamespaceIdentifier": {
+                    "target": "com.amazonaws.redshift#NamespaceIdentifierUnion",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster or \n            serverless namespace that you want to register. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConsumerIdentifiers": {
+                    "target": "com.amazonaws.redshift#ConsumerIdentifierList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array containing the ID of the consumer account \n            that you want to register the namespace to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#RegisterNamespaceOutputMessage": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.redshift#NamespaceRegistrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registration status of the cluster or \n            serverless namespace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshift#RejectDataShare": {
             "type": "operation",
             "input": {
@@ -16766,7 +16976,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting\n            cluster with the same configuration as the original cluster from which the snapshot was\n            created, except that the new cluster is created with the default cluster security and\n            parameter groups. After Amazon Redshift creates the cluster, you can use the <a>ModifyCluster</a> API to associate a different security group and different\n            parameter group with the restored cluster. If you are using a DS node type, you can also\n            choose to change to another DS node type of the same size during restore.</p>\n         <p>If you restore a cluster into a VPC, you must provide a cluster subnet group where\n            you want the cluster restored.</p>\n         <p>\nFor more information about working with snapshots, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting\n            cluster with the same configuration as the original cluster from which the snapshot was\n            created, except that the new cluster is created with the default cluster security and\n            parameter groups. After Amazon Redshift creates the cluster, you can use the <a>ModifyCluster</a> API to associate a different security group and different\n            parameter group with the restored cluster. If you are using a DS node type, you can also\n            choose to change to another DS node type of the same size during restore.</p>\n         <p>If you restore a cluster into a VPC, you must provide a cluster subnet group where\n            you want the cluster restored.</p>\n         <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that\n            you own in a Region from reaching or being reached from the internet through internet\n            gateways and egress-only internet gateways. If a subnet group for a\n            provisioned cluster is in an account with VPC BPA turned on, the following capabilities\n            are blocked:</p>\n         <ul>\n            <li>\n               <p>Creating a public cluster</p>\n            </li>\n            <li>\n               <p>Restoring a public cluster</p>\n            </li>\n            <li>\n               <p>Modifying a private cluster to be public</p>\n            </li>\n            <li>\n               <p>Adding a subnet with VPC BPA turned on to the subnet group when there's at\n                    least one public cluster within the group</p>\n            </li>\n         </ul>\n         <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and\n            subnets</a> in the <i>Amazon VPC User Guide</i>.</p>\n         <p>\nFor more information about working with snapshots, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshift#RestoreFromClusterSnapshotMessage": {
@@ -17973,6 +18183,30 @@
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.redshift#ServerlessIdentifier": {
+            "type": "structure",
+            "members": {
+                "NamespaceIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the serverless namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkgroupIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the workgroup \n            associated with the serverless namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier for a serverless namespace.</p>"
             }
         },
         "com.amazonaws.redshift#ServiceAuthorization": {

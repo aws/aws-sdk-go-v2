@@ -2461,6 +2461,9 @@
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughputExceededException"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#ReplicatedWriteConflictException"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#RequestLimitExceeded"
                 },
                 {
@@ -4040,9 +4043,9 @@
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
-                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-east-1",
                                                                     "signingName": "dynamodb",
-                                                                    "signingRegion": "us-east-1"
+                                                                    "name": "sigv4"
                                                                 }
                                                             ]
                                                         },
@@ -9241,6 +9244,23 @@
                 "target": "com.amazonaws.dynamodb#AttributeValue"
             }
         },
+        "com.amazonaws.dynamodb#MultiRegionConsistency": {
+            "type": "enum",
+            "members": {
+                "EVENTUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENTUAL"
+                    }
+                },
+                "STRONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRONG"
+                    }
+                }
+            }
+        },
         "com.amazonaws.dynamodb#NextTokenString": {
             "type": "string"
         },
@@ -9725,6 +9745,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ReplicatedWriteConflictException"
                 },
                 {
                     "target": "com.amazonaws.dynamodb#RequestLimitExceeded"
@@ -10811,6 +10834,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.dynamodb#ReplicaUpdate"
+            }
+        },
+        "com.amazonaws.dynamodb#ReplicatedWriteConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.dynamodb#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because one or more items in the request are being modified by a request in another Region. </p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.dynamodb#ReplicationGroupUpdate": {
@@ -12239,6 +12274,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the warm throughput value of the base table.</p>"
                     }
+                },
+                "MultiRegionConsistency": {
+                    "target": "com.amazonaws.dynamodb#MultiRegionConsistency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates one of the following consistency modes for a global table:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EVENTUAL</code>: Indicates that the global table is configured for multi-Region eventual consistency.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRONG</code>: Indicates that the global table is configured for multi-Region strong consistency (preview).</p>\n               <note>\n                  <p>Multi-Region strong consistency (MRSC) is a new DynamoDB global tables capability currently available in preview mode. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt\">Global tables multi-Region strong consistency</a>.</p>\n               </note>\n            </li>\n         </ul>\n         <p>If you don't specify this field, the global table consistency mode defaults to <code>EVENTUAL</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13321,6 +13362,9 @@
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughputExceededException"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#ReplicatedWriteConflictException"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#RequestLimitExceeded"
                 },
                 {
@@ -13742,6 +13786,12 @@
                     "target": "com.amazonaws.dynamodb#DeletionProtectionEnabled",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether deletion protection is to be enabled (true) or disabled (false) on\n            the table.</p>"
+                    }
+                },
+                "MultiRegionConsistency": {
+                    "target": "com.amazonaws.dynamodb#MultiRegionConsistency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the consistency mode for a new global table. This parameter is only valid when you create a global table by specifying one or more <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ReplicationGroupUpdate.html#DDB-Type-ReplicationGroupUpdate-Create\">Create</a> actions in the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html#DDB-UpdateTable-request-ReplicaUpdates\">ReplicaUpdates</a> action list.</p>\n         <p>You can specify one of the following consistency modes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EVENTUAL</code>: Configures a new global table for multi-Region eventual consistency. This is the default consistency mode for global tables.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRONG</code>: Configures a new global table for multi-Region strong consistency (preview).</p>\n               <note>\n                  <p>Multi-Region strong consistency (MRSC) is a new DynamoDB global tables capability currently available in preview mode. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt\">Global tables multi-Region strong consistency</a>.</p>\n               </note>\n            </li>\n         </ul>\n         <p>If you don't specify this parameter, the global table consistency mode defaults to <code>EVENTUAL</code>.</p>"
                     }
                 },
                 "OnDemandThroughput": {

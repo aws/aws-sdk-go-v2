@@ -304,6 +304,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains memory configuration for the agent.</p>"
                     }
+                },
+                "agentCollaboration": {
+                    "target": "com.amazonaws.bedrockagent#AgentCollaboration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's collaboration settings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -686,6 +692,221 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent/[0-9a-zA-Z]{10}$"
+            }
+        },
+        "com.amazonaws.bedrockagent#AgentCollaboration": {
+            "type": "enum",
+            "members": {
+                "SUPERVISOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPERVISOR"
+                    }
+                },
+                "SUPERVISOR_ROUTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPERVISOR_ROUTER"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#AgentCollaborator": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's agent ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentVersion": {
+                    "target": "com.amazonaws.bedrockagent#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's agent version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentDescriptor": {
+                    "target": "com.amazonaws.bedrockagent#AgentDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's agent descriptor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's collaborator ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaborationInstruction": {
+                    "target": "com.amazonaws.bedrockagent#CollaborationInstruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's instructions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorName": {
+                    "target": "com.amazonaws.bedrockagent#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's collaborator name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagent#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the collaborator was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrockagent#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the collaborator was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relayConversationHistory": {
+                    "target": "com.amazonaws.bedrockagent#RelayConversationHistory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's relay conversation history.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagent#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's client token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An agent collaborator.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#AgentCollaboratorResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AssociateAgentCollaborator"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#DisassociateAgentCollaborator"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#GetAgentCollaborator"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ListAgentCollaborators"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#UpdateAgentCollaborator"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagent#AgentCollaboratorSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#AgentCollaboratorSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#AgentCollaboratorSummary": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's agent ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentVersion": {
+                    "target": "com.amazonaws.bedrockagent#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's agent version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentDescriptor": {
+                    "target": "com.amazonaws.bedrockagent#AgentDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's agent descriptor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaborationInstruction": {
+                    "target": "com.amazonaws.bedrockagent#CollaborationInstruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's collaboration instruction.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relayConversationHistory": {
+                    "target": "com.amazonaws.bedrockagent#RelayConversationHistory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's relay conversation history.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorName": {
+                    "target": "com.amazonaws.bedrockagent#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagent#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the collaborator was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrockagent#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the collaborator was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An agent collaborator summary.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#AgentDescriptor": {
+            "type": "structure",
+            "members": {
+                "aliasArn": {
+                    "target": "com.amazonaws.bedrockagent#AgentAliasArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's alias ARN.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An agent descriptor.</p>"
             }
         },
         "com.amazonaws.bedrockagent#AgentFlowNodeConfiguration": {
@@ -1075,6 +1296,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n        Contains details of the memory configuration on the version of the agent. \n      </p>"
                     }
+                },
+                "agentCollaboration": {
+                    "target": "com.amazonaws.bedrockagent#AgentCollaboration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's collaboration settings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1178,6 +1405,9 @@
             "resources": [
                 {
                     "target": "com.amazonaws.bedrockagent#ActionGroupResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#AgentCollaboratorResource"
                 },
                 {
                     "target": "com.amazonaws.bedrockagent#AgentResource"
@@ -1912,6 +2142,123 @@
                 "smithy.api#documentation": "<p>Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#AssociateAgentCollaborator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagent#AssociateAgentCollaboratorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagent#AssociateAgentCollaboratorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Makes an agent a collaborator for another agent.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/agents/{agentId}/agentversions/{agentVersion}/agentcollaborators/"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "console"
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagent#AssociateAgentCollaboratorRequest": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentVersion": {
+                    "target": "com.amazonaws.bedrockagent#DraftVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An agent version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentDescriptor": {
+                    "target": "com.amazonaws.bedrockagent#AgentDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the collaborator agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorName": {
+                    "target": "com.amazonaws.bedrockagent#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the collaborator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaborationInstruction": {
+                    "target": "com.amazonaws.bedrockagent#CollaborationInstruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instruction for the collaborator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relayConversationHistory": {
+                    "target": "com.amazonaws.bedrockagent#RelayConversationHistory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A relay conversation history for the collaborator.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagent#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A client token.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#AssociateAgentCollaboratorResponse": {
+            "type": "structure",
+            "members": {
+                "agentCollaborator": {
+                    "target": "com.amazonaws.bedrockagent#AgentCollaborator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the collaborator.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagent#AssociateAgentKnowledgeBase": {
             "type": "operation",
             "input": {
@@ -2240,6 +2587,16 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,256}$"
+            }
+        },
+        "com.amazonaws.bedrockagent#CollaborationInstruction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4000
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagent#CollectorFlowNodeConfiguration": {
@@ -2840,6 +3197,12 @@
                     "target": "com.amazonaws.bedrockagent#MemoryConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p> Contains the details of the memory configured for the agent.</p>"
+                    }
+                },
+                "agentCollaboration": {
+                    "target": "com.amazonaws.bedrockagent#AgentCollaboration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's collaboration role.</p>"
                     }
                 }
             },
@@ -5370,6 +5733,86 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#DisassociateAgentCollaborator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagent#DisassociateAgentCollaboratorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagent#DisassociateAgentCollaboratorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates an agent collaborator.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/agents/{agentId}/agentversions/{agentVersion}/agentcollaborators/{collaboratorId}/"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "console"
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagent#DisassociateAgentCollaboratorRequest": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An agent ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentVersion": {
+                    "target": "com.amazonaws.bedrockagent#DraftVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#DisassociateAgentCollaboratorResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagent#DisassociateAgentKnowledgeBase": {
             "type": "operation",
             "input": {
@@ -5693,6 +6136,9 @@
                         "smithy.api#enumValue": "BINARY"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Bedrock models embedding data type. Can be either float32 or binary.</p>"
             }
         },
         "com.amazonaws.bedrockagent#EmbeddingModelConfiguration": {
@@ -7415,6 +7861,92 @@
                     "target": "com.amazonaws.bedrockagent#AgentAlias",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#GetAgentCollaborator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagent#GetAgentCollaboratorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagent#GetAgentCollaboratorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about an agent's collaborator.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/agents/{agentId}/agentversions/{agentVersion}/agentcollaborators/{collaboratorId}/"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "console"
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagent#GetAgentCollaboratorRequest": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentVersion": {
+                    "target": "com.amazonaws.bedrockagent#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#GetAgentCollaboratorResponse": {
+            "type": "structure",
+            "members": {
+                "agentCollaborator": {
+                    "target": "com.amazonaws.bedrockagent#AgentCollaborator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the collaborator.</p>",
+                        "smithy.api#nestedProperties": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -9929,6 +10461,107 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#ListAgentCollaborators": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagent#ListAgentCollaboratorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagent#ListAgentCollaboratorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve a list of an agent's collaborators.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/agents/{agentId}/agentversions/{agentVersion}/agentcollaborators/"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "agentCollaboratorSummaries"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "console"
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagent#ListAgentCollaboratorsRequest": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentVersion": {
+                    "target": "com.amazonaws.bedrockagent#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagent#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of agent collaborators to return in one page of results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#ListAgentCollaboratorsResponse": {
+            "type": "structure",
+            "members": {
+                "agentCollaboratorSummaries": {
+                    "target": "com.amazonaws.bedrockagent#AgentCollaboratorSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of collaborator summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagent#ListAgentKnowledgeBases": {
             "type": "operation",
             "input": {
@@ -12247,6 +12880,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to override the default parser Lambda function when parsing the raw foundation model output in the part of the agent sequence defined by the <code>promptType</code>. If you set the field as <code>OVERRIDEN</code>, the <code>overrideLambda</code> field in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html\">PromptOverrideConfiguration</a> must be specified with the ARN of a Lambda function.</p>"
                     }
+                },
+                "foundationModel": {
+                    "target": "com.amazonaws.bedrockagent#ModelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's foundation model.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13046,6 +13685,23 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.bedrockagent#RelayConversationHistory": {
+            "type": "enum",
+            "members": {
+                "TO_COLLABORATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TO_COLLABORATOR"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#RequireConfirmation": {
             "type": "enum",
             "members": {
@@ -13063,7 +13719,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "ENUM to check if action requires user confirmation"
+                "smithy.api#documentation": "<p>Whether the action requires user confirmation.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ResourceNotFoundException": {
@@ -14881,6 +15537,124 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#UpdateAgentCollaborator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagent#UpdateAgentCollaboratorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagent#UpdateAgentCollaboratorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an agent's collaborator.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/agents/{agentId}/agentversions/{agentVersion}/agentcollaborators/{collaboratorId}/"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "console"
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagent#UpdateAgentCollaboratorRequest": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentVersion": {
+                    "target": "com.amazonaws.bedrockagent#DraftVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorId": {
+                    "target": "com.amazonaws.bedrockagent#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentDescriptor": {
+                    "target": "com.amazonaws.bedrockagent#AgentDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An agent descriptor for the agent collaborator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaboratorName": {
+                    "target": "com.amazonaws.bedrockagent#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collaborator's name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collaborationInstruction": {
+                    "target": "com.amazonaws.bedrockagent#CollaborationInstruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instruction for the collaborator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relayConversationHistory": {
+                    "target": "com.amazonaws.bedrockagent#RelayConversationHistory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A relay conversation history for the collaborator.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#UpdateAgentCollaboratorResponse": {
+            "type": "structure",
+            "members": {
+                "agentCollaborator": {
+                    "target": "com.amazonaws.bedrockagent#AgentCollaborator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the collaborator.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagent#UpdateAgentKnowledgeBase": {
             "type": "operation",
             "input": {
@@ -15066,6 +15840,12 @@
                     "target": "com.amazonaws.bedrockagent#MemoryConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the new memory configuration for the agent. </p>"
+                    }
+                },
+                "agentCollaboration": {
+                    "target": "com.amazonaws.bedrockagent#AgentCollaboration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's collaboration role.</p>"
                     }
                 }
             },

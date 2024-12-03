@@ -14,6 +14,12 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.bedrockruntime#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
         "com.amazonaws.bedrockruntime#AdditionalModelResponseFieldPaths": {
             "type": "list",
             "member": {
@@ -35,6 +41,9 @@
             "type": "service",
             "version": "2023-09-30",
             "resources": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeResource"
+                },
                 {
                     "target": "com.amazonaws.bedrockruntime#GuardrailResource"
                 },
@@ -756,7 +765,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The action to apply a guardrail.</p>",
+                "smithy.api#documentation": "<p>The action to apply a guardrail.</p>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>ApplyGuardrail</code> API, \n            see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -844,6 +853,195 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockruntime#AsyncInvokeArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9\\-]+:bedrock:[a-z0-9\\-]*:[0-9]*:(provisioned-model|foundation-model)/.+$"
+            }
+        },
+        "com.amazonaws.bedrockruntime#AsyncInvokeIdempotencyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[!-~]*$"
+            }
+        },
+        "com.amazonaws.bedrockruntime#AsyncInvokeIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z_\\.\\-/0-9:]+$"
+            }
+        },
+        "com.amazonaws.bedrockruntime#AsyncInvokeMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#AsyncInvokeOutputDataConfig": {
+            "type": "union",
+            "members": {
+                "s3OutputDataConfig": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeS3OutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A storage location for the output data in an S3 bucket</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Asynchronous invocation output data settings.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#AsyncInvokeResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#GetAsyncInvoke"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ListAsyncInvokes"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#StartAsyncInvoke"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockruntime#AsyncInvokeS3OutputDataConfig": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.bedrockruntime#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object URI starting with <code>s3://</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.bedrockruntime#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A KMS encryption key ID.</p>"
+                    }
+                },
+                "bucketOwner": {
+                    "target": "com.amazonaws.bedrockruntime#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the bucket belongs to another AWS account, specify that account's ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Asynchronous invocation output data settings.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#AsyncInvokeStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#AsyncInvokeSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#AsyncInvokeSummary"
+            }
+        },
+        "com.amazonaws.bedrockruntime#AsyncInvokeSummary": {
+            "type": "structure",
+            "members": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockruntime#InvocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invoked model's ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's idempotency token.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's status.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message.</p>"
+                    }
+                },
+                "submitTime": {
+                    "target": "com.amazonaws.bedrockruntime#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the invocation was submitted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.bedrockruntime#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the invocation was last modified.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.bedrockruntime#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the invocation ended.</p>"
+                    }
+                },
+                "outputDataConfig": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeOutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's output data settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an asynchronous invocation.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#AutoToolChoice": {
             "type": "structure",
             "members": {},
@@ -858,6 +1056,19 @@
                     "max": 25000000
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error occurred because of a conflict while performing an operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.bedrockruntime#ContentBlock": {
@@ -879,6 +1090,12 @@
                     "target": "com.amazonaws.bedrockruntime#DocumentBlock",
                     "traits": {
                         "smithy.api#documentation": "<p>A document to include in the message.</p>"
+                    }
+                },
+                "video": {
+                    "target": "com.amazonaws.bedrockruntime#VideoBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Video to include in the message. </p>"
                     }
                 },
                 "toolUse": {
@@ -1137,7 +1354,7 @@
                 "toolConfig": {
                     "target": "com.amazonaws.bedrockruntime#ToolConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response. </p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3, Cohere Command R, Cohere Command R+, and Mistral Large models.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response. </p>\n         <p>For information about models that support tool use, see \n         <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features\">Supported models and model features</a>.</p>"
                     }
                 },
                 "guardrailConfig": {
@@ -1165,6 +1382,12 @@
                         "smithy.api#length": {
                             "max": 10
                         }
+                    }
+                },
+                "requestMetadata": {
+                    "target": "com.amazonaws.bedrockruntime#RequestMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that you can use to filter invocation logs.</p>"
                     }
                 },
                 "performanceConfig": {
@@ -1381,13 +1604,13 @@
                 "validationException": {
                     "target": "com.amazonaws.bedrockruntime#ValidationException",
                     "traits": {
-                        "smithy.api#documentation": "<p>Input validation failed. Check your request parameters and retry the request.</p>"
+                        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error\">ValidationError</a> in the Amazon Bedrock User Guide</p>"
                     }
                 },
                 "throttlingException": {
                     "target": "com.amazonaws.bedrockruntime#ThrottlingException",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of requests exceeds the limit. Resubmit your request later.</p>"
+                        "smithy.api#documentation": "<p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For\n         troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception\">ThrottlingException</a> in the Amazon Bedrock User Guide</p>"
                     }
                 },
                 "serviceUnavailableException": {
@@ -1434,7 +1657,7 @@
                 "toolConfig": {
                     "target": "com.amazonaws.bedrockruntime#ToolConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response.</p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3 models.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response.</p>\n         <p>For information about models that support streaming tool use, see \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features\">Supported models and model features</a>.</p>"
                     }
                 },
                 "guardrailConfig": {
@@ -1462,6 +1685,12 @@
                         "smithy.api#length": {
                             "max": 10
                         }
+                    }
+                },
+                "requestMetadata": {
+                    "target": "com.amazonaws.bedrockruntime#RequestMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that you can use to filter invocation logs.</p>"
                     }
                 },
                 "performanceConfig": {
@@ -1625,6 +1854,121 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the content of a document.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GetAsyncInvoke": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockruntime#GetAsyncInvokeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockruntime#GetAsyncInvokeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve information about an asynchronous invocation.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/async-invoke/{invocationArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#GetAsyncInvokeRequest": {
+            "type": "structure",
+            "members": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockruntime#InvocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#GetAsyncInvokeResponse": {
+            "type": "structure",
+            "members": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockruntime#InvocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's model ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's idempotency token.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message.</p>"
+                    }
+                },
+                "submitTime": {
+                    "target": "com.amazonaws.bedrockruntime#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the invocation request was submitted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.bedrockruntime#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation's last modified time.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.bedrockruntime#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the invocation ended.</p>"
+                    }
+                },
+                "outputDataConfig": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeOutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Output data settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailAction": {
@@ -3056,6 +3400,16 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.bedrockruntime#InvocationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:async-invoke/[a-z0-9]{12}$"
+            }
+        },
         "com.amazonaws.bedrockruntime#InvokeModel": {
             "type": "operation",
             "input": {
@@ -3361,6 +3715,142 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockruntime#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$"
+            }
+        },
+        "com.amazonaws.bedrockruntime#ListAsyncInvokes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockruntime#ListAsyncInvokesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockruntime#ListAsyncInvokesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists asynchronous invocations.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/async-invoke"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "asyncInvokeSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#ListAsyncInvokesRequest": {
+            "type": "structure",
+            "members": {
+                "submitTimeAfter": {
+                    "target": "com.amazonaws.bedrockruntime#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include invocations submitted after this time.</p>",
+                        "smithy.api#httpQuery": "submitTimeAfter"
+                    }
+                },
+                "submitTimeBefore": {
+                    "target": "com.amazonaws.bedrockruntime#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include invocations submitted before this time.</p>",
+                        "smithy.api#httpQuery": "submitTimeBefore"
+                    }
+                },
+                "statusEquals": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter invocations by status.</p>",
+                        "smithy.api#httpQuery": "statusEquals"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockruntime#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of invocations to return in one page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockruntime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.bedrockruntime#SortAsyncInvocationBy",
+                    "traits": {
+                        "smithy.api#default": "SubmissionTime",
+                        "smithy.api#documentation": "<p>How to sort the response.</p>",
+                        "smithy.api#httpQuery": "sortBy"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.bedrockruntime#SortOrder",
+                    "traits": {
+                        "smithy.api#default": "Descending",
+                        "smithy.api#documentation": "<p>The sorting order for the response.</p>",
+                        "smithy.api#httpQuery": "sortOrder"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#ListAsyncInvokesResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockruntime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>"
+                    }
+                },
+                "asyncInvokeSummaries": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of invocation summaries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.bedrockruntime#Message": {
             "type": "structure",
             "members": {
@@ -3453,6 +3943,12 @@
                 "smithy.api#httpError": 424
             }
         },
+        "com.amazonaws.bedrockruntime#ModelInputPayload": {
+            "type": "document",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockruntime#ModelNotReadyException": {
             "type": "structure",
             "members": {
@@ -3539,6 +4035,16 @@
                 }
             }
         },
+        "com.amazonaws.bedrockruntime#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\S*$"
+            }
+        },
         "com.amazonaws.bedrockruntime#PartBody": {
             "type": "blob",
             "traits": {
@@ -3621,6 +4127,36 @@
                 "smithy.api#documentation": "<p>Contains a map of variables in a prompt from Prompt management to an object containing the values to fill in for them when running model invocation. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-how.html\">How Prompt management works</a>.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#RequestMetadata": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 256
+                    },
+                    "smithy.api#pattern": "^[a-zA-Z0-9\\s:_@$#=/+,-.]{1,256}$"
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 0,
+                        "max": 256
+                    },
+                    "smithy.api#pattern": "^[a-zA-Z0-9\\s:_@$#=/+,-.]{0,256}$"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockruntime#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -3685,6 +4221,37 @@
                 "smithy.api#streaming": {}
             }
         },
+        "com.amazonaws.bedrockruntime#S3Location": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "com.amazonaws.bedrockruntime#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object URI starting with <code>s3://</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bucketOwner": {
+                    "target": "com.amazonaws.bedrockruntime#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the bucket belongs to another AWS account, specify that account's ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A storage location in an S3 bucket.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+            }
+        },
         "com.amazonaws.bedrockruntime#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -3711,6 +4278,34 @@
                 "smithy.api#httpError": 503
             }
         },
+        "com.amazonaws.bedrockruntime#SortAsyncInvocationBy": {
+            "type": "enum",
+            "members": {
+                "SUBMISSION_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubmissionTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#SortOrder": {
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ascending"
+                    }
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Descending"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockruntime#SpecificToolChoice": {
             "type": "structure",
             "members": {
@@ -3724,6 +4319,107 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The model must request a specific tool.  For example, <code>{\"tool\" : {\"name\" : \"Your tool name\"}}</code>.</p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3 models.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#StartAsyncInvoke": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockruntime#StartAsyncInvokeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockruntime#StartAsyncInvokeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an asynchronous invocation.</p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action.</p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n            <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the Converse API actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n            </p>\n         </important>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/async-invoke"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#StartAsyncInvokeRequest": {
+            "type": "structure",
+            "members": {
+                "clientRequestToken": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify idempotency token to ensure that requests are not duplicated.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "modelId": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model to invoke.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelInput": {
+                    "target": "com.amazonaws.bedrockruntime#ModelInputPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input to send to the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputDataConfig": {
+                    "target": "com.amazonaws.bedrockruntime#AsyncInvokeOutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where to store the output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockruntime#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to apply to the invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#StartAsyncInvokeResponse": {
+            "type": "structure",
+            "members": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockruntime#InvocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the invocation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockruntime#StatusCode": {
@@ -3802,6 +4498,60 @@
                 "target": "com.amazonaws.bedrockruntime#SystemContentBlock"
             }
         },
+        "com.amazonaws.bedrockruntime#Tag": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.bedrockruntime#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag's key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.bedrockruntime#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag's value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tag.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+            }
+        },
+        "com.amazonaws.bedrockruntime#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+            }
+        },
         "com.amazonaws.bedrockruntime#TextCharactersGuarded": {
             "type": "integer"
         },
@@ -3819,6 +4569,12 @@
                 "smithy.api#documentation": "<p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For\n         troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception\">ThrottlingException</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.bedrockruntime#Timestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
             }
         },
         "com.amazonaws.bedrockruntime#TokenUsage": {
@@ -3920,7 +4676,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for the tools that you pass to a model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Tool use (function calling)</a> in the Amazon Bedrock User Guide.</p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3, Cohere Command R, Cohere Command R+, and Mistral Large models.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configuration information for the tools that you pass to a model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Tool use (function calling)</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#ToolInputSchema": {
@@ -4000,6 +4756,12 @@
                     "target": "com.amazonaws.bedrockruntime#DocumentBlock",
                     "traits": {
                         "smithy.api#documentation": "<p>A tool result that is a document.</p>"
+                    }
+                },
+                "video": {
+                    "target": "com.amazonaws.bedrockruntime#VideoBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tool result that is video.</p>"
                     }
                 }
             },
@@ -4168,6 +4930,110 @@
                 "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error\">ValidationError</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bedrockruntime#VideoBlock": {
+            "type": "structure",
+            "members": {
+                "format": {
+                    "target": "com.amazonaws.bedrockruntime#VideoFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The block's format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockruntime#VideoSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The block's source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A video block.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#VideoFormat": {
+            "type": "enum",
+            "members": {
+                "MKV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mkv"
+                    }
+                },
+                "MOV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mov"
+                    }
+                },
+                "MP4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mp4"
+                    }
+                },
+                "WEBM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "webm"
+                    }
+                },
+                "FLV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "flv"
+                    }
+                },
+                "MPEG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mpeg"
+                    }
+                },
+                "MPG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mpg"
+                    }
+                },
+                "WMV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "wmv"
+                    }
+                },
+                "THREE_GP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "three_gp"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#VideoSource": {
+            "type": "union",
+            "members": {
+                "bytes": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Video content encoded in base64.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        }
+                    }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.bedrockruntime#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of a video object in an S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A video source. You can upload a smaller video as a base64-encoded string as\n    long as the encoded file is less than 25MB. You can also transfer videos up to 1GB in size\n    from an S3 bucket.</p>"
             }
         }
     }

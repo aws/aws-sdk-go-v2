@@ -12731,6 +12731,62 @@
                 "smithy.api#documentation": "<p>The visual publish options of a visual in a dashboard</p>"
             }
         },
+        "com.amazonaws.quicksight#DashboardVisualResult": {
+            "type": "structure",
+            "members": {
+                "DashboardId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dashboard.</p>"
+                    }
+                },
+                "DashboardName": {
+                    "target": "com.amazonaws.quicksight#DashboardName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dashboard.</p>"
+                    }
+                },
+                "SheetId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the sheet.</p>"
+                    }
+                },
+                "SheetName": {
+                    "target": "com.amazonaws.quicksight#SheetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the sheet.</p>"
+                    }
+                },
+                "VisualId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the visual.</p>"
+                    }
+                },
+                "VisualTitle": {
+                    "target": "com.amazonaws.quicksight#VisualTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the visual.</p>"
+                    }
+                },
+                "VisualSubtitle": {
+                    "target": "com.amazonaws.quicksight#VisualSubtitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subtitle of the visual.</p>"
+                    }
+                },
+                "DashboardUrl": {
+                    "target": "com.amazonaws.quicksight#QAUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The QA result that is made from dashboard visual.</p>"
+            }
+        },
         "com.amazonaws.quicksight#DashboardsQAStatus": {
             "type": "enum",
             "members": {
@@ -16703,6 +16759,85 @@
                         "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
                     }
                 },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteDefaultQBusinessApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteDefaultQBusinessApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteDefaultQBusinessApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a linked Amazon Q Business application from an Amazon QuickSight account</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/default-qbusiness-application",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteDefaultQBusinessApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight account that you want to disconnect from a Amazon Q Business application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon QuickSight namespace that you want to delete a linked Amazon Q Business application from. If this field is left blank, the Amazon Q Business application is deleted from the default namespace. Currently, the default namespace is the only valid value for this parameter.</p>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteDefaultQBusinessApplicationResponse": {
+            "type": "structure",
+            "members": {
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
@@ -21156,6 +21291,91 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeDefaultQBusinessApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeDefaultQBusinessApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeDefaultQBusinessApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Amazon Q Business application that is linked to an Amazon QuickSight account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/default-qbusiness-application",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDefaultQBusinessApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight account that is linked to the Amazon Q Business application that you want described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon QuickSight namespace that contains the linked Amazon Q Business application. If this field is left blank, the default namespace is used. Currently, the default namespace is the only valid value for this parameter.</p>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDefaultQBusinessApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Q Business application that is linked to the Amazon QuickSight account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeFolder": {
             "type": "operation",
             "input": {
@@ -22257,6 +22477,87 @@
                     "target": "com.amazonaws.quicksight#PersonalizationMode",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates whether personalization is enabled or not.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeQuickSightQSearchConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeQuickSightQSearchConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeQuickSightQSearchConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the state of a Amazon QuickSight Q Search configuration.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/quicksight-q-search-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeQuickSightQSearchConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the Amazon QuickSight Q Search configuration that the user wants described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeQuickSightQSearchConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "QSearchStatus": {
+                    "target": "com.amazonaws.quicksight#QSearchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Amazon QuickSight Q Search configuration.</p>"
                     }
                 },
                 "RequestId": {
@@ -27549,6 +27850,196 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#GenerateEmbedUrlForRegisteredUserWithIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#GenerateEmbedUrlForRegisteredUserWithIdentityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#GenerateEmbedUrlForRegisteredUserWithIdentityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#QuickSightUserNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#SessionLifetimeInMinutesInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedPricingPlanException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user that is registered in an Amazon QuickSight account that uses IAM Identity Center for authentication. This API requires <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html#types-identity-enhanced-iam-role-sessions\">identity-enhanced IAM Role sessions</a> for the authenticated user that the API call is being made for.</p>\n         <p>This API uses <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation.html\">trusted identity propagation</a> to ensure that an end user is authenticated and receives the embed URL that is specific to that user. The IAM Identity Center application that the user has logged into needs to have <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-using-customermanagedapps-specify-trusted-apps.html\">trusted Identity Propagation enabled for Amazon QuickSight</a> with the scope value set to <code>quicksight:read</code>. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/embed-url/registered-user-with-identity",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#GenerateEmbedUrlForRegisteredUserWithIdentityRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services registered user.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionLifetimeInMinutes": {
+                    "target": "com.amazonaws.quicksight#SessionLifetimeInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validity of the session in minutes.</p>"
+                    }
+                },
+                "ExperienceConfiguration": {
+                    "target": "com.amazonaws.quicksight#RegisteredUserEmbeddingExperienceConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowedDomains": {
+                    "target": "com.amazonaws.quicksight#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of domains to be allowed to generate the embed URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#GenerateEmbedUrlForRegisteredUserWithIdentityResponse": {
+            "type": "structure",
+            "members": {
+                "EmbedUrl": {
+                    "target": "com.amazonaws.quicksight#EmbeddingUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated embed URL for the registered user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#GeneratedAnswerResult": {
+            "type": "structure",
+            "members": {
+                "QuestionText": {
+                    "target": "com.amazonaws.quicksight#QAQueryText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The question text.</p>"
+                    }
+                },
+                "AnswerStatus": {
+                    "target": "com.amazonaws.quicksight#GeneratedAnswerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The answer status of the generated answer.</p>"
+                    }
+                },
+                "TopicId": {
+                    "target": "com.amazonaws.quicksight#TopicId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the topic.</p>"
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the topic.</p>"
+                    }
+                },
+                "Restatement": {
+                    "target": "com.amazonaws.quicksight#QAQueryText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The restatement for the answer.</p>"
+                    }
+                },
+                "QuestionId": {
+                    "target": "com.amazonaws.quicksight#QuestionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question.</p>"
+                    }
+                },
+                "AnswerId": {
+                    "target": "com.amazonaws.quicksight#AnswerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the answer.</p>"
+                    }
+                },
+                "QuestionUrl": {
+                    "target": "com.amazonaws.quicksight#QAUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the question.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The QA result that is made from generated answer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeneratedAnswerStatus": {
+            "type": "enum",
+            "members": {
+                "ANSWER_GENERATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANSWER_GENERATED"
+                    }
+                },
+                "ANSWER_RETRIEVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANSWER_RETRIEVED"
+                    }
+                },
+                "ANSWER_DOWNGRADE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANSWER_DOWNGRADE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#GeoSpatialColumnGroup": {
             "type": "structure",
             "members": {
@@ -30569,6 +31060,40 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#IncludeGeneratedAnswer": {
+            "type": "enum",
+            "members": {
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#IncludeQuickSightQIndex": {
+            "type": "enum",
+            "members": {
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
                     }
                 }
             }
@@ -37318,6 +37843,15 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#MaxTopicsToConsider": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
         "com.amazonaws.quicksight#MaximumLabelType": {
             "type": "structure",
             "members": {
@@ -41462,6 +41996,112 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#PredictQAResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#PredictQAResultsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#PredictQAResultsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Predicts existing visuals or generates new visuals to answer a given query.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/qa/predict",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#PredictQAResultsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that the user wants to execute Predict QA results in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryText": {
+                    "target": "com.amazonaws.quicksight#QAQueryText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query text to be used to predict QA results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeQuickSightQIndex": {
+                    "target": "com.amazonaws.quicksight#IncludeQuickSightQIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Q indicies are included or excluded.</p>"
+                    }
+                },
+                "IncludeGeneratedAnswer": {
+                    "target": "com.amazonaws.quicksight#IncludeGeneratedAnswer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether generated answers are included or excluded.</p>"
+                    }
+                },
+                "MaxTopicsToConsider": {
+                    "target": "com.amazonaws.quicksight#MaxTopicsToConsider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of maximum topics to be considered to predict QA results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#PredictQAResultsResponse": {
+            "type": "structure",
+            "members": {
+                "PrimaryResult": {
+                    "target": "com.amazonaws.quicksight#QAResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary visual response.</p>"
+                    }
+                },
+                "AdditionalResults": {
+                    "target": "com.amazonaws.quicksight#QAResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional visual responses.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#PredictionInterval": {
             "type": "integer",
             "traits": {
@@ -41757,6 +42397,91 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#QAQueryText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#QAResult": {
+            "type": "structure",
+            "members": {
+                "ResultType": {
+                    "target": "com.amazonaws.quicksight#QAResultType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of QA result.</p>"
+                    }
+                },
+                "DashboardVisual": {
+                    "target": "com.amazonaws.quicksight#DashboardVisualResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The representation of a dashboard visual result.</p>"
+                    }
+                },
+                "GeneratedAnswer": {
+                    "target": "com.amazonaws.quicksight#GeneratedAnswerResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The representation of a generated answer result.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The QA result that is made from the <code>DashboardVisual</code> or <code>GeneratedAnswer</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#QAResultType": {
+            "type": "enum",
+            "members": {
+                "DASHBOARD_VISUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DASHBOARD_VISUAL"
+                    }
+                },
+                "GENERATED_ANSWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERATED_ANSWER"
+                    }
+                },
+                "NO_ANSWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_ANSWER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#QAResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#QAResult"
+            }
+        },
+        "com.amazonaws.quicksight#QAUrl": {
+            "type": "string"
+        },
+        "com.amazonaws.quicksight#QSearchStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#Query": {
             "type": "string",
             "traits": {
@@ -41795,6 +42520,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that describes the query execution options.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#QuestionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.quicksight#QueueInfo": {
@@ -41954,6 +42689,9 @@
                     "target": "com.amazonaws.quicksight#DeleteDataSource"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DeleteDefaultQBusinessApplication"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DeleteFolder"
                 },
                 {
@@ -42083,6 +42821,9 @@
                     "target": "com.amazonaws.quicksight#DescribeDataSourcePermissions"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeDefaultQBusinessApplication"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeFolder"
                 },
                 {
@@ -42114,6 +42855,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeQPersonalizationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeQuickSightQSearchConfiguration"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeRefreshSchedule"
@@ -42165,6 +42909,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#GenerateEmbedUrlForRegisteredUser"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#GenerateEmbedUrlForRegisteredUserWithIdentity"
                 },
                 {
                     "target": "com.amazonaws.quicksight#GetDashboardEmbedUrl"
@@ -42275,6 +43022,9 @@
                     "target": "com.amazonaws.quicksight#ListVPCConnections"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#PredictQAResults"
+                },
+                {
                     "target": "com.amazonaws.quicksight#PutDataSetRefreshProperties"
                 },
                 {
@@ -42335,6 +43085,9 @@
                     "target": "com.amazonaws.quicksight#UpdateAnalysisPermissions"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#UpdateApplicationWithTokenExchangeGrant"
+                },
+                {
                     "target": "com.amazonaws.quicksight#UpdateBrand"
                 },
                 {
@@ -42374,6 +43127,9 @@
                     "target": "com.amazonaws.quicksight#UpdateDataSourcePermissions"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#UpdateDefaultQBusinessApplication"
+                },
+                {
                     "target": "com.amazonaws.quicksight#UpdateFolder"
                 },
                 {
@@ -42399,6 +43155,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateQPersonalizationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateQuickSightQSearchConfiguration"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateRefreshSchedule"
@@ -47386,6 +48145,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "REDSHIFT"
+                    }
+                },
+                "QBUSINESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QBUSINESS"
                     }
                 }
             }
@@ -56150,6 +56915,92 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateApplicationWithTokenExchangeGrant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateApplicationWithTokenExchangeGrantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateApplicationWithTokenExchangeGrantResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an Amazon QuickSight application with a token exchange grant. This operation only supports Amazon QuickSight applications that are registered with IAM Identity Center.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/application-with-token-exchange-grant",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateApplicationWithTokenExchangeGrantRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account to be updated with a token exchange grant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the Amazon QuickSight application.</p>",
+                        "smithy.api#httpQuery": "namespace",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateApplicationWithTokenExchangeGrantResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateBrand": {
             "type": "operation",
             "input": {
@@ -57630,6 +58481,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateDefaultQBusinessApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateDefaultQBusinessApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateDefaultQBusinessApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a Amazon Q Business application that is linked to a Amazon QuickSight account.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/default-qbusiness-application",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateDefaultQBusinessApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight account that is connected to the Amazon Q Business application that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon QuickSight namespace that contains the linked Amazon Q Business application. If this field is left blank, the default namespace is used. Currently, the default namespace is the only valid value for this parameter.</p>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Q Business application that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateDefaultQBusinessApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateFolder": {
             "type": "operation",
             "input": {
@@ -58536,6 +59476,94 @@
                     "target": "com.amazonaws.quicksight#PersonalizationMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The personalization mode that is used for the personalization configuration.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateQuickSightQSearchConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateQuickSightQSearchConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateQuickSightQSearchConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the state of a Amazon QuickSight Q Search configuration.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/quicksight-q-search-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateQuickSightQSearchConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the Amazon QuickSight Q Search configuration that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QSearchStatus": {
+                    "target": "com.amazonaws.quicksight#QSearchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Amazon QuickSight Q Search configuration that the user wants to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateQuickSightQSearchConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "QSearchStatus": {
+                    "target": "com.amazonaws.quicksight#QSearchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Amazon QuickSight Q Search configuration.</p>"
                     }
                 },
                 "RequestId": {
@@ -61329,6 +62357,15 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#VisualSubtitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.quicksight#VisualSubtitleLabelOptions": {
             "type": "structure",
             "members": {
@@ -61347,6 +62384,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The subtitle label options for a visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#VisualTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.quicksight#VisualTitleLabelOptions": {

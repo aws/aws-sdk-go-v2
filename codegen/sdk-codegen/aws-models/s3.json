@@ -267,6 +267,9 @@
                     "target": "com.amazonaws.s3#CreateBucket"
                 },
                 {
+                    "target": "com.amazonaws.s3#CreateBucketMetadataTableConfiguration"
+                },
+                {
                     "target": "com.amazonaws.s3#CreateMultipartUpload"
                 },
                 {
@@ -292,6 +295,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3#DeleteBucketLifecycle"
+                },
+                {
+                    "target": "com.amazonaws.s3#DeleteBucketMetadataTableConfiguration"
                 },
                 {
                     "target": "com.amazonaws.s3#DeleteBucketMetricsConfiguration"
@@ -352,6 +358,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3#GetBucketLogging"
+                },
+                {
+                    "target": "com.amazonaws.s3#GetBucketMetadataTableConfiguration"
                 },
                 {
                     "target": "com.amazonaws.s3#GetBucketMetricsConfiguration"
@@ -20312,6 +20321,81 @@
                 "smithy.api#documentation": "<p>The configuration information for the bucket.</p>"
             }
         },
+        "com.amazonaws.s3#CreateBucketMetadataTableConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3#CreateBucketMetadataTableConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "aws.protocols#httpChecksum": {
+                    "requestAlgorithmMember": "ChecksumAlgorithm",
+                    "requestChecksumRequired": true
+                },
+                "smithy.api#documentation": "<p>Creates a metadata table configuration for a general purpose bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html\">Accelerating data\n            discovery with S3 Metadata</a> in the <i>Amazon S3 User Guide</i>. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>To use this operation, you must have the following permissions. For more\n                  information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html\">Setting up\n                     permissions for configuring metadata tables</a> in the\n                     <i>Amazon S3 User Guide</i>.</p>\n               <p>If you also want to integrate your table bucket with Amazon Web Services analytics services so that you \n                  can query your metadata table, you need additional permissions. For more information, see \n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html\">\n                     Integrating Amazon S3 Tables with Amazon Web Services analytics services</a> in the \n                  <i>Amazon S3 User Guide</i>.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>s3:CreateBucketMetadataTableConfiguration</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:CreateNamespace</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:GetTable</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:CreateTable</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>s3tables:PutTablePolicy</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <p>The following operations are related to <code>CreateBucketMetadataTableConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html\">DeleteBucketMetadataTableConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html\">GetBucketMetadataTableConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/{Bucket}?metadataTable",
+                    "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "UseS3ExpressControlEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3#CreateBucketMetadataTableConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The general purpose bucket that you want to create the metadata table configuration in.\n      </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
+                    }
+                },
+                "ContentMD5": {
+                    "target": "com.amazonaws.s3#ContentMD5",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The <code>Content-MD5</code> header for the metadata table configuration.\n      </p>",
+                        "smithy.api#httpHeader": "Content-MD5"
+                    }
+                },
+                "ChecksumAlgorithm": {
+                    "target": "com.amazonaws.s3#ChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The checksum algorithm to use with your metadata table configuration. \n      </p>",
+                        "smithy.api#httpHeader": "x-amz-sdk-checksum-algorithm"
+                    }
+                },
+                "MetadataTableConfiguration": {
+                    "target": "com.amazonaws.s3#MetadataTableConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The contents of your metadata table configuration. \n      </p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "MetadataTableConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The expected owner of the general purpose bucket that contains your metadata table configuration.\n      </p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.s3#CreateBucketOutput": {
             "type": "structure",
             "members": {
@@ -21316,6 +21400,54 @@
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>\n         <note>\n            <p>This parameter applies to general purpose buckets only. It is not supported for\n            directory bucket lifecycle configurations.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3#DeleteBucketMetadataTableConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3#DeleteBucketMetadataTableConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Deletes a metadata table configuration from a general purpose bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html\">Accelerating data\n            discovery with S3 Metadata</a> in the <i>Amazon S3 User Guide</i>. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>To use this operation, you must have the <code>s3:DeleteBucketMetadataTableConfiguration</code> permission. For more\n                  information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html\">Setting up\n                     permissions for configuring metadata tables</a> in the\n                  <i>Amazon S3 User Guide</i>. </p>\n            </dd>\n         </dl>\n         <p>The following operations are related to <code>DeleteBucketMetadataTableConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html\">CreateBucketMetadataTableConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html\">GetBucketMetadataTableConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/{Bucket}?metadataTable",
+                    "code": 204
+                },
+                "smithy.rules#staticContextParams": {
+                    "UseS3ExpressControlEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3#DeleteBucketMetadataTableConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The general purpose bucket that you want to remove the metadata table configuration from.\n      </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The expected bucket owner of the general purpose bucket that you want to remove the \n         metadata table configuration from.\n      </p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
@@ -22462,6 +22594,26 @@
         "com.amazonaws.s3#ErrorCode": {
             "type": "string"
         },
+        "com.amazonaws.s3#ErrorDetails": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.s3#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If the <code>CreateBucketMetadataTableConfiguration</code> request succeeds, but S3 Metadata was \n         unable to create the table, this structure contains the error code. The possible error codes and \n         error messages are as follows:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>AccessDeniedCreatingResources</code> - You don't have sufficient permissions to \n               create the required resources. Make sure that you have <code>s3tables:CreateNamespace</code>, \n               <code>s3tables:CreateTable</code>, <code>s3tables:GetTable</code> and \n               <code>s3tables:PutTablePolicy</code> permissions, and then try again. To create a new metadata \n               table, you must delete the metadata configuration for this bucket, and then create a new \n               metadata configuration.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessDeniedWritingToTable</code> - Unable to write to the metadata table because of \n               missing resource permissions. To fix the resource policy, Amazon S3 needs to create a new \n               metadata table. To create a new metadata table, you must delete the metadata configuration for \n               this bucket, and then create a new metadata configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationTableNotFound</code> - The destination table doesn't exist. To create a \n               new metadata table, you must delete the metadata configuration for this bucket, and then \n               create a new metadata configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ServerInternalError</code> - An internal error has occurred. To create a new metadata \n               table, you must delete the metadata configuration for this bucket, and then create a new \n               metadata configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TableAlreadyExists</code> - The table that you specified already exists in the table \n               bucket's namespace. Specify a different table name. To create a new metadata table, you must \n               delete the metadata configuration for this bucket, and then create a new metadata \n               configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TableBucketNotFound</code> - The table bucket that you specified doesn't exist in \n               this Amazon Web Services Region and account. Create or choose a different table bucket. To create a new \n               metadata table, you must delete the metadata configuration for this bucket, and then create \n               a new metadata configuration.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.s3#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If the <code>CreateBucketMetadataTableConfiguration</code> request succeeds, but S3 Metadata was \n         unable to create the table, this structure contains the error message. The possible error codes and \n         error messages are as follows:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>AccessDeniedCreatingResources</code> - You don't have sufficient permissions to \n               create the required resources. Make sure that you have <code>s3tables:CreateNamespace</code>, \n               <code>s3tables:CreateTable</code>, <code>s3tables:GetTable</code> and \n               <code>s3tables:PutTablePolicy</code> permissions, and then try again. To create a new metadata \n               table, you must delete the metadata configuration for this bucket, and then create a new \n               metadata configuration.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessDeniedWritingToTable</code> - Unable to write to the metadata table because of \n               missing resource permissions. To fix the resource policy, Amazon S3 needs to create a new \n               metadata table. To create a new metadata table, you must delete the metadata configuration for \n               this bucket, and then create a new metadata configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationTableNotFound</code> - The destination table doesn't exist. To create a \n               new metadata table, you must delete the metadata configuration for this bucket, and then \n               create a new metadata configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ServerInternalError</code> - An internal error has occurred. To create a new metadata \n               table, you must delete the metadata configuration for this bucket, and then create a new \n               metadata configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TableAlreadyExists</code> - The table that you specified already exists in the table \n               bucket's namespace. Specify a different table name. To create a new metadata table, you must \n               delete the metadata configuration for this bucket, and then create a new metadata \n               configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TableBucketNotFound</code> - The table bucket that you specified doesn't exist in \n               this Amazon Web Services Region and account. Create or choose a different table bucket. To create a new \n               metadata table, you must delete the metadata configuration for this bucket, and then create \n               a new metadata configuration.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         If the <code>CreateBucketMetadataTableConfiguration</code> request succeeds, but S3 Metadata was \n         unable to create the table, this structure contains the error code and error message.\n      </p>"
+            }
+        },
         "com.amazonaws.s3#ErrorDocument": {
             "type": "structure",
             "members": {
@@ -23561,6 +23713,97 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3#GetBucketMetadataTableConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3#GetBucketMetadataTableConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3#GetBucketMetadataTableConfigurationOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Retrieves the metadata table configuration for a general purpose bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html\">Accelerating data\n            discovery with S3 Metadata</a> in the <i>Amazon S3 User Guide</i>. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>To use this operation, you must have the <code>s3:GetBucketMetadataTableConfiguration</code> permission. For more\n                  information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html\">Setting up\n                     permissions for configuring metadata tables</a> in the\n                  <i>Amazon S3 User Guide</i>. </p>\n            </dd>\n         </dl>\n         <p>The following operations are related to <code>GetBucketMetadataTableConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataTableConfiguration.html\">CreateBucketMetadataTableConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html\">DeleteBucketMetadataTableConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/{Bucket}?metadataTable",
+                    "code": 200
+                },
+                "smithy.rules#staticContextParams": {
+                    "UseS3ExpressControlEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3#GetBucketMetadataTableConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "GetBucketMetadataTableConfigurationResult": {
+                    "target": "com.amazonaws.s3#GetBucketMetadataTableConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The metadata table configuration for the general purpose bucket.\n      </p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3#GetBucketMetadataTableConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The general purpose bucket that contains the metadata table configuration that you want to retrieve.\n      </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "Bucket"
+                        }
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The expected owner of the general purpose bucket that you want to retrieve the metadata table configuration from.\n      </p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3#GetBucketMetadataTableConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "MetadataTableConfigurationResult": {
+                    "target": "com.amazonaws.s3#MetadataTableConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The metadata table configuration for a general purpose bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.s3#MetadataTableStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of the metadata table. The status values are:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The metadata table is in the process of being created in the \n               specified table bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The metadata table has been created successfully and records \n               are being delivered to the table.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon S3 is unable to create the metadata table, or Amazon S3 is unable to deliver \n               records. See <code>ErrorDetails</code> for details.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.s3#ErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If the <code>CreateBucketMetadataTableConfiguration</code> request succeeds, but S3 Metadata was \n         unable to create the table, this structure contains the error code and error message.  \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The metadata table configuration for a general purpose bucket.\n      </p>"
             }
         },
         "com.amazonaws.s3#GetBucketMetricsConfiguration": {
@@ -29226,6 +29469,39 @@
         "com.amazonaws.s3#MetadataKey": {
             "type": "string"
         },
+        "com.amazonaws.s3#MetadataTableConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3TablesDestination": {
+                    "target": "com.amazonaws.s3#S3TablesDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The destination information for the metadata table configuration. The destination table bucket\n         must be in the same Region and Amazon Web Services account as the general purpose bucket. The specified metadata\n         table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination \n         table bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The metadata table configuration for a general purpose bucket.\n      </p>"
+            }
+        },
+        "com.amazonaws.s3#MetadataTableConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "S3TablesDestinationResult": {
+                    "target": "com.amazonaws.s3#S3TablesDestinationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The destination information for the metadata table configuration. The destination table bucket\n         must be in the same Region and Amazon Web Services account as the general purpose bucket. The specified metadata\n         table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination \n         table bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The metadata table configuration for a general purpose bucket. The destination table bucket\n         must be in the same Region and Amazon Web Services account as the general purpose bucket. The specified metadata\n         table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination \n         table bucket. \n      </p>"
+            }
+        },
+        "com.amazonaws.s3#MetadataTableStatus": {
+            "type": "string"
+        },
         "com.amazonaws.s3#MetadataValue": {
             "type": "string"
         },
@@ -34233,6 +34509,76 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes an Amazon S3 location that will receive the results of the restore request.</p>"
             }
+        },
+        "com.amazonaws.s3#S3TablesArn": {
+            "type": "string"
+        },
+        "com.amazonaws.s3#S3TablesBucketArn": {
+            "type": "string"
+        },
+        "com.amazonaws.s3#S3TablesDestination": {
+            "type": "structure",
+            "members": {
+                "TableBucketArn": {
+                    "target": "com.amazonaws.s3#S3TablesBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) for the table bucket that's specified as the \n         destination in the metadata table configuration. The destination table bucket\n         must be in the same Region and Amazon Web Services account as the general purpose bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.s3#S3TablesName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name for the metadata table in your metadata table configuration. The specified metadata\n         table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination \n         table bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The destination information for the metadata table configuration. The destination table bucket\n         must be in the same Region and Amazon Web Services account as the general purpose bucket. The specified metadata\n         table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination \n         table bucket. \n      </p>"
+            }
+        },
+        "com.amazonaws.s3#S3TablesDestinationResult": {
+            "type": "structure",
+            "members": {
+                "TableBucketArn": {
+                    "target": "com.amazonaws.s3#S3TablesBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) for the table bucket that's specified as the \n         destination in the metadata table configuration. The destination table bucket\n         must be in the same Region and Amazon Web Services account as the general purpose bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.s3#S3TablesName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name for the metadata table in your metadata table configuration. The specified metadata\n         table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination \n         table bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableArn": {
+                    "target": "com.amazonaws.s3#S3TablesArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The \n         specified metadata table name must be unique within the <code>aws_s3_metadata</code> namespace \n         in the destination table bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableNamespace": {
+                    "target": "com.amazonaws.s3#S3TablesNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The table bucket namespace for the metadata table in your metadata table configuration. This value \n         is always <code>aws_s3_metadata</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The destination information for the metadata table configuration. The destination table bucket\n         must be in the same Region and Amazon Web Services account as the general purpose bucket. The specified metadata\n         table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination \n         table bucket.\n      </p>"
+            }
+        },
+        "com.amazonaws.s3#S3TablesName": {
+            "type": "string"
+        },
+        "com.amazonaws.s3#S3TablesNamespace": {
+            "type": "string"
         },
         "com.amazonaws.s3#SSECustomerAlgorithm": {
             "type": "string"

@@ -543,7 +543,7 @@
                 "schedule": {
                     "target": "com.amazonaws.redshiftserverless#Schedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li> \n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li>\n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -918,7 +918,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an workgroup in Amazon Redshift Serverless.</p>",
+                "smithy.api#documentation": "<p>Creates an workgroup in Amazon Redshift Serverless.</p>\n         <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that\n         you own in a Region from reaching or being reached from the internet through internet\n         gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA\n         turned on, the following capabilities are blocked: </p>\n         <ul>\n            <li>\n               <p>Creating a public access workgroup</p>\n            </li>\n            <li>\n               <p>Modifying a private workgroup to public</p>\n            </li>\n            <li>\n               <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is\n               public</p>\n            </li>\n         </ul>\n         <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1713,7 +1713,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a database user name and temporary password with\n         temporary authorization to log in to Amazon Redshift Serverless.</p>\n         <p>By default, the temporary credentials expire in 900 seconds. \n         You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).</p>\n      \n         <p>The Identity and Access Management (IAM) user or role that runs \n      GetCredentials must have an IAM policy attached that allows access to all \n      necessary actions and resources.</p>\n   \n         <p>If the <code>DbName</code> parameter is specified, the IAM policy must \n      allow access to the resource dbname for the specified database name.</p>"
+                "smithy.api#documentation": "<p>Returns a database user name and temporary password with\n         temporary authorization to log in to Amazon Redshift Serverless.</p>\n         <p>By default, the temporary credentials expire in 900 seconds. \n         You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).</p>\n         <p>The Identity and Access Management (IAM) user or role that runs \n      GetCredentials must have an IAM policy attached that allows access to all \n      necessary actions and resources.</p>\n         <p>If the <code>DbName</code> parameter is specified, the IAM policy must \n      allow access to the resource dbname for the specified database name.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#GetCredentialsRequest": {
@@ -2641,6 +2641,84 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#ListManagedWorkgroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListManagedWorkgroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListManagedWorkgroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a list of specified managed workgroups in your account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "managedWorkgroups"
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListManagedWorkgroupsRequest": {
+            "type": "structure",
+            "members": {
+                "sourceArn": {
+                    "target": "com.amazonaws.redshiftserverless#SourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the managed \n         workgroup in the AWS Glue Data Catalog.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial ListManagedWorkgroups operation returns a nextToken, \n         you can include the returned nextToken in following ListManagedWorkgroups \n         operations, which returns results in the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number \n         of results to return. You can use nextToken to display the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListManagedWorkgroupsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If nextToken is returned, there are more results available. \n         The value of nextToken is a unique pagination token for each page.\n         To retrieve the next page, make the call again using the returned token.</p>"
+                    }
+                },
+                "managedWorkgroups": {
+                    "target": "com.amazonaws.redshiftserverless#ManagedWorkgroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned array of managed workgroups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshiftserverless#ListNamespaces": {
             "type": "operation",
             "input": {
@@ -3449,6 +3527,104 @@
                 }
             }
         },
+        "com.amazonaws.redshiftserverless#ManagedWorkgroupListItem": {
+            "type": "structure",
+            "members": {
+                "managedWorkgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#ManagedWorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the managed workgroup.</p>"
+                    }
+                },
+                "managedWorkgroupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the managed workgroup.</p>"
+                    }
+                },
+                "sourceArn": {
+                    "target": "com.amazonaws.redshiftserverless#SourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the managed \n         workgroup in the AWS Glue Data Catalog.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.redshiftserverless#ManagedWorkgroupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the managed workgroup.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date of the managed workgroup.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of Amazon Redshift compute resources managed by AWS Glue.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ManagedWorkgroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_:\\-]+$"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ManagedWorkgroupResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ListManagedWorkgroups"
+                }
+            ]
+        },
+        "com.amazonaws.redshiftserverless#ManagedWorkgroupStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "MODIFYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODIFYING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_AVAILABLE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#ManagedWorkgroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#ManagedWorkgroupListItem"
+            }
+        },
         "com.amazonaws.redshiftserverless#Namespace": {
             "type": "structure",
             "members": {
@@ -3905,6 +4081,9 @@
                     "target": "com.amazonaws.redshiftserverless#CrossVpcEndpointResource"
                 },
                 {
+                    "target": "com.amazonaws.redshiftserverless#ManagedWorkgroupResource"
+                },
+                {
                     "target": "com.amazonaws.redshiftserverless#NamespaceResource"
                 },
                 {
@@ -3939,7 +4118,7 @@
                 ],
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>This is an interface reference for Amazon Redshift Serverless. \n           It contains documentation for one of the programming or command line interfaces you can use to manage Amazon Redshift Serverless.\n        </p>\n        <p>Amazon Redshift Serverless automatically provisions data warehouse capacity and intelligently scales the \n           underlying resources based on workload demands. Amazon Redshift Serverless adjusts capacity in seconds to deliver consistently high \n           performance and simplified operations for even the most demanding and volatile workloads. Amazon Redshift Serverless lets you\n           focus on using your data to acquire new insights for your business and customers.\n        </p>\n        <p>\n           To learn more about Amazon Redshift Serverless, \n           see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html\">What is Amazon Redshift Serverless</a>.\n        </p>",
+                "smithy.api#documentation": "<p>This is an interface reference for Amazon Redshift Serverless. \n           It contains documentation for one of the programming or command line interfaces you can use to manage Amazon Redshift Serverless.\n        </p>\n         <p>Amazon Redshift Serverless automatically provisions data warehouse capacity and intelligently scales the \n           underlying resources based on workload demands. Amazon Redshift Serverless adjusts capacity in seconds to deliver consistently high \n           performance and simplified operations for even the most demanding and volatile workloads. Amazon Redshift Serverless lets you\n           focus on using your data to acquire new insights for your business and customers.\n        </p>\n         <p> To learn more about Amazon Redshift Serverless, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html\">What is Amazon Redshift Serverless?</a>.</p>",
                 "smithy.api#title": "Redshift Serverless",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -5230,7 +5409,7 @@
                 "schedule": {
                     "target": "com.amazonaws.redshiftserverless#Schedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li> \n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li>\n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "scheduledActionDescription": {
@@ -5606,6 +5785,12 @@
                         "value": "COPYING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#SourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-z-]*:glue:[a-z0-9-]+:\\d+:(database|catalog)[a-z0-9-:]*(?:/[A-Za-z0-9-_]{1,255})*$"
             }
         },
         "com.amazonaws.redshiftserverless#State": {
@@ -6271,7 +6456,7 @@
                 "schedule": {
                     "target": "com.amazonaws.redshiftserverless#Schedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li> \n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li>\n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "roleArn": {
@@ -6545,7 +6730,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a workgroup with the specified configuration settings. You can't update multiple parameters in one request. For example,\n      you can update <code>baseCapacity</code> or <code>port</code> in a single request, but you can't update both in the same request.</p>"
+                "smithy.api#documentation": "<p>Updates a workgroup with the specified configuration settings. You can't update multiple parameters in one request. For example,\n      you can update <code>baseCapacity</code> or <code>port</code> in a single request, but you can't update both in the same request.</p>\n         <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that\n         you own in a Region from reaching or being reached from the internet through internet\n         gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA\n         turned on, the following capabilities are blocked: </p>\n         <ul>\n            <li>\n               <p>Creating a public access workgroup</p>\n            </li>\n            <li>\n               <p>Modifying a private workgroup to public</p>\n            </li>\n            <li>\n               <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is\n               public</p>\n            </li>\n         </ul>\n         <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and\n            subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#UpdateWorkgroupRequest": {
