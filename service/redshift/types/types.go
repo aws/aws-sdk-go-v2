@@ -686,6 +686,9 @@ type DataShare struct {
 	// and data consumers.
 	DataShareAssociations []DataShareAssociation
 
+	//  The type of the datashare created by RegisterNamespace.
+	DataShareType DataShareType
+
 	// The identifier of a datashare to show its managing entity.
 	ManagedBy *string
 
@@ -1271,6 +1274,35 @@ type MaintenanceTrack struct {
 	noSmithyDocumentSerde
 }
 
+// Object to store union of values for a provisioned cluster or serverless
+// namespace’s identifier.
+//
+// The following types satisfy this interface:
+//
+//	NamespaceIdentifierUnionMemberProvisionedIdentifier
+//	NamespaceIdentifierUnionMemberServerlessIdentifier
+type NamespaceIdentifierUnion interface {
+	isNamespaceIdentifierUnion()
+}
+
+// The identifier for a provisioned cluster.
+type NamespaceIdentifierUnionMemberProvisionedIdentifier struct {
+	Value ProvisionedIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (*NamespaceIdentifierUnionMemberProvisionedIdentifier) isNamespaceIdentifierUnion() {}
+
+// The identifier for a serverless namespace.
+type NamespaceIdentifierUnionMemberServerlessIdentifier struct {
+	Value ServerlessIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (*NamespaceIdentifierUnionMemberServerlessIdentifier) isNamespaceIdentifierUnion() {}
+
 // Describes a network interface.
 type NetworkInterface struct {
 
@@ -1473,6 +1505,17 @@ type PendingModifiedValues struct {
 	// The pending or in-progress change of the ability to connect to the cluster from
 	// the public network.
 	PubliclyAccessible *bool
+
+	noSmithyDocumentSerde
+}
+
+// The identifier for a provisioned cluster.
+type ProvisionedIdentifier struct {
+
+	// The unique identifier for the provisioned cluster.
+	//
+	// This member is required.
+	ClusterIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -2015,6 +2058,23 @@ type SecondaryClusterInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The identifier for a serverless namespace.
+type ServerlessIdentifier struct {
+
+	// The unique identifier for the serverless namespace.
+	//
+	// This member is required.
+	NamespaceIdentifier *string
+
+	// The unique identifier for the workgroup associated with the serverless
+	// namespace.
+	//
+	// This member is required.
+	WorkgroupIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
 // A list of service integrations.
 //
 // The following types satisfy this interface:
@@ -2514,5 +2574,6 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isLakeFormationScopeUnion()  {}
+func (*UnknownUnionMember) isNamespaceIdentifierUnion() {}
 func (*UnknownUnionMember) isS3AccessGrantsScopeUnion() {}
 func (*UnknownUnionMember) isServiceIntegrationsUnion() {}

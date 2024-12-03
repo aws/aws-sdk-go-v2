@@ -295,6 +295,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeAgentInput(v *InvokeAgentInput, e
 		}
 	}
 
+	if v.SourceArn != nil {
+		locationName := "X-Amz-Source-Arn"
+		encoder.SetHeader(locationName).String(*v.SourceArn)
+	}
+
 	return nil
 }
 
@@ -1233,6 +1238,11 @@ func awsRestjson1_serializeDocumentApiResult(v *types.ApiResult, value smithyjso
 		ok.String(*v.ActionGroup)
 	}
 
+	if v.AgentId != nil {
+		ok := object.Key("agentId")
+		ok.String(*v.AgentId)
+	}
+
 	if v.ApiPath != nil {
 		ok := object.Key("apiPath")
 		ok.String(*v.ApiPath)
@@ -1367,6 +1377,38 @@ func awsRestjson1_serializeDocumentByteContentFile(v *types.ByteContentFile, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ContentBlockMemberText:
+		av := object.Key("text")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContentBlocks(v []types.ContentBlock, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentContentBlock(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContentBody(v *types.ContentBody, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1374,6 +1416,20 @@ func awsRestjson1_serializeDocumentContentBody(v *types.ContentBody, value smith
 	if v.Body != nil {
 		ok := object.Key("body")
 		ok.String(*v.Body)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConversationHistory(v *types.ConversationHistory, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Messages != nil {
+		ok := object.Key("messages")
+		if err := awsRestjson1_serializeDocumentMessages(v.Messages, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1655,6 +1711,11 @@ func awsRestjson1_serializeDocumentFunctionResult(v *types.FunctionResult, value
 	if v.ActionGroup != nil {
 		ok := object.Key("actionGroup")
 		ok.String(*v.ActionGroup)
+	}
+
+	if v.AgentId != nil {
+		ok := object.Key("agentId")
+		ok.String(*v.AgentId)
 	}
 
 	if len(v.ConfirmationState) > 0 {
@@ -2162,6 +2223,38 @@ func awsRestjson1_serializeDocumentKnowledgeBaseVectorSearchConfiguration(v *typ
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessage(v *types.Message, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		if err := awsRestjson1_serializeDocumentContentBlocks(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Role) > 0 {
+		ok := object.Key("role")
+		ok.String(string(v.Role))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessages(v []types.Message, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMessage(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2793,6 +2886,13 @@ func awsRestjson1_serializeDocumentSessionAttributesMap(v map[string]string, val
 func awsRestjson1_serializeDocumentSessionState(v *types.SessionState, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ConversationHistory != nil {
+		ok := object.Key("conversationHistory")
+		if err := awsRestjson1_serializeDocumentConversationHistory(v.ConversationHistory, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Files != nil {
 		ok := object.Key("files")

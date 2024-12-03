@@ -4237,6 +4237,36 @@ type DashboardVisualPublishOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The QA result that is made from dashboard visual.
+type DashboardVisualResult struct {
+
+	// The ID of the dashboard.
+	DashboardId *string
+
+	// The name of the dashboard.
+	DashboardName *string
+
+	// The URL of the dashboard.
+	DashboardUrl *string
+
+	// The ID of the sheet.
+	SheetId *string
+
+	// The name of the sheet.
+	SheetName *string
+
+	// The ID of the visual.
+	VisualId *string
+
+	// The subtitle of the visual.
+	VisualSubtitle *string
+
+	// The title of the visual.
+	VisualTitle *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure that represents a data aggregation.
 type DataAggregation struct {
 
@@ -7627,6 +7657,36 @@ type GaugeChartVisual struct {
 
 	// The alt text for the visual.
 	VisualContentAltText *string
+
+	noSmithyDocumentSerde
+}
+
+// The QA result that is made from generated answer.
+type GeneratedAnswerResult struct {
+
+	// The ID of the answer.
+	AnswerId *string
+
+	// The answer status of the generated answer.
+	AnswerStatus GeneratedAnswerStatus
+
+	// The ID of the question.
+	QuestionId *string
+
+	// The question text.
+	QuestionText *string
+
+	// The URL of the question.
+	QuestionUrl *string
+
+	// The restatement for the answer.
+	Restatement *string
+
+	// The ID of the topic.
+	TopicId *string
+
+	// The name of the topic.
+	TopicName *string
 
 	noSmithyDocumentSerde
 }
@@ -12076,6 +12136,21 @@ type ProjectOperation struct {
 	//
 	// This member is required.
 	ProjectedColumns []string
+
+	noSmithyDocumentSerde
+}
+
+// The QA result that is made from the DashboardVisual or GeneratedAnswer .
+type QAResult struct {
+
+	// The representation of a dashboard visual result.
+	DashboardVisual *DashboardVisualResult
+
+	// The representation of a generated answer result.
+	GeneratedAnswer *GeneratedAnswerResult
+
+	// The type of QA result.
+	ResultType QAResultType
 
 	noSmithyDocumentSerde
 }

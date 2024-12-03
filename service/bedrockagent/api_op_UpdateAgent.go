@@ -78,6 +78,9 @@ type UpdateAgentInput struct {
 	// This member is required.
 	FoundationModel *string
 
+	// The agent's collaboration role.
+	AgentCollaboration types.AgentCollaboration
+
 	//  Contains details of the custom orchestration configured for the agent.
 	CustomOrchestration *types.CustomOrchestration
 

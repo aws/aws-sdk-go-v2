@@ -55,6 +55,10 @@ type UpdateWebExperienceInput struct {
 	// [Configure external OIDC identity provider for your browser extensions.]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/browser-extensions.html
 	BrowserExtensionConfiguration *types.BrowserExtensionConfiguration
 
+	// Updates the custom logo, favicon, font, and color used in the Amazon Q web
+	// experience.
+	CustomizationConfiguration *types.CustomizationConfiguration
+
 	// Information about the identity provider (IdP) used to authenticate end users of
 	// an Amazon Q Business web experience.
 	IdentityProviderConfiguration types.IdentityProviderConfiguration

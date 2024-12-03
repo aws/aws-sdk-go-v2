@@ -141,6 +141,9 @@ type Agent struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The agent's collaboration settings.
+	AgentCollaboration AgentCollaboration
+
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
 	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
@@ -416,6 +419,118 @@ type AgentAliasSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An agent collaborator.
+type AgentCollaborator struct {
+
+	// The collaborator's agent descriptor.
+	//
+	// This member is required.
+	AgentDescriptor *AgentDescriptor
+
+	// The collaborator's agent ID.
+	//
+	// This member is required.
+	AgentId *string
+
+	// The collaborator's agent version.
+	//
+	// This member is required.
+	AgentVersion *string
+
+	// The collaborator's instructions.
+	//
+	// This member is required.
+	CollaborationInstruction *string
+
+	// The collaborator's collaborator ID.
+	//
+	// This member is required.
+	CollaboratorId *string
+
+	// The collaborator's collaborator name.
+	//
+	// This member is required.
+	CollaboratorName *string
+
+	// When the collaborator was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// When the collaborator was updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The collaborator's client token.
+	ClientToken *string
+
+	// The collaborator's relay conversation history.
+	RelayConversationHistory RelayConversationHistory
+
+	noSmithyDocumentSerde
+}
+
+// An agent collaborator summary.
+type AgentCollaboratorSummary struct {
+
+	// The collaborator's agent descriptor.
+	//
+	// This member is required.
+	AgentDescriptor *AgentDescriptor
+
+	// The collaborator's agent ID.
+	//
+	// This member is required.
+	AgentId *string
+
+	// The collaborator's agent version.
+	//
+	// This member is required.
+	AgentVersion *string
+
+	// The collaborator's collaboration instruction.
+	//
+	// This member is required.
+	CollaborationInstruction *string
+
+	// The collaborator's ID.
+	//
+	// This member is required.
+	CollaboratorId *string
+
+	// The collaborator's name.
+	//
+	// This member is required.
+	CollaboratorName *string
+
+	// When the collaborator was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// When the collaborator was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The collaborator's relay conversation history.
+	//
+	// This member is required.
+	RelayConversationHistory RelayConversationHistory
+
+	noSmithyDocumentSerde
+}
+
+// An agent descriptor.
+type AgentDescriptor struct {
+
+	// The agent's alias ARN.
+	AliasArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines an agent node in your flow. You specify the agent to invoke at this
 // point in the flow. For more information, see [Node types in Amazon Bedrock works]in the Amazon Bedrock User Guide.
 //
@@ -591,6 +706,9 @@ type AgentVersion struct {
 	//
 	// This member is required.
 	Version *string
+
+	// The agent's collaboration settings.
+	AgentCollaboration AgentCollaboration
 
 	// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
 	CustomerEncryptionKeyArn *string
@@ -3377,6 +3495,9 @@ type PromptConfiguration struct {
 	// [Configure the prompt templates]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts-configure.html
 	// [Prompt template placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
 	BasePromptTemplate *string
+
+	// The agent's foundation model.
+	FoundationModel *string
 
 	// Contains inference parameters to use when the agent invokes a foundation model
 	// in the part of the agent sequence defined by the promptType . For more

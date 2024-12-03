@@ -53,6 +53,9 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	ProjectIdentifier *string
 
+	// The deployment order of the environment.
+	DeploymentOrder *int32
+
 	// The description of the Amazon DataZone environment.
 	Description *string
 
@@ -64,6 +67,9 @@ type CreateEnvironmentInput struct {
 
 	// The ID of the blueprint with which the environment is being created.
 	EnvironmentBlueprintIdentifier *string
+
+	// The configuration ID of the environment.
+	EnvironmentConfigurationId *string
 
 	// The glossary terms that can be used in this Amazon DataZone environment.
 	GlossaryTerms []string

@@ -5707,6 +5707,11 @@ func awsRestjson1_serializeDocumentCatalogResource(v *types.CatalogResource, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
 	return nil
 }
 

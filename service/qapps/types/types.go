@@ -774,6 +774,9 @@ type QPluginCard struct {
 	// This member is required.
 	Type CardType
 
+	// The action identifier of the action to be performed by the plugin card.
+	ActionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 
@@ -804,6 +807,9 @@ type QPluginCardInput struct {
 	//
 	// This member is required.
 	Type CardType
+
+	// The action identifier of the action to be performed by the plugin card.
+	ActionIdentifier *string
 
 	noSmithyDocumentSerde
 }

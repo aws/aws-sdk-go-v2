@@ -73,6 +73,7 @@ const (
 	AuthenticationTypeBasic  AuthenticationType = "BASIC"
 	AuthenticationTypeOauth2 AuthenticationType = "OAUTH2"
 	AuthenticationTypeCustom AuthenticationType = "CUSTOM"
+	AuthenticationTypeIam    AuthenticationType = "IAM"
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
@@ -84,6 +85,7 @@ func (AuthenticationType) Values() []AuthenticationType {
 		"BASIC",
 		"OAUTH2",
 		"CUSTOM",
+		"IAM",
 	}
 }
 
@@ -346,6 +348,27 @@ func (ComputationType) Values() []ComputationType {
 	}
 }
 
+type ComputeEnvironment string
+
+// Enum values for ComputeEnvironment
+const (
+	ComputeEnvironmentSpark  ComputeEnvironment = "SPARK"
+	ComputeEnvironmentAthena ComputeEnvironment = "ATHENA"
+	ComputeEnvironmentPython ComputeEnvironment = "PYTHON"
+)
+
+// Values returns all known values for ComputeEnvironment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComputeEnvironment) Values() []ComputeEnvironment {
+	return []ComputeEnvironment{
+		"SPARK",
+		"ATHENA",
+		"PYTHON",
+	}
+}
+
 type ConnectionPropertyKey string
 
 // Enum values for ConnectionPropertyKey
@@ -376,10 +399,6 @@ const (
 	ConnectionPropertyKeyKafkaClientKeyPassword               ConnectionPropertyKey = "KAFKA_CLIENT_KEY_PASSWORD"
 	ConnectionPropertyKeyEncryptedKafkaClientKeystorePassword ConnectionPropertyKey = "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD"
 	ConnectionPropertyKeyEncryptedKafkaClientKeyPassword      ConnectionPropertyKey = "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD"
-	ConnectionPropertyKeySecretId                             ConnectionPropertyKey = "SECRET_ID"
-	ConnectionPropertyKeyConnectorUrl                         ConnectionPropertyKey = "CONNECTOR_URL"
-	ConnectionPropertyKeyConnectorType                        ConnectionPropertyKey = "CONNECTOR_TYPE"
-	ConnectionPropertyKeyConnectorClassName                   ConnectionPropertyKey = "CONNECTOR_CLASS_NAME"
 	ConnectionPropertyKeyKafkaSaslMechanism                   ConnectionPropertyKey = "KAFKA_SASL_MECHANISM"
 	ConnectionPropertyKeyKafkaSaslPlainUsername               ConnectionPropertyKey = "KAFKA_SASL_PLAIN_USERNAME"
 	ConnectionPropertyKeyKafkaSaslPlainPassword               ConnectionPropertyKey = "KAFKA_SASL_PLAIN_PASSWORD"
@@ -392,6 +411,12 @@ const (
 	ConnectionPropertyKeyKafkaSaslGssapiKrb5Conf              ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_KRB5_CONF"
 	ConnectionPropertyKeyKafkaSaslGssapiService               ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_SERVICE"
 	ConnectionPropertyKeyKafkaSaslGssapiPrincipal             ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_PRINCIPAL"
+	ConnectionPropertyKeySecretId                             ConnectionPropertyKey = "SECRET_ID"
+	ConnectionPropertyKeyConnectorUrl                         ConnectionPropertyKey = "CONNECTOR_URL"
+	ConnectionPropertyKeyConnectorType                        ConnectionPropertyKey = "CONNECTOR_TYPE"
+	ConnectionPropertyKeyConnectorClassName                   ConnectionPropertyKey = "CONNECTOR_CLASS_NAME"
+	ConnectionPropertyKeyEndpoint                             ConnectionPropertyKey = "ENDPOINT"
+	ConnectionPropertyKeyEndpointType                         ConnectionPropertyKey = "ENDPOINT_TYPE"
 	ConnectionPropertyKeyRoleArn                              ConnectionPropertyKey = "ROLE_ARN"
 	ConnectionPropertyKeyRegion                               ConnectionPropertyKey = "REGION"
 	ConnectionPropertyKeyWorkgroupName                        ConnectionPropertyKey = "WORKGROUP_NAME"
@@ -431,10 +456,6 @@ func (ConnectionPropertyKey) Values() []ConnectionPropertyKey {
 		"KAFKA_CLIENT_KEY_PASSWORD",
 		"ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD",
 		"ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD",
-		"SECRET_ID",
-		"CONNECTOR_URL",
-		"CONNECTOR_TYPE",
-		"CONNECTOR_CLASS_NAME",
 		"KAFKA_SASL_MECHANISM",
 		"KAFKA_SASL_PLAIN_USERNAME",
 		"KAFKA_SASL_PLAIN_PASSWORD",
@@ -447,6 +468,12 @@ func (ConnectionPropertyKey) Values() []ConnectionPropertyKey {
 		"KAFKA_SASL_GSSAPI_KRB5_CONF",
 		"KAFKA_SASL_GSSAPI_SERVICE",
 		"KAFKA_SASL_GSSAPI_PRINCIPAL",
+		"SECRET_ID",
+		"CONNECTOR_URL",
+		"CONNECTOR_TYPE",
+		"CONNECTOR_CLASS_NAME",
+		"ENDPOINT",
+		"ENDPOINT_TYPE",
 		"ROLE_ARN",
 		"REGION",
 		"WORKGROUP_NAME",
@@ -480,16 +507,35 @@ type ConnectionType string
 
 // Enum values for ConnectionType
 const (
-	ConnectionTypeJdbc                   ConnectionType = "JDBC"
-	ConnectionTypeSftp                   ConnectionType = "SFTP"
-	ConnectionTypeMongodb                ConnectionType = "MONGODB"
-	ConnectionTypeKafka                  ConnectionType = "KAFKA"
-	ConnectionTypeNetwork                ConnectionType = "NETWORK"
-	ConnectionTypeMarketplace            ConnectionType = "MARKETPLACE"
-	ConnectionTypeCustom                 ConnectionType = "CUSTOM"
-	ConnectionTypeSalesforce             ConnectionType = "SALESFORCE"
-	ConnectionTypeViewValidationRedshift ConnectionType = "VIEW_VALIDATION_REDSHIFT"
-	ConnectionTypeViewValidationAthena   ConnectionType = "VIEW_VALIDATION_ATHENA"
+	ConnectionTypeJdbc                     ConnectionType = "JDBC"
+	ConnectionTypeSftp                     ConnectionType = "SFTP"
+	ConnectionTypeMongodb                  ConnectionType = "MONGODB"
+	ConnectionTypeKafka                    ConnectionType = "KAFKA"
+	ConnectionTypeNetwork                  ConnectionType = "NETWORK"
+	ConnectionTypeMarketplace              ConnectionType = "MARKETPLACE"
+	ConnectionTypeCustom                   ConnectionType = "CUSTOM"
+	ConnectionTypeSalesforce               ConnectionType = "SALESFORCE"
+	ConnectionTypeViewValidationRedshift   ConnectionType = "VIEW_VALIDATION_REDSHIFT"
+	ConnectionTypeViewValidationAthena     ConnectionType = "VIEW_VALIDATION_ATHENA"
+	ConnectionTypeGoogleads                ConnectionType = "GOOGLEADS"
+	ConnectionTypeGooglesheets             ConnectionType = "GOOGLESHEETS"
+	ConnectionTypeGoogleanalytics4         ConnectionType = "GOOGLEANALYTICS4"
+	ConnectionTypeServicenow               ConnectionType = "SERVICENOW"
+	ConnectionTypeMarketo                  ConnectionType = "MARKETO"
+	ConnectionTypeSapodata                 ConnectionType = "SAPODATA"
+	ConnectionTypeZendesk                  ConnectionType = "ZENDESK"
+	ConnectionTypeJiracloud                ConnectionType = "JIRACLOUD"
+	ConnectionTypeNetsuiteerp              ConnectionType = "NETSUITEERP"
+	ConnectionTypeHubspot                  ConnectionType = "HUBSPOT"
+	ConnectionTypeFacebookads              ConnectionType = "FACEBOOKADS"
+	ConnectionTypeInstagramads             ConnectionType = "INSTAGRAMADS"
+	ConnectionTypeZohocrm                  ConnectionType = "ZOHOCRM"
+	ConnectionTypeSalesforcepardot         ConnectionType = "SALESFORCEPARDOT"
+	ConnectionTypeSalesforcemarketingcloud ConnectionType = "SALESFORCEMARKETINGCLOUD"
+	ConnectionTypeSlack                    ConnectionType = "SLACK"
+	ConnectionTypeStripe                   ConnectionType = "STRIPE"
+	ConnectionTypeIntercom                 ConnectionType = "INTERCOM"
+	ConnectionTypeSnapchatads              ConnectionType = "SNAPCHATADS"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -508,6 +554,25 @@ func (ConnectionType) Values() []ConnectionType {
 		"SALESFORCE",
 		"VIEW_VALIDATION_REDSHIFT",
 		"VIEW_VALIDATION_ATHENA",
+		"GOOGLEADS",
+		"GOOGLESHEETS",
+		"GOOGLEANALYTICS4",
+		"SERVICENOW",
+		"MARKETO",
+		"SAPODATA",
+		"ZENDESK",
+		"JIRACLOUD",
+		"NETSUITEERP",
+		"HUBSPOT",
+		"FACEBOOKADS",
+		"INSTAGRAMADS",
+		"ZOHOCRM",
+		"SALESFORCEPARDOT",
+		"SALESFORCEMARKETINGCLOUD",
+		"SLACK",
+		"STRIPE",
+		"INTERCOM",
+		"SNAPCHATADS",
 	}
 }
 
@@ -678,6 +743,25 @@ func (DataFormat) Values() []DataFormat {
 		"AVRO",
 		"JSON",
 		"PROTOBUF",
+	}
+}
+
+type DataOperation string
+
+// Enum values for DataOperation
+const (
+	DataOperationRead  DataOperation = "READ"
+	DataOperationWrite DataOperation = "WRITE"
+)
+
+// Values returns all known values for DataOperation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataOperation) Values() []DataOperation {
+	return []DataOperation{
+		"READ",
+		"WRITE",
 	}
 }
 
@@ -859,6 +943,25 @@ func (ExecutionClass) Values() []ExecutionClass {
 	}
 }
 
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
+const (
+	ExecutionStatusFailed  ExecutionStatus = "FAILED"
+	ExecutionStatusStarted ExecutionStatus = "STARTED"
+)
+
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"FAILED",
+		"STARTED",
+	}
+}
+
 type ExistCondition string
 
 // Enum values for ExistCondition
@@ -912,6 +1015,86 @@ func (FederationSourceErrorCode) Values() []FederationSourceErrorCode {
 		"InternalServiceException",
 		"PartialFailureException",
 		"ThrottlingException",
+	}
+}
+
+type FieldDataType string
+
+// Enum values for FieldDataType
+const (
+	FieldDataTypeInt       FieldDataType = "INT"
+	FieldDataTypeSmallint  FieldDataType = "SMALLINT"
+	FieldDataTypeBigint    FieldDataType = "BIGINT"
+	FieldDataTypeFloat     FieldDataType = "FLOAT"
+	FieldDataTypeLong      FieldDataType = "LONG"
+	FieldDataTypeDate      FieldDataType = "DATE"
+	FieldDataTypeBoolean   FieldDataType = "BOOLEAN"
+	FieldDataTypeMap       FieldDataType = "MAP"
+	FieldDataTypeArray     FieldDataType = "ARRAY"
+	FieldDataTypeString    FieldDataType = "STRING"
+	FieldDataTypeTimestamp FieldDataType = "TIMESTAMP"
+	FieldDataTypeDecimal   FieldDataType = "DECIMAL"
+	FieldDataTypeByte      FieldDataType = "BYTE"
+	FieldDataTypeShort     FieldDataType = "SHORT"
+	FieldDataTypeDouble    FieldDataType = "DOUBLE"
+	FieldDataTypeStruct    FieldDataType = "STRUCT"
+)
+
+// Values returns all known values for FieldDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FieldDataType) Values() []FieldDataType {
+	return []FieldDataType{
+		"INT",
+		"SMALLINT",
+		"BIGINT",
+		"FLOAT",
+		"LONG",
+		"DATE",
+		"BOOLEAN",
+		"MAP",
+		"ARRAY",
+		"STRING",
+		"TIMESTAMP",
+		"DECIMAL",
+		"BYTE",
+		"SHORT",
+		"DOUBLE",
+		"STRUCT",
+	}
+}
+
+type FieldFilterOperator string
+
+// Enum values for FieldFilterOperator
+const (
+	FieldFilterOperatorLessThan             FieldFilterOperator = "LESS_THAN"
+	FieldFilterOperatorGreaterThan          FieldFilterOperator = "GREATER_THAN"
+	FieldFilterOperatorBetween              FieldFilterOperator = "BETWEEN"
+	FieldFilterOperatorEqualTo              FieldFilterOperator = "EQUAL_TO"
+	FieldFilterOperatorNotEqualTo           FieldFilterOperator = "NOT_EQUAL_TO"
+	FieldFilterOperatorGreaterThanOrEqualTo FieldFilterOperator = "GREATER_THAN_OR_EQUAL_TO"
+	FieldFilterOperatorLessThanOrEqualTo    FieldFilterOperator = "LESS_THAN_OR_EQUAL_TO"
+	FieldFilterOperatorContains             FieldFilterOperator = "CONTAINS"
+	FieldFilterOperatorOrderBy              FieldFilterOperator = "ORDER_BY"
+)
+
+// Values returns all known values for FieldFilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FieldFilterOperator) Values() []FieldFilterOperator {
+	return []FieldFilterOperator{
+		"LESS_THAN",
+		"GREATER_THAN",
+		"BETWEEN",
+		"EQUAL_TO",
+		"NOT_EQUAL_TO",
+		"GREATER_THAN_OR_EQUAL_TO",
+		"LESS_THAN_OR_EQUAL_TO",
+		"CONTAINS",
+		"ORDER_BY",
 	}
 }
 
@@ -1108,6 +1291,35 @@ func (InclusionAnnotationValue) Values() []InclusionAnnotationValue {
 	return []InclusionAnnotationValue{
 		"INCLUDE",
 		"EXCLUDE",
+	}
+}
+
+type IntegrationStatus string
+
+// Enum values for IntegrationStatus
+const (
+	IntegrationStatusCreating       IntegrationStatus = "CREATING"
+	IntegrationStatusActive         IntegrationStatus = "ACTIVE"
+	IntegrationStatusModifying      IntegrationStatus = "MODIFYING"
+	IntegrationStatusFailed         IntegrationStatus = "FAILED"
+	IntegrationStatusDeleting       IntegrationStatus = "DELETING"
+	IntegrationStatusSyncing        IntegrationStatus = "SYNCING"
+	IntegrationStatusNeedsAttention IntegrationStatus = "NEEDS_ATTENTION"
+)
+
+// Values returns all known values for IntegrationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationStatus) Values() []IntegrationStatus {
+	return []IntegrationStatus{
+		"CREATING",
+		"ACTIVE",
+		"MODIFYING",
+		"FAILED",
+		"DELETING",
+		"SYNCING",
+		"NEEDS_ATTENTION",
 	}
 }
 
@@ -1682,6 +1894,31 @@ func (PrincipalType) Values() []PrincipalType {
 	}
 }
 
+type PropertyType string
+
+// Enum values for PropertyType
+const (
+	PropertyTypeUserInput         PropertyType = "USER_INPUT"
+	PropertyTypeSecret            PropertyType = "SECRET"
+	PropertyTypeReadOnly          PropertyType = "READ_ONLY"
+	PropertyTypeUnused            PropertyType = "UNUSED"
+	PropertyTypeSecretOrUserInput PropertyType = "SECRET_OR_USER_INPUT"
+)
+
+// Values returns all known values for PropertyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PropertyType) Values() []PropertyType {
+	return []PropertyType{
+		"USER_INPUT",
+		"SECRET",
+		"READ_ONLY",
+		"UNUSED",
+		"SECRET_OR_USER_INPUT",
+	}
+}
+
 type QuoteChar string
 
 // Enum values for QuoteChar
@@ -1873,6 +2110,25 @@ func (ScheduleState) Values() []ScheduleState {
 	}
 }
 
+type ScheduleType string
+
+// Enum values for ScheduleType
+const (
+	ScheduleTypeCron ScheduleType = "CRON"
+	ScheduleTypeAuto ScheduleType = "AUTO"
+)
+
+// Values returns all known values for ScheduleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleType) Values() []ScheduleType {
+	return []ScheduleType{
+		"CRON",
+		"AUTO",
+	}
+}
+
 type SchemaDiffType string
 
 // Enum values for SchemaDiffType
@@ -1983,6 +2239,25 @@ func (SessionStatus) Values() []SessionStatus {
 		"TIMEOUT",
 		"STOPPING",
 		"STOPPED",
+	}
+}
+
+type SettingSource string
+
+// Enum values for SettingSource
+const (
+	SettingSourceCatalog SettingSource = "CATALOG"
+	SettingSourceTable   SettingSource = "TABLE"
+)
+
+// Values returns all known values for SettingSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SettingSource) Values() []SettingSource {
+	return []SettingSource{
+		"CATALOG",
+		"TABLE",
 	}
 }
 
@@ -2437,6 +2712,27 @@ func (UnionType) Values() []UnionType {
 	return []UnionType{
 		"ALL",
 		"DISTINCT",
+	}
+}
+
+type UnnestSpec string
+
+// Enum values for UnnestSpec
+const (
+	UnnestSpecToplevel UnnestSpec = "TOPLEVEL"
+	UnnestSpecFull     UnnestSpec = "FULL"
+	UnnestSpecNounnest UnnestSpec = "NOUNNEST"
+)
+
+// Values returns all known values for UnnestSpec. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UnnestSpec) Values() []UnnestSpec {
+	return []UnnestSpec{
+		"TOPLEVEL",
+		"FULL",
+		"NOUNNEST",
 	}
 }
 

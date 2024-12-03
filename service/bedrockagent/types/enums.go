@@ -65,6 +65,27 @@ func (AgentAliasStatus) Values() []AgentAliasStatus {
 	}
 }
 
+type AgentCollaboration string
+
+// Enum values for AgentCollaboration
+const (
+	AgentCollaborationSupervisor       AgentCollaboration = "SUPERVISOR"
+	AgentCollaborationSupervisorRouter AgentCollaboration = "SUPERVISOR_ROUTER"
+	AgentCollaborationDisabled         AgentCollaboration = "DISABLED"
+)
+
+// Values returns all known values for AgentCollaboration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentCollaboration) Values() []AgentCollaboration {
+	return []AgentCollaboration{
+		"SUPERVISOR",
+		"SUPERVISOR_ROUTER",
+		"DISABLED",
+	}
+}
+
 type AgentStatus string
 
 // Enum values for AgentStatus
@@ -921,6 +942,25 @@ func (PromptType) Values() []PromptType {
 		"ORCHESTRATION",
 		"POST_PROCESSING",
 		"KNOWLEDGE_BASE_RESPONSE_GENERATION",
+	}
+}
+
+type RelayConversationHistory string
+
+// Enum values for RelayConversationHistory
+const (
+	RelayConversationHistoryToCollaborator RelayConversationHistory = "TO_COLLABORATOR"
+	RelayConversationHistoryDisabled       RelayConversationHistory = "DISABLED"
+)
+
+// Values returns all known values for RelayConversationHistory. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RelayConversationHistory) Values() []RelayConversationHistory {
+	return []RelayConversationHistory{
+		"TO_COLLABORATOR",
+		"DISABLED",
 	}
 }
 

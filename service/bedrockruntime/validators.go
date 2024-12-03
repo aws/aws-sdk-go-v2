@@ -70,6 +70,26 @@ func (m *validateOpConverseStream) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAsyncInvoke struct {
+}
+
+func (*validateOpGetAsyncInvoke) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAsyncInvoke) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAsyncInvokeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAsyncInvokeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInvokeModel struct {
 }
 
@@ -110,6 +130,26 @@ func (m *validateOpInvokeModelWithResponseStream) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartAsyncInvoke struct {
+}
+
+func (*validateOpStartAsyncInvoke) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAsyncInvoke) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAsyncInvokeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAsyncInvokeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpApplyGuardrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpApplyGuardrail{}, middleware.After)
 }
@@ -122,12 +162,54 @@ func addOpConverseStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpConverseStream{}, middleware.After)
 }
 
+func addOpGetAsyncInvokeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAsyncInvoke{}, middleware.After)
+}
+
 func addOpInvokeModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeModel{}, middleware.After)
 }
 
 func addOpInvokeModelWithResponseStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeModelWithResponseStream{}, middleware.After)
+}
+
+func addOpStartAsyncInvokeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAsyncInvoke{}, middleware.After)
+}
+
+func validateAsyncInvokeOutputDataConfig(v types.AsyncInvokeOutputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AsyncInvokeOutputDataConfig"}
+	switch uv := v.(type) {
+	case *types.AsyncInvokeOutputDataConfigMemberS3OutputDataConfig:
+		if err := validateAsyncInvokeS3OutputDataConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3OutputDataConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAsyncInvokeS3OutputDataConfig(v *types.AsyncInvokeS3OutputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AsyncInvokeS3OutputDataConfig"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateContentBlock(v types.ContentBlock) error {
@@ -159,6 +241,11 @@ func validateContentBlock(v types.ContentBlock) error {
 	case *types.ContentBlockMemberToolUse:
 		if err := validateToolUseBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[toolUse]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ContentBlockMemberVideo:
+		if err := validateVideoBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[video]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -385,6 +472,21 @@ func validateMessages(v []types.Message) error {
 	}
 }
 
+func validateS3Location(v *types.S3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Location"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSpecificToolChoice(v *types.SpecificToolChoice) error {
 	if v == nil {
 		return nil
@@ -426,6 +528,41 @@ func validateSystemContentBlocks(v []types.SystemContentBlock) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SystemContentBlocks"}
 	for i := range v {
 		if err := validateSystemContentBlock(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -536,6 +673,11 @@ func validateToolResultContentBlock(v types.ToolResultContentBlock) error {
 			invalidParams.AddNested("[image]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ToolResultContentBlockMemberVideo:
+		if err := validateVideoBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[video]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -609,6 +751,47 @@ func validateToolUseBlock(v *types.ToolUseBlock) error {
 	}
 	if v.Input == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVideoBlock(v *types.VideoBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoBlock"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateVideoSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVideoSource(v types.VideoSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoSource"}
+	switch uv := v.(type) {
+	case *types.VideoSourceMemberS3Location:
+		if err := validateS3Location(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Location]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -715,6 +898,21 @@ func validateOpConverseStreamInput(v *ConverseStreamInput) error {
 	}
 }
 
+func validateOpGetAsyncInvokeInput(v *GetAsyncInvokeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAsyncInvokeInput"}
+	if v.InvocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpInvokeModelInput(v *InvokeModelInput) error {
 	if v == nil {
 		return nil
@@ -737,6 +935,36 @@ func validateOpInvokeModelWithResponseStreamInput(v *InvokeModelWithResponseStre
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeModelWithResponseStreamInput"}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAsyncInvokeInput(v *StartAsyncInvokeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAsyncInvokeInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if v.ModelInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelInput"))
+	}
+	if v.OutputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
+	} else if v.OutputDataConfig != nil {
+		if err := validateAsyncInvokeOutputDataConfig(v.OutputDataConfig); err != nil {
+			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

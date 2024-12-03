@@ -50,11 +50,6 @@ type GetDataSourceOutput struct {
 	// This member is required.
 	DomainId *string
 
-	// The ID of the environment where this data source creates and publishes assets,
-	//
-	// This member is required.
-	EnvironmentId *string
-
 	// The ID of the data source.
 	//
 	// This member is required.
@@ -76,6 +71,9 @@ type GetDataSourceOutput struct {
 	// The configuration of the data source.
 	Configuration types.DataSourceConfigurationOutput
 
+	// The ID of the connection.
+	ConnectionId *string
+
 	// The timestamp of when the data source was created.
 	CreatedAt *time.Time
 
@@ -84,6 +82,9 @@ type GetDataSourceOutput struct {
 
 	// Specifies whether this data source is enabled or not.
 	EnableSetting types.EnableSetting
+
+	// The ID of the environment where this data source creates and publishes assets,
+	EnvironmentId *string
 
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.

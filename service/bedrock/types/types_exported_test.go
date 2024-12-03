@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
 )
 
+func ExampleCustomizationConfig_outputUsage() {
+	var union types.CustomizationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomizationConfigMemberDistillationConfig:
+		_ = v.Value // Value is types.DistillationConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DistillationConfig
+
 func ExampleEvaluationConfig_outputUsage() {
 	var union types.EvaluationConfig
 	// type switches can be used to check the union value
@@ -123,6 +141,24 @@ func ExampleInferenceProfileModelSource_outputUsage() {
 
 var _ *string
 
+func ExampleInvocationLogSource_outputUsage() {
+	var union types.InvocationLogSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvocationLogSourceMemberS3Uri:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleKnowledgeBaseConfig_outputUsage() {
 	var union types.KnowledgeBaseConfig
 	// type switches can be used to check the union value
@@ -216,6 +252,34 @@ func ExampleRAGConfig_outputUsage() {
 }
 
 var _ types.KnowledgeBaseConfig
+
+func ExampleRequestMetadataFilters_outputUsage() {
+	var union types.RequestMetadataFilters
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RequestMetadataFiltersMemberAndAll:
+		_ = v.Value // Value is []types.RequestMetadataBaseFilters
+
+	case *types.RequestMetadataFiltersMemberEquals:
+		_ = v.Value // Value is map[string]string
+
+	case *types.RequestMetadataFiltersMemberNotEquals:
+		_ = v.Value // Value is map[string]string
+
+	case *types.RequestMetadataFiltersMemberOrAll:
+		_ = v.Value // Value is []types.RequestMetadataBaseFilters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.RequestMetadataBaseFilters
+var _ map[string]string
 
 func ExampleRetrievalFilter_outputUsage() {
 	var union types.RetrievalFilter

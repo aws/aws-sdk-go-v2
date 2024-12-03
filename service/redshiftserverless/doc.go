@@ -14,7 +14,7 @@
 // workloads. Amazon Redshift Serverless lets you focus on using your data to
 // acquire new insights for your business and customers.
 //
-// To learn more about Amazon Redshift Serverless, see [What is Amazon Redshift Serverless].
+// To learn more about Amazon Redshift Serverless, see [What is Amazon Redshift Serverless?].
 //
-// [What is Amazon Redshift Serverless]: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html
+// [What is Amazon Redshift Serverless?]: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html
 package redshiftserverless

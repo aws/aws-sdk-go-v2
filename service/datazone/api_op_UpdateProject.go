@@ -43,6 +43,9 @@ type UpdateProjectInput struct {
 	// The description to be updated as part of the UpdateProject action.
 	Description *string
 
+	// The environment deployment details of the project.
+	EnvironmentDeploymentDetails *types.EnvironmentDeploymentDetails
+
 	// The glossary terms to be updated as part of the UpdateProject action.
 	GlossaryTerms []string
 
@@ -83,6 +86,9 @@ type UpdateProjectOutput struct {
 	// The ID of the domain unit.
 	DomainUnitId *string
 
+	// The environment deployment details of the project.
+	EnvironmentDeploymentDetails *types.EnvironmentDeploymentDetails
+
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.
 	FailureReasons []types.ProjectDeletionError
@@ -93,8 +99,14 @@ type UpdateProjectOutput struct {
 	// The timestamp of when the project was last updated.
 	LastUpdatedAt *time.Time
 
+	// The ID of the project profile.
+	ProjectProfileId *string
+
 	// The status of the project.
 	ProjectStatus types.ProjectStatus
+
+	// The user parameters of the project.
+	UserParameters []types.EnvironmentConfigurationUserParameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

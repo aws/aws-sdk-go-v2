@@ -3709,6 +3709,11 @@ func awsRestjson1_serializeDocumentQPluginCardInput(v *types.QPluginCardInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.ActionIdentifier != nil {
+		ok := object.Key("actionIdentifier")
+		ok.String(*v.ActionIdentifier)
+	}
+
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)

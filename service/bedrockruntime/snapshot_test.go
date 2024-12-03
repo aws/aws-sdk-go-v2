@@ -98,6 +98,18 @@ func TestCheckSnapshot_ConverseStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAsyncInvoke(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAsyncInvoke(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAsyncInvoke")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_InvokeModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeModel(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,30 @@ func TestCheckSnapshot_InvokeModelWithResponseStream(t *testing.T) {
 	_, err := svc.InvokeModelWithResponseStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "InvokeModelWithResponseStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAsyncInvokes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAsyncInvokes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAsyncInvokes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartAsyncInvoke(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAsyncInvoke(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAsyncInvoke")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -157,6 +193,18 @@ func TestUpdateSnapshot_ConverseStream(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAsyncInvoke(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAsyncInvoke(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAsyncInvoke")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_InvokeModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeModel(context.Background(), nil, func(o *Options) {
@@ -174,6 +222,30 @@ func TestUpdateSnapshot_InvokeModelWithResponseStream(t *testing.T) {
 	_, err := svc.InvokeModelWithResponseStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "InvokeModelWithResponseStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAsyncInvokes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAsyncInvokes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAsyncInvokes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAsyncInvoke(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAsyncInvoke(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAsyncInvoke")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

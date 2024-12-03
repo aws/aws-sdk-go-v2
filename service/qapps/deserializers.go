@@ -8593,6 +8593,15 @@ func awsRestjson1_deserializeDocumentQPluginCard(v **types.QPluginCard, value in
 
 	for key, value := range shape {
 		switch key {
+		case "actionIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ActionIdentifier = ptr.String(jtv)
+			}
+
 		case "dependencies":
 			if err := awsRestjson1_deserializeDocumentDependencyList(&sv.Dependencies, value); err != nil {
 				return err
@@ -8683,6 +8692,15 @@ func awsRestjson1_deserializeDocumentQPluginCardInput(v **types.QPluginCardInput
 
 	for key, value := range shape {
 		switch key {
+		case "actionIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ActionIdentifier = ptr.String(jtv)
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)

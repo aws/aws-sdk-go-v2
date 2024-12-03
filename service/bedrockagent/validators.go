@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateAgentCollaborator struct {
+}
+
+func (*validateOpAssociateAgentCollaborator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateAgentCollaborator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateAgentCollaboratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateAgentCollaboratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateAgentKnowledgeBase struct {
 }
 
@@ -450,6 +470,26 @@ func (m *validateOpDeletePrompt) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateAgentCollaborator struct {
+}
+
+func (*validateOpDisassociateAgentCollaborator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateAgentCollaborator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateAgentCollaboratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateAgentCollaboratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateAgentKnowledgeBase struct {
 }
 
@@ -505,6 +545,26 @@ func (m *validateOpGetAgentAlias) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAgentAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentCollaborator struct {
+}
+
+func (*validateOpGetAgentCollaborator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentCollaborator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentCollaboratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentCollaboratorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -785,6 +845,26 @@ func (m *validateOpListAgentAliases) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAgentAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAgentCollaborators struct {
+}
+
+func (*validateOpListAgentCollaborators) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAgentCollaborators) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAgentCollaboratorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAgentCollaboratorsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1110,6 +1190,26 @@ func (m *validateOpUpdateAgentAlias) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAgentCollaborator struct {
+}
+
+func (*validateOpUpdateAgentCollaborator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentCollaborator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentCollaboratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentCollaboratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAgent struct {
 }
 
@@ -1270,6 +1370,10 @@ func (m *validateOpValidateFlowDefinition) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateAgentCollaboratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateAgentCollaborator{}, middleware.After)
+}
+
 func addOpAssociateAgentKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateAgentKnowledgeBase{}, middleware.After)
 }
@@ -1358,6 +1462,10 @@ func addOpDeletePromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePrompt{}, middleware.After)
 }
 
+func addOpDisassociateAgentCollaboratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateAgentCollaborator{}, middleware.After)
+}
+
 func addOpDisassociateAgentKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateAgentKnowledgeBase{}, middleware.After)
 }
@@ -1368,6 +1476,10 @@ func addOpGetAgentActionGroupValidationMiddleware(stack *middleware.Stack) error
 
 func addOpGetAgentAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentAlias{}, middleware.After)
+}
+
+func addOpGetAgentCollaboratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentCollaborator{}, middleware.After)
 }
 
 func addOpGetAgentValidationMiddleware(stack *middleware.Stack) error {
@@ -1424,6 +1536,10 @@ func addOpListAgentActionGroupsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpListAgentAliasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAgentAliases{}, middleware.After)
+}
+
+func addOpListAgentCollaboratorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAgentCollaborators{}, middleware.After)
 }
 
 func addOpListAgentKnowledgeBasesValidationMiddleware(stack *middleware.Stack) error {
@@ -1488,6 +1604,10 @@ func addOpUpdateAgentActionGroupValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateAgentAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgentAlias{}, middleware.After)
+}
+
+func addOpUpdateAgentCollaboratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentCollaborator{}, middleware.After)
 }
 
 func addOpUpdateAgentValidationMiddleware(stack *middleware.Stack) error {
@@ -3975,6 +4095,33 @@ func validateWebSourceConfiguration(v *types.WebSourceConfiguration) error {
 	}
 }
 
+func validateOpAssociateAgentCollaboratorInput(v *AssociateAgentCollaboratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateAgentCollaboratorInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AgentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentVersion"))
+	}
+	if v.AgentDescriptor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentDescriptor"))
+	}
+	if v.CollaboratorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaboratorName"))
+	}
+	if v.CollaborationInstruction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationInstruction"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateAgentKnowledgeBaseInput(v *AssociateAgentKnowledgeBaseInput) error {
 	if v == nil {
 		return nil
@@ -4420,6 +4567,27 @@ func validateOpDeletePromptInput(v *DeletePromptInput) error {
 	}
 }
 
+func validateOpDisassociateAgentCollaboratorInput(v *DisassociateAgentCollaboratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateAgentCollaboratorInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AgentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentVersion"))
+	}
+	if v.CollaboratorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaboratorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateAgentKnowledgeBaseInput(v *DisassociateAgentKnowledgeBaseInput) error {
 	if v == nil {
 		return nil
@@ -4472,6 +4640,27 @@ func validateOpGetAgentAliasInput(v *GetAgentAliasInput) error {
 	}
 	if v.AgentAliasId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentCollaboratorInput(v *GetAgentCollaboratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentCollaboratorInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AgentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentVersion"))
+	}
+	if v.CollaboratorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaboratorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4729,6 +4918,24 @@ func validateOpListAgentAliasesInput(v *ListAgentAliasesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAgentAliasesInput"}
 	if v.AgentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAgentCollaboratorsInput(v *ListAgentCollaboratorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAgentCollaboratorsInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AgentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5023,6 +5230,36 @@ func validateOpUpdateAgentAliasInput(v *UpdateAgentAliasInput) error {
 	}
 	if v.AgentAliasName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentCollaboratorInput(v *UpdateAgentCollaboratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentCollaboratorInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AgentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentVersion"))
+	}
+	if v.CollaboratorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaboratorId"))
+	}
+	if v.AgentDescriptor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentDescriptor"))
+	}
+	if v.CollaboratorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaboratorName"))
+	}
+	if v.CollaborationInstruction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationInstruction"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

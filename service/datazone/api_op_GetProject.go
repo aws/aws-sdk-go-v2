@@ -74,6 +74,9 @@ type GetProjectOutput struct {
 	// The ID of the domain unit.
 	DomainUnitId *string
 
+	// The environment deployment status of a project.
+	EnvironmentDeploymentDetails *types.EnvironmentDeploymentDetails
+
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.
 	FailureReasons []types.ProjectDeletionError
@@ -84,8 +87,14 @@ type GetProjectOutput struct {
 	// The timestamp of when the project was last updated.
 	LastUpdatedAt *time.Time
 
+	// The ID of the project profile of a project.
+	ProjectProfileId *string
+
 	// The status of the project.
 	ProjectStatus types.ProjectStatus
+
+	// The user parameters of a project.
+	UserParameters []types.EnvironmentConfigurationUserParameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

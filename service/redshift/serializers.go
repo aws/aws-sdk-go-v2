@@ -3518,6 +3518,76 @@ func (m *awsAwsquery_serializeOpDeleteUsageLimit) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDeregisterNamespace struct {
+}
+
+func (*awsAwsquery_serializeOpDeregisterNamespace) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeregisterNamespace) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeregisterNamespaceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeregisterNamespace")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDeregisterNamespaceInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDescribeAccountAttributes struct {
 }
 
@@ -8834,6 +8904,76 @@ func (m *awsAwsquery_serializeOpRebootCluster) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpRegisterNamespace struct {
+}
+
+func (*awsAwsquery_serializeOpRegisterNamespace) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpRegisterNamespace) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RegisterNamespaceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("RegisterNamespace")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentRegisterNamespaceInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpRejectDataShare struct {
 }
 
@@ -9664,6 +9804,16 @@ func awsAwsquery_serializeDocumentClusterSecurityGroupNameList(v []string, value
 	return nil
 }
 
+func awsAwsquery_serializeDocumentConsumerIdentifierList(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentDbGroupList(v []string, value query.Value) error {
 	array := value.Array("DbGroup")
 
@@ -9837,6 +9987,29 @@ func awsAwsquery_serializeDocumentLogTypeList(v []string, value query.Value) err
 	return nil
 }
 
+func awsAwsquery_serializeDocumentNamespaceIdentifierUnion(v types.NamespaceIdentifierUnion, value query.Value) error {
+	object := value.Object()
+
+	switch uv := v.(type) {
+	case *types.NamespaceIdentifierUnionMemberProvisionedIdentifier:
+		objectKey := object.Key("ProvisionedIdentifier")
+		if err := awsAwsquery_serializeDocumentProvisionedIdentifier(&uv.Value, objectKey); err != nil {
+			return err
+		}
+
+	case *types.NamespaceIdentifierUnionMemberServerlessIdentifier:
+		objectKey := object.Key("ServerlessIdentifier")
+		if err := awsAwsquery_serializeDocumentServerlessIdentifier(&uv.Value, objectKey); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentNodeConfigurationOptionsFilter(v *types.NodeConfigurationOptionsFilter, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -9938,6 +10111,18 @@ func awsAwsquery_serializeDocumentParametersList(v []types.Parameter, value quer
 }
 
 func awsAwsquery_serializeDocumentPauseClusterMessage(v *types.PauseClusterMessage, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentProvisionedIdentifier(v *types.ProvisionedIdentifier, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -10113,6 +10298,23 @@ func awsAwsquery_serializeDocumentScheduleDefinitionList(v []string, value query
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentServerlessIdentifier(v *types.ServerlessIdentifier, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.NamespaceIdentifier != nil {
+		objectKey := object.Key("NamespaceIdentifier")
+		objectKey.String(*v.NamespaceIdentifier)
+	}
+
+	if v.WorkgroupIdentifier != nil {
+		objectKey := object.Key("WorkgroupIdentifier")
+		objectKey.String(*v.WorkgroupIdentifier)
+	}
+
 	return nil
 }
 
@@ -11625,6 +11827,27 @@ func awsAwsquery_serializeOpDocumentDeleteUsageLimitInput(v *DeleteUsageLimitInp
 	if v.UsageLimitId != nil {
 		objectKey := object.Key("UsageLimitId")
 		objectKey.String(*v.UsageLimitId)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeregisterNamespaceInput(v *DeregisterNamespaceInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ConsumerIdentifiers != nil {
+		objectKey := object.Key("ConsumerIdentifiers")
+		if err := awsAwsquery_serializeDocumentConsumerIdentifierList(v.ConsumerIdentifiers, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NamespaceIdentifier != nil {
+		objectKey := object.Key("NamespaceIdentifier")
+		if err := awsAwsquery_serializeDocumentNamespaceIdentifierUnion(v.NamespaceIdentifier, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -13818,6 +14041,27 @@ func awsAwsquery_serializeOpDocumentRebootClusterInput(v *RebootClusterInput, va
 	if v.ClusterIdentifier != nil {
 		objectKey := object.Key("ClusterIdentifier")
 		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentRegisterNamespaceInput(v *RegisterNamespaceInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ConsumerIdentifiers != nil {
+		objectKey := object.Key("ConsumerIdentifiers")
+		if err := awsAwsquery_serializeDocumentConsumerIdentifierList(v.ConsumerIdentifiers, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NamespaceIdentifier != nil {
+		objectKey := object.Key("NamespaceIdentifier")
+		if err := awsAwsquery_serializeDocumentNamespaceIdentifierUnion(v.NamespaceIdentifier, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

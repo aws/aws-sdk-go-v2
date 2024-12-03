@@ -118,6 +118,24 @@ type CloudWatchConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A model customization configuration
+//
+// The following types satisfy this interface:
+//
+//	CustomizationConfigMemberDistillationConfig
+type CustomizationConfig interface {
+	isCustomizationConfig()
+}
+
+// The distillation configuration for the custom model.
+type CustomizationConfigMemberDistillationConfig struct {
+	Value DistillationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomizationConfigMemberDistillationConfig) isCustomizationConfig() {}
+
 // Summary information for a custom model.
 type CustomModelSummary struct {
 
@@ -154,6 +172,18 @@ type CustomModelSummary struct {
 
 	// The unique identifier of the account that owns the model.
 	OwnerAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for distilling a foundation model into a smaller and more efficient
+// model.
+type DistillationConfig struct {
+
+	// The teacher model configuration.
+	//
+	// This member is required.
+	TeacherModelConfig *TeacherModelConfig
 
 	noSmithyDocumentSerde
 }
@@ -1535,6 +1565,42 @@ type InferenceProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Settings for using invocation logs to customize a model.
+type InvocationLogsConfig struct {
+
+	// The source of the invocation logs.
+	//
+	// This member is required.
+	InvocationLogSource InvocationLogSource
+
+	// Rules for filtering invocation logs based on request metadata.
+	RequestMetadataFilters RequestMetadataFilters
+
+	// Whether to use the model's response for training, or just the prompt. The
+	// default value is False .
+	UsePromptResponse bool
+
+	noSmithyDocumentSerde
+}
+
+// A storage location for invocation logs.
+//
+// The following types satisfy this interface:
+//
+//	InvocationLogSourceMemberS3Uri
+type InvocationLogSource interface {
+	isInvocationLogSource()
+}
+
+// The URI of an invocation log in a bucket.
+type InvocationLogSourceMemberS3Uri struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationLogSourceMemberS3Uri) isInvocationLogSource() {}
+
 // Contains configuration details of the inference for knowledge base retrieval
 // and response generation.
 type KbInferenceConfig struct {
@@ -1657,6 +1723,9 @@ type LoggingConfig struct {
 
 	// Set to include text data in the log delivery.
 	TextDataDeliveryEnabled *bool
+
+	// Set to include video data in the log delivery.
+	VideoDataDeliveryEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1963,6 +2032,50 @@ type ModelInvocationJobSummary struct {
 	Message *string
 
 	// The status of the batch inference job.
+	//
+	// The following statuses are possible:
+	//
+	//   - Submitted – This job has been submitted to a queue for validation.
+	//
+	//   - Validating – This job is being validated for the requirements described in [Format and upload your batch inference data]
+	//   . The criteria include the following:
+	//
+	//   - Your IAM service role has access to the Amazon S3 buckets containing your
+	//   files.
+	//
+	//   - Your files are .jsonl files and each individual record is a JSON object in
+	//   the correct format. Note that validation doesn't check if the modelInput value
+	//   matches the request body for the model.
+	//
+	//   - Your files fulfill the requirements for file size and number of records.
+	//   For more information, see [Quotas for Amazon Bedrock].
+	//
+	//   - Scheduled – This job has been validated and is now in a queue. The job will
+	//   automatically start when it reaches its turn.
+	//
+	//   - Expired – This job timed out because it was scheduled but didn't begin
+	//   before the set timeout duration. Submit a new job request.
+	//
+	//   - InProgress – This job has begun. You can start viewing the results in the
+	//   output S3 location.
+	//
+	//   - Completed – This job has successfully completed. View the output files in
+	//   the output S3 location.
+	//
+	//   - PartiallyCompleted – This job has partially completed. Not all of your
+	//   records could be processed in time. View the output files in the output S3
+	//   location.
+	//
+	//   - Failed – This job has failed. Check the failure message for any further
+	//   details. For further assistance, reach out to the [Amazon Web Services Support Center].
+	//
+	//   - Stopped – This job was stopped by a user.
+	//
+	//   - Stopping – This job is being stopped by a user.
+	//
+	// [Format and upload your batch inference data]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html
+	// [Quotas for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html
+	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home/
 	Status ModelInvocationJobStatus
 
 	// The number of hours after which the batch inference job was set to time out.
@@ -1971,7 +2084,7 @@ type ModelInvocationJobSummary struct {
 	// The configuration of the Virtual Private Cloud (VPC) for the data in the batch
 	// inference job. For more information, see [Protect batch inference jobs using a VPC].
 	//
-	// [Protect batch inference jobs using a VPC]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-vpc
+	// [Protect batch inference jobs using a VPC]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-vpc
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -2123,6 +2236,68 @@ type RAGConfigMemberKnowledgeBaseConfig struct {
 }
 
 func (*RAGConfigMemberKnowledgeBaseConfig) isRAGConfig() {}
+
+// A mapping of a metadata key to a value that it should or should not equal.
+type RequestMetadataBaseFilters struct {
+
+	// Include results where the key equals the value.
+	Equals map[string]string
+
+	// Include results where the key does not equal the value.
+	NotEquals map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Rules for filtering invocation logs. A filter can be a mapping of a metadata
+// key to a value that it should or should not equal (a base filter), or a list of
+// base filters that are all applied with AND or OR logical operators
+//
+// The following types satisfy this interface:
+//
+//	RequestMetadataFiltersMemberAndAll
+//	RequestMetadataFiltersMemberEquals
+//	RequestMetadataFiltersMemberNotEquals
+//	RequestMetadataFiltersMemberOrAll
+type RequestMetadataFilters interface {
+	isRequestMetadataFilters()
+}
+
+// Include results where all of the based filters match.
+type RequestMetadataFiltersMemberAndAll struct {
+	Value []RequestMetadataBaseFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*RequestMetadataFiltersMemberAndAll) isRequestMetadataFilters() {}
+
+// Include results where the key equals the value.
+type RequestMetadataFiltersMemberEquals struct {
+	Value map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (*RequestMetadataFiltersMemberEquals) isRequestMetadataFilters() {}
+
+// Include results where the key does not equal the value.
+type RequestMetadataFiltersMemberNotEquals struct {
+	Value map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (*RequestMetadataFiltersMemberNotEquals) isRequestMetadataFilters() {}
+
+// Include results where any of the base filters match.
+type RequestMetadataFiltersMemberOrAll struct {
+	Value []RequestMetadataBaseFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*RequestMetadataFiltersMemberOrAll) isRequestMetadataFilters() {}
 
 // Specifies the filters to use on the metadata attributes/fields in the knowledge
 // base data sources before returning results.
@@ -2421,6 +2596,21 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a teacher model used for model customization.
+type TeacherModelConfig struct {
+
+	// The identifier of the teacher model.
+	//
+	// This member is required.
+	TeacherModelIdentifier *string
+
+	// The maximum number of tokens requested when the customization job invokes the
+	// teacher model.
+	MaxResponseLengthForInference *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details for text generation using a language model via the
 // RetrieveAndGenerate function.
 type TextInferenceConfig struct {
@@ -2455,9 +2645,10 @@ type TextInferenceConfig struct {
 // S3 Location of the training data.
 type TrainingDataConfig struct {
 
+	// Settings for using invocation logs to customize a model.
+	InvocationLogsConfig *InvocationLogsConfig
+
 	// The S3 URI where the training data is stored.
-	//
-	// This member is required.
 	S3Uri *string
 
 	noSmithyDocumentSerde
@@ -2532,15 +2723,18 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isCustomizationConfig()                {}
 func (*UnknownUnionMember) isEvaluationConfig()                   {}
 func (*UnknownUnionMember) isEvaluationDatasetLocation()          {}
 func (*UnknownUnionMember) isEvaluationInferenceConfig()          {}
 func (*UnknownUnionMember) isEvaluationModelConfig()              {}
 func (*UnknownUnionMember) isEvaluatorModelConfig()               {}
 func (*UnknownUnionMember) isInferenceProfileModelSource()        {}
+func (*UnknownUnionMember) isInvocationLogSource()                {}
 func (*UnknownUnionMember) isKnowledgeBaseConfig()                {}
 func (*UnknownUnionMember) isModelDataSource()                    {}
 func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()  {}
 func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig() {}
 func (*UnknownUnionMember) isRAGConfig()                          {}
+func (*UnknownUnionMember) isRequestMetadataFilters()             {}
 func (*UnknownUnionMember) isRetrievalFilter()                    {}

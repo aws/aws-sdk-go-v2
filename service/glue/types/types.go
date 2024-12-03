@@ -96,6 +96,20 @@ type AggregateOperation struct {
 	noSmithyDocumentSerde
 }
 
+// An object representing a value allowed for a property.
+type AllowedValue struct {
+
+	// The value allowed for the property.
+	//
+	// This member is required.
+	Value *string
+
+	// A description of the allowed value.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies an optional value when connecting to the Redshift cluster.
 type AmazonRedshiftAdvancedOption struct {
 
@@ -323,6 +337,33 @@ type AuditContext struct {
 	noSmithyDocumentSerde
 }
 
+// The authentication configuration for a connection returned by the
+// DescribeConnectionType API.
+type AuthConfiguration struct {
+
+	// The type of authentication for a connection.
+	//
+	// This member is required.
+	AuthenticationType *Property
+
+	// A map of key-value pairs for the OAuth2 properties. Each value is a a Property
+	// object.
+	BasicAuthenticationProperties map[string]Property
+
+	// A map of key-value pairs for the custom authentication properties. Each value
+	// is a a Property object.
+	CustomAuthenticationProperties map[string]Property
+
+	// A map of key-value pairs for the OAuth2 properties. Each value is a a Property
+	// object.
+	OAuth2Properties map[string]Property
+
+	// The Amazon Resource Name (ARN) for the Secrets Manager.
+	SecretArn *Property
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing the authentication configuration.
 type AuthenticationConfiguration struct {
 
@@ -345,6 +386,16 @@ type AuthenticationConfigurationInput struct {
 	// A structure containing the authentication configuration in the CreateConnection
 	// request.
 	AuthenticationType AuthenticationType
+
+	// The credentials used when the authentication type is basic authentication.
+	BasicAuthenticationCredentials *BasicAuthenticationCredentials
+
+	// The credentials used when the authentication type is custom authentication.
+	CustomAuthenticationCredentials map[string]string
+
+	// The ARN of the KMS key used to encrypt the connection. Only taken an as input
+	// in the request and stored in the Secret Manager.
+	KmsKeyArn *string
 
 	// The properties for OAuth2 authentication in the CreateConnection request.
 	OAuth2Properties *OAuth2PropertiesInput
@@ -400,6 +451,18 @@ type BackfillError struct {
 
 	// A list of a limited number of partitions in the response.
 	Partitions []PartitionValueList
+
+	noSmithyDocumentSerde
+}
+
+// For supplying basic auth credentials when not providing a SecretArn value.
+type BasicAuthenticationCredentials struct {
+
+	// The password to connect to the data source.
+	Password *string
+
+	// The username to connect to the data source.
+	Username *string
 
 	noSmithyDocumentSerde
 }
@@ -704,6 +767,85 @@ type BooleanColumnStatisticsData struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the supported authentication types returned by the
+// DescribeConnectionType API.
+type Capabilities struct {
+
+	// A list of supported authentication types.
+	//
+	// This member is required.
+	SupportedAuthenticationTypes []AuthenticationType
+
+	// A list of supported compute environments.
+	//
+	// This member is required.
+	SupportedComputeEnvironments []ComputeEnvironment
+
+	// A list of supported data operations.
+	//
+	// This member is required.
+	SupportedDataOperations []DataOperation
+
+	noSmithyDocumentSerde
+}
+
+// The catalog object represents a logical grouping of databases in the Glue Data
+// Catalog or a federated source. You can now create a Redshift-federated catalog
+// or a catalog containing resource links to Redshift databases in another account
+// or region.
+type Catalog struct {
+
+	// The name of the catalog. Cannot be the same as the account ID.
+	//
+	// This member is required.
+	Name *string
+
+	// The ID of the catalog. To grant access to the default catalog, this field
+	// should not be provided.
+	CatalogId *string
+
+	// A CatalogProperties object that specifies data lake access properties and other
+	// custom properties.
+	CatalogProperties *CatalogPropertiesOutput
+
+	// An array of PrincipalPermissions objects. Creates a set of default permissions
+	// on the database(s) for principals. Used by Amazon Web Services Lake Formation.
+	// Not used in the normal course of Glue operations.
+	CreateDatabaseDefaultPermissions []PrincipalPermissions
+
+	// An array of PrincipalPermissions objects. Creates a set of default permissions
+	// on the table(s) for principals. Used by Amazon Web Services Lake Formation. Not
+	// used in the normal course of Glue operations.
+	CreateTableDefaultPermissions []PrincipalPermissions
+
+	// The time at which the catalog was created.
+	CreateTime *time.Time
+
+	// Description string, not more than 2048 bytes long, matching the URI address
+	// multi-line string pattern. A description of the catalog.
+	Description *string
+
+	// A FederatedCatalog object that points to an entity outside the Glue Data
+	// Catalog.
+	FederatedCatalog *FederatedCatalog
+
+	//  A map array of key-value pairs that define parameters and properties of the
+	// catalog.
+	Parameters map[string]string
+
+	// The Amazon Resource Name (ARN) assigned to the catalog resource.
+	ResourceArn *string
+
+	// A TargetRedshiftCatalog object that describes a target catalog for database
+	// resource linking.
+	TargetRedshiftCatalog *TargetRedshiftCatalog
+
+	// The time at which the catalog was last updated.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
 type CatalogDeltaSource struct {
 
@@ -789,6 +931,42 @@ type CatalogImportStatus struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that describes catalog properties.
+type CatalogInput struct {
+
+	// A CatalogProperties object that specifies data lake access properties and other
+	// custom properties.
+	CatalogProperties *CatalogProperties
+
+	// An array of PrincipalPermissions objects. Creates a set of default permissions
+	// on the database(s) for principals. Used by Amazon Web Services Lake Formation.
+	// Typically should be explicitly set as an empty list.
+	CreateDatabaseDefaultPermissions []PrincipalPermissions
+
+	// An array of PrincipalPermissions objects. Creates a set of default permissions
+	// on the table(s) for principals. Used by Amazon Web Services Lake Formation.
+	// Typically should be explicitly set as an empty list.
+	CreateTableDefaultPermissions []PrincipalPermissions
+
+	// Description string, not more than 2048 bytes long, matching the URI address
+	// multi-line string pattern. A description of the catalog.
+	Description *string
+
+	// A FederatedCatalog object. A FederatedCatalog structure that references an
+	// entity outside the Glue Data Catalog, for example a Redshift database.
+	FederatedCatalog *FederatedCatalog
+
+	// A map array of key-value pairs that define the parameters and properties of the
+	// catalog.
+	Parameters map[string]string
+
+	// A TargetRedshiftCatalog object that describes a target catalog for resource
+	// linking.
+	TargetRedshiftCatalog *TargetRedshiftCatalog
+
+	noSmithyDocumentSerde
+}
+
 // Specifies an Apache Kafka data store in the Data Catalog.
 type CatalogKafkaSource struct {
 
@@ -851,6 +1029,36 @@ type CatalogKinesisSource struct {
 
 	// The amount of time to spend processing each micro batch.
 	WindowSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// A structure that specifies data lake access properties and other custom
+// properties.
+type CatalogProperties struct {
+
+	// Additional key-value properties for the catalog, such as column statistics
+	// optimizations.
+	CustomProperties map[string]string
+
+	// A DataLakeAccessProperties object that specifies properties to configure data
+	// lake access for your catalog resource in the Glue Data Catalog.
+	DataLakeAccessProperties *DataLakeAccessProperties
+
+	noSmithyDocumentSerde
+}
+
+// Property attributes that include configuration properties for the catalog
+// resource.
+type CatalogPropertiesOutput struct {
+
+	// Additional key-value properties for the catalog, such as column statistics
+	// optimizations.
+	CustomProperties map[string]string
+
+	// A DataLakeAccessProperties object with input properties to configure data lake
+	// access for your catalog resource in the Glue Data Catalog.
+	DataLakeAccessProperties *DataLakeAccessPropertiesOutput
 
 	noSmithyDocumentSerde
 }
@@ -1476,6 +1684,9 @@ type ColumnStatisticsTaskSettings struct {
 	// The name of the database where the table resides.
 	DatabaseName *string
 
+	// The last ExecutionAttempt for the column statistics task run.
+	LastExecutionAttempt *ExecutionAttempt
+
 	// The role used for running the column statistics.
 	Role *string
 
@@ -1485,8 +1696,16 @@ type ColumnStatisticsTaskSettings struct {
 	// A schedule for running the column statistics, specified in CRON syntax.
 	Schedule *Schedule
 
+	// The type of schedule for a column statistics task. Possible values may be CRON
+	// or AUTO .
+	ScheduleType ScheduleType
+
 	// Name of the security configuration that is used to encrypt CloudWatch logs.
 	SecurityConfiguration *string
+
+	// The source of setting the column statistics task. Possible values may be CATALOG
+	// or TABLE .
+	SettingSource SettingSource
 
 	// The name of the table for which to generate column statistics.
 	TableName *string
@@ -1499,6 +1718,58 @@ type CompactionMetrics struct {
 
 	// A structure containing the Iceberg compaction metrics for the optimizer run.
 	IcebergMetrics *IcebergCompactionMetrics
+
+	noSmithyDocumentSerde
+}
+
+// An object containing configuration for a compute environment (such as Spark,
+// Python or Athena) returned by the DescribeConnectionType API.
+type ComputeEnvironmentConfiguration struct {
+
+	// The type of compute environment.
+	//
+	// This member is required.
+	ComputeEnvironment ComputeEnvironment
+
+	// The connection option name overrides for the compute environment.
+	//
+	// This member is required.
+	ConnectionOptionNameOverrides map[string]string
+
+	// The parameters used as connection options for the compute environment.
+	//
+	// This member is required.
+	ConnectionOptions map[string]Property
+
+	// The connection properties that are required as overrides for the compute
+	// environment.
+	//
+	// This member is required.
+	ConnectionPropertiesRequiredOverrides []string
+
+	// The connection property name overrides for the compute environment.
+	//
+	// This member is required.
+	ConnectionPropertyNameOverrides map[string]string
+
+	// A description of the compute environment.
+	//
+	// This member is required.
+	Description *string
+
+	// A name for the compute environment configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The supported authentication types for the compute environment.
+	//
+	// This member is required.
+	SupportedAuthenticationTypes []AuthenticationType
+
+	// Indicates whether PhysicalConnectionProperties are required for the compute
+	// environment.
+	PhysicalConnectionPropertiesRequired *bool
 
 	noSmithyDocumentSerde
 }
@@ -1595,13 +1866,17 @@ type ConfusionMatrix struct {
 // Defines a connection to a data source.
 type Connection struct {
 
-	// This field is not currently used.
+	// Connection properties specific to the Athena compute environment.
 	AthenaProperties map[string]string
 
 	// The authentication properties of the connection.
 	AuthenticationConfiguration *AuthenticationConfiguration
 
-	// These key-value pairs define parameters for the connection:
+	// A list of compute environments compatible with the connection.
+	CompatibleComputeEnvironments []ComputeEnvironment
+
+	// These key-value pairs define parameters for the connection when using the
+	// version 1 Connection schema:
 	//
 	//   - HOST - The host URI: either the fully qualified domain name (FQDN) or the
 	//   IPv4 address of the database host.
@@ -1757,6 +2032,10 @@ type Connection struct {
 	// [MIT Kerberos Documentation: krb5.conf]: https://web.mit.edu/kerberos/krb5-1.12/doc/admin/conf_files/krb5_conf.html
 	ConnectionProperties map[string]string
 
+	// The version of the connection schema for this connection. Version 2 supports
+	// properties for specific compute environments.
+	ConnectionSchemaVersion *int32
+
 	// The type of the connection. Currently, SFTP is not supported.
 	ConnectionType ConnectionType
 
@@ -1784,6 +2063,12 @@ type Connection struct {
 	// The physical connection requirements, such as virtual private cloud (VPC) and
 	// SecurityGroup , that are needed to make this connection successfully.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirements
+
+	// Connection properties specific to the Python compute environment.
+	PythonProperties map[string]string
+
+	// Connection properties specific to the Spark compute environment.
+	SparkProperties map[string]string
 
 	// The status of the connection. Can be one of: READY , IN_PROGRESS , or FAILED .
 	Status ConnectionStatus
@@ -1851,10 +2136,6 @@ type ConnectionInput struct {
 	//
 	//   - Required: All of ( USERNAME , PASSWORD ) or SECRET_ID .
 	//
-	//   - SALESFORCE - Designates a connection to Salesforce using OAuth authencation.
-	//
-	//   - Requires the AuthenticationConfiguration member to be configured.
-	//
 	//   - VIEW_VALIDATION_REDSHIFT - Designates a connection used for view validation
 	//   by Amazon Redshift.
 	//
@@ -1882,6 +2163,54 @@ type ConnectionInput struct {
 	//   - CUSTOM - Uses configuration settings contained in a custom connector to read
 	//   from and write to data stores that are not natively supported by Glue.
 	//
+	// Additionally, a ConnectionType for the following SaaS connectors is supported:
+	//
+	//   - FACEBOOKADS - Designates a connection to Facebook Ads.
+	//
+	//   - GOOGLEADS - Designates a connection to Google Ads.
+	//
+	//   - GOOGLESHEETS - Designates a connection to Google Sheets.
+	//
+	//   - GOOGLEANALYTICS4 - Designates a connection to Google Analytics 4.
+	//
+	//   - HUBSPOT - Designates a connection to HubSpot.
+	//
+	//   - INSTAGRAMADS - Designates a connection to Instagram Ads.
+	//
+	//   - INTERCOM - Designates a connection to Intercom.
+	//
+	//   - JIRACLOUD - Designates a connection to Jira Cloud.
+	//
+	//   - MARKETO - Designates a connection to Adobe Marketo Engage.
+	//
+	//   - NETSUITEERP - Designates a connection to Oracle NetSuite.
+	//
+	//   - SALESFORCE - Designates a connection to Salesforce using OAuth
+	//   authentication.
+	//
+	//   - SALESFORCEMARKETINGCLOUD - Designates a connection to Salesforce Marketing
+	//   Cloud.
+	//
+	//   - SALESFORCEPARDOT - Designates a connection to Salesforce Marketing Cloud
+	//   Account Engagement (MCAE).
+	//
+	//   - SAPODATA - Designates a connection to SAP OData.
+	//
+	//   - SERVICENOW - Designates a connection to ServiceNow.
+	//
+	//   - SLACK - Designates a connection to Slack.
+	//
+	//   - SNAPCHATADS - Designates a connection to Snapchat Ads.
+	//
+	//   - STRIPE - Designates a connection to Stripe.
+	//
+	//   - ZENDESK - Designates a connection to Zendesk.
+	//
+	//   - ZOHOCRM - Designates a connection to Zoho CRM.
+	//
+	// For more information on the connection parameters needed for a particular
+	// connector, see the documentation for the connector in [Adding an Glue connection]in the Glue User Guide.
+	//
 	// SFTP is not supported.
 	//
 	// For more information about how optional ConnectionProperties are used to
@@ -1892,6 +2221,7 @@ type ConnectionInput struct {
 	//
 	// [Glue connection properties]: https://docs.aws.amazon.com/glue/latest/dg/connection-defining.html
 	// [Using connectors and connections]: https://docs.aws.amazon.com/glue/latest/ug/connectors-chapter.html
+	// [Adding an Glue connection]: https://docs.aws.amazon.com/glue/latest/dg/console-connections.html
 	//
 	// This member is required.
 	ConnectionType ConnectionType
@@ -1901,11 +2231,10 @@ type ConnectionInput struct {
 	// This member is required.
 	Name *string
 
-	// This field is not currently used.
+	// Connection properties specific to the Athena compute environment.
 	AthenaProperties map[string]string
 
-	// The authentication properties of the connection. Used for a Salesforce
-	// connection.
+	// The authentication properties of the connection.
 	AuthenticationConfiguration *AuthenticationConfigurationInput
 
 	// The description of the connection.
@@ -1918,9 +2247,18 @@ type ConnectionInput struct {
 	// SecurityGroup , that are needed to successfully make this connection.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirements
 
-	// A flag to validate the credentials during create connection. Used for a
-	// Salesforce connection. Default is true.
+	// Connection properties specific to the Python compute environment.
+	PythonProperties map[string]string
+
+	// Connection properties specific to the Spark compute environment.
+	SparkProperties map[string]string
+
+	// A flag to validate the credentials during create connection. Default is true.
 	ValidateCredentials bool
+
+	// The compute environments that the specified connection properties are validated
+	// against.
+	ValidateForComputeEnvironments []ComputeEnvironment
 
 	noSmithyDocumentSerde
 }
@@ -1965,6 +2303,23 @@ type ConnectionsList struct {
 
 	// A list of connections used by the job.
 	Connections []string
+
+	noSmithyDocumentSerde
+}
+
+// Brief information about a supported connection type returned by the
+// ListConnectionTypes API.
+type ConnectionTypeBrief struct {
+
+	// The supported authentication types, data interface types (compute
+	// environments), and data operations of the connector.
+	Capabilities *Capabilities
+
+	// The name of the connection type.
+	ConnectionType ConnectionType
+
+	// A description of the connection type.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -2617,6 +2972,67 @@ type DataCatalogEncryptionSettings struct {
 
 	// Specifies the encryption-at-rest configuration for the Data Catalog.
 	EncryptionAtRest *EncryptionAtRest
+
+	noSmithyDocumentSerde
+}
+
+// Input properties to configure data lake access for your catalog resource in the
+// Glue Data Catalog.
+type DataLakeAccessProperties struct {
+
+	// Specifies a federated catalog type for the native catalog resource. The
+	// currently supported type is aws:redshift .
+	CatalogType *string
+
+	// Turns on or off data lake access for Apache Spark applications that access
+	// Amazon Redshift databases in the Data Catalog from any non-Redshift engine, such
+	// as Amazon Athena, Amazon EMR, or Glue ETL.
+	DataLakeAccess bool
+
+	// A role that will be assumed by Glue for transferring data into/out of the
+	// staging bucket during a query.
+	DataTransferRole *string
+
+	// An encryption key that will be used for the staging bucket that will be created
+	// along with the catalog.
+	KmsKey *string
+
+	noSmithyDocumentSerde
+}
+
+// The output properties of the data lake access configuration for your catalog
+// resource in the Glue Data Catalog.
+type DataLakeAccessPropertiesOutput struct {
+
+	// Specifies a federated catalog type for the native catalog resource. The
+	// currently supported type is aws:redshift .
+	CatalogType *string
+
+	// Turns on or off data lake access for Apache Spark applications that access
+	// Amazon Redshift databases in the Data Catalog.
+	DataLakeAccess bool
+
+	// A role that will be assumed by Glue for transferring data into/out of the
+	// staging bucket during a query.
+	DataTransferRole *string
+
+	// An encryption key that will be used for the staging bucket that will be created
+	// along with the catalog.
+	KmsKey *string
+
+	// The managed Redshift Serverless compute name that is created for your catalog
+	// resource.
+	ManagedWorkgroupName *string
+
+	// The managed Redshift Serverless compute status.
+	ManagedWorkgroupStatus *string
+
+	// The default Redshift database resource name in the managed compute.
+	RedshiftDatabaseName *string
+
+	// A message that gives more detailed information about the managed workgroup
+	// status.
+	StatusMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -3611,6 +4027,33 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An entity supported by a given ConnectionType .
+type Entity struct {
+
+	// The type of entities that are present in the response. This value depends on
+	// the source connection. For example this is SObjects for Salesforce and databases
+	// or schemas or tables for sources like Amazon Redshift.
+	Category *string
+
+	// An optional map of keys which may be returned for an entity by a connector.
+	CustomProperties map[string]string
+
+	// A description of the entity.
+	Description *string
+
+	// The name of the entity.
+	EntityName *string
+
+	// A Boolean value which helps to determine whether there are sub objects that can
+	// be listed.
+	IsParentEntity *bool
+
+	// Label used for the entity.
+	Label *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about an error.
 type ErrorDetail struct {
 
@@ -3733,6 +4176,24 @@ type EventBatchingCondition struct {
 	noSmithyDocumentSerde
 }
 
+// A run attempt for a column statistics task run.
+type ExecutionAttempt struct {
+
+	// A task run ID for the last column statistics task run.
+	ColumnStatisticsTaskRunId *string
+
+	// An error message associated with the last column statistics task run.
+	ErrorMessage *string
+
+	// A timestamp when the last column statistics task run occurred.
+	ExecutionTimestamp *time.Time
+
+	// The status of the last column statistics task run.
+	Status ExecutionStatus
+
+	noSmithyDocumentSerde
+}
+
 // An execution property of a job.
 type ExecutionProperty struct {
 
@@ -3750,6 +4211,19 @@ type ExportLabelsTaskRunProperties struct {
 	// The Amazon Simple Storage Service (Amazon S3) path where you will export the
 	// labels.
 	OutputS3Path *string
+
+	noSmithyDocumentSerde
+}
+
+// A catalog that points to an entity outside the Glue Data Catalog.
+type FederatedCatalog struct {
+
+	// The name of the connection to an external data source, for example a
+	// Redshift-federated catalog.
+	ConnectionName *string
+
+	// A unique identifier for the federated catalog.
+	Identifier *string
 
 	noSmithyDocumentSerde
 }
@@ -3777,6 +4251,72 @@ type FederatedTable struct {
 
 	// A unique identifier for the federated table.
 	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The Field object has information about the different properties associated with
+// a field in the connector.
+type Field struct {
+
+	// Optional map of keys which may be returned.
+	CustomProperties map[string]string
+
+	// A description of the field.
+	Description *string
+
+	// A unique identifier for the field.
+	FieldName *string
+
+	// The type of data in the field.
+	FieldType FieldDataType
+
+	// Indicates whether this field can be created as part of a destination write.
+	IsCreateable *bool
+
+	// Indicates whether this field is populated automatically when the object is
+	// created, such as a created at timestamp.
+	IsDefaultOnCreate *bool
+
+	//  Indicates whether this field can used in a filter clause ( WHERE clause) of a
+	// SQL statement when querying data.
+	IsFilterable *bool
+
+	// Indicates whether this field can be nullable or not.
+	IsNullable *bool
+
+	// Indicates whether a given field can be used in partitioning the query made to
+	// SaaS.
+	IsPartitionable *bool
+
+	// Indicates whether this field can used as a primary key for the given entity.
+	IsPrimaryKey *bool
+
+	// Indicates whether this field can be added in Select clause of SQL query or
+	// whether it is retrievable or not.
+	IsRetrievable *bool
+
+	// Indicates whether this field can be updated as part of a destination write.
+	IsUpdateable *bool
+
+	// Indicates whether this field can be upserted as part of a destination write.
+	IsUpsertable *bool
+
+	// A readable label used for the field.
+	Label *string
+
+	// The data type returned by the SaaS API, such as “picklist” or “textarea” from
+	// Salesforce.
+	NativeDataType *string
+
+	// A parent field name for a nested field.
+	ParentField *string
+
+	// Indicates the support filter operators for this field.
+	SupportedFilterOperators []FieldFilterOperator
+
+	// A list of supported values for the field.
+	SupportedValues []string
 
 	noSmithyDocumentSerde
 }
@@ -3993,6 +4533,9 @@ type FindMatchesTaskRunProperties struct {
 // Filters the connection definitions that are returned by the GetConnections API
 // operation.
 type GetConnectionsFilter struct {
+
+	// Denotes if the connection was created with schema version 1 or 2.
+	ConnectionSchemaVersion *int32
 
 	// The type of connections to return. Currently, SFTP is not supported.
 	ConnectionType ConnectionType
@@ -4344,6 +4887,160 @@ type ImportLabelsTaskRunProperties struct {
 
 	// Indicates whether to overwrite your existing labels.
 	Replace bool
+
+	noSmithyDocumentSerde
+}
+
+// A structure for an integration that writes data into a resource.
+type InboundIntegration struct {
+
+	// The time that the integration was created, in UTC.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The ARN of the zero-ETL integration.
+	//
+	// This member is required.
+	IntegrationArn *string
+
+	// The ARN of the source resource for the integration.
+	//
+	// This member is required.
+	SourceArn *string
+
+	// The possible statuses are:
+	//
+	//   - CREATING: The integration is being created.
+	//
+	//   - ACTIVE: The integration creation succeeds.
+	//
+	//   - MODIFYING: The integration is being modified.
+	//
+	//   - FAILED: The integration creation fails.
+	//
+	//   - DELETING: The integration is deleted.
+	//
+	//   - SYNCING: The integration is synchronizing.
+	//
+	//   - NEEDS_ATTENTION: The integration needs attention, such as synchronization.
+	//
+	// This member is required.
+	Status IntegrationStatus
+
+	// The ARN of the target resource for the integration.
+	//
+	// This member is required.
+	TargetArn *string
+
+	// A list of errors associated with the integration.
+	Errors []IntegrationError
+
+	noSmithyDocumentSerde
+}
+
+// Describes a zero-ETL integration.
+type Integration struct {
+
+	// The time that the integration was created, in UTC.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the integration.
+	//
+	// This member is required.
+	IntegrationArn *string
+
+	// A unique name for the integration.
+	//
+	// This member is required.
+	IntegrationName *string
+
+	// The ARN for the source of the integration.
+	//
+	// This member is required.
+	SourceArn *string
+
+	// The possible statuses are:
+	//
+	//   - CREATING: The integration is being created.
+	//
+	//   - ACTIVE: The integration creation succeeds.
+	//
+	//   - MODIFYING: The integration is being modified.
+	//
+	//   - FAILED: The integration creation fails.
+	//
+	//   - DELETING: The integration is deleted.
+	//
+	//   - SYNCING: The integration is synchronizing.
+	//
+	//   - NEEDS_ATTENTION: The integration needs attention, such as synchronization.
+	//
+	// This member is required.
+	Status IntegrationStatus
+
+	// The ARN for the target of the integration.
+	//
+	// This member is required.
+	TargetArn *string
+
+	// An optional set of non-secret key–value pairs that contains additional
+	// contextual information for encryption. This can only be provided if KMSKeyId is
+	// provided.
+	AdditionalEncryptionContext map[string]string
+
+	// Selects source tables for the integration using Maxwell filter syntax.
+	DataFilter *string
+
+	// A description for the integration.
+	Description *string
+
+	// A list of errors associated with the integration.
+	Errors []IntegrationError
+
+	// The ARN of a KMS key used for encrypting the channel.
+	KmsKeyId *string
+
+	// Metadata assigned to the resource consisting of a list of key-value pairs.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// An error associated with a zero-ETL integration.
+type IntegrationError struct {
+
+	// The code associated with this error.
+	ErrorCode *string
+
+	// A message describing the error.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter that can be used when invoking a DescribeIntegrations request.
+type IntegrationFilter struct {
+
+	// The name of the filter.
+	Name *string
+
+	// A list of filter values.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes how data is partitioned on the target.
+type IntegrationPartition struct {
+
+	// The field name used to partition data on the target.
+	FieldName *string
+
+	// Specifies a function used to partition data on the target.
+	FunctionSpec *string
 
 	noSmithyDocumentSerde
 }
@@ -6191,6 +6888,24 @@ type OAuth2ClientApplication struct {
 	noSmithyDocumentSerde
 }
 
+// The credentials used when the authentication type is OAuth2 authentication.
+type OAuth2Credentials struct {
+
+	// The access token used when the authentication type is OAuth2.
+	AccessToken *string
+
+	// The JSON Web Token (JWT) used when the authentication type is OAuth2.
+	JwtToken *string
+
+	// The refresh token used when the authentication type is OAuth2.
+	RefreshToken *string
+
+	// The client application client secret if the client application is user managed.
+	UserManagedClientApplicationClientSecret *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing properties for OAuth2 authentication.
 type OAuth2Properties struct {
 
@@ -6220,6 +6935,9 @@ type OAuth2PropertiesInput struct {
 	// The client application type in the CreateConnection request. For example,
 	// AWS_MANAGED or USER_MANAGED .
 	OAuth2ClientApplication *OAuth2ClientApplication
+
+	// The credentials used when the authentication type is OAuth2 authentication.
+	OAuth2Credentials *OAuth2Credentials
 
 	// The OAuth2 grant type in the CreateConnection request. For example,
 	// AUTHORIZATION_CODE , JWT_BEARER , or CLIENT_CREDENTIALS .
@@ -6649,6 +7367,41 @@ type ProfileConfiguration struct {
 
 	// A key-value map of configuration parameters for Glue sessions.
 	SessionConfiguration map[string]ConfigurationObject
+
+	noSmithyDocumentSerde
+}
+
+// An object that defines a connection type for a compute environment.
+type Property struct {
+
+	// A description of the property.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the property.
+	//
+	// This member is required.
+	Name *string
+
+	// Describes the type of property.
+	//
+	// This member is required.
+	PropertyTypes []PropertyType
+
+	// Indicates whether the property is required.
+	//
+	// This member is required.
+	Required *bool
+
+	// A list of AllowedValue objects representing the values allowed for the property.
+	AllowedValues []AllowedValue
+
+	// Indicates which data operations are applicable to the property.
+	DataOperationScopes []DataOperation
+
+	// The default value for the property.
+	DefaultValue *string
 
 	noSmithyDocumentSerde
 }
@@ -8190,6 +8943,33 @@ type SourceControlDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The resource properties associated with the integration source.
+type SourceProcessingProperties struct {
+
+	// The IAM role to access the Glue connection.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Properties used by the source leg to process data from the source.
+type SourceTableConfig struct {
+
+	// A list of fields used for column-level filtering.
+	Fields []string
+
+	// A condition clause used for row-level filtering.
+	FilterPredicate *string
+
+	// Unique identifier of a record.
+	PrimaryKey []string
+
+	// Incremental pull timestamp-based field.
+	RecordUpdateField *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a connector to an Apache Spark data source.
 type SparkConnectorSource struct {
 
@@ -9020,6 +9800,75 @@ type TableVersionError struct {
 	// The ID value of the version in question. A VersionID is a string representation
 	// of an integer. Each version is incremented by 1.
 	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The Tag object represents a label that you can assign to an Amazon Web Services
+// resource. Each tag consists of a key and an optional value, both of which you
+// define.
+//
+// For more information about tags, and controlling access to resources in Glue,
+// see [Amazon Web Services Tags in Glue]and [Specifying Glue Resource ARNs] in the developer guide.
+//
+// [Specifying Glue Resource ARNs]: https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html
+// [Amazon Web Services Tags in Glue]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+type Tag struct {
+
+	// The tag key. The key is required when you create a tag on an object. The key is
+	// case-sensitive, and must not contain the prefix aws.
+	Key *string
+
+	// The tag value. The value is optional when you create a tag on an object. The
+	// value is case-sensitive, and must not contain the prefix aws.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The resource properties associated with the integration target.
+type TargetProcessingProperties struct {
+
+	// The Glue network connection to configure the Glue job running in the customer
+	// VPC.
+	ConnectionName *string
+
+	// The ARN of an Eventbridge event bus to receive the integration status
+	// notification.
+	EventBusArn *string
+
+	// The ARN of the KMS key used for encryption.
+	KmsArn *string
+
+	// The IAM role to access the Glue database.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes a target catalog for resource linking.
+type TargetRedshiftCatalog struct {
+
+	// The Amazon Resource Name (ARN) of the catalog resource.
+	//
+	// This member is required.
+	CatalogArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Properties used by the target leg to partition the data on the target.
+type TargetTableConfig struct {
+
+	// Determines the file layout on the target.
+	PartitionSpec []IntegrationPartition
+
+	// The optional name of a target table.
+	TargetTableName *string
+
+	// Specifies how nested objects are flattened to top-level elements. Valid values
+	// are: "TOPLEVEL", "FULL", or "NOUNNEST".
+	UnnestSpec UnnestSpec
 
 	noSmithyDocumentSerde
 }

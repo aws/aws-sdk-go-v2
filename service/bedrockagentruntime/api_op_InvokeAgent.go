@@ -106,6 +106,9 @@ type InvokeAgentInput struct {
 	// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
 	SessionState *types.SessionState
 
+	// The ARN of the resource making the request.
+	SourceArn *string
+
 	//  Specifies the configurations for streaming.
 	StreamingConfigurations *types.StreamingConfigurations
 

@@ -94,6 +94,10 @@ type GetApplicationOutput struct {
 	// experience.
 	QAppsConfiguration *types.QAppsConfiguration
 
+	// The Amazon QuickSight authentication configuration for the Amazon Q Business
+	// application.
+	QuickSightConfiguration *types.QuickSightConfiguration
+
 	// The Amazon Resource Name (ARN) of the IAM with permissions to access your
 	// CloudWatch logs and metrics.
 	RoleArn *string

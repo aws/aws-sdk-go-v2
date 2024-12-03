@@ -80,11 +80,6 @@ type UpdateDataSourceOutput struct {
 	// This member is required.
 	DomainId *string
 
-	// The identifier of the environment in which a data source is to be updated.
-	//
-	// This member is required.
-	EnvironmentId *string
-
 	// The identifier of the data source to be updated.
 	//
 	// This member is required.
@@ -106,6 +101,9 @@ type UpdateDataSourceOutput struct {
 	// The configuration to be updated as part of the UpdateDataSource action.
 	Configuration types.DataSourceConfigurationOutput
 
+	// The connection ID.
+	ConnectionId *string
+
 	// The timestamp of when the data source was updated.
 	CreatedAt *time.Time
 
@@ -114,6 +112,9 @@ type UpdateDataSourceOutput struct {
 
 	// The enable setting to be updated as part of the UpdateDataSource action.
 	EnableSetting types.EnableSetting
+
+	// The identifier of the environment in which a data source is to be updated.
+	EnvironmentId *string
 
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.

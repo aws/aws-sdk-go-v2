@@ -193,11 +193,22 @@ type PluginType string
 
 // Enum values for PluginType
 const (
-	PluginTypeServiceNow PluginType = "SERVICE_NOW"
-	PluginTypeSalesforce PluginType = "SALESFORCE"
-	PluginTypeJira       PluginType = "JIRA"
-	PluginTypeZendesk    PluginType = "ZENDESK"
-	PluginTypeCustom     PluginType = "CUSTOM"
+	PluginTypeServiceNow            PluginType = "SERVICE_NOW"
+	PluginTypeSalesforce            PluginType = "SALESFORCE"
+	PluginTypeJira                  PluginType = "JIRA"
+	PluginTypeZendesk               PluginType = "ZENDESK"
+	PluginTypeCustom                PluginType = "CUSTOM"
+	PluginTypeAsana                 PluginType = "ASANA"
+	PluginTypeAtlassianConfluence   PluginType = "ATLASSIAN_CONFLUENCE"
+	PluginTypeGoogleCalendar        PluginType = "GOOGLE_CALENDAR"
+	PluginTypeJiraCloud             PluginType = "JIRA_CLOUD"
+	PluginTypeMicrosoftExchange     PluginType = "MICROSOFT_EXCHANGE"
+	PluginTypeMicrosoftTeams        PluginType = "MICROSOFT_TEAMS"
+	PluginTypePagerdutyAdvance      PluginType = "PAGERDUTY_ADVANCE"
+	PluginTypeSalesforceCrm         PluginType = "SALESFORCE_CRM"
+	PluginTypeServicenowNowPlatform PluginType = "SERVICENOW_NOW_PLATFORM"
+	PluginTypeSmartsheet            PluginType = "SMARTSHEET"
+	PluginTypeZendeskSuite          PluginType = "ZENDESK_SUITE"
 )
 
 // Values returns all known values for PluginType. Note that this can be expanded
@@ -211,6 +222,17 @@ func (PluginType) Values() []PluginType {
 		"JIRA",
 		"ZENDESK",
 		"CUSTOM",
+		"ASANA",
+		"ATLASSIAN_CONFLUENCE",
+		"GOOGLE_CALENDAR",
+		"JIRA_CLOUD",
+		"MICROSOFT_EXCHANGE",
+		"MICROSOFT_TEAMS",
+		"PAGERDUTY_ADVANCE",
+		"SALESFORCE_CRM",
+		"SERVICENOW_NOW_PLATFORM",
+		"SMARTSHEET",
+		"ZENDESK_SUITE",
 	}
 }
 

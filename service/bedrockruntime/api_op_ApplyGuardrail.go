@@ -12,6 +12,11 @@ import (
 )
 
 // The action to apply a guardrail.
+//
+// For troubleshooting some of the common errors you might encounter when using
+// the ApplyGuardrail API, see [Troubleshooting Amazon Bedrock API Error Codes] in the Amazon Bedrock User Guide
+//
+// [Troubleshooting Amazon Bedrock API Error Codes]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html
 func (c *Client) ApplyGuardrail(ctx context.Context, params *ApplyGuardrailInput, optFns ...func(*Options)) (*ApplyGuardrailOutput, error) {
 	if params == nil {
 		params = &ApplyGuardrailInput{}

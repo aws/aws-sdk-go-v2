@@ -46,6 +46,7 @@ type CustomizationType string
 const (
 	CustomizationTypeFineTuning           CustomizationType = "FINE_TUNING"
 	CustomizationTypeContinuedPreTraining CustomizationType = "CONTINUED_PRE_TRAINING"
+	CustomizationTypeDistillation         CustomizationType = "DISTILLATION"
 )
 
 // Values returns all known values for CustomizationType. Note that this can be
@@ -56,6 +57,7 @@ func (CustomizationType) Values() []CustomizationType {
 	return []CustomizationType{
 		"FINE_TUNING",
 		"CONTINUED_PRE_TRAINING",
+		"DISTILLATION",
 	}
 }
 
@@ -504,6 +506,7 @@ type ModelCustomization string
 const (
 	ModelCustomizationFineTuning           ModelCustomization = "FINE_TUNING"
 	ModelCustomizationContinuedPreTraining ModelCustomization = "CONTINUED_PRE_TRAINING"
+	ModelCustomizationDistillation         ModelCustomization = "DISTILLATION"
 )
 
 // Values returns all known values for ModelCustomization. Note that this can be
@@ -514,6 +517,7 @@ func (ModelCustomization) Values() []ModelCustomization {
 	return []ModelCustomization{
 		"FINE_TUNING",
 		"CONTINUED_PRE_TRAINING",
+		"DISTILLATION",
 	}
 }
 

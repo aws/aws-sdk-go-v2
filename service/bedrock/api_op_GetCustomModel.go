@@ -79,6 +79,9 @@ type GetCustomModelOutput struct {
 	// This member is required.
 	TrainingDataConfig *types.TrainingDataConfig
 
+	// The customization configuration for the custom model.
+	CustomizationConfig types.CustomizationConfig
+
 	// The type of model customization.
 	CustomizationType types.CustomizationType
 

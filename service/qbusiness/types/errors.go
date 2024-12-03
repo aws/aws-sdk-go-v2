@@ -176,8 +176,8 @@ func (e *MediaTooLargeException) ErrorCode() string {
 }
 func (e *MediaTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you want to use doesn’t exist. Make sure you have provided the
-// correct resource and try again.
+// The application or plugin resource you want to use doesn’t exist. Make sure you
+// have provided the correct resource and try again.
 type ResourceNotFoundException struct {
 	Message *string
 

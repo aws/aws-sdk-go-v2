@@ -138,6 +138,68 @@ type AgentActionGroup struct {
 	noSmithyDocumentSerde
 }
 
+// Input for an agent collaborator. The input can be text or an action invocation
+// result.
+type AgentCollaboratorInputPayload struct {
+
+	// An action invocation result.
+	ReturnControlResults *ReturnControlResults
+
+	// Input text.
+	Text *string
+
+	// The input type.
+	Type PayloadType
+
+	noSmithyDocumentSerde
+}
+
+// An agent collaborator invocation input.
+type AgentCollaboratorInvocationInput struct {
+
+	// The collaborator's alias ARN.
+	AgentCollaboratorAliasArn *string
+
+	// The collaborator's name.
+	AgentCollaboratorName *string
+
+	// Text or action invocation result input for the collaborator.
+	Input *AgentCollaboratorInputPayload
+
+	noSmithyDocumentSerde
+}
+
+// Output from an agent collaborator.
+type AgentCollaboratorInvocationOutput struct {
+
+	// The output's agent collaborator alias ARN.
+	AgentCollaboratorAliasArn *string
+
+	// The output's agent collaborator name.
+	AgentCollaboratorName *string
+
+	// The output's output.
+	Output *AgentCollaboratorOutputPayload
+
+	noSmithyDocumentSerde
+}
+
+// Output from an agent collaborator. The output can be text or an action
+// invocation result.
+type AgentCollaboratorOutputPayload struct {
+
+	// An action invocation result.
+	ReturnControlPayload *ReturnControlPayload
+
+	// Text output.
+	Text *string
+
+	// The type of output.
+	Type PayloadType
+
+	noSmithyDocumentSerde
+}
+
 // An event in which the prompt was analyzed in preparation for optimization.
 type AnalyzePromptEvent struct {
 
@@ -165,8 +227,14 @@ type ApiInvocationInput struct {
 	// Contains information about the API operation to invoke.
 	ActionInvocationType ActionInvocationType
 
+	// The agent's ID.
+	AgentId *string
+
 	// The path to the API operation.
 	ApiPath *string
+
+	// The agent collaborator's name.
+	CollaboratorName *string
 
 	// The HTTP method of the API operation.
 	HttpMethod *string
@@ -234,6 +302,9 @@ type ApiResult struct {
 	//
 	// This member is required.
 	ActionGroup *string
+
+	// The agent's ID.
+	AgentId *string
 
 	// The path to the API operation.
 	ApiPath *string
@@ -376,6 +447,24 @@ type ByteContentFile struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a caller.
+//
+// The following types satisfy this interface:
+//
+//	CallerMemberAgentAliasArn
+type Caller interface {
+	isCaller()
+}
+
+// The caller's agent alias ARN.
+type CallerMemberAgentAliasArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CallerMemberAgentAliasArn) isCaller() {}
+
 // An object containing a segment of the generated response that is based on a
 // source in the knowledge base, alongside information about the source.
 //
@@ -440,6 +529,24 @@ type CodeInterpreterInvocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+// A content block.
+//
+// The following types satisfy this interface:
+//
+//	ContentBlockMemberText
+type ContentBlock interface {
+	isContentBlock()
+}
+
+// The block's text.
+type ContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberText) isContentBlock() {}
+
 // Contains the body of the API response.
 //
 // This data type is used in the following API operations:
@@ -451,6 +558,15 @@ type ContentBody struct {
 
 	// The body of the API response.
 	Body *string
+
+	noSmithyDocumentSerde
+}
+
+// A conversation history.
+type ConversationHistory struct {
+
+	// The conversation's messages.
+	Messages []Message
 
 	noSmithyDocumentSerde
 }
@@ -1012,6 +1128,12 @@ type FunctionInvocationInput struct {
 	// Contains information about the function to invoke,
 	ActionInvocationType ActionInvocationType
 
+	// The agent's ID.
+	AgentId *string
+
+	// The collaborator's name.
+	CollaboratorName *string
+
 	// The name of the function.
 	Function *string
 
@@ -1056,6 +1178,9 @@ type FunctionResult struct {
 	//
 	// This member is required.
 	ActionGroup *string
+
+	// The agent's ID.
+	AgentId *string
 
 	// Contains the user confirmation information about the function that was called.
 	ConfirmationState ConfirmationState
@@ -1642,6 +1767,9 @@ type InvocationInput struct {
 	// Contains information about the action group to be invoked.
 	ActionGroupInvocationInput *ActionGroupInvocationInput
 
+	// The collaborator's invocation input.
+	AgentCollaboratorInvocationInput *AgentCollaboratorInvocationInput
+
 	// Contains information about the code interpreter to be invoked.
 	CodeInterpreterInvocationInput *CodeInterpreterInvocationInput
 
@@ -1995,6 +2123,22 @@ type MemorySessionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a message.
+type Message struct {
+
+	// The message's content.
+	//
+	// This member is required.
+	Content []ContentBlock
+
+	// The message's role.
+	//
+	// This member is required.
+	Role ConversationRole
+
+	noSmithyDocumentSerde
+}
+
 // Provides details of the foundation model.
 type Metadata struct {
 
@@ -2054,6 +2198,9 @@ type MetadataConfigurationForReranking struct {
 // [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 type ModelInvocationInput struct {
 
+	// The identifier of a foundation model.
+	FoundationModel *string
+
 	// Specifications about the inference parameters that were provided alongside the
 	// prompt. These are specified in the [PromptOverrideConfiguration]object that was set when the agent was
 	// created or updated. For more information, see [Inference parameters for foundation models].
@@ -2097,6 +2244,9 @@ type Observation struct {
 	// Contains the JSON-formatted string returned by the API invoked by the action
 	// group.
 	ActionGroupInvocationOutput *ActionGroupInvocationOutput
+
+	// A collaborator's invocation output.
+	AgentCollaboratorInvocationOutput *AgentCollaboratorInvocationOutput
 
 	// Contains the JSON-formatted string returned by the API invoked by the code
 	// interpreter.
@@ -3429,6 +3579,81 @@ type ReturnControlPayload struct {
 	noSmithyDocumentSerde
 }
 
+// An action invocation result.
+type ReturnControlResults struct {
+
+	// The action's invocation ID.
+	InvocationId *string
+
+	// The action invocation result.
+	ReturnControlInvocationResults []InvocationResultMember
+
+	noSmithyDocumentSerde
+}
+
+// Invocation output from a routing classifier model.
+type RoutingClassifierModelInvocationOutput struct {
+
+	// The invocation's metadata.
+	Metadata *Metadata
+
+	// The invocation's raw response.
+	RawResponse *RawResponse
+
+	// The invocation's trace ID.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// A trace for a routing classifier.
+//
+// The following types satisfy this interface:
+//
+//	RoutingClassifierTraceMemberInvocationInput
+//	RoutingClassifierTraceMemberModelInvocationInput
+//	RoutingClassifierTraceMemberModelInvocationOutput
+//	RoutingClassifierTraceMemberObservation
+type RoutingClassifierTrace interface {
+	isRoutingClassifierTrace()
+}
+
+// The classifier's invocation input.
+type RoutingClassifierTraceMemberInvocationInput struct {
+	Value InvocationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*RoutingClassifierTraceMemberInvocationInput) isRoutingClassifierTrace() {}
+
+// The classifier's model invocation input.
+type RoutingClassifierTraceMemberModelInvocationInput struct {
+	Value ModelInvocationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*RoutingClassifierTraceMemberModelInvocationInput) isRoutingClassifierTrace() {}
+
+// The classifier's model invocation output.
+type RoutingClassifierTraceMemberModelInvocationOutput struct {
+	Value RoutingClassifierModelInvocationOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*RoutingClassifierTraceMemberModelInvocationOutput) isRoutingClassifierTrace() {}
+
+// The classifier's observation.
+type RoutingClassifierTraceMemberObservation struct {
+	Value Observation
+
+	noSmithyDocumentSerde
+}
+
+func (*RoutingClassifierTraceMemberObservation) isRoutingClassifierTrace() {}
+
 // The identifier information for an Amazon S3 bucket.
 type S3Identifier struct {
 
@@ -3473,6 +3698,9 @@ type S3ObjectFile struct {
 // [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
 // [Lambda function]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html
 type SessionState struct {
+
+	// The state's conversation history.
+	ConversationHistory *ConversationHistory
 
 	// Contains information about the files used by code interpreter.
 	Files []InputFile
@@ -3638,6 +3866,7 @@ type TextResponsePart struct {
 //	TraceMemberOrchestrationTrace
 //	TraceMemberPostProcessingTrace
 //	TraceMemberPreProcessingTrace
+//	TraceMemberRoutingClassifierTrace
 //
 // [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 type Trace interface {
@@ -3702,6 +3931,15 @@ type TraceMemberPreProcessingTrace struct {
 
 func (*TraceMemberPreProcessingTrace) isTrace() {}
 
+// A routing classifier's trace.
+type TraceMemberRoutingClassifierTrace struct {
+	Value RoutingClassifierTrace
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceMemberRoutingClassifierTrace) isTrace() {}
+
 // Contains information about the agent and session, alongside the agent's
 // reasoning process and results from calling API actions and querying knowledge
 // bases and metadata about the trace. You can use the trace to understand how the
@@ -3719,6 +3957,12 @@ type TracePart struct {
 
 	// The version of the agent.
 	AgentVersion *string
+
+	// The part's caller chain.
+	CallerChain []Caller
+
+	// The part's collaborator name.
+	CollaboratorName *string
 
 	// The unique identifier of the session with the agent.
 	SessionId *string
@@ -3805,6 +4049,8 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isActionGroupExecutor()                         {}
 func (*UnknownUnionMember) isAPISchema()                                   {}
+func (*UnknownUnionMember) isCaller()                                      {}
+func (*UnknownUnionMember) isContentBlock()                                {}
 func (*UnknownUnionMember) isFlowInputContent()                            {}
 func (*UnknownUnionMember) isFlowOutputContent()                           {}
 func (*UnknownUnionMember) isFlowResponseStream()                          {}
@@ -3826,4 +4072,5 @@ func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration() {}
 func (*UnknownUnionMember) isResponseStream()                              {}
 func (*UnknownUnionMember) isRetrievalFilter()                             {}
 func (*UnknownUnionMember) isRetrieveAndGenerateStreamResponseOutput()     {}
+func (*UnknownUnionMember) isRoutingClassifierTrace()                      {}
 func (*UnknownUnionMember) isTrace()                                       {}

@@ -151,6 +151,9 @@ type ConverseInput struct {
 	// field is ignored if you don't specify a prompt resource in the modelId field.
 	PromptVariables map[string]types.PromptVariableValues
 
+	// Key-value pairs that you can use to filter invocation logs.
+	RequestMetadata map[string]string
+
 	// A prompt that provides instructions or context to the model about the task it
 	// should perform, or the persona it should adopt during the conversation.
 	System []types.SystemContentBlock
@@ -158,8 +161,9 @@ type ConverseInput struct {
 	// Configuration information for the tools that the model can use when generating
 	// a response.
 	//
-	// This field is only supported by Anthropic Claude 3, Cohere Command R, Cohere
-	// Command R+, and Mistral Large models.
+	// For information about models that support tool use, see [Supported models and model features].
+	//
+	// [Supported models and model features]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features
 	ToolConfig *types.ToolConfiguration
 
 	noSmithyDocumentSerde

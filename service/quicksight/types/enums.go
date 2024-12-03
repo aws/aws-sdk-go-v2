@@ -2140,6 +2140,27 @@ func (FunnelChartMeasureDataLabelStyle) Values() []FunnelChartMeasureDataLabelSt
 	}
 }
 
+type GeneratedAnswerStatus string
+
+// Enum values for GeneratedAnswerStatus
+const (
+	GeneratedAnswerStatusAnswerGenerated GeneratedAnswerStatus = "ANSWER_GENERATED"
+	GeneratedAnswerStatusAnswerRetrieved GeneratedAnswerStatus = "ANSWER_RETRIEVED"
+	GeneratedAnswerStatusAnswerDowngrade GeneratedAnswerStatus = "ANSWER_DOWNGRADE"
+)
+
+// Values returns all known values for GeneratedAnswerStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GeneratedAnswerStatus) Values() []GeneratedAnswerStatus {
+	return []GeneratedAnswerStatus{
+		"ANSWER_GENERATED",
+		"ANSWER_RETRIEVED",
+		"ANSWER_DOWNGRADE",
+	}
+}
+
 type GeospatialColorState string
 
 // Enum values for GeospatialColorState
@@ -2485,6 +2506,44 @@ func (IncludeFolderMembers) Values() []IncludeFolderMembers {
 		"RECURSE",
 		"ONE_LEVEL",
 		"NONE",
+	}
+}
+
+type IncludeGeneratedAnswer string
+
+// Enum values for IncludeGeneratedAnswer
+const (
+	IncludeGeneratedAnswerInclude IncludeGeneratedAnswer = "INCLUDE"
+	IncludeGeneratedAnswerExclude IncludeGeneratedAnswer = "EXCLUDE"
+)
+
+// Values returns all known values for IncludeGeneratedAnswer. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludeGeneratedAnswer) Values() []IncludeGeneratedAnswer {
+	return []IncludeGeneratedAnswer{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
+type IncludeQuickSightQIndex string
+
+// Enum values for IncludeQuickSightQIndex
+const (
+	IncludeQuickSightQIndexInclude IncludeQuickSightQIndex = "INCLUDE"
+	IncludeQuickSightQIndexExclude IncludeQuickSightQIndex = "EXCLUDE"
+)
+
+// Values returns all known values for IncludeQuickSightQIndex. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludeQuickSightQIndex) Values() []IncludeQuickSightQIndex {
+	return []IncludeQuickSightQIndex{
+		"INCLUDE",
+		"EXCLUDE",
 	}
 }
 
@@ -3699,6 +3758,46 @@ func (PurchaseMode) Values() []PurchaseMode {
 	}
 }
 
+type QAResultType string
+
+// Enum values for QAResultType
+const (
+	QAResultTypeDashboardVisual QAResultType = "DASHBOARD_VISUAL"
+	QAResultTypeGeneratedAnswer QAResultType = "GENERATED_ANSWER"
+	QAResultTypeNoAnswer        QAResultType = "NO_ANSWER"
+)
+
+// Values returns all known values for QAResultType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QAResultType) Values() []QAResultType {
+	return []QAResultType{
+		"DASHBOARD_VISUAL",
+		"GENERATED_ANSWER",
+		"NO_ANSWER",
+	}
+}
+
+type QSearchStatus string
+
+// Enum values for QSearchStatus
+const (
+	QSearchStatusEnabled  QSearchStatus = "ENABLED"
+	QSearchStatusDisabled QSearchStatus = "DISABLED"
+)
+
+// Values returns all known values for QSearchStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QSearchStatus) Values() []QSearchStatus {
+	return []QSearchStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type QueryExecutionMode string
 
 // Enum values for QueryExecutionMode
@@ -4156,7 +4255,8 @@ type ServiceType string
 
 // Enum values for ServiceType
 const (
-	ServiceTypeRedshift ServiceType = "REDSHIFT"
+	ServiceTypeRedshift  ServiceType = "REDSHIFT"
+	ServiceTypeQbusiness ServiceType = "QBUSINESS"
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
@@ -4166,6 +4266,7 @@ const (
 func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"REDSHIFT",
+		"QBUSINESS",
 	}
 }
 

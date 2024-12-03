@@ -63,6 +63,10 @@ type GetWebExperienceOutput struct {
 	// The Unix timestamp when the Amazon Q Business web experience was last created.
 	CreatedAt *time.Time
 
+	// Gets the custom logo, favicon, font, and color used in the Amazon Q web
+	// experience.
+	CustomizationConfiguration *types.CustomizationConfiguration
+
 	// The endpoint of your Amazon Q Business web experience.
 	DefaultEndpoint *string
 

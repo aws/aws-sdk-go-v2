@@ -194,6 +194,18 @@ func TestCheckSnapshot_CreateAssetType(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDataProduct(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataProduct(context.Background(), nil, func(o *Options) {
@@ -374,6 +386,18 @@ func TestCheckSnapshot_CreateProjectMembership(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateProjectProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProjectProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateProjectProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRule(context.Background(), nil, func(o *Options) {
@@ -463,6 +487,18 @@ func TestCheckSnapshot_DeleteAssetType(t *testing.T) {
 	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConnection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -638,6 +674,18 @@ func TestCheckSnapshot_DeleteProjectMembership(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteProjectProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProjectProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteProjectProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteRule(context.Background(), nil, func(o *Options) {
@@ -739,6 +787,18 @@ func TestCheckSnapshot_GetAssetType(t *testing.T) {
 	_, err := svc.GetAssetType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -938,6 +998,30 @@ func TestCheckSnapshot_GetIamPortalLoginUrl(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetJobRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetJobRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetLineageEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLineageEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLineageEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetLineageNode(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLineageNode(context.Background(), nil, func(o *Options) {
@@ -979,6 +1063,18 @@ func TestCheckSnapshot_GetProject(t *testing.T) {
 	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetProjectProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProjectProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProjectProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1087,6 +1183,18 @@ func TestCheckSnapshot_ListAssetRevisions(t *testing.T) {
 	_, err := svc.ListAssetRevisions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAssetRevisions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConnections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConnections")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1238,6 +1346,30 @@ func TestCheckSnapshot_ListEnvironments(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListJobRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListJobRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListLineageEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLineageEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLineageEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListLineageNodeHistory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLineageNodeHistory(context.Background(), nil, func(o *Options) {
@@ -1291,6 +1423,18 @@ func TestCheckSnapshot_ListProjectMemberships(t *testing.T) {
 	_, err := svc.ListProjectMemberships(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListProjectMemberships")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListProjectProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProjectProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProjectProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1610,6 +1754,18 @@ func TestCheckSnapshot_UpdateAssetFilter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataSource(context.Background(), nil, func(o *Options) {
@@ -1723,6 +1879,18 @@ func TestCheckSnapshot_UpdateProject(t *testing.T) {
 	_, err := svc.UpdateProject(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateProjectProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProjectProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProjectProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1921,6 +2089,18 @@ func TestUpdateSnapshot_CreateAssetType(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDataProduct(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataProduct(context.Background(), nil, func(o *Options) {
@@ -2101,6 +2281,18 @@ func TestUpdateSnapshot_CreateProjectMembership(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateProjectProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProjectProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateProjectProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRule(context.Background(), nil, func(o *Options) {
@@ -2190,6 +2382,18 @@ func TestUpdateSnapshot_DeleteAssetType(t *testing.T) {
 	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConnection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2365,6 +2569,18 @@ func TestUpdateSnapshot_DeleteProjectMembership(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteProjectProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProjectProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteProjectProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteRule(context.Background(), nil, func(o *Options) {
@@ -2466,6 +2682,18 @@ func TestUpdateSnapshot_GetAssetType(t *testing.T) {
 	_, err := svc.GetAssetType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2665,6 +2893,30 @@ func TestUpdateSnapshot_GetIamPortalLoginUrl(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetJobRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetJobRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetLineageEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLineageEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLineageEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetLineageNode(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLineageNode(context.Background(), nil, func(o *Options) {
@@ -2706,6 +2958,18 @@ func TestUpdateSnapshot_GetProject(t *testing.T) {
 	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetProjectProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProjectProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProjectProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2814,6 +3078,18 @@ func TestUpdateSnapshot_ListAssetRevisions(t *testing.T) {
 	_, err := svc.ListAssetRevisions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAssetRevisions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConnections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConnections")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2965,6 +3241,30 @@ func TestUpdateSnapshot_ListEnvironments(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListJobRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListJobRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListLineageEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLineageEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLineageEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListLineageNodeHistory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLineageNodeHistory(context.Background(), nil, func(o *Options) {
@@ -3018,6 +3318,18 @@ func TestUpdateSnapshot_ListProjectMemberships(t *testing.T) {
 	_, err := svc.ListProjectMemberships(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListProjectMemberships")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListProjectProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProjectProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProjectProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3337,6 +3649,18 @@ func TestUpdateSnapshot_UpdateAssetFilter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataSource(context.Background(), nil, func(o *Options) {
@@ -3450,6 +3774,18 @@ func TestUpdateSnapshot_UpdateProject(t *testing.T) {
 	_, err := svc.UpdateProject(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProjectProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProjectProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProjectProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

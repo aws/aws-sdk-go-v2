@@ -47,6 +47,10 @@ type CreateWebExperienceInput struct {
 	// experience.
 	ClientToken *string
 
+	// Sets the custom logo, favicon, font, and color used in the Amazon Q web
+	// experience.
+	CustomizationConfiguration *types.CustomizationConfiguration
+
 	// Information about the identity provider (IdP) used to authenticate end users of
 	// an Amazon Q Business web experience.
 	IdentityProviderConfiguration types.IdentityProviderConfiguration

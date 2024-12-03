@@ -39,6 +39,7 @@
         "api_op_GetWorkgroup.go",
         "api_op_ListCustomDomainAssociations.go",
         "api_op_ListEndpointAccess.go",
+        "api_op_ListManagedWorkgroups.go",
         "api_op_ListNamespaces.go",
         "api_op_ListRecoveryPoints.go",
         "api_op_ListScheduledActions.go",

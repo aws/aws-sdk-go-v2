@@ -85,7 +85,7 @@ type CreateModelInvocationJobInput struct {
 	// The configuration of the Virtual Private Cloud (VPC) for the data in the batch
 	// inference job. For more information, see [Protect batch inference jobs using a VPC].
 	//
-	// [Protect batch inference jobs using a VPC]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-vpc
+	// [Protect batch inference jobs using a VPC]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-vpc
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

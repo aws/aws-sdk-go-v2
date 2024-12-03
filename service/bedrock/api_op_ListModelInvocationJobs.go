@@ -14,7 +14,7 @@ import (
 
 // Lists all batch inference jobs in the account. For more information, see [View details about a batch inference job].
 //
-// [View details about a batch inference job]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-view
+// [View details about a batch inference job]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-view.html
 func (c *Client) ListModelInvocationJobs(ctx context.Context, params *ListModelInvocationJobsInput, optFns ...func(*Options)) (*ListModelInvocationJobsOutput, error) {
 	if params == nil {
 		params = &ListModelInvocationJobsInput{}
@@ -55,6 +55,50 @@ type ListModelInvocationJobsInput struct {
 
 	// Specify a status to filter for batch inference jobs whose statuses match the
 	// string you specify.
+	//
+	// The following statuses are possible:
+	//
+	//   - Submitted – This job has been submitted to a queue for validation.
+	//
+	//   - Validating – This job is being validated for the requirements described in [Format and upload your batch inference data]
+	//   . The criteria include the following:
+	//
+	//   - Your IAM service role has access to the Amazon S3 buckets containing your
+	//   files.
+	//
+	//   - Your files are .jsonl files and each individual record is a JSON object in
+	//   the correct format. Note that validation doesn't check if the modelInput value
+	//   matches the request body for the model.
+	//
+	//   - Your files fulfill the requirements for file size and number of records.
+	//   For more information, see [Quotas for Amazon Bedrock].
+	//
+	//   - Scheduled – This job has been validated and is now in a queue. The job will
+	//   automatically start when it reaches its turn.
+	//
+	//   - Expired – This job timed out because it was scheduled but didn't begin
+	//   before the set timeout duration. Submit a new job request.
+	//
+	//   - InProgress – This job has begun. You can start viewing the results in the
+	//   output S3 location.
+	//
+	//   - Completed – This job has successfully completed. View the output files in
+	//   the output S3 location.
+	//
+	//   - PartiallyCompleted – This job has partially completed. Not all of your
+	//   records could be processed in time. View the output files in the output S3
+	//   location.
+	//
+	//   - Failed – This job has failed. Check the failure message for any further
+	//   details. For further assistance, reach out to the [Amazon Web Services Support Center].
+	//
+	//   - Stopped – This job was stopped by a user.
+	//
+	//   - Stopping – This job is being stopped by a user.
+	//
+	// [Format and upload your batch inference data]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html
+	// [Quotas for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html
+	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home/
 	StatusEquals types.ModelInvocationJobStatus
 
 	// Specify a time to filter for batch inference jobs that were submitted after the

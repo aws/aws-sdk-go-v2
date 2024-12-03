@@ -7270,6 +7270,11 @@ func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 		}
 	}
 
+	if len(v.MultiRegionConsistency) > 0 {
+		ok := object.Key("MultiRegionConsistency")
+		ok.String(string(v.MultiRegionConsistency))
+	}
+
 	if v.OnDemandThroughput != nil {
 		ok := object.Key("OnDemandThroughput")
 		if err := awsAwsjson10_serializeDocumentOnDemandThroughput(v.OnDemandThroughput, ok); err != nil {

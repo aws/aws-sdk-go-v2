@@ -1,0 +1,8 @@
+{
+    "id": "202c9414-3dbc-49db-8a9e-da2636ff8a46",
+    "type": "feature",
+    "description": "Add FEDERATED type to CreateDataCatalog. This creates Athena Data Catalog, AWS Lambda connector, and AWS Glue connection. Create/DeleteDataCatalog returns DataCatalog. Add Status, ConnectionType, and Error to DataCatalog and DataCatalogSummary. Add DeleteCatalogOnly to delete Athena Catalog only.",
+    "modules": [
+        "service/athena"
+    ]
+}

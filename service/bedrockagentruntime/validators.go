@@ -375,6 +375,23 @@ func validateByteContentFile(v *types.ByteContentFile) error {
 	}
 }
 
+func validateConversationHistory(v *types.ConversationHistory) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConversationHistory"}
+	if v.Messages != nil {
+		if err := validateMessages(v.Messages); err != nil {
+			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExternalSource(v *types.ExternalSource) error {
 	if v == nil {
 		return nil
@@ -1000,6 +1017,41 @@ func validateKnowledgeBaseVectorSearchConfiguration(v *types.KnowledgeBaseVector
 	}
 }
 
+func validateMessage(v *types.Message) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Message"}
+	if len(v.Role) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessages(v []types.Message) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Messages"}
+	for i := range v {
+		if err := validateMessage(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetadataAttributeSchema(v *types.MetadataAttributeSchema) error {
 	if v == nil {
 		return nil
@@ -1489,6 +1541,11 @@ func validateSessionState(v *types.SessionState) error {
 	if v.KnowledgeBaseConfigurations != nil {
 		if err := validateKnowledgeBaseConfigurations(v.KnowledgeBaseConfigurations); err != nil {
 			invalidParams.AddNested("KnowledgeBaseConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConversationHistory != nil {
+		if err := validateConversationHistory(v.ConversationHistory); err != nil {
+			invalidParams.AddNested("ConversationHistory", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1,0 +1,8 @@
+{
+    "id": "b32c9195-a7d3-4800-91f5-0c551a54bc67",
+    "type": "feature",
+    "description": "Adds support for Amazon Redshift RegisterNamespace and DeregisterNamespace APIs to share data to AWS Glue Data Catalog.",
+    "modules": [
+        "service/redshift"
+    ]
+}

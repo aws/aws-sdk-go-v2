@@ -34,6 +34,10 @@ type GetConnectionInput struct {
 	// This member is required.
 	Name *string
 
+	// For connections that may be used in multiple services, specifies returning
+	// properties for the specified compute environment.
+	ApplyOverrideForComputeEnvironment types.ComputeEnvironment
+
 	// The ID of the Data Catalog in which the connection resides. If none is
 	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string

@@ -2,6 +2,27 @@
 
 package types
 
+type AsyncInvokeStatus string
+
+// Enum values for AsyncInvokeStatus
+const (
+	AsyncInvokeStatusInProgress AsyncInvokeStatus = "InProgress"
+	AsyncInvokeStatusCompleted  AsyncInvokeStatus = "Completed"
+	AsyncInvokeStatusFailed     AsyncInvokeStatus = "Failed"
+)
+
+// Values returns all known values for AsyncInvokeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AsyncInvokeStatus) Values() []AsyncInvokeStatus {
+	return []AsyncInvokeStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+	}
+}
+
 type ConversationRole string
 
 // Enum values for ConversationRole
@@ -514,6 +535,42 @@ func (PerformanceConfigLatency) Values() []PerformanceConfigLatency {
 	}
 }
 
+type SortAsyncInvocationBy string
+
+// Enum values for SortAsyncInvocationBy
+const (
+	SortAsyncInvocationBySubmissionTime SortAsyncInvocationBy = "SubmissionTime"
+)
+
+// Values returns all known values for SortAsyncInvocationBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortAsyncInvocationBy) Values() []SortAsyncInvocationBy {
+	return []SortAsyncInvocationBy{
+		"SubmissionTime",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "Ascending"
+	SortOrderDescending SortOrder = "Descending"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"Ascending",
+		"Descending",
+	}
+}
+
 type StopReason string
 
 // Enum values for StopReason
@@ -576,5 +633,38 @@ func (Trace) Values() []Trace {
 	return []Trace{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type VideoFormat string
+
+// Enum values for VideoFormat
+const (
+	VideoFormatMkv     VideoFormat = "mkv"
+	VideoFormatMov     VideoFormat = "mov"
+	VideoFormatMp4     VideoFormat = "mp4"
+	VideoFormatWebm    VideoFormat = "webm"
+	VideoFormatFlv     VideoFormat = "flv"
+	VideoFormatMpeg    VideoFormat = "mpeg"
+	VideoFormatMpg     VideoFormat = "mpg"
+	VideoFormatWmv     VideoFormat = "wmv"
+	VideoFormatThreeGp VideoFormat = "three_gp"
+)
+
+// Values returns all known values for VideoFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoFormat) Values() []VideoFormat {
+	return []VideoFormat{
+		"mkv",
+		"mov",
+		"mp4",
+		"webm",
+		"flv",
+		"mpeg",
+		"mpg",
+		"wmv",
+		"three_gp",
 	}
 }

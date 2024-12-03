@@ -39,6 +39,20 @@ type AccessControl struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an allowed action and its associated filter configuration.
+type ActionConfiguration struct {
+
+	// The Q Business action that is allowed.
+	//
+	// This member is required.
+	Action *string
+
+	// The filter configuration for the action, if any.
+	FilterConfiguration *ActionFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Performs an Amazon Q Business plugin action during a non-streaming chat
 // conversation.
 type ActionExecution struct {
@@ -94,6 +108,17 @@ type ActionExecutionPayloadField struct {
 	//
 	// This member is required.
 	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Specifies filters to apply to an allowed action.
+type ActionFilterConfiguration struct {
+
+	// Enables filtering of responses based on document attributes or metadata fields.
+	//
+	// This member is required.
+	DocumentAttributeFilter *AttributeFilter
 
 	noSmithyDocumentSerde
 }
@@ -207,6 +232,31 @@ type ActionReviewPayloadFieldAllowedValue struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information for an Amazon Q Business plugin action.
+type ActionSummary struct {
+
+	// The identifier of an Amazon Q Business plugin action.
+	ActionIdentifier *string
+
+	// The description of an Amazon Q Business plugin action.
+	Description *string
+
+	// The display name assigned by Amazon Q Business to a plugin action. You can't
+	// modify this value.
+	DisplayName *string
+
+	// An Amazon Q Business suggested prompt and end user can use to invoke a plugin
+	// action. This value can be modified and sent as input to initiate an action. For
+	// example:
+	//
+	//   - Create a Jira task
+	//
+	//   - Create a chat assistant task to find the root cause of a specific incident
+	InstructionExample *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the OpenAPI schema for a custom plugin. For more
 // information, see [custom plugin OpenAPI schemas]. You can either include the schema directly in the payload
 // field or you can upload it to an S3 bucket and specify the S3 bucket location in
@@ -256,6 +306,10 @@ type Application struct {
 
 	// The authentication type being used by a Amazon Q Business application.
 	IdentityType IdentityType
+
+	// The Amazon QuickSight configuration for an Amazon Q Business application that
+	// uses QuickSight as the identity provider.
+	QuickSightConfiguration *QuickSightConfiguration
 
 	// The status of the Amazon Q Business application. The application is ready to
 	// use when the status is ACTIVE .
@@ -810,6 +864,24 @@ type ContentRetrievalRule struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the source of content to search in.
+//
+// The following types satisfy this interface:
+//
+//	ContentSourceMemberRetriever
+type ContentSource interface {
+	isContentSource()
+}
+
+// The retriever to use as the content source.
+type ContentSourceMemberRetriever struct {
+	Value RetrieverContentSource
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentSourceMemberRetriever) isContentSource() {}
+
 // A conversation in an Amazon Q Business application.
 type Conversation struct {
 
@@ -876,6 +948,30 @@ type CreatorModeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the configuration information to customize the logo, font, and color
+// of an Amazon Q Business web experience with individual files for each property
+// or a CSS file for them all.
+type CustomizationConfiguration struct {
+
+	// Provides the URL where the custom CSS file is hosted for an Amazon Q web
+	// experience.
+	CustomCSSUrl *string
+
+	// Provides the URL where the custom favicon file is hosted for an Amazon Q web
+	// experience.
+	FaviconUrl *string
+
+	// Provides the URL where the custom font file is hosted for an Amazon Q web
+	// experience.
+	FontUrl *string
+
+	// Provides the URL where the custom logo file is hosted for an Amazon Q web
+	// experience.
+	LogoUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information required to create a custom plugin.
 type CustomPluginConfiguration struct {
 
@@ -894,6 +990,35 @@ type CustomPluginConfiguration struct {
 	//
 	// This member is required.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about a data accessor.
+type DataAccessor struct {
+
+	// The timestamp when the data accessor was created.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the data accessor.
+	DataAccessorArn *string
+
+	// The unique identifier of the data accessor.
+	DataAccessorId *string
+
+	// The friendly name of the data accessor.
+	DisplayName *string
+
+	// The Amazon Resource Name (ARN) of the associated AWS IAM Identity Center
+	// application.
+	IdcApplicationArn *string
+
+	// The Amazon Resource Name (ARN) of the IAM role for the ISV associated with this
+	// data accessor.
+	Principal *string
+
+	// The timestamp when the data accessor was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -1592,6 +1717,25 @@ type HookConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the IAM Identity Center Application used to configure
+// authentication for a plugin.
+type IdcAuthConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the IAM Identity Center Application used to
+	// configure authentication.
+	//
+	// This member is required.
+	IdcApplicationArn *string
+
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to perform
+	// actions on Amazon Web Services services on your behalf.
+	//
+	// This member is required.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about the identity provider (IdP) used to authenticate end
 // users of an Amazon Q Business web experience.
 //
@@ -1924,6 +2068,14 @@ type OAuth2ClientCredentialConfiguration struct {
 	// This member is required.
 	SecretArn *string
 
+	// The redirect URL required by the OAuth 2.0 protocol for Amazon Q Business to
+	// authenticate a plugin user through a third party authentication server.
+	AuthorizationUrl *string
+
+	// The URL required by the OAuth 2.0 protocol to exchange an end user
+	// authorization code for an access token.
+	TokenUrl *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1997,6 +2149,7 @@ type Plugin struct {
 // The following types satisfy this interface:
 //
 //	PluginAuthConfigurationMemberBasicAuthConfiguration
+//	PluginAuthConfigurationMemberIdcAuthConfiguration
 //	PluginAuthConfigurationMemberNoAuthConfiguration
 //	PluginAuthConfigurationMemberOAuth2ClientCredentialConfiguration
 type PluginAuthConfiguration interface {
@@ -2012,6 +2165,16 @@ type PluginAuthConfigurationMemberBasicAuthConfiguration struct {
 }
 
 func (*PluginAuthConfigurationMemberBasicAuthConfiguration) isPluginAuthConfiguration() {}
+
+// Information about the IAM Identity Center Application used to configure
+// authentication for a plugin.
+type PluginAuthConfigurationMemberIdcAuthConfiguration struct {
+	Value IdcAuthConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*PluginAuthConfigurationMemberIdcAuthConfiguration) isPluginAuthConfiguration() {}
 
 // Information about invoking a custom plugin without any authentication.
 type PluginAuthConfigurationMemberNoAuthConfiguration struct {
@@ -2046,6 +2209,22 @@ type PluginConfiguration struct {
 	//
 	// This member is required.
 	PluginId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary metadata information for a Amazon Q Business plugin.
+type PluginTypeMetadataSummary struct {
+
+	// The category of the plugin type.
+	Category PluginTypeCategory
+
+	// The description assigned by Amazon Q Business to a plugin. You can't modify
+	// this value.
+	Description *string
+
+	// The type of the plugin.
+	Type PluginType
 
 	noSmithyDocumentSerde
 }
@@ -2125,6 +2304,47 @@ type QAppsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon QuickSight configuration for an Amazon Q Business application that
+// uses QuickSight as the identity provider. For more information, see [Creating an Amazon QuickSight integrated application].
+//
+// [Creating an Amazon QuickSight integrated application]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html
+type QuickSightConfiguration struct {
+
+	// The Amazon QuickSight namespace that is used as the identity provider. For more
+	// information about QuickSight namespaces, see [Namespace operations].
+	//
+	// [Namespace operations]: https://docs.aws.amazon.com/quicksight/latest/developerguide/namespace-operations.html
+	//
+	// This member is required.
+	ClientNamespace *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a piece of content that is relevant to a search query.
+type RelevantContent struct {
+
+	// The actual content of the relevant item.
+	Content *string
+
+	// Additional attributes of the document containing the relevant content.
+	DocumentAttributes []DocumentAttribute
+
+	// The unique identifier of the document containing the relevant content.
+	DocumentId *string
+
+	// The title of the document containing the relevant content.
+	DocumentTitle *string
+
+	// The URI of the document containing the relevant content.
+	DocumentUri *string
+
+	// Attributes related to the relevance score of the content.
+	ScoreAttributes *ScoreAttributes
+
+	noSmithyDocumentSerde
+}
+
 // Summary information for the retriever used for your Amazon Q Business
 // application.
 type Retriever struct {
@@ -2177,6 +2397,17 @@ type RetrieverConfigurationMemberNativeIndexConfiguration struct {
 }
 
 func (*RetrieverConfigurationMemberNativeIndexConfiguration) isRetrieverConfiguration() {}
+
+// Specifies a retriever as the content source for a search.
+type RetrieverContentSource struct {
+
+	// The unique identifier of the retriever to use as the content source.
+	//
+	// This member is required.
+	RetrieverId *string
+
+	noSmithyDocumentSerde
+}
 
 // Guardrail rules for an Amazon Q Business application. Amazon Q Business
 // supports only one rule at a time.
@@ -2283,6 +2514,15 @@ type SamlProviderConfiguration struct {
 	//
 	// This member is required.
 	AuthenticationUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the relevance score of content.
+type ScoreAttributes struct {
+
+	// The confidence level of the relevance score.
+	ScoreConfidence ScoreConfidence
 
 	noSmithyDocumentSerde
 }
@@ -2592,6 +2832,7 @@ func (*UnknownUnionMember) isAPISchema()                              {}
 func (*UnknownUnionMember) isChatInputStream()                        {}
 func (*UnknownUnionMember) isChatModeConfiguration()                  {}
 func (*UnknownUnionMember) isChatOutputStream()                       {}
+func (*UnknownUnionMember) isContentSource()                          {}
 func (*UnknownUnionMember) isCopyFromSource()                         {}
 func (*UnknownUnionMember) isDocumentAttributeBoostingConfiguration() {}
 func (*UnknownUnionMember) isDocumentAttributeValue()                 {}

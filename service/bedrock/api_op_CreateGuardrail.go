@@ -37,9 +37,9 @@ import (
 // returned to the user if a user input or model response is in violation of the
 // policies defined in the guardrail.
 //
-// For more information, see [Guardrails for Amazon Bedrock] in the Amazon Bedrock User Guide.
+// For more information, see [Amazon Bedrock Guardrails] in the Amazon Bedrock User Guide.
 //
-// [Guardrails for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html
+// [Amazon Bedrock Guardrails]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html
 func (c *Client) CreateGuardrail(ctx context.Context, params *CreateGuardrailInput, optFns ...func(*Options)) (*CreateGuardrailOutput, error) {
 	if params == nil {
 		params = &CreateGuardrailInput{}

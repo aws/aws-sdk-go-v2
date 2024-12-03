@@ -774,6 +774,13 @@ func awsRestjson1_serializeOpDocumentCreateModelCustomizationJobInput(v *CreateM
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.CustomizationConfig != nil {
+		ok := object.Key("customizationConfig")
+		if err := awsRestjson1_serializeDocumentCustomizationConfig(v.CustomizationConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.CustomizationType) > 0 {
 		ok := object.Key("customizationType")
 		ok.String(string(v.CustomizationType))
@@ -4399,6 +4406,38 @@ func awsRestjson1_serializeDocumentCloudWatchConfig(v *types.CloudWatchConfig, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomizationConfig(v types.CustomizationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CustomizationConfigMemberDistillationConfig:
+		av := object.Key("distillationConfig")
+		if err := awsRestjson1_serializeDocumentDistillationConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDistillationConfig(v *types.DistillationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TeacherModelConfig != nil {
+		ok := object.Key("teacherModelConfig")
+		if err := awsRestjson1_serializeDocumentTeacherModelConfig(v.TeacherModelConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEvaluationBedrockModel(v *types.EvaluationBedrockModel, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5241,6 +5280,48 @@ func awsRestjson1_serializeDocumentInferenceProfileModelSource(v types.Inference
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInvocationLogsConfig(v *types.InvocationLogsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InvocationLogSource != nil {
+		ok := object.Key("invocationLogSource")
+		if err := awsRestjson1_serializeDocumentInvocationLogSource(v.InvocationLogSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RequestMetadataFilters != nil {
+		ok := object.Key("requestMetadataFilters")
+		if err := awsRestjson1_serializeDocumentRequestMetadataFilters(v.RequestMetadataFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UsePromptResponse {
+		ok := object.Key("usePromptResponse")
+		ok.Boolean(v.UsePromptResponse)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInvocationLogSource(v types.InvocationLogSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.InvocationLogSourceMemberS3Uri:
+		av := object.Key("s3Uri")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKbInferenceConfig(v *types.KbInferenceConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5386,6 +5467,11 @@ func awsRestjson1_serializeDocumentLoggingConfig(v *types.LoggingConfig, value s
 	if v.TextDataDeliveryEnabled != nil {
 		ok := object.Key("textDataDeliveryEnabled")
 		ok.Boolean(*v.TextDataDeliveryEnabled)
+	}
+
+	if v.VideoDataDeliveryEnabled != nil {
+		ok := object.Key("videoDataDeliveryEnabled")
+		ok.Boolean(*v.VideoDataDeliveryEnabled)
 	}
 
 	return nil
@@ -5591,6 +5677,87 @@ func awsRestjson1_serializeDocumentRAGStopSequences(v []string, value smithyjson
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRequestMetadataBaseFilters(v *types.RequestMetadataBaseFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Equals != nil {
+		ok := object.Key("equals")
+		if err := awsRestjson1_serializeDocumentRequestMetadataMap(v.Equals, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotEquals != nil {
+		ok := object.Key("notEquals")
+		if err := awsRestjson1_serializeDocumentRequestMetadataMap(v.NotEquals, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRequestMetadataFilters(v types.RequestMetadataFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RequestMetadataFiltersMemberAndAll:
+		av := object.Key("andAll")
+		if err := awsRestjson1_serializeDocumentRequestMetadataFiltersList(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RequestMetadataFiltersMemberEquals:
+		av := object.Key("equals")
+		if err := awsRestjson1_serializeDocumentRequestMetadataMap(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RequestMetadataFiltersMemberNotEquals:
+		av := object.Key("notEquals")
+		if err := awsRestjson1_serializeDocumentRequestMetadataMap(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RequestMetadataFiltersMemberOrAll:
+		av := object.Key("orAll")
+		if err := awsRestjson1_serializeDocumentRequestMetadataFiltersList(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRequestMetadataFiltersList(v []types.RequestMetadataBaseFilters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRequestMetadataBaseFilters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRequestMetadataMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }
@@ -5850,6 +6017,23 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTeacherModelConfig(v *types.TeacherModelConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResponseLengthForInference != nil {
+		ok := object.Key("maxResponseLengthForInference")
+		ok.Integer(*v.MaxResponseLengthForInference)
+	}
+
+	if v.TeacherModelIdentifier != nil {
+		ok := object.Key("teacherModelIdentifier")
+		ok.String(*v.TeacherModelIdentifier)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTextInferenceConfig(v *types.TextInferenceConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5908,6 +6092,13 @@ func awsRestjson1_serializeDocumentTextInferenceConfig(v *types.TextInferenceCon
 func awsRestjson1_serializeDocumentTrainingDataConfig(v *types.TrainingDataConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.InvocationLogsConfig != nil {
+		ok := object.Key("invocationLogsConfig")
+		if err := awsRestjson1_serializeDocumentInvocationLogsConfig(v.InvocationLogsConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.S3Uri != nil {
 		ok := object.Key("s3Uri")

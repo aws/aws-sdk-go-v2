@@ -1,0 +1,8 @@
+{
+    "id": "2da124ed-2610-4ced-8229-d11bed1f3a10",
+    "type": "feature",
+    "description": "Adds support for the ListManagedWorkgroups API to get an overview of existing managed workgroups.",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

@@ -84,6 +84,25 @@ func (ConfirmationState) Values() []ConfirmationState {
 	}
 }
 
+type ConversationRole string
+
+// Enum values for ConversationRole
+const (
+	ConversationRoleUser      ConversationRole = "user"
+	ConversationRoleAssistant ConversationRole = "assistant"
+)
+
+// Values returns all known values for ConversationRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConversationRole) Values() []ConversationRole {
+	return []ConversationRole{
+		"user",
+		"assistant",
+	}
+}
+
 type CreationMode string
 
 // Enum values for CreationMode
@@ -493,6 +512,7 @@ const (
 	InvocationTypeKnowledgeBase              InvocationType = "KNOWLEDGE_BASE"
 	InvocationTypeFinish                     InvocationType = "FINISH"
 	InvocationTypeActionGroupCodeInterpreter InvocationType = "ACTION_GROUP_CODE_INTERPRETER"
+	InvocationTypeAgentCollaborator          InvocationType = "AGENT_COLLABORATOR"
 )
 
 // Values returns all known values for InvocationType. Note that this can be
@@ -505,6 +525,7 @@ func (InvocationType) Values() []InvocationType {
 		"KNOWLEDGE_BASE",
 		"FINISH",
 		"ACTION_GROUP_CODE_INTERPRETER",
+		"AGENT_COLLABORATOR",
 	}
 }
 
@@ -576,6 +597,25 @@ func (ParameterType) Values() []ParameterType {
 		"integer",
 		"boolean",
 		"array",
+	}
+}
+
+type PayloadType string
+
+// Enum values for PayloadType
+const (
+	PayloadTypeText          PayloadType = "TEXT"
+	PayloadTypeReturnControl PayloadType = "RETURN_CONTROL"
+)
+
+// Values returns all known values for PayloadType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PayloadType) Values() []PayloadType {
+	return []PayloadType{
+		"TEXT",
+		"RETURN_CONTROL",
 	}
 }
 
@@ -858,11 +898,12 @@ type Type string
 
 // Enum values for Type
 const (
-	TypeActionGroup   Type = "ACTION_GROUP"
-	TypeKnowledgeBase Type = "KNOWLEDGE_BASE"
-	TypeFinish        Type = "FINISH"
-	TypeAskUser       Type = "ASK_USER"
-	TypeReprompt      Type = "REPROMPT"
+	TypeActionGroup       Type = "ACTION_GROUP"
+	TypeAgentCollaborator Type = "AGENT_COLLABORATOR"
+	TypeKnowledgeBase     Type = "KNOWLEDGE_BASE"
+	TypeFinish            Type = "FINISH"
+	TypeAskUser           Type = "ASK_USER"
+	TypeReprompt          Type = "REPROMPT"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
@@ -872,6 +913,7 @@ const (
 func (Type) Values() []Type {
 	return []Type{
 		"ACTION_GROUP",
+		"AGENT_COLLABORATOR",
 		"KNOWLEDGE_BASE",
 		"FINISH",
 		"ASK_USER",

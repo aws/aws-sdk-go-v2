@@ -56,14 +56,6 @@ type CreateModelCustomizationJobInput struct {
 	// This member is required.
 	CustomModelName *string
 
-	// Parameters related to tuning the model. For details on the format for different
-	// models, see [Custom model hyperparameters].
-	//
-	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
-	//
-	// This member is required.
-	HyperParameters map[string]string
-
 	// A name for the fine-tuning job.
 	//
 	// This member is required.
@@ -101,8 +93,17 @@ type CreateModelCustomizationJobInput struct {
 	// Tags to attach to the resulting custom model.
 	CustomModelTags []types.Tag
 
+	// The customization configuration for the model customization job.
+	CustomizationConfig types.CustomizationConfig
+
 	// The customization type.
 	CustomizationType types.CustomizationType
+
+	// Parameters related to tuning the model. For details on the format for different
+	// models, see [Custom model hyperparameters].
+	//
+	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
+	HyperParameters map[string]string
 
 	// Tags to attach to the job.
 	JobTags []types.Tag

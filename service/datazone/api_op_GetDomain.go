@@ -64,6 +64,9 @@ type GetDomainOutput struct {
 	// The description of the Amazon DataZone domain.
 	Description *string
 
+	// The version of the domain.
+	DomainVersion types.DomainVersion
+
 	// The identifier of the Amazon Web Services Key Management Service (KMS) key that
 	// is used to encrypt the Amazon DataZone domain, metadata, and reporting data.
 	KmsKeyIdentifier *string
@@ -79,6 +82,9 @@ type GetDomainOutput struct {
 
 	// The ID of the root domain in Amazon Datazone.
 	RootDomainUnitId *string
+
+	// The service role of the domain.
+	ServiceRole *string
 
 	// The single sing-on option of the specified Amazon DataZone domain.
 	SingleSignOn *types.SingleSignOn

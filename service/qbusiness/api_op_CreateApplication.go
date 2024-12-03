@@ -90,6 +90,14 @@ type CreateApplicationInput struct {
 	// experience.
 	QAppsConfiguration *types.QAppsConfiguration
 
+	// The Amazon QuickSight configuration for an Amazon Q Business application that
+	// uses QuickSight for authentication. This configuration is required if your
+	// application uses QuickSight as the identity provider. For more information, see [Creating an Amazon QuickSight integrated application]
+	// .
+	//
+	// [Creating an Amazon QuickSight integrated application]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html
+	QuickSightConfiguration *types.QuickSightConfiguration
+
 	//  The Amazon Resource Name (ARN) of an IAM role with permissions to access your
 	// Amazon CloudWatch logs and metrics. If this property is not specified, Amazon Q
 	// Business will create a [service linked role (SLR)]and use it as the application's role.

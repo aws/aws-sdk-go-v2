@@ -65,6 +65,9 @@ type CreateAgentInput struct {
 	// This member is required.
 	AgentName *string
 
+	// The agent's collaboration role.
+	AgentCollaboration types.AgentCollaboration
+
 	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
 	// operations on the agent.
 	AgentResourceRoleArn *string

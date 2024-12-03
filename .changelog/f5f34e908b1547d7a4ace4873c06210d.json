@@ -1,0 +1,8 @@
+{
+    "id": "f5f34e90-8b15-47d7-a4ac-e4873c06210d",
+    "type": "feature",
+    "description": "This release includes API needed to support for Unstructured Data in Q in QuickSight Q\u0026A (IDC).",
+    "modules": [
+        "service/quicksight"
+    ]
+}

@@ -950,6 +950,44 @@ func validateCloudWatchConfig(v *types.CloudWatchConfig) error {
 	}
 }
 
+func validateCustomizationConfig(v types.CustomizationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomizationConfig"}
+	switch uv := v.(type) {
+	case *types.CustomizationConfigMemberDistillationConfig:
+		if err := validateDistillationConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[distillationConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDistillationConfig(v *types.DistillationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DistillationConfig"}
+	if v.TeacherModelConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TeacherModelConfig"))
+	} else if v.TeacherModelConfig != nil {
+		if err := validateTeacherModelConfig(v.TeacherModelConfig); err != nil {
+			invalidParams.AddNested("TeacherModelConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvaluationBedrockModel(v *types.EvaluationBedrockModel) error {
 	if v == nil {
 		return nil
@@ -1707,6 +1745,21 @@ func validateHumanWorkflowConfig(v *types.HumanWorkflowConfig) error {
 	}
 }
 
+func validateInvocationLogsConfig(v *types.InvocationLogsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvocationLogsConfig"}
+	if v.InvocationLogSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvocationLogSource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKnowledgeBaseConfig(v types.KnowledgeBaseConfig) error {
 	if v == nil {
 		return nil
@@ -2217,13 +2270,30 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateTeacherModelConfig(v *types.TeacherModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TeacherModelConfig"}
+	if v.TeacherModelIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TeacherModelIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTrainingDataConfig(v *types.TrainingDataConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TrainingDataConfig"}
-	if v.S3Uri == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	if v.InvocationLogsConfig != nil {
+		if err := validateInvocationLogsConfig(v.InvocationLogsConfig); err != nil {
+			invalidParams.AddNested("InvocationLogsConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2518,12 +2588,14 @@ func validateOpCreateModelCustomizationJobInput(v *CreateModelCustomizationJobIn
 			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.HyperParameters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HyperParameters"))
-	}
 	if v.VpcConfig != nil {
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomizationConfig != nil {
+		if err := validateCustomizationConfig(v.CustomizationConfig); err != nil {
+			invalidParams.AddNested("CustomizationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

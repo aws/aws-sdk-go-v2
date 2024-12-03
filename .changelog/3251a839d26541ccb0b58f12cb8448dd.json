@@ -1,0 +1,8 @@
+{
+    "id": "3251a839-d265-41cc-b0b5-8f12cb8448dd",
+    "type": "feature",
+    "description": "Tagging support for Async Invoke resources. Added support for Distillation in CreateModelCustomizationJob API. Support for videoDataDeliveryEnabled flag in invocation logging.",
+    "modules": [
+        "service/bedrock"
+    ]
+}
