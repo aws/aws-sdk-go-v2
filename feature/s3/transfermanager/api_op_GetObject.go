@@ -572,7 +572,7 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 		}
 		output = d.getChunk(1, "")
 		if output.PartsCount > 1 {
-			partSize := out.ContentLength
+			partSize := output.ContentLength
 			ch := make(chan dlchunk, d.options.Concurrency)
 			for i = 0; i <= d.options.Concurrency; i++ {
 				d.wg.Add(1)
@@ -584,17 +584,42 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 					break
 				}
 
-				ch <- dlchunk{w: d.w, size: partSize}
+				ch <- dlchunk{w: d.w, start: d.pos, size: partSize, part: i}
+				d.pos += partSize
 			}
 
 			close(ch)
 			d.wg.Wait()
 		}
 	} else {
-		if d.in.Range == nil {
-
+		var total int64
+		if d.in.Range == "" {
+			d.getChunk(0, d.byteRange())
+			total = d.getTotalBytes()
 		} else {
+			d.pos, total = d.getDownloadRange()
 		}
+
+		ch := make(chan dlchunk, d.cfg.Concurrency)
+		for i := 0; i < d.cfg.Concurrency; i++ {
+			d.wg.Add(1)
+			go d.downloadPart(ch)
+		}
+
+		// Assign work
+		for d.getErr() == nil {
+			if d.pos >= total {
+				break // We're finished queuing chunks
+			}
+
+			// Queue the next range of bytes to read.
+			ch <- dlchunk{w: d.w, start: d.pos, size: d.options.PartSizeBytes, withRange: d.byteRange()}
+			d.pos += d.options.PartSizeBytes
+		}
+
+		// Wait for completion
+		close(ch)
+		d.wg.Wait()
 	}
 
 	if d.err == nil {
@@ -630,12 +655,13 @@ func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*
 // getChunk grabs a chunk of data from the body.
 // Not thread safe. Should only used when grabbing data on a single thread.
 func (d *downloader) getChunk(part int32, rng string) *GetObjectOutput {
-	chunk := dlchunk{w: d.w, start: d.written, part: part, withRange: rng}
+	chunk := dlchunk{w: d.w, start: d.pos, size: d.options.PartSizeBytes, part: part, withRange: rng}
 
 	output, err := d.downloadChunk(chunk)
 	if err != nil {
 		d.setErr(err)
 	}
+	d.pos += output.ContentLength
 	return output
 }
 
@@ -760,6 +786,17 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 
 		d.totalBytes = total
 	}
+}
+
+func (d *downloader) getDownloadRange() (int64, int64) {
+	parts := strings.Split(strings.Split(d.in.Range, "=")[1], "-")
+	return parts[0], parts[1] + 1
+}
+
+// byteRange returns a HTTP Byte-Range header value that should be used by the
+// client to request a chunk range.
+func (d *downloader) byteRange() string {
+	return fmt.Sprintf("bytes=%d-%d", d.pos, d.pos+d.options.PartSizeBytes-1)
 }
 
 func (d *downloader) getErr() error {
