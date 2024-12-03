@@ -9,7 +9,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request is denied because of missing access permissions.</p>",
+                "smithy.api#documentation": "<p>The request is denied because you do not have sufficient permissions to perform the requested action. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-access-denied\">AccessDeniedException</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -1068,7 +1068,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model. <code>Converse</code> provides\n         a consistent interface that works with all models that\n         support messages. This allows you to write code once and use it with different models.\n         If a model has unique inference parameters, you can also pass those unique parameters\n         to the model.</p>\n         <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p>\n         <p>You can submit a prompt by including it in the <code>messages</code> field, specifying the <code>modelId</code> of a foundation model or inference profile to run inference on it, and including any other fields that are relevant to your use case.</p>\n         <p>You can also submit a prompt from Prompt management by specifying the ARN of the prompt version and including a map of variables to values in the <code>promptVariables</code> field. You can append more messages to the prompt by using the <code>messages</code> field. If you use a prompt from Prompt management, you can't include the following fields in the request: <code>additionalModelRequestFields</code>, <code>inferenceConfig</code>, <code>system</code>, or <code>toolConfig</code>. Instead, these fields must be defined through Prompt management. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html\">Use a prompt from Prompt management</a>.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Converse API examples</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action. </p>",
+                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model. <code>Converse</code> provides\n         a consistent interface that works with all models that\n         support messages. This allows you to write code once and use it with different models.\n         If a model has unique inference parameters, you can also pass those unique parameters\n         to the model.</p>\n         <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p>\n         <p>You can submit a prompt by including it in the <code>messages</code> field, specifying the <code>modelId</code> of a foundation model or inference profile to run inference on it, and including any other fields that are relevant to your use case.</p>\n         <p>You can also submit a prompt from Prompt management by specifying the ARN of the prompt version and including a map of variables to values in the <code>promptVariables</code> field. You can append more messages to the prompt by using the <code>messages</code> field. If you use a prompt from Prompt management, you can't include the following fields in the request: <code>additionalModelRequestFields</code>, <code>inferenceConfig</code>, <code>system</code>, or <code>toolConfig</code>. Instead, these fields must be defined through Prompt management. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html\">Use a prompt from Prompt management</a>.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Converse API examples</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action. </p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n         <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the base inference actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html\">InvokeModel</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html\">InvokeModelWithResponseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n      </p>\n         </important>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>Converse</code> API, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1111,7 +1111,7 @@
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#ConversationalModelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the model or throughput with which to run inference, or the prompt resource to use in inference. The value depends on the resource that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>To include a prompt that was defined in Prompt management, specify the ARN of the prompt version to use.</p>\n            </li>\n         </ul>\n         <p>The Converse API doesn't support <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported models</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the model or throughput with which to run inference, or the prompt resource to use in inference. The value depends on the resource that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>To include a prompt that was defined in <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html\">Prompt management</a>, specify the ARN of the prompt version to use.</p>\n            </li>\n         </ul>\n         <p>The Converse API doesn't support <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported models</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1161,10 +1161,16 @@
                 "additionalModelResponseFieldPaths": {
                     "target": "com.amazonaws.bedrockruntime#AdditionalModelResponseFieldPaths",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional model parameters field paths to return in the\n         response. <code>Converse</code> and <code>ConverseStream</code> return the requested fields as a JSON Pointer object in the\n         <code>additionalModelResponseFields</code> field. The following is example JSON for <code>additionalModelResponseFieldPaths</code>.</p>\n         <p>\n            <code>[\n         \"/stop_sequence\"\n         ]</code>\n         </p>\n         <p>For information about the JSON Pointer syntax, see the\n        <a href=\"https://datatracker.ietf.org/doc/html/rfc6901\">Internet Engineering Task Force (IETF)</a> documentation.</p>\n         <p>\n            <code>Converse</code> and <code>ConverseStream</code> reject an empty JSON Pointer or incorrectly structured\n         JSON Pointer with a <code>400</code> error code. if the JSON Pointer is valid, but the requested\n         field is not in the model response, it is ignored by <code>Converse</code>.</p>",
+                        "smithy.api#documentation": "<p>Additional model parameters field paths to return in the\n         response. <code>Converse</code> and <code>ConverseStream</code> return the requested fields as a JSON Pointer object in the\n         <code>additionalModelResponseFields</code> field. The following is example JSON for <code>additionalModelResponseFieldPaths</code>.</p>\n         <p>\n            <code>[\n         \"/stop_sequence\"\n         ]</code>\n         </p>\n         <p>For information about the JSON Pointer syntax, see the\n         <a href=\"https://datatracker.ietf.org/doc/html/rfc6901\">Internet Engineering Task Force (IETF)</a> documentation.</p>\n         <p>\n            <code>Converse</code> and <code>ConverseStream</code> reject an empty JSON Pointer or incorrectly structured\n         JSON Pointer with a <code>400</code> error code. if the JSON Pointer is valid, but the requested\n         field is not in the model response, it is ignored by <code>Converse</code>.</p>",
                         "smithy.api#length": {
                             "max": 10
                         }
+                    }
+                },
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model performance settings for the request.</p>"
                     }
                 }
             },
@@ -1214,6 +1220,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A trace object that contains information about the Guardrail behavior.</p>"
                     }
+                },
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model performance settings for the request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1258,7 +1270,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model and returns\n         the response in a stream. <code>ConverseStream</code> provides a consistent API\n         that works with all Amazon Bedrock models that support messages.\n         This allows you to write code once and use it with different models. Should a\n         model have unique inference parameters, you can also pass those unique parameters to the\n         model. </p>\n         <p>To find out if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>ConverseStream</code>.</p>\n         </note>\n         <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p>\n         <p>You can submit a prompt by including it in the <code>messages</code> field, specifying the <code>modelId</code> of a foundation model or inference profile to run inference on it, and including any other fields that are relevant to your use case.</p>\n         <p>You can also submit a prompt from Prompt management by specifying the ARN of the prompt version and including a map of variables to values in the <code>promptVariables</code> field. You can append more messages to the prompt by using the <code>messages</code> field. If you use a prompt from Prompt management, you can't include the following fields in the request: <code>additionalModelRequestFields</code>, <code>inferenceConfig</code>, <code>system</code>, or <code>toolConfig</code>. Instead, these fields must be defined through Prompt management. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html\">Use a prompt from Prompt management</a>.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Conversation streaming example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModelWithResponseStream</code> action.</p>",
+                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model and returns\n         the response in a stream. <code>ConverseStream</code> provides a consistent API\n         that works with all Amazon Bedrock models that support messages.\n         This allows you to write code once and use it with different models. Should a\n         model have unique inference parameters, you can also pass those unique parameters to the\n         model. </p>\n         <p>To find out if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>ConverseStream</code>.</p>\n         </note>\n         <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p>\n         <p>You can submit a prompt by including it in the <code>messages</code> field, specifying the <code>modelId</code> of a foundation model or inference profile to run inference on it, and including any other fields that are relevant to your use case.</p>\n         <p>You can also submit a prompt from Prompt management by specifying the ARN of the prompt version and including a map of variables to values in the <code>promptVariables</code> field. You can append more messages to the prompt by using the <code>messages</code> field. If you use a prompt from Prompt management, you can't include the following fields in the request: <code>additionalModelRequestFields</code>, <code>inferenceConfig</code>, <code>system</code>, or <code>toolConfig</code>. Instead, these fields must be defined through Prompt management. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html\">Use a prompt from Prompt management</a>.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Conversation streaming example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModelWithResponseStream</code> action.</p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n         <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the base inference actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html\">InvokeModel</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html\">InvokeModelWithResponseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n      </p>\n         </important>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>ConverseStream</code> API, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1287,6 +1299,12 @@
                     "target": "com.amazonaws.bedrockruntime#ConverseStreamTrace",
                     "traits": {
                         "smithy.api#documentation": "<p>The trace object in the response from <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> that contains information about the guardrail behavior.</p>"
+                    }
+                },
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model performance configuration metadata for the conversation stream event.</p>"
                     }
                 }
             },
@@ -1375,7 +1393,7 @@
                 "serviceUnavailableException": {
                     "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service isn't currently available. Try again later.</p>"
+                        "smithy.api#documentation": "<p>The service isn't currently available. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-service-unavailable\">ServiceUnavailable</a> in the Amazon Bedrock User Guide</p>"
                     }
                 }
             },
@@ -1390,7 +1408,7 @@
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#ConversationalModelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the model or throughput with which to run inference, or the prompt resource to use in inference. The value depends on the resource that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>To include a prompt that was defined in Prompt management, specify the ARN of the prompt version to use.</p>\n            </li>\n         </ul>\n         <p>The Converse API doesn't support <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported models</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the model or throughput with which to run inference, or the prompt resource to use in inference. The value depends on the resource that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>To include a prompt that was defined in <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html\">Prompt management</a>, specify the ARN of the prompt version to use.</p>\n            </li>\n         </ul>\n         <p>The Converse API doesn't support <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported models</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1440,10 +1458,16 @@
                 "additionalModelResponseFieldPaths": {
                     "target": "com.amazonaws.bedrockruntime#AdditionalModelResponseFieldPaths",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional model parameters field paths to return in the\n         response. <code>Converse</code> and <code>ConverseStream</code> return the requested fields as a JSON Pointer object in the\n         <code>additionalModelResponseFields</code> field. The following is example JSON for <code>additionalModelResponseFieldPaths</code>.</p>\n         <p>\n            <code>[\n         \"/stop_sequence\"\n         ]</code>\n         </p>\n         <p>For information about the JSON Pointer syntax, see the\n        <a href=\"https://datatracker.ietf.org/doc/html/rfc6901\">Internet Engineering Task Force (IETF)</a> documentation.</p>\n         <p>\n            <code>Converse</code> and <code>ConverseStream</code> reject an empty JSON Pointer or incorrectly structured\n         JSON Pointer with a <code>400</code> error code. if the JSON Pointer is valid, but the requested\n         field is not in the model response, it is ignored by <code>Converse</code>.</p>",
+                        "smithy.api#documentation": "<p>Additional model parameters field paths to return in the\n         response. <code>Converse</code> and <code>ConverseStream</code> return the requested fields as a JSON Pointer object in the\n         <code>additionalModelResponseFields</code> field. The following is example JSON for <code>additionalModelResponseFieldPaths</code>.</p>\n         <p>\n            <code>[\n         \"/stop_sequence\"\n         ]</code>\n         </p>\n         <p>For information about the JSON Pointer syntax, see the\n         <a href=\"https://datatracker.ietf.org/doc/html/rfc6901\">Internet Engineering Task Force (IETF)</a> documentation.</p>\n         <p>\n            <code>Converse</code> and <code>ConverseStream</code> reject an empty JSON Pointer or incorrectly structured\n         JSON Pointer with a <code>400</code> error code. if the JSON Pointer is valid, but the requested\n         field is not in the model response, it is ignored by <code>Converse</code>.</p>",
                         "smithy.api#length": {
                             "max": 10
                         }
+                    }
+                },
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model performance settings for the request.</p>"
                     }
                 }
             },
@@ -3027,7 +3051,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An internal server error occurred. Retry your request.</p>",
+                "smithy.api#documentation": "<p>An internal server error occurred. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-internal-failure\">InternalFailure</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -3073,7 +3097,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invokes the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. \n         You use model inference to generate text, images, and embeddings.</p>\n         <p>For example code, see <i>Invoke model code examples</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action.</p>",
+                "smithy.api#documentation": "<p>Invokes the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. \n         You use model inference to generate text, images, and embeddings.</p>\n         <p>For example code, see <i>Invoke model code examples</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action.</p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n            <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the Converse API actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n            </p>\n         </important>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>InvokeModel</code> API, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3118,7 +3142,7 @@
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#InvokeModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3143,6 +3167,14 @@
                         "smithy.api#documentation": "<p>The version number for the guardrail. The value can also be <code>DRAFT</code>.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-GuardrailVersion"
                     }
+                },
+                "performanceConfigLatency": {
+                    "target": "com.amazonaws.bedrockruntime#PerformanceConfigLatency",
+                    "traits": {
+                        "smithy.api#default": "standard",
+                        "smithy.api#documentation": "<p>Model performance settings for the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-PerformanceConfig-Latency"
+                    }
                 }
             },
             "traits": {
@@ -3166,6 +3198,13 @@
                         "smithy.api#documentation": "<p>The MIME type of the inference result.</p>",
                         "smithy.api#httpHeader": "Content-Type",
                         "smithy.api#required": {}
+                    }
+                },
+                "performanceConfigLatency": {
+                    "target": "com.amazonaws.bedrockruntime#PerformanceConfigLatency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model performance settings for the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-PerformanceConfig-Latency"
                     }
                 }
             },
@@ -3217,7 +3256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. The response is returned in a stream.</p>\n         <p>To see if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeModelWithResponseStream</code>.</p>\n         </note>\n         <p>For example code, see <i>Invoke model with streaming code\n         example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action. </p>",
+                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. The response is returned in a stream.</p>\n         <p>To see if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeModelWithResponseStream</code>.</p>\n         </note>\n         <p>For example code, see <i>Invoke model with streaming code\n         example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action. </p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n            <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the Converse API actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n            </p>\n         </important>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>InvokeModelWithResponseStream</code> API, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3252,7 +3291,7 @@
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#InvokeModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3277,6 +3316,14 @@
                         "smithy.api#documentation": "<p>The version number for the guardrail. The value can also be <code>DRAFT</code>.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-GuardrailVersion"
                     }
+                },
+                "performanceConfigLatency": {
+                    "target": "com.amazonaws.bedrockruntime#PerformanceConfigLatency",
+                    "traits": {
+                        "smithy.api#default": "standard",
+                        "smithy.api#documentation": "<p>Model performance settings for the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-PerformanceConfig-Latency"
+                    }
                 }
             },
             "traits": {
@@ -3300,6 +3347,13 @@
                         "smithy.api#documentation": "<p>The MIME type of the inference result.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-Content-Type",
                         "smithy.api#required": {}
+                    }
+                },
+                "performanceConfigLatency": {
+                    "target": "com.amazonaws.bedrockruntime#PerformanceConfigLatency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model performance settings for the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-PerformanceConfig-Latency"
                     }
                 }
             },
@@ -3407,7 +3461,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The model specified in the request is not ready to serve inference requests. The AWS SDK\n           will automatically retry the operation up to 5 times. For information about configuring\n           automatic retries, see <a href=\"https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html\">Retry behavior</a> in the <i>AWS SDKs and Tools</i>\n           reference guide.</p>",
+                "smithy.api#documentation": "<p>The model specified in the request is not ready to serve inference requests. The AWS SDK\n         will automatically retry the operation up to 5 times. For information about configuring\n         automatic retries, see <a href=\"https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html\">Retry behavior</a> in the <i>AWS SDKs and Tools</i>\n      reference guide.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {}
@@ -3509,6 +3563,38 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockruntime#PerformanceConfigLatency": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
+                    }
+                },
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "optimized"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#PerformanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "latency": {
+                    "target": "com.amazonaws.bedrockruntime#PerformanceConfigLatency",
+                    "traits": {
+                        "smithy.api#default": "standard",
+                        "smithy.api#documentation": "<p>To use a latency-optimized version of the model, set to <code>optimized</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Performance settings for a model.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#PromptVariableMap": {
             "type": "map",
             "key": {
@@ -3543,7 +3629,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified resource ARN was not found. Check the ARN and try your request again.</p>",
+                "smithy.api#documentation": "<p>The specified resource ARN was not found. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-resource-not-found\">ResourceNotFound</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -3588,7 +3674,10 @@
                     }
                 },
                 "serviceUnavailableException": {
-                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service isn't available. Try again later.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3617,7 +3706,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service isn't currently available. Try again later.</p>",
+                "smithy.api#documentation": "<p>The service isn't currently available. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-service-unavailable\">ServiceUnavailable</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -3727,7 +3816,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your request was throttled because of service-wide limitations. Resubmit your request later or in a different region. You can also purchase <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html\">Provisioned Throughput</a> to increase the rate or number of tokens you can process.</p>",
+                "smithy.api#documentation": "<p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For\n         troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception\">ThrottlingException</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -4076,7 +4165,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input validation failed. Check your request parameters and retry the request.</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error\">ValidationError</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

@@ -17437,6 +17437,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SHA256"
                     }
+                },
+                "CRC64NVME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRC64NVME"
+                    }
                 }
             }
         },
@@ -17455,7 +17461,7 @@
                 "TargetResource": {
                     "target": "com.amazonaws.s3control#S3RegionalOrS3ExpressBucketArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the destination bucket\n         Amazon Resource Name\n         (ARN)\n         for the batch copy operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>General purpose buckets</b> - For example, to copy objects to a general purpose bucket named\n               <code>destinationBucket</code>, set the <code>TargetResource</code> property to\n               <code>arn:aws:s3:::destinationBucket</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Directory buckets</b> - For example, to copy objects to a directory bucket named\n               <code>destinationBucket</code> in the Availability Zone identified by the AZ ID <code>usw2-az1</code>, set the <code>TargetResource</code> property to\n               <code>arn:aws:s3express:<i>region</i>:<i>account_id</i>:/bucket/<i>destination_bucket_base_name</i>--<i>usw2-az1</i>--x-s3</code>. A directory bucket as a destination bucket can be in Availability Zone or Local Zone. </p>\n               <note>\n                  <p>Copying objects across different Amazon Web Services Regions isn't supported when the source or destination bucket is in Amazon Web Services Local Zones. The source and destination buckets must have the same parent Amazon Web Services Region. Otherwise, \n                  you get an HTTP <code>400 Bad Request</code> error with the error code <code>InvalidRequest</code>.</p>\n               </note>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the destination bucket\n         Amazon Resource Name\n         (ARN)\n         for the batch copy operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>General purpose buckets</b> - For example, to copy objects to a general purpose bucket named\n               <code>destinationBucket</code>, set the <code>TargetResource</code> property to\n               <code>arn:aws:s3:::destinationBucket</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Directory buckets</b> - For example, to copy objects to a directory bucket named\n               <code>destinationBucket</code> in the Availability Zone; identified by the AZ ID <code>usw2-az1</code>, set the <code>TargetResource</code> property to\n               <code>arn:aws:s3express:<i>region</i>:<i>account_id</i>:/bucket/<i>destination_bucket_base_name</i>--<i>usw2-az1</i>--x-s3</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CannedAccessControlList": {
