@@ -1,3 +1,25 @@
+# Release (2024-12-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.25.0](service/bedrock/CHANGELOG.md#v1250-2024-12-04)
+  * **Feature**: Introduced two APIs ListPromptRouters and GetPromptRouter for Intelligent Prompt Router feature. Add support for Bedrock Guardrails image content filter. New Bedrock Marketplace feature enabling a wider range of bedrock compatible models with self-hosted capability.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.32.0](service/bedrockagent/CHANGELOG.md#v1320-2024-12-04)
+  * **Feature**: This release introduces the ability to generate SQL using natural language, through a new GenerateQuery API (with native integration into Knowledge Bases); ability to ingest and retrieve images through Bedrock Data Automation; and ability to create a Knowledge Base backed by Kendra GenAI Index.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.30.0](service/bedrockagentruntime/CHANGELOG.md#v1300-2024-12-04)
+  * **Feature**: This release introduces the ability to generate SQL using natural language, through a new GenerateQuery API (with native integration into Knowledge Bases); ability to ingest and retrieve images through Bedrock Data Automation; and ability to create a Knowledge Base backed by Kendra GenAI Index.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.0.0](service/bedrockdataautomation/CHANGELOG.md#v100-2024-12-04)
+  * **Release**: New AWS service client module
+  * **Feature**: Release Bedrock Data Automation SDK
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.0.0](service/bedrockdataautomationruntime/CHANGELOG.md#v100-2024-12-04)
+  * **Release**: New AWS service client module
+  * **Feature**: Release Bedrock Data Automation Runtime SDK
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.23.0](service/bedrockruntime/CHANGELOG.md#v1230-2024-12-04)
+  * **Feature**: Added support for Intelligent Prompt Router in Invoke, InvokeStream, Converse and ConverseStream. Add support for Bedrock Guardrails image content filter. New Bedrock Marketplace feature enabling a wider range of bedrock compatible models with self-hosted capability.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.55.0](service/kendra/CHANGELOG.md#v1550-2024-12-04)
+  * **Feature**: This release adds GenAI Index in Amazon Kendra for Retrieval Augmented Generation (RAG) and intelligent search. With the Kendra GenAI Index, customers get high retrieval accuracy powered by the latest information retrieval technologies and semantic models.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.169.0](service/sagemaker/CHANGELOG.md#v11690-2024-12-04)
+  * **Feature**: Amazon SageMaker HyperPod launched task governance to help customers maximize accelerator utilization for model development and flexible training plans to meet training timelines and budget while reducing weeks of training time. AI apps from AWS partner is now available in SageMaker.
+
 # Release (2024-12-03.2)
 
 ## General Highlights

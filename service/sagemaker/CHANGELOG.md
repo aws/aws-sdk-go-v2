@@ -1,3 +1,7 @@
+# v1.169.0 (2024-12-04)
+
+* **Feature**: Amazon SageMaker HyperPod launched task governance to help customers maximize accelerator utilization for model development and flexible training plans to meet training timelines and budget while reducing weeks of training time. AI apps from AWS partner is now available in SageMaker.
+
 # v1.168.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

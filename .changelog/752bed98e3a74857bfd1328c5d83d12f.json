@@ -1,8 +1,0 @@
-{
-    "id": "752bed98-e3a7-4857-bfd1-328c5d83d12f",
-    "type": "feature",
-    "description": "Added support for Intelligent Prompt Router in Invoke, InvokeStream, Converse and ConverseStream. Add support for Bedrock Guardrails image content filter. New Bedrock Marketplace feature enabling a wider range of bedrock compatible models with self-hosted capability.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

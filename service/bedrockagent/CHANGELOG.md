@@ -1,3 +1,7 @@
+# v1.32.0 (2024-12-04)
+
+* **Feature**: This release introduces the ability to generate SQL using natural language, through a new GenerateQuery API (with native integration into Knowledge Bases); ability to ingest and retrieve images through Bedrock Data Automation; and ability to create a Knowledge Base backed by Kendra GenAI Index.
+
 # v1.31.0 (2024-12-03.2)
 
 * **Feature**: Releasing SDK for Multi-Agent Collaboration.
