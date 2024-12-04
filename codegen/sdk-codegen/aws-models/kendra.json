@@ -1512,7 +1512,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Filters the search results based on document attributes or fields.</p>\n         <p>You can filter results using attributes for your particular documents. The attributes\n         must exist in your index. For example, if your documents include the custom attribute\n         \"Department\", you can filter documents that belong to the \"HR\" department. You would use\n         the <code>EqualsTo</code> operation to filter results or documents with \"Department\" equals\n         to \"HR\".</p>\n         <p>You can use <code>AndAllFilters</code> and <code>AndOrFilters</code> in combination with\n         each other or with other operations such as <code>EqualsTo</code>. For example:</p>\n         <p>\n            <code>AndAllFilters</code>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>EqualsTo</code>: \"Department\", \"HR\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>AndOrFilters</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ContainsAny</code>: \"Project Name\", [\"new hires\", \"new hiring\"]</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>This example filters results or documents that belong to the HR department\n            <i>and</i> belong to projects that contain \"new hires\"\n            <i>or</i> \"new hiring\" in the project name (must use\n            <code>ContainAny</code> with <code>StringListValue</code>). This example is filtering\n         with a depth of 2.</p>\n         <p>You cannot filter more than a depth of 2, otherwise you receive a\n            <code>ValidationException</code> exception with the message \"AttributeFilter cannot have\n         a depth of more than 2.\" Also, if you use more than 10 attribute filters in a given list\n         for <code>AndAllFilters</code> or <code>OrAllFilters</code>, you receive a\n            <code>ValidationException</code> with the message \"AttributeFilter cannot have a length\n         of more than 10\".</p>\n         <p>For examples of using <code>AttributeFilter</code>, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering\">Using document attributes to\n            filter search results</a>.</p>"
+                "smithy.api#documentation": "<p>Filters the search results based on document attributes or fields.</p>\n         <p>You can filter results using attributes for your particular documents. The attributes\n         must exist in your index. For example, if your documents include the custom attribute\n         \"Department\", you can filter documents that belong to the \"HR\" department. You would use\n         the <code>EqualsTo</code> operation to filter results or documents with \"Department\" equals\n         to \"HR\".</p>\n         <p>You can use <code>AndAllFilters</code> and <code>OrAllFilters</code> in combination with\n         each other or with other operations such as <code>EqualsTo</code>. For example:</p>\n         <p>\n            <code>AndAllFilters</code>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>EqualsTo</code>: \"Department\", \"HR\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>OrAllFilters</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ContainsAny</code>: \"Project Name\", [\"new hires\", \"new hiring\"]</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>This example filters results or documents that belong to the HR department\n            <code>AND</code> belong to projects that contain \"new hires\"\n            <code>OR</code> \"new hiring\" in the project name (must use\n            <code>ContainAny</code> with <code>StringListValue</code>). This example is filtering\n         with a depth of 2.</p>\n         <p>You cannot filter more than a depth of 2, otherwise you receive a\n            <code>ValidationException</code> exception with the message \"AttributeFilter cannot have\n         a depth of more than 2.\" Also, if you use more than 10 attribute filters in a given list\n         for <code>AndAllFilters</code> or <code>OrAllFilters</code>, you receive a\n            <code>ValidationException</code> with the message \"AttributeFilter cannot have a length\n         of more than 10\".</p>\n         <p>For examples of using <code>AttributeFilter</code>, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering\">Using document attributes to\n            filter search results</a>.</p>"
             }
         },
         "com.amazonaws.kendra#AttributeFilterList": {
@@ -1644,7 +1644,7 @@
                 "Credentials": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a>\n         </p>\n         <p>You use a secret if basic authentication credentials are required to connect to a\n            website. The secret stores your credentials of user name and password.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret. You create a \n            secret to store your credentials in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a>\n         </p>\n         <p>You use a secret if basic authentication credentials are required to connect to a\n            website. The secret stores your credentials of user name and password.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1743,6 +1743,12 @@
                     "target": "com.amazonaws.kendra#DocumentId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the document that couldn't be removed from the index.</p>"
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the data source connector that the document belongs to. </p>"
                     }
                 },
                 "ErrorCode": {
@@ -1952,6 +1958,12 @@
                         "smithy.api#documentation": "<p>The identifier of the document whose status could not be retrieved.</p>"
                     }
                 },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the data source connector that the failed document belongs to.\n        </p>"
+                    }
+                },
                 "ErrorCode": {
                     "target": "com.amazonaws.kendra#ErrorCode",
                     "traits": {
@@ -2065,6 +2077,12 @@
                     "target": "com.amazonaws.kendra#DocumentId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the document.</p>"
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the data source connector that the failed document belongs to.\n        </p>"
                     }
                 },
                 "ErrorCode": {
@@ -3196,7 +3214,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in Secrets Manager. The\n            credentials should be a user/password pair. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html\">Using a\n                Database Data Source</a>. For more information about Secrets Manager, see\n                <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What\n                Is Secrets Manager</a> in the <i>\n                Secrets Manager\n            </i> user guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that stores \n            the credentials. The credentials should be a user-password pair. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html\">Using a\n                Database Data Source</a>. For more information about Secrets Manager, see \n            <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What\n                Is Secrets Manager</a> in the <i>Secrets Manager</i> \n            user guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3391,7 +3409,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an access configuration for your documents. This includes user and group\n            access information for your documents. This is useful for user context filtering, where\n            search results are filtered based on the user or their group access to documents.</p>\n         <p>You can use this to re-configure your existing document level access control without\n            indexing all of your documents again. For example, your index contains top-secret\n            company documents that only certain employees or users should access. One of these users\n            leaves the company or switches to a team that should be blocked from accessing\n            top-secret documents. The user still has access to top-secret documents because the user\n            had access when your documents were previously indexed. You can create a specific access\n            control configuration for the user with deny access. You can later update the access\n            control configuration to allow access if the user returns to the company and re-joins\n            the 'top-secret' team. You can re-configure access control for your documents as\n            circumstances change.</p>\n         <p>To apply your access control configuration to certain documents, you call the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a> API with the <code>AccessControlConfigurationId</code>\n            included in the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html\">Document</a> object. If you use an S3 bucket as a data source, you update the\n                <code>.metadata.json</code> with the <code>AccessControlConfigurationId</code> and\n            synchronize your data source. Amazon Kendra currently only supports access control\n            configuration for S3 data sources and documents indexed using the\n                <code>BatchPutDocument</code> API.</p>"
+                "smithy.api#documentation": "<p>Creates an access configuration for your documents. This includes user and group\n            access information for your documents. This is useful for user context filtering, where\n            search results are filtered based on the user or their group access to documents.</p>\n         <p>You can use this to re-configure your existing document level access control without\n            indexing all of your documents again. For example, your index contains top-secret\n            company documents that only certain employees or users should access. One of these users\n            leaves the company or switches to a team that should be blocked from accessing\n            top-secret documents. The user still has access to top-secret documents because the user\n            had access when your documents were previously indexed. You can create a specific access\n            control configuration for the user with deny access. You can later update the access\n            control configuration to allow access if the user returns to the company and re-joins\n            the 'top-secret' team. You can re-configure access control for your documents as\n            circumstances change.</p>\n         <p>To apply your access control configuration to certain documents, you call the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a> API with the <code>AccessControlConfigurationId</code>\n            included in the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html\">Document</a> object. If you use an S3 bucket as a data source, you update the\n                <code>.metadata.json</code> with the <code>AccessControlConfigurationId</code> and\n            synchronize your data source. Amazon Kendra currently only supports access control\n            configuration for S3 data sources and documents indexed using the\n                <code>BatchPutDocument</code> API.</p>\n         <important>\n            <p>You can't configure access control using\n                    <code>CreateAccessControlConfiguration</code> for an Amazon Kendra Gen AI Enterprise\n                Edition index. Amazon Kendra will return a <code>ValidationException</code> error for a\n                    <code>Gen_AI_ENTERPRISE_EDITION</code> index.</p>\n         </important>"
             }
         },
         "com.amazonaws.kendra#CreateAccessControlConfigurationRequest": {
@@ -3758,7 +3776,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access \n            the S3 bucket that contains the FAQs. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM access roles for \n                Amazon Kendra</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access \n            the S3 bucket that contains the FAQ file. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM access roles for \n                Amazon Kendra</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3961,13 +3979,13 @@
                 "Edition": {
                     "target": "com.amazonaws.kendra#IndexEdition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code>\n      for indexes intended for development, testing, or proof of concept. Use\n        <code>ENTERPRISE_EDITION</code> for production. Once you set the edition for\n      an index, it can't be changed.</p>\n         <p>The <code>Edition</code> parameter is optional. If you don't supply a value, the default\n      is <code>ENTERPRISE_EDITION</code>.</p>\n         <p>For more information on quota limits for Enterprise and Developer editions, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code>\n      for indexes intended for development, testing, or proof of concept. Use\n        <code>ENTERPRISE_EDITION</code> for production. Use <code>GEN_AI_ENTERPRISE_EDITION</code>\n      for creating generative AI applications. Once you set the edition for an index, it can't be\n      changed. </p>\n         <p>The <code>Edition</code> parameter is optional. If you don't supply a value, the default\n      is <code>ENTERPRISE_EDITION</code>.</p>\n         <p>For more information on quota limits for Gen AI Enterprise Edition, Enterprise Edition, and\n      Developer Edition indices, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access your \n      Amazon CloudWatch logs and metrics. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM access roles for \n      Amazon Kendra</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access\n      your Amazon CloudWatch logs and metrics. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM access roles\n        for Amazon Kendra</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3993,25 +4011,25 @@
                 "Tags": {
                     "target": "com.amazonaws.kendra#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that identify or categorize the index. You can also use tags to \n      help control access to the index. Tag keys and values can consist of Unicode letters, digits, \n      white space, and any of the following symbols: _ . : / = + - @.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs that identify or categorize the index. You can also use tags to\n      help control access to the index. Tag keys and values can consist of Unicode letters, digits,\n      white space, and any of the following symbols: _ . : / = + - @.</p>"
                     }
                 },
                 "UserTokenConfigurations": {
                     "target": "com.amazonaws.kendra#UserTokenConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user token configuration.</p>"
+                        "smithy.api#documentation": "<p>The user token configuration.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index and you try to use\n               <code>UserTokenConfigurations</code> to configure user context policy, Amazon Kendra returns\n            a <code>ValidationException</code> error.</p>\n         </important>"
                     }
                 },
                 "UserContextPolicy": {
                     "target": "com.amazonaws.kendra#UserContextPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user context policy.</p>\n         <dl>\n            <dt>ATTRIBUTE_FILTER</dt>\n            <dd>\n               <p>All indexed content is searchable and displayable for all users. If you want to\n                  filter search results on user context, you can use the attribute filters of\n                     <code>_user_id</code> and <code>_group_ids</code> or you can provide user and\n                  group information in <code>UserContext</code>. </p>\n            </dd>\n            <dt>USER_TOKEN</dt>\n            <dd>\n               <p>Enables token-based user access control to filter search results on user\n                  context. All documents with no access control and all documents accessible to the\n                  user will be searchable and displayable. </p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The user context policy.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index, you can only use\n               <code>ATTRIBUTE_FILTER</code> to filter search results by user context. If you're\n            using an Amazon Kendra Gen AI Enterprise Edition index and you try to use\n               <code>USER_TOKEN</code> to configure user context policy, Amazon Kendra returns a\n               <code>ValidationException</code> error.</p>\n         </important>\n         <dl>\n            <dt>ATTRIBUTE_FILTER</dt>\n            <dd>\n               <p>All indexed content is searchable and displayable for all users. If you want to\n                  filter search results on user context, you can use the attribute filters of\n                     <code>_user_id</code> and <code>_group_ids</code> or you can provide user and\n                  group information in <code>UserContext</code>. </p>\n            </dd>\n            <dt>USER_TOKEN</dt>\n            <dd>\n               <p>Enables token-based user access control to filter search results on user\n                  context. All documents with no access control and all documents accessible to the\n                  user will be searchable and displayable. </p>\n            </dd>\n         </dl>"
                     }
                 },
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets users and groups from IAM Identity Center \n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>. This is useful for user context filtering, where\n         search results are filtered based on the user or their group access to documents.</p>"
+                        "smithy.api#documentation": "<p>Gets users and groups from IAM Identity Center identity source. To configure this,\n         see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>. This is useful for user context filtering,\n         where search results are filtered based on the user or their group access to\n         documents.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index,\n               <code>UserGroupResolutionConfiguration</code> isn't supported.</p>\n         </important>"
                     }
                 }
             },
@@ -4265,7 +4283,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to run\n                <code>PreExtractionHookConfiguration</code> and\n                <code>PostExtractionHookConfiguration</code> for altering document metadata and\n            content during the document ingestion process. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for Amazon Kendra</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to run\n                <code>PreExtractionHookConfiguration</code> and\n                <code>PostExtractionHookConfiguration</code> for altering document metadata and\n            content during the document ingestion process. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">an IAM roles for Amazon Kendra</a>.</p>"
                     }
                 }
             },
@@ -5252,7 +5270,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes an FAQ from an index.</p>"
+                "smithy.api#documentation": "<p>Removes a FAQ from an index.</p>"
             }
         },
         "com.amazonaws.kendra#DeleteFaqRequest": {
@@ -5306,7 +5324,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Kendra index. An exception is not thrown if the index is\n      already being deleted. While the index is being deleted, the <code>Status</code> field\n      returned by a call to the <code>DescribeIndex</code> API is set to\n      <code>DELETING</code>.</p>"
+                "smithy.api#documentation": "<p>Deletes an Amazon Kendra index. An exception is not thrown if the index is already\n      being deleted. While the index is being deleted, the <code>Status</code> field returned by a\n      call to the <code>DescribeIndex</code> API is set to <code>DELETING</code>.</p>"
             }
         },
         "com.amazonaws.kendra#DeleteIndexRequest": {
@@ -5353,7 +5371,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a group so that all users and sub groups that belong to the group can no\n            longer access documents only available to that group.</p>\n         <p>For example, after deleting the group \"Summer Interns\", all interns who belonged to\n            that group no longer see intern-only documents in their search results.</p>\n         <p>If you want to delete or replace users or sub groups of a group, you need to use the\n                <code>PutPrincipalMapping</code> operation. For example, if a user in the group\n            \"Engineering\" leaves the engineering team and another user takes their place, you\n            provide an updated list of users or sub groups that belong to the \"Engineering\" group\n            when calling <code>PutPrincipalMapping</code>. You can update your internal list of\n            users or sub groups and input this list when calling\n            <code>PutPrincipalMapping</code>.</p>\n         <p>\n            <code>DeletePrincipalMapping</code> is currently not supported in the Amazon Web Services GovCloud (US-West) region.</p>"
+                "smithy.api#documentation": "<p>Deletes a group so that all users that belong to the group can no\n            longer access documents only available to that group.</p>\n         <p>For example, after deleting the group \"Summer Interns\", all interns who belonged to\n            that group no longer see intern-only documents in their search results.</p>\n         <p>If you want to delete or replace users or sub groups of a group, you need to use the\n                <code>PutPrincipalMapping</code> operation. For example, if a user in the group\n            \"Engineering\" leaves the engineering team and another user takes their place, you\n            provide an updated list of users or sub groups that belong to the \"Engineering\" group\n            when calling <code>PutPrincipalMapping</code>. You can update your internal list of\n            users or sub groups and input this list when calling\n            <code>PutPrincipalMapping</code>.</p>\n         <p>\n            <code>DeletePrincipalMapping</code> is currently not supported in the Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#DeletePrincipalMappingRequest": {
@@ -5711,7 +5729,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role with permission to access the data source and\n      required resources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permission to \n      access the data source and required resources.</p>"
                     }
                 },
                 "ErrorMessage": {
@@ -5848,7 +5866,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows the Amazon Resource Name (ARN) of a role with permission to access \n            <code>Query</code> API, <code>QuerySuggestions</code> API, \n            <code>SubmitFeedback</code> API, and IAM Identity Center that stores \n            your user and group information.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permission to access \n            the <code>Query</code> API, <code>QuerySuggestions</code> API, \n            <code>SubmitFeedback</code> API, and IAM Identity Center that stores \n            your users and groups information.</p>"
                     }
                 },
                 "ErrorMessage": {
@@ -5888,7 +5906,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about an FAQ list.</p>"
+                "smithy.api#documentation": "<p>Gets information about a FAQ.</p>"
             }
         },
         "com.amazonaws.kendra#DescribeFaqRequest": {
@@ -5964,7 +5982,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that provides access to the S3 bucket\n            containing the input files for the FAQ.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides access \n            to the S3 bucket containing the FAQ file.</p>"
                     }
                 },
                 "ErrorMessage": {
@@ -5976,7 +5994,7 @@
                 "FileFormat": {
                     "target": "com.amazonaws.kendra#FaqFileFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file format used by the input files for the FAQ.</p>"
+                        "smithy.api#documentation": "<p>The file format used for the FAQ file.</p>"
                     }
                 },
                 "LanguageCode": {
@@ -6171,7 +6189,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that gives \n      Amazon Kendra permission to write to your Amazon CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra permission to write to your Amazon CloudWatch logs.</p>"
                     }
                 },
                 "ServerSideEncryptionConfiguration": {
@@ -6243,7 +6261,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you have enabled IAM Identity Center identity source for your \n         users and groups. This is useful for user context filtering, where\n         search results are filtered based on the user or their group access to documents.</p>"
+                        "smithy.api#documentation": "<p>Whether you have enabled IAM Identity Center identity source for your users and\n         groups. This is useful for user context filtering, where search results are filtered based\n         on the user or their group access to documents.</p>"
                     }
                 }
             },
@@ -8047,13 +8065,13 @@
                     "target": "com.amazonaws.kendra#IndexedQuestionAnswersCount",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The total number of FAQ questions and answers contained in the index.</p>",
+                        "smithy.api#documentation": "<p>The total number of FAQ questions and answers for an index.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides statistical information about the FAQ questions and answers contained in an\n            index.</p>"
+                "smithy.api#documentation": "<p>Provides statistical information about the FAQ questions and answers for an\n            index.</p>"
             }
         },
         "com.amazonaws.kendra#FaqStatus": {
@@ -9036,7 +9054,7 @@
                 "MemberGroups": {
                     "target": "com.amazonaws.kendra#MemberGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of sub groups that belong to a group. For example, the sub groups \"Research\",\n            \"Engineering\", and \"Sales and Marketing\" all belong to the group \"Company\".</p>"
+                        "smithy.api#documentation": "<p>A list of users that belong to a group. This can also include sub groups. For example, \n            the sub groups \"Research\", \"Engineering\", and \"Sales and Marketing\" all belong to the group \n            \"Company A\".</p>"
                     }
                 },
                 "MemberUsers": {
@@ -9053,7 +9071,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of users or sub groups that belong to a group. This is useful for user context\n            filtering, where search results are filtered based on the user or their group access to\n            documents.</p>"
+                "smithy.api#documentation": "<p>A list of users that belong to a group. This is useful for user context\n            filtering, where search results are filtered based on the user or their group access to\n            documents.</p>"
             }
         },
         "com.amazonaws.kendra#GroupOrderingIdSummaries": {
@@ -9236,7 +9254,7 @@
                 "LambdaArn": {
                     "target": "com.amazonaws.kendra#LambdaArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to run a Lambda function\n            during ingestion. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for Amazon Kendra</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to run a Lambda function\n            during ingestion. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">an IAM roles for Amazon Kendra</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9347,6 +9365,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ENTERPRISE_EDITION"
+                    }
+                },
+                "GEN_AI_ENTERPRISE_EDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GEN_AI_ENTERPRISE_EDITION"
                     }
                 }
             }
@@ -10411,7 +10435,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of FAQ lists associated with an index.</p>",
+                "smithy.api#documentation": "<p>Gets a list of FAQs associated with an index.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -10425,7 +10449,7 @@
                 "IndexId": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The index that contains the FAQ lists.</p>",
+                        "smithy.api#documentation": "<p>The index for the FAQs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10458,7 +10482,7 @@
                 "FaqSummaryItems": {
                     "target": "com.amazonaws.kendra#FaqSummaryItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>information about the FAQs associated with the specified index.</p>"
+                        "smithy.api#documentation": "<p>Summary information about the FAQs for a specified index.</p>"
                     }
                 }
             },
@@ -10823,7 +10847,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of tags associated with a specified resource. Indexes, FAQs, and data sources\n      can have tags associated with them.</p>"
+                "smithy.api#documentation": "<p>Gets a list of tags associated with a resource. Indexes, FAQs, data sources, and \n      other resources can have tags associated with them.</p>"
             }
         },
         "com.amazonaws.kendra#ListTagsForResourceRequest": {
@@ -10832,7 +10856,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.kendra#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the index, FAQ, or data source to get a list of tags\n      for.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to \n      get a list of tags for. For example, the ARN of an index is constructed as follows: \n      <i>arn:aws:kendra:your-region:your-account-id:index/index-id</i> \n      For information on how to construct an ARN for all types of Amazon Kendra resources, see \n      <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies\">Resource \n        types</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10847,7 +10871,7 @@
                 "Tags": {
                     "target": "com.amazonaws.kendra#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags associated with the index, FAQ, or data source.</p>"
+                        "smithy.api#documentation": "<p>A list of tags associated with the index, FAQ, data source, or other resource.</p>"
                     }
                 }
             },
@@ -11383,7 +11407,7 @@
                 "OneDriveUserList": {
                     "target": "com.amazonaws.kendra#OneDriveUserList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of users whose documents should be indexed. Specify the user names in email\n            format, for example, <code>username@tenantdomain</code>. If you need to index the\n            documents of more than 100 users, use the <code>OneDriveUserS3Path</code> field to\n            specify the location of a file containing a list of users.</p>"
+                        "smithy.api#documentation": "<p>A list of users whose documents should be indexed. Specify the user names in email\n            format, for example, <code>username@tenantdomain</code>. If you need to index the\n            documents of more than 10 users, use the <code>OneDriveUserS3Path</code> field to\n            specify the location of a file containing a list of users.</p>"
                     }
                 },
                 "OneDriveUserS3Path": {
@@ -11642,7 +11666,7 @@
                 "Credentials": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a>\n         </p>\n         <p>The credentials are optional. You use a secret if web proxy credentials are required\n            to connect to a website host. Amazon Kendra currently support basic authentication\n            to connect to a web proxy server. The secret stores your credentials.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret. You create a \n            secret to store your credentials in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a>\n         </p>\n         <p>The credentials are optional. You use a secret if web proxy credentials are required\n            to connect to a website host. Amazon Kendra currently support basic authentication\n            to connect to a web proxy server. The secret stores your credentials.</p>"
                     }
                 }
             },
@@ -11717,20 +11741,20 @@
                 "GroupMembers": {
                     "target": "com.amazonaws.kendra#GroupMembers",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list that contains your users or sub groups that belong the same group.</p>\n         <p>For example, the group \"Company\" includes the user \"CEO\" and the sub groups\n            \"Research\", \"Engineering\", and \"Sales and Marketing\".</p>\n         <p>If you have more than 1000 users and/or sub groups for a single group, you need to\n            provide the path to the S3 file that lists your users and sub groups for a group. Your\n            sub groups can contain more than 1000 users, but the list of sub groups that belong to a\n            group (and/or users) must be no more than 1000.</p>",
+                        "smithy.api#documentation": "<p>The list that contains your users that belong the same group. This can include sub groups \n            that belong to a group.</p>\n         <p>For example, the group \"Company A\" includes the user \"CEO\" and the sub groups\n            \"Research\", \"Engineering\", and \"Sales and Marketing\".</p>\n         <p>If you have more than 1000 users and/or sub groups for a single group, you need to\n            provide the path to the S3 file that lists your users and sub groups for a group. Your\n            sub groups can contain more than 1000 users, but the list of sub groups that belong to a\n            group (and/or users) must be no more than 1000.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OrderingId": {
                     "target": "com.amazonaws.kendra#PrincipalOrderingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp identifier you specify to ensure Amazon Kendra does not override\n            the latest <code>PUT</code> action with previous actions. The highest number ID, which\n            is the ordering ID, is the latest action you want to process and apply on top of other\n            actions with lower number IDs. This prevents previous actions with lower number IDs from\n            possibly overriding the latest action.</p>\n         <p>The ordering ID can be the Unix time of the last update you made to a group members\n            list. You would then provide this list when calling <code>PutPrincipalMapping</code>.\n            This ensures your <code>PUT</code> action for that updated group with the latest members\n            list doesn't get overwritten by earlier <code>PUT</code> actions for the same group\n            which are yet to be processed.</p>\n         <p>The default ordering ID is the current Unix time in milliseconds that the action was\n            received by Amazon Kendra.</p>"
+                        "smithy.api#documentation": "<p>The timestamp identifier you specify to ensure Amazon Kendra doesn't override\n            the latest <code>PUT</code> action with previous actions. The highest number ID, which\n            is the ordering ID, is the latest action you want to process and apply on top of other\n            actions with lower number IDs. This prevents previous actions with lower number IDs from\n            possibly overriding the latest action.</p>\n         <p>The ordering ID can be the Unix time of the last update you made to a group members\n            list. You would then provide this list when calling <code>PutPrincipalMapping</code>.\n            This ensures your <code>PUT</code> action for that updated group with the latest members\n            list doesn't get overwritten by earlier <code>PUT</code> actions for the same group\n            which are yet to be processed.</p>\n         <p>The default ordering ID is the current Unix time in milliseconds that the action was\n            received by Amazon Kendra.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role that has access to the S3 file that contains\n            your list of users or sub groups that belong to a group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds\">IAM roles for Amazon Kendra</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that has access to the \n            S3 file that contains your list of users that belong to a group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds\">IAM roles for \n            Amazon Kendra</a>.</p>"
                     }
                 }
             },
@@ -11770,7 +11794,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches an index given an input query.</p>\n         <note>\n            <p>If you are working with large language models (LLMs) or implementing retrieval\n            augmented generation (RAG) systems, you can use Amazon Kendra's <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html\">Retrieve</a> API, which can return longer semantically relevant passages. We\n            recommend using the <code>Retrieve</code> API instead of filing a service limit increase\n            to increase the <code>Query</code> API document excerpt length.</p>\n         </note>\n         <p>You can configure boosting or relevance tuning at the query level to override boosting\n         at the index level, filter based on document fields/attributes and faceted search, and\n         filter based on the user or their group access to documents. You can also include certain\n         fields in the response that might provide useful additional information.</p>\n         <p>A query response contains three types of results.</p>\n         <ul>\n            <li>\n               <p>Relevant suggested answers. The answers can be either a text excerpt or table\n               excerpt. The answer can be highlighted in the excerpt.</p>\n            </li>\n            <li>\n               <p>Matching FAQs or questions-answer from your FAQ file.</p>\n            </li>\n            <li>\n               <p>Relevant documents. This result type includes an excerpt of the document with the\n               document title. The searched terms can be highlighted in the excerpt.</p>\n            </li>\n         </ul>\n         <p>You can specify that the query return only one type of result using the\n            <code>QueryResultTypeFilter</code> parameter. Each query returns the 100 most relevant\n         results. If you filter result type to only question-answers, a maximum of four results are\n         returned. If you filter result type to only answers, a maximum of three results are\n         returned.</p>"
+                "smithy.api#documentation": "<p>Searches an index given an input query.</p>\n         <note>\n            <p>If you are working with large language models (LLMs) or implementing retrieval\n            augmented generation (RAG) systems, you can use Amazon Kendra's <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html\">Retrieve</a> API, which can return longer semantically relevant passages. We\n            recommend using the <code>Retrieve</code> API instead of filing a service limit increase\n            to increase the <code>Query</code> API document excerpt length.</p>\n         </note>\n         <p>You can configure boosting or relevance tuning at the query level to override boosting\n         at the index level, filter based on document fields/attributes and faceted search, and\n         filter based on the user or their group access to documents. You can also include certain\n         fields in the response that might provide useful additional information.</p>\n         <p>A query response contains three types of results.</p>\n         <ul>\n            <li>\n               <p>Relevant suggested answers. The answers can be either a text excerpt or table\n               excerpt. The answer can be highlighted in the excerpt.</p>\n            </li>\n            <li>\n               <p>Matching FAQs or questions-answer from your FAQ file.</p>\n            </li>\n            <li>\n               <p>Relevant documents. This result type includes an excerpt of the document with the\n               document title. The searched terms can be highlighted in the excerpt.</p>\n            </li>\n         </ul>\n         <p>You can specify that the query return only one type of result using the\n            <code>QueryResultTypeFilter</code> parameter. Each query returns the 100 most relevant\n         results. If you filter result type to only question-answers, a maximum of four results are\n         returned. If you filter result type to only answers, a maximum of three results are\n         returned.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index, you can only use\n               <code>ATTRIBUTE_FILTER</code> to filter search results by user context. If you're\n            using an Amazon Kendra Gen AI Enterprise Edition index and you try to use\n               <code>USER_TOKEN</code> to configure user context policy, Amazon Kendra returns a\n               <code>ValidationException</code> error.</p>\n         </important>"
             }
         },
         "com.amazonaws.kendra#QueryCapacityUnit": {
@@ -11827,7 +11851,7 @@
                 "AttributeFilter": {
                     "target": "com.amazonaws.kendra#AttributeFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters search results by document fields/attributes. You can only provide one attribute\n         filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, and\n            <code>OrAllFilters</code> parameters contain a list of other filters.</p>\n         <p>The <code>AttributeFilter</code> parameter means you can create a set of filtering rules\n         that a document must satisfy to be included in the query results.</p>"
+                        "smithy.api#documentation": "<p>Filters search results by document fields/attributes. You can only provide one attribute\n         filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, and\n            <code>OrAllFilters</code> parameters contain a list of other filters.</p>\n         <p>The <code>AttributeFilter</code> parameter means you can create a set of filtering rules\n         that a document must satisfy to be included in the query results.</p>\n         <note>\n            <p>For Amazon Kendra Gen AI Enterprise Edition indices use <code>AttributeFilter</code> to\n            enable document filtering for end users using <code>_email_id</code> or include public\n            documents (<code>_email_id=null</code>).</p>\n         </note>"
                     }
                 },
                 "Facets": {
@@ -12535,7 +12559,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves relevant passages or text excerpts given an input query.</p>\n         <p>This API is similar to the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html\">Query</a> API. However, by\n            default, the <code>Query</code> API only returns excerpt passages of up to 100 token\n            words. With the <code>Retrieve</code> API, you can retrieve longer passages of up to 200\n            token words and up to 100 semantically relevant passages. This doesn't include\n            question-answer or FAQ type responses from your index. The passages are text excerpts\n            that can be semantically extracted from multiple documents and multiple parts of the\n            same document. If in extreme cases your documents produce zero passages using the\n                <code>Retrieve</code> API, you can alternatively use the <code>Query</code> API and\n            its types of responses.</p>\n         <p>You can also do the following:</p>\n         <ul>\n            <li>\n               <p>Override boosting at the index level</p>\n            </li>\n            <li>\n               <p>Filter based on document fields or attributes</p>\n            </li>\n            <li>\n               <p>Filter based on the user or their group access to documents</p>\n            </li>\n            <li>\n               <p>View the confidence score bucket for a retrieved passage result. The\n                    confidence bucket provides a relative ranking that indicates how confident\n                        Amazon Kendra is that the response is relevant to the query.</p>\n               <note>\n                  <p>Confidence score buckets are currently available only for English.</p>\n               </note>\n            </li>\n         </ul>\n         <p>You can also include certain fields in the response that might provide useful\n            additional information.</p>\n         <p>The <code>Retrieve</code> API shares the number of <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_CapacityUnitsConfiguration.html\">query capacity\n                units</a> that you set for your index. For more information on what's included\n            in a single capacity unit and the default base capacity for an index, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html\">Adjusting\n                capacity</a>.</p>"
+                "smithy.api#documentation": "<p>Retrieves relevant passages or text excerpts given an input query.</p>\n         <p>This API is similar to the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html\">Query</a> API. However, by\n            default, the <code>Query</code> API only returns excerpt passages of up to 100 token\n            words. With the <code>Retrieve</code> API, you can retrieve longer passages of up to 200\n            token words and up to 100 semantically relevant passages. This doesn't include\n            question-answer or FAQ type responses from your index. The passages are text excerpts\n            that can be semantically extracted from multiple documents and multiple parts of the\n            same document. If in extreme cases your documents produce zero passages using the\n                <code>Retrieve</code> API, you can alternatively use the <code>Query</code> API and\n            its types of responses.</p>\n         <p>You can also do the following:</p>\n         <ul>\n            <li>\n               <p>Override boosting at the index level</p>\n            </li>\n            <li>\n               <p>Filter based on document fields or attributes</p>\n            </li>\n            <li>\n               <p>Filter based on the user or their group access to documents</p>\n            </li>\n            <li>\n               <p>View the confidence score bucket for a retrieved passage result. The\n                    confidence bucket provides a relative ranking that indicates how confident\n                        Amazon Kendra is that the response is relevant to the query.</p>\n               <note>\n                  <p>Confidence score buckets are currently available only for English.</p>\n               </note>\n            </li>\n         </ul>\n         <p>You can also include certain fields in the response that might provide useful\n            additional information.</p>\n         <p>The <code>Retrieve</code> API shares the number of <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_CapacityUnitsConfiguration.html\">query capacity\n                units</a> that you set for your index. For more information on what's included\n            in a single capacity unit and the default base capacity for an index, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html\">Adjusting\n                capacity</a>.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index, you can only use\n                    <code>ATTRIBUTE_FILTER</code> to filter search results by user context. If\n                you're using an Amazon Kendra Gen AI Enterprise Edition index and you try to use\n                    <code>USER_TOKEN</code> to configure user context policy, Amazon Kendra returns a\n                    <code>ValidationException</code> error.</p>\n         </important>"
             }
         },
         "com.amazonaws.kendra#RetrieveRequest": {
@@ -12558,7 +12582,7 @@
                 "AttributeFilter": {
                     "target": "com.amazonaws.kendra#AttributeFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters search results by document fields/attributes. You can only provide one\n            attribute filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, and\n                <code>OrAllFilters</code> parameters contain a list of other filters.</p>\n         <p>The <code>AttributeFilter</code> parameter means you can create a set of filtering\n            rules that a document must satisfy to be included in the query results.</p>"
+                        "smithy.api#documentation": "<p>Filters search results by document fields/attributes. You can only provide one\n            attribute filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, and\n                <code>OrAllFilters</code> parameters contain a list of other filters.</p>\n         <p>The <code>AttributeFilter</code> parameter means you can create a set of filtering\n            rules that a document must satisfy to be included in the query results.</p>\n         <note>\n            <p>For Amazon Kendra Gen AI Enterprise Edition indices use <code>AttributeFilter</code> to\n                enable document filtering for end users using <code>_email_id</code> or include\n                public documents (<code>_email_id=null</code>).</p>\n         </note>"
                     }
                 },
                 "RequestedDocumentAttributes": {
@@ -14661,7 +14685,7 @@
                 "Key": {
                     "target": "com.amazonaws.kendra#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key for the tag. Keys are not case sensitive and must be unique for the index, FAQ, or\n      data source.</p>",
+                        "smithy.api#documentation": "<p>The key for the tag. Keys are not case sensitive and must be unique for the index, FAQ, \n      data source, or other resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14674,7 +14698,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of key/value pairs that identify an index, FAQ, or data source. Tag keys and values\n      can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : /\n      = + - @.</p>"
+                "smithy.api#documentation": "<p>A key-value pair that identifies or categorizes an index, FAQ, \n      data source, or other resource. TA tag key and value can consist of Unicode letters, \n      digits, white space, and any of the following symbols: _ . : / = + - @.</p>"
             }
         },
         "com.amazonaws.kendra#TagKey": {
@@ -14736,7 +14760,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tag to the specified index, FAQ, or data source resource. If the tag\n      already exists, the existing value is replaced with the new value.</p>"
+                "smithy.api#documentation": "<p>Adds the specified tag to the specified index, FAQ, data source, or other resource. If \n      the tag already exists, the existing value is replaced with the new value.</p>"
             }
         },
         "com.amazonaws.kendra#TagResourceRequest": {
@@ -14745,14 +14769,14 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.kendra#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the index, FAQ, or data source to tag.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to add a tag. \n      For example, the ARN of an index is constructed as follows: \n      <i>arn:aws:kendra:your-region:your-account-id:index/index-id</i>  \n      For information on how to construct an ARN for all types of Amazon Kendra resources, see \n      <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies\">Resource \n        types</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.kendra#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tag keys to add to the index, FAQ, or data source. If a tag already exists, the\n      existing value is replaced with the new value.</p>",
+                        "smithy.api#documentation": "<p>A list of tag keys to add to the index, FAQ, data source, or other resource. If a tag already \n      exists, the existing value is replaced with the new value.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -15068,7 +15092,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a tag from an index, FAQ, or a data source.</p>"
+                "smithy.api#documentation": "<p>Removes a tag from an index, FAQ, data source, or other resource.</p>"
             }
         },
         "com.amazonaws.kendra#UntagResourceRequest": {
@@ -15077,14 +15101,14 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.kendra#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag\n      from.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to remove a tag. \n      For example, the ARN of an index is constructed as follows: \n      <i>arn:aws:kendra:your-region:your-account-id:index/index-id</i> \n      For information on how to construct an ARN for all types of Amazon Kendra resources, see \n      <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies\">Resource \n        types</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TagKeys": {
                     "target": "com.amazonaws.kendra#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tag keys to remove from the index, FAQ, or data source. If a tag key does not\n      exist on the resource, it is ignored.</p>",
+                        "smithy.api#documentation": "<p>A list of tag keys to remove from the index, FAQ, data source, or other resource. If a tag \n      key doesn't exist for the resource, it is ignored.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -15132,7 +15156,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an access control configuration for your documents in an index. This includes\n            user and group access information for your documents. This is useful for user context\n            filtering, where search results are filtered based on the user or their group access to\n            documents.</p>\n         <p>You can update an access control configuration you created without indexing all of\n            your documents again. For example, your index contains top-secret company documents that\n            only certain employees or users should access. You created an 'allow' access control\n            configuration for one user who recently joined the 'top-secret' team, switching from a\n            team with 'deny' access to top-secret documents. However, the user suddenly returns to\n            their previous team and should no longer have access to top secret documents. You can\n            update the access control configuration to re-configure access control for your\n            documents as circumstances change.</p>\n         <p>You call the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a> API to\n            apply the updated access control configuration, with the\n                <code>AccessControlConfigurationId</code> included in the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html\">Document</a>\n            object. If you use an S3 bucket as a data source, you synchronize your data source to\n            apply the <code>AccessControlConfigurationId</code> in the <code>.metadata.json</code>\n            file. Amazon Kendra currently only supports access control configuration for S3\n            data sources and documents indexed using the <code>BatchPutDocument</code> API.</p>"
+                "smithy.api#documentation": "<p>Updates an access control configuration for your documents in an index. This includes\n            user and group access information for your documents. This is useful for user context\n            filtering, where search results are filtered based on the user or their group access to\n            documents.</p>\n         <p>You can update an access control configuration you created without indexing all of\n            your documents again. For example, your index contains top-secret company documents that\n            only certain employees or users should access. You created an 'allow' access control\n            configuration for one user who recently joined the 'top-secret' team, switching from a\n            team with 'deny' access to top-secret documents. However, the user suddenly returns to\n            their previous team and should no longer have access to top secret documents. You can\n            update the access control configuration to re-configure access control for your\n            documents as circumstances change.</p>\n         <p>You call the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a> API to\n            apply the updated access control configuration, with the\n                <code>AccessControlConfigurationId</code> included in the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html\">Document</a>\n            object. If you use an S3 bucket as a data source, you synchronize your data source to\n            apply the <code>AccessControlConfigurationId</code> in the <code>.metadata.json</code>\n            file. Amazon Kendra currently only supports access control configuration for S3\n            data sources and documents indexed using the <code>BatchPutDocument</code> API.</p>\n         <important>\n            <p>You can't configure access control using\n                    <code>CreateAccessControlConfiguration</code> for an Amazon Kendra Gen AI Enterprise\n                Edition index. Amazon Kendra will return a <code>ValidationException</code> error for a\n                    <code>Gen_AI_ENTERPRISE_EDITION</code> index.</p>\n         </important>"
             }
         },
         "com.amazonaws.kendra#UpdateAccessControlConfigurationRequest": {
@@ -15270,7 +15294,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access the data source and\n      required resources. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for Amazon Kendra</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access \n      the data source and required resources. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for Amazon Kendra</a>.</p>"
                     }
                 },
                 "LanguageCode": {
@@ -15348,7 +15372,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access <code>Query</code>\n            API, <code>QuerySuggestions</code> API, <code>SubmitFeedback</code>\n            API, and IAM Identity Center that stores your user and group information. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for Amazon Kendra</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access \n            the <code>Query</code> API, <code>QuerySuggestions</code> API, <code>SubmitFeedback</code>\n            API, and IAM Identity Center that stores your users and groups information. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for Amazon Kendra</a>.</p>"
                     }
                 },
                 "Configuration": {
@@ -15544,19 +15568,19 @@
                 "UserTokenConfigurations": {
                     "target": "com.amazonaws.kendra#UserTokenConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user token configuration.</p>"
+                        "smithy.api#documentation": "<p>The user token configuration.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index and you try to use\n               <code>UserTokenConfigurations</code> to configure user context policy, Amazon Kendra returns\n            a <code>ValidationException</code> error.</p>\n         </important>"
                     }
                 },
                 "UserContextPolicy": {
                     "target": "com.amazonaws.kendra#UserContextPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user context policy.</p>"
+                        "smithy.api#documentation": "<p>The user context policy.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index, you can only use\n               <code>ATTRIBUTE_FILTER</code> to filter search results by user context. If you're\n            using an Amazon Kendra Gen AI Enterprise Edition index and you try to use\n               <code>USER_TOKEN</code> to configure user context policy, Amazon Kendra returns a\n               <code>ValidationException</code> error.</p>\n         </important>"
                     }
                 },
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets users and groups from IAM Identity Center\n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>. This is useful for user context filtering, where\n         search results are filtered based on the user or their group access to documents.</p>"
+                        "smithy.api#documentation": "<p>Gets users and groups from IAM Identity Center identity source. To configure this,\n         see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>. This is useful for user context filtering,\n         where search results are filtered based on the user or their group access to\n         documents.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index,\n               <code>UserGroupResolutionConfiguration</code> isn't supported.</p>\n         </important>"
                     }
                 }
             },
@@ -15869,7 +15893,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the user context for an Amazon Kendra index.</p>\n         <p>User context filtering is a kind of personalized search with the benefit of controlling\n         access to documents. For example, not all teams that search the company portal for\n         information should access top-secret company documents, nor are these documents relevant to\n         all users. Only specific users or groups of teams given access to top-secret documents\n         should see these documents in their search results.</p>\n         <p>You provide one of the following:</p>\n         <ul>\n            <li>\n               <p>User token</p>\n            </li>\n            <li>\n               <p>User ID, the groups the user belongs to, and any data sources the groups can\n               access.</p>\n            </li>\n         </ul>\n         <p>If you provide both, an exception is thrown.</p>"
+                "smithy.api#documentation": "<p>Provides information about the user context for an Amazon Kendra index.</p>\n         <p>User context filtering is a kind of personalized search with the benefit of controlling\n         access to documents. For example, not all teams that search the company portal for\n         information should access top-secret company documents, nor are these documents relevant to\n         all users. Only specific users or groups of teams given access to top-secret documents\n         should see these documents in their search results.</p>\n         <p>You provide one of the following:</p>\n         <ul>\n            <li>\n               <p>User token</p>\n            </li>\n            <li>\n               <p>User ID, the groups the user belongs to, and any data sources the groups can\n               access.</p>\n            </li>\n         </ul>\n         <p>If you provide both, an exception is thrown.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index, you can use\n               <code>UserId</code>, <code>Groups</code>, and <code>DataSourceGroups</code> to filter\n            content. If you set the <code>UserId</code> to a particular user ID, it also includes\n            all public documents.</p>\n            <p>Amazon Kendra Gen AI Enterprise Edition indices don't support token based document filtering.\n            If you're using an Amazon Kendra Gen AI Enterprise Edition index, Amazon Kendra returns a\n               <code>ValidationException</code> error if the <code>Token</code> field has a non-null\n            value.</p>\n         </important>"
             }
         },
         "com.amazonaws.kendra#UserContextPolicy": {
@@ -15895,13 +15919,13 @@
                 "UserGroupResolutionMode": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity store provider (mode) you want to use to get users and groups. \n         IAM Identity Center is currently the only available mode. Your users and groups\n         must exist in an IAM Identity Center identity source in order to use this mode.</p>",
+                        "smithy.api#documentation": "<p>The identity store provider (mode) you want to use to get users and groups. IAM Identity Center is currently the only available mode. Your users and groups must exist in\n         an IAM Identity Center identity source in order to use this mode.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information to get users and groups from\n         an IAM Identity Center identity source. This is useful for user context filtering, where\n         search results are filtered based on the user or their group access to documents. You can\n         also use the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping</a> API to\n         map users to their groups so that you only need to provide the user ID when you issue the\n         query.</p>\n         <p>To set up an IAM Identity Center identity source in the console to use with Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started with an IAM Identity Center identity source</a>. You must also grant the required permissions to\n         use IAM Identity Center with Amazon Kendra. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for IAM Identity Center</a>.</p>\n         <p>Amazon Kendra currently does not support using\n            <code>UserGroupResolutionConfiguration</code> with an Amazon Web Services organization\n         member account for your IAM Identity Center identify source. You must create your index in\n         the management account for the organization in order to use\n            <code>UserGroupResolutionConfiguration</code>.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to get users and groups from an IAM Identity Center identity source. This is useful for user context filtering, where search\n         results are filtered based on the user or their group access to documents. You can also use\n         the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping</a> API to map users to their groups so that you only need to\n         provide the user ID when you issue the query.</p>\n         <p>To set up an IAM Identity Center identity source in the console to use with Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started with an IAM Identity Center identity source</a>. You must also grant the required permissions to\n         use IAM Identity Center with Amazon Kendra. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for IAM Identity Center</a>.</p>\n         <p>Amazon Kendra currently does not support using\n            <code>UserGroupResolutionConfiguration</code> with an Amazon Web Services organization\n         member account for your IAM Identity Center identify source. You must create your index in\n         the management account for the organization in order to use\n            <code>UserGroupResolutionConfiguration</code>.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index,\n               <code>UserGroupResolutionConfiguration</code> isn't supported.</p>\n         </important>"
             }
         },
         "com.amazonaws.kendra#UserGroupResolutionMode": {
@@ -15972,7 +15996,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information for a token.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for a token.</p>\n         <important>\n            <p>If you're using an Amazon Kendra Gen AI Enterprise Edition index and you try to use\n               <code>UserTokenConfigurations</code> to configure user context policy, Amazon Kendra returns\n            a <code>ValidationException</code> error.</p>\n         </important>"
             }
         },
         "com.amazonaws.kendra#UserTokenConfigurationList": {

@@ -1,0 +1,3043 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.bedrockdataautomation#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomation#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when a request is denied per access permissions",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AmazonBedrockKeystoneBuildTimeService": {
+            "type": "service",
+            "version": "2023-07-26",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#CreateBlueprintVersion"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Bedrock Data Automation",
+                    "arnNamespace": "bedrock",
+                    "endpointPrefix": "bedrock-data-automation",
+                    "cloudTrailEventSource": "bedrock.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "bedrock"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "Amazon Bedrock Keystone Build",
+                "smithy.api#title": "Data Automation for Amazon Bedrock",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://bedrock-data-automation-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://bedrock-data-automation-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://bedrock-data-automation.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://bedrock-data-automation.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioExtractionCategory": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioExtractionCategoryTypes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Category of Audio Extraction"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioExtractionCategoryType": {
+            "type": "enum",
+            "members": {
+                "AUDIO_CONTENT_MODERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIO_CONTENT_MODERATION"
+                    }
+                },
+                "CHAPTER_CONTENT_MODERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHAPTER_CONTENT_MODERATION"
+                    }
+                },
+                "TRANSCRIPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSCRIPT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioExtractionCategoryTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#AudioExtractionCategoryType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Audio Extraction Category Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioStandardExtraction": {
+            "type": "structure",
+            "members": {
+                "category": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioExtractionCategory",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Extraction Configuration of Audio"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioStandardGenerativeField": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioStandardGenerativeFieldTypes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Generative Field Configuration of Audio"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioStandardGenerativeFieldType": {
+            "type": "enum",
+            "members": {
+                "AUDIO_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIO_SUMMARY"
+                    }
+                },
+                "CHAPTER_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHAPTER_SUMMARY"
+                    }
+                },
+                "IAB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAB"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioStandardGenerativeFieldTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#AudioStandardGenerativeFieldType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Audio Standard Generative Field Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioStandardOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "extraction": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioStandardExtraction"
+                },
+                "generativeField": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioStandardGenerativeField"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Output Configuration of Audio"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#Blueprint": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "schema": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintSchema",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockdataautomation#Type",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.bedrockdataautomation#DateTimestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.bedrockdataautomation#DateTimestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "blueprintName": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "blueprintVersion": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintVersion"
+                },
+                "blueprintStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage"
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.bedrockdataautomation#KmsKeyId"
+                },
+                "kmsEncryptionContext": {
+                    "target": "com.amazonaws.bedrockdataautomation#KmsEncryptionContext"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Contains the information of a Blueprint."
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN of a Blueprint",
+                "smithy.api#length": {
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:(aws|[0-9]{12}):blueprint/(bedrock-data-automation-public-[a-zA-Z0-9-_]{1,30}|[a-zA-Z0-9-]{12,36})$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintFilter": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "blueprintVersion": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintVersion"
+                },
+                "blueprintStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Blueprint Filter"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintItem": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "blueprintVersion": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintVersion"
+                },
+                "blueprintStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Blueprint Item"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#BlueprintItem"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Blueprint Item"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Name of the Blueprint",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintResource": {
+            "type": "resource",
+            "identifiers": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.bedrockdataautomation#CreateBlueprint"
+            },
+            "read": {
+                "target": "com.amazonaws.bedrockdataautomation#GetBlueprint"
+            },
+            "update": {
+                "target": "com.amazonaws.bedrockdataautomation#UpdateBlueprint"
+            },
+            "delete": {
+                "target": "com.amazonaws.bedrockdataautomation#DeleteBlueprint"
+            },
+            "list": {
+                "target": "com.amazonaws.bedrockdataautomation#ListBlueprints"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintSchema": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Schema of the blueprint",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s!\"\\#\\$%'&\\(\\)\\*\\+\\,\\-\\./:;=\\?@\\[\\\\\\]\\^_`\\{\\|\\}~><]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintStage": {
+            "type": "enum",
+            "members": {
+                "DEVELOPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVELOPMENT"
+                    }
+                },
+                "LIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Stage of the Blueprint"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintStageFilter": {
+            "type": "enum",
+            "members": {
+                "DEVELOPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVELOPMENT"
+                    }
+                },
+                "LIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIVE"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Blueprint Stage filter"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintSummary": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "blueprintVersion": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintVersion"
+                },
+                "blueprintStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage"
+                },
+                "blueprintName": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintName"
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.bedrockdataautomation#DateTimestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.bedrockdataautomation#DateTimestamp"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary of a Blueprint"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#BlueprintVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Blueprint Version",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9]*$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#Blueprints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#BlueprintSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Blueprints"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Client specified token used for idempotency checks",
+                "smithy.api#length": {
+                    "min": 33,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,256}$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomation#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when there is a conflict performing an operation",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CreateBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#CreateBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#CreateBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates an Amazon Bedrock Keystone Blueprint",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "PUT",
+                    "uri": "/blueprints/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CreateBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "blueprintName": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockdataautomation#Type",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "blueprintStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage"
+                },
+                "schema": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintSchema",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockdataautomation#ClientToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#EncryptionConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Create Blueprint Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CreateBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "blueprint": {
+                    "target": "com.amazonaws.bedrockdataautomation#Blueprint",
+                    "traits": {
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Create Blueprint Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CreateBlueprintVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#CreateBlueprintVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#CreateBlueprintVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates a new version of an existing Amazon Bedrock Keystone Blueprint",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/blueprints/{blueprintArn}/versions/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CreateBlueprintVersionRequest": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN generated at the server side when a Blueprint is created",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockdataautomation#ClientToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Create Blueprint Version Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CreateBlueprintVersionResponse": {
+            "type": "structure",
+            "members": {
+                "blueprint": {
+                    "target": "com.amazonaws.bedrockdataautomation#Blueprint",
+                    "traits": {
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Create Blueprint Version Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CreateDataAutomationProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#CreateDataAutomationProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#CreateDataAutomationProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates an Amazon Bedrock Keystone DataAutomationProject",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "PUT",
+                    "uri": "/data-automation-projects/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CreateDataAutomationProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectName": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectDescription": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectDescription"
+                },
+                "projectStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
+                },
+                "standardOutputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#StandardOutputConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "customOutputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#CustomOutputConfiguration"
+                },
+                "overrideConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#OverrideConfiguration"
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockdataautomation#ClientToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#EncryptionConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Create DataAutomationProject Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CreateDataAutomationProjectResponse": {
+            "type": "structure",
+            "members": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Create DataAutomationProject Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#CustomOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "blueprints": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintItems"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Custom output configuration"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProject": {
+            "type": "structure",
+            "members": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.bedrockdataautomation#DateTimestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.bedrockdataautomation#DateTimestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
+                },
+                "projectDescription": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectDescription"
+                },
+                "standardOutputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#StandardOutputConfiguration"
+                },
+                "customOutputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#CustomOutputConfiguration"
+                },
+                "overrideConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#OverrideConfiguration"
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.bedrockdataautomation#KmsKeyId"
+                },
+                "kmsEncryptionContext": {
+                    "target": "com.amazonaws.bedrockdataautomation#KmsEncryptionContext"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Contains the information of a DataAutomationProject."
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN of a DataAutomationProject",
+                "smithy.api#length": {
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:(aws|[0-9]{12}):data-automation-project/[a-zA-Z0-9-]{12,36}$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Description of the DataAutomationProject",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectFilter": {
+            "type": "structure",
+            "members": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Data Automation Project Filter"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Name of the DataAutomationProject",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectResource": {
+            "type": "resource",
+            "identifiers": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.bedrockdataautomation#CreateDataAutomationProject"
+            },
+            "read": {
+                "target": "com.amazonaws.bedrockdataautomation#GetDataAutomationProject"
+            },
+            "update": {
+                "target": "com.amazonaws.bedrockdataautomation#UpdateDataAutomationProject"
+            },
+            "delete": {
+                "target": "com.amazonaws.bedrockdataautomation#DeleteDataAutomationProject"
+            },
+            "list": {
+                "target": "com.amazonaws.bedrockdataautomation#ListDataAutomationProjects"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage": {
+            "type": "enum",
+            "members": {
+                "DEVELOPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVELOPMENT"
+                    }
+                },
+                "LIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Stage of the Project"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectStageFilter": {
+            "type": "enum",
+            "members": {
+                "DEVELOPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVELOPMENT"
+                    }
+                },
+                "LIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIVE"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Project Stage filter"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status of Data Automation Project"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of DataAutomationProjectSummary"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectSummary": {
+            "type": "structure",
+            "members": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
+                },
+                "projectName": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectName"
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.bedrockdataautomation#DateTimestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary of a DataAutomationProject"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DateTimestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#documentation": "Time Stamp",
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DeleteBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#DeleteBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#DeleteBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes an existing Amazon Bedrock Keystone Blueprint",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/blueprints/{blueprintArn}/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DeleteBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN generated at the server side when a Blueprint is created",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "blueprintVersion": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "Optional field to delete a specific Blueprint version",
+                        "smithy.api#httpQuery": "blueprintVersion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Delete Blueprint Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DeleteBlueprintResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Delete Blueprint Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DeleteDataAutomationProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#DeleteDataAutomationProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#DeleteDataAutomationProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes an existing Amazon Bedrock Keystone DataAutomationProject",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/data-automation-projects/{projectArn}/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DeleteDataAutomationProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN generated at the server side when a DataAutomationProject is created",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Delete DataAutomationProject Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DeleteDataAutomationProjectResponse": {
+            "type": "structure",
+            "members": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Delete DataAutomationProject Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentBoundingBox": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Bounding Box Configuration of Document Extraction"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentExtractionGranularity": {
+            "type": "structure",
+            "members": {
+                "types": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentExtractionGranularityTypes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Granularity of Document Extraction"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentExtractionGranularityType": {
+            "type": "enum",
+            "members": {
+                "DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT"
+                    }
+                },
+                "PAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAGE"
+                    }
+                },
+                "ELEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELEMENT"
+                    }
+                },
+                "WORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORD"
+                    }
+                },
+                "LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentExtractionGranularityTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#DocumentExtractionGranularityType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Document Extraction Granularity Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentOutputAdditionalFileFormat": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Additional File Format of Document Output"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentOutputFormat": {
+            "type": "structure",
+            "members": {
+                "textFormat": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentOutputTextFormat",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalFileFormat": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentOutputAdditionalFileFormat",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output Format of Document"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentOutputTextFormat": {
+            "type": "structure",
+            "members": {
+                "types": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentOutputTextFormatTypes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Text Format of Document Output"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentOutputTextFormatType": {
+            "type": "enum",
+            "members": {
+                "PLAIN_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAIN_TEXT"
+                    }
+                },
+                "MARKDOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MARKDOWN"
+                    }
+                },
+                "HTML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTML"
+                    }
+                },
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentOutputTextFormatTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#DocumentOutputTextFormatType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Document Output Text Format Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentOverrideConfiguration": {
+            "type": "structure",
+            "members": {
+                "splitter": {
+                    "target": "com.amazonaws.bedrockdataautomation#SplitterConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Override Configuration of Document"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentStandardExtraction": {
+            "type": "structure",
+            "members": {
+                "granularity": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentExtractionGranularity",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "boundingBox": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentBoundingBox",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Extraction Configuration of Document"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentStandardGenerativeField": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Generative Field Configuration of Document"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DocumentStandardOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "extraction": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentStandardExtraction"
+                },
+                "generativeField": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentStandardGenerativeField"
+                },
+                "outputFormat": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentOutputFormat"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Output Configuration of Document"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "kmsKeyId": {
+                    "target": "com.amazonaws.bedrockdataautomation#KmsKeyId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsEncryptionContext": {
+                    "target": "com.amazonaws.bedrockdataautomation#KmsEncryptionContext"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "KMS Encryption Configuration"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#GetBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#GetBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#GetBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Gets an existing Amazon Bedrock Keystone Blueprint",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/blueprints/{blueprintArn}/"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#GetBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN generated at the server side when a Blueprint is created",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "blueprintVersion": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "Optional field to get a specific Blueprint version"
+                    }
+                },
+                "blueprintStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage",
+                    "traits": {
+                        "smithy.api#documentation": "Optional field to get a specific Blueprint stage"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Get Blueprint Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#GetBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "blueprint": {
+                    "target": "com.amazonaws.bedrockdataautomation#Blueprint",
+                    "traits": {
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Get Blueprint Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#GetDataAutomationProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#GetDataAutomationProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#GetDataAutomationProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Gets an existing Amazon Bedrock Keystone DataAutomationProject",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/data-automation-projects/{projectArn}/"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#GetDataAutomationProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN generated at the server side when a DataAutomationProject is created",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage",
+                    "traits": {
+                        "smithy.api#documentation": "Optional field to delete a specific DataAutomationProject stage"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Get DataAutomationProject Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#GetDataAutomationProjectResponse": {
+            "type": "structure",
+            "members": {
+                "project": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProject",
+                    "traits": {
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Get DataAutomationProject Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageBoundingBox": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Bounding Box Configuration of Image Extraction"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageExtractionCategory": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.bedrockdataautomation#ImageExtractionCategoryTypes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Category of Image Extraction"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageExtractionCategoryType": {
+            "type": "enum",
+            "members": {
+                "CONTENT_MODERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT_MODERATION"
+                    }
+                },
+                "TEXT_DETECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT_DETECTION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageExtractionCategoryTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#ImageExtractionCategoryType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Image Extraction Category"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageStandardExtraction": {
+            "type": "structure",
+            "members": {
+                "category": {
+                    "target": "com.amazonaws.bedrockdataautomation#ImageExtractionCategory",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "boundingBox": {
+                    "target": "com.amazonaws.bedrockdataautomation#ImageBoundingBox",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Extraction Configuration of Image"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageStandardGenerativeField": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.bedrockdataautomation#ImageStandardGenerativeFieldTypes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Generative Field Configuration of Image"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageStandardGenerativeFieldType": {
+            "type": "enum",
+            "members": {
+                "IMAGE_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_SUMMARY"
+                    }
+                },
+                "IAB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAB"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageStandardGenerativeFieldTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#ImageStandardGenerativeFieldType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Image Standard Generative Field Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ImageStandardOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "extraction": {
+                    "target": "com.amazonaws.bedrockdataautomation#ImageStandardExtraction"
+                },
+                "generativeField": {
+                    "target": "com.amazonaws.bedrockdataautomation#ImageStandardGenerativeField"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Output Configuration of Image"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomation#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown if there was an unexpected error during processing of request",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#KmsEncryptionContext": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "KMS Encryption Context",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "KMS Key Identifier",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ListBlueprints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#ListBlueprintsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#ListBlueprintsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all existing Amazon Bedrock Keystone Blueprints",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/blueprints/"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "blueprints"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ListBlueprintsRequest": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn"
+                },
+                "resourceOwner": {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceOwner"
+                },
+                "blueprintStageFilter": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStageFilter"
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockdataautomation#MaxResults"
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockdataautomation#NextToken"
+                },
+                "projectFilter": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "List Blueprint Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ListBlueprintsResponse": {
+            "type": "structure",
+            "members": {
+                "blueprints": {
+                    "target": "com.amazonaws.bedrockdataautomation#Blueprints",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockdataautomation#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "List Blueprint Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ListDataAutomationProjects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#ListDataAutomationProjectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#ListDataAutomationProjectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all existing Amazon Bedrock Keystone DataAutomationProjects",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/data-automation-projects/"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "projects"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ListDataAutomationProjectsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockdataautomation#MaxResults"
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockdataautomation#NextToken"
+                },
+                "projectStageFilter": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStageFilter"
+                },
+                "blueprintFilter": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintFilter"
+                },
+                "resourceOwner": {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceOwner"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "List DataAutomationProject Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ListDataAutomationProjectsResponse": {
+            "type": "structure",
+            "members": {
+                "projects": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectSummaries",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockdataautomation#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "List DataAutomationProject Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Max Results",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Pagination token",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\S*$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#NonBlankString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Non Blank String",
+                "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#OverrideConfiguration": {
+            "type": "structure",
+            "members": {
+                "document": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentOverrideConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Override configuration"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomation#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when a resource referenced by the operation does not exist",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ResourceOwner": {
+            "type": "enum",
+            "members": {
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                },
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Resource Owner"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomation#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when a request is made beyond the service quota",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#SplitterConfiguration": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration of Splitter"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#StandardOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "document": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentStandardOutputConfiguration"
+                },
+                "image": {
+                    "target": "com.amazonaws.bedrockdataautomation#ImageStandardOutputConfiguration"
+                },
+                "video": {
+                    "target": "com.amazonaws.bedrockdataautomation#VideoStandardOutputConfiguration"
+                },
+                "audio": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioStandardOutputConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard output configuration"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#State": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "State"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomation#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when the number of requests exceeds the limit",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#Type": {
+            "type": "enum",
+            "members": {
+                "DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT"
+                    }
+                },
+                "IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#UpdateBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#UpdateBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#UpdateBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates an existing Amazon Bedrock Blueprint",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/blueprints/{blueprintArn}/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#UpdateBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN generated at the server side when a Blueprint is created",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "schema": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintSchema",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "blueprintStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#BlueprintStage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Update Blueprint Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#UpdateBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "blueprint": {
+                    "target": "com.amazonaws.bedrockdataautomation#Blueprint",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Update Blueprint Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#UpdateDataAutomationProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#UpdateDataAutomationProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#UpdateDataAutomationProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates an existing Amazon Bedrock DataAutomationProject",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/data-automation-projects/{projectArn}/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#UpdateDataAutomationProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN generated at the server side when a DataAutomationProject is created",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
+                },
+                "projectDescription": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectDescription"
+                },
+                "standardOutputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#StandardOutputConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "customOutputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#CustomOutputConfiguration"
+                },
+                "overrideConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#OverrideConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Update DataAutomationProject Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#UpdateDataAutomationProjectResponse": {
+            "type": "structure",
+            "members": {
+                "projectArn": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectStage": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Update DataAutomationProject Response",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomation#NonBlankString"
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationExceptionFieldList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown when the request's input validation fails",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockdataautomation#NonBlankString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomation#NonBlankString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Stores information about a field passed inside a request that resulted in an exception"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#ValidationExceptionField"
+            },
+            "traits": {
+                "smithy.api#documentation": "list of ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoBoundingBox": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Bounding Box Configuration of Video Extraction"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoExtractionCategory": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.bedrockdataautomation#VideoExtractionCategoryTypes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Category of Video Extraction"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoExtractionCategoryType": {
+            "type": "enum",
+            "members": {
+                "CONTENT_MODERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT_MODERATION"
+                    }
+                },
+                "TEXT_DETECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT_DETECTION"
+                    }
+                },
+                "TRANSCRIPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSCRIPT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoExtractionCategoryTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#VideoExtractionCategoryType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Video Extraction Category Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoStandardExtraction": {
+            "type": "structure",
+            "members": {
+                "category": {
+                    "target": "com.amazonaws.bedrockdataautomation#VideoExtractionCategory",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "boundingBox": {
+                    "target": "com.amazonaws.bedrockdataautomation#VideoBoundingBox",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Extraction Configuration of Video"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoStandardGenerativeField": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.bedrockdataautomation#VideoStandardGenerativeFieldTypes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Generative Field Configuration of Video"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoStandardGenerativeFieldType": {
+            "type": "enum",
+            "members": {
+                "VIDEO_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_SUMMARY"
+                    }
+                },
+                "SCENE_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCENE_SUMMARY"
+                    }
+                },
+                "IAB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAB"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoStandardGenerativeFieldTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#VideoStandardGenerativeFieldType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Video Standard Generative Field Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#VideoStandardOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "extraction": {
+                    "target": "com.amazonaws.bedrockdataautomation#VideoStandardExtraction"
+                },
+                "generativeField": {
+                    "target": "com.amazonaws.bedrockdataautomation#VideoStandardGenerativeField"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Standard Output Configuration of Video"
+            }
+        }
+    }
+}

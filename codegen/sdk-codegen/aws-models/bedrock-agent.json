@@ -2369,6 +2369,28 @@
                 "smithy.api#documentation": "<p>Defines tools. The model automatically decides whether to call a tool or to generate text instead. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#AwsDataCatalogTableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^.*\\.*$"
+            }
+        },
+        "com.amazonaws.bedrockagent#AwsDataCatalogTableNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#AwsDataCatalogTableName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#BasePromptTemplate": {
             "type": "string",
             "traits": {
@@ -2377,6 +2399,20 @@
                     "max": 100000
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#BedrockDataAutomationConfiguration": {
+            "type": "structure",
+            "members": {
+                "parsingModality": {
+                    "target": "com.amazonaws.bedrockagent#ParsingModality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable parsing of multimodal data, including both text and/or images.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for using Amazon Bedrock Data Automation as the parser for ingesting your data sources.</p>"
             }
         },
         "com.amazonaws.bedrockagent#BedrockEmbeddingModelArn": {
@@ -2415,7 +2451,7 @@
                 "modelArn": {
                     "target": "com.amazonaws.bedrockagent#BedrockModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the foundation model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the foundation model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> to use for parsing.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2423,6 +2459,12 @@
                     "target": "com.amazonaws.bedrockagent#ParsingPrompt",
                     "traits": {
                         "smithy.api#documentation": "<p>Instructions for interpreting the contents of a document.</p>"
+                    }
+                },
+                "parsingModality": {
+                    "target": "com.amazonaws.bedrockagent#ParsingModality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable parsing of multimodal data, including both text and/or images.</p>"
                     }
                 }
             },
@@ -3908,8 +3950,7 @@
                 "storageConfiguration": {
                     "target": "com.amazonaws.bedrockagent#StorageConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about the configuration of the vector database used for the knowledge base.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Contains details about the configuration of the vector database used for the knowledge base.</p>"
                     }
                 },
                 "tags": {
@@ -4275,6 +4316,39 @@
                         "smithy.api#enumValue": "OVERRIDDEN"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagent#CuratedQueries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#CuratedQuery"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#CuratedQuery": {
+            "type": "structure",
+            "members": {
+                "naturalLanguage": {
+                    "target": "com.amazonaws.bedrockagent#NaturalLanguageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An example natural language query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sql": {
+                    "target": "com.amazonaws.bedrockagent#SqlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SQL equivalent of the natural language query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for a query, each of which defines information about example queries to help the query engine generate appropriate SQL queries.</p>"
             }
         },
         "com.amazonaws.bedrockagent#CustomContent": {
@@ -4724,6 +4798,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "REDSHIFT_METADATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REDSHIFT_METADATA"
                     }
                 }
             }
@@ -5716,6 +5796,15 @@
             }
         },
         "com.amazonaws.bedrockagent#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#DescriptionString": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -9107,6 +9196,23 @@
                 "smithy.api#pattern": "^[0-9a-zA-Z]{10}$"
             }
         },
+        "com.amazonaws.bedrockagent#IncludeExclude": {
+            "type": "enum",
+            "members": {
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#IncompatibleConnectionDataTypeFlowValidationDetails": {
             "type": "structure",
             "members": {
@@ -9724,6 +9830,27 @@
                 "smithy.api#documentation": "<p>Contains configurations for an iterator node in a flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output.</p>\n         <p>The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#KendraIndexArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kendra:[a-z0-9-]{1,20}:([0-9]{12}|):index/([a-zA-Z0-9][a-zA-Z0-9-]{35}|[a-zA-Z0-9][a-zA-Z0-9-]{35}-[a-zA-Z0-9][a-zA-Z0-9-]{35})$"
+            }
+        },
+        "com.amazonaws.bedrockagent#KendraKnowledgeBaseConfiguration": {
+            "type": "structure",
+            "members": {
+                "kendraIndexArn": {
+                    "target": "com.amazonaws.bedrockagent#KendraIndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Kendra index.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for an Amazon Kendra knowledge base.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#Key": {
             "type": "string",
             "traits": {
@@ -9791,8 +9918,7 @@
                 "storageConfiguration": {
                     "target": "com.amazonaws.bedrockagent#StorageConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about the storage configuration of the knowledge base.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Contains details about the storage configuration of the knowledge base.</p>"
                     }
                 },
                 "status": {
@@ -9850,6 +9976,18 @@
                     "target": "com.amazonaws.bedrockagent#VectorKnowledgeBaseConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains details about the model that's used to convert the data source into vector embeddings.</p>"
+                    }
+                },
+                "kendraKnowledgeBaseConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#KendraKnowledgeBaseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for an Amazon Kendra knowledge base.</p>"
+                    }
+                },
+                "sqlKnowledgeBaseConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#SqlKnowledgeBaseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for a knowledge base connected to an SQL database.</p>"
                     }
                 }
             },
@@ -10199,6 +10337,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VECTOR"
+                    }
+                },
+                "KENDRA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KENDRA"
+                    }
+                },
+                "SQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL"
                     }
                 }
             }
@@ -12257,6 +12407,15 @@
                 "smithy.api#pattern": "^([0-9a-zA-Z][_-]?){1,100}$"
             }
         },
+        "com.amazonaws.bedrockagent#NaturalLanguageString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#NextToken": {
             "type": "string",
             "traits": {
@@ -12465,12 +12624,29 @@
                 "bedrockFoundationModelConfiguration": {
                     "target": "com.amazonaws.bedrockagent#BedrockFoundationModelConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings for a foundation model used to parse documents for a data source.</p>"
+                        "smithy.api#documentation": "<p>If you specify <code>BEDROCK_FOUNDATION_MODEL</code> as the parsing strategy for ingesting your data source, use this object to modify configurations for using a foundation model to parse documents.</p>"
+                    }
+                },
+                "bedrockDataAutomationConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#BedrockDataAutomationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you specify <code>BEDROCK_DATA_AUTOMATION</code> as the parsing strategy for ingesting your data source, use this object to modify configurations for using the Amazon Bedrock Data Automation parser.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for parsing document contents. By default, the service converts the contents of each\n    document into text before splitting it into chunks. To improve processing of PDF files with tables and images,\n    you can configure the data source to convert the pages of text into images and use a model to describe the\n    contents of each page.</p>\n         <p>To use a model to parse PDF documents, set the parsing strategy to <code>BEDROCK_FOUNDATION_MODEL</code> and\n      specify the model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> to use by ARN. You can also override the default parsing prompt with instructions for how\n    to interpret images and tables in your documents. The following models are supported.</p>\n         <ul>\n            <li>\n               <p>Anthropic Claude 3 Sonnet - <code>anthropic.claude-3-sonnet-20240229-v1:0</code>\n               </p>\n            </li>\n            <li>\n               <p>Anthropic Claude 3 Haiku - <code>anthropic.claude-3-haiku-20240307-v1:0</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can get the ARN of a model with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListFoundationModels.html\">ListFoundationModels</a> action. Standard model usage\n    charges apply for the foundation model parsing strategy.</p>"
+                "smithy.api#documentation": "<p>Settings for parsing document contents. If you exclude this field, the default parser converts the contents of each\n      document into text before splitting it into chunks. Specify the parsing strategy to use in the <code>parsingStrategy</code> field and include the relevant configuration, or omit it to use the Amazon Bedrock default parser. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-advanced-parsing.html\">Parsing options for your data source</a>.</p>\n         <note>\n            <p>If you specify <code>BEDROCK_DATA_AUTOMATION</code> or <code>BEDROCK_FOUNDATION_MODEL</code> and it fails to parse a file, the Amazon Bedrock default parser will be used instead.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ParsingModality": {
+            "type": "enum",
+            "members": {
+                "MULTIMODAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIMODAL"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagent#ParsingPrompt": {
@@ -12504,6 +12680,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BEDROCK_FOUNDATION_MODEL"
+                    }
+                },
+                "BEDROCK_DATA_AUTOMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEDROCK_DATA_AUTOMATION"
                     }
                 }
             }
@@ -13480,6 +13662,158 @@
                 "smithy.api#pattern": "^((([0-9a-zA-Z][_-]?){1,63})|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:provisioned-model/[a-z0-9]{12}))$"
             }
         },
+        "com.amazonaws.bedrockagent#QueryEngineType": {
+            "type": "enum",
+            "members": {
+                "REDSHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REDSHIFT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#QueryExecutionTimeoutSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#QueryGenerationColumn": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagent#QueryGenerationColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column for which the other fields in this object apply.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagent#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the column that helps the query engine understand the contents of the column.</p>"
+                    }
+                },
+                "inclusion": {
+                    "target": "com.amazonaws.bedrockagent#IncludeExclude",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include or exclude the column during query generation. If you specify <code>EXCLUDE</code>, the column will be ignored. If you specify <code>INCLUDE</code>, all other columns in the table will be ignored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a column in the current table for the query engine to consider.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#QueryGenerationColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#QueryGenerationColumns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#QueryGenerationColumn"
+            }
+        },
+        "com.amazonaws.bedrockagent#QueryGenerationConfiguration": {
+            "type": "structure",
+            "members": {
+                "executionTimeoutSeconds": {
+                    "target": "com.amazonaws.bedrockagent#QueryExecutionTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time after which query generation will time out.</p>"
+                    }
+                },
+                "generationContext": {
+                    "target": "com.amazonaws.bedrockagent#QueryGenerationContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for context to use during query generation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for query generation. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html\">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide..</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#QueryGenerationContext": {
+            "type": "structure",
+            "members": {
+                "tables": {
+                    "target": "com.amazonaws.bedrockagent#QueryGenerationTables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, each of which defines information about a table in the database.</p>"
+                    }
+                },
+                "curatedQueries": {
+                    "target": "com.amazonaws.bedrockagent#CuratedQueries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, each of which defines information about example queries to help the query engine generate appropriate SQL queries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>&gt;Contains configurations for context to use during query generation.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#QueryGenerationTable": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagent#QueryGenerationTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which the other fields in this object apply.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagent#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the table that helps the query engine understand the contents of the table.</p>"
+                    }
+                },
+                "inclusion": {
+                    "target": "com.amazonaws.bedrockagent#IncludeExclude",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include or exclude the table during query generation. If you specify <code>EXCLUDE</code>, the table will be ignored. If you specify <code>INCLUDE</code>, all other tables will be ignored.</p>"
+                    }
+                },
+                "columns": {
+                    "target": "com.amazonaws.bedrockagent#QueryGenerationColumns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, each of which defines information about a column in the table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a table for the query engine to consider.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#QueryGenerationTableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^.*\\..*\\..*$"
+            }
+        },
+        "com.amazonaws.bedrockagent#QueryGenerationTables": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#QueryGenerationTable"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#RdsArn": {
             "type": "string",
             "traits": {
@@ -13683,6 +14017,314 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftClusterIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageConfigurations": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftQueryEngineStorageConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for Amazon Redshift database storage.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queryEngineConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftQueryEngineConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for an Amazon Redshift query engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queryGenerationConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#QueryGenerationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for generating queries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for an Amazon Redshift database. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html\">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftDatabase": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftProvisionedAuthConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftProvisionedAuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "databaseUser": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database username for authentication to an Amazon Redshift provisioned data warehouse.</p>"
+                    }
+                },
+                "usernamePasswordSecretArn": {
+                    "target": "com.amazonaws.bedrockagent#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an Secrets Manager secret for authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for authentication to an Amazon Redshift provisioned data warehouse. Specify the type of authentication to use in the <code>type</code> field and include the corresponding field. If you specify IAM authentication, you don't need to include another field.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftProvisionedAuthType": {
+            "type": "enum",
+            "members": {
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM"
+                    }
+                },
+                "USERNAME_PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USERNAME_PASSWORD"
+                    }
+                },
+                "USERNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USERNAME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftProvisionedConfiguration": {
+            "type": "structure",
+            "members": {
+                "clusterIdentifier": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Redshift cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "authConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftProvisionedAuthConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for authentication to Amazon Redshift.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for a provisioned Amazon Redshift query engine.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftQueryEngineAwsDataCatalogStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "tableNames": {
+                    "target": "com.amazonaws.bedrockagent#AwsDataCatalogTableNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of names of the tables to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for storage in Glue Data Catalog.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftQueryEngineConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftQueryEngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of query engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serverlessConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftServerlessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for a serverless Amazon Redshift query engine.</p>"
+                    }
+                },
+                "provisionedConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftProvisionedConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for a provisioned Amazon Redshift query engine.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for an Amazon Redshift query engine. Specify the type of query engine in <code>type</code> and include the corresponding field. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html\">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftQueryEngineRedshiftStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "databaseName": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftDatabase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Redshift database.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for storage in Amazon Redshift.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftQueryEngineStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftQueryEngineStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data storage service to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awsDataCatalogConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftQueryEngineAwsDataCatalogStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for storage in Glue Data Catalog.</p>"
+                    }
+                },
+                "redshiftConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftQueryEngineRedshiftStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for storage in Amazon Redshift.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for Amazon Redshift data storage. Specify the data storage service to use in the <code>type</code> field and include the corresponding field. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html\">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftQueryEngineStorageConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#RedshiftQueryEngineStorageConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftQueryEngineStorageType": {
+            "type": "enum",
+            "members": {
+                "REDSHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REDSHIFT"
+                    }
+                },
+                "AWS_DATA_CATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_DATA_CATALOG"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftQueryEngineType": {
+            "type": "enum",
+            "members": {
+                "SERVERLESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVERLESS"
+                    }
+                },
+                "PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftServerlessAuthConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftServerlessAuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "usernamePasswordSecretArn": {
+                    "target": "com.amazonaws.bedrockagent#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an Secrets Manager secret for authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configurations for authentication to a Redshift Serverless. Specify the type of authentication to use in the <code>type</code> field and include the corresponding field. If you specify IAM authentication, you don't need to include another field.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftServerlessAuthType": {
+            "type": "enum",
+            "members": {
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM"
+                    }
+                },
+                "USERNAME_PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USERNAME_PASSWORD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#RedshiftServerlessConfiguration": {
+            "type": "structure",
+            "members": {
+                "workgroupArn": {
+                    "target": "com.amazonaws.bedrockagent#WorkgroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Redshift workgroup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "authConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftServerlessAuthConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for authentication to an Amazon Redshift provisioned data warehouse.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for authentication to Amazon Redshift Serverless.</p>"
             }
         },
         "com.amazonaws.bedrockagent#RelayConversationHistory": {
@@ -14270,6 +14912,36 @@
                 "smithy.api#documentation": "<p>Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#SqlKnowledgeBaseConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#QueryEngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of SQL database to connect to the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "redshiftConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#RedshiftConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configurations for a knowledge base connected to an Amazon Redshift database.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for a knowledge base connected to an SQL database. Specify the SQL database type in the <code>type</code> field and include the corresponding field. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html\">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#SqlString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#StartIngestionJob": {
             "type": "operation",
             "input": {
@@ -14590,6 +15262,65 @@
                     "max": 2048
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#SupplementalDataStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageLocations": {
+                    "target": "com.amazonaws.bedrockagent#SupplementalDataStorageLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects specifying storage locations for images extracted from multimodal documents in your data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configurations for the storage location of the images extracted from multimodal documents in your data source. These images can be retrieved and returned to the end user.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#SupplementalDataStorageLocation": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#SupplementalDataStorageLocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the storage service used for this location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.bedrockagent#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the Amazon S3 location for the extracted images.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a storage location for images extracted from multimodal documents in your data source.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#SupplementalDataStorageLocationType": {
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#SupplementalDataStorageLocations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#SupplementalDataStorageLocation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.bedrockagent#SystemContentBlock": {
@@ -16393,8 +17124,7 @@
                 "storageConfiguration": {
                     "target": "com.amazonaws.bedrockagent#StorageConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration for the vector store used for the knowledge base. You must use the same configuration as when the knowledge base was created.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the configuration for the vector store used for the knowledge base. You must use the same configuration as when the knowledge base was created.</p>"
                     }
                 }
             },
@@ -16732,7 +17462,7 @@
                 "parsingConfiguration": {
                     "target": "com.amazonaws.bedrockagent#ParsingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A custom parser for data source documents.</p>"
+                        "smithy.api#documentation": "<p>Configurations for a parser to use for parsing documents in your data source. If you exclude this field, the default parser will be used.</p>"
                     }
                 }
             },
@@ -16754,6 +17484,12 @@
                     "target": "com.amazonaws.bedrockagent#EmbeddingModelConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The embeddings model configuration details for the vector model used in Knowledge Base.</p>"
+                    }
+                },
+                "supplementalDataStorageConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#SupplementalDataStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you include multimodal data from your data source, use this object to specify configurations for the storage location of the images extracted from your documents. These images can be retrieved and returned to the end user. They can also be used in generation when using <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html\">RetrieveAndGenerate</a>.</p>"
                     }
                 }
             },
@@ -16886,6 +17622,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration of the URL/URLs for the web content that you want \n            to crawl. You should be authorized to crawl the URLs.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#WorkgroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"
             }
         }
     }
