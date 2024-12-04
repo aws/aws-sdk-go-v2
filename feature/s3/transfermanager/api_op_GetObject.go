@@ -20,6 +20,18 @@ import (
 	smithymiddleware "github.com/aws/smithy-go/middleware"
 )
 
+type errReadingBody struct {
+	err error
+}
+
+func (e *errReadingBody) Error() string {
+	return fmt.Sprintf("failed to read part body: %v", e.err)
+}
+
+func (e *errReadingBody) Unwrap() error {
+	return e.err
+}
+
 type GetObjectInput struct {
 	// Bucket the object is downloaded from
 	Bucket string
@@ -562,24 +574,24 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 		}}
 
 	if d.in.PartNumber > 0 {
-		return d.singleDownload(ctx)
+		return d.singleDownload(ctx, clientOptions...)
 	}
 
 	var output *GetObjectOutput
 	if d.options.MultipartDownloadType == types.MultipartDownloadTypePart {
 		if d.in.Range != "" {
-			return d.singleDownload(ctx)
+			return d.singleDownload(ctx, clientOptions...)
 		}
-		output = d.getChunk(1, "")
+		output = d.getChunk(ctx, 1, "", clientOptions...)
 		if output.PartsCount > 1 {
 			partSize := output.ContentLength
 			ch := make(chan dlchunk, d.options.Concurrency)
-			for i = 0; i <= d.options.Concurrency; i++ {
+			for i := 0; i <= d.options.Concurrency; i++ {
 				d.wg.Add(1)
-				go d.downloadPart(ch)
+				go d.downloadPart(ctx, ch, clientOptions...)
 			}
 
-			for i := 2; i <= out.PartsCount; i++ {
+			for i := int32(2); i <= output.PartsCount; i++ {
 				if d.getErr() != nil {
 					break
 				}
@@ -594,16 +606,16 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 	} else {
 		var total int64
 		if d.in.Range == "" {
-			d.getChunk(0, d.byteRange())
+			d.getChunk(ctx, 0, d.byteRange(), clientOptions...)
 			total = d.getTotalBytes()
 		} else {
 			d.pos, total = d.getDownloadRange()
 		}
 
-		ch := make(chan dlchunk, d.cfg.Concurrency)
-		for i := 0; i < d.cfg.Concurrency; i++ {
+		ch := make(chan dlchunk, d.options.Concurrency)
+		for i := 0; i < d.options.Concurrency; i++ {
 			d.wg.Add(1)
-			go d.downloadPart(ch)
+			go d.downloadPart(ctx, ch, clientOptions...)
 		}
 
 		// Assign work
@@ -635,10 +647,12 @@ func (d *downloader) init(ctx context.Context) error {
 	}
 
 	if d.options.PartBodyMaxRetries < 0 {
-		return fmt.Error("part body retry must be non-negative")
+		return fmt.Errorf("part body retry must be non-negative")
 	}
 
 	d.options.Logger = logging.WithContext(ctx, d.options.Logger)
+
+	return nil
 }
 
 func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*s3.Options)) (*GetObjectOutput, error) {
@@ -652,12 +666,29 @@ func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*
 	return output, err
 }
 
+func (d *downloader) downloadPart(ctx context.Context, ch chan dlchunk, clientOptions ...func(*s3.Options)) {
+	defer d.wg.Done()
+	for {
+		chunk, ok := <-ch
+		if !ok {
+			break
+		}
+		if d.getErr() != nil {
+			continue
+		}
+
+		if _, err := d.downloadChunk(ctx, chunk, clientOptions...); err != nil {
+			d.setErr(err)
+		}
+	}
+}
+
 // getChunk grabs a chunk of data from the body.
 // Not thread safe. Should only used when grabbing data on a single thread.
-func (d *downloader) getChunk(part int32, rng string) *GetObjectOutput {
+func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clientOptions ...func(*s3.Options)) *GetObjectOutput {
 	chunk := dlchunk{w: d.w, start: d.pos, size: d.options.PartSizeBytes, part: part, withRange: rng}
 
-	output, err := d.downloadChunk(chunk)
+	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
 		d.setErr(err)
 	}
@@ -678,8 +709,8 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlchunk, clientOpt
 	var out *s3.GetObjectOutput
 	var n int64
 	var err error
-	for retry := 0; retry <= d.partBodyMaxRetries; retry++ {
-		out, n, err = d.tryDownloadChunk(ctx, params, &chunk, clientOptions)
+	for retry := 0; retry <= d.options.PartBodyMaxRetries; retry++ {
+		out, n, err = d.tryDownloadChunk(ctx, params, &chunk, clientOptions...)
 		if err == nil {
 			break
 		}
@@ -728,8 +759,8 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		if err != nil {
 			return nil, 0, &errReadingBody{err: err}
 		}
-		n = len(part)
-		d.buf = append(d.buf, part)
+		n = int64(len(part))
+		d.buf = append(d.buf, part...)
 	}
 
 	return out, n, nil
@@ -790,7 +821,20 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 
 func (d *downloader) getDownloadRange() (int64, int64) {
 	parts := strings.Split(strings.Split(d.in.Range, "=")[1], "-")
-	return parts[0], parts[1] + 1
+
+	start, err := strconv.ParseInt(parts[0], 10, 64)
+	if err != nil {
+		d.err = err
+		return 0, 0
+	}
+
+	end, err := strconv.ParseInt(parts[1], 10, 64)
+	if err != nil {
+		d.err = err
+		return 0, 0
+	}
+
+	return start, end + 1
 }
 
 // byteRange returns a HTTP Byte-Range header value that should be used by the
