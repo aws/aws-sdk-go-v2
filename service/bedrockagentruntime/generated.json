@@ -10,6 +10,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_DeleteAgentMemory.go",
+        "api_op_GenerateQuery.go",
         "api_op_GetAgentMemory.go",
         "api_op_InvokeAgent.go",
         "api_op_InvokeFlow.go",

@@ -1141,6 +1141,12 @@ func awsRestjson1_serializeDocumentGuardrailContentBlock(v types.GuardrailConten
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.GuardrailContentBlockMemberImage:
+		av := object.Key("image")
+		if err := awsRestjson1_serializeDocumentGuardrailImageBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.GuardrailContentBlockMemberText:
 		av := object.Key("text")
 		if err := awsRestjson1_serializeDocumentGuardrailTextBlock(&uv.Value, av); err != nil {
@@ -1186,6 +1192,12 @@ func awsRestjson1_serializeDocumentGuardrailConverseContentBlock(v types.Guardra
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.GuardrailConverseContentBlockMemberImage:
+		av := object.Key("image")
+		if err := awsRestjson1_serializeDocumentGuardrailConverseImageBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.GuardrailConverseContentBlockMemberText:
 		av := object.Key("text")
 		if err := awsRestjson1_serializeDocumentGuardrailConverseTextBlock(&uv.Value, av); err != nil {
@@ -1210,6 +1222,41 @@ func awsRestjson1_serializeDocumentGuardrailConverseContentQualifierList(v []typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGuardrailConverseImageBlock(v *types.GuardrailConverseImageBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Format) > 0 {
+		ok := object.Key("format")
+		ok.String(string(v.Format))
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsRestjson1_serializeDocumentGuardrailConverseImageSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailConverseImageSource(v types.GuardrailConverseImageSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.GuardrailConverseImageSourceMemberBytes:
+		av := object.Key("bytes")
+		av.Base64EncodeBytes(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGuardrailConverseTextBlock(v *types.GuardrailConverseTextBlock, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1226,6 +1273,41 @@ func awsRestjson1_serializeDocumentGuardrailConverseTextBlock(v *types.Guardrail
 		ok.String(*v.Text)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailImageBlock(v *types.GuardrailImageBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Format) > 0 {
+		ok := object.Key("format")
+		ok.String(string(v.Format))
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsRestjson1_serializeDocumentGuardrailImageSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailImageSource(v types.GuardrailImageSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.GuardrailImageSourceMemberBytes:
+		av := object.Key("bytes")
+		av.Base64EncodeBytes(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

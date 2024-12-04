@@ -318,6 +318,11 @@ func validateGuardrailContentBlock(v types.GuardrailContentBlock) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GuardrailContentBlock"}
 	switch uv := v.(type) {
+	case *types.GuardrailContentBlockMemberImage:
+		if err := validateGuardrailImageBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[image]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.GuardrailContentBlockMemberText:
 		if err := validateGuardrailTextBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[text]", err.(smithy.InvalidParamsError))
@@ -354,11 +359,34 @@ func validateGuardrailConverseContentBlock(v types.GuardrailConverseContentBlock
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GuardrailConverseContentBlock"}
 	switch uv := v.(type) {
+	case *types.GuardrailConverseContentBlockMemberImage:
+		if err := validateGuardrailConverseImageBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[image]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.GuardrailConverseContentBlockMemberText:
 		if err := validateGuardrailConverseTextBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[text]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailConverseImageBlock(v *types.GuardrailConverseImageBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailConverseImageBlock"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -374,6 +402,24 @@ func validateGuardrailConverseTextBlock(v *types.GuardrailConverseTextBlock) err
 	invalidParams := smithy.InvalidParamsError{Context: "GuardrailConverseTextBlock"}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailImageBlock(v *types.GuardrailImageBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailImageBlock"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

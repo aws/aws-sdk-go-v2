@@ -81,12 +81,6 @@ type CreateKnowledgeBaseInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Contains details about the configuration of the vector database used for the
-	// knowledge base.
-	//
-	// This member is required.
-	StorageConfiguration *types.StorageConfiguration
-
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
 	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
@@ -96,6 +90,10 @@ type CreateKnowledgeBaseInput struct {
 
 	// A description of the knowledge base.
 	Description *string
+
+	// Contains details about the configuration of the vector database used for the
+	// knowledge base.
+	StorageConfiguration *types.StorageConfiguration
 
 	// Specify the key-value pairs for the tags that you want to attach to your
 	// knowledge base in this object.

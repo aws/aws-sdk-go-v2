@@ -35,6 +35,10 @@ import (
 // currently only supports access control configuration for S3 data sources and
 // documents indexed using the BatchPutDocument API.
 //
+// You can't configure access control using CreateAccessControlConfiguration for
+// an Amazon Kendra Gen AI Enterprise Edition index. Amazon Kendra will return a
+// ValidationException error for a Gen_AI_ENTERPRISE_EDITION index.
+//
 // [BatchPutDocument]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
 // [Document]: https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html
 func (c *Client) CreateAccessControlConfiguration(ctx context.Context, params *CreateAccessControlConfigurationInput, optFns ...func(*Options)) (*CreateAccessControlConfigurationOutput, error) {

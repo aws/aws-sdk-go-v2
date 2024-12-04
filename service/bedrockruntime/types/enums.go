@@ -289,6 +289,45 @@ func (GuardrailConverseContentQualifier) Values() []GuardrailConverseContentQual
 	}
 }
 
+type GuardrailConverseImageFormat string
+
+// Enum values for GuardrailConverseImageFormat
+const (
+	GuardrailConverseImageFormatPng  GuardrailConverseImageFormat = "png"
+	GuardrailConverseImageFormatJpeg GuardrailConverseImageFormat = "jpeg"
+)
+
+// Values returns all known values for GuardrailConverseImageFormat. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailConverseImageFormat) Values() []GuardrailConverseImageFormat {
+	return []GuardrailConverseImageFormat{
+		"png",
+		"jpeg",
+	}
+}
+
+type GuardrailImageFormat string
+
+// Enum values for GuardrailImageFormat
+const (
+	GuardrailImageFormatPng  GuardrailImageFormat = "png"
+	GuardrailImageFormatJpeg GuardrailImageFormat = "jpeg"
+)
+
+// Values returns all known values for GuardrailImageFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailImageFormat) Values() []GuardrailImageFormat {
+	return []GuardrailImageFormat{
+		"png",
+		"jpeg",
+	}
+}
+
 type GuardrailManagedWordType string
 
 // Enum values for GuardrailManagedWordType

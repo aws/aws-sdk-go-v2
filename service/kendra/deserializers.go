@@ -9045,6 +9045,15 @@ func awsAwsjson11_deserializeDocumentBatchDeleteDocumentResponseFailedDocument(v
 
 	for key, value := range shape {
 		switch key {
+		case "DataSourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceId to be of type string, got %T instead", value)
+				}
+				sv.DataSourceId = ptr.String(jtv)
+			}
+
 		case "ErrorCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9229,6 +9238,15 @@ func awsAwsjson11_deserializeDocumentBatchGetDocumentStatusResponseError(v **typ
 
 	for key, value := range shape {
 		switch key {
+		case "DataSourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceId to be of type string, got %T instead", value)
+				}
+				sv.DataSourceId = ptr.String(jtv)
+			}
+
 		case "DocumentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9321,6 +9339,15 @@ func awsAwsjson11_deserializeDocumentBatchPutDocumentResponseFailedDocument(v **
 
 	for key, value := range shape {
 		switch key {
+		case "DataSourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceId to be of type string, got %T instead", value)
+				}
+				sv.DataSourceId = ptr.String(jtv)
+			}
+
 		case "ErrorCode":
 			if value != nil {
 				jtv, ok := value.(string)

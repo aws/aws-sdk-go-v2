@@ -7194,6 +7194,29 @@ func awsRestjson1_serializeDocumentAutoToolChoice(v *types.AutoToolChoice, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsDataCatalogTableNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBedrockDataAutomationConfiguration(v *types.BedrockDataAutomationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ParsingModality) > 0 {
+		ok := object.Key("parsingModality")
+		ok.String(string(v.ParsingModality))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBedrockEmbeddingModelConfiguration(v *types.BedrockEmbeddingModelConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7218,6 +7241,11 @@ func awsRestjson1_serializeDocumentBedrockFoundationModelConfiguration(v *types.
 	if v.ModelArn != nil {
 		ok := object.Key("modelArn")
 		ok.String(*v.ModelArn)
+	}
+
+	if len(v.ParsingModality) > 0 {
+		ok := object.Key("parsingModality")
+		ok.String(string(v.ParsingModality))
 	}
 
 	if v.ParsingPrompt != nil {
@@ -7444,6 +7472,36 @@ func awsRestjson1_serializeDocumentCrawlFilterConfiguration(v *types.CrawlFilter
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCuratedQueries(v []types.CuratedQuery, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCuratedQuery(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCuratedQuery(v *types.CuratedQuery, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NaturalLanguage != nil {
+		ok := object.Key("naturalLanguage")
+		ok.String(*v.NaturalLanguage)
+	}
+
+	if v.Sql != nil {
+		ok := object.Key("sql")
+		ok.String(*v.Sql)
 	}
 
 	return nil
@@ -8413,9 +8471,35 @@ func awsRestjson1_serializeDocumentIteratorFlowNodeConfiguration(v *types.Iterat
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKendraKnowledgeBaseConfiguration(v *types.KendraKnowledgeBaseConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KendraIndexArn != nil {
+		ok := object.Key("kendraIndexArn")
+		ok.String(*v.KendraIndexArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKnowledgeBaseConfiguration(v *types.KnowledgeBaseConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.KendraKnowledgeBaseConfiguration != nil {
+		ok := object.Key("kendraKnowledgeBaseConfiguration")
+		if err := awsRestjson1_serializeDocumentKendraKnowledgeBaseConfiguration(v.KendraKnowledgeBaseConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SqlKnowledgeBaseConfiguration != nil {
+		ok := object.Key("sqlKnowledgeBaseConfiguration")
+		if err := awsRestjson1_serializeDocumentSqlKnowledgeBaseConfiguration(v.SqlKnowledgeBaseConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
@@ -8823,6 +8907,13 @@ func awsRestjson1_serializeDocumentParameterMap(v map[string]types.ParameterDeta
 func awsRestjson1_serializeDocumentParsingConfiguration(v *types.ParsingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BedrockDataAutomationConfiguration != nil {
+		ok := object.Key("bedrockDataAutomationConfiguration")
+		if err := awsRestjson1_serializeDocumentBedrockDataAutomationConfiguration(v.BedrockDataAutomationConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.BedrockFoundationModelConfiguration != nil {
 		ok := object.Key("bedrockFoundationModelConfiguration")
@@ -9373,6 +9464,123 @@ func awsRestjson1_serializeDocumentPromptVariantList(v []types.PromptVariant, va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentQueryGenerationColumn(v *types.QueryGenerationColumn, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if len(v.Inclusion) > 0 {
+		ok := object.Key("inclusion")
+		ok.String(string(v.Inclusion))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQueryGenerationColumns(v []types.QueryGenerationColumn, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentQueryGenerationColumn(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQueryGenerationConfiguration(v *types.QueryGenerationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExecutionTimeoutSeconds != nil {
+		ok := object.Key("executionTimeoutSeconds")
+		ok.Integer(*v.ExecutionTimeoutSeconds)
+	}
+
+	if v.GenerationContext != nil {
+		ok := object.Key("generationContext")
+		if err := awsRestjson1_serializeDocumentQueryGenerationContext(v.GenerationContext, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQueryGenerationContext(v *types.QueryGenerationContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CuratedQueries != nil {
+		ok := object.Key("curatedQueries")
+		if err := awsRestjson1_serializeDocumentCuratedQueries(v.CuratedQueries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tables != nil {
+		ok := object.Key("tables")
+		if err := awsRestjson1_serializeDocumentQueryGenerationTables(v.Tables, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQueryGenerationTable(v *types.QueryGenerationTable, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Columns != nil {
+		ok := object.Key("columns")
+		if err := awsRestjson1_serializeDocumentQueryGenerationColumns(v.Columns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if len(v.Inclusion) > 0 {
+		ok := object.Key("inclusion")
+		ok.String(string(v.Inclusion))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQueryGenerationTables(v []types.QueryGenerationTable, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentQueryGenerationTable(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRdsConfiguration(v *types.RdsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9480,6 +9688,202 @@ func awsRestjson1_serializeDocumentRedisEnterpriseCloudFieldMapping(v *types.Red
 	if v.VectorField != nil {
 		ok := object.Key("vectorField")
 		ok.String(*v.VectorField)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftConfiguration(v *types.RedshiftConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.QueryEngineConfiguration != nil {
+		ok := object.Key("queryEngineConfiguration")
+		if err := awsRestjson1_serializeDocumentRedshiftQueryEngineConfiguration(v.QueryEngineConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryGenerationConfiguration != nil {
+		ok := object.Key("queryGenerationConfiguration")
+		if err := awsRestjson1_serializeDocumentQueryGenerationConfiguration(v.QueryGenerationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StorageConfigurations != nil {
+		ok := object.Key("storageConfigurations")
+		if err := awsRestjson1_serializeDocumentRedshiftQueryEngineStorageConfigurations(v.StorageConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftProvisionedAuthConfiguration(v *types.RedshiftProvisionedAuthConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseUser != nil {
+		ok := object.Key("databaseUser")
+		ok.String(*v.DatabaseUser)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	if v.UsernamePasswordSecretArn != nil {
+		ok := object.Key("usernamePasswordSecretArn")
+		ok.String(*v.UsernamePasswordSecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftProvisionedConfiguration(v *types.RedshiftProvisionedConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthConfiguration != nil {
+		ok := object.Key("authConfiguration")
+		if err := awsRestjson1_serializeDocumentRedshiftProvisionedAuthConfiguration(v.AuthConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClusterIdentifier != nil {
+		ok := object.Key("clusterIdentifier")
+		ok.String(*v.ClusterIdentifier)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftQueryEngineAwsDataCatalogStorageConfiguration(v *types.RedshiftQueryEngineAwsDataCatalogStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TableNames != nil {
+		ok := object.Key("tableNames")
+		if err := awsRestjson1_serializeDocumentAwsDataCatalogTableNames(v.TableNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftQueryEngineConfiguration(v *types.RedshiftQueryEngineConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProvisionedConfiguration != nil {
+		ok := object.Key("provisionedConfiguration")
+		if err := awsRestjson1_serializeDocumentRedshiftProvisionedConfiguration(v.ProvisionedConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ServerlessConfiguration != nil {
+		ok := object.Key("serverlessConfiguration")
+		if err := awsRestjson1_serializeDocumentRedshiftServerlessConfiguration(v.ServerlessConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftQueryEngineRedshiftStorageConfiguration(v *types.RedshiftQueryEngineRedshiftStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseName != nil {
+		ok := object.Key("databaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftQueryEngineStorageConfiguration(v *types.RedshiftQueryEngineStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsDataCatalogConfiguration != nil {
+		ok := object.Key("awsDataCatalogConfiguration")
+		if err := awsRestjson1_serializeDocumentRedshiftQueryEngineAwsDataCatalogStorageConfiguration(v.AwsDataCatalogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RedshiftConfiguration != nil {
+		ok := object.Key("redshiftConfiguration")
+		if err := awsRestjson1_serializeDocumentRedshiftQueryEngineRedshiftStorageConfiguration(v.RedshiftConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftQueryEngineStorageConfigurations(v []types.RedshiftQueryEngineStorageConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRedshiftQueryEngineStorageConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftServerlessAuthConfiguration(v *types.RedshiftServerlessAuthConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	if v.UsernamePasswordSecretArn != nil {
+		ok := object.Key("usernamePasswordSecretArn")
+		ok.String(*v.UsernamePasswordSecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftServerlessConfiguration(v *types.RedshiftServerlessConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthConfiguration != nil {
+		ok := object.Key("authConfiguration")
+		if err := awsRestjson1_serializeDocumentRedshiftServerlessAuthConfiguration(v.AuthConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkgroupArn != nil {
+		ok := object.Key("workgroupArn")
+		ok.String(*v.WorkgroupArn)
 	}
 
 	return nil
@@ -9820,6 +10224,25 @@ func awsRestjson1_serializeDocumentSpecificToolChoice(v *types.SpecificToolChoic
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSqlKnowledgeBaseConfiguration(v *types.SqlKnowledgeBaseConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RedshiftConfiguration != nil {
+		ok := object.Key("redshiftConfiguration")
+		if err := awsRestjson1_serializeDocumentRedshiftConfiguration(v.RedshiftConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentStopSequences(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -9929,6 +10352,52 @@ func awsRestjson1_serializeDocumentStringListValue(v []string, value smithyjson.
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSupplementalDataStorageConfiguration(v *types.SupplementalDataStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StorageLocations != nil {
+		ok := object.Key("storageLocations")
+		if err := awsRestjson1_serializeDocumentSupplementalDataStorageLocations(v.StorageLocations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSupplementalDataStorageLocation(v *types.SupplementalDataStorageLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Location != nil {
+		ok := object.Key("s3Location")
+		if err := awsRestjson1_serializeDocumentS3Location(v.S3Location, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSupplementalDataStorageLocations(v []types.SupplementalDataStorageLocation, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSupplementalDataStorageLocation(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -10246,6 +10715,13 @@ func awsRestjson1_serializeDocumentVectorKnowledgeBaseConfiguration(v *types.Vec
 	if v.EmbeddingModelConfiguration != nil {
 		ok := object.Key("embeddingModelConfiguration")
 		if err := awsRestjson1_serializeDocumentEmbeddingModelConfiguration(v.EmbeddingModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SupplementalDataStorageConfiguration != nil {
+		ok := object.Key("supplementalDataStorageConfiguration")
+		if err := awsRestjson1_serializeDocumentSupplementalDataStorageConfiguration(v.SupplementalDataStorageConfiguration, ok); err != nil {
 			return err
 		}
 	}

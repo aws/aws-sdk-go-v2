@@ -186,6 +186,9 @@ func ExampleGuardrailContentBlock_outputUsage() {
 	var union types.GuardrailContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.GuardrailContentBlockMemberImage:
+		_ = v.Value // Value is types.GuardrailImageBlock
+
 	case *types.GuardrailContentBlockMemberText:
 		_ = v.Value // Value is types.GuardrailTextBlock
 
@@ -198,12 +201,16 @@ func ExampleGuardrailContentBlock_outputUsage() {
 	}
 }
 
+var _ *types.GuardrailImageBlock
 var _ *types.GuardrailTextBlock
 
 func ExampleGuardrailConverseContentBlock_outputUsage() {
 	var union types.GuardrailConverseContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.GuardrailConverseContentBlockMemberImage:
+		_ = v.Value // Value is types.GuardrailConverseImageBlock
+
 	case *types.GuardrailConverseContentBlockMemberText:
 		_ = v.Value // Value is types.GuardrailConverseTextBlock
 
@@ -217,6 +224,43 @@ func ExampleGuardrailConverseContentBlock_outputUsage() {
 }
 
 var _ *types.GuardrailConverseTextBlock
+var _ *types.GuardrailConverseImageBlock
+
+func ExampleGuardrailConverseImageSource_outputUsage() {
+	var union types.GuardrailConverseImageSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GuardrailConverseImageSourceMemberBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []byte
+
+func ExampleGuardrailImageSource_outputUsage() {
+	var union types.GuardrailImageSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GuardrailImageSourceMemberBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []byte
 
 func ExampleImageSource_outputUsage() {
 	var union types.ImageSource

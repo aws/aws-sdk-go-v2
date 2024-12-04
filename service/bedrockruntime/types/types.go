@@ -419,6 +419,9 @@ type ConverseStreamTrace struct {
 	// The guardrail trace object.
 	Guardrail *GuardrailTraceAssessment
 
+	// The request's prompt router.
+	PromptRouter *PromptRouterTrace
+
 	noSmithyDocumentSerde
 }
 
@@ -429,6 +432,9 @@ type ConverseTrace struct {
 
 	// The guardrail trace object.
 	Guardrail *GuardrailTraceAssessment
+
+	// The request's prompt router.
+	PromptRouter *PromptRouterTrace
 
 	noSmithyDocumentSerde
 }
@@ -537,10 +543,20 @@ type GuardrailConfiguration struct {
 //
 // The following types satisfy this interface:
 //
+//	GuardrailContentBlockMemberImage
 //	GuardrailContentBlockMemberText
 type GuardrailContentBlock interface {
 	isGuardrailContentBlock()
 }
+
+// Image within guardrail content block to be evaluated by the guardrail.
+type GuardrailContentBlockMemberImage struct {
+	Value GuardrailImageBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailContentBlockMemberImage) isGuardrailContentBlock() {}
 
 // Text within content block to be evaluated by the guardrail.
 type GuardrailContentBlockMemberText struct {
@@ -626,6 +642,7 @@ type GuardrailContextualGroundingPolicyAssessment struct {
 //
 // The following types satisfy this interface:
 //
+//	GuardrailConverseContentBlockMemberImage
 //	GuardrailConverseContentBlockMemberText
 //
 // [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
@@ -633,6 +650,15 @@ type GuardrailContextualGroundingPolicyAssessment struct {
 type GuardrailConverseContentBlock interface {
 	isGuardrailConverseContentBlock()
 }
+
+// Image within converse content block to be evaluated by the guardrail.
+type GuardrailConverseContentBlockMemberImage struct {
+	Value GuardrailConverseImageBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailConverseContentBlockMemberImage) isGuardrailConverseContentBlock() {}
 
 // The text to guard.
 type GuardrailConverseContentBlockMemberText struct {
@@ -642,6 +668,40 @@ type GuardrailConverseContentBlockMemberText struct {
 }
 
 func (*GuardrailConverseContentBlockMemberText) isGuardrailConverseContentBlock() {}
+
+// An image block that contains images that you want to assess with a guardrail.
+type GuardrailConverseImageBlock struct {
+
+	// The format details for the image type of the guardrail converse image block.
+	//
+	// This member is required.
+	Format GuardrailConverseImageFormat
+
+	// The image source (image bytes) of the guardrail converse image block.
+	//
+	// This member is required.
+	Source GuardrailConverseImageSource
+
+	noSmithyDocumentSerde
+}
+
+// The image source (image bytes) of the guardrail converse image source.
+//
+// The following types satisfy this interface:
+//
+//	GuardrailConverseImageSourceMemberBytes
+type GuardrailConverseImageSource interface {
+	isGuardrailConverseImageSource()
+}
+
+// The raw image bytes for the image.
+type GuardrailConverseImageSourceMemberBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailConverseImageSourceMemberBytes) isGuardrailConverseImageSource() {}
 
 // A text block that contains text that you want to assess with a guardrail. For
 // more information, see GuardrailConverseContentBlock.
@@ -660,6 +720,10 @@ type GuardrailConverseTextBlock struct {
 
 // The action of the guardrail coverage details.
 type GuardrailCoverage struct {
+
+	// The guardrail coverage for images (the number of images that guardrails
+	// guarded).
+	Images *GuardrailImageCoverage
 
 	// The text characters of the guardrail coverage details.
 	TextCharacters *GuardrailTextCharactersCoverage
@@ -682,6 +746,55 @@ type GuardrailCustomWord struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contain an image which user wants guarded. This block is accepted by the
+// guardrails independent API.
+type GuardrailImageBlock struct {
+
+	// The format details for the file type of the image blocked by the guardrail.
+	//
+	// This member is required.
+	Format GuardrailImageFormat
+
+	// The image source (image bytes) details of the image blocked by the guardrail.
+	//
+	// This member is required.
+	Source GuardrailImageSource
+
+	noSmithyDocumentSerde
+}
+
+// The details of the guardrail image coverage.
+type GuardrailImageCoverage struct {
+
+	// The count (integer) of images guardrails guarded.
+	Guarded *int32
+
+	// Represents the total number of images (integer) that were in the request
+	// (guarded and unguarded).
+	Total *int32
+
+	noSmithyDocumentSerde
+}
+
+// The image source (image bytes) of the guardrail image source. Object used in
+// independent api.
+//
+// The following types satisfy this interface:
+//
+//	GuardrailImageSourceMemberBytes
+type GuardrailImageSource interface {
+	isGuardrailImageSource()
+}
+
+// The bytes details of the guardrail image source. Object used in independent api.
+type GuardrailImageSourceMemberBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailImageSourceMemberBytes) isGuardrailImageSource() {}
 
 // The invocation metrics for the guardrail.
 type GuardrailInvocationMetrics struct {
@@ -1089,6 +1202,15 @@ type PerformanceConfiguration struct {
 
 	// To use a latency-optimized version of the model, set to optimized .
 	Latency PerformanceConfigLatency
+
+	noSmithyDocumentSerde
+}
+
+// A prompt router trace.
+type PromptRouterTrace struct {
+
+	// The ID of the invoked model.
+	InvokedModelId *string
 
 	noSmithyDocumentSerde
 }
@@ -1549,6 +1671,8 @@ func (*UnknownUnionMember) isConverseStreamOutput()          {}
 func (*UnknownUnionMember) isDocumentSource()                {}
 func (*UnknownUnionMember) isGuardrailContentBlock()         {}
 func (*UnknownUnionMember) isGuardrailConverseContentBlock() {}
+func (*UnknownUnionMember) isGuardrailConverseImageSource()  {}
+func (*UnknownUnionMember) isGuardrailImageSource()          {}
 func (*UnknownUnionMember) isImageSource()                   {}
 func (*UnknownUnionMember) isPromptVariableValues()          {}
 func (*UnknownUnionMember) isResponseStream()                {}

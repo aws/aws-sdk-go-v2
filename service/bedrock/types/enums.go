@@ -283,6 +283,25 @@ func (GuardrailManagedWordsType) Values() []GuardrailManagedWordsType {
 	}
 }
 
+type GuardrailModality string
+
+// Enum values for GuardrailModality
+const (
+	GuardrailModalityText  GuardrailModality = "TEXT"
+	GuardrailModalityImage GuardrailModality = "IMAGE"
+)
+
+// Values returns all known values for GuardrailModality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailModality) Values() []GuardrailModality {
+	return []GuardrailModality{
+		"TEXT",
+		"IMAGE",
+	}
+}
+
 type GuardrailPiiEntityType string
 
 // Enum values for GuardrailPiiEntityType
@@ -623,6 +642,42 @@ func (ModelModality) Values() []ModelModality {
 	}
 }
 
+type PromptRouterStatus string
+
+// Enum values for PromptRouterStatus
+const (
+	PromptRouterStatusAvailable PromptRouterStatus = "AVAILABLE"
+)
+
+// Values returns all known values for PromptRouterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PromptRouterStatus) Values() []PromptRouterStatus {
+	return []PromptRouterStatus{
+		"AVAILABLE",
+	}
+}
+
+type PromptRouterType string
+
+// Enum values for PromptRouterType
+const (
+	PromptRouterTypeCustom  PromptRouterType = "custom"
+	PromptRouterTypeDefault PromptRouterType = "default"
+)
+
+// Values returns all known values for PromptRouterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PromptRouterType) Values() []PromptRouterType {
+	return []PromptRouterType{
+		"custom",
+		"default",
+	}
+}
+
 type ProvisionedModelStatus string
 
 // Enum values for ProvisionedModelStatus
@@ -785,5 +840,24 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"Ascending",
 		"Descending",
+	}
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusRegistered           Status = "REGISTERED"
+	StatusIncompatibleEndpoint Status = "INCOMPATIBLE_ENDPOINT"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"REGISTERED",
+		"INCOMPATIBLE_ENDPOINT",
 	}
 }

@@ -65,14 +65,15 @@ type CreateIndexInput struct {
 
 	// The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for
 	// indexes intended for development, testing, or proof of concept. Use
-	// ENTERPRISE_EDITION for production. Once you set the edition for an index, it
-	// can't be changed.
+	// ENTERPRISE_EDITION for production. Use GEN_AI_ENTERPRISE_EDITION for creating
+	// generative AI applications. Once you set the edition for an index, it can't be
+	// changed.
 	//
 	// The Edition parameter is optional. If you don't supply a value, the default is
 	// ENTERPRISE_EDITION .
 	//
-	// For more information on quota limits for Enterprise and Developer editions, see [Quotas]
-	// .
+	// For more information on quota limits for Gen AI Enterprise Edition, Enterprise
+	// Edition, and Developer Edition indices, see [Quotas].
 	//
 	// [Quotas]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
 	Edition types.IndexEdition
@@ -89,6 +90,12 @@ type CreateIndexInput struct {
 
 	// The user context policy.
 	//
+	// If you're using an Amazon Kendra Gen AI Enterprise Edition index, you can only
+	// use ATTRIBUTE_FILTER to filter search results by user context. If you're using
+	// an Amazon Kendra Gen AI Enterprise Edition index and you try to use USER_TOKEN
+	// to configure user context policy, Amazon Kendra returns a ValidationException
+	// error.
+	//
 	// ATTRIBUTE_FILTER All indexed content is searchable and displayable for all
 	// users. If you want to filter search results on user context, you can use the
 	// attribute filters of _user_id and _group_ids or you can provide user and group
@@ -103,10 +110,17 @@ type CreateIndexInput struct {
 	// this, see [UserGroupResolutionConfiguration]. This is useful for user context filtering, where search results are
 	// filtered based on the user or their group access to documents.
 	//
+	// If you're using an Amazon Kendra Gen AI Enterprise Edition index,
+	// UserGroupResolutionConfiguration isn't supported.
+	//
 	// [UserGroupResolutionConfiguration]: https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration.
+	//
+	// If you're using an Amazon Kendra Gen AI Enterprise Edition index and you try to
+	// use UserTokenConfigurations to configure user context policy, Amazon Kendra
+	// returns a ValidationException error.
 	UserTokenConfigurations []types.UserTokenConfiguration
 
 	noSmithyDocumentSerde

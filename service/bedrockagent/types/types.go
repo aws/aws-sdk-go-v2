@@ -837,6 +837,17 @@ type AutoToolChoice struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for using Amazon Bedrock Data Automation as the parser
+// for ingesting your data sources.
+type BedrockDataAutomationConfiguration struct {
+
+	// Specifies whether to enable parsing of multimodal data, including both text
+	// and/or images.
+	ParsingModality ParsingModality
+
+	noSmithyDocumentSerde
+}
+
 // The vector configuration details for the Bedrock embeddings model.
 type BedrockEmbeddingModelConfiguration struct {
 
@@ -861,12 +872,16 @@ type BedrockEmbeddingModelConfiguration struct {
 // [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 type BedrockFoundationModelConfiguration struct {
 
-	// The ARN of the foundation model or [inference profile].
+	// The ARN of the foundation model or [inference profile] to use for parsing.
 	//
 	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	//
 	// This member is required.
 	ModelArn *string
+
+	// Specifies whether to enable parsing of multimodal data, including both text
+	// and/or images.
+	ParsingModality ParsingModality
 
 	// Instructions for interpreting the contents of a document.
 	ParsingPrompt *ParsingPrompt
@@ -1122,6 +1137,23 @@ type CrawlFilterConfiguration struct {
 	// The configuration of filtering certain objects or content types of the data
 	// source.
 	PatternObjectFilter *PatternObjectFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a query, each of which defines information about
+// example queries to help the query engine generate appropriate SQL queries.
+type CuratedQuery struct {
+
+	// An example natural language query.
+	//
+	// This member is required.
+	NaturalLanguage *string
+
+	// The SQL equivalent of the natural language query.
+	//
+	// This member is required.
+	Sql *string
 
 	noSmithyDocumentSerde
 }
@@ -2655,6 +2687,17 @@ type IteratorFlowNodeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Settings for an Amazon Kendra knowledge base.
+type KendraKnowledgeBaseConfiguration struct {
+
+	// The ARN of the Amazon Kendra index.
+	//
+	// This member is required.
+	KendraIndexArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a knowledge base.
 type KnowledgeBase struct {
 
@@ -2704,11 +2747,6 @@ type KnowledgeBase struct {
 	// This member is required.
 	Status KnowledgeBaseStatus
 
-	// Contains details about the storage configuration of the knowledge base.
-	//
-	// This member is required.
-	StorageConfiguration *StorageConfiguration
-
 	// The time the knowledge base was last updated.
 	//
 	// This member is required.
@@ -2719,6 +2757,9 @@ type KnowledgeBase struct {
 
 	// A list of reasons that the API operation on the knowledge base failed.
 	FailureReasons []string
+
+	// Contains details about the storage configuration of the knowledge base.
+	StorageConfiguration *StorageConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2731,6 +2772,12 @@ type KnowledgeBaseConfiguration struct {
 	//
 	// This member is required.
 	Type KnowledgeBaseType
+
+	// Settings for an Amazon Kendra knowledge base.
+	KendraKnowledgeBaseConfiguration *KendraKnowledgeBaseConfiguration
+
+	// Specifies configurations for a knowledge base connected to an SQL database.
+	SqlKnowledgeBaseConfiguration *SqlKnowledgeBaseConfiguration
 
 	// Contains details about the model that's used to convert the data source into
 	// vector embeddings.
@@ -3338,26 +3385,16 @@ type ParameterDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for parsing document contents. By default, the service converts the
-// contents of each document into text before splitting it into chunks. To improve
-// processing of PDF files with tables and images, you can configure the data
-// source to convert the pages of text into images and use a model to describe the
-// contents of each page.
+// Settings for parsing document contents. If you exclude this field, the default
+// parser converts the contents of each document into text before splitting it into
+// chunks. Specify the parsing strategy to use in the parsingStrategy field and
+// include the relevant configuration, or omit it to use the Amazon Bedrock default
+// parser. For more information, see [Parsing options for your data source].
 //
-// To use a model to parse PDF documents, set the parsing strategy to
-// BEDROCK_FOUNDATION_MODEL and specify the model or [inference profile] to use by ARN. You can also
-// override the default parsing prompt with instructions for how to interpret
-// images and tables in your documents. The following models are supported.
+// If you specify BEDROCK_DATA_AUTOMATION or BEDROCK_FOUNDATION_MODEL and it fails
+// to parse a file, the Amazon Bedrock default parser will be used instead.
 //
-//   - Anthropic Claude 3 Sonnet - anthropic.claude-3-sonnet-20240229-v1:0
-//
-//   - Anthropic Claude 3 Haiku - anthropic.claude-3-haiku-20240307-v1:0
-//
-// You can get the ARN of a model with the [ListFoundationModels] action. Standard model usage charges
-// apply for the foundation model parsing strategy.
-//
-// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
-// [ListFoundationModels]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListFoundationModels.html
+// [Parsing options for your data source]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-advanced-parsing.html
 type ParsingConfiguration struct {
 
 	// The parsing strategy for the data source.
@@ -3365,7 +3402,14 @@ type ParsingConfiguration struct {
 	// This member is required.
 	ParsingStrategy ParsingStrategy
 
-	// Settings for a foundation model used to parse documents for a data source.
+	// If you specify BEDROCK_DATA_AUTOMATION as the parsing strategy for ingesting
+	// your data source, use this object to modify configurations for using the Amazon
+	// Bedrock Data Automation parser.
+	BedrockDataAutomationConfiguration *BedrockDataAutomationConfiguration
+
+	// If you specify BEDROCK_FOUNDATION_MODEL as the parsing strategy for ingesting
+	// your data source, use this object to modify configurations for using a
+	// foundation model to parse documents.
 	BedrockFoundationModelConfiguration *BedrockFoundationModelConfiguration
 
 	noSmithyDocumentSerde
@@ -3865,6 +3909,78 @@ type PromptVariant struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a column in the current table for the query engine
+// to consider.
+type QueryGenerationColumn struct {
+
+	// A description of the column that helps the query engine understand the contents
+	// of the column.
+	Description *string
+
+	// Specifies whether to include or exclude the column during query generation. If
+	// you specify EXCLUDE , the column will be ignored. If you specify INCLUDE , all
+	// other columns in the table will be ignored.
+	Inclusion IncludeExclude
+
+	// The name of the column for which the other fields in this object apply.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for query generation. For more information, see [Build a knowledge base by connecting to a structured data source] in the
+// Amazon Bedrock User Guide..
+//
+// [Build a knowledge base by connecting to a structured data source]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html
+type QueryGenerationConfiguration struct {
+
+	// The time after which query generation will time out.
+	ExecutionTimeoutSeconds *int32
+
+	// Specifies configurations for context to use during query generation.
+	GenerationContext *QueryGenerationContext
+
+	noSmithyDocumentSerde
+}
+
+// >Contains configurations for context to use during query generation.
+type QueryGenerationContext struct {
+
+	// An array of objects, each of which defines information about example queries to
+	// help the query engine generate appropriate SQL queries.
+	CuratedQueries []CuratedQuery
+
+	// An array of objects, each of which defines information about a table in the
+	// database.
+	Tables []QueryGenerationTable
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a table for the query engine to consider.
+type QueryGenerationTable struct {
+
+	// The name of the table for which the other fields in this object apply.
+	//
+	// This member is required.
+	Name *string
+
+	// An array of objects, each of which defines information about a column in the
+	// table.
+	Columns []QueryGenerationColumn
+
+	// A description of the table that helps the query engine understand the contents
+	// of the table.
+	Description *string
+
+	// Specifies whether to include or exclude the table during query generation. If
+	// you specify EXCLUDE , the table will be ignored. If you specify INCLUDE , all
+	// other tables will be ignored.
+	Inclusion IncludeExclude
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the storage configuration of the knowledge base in
 // Amazon RDS. For more information, see [Create a vector index in Amazon RDS].
 //
@@ -3983,6 +4099,163 @@ type RedisEnterpriseCloudFieldMapping struct {
 	//
 	// This member is required.
 	VectorField *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for an Amazon Redshift database. For more information,
+// see [Build a knowledge base by connecting to a structured data source]in the Amazon Bedrock User Guide.
+//
+// [Build a knowledge base by connecting to a structured data source]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html
+type RedshiftConfiguration struct {
+
+	// Specifies configurations for an Amazon Redshift query engine.
+	//
+	// This member is required.
+	QueryEngineConfiguration *RedshiftQueryEngineConfiguration
+
+	// Specifies configurations for Amazon Redshift database storage.
+	//
+	// This member is required.
+	StorageConfigurations []RedshiftQueryEngineStorageConfiguration
+
+	// Specifies configurations for generating queries.
+	QueryGenerationConfiguration *QueryGenerationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for authentication to an Amazon Redshift provisioned
+// data warehouse. Specify the type of authentication to use in the type field and
+// include the corresponding field. If you specify IAM authentication, you don't
+// need to include another field.
+type RedshiftProvisionedAuthConfiguration struct {
+
+	// The type of authentication to use.
+	//
+	// This member is required.
+	Type RedshiftProvisionedAuthType
+
+	// The database username for authentication to an Amazon Redshift provisioned data
+	// warehouse.
+	DatabaseUser *string
+
+	// The ARN of an Secrets Manager secret for authentication.
+	UsernamePasswordSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a provisioned Amazon Redshift query engine.
+type RedshiftProvisionedConfiguration struct {
+
+	// Specifies configurations for authentication to Amazon Redshift.
+	//
+	// This member is required.
+	AuthConfiguration *RedshiftProvisionedAuthConfiguration
+
+	// The ID of the Amazon Redshift cluster.
+	//
+	// This member is required.
+	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for storage in Glue Data Catalog.
+type RedshiftQueryEngineAwsDataCatalogStorageConfiguration struct {
+
+	// A list of names of the tables to use.
+	//
+	// This member is required.
+	TableNames []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for an Amazon Redshift query engine. Specify the type
+// of query engine in type and include the corresponding field. For more
+// information, see [Build a knowledge base by connecting to a structured data source]in the Amazon Bedrock User Guide.
+//
+// [Build a knowledge base by connecting to a structured data source]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html
+type RedshiftQueryEngineConfiguration struct {
+
+	// The type of query engine.
+	//
+	// This member is required.
+	Type RedshiftQueryEngineType
+
+	// Specifies configurations for a provisioned Amazon Redshift query engine.
+	ProvisionedConfiguration *RedshiftProvisionedConfiguration
+
+	// Specifies configurations for a serverless Amazon Redshift query engine.
+	ServerlessConfiguration *RedshiftServerlessConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for storage in Amazon Redshift.
+type RedshiftQueryEngineRedshiftStorageConfiguration struct {
+
+	// The name of the Amazon Redshift database.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for Amazon Redshift data storage. Specify the data
+// storage service to use in the type field and include the corresponding field.
+// For more information, see [Build a knowledge base by connecting to a structured data source]in the Amazon Bedrock User Guide.
+//
+// [Build a knowledge base by connecting to a structured data source]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html
+type RedshiftQueryEngineStorageConfiguration struct {
+
+	// The data storage service to use.
+	//
+	// This member is required.
+	Type RedshiftQueryEngineStorageType
+
+	// Specifies configurations for storage in Glue Data Catalog.
+	AwsDataCatalogConfiguration *RedshiftQueryEngineAwsDataCatalogStorageConfiguration
+
+	// Specifies configurations for storage in Amazon Redshift.
+	RedshiftConfiguration *RedshiftQueryEngineRedshiftStorageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Specifies configurations for authentication to a Redshift Serverless. Specify
+// the type of authentication to use in the type field and include the
+// corresponding field. If you specify IAM authentication, you don't need to
+// include another field.
+type RedshiftServerlessAuthConfiguration struct {
+
+	// The type of authentication to use.
+	//
+	// This member is required.
+	Type RedshiftServerlessAuthType
+
+	// The ARN of an Secrets Manager secret for authentication.
+	UsernamePasswordSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for authentication to Amazon Redshift Serverless.
+type RedshiftServerlessConfiguration struct {
+
+	// Specifies configurations for authentication to an Amazon Redshift provisioned
+	// data warehouse.
+	//
+	// This member is required.
+	AuthConfiguration *RedshiftServerlessAuthConfiguration
+
+	// The ARN of the Amazon Redshift workgroup.
+	//
+	// This member is required.
+	WorkgroupArn *string
 
 	noSmithyDocumentSerde
 }
@@ -4276,6 +4549,25 @@ type SpecificToolChoice struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for a knowledge base connected to an SQL database.
+// Specify the SQL database type in the type field and include the corresponding
+// field. For more information, see [Build a knowledge base by connecting to a structured data source]in the Amazon Bedrock User Guide.
+//
+// [Build a knowledge base by connecting to a structured data source]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html
+type SqlKnowledgeBaseConfiguration struct {
+
+	// The type of SQL database to connect to the knowledge base.
+	//
+	// This member is required.
+	Type QueryEngineType
+
+	// Specifies configurations for a knowledge base connected to an Amazon Redshift
+	// database.
+	RedshiftConfiguration *RedshiftConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Contains the storage configuration of the knowledge base.
 type StorageConfiguration struct {
 
@@ -4351,6 +4643,35 @@ type StorageFlowNodeServiceConfigurationMemberS3 struct {
 }
 
 func (*StorageFlowNodeServiceConfigurationMemberS3) isStorageFlowNodeServiceConfiguration() {}
+
+// Specifies configurations for the storage location of the images extracted from
+// multimodal documents in your data source. These images can be retrieved and
+// returned to the end user.
+type SupplementalDataStorageConfiguration struct {
+
+	// A list of objects specifying storage locations for images extracted from
+	// multimodal documents in your data source.
+	//
+	// This member is required.
+	StorageLocations []SupplementalDataStorageLocation
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a storage location for images extracted from
+// multimodal documents in your data source.
+type SupplementalDataStorageLocation struct {
+
+	// Specifies the storage service used for this location.
+	//
+	// This member is required.
+	Type SupplementalDataStorageLocationType
+
+	// Contains information about the Amazon S3 location for the extracted images.
+	S3Location *S3Location
+
+	noSmithyDocumentSerde
+}
 
 // Contains a system prompt to provide context to the model or to describe how it
 // should behave. For more information, see [Create a prompt using Prompt management].
@@ -4703,7 +5024,8 @@ type VectorIngestionConfiguration struct {
 	// A custom document transformer for parsed data source documents.
 	CustomTransformationConfiguration *CustomTransformationConfiguration
 
-	// A custom parser for data source documents.
+	// Configurations for a parser to use for parsing documents in your data source.
+	// If you exclude this field, the default parser will be used.
 	ParsingConfiguration *ParsingConfiguration
 
 	noSmithyDocumentSerde
@@ -4722,6 +5044,14 @@ type VectorKnowledgeBaseConfiguration struct {
 	// The embeddings model configuration details for the vector model used in
 	// Knowledge Base.
 	EmbeddingModelConfiguration *EmbeddingModelConfiguration
+
+	// If you include multimodal data from your data source, use this object to
+	// specify configurations for the storage location of the images extracted from
+	// your documents. These images can be retrieved and returned to the end user. They
+	// can also be used in generation when using [RetrieveAndGenerate].
+	//
+	// [RetrieveAndGenerate]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html
+	SupplementalDataStorageConfiguration *SupplementalDataStorageConfiguration
 
 	noSmithyDocumentSerde
 }

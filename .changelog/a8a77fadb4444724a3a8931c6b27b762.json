@@ -1,0 +1,8 @@
+{
+    "id": "a8a77fad-b444-4724-a3a8-931c6b27b762",
+    "type": "feature",
+    "description": "Amazon SageMaker HyperPod launched task governance to help customers maximize accelerator utilization for model development and flexible training plans to meet training timelines and budget while reducing weeks of training time. AI apps from AWS partner is now available in SageMaker.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

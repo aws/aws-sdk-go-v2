@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a group so that all users and sub groups that belong to the group can
-// no longer access documents only available to that group.
+// Deletes a group so that all users that belong to the group can no longer access
+// documents only available to that group.
 //
 // For example, after deleting the group "Summer Interns", all interns who
 // belonged to that group no longer see intern-only documents in their search

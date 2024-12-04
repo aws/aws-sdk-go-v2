@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes an FAQ from an index.
+// Removes a FAQ from an index.
 func (c *Client) DeleteFaq(ctx context.Context, params *DeleteFaqInput, optFns ...func(*Options)) (*DeleteFaqOutput, error) {
 	if params == nil {
 		params = &DeleteFaqInput{}

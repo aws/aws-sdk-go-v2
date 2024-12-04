@@ -30,6 +30,26 @@ func (m *validateOpDeleteAgentMemory) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGenerateQuery struct {
+}
+
+func (*validateOpGenerateQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAgentMemory struct {
 }
 
@@ -212,6 +232,10 @@ func (m *validateOpRetrieve) HandleInitialize(ctx context.Context, in middleware
 
 func addOpDeleteAgentMemoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAgentMemory{}, middleware.After)
+}
+
+func addOpGenerateQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateQuery{}, middleware.After)
 }
 
 func addOpGetAgentMemoryValidationMiddleware(stack *middleware.Stack) error {
@@ -1175,6 +1199,24 @@ func validatePromptOverrideConfiguration(v *types.PromptOverrideConfiguration) e
 	}
 }
 
+func validateQueryGenerationInput(v *types.QueryGenerationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryGenerationInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateQueryTransformationConfiguration(v *types.QueryTransformationConfiguration) error {
 	if v == nil {
 		return nil
@@ -1570,6 +1612,61 @@ func validateTextPrompt(v *types.TextPrompt) error {
 	}
 }
 
+func validateTextToSqlConfiguration(v *types.TextToSqlConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextToSqlConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.KnowledgeBaseConfiguration != nil {
+		if err := validateTextToSqlKnowledgeBaseConfiguration(v.KnowledgeBaseConfiguration); err != nil {
+			invalidParams.AddNested("KnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextToSqlKnowledgeBaseConfiguration(v *types.TextToSqlKnowledgeBaseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextToSqlKnowledgeBaseConfiguration"}
+	if v.KnowledgeBaseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformationConfiguration(v *types.TransformationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformationConfiguration"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if v.TextToSqlConfiguration != nil {
+		if err := validateTextToSqlConfiguration(v.TextToSqlConfiguration); err != nil {
+			invalidParams.AddNested("TextToSqlConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVectorSearchBedrockRerankingConfiguration(v *types.VectorSearchBedrockRerankingConfiguration) error {
 	if v == nil {
 		return nil
@@ -1639,6 +1736,32 @@ func validateOpDeleteAgentMemoryInput(v *DeleteAgentMemoryInput) error {
 	}
 	if v.AgentAliasId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGenerateQueryInput(v *GenerateQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateQueryInput"}
+	if v.QueryGenerationInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryGenerationInput"))
+	} else if v.QueryGenerationInput != nil {
+		if err := validateQueryGenerationInput(v.QueryGenerationInput); err != nil {
+			invalidParams.AddNested("QueryGenerationInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TransformationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransformationConfiguration"))
+	} else if v.TransformationConfiguration != nil {
+		if err := validateTransformationConfiguration(v.TransformationConfiguration); err != nil {
+			invalidParams.AddNested("TransformationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

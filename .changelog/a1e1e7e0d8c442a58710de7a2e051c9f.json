@@ -1,0 +1,8 @@
+{
+    "id": "a1e1e7e0-d8c4-42a5-8710-de7a2e051c9f",
+    "type": "feature",
+    "description": "This release adds GenAI Index in Amazon Kendra for Retrieval Augmented Generation (RAG) and intelligent search. With the Kendra GenAI Index, customers get high retrieval accuracy powered by the latest information retrieval technologies and semantic models.",
+    "modules": [
+        "service/kendra"
+    ]
+}

@@ -66,8 +66,8 @@ type UpdateDataSourceInput struct {
 	// A new name for the data source connector.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data
-	// source and required resources. For more information, see [IAM roles for Amazon Kendra].
+	// The Amazon Resource Name (ARN) of an IAM role with permission to access the
+	// data source and required resources. For more information, see [IAM roles for Amazon Kendra].
 	//
 	// [IAM roles for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
 	RoleArn *string

@@ -232,6 +232,23 @@ func (FlowCompletionReason) Values() []FlowCompletionReason {
 	}
 }
 
+type GeneratedQueryType string
+
+// Enum values for GeneratedQueryType
+const (
+	GeneratedQueryTypeRedshiftSql GeneratedQueryType = "REDSHIFT_SQL"
+)
+
+// Values returns all known values for GeneratedQueryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GeneratedQueryType) Values() []GeneratedQueryType {
+	return []GeneratedQueryType{
+		"REDSHIFT_SQL",
+	}
+}
+
 type GuadrailAction string
 
 // Enum values for GuadrailAction
@@ -504,6 +521,23 @@ func (GuardrailWordPolicyAction) Values() []GuardrailWordPolicyAction {
 	}
 }
 
+type InputQueryType string
+
+// Enum values for InputQueryType
+const (
+	InputQueryTypeText InputQueryType = "TEXT"
+)
+
+// Values returns all known values for InputQueryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InputQueryType) Values() []InputQueryType {
+	return []InputQueryType{
+		"TEXT",
+	}
+}
+
 type InvocationType string
 
 // Enum values for InvocationType
@@ -663,6 +697,23 @@ func (PromptType) Values() []PromptType {
 	}
 }
 
+type QueryTransformationMode string
+
+// Enum values for QueryTransformationMode
+const (
+	QueryTransformationModeTextToSql QueryTransformationMode = "TEXT_TO_SQL"
+)
+
+// Values returns all known values for QueryTransformationMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryTransformationMode) Values() []QueryTransformationMode {
+	return []QueryTransformationMode{
+		"TEXT_TO_SQL",
+	}
+}
+
 type QueryTransformationType string
 
 // Enum values for QueryTransformationType
@@ -808,6 +859,55 @@ func (ResponseState) Values() []ResponseState {
 	}
 }
 
+type RetrievalResultContentColumnType string
+
+// Enum values for RetrievalResultContentColumnType
+const (
+	RetrievalResultContentColumnTypeBlob    RetrievalResultContentColumnType = "BLOB"
+	RetrievalResultContentColumnTypeBoolean RetrievalResultContentColumnType = "BOOLEAN"
+	RetrievalResultContentColumnTypeDouble  RetrievalResultContentColumnType = "DOUBLE"
+	RetrievalResultContentColumnTypeNull    RetrievalResultContentColumnType = "NULL"
+	RetrievalResultContentColumnTypeLong    RetrievalResultContentColumnType = "LONG"
+	RetrievalResultContentColumnTypeString  RetrievalResultContentColumnType = "STRING"
+)
+
+// Values returns all known values for RetrievalResultContentColumnType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrievalResultContentColumnType) Values() []RetrievalResultContentColumnType {
+	return []RetrievalResultContentColumnType{
+		"BLOB",
+		"BOOLEAN",
+		"DOUBLE",
+		"NULL",
+		"LONG",
+		"STRING",
+	}
+}
+
+type RetrievalResultContentType string
+
+// Enum values for RetrievalResultContentType
+const (
+	RetrievalResultContentTypeText  RetrievalResultContentType = "TEXT"
+	RetrievalResultContentTypeImage RetrievalResultContentType = "IMAGE"
+	RetrievalResultContentTypeRow   RetrievalResultContentType = "ROW"
+)
+
+// Values returns all known values for RetrievalResultContentType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrievalResultContentType) Values() []RetrievalResultContentType {
+	return []RetrievalResultContentType{
+		"TEXT",
+		"IMAGE",
+		"ROW",
+	}
+}
+
 type RetrievalResultLocationType string
 
 // Enum values for RetrievalResultLocationType
@@ -818,6 +918,8 @@ const (
 	RetrievalResultLocationTypeSalesforce RetrievalResultLocationType = "SALESFORCE"
 	RetrievalResultLocationTypeSharepoint RetrievalResultLocationType = "SHAREPOINT"
 	RetrievalResultLocationTypeCustom     RetrievalResultLocationType = "CUSTOM"
+	RetrievalResultLocationTypeKendra     RetrievalResultLocationType = "KENDRA"
+	RetrievalResultLocationTypeSql        RetrievalResultLocationType = "SQL"
 )
 
 // Values returns all known values for RetrievalResultLocationType. Note that this
@@ -832,6 +934,8 @@ func (RetrievalResultLocationType) Values() []RetrievalResultLocationType {
 		"SALESFORCE",
 		"SHAREPOINT",
 		"CUSTOM",
+		"KENDRA",
+		"SQL",
 	}
 }
 
@@ -891,6 +995,23 @@ func (Source) Values() []Source {
 		"ACTION_GROUP",
 		"KNOWLEDGE_BASE",
 		"PARSER",
+	}
+}
+
+type TextToSqlConfigurationType string
+
+// Enum values for TextToSqlConfigurationType
+const (
+	TextToSqlConfigurationTypeKnowledgeBase TextToSqlConfigurationType = "KNOWLEDGE_BASE"
+)
+
+// Values returns all known values for TextToSqlConfigurationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TextToSqlConfigurationType) Values() []TextToSqlConfigurationType {
+	return []TextToSqlConfigurationType{
+		"KNOWLEDGE_BASE",
 	}
 }
 

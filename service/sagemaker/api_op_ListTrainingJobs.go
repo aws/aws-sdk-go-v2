@@ -84,6 +84,13 @@ type ListTrainingJobsInput struct {
 	// A filter that retrieves only training jobs with a specific status.
 	StatusEquals types.TrainingJobStatus
 
+	// The Amazon Resource Name (ARN); of the training plan to filter training jobs
+	// by. For more information about reserving GPU capacity for your SageMaker
+	// training jobs using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+	//
+	// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+	TrainingPlanArnEquals *string
+
 	// A filter that retrieves only training jobs with a specific warm pool status.
 	WarmPoolStatusEquals types.WarmPoolResourceStatus
 

@@ -2792,6 +2792,11 @@ func awsRestjson1_deserializeDocumentConverseStreamTrace(v **types.ConverseStrea
 				return err
 			}
 
+		case "promptRouter":
+			if err := awsRestjson1_deserializeDocumentPromptRouterTrace(&sv.PromptRouter, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3311,6 +3316,11 @@ func awsRestjson1_deserializeDocumentGuardrailCoverage(v **types.GuardrailCovera
 
 	for key, value := range shape {
 		switch key {
+		case "images":
+			if err := awsRestjson1_deserializeDocumentGuardrailImageCoverage(&sv.Images, value); err != nil {
+				return err
+			}
+
 		case "textCharacters":
 			if err := awsRestjson1_deserializeDocumentGuardrailTextCharactersCoverage(&sv.TextCharacters, value); err != nil {
 				return err
@@ -3405,6 +3415,63 @@ func awsRestjson1_deserializeDocumentGuardrailCustomWordList(v *[]types.Guardrai
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailImageCoverage(v **types.GuardrailImageCoverage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailImageCoverage
+	if *v == nil {
+		sv = &types.GuardrailImageCoverage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "guarded":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ImagesGuarded to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Guarded = ptr.Int32(int32(i64))
+			}
+
+		case "total":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ImagesTotal to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Total = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -4319,6 +4386,46 @@ func awsRestjson1_deserializeDocumentPerformanceConfiguration(v **types.Performa
 					return fmt.Errorf("expected PerformanceConfigLatency to be of type string, got %T instead", value)
 				}
 				sv.Latency = types.PerformanceConfigLatency(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPromptRouterTrace(v **types.PromptRouterTrace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PromptRouterTrace
+	if *v == nil {
+		sv = &types.PromptRouterTrace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "invokedModelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InvokedModelId to be of type string, got %T instead", value)
+				}
+				sv.InvokedModelId = ptr.String(jtv)
 			}
 
 		default:
@@ -5504,6 +5611,11 @@ func awsRestjson1_deserializeDocumentConverseTrace(v **types.ConverseTrace, valu
 				return err
 			}
 
+		case "promptRouter":
+			if err := awsRestjson1_deserializeDocumentPromptRouterTrace(&sv.PromptRouter, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5633,6 +5745,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "image":
+			var mv types.GuardrailConverseImageBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentGuardrailConverseImageBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.GuardrailConverseContentBlockMemberImage{Value: mv}
+			break loop
+
 		case "text":
 			var mv types.GuardrailConverseTextBlock
 			destAddr := &mv
@@ -5686,6 +5808,97 @@ func awsRestjson1_deserializeDocumentGuardrailConverseContentQualifierList(v *[]
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailConverseImageBlock(v **types.GuardrailConverseImageBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailConverseImageBlock
+	if *v == nil {
+		sv = &types.GuardrailConverseImageBlock{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailConverseImageFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.GuardrailConverseImageFormat(jtv)
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentGuardrailConverseImageSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailConverseImageSource(v *types.GuardrailConverseImageSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.GuardrailConverseImageSource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "bytes":
+			var mv []byte
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Blob to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode Blob, %w", err)
+				}
+				mv = dv
+			}
+			uv = &types.GuardrailConverseImageSourceMemberBytes{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

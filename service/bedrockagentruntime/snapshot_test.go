@@ -74,6 +74,18 @@ func TestCheckSnapshot_DeleteAgentMemory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GenerateQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GenerateQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAgentMemory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgentMemory(context.Background(), nil, func(o *Options) {
@@ -186,6 +198,18 @@ func TestUpdateSnapshot_DeleteAgentMemory(t *testing.T) {
 	_, err := svc.DeleteAgentMemory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAgentMemory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GenerateQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GenerateQuery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

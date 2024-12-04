@@ -51,9 +51,10 @@ type PutPrincipalMappingInput struct {
 	// This member is required.
 	GroupId *string
 
-	// The list that contains your users or sub groups that belong the same group.
+	// The list that contains your users that belong the same group. This can include
+	// sub groups that belong to a group.
 	//
-	// For example, the group "Company" includes the user "CEO" and the sub groups
+	// For example, the group "Company A" includes the user "CEO" and the sub groups
 	// "Research", "Engineering", and "Sales and Marketing".
 	//
 	// If you have more than 1000 users and/or sub groups for a single group, you need
@@ -79,7 +80,7 @@ type PutPrincipalMappingInput struct {
 	// documents stored in Salesforce.
 	DataSourceId *string
 
-	// The timestamp identifier you specify to ensure Amazon Kendra does not override
+	// The timestamp identifier you specify to ensure Amazon Kendra doesn't override
 	// the latest PUT action with previous actions. The highest number ID, which is
 	// the ordering ID, is the latest action you want to process and apply on top of
 	// other actions with lower number IDs. This prevents previous actions with lower
@@ -95,8 +96,8 @@ type PutPrincipalMappingInput struct {
 	// action was received by Amazon Kendra.
 	OrderingId *int64
 
-	// The Amazon Resource Name (ARN) of a role that has access to the S3 file that
-	// contains your list of users or sub groups that belong to a group.
+	// The Amazon Resource Name (ARN) of an IAM role that has access to the S3 file
+	// that contains your list of users that belong to a group.
 	//
 	// For more information, see [IAM roles for Amazon Kendra].
 	//

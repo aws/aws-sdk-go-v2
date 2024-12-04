@@ -186,19 +186,19 @@ type AlfrescoConfiguration struct {
 // department. You would use the EqualsTo operation to filter results or documents
 // with "Department" equals to "HR".
 //
-// You can use AndAllFilters and AndOrFilters in combination with each other or
+// You can use AndAllFilters and OrAllFilters in combination with each other or
 // with other operations such as EqualsTo . For example:
 //
 //	  AndAllFilters
 //
 //	- EqualsTo : "Department", "HR"
 //
-//	- AndOrFilters
+//	- OrAllFilters
 //
 //	- ContainsAny : "Project Name", ["new hires", "new hiring"]
 //
-// This example filters results or documents that belong to the HR department and
-// belong to projects that contain "new hires" or "new hiring" in the project name
+// This example filters results or documents that belong to the HR department AND
+// belong to projects that contain "new hires" OR "new hiring" in the project name
 // (must use ContainAny with StringListValue ). This example is filtering with a
 // depth of 2.
 //
@@ -358,7 +358,8 @@ type AuthenticationConfiguration struct {
 // basic user authentication.
 type BasicAuthenticationConfiguration struct {
 
-	// Your secret ARN, which you can create in [Secrets Manager]
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret. You create a
+	// secret to store your credentials in [Secrets Manager]
 	//
 	// You use a secret if basic authentication credentials are required to connect to
 	// a website. The secret stores your credentials of user name and password.
@@ -392,6 +393,9 @@ type BasicAuthenticationConfiguration struct {
 // Provides information about documents that could not be removed from an index by
 // the BatchDeleteDocument API.
 type BatchDeleteDocumentResponseFailedDocument struct {
+
+	//  The identifier of the data source connector that the document belongs to.
+	DataSourceId *string
 
 	// The error code for why the document couldn't be removed from the index.
 	ErrorCode ErrorCode
@@ -435,6 +439,10 @@ type BatchDeleteFeaturedResultsSetError struct {
 // Provides a response when the status of a document could not be retrieved.
 type BatchGetDocumentStatusResponseError struct {
 
+	//  The identifier of the data source connector that the failed document belongs
+	// to.
+	DataSourceId *string
+
 	// The identifier of the document whose status could not be retrieved.
 	DocumentId *string
 
@@ -450,6 +458,10 @@ type BatchGetDocumentStatusResponseError struct {
 
 // Provides information about a document that could not be indexed.
 type BatchPutDocumentResponseFailedDocument struct {
+
+	//  The identifier of the data source connector that the failed document belongs
+	// to.
+	DataSourceId *string
 
 	// The type of error that caused the document to fail to be indexed.
 	ErrorCode ErrorCode
@@ -1019,9 +1031,10 @@ type ConnectionConfiguration struct {
 	// This member is required.
 	DatabasePort *int32
 
-	// The Amazon Resource Name (ARN) of credentials stored in Secrets Manager. The
-	// credentials should be a user/password pair. For more information, see [Using a Database Data Source]. For
-	// more information about Secrets Manager, see [What Is Secrets Manager]in the Secrets Manager user guide.
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret that stores the
+	// credentials. The credentials should be a user-password pair. For more
+	// information, see [Using a Database Data Source]. For more information about Secrets Manager, see [What Is Secrets Manager] in the
+	// Secrets Manager user guide.
 	//
 	// [Using a Database Data Source]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html
 	// [What Is Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
@@ -1105,12 +1118,12 @@ type CustomDocumentEnrichmentConfiguration struct {
 	// [Advanced data manipulation]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation
 	PreExtractionHookConfiguration *HookConfiguration
 
-	// The Amazon Resource Name (ARN) of a role with permission to run
+	// The Amazon Resource Name (ARN) of an IAM role with permission to run
 	// PreExtractionHookConfiguration and PostExtractionHookConfiguration for altering
 	// document metadata and content during the document ingestion process. For more
-	// information, see [IAM roles for Amazon Kendra].
+	// information, see [an IAM roles for Amazon Kendra].
 	//
-	// [IAM roles for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
+	// [an IAM roles for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -2048,11 +2061,11 @@ type FailedEntity struct {
 	noSmithyDocumentSerde
 }
 
-// Provides statistical information about the FAQ questions and answers contained
-// in an index.
+// Provides statistical information about the FAQ questions and answers for an
+// index.
 type FaqStatistics struct {
 
-	// The total number of FAQ questions and answers contained in the index.
+	// The total number of FAQ questions and answers for an index.
 	//
 	// This member is required.
 	IndexedQuestionAnswersCount int32
@@ -2624,14 +2637,14 @@ type GoogleDriveConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A list of users or sub groups that belong to a group. This is useful for user
-// context filtering, where search results are filtered based on the user or their
-// group access to documents.
+// A list of users that belong to a group. This is useful for user context
+// filtering, where search results are filtered based on the user or their group
+// access to documents.
 type GroupMembers struct {
 
-	// A list of sub groups that belong to a group. For example, the sub groups
-	// "Research", "Engineering", and "Sales and Marketing" all belong to the group
-	// "Company".
+	// A list of users that belong to a group. This can also include sub groups. For
+	// example, the sub groups "Research", "Engineering", and "Sales and Marketing" all
+	// belong to the group "Company A".
 	MemberGroups []MemberGroup
 
 	// A list of users that belong to a group. For example, a list of interns all
@@ -2748,10 +2761,10 @@ type Highlight struct {
 // [PostExtractionHookConfiguration]: https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html
 type HookConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of a role with permission to run a Lambda
-	// function during ingestion. For more information, see [IAM roles for Amazon Kendra].
+	// The Amazon Resource Name (ARN) of an IAM role with permission to run a Lambda
+	// function during ingestion. For more information, see [an IAM roles for Amazon Kendra].
 	//
-	// [IAM roles for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
+	// [an IAM roles for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
 	//
 	// This member is required.
 	LambdaArn *string
@@ -3088,7 +3101,7 @@ type OneDriveUsers struct {
 
 	// A list of users whose documents should be indexed. Specify the user names in
 	// email format, for example, username@tenantdomain . If you need to index the
-	// documents of more than 100 users, use the OneDriveUserS3Path field to specify
+	// documents of more than 10 users, use the OneDriveUserS3Path field to specify
 	// the location of a file containing a list of users.
 	OneDriveUserList []string
 
@@ -3207,7 +3220,8 @@ type ProxyConfiguration struct {
 	// This member is required.
 	Port *int32
 
-	// Your secret ARN, which you can create in [Secrets Manager]
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret. You create a
+	// secret to store your credentials in [Secrets Manager]
 	//
 	// The credentials are optional. You use a secret if web proxy credentials are
 	// required to connect to a website host. Amazon Kendra currently support basic
@@ -4580,13 +4594,13 @@ type TableRow struct {
 	noSmithyDocumentSerde
 }
 
-// A list of key/value pairs that identify an index, FAQ, or data source. Tag keys
-// and values can consist of Unicode letters, digits, white space, and any of the
-// following symbols: _ . : / = + - @.
+// A key-value pair that identifies or categorizes an index, FAQ, data source, or
+// other resource. TA tag key and value can consist of Unicode letters, digits,
+// white space, and any of the following symbols: _ . : / = + - @.
 type Tag struct {
 
 	// The key for the tag. Keys are not case sensitive and must be unique for the
-	// index, FAQ, or data source.
+	// index, FAQ, data source, or other resource.
 	//
 	// This member is required.
 	Key *string
@@ -4725,6 +4739,15 @@ type Urls struct {
 //     can access.
 //
 // If you provide both, an exception is thrown.
+//
+// If you're using an Amazon Kendra Gen AI Enterprise Edition index, you can use
+// UserId , Groups , and DataSourceGroups to filter content. If you set the UserId
+// to a particular user ID, it also includes all public documents.
+//
+// Amazon Kendra Gen AI Enterprise Edition indices don't support token based
+// document filtering. If you're using an Amazon Kendra Gen AI Enterprise Edition
+// index, Amazon Kendra returns a ValidationException error if the Token field has
+// a non-null value.
 type UserContext struct {
 
 	// The list of data source groups you want to filter search results based on
@@ -4761,6 +4784,9 @@ type UserContext struct {
 // Center identify source. You must create your index in the management account for
 // the organization in order to use UserGroupResolutionConfiguration .
 //
+// If you're using an Amazon Kendra Gen AI Enterprise Edition index,
+// UserGroupResolutionConfiguration isn't supported.
+//
 // [Getting started with an IAM Identity Center identity source]: https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html
 // [IAM roles for IAM Identity Center]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso
 // [PutPrincipalMapping]: https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html
@@ -4793,6 +4819,10 @@ type UserIdentityConfiguration struct {
 }
 
 // Provides the configuration information for a token.
+//
+// If you're using an Amazon Kendra Gen AI Enterprise Edition index and you try to
+// use UserTokenConfigurations to configure user context policy, Amazon Kendra
+// returns a ValidationException error.
 type UserTokenConfiguration struct {
 
 	// Information about the JSON token type configuration.

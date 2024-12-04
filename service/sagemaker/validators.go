@@ -270,6 +270,26 @@ func (m *validateOpCreateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateClusterSchedulerConfig struct {
+}
+
+func (*validateOpCreateClusterSchedulerConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateClusterSchedulerConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateClusterSchedulerConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateClusterSchedulerConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCodeRepository struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpCreateCompilationJob) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCompilationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateComputeQuota struct {
+}
+
+func (*validateOpCreateComputeQuota) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateComputeQuota) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateComputeQuotaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateComputeQuotaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1050,46 @@ func (m *validateOpCreateOptimizationJob) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePartnerApp struct {
+}
+
+func (*validateOpCreatePartnerApp) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePartnerApp) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePartnerAppInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePartnerAppInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePartnerAppPresignedUrl struct {
+}
+
+func (*validateOpCreatePartnerAppPresignedUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePartnerAppPresignedUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePartnerAppPresignedUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePartnerAppPresignedUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePipeline struct {
 }
 
@@ -1185,6 +1265,26 @@ func (m *validateOpCreateTrainingJob) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateTrainingJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateTrainingPlan struct {
+}
+
+func (*validateOpCreateTrainingPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTrainingPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTrainingPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTrainingPlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1450,6 +1550,26 @@ func (m *validateOpDeleteCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteClusterSchedulerConfig struct {
+}
+
+func (*validateOpDeleteClusterSchedulerConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteClusterSchedulerConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteClusterSchedulerConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteClusterSchedulerConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCodeRepository struct {
 }
 
@@ -1485,6 +1605,26 @@ func (m *validateOpDeleteCompilationJob) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCompilationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteComputeQuota struct {
+}
+
+func (*validateOpDeleteComputeQuota) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteComputeQuota) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteComputeQuotaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteComputeQuotaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2150,6 +2290,26 @@ func (m *validateOpDeleteOptimizationJob) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePartnerApp struct {
+}
+
+func (*validateOpDeletePartnerApp) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePartnerApp) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePartnerAppInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePartnerAppInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePipeline struct {
 }
 
@@ -2550,6 +2710,26 @@ func (m *validateOpDescribeClusterNode) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeClusterSchedulerConfig struct {
+}
+
+func (*validateOpDescribeClusterSchedulerConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeClusterSchedulerConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeClusterSchedulerConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeClusterSchedulerConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCodeRepository struct {
 }
 
@@ -2585,6 +2765,26 @@ func (m *validateOpDescribeCompilationJob) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCompilationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeComputeQuota struct {
+}
+
+func (*validateOpDescribeComputeQuota) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeComputeQuota) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeComputeQuotaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeComputeQuotaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3330,6 +3530,26 @@ func (m *validateOpDescribeOptimizationJob) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePartnerApp struct {
+}
+
+func (*validateOpDescribePartnerApp) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePartnerApp) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePartnerAppInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePartnerAppInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribePipelineDefinitionForExecution struct {
 }
 
@@ -3505,6 +3725,26 @@ func (m *validateOpDescribeTrainingJob) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeTrainingJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeTrainingPlan struct {
+}
+
+func (*validateOpDescribeTrainingPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTrainingPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTrainingPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTrainingPlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4110,6 +4350,26 @@ func (m *validateOpListTrainingJobsForHyperParameterTuningJob) HandleInitialize(
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTrainingPlans struct {
+}
+
+func (*validateOpListTrainingPlans) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTrainingPlans) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTrainingPlansInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTrainingPlansInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutModelPackageGroupPolicy struct {
 }
 
@@ -4205,6 +4465,26 @@ func (m *validateOpSearch) HandleInitialize(ctx context.Context, in middleware.I
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchTrainingPlanOfferings struct {
+}
+
+func (*validateOpSearchTrainingPlanOfferings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchTrainingPlanOfferings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchTrainingPlanOfferingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchTrainingPlanOfferingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4770,6 +5050,26 @@ func (m *validateOpUpdateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateClusterSchedulerConfig struct {
+}
+
+func (*validateOpUpdateClusterSchedulerConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateClusterSchedulerConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateClusterSchedulerConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateClusterSchedulerConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateClusterSoftware struct {
 }
 
@@ -4805,6 +5105,26 @@ func (m *validateOpUpdateCodeRepository) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateCodeRepositoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateComputeQuota struct {
+}
+
+func (*validateOpUpdateComputeQuota) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateComputeQuota) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateComputeQuotaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateComputeQuotaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5250,6 +5570,26 @@ func (m *validateOpUpdateNotebookInstanceLifecycleConfig) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePartnerApp struct {
+}
+
+func (*validateOpUpdatePartnerApp) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePartnerApp) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePartnerAppInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePartnerAppInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePipelineExecution struct {
 }
 
@@ -5502,12 +5842,20 @@ func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
 
+func addOpCreateClusterSchedulerConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateClusterSchedulerConfig{}, middleware.After)
+}
+
 func addOpCreateCodeRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCodeRepository{}, middleware.After)
 }
 
 func addOpCreateCompilationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCompilationJob{}, middleware.After)
+}
+
+func addOpCreateComputeQuotaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateComputeQuota{}, middleware.After)
 }
 
 func addOpCreateContextValidationMiddleware(stack *middleware.Stack) error {
@@ -5650,6 +5998,14 @@ func addOpCreateOptimizationJobValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateOptimizationJob{}, middleware.After)
 }
 
+func addOpCreatePartnerAppValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePartnerApp{}, middleware.After)
+}
+
+func addOpCreatePartnerAppPresignedUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePartnerAppPresignedUrl{}, middleware.After)
+}
+
 func addOpCreatePipelineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePipeline{}, middleware.After)
 }
@@ -5684,6 +6040,10 @@ func addOpCreateStudioLifecycleConfigValidationMiddleware(stack *middleware.Stac
 
 func addOpCreateTrainingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTrainingJob{}, middleware.After)
+}
+
+func addOpCreateTrainingPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTrainingPlan{}, middleware.After)
 }
 
 func addOpCreateTransformJobValidationMiddleware(stack *middleware.Stack) error {
@@ -5738,12 +6098,20 @@ func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCluster{}, middleware.After)
 }
 
+func addOpDeleteClusterSchedulerConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteClusterSchedulerConfig{}, middleware.After)
+}
+
 func addOpDeleteCodeRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCodeRepository{}, middleware.After)
 }
 
 func addOpDeleteCompilationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCompilationJob{}, middleware.After)
+}
+
+func addOpDeleteComputeQuotaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteComputeQuota{}, middleware.After)
 }
 
 func addOpDeleteContextValidationMiddleware(stack *middleware.Stack) error {
@@ -5878,6 +6246,10 @@ func addOpDeleteOptimizationJobValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteOptimizationJob{}, middleware.After)
 }
 
+func addOpDeletePartnerAppValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePartnerApp{}, middleware.After)
+}
+
 func addOpDeletePipelineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePipeline{}, middleware.After)
 }
@@ -5958,12 +6330,20 @@ func addOpDescribeClusterNodeValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeClusterNode{}, middleware.After)
 }
 
+func addOpDescribeClusterSchedulerConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeClusterSchedulerConfig{}, middleware.After)
+}
+
 func addOpDescribeCodeRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCodeRepository{}, middleware.After)
 }
 
 func addOpDescribeCompilationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCompilationJob{}, middleware.After)
+}
+
+func addOpDescribeComputeQuotaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeComputeQuota{}, middleware.After)
 }
 
 func addOpDescribeContextValidationMiddleware(stack *middleware.Stack) error {
@@ -6114,6 +6494,10 @@ func addOpDescribeOptimizationJobValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDescribeOptimizationJob{}, middleware.After)
 }
 
+func addOpDescribePartnerAppValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePartnerApp{}, middleware.After)
+}
+
 func addOpDescribePipelineDefinitionForExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePipelineDefinitionForExecution{}, middleware.After)
 }
@@ -6148,6 +6532,10 @@ func addOpDescribeSubscribedWorkteamValidationMiddleware(stack *middleware.Stack
 
 func addOpDescribeTrainingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTrainingJob{}, middleware.After)
+}
+
+func addOpDescribeTrainingPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTrainingPlan{}, middleware.After)
 }
 
 func addOpDescribeTransformJobValidationMiddleware(stack *middleware.Stack) error {
@@ -6270,6 +6658,10 @@ func addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack *
 	return stack.Initialize.Add(&validateOpListTrainingJobsForHyperParameterTuningJob{}, middleware.After)
 }
 
+func addOpListTrainingPlansValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTrainingPlans{}, middleware.After)
+}
+
 func addOpPutModelPackageGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutModelPackageGroupPolicy{}, middleware.After)
 }
@@ -6288,6 +6680,10 @@ func addOpRetryPipelineExecutionValidationMiddleware(stack *middleware.Stack) er
 
 func addOpSearchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearch{}, middleware.After)
+}
+
+func addOpSearchTrainingPlanOfferingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchTrainingPlanOfferings{}, middleware.After)
 }
 
 func addOpSendPipelineExecutionStepFailureValidationMiddleware(stack *middleware.Stack) error {
@@ -6402,12 +6798,20 @@ func addOpUpdateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCluster{}, middleware.After)
 }
 
+func addOpUpdateClusterSchedulerConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateClusterSchedulerConfig{}, middleware.After)
+}
+
 func addOpUpdateClusterSoftwareValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateClusterSoftware{}, middleware.After)
 }
 
 func addOpUpdateCodeRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCodeRepository{}, middleware.After)
+}
+
+func addOpUpdateComputeQuotaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateComputeQuota{}, middleware.After)
 }
 
 func addOpUpdateContextValidationMiddleware(stack *middleware.Stack) error {
@@ -6496,6 +6900,10 @@ func addOpUpdateNotebookInstanceValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateNotebookInstanceLifecycleConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNotebookInstanceLifecycleConfig{}, middleware.After)
+}
+
+func addOpUpdatePartnerAppValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePartnerApp{}, middleware.After)
 }
 
 func addOpUpdatePipelineExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -7833,6 +8241,78 @@ func validateCollectionConfig(v types.CollectionConfig) error {
 	}
 }
 
+func validateComputeQuotaConfig(v *types.ComputeQuotaConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputeQuotaConfig"}
+	if v.ComputeQuotaResources != nil {
+		if err := validateComputeQuotaResourceConfigList(v.ComputeQuotaResources); err != nil {
+			invalidParams.AddNested("ComputeQuotaResources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceSharingConfig != nil {
+		if err := validateResourceSharingConfig(v.ResourceSharingConfig); err != nil {
+			invalidParams.AddNested("ResourceSharingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComputeQuotaResourceConfig(v *types.ComputeQuotaResourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputeQuotaResourceConfig"}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.Count == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Count"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComputeQuotaResourceConfigList(v []types.ComputeQuotaResourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputeQuotaResourceConfigList"}
+	for i := range v {
+		if err := validateComputeQuotaResourceConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComputeQuotaTarget(v *types.ComputeQuotaTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputeQuotaTarget"}
+	if v.TeamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TeamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContainerDefinition(v *types.ContainerDefinition) error {
 	if v == nil {
 		return nil
@@ -7959,6 +8439,11 @@ func validateCustomFileSystem(v types.CustomFileSystem) error {
 			invalidParams.AddNested("[EFSFileSystem]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.CustomFileSystemMemberFSxLustreFileSystem:
+		if err := validateFSxLustreFileSystem(&uv.Value); err != nil {
+			invalidParams.AddNested("[FSxLustreFileSystem]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7976,6 +8461,11 @@ func validateCustomFileSystemConfig(v types.CustomFileSystemConfig) error {
 	case *types.CustomFileSystemConfigMemberEFSFileSystemConfig:
 		if err := validateEFSFileSystemConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[EFSFileSystemConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CustomFileSystemConfigMemberFSxLustreFileSystemConfig:
+		if err := validateFSxLustreFileSystemConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[FSxLustreFileSystemConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -8999,6 +9489,36 @@ func validateFlowDefinitionOutputConfig(v *types.FlowDefinitionOutputConfig) err
 	invalidParams := smithy.InvalidParamsError{Context: "FlowDefinitionOutputConfig"}
 	if v.S3OutputPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFSxLustreFileSystem(v *types.FSxLustreFileSystem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FSxLustreFileSystem"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFSxLustreFileSystemConfig(v *types.FSxLustreFileSystemConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FSxLustreFileSystemConfig"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11234,6 +11754,41 @@ func validatePipelineDefinitionS3Location(v *types.PipelineDefinitionS3Location)
 	}
 }
 
+func validatePriorityClass(v *types.PriorityClass) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PriorityClass"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Weight == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Weight"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePriorityClassList(v []types.PriorityClass) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PriorityClassList"}
+	for i := range v {
+		if err := validatePriorityClass(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProcessingClusterConfig(v *types.ProcessingClusterConfig) error {
 	if v == nil {
 		return nil
@@ -11759,6 +12314,21 @@ func validateResourceLimits(v *types.ResourceLimits) error {
 	}
 }
 
+func validateResourceSharingConfig(v *types.ResourceSharingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceSharingConfig"}
+	if len(v.Strategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Strategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRetryStrategy(v *types.RetryStrategy) error {
 	if v == nil {
 		return nil
@@ -11919,6 +12489,23 @@ func validateScheduleConfig(v *types.ScheduleConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfig"}
 	if v.ScheduleExpression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchedulerConfig(v *types.SchedulerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchedulerConfig"}
+	if v.PriorityClasses != nil {
+		if err := validatePriorityClassList(v.PriorityClasses); err != nil {
+			invalidParams.AddNested("PriorityClasses", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12551,6 +13138,41 @@ func validateTrainingJobDefinition(v *types.TrainingJobDefinition) error {
 	}
 	if v.StoppingCondition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StoppingCondition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainingPlanFilter(v *types.TrainingPlanFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingPlanFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainingPlanFilters(v []types.TrainingPlanFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingPlanFilters"}
+	for i := range v {
+		if err := validateTrainingPlanFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13285,6 +13907,36 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	}
 }
 
+func validateOpCreateClusterSchedulerConfigInput(v *CreateClusterSchedulerConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterSchedulerConfigInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.SchedulerConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchedulerConfig"))
+	} else if v.SchedulerConfig != nil {
+		if err := validateSchedulerConfig(v.SchedulerConfig); err != nil {
+			invalidParams.AddNested("SchedulerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCodeRepositoryInput(v *CreateCodeRepositoryInput) error {
 	if v == nil {
 		return nil
@@ -13342,6 +13994,43 @@ func validateOpCreateCompilationJobInput(v *CreateCompilationJobInput) error {
 	}
 	if v.StoppingCondition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StoppingCondition"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateComputeQuotaInput(v *CreateComputeQuotaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateComputeQuotaInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.ComputeQuotaConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeQuotaConfig"))
+	} else if v.ComputeQuotaConfig != nil {
+		if err := validateComputeQuotaConfig(v.ComputeQuotaConfig); err != nil {
+			invalidParams.AddNested("ComputeQuotaConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComputeQuotaTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeQuotaTarget"))
+	} else if v.ComputeQuotaTarget != nil {
+		if err := validateComputeQuotaTarget(v.ComputeQuotaTarget); err != nil {
+			invalidParams.AddNested("ComputeQuotaTarget", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -14636,6 +15325,53 @@ func validateOpCreateOptimizationJobInput(v *CreateOptimizationJobInput) error {
 	}
 }
 
+func validateOpCreatePartnerAppInput(v *CreatePartnerAppInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePartnerAppInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.Tier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tier"))
+	}
+	if len(v.AuthType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePartnerAppPresignedUrlInput(v *CreatePartnerAppPresignedUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePartnerAppPresignedUrlInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePipelineInput(v *CreatePipelineInput) error {
 	if v == nil {
 		return nil
@@ -14946,6 +15682,29 @@ func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 	if v.RetryStrategy != nil {
 		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
 			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateTrainingPlanInput(v *CreateTrainingPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTrainingPlanInput"}
+	if v.TrainingPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingPlanName"))
+	}
+	if v.TrainingPlanOfferingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingPlanOfferingId"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -15266,6 +16025,21 @@ func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	}
 }
 
+func validateOpDeleteClusterSchedulerConfigInput(v *DeleteClusterSchedulerConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterSchedulerConfigInput"}
+	if v.ClusterSchedulerConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterSchedulerConfigId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCodeRepositoryInput(v *DeleteCodeRepositoryInput) error {
 	if v == nil {
 		return nil
@@ -15288,6 +16062,21 @@ func validateOpDeleteCompilationJobInput(v *DeleteCompilationJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCompilationJobInput"}
 	if v.CompilationJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CompilationJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteComputeQuotaInput(v *DeleteComputeQuotaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteComputeQuotaInput"}
+	if v.ComputeQuotaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeQuotaId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15809,6 +16598,21 @@ func validateOpDeleteOptimizationJobInput(v *DeleteOptimizationJobInput) error {
 	}
 }
 
+func validateOpDeletePartnerAppInput(v *DeletePartnerAppInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePartnerAppInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePipelineInput(v *DeletePipelineInput) error {
 	if v == nil {
 		return nil
@@ -16133,6 +16937,21 @@ func validateOpDescribeClusterNodeInput(v *DescribeClusterNodeInput) error {
 	}
 }
 
+func validateOpDescribeClusterSchedulerConfigInput(v *DescribeClusterSchedulerConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeClusterSchedulerConfigInput"}
+	if v.ClusterSchedulerConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterSchedulerConfigId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeCodeRepositoryInput(v *DescribeCodeRepositoryInput) error {
 	if v == nil {
 		return nil
@@ -16155,6 +16974,21 @@ func validateOpDescribeCompilationJobInput(v *DescribeCompilationJobInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCompilationJobInput"}
 	if v.CompilationJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CompilationJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeComputeQuotaInput(v *DescribeComputeQuotaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeComputeQuotaInput"}
+	if v.ComputeQuotaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeQuotaId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -16730,6 +17564,21 @@ func validateOpDescribeOptimizationJobInput(v *DescribeOptimizationJobInput) err
 	}
 }
 
+func validateOpDescribePartnerAppInput(v *DescribePartnerAppInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePartnerAppInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribePipelineDefinitionForExecutionInput(v *DescribePipelineDefinitionForExecutionInput) error {
 	if v == nil {
 		return nil
@@ -16860,6 +17709,21 @@ func validateOpDescribeTrainingJobInput(v *DescribeTrainingJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrainingJobInput"}
 	if v.TrainingJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeTrainingPlanInput(v *DescribeTrainingPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrainingPlanInput"}
+	if v.TrainingPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingPlanName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17360,6 +18224,23 @@ func validateOpListTrainingJobsForHyperParameterTuningJobInput(v *ListTrainingJo
 	}
 }
 
+func validateOpListTrainingPlansInput(v *ListTrainingPlansInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTrainingPlansInput"}
+	if v.Filters != nil {
+		if err := validateTrainingPlanFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutModelPackageGroupPolicyInput(v *PutModelPackageGroupPolicyInput) error {
 	if v == nil {
 		return nil
@@ -17467,6 +18348,27 @@ func validateOpSearchInput(v *SearchInput) error {
 		if err := validateSearchExpression(v.SearchExpression); err != nil {
 			invalidParams.AddNested("SearchExpression", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchTrainingPlanOfferingsInput(v *SearchTrainingPlanOfferingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchTrainingPlanOfferingsInput"}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.InstanceCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
+	}
+	if v.TargetResources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResources"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17947,6 +18849,29 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 	}
 }
 
+func validateOpUpdateClusterSchedulerConfigInput(v *UpdateClusterSchedulerConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterSchedulerConfigInput"}
+	if v.ClusterSchedulerConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterSchedulerConfigId"))
+	}
+	if v.TargetVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetVersion"))
+	}
+	if v.SchedulerConfig != nil {
+		if err := validateSchedulerConfig(v.SchedulerConfig); err != nil {
+			invalidParams.AddNested("SchedulerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateClusterSoftwareInput(v *UpdateClusterSoftwareInput) error {
 	if v == nil {
 		return nil
@@ -17969,6 +18894,34 @@ func validateOpUpdateCodeRepositoryInput(v *UpdateCodeRepositoryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCodeRepositoryInput"}
 	if v.CodeRepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CodeRepositoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateComputeQuotaInput(v *UpdateComputeQuotaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateComputeQuotaInput"}
+	if v.ComputeQuotaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeQuotaId"))
+	}
+	if v.TargetVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetVersion"))
+	}
+	if v.ComputeQuotaConfig != nil {
+		if err := validateComputeQuotaConfig(v.ComputeQuotaConfig); err != nil {
+			invalidParams.AddNested("ComputeQuotaConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComputeQuotaTarget != nil {
+		if err := validateComputeQuotaTarget(v.ComputeQuotaTarget); err != nil {
+			invalidParams.AddNested("ComputeQuotaTarget", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -18424,6 +19377,26 @@ func validateOpUpdateNotebookInstanceLifecycleConfigInput(v *UpdateNotebookInsta
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotebookInstanceLifecycleConfigInput"}
 	if v.NotebookInstanceLifecycleConfigName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePartnerAppInput(v *UpdatePartnerAppInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePartnerAppInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

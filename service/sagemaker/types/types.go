@@ -3281,6 +3281,22 @@ type ClusterInstanceGroupDetails struct {
 	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
 	OverrideVpcConfig *VpcConfig
 
+	// The current status of the cluster instance group.
+	//
+	//   - InService : The instance group is active and healthy.
+	//
+	//   - Creating : The instance group is being provisioned.
+	//
+	//   - Updating : The instance group is being updated.
+	//
+	//   - Failed : The instance group has failed to provision or is no longer healthy.
+	//
+	//   - Degraded : The instance group is degraded, meaning that some instances have
+	//   failed to provision or are no longer healthy.
+	//
+	//   - Deleting : The instance group is being deleted.
+	Status InstanceGroupStatus
+
 	// The number of instances you specified to add to the instance group of a
 	// SageMaker HyperPod cluster.
 	TargetCount *int32
@@ -3293,6 +3309,19 @@ type ClusterInstanceGroupDetails struct {
 	//
 	// [CPU cores and threads per CPU core per instance type]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
 	ThreadsPerCore *int32
+
+	// The Amazon Resource Name (ARN); of the training plan associated with this
+	// cluster instance group.
+	//
+	// For more information about how to reserve GPU capacity for your SageMaker
+	// HyperPod clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+	//
+	// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+	TrainingPlanArn *string
+
+	// The current status of the training plan associated with this cluster instance
+	// group.
+	TrainingPlanStatus *string
 
 	noSmithyDocumentSerde
 }
@@ -3349,6 +3378,15 @@ type ClusterInstanceGroupSpecification struct {
 	//
 	// [CPU cores and threads per CPU core per instance type]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
 	ThreadsPerCore *int32
+
+	// The Amazon Resource Name (ARN); of the training plan to use for this cluster
+	// instance group.
+	//
+	// For more information about how to reserve GPU capacity for your SageMaker
+	// HyperPod clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+	//
+	// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+	TrainingPlanArn *string
 
 	noSmithyDocumentSerde
 }
@@ -3536,6 +3574,46 @@ type ClusterOrchestratorEksConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Summary of the cluster policy.
+type ClusterSchedulerConfigSummary struct {
+
+	// ARN of the cluster policy.
+	//
+	// This member is required.
+	ClusterSchedulerConfigArn *string
+
+	// ID of the cluster policy.
+	//
+	// This member is required.
+	ClusterSchedulerConfigId *string
+
+	// Creation time of the cluster policy.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// Name of the cluster policy.
+	//
+	// This member is required.
+	Name *string
+
+	// Status of the cluster policy.
+	//
+	// This member is required.
+	Status SchedulerResourceStatus
+
+	// ARN of the cluster.
+	ClusterArn *string
+
+	// Version of the cluster policy.
+	ClusterSchedulerConfigVersion *int32
+
+	// Last modified time of the cluster policy.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Lists a summary of the properties of a SageMaker HyperPod cluster.
 type ClusterSummary struct {
 
@@ -3558,6 +3636,15 @@ type ClusterSummary struct {
 	//
 	// This member is required.
 	CreationTime *time.Time
+
+	// A list of Amazon Resource Names (ARNs) of the training plans associated with
+	// this cluster.
+	//
+	// For more information about how to reserve GPU capacity for your SageMaker
+	// HyperPod clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+	//
+	// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+	TrainingPlanArns []string
 
 	noSmithyDocumentSerde
 }
@@ -3780,6 +3867,118 @@ type CompilationJobSummary struct {
 
 	// The time when the model compilation job was last modified.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Configuration of the compute allocation definition for an entity. This includes
+// the resource sharing option and the setting to preempt low priority tasks.
+type ComputeQuotaConfig struct {
+
+	// Allocate compute resources by instance types.
+	ComputeQuotaResources []ComputeQuotaResourceConfig
+
+	// Allows workloads from within an entity to preempt same-team workloads. When set
+	// to LowerPriority , the entity's lower priority tasks are preempted by their own
+	// higher priority tasks.
+	//
+	// Default is LowerPriority .
+	PreemptTeamTasks PreemptTeamTasks
+
+	// Resource sharing configuration. This defines how an entity can lend and borrow
+	// idle compute with other entities within the cluster.
+	ResourceSharingConfig *ResourceSharingConfig
+
+	noSmithyDocumentSerde
+}
+
+// Configuration of the resources used for the compute allocation definition.
+type ComputeQuotaResourceConfig struct {
+
+	// The number of instances to add to the instance group of a SageMaker HyperPod
+	// cluster.
+	//
+	// This member is required.
+	Count *int32
+
+	// The instance type of the instance group for the cluster.
+	//
+	// This member is required.
+	InstanceType ClusterInstanceType
+
+	noSmithyDocumentSerde
+}
+
+// Summary of the compute allocation definition.
+type ComputeQuotaSummary struct {
+
+	// ARN of the compute allocation definition.
+	//
+	// This member is required.
+	ComputeQuotaArn *string
+
+	// ID of the compute allocation definition.
+	//
+	// This member is required.
+	ComputeQuotaId *string
+
+	// The target entity to allocate compute resources to.
+	//
+	// This member is required.
+	ComputeQuotaTarget *ComputeQuotaTarget
+
+	// Creation time of the compute allocation definition.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// Name of the compute allocation definition.
+	//
+	// This member is required.
+	Name *string
+
+	// Status of the compute allocation definition.
+	//
+	// This member is required.
+	Status SchedulerResourceStatus
+
+	// The state of the compute allocation being described. Use to enable or disable
+	// compute allocation.
+	//
+	// Default is Enabled .
+	ActivationState ActivationState
+
+	// ARN of the cluster.
+	ClusterArn *string
+
+	// Configuration of the compute allocation definition. This includes the resource
+	// sharing option, and the setting to preempt low priority tasks.
+	ComputeQuotaConfig *ComputeQuotaConfig
+
+	// Version of the compute allocation definition.
+	ComputeQuotaVersion *int32
+
+	// Last modified time of the compute allocation definition.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The target entity to allocate compute resources to.
+type ComputeQuotaTarget struct {
+
+	// Name of the team to allocate compute resources to.
+	//
+	// This member is required.
+	TeamName *string
+
+	// Assigned entity fair-share weight. Idle compute will be shared across entities
+	// based on these assigned weights. This weight is only used when FairShare is
+	// enabled.
+	//
+	// A weight of 0 is the lowest priority and 100 is the highest. Weight 0 is the
+	// default.
+	FairShareWeight *int32
 
 	noSmithyDocumentSerde
 }
@@ -4033,6 +4232,7 @@ type ConvergenceDetected struct {
 // The following types satisfy this interface:
 //
 //	CustomFileSystemMemberEFSFileSystem
+//	CustomFileSystemMemberFSxLustreFileSystem
 type CustomFileSystem interface {
 	isCustomFileSystem()
 }
@@ -4046,6 +4246,15 @@ type CustomFileSystemMemberEFSFileSystem struct {
 
 func (*CustomFileSystemMemberEFSFileSystem) isCustomFileSystem() {}
 
+// A custom file system in Amazon FSx for Lustre.
+type CustomFileSystemMemberFSxLustreFileSystem struct {
+	Value FSxLustreFileSystem
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFileSystemMemberFSxLustreFileSystem) isCustomFileSystem() {}
+
 // The settings for assigning a custom file system to a user profile or space for
 // an Amazon SageMaker Domain. Permitted users can access this file system in
 // Amazon SageMaker Studio.
@@ -4053,6 +4262,7 @@ func (*CustomFileSystemMemberEFSFileSystem) isCustomFileSystem() {}
 // The following types satisfy this interface:
 //
 //	CustomFileSystemConfigMemberEFSFileSystemConfig
+//	CustomFileSystemConfigMemberFSxLustreFileSystemConfig
 type CustomFileSystemConfig interface {
 	isCustomFileSystemConfig()
 }
@@ -4065,6 +4275,15 @@ type CustomFileSystemConfigMemberEFSFileSystemConfig struct {
 }
 
 func (*CustomFileSystemConfigMemberEFSFileSystemConfig) isCustomFileSystemConfig() {}
+
+// The settings for a custom Amazon FSx for Lustre file system.
+type CustomFileSystemConfigMemberFSxLustreFileSystemConfig struct {
+	Value FSxLustreFileSystemConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFileSystemConfigMemberFSxLustreFileSystemConfig) isCustomFileSystemConfig() {}
 
 // A custom SageMaker image. For more information, see [Bring your own SageMaker image].
 //
@@ -5822,6 +6041,19 @@ type EnvironmentParameterRanges struct {
 	noSmithyDocumentSerde
 }
 
+// This is an error field object that contains the error code and the reason for
+// an operation failure.
+type ErrorInfo struct {
+
+	// The error code for an invalid or failed operation.
+	Code *string
+
+	// The failure reason for the operation.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
 // The properties of an experiment as returned by the [Search] API.
 //
 // [Search]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
@@ -6446,6 +6678,34 @@ type FlowDefinitionSummary struct {
 	// The reason why the flow definition creation failed. A failure reason is
 	// returned only when the flow definition status is Failed .
 	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
+// A custom file system in Amazon FSx for Lustre.
+type FSxLustreFileSystem struct {
+
+	// Amazon FSx for Lustre file system ID.
+	//
+	// This member is required.
+	FileSystemId *string
+
+	noSmithyDocumentSerde
+}
+
+// The settings for assigning a custom Amazon FSx for Lustre file system to a user
+// profile or space for an Amazon SageMaker Domain.
+type FSxLustreFileSystemConfig struct {
+
+	// The globally unique, 17-digit, ID of the file system, assigned by Amazon FSx
+	// for Lustre.
+	//
+	// This member is required.
+	FileSystemId *string
+
+	// The path to the file system directory that is accessible in Amazon SageMaker
+	// Studio. Permitted users can access only this directory and below.
+	FileSystemPath *string
 
 	noSmithyDocumentSerde
 }
@@ -13405,6 +13665,55 @@ type ParentHyperParameterTuningJob struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for the SageMaker Partner AI App.
+type PartnerAppConfig struct {
+
+	// The list of users that are given admin access to the SageMaker Partner AI App.
+	AdminUsers []string
+
+	// This is a map of required inputs for a SageMaker Partner AI App. Based on the
+	// application type, the map is populated with a key and value pair that is
+	// specific to the user and application.
+	Arguments map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Maintenance configuration settings for the SageMaker Partner AI App.
+type PartnerAppMaintenanceConfig struct {
+
+	// The day and time of the week in Coordinated Universal Time (UTC) 24-hour
+	// standard time that weekly maintenance updates are scheduled. This value must
+	// take the following format: 3-letter-day:24-h-hour:minute . For example:
+	// TUE:03:30 .
+	MaintenanceWindowStart *string
+
+	noSmithyDocumentSerde
+}
+
+// A subset of information related to a SageMaker Partner AI App. This information
+// is used as part of the ListPartnerApps API response.
+type PartnerAppSummary struct {
+
+	// The ARN of the SageMaker Partner AI App.
+	Arn *string
+
+	// The creation time of the SageMaker Partner AI App.
+	CreationTime *time.Time
+
+	// The name of the SageMaker Partner AI App.
+	Name *string
+
+	// The status of the SageMaker Partner AI App.
+	Status PartnerAppStatus
+
+	// The type of SageMaker Partner AI App to create. Must be one of the following:
+	// lakera-guard , comet , deepchecks-llm-evaluation , or fiddler .
+	Type PartnerAppType
+
+	noSmithyDocumentSerde
+}
+
 // The summary of an in-progress deployment when an endpoint is creating or
 // updating with a new endpoint configuration.
 type PendingDeploymentSummary struct {
@@ -13856,6 +14165,27 @@ type PredefinedMetricSpecification struct {
 	// The metric type. You can only apply SageMaker metric types to SageMaker
 	// endpoints.
 	PredefinedMetricType *string
+
+	noSmithyDocumentSerde
+}
+
+// Priority class configuration. When included in PriorityClasses , these class
+// configurations define how tasks are queued.
+type PriorityClass struct {
+
+	// Name of the priority class.
+	//
+	// This member is required.
+	Name *string
+
+	// Weight of the priority class. The value is within a range from 0 to 100, where
+	// 0 is the default.
+	//
+	// A weight of 0 is the lowest priority and 100 is the highest. Weight 0 is the
+	// default.
+	//
+	// This member is required.
+	Weight *int32
 
 	noSmithyDocumentSerde
 }
@@ -15562,6 +15892,91 @@ type RepositoryAuthConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a reserved capacity offering for a training plan offering.
+//
+// For more information about how to reserve GPU capacity for your SageMaker
+// HyperPod clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+//
+// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+type ReservedCapacityOffering struct {
+
+	// The number of instances in the reserved capacity offering.
+	//
+	// This member is required.
+	InstanceCount *int32
+
+	// The instance type for the reserved capacity offering.
+	//
+	// This member is required.
+	InstanceType ReservedCapacityInstanceType
+
+	// The availability zone for the reserved capacity offering.
+	AvailabilityZone *string
+
+	// The number of whole hours in the total duration for this reserved capacity
+	// offering.
+	DurationHours *int64
+
+	// The additional minutes beyond whole hours in the total duration for this
+	// reserved capacity offering.
+	DurationMinutes *int64
+
+	// The end time of the reserved capacity offering.
+	EndTime *time.Time
+
+	// The start time of the reserved capacity offering.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details of a reserved capacity for the training plan.
+//
+// For more information about how to reserve GPU capacity for your SageMaker
+// HyperPod clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+//
+// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+type ReservedCapacitySummary struct {
+
+	// The instance type for the reserved capacity.
+	//
+	// This member is required.
+	InstanceType ReservedCapacityInstanceType
+
+	// The Amazon Resource Name (ARN); of the reserved capacity.
+	//
+	// This member is required.
+	ReservedCapacityArn *string
+
+	// The current status of the reserved capacity.
+	//
+	// This member is required.
+	Status ReservedCapacityStatus
+
+	// The total number of instances in the reserved capacity.
+	//
+	// This member is required.
+	TotalInstanceCount *int32
+
+	// The availability zone for the reserved capacity.
+	AvailabilityZone *string
+
+	// The number of whole hours in the total duration for this reserved capacity.
+	DurationHours *int64
+
+	// The additional minutes beyond whole hours in the total duration for this
+	// reserved capacity.
+	DurationMinutes *int64
+
+	// The end time of the reserved capacity.
+	EndTime *time.Time
+
+	// The start time of the reserved capacity.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The resolved attributes.
 type ResolvedAttributes struct {
 
@@ -15679,6 +16094,10 @@ type ResourceConfig struct {
 	// for subsequent training jobs.
 	KeepAlivePeriodInSeconds *int32
 
+	// The Amazon Resource Name (ARN); of the training plan to use for this resource
+	// configuration.
+	TrainingPlanArn *string
+
 	// The Amazon Web Services KMS key that SageMaker uses to encrypt data on the
 	// storage volume attached to the ML compute instance(s) that run the training job.
 	//
@@ -15735,6 +16154,33 @@ type ResourceLimits struct {
 
 	// The maximum time in seconds that a hyperparameter tuning job can run.
 	MaxRuntimeInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Resource sharing configuration.
+type ResourceSharingConfig struct {
+
+	// The strategy of how idle compute is shared within the cluster. The following
+	// are the options of strategies.
+	//
+	//   - DontLend : entities do not lend idle compute.
+	//
+	//   - Lend : entities can lend idle compute to entities that can borrow.
+	//
+	//   - LendandBorrow : entities can lend idle compute and borrow idle compute from
+	//   other entities.
+	//
+	// Default is LendandBorrow .
+	//
+	// This member is required.
+	Strategy ResourceSharingStrategy
+
+	// The limit on how much idle compute can be borrowed.The values can be 1 - 500
+	// percent of idle compute that the team is allowed to borrow.
+	//
+	// Default is 50 .
+	BorrowLimit *int32
 
 	noSmithyDocumentSerde
 }
@@ -16256,6 +16702,27 @@ type ScheduleConfig struct {
 	//
 	// If you set ScheduleExpression to NOW , this parameter is required.
 	DataAnalysisStartTime *string
+
+	noSmithyDocumentSerde
+}
+
+// Cluster policy configuration. This policy is used for task prioritization and
+// fair-share allocation. This helps prioritize critical workloads and distributes
+// idle compute across entities.
+type SchedulerConfig struct {
+
+	// When enabled, entities borrow idle compute based on their assigned
+	// FairShareWeight .
+	//
+	// When disabled, entities borrow idle compute based on a first-come first-serve
+	// basis.
+	//
+	// Default is Enabled .
+	FairShare FairShare
+
+	// List of the priority classes, PriorityClass , of the cluster policy. When
+	// specified, these class configurations define how tasks are queued.
+	PriorityClasses []PriorityClass
 
 	noSmithyDocumentSerde
 }
@@ -18137,8 +18604,171 @@ type TrainingJobSummary struct {
 	// Stopped ).
 	TrainingEndTime *time.Time
 
+	// The Amazon Resource Name (ARN); of the training plan associated with this
+	// training job.
+	//
+	// For more information about how to reserve GPU capacity for your SageMaker
+	// HyperPod clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+	//
+	// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+	TrainingPlanArn *string
+
 	// The status of the warm pool associated with the training job.
 	WarmPoolStatus *WarmPoolStatus
+
+	noSmithyDocumentSerde
+}
+
+// A filter to apply when listing or searching for training plans.
+//
+// For more information about how to reserve GPU capacity for your SageMaker
+// HyperPod clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+//
+// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+type TrainingPlanFilter struct {
+
+	// The name of the filter field (e.g., Status, InstanceType).
+	//
+	// This member is required.
+	Name TrainingPlanFilterName
+
+	// The value to filter by for the specified field.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a training plan offering.
+//
+// For more information about how to reserve GPU capacity for your SageMaker
+// HyperPod clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+//
+// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+type TrainingPlanOffering struct {
+
+	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod) for
+	// this training plan offering.
+	//
+	// Training plans are specific to their target resource.
+	//
+	//   - A training plan designed for SageMaker training jobs can only be used to
+	//   schedule and run training jobs.
+	//
+	//   - A training plan for HyperPod clusters can be used exclusively to provide
+	//   compute resources to a cluster's instance group.
+	//
+	// This member is required.
+	TargetResources []SageMakerResourceName
+
+	// The unique identifier for this training plan offering.
+	//
+	// This member is required.
+	TrainingPlanOfferingId *string
+
+	// The currency code for the upfront fee (e.g., USD).
+	CurrencyCode *string
+
+	// The number of whole hours in the total duration for this training plan offering.
+	DurationHours *int64
+
+	// The additional minutes beyond whole hours in the total duration for this
+	// training plan offering.
+	DurationMinutes *int64
+
+	// The requested end time that the user specified when searching for the training
+	// plan offering.
+	RequestedEndTimeBefore *time.Time
+
+	// The requested start time that the user specified when searching for the
+	// training plan offering.
+	RequestedStartTimeAfter *time.Time
+
+	// A list of reserved capacity offerings associated with this training plan
+	// offering.
+	ReservedCapacityOfferings []ReservedCapacityOffering
+
+	// The upfront fee for this training plan offering.
+	UpfrontFee *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of the training plan.
+//
+// For more information about how to reserve GPU capacity for your SageMaker
+// HyperPod clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+//
+// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+type TrainingPlanSummary struct {
+
+	// The current status of the training plan (e.g., Pending, Active, Expired). To
+	// see the complete list of status values available for a training plan, refer to
+	// the Status attribute within the [TrainingPlanSummary] object.
+	//
+	// [TrainingPlanSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingPlanSummary.html
+	//
+	// This member is required.
+	Status TrainingPlanStatus
+
+	// The Amazon Resource Name (ARN); of the training plan.
+	//
+	// This member is required.
+	TrainingPlanArn *string
+
+	// The name of the training plan.
+	//
+	// This member is required.
+	TrainingPlanName *string
+
+	// The number of instances currently available for use in this training plan.
+	AvailableInstanceCount *int32
+
+	// The currency code for the upfront fee (e.g., USD).
+	CurrencyCode *string
+
+	// The number of whole hours in the total duration for this training plan.
+	DurationHours *int64
+
+	// The additional minutes beyond whole hours in the total duration for this
+	// training plan.
+	DurationMinutes *int64
+
+	// The end time of the training plan.
+	EndTime *time.Time
+
+	// The number of instances currently in use from this training plan.
+	InUseInstanceCount *int32
+
+	// A list of reserved capacities associated with this training plan, including
+	// details such as instance types, counts, and availability zones.
+	ReservedCapacitySummaries []ReservedCapacitySummary
+
+	// The start time of the training plan.
+	StartTime *time.Time
+
+	// A message providing additional information about the current status of the
+	// training plan.
+	StatusMessage *string
+
+	// The target resources (e.g., training jobs, HyperPod clusters) that can use this
+	// training plan.
+	//
+	// Training plans are specific to their target resource.
+	//
+	//   - A training plan designed for SageMaker training jobs can only be used to
+	//   schedule and run training jobs.
+	//
+	//   - A training plan for HyperPod clusters can be used exclusively to provide
+	//   compute resources to a cluster's instance group.
+	TargetResources []SageMakerResourceName
+
+	// The total number of instances reserved in this training plan.
+	TotalInstanceCount *int32
+
+	// The upfront fee for the training plan.
+	UpfrontFee *string
 
 	noSmithyDocumentSerde
 }

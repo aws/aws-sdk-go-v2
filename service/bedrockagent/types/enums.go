@@ -331,12 +331,13 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeS3         DataSourceType = "S3"
-	DataSourceTypeWeb        DataSourceType = "WEB"
-	DataSourceTypeConfluence DataSourceType = "CONFLUENCE"
-	DataSourceTypeSalesforce DataSourceType = "SALESFORCE"
-	DataSourceTypeSharepoint DataSourceType = "SHAREPOINT"
-	DataSourceTypeCustom     DataSourceType = "CUSTOM"
+	DataSourceTypeS3               DataSourceType = "S3"
+	DataSourceTypeWeb              DataSourceType = "WEB"
+	DataSourceTypeConfluence       DataSourceType = "CONFLUENCE"
+	DataSourceTypeSalesforce       DataSourceType = "SALESFORCE"
+	DataSourceTypeSharepoint       DataSourceType = "SHAREPOINT"
+	DataSourceTypeCustom           DataSourceType = "CUSTOM"
+	DataSourceTypeRedshiftMetadata DataSourceType = "REDSHIFT_METADATA"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -351,6 +352,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"SALESFORCE",
 		"SHAREPOINT",
 		"CUSTOM",
+		"REDSHIFT_METADATA",
 	}
 }
 
@@ -602,6 +604,25 @@ func (FlowValidationType) Values() []FlowValidationType {
 	}
 }
 
+type IncludeExclude string
+
+// Enum values for IncludeExclude
+const (
+	IncludeExcludeInclude IncludeExclude = "INCLUDE"
+	IncludeExcludeExclude IncludeExclude = "EXCLUDE"
+)
+
+// Values returns all known values for IncludeExclude. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludeExclude) Values() []IncludeExclude {
+	return []IncludeExclude{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type IngestionJobFilterAttribute string
 
 // Enum values for IngestionJobFilterAttribute
@@ -777,6 +798,8 @@ type KnowledgeBaseType string
 // Enum values for KnowledgeBaseType
 const (
 	KnowledgeBaseTypeVector KnowledgeBaseType = "VECTOR"
+	KnowledgeBaseTypeKendra KnowledgeBaseType = "KENDRA"
+	KnowledgeBaseTypeSql    KnowledgeBaseType = "SQL"
 )
 
 // Values returns all known values for KnowledgeBaseType. Note that this can be
@@ -786,6 +809,8 @@ const (
 func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 	return []KnowledgeBaseType{
 		"VECTOR",
+		"KENDRA",
+		"SQL",
 	}
 }
 
@@ -867,11 +892,29 @@ func (OrchestrationType) Values() []OrchestrationType {
 	}
 }
 
+type ParsingModality string
+
+// Enum values for ParsingModality
+const (
+	ParsingModalityMultimodal ParsingModality = "MULTIMODAL"
+)
+
+// Values returns all known values for ParsingModality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParsingModality) Values() []ParsingModality {
+	return []ParsingModality{
+		"MULTIMODAL",
+	}
+}
+
 type ParsingStrategy string
 
 // Enum values for ParsingStrategy
 const (
 	ParsingStrategyBedrockFoundationModel ParsingStrategy = "BEDROCK_FOUNDATION_MODEL"
+	ParsingStrategyBedrockDataAutomation  ParsingStrategy = "BEDROCK_DATA_AUTOMATION"
 )
 
 // Values returns all known values for ParsingStrategy. Note that this can be
@@ -881,6 +924,7 @@ const (
 func (ParsingStrategy) Values() []ParsingStrategy {
 	return []ParsingStrategy{
 		"BEDROCK_FOUNDATION_MODEL",
+		"BEDROCK_DATA_AUTOMATION",
 	}
 }
 
@@ -942,6 +986,102 @@ func (PromptType) Values() []PromptType {
 		"ORCHESTRATION",
 		"POST_PROCESSING",
 		"KNOWLEDGE_BASE_RESPONSE_GENERATION",
+	}
+}
+
+type QueryEngineType string
+
+// Enum values for QueryEngineType
+const (
+	QueryEngineTypeRedshift QueryEngineType = "REDSHIFT"
+)
+
+// Values returns all known values for QueryEngineType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryEngineType) Values() []QueryEngineType {
+	return []QueryEngineType{
+		"REDSHIFT",
+	}
+}
+
+type RedshiftProvisionedAuthType string
+
+// Enum values for RedshiftProvisionedAuthType
+const (
+	RedshiftProvisionedAuthTypeIam              RedshiftProvisionedAuthType = "IAM"
+	RedshiftProvisionedAuthTypeUsernamePassword RedshiftProvisionedAuthType = "USERNAME_PASSWORD"
+	RedshiftProvisionedAuthTypeUsername         RedshiftProvisionedAuthType = "USERNAME"
+)
+
+// Values returns all known values for RedshiftProvisionedAuthType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedshiftProvisionedAuthType) Values() []RedshiftProvisionedAuthType {
+	return []RedshiftProvisionedAuthType{
+		"IAM",
+		"USERNAME_PASSWORD",
+		"USERNAME",
+	}
+}
+
+type RedshiftQueryEngineStorageType string
+
+// Enum values for RedshiftQueryEngineStorageType
+const (
+	RedshiftQueryEngineStorageTypeRedshift       RedshiftQueryEngineStorageType = "REDSHIFT"
+	RedshiftQueryEngineStorageTypeAwsDataCatalog RedshiftQueryEngineStorageType = "AWS_DATA_CATALOG"
+)
+
+// Values returns all known values for RedshiftQueryEngineStorageType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedshiftQueryEngineStorageType) Values() []RedshiftQueryEngineStorageType {
+	return []RedshiftQueryEngineStorageType{
+		"REDSHIFT",
+		"AWS_DATA_CATALOG",
+	}
+}
+
+type RedshiftQueryEngineType string
+
+// Enum values for RedshiftQueryEngineType
+const (
+	RedshiftQueryEngineTypeServerless  RedshiftQueryEngineType = "SERVERLESS"
+	RedshiftQueryEngineTypeProvisioned RedshiftQueryEngineType = "PROVISIONED"
+)
+
+// Values returns all known values for RedshiftQueryEngineType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedshiftQueryEngineType) Values() []RedshiftQueryEngineType {
+	return []RedshiftQueryEngineType{
+		"SERVERLESS",
+		"PROVISIONED",
+	}
+}
+
+type RedshiftServerlessAuthType string
+
+// Enum values for RedshiftServerlessAuthType
+const (
+	RedshiftServerlessAuthTypeIam              RedshiftServerlessAuthType = "IAM"
+	RedshiftServerlessAuthTypeUsernamePassword RedshiftServerlessAuthType = "USERNAME_PASSWORD"
+)
+
+// Values returns all known values for RedshiftServerlessAuthType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedshiftServerlessAuthType) Values() []RedshiftServerlessAuthType {
+	return []RedshiftServerlessAuthType{
+		"IAM",
+		"USERNAME_PASSWORD",
 	}
 }
 
@@ -1067,6 +1207,24 @@ const (
 func (StepType) Values() []StepType {
 	return []StepType{
 		"POST_CHUNKING",
+	}
+}
+
+type SupplementalDataStorageLocationType string
+
+// Enum values for SupplementalDataStorageLocationType
+const (
+	SupplementalDataStorageLocationTypeS3 SupplementalDataStorageLocationType = "S3"
+)
+
+// Values returns all known values for SupplementalDataStorageLocationType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupplementalDataStorageLocationType) Values() []SupplementalDataStorageLocationType {
+	return []SupplementalDataStorageLocationType{
+		"S3",
 	}
 }
 

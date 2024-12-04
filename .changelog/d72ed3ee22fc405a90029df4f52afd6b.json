@@ -1,0 +1,8 @@
+{
+    "id": "d72ed3ee-22fc-405a-9002-9df4f52afd6b",
+    "type": "feature",
+    "description": "Release Bedrock Data Automation SDK",
+    "modules": [
+        "service/bedrockdataautomation"
+    ]
+}

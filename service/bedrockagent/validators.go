@@ -1853,6 +1853,41 @@ func validateCrawlFilterConfiguration(v *types.CrawlFilterConfiguration) error {
 	}
 }
 
+func validateCuratedQueries(v []types.CuratedQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CuratedQueries"}
+	for i := range v {
+		if err := validateCuratedQuery(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCuratedQuery(v *types.CuratedQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CuratedQuery"}
+	if v.NaturalLanguage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NaturalLanguage"))
+	}
+	if v.Sql == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sql"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomContent(v *types.CustomContent) error {
 	if v == nil {
 		return nil
@@ -2635,6 +2670,21 @@ func validateIntermediateStorage(v *types.IntermediateStorage) error {
 	}
 }
 
+func validateKendraKnowledgeBaseConfiguration(v *types.KendraKnowledgeBaseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KendraKnowledgeBaseConfiguration"}
+	if v.KendraIndexArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KendraIndexArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKnowledgeBaseConfiguration(v *types.KnowledgeBaseConfiguration) error {
 	if v == nil {
 		return nil
@@ -2646,6 +2696,16 @@ func validateKnowledgeBaseConfiguration(v *types.KnowledgeBaseConfiguration) err
 	if v.VectorKnowledgeBaseConfiguration != nil {
 		if err := validateVectorKnowledgeBaseConfiguration(v.VectorKnowledgeBaseConfiguration); err != nil {
 			invalidParams.AddNested("VectorKnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KendraKnowledgeBaseConfiguration != nil {
+		if err := validateKendraKnowledgeBaseConfiguration(v.KendraKnowledgeBaseConfiguration); err != nil {
+			invalidParams.AddNested("KendraKnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SqlKnowledgeBaseConfiguration != nil {
+		if err := validateSqlKnowledgeBaseConfiguration(v.SqlKnowledgeBaseConfiguration); err != nil {
+			invalidParams.AddNested("SqlKnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3354,6 +3414,77 @@ func validatePromptVariantList(v []types.PromptVariant) error {
 	}
 }
 
+func validateQueryGenerationConfiguration(v *types.QueryGenerationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryGenerationConfiguration"}
+	if v.GenerationContext != nil {
+		if err := validateQueryGenerationContext(v.GenerationContext); err != nil {
+			invalidParams.AddNested("GenerationContext", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryGenerationContext(v *types.QueryGenerationContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryGenerationContext"}
+	if v.Tables != nil {
+		if err := validateQueryGenerationTables(v.Tables); err != nil {
+			invalidParams.AddNested("Tables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CuratedQueries != nil {
+		if err := validateCuratedQueries(v.CuratedQueries); err != nil {
+			invalidParams.AddNested("CuratedQueries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryGenerationTable(v *types.QueryGenerationTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryGenerationTable"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryGenerationTables(v []types.QueryGenerationTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryGenerationTables"}
+	for i := range v {
+		if err := validateQueryGenerationTable(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRdsConfiguration(v *types.RdsConfiguration) error {
 	if v == nil {
 		return nil
@@ -3450,6 +3581,208 @@ func validateRedisEnterpriseCloudFieldMapping(v *types.RedisEnterpriseCloudField
 	}
 	if v.MetadataField == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetadataField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftConfiguration(v *types.RedshiftConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftConfiguration"}
+	if v.StorageConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageConfigurations"))
+	} else if v.StorageConfigurations != nil {
+		if err := validateRedshiftQueryEngineStorageConfigurations(v.StorageConfigurations); err != nil {
+			invalidParams.AddNested("StorageConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueryEngineConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryEngineConfiguration"))
+	} else if v.QueryEngineConfiguration != nil {
+		if err := validateRedshiftQueryEngineConfiguration(v.QueryEngineConfiguration); err != nil {
+			invalidParams.AddNested("QueryEngineConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueryGenerationConfiguration != nil {
+		if err := validateQueryGenerationConfiguration(v.QueryGenerationConfiguration); err != nil {
+			invalidParams.AddNested("QueryGenerationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftProvisionedAuthConfiguration(v *types.RedshiftProvisionedAuthConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftProvisionedAuthConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftProvisionedConfiguration(v *types.RedshiftProvisionedConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftProvisionedConfiguration"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.AuthConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthConfiguration"))
+	} else if v.AuthConfiguration != nil {
+		if err := validateRedshiftProvisionedAuthConfiguration(v.AuthConfiguration); err != nil {
+			invalidParams.AddNested("AuthConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftQueryEngineAwsDataCatalogStorageConfiguration(v *types.RedshiftQueryEngineAwsDataCatalogStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftQueryEngineAwsDataCatalogStorageConfiguration"}
+	if v.TableNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftQueryEngineConfiguration(v *types.RedshiftQueryEngineConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftQueryEngineConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ServerlessConfiguration != nil {
+		if err := validateRedshiftServerlessConfiguration(v.ServerlessConfiguration); err != nil {
+			invalidParams.AddNested("ServerlessConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProvisionedConfiguration != nil {
+		if err := validateRedshiftProvisionedConfiguration(v.ProvisionedConfiguration); err != nil {
+			invalidParams.AddNested("ProvisionedConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftQueryEngineRedshiftStorageConfiguration(v *types.RedshiftQueryEngineRedshiftStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftQueryEngineRedshiftStorageConfiguration"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftQueryEngineStorageConfiguration(v *types.RedshiftQueryEngineStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftQueryEngineStorageConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.AwsDataCatalogConfiguration != nil {
+		if err := validateRedshiftQueryEngineAwsDataCatalogStorageConfiguration(v.AwsDataCatalogConfiguration); err != nil {
+			invalidParams.AddNested("AwsDataCatalogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RedshiftConfiguration != nil {
+		if err := validateRedshiftQueryEngineRedshiftStorageConfiguration(v.RedshiftConfiguration); err != nil {
+			invalidParams.AddNested("RedshiftConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftQueryEngineStorageConfigurations(v []types.RedshiftQueryEngineStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftQueryEngineStorageConfigurations"}
+	for i := range v {
+		if err := validateRedshiftQueryEngineStorageConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftServerlessAuthConfiguration(v *types.RedshiftServerlessAuthConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftServerlessAuthConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftServerlessConfiguration(v *types.RedshiftServerlessConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftServerlessConfiguration"}
+	if v.WorkgroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkgroupArn"))
+	}
+	if v.AuthConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthConfiguration"))
+	} else if v.AuthConfiguration != nil {
+		if err := validateRedshiftServerlessAuthConfiguration(v.AuthConfiguration); err != nil {
+			invalidParams.AddNested("AuthConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3726,6 +4059,26 @@ func validateSpecificToolChoice(v *types.SpecificToolChoice) error {
 	}
 }
 
+func validateSqlKnowledgeBaseConfiguration(v *types.SqlKnowledgeBaseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SqlKnowledgeBaseConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.RedshiftConfiguration != nil {
+		if err := validateRedshiftConfiguration(v.RedshiftConfiguration); err != nil {
+			invalidParams.AddNested("RedshiftConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStorageConfiguration(v *types.StorageConfiguration) error {
 	if v == nil {
 		return nil
@@ -3811,6 +4164,62 @@ func validateStorageFlowNodeServiceConfiguration(v types.StorageFlowNodeServiceC
 			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSupplementalDataStorageConfiguration(v *types.SupplementalDataStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SupplementalDataStorageConfiguration"}
+	if v.StorageLocations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageLocations"))
+	} else if v.StorageLocations != nil {
+		if err := validateSupplementalDataStorageLocations(v.StorageLocations); err != nil {
+			invalidParams.AddNested("StorageLocations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSupplementalDataStorageLocation(v *types.SupplementalDataStorageLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SupplementalDataStorageLocation"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.S3Location != nil {
+		if err := validateS3Location(v.S3Location); err != nil {
+			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSupplementalDataStorageLocations(v []types.SupplementalDataStorageLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SupplementalDataStorageLocations"}
+	for i := range v {
+		if err := validateSupplementalDataStorageLocation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4053,6 +4462,11 @@ func validateVectorKnowledgeBaseConfiguration(v *types.VectorKnowledgeBaseConfig
 	invalidParams := smithy.InvalidParamsError{Context: "VectorKnowledgeBaseConfiguration"}
 	if v.EmbeddingModelArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EmbeddingModelArn"))
+	}
+	if v.SupplementalDataStorageConfiguration != nil {
+		if err := validateSupplementalDataStorageConfiguration(v.SupplementalDataStorageConfiguration); err != nil {
+			invalidParams.AddNested("SupplementalDataStorageConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4322,9 +4736,7 @@ func validateOpCreateKnowledgeBaseInput(v *CreateKnowledgeBaseInput) error {
 			invalidParams.AddNested("KnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.StorageConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageConfiguration"))
-	} else if v.StorageConfiguration != nil {
+	if v.StorageConfiguration != nil {
 		if err := validateStorageConfiguration(v.StorageConfiguration); err != nil {
 			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -5427,9 +5839,7 @@ func validateOpUpdateKnowledgeBaseInput(v *UpdateKnowledgeBaseInput) error {
 			invalidParams.AddNested("KnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.StorageConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageConfiguration"))
-	} else if v.StorageConfiguration != nil {
+	if v.StorageConfiguration != nil {
 		if err := validateStorageConfiguration(v.StorageConfiguration); err != nil {
 			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
 		}

@@ -110,6 +110,26 @@ func (m *validateOpCreateInferenceProfile) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMarketplaceModelEndpoint struct {
+}
+
+func (*validateOpCreateMarketplaceModelEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMarketplaceModelEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMarketplaceModelEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMarketplaceModelEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateModelCopyJob struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpDeleteInferenceProfile) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMarketplaceModelEndpoint struct {
+}
+
+func (*validateOpDeleteMarketplaceModelEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMarketplaceModelEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMarketplaceModelEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMarketplaceModelEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteProvisionedModelThroughput struct {
 }
 
@@ -305,6 +345,26 @@ func (m *validateOpDeleteProvisionedModelThroughput) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProvisionedModelThroughputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeregisterMarketplaceModelEndpoint struct {
+}
+
+func (*validateOpDeregisterMarketplaceModelEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterMarketplaceModelEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterMarketplaceModelEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterMarketplaceModelEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +490,26 @@ func (m *validateOpGetInferenceProfile) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMarketplaceModelEndpoint struct {
+}
+
+func (*validateOpGetMarketplaceModelEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMarketplaceModelEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMarketplaceModelEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMarketplaceModelEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetModelCopyJob struct {
 }
 
@@ -510,6 +590,26 @@ func (m *validateOpGetModelInvocationJob) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPromptRouter struct {
+}
+
+func (*validateOpGetPromptRouter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPromptRouter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPromptRouterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPromptRouterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetProvisionedModelThroughput struct {
 }
 
@@ -565,6 +665,26 @@ func (m *validateOpPutModelInvocationLoggingConfiguration) HandleInitialize(ctx 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutModelInvocationLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRegisterMarketplaceModelEndpoint struct {
+}
+
+func (*validateOpRegisterMarketplaceModelEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterMarketplaceModelEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterMarketplaceModelEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterMarketplaceModelEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +810,26 @@ func (m *validateOpUpdateGuardrail) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMarketplaceModelEndpoint struct {
+}
+
+func (*validateOpUpdateMarketplaceModelEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMarketplaceModelEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMarketplaceModelEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMarketplaceModelEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProvisionedModelThroughput struct {
 }
 
@@ -730,6 +870,10 @@ func addOpCreateInferenceProfileValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateInferenceProfile{}, middleware.After)
 }
 
+func addOpCreateMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMarketplaceModelEndpoint{}, middleware.After)
+}
+
 func addOpCreateModelCopyJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModelCopyJob{}, middleware.After)
 }
@@ -766,8 +910,16 @@ func addOpDeleteInferenceProfileValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteInferenceProfile{}, middleware.After)
 }
 
+func addOpDeleteMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMarketplaceModelEndpoint{}, middleware.After)
+}
+
 func addOpDeleteProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProvisionedModelThroughput{}, middleware.After)
+}
+
+func addOpDeregisterMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterMarketplaceModelEndpoint{}, middleware.After)
 }
 
 func addOpGetCustomModelValidationMiddleware(stack *middleware.Stack) error {
@@ -794,6 +946,10 @@ func addOpGetInferenceProfileValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetInferenceProfile{}, middleware.After)
 }
 
+func addOpGetMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMarketplaceModelEndpoint{}, middleware.After)
+}
+
 func addOpGetModelCopyJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetModelCopyJob{}, middleware.After)
 }
@@ -810,6 +966,10 @@ func addOpGetModelInvocationJobValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetModelInvocationJob{}, middleware.After)
 }
 
+func addOpGetPromptRouterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPromptRouter{}, middleware.After)
+}
+
 func addOpGetProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProvisionedModelThroughput{}, middleware.After)
 }
@@ -820,6 +980,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutModelInvocationLoggingConfiguration{}, middleware.After)
+}
+
+func addOpRegisterMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterMarketplaceModelEndpoint{}, middleware.After)
 }
 
 func addOpStopEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -844,6 +1008,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateGuardrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGuardrail{}, middleware.After)
+}
+
+func addOpUpdateMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMarketplaceModelEndpoint{}, middleware.After)
 }
 
 func addOpUpdateProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
@@ -980,6 +1148,25 @@ func validateDistillationConfig(v *types.DistillationConfig) error {
 		if err := validateTeacherModelConfig(v.TeacherModelConfig); err != nil {
 			invalidParams.AddNested("TeacherModelConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEndpointConfig(v types.EndpointConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointConfig"}
+	switch uv := v.(type) {
+	case *types.EndpointConfigMemberSageMaker:
+		if err := validateSageMakerEndpoint(&uv.Value); err != nil {
+			invalidParams.AddNested("[sageMaker]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2235,6 +2422,32 @@ func validateS3ObjectDoc(v *types.S3ObjectDoc) error {
 	}
 }
 
+func validateSageMakerEndpoint(v *types.SageMakerEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SageMakerEndpoint"}
+	if v.InitialInstanceCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialInstanceCount"))
+	}
+	if v.InstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.ExecutionRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRole"))
+	}
+	if v.Vpc != nil {
+		if err := validateVpcConfig(v.Vpc); err != nil {
+			invalidParams.AddNested("Vpc", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -2519,6 +2732,36 @@ func validateOpCreateInferenceProfileInput(v *CreateInferenceProfileInput) error
 	}
 }
 
+func validateOpCreateMarketplaceModelEndpointInput(v *CreateMarketplaceModelEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMarketplaceModelEndpointInput"}
+	if v.ModelSourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelSourceIdentifier"))
+	}
+	if v.EndpointConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointConfig"))
+	} else if v.EndpointConfig != nil {
+		if err := validateEndpointConfig(v.EndpointConfig); err != nil {
+			invalidParams.AddNested("EndpointConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateModelCopyJobInput(v *CreateModelCopyJobInput) error {
 	if v == nil {
 		return nil
@@ -2779,6 +3022,21 @@ func validateOpDeleteInferenceProfileInput(v *DeleteInferenceProfileInput) error
 	}
 }
 
+func validateOpDeleteMarketplaceModelEndpointInput(v *DeleteMarketplaceModelEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMarketplaceModelEndpointInput"}
+	if v.EndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteProvisionedModelThroughputInput(v *DeleteProvisionedModelThroughputInput) error {
 	if v == nil {
 		return nil
@@ -2786,6 +3044,21 @@ func validateOpDeleteProvisionedModelThroughputInput(v *DeleteProvisionedModelTh
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteProvisionedModelThroughputInput"}
 	if v.ProvisionedModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeregisterMarketplaceModelEndpointInput(v *DeregisterMarketplaceModelEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterMarketplaceModelEndpointInput"}
+	if v.EndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2884,6 +3157,21 @@ func validateOpGetInferenceProfileInput(v *GetInferenceProfileInput) error {
 	}
 }
 
+func validateOpGetMarketplaceModelEndpointInput(v *GetMarketplaceModelEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMarketplaceModelEndpointInput"}
+	if v.EndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetModelCopyJobInput(v *GetModelCopyJobInput) error {
 	if v == nil {
 		return nil
@@ -2944,6 +3232,21 @@ func validateOpGetModelInvocationJobInput(v *GetModelInvocationJobInput) error {
 	}
 }
 
+func validateOpGetPromptRouterInput(v *GetPromptRouterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPromptRouterInput"}
+	if v.PromptRouterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptRouterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetProvisionedModelThroughputInput(v *GetProvisionedModelThroughputInput) error {
 	if v == nil {
 		return nil
@@ -2985,6 +3288,24 @@ func validateOpPutModelInvocationLoggingConfigurationInput(v *PutModelInvocation
 		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterMarketplaceModelEndpointInput(v *RegisterMarketplaceModelEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterMarketplaceModelEndpointInput"}
+	if v.EndpointIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointIdentifier"))
+	}
+	if v.ModelSourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelSourceIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3119,6 +3440,28 @@ func validateOpUpdateGuardrailInput(v *UpdateGuardrailInput) error {
 	}
 	if v.BlockedOutputsMessaging == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BlockedOutputsMessaging"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMarketplaceModelEndpointInput(v *UpdateMarketplaceModelEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMarketplaceModelEndpointInput"}
+	if v.EndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
+	if v.EndpointConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointConfig"))
+	} else if v.EndpointConfig != nil {
+		if err := validateEndpointConfig(v.EndpointConfig); err != nil {
+			invalidParams.AddNested("EndpointConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

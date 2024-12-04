@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of tags associated with a specified resource. Indexes, FAQs, and
-// data sources can have tags associated with them.
+// Gets a list of tags associated with a resource. Indexes, FAQs, data sources,
+// and other resources can have tags associated with them.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -30,8 +30,13 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the index, FAQ, or data source to get a list
-	// of tags for.
+	// The Amazon Resource Name (ARN) of the index, FAQ, data source, or other
+	// resource to get a list of tags for. For example, the ARN of an index is
+	// constructed as follows:
+	// arn:aws:kendra:your-region:your-account-id:index/index-id For information on how
+	// to construct an ARN for all types of Amazon Kendra resources, see [Resource types].
+	//
+	// [Resource types]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies
 	//
 	// This member is required.
 	ResourceARN *string
@@ -41,7 +46,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// A list of tags associated with the index, FAQ, or data source.
+	// A list of tags associated with the index, FAQ, data source, or other resource.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

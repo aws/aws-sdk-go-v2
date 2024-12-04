@@ -25,6 +25,24 @@ func ExampleCustomizationConfig_outputUsage() {
 
 var _ *types.DistillationConfig
 
+func ExampleEndpointConfig_outputUsage() {
+	var union types.EndpointConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EndpointConfigMemberSageMaker:
+		_ = v.Value // Value is types.SageMakerEndpoint
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SageMakerEndpoint
+
 func ExampleEvaluationConfig_outputUsage() {
 	var union types.EvaluationConfig
 	// type switches can be used to check the union value

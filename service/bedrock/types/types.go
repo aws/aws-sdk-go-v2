@@ -188,6 +188,24 @@ type DistillationConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the configuration for the endpoint.
+//
+// The following types satisfy this interface:
+//
+//	EndpointConfigMemberSageMaker
+type EndpointConfig interface {
+	isEndpointConfig()
+}
+
+// The configuration specific to Amazon SageMaker for the endpoint.
+type EndpointConfigMemberSageMaker struct {
+	Value SageMakerEndpoint
+
+	noSmithyDocumentSerde
+}
+
+func (*EndpointConfigMemberSageMaker) isEndpointConfig() {}
+
 // Contains the ARN of the Amazon Bedrock model or [inference profile] specified in your evaluation
 // job. Each Amazon Bedrock model supports different inferenceParams . To learn
 // more about supported inference parameters for Amazon Bedrock models, see [Inference parameters for foundation models].
@@ -733,6 +751,12 @@ type GuardrailContentFilter struct {
 	// This member is required.
 	Type GuardrailContentFilterType
 
+	// The input modalities selected for the guardrail content filter.
+	InputModalities []GuardrailModality
+
+	// The output modalities selected for the guardrail content filter.
+	OutputModalities []GuardrailModality
+
 	noSmithyDocumentSerde
 }
 
@@ -790,6 +814,12 @@ type GuardrailContentFilterConfig struct {
 	//
 	// This member is required.
 	Type GuardrailContentFilterType
+
+	// The input modalities selected for the guardrail content filter configuration.
+	InputModalities []GuardrailModality
+
+	// The output modalities selected for the guardrail content filter configuration.
+	OutputModalities []GuardrailModality
 
 	noSmithyDocumentSerde
 }
@@ -908,7 +938,7 @@ type GuardrailPiiEntity struct {
 	// This member is required.
 	Action GuardrailSensitiveInformationAction
 
-	// The type of PII entity. For exampvle, Social Security Number.
+	// The type of PII entity. For example, Social Security Number.
 	//
 	// This member is required.
 	Type GuardrailPiiEntityType
@@ -939,7 +969,7 @@ type GuardrailPiiEntityConfig struct {
 	//   - AGE
 	//
 	// An individual's age, including the quantity and unit of time. For example, in
-	//   the phrase "I am 40 years old," Guarrails recognizes "40 years" as an age.
+	//   the phrase "I am 40 years old," Guardrails recognizes "40 years" as an age.
 	//
 	//   - NAME
 	//
@@ -988,7 +1018,7 @@ type GuardrailPiiEntityConfig struct {
 	//
 	//   - Finance
 	//
-	//   - REDIT_DEBIT_CARD_CVV
+	//   - CREDIT_DEBIT_CARD_CVV
 	//
 	// A three-digit card verification code (CVV) that is present on VISA, MasterCard,
 	//   and Discover credit and debit cards. For American Express credit or debit cards,
@@ -1730,6 +1760,88 @@ type LoggingConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about an endpoint for a model from Amazon Bedrock Marketplace.
+type MarketplaceModelEndpoint struct {
+
+	// The timestamp when the endpoint was registered.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the endpoint.
+	//
+	// This member is required.
+	EndpointArn *string
+
+	// The configuration of the endpoint, including the number and type of instances
+	// used.
+	//
+	// This member is required.
+	EndpointConfig EndpointConfig
+
+	// The current status of the endpoint (e.g., Creating, InService, Updating,
+	// Failed).
+	//
+	// This member is required.
+	EndpointStatus *string
+
+	// The ARN of the model from Amazon Bedrock Marketplace that is deployed on this
+	// endpoint.
+	//
+	// This member is required.
+	ModelSourceIdentifier *string
+
+	// The timestamp when the endpoint was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// Additional information about the endpoint status, if available.
+	EndpointStatusMessage *string
+
+	// The overall status of the endpoint in Amazon Bedrock Marketplace (e.g., ACTIVE,
+	// INACTIVE).
+	Status Status
+
+	// Additional information about the overall status, if available.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of an endpoint for a model from Amazon Bedrock Marketplace.
+type MarketplaceModelEndpointSummary struct {
+
+	// The timestamp when the endpoint was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the endpoint.
+	//
+	// This member is required.
+	EndpointArn *string
+
+	// The ARN of the model from Amazon Bedrock Marketplace that is deployed on this
+	// endpoint.
+	//
+	// This member is required.
+	ModelSourceIdentifier *string
+
+	// The timestamp when the endpoint was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The overall status of the endpoint in Amazon Bedrock Marketplace.
+	Status Status
+
+	// Additional information about the overall status, if available.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about each model copy job.
 //
 // This data type is used in the following API operations:
@@ -2109,6 +2221,65 @@ type OutputDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a prompt router.
+type PromptRouterSummary struct {
+
+	// The router's fallback model.
+	//
+	// This member is required.
+	FallbackModel *PromptRouterTargetModel
+
+	// The router's models.
+	//
+	// This member is required.
+	Models []PromptRouterTargetModel
+
+	// The router's ARN.
+	//
+	// This member is required.
+	PromptRouterArn *string
+
+	// The router's name.
+	//
+	// This member is required.
+	PromptRouterName *string
+
+	// The router's routing criteria.
+	//
+	// This member is required.
+	RoutingCriteria *RoutingCriteria
+
+	// The router's status.
+	//
+	// This member is required.
+	Status PromptRouterStatus
+
+	// The summary's type.
+	//
+	// This member is required.
+	Type PromptRouterType
+
+	// When the router was created.
+	CreatedAt *time.Time
+
+	// The router's description.
+	Description *string
+
+	// When the router was updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The target model for a prompt router.
+type PromptRouterTargetModel struct {
+
+	// The target model's ARN.
+	ModelArn *string
 
 	noSmithyDocumentSerde
 }
@@ -2544,6 +2715,17 @@ type RetrieveConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Routing criteria for a prompt router.
+type RoutingCriteria struct {
+
+	// The criteria's response quality difference.
+	//
+	// This member is required.
+	ResponseQualityDifference *float64
+
+	noSmithyDocumentSerde
+}
+
 // S3 configuration for storing log data.
 type S3Config struct {
 
@@ -2576,6 +2758,38 @@ type S3ObjectDoc struct {
 	//
 	// This member is required.
 	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration for a Amazon SageMaker endpoint.
+type SageMakerEndpoint struct {
+
+	// The ARN of the IAM role that Amazon SageMaker can assume to access model
+	// artifacts and docker image for deployment on Amazon EC2 compute instances or for
+	// batch transform jobs.
+	//
+	// This member is required.
+	ExecutionRole *string
+
+	// The number of Amazon EC2 compute instances to deploy for initial endpoint
+	// creation.
+	//
+	// This member is required.
+	InitialInstanceCount *int32
+
+	// The Amazon EC2 compute instance type to deploy for hosting the model.
+	//
+	// This member is required.
+	InstanceType *string
+
+	// The Amazon Web Services KMS key that Amazon SageMaker uses to encrypt data on
+	// the storage volume attached to the Amazon EC2 compute instance that hosts the
+	// endpoint.
+	KmsEncryptionKey *string
+
+	// The VPC configuration for the endpoint.
+	Vpc *VpcConfig
 
 	noSmithyDocumentSerde
 }
@@ -2724,6 +2938,7 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isCustomizationConfig()                {}
+func (*UnknownUnionMember) isEndpointConfig()                     {}
 func (*UnknownUnionMember) isEvaluationConfig()                   {}
 func (*UnknownUnionMember) isEvaluationDatasetLocation()          {}
 func (*UnknownUnionMember) isEvaluationInferenceConfig()          {}

@@ -1222,6 +1222,18 @@ type FunctionSchemaMemberFunctions struct {
 
 func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
 
+// Contains information about a query generated for a natural language query.
+type GeneratedQuery struct {
+
+	// An SQL query that corresponds to the natural language query.
+	Sql *string
+
+	// The type of transformed query.
+	Type GeneratedQueryType
+
+	noSmithyDocumentSerde
+}
+
 // Contains metadata about a part of the generated response that is accompanied by
 // a citation.
 //
@@ -1977,7 +1989,7 @@ type KnowledgeBaseRetrievalConfiguration struct {
 // [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
 type KnowledgeBaseRetrievalResult struct {
 
-	// Contains a chunk of text from a data source in the knowledge base.
+	// Contains information about the content of the chunk.
 	//
 	// This member is required.
 	Content *RetrievalResultContent
@@ -2773,6 +2785,22 @@ type PropertyParameters struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a natural language query to transform into SQL.
+type QueryGenerationInput struct {
+
+	// The text of the query.
+	//
+	// This member is required.
+	Text *string
+
+	// The type of the query.
+	//
+	// This member is required.
+	Type InputQueryType
+
+	noSmithyDocumentSerde
+}
+
 // To split up the prompt and retrieve multiple sources, set the transformation
 // type to QUERY_DECOMPOSITION .
 type QueryTransformationConfiguration struct {
@@ -3263,7 +3291,9 @@ type RetrievalResultConfluenceLocation struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the cited text from the data source.
+// Contains information about a chunk of text from a data source in the knowledge
+// base. If the result is from a structured data source, the cell in the database
+// and the type of the value is also identified.
 //
 // This data type is used in the following API operations:
 //
@@ -3281,10 +3311,34 @@ type RetrievalResultConfluenceLocation struct {
 // [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievalResultContent struct {
 
+	// A data URI with base64-encoded content from the data source. The URI is in the
+	// following format: returned in the following format:
+	// data:image/jpeg;base64,${base64-encoded string} .
+	ByteContent *string
+
+	// Specifies information about the rows with the cells to return in retrieval.
+	Row []RetrievalResultContentColumn
+
 	// The cited text from the data source.
-	//
-	// This member is required.
 	Text *string
+
+	// The type of content in the retrieval result.
+	Type RetrievalResultContentType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a column with a cell to return in retrieval.
+type RetrievalResultContentColumn struct {
+
+	// The name of the column.
+	ColumnName *string
+
+	// The value in the column.
+	ColumnValue *string
+
+	// The data type of the value.
+	Type RetrievalResultContentColumnType
 
 	noSmithyDocumentSerde
 }
@@ -3294,6 +3348,15 @@ type RetrievalResultCustomDocumentLocation struct {
 
 	// The ID of the document.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// The location of a result in Amazon Kendra.
+type RetrievalResultKendraDocumentLocation struct {
+
+	// The document's uri.
+	Uri *string
 
 	noSmithyDocumentSerde
 }
@@ -3309,7 +3372,7 @@ type RetrievalResultCustomDocumentLocation struct {
 //   - – in the location field
 //
 // [InvokeAgent response]
-//   - – in the locatino field
+//   - – in the location field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
 // [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
@@ -3327,6 +3390,9 @@ type RetrievalResultLocation struct {
 	// Specifies the location of a document in a custom data source.
 	CustomDocumentLocation *RetrievalResultCustomDocumentLocation
 
+	// The location of a document in Amazon Kendra.
+	KendraDocumentLocation *RetrievalResultKendraDocumentLocation
+
 	// The S3 data source location.
 	S3Location *RetrievalResultS3Location
 
@@ -3335,6 +3401,9 @@ type RetrievalResultLocation struct {
 
 	// The SharePoint data source location.
 	SharePointLocation *RetrievalResultSharePointLocation
+
+	// Specifies information about the SQL query used to retrieve the result.
+	SqlLocation *RetrievalResultSqlLocation
 
 	// The web URL/URLs data source location.
 	WebLocation *RetrievalResultWebLocation
@@ -3380,6 +3449,15 @@ type RetrievalResultSharePointLocation struct {
 
 	// The SharePoint site URL for the data source location.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the SQL query used to retrieve the result.
+type RetrievalResultSqlLocation struct {
+
+	// The SQL query used to retrieve the result.
+	Query *string
 
 	noSmithyDocumentSerde
 }
@@ -3853,6 +3931,31 @@ type TextResponsePart struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for transforming text to SQL.
+type TextToSqlConfiguration struct {
+
+	// The type of resource to use in transformation.
+	//
+	// This member is required.
+	Type TextToSqlConfigurationType
+
+	// Specifies configurations for a knowledge base to use in transformation.
+	KnowledgeBaseConfiguration *TextToSqlKnowledgeBaseConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a knowledge base to use in transformation.
+type TextToSqlKnowledgeBaseConfiguration struct {
+
+	// The ARN of the knowledge base
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains one part of the agent's reasoning process and results from calling API
 // actions and querying knowledge bases. You can use the trace to understand how
 // the agent arrived at the response it provided the customer. For more
@@ -3974,6 +4077,20 @@ type TracePart struct {
 	//
 	// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 	Trace Trace
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for transforming the natural language query into SQL.
+type TransformationConfiguration struct {
+
+	// The mode of the transformation.
+	//
+	// This member is required.
+	Mode QueryTransformationMode
+
+	// Specifies configurations for transforming text to SQL.
+	TextToSqlConfiguration *TextToSqlConfiguration
 
 	noSmithyDocumentSerde
 }
