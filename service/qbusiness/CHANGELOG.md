@@ -1,3 +1,7 @@
+# v1.19.0 (2024-12-05)
+
+* **Feature**: This release removes the deprecated UserId and UserGroups fields from SearchRelevantContent api's request parameters.
+
 # v1.18.0 (2024-12-03.2)
 
 * **Feature**: Amazon Q Business now supports customization options for your web experience, 11 new Plugins, and QuickSight support. Amazon Q index allows software providers to enrich their native generative AI experiences with their customer's enterprise knowledge and user context spanning multiple applications.

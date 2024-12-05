@@ -1,3 +1,11 @@
+# Release (2024-12-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.2.0](service/partnercentralselling/CHANGELOG.md#v120-2024-12-05)
+  * **Feature**: Introducing the preview of new partner central selling APIs designed to transform how AWS partners collaborate and co-sell with multiple partners. This enables multiple partners to seamlessly engage and jointly pursue customer opportunities, fostering a new era of collaborative selling.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.19.0](service/qbusiness/CHANGELOG.md#v1190-2024-12-05)
+  * **Feature**: This release removes the deprecated UserId and UserGroups fields from SearchRelevantContent api's request parameters.
+
 # Release (2024-12-04)
 
 ## Module Highlights
