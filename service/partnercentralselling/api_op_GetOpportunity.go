@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-//	Fetches the Opportunity record from Partner Central by a given Identifier .
+// Fetches the Opportunity record from Partner Central by a given Identifier .
 //
 // Use the ListOpportunities action or the event notification (from Amazon
 // EventBridge) to obtain this identifier.
@@ -33,7 +33,7 @@ func (c *Client) GetOpportunity(ctx context.Context, params *GetOpportunityInput
 
 type GetOpportunityInput struct {
 
-	//  Specifies the catalog associated with the request. This field takes a string
+	// Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity is fetched from. Use AWS to retrieve opportunities
 	// in the Amazon Web Services catalog, and Sandbox to retrieve opportunities in a
@@ -52,7 +52,7 @@ type GetOpportunityInput struct {
 
 type GetOpportunityOutput struct {
 
-	//  Specifies the catalog associated with the request. This field takes a string
+	// Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity information is retrieved from. Use AWS to retrieve
 	// opportunities in the Amazon Web Services catalog, and Sandbox to retrieve
@@ -76,12 +76,15 @@ type GetOpportunityOutput struct {
 	// This member is required.
 	LastModifiedDate *time.Time
 
-	//  Provides information about the associations of other entities with the
+	// Provides information about the associations of other entities with the
 	// opportunity. These entities include identifiers for AWSProducts , Partner
 	// Solutions , and AWSMarketplaceOffers .
 	//
 	// This member is required.
 	RelatedEntityIdentifiers *types.RelatedEntityIdentifiers
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the opportunity.
+	Arn *string
 
 	// Specifies details of the customer associated with the Opportunity .
 	Customer *types.Customer
@@ -102,7 +105,7 @@ type GetOpportunityOutput struct {
 	// involved in collaborating on this opportunity within the partner's organization.
 	OpportunityTeam []types.Contact
 
-	//  Specifies the opportunity type as renewal, new, or expansion.
+	// Specifies the opportunity type as renewal, new, or expansion.
 	//
 	// Opportunity types:
 	//
@@ -123,7 +126,7 @@ type GetOpportunityOutput struct {
 	// payload sent back to the partner.
 	PartnerOpportunityIdentifier *string
 
-	//  Identifies the type of support the partner needs from Amazon Web Services.
+	// Identifies the type of support the partner needs from Amazon Web Services.
 	//
 	// Valid values:
 	//

@@ -1244,6 +1244,23 @@ func (DeliveryModel) Values() []DeliveryModel {
 	}
 }
 
+type EngagementContextType string
+
+// Enum values for EngagementContextType
+const (
+	EngagementContextTypeCustomerProject EngagementContextType = "CustomerProject"
+)
+
+// Values returns all known values for EngagementContextType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EngagementContextType) Values() []EngagementContextType {
+	return []EngagementContextType{
+		"CustomerProject",
+	}
+}
+
 type EngagementInvitationPayloadType string
 
 // Enum values for EngagementInvitationPayloadType
@@ -1280,6 +1297,23 @@ func (EngagementScore) Values() []EngagementScore {
 		"High",
 		"Medium",
 		"Low",
+	}
+}
+
+type EngagementSortName string
+
+// Enum values for EngagementSortName
+const (
+	EngagementSortNameCreatedDate EngagementSortName = "CreatedDate"
+)
+
+// Values returns all known values for EngagementSortName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EngagementSortName) Values() []EngagementSortName {
+	return []EngagementSortName{
+		"CreatedDate",
 	}
 }
 
@@ -1399,6 +1433,23 @@ func (InvolvementTypeChangeReason) Values() []InvolvementTypeChangeReason {
 		"Customer Requested",
 		"Technical Complexity",
 		"Risk Mitigation",
+	}
+}
+
+type ListTasksSortName string
+
+// Enum values for ListTasksSortName
+const (
+	ListTasksSortNameStartTime ListTasksSortName = "StartTime"
+)
+
+// Values returns all known values for ListTasksSortName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListTasksSortName) Values() []ListTasksSortName {
+	return []ListTasksSortName{
+		"StartTime",
 	}
 }
 
@@ -1523,6 +1574,7 @@ type ParticipantType string
 
 // Enum values for ParticipantType
 const (
+	ParticipantTypeSender   ParticipantType = "SENDER"
 	ParticipantTypeReceiver ParticipantType = "RECEIVER"
 )
 
@@ -1532,6 +1584,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ParticipantType) Values() []ParticipantType {
 	return []ParticipantType{
+		"SENDER",
 		"RECEIVER",
 	}
 }
@@ -1588,17 +1641,25 @@ type ReasonCode string
 
 // Enum values for ReasonCode
 const (
-	ReasonCodeInvitationAccessDenied          ReasonCode = "InvitationAccessDenied"
-	ReasonCodeEngagementAccessDenied          ReasonCode = "EngagementAccessDenied"
-	ReasonCodeOpportunityAccessDenied         ReasonCode = "OpportunityAccessDenied"
-	ReasonCodeResourceSnapshotJobAccessDenied ReasonCode = "ResourceSnapshotJobAccessDenied"
-	ReasonCodeEngagementValidationFailed      ReasonCode = "EngagementValidationFailed"
-	ReasonCodeOpportunitySubmissionFailed     ReasonCode = "OpportunitySubmissionFailed"
-	ReasonCodeEngagementInvitationConflict    ReasonCode = "EngagementInvitationConflict"
-	ReasonCodeInternalError                   ReasonCode = "InternalError"
-	ReasonCodeOpportunityValidationFailed     ReasonCode = "OpportunityValidationFailed"
-	ReasonCodeOpportunityConflict             ReasonCode = "OpportunityConflict"
-	ReasonCodeResourceSnapshotAccessDenied    ReasonCode = "ResourceSnapshotAccessDenied"
+	ReasonCodeInvitationAccessDenied              ReasonCode = "InvitationAccessDenied"
+	ReasonCodeInvitationValidationFailed          ReasonCode = "InvitationValidationFailed"
+	ReasonCodeEngagementAccessDenied              ReasonCode = "EngagementAccessDenied"
+	ReasonCodeOpportunityAccessDenied             ReasonCode = "OpportunityAccessDenied"
+	ReasonCodeResourceSnapshotJobAccessDenied     ReasonCode = "ResourceSnapshotJobAccessDenied"
+	ReasonCodeResourceSnapshotJobValidationFailed ReasonCode = "ResourceSnapshotJobValidationFailed"
+	ReasonCodeResourceSnapshotJobConflict         ReasonCode = "ResourceSnapshotJobConflict"
+	ReasonCodeEngagementValidationFailed          ReasonCode = "EngagementValidationFailed"
+	ReasonCodeEngagementConflict                  ReasonCode = "EngagementConflict"
+	ReasonCodeOpportunitySubmissionFailed         ReasonCode = "OpportunitySubmissionFailed"
+	ReasonCodeEngagementInvitationConflict        ReasonCode = "EngagementInvitationConflict"
+	ReasonCodeOpportunityValidationFailed         ReasonCode = "OpportunityValidationFailed"
+	ReasonCodeOpportunityConflict                 ReasonCode = "OpportunityConflict"
+	ReasonCodeResourceSnapshotAccessDenied        ReasonCode = "ResourceSnapshotAccessDenied"
+	ReasonCodeResourceSnapshotValidationFailed    ReasonCode = "ResourceSnapshotValidationFailed"
+	ReasonCodeResourceSnapshotConflict            ReasonCode = "ResourceSnapshotConflict"
+	ReasonCodeInternalError                       ReasonCode = "InternalError"
+	ReasonCodeServiceQuotaExceeded                ReasonCode = "ServiceQuotaExceeded"
+	ReasonCodeRequestThrottled                    ReasonCode = "RequestThrottled"
 )
 
 // Values returns all known values for ReasonCode. Note that this can be expanded
@@ -1608,16 +1669,24 @@ const (
 func (ReasonCode) Values() []ReasonCode {
 	return []ReasonCode{
 		"InvitationAccessDenied",
+		"InvitationValidationFailed",
 		"EngagementAccessDenied",
 		"OpportunityAccessDenied",
 		"ResourceSnapshotJobAccessDenied",
+		"ResourceSnapshotJobValidationFailed",
+		"ResourceSnapshotJobConflict",
 		"EngagementValidationFailed",
+		"EngagementConflict",
 		"OpportunitySubmissionFailed",
 		"EngagementInvitationConflict",
-		"InternalError",
 		"OpportunityValidationFailed",
 		"OpportunityConflict",
 		"ResourceSnapshotAccessDenied",
+		"ResourceSnapshotValidationFailed",
+		"ResourceSnapshotConflict",
+		"InternalError",
+		"ServiceQuotaExceeded",
+		"RequestThrottled",
 	}
 }
 
@@ -1672,6 +1741,42 @@ func (RelatedEntityType) Values() []RelatedEntityType {
 		"Solutions",
 		"AwsProducts",
 		"AwsMarketplaceOffers",
+	}
+}
+
+type ResourceSnapshotJobStatus string
+
+// Enum values for ResourceSnapshotJobStatus
+const (
+	ResourceSnapshotJobStatusRunning ResourceSnapshotJobStatus = "Running"
+	ResourceSnapshotJobStatusStopped ResourceSnapshotJobStatus = "Stopped"
+)
+
+// Values returns all known values for ResourceSnapshotJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceSnapshotJobStatus) Values() []ResourceSnapshotJobStatus {
+	return []ResourceSnapshotJobStatus{
+		"Running",
+		"Stopped",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeOpportunity ResourceType = "Opportunity"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"Opportunity",
 	}
 }
 
@@ -1816,6 +1921,23 @@ func (SolutionStatus) Values() []SolutionStatus {
 		"Active",
 		"Inactive",
 		"Draft",
+	}
+}
+
+type SortBy string
+
+// Enum values for SortBy
+const (
+	SortByCreatedDate SortBy = "CreatedDate"
+)
+
+// Values returns all known values for SortBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortBy) Values() []SortBy {
+	return []SortBy{
+		"CreatedDate",
 	}
 }
 

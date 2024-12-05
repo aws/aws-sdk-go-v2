@@ -75,6 +75,9 @@ type StartEngagementByAcceptingInvitationTaskOutput struct {
 	// Indicates the reason for task failure using an enumerated code.
 	ReasonCode types.ReasonCode
 
+	//  The identifier of the resource snapshot job created as part of this task.
+	ResourceSnapshotJobId *string
+
 	// The timestamp indicating when the task was initiated. The format follows RFC
 	// 3339 section 5.6.
 	StartTime *time.Time

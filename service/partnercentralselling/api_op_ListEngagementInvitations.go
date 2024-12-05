@@ -43,6 +43,13 @@ type ListEngagementInvitationsInput struct {
 	// This member is required.
 	ParticipantType types.ParticipantType
 
+	//  Retrieves a list of engagement invitation summaries based on specified
+	// filters. The ListEngagementInvitations operation allows you to view all
+	// invitations that you have sent or received. You must specify the ParticipantType
+	// to filter invitations where you are either the SENDER or the RECEIVER.
+	// Invitations will automatically expire if not accepted within 15 days.
+	EngagementIdentifier []string
+
 	// Specifies the maximum number of engagement invitations to return in the
 	// response. If more results are available, a pagination token will be provided.
 	MaxResults *int32
@@ -57,10 +64,16 @@ type ListEngagementInvitationsInput struct {
 	// the invitation.
 	PayloadType []types.EngagementInvitationPayloadType
 
+	//  List of sender AWS account IDs to filter the invitations.
+	SenderAwsAccountId []string
+
 	// Specifies the sorting options for listing engagement invitations. Invitations
 	// can be sorted by fields such as InvitationDate or Status to help partners view
 	// results in their preferred order.
 	Sort *types.OpportunityEngagementInvitationSort
+
+	//  Status values to filter the invitations.
+	Status []types.InvitationStatus
 
 	noSmithyDocumentSerde
 }

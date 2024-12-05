@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
 )
 
+func ExampleEngagementContextPayload_outputUsage() {
+	var union types.EngagementContextPayload
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EngagementContextPayloadMemberCustomerProject:
+		_ = v.Value // Value is types.CustomerProjectsContext
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomerProjectsContext
+
 func ExamplePayload_outputUsage() {
 	var union types.Payload
 	// type switches can be used to check the union value
@@ -42,3 +60,21 @@ func ExampleReceiver_outputUsage() {
 }
 
 var _ *types.AccountReceiver
+
+func ExampleResourceSnapshotPayload_outputUsage() {
+	var union types.ResourceSnapshotPayload
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ResourceSnapshotPayloadMemberOpportunitySummary:
+		_ = v.Value // Value is types.OpportunitySummaryView
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OpportunitySummaryView

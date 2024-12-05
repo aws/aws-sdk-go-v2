@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Enables you to create a formal association between an Opportunity and various
-//
+// Enables you to create a formal association between an Opportunity and various
 // related entities, enriching the context and details of the opportunity for
 // better collaboration and decision making. You can associate an opportunity with
 // the following entity types:
@@ -64,7 +63,7 @@ func (c *Client) AssociateOpportunity(ctx context.Context, params *AssociateOppo
 
 type AssociateOpportunityInput struct {
 
-	//  Specifies the catalog associated with the request. This field takes a string
+	// Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity association is made in. Use AWS to associate
 	// opportunities in the Amazon Web Services catalog, and Sandbox for testing in

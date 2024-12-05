@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Retrieves a summary of an AWS Opportunity. This summary includes high-level
-//
+// Retrieves a summary of an AWS Opportunity. This summary includes high-level
 // details about the opportunity sourced from AWS, such as lifecycle information,
 // customer details, and involvement type. It is useful for tracking updates on the
 // AWS opportunity corresponding to an opportunity in the partner's account.
@@ -33,14 +32,14 @@ func (c *Client) GetAwsOpportunitySummary(ctx context.Context, params *GetAwsOpp
 
 type GetAwsOpportunitySummaryInput struct {
 
-	//  Specifies the catalog in which the AWS Opportunity is located. Accepted values
+	// Specifies the catalog in which the AWS Opportunity is located. Accepted values
 	// include AWS for production opportunities or Sandbox for testing purposes. The
 	// catalog determines which environment the opportunity data is pulled from.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  The unique identifier for the related partner opportunity. Use this field to
+	// The unique identifier for the related partner opportunity. Use this field to
 	// correlate an AWS opportunity with its corresponding partner opportunity.
 	//
 	// This member is required.
@@ -51,63 +50,63 @@ type GetAwsOpportunitySummaryInput struct {
 
 type GetAwsOpportunitySummaryOutput struct {
 
-	//  Specifies the catalog in which the AWS Opportunity exists. This is the
+	// Specifies the catalog in which the AWS Opportunity exists. This is the
 	// environment (e.g., AWS or Sandbox ) where the opportunity is being managed.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  Provides details about the customer associated with the AWS Opportunity,
+	// Provides details about the customer associated with the AWS Opportunity,
 	// including account information, industry, and other customer data. These details
 	// help partners understand the business context of the opportunity.
 	Customer *types.AwsOpportunityCustomer
 
-	//  Provides insights into the AWS Opportunity, including engagement score and
+	// Provides insights into the AWS Opportunity, including engagement score and
 	// recommended actions that AWS suggests for the partner.
 	Insights *types.AwsOpportunityInsights
 
-	//  Specifies the type of involvement AWS has in the opportunity, such as direct
+	// Specifies the type of involvement AWS has in the opportunity, such as direct
 	// cosell or advisory support. This field helps partners understand the role AWS
 	// plays in advancing the opportunity.
 	InvolvementType types.SalesInvolvementType
 
-	//  Provides a reason for any changes in the involvement type of AWS in the
+	// Provides a reason for any changes in the involvement type of AWS in the
 	// opportunity. This field is used to track why the level of AWS engagement has
 	// changed from For Visibility Only to Co-sell offering transparency into the
 	// partnership dynamics.
 	InvolvementTypeChangeReason types.InvolvementTypeChangeReason
 
-	//  Contains lifecycle information for the AWS Opportunity, including review
+	// Contains lifecycle information for the AWS Opportunity, including review
 	// status, stage, and target close date. This field is crucial for partners to
 	// monitor the progression of the opportunity.
 	LifeCycle *types.AwsOpportunityLifeCycle
 
-	//  Details the AWS opportunity team, including members involved. This information
+	// Details the AWS opportunity team, including members involved. This information
 	// helps partners know who from AWS is engaged and what their role is.
 	OpportunityTeam []types.AwsTeamMember
 
-	//  Specifies whether the AWS Opportunity originated from AWS or the partner. This
+	// Specifies whether the AWS Opportunity originated from AWS or the partner. This
 	// helps distinguish between opportunities that were sourced by AWS and those
 	// referred by the partner.
 	Origin types.OpportunityOrigin
 
-	//  Provides details about the project associated with the AWS Opportunity,
+	// Provides details about the project associated with the AWS Opportunity,
 	// including the customer’s business problem, expected outcomes, and project scope.
 	// This information is crucial for understanding the broader context of the
 	// opportunity.
 	Project *types.AwsOpportunityProject
 
-	//  Lists related entity identifiers, such as AWS products or partner solutions,
+	// Lists related entity identifiers, such as AWS products or partner solutions,
 	// associated with the AWS Opportunity. These identifiers provide additional
 	// context and help partners understand which AWS services are involved.
 	RelatedEntityIds *types.AwsOpportunityRelatedEntities
 
-	//  Provides the unique identifier of the related partner opportunity, allowing
+	// Provides the unique identifier of the related partner opportunity, allowing
 	// partners to link the AWS Opportunity to their corresponding opportunity in their
 	// CRM system.
 	RelatedOpportunityId *string
 
-	//  Defines the visibility level for the AWS Opportunity. Use Full visibility for
+	// Defines the visibility level for the AWS Opportunity. Use Full visibility for
 	// most cases, while Limited visibility is reserved for special programs or
 	// sensitive opportunities.
 	Visibility types.Visibility

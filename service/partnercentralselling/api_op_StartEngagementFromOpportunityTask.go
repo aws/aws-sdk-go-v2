@@ -64,6 +64,14 @@ type StartEngagementFromOpportunityTaskInput struct {
 
 type StartEngagementFromOpportunityTaskOutput struct {
 
+	//  The identifier of the newly created engagement. Only populated if TaskStatus
+	// is COMPLETE.
+	EngagementId *string
+
+	//  The identifier of the new engagement invitation. Only populated if TaskStatus
+	// is COMPLETE.
+	EngagementInvitationId *string
+
 	// If the task fails, this field contains a detailed message describing the
 	// failure and possible recovery steps.
 	Message *string
@@ -74,6 +82,10 @@ type StartEngagementFromOpportunityTaskOutput struct {
 
 	// Indicates the reason for task failure using an enumerated code.
 	ReasonCode types.ReasonCode
+
+	//  The identifier of the resource snapshot job created to add the opportunity
+	// resource snapshot to the Engagement. Only populated if TaskStatus is COMPLETE.
+	ResourceSnapshotJobId *string
 
 	// The timestamp indicating when the task was initiated. The format follows RFC
 	// 3339 section 5.6.

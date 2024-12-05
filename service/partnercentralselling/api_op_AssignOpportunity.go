@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Enables you to reassign an existing Opportunity to another user within your
-//
+// Enables you to reassign an existing Opportunity to another user within your
 // Partner Central account. The specified user receives the opportunity, and it
 // appears on their Partner Central dashboard, allowing them to take necessary
 // actions or proceed with the opportunity.
@@ -46,7 +45,7 @@ type AssignOpportunityInput struct {
 	// This member is required.
 	Assignee *types.AssigneeContact
 
-	//  Specifies the catalog associated with the request. This field takes a string
+	// Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity is assigned in. Use AWS to assign real
 	// opportunities in the Amazon Web Services catalog, and Sandbox for testing in
@@ -55,7 +54,7 @@ type AssignOpportunityInput struct {
 	// This member is required.
 	Catalog *string
 
-	//  Requires the Opportunity 's unique identifier when you want to assign it to
+	// Requires the Opportunity 's unique identifier when you want to assign it to
 	// another user. Provide the correct identifier so the intended opportunity is
 	// reassigned.
 	//

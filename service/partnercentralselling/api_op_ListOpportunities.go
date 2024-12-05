@@ -49,7 +49,7 @@ func (c *Client) ListOpportunities(ctx context.Context, params *ListOpportunitie
 
 type ListOpportunitiesInput struct {
 
-	//  Specifies the catalog associated with the request. This field takes a string
+	// Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunities are listed in. Use AWS for listing real
 	// opportunities in the Amazon Web Services catalog, and Sandbox for testing in
@@ -83,19 +83,19 @@ type ListOpportunitiesInput struct {
 	// Qualified , Technical Validation , Business Validation , or Closed Won .
 	LifeCycleStage []types.Stage
 
-	//  Specifies the maximum number of results to return in a single call. This
-	// limits the number of opportunities returned in the response to avoid providing
-	// too many results at once.
+	// Specifies the maximum number of results to return in a single call. This limits
+	// the number of opportunities returned in the response to avoid providing too many
+	// results at once.
 	//
 	// Default: 20
 	MaxResults *int32
 
-	//  A pagination token used to retrieve the next set of results in subsequent
+	// A pagination token used to retrieve the next set of results in subsequent
 	// calls. This token is included in the response only if there are additional
 	// result pages available.
 	NextToken *string
 
-	//  An object that specifies how the response is sorted. The default Sort.SortBy
+	// An object that specifies how the response is sorted. The default Sort.SortBy
 	// value is LastModifiedDate .
 	Sort *types.OpportunitySort
 
@@ -104,14 +104,13 @@ type ListOpportunitiesInput struct {
 
 type ListOpportunitiesOutput struct {
 
-	//  An array that contains minimal details for opportunities that match the
-	// request criteria. This summary view provides a quick overview of relevant
-	// opportunities.
+	// An array that contains minimal details for opportunities that match the request
+	// criteria. This summary view provides a quick overview of relevant opportunities.
 	//
 	// This member is required.
 	OpportunitySummaries []types.OpportunitySummary
 
-	//  A pagination token used to retrieve the next set of results in subsequent
+	// A pagination token used to retrieve the next set of results in subsequent
 	// calls. This token is included in the response only if there are additional
 	// result pages available.
 	NextToken *string
@@ -224,9 +223,9 @@ func (c *Client) addOperationListOpportunitiesMiddlewares(stack *middleware.Stac
 
 // ListOpportunitiesPaginatorOptions is the paginator options for ListOpportunities
 type ListOpportunitiesPaginatorOptions struct {
-	//  Specifies the maximum number of results to return in a single call. This
-	// limits the number of opportunities returned in the response to avoid providing
-	// too many results at once.
+	// Specifies the maximum number of results to return in a single call. This limits
+	// the number of opportunities returned in the response to avoid providing too many
+	// results at once.
 	//
 	// Default: 20
 	Limit int32

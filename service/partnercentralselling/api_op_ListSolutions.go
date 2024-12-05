@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Retrieves a list of Partner Solutions that the partner registered on Partner
-//
+// Retrieves a list of Partner Solutions that the partner registered on Partner
 // Central. This API is used to generate a list of solutions that an end user
 // selects from for association with an opportunity.
 func (c *Client) ListSolutions(ctx context.Context, params *ListSolutionsInput, optFns ...func(*Options)) (*ListSolutionsOutput, error) {
@@ -32,7 +31,7 @@ func (c *Client) ListSolutions(ctx context.Context, params *ListSolutionsInput, 
 
 type ListSolutionsInput struct {
 
-	//  Specifies the catalog associated with the request. This field takes a string
+	// Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the solutions are listed in. Use AWS to list solutions in the
 	// Amazon Web Services catalog, and Sandbox to list solutions in a secure and
@@ -57,7 +56,7 @@ type ListSolutionsInput struct {
 	// Default: 20
 	MaxResults *int32
 
-	//  A pagination token used to retrieve the next set of results in subsequent
+	// A pagination token used to retrieve the next set of results in subsequent
 	// calls. This token is included in the response only if there are additional
 	// result pages available.
 	NextToken *string
@@ -80,7 +79,7 @@ type ListSolutionsOutput struct {
 	// This member is required.
 	SolutionSummaries []types.SolutionBase
 
-	//  A pagination token used to retrieve the next set of results in subsequent
+	// A pagination token used to retrieve the next set of results in subsequent
 	// calls. This token is included in the response only if there are additional
 	// result pages available.
 	NextToken *string

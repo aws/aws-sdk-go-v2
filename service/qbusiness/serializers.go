@@ -5375,16 +5375,6 @@ func awsRestjson1_serializeOpHttpBindingsSearchRelevantContentInput(v *SearchRel
 		}
 	}
 
-	if v.UserGroups != nil {
-		for i := range v.UserGroups {
-			encoder.AddQuery("userGroups").String(v.UserGroups[i])
-		}
-	}
-
-	if v.UserId != nil {
-		encoder.SetQuery("userId").String(*v.UserId)
-	}
-
 	return nil
 }
 

@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Allows you to remove an existing association between an Opportunity and
-//
-// related entities, such as a Partner Solution, Amazon Web Services product, or an
-// Amazon Web Services Marketplace offer. This operation is the counterpart to
+// Allows you to remove an existing association between an Opportunity and related
+// entities, such as a Partner Solution, Amazon Web Services product, or an Amazon
+// Web Services Marketplace offer. This operation is the counterpart to
 // AssociateOpportunity , and it provides flexibility to manage associations as
 // business needs change.
 //
@@ -41,7 +40,7 @@ func (c *Client) DisassociateOpportunity(ctx context.Context, params *Disassocia
 
 type DisassociateOpportunityInput struct {
 
-	//  Specifies the catalog associated with the request. This field takes a string
+	// Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity disassociation is made in. Use AWS to disassociate
 	// opportunities in the Amazon Web Services catalog, and Sandbox for testing in
