@@ -12038,7 +12038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for relevant content in a Q Business application based on a query. This operation takes a \n        search query text, the Q Business application identifier, and optional filters \n        (such as user ID, user groups, content source, and maximum results) as input. It returns a list of \n        relevant content items, where each item includes the content text, the unique document identifier, \n        the document title, the document URI, any relevant document attributes, and score attributes \n        indicating the confidence level of the relevance.</p>",
+                "smithy.api#documentation": "<p>Searches for relevant content in a Q Business application based on a query. This operation takes a \n        search query text, the Q Business application identifier, and optional filters \n        (such as content source and maximum results) as input. It returns a list of \n        relevant content items, where each item includes the content text, the unique document identifier, \n        the document title, the document URI, any relevant document attributes, and score attributes \n        indicating the confidence level of the relevance.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/relevant-content",
                     "method": "POST"
@@ -12060,20 +12060,6 @@
                         "smithy.api#documentation": "<p>The unique identifier of the Q Business application to search.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
-                    }
-                },
-                "userId": {
-                    "target": "com.amazonaws.qbusiness#UserId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The ID of the user performing the search. Used for access control.</p>",
-                        "smithy.api#httpQuery": "userId"
-                    }
-                },
-                "userGroups": {
-                    "target": "com.amazonaws.qbusiness#UserGroups",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The groups the user belongs to. Used for access control.</p>",
-                        "smithy.api#httpQuery": "userGroups"
                     }
                 },
                 "queryText": {
