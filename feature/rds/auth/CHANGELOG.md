@@ -1,3 +1,7 @@
+# v1.5.1 (2024-12-06)
+
+* **Bug Fix**: **BREAKFIX**: Revert bad API release.
+
 # v1.5.0 (2024-12-03.2)
 
 * No change notes available for this release.

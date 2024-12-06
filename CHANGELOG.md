@@ -1,3 +1,9 @@
+# Release (2024-12-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/rds/auth`: [v1.5.1](feature/rds/auth/CHANGELOG.md#v151-2024-12-06)
+  * **Bug Fix**: **BREAKFIX**: Revert bad API release.
+
 # Release (2024-12-05)
 
 ## Module Highlights

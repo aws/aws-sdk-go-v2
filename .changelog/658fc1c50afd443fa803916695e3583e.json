@@ -1,8 +1,0 @@
-{
-    "id": "658fc1c5-0afd-443f-a803-916695e3583e",
-    "type": "bugfix",
-    "description": "**BREAKFIX**: Revert bad API release.",
-    "modules": [
-        "feature/rds/auth"
-    ]
-}
