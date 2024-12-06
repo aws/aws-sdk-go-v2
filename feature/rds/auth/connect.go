@@ -4,33 +4,26 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 const (
-	rdsAuthTokenID    = "rds-db"
-	rdsClusterTokenID = "dsql"
-	emptyPayloadHash  = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-	userAction        = "DbConnect"
-	adminUserAction   = "DbConnectAdmin"
+	signingID        = "rds-db"
+	emptyPayloadHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 )
 
 // BuildAuthTokenOptions is the optional set of configuration properties for BuildAuthToken
-type BuildAuthTokenOptions struct {
-	ExpiresIn time.Duration
-}
+type BuildAuthTokenOptions struct{}
 
 // BuildAuthToken will return an authorization token used as the password for a DB
 // connection.
 //
-// * endpoint - Endpoint consists of the hostname and port needed to connect to the DB. <host>:<port>
+// * endpoint - Endpoint consists of the port needed to connect to the DB. <host>:<port>
 // * region - Region is the location of where the DB is
 // * dbUser - User account within the database to sign in with
 // * creds - Credentials to be signed with
@@ -57,62 +50,10 @@ func BuildAuthToken(ctx context.Context, endpoint, region, dbUser string, creds 
 		return "", fmt.Errorf("the provided endpoint is missing a port, or the provided port is invalid")
 	}
 
-	values := url.Values{
-		"Action": []string{"connect"},
-		"DBUser": []string{dbUser},
-	}
-
-	return generateAuthToken(ctx, endpoint, region, values, rdsAuthTokenID, creds, optFns...)
-}
-
-// GenerateDbConnectAuthToken will return an authorization token as the password for a
-// DB connection.
-//
-// This is the regular user variant, see [GenerateDBConnectSuperUserAuthToken] for the superuser variant
-//
-// * endpoint - Endpoint is the hostname and optional port to connect to the DB
-// * region - Region is the location of where the DB is
-// * creds - Credentials to be signed with
-func GenerateDbConnectAuthToken(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *BuildAuthTokenOptions)) (string, error) {
-	values := url.Values{
-		"Action": []string{userAction},
-	}
-	return generateAuthToken(ctx, endpoint, region, values, rdsClusterTokenID, creds, optFns...)
-}
-
-// GenerateDBConnectSuperUserAuthToken will return an authorization token as the password for a
-// DB connection.
-//
-// This is the superuser user variant, see [GenerateDBConnectSuperUserAuthToken] for the regular user variant
-//
-// * endpoint - Endpoint is the hostname and optional port to connect to the DB
-// * region - Region is the location of where the DB is
-// * creds - Credentials to be signed with
-func GenerateDBConnectSuperUserAuthToken(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *BuildAuthTokenOptions)) (string, error) {
-	values := url.Values{
-		"Action": []string{adminUserAction},
-	}
-	return generateAuthToken(ctx, endpoint, region, values, rdsClusterTokenID, creds, optFns...)
-}
-
-// All generate token functions are presigned URLs behind the scenes with the scheme stripped.
-// This function abstracts generating this for all use cases
-func generateAuthToken(ctx context.Context, endpoint, region string, values url.Values, signingID string, creds aws.CredentialsProvider, optFns ...func(options *BuildAuthTokenOptions)) (string, error) {
-	if len(region) == 0 {
-		return "", fmt.Errorf("region is required")
-	}
-	if len(endpoint) == 0 {
-		return "", fmt.Errorf("endpoint is required")
-	}
-
 	o := BuildAuthTokenOptions{}
 
 	for _, fn := range optFns {
 		fn(&o)
-	}
-
-	if o.ExpiresIn == 0 {
-		o.ExpiresIn = 15 * time.Minute
 	}
 
 	if creds == nil {
@@ -128,7 +69,11 @@ func generateAuthToken(ctx context.Context, endpoint, region string, values url.
 	if err != nil {
 		return "", err
 	}
+	values := req.URL.Query()
+	values.Set("Action", "connect")
+	values.Set("DBUser", dbUser)
 	req.URL.RawQuery = values.Encode()
+
 	signer := v4.NewSigner()
 
 	credentials, err := creds.Retrieve(ctx)
@@ -136,17 +81,12 @@ func generateAuthToken(ctx context.Context, endpoint, region string, values url.
 		return "", err
 	}
 
-	expires := o.ExpiresIn
-	// if creds expire before expiresIn, set that as the expiration time
-	if credentials.CanExpire && !credentials.Expires.IsZero() {
-		credsExpireIn := credentials.Expires.Sub(sdk.NowTime())
-		expires = min(o.ExpiresIn, credsExpireIn)
-	}
+	// Expire Time: 15 minute
 	query := req.URL.Query()
-	query.Set("X-Amz-Expires", strconv.Itoa(int(expires.Seconds())))
+	query.Set("X-Amz-Expires", "900")
 	req.URL.RawQuery = query.Encode()
 
-	signedURI, _, err := signer.PresignHTTP(ctx, credentials, req, emptyPayloadHash, signingID, region, sdk.NowTime().UTC())
+	signedURI, _, err := signer.PresignHTTP(ctx, credentials, req, emptyPayloadHash, signingID, region, time.Now().UTC())
 	if err != nil {
 		return "", err
 	}
