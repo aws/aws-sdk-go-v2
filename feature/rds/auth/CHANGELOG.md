@@ -1,6 +1,6 @@
 # v1.5.0 (2024-12-03.2)
 
-* **Feature**: feat: Add Xanadu Auth Token Generator
+* No change notes available for this release.
 
 # v1.4.25 (2024-12-02)
 
