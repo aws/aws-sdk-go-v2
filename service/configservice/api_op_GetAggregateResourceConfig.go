@@ -13,6 +13,8 @@ import (
 
 // Returns configuration item that is aggregated for your specific resource in a
 // specific source account and region.
+//
+// The API does not return results for deleted resources.
 func (c *Client) GetAggregateResourceConfig(ctx context.Context, params *GetAggregateResourceConfigInput, optFns ...func(*Options)) (*GetAggregateResourceConfigOutput, error) {
 	if params == nil {
 		params = &GetAggregateResourceConfigInput{}

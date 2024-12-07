@@ -1,3 +1,7 @@
+# v1.51.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.0 (2024-11-22)
 
 * **Feature**: Now, Amazon EC2 Auto Scaling customers can enable target tracking policies to take quicker scaling decisions, enhancing their application performance and EC2 utilization. To get started, specify target tracking to monitor a metric that is available on Amazon CloudWatch at seconds-level interval.

@@ -1,3 +1,7 @@
+# v1.56.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2024-11-21)
 
 * **Feature**: Added support for providing high-level overviews of managed nodes and previewing the potential impact of a runbook execution.

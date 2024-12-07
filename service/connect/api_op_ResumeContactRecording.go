@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +52,9 @@ type ResumeContactRecordingInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	// The type of recording being operated on.
+	ContactRecordingType types.ContactRecordingType
 
 	noSmithyDocumentSerde
 }

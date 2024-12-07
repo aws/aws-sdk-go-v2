@@ -36,7 +36,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You are trying to perform an action that conflicts with the current status of
-// your resource. Fix any inconsistences with your resources and try again.
+// your resource. Fix any inconsistencies with your resources and try again.
 type ConflictException struct {
 	Message *string
 
@@ -64,6 +64,34 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An external resource that you configured with your application is returning
+// errors and preventing this operation from succeeding. Fix those errors and try
+// again.
+type ExternalResourceException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ExternalResourceException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ExternalResourceException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ExternalResourceException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ExternalResourceException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ExternalResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An issue occurred with the internal server used for your Amazon Q Business
 // service. Wait some minutes and try again, or contact [Support]for help.
@@ -122,8 +150,34 @@ func (e *LicenseNotFoundException) ErrorCode() string {
 }
 func (e *LicenseNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource you want to use doesn’t exist. Make sure you have provided the
-// correct resource and try again.
+// The requested media object is too large to be returned.
+type MediaTooLargeException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MediaTooLargeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MediaTooLargeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MediaTooLargeException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MediaTooLargeException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MediaTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The application or plugin resource you want to use doesn’t exist. Make sure you
+// have provided the correct resource and try again.
 type ResourceNotFoundException struct {
 	Message *string
 

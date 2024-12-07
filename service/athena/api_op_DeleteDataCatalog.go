@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,10 +34,23 @@ type DeleteDataCatalogInput struct {
 	// This member is required.
 	Name *string
 
+	// Deletes the Athena Data Catalog. You can only use this with the FEDERATED
+	// catalogs. You usually perform this before registering the connector with Glue
+	// Data Catalog. After deletion, you will have to manage the Glue Connection and
+	// Lambda function.
+	DeleteCatalogOnly bool
+
 	noSmithyDocumentSerde
 }
 
 type DeleteDataCatalogOutput struct {
+
+	// Contains information about a data catalog in an Amazon Web Services account.
+	//
+	// In the Athena console, data catalogs are listed as "data sources" on the Data
+	// sources page under the Data source name column.
+	DataCatalog *types.DataCatalog
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

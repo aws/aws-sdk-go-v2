@@ -12,11 +12,10 @@ import (
 	"time"
 )
 
-//	Updates the Opportunity record identified by a given Identifier . This
-//
-// operation allows you to modify the details of an existing opportunity to reflect
-// the latest information and progress. Use this action to keep the opportunity
-// record up-to-date and accurate.
+// Updates the Opportunity record identified by a given Identifier . This operation
+// allows you to modify the details of an existing opportunity to reflect the
+// latest information and progress. Use this action to keep the opportunity record
+// up-to-date and accurate.
 //
 // When you perform updates, include the entire payload with each request. If any
 // field is omitted, the API assumes that the field is set to null . The best
@@ -39,7 +38,7 @@ func (c *Client) UpdateOpportunity(ctx context.Context, params *UpdateOpportunit
 
 type UpdateOpportunityInput struct {
 
-	//  Specifies the catalog associated with the request. This field takes a string
+	// Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity is updated in. Use AWS to update real opportunities
 	// in the production environment, and Sandbox for testing in secure, isolated
@@ -75,7 +74,7 @@ type UpdateOpportunityInput struct {
 	// apply, impacting the opportunity's visibility and processing.
 	NationalSecurity types.NationalSecurity
 
-	//  Specifies the opportunity type as a renewal, new, or expansion.
+	// Specifies the opportunity type as a renewal, new, or expansion.
 	//
 	// Opportunity types:
 	//
@@ -96,7 +95,7 @@ type UpdateOpportunityInput struct {
 	// payload sent back to the partner.
 	PartnerOpportunityIdentifier *string
 
-	//  Identifies the type of support the partner needs from Amazon Web Services.
+	// Identifies the type of support the partner needs from Amazon Web Services.
 	//
 	// Valid values:
 	//

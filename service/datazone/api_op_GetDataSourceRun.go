@@ -92,6 +92,9 @@ type GetDataSourceRunOutput struct {
 	// successfully completed.
 	ErrorMessage *types.DataSourceErrorMessage
 
+	// The summary of the data lineage.
+	LineageSummary *types.DataSourceRunLineageSummary
+
 	// The asset statistics from this data source run.
 	RunStatisticsForAssets *types.RunStatisticsForAssets
 

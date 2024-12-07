@@ -737,6 +737,9 @@
                     "target": "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorEmergencyCallingConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorExternalSystemsConfiguration"
+                },
+                {
                     "target": "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorGroup"
                 },
                 {
@@ -801,6 +804,9 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#GetVoiceConnectorEmergencyCallingConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#GetVoiceConnectorExternalSystemsConfiguration"
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#GetVoiceConnectorGroup"
@@ -879,6 +885,9 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#PutVoiceConnectorEmergencyCallingConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#PutVoiceConnectorExternalSystemsConfiguration"
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#PutVoiceConnectorLoggingConfiguration"
@@ -1671,6 +1680,41 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.chimesdkvoice#ContactCenterSystemType": {
+            "type": "enum",
+            "members": {
+                "GENESYS_ENGAGE_ON_PREMISES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENESYS_ENGAGE_ON_PREMISES"
+                    }
+                },
+                "AVAYA_AURA_CALL_CENTER_ELITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAYA_AURA_CALL_CENTER_ELITE"
+                    }
+                },
+                "AVAYA_AURA_CONTACT_CENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAYA_AURA_CONTACT_CENTER"
+                    }
+                },
+                "CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkvoice#ContactCenterSystemTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkvoice#ContactCenterSystemType"
+            }
+        },
         "com.amazonaws.chimesdkvoice#Country": {
             "type": "string",
             "traits": {
@@ -2340,6 +2384,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags assigned to the Voice Connector.</p>"
                     }
+                },
+                "IntegrationType": {
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorIntegrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connectors for use with Amazon Connect.</p>\n         <p>The following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONNECT_CALL_TRANSFER_CONNECTOR</code> - Enables enterprises to integrate\n               Amazon Connect with other voice systems to directly transfer voice calls and\n               metadata without using the public telephone network. They can use Amazon Connect\n               telephony and Interactive Voice Response (IVR) with their existing voice systems to\n               modernize the IVR experience of their existing contact center and their enterprise\n               and branch voice systems. Additionally, enterprises migrating their contact center to\n               Amazon Connect can start with Connect telephony and IVR for immediate\n               modernization ahead of agent migration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONNECT_ANALYTICS_CONNECTOR</code> - Enables enterprises to integrate\n               Amazon Connect with other voice systems for real-time and post-call analytics.\n               They can use Amazon Connect Contact Lens with their existing voice systems to\n               provides call recordings, conversational analytics (including contact transcript,\n               sensitive data redaction, content categorization, theme detection, sentiment\n               analysis, real-time alerts, and post-contact summary), and agent performance\n               evaluations (including evaluation forms, automated evaluation, supervisor review)\n               with a rich user experience to display, search and filter customer interactions, and\n               programmatic access to data streams and the data lake. Additionally, enterprises\n               migrating their contact center to Amazon Connect can start with Contact Lens\n               analytics and performance insights ahead of agent migration.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -2937,6 +2987,63 @@
                     "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorExternalSystemsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorExternalSystemsConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkvoice#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the external systems configuration for a Voice Connector.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/voice-connectors/{VoiceConnectorId}/external-systems-configuration",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorExternalSystemsConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "VoiceConnectorId": {
+                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Voice Connector for which to delete the external system\n         configuration.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3712,6 +3819,26 @@
                         "smithy.api#enumValue": "Gone"
                     }
                 }
+            }
+        },
+        "com.amazonaws.chimesdkvoice#ExternalSystemsConfiguration": {
+            "type": "structure",
+            "members": {
+                "SessionBorderControllerTypes": {
+                    "target": "com.amazonaws.chimesdkvoice#SessionBorderControllerTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session border controllers.</p>"
+                    }
+                },
+                "ContactCenterSystemTypes": {
+                    "target": "com.amazonaws.chimesdkvoice#ContactCenterSystemTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact center system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an external systems configuration for a Voice\n         Connector.</p>"
             }
         },
         "com.amazonaws.chimesdkvoice#ForbiddenException": {
@@ -4576,6 +4703,76 @@
                     "target": "com.amazonaws.chimesdkvoice#EmergencyCallingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The details of the emergency calling configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chimesdkvoice#GetVoiceConnectorExternalSystemsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkvoice#GetVoiceConnectorExternalSystemsConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkvoice#GetVoiceConnectorExternalSystemsConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkvoice#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about an external systems configuration for a Voice\n         Connector.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/voice-connectors/{VoiceConnectorId}/external-systems-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkvoice#GetVoiceConnectorExternalSystemsConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "VoiceConnectorId": {
+                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Voice Connector for which to return information about the\n         external system configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chimesdkvoice#GetVoiceConnectorExternalSystemsConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ExternalSystemsConfiguration": {
+                    "target": "com.amazonaws.chimesdkvoice#ExternalSystemsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about an external systems configuration for a Voice Connector.</p>"
                     }
                 }
             },
@@ -7739,6 +7936,92 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.chimesdkvoice#PutVoiceConnectorExternalSystemsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkvoice#PutVoiceConnectorExternalSystemsConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkvoice#PutVoiceConnectorExternalSystemsConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkvoice#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds an external systems configuration to a Voice Connector.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/voice-connectors/{VoiceConnectorId}/external-systems-configuration",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.chimesdkvoice#PutVoiceConnectorExternalSystemsConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "VoiceConnectorId": {
+                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Voice Connector for which to add the external system\n         configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionBorderControllerTypes": {
+                    "target": "com.amazonaws.chimesdkvoice#SessionBorderControllerTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session border controllers to use.</p>"
+                    }
+                },
+                "ContactCenterSystemTypes": {
+                    "target": "com.amazonaws.chimesdkvoice#ContactCenterSystemTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact center system to use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chimesdkvoice#PutVoiceConnectorExternalSystemsConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ExternalSystemsConfiguration": {
+                    "target": "com.amazonaws.chimesdkvoice#ExternalSystemsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about an external systems configuration for a Voice Connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.chimesdkvoice#PutVoiceConnectorLoggingConfiguration": {
             "type": "operation",
             "input": {
@@ -8532,6 +8815,47 @@
                 "smithy.api#documentation": "<p>The service is currently unavailable.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.chimesdkvoice#SessionBorderControllerType": {
+            "type": "enum",
+            "members": {
+                "RIBBON_SBC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RIBBON_SBC"
+                    }
+                },
+                "ORACLE_ACME_PACKET_SBC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORACLE_ACME_PACKET_SBC"
+                    }
+                },
+                "AVAYA_SBCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAYA_SBCE"
+                    }
+                },
+                "CISCO_UNIFIED_BORDER_ELEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CISCO_UNIFIED_BORDER_ELEMENT"
+                    }
+                },
+                "AUDIOCODES_MEDIANT_SBC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIOCODES_MEDIANT_SBC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkvoice#SessionBorderControllerTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkvoice#SessionBorderControllerType"
             }
         },
         "com.amazonaws.chimesdkvoice#SipApplicationPriority": {
@@ -10796,6 +11120,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the Voice Connector.</p>"
                     }
+                },
+                "IntegrationType": {
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorIntegrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connectors for use with Amazon Connect.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10931,6 +11261,23 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9 _.-]+$"
+            }
+        },
+        "com.amazonaws.chimesdkvoice#VoiceConnectorIntegrationType": {
+            "type": "enum",
+            "members": {
+                "CONNECT_CALL_TRANSFER_CONNECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECT_CALL_TRANSFER_CONNECTOR"
+                    }
+                },
+                "CONNECT_ANALYTICS_CONNECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECT_ANALYTICS_CONNECTOR"
+                    }
+                }
             }
         },
         "com.amazonaws.chimesdkvoice#VoiceConnectorItem": {

@@ -172,6 +172,9 @@ type RestoreDBInstanceFromS3Input struct {
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
+	// Specifies the mode of Database Insights to enable for the instance.
+	DatabaseInsightsMode types.DatabaseInsightsMode
+
 	// Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
 	DedicatedLogVolume *bool
 

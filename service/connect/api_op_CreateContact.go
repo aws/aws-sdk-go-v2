@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates a new contact.
 func (c *Client) CreateContact(ctx context.Context, params *CreateContactInput, optFns ...func(*Options)) (*CreateContactOutput, error) {
 	if params == nil {
 		params = &CreateContactInput{}
@@ -28,49 +29,74 @@ func (c *Client) CreateContact(ctx context.Context, params *CreateContactInput, 
 
 type CreateContactInput struct {
 
-	//
+	// The channel for the contact
 	//
 	// This member is required.
 	Channel types.Channel
 
-	//
+	// Indicates how the contact was initiated.
 	//
 	// This member is required.
 	InitiationMethod types.ContactInitiationMethod
 
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
+	// A custom key-value pair using an attribute map. The attributes are standard
+	// Amazon Connect attributes, and can be accessed in flows just like any other
+	// contact attributes.
 	//
+	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
+	// Attribute keys can include only alphanumeric, dash, and underscore characters.
 	Attributes map[string]string
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
 	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	//
+	// A description of the contact.
 	Description *string
 
-	//
+	// Number of minutes the contact will be active for before expiring
 	ExpiryDurationInMinutes *int32
 
-	//
+	// Initial state of the contact when it's created
 	InitiateAs types.InitiateAs
 
-	//
+	// The name of a the contact.
 	Name *string
 
-	//
+	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+	// Tasks can have the following reference types at the time of creation: URL |
+	// NUMBER | STRING | DATE | EMAIL | ATTACHMENT.
 	References map[string]types.Reference
 
-	//
+	// The identifier of the contact in this instance of Amazon Connect.
 	RelatedContactId *string
 
+	// A set of system defined key-value pairs stored on individual contact segments
+	// (unique contact ID) using an attribute map. The attributes are standard Amazon
+	// Connect attributes. They can be accessed in flows.
 	//
+	// Attribute keys can include only alphanumeric, -, and _.
+	//
+	// This field can be used to set Segment Contact Expiry as a duration in minutes.
+	//
+	// To set contact expiry, a ValueMap must be specified containing the integer
+	// number of minutes the contact will be active for before expiring, with
+	// SegmentAttributes like {  "connect:ContactExpiry": {"ValueMap" : {
+	// "ExpiryDuration": { "ValueInteger": 135}}}} .
 	SegmentAttributes map[string]types.SegmentAttributeValue
 
-	//
+	// User details for the contact
 	UserInfo *types.UserInfo
 
 	noSmithyDocumentSerde
@@ -78,10 +104,10 @@ type CreateContactInput struct {
 
 type CreateContactOutput struct {
 
-	//
+	// The Amazon Resource Name (ARN) of the created contact.
 	ContactArn *string
 
-	//
+	// The identifier of the contact in this instance of Amazon Connect.
 	ContactId *string
 
 	// Metadata pertaining to the operation's result.

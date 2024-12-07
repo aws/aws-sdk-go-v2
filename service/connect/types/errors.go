@@ -33,6 +33,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A conditional check failed.
 type ConditionalOperationFailedException struct {
 	Message *string
 
@@ -437,7 +438,7 @@ func (e *OutboundContactNotPermittedException) ErrorFault() smithy.ErrorFault {
 
 // Thrown for analyzed content when requested OutputType was not enabled for a
 // given contact. For example, if an OutputType.Raw was requested for a contact
-// that had `RedactedOnly` Redaction policy set in Contact flow.
+// that had `RedactedOnly` Redaction policy set in the flow.
 type OutputTypeNotFoundException struct {
 	Message *string
 

@@ -822,6 +822,27 @@ func (OpenZFSQuotaType) Values() []OpenZFSQuotaType {
 	}
 }
 
+type OpenZFSReadCacheSizingMode string
+
+// Enum values for OpenZFSReadCacheSizingMode
+const (
+	OpenZFSReadCacheSizingModeNoCache                          OpenZFSReadCacheSizingMode = "NO_CACHE"
+	OpenZFSReadCacheSizingModeUserProvisioned                  OpenZFSReadCacheSizingMode = "USER_PROVISIONED"
+	OpenZFSReadCacheSizingModeProportionalToThroughputCapacity OpenZFSReadCacheSizingMode = "PROPORTIONAL_TO_THROUGHPUT_CAPACITY"
+)
+
+// Values returns all known values for OpenZFSReadCacheSizingMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OpenZFSReadCacheSizingMode) Values() []OpenZFSReadCacheSizingMode {
+	return []OpenZFSReadCacheSizingMode{
+		"NO_CACHE",
+		"USER_PROVISIONED",
+		"PROPORTIONAL_TO_THROUGHPUT_CAPACITY",
+	}
+}
+
 type PrivilegedDelete string
 
 // Enum values for PrivilegedDelete
@@ -1094,8 +1115,9 @@ type StorageType string
 
 // Enum values for StorageType
 const (
-	StorageTypeSsd StorageType = "SSD"
-	StorageTypeHdd StorageType = "HDD"
+	StorageTypeSsd                StorageType = "SSD"
+	StorageTypeHdd                StorageType = "HDD"
+	StorageTypeIntelligentTiering StorageType = "INTELLIGENT_TIERING"
 )
 
 // Values returns all known values for StorageType. Note that this can be expanded
@@ -1106,6 +1128,7 @@ func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"SSD",
 		"HDD",
+		"INTELLIGENT_TIERING",
 	}
 }
 

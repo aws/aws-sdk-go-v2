@@ -41,6 +41,9 @@ type GetQAppInput struct {
 	// This member is required.
 	InstanceId *string
 
+	// The version of the Q App.
+	AppVersion *int32
+
 	noSmithyDocumentSerde
 }
 

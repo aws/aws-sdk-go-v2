@@ -293,6 +293,52 @@ type AggregationAuthorization struct {
 	noSmithyDocumentSerde
 }
 
+// An object to filter the configuration recorders based on the resource types in
+// scope for recording.
+type AggregatorFilterResourceType struct {
+
+	// The type of resource type filter to apply. INCLUDE specifies that the list of
+	// resource types in the Value field will be aggregated and no other resource
+	// types will be filtered.
+	Type AggregatorFilterType
+
+	// Comma-separate list of resource types to filter your aggregated configuration
+	// recorders.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+// An object to filter the data you specify for an aggregator.
+type AggregatorFilters struct {
+
+	// An object to filter the configuration recorders based on the resource types in
+	// scope for recording.
+	ResourceType *AggregatorFilterResourceType
+
+	// An object to filter service-linked configuration recorders in an aggregator
+	// based on the linked Amazon Web Services service.
+	ServicePrincipal *AggregatorFilterServicePrincipal
+
+	noSmithyDocumentSerde
+}
+
+// An object to filter service-linked configuration recorders in an aggregator
+// based on the linked Amazon Web Services service.
+type AggregatorFilterServicePrincipal struct {
+
+	// The type of service principal filter to apply. INCLUDE specifies that the list
+	// of service principals in the Value field will be aggregated and no other
+	// service principals will be filtered.
+	Type AggregatorFilterType
+
+	// Comma-separated list of service principals for the linked Amazon Web Services
+	// services to filter your aggregated service-linked configuration recorders.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
 // The detailed configurations of a specified resource.
 type BaseConfigurationItem struct {
 
@@ -652,7 +698,8 @@ type ConfigRuleComplianceSummaryFilters struct {
 // rules. The status includes information such as the last time the rule ran, the
 // last time it failed, and the related error for the last failure.
 //
-// This action does not return status information about Config Custom Lambda rules.
+// This operation does not return status information about Config Custom Lambda
+// rules.
 type ConfigRuleEvaluationStatus struct {
 
 	// The Amazon Resource Name (ARN) of the Config rule.
@@ -793,6 +840,9 @@ type ConfigurationAggregator struct {
 	// Provides a list of source accounts and regions to be aggregated.
 	AccountAggregationSources []AccountAggregationSource
 
+	// An object to filter the data you specify for an aggregator.
+	AggregatorFilters *AggregatorFilters
+
 	// The Amazon Resource Name (ARN) of the aggregator.
 	ConfigurationAggregatorArn *string
 
@@ -919,25 +969,41 @@ type ConfigurationItem struct {
 	noSmithyDocumentSerde
 }
 
-// Records configuration changes to your specified resource types. For more
-// information about the configuration recorder, see [Managing the Configuration Recorder]in the Config Developer Guide.
+// Records configuration changes to the resource types in scope.
 //
-// [Managing the Configuration Recorder]: https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html
+// For more information about the configuration recorder, see [Working with the Configuration Recorder] in the Config
+// Developer Guide.
+//
+// [Working with the Configuration Recorder]: https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html
 type ConfigurationRecorder struct {
 
-	// The name of the configuration recorder. Config automatically assigns the name
-	// of "default" when creating the configuration recorder.
+	// The Amazon Resource Name (ARN) of the specified configuration recorder.
+	Arn *string
+
+	// The name of the configuration recorder.
 	//
-	// You cannot change the name of the configuration recorder after it has been
-	// created. To change the configuration recorder name, you must delete it and
-	// create a new configuration recorder with a new name.
+	// For customer managed configuration recorders, Config automatically assigns the
+	// name of "default" when creating a configuration recorder if you do not specify a
+	// name at creation time.
+	//
+	// For service-linked configuration recorders, Config automatically assigns a name
+	// that has the prefix " AWS " to a new service-linked configuration recorder.
+	//
+	// Changing the name of a configuration recorder
+	//
+	// To change the name of the customer managed configuration recorder, you must
+	// delete it and create a new customer managed configuration recorder with a new
+	// name.
+	//
+	// You cannot change the name of a service-linked configuration recorder.
 	Name *string
 
-	// Specifies which resource types Config records for configuration changes.
+	// Specifies which resource types are in scope for the configuration recorder to
+	// record.
 	//
 	// High Number of Config Evaluations
 	//
-	// You may notice increased activity in your account during your initial month
+	// You might notice increased activity in your account during your initial month
 	// recording with Config when compared to subsequent months. During the initial
 	// bootstrapping process, Config runs evaluations on all the resources in your
 	// account that you have selected for Config to record.
@@ -946,14 +1012,16 @@ type ConfigurationRecorder struct {
 	// Config as it records configuration changes associated with creating and deleting
 	// these temporary resources. An ephemeral workload is a temporary use of computing
 	// resources that are loaded and run when needed. Examples include Amazon Elastic
-	// Compute Cloud (Amazon EC2) Spot Instances, Amazon EMR jobs, and Auto Scaling. If
-	// you want to avoid the increased activity from running ephemeral workloads, you
-	// can run these types of workloads in a separate account with Config turned off to
-	// avoid increased configuration recording and rule evaluations.
+	// Compute Cloud (Amazon EC2) Spot Instances, Amazon EMR jobs, and Auto Scaling.
+	//
+	// If you want to avoid the increased activity from running ephemeral workloads,
+	// you can set up the configuration recorder to exclude these resource types from
+	// being recorded, or run these types of workloads in a separate account with
+	// Config turned off to avoid increased configuration recording and rule
+	// evaluations.
 	RecordingGroup *RecordingGroup
 
-	// Specifies the default recording frequency that Config uses to record
-	// configuration changes.
+	// Specifies the default recording frequency for the configuration recorder.
 	//
 	// Config supports Continuous recording and Daily recording.
 	//
@@ -964,6 +1032,8 @@ type ConfigurationRecorder struct {
 	//   representing the most recent state of your resources over the last 24-hour
 	//   period, only if it’s different from the previous CI recorded.
 	//
+	// Some resource types require continuous recording
+	//
 	// Firewall Manager depends on continuous recording to monitor your resources. If
 	// you are using Firewall Manager, it is recommended that you set the recording
 	// frequency to Continuous.
@@ -971,28 +1041,77 @@ type ConfigurationRecorder struct {
 	// You can also override the recording frequency for specific resource types.
 	RecordingMode *RecordingMode
 
-	// Amazon Resource Name (ARN) of the IAM role assumed by Config and used by the
-	// configuration recorder.
+	// Specifies whether the [ConfigurationItems] in scope for the specified configuration recorder are
+	// recorded for free ( INTERNAL ) or if it impacts the costs to your bill ( PAID ).
+	//
+	// [ConfigurationItems]: https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html
+	RecordingScope RecordingScope
+
+	// The Amazon Resource Name (ARN) of the IAM role assumed by Config and used by
+	// the specified configuration recorder.
+	//
+	// The server will reject a request without a defined roleARN for the
+	// configuration recorder
 	//
 	// While the API model does not require this field, the server will reject a
 	// request without a defined roleARN for the configuration recorder.
 	//
-	// Pre-existing Config role
+	// Policies and compliance results
 	//
-	// If you have used an Amazon Web Services service that uses Config, such as
-	// Security Hub or Control Tower, and an Config role has already been created, make
-	// sure that the IAM role that you use when setting up Config keeps the same
-	// minimum permissions as the already created Config role. You must do this so that
-	// the other Amazon Web Services service continues to run as expected.
+	// [IAM policies]and [other policies managed in Organizations] can impact whether Config has permissions to record configuration changes
+	// for your resources. Additionally, rules directly evaluate the configuration of a
+	// resource and rules don't take into account these policies when running
+	// evaluations. Make sure that the policies in effect align with how you intend to
+	// use Config.
 	//
-	// For example, if Control Tower has an IAM role that allows Config to read Amazon
-	// Simple Storage Service (Amazon S3) objects, make sure that the same permissions
-	// are granted within the IAM role you use when setting up Config. Otherwise, it
-	// may interfere with how Control Tower operates. For more information about IAM
-	// roles for Config, see [Identity and Access Management for Config]in the Config Developer Guide.
+	// Keep Minimum Permisions When Reusing an IAM role
 	//
-	// [Identity and Access Management for Config]: https://docs.aws.amazon.com/config/latest/developerguide/security-iam.html
+	// If you use an Amazon Web Services service that uses Config, such as Security
+	// Hub or Control Tower, and an IAM role has already been created, make sure that
+	// the IAM role that you use when setting up Config keeps the same minimum
+	// permissions as the pre-existing IAM role. You must do this to ensure that the
+	// other Amazon Web Services service continues to run as expected.
+	//
+	// For example, if Control Tower has an IAM role that allows Config to read S3
+	// objects, make sure that the same permissions are granted to the IAM role you use
+	// when setting up Config. Otherwise, it may interfere with how Control Tower
+	// operates.
+	//
+	// The service-linked IAM role for Config must be used for service-linked
+	// configuration recorders
+	//
+	// For service-linked configuration recorders, you must use the service-linked IAM
+	// role for Config: [AWSServiceRoleForConfig].
+	//
+	// [AWSServiceRoleForConfig]: https://docs.aws.amazon.com/config/latest/developerguide/using-service-linked-roles.html
+	// [other policies managed in Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html
+	// [IAM policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
 	RoleARN *string
+
+	// For service-linked configuration recorders, specifies the linked Amazon Web
+	// Services service for the configuration recorder.
+	ServicePrincipal *string
+
+	noSmithyDocumentSerde
+}
+
+// Filters configuration recorders by recording scope.
+type ConfigurationRecorderFilter struct {
+
+	// The name of the type of filter. Currently, only recordingScope is supported.
+	FilterName ConfigurationRecorderFilterName
+
+	// The value of the filter. For recordingScope , valid values include: INTERNAL
+	// and PAID .
+	//
+	// INTERNAL indicates that the [ConfigurationItems] in scope for the configuration recorder are
+	// recorded for free.
+	//
+	// PAID indicates that the [ConfigurationItems] in scope for the configuration recorder impact the
+	// costs to your bill.
+	//
+	// [ConfigurationItems]: https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html
+	FilterValue []string
 
 	noSmithyDocumentSerde
 }
@@ -1002,6 +1121,9 @@ type ConfigurationRecorder struct {
 // For a detailed status of recording events over time, add your Config events to
 // CloudWatch metrics and use CloudWatch metrics.
 type ConfigurationRecorderStatus struct {
+
+	// The Amazon Resource Name (ARN) of the configuration recorder.
+	Arn *string
 
 	// The latest error code from when the recorder last failed.
 	LastErrorCode *string
@@ -1027,6 +1149,39 @@ type ConfigurationRecorderStatus struct {
 
 	// Specifies whether or not the recorder is currently recording.
 	Recording bool
+
+	// For service-linked configuration recorders, the service principal of the linked
+	// Amazon Web Services service.
+	ServicePrincipal *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a configuration recorder, including the arn , name ,
+// servicePrincipal , and recordingScope .
+type ConfigurationRecorderSummary struct {
+
+	// The Amazon Resource Name (ARN) of the configuration recorder.
+	//
+	// This member is required.
+	Arn *string
+
+	// The name of the configuration recorder.
+	//
+	// This member is required.
+	Name *string
+
+	// Indicates whether the [ConfigurationItems] in scope for the configuration recorder are recorded for
+	// free ( INTERNAL ) or if you are charged a service fee for recording ( PAID ).
+	//
+	// [ConfigurationItems]: https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html
+	//
+	// This member is required.
+	RecordingScope RecordingScope
+
+	// For service-linked configuration recorders, indicates which Amazon Web Services
+	// service the configuration recorder is linked to.
+	ServicePrincipal *string
 
 	noSmithyDocumentSerde
 }
@@ -1578,24 +1733,10 @@ type EvaluationStatus struct {
 // IAM users, groups, roles, and customer managed policies will be recorded in the
 // Region where you set up the configuration recorder if that is a Region where
 // Config was available before February 2022. You cannot be record the global IAM
-// resouce types in Regions supported by Config after February 2022. This list
-// where you cannot record the global IAM resource types includes the following
-// Regions:
+// resouce types in Regions supported by Config after February 2022. For a list of
+// those Regions, see [Recording Amazon Web Services Resources | Global Resources].
 //
-//   - Asia Pacific (Hyderabad)
-//
-//   - Asia Pacific (Melbourne)
-//
-//   - Canada West (Calgary)
-//
-//   - Europe (Spain)
-//
-//   - Europe (Zurich)
-//
-//   - Israel (Tel Aviv)
-//
-//   - Middle East (UAE)
-//
+// [Recording Amazon Web Services Resources | Global Resources]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all
 // [RecordingStrategy]: https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html
 type ExclusionByResourceTypes struct {
 
@@ -2446,22 +2587,8 @@ type RecordingGroup struct {
 	// IAM users, groups, roles, and customer managed policies. These global IAM
 	// resource types can only be recorded by Config in Regions where Config was
 	// available before February 2022. You cannot be record the global IAM resouce
-	// types in Regions supported by Config after February 2022. This list where you
-	// cannot record the global IAM resource types includes the following Regions:
-	//
-	//   - Asia Pacific (Hyderabad)
-	//
-	//   - Asia Pacific (Melbourne)
-	//
-	//   - Canada West (Calgary)
-	//
-	//   - Europe (Spain)
-	//
-	//   - Europe (Zurich)
-	//
-	//   - Israel (Tel Aviv)
-	//
-	//   - Middle East (UAE)
+	// types in Regions supported by Config after February 2022. For a list of those
+	// Regions, see [Recording Amazon Web Services Resources | Global Resources].
 	//
 	// Aurora global clusters are recorded in all enabled Regions
 	//
@@ -2516,6 +2643,7 @@ type RecordingGroup struct {
 	// not list them in the resourceTypes field in addition to setting the
 	// includeGlobalResourceTypes field to false.
 	//
+	// [Recording Amazon Web Services Resources | Global Resources]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all
 	// [RecordingStrategy]: https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html
 	// [Selecting Which Resources are Recorded]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all
 	// [RecordingGroup]: https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html
@@ -2573,24 +2701,10 @@ type RecordingGroup struct {
 	// IAM users, groups, roles, and customer managed policies will be recorded in the
 	// Region where you set up the configuration recorder if that is a Region where
 	// Config was available before February 2022. You cannot be record the global IAM
-	// resouce types in Regions supported by Config after February 2022. This list
-	// where you cannot record the global IAM resource types includes the following
-	// Regions:
+	// resouce types in Regions supported by Config after February 2022. For a list of
+	// those Regions, see [Recording Amazon Web Services Resources | Global Resources].
 	//
-	//   - Asia Pacific (Hyderabad)
-	//
-	//   - Asia Pacific (Melbourne)
-	//
-	//   - Canada West (Calgary)
-	//
-	//   - Europe (Spain)
-	//
-	//   - Europe (Zurich)
-	//
-	//   - Israel (Tel Aviv)
-	//
-	//   - Middle East (UAE)
-	//
+	// [Recording Amazon Web Services Resources | Global Resources]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all
 	// [RecordingStrategy]: https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html
 	// [ExclusionByResourceTypes]: https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html
 	// [RecordingGroup]: https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html
@@ -2652,7 +2766,7 @@ type RecordingMode struct {
 	// The default recording frequency that Config uses to record configuration
 	// changes.
 	//
-	// Daily recording is not supported for the following resource types:
+	// Daily recording cannot be specified for the following resource types:
 	//
 	//   - AWS::Config::ResourceCompliance
 	//
@@ -2698,7 +2812,7 @@ type RecordingModeOverride struct {
 	// A comma-separated list that specifies which resource types Config includes in
 	// the override.
 	//
-	// Daily recording is not supported for the following resource types:
+	// Daily recording cannot be specified for the following resource types:
 	//
 	//   - AWS::Config::ResourceCompliance
 	//

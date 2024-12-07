@@ -434,6 +434,18 @@ func TestCheckSnapshot_ListEndpointAccess(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListManagedWorkgroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedWorkgroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListManagedWorkgroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListNamespaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNamespaces(context.Background(), nil, func(o *Options) {
@@ -1086,6 +1098,18 @@ func TestUpdateSnapshot_ListEndpointAccess(t *testing.T) {
 	_, err := svc.ListEndpointAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEndpointAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListManagedWorkgroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedWorkgroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListManagedWorkgroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

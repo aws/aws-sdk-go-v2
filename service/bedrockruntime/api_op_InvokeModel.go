@@ -19,6 +19,20 @@ import (
 // Guide.
 //
 // This operation requires permission for the bedrock:InvokeModel action.
+//
+// To deny all inference access to resources that you specify in the modelId
+// field, you need to deny access to the bedrock:InvokeModel and
+// bedrock:InvokeModelWithResponseStream actions. Doing this also denies access to
+// the resource through the Converse API actions ([Converse] and [ConverseStream]). For more information see [Deny access for inference on specific models]
+// .
+//
+// For troubleshooting some of the common errors you might encounter when using
+// the InvokeModel API, see [Troubleshooting Amazon Bedrock API Error Codes] in the Amazon Bedrock User Guide
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+// [Troubleshooting Amazon Bedrock API Error Codes]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html
+// [Deny access for inference on specific models]: https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference
 func (c *Client) InvokeModel(ctx context.Context, params *InvokeModelInput, optFns ...func(*Options)) (*InvokeModelOutput, error) {
 	if params == nil {
 		params = &InvokeModelInput{}
@@ -38,10 +52,14 @@ type InvokeModelInput struct {
 
 	// The unique identifier of the model to invoke to run inference.
 	//
-	// The modelId to provide depends on the type of model that you use:
+	// The modelId to provide depends on the type of model or throughput that you use:
 	//
 	//   - If you use a base model, specify the model ID or its ARN. For a list of
 	//   model IDs for base models, see [Amazon Bedrock base model IDs (on-demand throughput)]in the Amazon Bedrock User Guide.
+	//
+	//   - If you use an inference profile, specify the inference profile ID or its
+	//   ARN. For a list of inference profile IDs, see [Supported Regions and models for cross-region inference]in the Amazon Bedrock User
+	//   Guide.
 	//
 	//   - If you use a provisioned model, specify the ARN of the Provisioned
 	//   Throughput. For more information, see [Run inference using a Provisioned Throughput]in the Amazon Bedrock User Guide.
@@ -58,6 +76,7 @@ type InvokeModelInput struct {
 	// [Use a custom model in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
 	// [imported model]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
 	// [CreateModelImportJob]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
+	// [Supported Regions and models for cross-region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
 	// [Amazon Bedrock base model IDs (on-demand throughput)]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
 	//
 	// This member is required.
@@ -96,6 +115,9 @@ type InvokeModelInput struct {
 	// The version number for the guardrail. The value can also be DRAFT .
 	GuardrailVersion *string
 
+	// Model performance settings for the request.
+	PerformanceConfigLatency types.PerformanceConfigLatency
+
 	// Specifies whether to enable or disable the Bedrock trace. If enabled, you can
 	// see the full Bedrock trace.
 	Trace types.Trace
@@ -118,6 +140,9 @@ type InvokeModelOutput struct {
 	//
 	// This member is required.
 	ContentType *string
+
+	// Model performance settings for the request.
+	PerformanceConfigLatency types.PerformanceConfigLatency
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

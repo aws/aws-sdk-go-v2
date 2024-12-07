@@ -662,6 +662,18 @@ func TestCheckSnapshot_DeleteUsageLimit(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeregisterNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeregisterNamespace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeAccountAttributes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAccountAttributes(context.Background(), nil, func(o *Options) {
@@ -1574,6 +1586,18 @@ func TestCheckSnapshot_RebootCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RegisterNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterNamespace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RejectDataShare(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RejectDataShare(context.Background(), nil, func(o *Options) {
@@ -2298,6 +2322,18 @@ func TestUpdateSnapshot_DeleteUsageLimit(t *testing.T) {
 	_, err := svc.DeleteUsageLimit(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteUsageLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeregisterNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeregisterNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3210,6 +3246,18 @@ func TestUpdateSnapshot_RebootCluster(t *testing.T) {
 	_, err := svc.RebootCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RebootCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RegisterNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -138,6 +138,68 @@ type AgentActionGroup struct {
 	noSmithyDocumentSerde
 }
 
+// Input for an agent collaborator. The input can be text or an action invocation
+// result.
+type AgentCollaboratorInputPayload struct {
+
+	// An action invocation result.
+	ReturnControlResults *ReturnControlResults
+
+	// Input text.
+	Text *string
+
+	// The input type.
+	Type PayloadType
+
+	noSmithyDocumentSerde
+}
+
+// An agent collaborator invocation input.
+type AgentCollaboratorInvocationInput struct {
+
+	// The collaborator's alias ARN.
+	AgentCollaboratorAliasArn *string
+
+	// The collaborator's name.
+	AgentCollaboratorName *string
+
+	// Text or action invocation result input for the collaborator.
+	Input *AgentCollaboratorInputPayload
+
+	noSmithyDocumentSerde
+}
+
+// Output from an agent collaborator.
+type AgentCollaboratorInvocationOutput struct {
+
+	// The output's agent collaborator alias ARN.
+	AgentCollaboratorAliasArn *string
+
+	// The output's agent collaborator name.
+	AgentCollaboratorName *string
+
+	// The output's output.
+	Output *AgentCollaboratorOutputPayload
+
+	noSmithyDocumentSerde
+}
+
+// Output from an agent collaborator. The output can be text or an action
+// invocation result.
+type AgentCollaboratorOutputPayload struct {
+
+	// An action invocation result.
+	ReturnControlPayload *ReturnControlPayload
+
+	// Text output.
+	Text *string
+
+	// The type of output.
+	Type PayloadType
+
+	noSmithyDocumentSerde
+}
+
 // An event in which the prompt was analyzed in preparation for optimization.
 type AnalyzePromptEvent struct {
 
@@ -165,8 +227,14 @@ type ApiInvocationInput struct {
 	// Contains information about the API operation to invoke.
 	ActionInvocationType ActionInvocationType
 
+	// The agent's ID.
+	AgentId *string
+
 	// The path to the API operation.
 	ApiPath *string
+
+	// The agent collaborator's name.
+	CollaboratorName *string
 
 	// The HTTP method of the API operation.
 	HttpMethod *string
@@ -234,6 +302,9 @@ type ApiResult struct {
 	//
 	// This member is required.
 	ActionGroup *string
+
+	// The agent's ID.
+	AgentId *string
 
 	// The path to the API operation.
 	ApiPath *string
@@ -309,6 +380,35 @@ type Attribution struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for an Amazon Bedrock reranker model.
+type BedrockRerankingConfiguration struct {
+
+	// Contains configurations for a reranker model.
+	//
+	// This member is required.
+	ModelConfiguration *BedrockRerankingModelConfiguration
+
+	// The number of results to return after reranking.
+	NumberOfResults *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a reranker model.
+type BedrockRerankingModelConfiguration struct {
+
+	// The ARN of the reranker model.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// A JSON object whose keys are request fields for the model and whose values are
+	// values for those fields.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // This property contains the document to chat with, along with its attributes.
 type ByteContentDoc struct {
 
@@ -347,6 +447,24 @@ type ByteContentFile struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a caller.
+//
+// The following types satisfy this interface:
+//
+//	CallerMemberAgentAliasArn
+type Caller interface {
+	isCaller()
+}
+
+// The caller's agent alias ARN.
+type CallerMemberAgentAliasArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CallerMemberAgentAliasArn) isCaller() {}
+
 // An object containing a segment of the generated response that is based on a
 // source in the knowledge base, alongside information about the source.
 //
@@ -367,6 +485,15 @@ type Citation struct {
 
 	// Contains metadata about the sources cited for the generated response.
 	RetrievedReferences []RetrievedReference
+
+	noSmithyDocumentSerde
+}
+
+// A citation event.
+type CitationEvent struct {
+
+	// The citation.
+	Citation *Citation
 
 	noSmithyDocumentSerde
 }
@@ -402,6 +529,24 @@ type CodeInterpreterInvocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+// A content block.
+//
+// The following types satisfy this interface:
+//
+//	ContentBlockMemberText
+type ContentBlock interface {
+	isContentBlock()
+}
+
+// The block's text.
+type ContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberText) isContentBlock() {}
+
 // Contains the body of the API response.
 //
 // This data type is used in the following API operations:
@@ -413,6 +558,38 @@ type ContentBody struct {
 
 	// The body of the API response.
 	Body *string
+
+	noSmithyDocumentSerde
+}
+
+// A conversation history.
+type ConversationHistory struct {
+
+	// The conversation's messages.
+	Messages []Message
+
+	noSmithyDocumentSerde
+}
+
+// The trace behavior for the custom orchestration.
+type CustomOrchestrationTrace struct {
+
+	//  The event details used with the custom orchestration.
+	Event *CustomOrchestrationTraceEvent
+
+	//  The unique identifier of the trace.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+//	The event in the custom orchestration sequence. Events are the responses which
+//
+// the custom orchestration Lambda function sends as response to the agent.
+type CustomOrchestrationTraceEvent struct {
+
+	//  The text that prompted the event at this step.
+	Text *string
 
 	noSmithyDocumentSerde
 }
@@ -486,6 +663,19 @@ type FailureTrace struct {
 
 	// The unique identifier of the trace.
 	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information for a metadata field to include in or exclude from
+// consideration when reranking.
+type FieldForReranking struct {
+
+	// The name of a metadata field to include in or exclude from consideration when
+	// reranking.
+	//
+	// This member is required.
+	FieldName *string
 
 	noSmithyDocumentSerde
 }
@@ -938,6 +1128,12 @@ type FunctionInvocationInput struct {
 	// Contains information about the function to invoke,
 	ActionInvocationType ActionInvocationType
 
+	// The agent's ID.
+	AgentId *string
+
+	// The collaborator's name.
+	CollaboratorName *string
+
 	// The name of the function.
 	Function *string
 
@@ -983,6 +1179,9 @@ type FunctionResult struct {
 	// This member is required.
 	ActionGroup *string
 
+	// The agent's ID.
+	AgentId *string
+
 	// Contains the user confirmation information about the function that was called.
 	ConfirmationState ConfirmationState
 
@@ -1022,6 +1221,18 @@ type FunctionSchemaMemberFunctions struct {
 }
 
 func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
+
+// Contains information about a query generated for a natural language query.
+type GeneratedQuery struct {
+
+	// An SQL query that corresponds to the natural language query.
+	Sql *string
+
+	// The type of transformed query.
+	Type GeneratedQueryType
+
+	noSmithyDocumentSerde
+}
 
 // Contains metadata about a part of the generated response that is accompanied by
 // a citation.
@@ -1164,6 +1375,15 @@ type GuardrailCustomWord struct {
 	noSmithyDocumentSerde
 }
 
+// A guardrail event.
+type GuardrailEvent struct {
+
+	// The guardrail action.
+	Action GuadrailAction
+
+	noSmithyDocumentSerde
+}
+
 // The managed word details for the filter in the Guardrail.
 type GuardrailManagedWord struct {
 
@@ -1277,6 +1497,23 @@ type GuardrailWordPolicyAssessment struct {
 
 	// The managed word lists for words defined in the Guardrail filter.
 	ManagedWordLists []GuardrailManagedWord
+
+	noSmithyDocumentSerde
+}
+
+// Settings for implicit filtering, where a model generates a metadata filter
+// based on the prompt.
+type ImplicitFilterConfiguration struct {
+
+	// Metadata that can be used in a filter.
+	//
+	// This member is required.
+	MetadataAttributes []MetadataAttributeSchema
+
+	// The model that generates the filter.
+	//
+	// This member is required.
+	ModelArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1542,6 +1779,9 @@ type InvocationInput struct {
 	// Contains information about the action group to be invoked.
 	ActionGroupInvocationInput *ActionGroupInvocationInput
 
+	// The collaborator's invocation input.
+	AgentCollaboratorInvocationInput *AgentCollaboratorInvocationInput
+
 	// Contains information about the code interpreter to be invoked.
 	CodeInterpreterInvocationInput *CodeInterpreterInvocationInput
 
@@ -1749,7 +1989,7 @@ type KnowledgeBaseRetrievalConfiguration struct {
 // [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
 type KnowledgeBaseRetrievalResult struct {
 
-	// Contains a chunk of text from a data source in the knowledge base.
+	// Contains information about the content of the chunk.
 	//
 	// This member is required.
 	Content *RetrievalResultContent
@@ -1831,6 +2071,9 @@ type KnowledgeBaseVectorSearchConfiguration struct {
 	// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
 	Filter RetrievalFilter
 
+	// Settings for implicit filtering.
+	ImplicitFilterConfiguration *ImplicitFilterConfiguration
+
 	// The number of source chunks to retrieve.
 	NumberOfResults *int32
 
@@ -1843,6 +2086,12 @@ type KnowledgeBaseVectorSearchConfiguration struct {
 	//
 	// [Test a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-test.html
 	OverrideSearchType SearchType
+
+	// Contains configurations for reranking the retrieved results. For more
+	// information, see [Improve the relevance of query responses with a reranker model].
+	//
+	// [Improve the relevance of query responses with a reranker model]: https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html
+	RerankingConfiguration *VectorSearchRerankingConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1886,11 +2135,65 @@ type MemorySessionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a message.
+type Message struct {
+
+	// The message's content.
+	//
+	// This member is required.
+	Content []ContentBlock
+
+	// The message's role.
+	//
+	// This member is required.
+	Role ConversationRole
+
+	noSmithyDocumentSerde
+}
+
 // Provides details of the foundation model.
 type Metadata struct {
 
 	// Contains details of the foundation model usage.
 	Usage *Usage
+
+	noSmithyDocumentSerde
+}
+
+// Details about a metadata attribute.
+type MetadataAttributeSchema struct {
+
+	// The attribute's description.
+	//
+	// This member is required.
+	Description *string
+
+	// The attribute's key.
+	//
+	// This member is required.
+	Key *string
+
+	// The attribute's type.
+	//
+	// This member is required.
+	Type AttributeType
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the metadata to use in reranking.
+type MetadataConfigurationForReranking struct {
+
+	// Specifies whether to consider all metadata when reranking, or only the metadata
+	// that you select. If you specify SELECTIVE , include the
+	// selectiveModeConfiguration field.
+	//
+	// This member is required.
+	SelectionMode RerankingMetadataSelectionMode
+
+	// Contains configurations for the metadata fields to include or exclude when
+	// considering reranking.
+	SelectiveModeConfiguration RerankingMetadataSelectiveModeConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1906,6 +2209,9 @@ type Metadata struct {
 //
 // [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 type ModelInvocationInput struct {
+
+	// The identifier of a foundation model.
+	FoundationModel *string
 
 	// Specifications about the inference parameters that were provided alongside the
 	// prompt. These are specified in the [PromptOverrideConfiguration]object that was set when the agent was
@@ -1950,6 +2256,9 @@ type Observation struct {
 	// Contains the JSON-formatted string returned by the API invoked by the action
 	// group.
 	ActionGroupInvocationOutput *ActionGroupInvocationOutput
+
+	// A collaborator's invocation output.
+	AgentCollaboratorInvocationOutput *AgentCollaboratorInvocationOutput
 
 	// Contains the JSON-formatted string returned by the API invoked by the code
 	// interpreter.
@@ -2476,6 +2785,22 @@ type PropertyParameters struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a natural language query to transform into SQL.
+type QueryGenerationInput struct {
+
+	// The text of the query.
+	//
+	// This member is required.
+	Text *string
+
+	// The type of the query.
+	//
+	// This member is required.
+	Type InputQueryType
+
+	noSmithyDocumentSerde
+}
+
 // To split up the prompt and retrieve multiple sources, set the transformation
 // type to QUERY_DECOMPOSITION .
 type QueryTransformationConfiguration struct {
@@ -2527,6 +2852,137 @@ type RequestBody struct {
 
 	// The content in the request body.
 	Content map[string][]Parameter
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a document to rerank. Choose the type to define and
+// include the field that corresponds to the type.
+type RerankDocument struct {
+
+	// The type of document to rerank.
+	//
+	// This member is required.
+	Type RerankDocumentType
+
+	// Contains a JSON document to rerank.
+	JsonDocument document.Interface
+
+	// Contains information about a text document to rerank.
+	TextDocument *RerankTextDocument
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for reranking.
+type RerankingConfiguration struct {
+
+	// Contains configurations for an Amazon Bedrock reranker.
+	//
+	// This member is required.
+	BedrockRerankingConfiguration *BedrockRerankingConfiguration
+
+	// The type of reranker that the configurations apply to.
+	//
+	// This member is required.
+	Type RerankingConfigurationType
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the metadata fields to include or exclude when
+// considering reranking. If you include the fieldsToExclude field, the reranker
+// ignores all the metadata fields that you specify. If you include the
+// fieldsToInclude field, the reranker uses only the metadata fields that you
+// specify and ignores all others. You can include only one of these fields.
+//
+// The following types satisfy this interface:
+//
+//	RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude
+//	RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude
+type RerankingMetadataSelectiveModeConfiguration interface {
+	isRerankingMetadataSelectiveModeConfiguration()
+}
+
+// An array of objects, each of which specifies a metadata field to exclude from
+// consideration when reranking.
+type RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude struct {
+	Value []FieldForReranking
+
+	noSmithyDocumentSerde
+}
+
+func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude) isRerankingMetadataSelectiveModeConfiguration() {
+}
+
+// An array of objects, each of which specifies a metadata field to include in
+// consideration when reranking. The remaining metadata fields are ignored.
+type RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude struct {
+	Value []FieldForReranking
+
+	noSmithyDocumentSerde
+}
+
+func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude) isRerankingMetadataSelectiveModeConfiguration() {
+}
+
+// Contains information about a query to submit to the reranker model.
+type RerankQuery struct {
+
+	// Contains information about a text query.
+	//
+	// This member is required.
+	TextQuery *RerankTextDocument
+
+	// The type of the query.
+	//
+	// This member is required.
+	Type RerankQueryContentType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a document that was reranked.
+type RerankResult struct {
+
+	// The ranking of the document. The lower a number, the higher the document is
+	// ranked.
+	//
+	// This member is required.
+	Index *int32
+
+	// The relevance score of the document.
+	//
+	// This member is required.
+	RelevanceScore *float32
+
+	// Contains information about the document.
+	Document *RerankDocument
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a source for reranking.
+type RerankSource struct {
+
+	// Contains an inline definition of a source for reranking.
+	//
+	// This member is required.
+	InlineDocumentSource *RerankDocument
+
+	// The type of the source.
+	//
+	// This member is required.
+	Type RerankSourceType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a text document to rerank.
+type RerankTextDocument struct {
+
+	// The text of the document.
+	Text *string
 
 	noSmithyDocumentSerde
 }
@@ -2835,7 +3291,9 @@ type RetrievalResultConfluenceLocation struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the cited text from the data source.
+// Contains information about a chunk of text from a data source in the knowledge
+// base. If the result is from a structured data source, the cell in the database
+// and the type of the value is also identified.
 //
 // This data type is used in the following API operations:
 //
@@ -2853,10 +3311,52 @@ type RetrievalResultConfluenceLocation struct {
 // [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievalResultContent struct {
 
+	// A data URI with base64-encoded content from the data source. The URI is in the
+	// following format: returned in the following format:
+	// data:image/jpeg;base64,${base64-encoded string} .
+	ByteContent *string
+
+	// Specifies information about the rows with the cells to return in retrieval.
+	Row []RetrievalResultContentColumn
+
 	// The cited text from the data source.
-	//
-	// This member is required.
 	Text *string
+
+	// The type of content in the retrieval result.
+	Type RetrievalResultContentType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a column with a cell to return in retrieval.
+type RetrievalResultContentColumn struct {
+
+	// The name of the column.
+	ColumnName *string
+
+	// The value in the column.
+	ColumnValue *string
+
+	// The data type of the value.
+	Type RetrievalResultContentColumnType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the location of a document in a custom data source.
+type RetrievalResultCustomDocumentLocation struct {
+
+	// The ID of the document.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// The location of a result in Amazon Kendra.
+type RetrievalResultKendraDocumentLocation struct {
+
+	// The document's uri.
+	Uri *string
 
 	noSmithyDocumentSerde
 }
@@ -2872,7 +3372,7 @@ type RetrievalResultContent struct {
 //   - – in the location field
 //
 // [InvokeAgent response]
-//   - – in the locatino field
+//   - – in the location field
 //
 // [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
 // [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
@@ -2887,6 +3387,12 @@ type RetrievalResultLocation struct {
 	// The Confluence data source location.
 	ConfluenceLocation *RetrievalResultConfluenceLocation
 
+	// Specifies the location of a document in a custom data source.
+	CustomDocumentLocation *RetrievalResultCustomDocumentLocation
+
+	// The location of a document in Amazon Kendra.
+	KendraDocumentLocation *RetrievalResultKendraDocumentLocation
+
 	// The S3 data source location.
 	S3Location *RetrievalResultS3Location
 
@@ -2895,6 +3401,9 @@ type RetrievalResultLocation struct {
 
 	// The SharePoint data source location.
 	SharePointLocation *RetrievalResultSharePointLocation
+
+	// Specifies information about the SQL query used to retrieve the result.
+	SqlLocation *RetrievalResultSqlLocation
 
 	// The web URL/URLs data source location.
 	WebLocation *RetrievalResultWebLocation
@@ -2940,6 +3449,15 @@ type RetrievalResultSharePointLocation struct {
 
 	// The SharePoint site URL for the data source location.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the SQL query used to retrieve the result.
+type RetrievalResultSqlLocation struct {
+
+	// The SQL query used to retrieve the result.
+	Query *string
 
 	noSmithyDocumentSerde
 }
@@ -3019,6 +3537,17 @@ type RetrieveAndGenerateOutput struct {
 	noSmithyDocumentSerde
 }
 
+// A retrieve and generate output event.
+type RetrieveAndGenerateOutputEvent struct {
+
+	// A text response.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains configuration about the session with the knowledge base.
 //
 // This data type is used in the following API operations:
@@ -3035,6 +3564,47 @@ type RetrieveAndGenerateSessionConfiguration struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
+}
+
+// A retrieve and generate stream response output.
+//
+// The following types satisfy this interface:
+//
+//	RetrieveAndGenerateStreamResponseOutputMemberCitation
+//	RetrieveAndGenerateStreamResponseOutputMemberGuardrail
+//	RetrieveAndGenerateStreamResponseOutputMemberOutput
+type RetrieveAndGenerateStreamResponseOutput interface {
+	isRetrieveAndGenerateStreamResponseOutput()
+}
+
+// A citation event.
+type RetrieveAndGenerateStreamResponseOutputMemberCitation struct {
+	Value CitationEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrieveAndGenerateStreamResponseOutputMemberCitation) isRetrieveAndGenerateStreamResponseOutput() {
+}
+
+// A guardrail event.
+type RetrieveAndGenerateStreamResponseOutputMemberGuardrail struct {
+	Value GuardrailEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrieveAndGenerateStreamResponseOutputMemberGuardrail) isRetrieveAndGenerateStreamResponseOutput() {
+}
+
+// An output event.
+type RetrieveAndGenerateStreamResponseOutputMemberOutput struct {
+	Value RetrieveAndGenerateOutputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrieveAndGenerateStreamResponseOutputMemberOutput) isRetrieveAndGenerateStreamResponseOutput() {
 }
 
 // Contains metadata about a source cited for the generated response.
@@ -3087,6 +3657,81 @@ type ReturnControlPayload struct {
 	noSmithyDocumentSerde
 }
 
+// An action invocation result.
+type ReturnControlResults struct {
+
+	// The action's invocation ID.
+	InvocationId *string
+
+	// The action invocation result.
+	ReturnControlInvocationResults []InvocationResultMember
+
+	noSmithyDocumentSerde
+}
+
+// Invocation output from a routing classifier model.
+type RoutingClassifierModelInvocationOutput struct {
+
+	// The invocation's metadata.
+	Metadata *Metadata
+
+	// The invocation's raw response.
+	RawResponse *RawResponse
+
+	// The invocation's trace ID.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// A trace for a routing classifier.
+//
+// The following types satisfy this interface:
+//
+//	RoutingClassifierTraceMemberInvocationInput
+//	RoutingClassifierTraceMemberModelInvocationInput
+//	RoutingClassifierTraceMemberModelInvocationOutput
+//	RoutingClassifierTraceMemberObservation
+type RoutingClassifierTrace interface {
+	isRoutingClassifierTrace()
+}
+
+// The classifier's invocation input.
+type RoutingClassifierTraceMemberInvocationInput struct {
+	Value InvocationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*RoutingClassifierTraceMemberInvocationInput) isRoutingClassifierTrace() {}
+
+// The classifier's model invocation input.
+type RoutingClassifierTraceMemberModelInvocationInput struct {
+	Value ModelInvocationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*RoutingClassifierTraceMemberModelInvocationInput) isRoutingClassifierTrace() {}
+
+// The classifier's model invocation output.
+type RoutingClassifierTraceMemberModelInvocationOutput struct {
+	Value RoutingClassifierModelInvocationOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*RoutingClassifierTraceMemberModelInvocationOutput) isRoutingClassifierTrace() {}
+
+// The classifier's observation.
+type RoutingClassifierTraceMemberObservation struct {
+	Value Observation
+
+	noSmithyDocumentSerde
+}
+
+func (*RoutingClassifierTraceMemberObservation) isRoutingClassifierTrace() {}
+
 // The identifier information for an Amazon S3 bucket.
 type S3Identifier struct {
 
@@ -3131,6 +3776,9 @@ type S3ObjectFile struct {
 // [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
 // [Lambda function]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html
 type SessionState struct {
+
+	// The state's conversation history.
+	ConversationHistory *ConversationHistory
 
 	// Contains information about the files used by code interpreter.
 	Files []InputFile
@@ -3192,6 +3840,19 @@ type Span struct {
 
 	// Where the text with a citation starts in the generated output.
 	Start *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configurations for streaming.
+type StreamingConfigurations struct {
+
+	//  The guardrail interval to apply as response is generated.
+	ApplyGuardrailInterval *int32
+
+	//  Specifies whether to enable streaming for the final response. This is set to
+	// false by default.
+	StreamFinalResponse bool
 
 	noSmithyDocumentSerde
 }
@@ -3270,6 +3931,31 @@ type TextResponsePart struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for transforming text to SQL.
+type TextToSqlConfiguration struct {
+
+	// The type of resource to use in transformation.
+	//
+	// This member is required.
+	Type TextToSqlConfigurationType
+
+	// Specifies configurations for a knowledge base to use in transformation.
+	KnowledgeBaseConfiguration *TextToSqlKnowledgeBaseConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a knowledge base to use in transformation.
+type TextToSqlKnowledgeBaseConfiguration struct {
+
+	// The ARN of the knowledge base
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains one part of the agent's reasoning process and results from calling API
 // actions and querying knowledge bases. You can use the trace to understand how
 // the agent arrived at the response it provided the customer. For more
@@ -3277,16 +3963,29 @@ type TextResponsePart struct {
 //
 // The following types satisfy this interface:
 //
+//	TraceMemberCustomOrchestrationTrace
 //	TraceMemberFailureTrace
 //	TraceMemberGuardrailTrace
 //	TraceMemberOrchestrationTrace
 //	TraceMemberPostProcessingTrace
 //	TraceMemberPreProcessingTrace
+//	TraceMemberRoutingClassifierTrace
 //
 // [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 type Trace interface {
 	isTrace()
 }
+
+//	Details about the custom orchestration step in which the agent determines the
+//
+// order in which actions are executed.
+type TraceMemberCustomOrchestrationTrace struct {
+	Value CustomOrchestrationTrace
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceMemberCustomOrchestrationTrace) isTrace() {}
 
 // Contains information about the failure of the interaction.
 type TraceMemberFailureTrace struct {
@@ -3335,6 +4034,15 @@ type TraceMemberPreProcessingTrace struct {
 
 func (*TraceMemberPreProcessingTrace) isTrace() {}
 
+// A routing classifier's trace.
+type TraceMemberRoutingClassifierTrace struct {
+	Value RoutingClassifierTrace
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceMemberRoutingClassifierTrace) isTrace() {}
+
 // Contains information about the agent and session, alongside the agent's
 // reasoning process and results from calling API actions and querying knowledge
 // bases and metadata about the trace. You can use the trace to understand how the
@@ -3353,6 +4061,12 @@ type TracePart struct {
 	// The version of the agent.
 	AgentVersion *string
 
+	// The part's caller chain.
+	CallerChain []Caller
+
+	// The part's collaborator name.
+	CollaboratorName *string
+
 	// The unique identifier of the session with the agent.
 	SessionId *string
 
@@ -3363,6 +4077,20 @@ type TracePart struct {
 	//
 	// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 	Trace Trace
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for transforming the natural language query into SQL.
+type TransformationConfiguration struct {
+
+	// The mode of the transformation.
+	//
+	// This member is required.
+	Mode QueryTransformationMode
+
+	// Specifies configurations for transforming text to SQL.
+	TextToSqlConfiguration *TextToSqlConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -3379,6 +4107,52 @@ type Usage struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for reranking with an Amazon Bedrock reranker model.
+type VectorSearchBedrockRerankingConfiguration struct {
+
+	// Contains configurations for the reranker model.
+	//
+	// This member is required.
+	ModelConfiguration *VectorSearchBedrockRerankingModelConfiguration
+
+	// Contains configurations for the metadata to use in reranking.
+	MetadataConfiguration *MetadataConfigurationForReranking
+
+	// The number of results to return after reranking.
+	NumberOfRerankedResults *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for an Amazon Bedrock reranker model.
+type VectorSearchBedrockRerankingModelConfiguration struct {
+
+	// The ARN of the reranker model to use.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// A JSON object whose keys are request fields for the model and whose values are
+	// values for those fields.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for reranking the retrieved results.
+type VectorSearchRerankingConfiguration struct {
+
+	// The type of reranker model.
+	//
+	// This member is required.
+	Type VectorSearchRerankingConfigurationType
+
+	// Contains configurations for an Amazon Bedrock reranker model.
+	BedrockRerankingConfiguration *VectorSearchBedrockRerankingConfiguration
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -3390,25 +4164,30 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isActionGroupExecutor()        {}
-func (*UnknownUnionMember) isAPISchema()                  {}
-func (*UnknownUnionMember) isFlowInputContent()           {}
-func (*UnknownUnionMember) isFlowOutputContent()          {}
-func (*UnknownUnionMember) isFlowResponseStream()         {}
-func (*UnknownUnionMember) isFlowTrace()                  {}
-func (*UnknownUnionMember) isFlowTraceNodeInputContent()  {}
-func (*UnknownUnionMember) isFlowTraceNodeOutputContent() {}
-func (*UnknownUnionMember) isFunctionSchema()             {}
-func (*UnknownUnionMember) isInlineAgentResponseStream()  {}
-func (*UnknownUnionMember) isInputPrompt()                {}
-func (*UnknownUnionMember) isInvocationInputMember()      {}
-func (*UnknownUnionMember) isInvocationResultMember()     {}
-func (*UnknownUnionMember) isMemory()                     {}
-func (*UnknownUnionMember) isOptimizedPrompt()            {}
-func (*UnknownUnionMember) isOptimizedPromptStream()      {}
-func (*UnknownUnionMember) isOrchestrationTrace()         {}
-func (*UnknownUnionMember) isPostProcessingTrace()        {}
-func (*UnknownUnionMember) isPreProcessingTrace()         {}
-func (*UnknownUnionMember) isResponseStream()             {}
-func (*UnknownUnionMember) isRetrievalFilter()            {}
-func (*UnknownUnionMember) isTrace()                      {}
+func (*UnknownUnionMember) isActionGroupExecutor()                         {}
+func (*UnknownUnionMember) isAPISchema()                                   {}
+func (*UnknownUnionMember) isCaller()                                      {}
+func (*UnknownUnionMember) isContentBlock()                                {}
+func (*UnknownUnionMember) isFlowInputContent()                            {}
+func (*UnknownUnionMember) isFlowOutputContent()                           {}
+func (*UnknownUnionMember) isFlowResponseStream()                          {}
+func (*UnknownUnionMember) isFlowTrace()                                   {}
+func (*UnknownUnionMember) isFlowTraceNodeInputContent()                   {}
+func (*UnknownUnionMember) isFlowTraceNodeOutputContent()                  {}
+func (*UnknownUnionMember) isFunctionSchema()                              {}
+func (*UnknownUnionMember) isInlineAgentResponseStream()                   {}
+func (*UnknownUnionMember) isInputPrompt()                                 {}
+func (*UnknownUnionMember) isInvocationInputMember()                       {}
+func (*UnknownUnionMember) isInvocationResultMember()                      {}
+func (*UnknownUnionMember) isMemory()                                      {}
+func (*UnknownUnionMember) isOptimizedPrompt()                             {}
+func (*UnknownUnionMember) isOptimizedPromptStream()                       {}
+func (*UnknownUnionMember) isOrchestrationTrace()                          {}
+func (*UnknownUnionMember) isPostProcessingTrace()                         {}
+func (*UnknownUnionMember) isPreProcessingTrace()                          {}
+func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration() {}
+func (*UnknownUnionMember) isResponseStream()                              {}
+func (*UnknownUnionMember) isRetrievalFilter()                             {}
+func (*UnknownUnionMember) isRetrieveAndGenerateStreamResponseOutput()     {}
+func (*UnknownUnionMember) isRoutingClassifierTrace()                      {}
+func (*UnknownUnionMember) isTrace()                                       {}

@@ -18,6 +18,26 @@ import (
 // .
 //
 // You can check the state of a rule by using the DescribeConfigRules request.
+//
+// Recommendation: Stop recording resource compliance before deleting rules
+//
+// It is highly recommended that you stop recording for the
+// AWS::Config::ResourceCompliance resource type before you delete rules in your
+// account. Deleting rules creates CIs for AWS::Config::ResourceCompliance and can
+// affect your Config [configuration recorder]costs.
+//
+// If you are deleting rules which evaluate a large number of resource types, this
+// can lead to a spike in the number of CIs recorded.
+//
+// Best practice:
+//
+//   - Stop recording AWS::Config::ResourceCompliance
+//
+//   - Delete rule(s)
+//
+//   - Turn on recording for AWS::Config::ResourceCompliance
+//
+// [configuration recorder]: https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html
 func (c *Client) DeleteConfigRule(ctx context.Context, params *DeleteConfigRuleInput, optFns ...func(*Options)) (*DeleteConfigRuleOutput, error) {
 	if params == nil {
 		params = &DeleteConfigRuleInput{}

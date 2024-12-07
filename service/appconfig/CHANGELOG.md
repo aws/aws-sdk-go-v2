@@ -1,3 +1,7 @@
+# v1.36.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2024-11-18)
 
 * **Feature**: AWS AppConfig has added a new extension action point, AT_DEPLOYMENT_TICK, to support third-party monitors to trigger an automatic rollback during a deployment.

@@ -31,7 +31,7 @@ func (c *Client) ListTargets(ctx context.Context, params *ListTargetsInput, optF
 
 type ListTargetsInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the target group.
+	// The ID or ARN of the target group.
 	//
 	// This member is required.
 	TargetGroupIdentifier *string

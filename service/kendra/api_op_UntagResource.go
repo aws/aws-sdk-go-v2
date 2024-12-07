@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a tag from an index, FAQ, or a data source.
+// Removes a tag from an index, FAQ, data source, or other resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,14 +28,19 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the
-	// tag from.
+	// The Amazon Resource Name (ARN) of the index, FAQ, data source, or other
+	// resource to remove a tag. For example, the ARN of an index is constructed as
+	// follows: arn:aws:kendra:your-region:your-account-id:index/index-id For
+	// information on how to construct an ARN for all types of Amazon Kendra resources,
+	// see [Resource types].
+	//
+	// [Resource types]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// A list of tag keys to remove from the index, FAQ, or data source. If a tag key
-	// does not exist on the resource, it is ignored.
+	// A list of tag keys to remove from the index, FAQ, data source, or other
+	// resource. If a tag key doesn't exist for the resource, it is ignored.
 	//
 	// This member is required.
 	TagKeys []string

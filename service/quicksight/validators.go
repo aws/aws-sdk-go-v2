@@ -750,6 +750,26 @@ func (m *validateOpDeleteDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDefaultQBusinessApplication struct {
+}
+
+func (*validateOpDeleteDefaultQBusinessApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDefaultQBusinessApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDefaultQBusinessApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDefaultQBusinessApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFolder struct {
 }
 
@@ -1610,6 +1630,26 @@ func (m *validateOpDescribeDataSourcePermissions) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDefaultQBusinessApplication struct {
+}
+
+func (*validateOpDescribeDefaultQBusinessApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDefaultQBusinessApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDefaultQBusinessApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDefaultQBusinessApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFolder struct {
 }
 
@@ -1825,6 +1865,26 @@ func (m *validateOpDescribeQPersonalizationConfiguration) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeQPersonalizationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeQuickSightQSearchConfiguration struct {
+}
+
+func (*validateOpDescribeQuickSightQSearchConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQuickSightQSearchConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQuickSightQSearchConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQuickSightQSearchConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2165,6 +2225,26 @@ func (m *validateOpGenerateEmbedUrlForRegisteredUser) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGenerateEmbedUrlForRegisteredUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGenerateEmbedUrlForRegisteredUserWithIdentity struct {
+}
+
+func (*validateOpGenerateEmbedUrlForRegisteredUserWithIdentity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateEmbedUrlForRegisteredUserWithIdentity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateEmbedUrlForRegisteredUserWithIdentityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateEmbedUrlForRegisteredUserWithIdentityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2890,6 +2970,26 @@ func (m *validateOpListVPCConnections) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPredictQAResults struct {
+}
+
+func (*validateOpPredictQAResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPredictQAResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PredictQAResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPredictQAResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutDataSetRefreshProperties struct {
 }
 
@@ -3290,6 +3390,26 @@ func (m *validateOpUpdateAnalysisPermissions) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApplicationWithTokenExchangeGrant struct {
+}
+
+func (*validateOpUpdateApplicationWithTokenExchangeGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApplicationWithTokenExchangeGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApplicationWithTokenExchangeGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApplicationWithTokenExchangeGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateBrandAssignment struct {
 }
 
@@ -3550,6 +3670,26 @@ func (m *validateOpUpdateDataSourcePermissions) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDefaultQBusinessApplication struct {
+}
+
+func (*validateOpUpdateDefaultQBusinessApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDefaultQBusinessApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDefaultQBusinessApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDefaultQBusinessApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFolder struct {
 }
 
@@ -3725,6 +3865,26 @@ func (m *validateOpUpdateQPersonalizationConfiguration) HandleInitialize(ctx con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateQPersonalizationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQuickSightQSearchConfiguration struct {
+}
+
+func (*validateOpUpdateQuickSightQSearchConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQuickSightQSearchConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQuickSightQSearchConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQuickSightQSearchConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4178,6 +4338,10 @@ func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSource{}, middleware.After)
 }
 
+func addOpDeleteDefaultQBusinessApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDefaultQBusinessApplication{}, middleware.After)
+}
+
 func addOpDeleteFolderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFolder{}, middleware.After)
 }
@@ -4350,6 +4514,10 @@ func addOpDescribeDataSourcePermissionsValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDescribeDataSourcePermissions{}, middleware.After)
 }
 
+func addOpDescribeDefaultQBusinessApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDefaultQBusinessApplication{}, middleware.After)
+}
+
 func addOpDescribeFolderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFolder{}, middleware.After)
 }
@@ -4392,6 +4560,10 @@ func addOpDescribeNamespaceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeQPersonalizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeQPersonalizationConfiguration{}, middleware.After)
+}
+
+func addOpDescribeQuickSightQSearchConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQuickSightQSearchConfiguration{}, middleware.After)
 }
 
 func addOpDescribeRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -4460,6 +4632,10 @@ func addOpGenerateEmbedUrlForAnonymousUserValidationMiddleware(stack *middleware
 
 func addOpGenerateEmbedUrlForRegisteredUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGenerateEmbedUrlForRegisteredUser{}, middleware.After)
+}
+
+func addOpGenerateEmbedUrlForRegisteredUserWithIdentityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateEmbedUrlForRegisteredUserWithIdentity{}, middleware.After)
 }
 
 func addOpGetDashboardEmbedUrlValidationMiddleware(stack *middleware.Stack) error {
@@ -4606,6 +4782,10 @@ func addOpListVPCConnectionsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListVPCConnections{}, middleware.After)
 }
 
+func addOpPredictQAResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPredictQAResults{}, middleware.After)
+}
+
 func addOpPutDataSetRefreshPropertiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDataSetRefreshProperties{}, middleware.After)
 }
@@ -4686,6 +4866,10 @@ func addOpUpdateAnalysisPermissionsValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpUpdateAnalysisPermissions{}, middleware.After)
 }
 
+func addOpUpdateApplicationWithTokenExchangeGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApplicationWithTokenExchangeGrant{}, middleware.After)
+}
+
 func addOpUpdateBrandAssignmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBrandAssignment{}, middleware.After)
 }
@@ -4738,6 +4922,10 @@ func addOpUpdateDataSourcePermissionsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpUpdateDataSourcePermissions{}, middleware.After)
 }
 
+func addOpUpdateDefaultQBusinessApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDefaultQBusinessApplication{}, middleware.After)
+}
+
 func addOpUpdateFolderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFolder{}, middleware.After)
 }
@@ -4772,6 +4960,10 @@ func addOpUpdatePublicSharingSettingsValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateQPersonalizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateQPersonalizationConfiguration{}, middleware.After)
+}
+
+func addOpUpdateQuickSightQSearchConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQuickSightQSearchConfiguration{}, middleware.After)
 }
 
 func addOpUpdateRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -21530,6 +21722,21 @@ func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	}
 }
 
+func validateOpDeleteDefaultQBusinessApplicationInput(v *DeleteDefaultQBusinessApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDefaultQBusinessApplicationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFolderInput(v *DeleteFolderInput) error {
 	if v == nil {
 		return nil
@@ -22343,6 +22550,21 @@ func validateOpDescribeDataSourcePermissionsInput(v *DescribeDataSourcePermissio
 	}
 }
 
+func validateOpDescribeDefaultQBusinessApplicationInput(v *DescribeDefaultQBusinessApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDefaultQBusinessApplicationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeFolderInput(v *DescribeFolderInput) error {
 	if v == nil {
 		return nil
@@ -22537,6 +22759,21 @@ func validateOpDescribeQPersonalizationConfigurationInput(v *DescribeQPersonaliz
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeQPersonalizationConfigurationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeQuickSightQSearchConfigurationInput(v *DescribeQuickSightQSearchConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQuickSightQSearchConfigurationInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
@@ -22881,6 +23118,28 @@ func validateOpGenerateEmbedUrlForRegisteredUserInput(v *GenerateEmbedUrlForRegi
 	}
 	if v.UserArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
+	}
+	if v.ExperienceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperienceConfiguration"))
+	} else if v.ExperienceConfiguration != nil {
+		if err := validateRegisteredUserEmbeddingExperienceConfiguration(v.ExperienceConfiguration); err != nil {
+			invalidParams.AddNested("ExperienceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGenerateEmbedUrlForRegisteredUserWithIdentityInput(v *GenerateEmbedUrlForRegisteredUserWithIdentityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateEmbedUrlForRegisteredUserWithIdentityInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
 	if v.ExperienceConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExperienceConfiguration"))
@@ -23508,6 +23767,24 @@ func validateOpListVPCConnectionsInput(v *ListVPCConnectionsInput) error {
 	}
 }
 
+func validateOpPredictQAResultsInput(v *PredictQAResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictQAResultsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.QueryText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryText"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutDataSetRefreshPropertiesInput(v *PutDataSetRefreshPropertiesInput) error {
 	if v == nil {
 		return nil
@@ -23998,6 +24275,24 @@ func validateOpUpdateAnalysisPermissionsInput(v *UpdateAnalysisPermissionsInput)
 	}
 }
 
+func validateOpUpdateApplicationWithTokenExchangeGrantInput(v *UpdateApplicationWithTokenExchangeGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationWithTokenExchangeGrantInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateBrandAssignmentInput(v *UpdateBrandAssignmentInput) error {
 	if v == nil {
 		return nil
@@ -24365,6 +24660,24 @@ func validateOpUpdateDataSourcePermissionsInput(v *UpdateDataSourcePermissionsIn
 	}
 }
 
+func validateOpUpdateDefaultQBusinessApplicationInput(v *UpdateDefaultQBusinessApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDefaultQBusinessApplicationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFolderInput(v *UpdateFolderInput) error {
 	if v == nil {
 		return nil
@@ -24532,6 +24845,24 @@ func validateOpUpdateQPersonalizationConfigurationInput(v *UpdateQPersonalizatio
 	}
 	if len(v.PersonalizationMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PersonalizationMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQuickSightQSearchConfigurationInput(v *UpdateQuickSightQSearchConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQuickSightQSearchConfigurationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if len(v.QSearchStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("QSearchStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

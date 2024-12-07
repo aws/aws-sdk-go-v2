@@ -1,3 +1,7 @@
+# v1.7.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2024-11-22)
 
 * **Feature**: Added new "DeliverToQBusiness" rule action to MailManager RulesSet for ingesting email data into Amazon Q Business customer applications

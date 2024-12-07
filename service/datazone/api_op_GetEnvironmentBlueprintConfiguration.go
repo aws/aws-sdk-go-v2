@@ -61,6 +61,9 @@ type GetEnvironmentBlueprintConfigurationOutput struct {
 	// The Amazon Web Services regions in which this blueprint is enabled.
 	EnabledRegions []string
 
+	// The environment role permissions boundary.
+	EnvironmentRolePermissionBoundary *string
+
 	// The ARN of the manage access role with which this blueprint is created.
 	ManageAccessRoleArn *string
 

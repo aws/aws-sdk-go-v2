@@ -31,7 +31,7 @@ func (c *Client) GetServiceNetworkServiceAssociation(ctx context.Context, params
 
 type GetServiceNetworkServiceAssociationInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the association.
+	// The ID or ARN of the association.
 	//
 	// This member is required.
 	ServiceNetworkServiceAssociationIdentifier *string
@@ -44,8 +44,7 @@ type GetServiceNetworkServiceAssociationOutput struct {
 	// The Amazon Resource Name (ARN) of the association.
 	Arn *string
 
-	// The date and time that the association was created, specified in ISO-8601
-	// format.
+	// The date and time that the association was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The account that created the association.

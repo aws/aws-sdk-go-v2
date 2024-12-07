@@ -15,9 +15,9 @@ import (
 //
 // For more information, see [Using RDS Data API] in the Amazon Aurora User Guide.
 //
-// This operation applies only to Aurora PostgreSQL Serverless v2 and provisioned
-// DB clusters. To disable the HTTP endpoint for Aurora Serverless v1 DB clusters,
-// use the EnableHttpEndpoint parameter of the ModifyDBCluster operation.
+// This operation applies only to Aurora Serverless v2 and provisioned DB
+// clusters. To disable the HTTP endpoint for Aurora Serverless v1 DB clusters, use
+// the EnableHttpEndpoint parameter of the ModifyDBCluster operation.
 //
 // [Using RDS Data API]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
 func (c *Client) DisableHttpEndpoint(ctx context.Context, params *DisableHttpEndpointInput, optFns ...func(*Options)) (*DisableHttpEndpointOutput, error) {

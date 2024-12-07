@@ -626,6 +626,23 @@ type DescribedHostKey struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains the details of the IAM Identity Center used for your
+// web app. Returned during a call to DescribeWebApp .
+type DescribedIdentityCenterConfig struct {
+
+	// The Amazon Resource Name (ARN) for the IAM Identity Center application: this
+	// value is set automatically when you create your web app.
+	ApplicationArn *string
+
+	// The Amazon Resource Name (ARN) for the IAM Identity Center used for the web app.
+	InstanceArn *string
+
+	// The IAM role in IAM Identity Center used for the web app.
+	Role *string
+
+	noSmithyDocumentSerde
+}
+
 // The details for a local or partner AS2 profile.
 type DescribedProfile struct {
 
@@ -999,6 +1016,91 @@ type DescribedUser struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that describes the parameters for the web app, as identified by the
+// WebAppId .
+type DescribedWebApp struct {
+
+	// The Amazon Resource Name (ARN) of the web app.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier for the web app.
+	//
+	// This member is required.
+	WebAppId *string
+
+	// The AccessEndpoint is the URL that you provide to your users for them to
+	// interact with the Transfer Family web app. You can specify a custom URL or use
+	// the default value.
+	AccessEndpoint *string
+
+	// A structure that contains the details for the identity provider used by the web
+	// app.
+	DescribedIdentityProviderDetails DescribedWebAppIdentityProviderDetails
+
+	// Key-value pairs that can be used to group and search for web apps. Tags are
+	// metadata attached to web apps for any purpose.
+	Tags []Tag
+
+	// The WebAppEndpoint is the unique URL for your Transfer Family web app. This is
+	// the value that you use when you configure Origins on CloudFront.
+	WebAppEndpoint *string
+
+	// A union that contains the value for number of concurrent connections or the
+	// user sessions on your web app.
+	WebAppUnits WebAppUnits
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the customization fields for the web app. You can
+// provide a title, logo, and icon to customize the appearance of your web app.
+type DescribedWebAppCustomization struct {
+
+	// Returns the Amazon Resource Name (ARN) for the web app.
+	//
+	// This member is required.
+	Arn *string
+
+	// Returns the unique identifier for your web app.
+	//
+	// This member is required.
+	WebAppId *string
+
+	// Returns a icon file data string (in base64 encoding).
+	FaviconFile []byte
+
+	// Returns a logo file data string (in base64 encoding).
+	LogoFile []byte
+
+	// Returns the page title that you defined for your web app.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// Returns a structure that contains the identity provider details for your web
+// app.
+//
+// The following types satisfy this interface:
+//
+//	DescribedWebAppIdentityProviderDetailsMemberIdentityCenterConfig
+type DescribedWebAppIdentityProviderDetails interface {
+	isDescribedWebAppIdentityProviderDetails()
+}
+
+// Returns a structure for your identity provider details. This structure contains
+// the instance ARN and role being used for the web app.
+type DescribedWebAppIdentityProviderDetailsMemberIdentityCenterConfig struct {
+	Value DescribedIdentityCenterConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*DescribedWebAppIdentityProviderDetailsMemberIdentityCenterConfig) isDescribedWebAppIdentityProviderDetails() {
+}
+
 // Describes the properties of the specified workflow
 type DescribedWorkflow struct {
 
@@ -1254,6 +1356,19 @@ type HomeDirectoryMapEntry struct {
 	// Transfer Family server. You would need to explicitly set Type to FILE if you
 	// want a mapping to have a file target.
 	Type MapType
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes the values to use for the IAM Identity Center
+// settings when you create or update a web app.
+type IdentityCenterConfig struct {
+
+	// The Amazon Resource Name (ARN) for the IAM Identity Center used for the web app.
+	InstanceArn *string
+
+	// The IAM role in IAM Identity Center used for the web app.
+	Role *string
 
 	noSmithyDocumentSerde
 }
@@ -1653,6 +1768,31 @@ type ListedUser struct {
 	noSmithyDocumentSerde
 }
 
+// a structure that contains details for the web app.
+type ListedWebApp struct {
+
+	// The Amazon Resource Name (ARN) for the web app.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier for the web app.
+	//
+	// This member is required.
+	WebAppId *string
+
+	// The AccessEndpoint is the URL that you provide to your users for them to
+	// interact with the Transfer Family web app. You can specify a custom URL or use
+	// the default value.
+	AccessEndpoint *string
+
+	// The WebAppEndpoint is the unique URL for your Transfer Family web app. This is
+	// the value that you use when you configure Origins on CloudFront.
+	WebAppEndpoint *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the identifier, text description, and Amazon Resource Name (ARN) for
 // the workflow.
 type ListedWorkflow struct {
@@ -2006,6 +2146,36 @@ type TagStepDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that describes the values to use for the IAM Identity Center
+// settings when you update a web app.
+type UpdateWebAppIdentityCenterConfig struct {
+
+	// The IAM role used to access IAM Identity Center.
+	Role *string
+
+	noSmithyDocumentSerde
+}
+
+// A union that contains the UpdateWebAppIdentityCenterConfig object.
+//
+// The following types satisfy this interface:
+//
+//	UpdateWebAppIdentityProviderDetailsMemberIdentityCenterConfig
+type UpdateWebAppIdentityProviderDetails interface {
+	isUpdateWebAppIdentityProviderDetails()
+}
+
+// A structure that describes the values to use for the IAM Identity Center
+// settings when you update a web app.
+type UpdateWebAppIdentityProviderDetailsMemberIdentityCenterConfig struct {
+	Value UpdateWebAppIdentityCenterConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateWebAppIdentityProviderDetailsMemberIdentityCenterConfig) isUpdateWebAppIdentityProviderDetails() {
+}
+
 // Specifies the user name, server ID, and session ID for a workflow.
 type UserDetails struct {
 
@@ -2025,6 +2195,49 @@ type UserDetails struct {
 
 	noSmithyDocumentSerde
 }
+
+// A union that contains the IdentityCenterConfig object.
+//
+// The following types satisfy this interface:
+//
+//	WebAppIdentityProviderDetailsMemberIdentityCenterConfig
+type WebAppIdentityProviderDetails interface {
+	isWebAppIdentityProviderDetails()
+}
+
+// A structure that describes the values to use for the IAM Identity Center
+// settings when you create a web app.
+type WebAppIdentityProviderDetailsMemberIdentityCenterConfig struct {
+	Value IdentityCenterConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*WebAppIdentityProviderDetailsMemberIdentityCenterConfig) isWebAppIdentityProviderDetails() {}
+
+// Contains an integer value that represents the value for number of concurrent
+// connections or the user sessions on your web app.
+//
+// The following types satisfy this interface:
+//
+//	WebAppUnitsMemberProvisioned
+type WebAppUnits interface {
+	isWebAppUnits()
+}
+
+// An integer that represents the number of units for your desired number of
+// concurrent connections, or the number of user sessions on your web app at the
+// same time.
+//
+// Each increment allows an additional 250 concurrent sessions: a value of 1 sets
+// the number of concurrent sessions to 250; 2 sets a value of 500, and so on.
+type WebAppUnitsMemberProvisioned struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*WebAppUnitsMemberProvisioned) isWebAppUnits() {}
 
 // Specifies the workflow ID for the workflow to assign and the execution role
 // that's used for executing the workflow.
@@ -2140,3 +2353,17 @@ type WorkflowStep struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isDescribedWebAppIdentityProviderDetails() {}
+func (*UnknownUnionMember) isUpdateWebAppIdentityProviderDetails()    {}
+func (*UnknownUnionMember) isWebAppIdentityProviderDetails()          {}
+func (*UnknownUnionMember) isWebAppUnits()                            {}

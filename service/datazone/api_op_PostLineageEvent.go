@@ -47,6 +47,13 @@ type PostLineageEventInput struct {
 }
 
 type PostLineageEventOutput struct {
+
+	// The ID of the domain.
+	DomainId *string
+
+	// The ID of the lineage event.
+	Id *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

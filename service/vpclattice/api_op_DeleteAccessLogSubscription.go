@@ -28,7 +28,7 @@ func (c *Client) DeleteAccessLogSubscription(ctx context.Context, params *Delete
 
 type DeleteAccessLogSubscriptionInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the access log subscription.
+	// The ID or ARN of the access log subscription.
 	//
 	// This member is required.
 	AccessLogSubscriptionIdentifier *string

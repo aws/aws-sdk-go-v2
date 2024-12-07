@@ -7531,6 +7531,19 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				sv.ResourceType = types.ResourceType(jtv)
 			}
 
+		case "SizeInBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SizeInBytes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeInBytes = ptr.Int64(i64)
+			}
+
 		case "SourceBackupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10870,6 +10883,15 @@ func awsAwsjson11_deserializeDocumentLustreFileSystemConfiguration(v **types.Lus
 				sv.DriveCacheType = types.DriveCacheType(jtv)
 			}
 
+		case "EfaEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.EfaEnabled = ptr.Bool(jtv)
+			}
+
 		case "LogConfiguration":
 			if err := awsAwsjson11_deserializeDocumentLustreLogConfiguration(&sv.LogConfiguration, value); err != nil {
 				return err
@@ -11851,6 +11873,11 @@ func awsAwsjson11_deserializeDocumentOpenZFSFileSystemConfiguration(v **types.Op
 				sv.PreferredSubnetId = ptr.String(jtv)
 			}
 
+		case "ReadCacheConfiguration":
+			if err := awsAwsjson11_deserializeDocumentOpenZFSReadCacheConfiguration(&sv.ReadCacheConfiguration, value); err != nil {
+				return err
+			}
+
 		case "RootVolumeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12040,6 +12067,59 @@ func awsAwsjson11_deserializeDocumentOpenZFSOriginSnapshotConfiguration(v **type
 					return fmt.Errorf("expected ResourceARN to be of type string, got %T instead", value)
 				}
 				sv.SnapshotARN = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOpenZFSReadCacheConfiguration(v **types.OpenZFSReadCacheConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenZFSReadCacheConfiguration
+	if *v == nil {
+		sv = &types.OpenZFSReadCacheConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SizeGiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StorageCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeGiB = ptr.Int32(int32(i64))
+			}
+
+		case "SizingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpenZFSReadCacheSizingMode to be of type string, got %T instead", value)
+				}
+				sv.SizingMode = types.OpenZFSReadCacheSizingMode(jtv)
 			}
 
 		default:

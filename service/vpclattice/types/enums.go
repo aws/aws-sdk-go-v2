@@ -127,6 +127,228 @@ func (ListenerProtocol) Values() []ListenerProtocol {
 	}
 }
 
+type ProtocolType string
+
+// Enum values for ProtocolType
+const (
+	// Resource Configuration protocol type TCP
+	ProtocolTypeTcp ProtocolType = "TCP"
+)
+
+// Values returns all known values for ProtocolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProtocolType) Values() []ProtocolType {
+	return []ProtocolType{
+		"TCP",
+	}
+}
+
+type ResourceConfigurationIpAddressType string
+
+// Enum values for ResourceConfigurationIpAddressType
+const (
+	// Ipv4 ip address type for dns type resource configs
+	ResourceConfigurationIpAddressTypeIpv4 ResourceConfigurationIpAddressType = "IPV4"
+	// IPv6 ip address type for dns type resource configs
+	ResourceConfigurationIpAddressTypeIpv6 ResourceConfigurationIpAddressType = "IPV6"
+	// Dualstack ip address type for dns type resource configs
+	ResourceConfigurationIpAddressTypeDualstack ResourceConfigurationIpAddressType = "DUALSTACK"
+)
+
+// Values returns all known values for ResourceConfigurationIpAddressType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceConfigurationIpAddressType) Values() []ResourceConfigurationIpAddressType {
+	return []ResourceConfigurationIpAddressType{
+		"IPV4",
+		"IPV6",
+		"DUALSTACK",
+	}
+}
+
+type ResourceConfigurationStatus string
+
+// Enum values for ResourceConfigurationStatus
+const (
+	// Resource Configuration is active.
+	ResourceConfigurationStatusActive ResourceConfigurationStatus = "ACTIVE"
+	// Resource Configuration creation in progress.
+	ResourceConfigurationStatusCreateInProgress ResourceConfigurationStatus = "CREATE_IN_PROGRESS"
+	// Resource Configuration update in progress.
+	ResourceConfigurationStatusUpdateInProgress ResourceConfigurationStatus = "UPDATE_IN_PROGRESS"
+	// Resource Configuration deletion in progress
+	ResourceConfigurationStatusDeleteInProgress ResourceConfigurationStatus = "DELETE_IN_PROGRESS"
+	// Resource Configuration creation failed
+	ResourceConfigurationStatusCreateFailed ResourceConfigurationStatus = "CREATE_FAILED"
+	// Resource Configuration update failed
+	ResourceConfigurationStatusUpdateFailed ResourceConfigurationStatus = "UPDATE_FAILED"
+	// Resource Configuration deletion failed.
+	ResourceConfigurationStatusDeleteFailed ResourceConfigurationStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for ResourceConfigurationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceConfigurationStatus) Values() []ResourceConfigurationStatus {
+	return []ResourceConfigurationStatus{
+		"ACTIVE",
+		"CREATE_IN_PROGRESS",
+		"UPDATE_IN_PROGRESS",
+		"DELETE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type ResourceConfigurationType string
+
+// Enum values for ResourceConfigurationType
+const (
+	// Resource Configuration of type GROUP
+	ResourceConfigurationTypeGroup ResourceConfigurationType = "GROUP"
+	// Resource Configuration of type CHILD
+	ResourceConfigurationTypeChild ResourceConfigurationType = "CHILD"
+	// Resource Configuration of type SINGLE
+	ResourceConfigurationTypeSingle ResourceConfigurationType = "SINGLE"
+	// Resource Configuration of type ARN
+	ResourceConfigurationTypeArn ResourceConfigurationType = "ARN"
+)
+
+// Values returns all known values for ResourceConfigurationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceConfigurationType) Values() []ResourceConfigurationType {
+	return []ResourceConfigurationType{
+		"GROUP",
+		"CHILD",
+		"SINGLE",
+		"ARN",
+	}
+}
+
+type ResourceGatewayIpAddressType string
+
+// Enum values for ResourceGatewayIpAddressType
+const (
+	// Ipv4 ip address type for resource gateway
+	ResourceGatewayIpAddressTypeIpv4 ResourceGatewayIpAddressType = "IPV4"
+	// IPv6 ip address type for resource gateway
+	ResourceGatewayIpAddressTypeIpv6 ResourceGatewayIpAddressType = "IPV6"
+	// Dualstack ip address type for resource gateway
+	ResourceGatewayIpAddressTypeDualstack ResourceGatewayIpAddressType = "DUALSTACK"
+)
+
+// Values returns all known values for ResourceGatewayIpAddressType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceGatewayIpAddressType) Values() []ResourceGatewayIpAddressType {
+	return []ResourceGatewayIpAddressType{
+		"IPV4",
+		"IPV6",
+		"DUALSTACK",
+	}
+}
+
+type ResourceGatewayStatus string
+
+// Enum values for ResourceGatewayStatus
+const (
+	// Resource Gateway is active.
+	ResourceGatewayStatusActive ResourceGatewayStatus = "ACTIVE"
+	// Resource Gateway creation in progress.
+	ResourceGatewayStatusCreateInProgress ResourceGatewayStatus = "CREATE_IN_PROGRESS"
+	// Resource Gateway update in progress.
+	ResourceGatewayStatusUpdateInProgress ResourceGatewayStatus = "UPDATE_IN_PROGRESS"
+	// Resource Gateway deletion in progress
+	ResourceGatewayStatusDeleteInProgress ResourceGatewayStatus = "DELETE_IN_PROGRESS"
+	// Resource Gateway creation failed
+	ResourceGatewayStatusCreateFailed ResourceGatewayStatus = "CREATE_FAILED"
+	// Reosurce Gateway update failed
+	ResourceGatewayStatusUpdateFailed ResourceGatewayStatus = "UPDATE_FAILED"
+	// Resource Gateway deletion failed.
+	ResourceGatewayStatusDeleteFailed ResourceGatewayStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for ResourceGatewayStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceGatewayStatus) Values() []ResourceGatewayStatus {
+	return []ResourceGatewayStatus{
+		"ACTIVE",
+		"CREATE_IN_PROGRESS",
+		"UPDATE_IN_PROGRESS",
+		"DELETE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type ServiceNetworkLogType string
+
+// Enum values for ServiceNetworkLogType
+const (
+	// Indicates logs for Lattice services.
+	ServiceNetworkLogTypeService ServiceNetworkLogType = "SERVICE"
+	// Indicates logs for Lattice resource configurations.
+	ServiceNetworkLogTypeResource ServiceNetworkLogType = "RESOURCE"
+)
+
+// Values returns all known values for ServiceNetworkLogType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceNetworkLogType) Values() []ServiceNetworkLogType {
+	return []ServiceNetworkLogType{
+		"SERVICE",
+		"RESOURCE",
+	}
+}
+
+type ServiceNetworkResourceAssociationStatus string
+
+// Enum values for ServiceNetworkResourceAssociationStatus
+const (
+	// ServiceNetwork and Service association creation in progress
+	ServiceNetworkResourceAssociationStatusCreateInProgress ServiceNetworkResourceAssociationStatus = "CREATE_IN_PROGRESS"
+	// ServiceNetwork and Service association is active
+	ServiceNetworkResourceAssociationStatusActive ServiceNetworkResourceAssociationStatus = "ACTIVE"
+	// ServiceNetwork and Service association is partial
+	ServiceNetworkResourceAssociationStatusPartial ServiceNetworkResourceAssociationStatus = "PARTIAL"
+	// ServiceNetwork and Service association deletion in progress
+	ServiceNetworkResourceAssociationStatusDeleteInProgress ServiceNetworkResourceAssociationStatus = "DELETE_IN_PROGRESS"
+	// ServiceNetwork and Service association creation failed.
+	ServiceNetworkResourceAssociationStatusCreateFailed ServiceNetworkResourceAssociationStatus = "CREATE_FAILED"
+	// ServiceNetwork and Service association deletion failed
+	ServiceNetworkResourceAssociationStatusDeleteFailed ServiceNetworkResourceAssociationStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for ServiceNetworkResourceAssociationStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceNetworkResourceAssociationStatus) Values() []ServiceNetworkResourceAssociationStatus {
+	return []ServiceNetworkResourceAssociationStatus{
+		"CREATE_IN_PROGRESS",
+		"ACTIVE",
+		"PARTIAL",
+		"DELETE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
 type ServiceNetworkServiceAssociationStatus string
 
 // Enum values for ServiceNetworkServiceAssociationStatus

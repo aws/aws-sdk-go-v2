@@ -7522,6 +7522,33 @@ func awsRestjson1_serializeDocumentAnalysisTemplateArnList(v []string, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAthenaTableReference(v *types.AthenaTableReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseName != nil {
+		ok := object.Key("databaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.OutputLocation != nil {
+		ok := object.Key("outputLocation")
+		ok.String(*v.OutputLocation)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("tableName")
+		ok.String(*v.TableName)
+	}
+
+	if v.WorkGroup != nil {
+		ok := object.Key("workGroup")
+		ok.String(*v.WorkGroup)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComputeConfiguration(v types.ComputeConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8377,6 +8404,93 @@ func awsRestjson1_serializeDocumentSchemaAnalysisRuleRequestList(v []types.Schem
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSnowflakeTableReference(v *types.SnowflakeTableReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountIdentifier != nil {
+		ok := object.Key("accountIdentifier")
+		ok.String(*v.AccountIdentifier)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("databaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.SchemaName != nil {
+		ok := object.Key("schemaName")
+		ok.String(*v.SchemaName)
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("secretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("tableName")
+		ok.String(*v.TableName)
+	}
+
+	if v.TableSchema != nil {
+		ok := object.Key("tableSchema")
+		if err := awsRestjson1_serializeDocumentSnowflakeTableSchema(v.TableSchema, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnowflakeTableSchema(v types.SnowflakeTableSchema, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SnowflakeTableSchemaMemberV1:
+		av := object.Key("v1")
+		if err := awsRestjson1_serializeDocumentSnowflakeTableSchemaList(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnowflakeTableSchemaList(v []types.SnowflakeTableSchemaV1, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSnowflakeTableSchemaV1(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnowflakeTableSchemaV1(v *types.SnowflakeTableSchemaV1, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnName != nil {
+		ok := object.Key("columnName")
+		ok.String(*v.ColumnName)
+	}
+
+	if v.ColumnType != nil {
+		ok := object.Key("columnType")
+		ok.String(*v.ColumnType)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTableAliasList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -8393,9 +8507,21 @@ func awsRestjson1_serializeDocumentTableReference(v types.TableReference, value 
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.TableReferenceMemberAthena:
+		av := object.Key("athena")
+		if err := awsRestjson1_serializeDocumentAthenaTableReference(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.TableReferenceMemberGlue:
 		av := object.Key("glue")
 		if err := awsRestjson1_serializeDocumentGlueTableReference(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.TableReferenceMemberSnowflake:
+		av := object.Key("snowflake")
+		if err := awsRestjson1_serializeDocumentSnowflakeTableReference(&uv.Value, av); err != nil {
 			return err
 		}
 

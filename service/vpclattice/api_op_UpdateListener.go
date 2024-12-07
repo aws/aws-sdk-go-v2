@@ -34,12 +34,12 @@ type UpdateListenerInput struct {
 	// This member is required.
 	DefaultAction types.RuleAction
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// The ID or ARN of the listener.
 	//
 	// This member is required.
 	ListenerIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

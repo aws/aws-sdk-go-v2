@@ -1,3 +1,11 @@
+# v1.39.0 (2024-12-03.2)
+
+* **Feature**: This release added two new LakeFormation Permissions (CREATE_CATALOG, SUPER_USER) and added Id field for CatalogResource. It also added new conditon and expression field.
+
+# v1.38.4 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.3 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

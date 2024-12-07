@@ -1,3 +1,8 @@
+# v1.25.0 (2024-12-02)
+
+* **Feature**: Amazon MemoryDB SDK now supports all APIs for Multi-Region. Please refer to the updated Amazon MemoryDB public documentation for detailed information on API usage.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.5 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

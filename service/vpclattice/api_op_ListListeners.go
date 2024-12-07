@@ -29,7 +29,7 @@ func (c *Client) ListListeners(ctx context.Context, params *ListListenersInput, 
 
 type ListListenersInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

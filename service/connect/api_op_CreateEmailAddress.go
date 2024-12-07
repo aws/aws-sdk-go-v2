@@ -10,6 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Create new email address in the specified Amazon Connect instance. For more
+// information about email addresses, see [Create email addresses]in the Amazon Connect Administrator
+// Guide.
+//
+// [Create email addresses]: https://docs.aws.amazon.com/connect/latest/adminguide/create-email-address1.html
 func (c *Client) CreateEmailAddress(ctx context.Context, params *CreateEmailAddressInput, optFns ...func(*Options)) (*CreateEmailAddressOutput, error) {
 	if params == nil {
 		params = &CreateEmailAddressInput{}
@@ -27,26 +32,34 @@ func (c *Client) CreateEmailAddress(ctx context.Context, params *CreateEmailAddr
 
 type CreateEmailAddressInput struct {
 
-	//
+	// The email address with the instance, in [^\s@]+@[^\s@]+\.[^\s@]+ format.
 	//
 	// This member is required.
 	EmailAddress *string
 
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
 	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	//
+	// The description of the email address.
 	Description *string
 
-	//
+	// The display name of email address
 	DisplayName *string
 
-	//
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -54,10 +67,10 @@ type CreateEmailAddressInput struct {
 
 type CreateEmailAddressOutput struct {
 
-	//
+	// The Amazon Resource Name (ARN) of the email address.
 	EmailAddressArn *string
 
-	//
+	// The identifier of the email address.
 	EmailAddressId *string
 
 	// Metadata pertaining to the operation's result.

@@ -74,6 +74,18 @@ func TestCheckSnapshot_DeleteAgentMemory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GenerateQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GenerateQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAgentMemory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgentMemory(context.Background(), nil, func(o *Options) {
@@ -134,6 +146,18 @@ func TestCheckSnapshot_OptimizePrompt(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_Rerank(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Rerank(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "Rerank")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_Retrieve(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.Retrieve(context.Background(), nil, func(o *Options) {
@@ -157,11 +181,35 @@ func TestCheckSnapshot_RetrieveAndGenerate(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_RetrieveAndGenerateStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RetrieveAndGenerateStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RetrieveAndGenerateStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_DeleteAgentMemory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAgentMemory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAgentMemory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GenerateQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GenerateQuery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -229,6 +277,18 @@ func TestUpdateSnapshot_OptimizePrompt(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_Rerank(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Rerank(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "Rerank")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_Retrieve(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.Retrieve(context.Background(), nil, func(o *Options) {
@@ -246,6 +306,18 @@ func TestUpdateSnapshot_RetrieveAndGenerate(t *testing.T) {
 	_, err := svc.RetrieveAndGenerate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RetrieveAndGenerate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RetrieveAndGenerateStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RetrieveAndGenerateStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RetrieveAndGenerateStream")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

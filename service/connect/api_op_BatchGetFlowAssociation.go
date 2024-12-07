@@ -39,6 +39,12 @@ type BatchGetFlowAssociationInput struct {
 
 	// A list of resource identifiers to retrieve flow associations.
 	//
+	//   - Amazon Web Services End User Messaging SMS phone number ARN when using
+	//   SMS_PHONE_NUMBER
+	//
+	//   - Amazon Web Services End User Messaging Social phone number ARN when using
+	//   WHATSAPP_MESSAGING_PHONE_NUMBER
+	//
 	// This member is required.
 	ResourceIds []string
 

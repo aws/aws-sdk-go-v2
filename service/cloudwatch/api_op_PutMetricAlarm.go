@@ -159,6 +159,10 @@ type PutMetricAlarmInput struct {
 	//   - arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
 	//
 	//   - arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
+	//
+	// Start a Amazon Q Developer operational investigation
+	//
+	//     arn:aws:aiops:region:account-id:investigation-group:ingestigation-group-id
 	AlarmActions []string
 
 	// The description for the alarm.

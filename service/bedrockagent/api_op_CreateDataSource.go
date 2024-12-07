@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a data source connector for a knowledge base.
+// Connects a knowledge base to a data source. You specify the configuration for
+// the specific data source service in the dataSourceConfiguration field.
 //
 // You can't change the chunkingConfiguration after you create the data source
 // connector.

@@ -196,6 +196,9 @@ func ExampleSource_outputUsage() {
 	case *types.SourceMemberCustomerProfilesSegmentArn:
 		_ = v.Value // Value is string
 
+	case *types.SourceMemberEventTrigger:
+		_ = v.Value // Value is types.EventTrigger
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -206,6 +209,7 @@ func ExampleSource_outputUsage() {
 }
 
 var _ *string
+var _ *types.EventTrigger
 
 func ExampleTelephonyOutboundMode_outputUsage() {
 	var union types.TelephonyOutboundMode

@@ -45,17 +45,15 @@ type CreateSubscriptionGrantInput struct {
 	// This member is required.
 	GrantedEntity types.GrantedEntityInput
 
-	// The ID of the subscription target for which the subscription grant is created.
-	//
-	// This member is required.
-	SubscriptionTargetIdentifier *string
-
 	// The names of the assets for which the subscription grant is created.
 	AssetTargetNames []types.AssetTargetNameMap
 
 	// A unique, case-sensitive identifier that is provided to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// The ID of the subscription target for which the subscription grant is created.
+	SubscriptionTargetIdentifier *string
 
 	noSmithyDocumentSerde
 }

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Initiates a flow to send an agent reply or outbound email contact (created from
+// the CreateContact API) to a customer.
 func (c *Client) StartOutboundEmailContact(ctx context.Context, params *StartOutboundEmailContactInput, optFns ...func(*Options)) (*StartOutboundEmailContactOutput, error) {
 	if params == nil {
 		params = &StartOutboundEmailContactInput{}
@@ -28,33 +30,40 @@ func (c *Client) StartOutboundEmailContact(ctx context.Context, params *StartOut
 
 type StartOutboundEmailContactInput struct {
 
-	//
+	// The identifier of the contact in this instance of Amazon Connect.
 	//
 	// This member is required.
 	ContactId *string
 
-	//
+	// The email address of the customer.
 	//
 	// This member is required.
 	DestinationEmailAddress *types.EmailAddressInfo
 
-	//
+	// The email message body to be sent to the newly created email.
 	//
 	// This member is required.
 	EmailMessage *types.OutboundEmailContent
 
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	//
+	// The addtional recipients address of email in CC.
 	AdditionalRecipients *types.OutboundAdditionalRecipients
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
 	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	//
+	// The email address associated with the instance.
 	FromEmailAddress *types.EmailAddressInfo
 
 	noSmithyDocumentSerde
@@ -62,7 +71,7 @@ type StartOutboundEmailContactInput struct {
 
 type StartOutboundEmailContactOutput struct {
 
-	//
+	// The identifier of the contact in this instance of Amazon Connect.
 	ContactId *string
 
 	// Metadata pertaining to the operation's result.

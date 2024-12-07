@@ -44,6 +44,12 @@ type DescribeQueryDefinitionsInput struct {
 	// have names that start with the prefix you specify.
 	QueryDefinitionNamePrefix *string
 
+	// The query language used for this query. For more information about the query
+	// languages that CloudWatch Logs supports, see [Supported query languages].
+	//
+	// [Supported query languages]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html
+	QueryLanguage types.QueryLanguage
+
 	noSmithyDocumentSerde
 }
 

@@ -32,13 +32,19 @@ import (
 //
 // To register a delegated administrator, see [Register a Delegated Administrator] in the Config developer guide.
 //
+// # Tags are added at creation and cannot be updated with this operation
+//
 // PutConfigurationAggregator is an idempotent API. Subsequent requests won’t
 // create a duplicate resource if one was already created. If a following request
 // has different tags values, Config will ignore these differences and treat it as
 // an idempotent request of the previous. In this case, tags will not be updated,
 // even if they are different.
 //
+// Use [TagResource] and [UntagResource] to update tags after creation.
+//
 // [Register a Delegated Administrator]: https://docs.aws.amazon.com/config/latest/developerguide/set-up-aggregator-cli.html#register-a-delegated-administrator-cli
+// [TagResource]: https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html
+// [UntagResource]: https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html
 func (c *Client) PutConfigurationAggregator(ctx context.Context, params *PutConfigurationAggregatorInput, optFns ...func(*Options)) (*PutConfigurationAggregatorOutput, error) {
 	if params == nil {
 		params = &PutConfigurationAggregatorInput{}
@@ -63,6 +69,10 @@ type PutConfigurationAggregatorInput struct {
 
 	// A list of AccountAggregationSource object.
 	AccountAggregationSources []types.AccountAggregationSource
+
+	// An object to filter configuration recorders in an aggregator. Either
+	// ResourceType or ServicePrincipal is required.
+	AggregatorFilters *types.AggregatorFilters
 
 	// An OrganizationAggregationSource object.
 	OrganizationAggregationSource *types.OrganizationAggregationSource

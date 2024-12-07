@@ -5005,6 +5005,11 @@ func awsAwsjson11_serializeOpDocumentDeleteDataCatalogInput(v *DeleteDataCatalog
 	object := value.Object()
 	defer object.Close()
 
+	if v.DeleteCatalogOnly {
+		ok := object.Key("DeleteCatalogOnly")
+		ok.Boolean(v.DeleteCatalogOnly)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)

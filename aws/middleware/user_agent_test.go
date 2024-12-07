@@ -16,6 +16,7 @@ import (
 )
 
 var expectedAgent = aws.SDKName + "/" + aws.SDKVersion +
+	" ua/2.1" +
 	" os/" + getNormalizedOSName() +
 	" lang/go#" + strings.Map(rules, languageVersion) + // normalize as the user-agent builder will
 	" md/GOOS#" + runtime.GOOS +
@@ -251,7 +252,7 @@ func TestAddUserAgentFeature(t *testing.T) {
 			Features: []UserAgentFeature{
 				UserAgentFeatureWaiter,
 			},
-			Expect: "m/B " + expectedAgent,
+			Expect: expectedAgent + " " + "m/B",
 		},
 		"two": {
 			Features: []UserAgentFeature{
@@ -259,7 +260,7 @@ func TestAddUserAgentFeature(t *testing.T) {
 				UserAgentFeatureRetryModeAdaptive,
 				UserAgentFeatureWaiter,
 			},
-			Expect: "m/B,F " + expectedAgent,
+			Expect: expectedAgent + " " + "m/B,F",
 		},
 	}
 
@@ -403,7 +404,7 @@ func TestAddSDKAgentKeyValue(t *testing.T) {
 				t.Fatalf("expect User-Agent to be present")
 			}
 			if ua[0] != c.Expect {
-				t.Errorf("User-Agent: %q != %q", c.Expect, ua[0])
+				t.Errorf("User-Agent: expected %q != actual %q", c.Expect, ua[0])
 			}
 		})
 	}

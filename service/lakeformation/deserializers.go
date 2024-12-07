@@ -9692,6 +9692,15 @@ func awsRestjson1_deserializeDocumentCatalogResource(v **types.CatalogResource, 
 
 	for key, value := range shape {
 		switch key {
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CatalogIdString to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9881,6 +9890,46 @@ func awsRestjson1_deserializeDocumentConcurrentModificationException(v **types.C
 					return fmt.Errorf("expected MessageString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Condition
+	if *v == nil {
+		sv = &types.Condition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Expression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExpressionString to be of type string, got %T instead", value)
+				}
+				sv.Expression = ptr.String(jtv)
 			}
 
 		default:
@@ -10835,6 +10884,11 @@ func awsRestjson1_deserializeDocumentLakeFormationOptInsInfo(v **types.LakeForma
 
 	for key, value := range shape {
 		switch key {
+		case "Condition":
+			if err := awsRestjson1_deserializeDocumentCondition(&sv.Condition, value); err != nil {
+				return err
+			}
+
 		case "LastModified":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11865,6 +11919,11 @@ func awsRestjson1_deserializeDocumentPrincipalResourcePermissions(v **types.Prin
 		switch key {
 		case "AdditionalDetails":
 			if err := awsRestjson1_deserializeDocumentDetailsMap(&sv.AdditionalDetails, value); err != nil {
+				return err
+			}
+
+		case "Condition":
+			if err := awsRestjson1_deserializeDocumentCondition(&sv.Condition, value); err != nil {
 				return err
 			}
 

@@ -1,3 +1,7 @@
+# v1.45.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2024-11-22)
 
 * **Feature**: This release adds the Impact field(contains Contribution field) to the GetAnomalies API response under RootCause

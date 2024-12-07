@@ -52,7 +52,7 @@ type CreateListenerInput struct {
 	// This member is required.
 	Protocol types.ListenerProtocol
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

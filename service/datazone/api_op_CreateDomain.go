@@ -48,9 +48,15 @@ type CreateDomainInput struct {
 	// The description of the Amazon DataZone domain.
 	Description *string
 
+	// The version of the domain that is created.
+	DomainVersion types.DomainVersion
+
 	// The identifier of the Amazon Web Services Key Management Service (KMS) key that
 	// is used to encrypt the Amazon DataZone domain, metadata, and reporting data.
 	KmsKeyIdentifier *string
+
+	// The service role of the domain that is created.
+	ServiceRole *string
 
 	// The single-sign on configuration of the Amazon DataZone domain.
 	SingleSignOn *types.SingleSignOn
@@ -79,6 +85,9 @@ type CreateDomainOutput struct {
 	// that houses the Amazon DataZone domain.
 	DomainExecutionRole *string
 
+	// The version of the domain that is created.
+	DomainVersion types.DomainVersion
+
 	// The identifier of the Amazon Web Services Key Management Service (KMS) key that
 	// is used to encrypt the Amazon DataZone domain, metadata, and reporting data.
 	KmsKeyIdentifier *string
@@ -91,6 +100,9 @@ type CreateDomainOutput struct {
 
 	// The ID of the root domain unit.
 	RootDomainUnitId *string
+
+	// Te service role of the domain that is created.
+	ServiceRole *string
 
 	// The single-sign on configuration of the Amazon DataZone domain.
 	SingleSignOn *types.SingleSignOn

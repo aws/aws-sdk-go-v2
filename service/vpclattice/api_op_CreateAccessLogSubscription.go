@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,7 +43,7 @@ type CreateAccessLogSubscriptionInput struct {
 	// This member is required.
 	DestinationArn *string
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service.
+	// The ID or ARN of the service network or service.
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -52,6 +53,9 @@ type CreateAccessLogSubscriptionInput struct {
 	// same client token and parameters, the retry succeeds without performing any
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
+
+	// The type of log that monitors your Amazon VPC Lattice service networks.
+	ServiceNetworkLogType types.ServiceNetworkLogType
 
 	// The tags for the access log subscription.
 	Tags map[string]string
@@ -85,6 +89,9 @@ type CreateAccessLogSubscriptionOutput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	// The type of log that monitors your Amazon VPC Lattice service networks.
+	ServiceNetworkLogType types.ServiceNetworkLogType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

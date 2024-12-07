@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the rules for the listener.
+// Lists the rules for the specified listener.
 func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns ...func(*Options)) (*ListRulesOutput, error) {
 	if params == nil {
 		params = &ListRulesInput{}
@@ -29,12 +29,12 @@ func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns .
 
 type ListRulesInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// The ID or ARN of the listener.
 	//
 	// This member is required.
 	ListenerIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

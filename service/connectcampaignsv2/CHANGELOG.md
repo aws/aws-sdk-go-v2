@@ -1,3 +1,8 @@
+# v1.1.0 (2024-12-02)
+
+* **Feature**: Amazon Connect Outbound Campaigns V2 / Features : Adds support for Event-Triggered Campaigns.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.2 (2024-11-19)
 
 * No change notes available for this release.

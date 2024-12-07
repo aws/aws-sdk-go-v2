@@ -1780,7 +1780,14 @@
         },
         "com.amazonaws.lakeformation#CatalogResource": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the catalog resource.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#documentation": "<p>A structure for the catalog object.</p>"
             }
@@ -1981,6 +1988,20 @@
             "traits": {
                 "smithy.api#documentation": "<p>Two processes are trying to modify a resource simultaneously.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.lakeformation#Condition": {
+            "type": "structure",
+            "members": {
+                "Expression": {
+                    "target": "com.amazonaws.lakeformation#ExpressionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An expression written based on the Cedar Policy Language used to match the principal attributes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A Lake Formation condition, which applies to permissions and opt-ins that contain an expression.</p>"
             }
         },
         "com.amazonaws.lakeformation#ContextKey": {
@@ -3527,6 +3548,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lakeformation#LFTag"
+            }
+        },
+        "com.amazonaws.lakeformation#ExpressionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3000
+                }
             }
         },
         "com.amazonaws.lakeformation#ExtendTransaction": {
@@ -5359,6 +5389,12 @@
                 "Principal": {
                     "target": "com.amazonaws.lakeformation#DataLakePrincipal"
                 },
+                "Condition": {
+                    "target": "com.amazonaws.lakeformation#Condition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Lake Formation condition, which applies to permissions and opt-ins that contain an expression.</p>"
+                    }
+                },
                 "LastModified": {
                     "target": "com.amazonaws.lakeformation#LastModifiedTimestamp",
                     "traits": {
@@ -6365,6 +6401,18 @@
                     "traits": {
                         "smithy.api#enumValue": "CREATE_LF_TAG_EXPRESSION"
                     }
+                },
+                "CREATE_CATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_CATALOG"
+                    }
+                },
+                "SUPER_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPER_USER"
+                    }
                 }
             }
         },
@@ -6515,6 +6563,12 @@
                     "target": "com.amazonaws.lakeformation#Resource",
                     "traits": {
                         "smithy.api#documentation": "<p>The resource where permissions are to be granted or revoked.</p>"
+                    }
+                },
+                "Condition": {
+                    "target": "com.amazonaws.lakeformation#Condition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Lake Formation condition, which applies to permissions and opt-ins that contain an expression.</p>"
                     }
                 },
                 "Permissions": {

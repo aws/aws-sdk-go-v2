@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Searches email address in an instance, with optional filtering.
 func (c *Client) SearchEmailAddresses(ctx context.Context, params *SearchEmailAddressesInput, optFns ...func(*Options)) (*SearchEmailAddressesOutput, error) {
 	if params == nil {
 		params = &SearchEmailAddressesInput{}
@@ -28,21 +29,25 @@ func (c *Client) SearchEmailAddresses(ctx context.Context, params *SearchEmailAd
 
 type SearchEmailAddressesInput struct {
 
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	//
+	// The maximum number of results to return per page.
 	MaxResults *int32
 
-	//
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	//
+	// The search criteria to be used to return email addresses.
 	SearchCriteria *types.EmailAddressSearchCriteria
 
-	//
+	// Filters to be applied to search results.
 	SearchFilter *types.EmailAddressSearchFilter
 
 	noSmithyDocumentSerde
@@ -50,13 +55,13 @@ type SearchEmailAddressesInput struct {
 
 type SearchEmailAddressesOutput struct {
 
-	//
+	// The total number of email addresses which matched your search query.
 	ApproximateTotalCount *int64
 
-	//
+	// List of email addresses matching SearchFilter and SearchCriteria
 	EmailAddresses []types.EmailAddressMetadata
 
-	//
+	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

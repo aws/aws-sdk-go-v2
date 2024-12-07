@@ -87,6 +87,10 @@ type GetDataSourceOutput struct {
 	// The identifier of the index linked to the data source connector.
 	IndexId *string
 
+	// The configuration for extracting information from media in documents for the
+	// data source.
+	MediaExtractionConfiguration *types.MediaExtractionConfiguration
+
 	// The Amazon Resource Name (ARN) of the role with permission to access the data
 	// source and required resources.
 	RoleArn *string

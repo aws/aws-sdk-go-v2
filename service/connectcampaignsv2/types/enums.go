@@ -335,3 +335,34 @@ func (LocalTimeZoneDetectionType) Values() []LocalTimeZoneDetectionType {
 		"AREA_CODE",
 	}
 }
+
+type ProfileOutboundRequestFailureCode string
+
+// Enum values for ProfileOutboundRequestFailureCode
+const (
+	// Unexpected error during processing of request
+	ProfileOutboundRequestFailureCodeUnknownError ProfileOutboundRequestFailureCode = "UnknownError"
+	// The specified resource was not found
+	ProfileOutboundRequestFailureCodeResourceNotFound ProfileOutboundRequestFailureCode = "ResourceNotFound"
+	// The specified resource conflicts with another resource
+	ProfileOutboundRequestFailureCodeConflict ProfileOutboundRequestFailureCode = "Conflict"
+	// Request throttled due to large number of requests
+	ProfileOutboundRequestFailureCodeRequestThrottled ProfileOutboundRequestFailureCode = "RequestThrottled"
+	// The request failed to satisfy the constraints specified by the service
+	ProfileOutboundRequestFailureCodeInvalidInput ProfileOutboundRequestFailureCode = "InvalidInput"
+)
+
+// Values returns all known values for ProfileOutboundRequestFailureCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProfileOutboundRequestFailureCode) Values() []ProfileOutboundRequestFailureCode {
+	return []ProfileOutboundRequestFailureCode{
+		"UnknownError",
+		"ResourceNotFound",
+		"Conflict",
+		"RequestThrottled",
+		"InvalidInput",
+	}
+}

@@ -657,6 +657,15 @@
                 "smithy.api#pattern": "^\\S{36,128}$"
             }
         },
+        "com.amazonaws.cloudwatchlogs#CollectionRetentionDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#Column": {
             "type": "string",
             "traits": {
@@ -1251,6 +1260,12 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#DashboardViewerPrincipals": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#Arn"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#DataAlreadyAcceptedException": {
             "type": "structure",
             "members": {
@@ -1717,6 +1732,61 @@
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteIndexPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DeleteIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#DeleteIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the integration between CloudWatch Logs and OpenSearch Service. If your integration has active vended logs dashboards, \n        you must specify <code>true</code> for the <code>force</code> parameter, otherwise the operation will fail. If you delete the integration by \n        setting <code>force</code> to <code>true</code>, \n        all your vended logs dashboards powered by OpenSearch Service will be deleted and the data that was on them \n      will no longer be accessible.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "integrationName": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the integration to delete. To find the name of your integration, use \n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListIntegrations.html\">ListIntegrations</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "force": {
+                    "target": "com.amazonaws.cloudwatchlogs#Force",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specify <code>true</code> to force the deletion of the integration even if vended logs dashboards currently exist.</p>\n         <p>The default is <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteIntegrationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -3442,6 +3512,12 @@
                 },
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
+                },
+                "queryLanguage": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the returned queries to only the queries that use the specified query language.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3488,6 +3564,12 @@
         "com.amazonaws.cloudwatchlogs#DescribeQueryDefinitionsRequest": {
             "type": "structure",
             "members": {
+                "queryLanguage": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query language used for this query. For more information about the query languages that CloudWatch Logs supports, \n       see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html\">Supported query languages</a>.</p>"
+                    }
+                },
                 "queryDefinitionNamePrefix": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryDefinitionName",
                     "traits": {
@@ -4565,6 +4647,12 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#Force": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.cloudwatchlogs#ForceUpdate": {
             "type": "boolean"
         },
@@ -4863,6 +4951,76 @@
                     "target": "com.amazonaws.cloudwatchlogs#DeliverySource",
                     "traits": {
                         "smithy.api#documentation": "<p>A structure containing information about the delivery source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#GetIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#GetIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about one integration between CloudWatch Logs and OpenSearch Service. </p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "integrationName": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the integration that you want to find information about. To find the name of your integration, use \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListIntegrations.html\">ListIntegrations</a>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetIntegrationResponse": {
+            "type": "structure",
+            "members": {
+                "integrationName": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the integration.</p>"
+                    }
+                },
+                "integrationType": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of integration. Integrations with OpenSearch Service have the type <code>OPENSEARCH</code>.</p>"
+                    }
+                },
+                "integrationStatus": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of this integration.</p>"
+                    }
+                },
+                "integrationDetails": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains information about the integration configuration. For an integration \n       with OpenSearch Service, this includes information about OpenSearch Service resources such as the collection, the workspace, \n       and policies.</p>"
                     }
                 }
             },
@@ -5276,6 +5434,12 @@
         "com.amazonaws.cloudwatchlogs#GetQueryResultsResponse": {
             "type": "structure",
             "members": {
+                "queryLanguage": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query language used for this query. For more information about the query languages that CloudWatch Logs supports, \n       see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html\">Supported query languages</a>.</p>"
+                    }
+                },
                 "results": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryResults",
                     "traits": {
@@ -5558,6 +5722,114 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.cloudwatchlogs#IntegrationDetails": {
+            "type": "union",
+            "members": {
+                "openSearchIntegrationDetails": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchIntegrationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains complete information about one integration between CloudWatch Logs and\n       OpenSearch Service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the integration configuration. For an integration \n       with OpenSearch Service, this includes information about OpenSearch Service resources such as the collection, the workspace, \n       and policies.</p>\n         <p>This structure\n        is returned by a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetIntegration.html\">GetIntegration</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#IntegrationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#IntegrationNamePrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#IntegrationStatus": {
+            "type": "enum",
+            "members": {
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#IntegrationStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#IntegrationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#IntegrationSummary"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#IntegrationSummary": {
+            "type": "structure",
+            "members": {
+                "integrationName": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this integration.</p>"
+                    }
+                },
+                "integrationType": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of integration. Integrations with OpenSearch Service have the type <code>OPENSEARCH</code>.</p>"
+                    }
+                },
+                "integrationStatus": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of this integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about one CloudWatch Logs integration. This structure\n       is returned by a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListIntegrations.html\">ListIntegrations</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#IntegrationType": {
+            "type": "enum",
+            "members": {
+                "OPENSEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPENSEARCH"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#Interleaved": {
             "type": "boolean"
         },
@@ -5735,6 +6007,66 @@
                 },
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ListIntegrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#ListIntegrationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#ListIntegrationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of integrations between CloudWatch Logs and other services in this account. Currently, only one\n      integration can be created in an account, and this integration must be with OpenSearch Service.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ListIntegrationsRequest": {
+            "type": "structure",
+            "members": {
+                "integrationNamePrefix": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationNamePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To limit the results to integrations that start with a certain name prefix, specify that name prefix here.</p>"
+                    }
+                },
+                "integrationType": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To limit the results to integrations of a certain type, specify that type here.</p>"
+                    }
+                },
+                "integrationStatus": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To limit the results to integrations with a certain status, specify that status here.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ListIntegrationsResponse": {
+            "type": "structure",
+            "members": {
+                "integrationSummaries": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array, where each object in the array contains information about one CloudWatch Logs integration in this account. </p>"
+                    }
                 }
             },
             "traits": {
@@ -6562,6 +6894,9 @@
                     "target": "com.amazonaws.cloudwatchlogs#DeleteIndexPolicy"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchlogs#DeleteIntegration"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchlogs#DeleteLogAnomalyDetector"
                 },
                 {
@@ -6658,6 +6993,9 @@
                     "target": "com.amazonaws.cloudwatchlogs#GetDeliverySource"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchlogs#GetIntegration"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchlogs#GetLogAnomalyDetector"
                 },
                 {
@@ -6677,6 +7015,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#ListAnomalies"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ListIntegrations"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#ListLogAnomalyDetectors"
@@ -6713,6 +7054,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#PutIndexPolicy"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#PutIntegration"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#PutLogEvents"
@@ -8132,6 +8476,384 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#OpenSearchApplication": {
+            "type": "structure",
+            "members": {
+                "applicationEndpoint": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchApplicationEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint of the application.</p>"
+                    }
+                },
+                "applicationArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the application.</p>"
+                    }
+                },
+                "applicationId": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the status of this OpenSearch Service resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service application used for this integration.\n       An OpenSearch Service application is the web application created by the integration with CloudWatch Logs. It hosts the vended logs dashboards.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchApplicationEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^https://[\\.\\-_/#:A-Za-z0-9]+\\.com$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchApplicationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchCollection": {
+            "type": "structure",
+            "members": {
+                "collectionEndpoint": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchCollectionEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint of the collection.</p>"
+                    }
+                },
+                "collectionArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the collection.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the status of this OpenSearch Service resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service collection used for this integration.\n       An OpenSearch Service collection is a logical grouping of one or more indexes that represent an analytics workload. \n       For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-collections.html\">Creating and managing OpenSearch Service Serverless collections</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchCollectionEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^https://[\\.\\-_/#:A-Za-z0-9]+\\.com$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchDataAccessPolicy": {
+            "type": "structure",
+            "members": {
+                "policyName": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data access policy.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the status of this OpenSearch Service resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service data access policy used for this integration. The access \n       policy defines the access controls for the collection. This data access policy was automatically created as part of the integration setup.\n       For more information about OpenSearch Service data access policies, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html\">Data access control for Amazon OpenSearch Serverless</a> in the OpenSearch Service Developer Guide.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchDataSource": {
+            "type": "structure",
+            "members": {
+                "dataSourceName": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchDataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OpenSearch Service data source.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the status of this OpenSearch Service resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service data source used for this integration. This data source was \n       created as part of the integration setup.\n       An OpenSearch Service data source defines the source and destination for OpenSearch Service queries. It includes the role required to execute queries and write to collections.</p>\n         <p>For more information about OpenSearch Service data sources , see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html\">Creating OpenSearch Service data source integrations with Amazon S3.</a>\n         </p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchDataSourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchEncryptionPolicy": {
+            "type": "structure",
+            "members": {
+                "policyName": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the encryption policy.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the status of this OpenSearch Service resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service encryption policy used for this integration. The encryption policy was created\n       automatically when you created the integration. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html#serverless-encryption-policies\">Encryption policies</a> in the OpenSearch Service Developer Guide.\n     </p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchIntegrationDetails": {
+            "type": "structure",
+            "members": {
+                "dataSource": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service data source used for this integration. This data source was \n        created as part of the integration setup.\n        An OpenSearch Service data source defines the source and destination for OpenSearch Service queries. It includes the role required to execute queries and write to collections.</p>\n         <p>For more information about OpenSearch Service data sources , see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html\">Creating OpenSearch Service data source integrations with Amazon S3.</a>\n         </p>"
+                    }
+                },
+                "application": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchApplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service application used for this integration.\n       An OpenSearch Service application is the web application that was created by the integration with CloudWatch Logs. It hosts the vended logs dashboards.</p>"
+                    }
+                },
+                "collection": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchCollection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service collection used for this integration. This collection was \n       created as part of the integration setup.\n       An OpenSearch Service collection is a logical grouping of one or more indexes that represent an analytics workload. \n       For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-collections.html\">Creating and managing OpenSearch Service Serverless collections</a>.</p>"
+                    }
+                },
+                "workspace": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchWorkspace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service workspace used for this integration.\n       An OpenSearch Service workspace is the collection of dashboards along with other OpenSearch Service tools. This workspace was created automatically as part of the integration setup.\n       For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html\">Centralized OpenSearch user interface (Dashboards) with \n         OpenSearch Service</a>.</p>"
+                    }
+                },
+                "encryptionPolicy": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchEncryptionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service encryption policy used for this integration. The encryption policy was created\n       automatically when you created the integration. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html#serverless-encryption-policies\">Encryption policies</a> in the OpenSearch Service Developer Guide.\n     </p>"
+                    }
+                },
+                "networkPolicy": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchNetworkPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service network policy used for this integration. The network \n       policy assigns network access settings to collections. \n       For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html#serverless-network-policies\">Network policies</a> in the OpenSearch Service Developer Guide.</p>"
+                    }
+                },
+                "accessPolicy": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchDataAccessPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service data access policy used for this integration. The access \n       policy defines the access controls for the collection. This data access policy was automatically created as part of the integration setup.\n       For more information about OpenSearch Service data access policies, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html\">Data access control for Amazon OpenSearch Serverless</a> in the OpenSearch Service Developer Guide.</p>"
+                    }
+                },
+                "lifecyclePolicy": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchLifecyclePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service data lifecycle policy used for this integration. The lifecycle policy\n       determines the lifespan of the data in the collection. It was automatically created as part of the integration setup.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html\">Using data lifecycle policies with OpenSearch Service Serverless</a> \n       in the OpenSearch Service Developer Guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains complete information about one CloudWatch Logs integration. This structure\n       is returned by a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetIntegration.html\">GetIntegration</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchLifecyclePolicy": {
+            "type": "structure",
+            "members": {
+                "policyName": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lifecycle policy.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the status of this OpenSearch Service resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service data lifecycle policy used for this integration. The lifecycle policy\n       determines the lifespan of the data in the collection. It was automatically created as part of the integration setup.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html\">Using data lifecycle policies with OpenSearch Service Serverless</a> \n       in the OpenSearch Service Developer Guide.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchNetworkPolicy": {
+            "type": "structure",
+            "members": {
+                "policyName": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network policy.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the status of this OpenSearch Service resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service network policy used for this integration. The network \n       policy assigns network access settings to collections. \n       For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html#serverless-network-policies\">Network policies</a> in the OpenSearch Service Developer Guide.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchPolicyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchResourceConfig": {
+            "type": "structure",
+            "members": {
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To have the vended dashboard data encrypted with KMS instead of the CloudWatch Logs default \n       encryption method, specify the ARN of the KMS key that you want to use.</p>"
+                    }
+                },
+                "dataSourceRoleArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the ARN of an IAM role that CloudWatch Logs will use to create the integration. This role must have the permissions necessary to access the OpenSearch Service\n        collection to be able to create the dashboards. For more information about the permissions needed, see  <a href=\"https://docs.aws.amazon.com/OpenSearch-Dashboards-CreateRole\">Create an IAM role to access the OpenSearch Service collection</a> in the CloudWatch Logs User Guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dashboardViewerPrincipals": {
+                    "target": "com.amazonaws.cloudwatchlogs#DashboardViewerPrincipals",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the ARNs of IAM roles and IAM users who you want to grant permission to for viewing the dashboards.</p>\n         <important>\n            <p>In addition to specifying these users here, you must also grant them the <b>CloudWatchOpenSearchDashboardsAccess</b> \n       IAM policy. For more information, see </p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you want to use an existing OpenSearch Service application for your integration with OpenSearch Service, specify it here. If you \n      omit this, a new application will be created.</p>"
+                    }
+                },
+                "retentionDays": {
+                    "target": "com.amazonaws.cloudwatchlogs#CollectionRetentionDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify how many days that you want the data derived by OpenSearch Service to be retained in the index that the dashboard refers to. \n       This also sets the maximum time period that you can choose when viewing data in the dashboard. Choosing a longer time frame will incur additional costs. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains configuration details about an integration between CloudWatch Logs and OpenSearch Service.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatus": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of this resource.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message with additional information about the status of this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the status of an OpenSearch Service resource.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatusType": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_FOUND"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchWorkspace": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchWorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of this workspace.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains information about the status of an OpenSearch Service resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about the OpenSearch Service workspace used for this integration.\n       An OpenSearch Service workspace is the collection of dashboards along with other OpenSearch Service tools. This workspace was created automatically as part of the integration setup.\n       For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html\">Centralized OpenSearch user interface (Dashboards) with \n         OpenSearch Service</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#OpenSearchWorkspaceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#OperationAbortedException": {
             "type": "structure",
             "members": {
@@ -9254,6 +9976,81 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#PutIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#PutIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#PutIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an integration between CloudWatch Logs and another service in this account. Currently, only integrations with \n       OpenSearch Service are supported, and currently you can have only one integration in your account.</p>\n         <p>Integrating with OpenSearch Service makes it possible for you to create curated vended logs dashboards, powered \n       by OpenSearch Service analytics. For more information, see \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-OpenSearch-Dashboards.html\">Vended log dashboards powered by Amazon OpenSearch Service</a>.</p>\n         <p>You can use this operation only to create a new integration. You can't modify an existing integration.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "integrationName": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceConfig": {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains configuration information for the integration that you are creating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "integrationType": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of integration. Currently, the only supported type is <code>OPENSEARCH</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutIntegrationResponse": {
+            "type": "structure",
+            "members": {
+                "integrationName": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the integration that you just created.</p>"
+                    }
+                },
+                "integrationStatus": {
+                    "target": "com.amazonaws.cloudwatchlogs#IntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the integration that you just created.</p>\n         <p>After you create an integration, it takes a few minutes to complete. During this time, you'll see the status as <code>PROVISIONING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatchlogs#PutLogEvents": {
             "type": "operation",
             "input": {
@@ -9457,6 +10254,12 @@
         "com.amazonaws.cloudwatchlogs#PutQueryDefinitionRequest": {
             "type": "structure",
             "members": {
+                "queryLanguage": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the query language to use for this query. The options are Logs Insights QL, OpenSearch PPL, and OpenSearch SQL. For more information about the query languages that CloudWatch Logs supports, \n       see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html\">Supported query languages</a>.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryDefinitionName",
                     "traits": {
@@ -9473,7 +10276,7 @@
                 "logGroupNames": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to include specific log groups as part of your query definition.</p>\n         <p>If you are updating a query definition and you omit this parameter, then the updated\n      definition will contain no log groups.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to include specific log groups as part of your query definition. If your query\n    uses the OpenSearch Service query language, you specify the log group names inside the <code>querystring</code> instead of here.</p>\n         <p>If you are updating an existing query definition for the Logs Insights QL or OpenSearch Service PPL and you omit this parameter, then the updated\n      definition will contain no log groups.</p>"
                     }
                 },
                 "queryString": {
@@ -9800,6 +10603,12 @@
         "com.amazonaws.cloudwatchlogs#QueryDefinition": {
             "type": "structure",
             "members": {
+                "queryLanguage": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query language used for this query. For more information about the query languages that CloudWatch Logs supports, \n       see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html\">Supported query languages</a>.</p>"
+                    }
+                },
                 "queryDefinitionId": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryId",
                     "traits": {
@@ -9871,6 +10680,12 @@
         "com.amazonaws.cloudwatchlogs#QueryInfo": {
             "type": "structure",
             "members": {
+                "queryLanguage": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query language used for this query. For more information about the query languages that CloudWatch Logs supports, \n        see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html\">Supported query languages</a>.</p>"
+                    }
+                },
                 "queryId": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryId",
                     "traits": {
@@ -9910,6 +10725,29 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudwatchlogs#QueryInfo"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#QueryLanguage": {
+            "type": "enum",
+            "members": {
+                "CWLI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CWLI"
+                    }
+                },
+                "SQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL"
+                    }
+                },
+                "PPL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PPL"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatchlogs#QueryListMaxResults": {
@@ -10205,6 +11043,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudwatchlogs#Arn"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ResourceConfig": {
+            "type": "union",
+            "members": {
+                "openSearchResourceConfig": {
+                    "target": "com.amazonaws.cloudwatchlogs#OpenSearchResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains configuration details about an integration between CloudWatch Logs and OpenSearch Service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains configuration details about an integration between CloudWatch Logs and another entity.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#ResourceIdentifier": {
@@ -10844,22 +11696,28 @@
         "com.amazonaws.cloudwatchlogs#StartQueryRequest": {
             "type": "structure",
             "members": {
+                "queryLanguage": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the query language to use for this query. The options are Logs Insights QL, OpenSearch PPL, and OpenSearch SQL. For more information about the query languages that CloudWatch Logs supports, \n       see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html\">Supported query languages</a>.</p>"
+                    }
+                },
                 "logGroupName": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The log group on which to perform the query.</p>"
+                        "smithy.api#documentation": "<p>The log group on which to perform the query.</p>\n         <note>\n            <p>A <code>StartQuery</code> operation must include exactly one of the following\n        parameters: <code>logGroupName</code>, <code>logGroupNames</code>, or\n          <code>logGroupIdentifiers</code>. The exception is queries using the OpenSearch Service SQL query\n          language, where you specify the log group names inside the <code>querystring</code> instead of here.</p>\n         </note>"
                     }
                 },
                 "logGroupNames": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of log groups to be queried. You can include up to 50 log groups.</p>"
+                        "smithy.api#documentation": "<p>The list of log groups to be queried. You can include up to 50 log groups.</p>\n         <note>\n            <p>A <code>StartQuery</code> operation must include exactly one of the following\n        parameters: <code>logGroupName</code>, <code>logGroupNames</code>, or\n        <code>logGroupIdentifiers</code>. The exception is queries using the OpenSearch Service SQL query\n        language, where you specify the log group names inside the <code>querystring</code> instead of here.</p>\n         </note>"
                     }
                 },
                 "logGroupIdentifiers": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of log groups to query. You can include up to 50 log groups.</p>\n         <p>You can specify them by the log group name or ARN. If a log group that you're querying is\n      in a source account and you're using a monitoring account, you must specify the ARN of the log\n      group here. The query definition must also be defined in the monitoring account.</p>\n         <p>If you specify an ARN, use the format\n      arn:aws:logs:<i>region</i>:<i>account-id</i>:log-group:<i>log_group_name</i> Don't include an * at the end.</p>\n         <p>A <code>StartQuery</code> operation must include exactly one of the following parameters:\n        <code>logGroupName</code>, <code>logGroupNames</code>, or <code>logGroupIdentifiers</code>. </p>"
+                        "smithy.api#documentation": "<p>The list of log groups to query. You can include up to 50 log groups.</p>\n         <p>You can specify them by the log group name or ARN. If a log group that you're querying is\n      in a source account and you're using a monitoring account, you must specify the ARN of the log\n      group here. The query definition must also be defined in the monitoring account.</p>\n         <p>If you specify an ARN, use the format\n      arn:aws:logs:<i>region</i>:<i>account-id</i>:log-group:<i>log_group_name</i> Don't include an * at the end.</p>\n         <p>A <code>StartQuery</code> operation must include exactly one of the following parameters:\n      <code>logGroupName</code>, <code>logGroupNames</code>, or <code>logGroupIdentifiers</code>. The exception is queries using the OpenSearch Service SQL query\n      language, where you specify the log group names inside the <code>querystring</code> instead of here. </p>"
                     }
                 },
                 "startTime": {

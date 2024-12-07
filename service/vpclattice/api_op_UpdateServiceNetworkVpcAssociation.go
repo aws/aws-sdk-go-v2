@@ -12,10 +12,10 @@ import (
 )
 
 // Updates the service network and VPC association. If you add a security group to
-// the service network and VPC association, the association must continue to always
-// have at least one security group. You can add or edit security groups at any
-// time. However, to remove all security groups, you must first delete the
-// association and recreate it without security groups.
+// the service network and VPC association, the association must continue to have
+// at least one security group. You can add or edit security groups at any time.
+// However, to remove all security groups, you must first delete the association
+// and then recreate it without security groups.
 func (c *Client) UpdateServiceNetworkVpcAssociation(ctx context.Context, params *UpdateServiceNetworkVpcAssociationInput, optFns ...func(*Options)) (*UpdateServiceNetworkVpcAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateServiceNetworkVpcAssociationInput{}
@@ -38,7 +38,7 @@ type UpdateServiceNetworkVpcAssociationInput struct {
 	// This member is required.
 	SecurityGroupIds []string
 
-	// The ID or Amazon Resource Name (ARN) of the association.
+	// The ID or ARN of the association.
 	//
 	// This member is required.
 	ServiceNetworkVpcAssociationIdentifier *string

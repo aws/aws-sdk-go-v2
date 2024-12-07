@@ -62,6 +62,9 @@ type AuthorizeDataShareOutput struct {
 	// and data consumers.
 	DataShareAssociations []types.DataShareAssociation
 
+	//  The type of the datashare created by RegisterNamespace.
+	DataShareType types.DataShareType
+
 	// The identifier of a datashare to show its managing entity.
 	ManagedBy *string
 

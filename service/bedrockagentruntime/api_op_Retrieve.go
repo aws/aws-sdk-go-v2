@@ -39,6 +39,9 @@ type RetrieveInput struct {
 	// This member is required.
 	RetrievalQuery *types.KnowledgeBaseQuery
 
+	// Guardrail settings.
+	GuardrailConfiguration *types.GuardrailConfiguration
+
 	// If there are more results than can fit in the response, the response returns a
 	// nextToken . Use this token in the nextToken field of another request to
 	// retrieve the next batch of results.
@@ -59,6 +62,9 @@ type RetrieveOutput struct {
 	//
 	// This member is required.
 	RetrievalResults []types.KnowledgeBaseRetrievalResult
+
+	// Specifies if there is a guardrail intervention in the response.
+	GuardrailAction types.GuadrailAction
 
 	// If there are more results than can fit in the response, the response returns a
 	// nextToken . Use this token in the nextToken field of another request to

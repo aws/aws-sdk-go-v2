@@ -94,6 +94,10 @@ type CreateDataSourceInput struct {
 	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	DocumentEnrichmentConfiguration *types.DocumentEnrichmentConfiguration
 
+	// The configuration for extracting information from media in documents during
+	// ingestion.
+	MediaExtractionConfiguration *types.MediaExtractionConfiguration
+
 	// The Amazon Resource Name (ARN) of an IAM role with permission to access the
 	// data source and required resources.
 	RoleArn *string

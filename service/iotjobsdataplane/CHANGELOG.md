@@ -1,3 +1,7 @@
+# v1.24.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2024-11-21)
 
 * **Feature**: General Availability (GA) release of AWS IoT Device Management - Commands, to trigger light-weight remote actions on targeted devices

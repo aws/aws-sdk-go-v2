@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -108,14 +109,33 @@ type StartQueryInput struct {
 	// the end.
 	//
 	// A StartQuery operation must include exactly one of the following parameters:
-	// logGroupName , logGroupNames , or logGroupIdentifiers .
+	// logGroupName , logGroupNames , or logGroupIdentifiers . The exception is queries
+	// using the OpenSearch Service SQL query language, where you specify the log group
+	// names inside the querystring instead of here.
 	LogGroupIdentifiers []string
 
 	// The log group on which to perform the query.
+	//
+	// A StartQuery operation must include exactly one of the following parameters:
+	// logGroupName , logGroupNames , or logGroupIdentifiers . The exception is queries
+	// using the OpenSearch Service SQL query language, where you specify the log group
+	// names inside the querystring instead of here.
 	LogGroupName *string
 
 	// The list of log groups to be queried. You can include up to 50 log groups.
+	//
+	// A StartQuery operation must include exactly one of the following parameters:
+	// logGroupName , logGroupNames , or logGroupIdentifiers . The exception is queries
+	// using the OpenSearch Service SQL query language, where you specify the log group
+	// names inside the querystring instead of here.
 	LogGroupNames []string
+
+	// Specify the query language to use for this query. The options are Logs Insights
+	// QL, OpenSearch PPL, and OpenSearch SQL. For more information about the query
+	// languages that CloudWatch Logs supports, see [Supported query languages].
+	//
+	// [Supported query languages]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html
+	QueryLanguage types.QueryLanguage
 
 	noSmithyDocumentSerde
 }

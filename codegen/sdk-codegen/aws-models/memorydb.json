@@ -248,6 +248,9 @@
                     "target": "com.amazonaws.memorydb#CreateCluster"
                 },
                 {
+                    "target": "com.amazonaws.memorydb#CreateMultiRegionCluster"
+                },
+                {
                     "target": "com.amazonaws.memorydb#CreateParameterGroup"
                 },
                 {
@@ -264,6 +267,9 @@
                 },
                 {
                     "target": "com.amazonaws.memorydb#DeleteCluster"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#DeleteMultiRegionCluster"
                 },
                 {
                     "target": "com.amazonaws.memorydb#DeleteParameterGroup"
@@ -288,6 +294,9 @@
                 },
                 {
                     "target": "com.amazonaws.memorydb#DescribeEvents"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#DescribeMultiRegionClusters"
                 },
                 {
                     "target": "com.amazonaws.memorydb#DescribeParameterGroups"
@@ -317,6 +326,9 @@
                     "target": "com.amazonaws.memorydb#FailoverShard"
                 },
                 {
+                    "target": "com.amazonaws.memorydb#ListAllowedMultiRegionClusterUpdates"
+                },
+                {
                     "target": "com.amazonaws.memorydb#ListAllowedNodeTypeUpdates"
                 },
                 {
@@ -341,6 +353,9 @@
                     "target": "com.amazonaws.memorydb#UpdateCluster"
                 },
                 {
+                    "target": "com.amazonaws.memorydb#UpdateMultiRegionCluster"
+                },
+                {
                     "target": "com.amazonaws.memorydb#UpdateParameterGroup"
                 },
                 {
@@ -362,7 +377,7 @@
                     "name": "memorydb"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>MemoryDB for Redis is a fully managed, Redis-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.\n       \n       MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis, a popular open source data store, enabling you to leverage Redis’ flexible and friendly data structures, APIs, and commands.</p>",
+                "smithy.api#documentation": "<p>MemoryDB is a fully managed, Redis OSS-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.\n       \n       MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis OSS, a popular open source data store, enabling you to leverage Redis OSS’ flexible and friendly data structures, APIs, and commands.</p>",
                 "smithy.api#title": "Amazon MemoryDB",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://memorydb.amazonaws.com/doc/2021-01-01/"
@@ -1431,6 +1446,12 @@
                         "smithy.api#documentation": "<p>A group of settings that are currently being applied.</p>"
                     }
                 },
+                "MultiRegionClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region cluster that this cluster belongs to.</p>"
+                    }
+                },
                 "NumberOfShards": {
                     "target": "com.amazonaws.memorydb#IntegerOptional",
                     "traits": {
@@ -1464,19 +1485,19 @@
                 "Engine": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Redis OSS or Valkey engine used by the cluster.</p>"
+                        "smithy.api#documentation": "<p>The name of the engine used by the cluster.</p>"
                     }
                 },
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redis engine version used by the cluster</p>"
+                        "smithy.api#documentation": "<p>The Redis OSS engine version used by the cluster</p>"
                     }
                 },
                 "EnginePatchVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine patch version used by the cluster</p>"
+                        "smithy.api#documentation": "<p>The Redis OSS engine patch version used by the cluster</p>"
                     }
                 },
                 "ParameterGroupName": {
@@ -1615,13 +1636,13 @@
                 "Engine": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the Redis OSS or Valkey engine used by the cluster.</p>"
+                        "smithy.api#documentation": "<p>The name of the engine used by the cluster configuration.</p>"
                     }
                 },
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine version used by the cluster</p>"
+                        "smithy.api#documentation": "<p>The Redis OSS engine version used by the cluster</p>"
                     }
                 },
                 "MaintenanceWindow": {
@@ -1682,6 +1703,18 @@
                     "target": "com.amazonaws.memorydb#ShardDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of shards in the cluster</p>"
+                    }
+                },
+                "MultiRegionParameterGroupName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region parameter group associated with the cluster configuration.</p>"
+                    }
+                },
+                "MultiRegionClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the multi-Region cluster associated with the cluster configuration.</p>"
                     }
                 }
             },
@@ -1966,6 +1999,9 @@
                     "target": "com.amazonaws.memorydb#InvalidCredentialsException"
                 },
                 {
+                    "target": "com.amazonaws.memorydb#InvalidMultiRegionClusterStateFault"
+                },
+                {
                     "target": "com.amazonaws.memorydb#InvalidParameterCombinationException"
                 },
                 {
@@ -1973,6 +2009,9 @@
                 },
                 {
                     "target": "com.amazonaws.memorydb#InvalidVPCNetworkStateFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.memorydb#NodeQuotaForClusterExceededFault"
@@ -2015,6 +2054,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The compute and memory capacity of the nodes in the cluster.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "MultiRegionClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region cluster to be created.</p>"
                     }
                 },
                 "ParameterGroupName": {
@@ -2123,13 +2168,13 @@
                 "Engine": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the engine to be used for the nodes in this cluster. The value must be set to either Redis or Valkey.</p>"
+                        "smithy.api#documentation": "<p>The name of the engine to be used for the cluster.</p>"
                     }
                 },
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the engine to be used for the cluster.</p>"
+                        "smithy.api#documentation": "<p>The version number of the Redis OSS engine to be used for the cluster.</p>"
                     }
                 },
                 "AutoMinorVersionUpgrade": {
@@ -2156,6 +2201,116 @@
                     "target": "com.amazonaws.memorydb#Cluster",
                     "traits": {
                         "smithy.api#documentation": "<p>The newly-created cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.memorydb#CreateMultiRegionCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.memorydb#CreateMultiRegionClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.memorydb#CreateMultiRegionClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.memorydb#ClusterQuotaForCustomerExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#TagQuotaPerResourceExceeded"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new multi-Region cluster.</p>"
+            }
+        },
+        "com.amazonaws.memorydb#CreateMultiRegionClusterRequest": {
+            "type": "structure",
+            "members": {
+                "MultiRegionClusterNameSuffix": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A suffix to be added to the multi-Region cluster name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the multi-Region cluster.</p>"
+                    }
+                },
+                "Engine": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the engine to be used for the multi-Region cluster.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the engine to be used for the multi-Region cluster.</p>"
+                    }
+                },
+                "NodeType": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node type to be used for the multi-Region cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MultiRegionParameterGroupName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region parameter group to be associated with the cluster.</p>"
+                    }
+                },
+                "NumShards": {
+                    "target": "com.amazonaws.memorydb#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of shards for the multi-Region cluster.</p>"
+                    }
+                },
+                "TLSEnabled": {
+                    "target": "com.amazonaws.memorydb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable TLS encryption for the multi-Region cluster.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.memorydb#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be applied to the multi-Region cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.memorydb#CreateMultiRegionClusterResponse": {
+            "type": "structure",
+            "members": {
+                "MultiRegionCluster": {
+                    "target": "com.amazonaws.memorydb#MultiRegionCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the newly created multi-Region cluster.</p>"
                     }
                 }
             },
@@ -2407,7 +2562,7 @@
                 "SubnetGroup": {
                     "target": "com.amazonaws.memorydb#SubnetGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>The newly-created subnet group</p>"
+                        "smithy.api#documentation": "<p>The newly-created subnet group.</p>"
                     }
                 }
             },
@@ -2559,7 +2714,7 @@
                 "ACLName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Access Control List to delete</p>",
+                        "smithy.api#documentation": "<p>The name of the Access Control List to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2611,7 +2766,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a cluster. It also deletes all associated nodes and node endpoints</p>"
+                "smithy.api#documentation": "<p>Deletes a cluster. It also deletes all associated nodes and node endpoints.</p>\n         <note>\n            <p>\n               <code>CreateSnapshot</code> permission is required to create a final snapshot. \n         Without this permission, the API call will fail with an <code>Access Denied</code> exception.</p>\n         </note>"
             }
         },
         "com.amazonaws.memorydb#DeleteClusterRequest": {
@@ -2622,6 +2777,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the cluster to be deleted</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "MultiRegionClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region cluster to be deleted.</p>"
                     }
                 },
                 "FinalSnapshotName": {
@@ -2641,7 +2802,59 @@
                 "Cluster": {
                     "target": "com.amazonaws.memorydb#Cluster",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster object that has been deleted</p>"
+                        "smithy.api#documentation": "<p>The cluster object that has been deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.memorydb#DeleteMultiRegionCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.memorydb#DeleteMultiRegionClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.memorydb#DeleteMultiRegionClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.memorydb#InvalidMultiRegionClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing multi-Region cluster.</p>"
+            }
+        },
+        "com.amazonaws.memorydb#DeleteMultiRegionClusterRequest": {
+            "type": "structure",
+            "members": {
+                "MultiRegionClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region cluster to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.memorydb#DeleteMultiRegionClusterResponse": {
+            "type": "structure",
+            "members": {
+                "MultiRegionCluster": {
+                    "target": "com.amazonaws.memorydb#MultiRegionCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the deleted multi-Region cluster.</p>"
                     }
                 }
             },
@@ -2742,7 +2955,7 @@
                 "SnapshotName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the snapshot to delete</p>",
+                        "smithy.api#documentation": "<p>The name of the snapshot to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2794,7 +3007,7 @@
                 "SubnetGroupName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the subnet group to delete</p>",
+                        "smithy.api#documentation": "<p>The name of the subnet group to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2886,7 +3099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of ACLs</p>",
+                "smithy.api#documentation": "<p>Returns a list of ACLs.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2901,7 +3114,7 @@
                 "ACLName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ACL</p>"
+                        "smithy.api#documentation": "<p>The name of the ACL.</p>"
                     }
                 },
                 "MaxResults": {
@@ -2927,7 +3140,7 @@
                 "ACLs": {
                     "target": "com.amazonaws.memorydb#ACLList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of ACLs</p>"
+                        "smithy.api#documentation": "<p>The list of ACLs.</p>"
                     }
                 },
                 "NextToken": {
@@ -2979,7 +3192,7 @@
                 "ClusterName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cluster</p>"
+                        "smithy.api#documentation": "<p>The name of the cluster.</p>"
                     }
                 },
                 "MaxResults": {
@@ -3045,7 +3258,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the available engine versions.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the available Redis OSS engine versions.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3060,13 +3273,13 @@
                 "Engine": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine version to return. Valid values are either valkey or redis.</p>"
+                        "smithy.api#documentation": "<p>The name of the engine for which to list available versions.</p>"
                     }
                 },
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine version.</p>"
+                        "smithy.api#documentation": "<p>The Redis OSS engine version</p>"
                     }
                 },
                 "ParameterGroupFamily": {
@@ -3211,6 +3424,90 @@
                     "target": "com.amazonaws.memorydb#EventList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of events. Each element in the list contains detailed information about one event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.memorydb#DescribeMultiRegionClusters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.memorydb#DescribeMultiRegionClustersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.memorydb#DescribeMultiRegionClustersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.memorydb#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about one or more multi-Region clusters.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "MultiRegionClusters",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.memorydb#DescribeMultiRegionClustersRequest": {
+            "type": "structure",
+            "members": {
+                "MultiRegionClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a specific multi-Region cluster to describe.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.memorydb#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating.</p>"
+                    }
+                },
+                "ShowClusterDetails": {
+                    "target": "com.amazonaws.memorydb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the multi-Region cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.memorydb#DescribeMultiRegionClustersResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use to retrieve the next page of results.</p>"
+                    }
+                },
+                "MultiRegionClusters": {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of multi-Region clusters.</p>"
                     }
                 }
             },
@@ -3590,7 +3887,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns details of the service updates</p>",
+                "smithy.api#documentation": "<p>Returns details of the service updates.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3611,13 +3908,13 @@
                 "ClusterNames": {
                     "target": "com.amazonaws.memorydb#ClusterNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of cluster names to identify service updates to apply</p>"
+                        "smithy.api#documentation": "<p>The list of cluster names to identify service updates to apply.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.memorydb#ServiceUpdateStatusList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status(es) of the service updates to filter on</p>"
+                        "smithy.api#documentation": "<p>The status(es) of the service updates to filter on.</p>"
                     }
                 },
                 "MaxResults": {
@@ -3857,7 +4154,7 @@
                 "UserName": {
                     "target": "com.amazonaws.memorydb#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user</p>"
+                        "smithy.api#documentation": "<p>The name of the user.</p>"
                     }
                 },
                 "Filters": {
@@ -3953,7 +4250,7 @@
                 "Engine": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the Redis OSS or Valkey engine used by the cluster.</p>"
+                        "smithy.api#documentation": "<p>The name of the engine for which version information is provided.</p>"
                     }
                 },
                 "EngineVersion": {
@@ -3976,7 +4273,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides details of the engine version.</p>"
+                "smithy.api#documentation": "<p>Provides details of the Redis OSS engine version</p>"
             }
         },
         "com.amazonaws.memorydb#EngineVersionInfoList": {
@@ -4073,14 +4370,14 @@
                 "ClusterName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster being failed over</p>",
+                        "smithy.api#documentation": "<p>The cluster being failed over.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ShardName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the shard</p>",
+                        "smithy.api#documentation": "<p>The name of the shard.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4095,7 +4392,7 @@
                 "Cluster": {
                     "target": "com.amazonaws.memorydb#Cluster",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster being failed over</p>"
+                        "smithy.api#documentation": "<p>The cluster being failed over.</p>"
                     }
                 }
             },
@@ -4282,6 +4579,23 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.memorydb#InvalidMultiRegionClusterStateFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.memorydb#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidMultiRegionClusterState",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The requested operation cannot be performed on the multi-Region cluster in its current state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.memorydb#InvalidNodeStateFault": {
             "type": "structure",
             "members": {
@@ -4433,6 +4747,64 @@
                 }
             }
         },
+        "com.amazonaws.memorydb#ListAllowedMultiRegionClusterUpdates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.memorydb#ListAllowedMultiRegionClusterUpdatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.memorydb#ListAllowedMultiRegionClusterUpdatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the allowed updates for a multi-Region cluster.</p>"
+            }
+        },
+        "com.amazonaws.memorydb#ListAllowedMultiRegionClusterUpdatesRequest": {
+            "type": "structure",
+            "members": {
+                "MultiRegionClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.memorydb#ListAllowedMultiRegionClusterUpdatesResponse": {
+            "type": "structure",
+            "members": {
+                "ScaleUpNodeTypes": {
+                    "target": "com.amazonaws.memorydb#NodeTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node types that the cluster can be scaled up to.</p>"
+                    }
+                },
+                "ScaleDownNodeTypes": {
+                    "target": "com.amazonaws.memorydb#NodeTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node types that the cluster can be scaled down to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.memorydb#ListAllowedNodeTypeUpdates": {
             "type": "operation",
             "input": {
@@ -4516,6 +4888,12 @@
                     "target": "com.amazonaws.memorydb#InvalidClusterStateFault"
                 },
                 {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.memorydb#ParameterGroupNotFoundFault"
                 },
                 {
@@ -4532,7 +4910,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.\n         \n         A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track your MemoryDB resources. \n         For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>\n         </p>"
+                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.\n         \n         A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track your MemoryDB resources. \n         For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>.</p>"
             }
         },
         "com.amazonaws.memorydb#ListTagsRequest": {
@@ -4541,7 +4919,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4562,6 +4940,137 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.memorydb#MultiRegionCluster": {
+            "type": "structure",
+            "members": {
+                "MultiRegionClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region cluster.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the multi-Region cluster.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the multi-Region cluster.</p>"
+                    }
+                },
+                "NodeType": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node type used by the multi-Region cluster.</p>"
+                    }
+                },
+                "Engine": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the engine used by the multi-Region cluster.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the engine used by the multi-Region cluster.</p>"
+                    }
+                },
+                "NumberOfShards": {
+                    "target": "com.amazonaws.memorydb#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of shards in the multi-Region cluster.</p>"
+                    }
+                },
+                "Clusters": {
+                    "target": "com.amazonaws.memorydb#RegionalClusterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The clusters in this multi-Region cluster.</p>"
+                    }
+                },
+                "MultiRegionParameterGroupName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region parameter group associated with the cluster.</p>"
+                    }
+                },
+                "TLSEnabled": {
+                    "target": "com.amazonaws.memorydb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indiciates if the multi-Region cluster is TLS enabled.</p>"
+                    }
+                },
+                "ARN": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the multi-Region cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a multi-Region cluster.</p>"
+            }
+        },
+        "com.amazonaws.memorydb#MultiRegionClusterAlreadyExistsFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.memorydb#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MultiRegionClusterAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>A multi-Region cluster with the specified name already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.memorydb#MultiRegionClusterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.memorydb#MultiRegionCluster"
+            }
+        },
+        "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.memorydb#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MultiRegionClusterNotFound",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified multi-Region cluster does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.memorydb#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MultiRegionParameterGroupNotFoundFault",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified multi-Region parameter group does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.memorydb#NoOperationFault": {
@@ -5000,6 +5509,47 @@
                 }
             }
         },
+        "com.amazonaws.memorydb#RegionalCluster": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Regional cluster</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region the current Regional cluster is assigned to.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Regional cluster.</p>"
+                    }
+                },
+                "ARN": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) the Regional cluster</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a Regional cluster</p>"
+            }
+        },
+        "com.amazonaws.memorydb#RegionalClusterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.memorydb#RegionalCluster",
+                "traits": {
+                    "smithy.api#xmlName": "RegionalCluster"
+                }
+            }
+        },
         "com.amazonaws.memorydb#ReplicaConfigurationRequest": {
             "type": "structure",
             "members": {
@@ -5403,7 +5953,7 @@
                 "Engine": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The MemoryDB engine to which the update applies. The values are either Redis or Valkey.</p>"
+                        "smithy.api#documentation": "<p>The name of the engine for which a service update is available.</p>"
                     }
                 },
                 "NodesUpdated": {
@@ -6139,6 +6689,15 @@
                     "target": "com.amazonaws.memorydb#InvalidClusterStateFault"
                 },
                 {
+                    "target": "com.amazonaws.memorydb#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.memorydb#ParameterGroupNotFoundFault"
                 },
                 {
@@ -6167,7 +6726,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which the tags are to be added</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which the tags are to be added.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6281,6 +6840,15 @@
                     "target": "com.amazonaws.memorydb#InvalidClusterStateFault"
                 },
                 {
+                    "target": "com.amazonaws.memorydb#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.memorydb#ParameterGroupNotFoundFault"
                 },
                 {
@@ -6300,7 +6868,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to remove tags on a resource</p>"
+                "smithy.api#documentation": "<p>Use this operation to remove tags on a resource.</p>"
             }
         },
         "com.amazonaws.memorydb#UntagResourceRequest": {
@@ -6309,14 +6877,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which the tags are to be removed</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which the tags are to be removed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TagKeys": {
                     "target": "com.amazonaws.memorydb#KeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of keys of the tags that are to be removed</p>",
+                        "smithy.api#documentation": "<p>The list of keys of the tags that are to be removed.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6331,7 +6899,7 @@
                 "TagList": {
                     "target": "com.amazonaws.memorydb#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tags removed</p>"
+                        "smithy.api#documentation": "<p>The list of tags removed.</p>"
                     }
                 }
             },
@@ -6380,20 +6948,20 @@
                 "ACLName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Access Control List</p>",
+                        "smithy.api#documentation": "<p>The name of the Access Control List.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UserNamesToAdd": {
                     "target": "com.amazonaws.memorydb#UserNameListInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of users to add to the Access Control List</p>"
+                        "smithy.api#documentation": "<p>The list of users to add to the Access Control List.</p>"
                     }
                 },
                 "UserNamesToRemove": {
                     "target": "com.amazonaws.memorydb#UserNameListInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of users to remove from the Access Control List</p>"
+                        "smithy.api#documentation": "<p>The list of users to remove from the Access Control List.</p>"
                     }
                 }
             },
@@ -6407,7 +6975,7 @@
                 "ACL": {
                     "target": "com.amazonaws.memorydb#ACL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated Access Control List</p>"
+                        "smithy.api#documentation": "<p>The updated Access Control List.</p>"
                     }
                 }
             },
@@ -6483,20 +7051,20 @@
                 "ClusterName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cluster to update</p>",
+                        "smithy.api#documentation": "<p>The name of the cluster to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the cluster to update</p>"
+                        "smithy.api#documentation": "<p>The description of the cluster to update.</p>"
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.memorydb#SecurityGroupIdsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SecurityGroupIds to update</p>"
+                        "smithy.api#documentation": "<p>The SecurityGroupIds to update.</p>"
                     }
                 },
                 "MaintenanceWindow": {
@@ -6508,7 +7076,7 @@
                 "SnsTopicArn": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SNS topic ARN to update</p>"
+                        "smithy.api#documentation": "<p>The SNS topic ARN to update.</p>"
                     }
                 },
                 "SnsTopicStatus": {
@@ -6520,7 +7088,7 @@
                 "ParameterGroupName": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter group to update</p>"
+                        "smithy.api#documentation": "<p>The name of the parameter group to update.</p>"
                     }
                 },
                 "SnapshotWindow": {
@@ -6544,7 +7112,7 @@
                 "Engine": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the engine to be used for the nodes in this cluster. The value must be set to either Redis or Valkey.</p>"
+                        "smithy.api#documentation": "<p>The name of the engine to be used for the cluster.</p>"
                     }
                 },
                 "EngineVersion": {
@@ -6556,19 +7124,19 @@
                 "ReplicaConfiguration": {
                     "target": "com.amazonaws.memorydb#ReplicaConfigurationRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas that will reside in each shard</p>"
+                        "smithy.api#documentation": "<p>The number of replicas that will reside in each shard.</p>"
                     }
                 },
                 "ShardConfiguration": {
                     "target": "com.amazonaws.memorydb#ShardConfigurationRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of shards in the cluster</p>"
+                        "smithy.api#documentation": "<p>The number of shards in the cluster.</p>"
                     }
                 },
                 "ACLName": {
                     "target": "com.amazonaws.memorydb#ACLName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Access Control List that is associated with the cluster</p>"
+                        "smithy.api#documentation": "<p>The Access Control List that is associated with the cluster.</p>"
                     }
                 }
             },
@@ -6582,7 +7150,98 @@
                 "Cluster": {
                     "target": "com.amazonaws.memorydb#Cluster",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated cluster</p>"
+                        "smithy.api#documentation": "<p>The updated cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.memorydb#UpdateMultiRegionCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.memorydb#UpdateMultiRegionClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.memorydb#UpdateMultiRegionClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.memorydb#InvalidMultiRegionClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration of an existing multi-Region cluster.</p>"
+            }
+        },
+        "com.amazonaws.memorydb#UpdateMultiRegionClusterRequest": {
+            "type": "structure",
+            "members": {
+                "MultiRegionClusterName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-Region cluster to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeType": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new node type to be used for the multi-Region cluster.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the multi-Region cluster.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new engine version to be used for the multi-Region cluster.</p>"
+                    }
+                },
+                "ShardConfiguration": {
+                    "target": "com.amazonaws.memorydb#ShardConfigurationRequest"
+                },
+                "MultiRegionParameterGroupName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new multi-Region parameter group to be associated with the cluster.</p>"
+                    }
+                },
+                "UpdateStrategy": {
+                    "target": "com.amazonaws.memorydb#UpdateStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to force the update even if it may cause data loss.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.memorydb#UpdateMultiRegionClusterResponse": {
+            "type": "structure",
+            "members": {
+                "MultiRegionCluster": {
+                    "target": "com.amazonaws.memorydb#MultiRegionCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of updating the multi-Region cluster.</p>"
                     }
                 }
             },
@@ -6653,6 +7312,23 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.memorydb#UpdateStrategy": {
+            "type": "enum",
+            "members": {
+                "COORDINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "coordinated"
+                    }
+                },
+                "UNCOORDINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "uncoordinated"
+                    }
+                }
             }
         },
         "com.amazonaws.memorydb#UpdateSubnetGroup": {

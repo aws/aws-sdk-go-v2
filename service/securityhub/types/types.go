@@ -147,6 +147,94 @@ type ActionTarget struct {
 	noSmithyDocumentSerde
 }
 
+//	Information about the threat actor identified in an Amazon GuardDuty Extended
+//
+// Threat Detection attack sequence. GuardDuty generates an attack sequence finding
+// when multiple events align to a potentially suspicious activity. To receive
+// GuardDuty attack sequence findings in Security Hub, you must have GuardDuty and
+// GuardDuty S3 Protection enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon
+// GuardDuty User Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type Actor struct {
+
+	//  The ID of the threat actor.
+	Id *string
+
+	//  Contains information about the user session where the activity initiated.
+	Session *ActorSession
+
+	//  Contains information about the user credentials used by the threat actor.
+	User *ActorUser
+
+	noSmithyDocumentSerde
+}
+
+//	Contains information about the authenticated session used by the threat actor
+//
+// identified in an Amazon GuardDuty Extended Threat Detection attack sequence.
+// GuardDuty generates an attack sequence finding when multiple events align to a
+// potentially suspicious activity. To receive GuardDuty attack sequence findings
+// in Security Hub, you must have GuardDuty and GuardDuty S3 Protection enabled.
+// For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type ActorSession struct {
+
+	// The timestamp for when the session was created.
+	//
+	// In CloudTrail, you can find this value as
+	// userIdentity.sessionContext.attributes.creationDate .
+	CreatedTime *int64
+
+	//  The issuer of the session.
+	//
+	// In CloudTrail, you can find this value as
+	// userIdentity.sessionContext.sessionIssuer.arn .
+	Issuer *string
+
+	//  Indicates whether multi-factor authentication (MFA) was used for
+	// authentication during the session.
+	//
+	// In CloudTrail, you can find this value as
+	// userIdentity.sessionContext.attributes.mfaAuthenticated .
+	MfaStatus ActorSessionMfaStatus
+
+	//  Unique identifier of the session.
+	Uid *string
+
+	noSmithyDocumentSerde
+}
+
+//	Contains information about the credentials used by the threat actor identified
+//
+// in an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty
+// generates an attack sequence finding when multiple events align to a potentially
+// suspicious activity. To receive GuardDuty attack sequence findings in Security
+// Hub, you must have GuardDuty and GuardDuty S3 Protection enabled. For more
+// information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type ActorUser struct {
+
+	//  The account of the threat actor.
+	Account *UserAccount
+
+	//  Unique identifier of the threat actor’s user credentials.
+	CredentialUid *string
+
+	//  The name of the threat actor.
+	Name *string
+
+	//  The type of user.
+	Type *string
+
+	//  The unique identifier of the threat actor.
+	Uid *string
+
+	noSmithyDocumentSerde
+}
+
 // An adjustment to the CVSS metric.
 type Adjustment struct {
 
@@ -13026,6 +13114,15 @@ type AwsSecurityFinding struct {
 	// score of 100 is reserved for the most critical resources.
 	Criticality *int32
 
+	//  Provides details about an Amazon GuardDuty Extended Threat Detection attack
+	// sequence. GuardDuty generates an attack sequence finding when multiple events
+	// align to a potentially suspicious activity. To receive GuardDuty attack sequence
+	// findings in Security Hub, you must have GuardDuty and GuardDuty S3 Protection
+	// enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+	//
+	// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+	Detection *Detection
+
 	// In a BatchImportFindings request, finding providers use FindingProviderFields
 	// to provide and update their own values for confidence, criticality, related
 	// findings, severity, and types.
@@ -15427,6 +15524,23 @@ type DateRange struct {
 	noSmithyDocumentSerde
 }
 
+//	A top-level object field that provides details about an Amazon GuardDuty
+//
+// Extended Threat Detection attack sequence. GuardDuty generates an attack
+// sequence finding when multiple events align to a potentially suspicious
+// activity. To receive GuardDuty attack sequence findings in Security Hub, you
+// must have GuardDuty and GuardDuty S3 Protection enabled. For more information,
+// see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type Detection struct {
+
+	//  Provides details about an attack sequence.
+	Sequence *Sequence
+
+	noSmithyDocumentSerde
+}
+
 // Provided if ActionType is DNS_REQUEST . It provides details about the DNS
 // request that was detected.
 type DnsRequestAction struct {
@@ -15869,6 +15983,36 @@ type ImportFindingsError struct {
 	noSmithyDocumentSerde
 }
 
+//	Contains information about the indicators observed in an Amazon GuardDuty
+//
+// Extended Threat Detection attack sequence. Indicators include a set of signals,
+// which can be API activities or findings that GuardDuty uses to detect an attack
+// sequence finding. GuardDuty generates an attack sequence finding when multiple
+// signals align to a potentially suspicious activity. To receive GuardDuty attack
+// sequence findings in Security Hub, you must have GuardDuty and GuardDuty S3
+// Protection enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User
+// Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type Indicator struct {
+
+	//  The name of the indicator that’s present in the attack sequence finding.
+	Key *string
+
+	//  The title describing the indicator.
+	Title *string
+
+	//  The type of indicator.
+	Type *string
+
+	// Values associated with each indicator key. For example, if the indicator key is
+	// SUSPICIOUS_NETWORK , then the value will be the name of the network. If the
+	// indicator key is ATTACK_TACTIC , then the value will be one of the MITRE tactics.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a Security Hub insight.
 type Insight struct {
 
@@ -16277,6 +16421,43 @@ type Network struct {
 	noSmithyDocumentSerde
 }
 
+//	Contains information about the Autonomous System (AS) of the network endpoints
+//
+// involved in an Amazon GuardDuty Extended Threat Detection attack sequence.
+// GuardDuty generates an attack sequence finding when multiple events align to a
+// potentially suspicious activity. To receive GuardDuty attack sequence findings
+// in Security Hub, you must have GuardDuty and GuardDuty S3 Protection enabled.
+// For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type NetworkAutonomousSystem struct {
+
+	//  The name associated with the AS.
+	Name *string
+
+	//  The unique number that identifies the AS.
+	Number *int32
+
+	noSmithyDocumentSerde
+}
+
+//	Contains information about the network connection involved in an Amazon
+//
+// GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an
+// attack sequence finding when multiple events align to a potentially suspicious
+// activity. To receive GuardDuty attack sequence findings in Security Hub, you
+// must have GuardDuty and GuardDuty S3 Protection enabled. For more information,
+// see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type NetworkConnection struct {
+
+	//  The direction in which the network traffic is flowing.
+	Direction ConnectionDirection
+
+	noSmithyDocumentSerde
+}
+
 // Provided if ActionType is NETWORK_CONNECTION . It provides details about the
 // attempted network connection that was detected.
 type NetworkConnectionAction struct {
@@ -16301,6 +16482,71 @@ type NetworkConnectionAction struct {
 
 	// Information about the port on the remote IP address.
 	RemotePortDetails *ActionRemotePortDetails
+
+	noSmithyDocumentSerde
+}
+
+//	Contains information about network endpoints involved in an Amazon GuardDuty
+//
+// Extended Threat Detection attack sequence. GuardDuty generates an attack
+// sequence finding when multiple events align to a potentially suspicious
+// activity. To receive GuardDuty attack sequence findings in Security Hub, you
+// must have GuardDuty and GuardDuty S3 Protection enabled. For more information,
+// see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+//
+// This field can provide information about the network endpoints associated with
+// the resource in the attack sequence finding, or about a specific network
+// endpoint used for the attack.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type NetworkEndpoint struct {
+
+	//  The Autonomous System Number (ASN) of the network endpoint.
+	AutonomousSystem *NetworkAutonomousSystem
+
+	//  Information about the network connection.
+	Connection *NetworkConnection
+
+	//  The domain information for the network endpoint.
+	Domain *string
+
+	//  The identifier of the network endpoint involved in the attack sequence.
+	Id *string
+
+	//  The IP address used in the network endpoint.
+	Ip *string
+
+	//  Information about the location of the network endpoint.
+	Location *NetworkGeoLocation
+
+	//  The port number associated with the network endpoint.
+	Port *int32
+
+	noSmithyDocumentSerde
+}
+
+//	Contains information about the location of a network endpoint involved in an
+//
+// Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates
+// an attack sequence finding when multiple events align to a potentially
+// suspicious activity. To receive GuardDuty attack sequence findings in Security
+// Hub, you must have GuardDuty and GuardDuty S3 Protection enabled. For more
+// information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type NetworkGeoLocation struct {
+
+	//  The name of the city.
+	City *string
+
+	//  The name of the country.
+	Country *string
+
+	//  The latitude information of the endpoint location.
+	Lat *float64
+
+	//  The longitude information of the endpoint location.
+	Lon *float64
 
 	noSmithyDocumentSerde
 }
@@ -18032,6 +18278,40 @@ type SensitiveDataResult struct {
 	noSmithyDocumentSerde
 }
 
+//	Contains information about an Amazon GuardDuty Extended Threat Detection
+//
+// attack sequence finding. GuardDuty generates an attack sequence finding when
+// multiple events align to a potentially suspicious activity. To receive GuardDuty
+// attack sequence findings in Security Hub, you must have GuardDuty and GuardDuty
+// S3 Protection enabled. For more information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User
+// Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type Sequence struct {
+
+	//  Provides information about the actors involved in the attack sequence.
+	Actors []Actor
+
+	//  Contains information about the network endpoints that were used in the attack
+	// sequence.
+	Endpoints []NetworkEndpoint
+
+	//  Contains information about the indicators observed in the attack sequence. The
+	// values for [SignalIndicators]are a subset of the values for SequenceIndicators , but the values
+	// for these fields don't always match 1:1.
+	//
+	// [SignalIndicators]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Signal.html
+	SequenceIndicators []Indicator
+
+	//  Contains information about the signals involved in the attack sequence.
+	Signals []Signal
+
+	//  Unique identifier of the attack sequence.
+	Uid *string
+
+	noSmithyDocumentSerde
+}
+
 // The severity of the finding.
 //
 // The finding provider can provide the initial severity. The finding provider can
@@ -18139,6 +18419,97 @@ type SeverityUpdate struct {
 	// The native severity as defined by the Amazon Web Services service or integrated
 	// partner product that generated the finding.
 	Product *float64
+
+	noSmithyDocumentSerde
+}
+
+//	Contains information about the signals involved in an Amazon GuardDuty
+//
+// Extended Threat Detection attack sequence. An attack sequence is a type of
+// threat detected by GuardDuty. GuardDuty generates an attack sequence finding
+// when multiple events, or signals, align to a potentially suspicious activity.
+// When GuardDuty and Security Hub are integrated, GuardDuty sends attack sequence
+// findings to Security Hub.
+//
+// A signal can be an API activity or a finding that GuardDuty uses to detect an
+// attack sequence finding.
+type Signal struct {
+
+	//  The IDs of the threat actors involved in the signal.
+	ActorIds []string
+
+	//  The number of times this signal was observed.
+	Count *int32
+
+	//  The timestamp when the first finding or activity related to this signal was
+	// observed.
+	CreatedAt *int64
+
+	// Information about the endpoint IDs associated with this signal.
+	EndpointIds []string
+
+	//  The timestamp when the first finding or activity related to this signal was
+	// observed.
+	FirstSeenAt *int64
+
+	//  The identifier of the signal.
+	Id *string
+
+	//  The timestamp when the last finding or activity related to this signal was
+	// observed.
+	LastSeenAt *int64
+
+	//  The name of the GuardDuty signal. For example, when signal type is FINDING ,
+	// the signal name is the name of the finding.
+	Name *string
+
+	//  The Amazon Resource Name (ARN) of the product that generated the signal.
+	ProductArn *string
+
+	//  The ARN or ID of the Amazon Web Services resource associated with the signal.
+	ResourceIds []string
+
+	// The severity associated with the signal. For more information about severity,
+	// see [Findings severity levels]in the Amazon GuardDuty User Guide.
+	//
+	// [Findings severity levels]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html
+	Severity *float64
+
+	//  Contains information about the indicators associated with the signals in this
+	// attack sequence finding. The values for SignalIndicators are a subset of the
+	// values for [SequenceIndicators], but the values for these fields don't always match 1:1.
+	//
+	// [SequenceIndicators]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Sequence.html
+	SignalIndicators []Indicator
+
+	//  The description of the GuardDuty finding.
+	Title *string
+
+	//  The type of the signal used to identify an attack sequence.
+	//
+	// Signals can be GuardDuty findings or activities observed in data sources that
+	// GuardDuty monitors. For more information, see [GuardDuty foundational data sources]in the Amazon GuardDuty User
+	// Guide.
+	//
+	// A signal type can be one of the following values. Here are the related
+	// descriptions:
+	//
+	//   - FINDING - Individually generated GuardDuty finding.
+	//
+	//   - CLOUD_TRAIL - Activity observed from CloudTrail logs
+	//
+	//   - S3_DATA_EVENTS - Activity observed from CloudTrail data events for Amazon
+	//   Simple Storage Service (S3). Activities associated with this type will show up
+	//   only when you have enabled GuardDuty S3 Protection feature in your account. For
+	//   more information about S3 Protection and the steps to enable it, see [S3 Protection]in the
+	//   Amazon GuardDuty User Guide.
+	//
+	// [S3 Protection]: https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html
+	// [GuardDuty foundational data sources]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html
+	Type *string
+
+	//  The timestamp when this signal was last observed.
+	UpdatedAt *int64
 
 	noSmithyDocumentSerde
 }
@@ -18539,9 +18910,9 @@ type StatelessCustomPublishMetricActionDimension struct {
 type StatusReason struct {
 
 	// A code that represents a reason for the control status. For the list of status
-	// reason codes and their meanings, see [Standards-related information in the ASFF]in the Security Hub User Guide.
+	// reason codes and their meanings, see [Compliance details for control findings]in the Security Hub User Guide.
 	//
-	// [Standards-related information in the ASFF]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
+	// [Compliance details for control findings]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-asff-compliance
 	//
 	// This member is required.
 	ReasonCode *string
@@ -18951,6 +19322,26 @@ type UpdateAutomationRulesRequestItem struct {
 	//
 	// [BatchUpdateAutomationRules]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
 	RuleStatus RuleStatus
+
+	noSmithyDocumentSerde
+}
+
+//	Provides Amazon Web Services account information of the user involved in an
+//
+// Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates
+// an attack sequence finding when multiple events align to a potentially
+// suspicious activity. To receive GuardDuty attack sequence findings in Security
+// Hub, you must have GuardDuty and GuardDuty S3 Protection enabled. For more
+// information, see [GuardDuty Extended Threat Detection]in the Amazon GuardDuty User Guide.
+//
+// [GuardDuty Extended Threat Detection]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html
+type UserAccount struct {
+
+	//  The name of the user account involved in the attack sequence.
+	Name *string
+
+	//  The unique identifier of the user account involved in the attack sequence.
+	Uid *string
 
 	noSmithyDocumentSerde
 }

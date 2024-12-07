@@ -24,3 +24,25 @@ func ExampleDataSourceType_outputUsage() {
 }
 
 var _ *types.S3GlueDataCatalog
+
+func ExampleDirectQueryDataSourceType_outputUsage() {
+	var union types.DirectQueryDataSourceType
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DirectQueryDataSourceTypeMemberCloudWatchLog:
+		_ = v.Value // Value is types.CloudWatchDirectQueryDataSource
+
+	case *types.DirectQueryDataSourceTypeMemberSecurityLake:
+		_ = v.Value // Value is types.SecurityLakeDirectQueryDataSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CloudWatchDirectQueryDataSource
+var _ *types.SecurityLakeDirectQueryDataSource

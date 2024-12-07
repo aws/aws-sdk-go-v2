@@ -2149,10 +2149,16 @@ type S3CopyObjectOperation struct {
 	// this header to true causes Amazon S3 to use an S3 Bucket Key for object
 	// encryption with SSE-KMS.
 	//
-	// Specifying this header with an object action doesn’t affect bucket-level
-	// settings for S3 Bucket Key.
+	// Specifying this header with an Copy action doesn’t affect bucket-level settings
+	// for S3 Bucket Key.
 	//
-	// This functionality is not supported by directory buckets.
+	// Directory buckets - S3 Bucket Keys aren't supported, when you copy SSE-KMS
+	// encrypted objects from general purpose buckets to directory buckets, from
+	// directory buckets to general purpose buckets, or between directory buckets,
+	// through [the Copy operation in Batch Operations]. In this case, Amazon S3 makes a call to KMS every time a copy request
+	// is made for a KMS-encrypted object.
+	//
+	// [the Copy operation in Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops
 	BucketKeyEnabled bool
 
 	// This functionality is not supported by directory buckets.
@@ -2212,7 +2218,27 @@ type S3CopyObjectOperation struct {
 	// This functionality is not supported by directory buckets.
 	RequesterPays bool
 
-	// This functionality is not supported by directory buckets.
+	// Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object
+	// encryption. If the KMS key doesn't exist in the same account that's issuing the
+	// command, you must use the full Key ARN not the Key ID.
+	//
+	// Directory buckets - If you specify SSEAlgorithm with KMS , you must specify the
+	// SSEAwsKmsKeyId parameter with the ID (Key ID or Key ARN) of the KMS symmetric
+	// encryption customer managed key to use. Otherwise, you get an HTTP 400 Bad
+	// Request error. The key alias format of the KMS key isn't supported. To encrypt
+	// new object copies in a directory bucket with SSE-KMS, you must specify SSE-KMS
+	// as the directory bucket's default encryption configuration with a KMS key
+	// (specifically, a [customer managed key]). The [Amazon Web Services managed key] ( aws/s3 ) isn't supported. Your SSE-KMS configuration
+	// can only support 1 [customer managed key]per directory bucket for the lifetime of the bucket. After
+	// you specify a customer managed key for SSE-KMS as the bucket default encryption,
+	// you can't override the customer managed key for the bucket's SSE-KMS
+	// configuration. Then, when you specify server-side encryption settings for new
+	// object copies with SSE-KMS, you must make sure the encryption key is the same
+	// customer managed key that you specified for the directory bucket's default
+	// encryption configuration.
+	//
+	// [customer managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+	// [Amazon Web Services managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
 	SSEAwsKmsKeyId *string
 
 	// Specify the storage class for the destination objects in a Copy operation.
@@ -2432,8 +2458,16 @@ type S3ObjectMetadata struct {
 	//  This member has been deprecated.
 	RequesterCharged bool
 
-	// For directory buckets, only the server-side encryption with Amazon S3 managed
-	// keys (SSE-S3) ( AES256 ) is supported.
+	// The server-side encryption algorithm used when storing objects in Amazon S3.
+	//
+	// Directory buckets - For directory buckets, there are only two supported options
+	// for server-side encryption: server-side encryption with Amazon S3 managed keys
+	// (SSE-S3) ( AES256 ) and server-side encryption with KMS keys (SSE-KMS) ( KMS ).
+	// For more information, see [Protecting data with server-side encryption]in the Amazon S3 User Guide. For [the Copy operation in Batch Operations], see [S3CopyObjectOperation].
+	//
+	// [Protecting data with server-side encryption]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html
+	// [S3CopyObjectOperation]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_S3CopyObjectOperation.html
+	// [the Copy operation in Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops
 	SSEAlgorithm S3SSEAlgorithm
 
 	//

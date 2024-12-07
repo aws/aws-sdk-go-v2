@@ -11,14 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the current status of the specified configuration recorder as well as
-// the status of the last recording event for the recorder. If a configuration
-// recorder is not specified, this action returns the status of all configuration
-// recorders associated with the account.
+// Returns the current status of the configuration recorder you specify as well as
+// the status of the last recording event for the configuration recorders.
 //
-// >You can specify only one configuration recorder for each Amazon Web Services
-// Region for each account. For a detailed status of recording events over time,
-// add your Config events to Amazon CloudWatch metrics and use CloudWatch metrics.
+// For a detailed status of recording events over time, add your Config events to
+// Amazon CloudWatch metrics and use CloudWatch metrics.
+//
+// If a configuration recorder is not specified, this operation returns the status
+// for the customer managed configuration recorder configured for the account, if
+// applicable.
+//
+// When making a request to this operation, you can only specify one configuration
+// recorder.
 func (c *Client) DescribeConfigurationRecorderStatus(ctx context.Context, params *DescribeConfigurationRecorderStatusInput, optFns ...func(*Options)) (*DescribeConfigurationRecorderStatusOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationRecorderStatusInput{}
@@ -37,10 +41,21 @@ func (c *Client) DescribeConfigurationRecorderStatus(ctx context.Context, params
 // The input for the DescribeConfigurationRecorderStatus action.
 type DescribeConfigurationRecorderStatusInput struct {
 
-	// The name(s) of the configuration recorder. If the name is not specified, the
-	// action returns the current status of all the configuration recorders associated
-	// with the account.
+	// The Amazon Resource Name (ARN) of the configuration recorder that you want to
+	// specify.
+	Arn *string
+
+	// The name of the configuration recorder. If the name is not specified, the
+	// opertation returns the status for the customer managed configuration recorder
+	// configured for the account, if applicable.
+	//
+	// When making a request to this operation, you can only specify one configuration
+	// recorder.
 	ConfigurationRecorderNames []string
+
+	// For service-linked configuration recorders, you can use the service principal
+	// of the linked Amazon Web Services service to specify the configuration recorder.
+	ServicePrincipal *string
 
 	noSmithyDocumentSerde
 }

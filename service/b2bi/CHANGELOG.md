@@ -1,3 +1,7 @@
+# v1.0.0-preview.55 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.54 (2024-11-19)
 
 * **Feature**: Add new X12 transactions sets and versions

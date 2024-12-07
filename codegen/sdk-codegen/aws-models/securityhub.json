@@ -411,6 +411,131 @@
                 "target": "com.amazonaws.securityhub#ActionTarget"
             }
         },
+        "com.amazonaws.securityhub#Actor": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID of the threat actor.\n        </p>"
+                    }
+                },
+                "User": {
+                    "target": "com.amazonaws.securityhub#ActorUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains information about the user credentials used by the threat actor.</p>"
+                    }
+                },
+                "Session": {
+                    "target": "com.amazonaws.securityhub#ActorSession",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains information about the user session where the activity initiated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Information about the threat actor identified in an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ActorSession": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Unique identifier of the session.\n        </p>"
+                    }
+                },
+                "MfaStatus": {
+                    "target": "com.amazonaws.securityhub#ActorSessionMfaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether multi-factor authentication (MFA) was used for authentication during the session.</p>\n         <p>In CloudTrail, you can find this value as <code>userIdentity.sessionContext.attributes.mfaAuthenticated</code>.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the session was created. \n        </p>\n         <p>In CloudTrail, you can find this value as <code>userIdentity.sessionContext.attributes.creationDate</code>.</p>"
+                    }
+                },
+                "Issuer": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The issuer of the session. \n        </p>\n         <p>In CloudTrail, you can find this value as <code>userIdentity.sessionContext.sessionIssuer.arn</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains information about the authenticated session used by the threat actor identified in an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ActorSessionMfaStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ActorUser": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the threat actor.\n        </p>"
+                    }
+                },
+                "Uid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The unique identifier of the threat actor.\n        </p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The type of user.\n        </p>"
+                    }
+                },
+                "CredentialUid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Unique identifier of the threat actor’s user credentials.\n        </p>"
+                    }
+                },
+                "Account": {
+                    "target": "com.amazonaws.securityhub#UserAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The account of the threat actor.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains information about the credentials used by the threat actor identified in an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ActorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#Actor"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.securityhub#Adjustment": {
             "type": "structure",
             "members": {
@@ -18488,6 +18613,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Amazon Web Services account from which a finding was generated.\n        </p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 50.\n        </p>"
                     }
+                },
+                "Detection": {
+                    "target": "com.amazonaws.securityhub#Detection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -22458,6 +22589,23 @@
                 "target": "com.amazonaws.securityhub#ConfigurationPolicySummary"
             }
         },
+        "com.amazonaws.securityhub#ConnectionDirection": {
+            "type": "enum",
+            "members": {
+                "INBOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INBOUND"
+                    }
+                },
+                "OUTBOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTBOUND"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#ContainerDetails": {
             "type": "structure",
             "members": {
@@ -24665,6 +24813,20 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#Detection": {
+            "type": "structure",
+            "members": {
+                "Sequence": {
+                    "target": "com.amazonaws.securityhub#Sequence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about an attack sequence.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            A top-level object field that provides details about an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.</p>"
             }
         },
         "com.amazonaws.securityhub#DisableImportFindingsForProduct": {
@@ -27147,6 +27309,50 @@
                 "target": "com.amazonaws.securityhub#ImportFindingsError"
             }
         },
+        "com.amazonaws.securityhub#Indicator": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the indicator that’s present in the attack sequence finding.\n        </p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Values associated with each indicator key. For example, if the indicator key is\n            <code>SUSPICIOUS_NETWORK</code>, then the value will be the name of the network. If\n            the indicator key is <code>ATTACK_TACTIC</code>, then the value will be one of the MITRE tactics.</p>"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The title describing the indicator.\n        </p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The type of indicator.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains information about the indicators observed in an Amazon GuardDuty Extended Threat Detection attack sequence. \n            Indicators include a set of signals, which can be API activities or findings that GuardDuty uses to detect an attack sequence finding. GuardDuty \n            generates an attack sequence finding when multiple signals align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n            must have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#IndicatorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#Indicator"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.securityhub#Insight": {
             "type": "structure",
             "members": {
@@ -29094,6 +29300,40 @@
                 "smithy.api#documentation": "<p>The details of network-related information about a finding.</p>"
             }
         },
+        "com.amazonaws.securityhub#NetworkAutonomousSystem": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name associated with the AS.\n        </p>"
+                    }
+                },
+                "Number": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The unique number that identifies the AS. \n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains information about the Autonomous System (AS) of the network \n            endpoints involved in an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#NetworkConnection": {
+            "type": "structure",
+            "members": {
+                "Direction": {
+                    "target": "com.amazonaws.securityhub#ConnectionDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The direction in which the network traffic is flowing.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains information about the network connection involved in an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#NetworkConnectionAction": {
             "type": "structure",
             "members": {
@@ -29153,6 +29393,100 @@
                         "smithy.api#enumValue": "OUT"
                     }
                 }
+            }
+        },
+        "com.amazonaws.securityhub#NetworkEndpoint": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of the network endpoint involved in the attack sequence. \n        </p>"
+                    }
+                },
+                "Ip": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The IP address used in the network endpoint.\n        </p>"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The domain information for the network endpoint.\n        </p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The port number associated with the network endpoint.\n        </p>"
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.securityhub#NetworkGeoLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information about the location of the network endpoint.\n        </p>"
+                    }
+                },
+                "AutonomousSystem": {
+                    "target": "com.amazonaws.securityhub#NetworkAutonomousSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Autonomous System Number (ASN) of the network endpoint.\n        </p>"
+                    }
+                },
+                "Connection": {
+                    "target": "com.amazonaws.securityhub#NetworkConnection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information about the network connection.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains information about network endpoints involved in an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.\n        </p>\n         <p>This field can provide information about the network endpoints associated with the resource in the attack sequence finding, \nor about a specific network endpoint used for the attack.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#NetworkEndpointsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#NetworkEndpoint"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.securityhub#NetworkGeoLocation": {
+            "type": "structure",
+            "members": {
+                "City": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the city.\n        </p>"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the country.\n        </p>"
+                    }
+                },
+                "Lat": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The latitude information of the endpoint location.\n        </p>"
+                    }
+                },
+                "Lon": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The longitude information of the endpoint location.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains information about the location of a network endpoint involved in an Amazon GuardDuty Extended Threat Detection attack sequence. \nGuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.\n        </p>"
             }
         },
         "com.amazonaws.securityhub#NetworkHeader": {
@@ -33111,6 +33445,44 @@
                 "target": "com.amazonaws.securityhub#SensitiveDataResult"
             }
         },
+        "com.amazonaws.securityhub#Sequence": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Unique identifier of the attack sequence.\n        </p>"
+                    }
+                },
+                "Actors": {
+                    "target": "com.amazonaws.securityhub#ActorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides information about the actors involved in the attack sequence.\n        </p>"
+                    }
+                },
+                "Endpoints": {
+                    "target": "com.amazonaws.securityhub#NetworkEndpointsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains information about the network endpoints that were used in the attack sequence.\n        </p>"
+                    }
+                },
+                "Signals": {
+                    "target": "com.amazonaws.securityhub#SignalsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains information about the signals involved in the attack sequence.\n        </p>"
+                    }
+                },
+                "SequenceIndicators": {
+                    "target": "com.amazonaws.securityhub#IndicatorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains information about the indicators observed in the attack sequence. The values for  \n            <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Signal.html\">SignalIndicators</a> are a subset of the values for <code>SequenceIndicators</code>, but the values for \n            these fields don't always match 1:1.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains information about an Amazon GuardDuty Extended Threat Detection attack sequence finding. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#Severity": {
             "type": "structure",
             "members": {
@@ -33231,6 +33603,116 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Updates to the severity information for a finding.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#Signal": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The type of the signal used to identify an attack sequence.\n        </p>\n         <p>Signals can be GuardDuty findings or activities observed in data sources that GuardDuty monitors. \n            For\n            more information, see \n            <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html\">GuardDuty foundational data sources</a> in the\n            <i>Amazon GuardDuty User Guide</i>.</p>\n         <p>A signal type can be one of the following values. Here are the related descriptions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FINDING</code> - Individually generated GuardDuty finding.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CLOUD_TRAIL</code> - Activity observed from CloudTrail logs</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3_DATA_EVENTS</code> - Activity observed from CloudTrail data events for Amazon Simple Storage Service (S3). \n                    Activities associated\n                    with this type will show up only when\n                    you have enabled GuardDuty S3 Protection feature in your account. For more information about \n                    S3 Protection and the\n                    steps to enable it, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html\">S3 Protection</a> in the\n                    <i>Amazon GuardDuty User Guide</i>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of the signal.\n        </p>"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the GuardDuty finding.\n        </p>"
+                    }
+                },
+                "ProductArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the product that generated the signal.\n        </p>"
+                    }
+                },
+                "ResourceIds": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN or ID of the Amazon Web Services resource associated with the signal.\n        </p>"
+                    }
+                },
+                "SignalIndicators": {
+                    "target": "com.amazonaws.securityhub#IndicatorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains information about the indicators associated with the signals in this attack sequence finding. The values for \n            <code>SignalIndicators</code> are a subset of the values for <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Sequence.html\">SequenceIndicators</a>, but the values for \n            these fields don't always match 1:1.\n        </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the GuardDuty signal. For example, when signal type is <code>FINDING</code>, \n            the signal name is the name of the finding.\n        </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp when the first finding or activity related to this signal was observed.\n        </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp when this signal was last observed.\n        </p>"
+                    }
+                },
+                "FirstSeenAt": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp when the first finding or activity related to this signal was observed.\n        </p>"
+                    }
+                },
+                "LastSeenAt": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp when the last finding or activity related to this signal was observed.\n        </p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity associated with the signal. For more information about severity, see \n            <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html\">Findings severity levels</a>\n            in the <i>Amazon GuardDuty User Guide</i>.</p>"
+                    }
+                },
+                "Count": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The number of times this signal was observed.\n        </p>"
+                    }
+                },
+                "ActorIds": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The IDs of the threat actors involved in the signal.\n        </p>"
+                    }
+                },
+                "EndpointIds": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the endpoint IDs associated with this signal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains information about the signals involved in an Amazon GuardDuty Extended Threat Detection attack sequence. An attack sequence is a \ntype of threat detected by GuardDuty. GuardDuty generates an attack sequence finding when multiple events, or \nsignals, align to a potentially suspicious activity. When GuardDuty and Security Hub are integrated, GuardDuty \nsends attack sequence findings to Security Hub.</p>\n         <p>A signal can be an API activity or a finding that GuardDuty uses to detect an attack sequence finding.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SignalsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#Signal"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.securityhub#SizeBytes": {
@@ -34158,7 +34640,7 @@
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A code that represents a reason for the control status. For the list of status reason\n         codes and their meanings, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff\">Standards-related information in the ASFF</a> in the\n            <i>Security Hub User Guide</i>. </p>",
+                        "smithy.api#documentation": "<p>A code that represents a reason for the control status. For the list of status reason\n         codes and their meanings, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-asff-compliance\">Compliance details for control findings</a> in the\n            <i>Security Hub User Guide</i>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -35972,6 +36454,26 @@
                         "smithy.api#enumValue": "UPDATING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.securityhub#UserAccount": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The unique identifier of the user account involved in the attack sequence.\n        </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the user account involved in the attack sequence.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides Amazon Web Services account information of the user involved in an Amazon GuardDuty Extended Threat Detection attack sequence. GuardDuty generates an attack \n            sequence finding when multiple events align to a potentially suspicious activity. To receive GuardDuty attack sequence findings in Security Hub, you \n\t\t\t\tmust have GuardDuty and GuardDuty S3 Protection enabled. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html\">GuardDuty Extended Threat Detection </a> in the <i>Amazon GuardDuty User Guide</i>. \n        </p>"
             }
         },
         "com.amazonaws.securityhub#VerificationState": {

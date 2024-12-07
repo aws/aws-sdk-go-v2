@@ -15,7 +15,7 @@ import (
 //
 // A tag is a key-value pair where the key and value are case-sensitive. You can
 // use tags to categorize and track your MemoryDB resources. For more information,
-// see [Tagging your MemoryDB resources]
+// see [Tagging your MemoryDB resources].
 //
 // [Tagging your MemoryDB resources]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
@@ -36,7 +36,7 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 type ListTagsInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource for which you want the list of
-	// tags
+	// tags.
 	//
 	// This member is required.
 	ResourceArn *string

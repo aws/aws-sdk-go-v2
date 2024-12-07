@@ -1,3 +1,198 @@
+# Release (2024-12-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/rds/auth`: [v1.5.1](feature/rds/auth/CHANGELOG.md#v151-2024-12-06)
+  * **Bug Fix**: **BREAKFIX**: Revert bad API release.
+
+# Release (2024-12-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.2.0](service/partnercentralselling/CHANGELOG.md#v120-2024-12-05)
+  * **Feature**: Introducing the preview of new partner central selling APIs designed to transform how AWS partners collaborate and co-sell with multiple partners. This enables multiple partners to seamlessly engage and jointly pursue customer opportunities, fostering a new era of collaborative selling.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.19.0](service/qbusiness/CHANGELOG.md#v1190-2024-12-05)
+  * **Feature**: This release removes the deprecated UserId and UserGroups fields from SearchRelevantContent api's request parameters.
+
+# Release (2024-12-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.25.0](service/bedrock/CHANGELOG.md#v1250-2024-12-04)
+  * **Feature**: Introduced two APIs ListPromptRouters and GetPromptRouter for Intelligent Prompt Router feature. Add support for Bedrock Guardrails image content filter. New Bedrock Marketplace feature enabling a wider range of bedrock compatible models with self-hosted capability.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.32.0](service/bedrockagent/CHANGELOG.md#v1320-2024-12-04)
+  * **Feature**: This release introduces the ability to generate SQL using natural language, through a new GenerateQuery API (with native integration into Knowledge Bases); ability to ingest and retrieve images through Bedrock Data Automation; and ability to create a Knowledge Base backed by Kendra GenAI Index.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.30.0](service/bedrockagentruntime/CHANGELOG.md#v1300-2024-12-04)
+  * **Feature**: This release introduces the ability to generate SQL using natural language, through a new GenerateQuery API (with native integration into Knowledge Bases); ability to ingest and retrieve images through Bedrock Data Automation; and ability to create a Knowledge Base backed by Kendra GenAI Index.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.0.0](service/bedrockdataautomation/CHANGELOG.md#v100-2024-12-04)
+  * **Release**: New AWS service client module
+  * **Feature**: Release Bedrock Data Automation SDK
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.0.0](service/bedrockdataautomationruntime/CHANGELOG.md#v100-2024-12-04)
+  * **Release**: New AWS service client module
+  * **Feature**: Release Bedrock Data Automation Runtime SDK
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.23.0](service/bedrockruntime/CHANGELOG.md#v1230-2024-12-04)
+  * **Feature**: Added support for Intelligent Prompt Router in Invoke, InvokeStream, Converse and ConverseStream. Add support for Bedrock Guardrails image content filter. New Bedrock Marketplace feature enabling a wider range of bedrock compatible models with self-hosted capability.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.55.0](service/kendra/CHANGELOG.md#v1550-2024-12-04)
+  * **Feature**: This release adds GenAI Index in Amazon Kendra for Retrieval Augmented Generation (RAG) and intelligent search. With the Kendra GenAI Index, customers get high retrieval accuracy powered by the latest information retrieval technologies and semantic models.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.169.0](service/sagemaker/CHANGELOG.md#v11690-2024-12-04)
+  * **Feature**: Amazon SageMaker HyperPod launched task governance to help customers maximize accelerator utilization for model development and flexible training plans to meet training timelines and budget while reducing weeks of training time. AI apps from AWS partner is now available in SageMaker.
+
+# Release (2024-12-03.2)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/rds/auth`: [v1.5.0](feature/rds/auth/CHANGELOG.md#v150-2024-12-032)
+  * No change notes available for this release.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.49.0](service/athena/CHANGELOG.md#v1490-2024-12-032)
+  * **Feature**: Add FEDERATED type to CreateDataCatalog. This creates Athena Data Catalog, AWS Lambda connector, and AWS Glue connection. Create/DeleteDataCatalog returns DataCatalog. Add Status, ConnectionType, and Error to DataCatalog and DataCatalogSummary. Add DeleteCatalogOnly to delete Athena Catalog only.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.24.0](service/bedrock/CHANGELOG.md#v1240-2024-12-032)
+  * **Feature**: Tagging support for Async Invoke resources. Added support for Distillation in CreateModelCustomizationJob API. Support for videoDataDeliveryEnabled flag in invocation logging.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.31.0](service/bedrockagent/CHANGELOG.md#v1310-2024-12-032)
+  * **Feature**: Releasing SDK for Multi-Agent Collaboration.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.29.0](service/bedrockagentruntime/CHANGELOG.md#v1290-2024-12-032)
+  * **Feature**: Releasing SDK for multi agent collaboration
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.22.0](service/bedrockruntime/CHANGELOG.md#v1220-2024-12-032)
+  * **Feature**: Added support for Async Invoke Operations Start, List and Get. Support for invocation logs with `requestMetadata` field in Converse, ConverseStream, Invoke and InvokeStream. Video content blocks in Converse/ConverseStream accept raw bytes or S3 URI.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.43.3](service/cloudwatch/CHANGELOG.md#v1433-2024-12-032)
+  * **Documentation**: Support for configuring AiOps investigation as alarm action
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.25.0](service/datazone/CHANGELOG.md#v1250-2024-12-032)
+  * **Feature**: Adds support for Connections, ProjectProfiles, and JobRuns APIs. Supports the new Lineage feature at GA. Adjusts optionality of a parameter for DataSource and SubscriptionTarget APIs which may adjust types in some clients.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.0.0](service/dsql/CHANGELOG.md#v100-2024-12-032)
+  * **Release**: New AWS service client module
+  * **Feature**: Add new API operations for Amazon Aurora DSQL. Amazon Aurora DSQL is a serverless, distributed SQL database with virtually unlimited scale, highest availability, and zero infrastructure management.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.38.0](service/dynamodb/CHANGELOG.md#v1380-2024-12-032)
+  * **Feature**: This change adds support for global tables with multi-Region strong consistency (in preview). The UpdateTable API now supports a new attribute MultiRegionConsistency to set consistency when creating global tables. The DescribeTable output now optionally includes the MultiRegionConsistency attribute.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.103.0](service/glue/CHANGELOG.md#v11030-2024-12-032)
+  * **Feature**: This release includes(1)Zero-ETL integration to ingest data from 3P SaaS and DynamoDB to Redshift/Redlake (2)new properties on Connections to enable reuse; new connection APIs for retrieve/preview metadata (3)support of CRUD operations for Multi-catalog (4)support of automatic statistics collections
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.39.0](service/lakeformation/CHANGELOG.md#v1390-2024-12-032)
+  * **Feature**: This release added two new LakeFormation Permissions (CREATE_CATALOG, SUPER_USER) and added Id field for CatalogResource. It also added new conditon and expression field.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.6.0](service/qapps/CHANGELOG.md#v160-2024-12-032)
+  * **Feature**: Add support for 11 new plugins as action cards to help automate repetitive tasks and improve productivity.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.18.0](service/qbusiness/CHANGELOG.md#v1180-2024-12-032)
+  * **Feature**: Amazon Q Business now supports customization options for your web experience, 11 new Plugins, and QuickSight support. Amazon Q index allows software providers to enrich their native generative AI experiences with their customer's enterprise knowledge and user context spanning multiple applications.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.81.0](service/quicksight/CHANGELOG.md#v1810-2024-12-032)
+  * **Feature**: This release includes API needed to support for Unstructured Data in Q in QuickSight Q&A (IDC).
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.53.0](service/redshift/CHANGELOG.md#v1530-2024-12-032)
+  * **Feature**: Adds support for Amazon Redshift RegisterNamespace and DeregisterNamespace APIs to share data to AWS Glue Data Catalog.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.25.0](service/redshiftserverless/CHANGELOG.md#v1250-2024-12-032)
+  * **Feature**: Adds support for the ListManagedWorkgroups API to get an overview of existing managed workgroups.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.71.0](service/s3/CHANGELOG.md#v1710-2024-12-032)
+  * **Feature**: Amazon S3 Metadata stores object metadata in read-only, fully managed Apache Iceberg metadata tables that you can query. You can create metadata table configurations for S3 general purpose buckets.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.0.0](service/s3tables/CHANGELOG.md#v100-2024-12-032)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon S3 Tables deliver the first cloud object store with built-in open table format support, and the easiest way to store tabular data at scale.
+
+# Release (2024-12-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.21.0](service/bedrockruntime/CHANGELOG.md#v1210-2024-12-03)
+  * **Feature**: Add an API parameter that allows customers to set performance configuration for invoking a model.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.52.0](service/s3control/CHANGELOG.md#v1520-2024-12-03)
+  * **Feature**: It allows customers to pass CRC64NVME as a header in S3 Batch Operations copy requests
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.1.0](service/socialmessaging/CHANGELOG.md#v110-2024-12-03)
+  * **Feature**: Added support for passing role arn corresponding to the supported event destination
+
+# Release (2024-12-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.32.6
+  * **Bug Fix**: Fix user agent to add business metrics at the end instead of prepend them
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.23.0](service/bedrock/CHANGELOG.md#v1230-2024-12-02)
+  * **Feature**: Add support for Knowledge Base Evaluations & LLM as a judge
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.30.0](service/bedrockagent/CHANGELOG.md#v1300-2024-12-02)
+  * **Feature**: This release introduces APIs to upload documents directly into a Knowledge Base
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.28.0](service/bedrockagentruntime/CHANGELOG.md#v1280-2024-12-02)
+  * **Feature**: This release introduces a new Rerank API to leverage reranking models (with integration into Knowledge Bases); APIs to upload documents directly into Knowledge Base; RetrieveAndGenerateStream API for streaming response; Guardrails on Retrieve API; and ability to automatically generate filters
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.20.0](service/chimesdkvoice/CHANGELOG.md#v1200-2024-12-02)
+  * **Feature**: This release adds supports for enterprises to integrate Amazon Connect with other voice systems. It supports directly transferring voice calls and metadata without using the public telephone network. It also supports real-time and post-call analytics.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.21.0](service/cleanrooms/CHANGELOG.md#v1210-2024-12-02)
+  * **Feature**: This release allows customers and their partners to easily collaborate with data stored in Snowflake and Amazon Athena, without having to move or share their underlying data among collaborators.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.45.0](service/cloudwatchlogs/CHANGELOG.md#v1450-2024-12-02)
+  * **Feature**: Adds PutIntegration, GetIntegration, ListIntegrations and DeleteIntegration APIs. Adds QueryLanguage support to StartQuery, GetQueryResults, DescribeQueries, DescribeQueryDefinitions, and PutQueryDefinition APIs.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.119.0](service/connect/CHANGELOG.md#v11190-2024-12-02)
+  * **Feature**: Adds support for WhatsApp Business messaging, IVR call recording, enabling Contact Lens for existing on-premise contact centers and telephony platforms, and enabling telephony and IVR migration to Amazon Connect independent of their contact center agents.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.1.0](service/connectcampaignsv2/CHANGELOG.md#v110-2024-12-02)
+  * **Feature**: Amazon Connect Outbound Campaigns V2 / Features : Adds support for Event-Triggered Campaigns.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.44.0](service/customerprofiles/CHANGELOG.md#v1440-2024-12-02)
+  * **Feature**: This release introduces Event Trigger APIs as part of Amazon Connect Customer Profiles service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.195.0](service/ec2/CHANGELOG.md#v11950-2024-12-02)
+  * **Feature**: Adds support for declarative policies that allow you to enforce desired configuration across an AWS organization through configuring account attributes. Adds support for Allowed AMIs that allows you to limit the use of AMIs in AWS accounts. Adds support for connectivity over non-HTTP protocols.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.52.1](service/ecs/CHANGELOG.md#v1521-2024-12-02)
+  * **Documentation**: This release adds support for Container Insights with Enhanced Observability for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.53.0](service/eks/CHANGELOG.md#v1530-2024-12-02)
+  * **Feature**: Added support for Auto Mode Clusters, Hybrid Nodes, and specifying computeTypes in the DescribeAddonVersions API.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.36.0](service/eventbridge/CHANGELOG.md#v1360-2024-12-02)
+  * **Feature**: Call private APIs by configuring Connections with VPC connectivity through PrivateLink and VPC Lattice
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.51.0](service/fsx/CHANGELOG.md#v1510-2024-12-02)
+  * **Feature**: FSx API changes to support the public launch of the Amazon FSx Intelligent Tiering for OpenZFS storage class.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.52.0](service/guardduty/CHANGELOG.md#v1520-2024-12-02)
+  * **Feature**: Add new Multi Domain Correlation findings.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.39.0](service/imagebuilder/CHANGELOG.md#v1390-2024-12-02)
+  * **Feature**: Added support for EC2 Image Builder's integration with AWS Marketplace for Marketplace components.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.0.0](service/invoicing/CHANGELOG.md#v100-2024-12-02)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Invoice Configuration allows you to receive separate AWS invoices based on your organizational needs. You can use the AWS SDKs to manage Invoice Units and programmatically fetch the information of the invoice receiver.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.25.0](service/memorydb/CHANGELOG.md#v1250-2024-12-02)
+  * **Feature**: Amazon MemoryDB SDK now supports all APIs for Multi-Region. Please refer to the updated Amazon MemoryDB public documentation for detailed information on API usage.
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.0.0](service/networkflowmonitor/CHANGELOG.md#v100-2024-12-02)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds documentation for a new feature in Amazon CloudWatch called Network Flow Monitor. You can use Network Flow Monitor to get near real-time metrics, including retransmissions and data transferred, for your actual workloads.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.45.0](service/opensearch/CHANGELOG.md#v1450-2024-12-02)
+  * **Feature**: This feature introduces support for CRUDL APIs, enabling the creation and management of Connected data sources.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.36.0](service/organizations/CHANGELOG.md#v1360-2024-12-02)
+  * **Feature**: Add support for policy operations on the DECLARATIVE_POLICY_EC2 policy type.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.17.0](service/qbusiness/CHANGELOG.md#v1170-2024-12-02)
+  * **Feature**: Amazon Q Business now supports capabilities to extract insights and answer questions from visual elements embedded within documents, a browser extension for Google Chrome, Mozilla Firefox, and Microsoft Edge, and attachments across conversations.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.14.0](service/qconnect/CHANGELOG.md#v1140-2024-12-02)
+  * **Feature**: This release adds following capabilities: Configuring safeguards via AIGuardrails for Q in Connect inferencing, and APIs to support Q&A self-service use cases
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.92.0](service/rds/CHANGELOG.md#v1920-2024-12-02)
+  * **Feature**: Amazon RDS supports CloudWatch Database Insights. You can use the SDK to create, modify, and describe the DatabaseInsightsMode for your DB instances and clusters.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.70.0](service/s3/CHANGELOG.md#v1700-2024-12-02)
+  * **Feature**: Amazon S3 introduces support for AWS Dedicated Local Zones
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.51.0](service/s3control/CHANGELOG.md#v1510-2024-12-02)
+  * **Feature**: Amazon S3 introduces support for AWS Dedicated Local Zones
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.55.0](service/securityhub/CHANGELOG.md#v1550-2024-12-02)
+  * **Feature**: Add new Multi Domain Correlation findings.
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.0.0](service/securityir/CHANGELOG.md#v100-2024-12-02)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Security Incident Response is a purpose-built security incident solution designed to help customers prepare for, respond to, and recover from security incidents.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.54.0](service/transfer/CHANGELOG.md#v1540-2024-12-02)
+  * **Feature**: AWS Transfer Family now offers Web apps that enables simple and secure access to data stored in Amazon S3.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.13.0](service/vpclattice/CHANGELOG.md#v1130-2024-12-02)
+  * **Feature**: Lattice APIs that allow sharing and access of VPC resources across accounts.
+
+# Release (2024-11-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.29.0](service/bedrockagent/CHANGELOG.md#v1290-2024-11-27)
+  * **Feature**: Add support for specifying embeddingDataType, either FLOAT32 or BINARY
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.51.0](service/configservice/CHANGELOG.md#v1510-2024-11-27)
+  * **Feature**: AWS Config adds support for service-linked recorders, a new type of Config recorder managed by AWS services to record specific subsets of resource configuration data and functioning independently from customer managed AWS Config recorders.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.50.0](service/fsx/CHANGELOG.md#v1500-2024-11-27)
+  * **Feature**: This release adds EFA support to increase FSx for Lustre file systems' throughput performance to a single client instance. This can be done by specifying EfaEnabled=true at the time of creation of Persistent_2 file systems.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.0.0](service/observabilityadmin/CHANGELOG.md#v100-2024-11-27)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon CloudWatch Observability Admin adds the ability to audit telemetry configuration for AWS resources in customers AWS Accounts and Organizations. The release introduces new APIs to turn on/off the new experience, which supports discovering supported AWS resources and their state of telemetry.
+
+# Release (2024-11-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.28.0](service/bedrockagent/CHANGELOG.md#v1280-2024-11-26)
+  * **Feature**: Custom Orchestration API release for AWSBedrockAgents.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.27.0](service/bedrockagentruntime/CHANGELOG.md#v1270-2024-11-26)
+  * **Feature**: Custom Orchestration and Streaming configurations API release for AWSBedrockAgents.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.118.0](service/connect/CHANGELOG.md#v11180-2024-11-26)
+  * **Feature**: Enables access to ValueMap and ValueInteger types for SegmentAttributes and fixes deserialization bug for DescribeContactFlow in AmazonConnect Public API
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.194.0](service/ec2/CHANGELOG.md#v11940-2024-11-26)
+  * **Feature**: Adds support for Time-based Copy for EBS Snapshots and Cross Region PrivateLink. Time-based Copy ensures that EBS Snapshots are copied within and across AWS Regions in a specified timeframe. Cross Region PrivateLink enables customers to connect to VPC endpoint services hosted in other AWS Regions.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.5.0](service/qapps/CHANGELOG.md#v150-2024-11-26)
+  * **Feature**: Private sharing, file upload and data collection feature support for Q Apps
+
 # Release (2024-11-25)
 
 ## General Highlights

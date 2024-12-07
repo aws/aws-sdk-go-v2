@@ -218,6 +218,35 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.guardduty#AccessKey": {
+            "type": "structure",
+            "members": {
+                "PrincipalId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Principal ID of the user.</p>",
+                        "smithy.api#jsonName": "principalId"
+                    }
+                },
+                "UserName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the user.</p>",
+                        "smithy.api#jsonName": "userName"
+                    }
+                },
+                "UserType": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the user.</p>",
+                        "smithy.api#jsonName": "userType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the access keys.</p>"
+            }
+        },
         "com.amazonaws.guardduty#AccessKeyDetails": {
             "type": "structure",
             "members": {
@@ -252,6 +281,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the access keys.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#Account": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>ID of the member's Amazon Web Services account</p>",
+                        "smithy.api#jsonName": "uid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the member's Amazon Web Services account.</p>",
+                        "smithy.api#jsonName": "account"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the account.</p>"
             }
         },
         "com.amazonaws.guardduty#AccountDetail": {
@@ -471,6 +524,61 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about actions.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#Actor": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>ID of the threat actor.</p>",
+                        "smithy.api#jsonName": "id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "User": {
+                    "target": "com.amazonaws.guardduty#User",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the user credentials used by the threat actor.</p>",
+                        "smithy.api#jsonName": "user"
+                    }
+                },
+                "Session": {
+                    "target": "com.amazonaws.guardduty#Session",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the user session where the activity initiated.</p>",
+                        "smithy.api#jsonName": "session"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the actors involved in an attack sequence.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ActorIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
+                }
+            }
+        },
+        "com.amazonaws.guardduty#Actors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Actor"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
+                }
             }
         },
         "com.amazonaws.guardduty#AddonDetails": {
@@ -790,6 +898,32 @@
                         "smithy.api#enumValue": "NONE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.guardduty#AutonomousSystem": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Name associated with the Autonomous System (AS).</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Number": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique number that identifies the Autonomous System (AS).</p>",
+                        "smithy.api#jsonName": "number",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Autonomous System (AS) associated with the network \n       endpoints involved in an attack sequence.</p>"
             }
         },
         "com.amazonaws.guardduty#AwsApiCallAction": {
@@ -3840,6 +3974,13 @@
                         "smithy.api#documentation": "<p>The details about the anomalous activity that caused GuardDuty to \n      generate the finding.</p>",
                         "smithy.api#jsonName": "anomaly"
                     }
+                },
+                "Sequence": {
+                    "target": "com.amazonaws.guardduty#Sequence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details about the attack sequence.</p>",
+                        "smithy.api#jsonName": "sequence"
+                    }
                 }
             },
             "traits": {
@@ -4538,6 +4679,129 @@
                 "smithy.api#documentation": "<p>Describes the configuration of scanning EBS volumes as a data source.</p>"
             }
         },
+        "com.amazonaws.guardduty#Ec2Instance": {
+            "type": "structure",
+            "members": {
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability zone of the Amazon EC2 instance. For more information, see\n       <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones\">Availability zones</a>\n       in the <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#jsonName": "availabilityZone"
+                    }
+                },
+                "ImageDescription": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image description of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "imageDescription"
+                    }
+                },
+                "InstanceState": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the Amazon EC2 instance. For more information, see\n       <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Amazon EC2 instance state changes</a>\n       in the <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#jsonName": "instanceState"
+                    }
+                },
+                "IamInstanceProfile": {
+                    "target": "com.amazonaws.guardduty#IamInstanceProfile"
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "instanceType"
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Outpost. This shows applicable Amazon Web Services Outposts instances.</p>",
+                        "smithy.api#jsonName": "outpostArn"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "platform"
+                    }
+                },
+                "ProductCodes": {
+                    "target": "com.amazonaws.guardduty#ProductCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product code of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "productCodes"
+                    }
+                },
+                "Ec2NetworkInterfaceUids": {
+                    "target": "com.amazonaws.guardduty#Ec2NetworkInterfaceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the network interface.</p>",
+                        "smithy.api#jsonName": "ec2NetworkInterfaceUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the potentially impacted Amazon EC2 instance resource.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#Ec2NetworkInterface": {
+            "type": "structure",
+            "members": {
+                "Ipv6Addresses": {
+                    "target": "com.amazonaws.guardduty#Ipv6Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IPv6 addresses for the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "ipv6Addresses"
+                    }
+                },
+                "PrivateIpAddresses": {
+                    "target": "com.amazonaws.guardduty#PrivateIpAddresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Other private IP address information of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "privateIpAddresses"
+                    }
+                },
+                "PublicIp": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public IP address of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "publicIp"
+                    }
+                },
+                "SecurityGroups": {
+                    "target": "com.amazonaws.guardduty#SecurityGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups associated with the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "securityGroups"
+                    }
+                },
+                "SubNetId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet ID of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "subNetId"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC ID of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "vpcId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the elastic network interface of the Amazon EC2 instance.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#Ec2NetworkInterfaceUids": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            }
+        },
         "com.amazonaws.guardduty#EcsClusterDetails": {
             "type": "structure",
             "members": {
@@ -4794,6 +5058,18 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#EndpointIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
+                }
             }
         },
         "com.amazonaws.guardduty#Eq": {
@@ -5173,6 +5449,13 @@
                         "smithy.api#jsonName": "updatedAt",
                         "smithy.api#required": {}
                     }
+                },
+                "AssociatedAttackSequenceArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) associated with the attack sequence finding.</p>",
+                        "smithy.api#jsonName": "associatedAttackSequenceArn"
+                    }
                 }
             },
             "traits": {
@@ -5234,6 +5517,41 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SIX_HOURS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#FindingResourceType": {
+            "type": "enum",
+            "members": {
+                "EC2_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_INSTANCE"
+                    }
+                },
+                "EC2_NETWORK_INTERFACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_NETWORK_INTERFACE"
+                    }
+                },
+                "S3_BUCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_BUCKET"
+                    }
+                },
+                "S3_OBJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_OBJECT"
+                    }
+                },
+                "ACCESS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_KEY"
                     }
                 }
             }
@@ -8331,6 +8649,144 @@
                 "smithy.api#documentation": "<p>Contains information about the impersonated user.</p>"
             }
         },
+        "com.amazonaws.guardduty#Indicator": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.guardduty#IndicatorType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specific indicator keys observed in the attack sequence.</p>",
+                        "smithy.api#jsonName": "key",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.guardduty#IndicatorValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Values associated with each indicator key. For example, if the indicator key is\n        <code>SUSPICIOUS_NETWORK</code>, then the value will be the name of the network. If\n        the indicator key is <code>ATTACK_TACTIC</code>, then the value will be one of the MITRE tactics. </p>\n         <p>For more information about the\n      values associated with the key, see GuardDuty Extended Threat Detection in the\n      <i>GuardDuty User Guide.</i>\n         </p>",
+                        "smithy.api#jsonName": "values"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.guardduty#IndicatorTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Title describing the indicator.</p>",
+                        "smithy.api#jsonName": "title"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the indicators that include a set of \n       signals observed in an attack sequence.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#IndicatorTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.guardduty#IndicatorType": {
+            "type": "enum",
+            "members": {
+                "SUSPICIOUS_USER_AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPICIOUS_USER_AGENT"
+                    }
+                },
+                "SUSPICIOUS_NETWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPICIOUS_NETWORK"
+                    }
+                },
+                "MALICIOUS_IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MALICIOUS_IP"
+                    }
+                },
+                "TOR_IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOR_IP"
+                    }
+                },
+                "ATTACK_TACTIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACK_TACTIC"
+                    }
+                },
+                "HIGH_RISK_API": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH_RISK_API"
+                    }
+                },
+                "ATTACK_TECHNIQUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACK_TECHNIQUE"
+                    }
+                },
+                "UNUSUAL_API_FOR_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNUSUAL_API_FOR_ACCOUNT"
+                    }
+                },
+                "UNUSUAL_ASN_FOR_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNUSUAL_ASN_FOR_ACCOUNT"
+                    }
+                },
+                "UNUSUAL_ASN_FOR_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNUSUAL_ASN_FOR_USER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#IndicatorValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.guardduty#IndicatorValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#IndicatorValueString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 400
+                }
+            }
+        },
+        "com.amazonaws.guardduty#Indicators": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Indicator"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
+                }
+            }
+        },
         "com.amazonaws.guardduty#InstanceArn": {
             "type": "string",
             "traits": {
@@ -10996,6 +11452,23 @@
                 "target": "com.amazonaws.guardduty#String"
             }
         },
+        "com.amazonaws.guardduty#MfaStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#Name": {
             "type": "string",
             "traits": {
@@ -11009,6 +11482,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#String"
+            }
+        },
+        "com.amazonaws.guardduty#NetworkConnection": {
+            "type": "structure",
+            "members": {
+                "Direction": {
+                    "target": "com.amazonaws.guardduty#NetworkDirection",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The direction in which the network traffic is flowing.</p>",
+                        "smithy.api#jsonName": "direction",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the network connection.</p>"
             }
         },
         "com.amazonaws.guardduty#NetworkConnectionAction": {
@@ -11073,6 +11563,138 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the NETWORK_CONNECTION action described in the finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#NetworkDirection": {
+            "type": "enum",
+            "members": {
+                "INBOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INBOUND"
+                    }
+                },
+                "OUTBOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTBOUND"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#NetworkEndpoint": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the network endpoint.</p>",
+                        "smithy.api#jsonName": "id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Ip": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address associated with the network endpoint.</p>",
+                        "smithy.api#jsonName": "ip"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain information for the network endpoint.</p>",
+                        "smithy.api#jsonName": "domain"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number associated with the network endpoint.</p>",
+                        "smithy.api#jsonName": "port"
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.guardduty#NetworkGeoLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the location of the network endpoint.</p>",
+                        "smithy.api#jsonName": "location"
+                    }
+                },
+                "AutonomousSystem": {
+                    "target": "com.amazonaws.guardduty#AutonomousSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Autonomous System (AS) of the network endpoint.</p>",
+                        "smithy.api#jsonName": "autonomousSystem"
+                    }
+                },
+                "Connection": {
+                    "target": "com.amazonaws.guardduty#NetworkConnection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network connection.</p>",
+                        "smithy.api#jsonName": "connection"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about network endpoints that were observed in the attack sequence.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#NetworkEndpoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#NetworkEndpoint"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
+                }
+            }
+        },
+        "com.amazonaws.guardduty#NetworkGeoLocation": {
+            "type": "structure",
+            "members": {
+                "City": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the city.</p>",
+                        "smithy.api#jsonName": "city",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the country.</p>",
+                        "smithy.api#jsonName": "country",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Latitude": {
+                    "target": "com.amazonaws.guardduty#Double",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The latitude information of the endpoint location.</p>",
+                        "smithy.api#jsonName": "lat",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Longitude": {
+                    "target": "com.amazonaws.guardduty#Double",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The longitude information of the endpoint location.</p>",
+                        "smithy.api#jsonName": "lon",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about network endpoint location.</p>"
             }
         },
         "com.amazonaws.guardduty#NetworkInterface": {
@@ -12166,6 +12788,93 @@
                 "smithy.api#documentation": "<p>Describes the public access policies that apply to the S3 bucket.</p>"
             }
         },
+        "com.amazonaws.guardduty#PublicAccessConfiguration": {
+            "type": "structure",
+            "members": {
+                "PublicAclAccess": {
+                    "target": "com.amazonaws.guardduty#PublicAccessStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not there is a setting that allows public access to the Amazon S3 buckets through access\n       control lists (ACLs).</p>",
+                        "smithy.api#jsonName": "publicAclAccess"
+                    }
+                },
+                "PublicPolicyAccess": {
+                    "target": "com.amazonaws.guardduty#PublicAccessStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not there is a setting that allows public access to the Amazon S3 bucket policy.</p>",
+                        "smithy.api#jsonName": "publicPolicyAccess"
+                    }
+                },
+                "PublicAclIgnoreBehavior": {
+                    "target": "com.amazonaws.guardduty#PublicAclIgnoreBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not there is a setting that ignores all public access control lists (ACLs)\n       on the Amazon S3 bucket and the objects that it contains.</p>",
+                        "smithy.api#jsonName": "publicAclIgnoreBehavior"
+                    }
+                },
+                "PublicBucketRestrictBehavior": {
+                    "target": "com.amazonaws.guardduty#PublicBucketRestrictBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not there is a setting that restricts access to the bucket with specified policies.</p>",
+                        "smithy.api#jsonName": "publicBucketRestrictBehavior"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes public access policies that apply to the Amazon S3 bucket.</p>\n         <p>For information about each of the following settings, see\n       <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html\">Blocking public access to your Amazon S3 storage</a> in the <i>Amazon S3 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#PublicAccessStatus": {
+            "type": "enum",
+            "members": {
+                "BLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKED"
+                    }
+                },
+                "ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOWED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#PublicAclIgnoreBehavior": {
+            "type": "enum",
+            "members": {
+                "IGNORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IGNORED"
+                    }
+                },
+                "NOT_IGNORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_IGNORED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#PublicBucketRestrictBehavior": {
+            "type": "enum",
+            "members": {
+                "RESTRICTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTRICTED"
+                    }
+                },
+                "NOT_RESTRICTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_RESTRICTED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#PublishingStatus": {
             "type": "enum",
             "members": {
@@ -12342,7 +13051,7 @@
                 "Tags": {
                     "target": "com.amazonaws.guardduty#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the tag-key value pair.</p>",
+                        "smithy.api#documentation": "<p>Information about the tag key-value pair.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -12569,6 +13278,49 @@
                 "smithy.api#pattern": "^arn:[A-Za-z-]+:[A-Za-z0-9]+:[A-Za-z0-9-]+:\\d+:(([A-Za-z0-9-]+)[:\\/])?[A-Za-z0-9-]*$"
             }
         },
+        "com.amazonaws.guardduty#ResourceData": {
+            "type": "structure",
+            "members": {
+                "S3Bucket": {
+                    "target": "com.amazonaws.guardduty#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the Amazon S3 bucket.</p>",
+                        "smithy.api#jsonName": "s3Bucket"
+                    }
+                },
+                "Ec2Instance": {
+                    "target": "com.amazonaws.guardduty#Ec2Instance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "ec2Instance"
+                    }
+                },
+                "AccessKey": {
+                    "target": "com.amazonaws.guardduty#AccessKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the IAM access key details of a user that involved in the GuardDuty finding.</p>",
+                        "smithy.api#jsonName": "accessKey"
+                    }
+                },
+                "Ec2NetworkInterface": {
+                    "target": "com.amazonaws.guardduty#Ec2NetworkInterface",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the elastic network interface of the Amazon EC2 instance.</p>",
+                        "smithy.api#jsonName": "ec2NetworkInterface"
+                    }
+                },
+                "S3Object": {
+                    "target": "com.amazonaws.guardduty#S3Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the Amazon S3 object.</p>",
+                        "smithy.api#jsonName": "s3Object"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon Web Services resource that is associated with the activity that prompted\n       GuardDuty to generate a finding.</p>"
+            }
+        },
         "com.amazonaws.guardduty#ResourceDetails": {
             "type": "structure",
             "members": {
@@ -12677,6 +13429,105 @@
                     "traits": {
                         "smithy.api#enumValue": "EC2"
                     }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ResourceUids": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ResourceV2": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the resource.</p>",
+                        "smithy.api#jsonName": "uid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID to which the resource belongs.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.guardduty#FindingResourceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the Amazon Web Services resource.</p>",
+                        "smithy.api#jsonName": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the resource belongs.</p>",
+                        "smithy.api#jsonName": "region"
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service of the resource.</p>",
+                        "smithy.api#jsonName": "service"
+                    }
+                },
+                "CloudPartition": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud partition within the Amazon Web Services Region to which the resource belongs.</p>",
+                        "smithy.api#jsonName": "cloudPartition"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the tags associated with the resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.guardduty#ResourceData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the Amazon Web Services resource associated with the activity that prompted\n       GuardDuty to generate a finding.</p>",
+                        "smithy.api#jsonName": "data"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon Web Services resource that is associated with the GuardDuty finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#Resources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#ResourceV2"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
                 }
             }
         },
@@ -12885,6 +13736,84 @@
                 "smithy.api#documentation": "<p>Information about the process and any required context values for a specific\n      finding.</p>"
             }
         },
+        "com.amazonaws.guardduty#S3Bucket": {
+            "type": "structure",
+            "members": {
+                "OwnerId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner ID of the associated S3Amazon S3bucket.</p>",
+                        "smithy.api#jsonName": "ownerId"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the Amazon S3 bucket was created.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
+                "EncryptionType": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption used for the Amazon S3 buckets and its objects. For more information,\n       see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html\">Protecting data with server-side encryption</a>\n       in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#jsonName": "encryptionType"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the encryption key that is used to encrypt the Amazon S3 bucket and its objects.</p>",
+                        "smithy.api#jsonName": "encryptionKeyArn"
+                    }
+                },
+                "EffectivePermission": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the effective permissions on this S3 bucket, after factoring all the attached policies.</p>",
+                        "smithy.api#jsonName": "effectivePermission"
+                    }
+                },
+                "PublicReadAccess": {
+                    "target": "com.amazonaws.guardduty#PublicAccessStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not the public read access is allowed for an Amazon S3 bucket.</p>",
+                        "smithy.api#jsonName": "publicReadAccess"
+                    }
+                },
+                "PublicWriteAccess": {
+                    "target": "com.amazonaws.guardduty#PublicAccessStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not the public write access is allowed for an Amazon S3 bucket.</p>",
+                        "smithy.api#jsonName": "publicWriteAccess"
+                    }
+                },
+                "AccountPublicAccess": {
+                    "target": "com.amazonaws.guardduty#PublicAccessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the public access policies that apply to the Amazon S3 bucket at the account level.</p>",
+                        "smithy.api#jsonName": "accountPublicAccess"
+                    }
+                },
+                "BucketPublicAccess": {
+                    "target": "com.amazonaws.guardduty#PublicAccessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about public access policies that apply to the Amazon S3 bucket.</p>",
+                        "smithy.api#jsonName": "bucketPublicAccess"
+                    }
+                },
+                "S3ObjectUids": {
+                    "target": "com.amazonaws.guardduty#S3ObjectUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of Amazon S3 object identifiers.</p>",
+                        "smithy.api#jsonName": "s3ObjectUids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon S3 bucket policies and encryption.</p>"
+            }
+        },
         "com.amazonaws.guardduty#S3BucketDetail": {
             "type": "structure",
             "members": {
@@ -12996,6 +13925,35 @@
                 "smithy.api#documentation": "<p>Describes whether S3 data event logs will be enabled as a data source.</p>"
             }
         },
+        "com.amazonaws.guardduty#S3Object": {
+            "type": "structure",
+            "members": {
+                "ETag": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity tag is a hash of the Amazon S3 object. The ETag reflects changes only to the\n       contents of an object, and not its metadata.</p>",
+                        "smithy.api#jsonName": "eTag"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the Amazon S3 object.</p>",
+                        "smithy.api#jsonName": "key"
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version Id of the Amazon S3 object.</p>",
+                        "smithy.api#jsonName": "versionId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Amazon S3 object.</p>"
+            }
+        },
         "com.amazonaws.guardduty#S3ObjectDetail": {
             "type": "structure",
             "members": {
@@ -13043,6 +14001,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#S3ObjectDetail"
+            }
+        },
+        "com.amazonaws.guardduty#S3ObjectUids": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
             }
         },
         "com.amazonaws.guardduty#Scan": {
@@ -13560,6 +14524,78 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.guardduty#Sequence": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Unique identifier of the attack sequence.</p>",
+                        "smithy.api#jsonName": "uid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.guardduty#SequenceDescription",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Description of the attack sequence.</p>",
+                        "smithy.api#jsonName": "description",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Actors": {
+                    "target": "com.amazonaws.guardduty#Actors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the actors involved in the attack sequence.</p>",
+                        "smithy.api#jsonName": "actors"
+                    }
+                },
+                "Resources": {
+                    "target": "com.amazonaws.guardduty#Resources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the resources involved in the attack sequence.</p>",
+                        "smithy.api#jsonName": "resources"
+                    }
+                },
+                "Endpoints": {
+                    "target": "com.amazonaws.guardduty#NetworkEndpoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the network endpoints that were used in the attack sequence.</p>",
+                        "smithy.api#jsonName": "endpoints"
+                    }
+                },
+                "Signals": {
+                    "target": "com.amazonaws.guardduty#Signals",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Contains information about the signals involved in the attack sequence.</p>",
+                        "smithy.api#jsonName": "signals",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SequenceIndicators": {
+                    "target": "com.amazonaws.guardduty#Indicators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the indicators observed in the attack sequence.</p>",
+                        "smithy.api#jsonName": "sequenceIndicators"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the GuardDuty attack sequence finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#SequenceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
         "com.amazonaws.guardduty#Service": {
             "type": "structure",
             "members": {
@@ -13702,6 +14738,42 @@
                 "smithy.api#documentation": "<p>Additional information about the generated finding.</p>"
             }
         },
+        "com.amazonaws.guardduty#Session": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session.</p>",
+                        "smithy.api#jsonName": "uid"
+                    }
+                },
+                "MfaStatus": {
+                    "target": "com.amazonaws.guardduty#MfaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not multi-factor authencation (MFA) was used during authentication.</p>\n         <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.attributes.mfaAuthenticated</code>.</p>",
+                        "smithy.api#jsonName": "mfaStatus"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the session was created.</p>\n         <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.attributes.creationDate</code>.</p>",
+                        "smithy.api#jsonName": "createdTime"
+                    }
+                },
+                "Issuer": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the session issuer.</p>\n         <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.sessionIssuer.arn</code>.</p>",
+                        "smithy.api#jsonName": "issuer"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the authenticated session.</p>"
+            }
+        },
         "com.amazonaws.guardduty#SessionNameList": {
             "type": "list",
             "member": {
@@ -13735,6 +14807,172 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about severity level for each finding type.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#Signal": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the signal.</p>",
+                        "smithy.api#jsonName": "uid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.guardduty#SignalType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the signal used to identify an attack sequence.</p>\n         <p>Signals can be GuardDuty findings or activities observed in data sources that GuardDuty monitors. For\n       more information, see \n       <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html\">Foundational data sources</a> in the\n     <i>GuardDuty User Guide</i>.</p>\n         <p>A signal type can be one of the valid values listed in this API. Here are the related descriptions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FINDING</code> - Individually generated GuardDuty finding.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CLOUD_TRAIL</code> - Activity observed from CloudTrail logs</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3_DATA_EVENTS</code> - Activity observed from CloudTrail data events for S3. Activities associated\n           with this type will show up only when\n           you have enabled GuardDuty S3 Protection feature in your account. For more information about S3 Protection and\n           steps to enable it, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html\">S3 Protection</a> in the\n           <i>GuardDuty User Guide</i>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.guardduty#SignalDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the signal.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the signal. For example, when signal type is <code>FINDING</code>, \n       the signal name is the name of the finding.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the first finding or activity related to this signal was observed.</p>",
+                        "smithy.api#jsonName": "createdAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when this signal was last observed.</p>",
+                        "smithy.api#jsonName": "updatedAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirstSeenAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the first finding or activity related to this signal was observed.</p>",
+                        "smithy.api#jsonName": "firstSeenAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastSeenAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the last finding or activity related to this signal was observed.</p>",
+                        "smithy.api#jsonName": "lastSeenAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.guardduty#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity associated with the signal. For more information about severity, see \n       <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html\">Findings severity levels</a>\n     in the <i>GuardDuty User Guide</i>.</p>",
+                        "smithy.api#jsonName": "severity"
+                    }
+                },
+                "Count": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of times this signal was observed.</p>",
+                        "smithy.api#jsonName": "count",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceUids": {
+                    "target": "com.amazonaws.guardduty#ResourceUids",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the unique identifiers of the resources involved in the signal.</p>",
+                        "smithy.api#jsonName": "resourceUids"
+                    }
+                },
+                "ActorIds": {
+                    "target": "com.amazonaws.guardduty#ActorIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the IDs of the threat actors involved in the signal.</p>",
+                        "smithy.api#jsonName": "actorIds"
+                    }
+                },
+                "EndpointIds": {
+                    "target": "com.amazonaws.guardduty#EndpointIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the endpoint IDs associated with this signal.</p>",
+                        "smithy.api#jsonName": "endpointIds"
+                    }
+                },
+                "SignalIndicators": {
+                    "target": "com.amazonaws.guardduty#Indicators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the indicators associated with the signals.</p>",
+                        "smithy.api#jsonName": "signalIndicators"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the signals involved in the attack sequence.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#SignalDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.guardduty#SignalType": {
+            "type": "enum",
+            "members": {
+                "FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINDING"
+                    }
+                },
+                "CLOUD_TRAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUD_TRAIL"
+                    }
+                },
+                "S3_DATA_EVENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_DATA_EVENTS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#Signals": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Signal"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.guardduty#SortCriteria": {
@@ -15755,6 +16993,55 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#UsageTopAccountsResult"
+            }
+        },
+        "com.amazonaws.guardduty#User": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the user.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Uid": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the user.</p>",
+                        "smithy.api#jsonName": "uid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the user.</p>",
+                        "smithy.api#jsonName": "type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CredentialUid": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The credentials of the user ID.</p>",
+                        "smithy.api#jsonName": "credentialUid"
+                    }
+                },
+                "Account": {
+                    "target": "com.amazonaws.guardduty#Account",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the Amazon Web Services account.</p>",
+                        "smithy.api#jsonName": "account"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the user involved in the attack sequence.</p>"
             }
         },
         "com.amazonaws.guardduty#Volume": {

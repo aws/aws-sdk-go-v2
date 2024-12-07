@@ -65,9 +65,25 @@ type GetEngagementInvitationOutput struct {
 	// The Amazon Resource Name (ARN) that identifies the engagement invitation.
 	Arn *string
 
+	//  The description of the engagement associated with this invitation.
+	EngagementDescription *string
+
+	//  The identifier of the engagement associated with this invitation.This ID links
+	// the invitation to its corresponding engagement.
+	EngagementId *string
+
 	// The title of the engagement invitation, summarizing the purpose or objectives
 	// of the opportunity shared by AWS.
 	EngagementTitle *string
+
+	//  A list of active members currently part of the Engagement. This array contains
+	// a maximum of 10 members, each represented by an object with the following
+	// properties.
+	//
+	//   - CompanyName: The name of the member's company.
+	//
+	//   - WebsiteUrl: The website URL of the member's company.
+	ExistingMembers []types.EngagementMemberSummary
 
 	// Indicates the date on which the engagement invitation will expire if not
 	// accepted by the partner.
@@ -75,6 +91,9 @@ type GetEngagementInvitationOutput struct {
 
 	// The date when the engagement invitation was sent to the partner.
 	InvitationDate *time.Time
+
+	//  The message sent to the invited partner when the invitation was created.
+	InvitationMessage *string
 
 	// Details of the engagement invitation payload, including specific data relevant
 	// to the invitation's contents, such as customer information and opportunity

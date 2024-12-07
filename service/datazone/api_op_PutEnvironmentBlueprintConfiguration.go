@@ -46,6 +46,9 @@ type PutEnvironmentBlueprintConfigurationInput struct {
 	// This member is required.
 	EnvironmentBlueprintIdentifier *string
 
+	// The environment role permissions boundary.
+	EnvironmentRolePermissionBoundary *string
+
 	// The ARN of the manage access role.
 	ManageAccessRoleArn *string
 
@@ -78,6 +81,9 @@ type PutEnvironmentBlueprintConfigurationOutput struct {
 
 	// Specifies the enabled Amazon Web Services Regions.
 	EnabledRegions []string
+
+	// The environment role permissions boundary.
+	EnvironmentRolePermissionBoundary *string
 
 	// The ARN of the manage access role.
 	ManageAccessRoleArn *string

@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a cluster. It also deletes all associated nodes and node endpoints
+// Deletes a cluster. It also deletes all associated nodes and node endpoints.
+//
+// CreateSnapshot permission is required to create a final snapshot. Without this
+// permission, the API call will fail with an Access Denied exception.
 func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, optFns ...func(*Options)) (*DeleteClusterOutput, error) {
 	if params == nil {
 		params = &DeleteClusterInput{}
@@ -39,12 +42,15 @@ type DeleteClusterInput struct {
 	// the cluster immediately afterward.
 	FinalSnapshotName *string
 
+	// The name of the multi-Region cluster to be deleted.
+	MultiRegionClusterName *string
+
 	noSmithyDocumentSerde
 }
 
 type DeleteClusterOutput struct {
 
-	// The cluster object that has been deleted
+	// The cluster object that has been deleted.
 	Cluster *types.Cluster
 
 	// Metadata pertaining to the operation's result.

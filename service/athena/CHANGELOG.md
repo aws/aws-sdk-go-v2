@@ -1,3 +1,11 @@
+# v1.49.0 (2024-12-03.2)
+
+* **Feature**: Add FEDERATED type to CreateDataCatalog. This creates Athena Data Catalog, AWS Lambda connector, and AWS Glue connection. Create/DeleteDataCatalog returns DataCatalog. Add Status, ConnectionType, and Error to DataCatalog and DataCatalogSummary. Add DeleteCatalogOnly to delete Athena Catalog only.
+
+# v1.48.5 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

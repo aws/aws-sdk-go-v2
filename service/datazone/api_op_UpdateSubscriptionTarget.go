@@ -112,12 +112,6 @@ type UpdateSubscriptionTargetOutput struct {
 	// This member is required.
 	Id *string
 
-	// The manage access role to be updated as part of the UpdateSubscriptionTarget
-	// action.
-	//
-	// This member is required.
-	ManageAccessRole *string
-
 	// The name to be updated as part of the UpdateSubscriptionTarget action.
 	//
 	// This member is required.
@@ -142,6 +136,10 @@ type UpdateSubscriptionTargetOutput struct {
 	//
 	// This member is required.
 	Type *string
+
+	// The manage access role to be updated as part of the UpdateSubscriptionTarget
+	// action.
+	ManageAccessRole *string
 
 	// The timestamp of when the subscription target was updated.
 	UpdatedAt *time.Time

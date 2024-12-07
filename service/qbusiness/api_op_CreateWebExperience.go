@@ -34,9 +34,22 @@ type CreateWebExperienceInput struct {
 	// This member is required.
 	ApplicationId *string
 
+	// The browser extension configuration for an Amazon Q Business web experience.
+	//
+	// For Amazon Q Business application using external OIDC-compliant identity
+	// providers (IdPs). The IdP administrator must add the browser extension sign-in
+	// redirect URLs to the IdP application. For more information, see [Configure external OIDC identity provider for your browser extensions.].
+	//
+	// [Configure external OIDC identity provider for your browser extensions.]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/browser-extensions.html
+	BrowserExtensionConfiguration *types.BrowserExtensionConfiguration
+
 	// A token you provide to identify a request to create an Amazon Q Business web
 	// experience.
 	ClientToken *string
+
+	// Sets the custom logo, favicon, font, and color used in the Amazon Q web
+	// experience.
+	CustomizationConfiguration *types.CustomizationConfiguration
 
 	// Information about the identity provider (IdP) used to authenticate end users of
 	// an Amazon Q Business web experience.

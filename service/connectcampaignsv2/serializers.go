@@ -1561,6 +1561,102 @@ func awsRestjson1_serializeOpDocumentPutOutboundRequestBatchInput(v *PutOutbound
 	return nil
 }
 
+type awsRestjson1_serializeOpPutProfileOutboundRequestBatch struct {
+}
+
+func (*awsRestjson1_serializeOpPutProfileOutboundRequestBatch) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutProfileOutboundRequestBatch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutProfileOutboundRequestBatchInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/campaigns/{id}/profile-outbound-requests")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutProfileOutboundRequestBatchInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutProfileOutboundRequestBatchInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutProfileOutboundRequestBatchInput(v *PutProfileOutboundRequestBatchInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutProfileOutboundRequestBatchInput(v *PutProfileOutboundRequestBatchInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProfileOutboundRequests != nil {
+		ok := object.Key("profileOutboundRequests")
+		if err := awsRestjson1_serializeDocumentProfileOutboundRequestList(v.ProfileOutboundRequests, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpResumeCampaign struct {
 }
 
@@ -3108,6 +3204,18 @@ func awsRestjson1_serializeDocumentEncryptionConfig(v *types.EncryptionConfig, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEventTrigger(v *types.EventTrigger, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomerProfilesDomainArn != nil {
+		ok := object.Key("customerProfilesDomainArn")
+		ok.String(*v.CustomerProfilesDomainArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInstanceIdFilter(v *types.InstanceIdFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3291,6 +3399,41 @@ func awsRestjson1_serializeDocumentPredictiveConfig(v *types.PredictiveConfig, v
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProfileOutboundRequest(v *types.ProfileOutboundRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ExpirationTime != nil {
+		ok := object.Key("expirationTime")
+		ok.String(smithytime.FormatDateTime(*v.ExpirationTime))
+	}
+
+	if v.ProfileId != nil {
+		ok := object.Key("profileId")
+		ok.String(*v.ProfileId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProfileOutboundRequestList(v []types.ProfileOutboundRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentProfileOutboundRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -3529,6 +3672,12 @@ func awsRestjson1_serializeDocumentSource(v types.Source, value smithyjson.Value
 	case *types.SourceMemberCustomerProfilesSegmentArn:
 		av := object.Key("customerProfilesSegmentArn")
 		av.String(uv.Value)
+
+	case *types.SourceMemberEventTrigger:
+		av := object.Key("eventTrigger")
+		if err := awsRestjson1_serializeDocumentEventTrigger(&uv.Value, av); err != nil {
+			return err
+		}
 
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)

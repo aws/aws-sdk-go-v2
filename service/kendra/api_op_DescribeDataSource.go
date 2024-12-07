@@ -86,8 +86,8 @@ type DescribeDataSourceOutput struct {
 	// The name for the data source connector.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the role with permission to access the data
-	// source and required resources.
+	// The Amazon Resource Name (ARN) of the IAM role with permission to access the
+	// data source and required resources.
 	RoleArn *string
 
 	// The schedule for Amazon Kendra to update the index.

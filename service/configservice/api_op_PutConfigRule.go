@@ -49,15 +49,21 @@ import (
 // For more information about developing and using Config rules, see [Evaluating Resources with Config Rules] in the
 // Config Developer Guide.
 //
+// # Tags are added at creation and cannot be updated with this operation
+//
 // PutConfigRule is an idempotent API. Subsequent requests won’t create a
 // duplicate resource if one was already created. If a following request has
 // different tags values, Config will ignore these differences and treat it as an
 // idempotent request of the previous. In this case, tags will not be updated,
 // even if they are different.
 //
+// Use [TagResource] and [UntagResource] to update tags after creation.
+//
 // [List of Config Managed Rules]: https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html
 // [Lambda Developer Guide]: https://docs.aws.amazon.com/config/latest/developerguide/gettingstarted-concepts.html#gettingstarted-concepts-function
+// [TagResource]: https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html
 // [Evaluating Resources with Config Rules]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
+// [UntagResource]: https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html
 // [Service Limits]: https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html
 // [Guard GitHub Repository]: https://github.com/aws-cloudformation/cloudformation-guard
 func (c *Client) PutConfigRule(ctx context.Context, params *PutConfigRuleInput, optFns ...func(*Options)) (*PutConfigRuleOutput, error) {

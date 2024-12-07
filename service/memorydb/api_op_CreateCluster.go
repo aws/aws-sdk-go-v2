@@ -60,11 +60,10 @@ type CreateClusterInput struct {
 	// An optional description of the cluster.
 	Description *string
 
-	// The name of the engine to be used for the nodes in this cluster. The value must
-	// be set to either Redis or Valkey.
+	// The name of the engine to be used for the cluster.
 	Engine *string
 
-	// The version number of the engine to be used for the cluster.
+	// The version number of the Redis OSS engine to be used for the cluster.
 	EngineVersion *string
 
 	// The ID of the KMS key used to encrypt the cluster.
@@ -92,6 +91,9 @@ type CreateClusterInput struct {
 	//
 	// Example: sun:23:00-mon:01:30
 	MaintenanceWindow *string
+
+	// The name of the multi-Region cluster to be created.
+	MultiRegionClusterName *string
 
 	// The number of replicas to apply to each shard. The default value is 1. The
 	// maximum is 5.

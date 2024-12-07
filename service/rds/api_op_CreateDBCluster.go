@@ -213,6 +213,9 @@ type CreateDBClusterInput struct {
 	// Reserved for future use.
 	DBSystemId *string
 
+	// Specifies the mode of Database Insights to enable for the cluster.
+	DatabaseInsightsMode types.DatabaseInsightsMode
+
 	// The name for your database of up to 64 alphanumeric characters. A database
 	// named postgres is always created. If this parameter is specified, an additional
 	// database with this name is created.

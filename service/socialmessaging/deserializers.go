@@ -2843,6 +2843,15 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountIdMetaData(v *
 				return err
 			}
 
+		case "wabaId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LinkedWhatsAppBusinessAccountId to be of type string, got %T instead", value)
+				}
+				sv.WabaId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3215,6 +3224,15 @@ func awsRestjson1_deserializeDocumentWhatsAppBusinessAccountEventDestination(v *
 					return fmt.Errorf("expected EventDestinationArn to be of type string, got %T instead", value)
 				}
 				sv.EventDestinationArn = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
 			}
 
 		default:

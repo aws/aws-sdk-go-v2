@@ -1,3 +1,20 @@
+# v1.30.0 (2024-12-04)
+
+* **Feature**: This release introduces the ability to generate SQL using natural language, through a new GenerateQuery API (with native integration into Knowledge Bases); ability to ingest and retrieve images through Bedrock Data Automation; and ability to create a Knowledge Base backed by Kendra GenAI Index.
+
+# v1.29.0 (2024-12-03.2)
+
+* **Feature**: Releasing SDK for multi agent collaboration
+
+# v1.28.0 (2024-12-02)
+
+* **Feature**: This release introduces a new Rerank API to leverage reranking models (with integration into Knowledge Bases); APIs to upload documents directly into Knowledge Base; RetrieveAndGenerateStream API for streaming response; Guardrails on Retrieve API; and ability to automatically generate filters
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.0 (2024-11-26)
+
+* **Feature**: Custom Orchestration and Streaming configurations API release for AWSBedrockAgents.
+
 # v1.26.0 (2024-11-22)
 
 * **Feature**: InvokeInlineAgent API release to help invoke runtime agents without any dependency on preconfigured agents.

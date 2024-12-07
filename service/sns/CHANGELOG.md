@@ -1,3 +1,7 @@
+# v1.33.7 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.6 (2024-11-22)
 
 * **Documentation**: ArchivePolicy attribute added to Archive and Replay feature

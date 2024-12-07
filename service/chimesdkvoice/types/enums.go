@@ -82,6 +82,29 @@ func (Capability) Values() []Capability {
 	}
 }
 
+type ContactCenterSystemType string
+
+// Enum values for ContactCenterSystemType
+const (
+	ContactCenterSystemTypeGenesysEngageOnPremises             ContactCenterSystemType = "GENESYS_ENGAGE_ON_PREMISES"
+	ContactCenterSystemTypeAvayaAuraCallCenterElite            ContactCenterSystemType = "AVAYA_AURA_CALL_CENTER_ELITE"
+	ContactCenterSystemTypeAvayaAuraContactCenter              ContactCenterSystemType = "AVAYA_AURA_CONTACT_CENTER"
+	ContactCenterSystemTypeCiscoUnifiedContactCenterEnterprise ContactCenterSystemType = "CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE"
+)
+
+// Values returns all known values for ContactCenterSystemType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactCenterSystemType) Values() []ContactCenterSystemType {
+	return []ContactCenterSystemType{
+		"GENESYS_ENGAGE_ON_PREMISES",
+		"AVAYA_AURA_CALL_CENTER_ELITE",
+		"AVAYA_AURA_CONTACT_CENTER",
+		"CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -418,6 +441,31 @@ func (ProxySessionStatus) Values() []ProxySessionStatus {
 	}
 }
 
+type SessionBorderControllerType string
+
+// Enum values for SessionBorderControllerType
+const (
+	SessionBorderControllerTypeRibbonSbc                 SessionBorderControllerType = "RIBBON_SBC"
+	SessionBorderControllerTypeOracleAcmePacketSbc       SessionBorderControllerType = "ORACLE_ACME_PACKET_SBC"
+	SessionBorderControllerTypeAvayaSbce                 SessionBorderControllerType = "AVAYA_SBCE"
+	SessionBorderControllerTypeCiscoUnifiedBorderElement SessionBorderControllerType = "CISCO_UNIFIED_BORDER_ELEMENT"
+	SessionBorderControllerTypeAudiocodesMediantSbc      SessionBorderControllerType = "AUDIOCODES_MEDIANT_SBC"
+)
+
+// Values returns all known values for SessionBorderControllerType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionBorderControllerType) Values() []SessionBorderControllerType {
+	return []SessionBorderControllerType{
+		"RIBBON_SBC",
+		"ORACLE_ACME_PACKET_SBC",
+		"AVAYA_SBCE",
+		"CISCO_UNIFIED_BORDER_ELEMENT",
+		"AUDIOCODES_MEDIANT_SBC",
+	}
+}
+
 type SipRuleTriggerType string
 
 // Enum values for SipRuleTriggerType
@@ -469,5 +517,25 @@ func (VoiceConnectorAwsRegion) Values() []VoiceConnectorAwsRegion {
 		"ap-northeast-1",
 		"ap-southeast-1",
 		"ap-southeast-2",
+	}
+}
+
+type VoiceConnectorIntegrationType string
+
+// Enum values for VoiceConnectorIntegrationType
+const (
+	VoiceConnectorIntegrationTypeConnectCallTransferConnector VoiceConnectorIntegrationType = "CONNECT_CALL_TRANSFER_CONNECTOR"
+	VoiceConnectorIntegrationTypeConnectAnalyticsConnector    VoiceConnectorIntegrationType = "CONNECT_ANALYTICS_CONNECTOR"
+)
+
+// Values returns all known values for VoiceConnectorIntegrationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VoiceConnectorIntegrationType) Values() []VoiceConnectorIntegrationType {
+	return []VoiceConnectorIntegrationType{
+		"CONNECT_CALL_TRANSFER_CONNECTOR",
+		"CONNECT_ANALYTICS_CONNECTOR",
 	}
 }

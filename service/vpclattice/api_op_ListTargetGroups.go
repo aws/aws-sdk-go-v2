@@ -39,7 +39,7 @@ type ListTargetGroupsInput struct {
 	// The target group type.
 	TargetGroupType types.TargetGroupType
 
-	// The ID or Amazon Resource Name (ARN) of the VPC.
+	// The ID or ARN of the VPC.
 	VpcIdentifier *string
 
 	noSmithyDocumentSerde

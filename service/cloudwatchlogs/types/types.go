@@ -859,6 +859,50 @@ type InputLogEvent struct {
 	noSmithyDocumentSerde
 }
 
+// This structure contains information about the integration configuration. For an
+// integration with OpenSearch Service, this includes information about OpenSearch
+// Service resources such as the collection, the workspace, and policies.
+//
+// This structure is returned by a [GetIntegration] operation.
+//
+// The following types satisfy this interface:
+//
+//	IntegrationDetailsMemberOpenSearchIntegrationDetails
+//
+// [GetIntegration]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetIntegration.html
+type IntegrationDetails interface {
+	isIntegrationDetails()
+}
+
+// This structure contains complete information about one integration between
+// CloudWatch Logs and OpenSearch Service.
+type IntegrationDetailsMemberOpenSearchIntegrationDetails struct {
+	Value OpenSearchIntegrationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegrationDetailsMemberOpenSearchIntegrationDetails) isIntegrationDetails() {}
+
+// This structure contains information about one CloudWatch Logs integration. This
+// structure is returned by a [ListIntegrations]operation.
+//
+// [ListIntegrations]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListIntegrations.html
+type IntegrationSummary struct {
+
+	// The name of this integration.
+	IntegrationName *string
+
+	// The current status of this integration.
+	IntegrationStatus IntegrationStatus
+
+	// The type of integration. Integrations with OpenSearch Service have the type
+	// OPENSEARCH .
+	IntegrationType IntegrationType
+
+	noSmithyDocumentSerde
+}
+
 // This processor takes a list of objects that contain key fields, and converts
 // them into a map of target keys.
 //
@@ -1313,6 +1357,298 @@ type MoveKeys struct {
 	noSmithyDocumentSerde
 }
 
+// This structure contains information about the OpenSearch Service application
+// used for this integration. An OpenSearch Service application is the web
+// application created by the integration with CloudWatch Logs. It hosts the vended
+// logs dashboards.
+type OpenSearchApplication struct {
+
+	// The Amazon Resource Name (ARN) of the application.
+	ApplicationArn *string
+
+	// The endpoint of the application.
+	ApplicationEndpoint *string
+
+	// The ID of the application.
+	ApplicationId *string
+
+	// This structure contains information about the status of this OpenSearch Service
+	// resource.
+	Status *OpenSearchResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the OpenSearch Service collection
+// used for this integration. An OpenSearch Service collection is a logical
+// grouping of one or more indexes that represent an analytics workload. For more
+// information, see [Creating and managing OpenSearch Service Serverless collections].
+//
+// [Creating and managing OpenSearch Service Serverless collections]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-collections.html
+type OpenSearchCollection struct {
+
+	// The ARN of the collection.
+	CollectionArn *string
+
+	// The endpoint of the collection.
+	CollectionEndpoint *string
+
+	// This structure contains information about the status of this OpenSearch Service
+	// resource.
+	Status *OpenSearchResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the OpenSearch Service data access
+// policy used for this integration. The access policy defines the access controls
+// for the collection. This data access policy was automatically created as part of
+// the integration setup. For more information about OpenSearch Service data access
+// policies, see [Data access control for Amazon OpenSearch Serverless]in the OpenSearch Service Developer Guide.
+//
+// [Data access control for Amazon OpenSearch Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html
+type OpenSearchDataAccessPolicy struct {
+
+	// The name of the data access policy.
+	PolicyName *string
+
+	// This structure contains information about the status of this OpenSearch Service
+	// resource.
+	Status *OpenSearchResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the OpenSearch Service data source
+// used for this integration. This data source was created as part of the
+// integration setup. An OpenSearch Service data source defines the source and
+// destination for OpenSearch Service queries. It includes the role required to
+// execute queries and write to collections.
+//
+// For more information about OpenSearch Service data sources , see [Creating OpenSearch Service data source integrations with Amazon S3.]
+//
+// [Creating OpenSearch Service data source integrations with Amazon S3.]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html
+type OpenSearchDataSource struct {
+
+	// The name of the OpenSearch Service data source.
+	DataSourceName *string
+
+	// This structure contains information about the status of this OpenSearch Service
+	// resource.
+	Status *OpenSearchResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the OpenSearch Service encryption
+// policy used for this integration. The encryption policy was created
+// automatically when you created the integration. For more information, see [Encryption policies]in
+// the OpenSearch Service Developer Guide.
+//
+// [Encryption policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html#serverless-encryption-policies
+type OpenSearchEncryptionPolicy struct {
+
+	// The name of the encryption policy.
+	PolicyName *string
+
+	// This structure contains information about the status of this OpenSearch Service
+	// resource.
+	Status *OpenSearchResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains complete information about one CloudWatch Logs
+// integration. This structure is returned by a [GetIntegration]operation.
+//
+// [GetIntegration]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetIntegration.html
+type OpenSearchIntegrationDetails struct {
+
+	// This structure contains information about the OpenSearch Service data access
+	// policy used for this integration. The access policy defines the access controls
+	// for the collection. This data access policy was automatically created as part of
+	// the integration setup. For more information about OpenSearch Service data access
+	// policies, see [Data access control for Amazon OpenSearch Serverless]in the OpenSearch Service Developer Guide.
+	//
+	// [Data access control for Amazon OpenSearch Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html
+	AccessPolicy *OpenSearchDataAccessPolicy
+
+	// This structure contains information about the OpenSearch Service application
+	// used for this integration. An OpenSearch Service application is the web
+	// application that was created by the integration with CloudWatch Logs. It hosts
+	// the vended logs dashboards.
+	Application *OpenSearchApplication
+
+	// This structure contains information about the OpenSearch Service collection
+	// used for this integration. This collection was created as part of the
+	// integration setup. An OpenSearch Service collection is a logical grouping of one
+	// or more indexes that represent an analytics workload. For more information, see [Creating and managing OpenSearch Service Serverless collections]
+	// .
+	//
+	// [Creating and managing OpenSearch Service Serverless collections]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-collections.html
+	Collection *OpenSearchCollection
+
+	// This structure contains information about the OpenSearch Service data source
+	// used for this integration. This data source was created as part of the
+	// integration setup. An OpenSearch Service data source defines the source and
+	// destination for OpenSearch Service queries. It includes the role required to
+	// execute queries and write to collections.
+	//
+	// For more information about OpenSearch Service data sources , see [Creating OpenSearch Service data source integrations with Amazon S3.]
+	//
+	// [Creating OpenSearch Service data source integrations with Amazon S3.]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html
+	DataSource *OpenSearchDataSource
+
+	// This structure contains information about the OpenSearch Service encryption
+	// policy used for this integration. The encryption policy was created
+	// automatically when you created the integration. For more information, see [Encryption policies]in
+	// the OpenSearch Service Developer Guide.
+	//
+	// [Encryption policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html#serverless-encryption-policies
+	EncryptionPolicy *OpenSearchEncryptionPolicy
+
+	// This structure contains information about the OpenSearch Service data lifecycle
+	// policy used for this integration. The lifecycle policy determines the lifespan
+	// of the data in the collection. It was automatically created as part of the
+	// integration setup.
+	//
+	// For more information, see [Using data lifecycle policies with OpenSearch Service Serverless] in the OpenSearch Service Developer Guide.
+	//
+	// [Using data lifecycle policies with OpenSearch Service Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html
+	LifecyclePolicy *OpenSearchLifecyclePolicy
+
+	// This structure contains information about the OpenSearch Service network policy
+	// used for this integration. The network policy assigns network access settings to
+	// collections. For more information, see [Network policies]in the OpenSearch Service Developer
+	// Guide.
+	//
+	// [Network policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html#serverless-network-policies
+	NetworkPolicy *OpenSearchNetworkPolicy
+
+	// This structure contains information about the OpenSearch Service workspace used
+	// for this integration. An OpenSearch Service workspace is the collection of
+	// dashboards along with other OpenSearch Service tools. This workspace was created
+	// automatically as part of the integration setup. For more information, see [Centralized OpenSearch user interface (Dashboards) with OpenSearch Service].
+	//
+	// [Centralized OpenSearch user interface (Dashboards) with OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html
+	Workspace *OpenSearchWorkspace
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the OpenSearch Service data lifecycle
+// policy used for this integration. The lifecycle policy determines the lifespan
+// of the data in the collection. It was automatically created as part of the
+// integration setup.
+//
+// For more information, see [Using data lifecycle policies with OpenSearch Service Serverless] in the OpenSearch Service Developer Guide.
+//
+// [Using data lifecycle policies with OpenSearch Service Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html
+type OpenSearchLifecyclePolicy struct {
+
+	// The name of the lifecycle policy.
+	PolicyName *string
+
+	// This structure contains information about the status of this OpenSearch Service
+	// resource.
+	Status *OpenSearchResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the OpenSearch Service network policy
+// used for this integration. The network policy assigns network access settings to
+// collections. For more information, see [Network policies]in the OpenSearch Service Developer
+// Guide.
+//
+// [Network policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html#serverless-network-policies
+type OpenSearchNetworkPolicy struct {
+
+	// The name of the network policy.
+	PolicyName *string
+
+	// This structure contains information about the status of this OpenSearch Service
+	// resource.
+	Status *OpenSearchResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains configuration details about an integration between
+// CloudWatch Logs and OpenSearch Service.
+type OpenSearchResourceConfig struct {
+
+	// Specify the ARNs of IAM roles and IAM users who you want to grant permission to
+	// for viewing the dashboards.
+	//
+	// In addition to specifying these users here, you must also grant them the
+	// CloudWatchOpenSearchDashboardsAccess IAM policy. For more information, see
+	//
+	// This member is required.
+	DashboardViewerPrincipals []string
+
+	// Specify the ARN of an IAM role that CloudWatch Logs will use to create the
+	// integration. This role must have the permissions necessary to access the
+	// OpenSearch Service collection to be able to create the dashboards. For more
+	// information about the permissions needed, see [Create an IAM role to access the OpenSearch Service collection]in the CloudWatch Logs User Guide.
+	//
+	// [Create an IAM role to access the OpenSearch Service collection]: https://docs.aws.amazon.com/OpenSearch-Dashboards-CreateRole
+	//
+	// This member is required.
+	DataSourceRoleArn *string
+
+	// Specify how many days that you want the data derived by OpenSearch Service to
+	// be retained in the index that the dashboard refers to. This also sets the
+	// maximum time period that you can choose when viewing data in the dashboard.
+	// Choosing a longer time frame will incur additional costs.
+	//
+	// This member is required.
+	RetentionDays *int32
+
+	// If you want to use an existing OpenSearch Service application for your
+	// integration with OpenSearch Service, specify it here. If you omit this, a new
+	// application will be created.
+	ApplicationArn *string
+
+	// To have the vended dashboard data encrypted with KMS instead of the CloudWatch
+	// Logs default encryption method, specify the ARN of the KMS key that you want to
+	// use.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the status of an OpenSearch Service
+// resource.
+type OpenSearchResourceStatus struct {
+
+	// The current status of this resource.
+	Status OpenSearchResourceStatusType
+
+	// A message with additional information about the status of this resource.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about the OpenSearch Service workspace used
+// for this integration. An OpenSearch Service workspace is the collection of
+// dashboards along with other OpenSearch Service tools. This workspace was created
+// automatically as part of the integration setup. For more information, see [Centralized OpenSearch user interface (Dashboards) with OpenSearch Service].
+//
+// [Centralized OpenSearch user interface (Dashboards) with OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html
+type OpenSearchWorkspace struct {
+
+	// This structure contains information about the status of an OpenSearch Service
+	// resource.
+	Status *OpenSearchResourceStatus
+
+	// The ID of this workspace.
+	WorkspaceId *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a log event.
 type OutputLogEvent struct {
 
@@ -1707,6 +2043,12 @@ type QueryDefinition struct {
 	// The unique ID of the query definition.
 	QueryDefinitionId *string
 
+	// The query language used for this query. For more information about the query
+	// languages that CloudWatch Logs supports, see [Supported query languages].
+	//
+	// [Supported query languages]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html
+	QueryLanguage QueryLanguage
+
 	// The query string to use for this definition. For more information, see [CloudWatch Logs Insights Query Syntax].
 	//
 	// [CloudWatch Logs Insights Query Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
@@ -1727,6 +2069,12 @@ type QueryInfo struct {
 
 	// The unique ID number of this query.
 	QueryId *string
+
+	// The query language used for this query. For more information about the query
+	// languages that CloudWatch Logs supports, see [Supported query languages].
+	//
+	// [Supported query languages]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html
+	QueryLanguage QueryLanguage
 
 	// The query string used in this query.
 	QueryString *string
@@ -1867,6 +2215,26 @@ type RenameKeys struct {
 
 	noSmithyDocumentSerde
 }
+
+// This structure contains configuration details about an integration between
+// CloudWatch Logs and another entity.
+//
+// The following types satisfy this interface:
+//
+//	ResourceConfigMemberOpenSearchResourceConfig
+type ResourceConfig interface {
+	isResourceConfig()
+}
+
+// This structure contains configuration details about an integration between
+// CloudWatch Logs and OpenSearch Service.
+type ResourceConfigMemberOpenSearchResourceConfig struct {
+	Value OpenSearchResourceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceConfigMemberOpenSearchResourceConfig) isResourceConfig() {}
 
 // A policy enabling one or more entities to put logs to a log group in this
 // account.
@@ -2198,4 +2566,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isIntegrationDetails()          {}
+func (*UnknownUnionMember) isResourceConfig()              {}
 func (*UnknownUnionMember) isStartLiveTailResponseStream() {}

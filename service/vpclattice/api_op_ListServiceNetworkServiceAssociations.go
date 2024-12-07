@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the associations between the service network and the service. You can
-// filter the list either by service or service network. You must provide either
-// the service network identifier or the service identifier.
+// Lists the associations between a service network and a service. You can filter
+// the list either by service or service network. You must provide either the
+// service network identifier or the service identifier.
 //
-// Every association in Amazon VPC Lattice is given a unique Amazon Resource Name
+// Every association in Amazon VPC Lattice has a unique Amazon Resource Name
 // (ARN), such as when a service network is associated with a VPC or when a service
-// is associated with a service network. If the association is for a resource that
-// is shared with another account, the association includes the local account ID as
-// the prefix in the ARN for each account the resource is shared with.
+// is associated with a service network. If the association is for a resource is
+// shared with another account, the association includes the local account ID as
+// the prefix in the ARN.
 func (c *Client) ListServiceNetworkServiceAssociations(ctx context.Context, params *ListServiceNetworkServiceAssociationsInput, optFns ...func(*Options)) (*ListServiceNetworkServiceAssociationsOutput, error) {
 	if params == nil {
 		params = &ListServiceNetworkServiceAssociationsInput{}
@@ -43,10 +43,10 @@ type ListServiceNetworkServiceAssociationsInput struct {
 	// A pagination token for the next page of results.
 	NextToken *string
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	ServiceIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the service network.
+	// The ID or ARN of the service network.
 	ServiceNetworkIdentifier *string
 
 	noSmithyDocumentSerde

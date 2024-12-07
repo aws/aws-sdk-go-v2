@@ -1,3 +1,8 @@
+# v1.92.0 (2024-12-02)
+
+* **Feature**: Amazon RDS supports CloudWatch Database Insights. You can use the SDK to create, modify, and describe the DatabaseInsightsMode for your DB instances and clusters.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.91.0 (2024-11-20)
 
 * **Feature**: This release adds support for scale storage on the DB instance using a Blue/Green Deployment.

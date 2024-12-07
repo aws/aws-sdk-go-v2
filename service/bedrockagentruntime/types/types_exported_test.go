@@ -52,6 +52,42 @@ func ExampleAPISchema_outputUsage() {
 var _ *types.S3Identifier
 var _ *string
 
+func ExampleCaller_outputUsage() {
+	var union types.Caller
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CallerMemberAgentAliasArn:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleContentBlock_outputUsage() {
+	var union types.ContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleFlowInputContent_outputUsage() {
 	var union types.FlowInputContent
 	// type switches can be used to check the union value
@@ -422,6 +458,27 @@ func ExamplePreProcessingTrace_outputUsage() {
 var _ *types.ModelInvocationInput
 var _ *types.PreProcessingModelInvocationOutput
 
+func ExampleRerankingMetadataSelectiveModeConfiguration_outputUsage() {
+	var union types.RerankingMetadataSelectiveModeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude:
+		_ = v.Value // Value is []types.FieldForReranking
+
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude:
+		_ = v.Value // Value is []types.FieldForReranking
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.FieldForReranking
+
 func ExampleResponseStream_outputUsage() {
 	var union types.ResponseStream
 	// type switches can be used to check the union value
@@ -507,10 +564,69 @@ func ExampleRetrievalFilter_outputUsage() {
 var _ []types.RetrievalFilter
 var _ *types.FilterAttribute
 
+func ExampleRetrieveAndGenerateStreamResponseOutput_outputUsage() {
+	var union types.RetrieveAndGenerateStreamResponseOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RetrieveAndGenerateStreamResponseOutputMemberCitation:
+		_ = v.Value // Value is types.CitationEvent
+
+	case *types.RetrieveAndGenerateStreamResponseOutputMemberGuardrail:
+		_ = v.Value // Value is types.GuardrailEvent
+
+	case *types.RetrieveAndGenerateStreamResponseOutputMemberOutput:
+		_ = v.Value // Value is types.RetrieveAndGenerateOutputEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GuardrailEvent
+var _ *types.CitationEvent
+var _ *types.RetrieveAndGenerateOutputEvent
+
+func ExampleRoutingClassifierTrace_outputUsage() {
+	var union types.RoutingClassifierTrace
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RoutingClassifierTraceMemberInvocationInput:
+		_ = v.Value // Value is types.InvocationInput
+
+	case *types.RoutingClassifierTraceMemberModelInvocationInput:
+		_ = v.Value // Value is types.ModelInvocationInput
+
+	case *types.RoutingClassifierTraceMemberModelInvocationOutput:
+		_ = v.Value // Value is types.RoutingClassifierModelInvocationOutput
+
+	case *types.RoutingClassifierTraceMemberObservation:
+		_ = v.Value // Value is types.Observation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RoutingClassifierModelInvocationOutput
+var _ *types.InvocationInput
+var _ *types.ModelInvocationInput
+var _ *types.Observation
+
 func ExampleTrace_outputUsage() {
 	var union types.Trace
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.TraceMemberCustomOrchestrationTrace:
+		_ = v.Value // Value is types.CustomOrchestrationTrace
+
 	case *types.TraceMemberFailureTrace:
 		_ = v.Value // Value is types.FailureTrace
 
@@ -526,6 +642,9 @@ func ExampleTrace_outputUsage() {
 	case *types.TraceMemberPreProcessingTrace:
 		_ = v.Value // Value is types.PreProcessingTrace
 
+	case *types.TraceMemberRoutingClassifierTrace:
+		_ = v.Value // Value is types.RoutingClassifierTrace
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -537,6 +656,8 @@ func ExampleTrace_outputUsage() {
 
 var _ *types.FailureTrace
 var _ *types.GuardrailTrace
+var _ *types.CustomOrchestrationTrace
 var _ types.PreProcessingTrace
 var _ types.PostProcessingTrace
 var _ types.OrchestrationTrace
+var _ types.RoutingClassifierTrace

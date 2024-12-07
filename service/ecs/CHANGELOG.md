@@ -1,3 +1,8 @@
+# v1.52.1 (2024-12-02)
+
+* **Documentation**: This release adds support for Container Insights with Enhanced Observability for Amazon ECS.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2024-11-20)
 
 * **Feature**: This release adds support for the Availability Zone rebalancing feature on Amazon ECS.

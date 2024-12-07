@@ -36,6 +36,9 @@ func (c *Client) TestConnection(ctx context.Context, params *TestConnectionInput
 
 type TestConnectionInput struct {
 
+	// The catalog ID where the connection resides.
+	CatalogId *string
+
 	// Optional. The name of the connection to test. If only name is provided, the
 	// operation will get the connection and use that for testing.
 	ConnectionName *string

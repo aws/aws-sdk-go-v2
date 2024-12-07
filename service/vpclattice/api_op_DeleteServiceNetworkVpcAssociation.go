@@ -30,7 +30,7 @@ func (c *Client) DeleteServiceNetworkVpcAssociation(ctx context.Context, params 
 
 type DeleteServiceNetworkVpcAssociationInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the association.
+	// The ID or ARN of the association.
 	//
 	// This member is required.
 	ServiceNetworkVpcAssociationIdentifier *string

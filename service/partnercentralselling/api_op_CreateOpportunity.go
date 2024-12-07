@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-//	Creates an Opportunity record in Partner Central. Use this operation to create
-//
+// Creates an Opportunity record in Partner Central. Use this operation to create
 // a potential business opportunity for submission to Amazon Web Services. Creating
 // an opportunity sets Lifecycle.ReviewStatus to Pending Submission .
 //
@@ -48,7 +47,7 @@ func (c *Client) CreateOpportunity(ctx context.Context, params *CreateOpportunit
 
 type CreateOpportunityInput struct {
 
-	//  Specifies the catalog associated with the request. This field takes a string
+	// Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity is created in. Use AWS to create opportunities in
 	// the Amazon Web Services catalog, and Sandbox for testing in secure, isolated
@@ -57,7 +56,7 @@ type CreateOpportunityInput struct {
 	// This member is required.
 	Catalog *string
 
-	//  Required to be unique, and should be unchanging, it can be randomly generated
+	// Required to be unique, and should be unchanging, it can be randomly generated
 	// or a meaningful string.
 	//
 	// Default: None
@@ -90,7 +89,7 @@ type CreateOpportunityInput struct {
 	// members of this opportunity who are within the partner's organization.
 	OpportunityTeam []types.Contact
 
-	//  Specifies the opportunity type as a renewal, new, or expansion.
+	// Specifies the opportunity type as a renewal, new, or expansion.
 	//
 	// Opportunity types:
 	//
@@ -106,7 +105,7 @@ type CreateOpportunityInput struct {
 	//   the volume of existing services for a current customer.
 	OpportunityType types.OpportunityType
 
-	//  Specifies the origin of the opportunity, indicating if it was sourced from
+	// Specifies the origin of the opportunity, indicating if it was sourced from
 	// Amazon Web Services or the partner. For all opportunities created with Catalog:
 	// AWS , this field must only be Partner Referral . However, when using Catalog:
 	// Sandbox , you can set this field to AWS Referral to simulate Amazon Web
@@ -114,16 +113,16 @@ type CreateOpportunityInput struct {
 	// testing in the sandbox catalog.
 	Origin types.OpportunityOrigin
 
-	//  Specifies the opportunity's unique identifier in the partner's CRM system.
-	// This value is essential to track and reconcile because it's included in the
-	// outbound payload to the partner.
+	// Specifies the opportunity's unique identifier in the partner's CRM system. This
+	// value is essential to track and reconcile because it's included in the outbound
+	// payload to the partner.
 	//
 	// This field allows partners to link an opportunity to their CRM, which helps to
 	// ensure seamless integration and accurate synchronization between the Partner
 	// Central API and the partner's internal systems.
 	PartnerOpportunityIdentifier *string
 
-	//  Identifies the type of support the partner needs from Amazon Web Services.
+	// Identifies the type of support the partner needs from Amazon Web Services.
 	//
 	// Valid values:
 	//
@@ -175,7 +174,7 @@ type CreateOpportunityInput struct {
 
 type CreateOpportunityOutput struct {
 
-	//  Read-only, system-generated Opportunity unique identifier. Amazon Web Services
+	// Read-only, system-generated Opportunity unique identifier. Amazon Web Services
 	// creates this identifier, and it's used for all subsequent opportunity actions,
 	// such as updates, associations, and submissions. It helps to ensure that each
 	// opportunity is accurately tracked and managed.

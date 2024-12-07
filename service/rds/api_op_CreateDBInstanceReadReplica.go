@@ -172,6 +172,9 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
+	// Specifies the mode of Database Insights.
+	DatabaseInsightsMode types.DatabaseInsightsMode
+
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
 	DedicatedLogVolume *bool
 

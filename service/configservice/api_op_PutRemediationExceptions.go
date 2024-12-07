@@ -41,6 +41,11 @@ import (
 // conditions that initiate the possible Config evaluation results, see [Concepts | Config Rules]in the
 // Config Developer Guide.
 //
+// # Exceptions cannot be placed on service-linked remediation actions
+//
+// You cannot place an exception on service-linked remediation actions, such as
+// remediation actions put by an organizational conformance pack.
+//
 // # Auto remediation can be initiated even for compliant resources
 //
 // If you enable auto remediation for a specific Config rule using the [PutRemediationConfigurations] API or the

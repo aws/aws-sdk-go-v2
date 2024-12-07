@@ -481,7 +481,7 @@
                 "state": {
                     "target": "com.amazonaws.imagebuilder#ComponentState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the current status of the component. This is used for components that are no\n\t\t\tlonger active.</p>"
+                        "smithy.api#documentation": "<p>Describes the current status of the component.</p>"
                     }
                 },
                 "parameters": {
@@ -537,6 +537,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether component source is hidden from view in the console, and from \n\t\t\tcomponent detail results for API, CLI, or SDK operations.</p>"
+                    }
+                },
+                "productCodes": {
+                    "target": "com.amazonaws.imagebuilder#ProductCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains product codes that are used for billing purposes for Amazon Web Services Marketplace components.</p>"
                     }
                 }
             },
@@ -742,6 +748,18 @@
                     "traits": {
                         "smithy.api#enumValue": "DEPRECATED"
                     }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
                 }
             }
         },
@@ -830,7 +848,7 @@
                     "target": "com.amazonaws.imagebuilder#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether component source is hidden from view in the console, \n\t\t\tand from component detail results for API, CLI, or SDK operations.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether component source is hidden from view in the console, and from \n\t\t\tcomponent detail results for API, CLI, or SDK operations.</p>"
                     }
                 }
             },
@@ -916,6 +934,18 @@
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The date that the component was created.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.imagebuilder#ComponentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the current status of the component version.</p>"
+                    }
+                },
+                "productCodes": {
+                    "target": "com.amazonaws.imagebuilder#ProductCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains product codes that are used for billing purposes for Amazon Web Services Marketplace components.</p>"
                     }
                 }
             },
@@ -3891,7 +3921,7 @@
         "com.amazonaws.imagebuilder#FilterValue": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9a-zA-Z./_ :-]{1,1024}$"
+                "smithy.api#pattern": "^[0-9a-zA-Z./_ :,{}\"-]{1,1024}$"
             }
         },
         "com.amazonaws.imagebuilder#FilterValues": {
@@ -4858,6 +4888,97 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.imagebuilder#GetMarketplaceResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#GetMarketplaceResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#GetMarketplaceResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Verify the subscription and perform resource dependency checks on the requested \n\t\t\tAmazon Web Services Marketplace resource. For Amazon Web Services Marketplace components, the response contains fields to download the \n\t\t\tcomponents and their artifacts.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetMarketplaceResource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#GetMarketplaceResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceType": {
+                    "target": "com.amazonaws.imagebuilder#MarketplaceResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which type of Amazon Web Services Marketplace resource Image Builder retrieves.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an Amazon Web Services Marketplace resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceLocation": {
+                    "target": "com.amazonaws.imagebuilder#MarketplaceResourceLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucket path that you can specify to download the resource from Amazon S3.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#GetMarketplaceResourceResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Amazon Web Services Marketplace resource that was requested.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The obfuscated S3 URL to download the component artifact from.</p>"
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns obfuscated data that contains the YAML content of the component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.imagebuilder#GetWorkflow": {
             "type": "operation",
             "input": {
@@ -5476,18 +5597,18 @@
                 "packageName": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the package as reported to the operating system package manager.</p>"
+                        "smithy.api#documentation": "<p>The name of the package that's reported to the operating system package \n\t\t\tmanager.</p>"
                     }
                 },
                 "packageVersion": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the package as reported to the operating system package manager.</p>"
+                        "smithy.api#documentation": "<p>The version of the package that's reported to the operating system package \n\t\t\tmanager.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a package installed on an Image Builder image.</p>"
+                "smithy.api#documentation": "<p>A software package that's installed on top of the base image to create a \n\t\t\tcustomized image.</p>"
             }
         },
         "com.amazonaws.imagebuilder#ImagePackageList": {
@@ -6325,7 +6446,7 @@
                 "timeoutMinutes": {
                     "target": "com.amazonaws.imagebuilder#ImageTestsTimeoutMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time in minutes that tests are permitted to run.</p>\n         <note>\n            <p>The timeoutMinutes attribute is not currently active. This value is\n\t\t\t\tignored.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The maximum time in minutes that tests are permitted to run.</p>\n         <note>\n            <p>The timeout attribute is not currently active. This value is\n\t\t\t\tignored.</p>\n         </note>"
                     }
                 }
             },
@@ -10327,6 +10448,33 @@
                 "smithy.api#documentation": "<p>Logging configuration defines where Image Builder uploads your logs.</p>"
             }
         },
+        "com.amazonaws.imagebuilder#MarketplaceResourceLocation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[^/]+/.+[^/]$"
+            }
+        },
+        "com.amazonaws.imagebuilder#MarketplaceResourceType": {
+            "type": "enum",
+            "members": {
+                "COMPONENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPONENT_DATA"
+                    }
+                },
+                "COMPONENT_ARTIFACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPONENT_ARTIFACT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#MaxParallelLaunches": {
             "type": "integer",
             "traits": {
@@ -10484,6 +10632,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ThirdParty"
+                    }
+                },
+                "AWS_MARKETPLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSMarketplace"
                     }
                 }
             }
@@ -10667,6 +10821,51 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "macOS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ProductCodeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[A-Za-z0-9]{1,25}$"
+            }
+        },
+        "com.amazonaws.imagebuilder#ProductCodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#ProductCodeListItem"
+            }
+        },
+        "com.amazonaws.imagebuilder#ProductCodeListItem": {
+            "type": "structure",
+            "members": {
+                "productCodeId": {
+                    "target": "com.amazonaws.imagebuilder#ProductCodeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For Amazon Web Services Marketplace components, this contains the product code ID that can be stamped onto \n\t\t\tan EC2 AMI to ensure that components are billed correctly. If this property is empty, \n\t\t\tit might mean that the component is not published.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "productCodeType": {
+                    "target": "com.amazonaws.imagebuilder#ProductCodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the product code that's billed. If this property is \n\t\t\tempty, it might mean that the component is not published.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a single product code.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ProductCodeType": {
+            "type": "enum",
+            "members": {
+                "MARKETPLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "marketplace"
                     }
                 }
             }
@@ -11875,7 +12074,7 @@
                 "repositoryName": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the container repository where the output container image is stored. This\n\t\t\tname is prefixed by the repository location.</p>",
+                        "smithy.api#documentation": "<p>The name of the container repository where the output container image is stored. \n\t\t\tThis name is prefixed by the repository location. For example, \n\t\t\t<code><repository location url>/repository_name</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13672,6 +13871,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetLifecyclePolicy"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#GetMarketplaceResource"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetWorkflow"

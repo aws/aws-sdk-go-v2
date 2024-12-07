@@ -42,7 +42,7 @@ type ListMessagesInput struct {
 	// The maximum number of messages to return.
 	MaxResults *int32
 
-	// If the number of retrievers returned exceeds maxResults , Amazon Q Business
+	// If the number of messages returned exceeds maxResults , Amazon Q Business
 	// returns a next token as a pagination token to retrieve the next set of messages.
 	NextToken *string
 

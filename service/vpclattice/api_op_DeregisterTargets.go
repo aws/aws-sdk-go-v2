@@ -29,7 +29,7 @@ func (c *Client) DeregisterTargets(ctx context.Context, params *DeregisterTarget
 
 type DeregisterTargetsInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the target group.
+	// The ID or ARN of the target group.
 	//
 	// This member is required.
 	TargetGroupIdentifier *string

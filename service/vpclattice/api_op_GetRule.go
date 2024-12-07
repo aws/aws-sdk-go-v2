@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Retrieves information about listener rules. You can also retrieve information
-// about the default listener rule. For more information, see [Listener rules]in the Amazon VPC
-// Lattice User Guide.
+// Retrieves information about the specified listener rules. You can also retrieve
+// information about the default listener rule. For more information, see [Listener rules]in the
+// Amazon VPC Lattice User Guide.
 //
 // [Listener rules]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules
 func (c *Client) GetRule(ctx context.Context, params *GetRuleInput, optFns ...func(*Options)) (*GetRuleOutput, error) {
@@ -34,17 +34,17 @@ func (c *Client) GetRule(ctx context.Context, params *GetRuleInput, optFns ...fu
 
 type GetRuleInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// The ID or ARN of the listener.
 	//
 	// This member is required.
 	ListenerIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the listener rule.
+	// The ID or ARN of the listener rule.
 	//
 	// This member is required.
 	RuleIdentifier *string
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string
@@ -60,8 +60,7 @@ type GetRuleOutput struct {
 	// The Amazon Resource Name (ARN) of the listener.
 	Arn *string
 
-	// The date and time that the listener rule was created, specified in ISO-8601
-	// format.
+	// The date and time that the listener rule was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The ID of the listener.
@@ -70,8 +69,7 @@ type GetRuleOutput struct {
 	// Indicates whether this is the default rule.
 	IsDefault *bool
 
-	// The date and time that the listener rule was last updated, specified in
-	// ISO-8601 format.
+	// The date and time that the listener rule was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The rule match.

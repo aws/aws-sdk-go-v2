@@ -90,6 +90,26 @@ func (m *validateOpCreateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMultiRegionCluster struct {
+}
+
+func (*validateOpCreateMultiRegionCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMultiRegionCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMultiRegionClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMultiRegionClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateParameterGroup struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpDeleteCluster) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMultiRegionCluster struct {
+}
+
+func (*validateOpDeleteMultiRegionCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMultiRegionCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMultiRegionClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMultiRegionClusterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -345,6 +385,26 @@ func (m *validateOpFailoverShard) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpFailoverShardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAllowedMultiRegionClusterUpdates struct {
+}
+
+func (*validateOpListAllowedMultiRegionClusterUpdates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAllowedMultiRegionClusterUpdates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAllowedMultiRegionClusterUpdatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAllowedMultiRegionClusterUpdatesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +570,26 @@ func (m *validateOpUpdateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMultiRegionCluster struct {
+}
+
+func (*validateOpUpdateMultiRegionCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMultiRegionCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMultiRegionClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMultiRegionClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateParameterGroup struct {
 }
 
@@ -586,6 +666,10 @@ func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
 
+func addOpCreateMultiRegionClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMultiRegionCluster{}, middleware.After)
+}
+
 func addOpCreateParameterGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateParameterGroup{}, middleware.After)
 }
@@ -608,6 +692,10 @@ func addOpDeleteACLValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCluster{}, middleware.After)
+}
+
+func addOpDeleteMultiRegionClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMultiRegionCluster{}, middleware.After)
 }
 
 func addOpDeleteParameterGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -636,6 +724,10 @@ func addOpDescribeUsersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpFailoverShardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpFailoverShard{}, middleware.After)
+}
+
+func addOpListAllowedMultiRegionClusterUpdatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAllowedMultiRegionClusterUpdates{}, middleware.After)
 }
 
 func addOpListAllowedNodeTypeUpdatesValidationMiddleware(stack *middleware.Stack) error {
@@ -668,6 +760,10 @@ func addOpUpdateACLValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCluster{}, middleware.After)
+}
+
+func addOpUpdateMultiRegionClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMultiRegionCluster{}, middleware.After)
 }
 
 func addOpUpdateParameterGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -786,6 +882,24 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	}
 }
 
+func validateOpCreateMultiRegionClusterInput(v *CreateMultiRegionClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMultiRegionClusterInput"}
+	if v.MultiRegionClusterNameSuffix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiRegionClusterNameSuffix"))
+	}
+	if v.NodeType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateParameterGroupInput(v *CreateParameterGroupInput) error {
 	if v == nil {
 		return nil
@@ -883,6 +997,21 @@ func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMultiRegionClusterInput(v *DeleteMultiRegionClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMultiRegionClusterInput"}
+	if v.MultiRegionClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiRegionClusterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -993,6 +1122,21 @@ func validateOpFailoverShardInput(v *FailoverShardInput) error {
 	}
 	if v.ShardName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ShardName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAllowedMultiRegionClusterUpdatesInput(v *ListAllowedMultiRegionClusterUpdatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAllowedMultiRegionClusterUpdatesInput"}
+	if v.MultiRegionClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiRegionClusterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1119,6 +1263,21 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMultiRegionClusterInput(v *UpdateMultiRegionClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMultiRegionClusterInput"}
+	if v.MultiRegionClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiRegionClusterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

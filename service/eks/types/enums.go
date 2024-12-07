@@ -766,6 +766,9 @@ const (
 	UpdateParamTypePodIdentityAssociations  UpdateParamType = "PodIdentityAssociations"
 	UpdateParamTypeUpgradePolicy            UpdateParamType = "UpgradePolicy"
 	UpdateParamTypeZonalShiftConfig         UpdateParamType = "ZonalShiftConfig"
+	UpdateParamTypeComputeConfig            UpdateParamType = "ComputeConfig"
+	UpdateParamTypeStorageConfig            UpdateParamType = "StorageConfig"
+	UpdateParamTypeKubernetesNetworkConfig  UpdateParamType = "KubernetesNetworkConfig"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -804,6 +807,9 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"PodIdentityAssociations",
 		"UpgradePolicy",
 		"ZonalShiftConfig",
+		"ComputeConfig",
+		"StorageConfig",
+		"KubernetesNetworkConfig",
 	}
 }
 
@@ -846,6 +852,7 @@ const (
 	UpdateTypeAccessConfigUpdate                 UpdateType = "AccessConfigUpdate"
 	UpdateTypeUpgradePolicyUpdate                UpdateType = "UpgradePolicyUpdate"
 	UpdateTypeZonalShiftConfigUpdate             UpdateType = "ZonalShiftConfigUpdate"
+	UpdateTypeAutoModeUpdate                     UpdateType = "AutoModeUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -866,5 +873,6 @@ func (UpdateType) Values() []UpdateType {
 		"AccessConfigUpdate",
 		"UpgradePolicyUpdate",
 		"ZonalShiftConfigUpdate",
+		"AutoModeUpdate",
 	}
 }

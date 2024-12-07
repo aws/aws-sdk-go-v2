@@ -35,12 +35,6 @@ type CreateDataSourceInput struct {
 	// This member is required.
 	DomainIdentifier *string
 
-	// The unique identifier of the Amazon DataZone environment to which the data
-	// source publishes assets.
-	//
-	// This member is required.
-	EnvironmentIdentifier *string
-
 	// The name of the data source.
 	//
 	// This member is required.
@@ -69,11 +63,18 @@ type CreateDataSourceInput struct {
 	// glueRunConfiguration or redshiftRunConfiguration .
 	Configuration types.DataSourceConfigurationInput
 
+	// The ID of the connection.
+	ConnectionIdentifier *string
+
 	// The description of the data source.
 	Description *string
 
 	// Specifies whether the data source is enabled.
 	EnableSetting types.EnableSetting
+
+	// The unique identifier of the Amazon DataZone environment to which the data
+	// source publishes assets.
+	EnvironmentIdentifier *string
 
 	// Specifies whether the assets that this data source creates in the inventory are
 	// to be also automatically published to the catalog.
@@ -95,12 +96,6 @@ type CreateDataSourceOutput struct {
 	//
 	// This member is required.
 	DomainId *string
-
-	// The unique identifier of the Amazon DataZone environment to which the data
-	// source publishes assets.
-	//
-	// This member is required.
-	EnvironmentId *string
 
 	// The unique identifier of the data source.
 	//
@@ -124,6 +119,9 @@ type CreateDataSourceOutput struct {
 	// glueRunConfiguration or redshiftRunConfiguration .
 	Configuration types.DataSourceConfigurationOutput
 
+	// The ID of the connection.
+	ConnectionId *string
+
 	// The timestamp of when the data source was created.
 	CreatedAt *time.Time
 
@@ -132,6 +130,10 @@ type CreateDataSourceOutput struct {
 
 	// Specifies whether the data source is enabled.
 	EnableSetting types.EnableSetting
+
+	// The unique identifier of the Amazon DataZone environment to which the data
+	// source publishes assets.
+	EnvironmentId *string
 
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.

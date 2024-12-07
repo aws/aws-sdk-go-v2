@@ -7,6 +7,42 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
 )
 
+func ExampleCustomizationConfig_outputUsage() {
+	var union types.CustomizationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomizationConfigMemberDistillationConfig:
+		_ = v.Value // Value is types.DistillationConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DistillationConfig
+
+func ExampleEndpointConfig_outputUsage() {
+	var union types.EndpointConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EndpointConfigMemberSageMaker:
+		_ = v.Value // Value is types.SageMakerEndpoint
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SageMakerEndpoint
+
 func ExampleEvaluationConfig_outputUsage() {
 	var union types.EvaluationConfig
 	// type switches can be used to check the union value
@@ -54,6 +90,9 @@ func ExampleEvaluationInferenceConfig_outputUsage() {
 	case *types.EvaluationInferenceConfigMemberModels:
 		_ = v.Value // Value is []types.EvaluationModelConfig
 
+	case *types.EvaluationInferenceConfigMemberRagConfigs:
+		_ = v.Value // Value is []types.RAGConfig
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -64,6 +103,7 @@ func ExampleEvaluationInferenceConfig_outputUsage() {
 }
 
 var _ []types.EvaluationModelConfig
+var _ []types.RAGConfig
 
 func ExampleEvaluationModelConfig_outputUsage() {
 	var union types.EvaluationModelConfig
@@ -83,6 +123,24 @@ func ExampleEvaluationModelConfig_outputUsage() {
 
 var _ *types.EvaluationBedrockModel
 
+func ExampleEvaluatorModelConfig_outputUsage() {
+	var union types.EvaluatorModelConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluatorModelConfigMemberBedrockEvaluatorModels:
+		_ = v.Value // Value is []types.BedrockEvaluatorModel
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.BedrockEvaluatorModel
+
 func ExampleInferenceProfileModelSource_outputUsage() {
 	var union types.InferenceProfileModelSource
 	// type switches can be used to check the union value
@@ -100,6 +158,46 @@ func ExampleInferenceProfileModelSource_outputUsage() {
 }
 
 var _ *string
+
+func ExampleInvocationLogSource_outputUsage() {
+	var union types.InvocationLogSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvocationLogSourceMemberS3Uri:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleKnowledgeBaseConfig_outputUsage() {
+	var union types.KnowledgeBaseConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.KnowledgeBaseConfigMemberRetrieveAndGenerateConfig:
+		_ = v.Value // Value is types.RetrieveAndGenerateConfiguration
+
+	case *types.KnowledgeBaseConfigMemberRetrieveConfig:
+		_ = v.Value // Value is types.RetrieveConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RetrieveConfig
+var _ *types.RetrieveAndGenerateConfiguration
 
 func ExampleModelDataSource_outputUsage() {
 	var union types.ModelDataSource
@@ -154,3 +252,104 @@ func ExampleModelInvocationJobOutputDataConfig_outputUsage() {
 }
 
 var _ *types.ModelInvocationJobS3OutputDataConfig
+
+func ExampleRAGConfig_outputUsage() {
+	var union types.RAGConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RAGConfigMemberKnowledgeBaseConfig:
+		_ = v.Value // Value is types.KnowledgeBaseConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.KnowledgeBaseConfig
+
+func ExampleRequestMetadataFilters_outputUsage() {
+	var union types.RequestMetadataFilters
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RequestMetadataFiltersMemberAndAll:
+		_ = v.Value // Value is []types.RequestMetadataBaseFilters
+
+	case *types.RequestMetadataFiltersMemberEquals:
+		_ = v.Value // Value is map[string]string
+
+	case *types.RequestMetadataFiltersMemberNotEquals:
+		_ = v.Value // Value is map[string]string
+
+	case *types.RequestMetadataFiltersMemberOrAll:
+		_ = v.Value // Value is []types.RequestMetadataBaseFilters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.RequestMetadataBaseFilters
+var _ map[string]string
+
+func ExampleRetrievalFilter_outputUsage() {
+	var union types.RetrievalFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RetrievalFilterMemberAndAll:
+		_ = v.Value // Value is []types.RetrievalFilter
+
+	case *types.RetrievalFilterMemberEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberGreaterThan:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberGreaterThanOrEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberIn:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberLessThan:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberLessThanOrEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberListContains:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberNotEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberNotIn:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberOrAll:
+		_ = v.Value // Value is []types.RetrievalFilter
+
+	case *types.RetrievalFilterMemberStartsWith:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberStringContains:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.RetrievalFilter
+var _ *types.FilterAttribute

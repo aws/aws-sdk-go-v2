@@ -12617,6 +12617,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
 	}
 
+	if len(v.DatabaseInsightsMode) > 0 {
+		objectKey := object.Key("DatabaseInsightsMode")
+		objectKey.String(string(v.DatabaseInsightsMode))
+	}
+
 	if v.DatabaseName != nil {
 		objectKey := object.Key("DatabaseName")
 		objectKey.String(*v.DatabaseName)
@@ -12969,6 +12974,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.CustomIamInstanceProfile)
 	}
 
+	if len(v.DatabaseInsightsMode) > 0 {
+		objectKey := object.Key("DatabaseInsightsMode")
+		objectKey.String(string(v.DatabaseInsightsMode))
+	}
+
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
@@ -13286,6 +13296,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.CustomIamInstanceProfile != nil {
 		objectKey := object.Key("CustomIamInstanceProfile")
 		objectKey.String(*v.CustomIamInstanceProfile)
+	}
+
+	if len(v.DatabaseInsightsMode) > 0 {
+		objectKey := object.Key("DatabaseInsightsMode")
+		objectKey.String(string(v.DatabaseInsightsMode))
 	}
 
 	if v.DBInstanceClass != nil {
@@ -16194,6 +16209,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
 	}
 
+	if len(v.DatabaseInsightsMode) > 0 {
+		objectKey := object.Key("DatabaseInsightsMode")
+		objectKey.String(string(v.DatabaseInsightsMode))
+	}
+
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
@@ -16482,6 +16502,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
+	if len(v.DatabaseInsightsMode) > 0 {
+		objectKey := object.Key("DatabaseInsightsMode")
+		objectKey.String(string(v.DatabaseInsightsMode))
 	}
 
 	if v.DBInstanceClass != nil {
@@ -18304,6 +18329,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
+	if len(v.DatabaseInsightsMode) > 0 {
+		objectKey := object.Key("DatabaseInsightsMode")
+		objectKey.String(string(v.DatabaseInsightsMode))
 	}
 
 	if v.DBInstanceClass != nil {

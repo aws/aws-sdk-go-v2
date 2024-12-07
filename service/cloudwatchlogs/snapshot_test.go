@@ -242,6 +242,18 @@ func TestCheckSnapshot_DeleteIndexPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteLogAnomalyDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLogAnomalyDetector(context.Background(), nil, func(o *Options) {
@@ -626,6 +638,18 @@ func TestCheckSnapshot_GetDeliverySource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetLogAnomalyDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLogAnomalyDetector(context.Background(), nil, func(o *Options) {
@@ -703,6 +727,18 @@ func TestCheckSnapshot_ListAnomalies(t *testing.T) {
 	_, err := svc.ListAnomalies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAnomalies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIntegrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntegrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIntegrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -847,6 +883,18 @@ func TestCheckSnapshot_PutIndexPolicy(t *testing.T) {
 	_, err := svc.PutIndexPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutIndexPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1261,6 +1309,18 @@ func TestUpdateSnapshot_DeleteIndexPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteLogAnomalyDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLogAnomalyDetector(context.Background(), nil, func(o *Options) {
@@ -1645,6 +1705,18 @@ func TestUpdateSnapshot_GetDeliverySource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetLogAnomalyDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLogAnomalyDetector(context.Background(), nil, func(o *Options) {
@@ -1722,6 +1794,18 @@ func TestUpdateSnapshot_ListAnomalies(t *testing.T) {
 	_, err := svc.ListAnomalies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAnomalies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIntegrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntegrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIntegrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1866,6 +1950,18 @@ func TestUpdateSnapshot_PutIndexPolicy(t *testing.T) {
 	_, err := svc.PutIndexPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutIndexPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

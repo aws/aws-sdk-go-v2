@@ -170,6 +170,8 @@ const (
 	PermissionAssociate                Permission = "ASSOCIATE"
 	PermissionGrantWithLfTagExpression Permission = "GRANT_WITH_LF_TAG_EXPRESSION"
 	PermissionCreateLfTagExpression    Permission = "CREATE_LF_TAG_EXPRESSION"
+	PermissionCreateCatalog            Permission = "CREATE_CATALOG"
+	PermissionSuperUser                Permission = "SUPER_USER"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
@@ -192,6 +194,8 @@ func (Permission) Values() []Permission {
 		"ASSOCIATE",
 		"GRANT_WITH_LF_TAG_EXPRESSION",
 		"CREATE_LF_TAG_EXPRESSION",
+		"CREATE_CATALOG",
+		"SUPER_USER",
 	}
 }
 

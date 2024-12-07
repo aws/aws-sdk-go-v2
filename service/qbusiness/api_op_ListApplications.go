@@ -12,6 +12,11 @@ import (
 )
 
 // Lists Amazon Q Business applications.
+//
+// Amazon Q Business applications may securely transmit data for processing across
+// Amazon Web Services Regions within your geography. For more information, see [Cross region inference in Amazon Q Business].
+//
+// [Cross region inference in Amazon Q Business]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/cross-region-inference.html
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}

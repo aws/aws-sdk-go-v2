@@ -152,12 +152,15 @@ type Component struct {
 	// The operating system platform of the component.
 	Platform Platform
 
+	// Contains product codes that are used for billing purposes for Amazon Web
+	// Services Marketplace components.
+	ProductCodes []ProductCodeListItem
+
 	// Contains the name of the publisher if this is a third-party component.
 	// Otherwise, this property is empty.
 	Publisher *string
 
-	// Describes the current status of the component. This is used for components that
-	// are no longer active.
+	// Describes the current status of the component.
 	State *ComponentState
 
 	// The operating system (OS) version supported by the component. If the OS
@@ -331,6 +334,13 @@ type ComponentVersion struct {
 
 	// The platform of the component.
 	Platform Platform
+
+	// Contains product codes that are used for billing purposes for Amazon Web
+	// Services Marketplace components.
+	ProductCodes []ProductCodeListItem
+
+	// Describes the current status of the component version.
+	Status ComponentStatus
 
 	// he operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the base image OS
@@ -939,13 +949,15 @@ type ImageAggregation struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a package installed on an Image Builder image.
+// A software package that's installed on top of the base image to create a
+// customized image.
 type ImagePackage struct {
 
-	// The name of the package as reported to the operating system package manager.
+	// The name of the package that's reported to the operating system package manager.
 	PackageName *string
 
-	// The version of the package as reported to the operating system package manager.
+	// The version of the package that's reported to the operating system package
+	// manager.
 	PackageVersion *string
 
 	noSmithyDocumentSerde
@@ -1317,7 +1329,7 @@ type ImageTestsConfiguration struct {
 
 	// The maximum time in minutes that tests are permitted to run.
 	//
-	// The timeoutMinutes attribute is not currently active. This value is ignored.
+	// The timeout attribute is not currently active. This value is ignored.
 	TimeoutMinutes *int32
 
 	noSmithyDocumentSerde
@@ -2107,6 +2119,26 @@ type Placement struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a single product code.
+type ProductCodeListItem struct {
+
+	// For Amazon Web Services Marketplace components, this contains the product code
+	// ID that can be stamped onto an EC2 AMI to ensure that components are billed
+	// correctly. If this property is empty, it might mean that the component is not
+	// published.
+	//
+	// This member is required.
+	ProductCodeId *string
+
+	// The owner of the product code that's billed. If this property is empty, it
+	// might mean that the component is not published.
+	//
+	// This member is required.
+	ProductCodeType ProductCodeType
+
+	noSmithyDocumentSerde
+}
+
 // Information about how to remediate a finding.
 type Remediation struct {
 
@@ -2283,7 +2315,8 @@ type SystemsManagerAgent struct {
 type TargetContainerRepository struct {
 
 	// The name of the container repository where the output container image is
-	// stored. This name is prefixed by the repository location.
+	// stored. This name is prefixed by the repository location. For example,
+	// /repository_name .
 	//
 	// This member is required.
 	RepositoryName *string

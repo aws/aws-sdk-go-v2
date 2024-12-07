@@ -34913,6 +34913,12 @@ func awsRestjson1_deserializeOpErrorUpdateContact(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
 
@@ -44576,15 +44582,6 @@ func awsRestjson1_deserializeDocumentContactFlow(v **types.ContactFlow, value in
 					return fmt.Errorf("expected ContactFlowId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
-			}
-
-		case "IsDefault":
-			if value != nil {
-				jtv, ok := value.(bool)
-				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
-				}
-				sv.IsDefault = jtv
 			}
 
 		case "LastModifiedRegion":
@@ -59389,6 +59386,24 @@ func awsRestjson1_deserializeDocumentSegmentAttributeValue(v **types.SegmentAttr
 
 	for key, value := range shape {
 		switch key {
+		case "ValueInteger":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SegmentAttributeValueInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ValueInteger = ptr.Int32(int32(i64))
+			}
+
+		case "ValueMap":
+			if err := awsRestjson1_deserializeDocumentSegmentAttributeValueMap(&sv.ValueMap, value); err != nil {
+				return err
+			}
+
 		case "ValueString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -59404,6 +59419,41 @@ func awsRestjson1_deserializeDocumentSegmentAttributeValue(v **types.SegmentAttr
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSegmentAttributeValueMap(v *map[string]types.SegmentAttributeValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.SegmentAttributeValue
+	if *v == nil {
+		mv = map[string]types.SegmentAttributeValue{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.SegmentAttributeValue
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentSegmentAttributeValue(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

@@ -664,6 +664,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The details for unregistered WhatsApp phone numbers.</p>"
                     }
+                },
+                "wabaId": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the WhatsApp Business Account ID.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1099,6 +1105,11 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "iam:PassRole"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Add an event destination to log event data from WhatsApp for a WhatsApp Business Account (WABA). A WABA can only have one event destination at a time. All resources associated with the WABA use the same event destination.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -1166,6 +1177,12 @@
                 "smithy.api#documentation": "<p>The resource was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.socialmessaging#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:iam::\\d{12}:role\\/[a-zA-Z0-9+=,.@\\-_]+$"
             }
         },
         "com.amazonaws.socialmessaging#S3File": {
@@ -2386,6 +2403,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the event destination.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.socialmessaging#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Identity and Access Management role\n         that is able to import phone numbers and write events.</p>"
                     }
                 }
             },

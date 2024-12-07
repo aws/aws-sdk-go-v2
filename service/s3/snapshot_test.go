@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateBucket(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateBucketMetadataTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBucketMetadataTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateBucketMetadataTableConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateMultipartUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMultipartUpload(context.Background(), nil, func(o *Options) {
@@ -211,6 +223,18 @@ func TestCheckSnapshot_DeleteBucketLifecycle(t *testing.T) {
 	_, err := svc.DeleteBucketLifecycle(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteBucketLifecycle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteBucketMetadataTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBucketMetadataTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteBucketMetadataTableConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -451,6 +475,18 @@ func TestCheckSnapshot_GetBucketLogging(t *testing.T) {
 	_, err := svc.GetBucketLogging(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetBucketLogging")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetBucketMetadataTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBucketMetadataTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetBucketMetadataTableConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1249,6 +1285,18 @@ func TestUpdateSnapshot_CreateBucket(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateBucketMetadataTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBucketMetadataTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateBucketMetadataTableConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateMultipartUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMultipartUpload(context.Background(), nil, func(o *Options) {
@@ -1350,6 +1398,18 @@ func TestUpdateSnapshot_DeleteBucketLifecycle(t *testing.T) {
 	_, err := svc.DeleteBucketLifecycle(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBucketLifecycle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteBucketMetadataTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBucketMetadataTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteBucketMetadataTableConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1590,6 +1650,18 @@ func TestUpdateSnapshot_GetBucketLogging(t *testing.T) {
 	_, err := svc.GetBucketLogging(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetBucketLogging")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetBucketMetadataTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBucketMetadataTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetBucketMetadataTableConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

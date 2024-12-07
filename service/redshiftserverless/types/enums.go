@@ -23,6 +23,31 @@ func (LogExport) Values() []LogExport {
 	}
 }
 
+type ManagedWorkgroupStatus string
+
+// Enum values for ManagedWorkgroupStatus
+const (
+	ManagedWorkgroupStatusCreating     ManagedWorkgroupStatus = "CREATING"
+	ManagedWorkgroupStatusDeleting     ManagedWorkgroupStatus = "DELETING"
+	ManagedWorkgroupStatusModifying    ManagedWorkgroupStatus = "MODIFYING"
+	ManagedWorkgroupStatusAvailable    ManagedWorkgroupStatus = "AVAILABLE"
+	ManagedWorkgroupStatusNotAvailable ManagedWorkgroupStatus = "NOT_AVAILABLE"
+)
+
+// Values returns all known values for ManagedWorkgroupStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedWorkgroupStatus) Values() []ManagedWorkgroupStatus {
+	return []ManagedWorkgroupStatus{
+		"CREATING",
+		"DELETING",
+		"MODIFYING",
+		"AVAILABLE",
+		"NOT_AVAILABLE",
+	}
+}
+
 type NamespaceStatus string
 
 // Enum values for NamespaceStatus

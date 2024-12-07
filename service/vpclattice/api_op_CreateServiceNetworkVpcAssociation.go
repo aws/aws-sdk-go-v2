@@ -45,8 +45,8 @@ func (c *Client) CreateServiceNetworkVpcAssociation(ctx context.Context, params 
 
 type CreateServiceNetworkVpcAssociationInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the service network. You must use the
-	// ARN when the resources specified in the operation are in different accounts.
+	// The ID or ARN of the service network. You must use an ARN if the resources are
+	// in different accounts.
 	//
 	// This member is required.
 	ServiceNetworkIdentifier *string

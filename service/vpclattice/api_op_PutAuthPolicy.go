@@ -40,8 +40,7 @@ type PutAuthPolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service for
-	// which the policy is created.
+	// The ID or ARN of the service network or service for which the policy is created.
 	//
 	// This member is required.
 	ResourceIdentifier *string

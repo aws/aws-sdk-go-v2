@@ -35,7 +35,7 @@ func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, 
 
 type DeleteServiceInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the service.
+	// The ID or ARN of the service.
 	//
 	// This member is required.
 	ServiceIdentifier *string

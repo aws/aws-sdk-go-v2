@@ -128,6 +128,28 @@ type EndpointAccess struct {
 	noSmithyDocumentSerde
 }
 
+// A collection of Amazon Redshift compute resources managed by AWS Glue.
+type ManagedWorkgroupListItem struct {
+
+	// The creation date of the managed workgroup.
+	CreationDate *time.Time
+
+	// The unique identifier of the managed workgroup.
+	ManagedWorkgroupId *string
+
+	// The name of the managed workgroup.
+	ManagedWorkgroupName *string
+
+	// The Amazon Resource Name (ARN) for the managed workgroup in the AWS Glue Data
+	// Catalog.
+	SourceArn *string
+
+	// The status of the managed workgroup.
+	Status ManagedWorkgroupStatus
+
+	noSmithyDocumentSerde
+}
+
 // A collection of database objects and users.
 type Namespace struct {
 

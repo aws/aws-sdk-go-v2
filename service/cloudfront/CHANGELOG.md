@@ -1,3 +1,7 @@
+# v1.43.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2024-11-21)
 
 * **Feature**: Adds support for Origin Selection between EMPv2 origins based on media quality score.

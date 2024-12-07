@@ -77,6 +77,13 @@ type ListClustersInput struct {
 	// The sort order for results. The default value is Ascending .
 	SortOrder types.SortOrder
 
+	// The Amazon Resource Name (ARN); of the training plan to filter clusters by. For
+	// more information about reserving GPU capacity for your SageMaker HyperPod
+	// clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+	//
+	// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+	TrainingPlanArn *string
+
 	noSmithyDocumentSerde
 }
 

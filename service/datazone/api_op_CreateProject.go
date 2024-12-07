@@ -50,6 +50,12 @@ type CreateProjectInput struct {
 	// The glossary terms that can be used in this Amazon DataZone project.
 	GlossaryTerms []string
 
+	// The ID of the project profile.
+	ProjectProfileId *string
+
+	// The user parameters of the project.
+	UserParameters []types.EnvironmentConfigurationUserParameter
+
 	noSmithyDocumentSerde
 }
 
@@ -84,6 +90,9 @@ type CreateProjectOutput struct {
 	// The ID of the domain unit.
 	DomainUnitId *string
 
+	// The environment deployment details.
+	EnvironmentDeploymentDetails *types.EnvironmentDeploymentDetails
+
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.
 	FailureReasons []types.ProjectDeletionError
@@ -94,8 +103,14 @@ type CreateProjectOutput struct {
 	// The timestamp of when the project was last updated.
 	LastUpdatedAt *time.Time
 
+	// The project profile ID.
+	ProjectProfileId *string
+
 	// The status of the Amazon DataZone project that was created.
 	ProjectStatus types.ProjectStatus
+
+	// The user parameters of the project.
+	UserParameters []types.EnvironmentConfigurationUserParameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

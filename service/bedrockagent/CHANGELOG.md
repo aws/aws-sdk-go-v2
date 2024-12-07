@@ -1,3 +1,24 @@
+# v1.32.0 (2024-12-04)
+
+* **Feature**: This release introduces the ability to generate SQL using natural language, through a new GenerateQuery API (with native integration into Knowledge Bases); ability to ingest and retrieve images through Bedrock Data Automation; and ability to create a Knowledge Base backed by Kendra GenAI Index.
+
+# v1.31.0 (2024-12-03.2)
+
+* **Feature**: Releasing SDK for Multi-Agent Collaboration.
+
+# v1.30.0 (2024-12-02)
+
+* **Feature**: This release introduces APIs to upload documents directly into a Knowledge Base
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.0 (2024-11-27)
+
+* **Feature**: Add support for specifying embeddingDataType, either FLOAT32 or BINARY
+
+# v1.28.0 (2024-11-26)
+
+* **Feature**: Custom Orchestration API release for AWSBedrockAgents.
+
 # v1.27.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

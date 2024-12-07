@@ -28,7 +28,7 @@ func (c *Client) UpdateAccessLogSubscription(ctx context.Context, params *Update
 
 type UpdateAccessLogSubscriptionInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the access log subscription.
+	// The ID or ARN of the access log subscription.
 	//
 	// This member is required.
 	AccessLogSubscriptionIdentifier *string

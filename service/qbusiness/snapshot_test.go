@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociatePermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociatePermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociatePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDeleteDocument(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteDocument(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_CreateApplication(t *testing.T) {
 	_, err := svc.CreateApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDataAccessor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataAccessor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataAccessor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,6 +254,18 @@ func TestCheckSnapshot_DeleteConversation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDataAccessor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataAccessor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataAccessor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataSource(context.Background(), nil, func(o *Options) {
@@ -314,6 +350,18 @@ func TestCheckSnapshot_DeleteWebExperience(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociatePermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociatePermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociatePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
@@ -331,6 +379,18 @@ func TestCheckSnapshot_GetChatControlsConfiguration(t *testing.T) {
 	_, err := svc.GetChatControlsConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetChatControlsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataAccessor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataAccessor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataAccessor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -374,11 +434,35 @@ func TestCheckSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMedia(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMedia(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMedia")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPlugin(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPlugin(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetPlugin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -434,11 +518,35 @@ func TestCheckSnapshot_ListApplications(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAttachments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListConversations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConversations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListConversations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataAccessors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataAccessors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataAccessors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -518,11 +626,47 @@ func TestCheckSnapshot_ListMessages(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPluginActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPluginActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPluginActions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPlugins(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPlugins(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListPlugins")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPluginTypeActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPluginTypeActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPluginTypeActions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPluginTypeMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPluginTypeMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPluginTypeMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -583,6 +727,18 @@ func TestCheckSnapshot_PutGroup(t *testing.T) {
 	_, err := svc.PutGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchRelevantContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchRelevantContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchRelevantContent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -662,6 +818,18 @@ func TestCheckSnapshot_UpdateChatControlsConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDataAccessor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataAccessor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDataAccessor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataSource(context.Background(), nil, func(o *Options) {
@@ -733,6 +901,18 @@ func TestCheckSnapshot_UpdateWebExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociatePermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociatePermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociatePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchDeleteDocument(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteDocument(context.Background(), nil, func(o *Options) {
@@ -786,6 +966,18 @@ func TestUpdateSnapshot_CreateApplication(t *testing.T) {
 	_, err := svc.CreateApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDataAccessor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataAccessor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataAccessor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -901,6 +1093,18 @@ func TestUpdateSnapshot_DeleteConversation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteDataAccessor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataAccessor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataAccessor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataSource(context.Background(), nil, func(o *Options) {
@@ -985,6 +1189,18 @@ func TestUpdateSnapshot_DeleteWebExperience(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociatePermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociatePermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociatePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
@@ -1002,6 +1218,18 @@ func TestUpdateSnapshot_GetChatControlsConfiguration(t *testing.T) {
 	_, err := svc.GetChatControlsConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetChatControlsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataAccessor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataAccessor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataAccessor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1045,11 +1273,35 @@ func TestUpdateSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMedia(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMedia(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMedia")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetPlugin(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPlugin(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPlugin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1105,11 +1357,35 @@ func TestUpdateSnapshot_ListApplications(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAttachments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListConversations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConversations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListConversations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataAccessors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataAccessors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataAccessors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1189,11 +1465,47 @@ func TestUpdateSnapshot_ListMessages(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPluginActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPluginActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPluginActions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListPlugins(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPlugins(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListPlugins")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPluginTypeActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPluginTypeActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPluginTypeActions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPluginTypeMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPluginTypeMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPluginTypeMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1254,6 +1566,18 @@ func TestUpdateSnapshot_PutGroup(t *testing.T) {
 	_, err := svc.PutGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchRelevantContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchRelevantContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchRelevantContent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1326,6 +1650,18 @@ func TestUpdateSnapshot_UpdateChatControlsConfiguration(t *testing.T) {
 	_, err := svc.UpdateChatControlsConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateChatControlsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDataAccessor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataAccessor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDataAccessor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

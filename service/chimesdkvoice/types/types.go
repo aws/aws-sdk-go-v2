@@ -133,6 +133,19 @@ type EmergencyCallingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an external systems configuration for a Voice
+// Connector.
+type ExternalSystemsConfiguration struct {
+
+	// The contact center system.
+	ContactCenterSystemTypes []ContactCenterSystemType
+
+	// The session border controllers.
+	SessionBorderControllerTypes []SessionBorderControllerType
+
+	noSmithyDocumentSerde
+}
+
 // The country and area code for a proxy phone number in a proxy phone session.
 type GeoMatchParams struct {
 
@@ -781,6 +794,9 @@ type VoiceConnector struct {
 
 	// The Voice Connector's creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
+
+	// The connectors for use with Amazon Connect.
+	IntegrationType VoiceConnectorIntegrationType
 
 	// The Voice Connector's name.
 	Name *string

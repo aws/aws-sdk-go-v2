@@ -1,0 +1,2117 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.invoicing#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.invoicing#BasicString"
+                },
+                "resourceName": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvoicingAccessDenied",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.invoicing#AccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#AccountIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.invoicing#AccountIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.invoicing#AsOfTimestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.invoicing#BasicString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.invoicing#BatchGetInvoiceProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#BatchGetInvoiceProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#BatchGetInvoiceProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This gets the invoice profile associated with a set of accounts. The accounts must be linked accounts under the requester management account organization.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "BatchGetInvoiceProfile",
+                        "input": {
+                            "AccountIds": [
+                                "111111111111"
+                            ]
+                        },
+                        "output": {
+                            "Profiles": [
+                                {
+                                    "AccountId": "111111111111",
+                                    "Issuer": "Test",
+                                    "ReceiverAddress": {
+                                        "AddressLine1": "Test",
+                                        "City": "Test",
+                                        "CountryCode": "LU",
+                                        "PostalCode": "Test",
+                                        "StateOrRegion": "Test"
+                                    },
+                                    "ReceiverEmail": "test@amazon.com",
+                                    "ReceiverName": "TestAccount"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.invoicing#BatchGetInvoiceProfileRequest": {
+            "type": "structure",
+            "members": {
+                "AccountIds": {
+                    "target": "com.amazonaws.invoicing#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the corresponding invoice profile data for these account IDs.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#BatchGetInvoiceProfileResponse": {
+            "type": "structure",
+            "members": {
+                "Profiles": {
+                    "target": "com.amazonaws.invoicing#ProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of invoice profiles corresponding to the requested accounts.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#CreateInvoiceUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#CreateInvoiceUnitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#CreateInvoiceUnitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This creates a new invoice unit with the provided definition.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateInvoiceUnit",
+                        "input": {
+                            "Name": "Example Invoice Unit",
+                            "InvoiceReceiver": "111111111111",
+                            "Description": "Example Invoice Unit Description",
+                            "TaxInheritanceDisabled": false,
+                            "Rule": {
+                                "LinkedAccounts": [
+                                    "222222222222"
+                                ]
+                            },
+                            "ResourceTags": [
+                                {
+                                    "Key": "TagKey",
+                                    "Value": "TagValue"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#CreateInvoiceUnitRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The unique name of the invoice unit that is shown on the generated invoice. This can't be changed once it is set. To change this name, you must delete the invoice unit recreate.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvoiceReceiver": {
+                    "target": "com.amazonaws.invoicing#AccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Web Services account ID chosen to be the receiver of an invoice unit. All invoices generated for that invoice unit will be sent to this account ID.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.invoicing#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The invoice unit's description. This can be changed at a later time.\n    </p>"
+                    }
+                },
+                "TaxInheritanceDisabled": {
+                    "target": "com.amazonaws.invoicing#TaxInheritanceDisabledFlag",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the invoice unit based tax inheritance is/ should be enabled or disabled.\n    </p>"
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>InvoiceUnitRule</code> object used to create invoice units.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.invoicing#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The tag structure that contains a tag key and value.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#CreateInvoiceUnitResponse": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnitArn": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#DeleteInvoiceUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#DeleteInvoiceUnitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#DeleteInvoiceUnitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This deletes an invoice unit with the provided invoice unit ARN.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteInvoiceUnit",
+                        "input": {
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
+                        },
+                        "output": {
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#DeleteInvoiceUnitRequest": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnitArn": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#DeleteInvoiceUnitResponse": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnitArn": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#DescriptionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.invoicing#Filters": {
+            "type": "structure",
+            "members": {
+                "Names": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    An optional input to the list API. You can specify a list of invoice unit names inside filters to return invoice units that match only the specified invoice unit names. If multiple names are provided, the result is an <code>OR</code> condition (match any) of the specified invoice unit names.\n</p>"
+                    }
+                },
+                "InvoiceReceivers": {
+                    "target": "com.amazonaws.invoicing#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nYou can specify a list of Amazon Web Services account IDs inside filters to return invoice units that match only the specified accounts. If multiple accounts are provided, the result is an <code>OR</code> condition (match any) of the specified accounts. This filter only matches the specified accounts on the invoice receivers of the invoice units.\n</p>"
+                    }
+                },
+                "Accounts": {
+                    "target": "com.amazonaws.invoicing#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nYou can specify a list of Amazon Web Services account IDs inside filters to return invoice units that match only the specified accounts. If multiple accounts are provided, the result is an <code>OR</code> condition (match any) of the specified accounts. The specified account IDs are matched with either the receiver or the linked accounts in the rules.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional input to the list API. If multiple filters are specified, the returned list will be a configuration that match all of the provided filters. Supported filter types are <code>InvoiceReceivers</code>, <code>Names</code>, and <code>Accounts</code>. \n</p>"
+            }
+        },
+        "com.amazonaws.invoicing#GetInvoiceUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#GetInvoiceUnitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#GetInvoiceUnitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This retrieves the invoice unit definition.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetInvoiceUnit as of current time",
+                        "input": {
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
+                        },
+                        "output": {
+                            "InvoiceReceiver": "111111111111",
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678",
+                            "LastModified": 1733788800,
+                            "Name": "Example Invoice Unit A",
+                            "Description": "Description changed on 1733788800",
+                            "Rule": {
+                                "LinkedAccounts": [
+                                    "222222222222"
+                                ]
+                            },
+                            "TaxInheritanceDisabled": false
+                        }
+                    },
+                    {
+                        "title": "GetInvoiceUnit as of specified time",
+                        "input": {
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/87654321",
+                            "AsOf": 1733097600
+                        },
+                        "output": {
+                            "InvoiceReceiver": "333333333333",
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/87654321",
+                            "LastModified": 1733011200,
+                            "Name": "Example Invoice Unit B",
+                            "Description": "Description changed on 1733011200",
+                            "Rule": {
+                                "LinkedAccounts": [
+                                    "333333333333"
+                                ]
+                            },
+                            "TaxInheritanceDisabled": false
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.invoicing#GetInvoiceUnitRequest": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnitArn": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AsOf": {
+                    "target": "com.amazonaws.invoicing#AsOfTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The state of an invoice unit at a specified time. You can see legacy invoice units that are currently deleted if the <code>AsOf</code> time is set to before it was deleted. If an <code>AsOf</code> is not provided, the default value is the current time.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#GetInvoiceUnitResponse": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnitArn": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>"
+                    }
+                },
+                "InvoiceReceiver": {
+                    "target": "com.amazonaws.invoicing#AccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Web Services account ID chosen to be the receiver of an invoice unit. All invoices generated for that invoice unit will be sent to this account ID.\n    </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The unique name of the invoice unit that is shown on the generated invoice.\n    </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.invoicing#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The assigned description for an invoice unit.\n    </p>"
+                    }
+                },
+                "TaxInheritanceDisabled": {
+                    "target": "com.amazonaws.invoicing#TaxInheritanceDisabledFlag",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>\n      Whether the invoice unit based tax inheritance is/ should be enabled or disabled.\n    </p>"
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitRule"
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.invoicing#LastModifiedTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The most recent date the invoice unit response was updated.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The processing request failed because of an unknown error, exception, or failure.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.invoicing#BasicString"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvoicingInternalServer",
+                    "httpResponseCode": 500
+                },
+                "smithy.api#documentation": "<p>The processing request failed because of an unknown error, exception, or failure.\n</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceProfile": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.invoicing#AccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe account ID the invoice profile is generated for.\n</p>"
+                    }
+                },
+                "ReceiverName": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the person receiving the invoice profile.\n</p>"
+                    }
+                },
+                "ReceiverAddress": {
+                    "target": "com.amazonaws.invoicing#ReceiverAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address of the receiver that will be printed on the invoice.\n</p>"
+                    }
+                },
+                "ReceiverEmail": {
+                    "target": "com.amazonaws.invoicing#SensitiveBasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address for the invoice profile receiver.\n</p>"
+                    }
+                },
+                "Issuer": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThis specifies the issuing entity of the invoice.\n</p>"
+                    }
+                },
+                "TaxRegistrationNumber": {
+                    "target": "com.amazonaws.invoicing#SensitiveBasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nYour Tax Registration Number (TRN) information.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nContains high-level information about the invoice receiver.\n</p>"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceUnit": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnitArn": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN to identify an invoice unit. This information can't be modified or deleted.\n</p>"
+                    }
+                },
+                "InvoiceReceiver": {
+                    "target": "com.amazonaws.invoicing#AccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that receives invoices related to the invoice unit.\n</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    A unique name that is distinctive within your Amazon Web Services.\n</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.invoicing#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assigned description for an invoice unit. This information can't be modified or deleted.\n</p>"
+                    }
+                },
+                "TaxInheritanceDisabled": {
+                    "target": "com.amazonaws.invoicing#TaxInheritanceDisabledFlag",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Whether the invoice unit based tax inheritance is/ should be enabled or disabled.\n</p>"
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn <code>InvoiceUnitRule</code> object used the categorize invoice units. \n</p>"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.invoicing#LastModifiedTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe last time the invoice unit was updated. This is important to determine the version of invoice unit configuration used to create the invoices. Any invoice created after this modified time will use this invoice unit configuration.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An invoice unit is a set of mutually exclusive accounts that correspond to your business entity. Invoice units allow you separate Amazon Web Services account costs and configures your invoice for each business entity going forward.\n</p>"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceUnitArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceUnitName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^(?! )[\\p{L}\\p{N}\\p{Z}-_]*(?<! )$"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceUnitNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#InvoiceUnitName"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceUnitRule": {
+            "type": "structure",
+            "members": {
+                "LinkedAccounts": {
+                    "target": "com.amazonaws.invoicing#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of <code>LINKED_ACCOUNT</code> IDs where charges are included within the invoice unit.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThis is used to categorize the invoice unit. Values are Amazon Web Services account IDs. Currently, the only supported rule is <code>LINKED_ACCOUNT</code>.\n</p>"
+            }
+        },
+        "com.amazonaws.invoicing#InvoiceUnits": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#InvoiceUnit"
+            }
+        },
+        "com.amazonaws.invoicing#Invoicing": {
+            "type": "service",
+            "version": "2024-12-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.invoicing#BatchGetInvoiceProfile"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#CreateInvoiceUnit"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#DeleteInvoiceUnit"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#GetInvoiceUnit"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ListInvoiceUnits"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#UpdateInvoiceUnit"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Invoicing",
+                    "arnNamespace": "invoicing",
+                    "endpointPrefix": "invoicing",
+                    "docId": "invoicing-2024-12-01",
+                    "cloudTrailEventSource": "invoicing.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "invoicing"
+                },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardPartitionalEndpoints": {
+                    "endpointPatternType": "service_region_dnsSuffix"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>\n            <b>Amazon Web Services Invoice Configuration</b>\n         </p>\n         <p>You can use Amazon Web Services Invoice Configuration APIs to programmatically create,\n      update, delete, get, and list invoice units. You can also programmatically fetch the\n      information of the invoice receiver. For example, business legal name, address, and invoicing\n      contacts. </p>\n         <p>You can use Amazon Web Services Invoice Configuration to receive separate Amazon Web Services invoices based your organizational needs. By using Amazon Web Services Invoice Configuration, you can configure invoice units that are groups of Amazon Web Services accounts that represent your business entities, and receive separate invoices for each business entity. You can also assign a unique member or payer account as the invoice receiver for each invoice unit. As you create new accounts within your Organizations using Amazon Web Services Invoice Configuration APIs, you can automate the creation of new invoice units and subsequently automate the addition of new accounts to your invoice units.</p>\n         <p>Service endpoint</p>\n         <p>You can use the following endpoints for Amazon Web Services Invoice Configuration:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>https://invoicing.us-east-1.api.aws</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Invoicing",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://invoicing-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://invoicing.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-iso-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-iso-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isob-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isob-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "eu-isoe-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "eu-isoe-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isof-south-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isof-south-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://invoicing.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.invoicing#LastModifiedTimestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.invoicing#ListInvoiceUnits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#ListInvoiceUnitsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#ListInvoiceUnitsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This fetches a list of all invoice unit definitions for a given account, as of the provided <code>AsOf</code> date.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListInvoiceUnits without filters as of current time",
+                        "input": {},
+                        "output": {
+                            "InvoiceUnits": [
+                                {
+                                    "InvoiceReceiver": "111111111111",
+                                    "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678",
+                                    "LastModified": 1733788800,
+                                    "Name": "Example Invoice Unit A",
+                                    "Description": "Description changed on 1733788800",
+                                    "Rule": {
+                                        "LinkedAccounts": [
+                                            "222222222222"
+                                        ]
+                                    },
+                                    "TaxInheritanceDisabled": false
+                                },
+                                {
+                                    "InvoiceReceiver": "333333333333",
+                                    "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/87654321",
+                                    "LastModified": 1733788800,
+                                    "Name": "Example Invoice Unit B",
+                                    "Description": "Description changed on 1733788800",
+                                    "Rule": {
+                                        "LinkedAccounts": [
+                                            "333333333333"
+                                        ]
+                                    },
+                                    "TaxInheritanceDisabled": true
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "ListInvoiceUnits with filters as of specified time",
+                        "input": {
+                            "AsOf": 1733097600,
+                            "Filters": {
+                                "InvoiceReceivers": [
+                                    "333333333333"
+                                ]
+                            }
+                        },
+                        "output": {
+                            "InvoiceUnits": [
+                                {
+                                    "InvoiceReceiver": "333333333333",
+                                    "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/87654321",
+                                    "LastModified": 1733011200,
+                                    "Name": "Example Invoice Unit B",
+                                    "Description": "Description changed on 1733011200",
+                                    "Rule": {
+                                        "LinkedAccounts": [
+                                            "333333333333"
+                                        ]
+                                    },
+                                    "TaxInheritanceDisabled": false
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "ListInvoiceUnits with pagination - first page",
+                        "input": {
+                            "MaxResults": 1
+                        },
+                        "output": {
+                            "InvoiceUnits": [
+                                {
+                                    "InvoiceReceiver": "111111111111",
+                                    "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678",
+                                    "LastModified": 1733788800,
+                                    "Name": "Example Invoice Unit A",
+                                    "Description": "Description changed on 1733788800",
+                                    "Rule": {
+                                        "LinkedAccounts": [
+                                            "222222222222"
+                                        ]
+                                    },
+                                    "TaxInheritanceDisabled": false
+                                }
+                            ],
+                            "NextToken": "nextTokenExample"
+                        }
+                    },
+                    {
+                        "title": "ListInvoiceUnits with pagination - second page",
+                        "input": {
+                            "MaxResults": 1,
+                            "NextToken": "nextTokenExample"
+                        },
+                        "output": {
+                            "InvoiceUnits": [
+                                {
+                                    "InvoiceReceiver": "333333333333",
+                                    "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/87654321",
+                                    "LastModified": 1733788800,
+                                    "Name": "Example Invoice Unit B",
+                                    "Description": "Description changed on 1733788800",
+                                    "Rule": {
+                                        "LinkedAccounts": [
+                                            "333333333333"
+                                        ]
+                                    },
+                                    "TaxInheritanceDisabled": true
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "InvoiceUnits"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListInvoiceUnitsSuccess",
+                        "params": {},
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#ListInvoiceUnitsRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.invoicing#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An optional input to the list API. If multiple filters are specified, the returned list will be a configuration that match all of the provided filters. Supported filter types are <code>InvoiceReceivers</code>, <code>Names</code>, and <code>Accounts</code>. \n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.invoicing#NextTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used to indicate where the returned list should start from.\n    </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.invoicing#MaxResultsInteger",
+                    "traits": {
+                        "smithy.api#default": 500,
+                        "smithy.api#documentation": "<p>The maximum number of invoice units that can be returned.\n    </p>"
+                    }
+                },
+                "AsOf": {
+                    "target": "com.amazonaws.invoicing#AsOfTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The state of an invoice unit at a specified time. You can see legacy invoice units that are currently deleted if the <code>AsOf</code> time is set to before it was deleted. If an <code>AsOf</code> is not provided, the default value is the current time.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#ListInvoiceUnitsResponse": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnits": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An invoice unit is a set of mutually exclusive accounts that correspond to your business entity.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.invoicing#NextTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used to indicate where the returned list should start from.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags for a resource.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListTagsForResource",
+                        "input": {
+                            "ResourceArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
+                        },
+                        "output": {
+                            "ResourceTags": [
+                                {
+                                    "Key": "TagKey",
+                                    "Value": "TagValue"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.invoicing#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.invoicing#TagrisArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of tags to list.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceTags": {
+                    "target": "com.amazonaws.invoicing#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Adds a tag to a resource.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#MaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 500,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.invoicing#NextTokenString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.invoicing#ProfileList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#InvoiceProfile"
+            }
+        },
+        "com.amazonaws.invoicing#ReceiverAddress": {
+            "type": "structure",
+            "members": {
+                "AddressLine1": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe first line of the address.\n</p>"
+                    }
+                },
+                "AddressLine2": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe second line of the address, if applicable.\n</p>"
+                    }
+                },
+                "AddressLine3": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe third line of the address, if applicable.\n</p>"
+                    }
+                },
+                "DistrictOrCounty": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe district or country the address is located in.\n</p>"
+                    }
+                },
+                "City": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe city that the address is in.\n</p>"
+                    }
+                },
+                "StateOrRegion": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe state, region, or province the address is located.\n</p>"
+                    }
+                },
+                "CountryCode": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe country code for the country the address is in.\n</p>"
+                    }
+                },
+                "CompanyName": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique company name.\n</p>"
+                    }
+                },
+                "PostalCode": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe postal code associated with the address.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe details of the address associated with the receiver.\n</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.invoicing#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.invoicing#BasicString"
+                },
+                "resourceName": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource could not be found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvoicingResourceNotFound",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The resource could not be found.\n</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.invoicing#ResourceTag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.invoicing#ResourceTagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key of your of your resource tag.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.invoicing#ResourceTagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe specific value of the resource tag.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tag structure that contains a tag key and value.\n</p>"
+            }
+        },
+        "com.amazonaws.invoicing#ResourceTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.invoicing#ResourceTagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#ResourceTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.invoicing#ResourceTagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#ResourceTag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.invoicing#ResourceTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.invoicing#SensitiveBasicString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^\\S+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.invoicing#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvoicingServiceQuotaExceeded",
+                    "httpResponseCode": 402
+                },
+                "smithy.api#documentation": "<p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services account limits. The error message describes the limit exceeded.\n        </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.invoicing#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a tag to a resource.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "TagResource",
+                        "input": {
+                            "ResourceArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678",
+                            "ResourceTags": [
+                                {
+                                    "Key": "TagKey",
+                                    "Value": "TagValue"
+                                }
+                            ]
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.invoicing#TagrisArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tags.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.invoicing#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Adds a tag to a resource.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#TagrisArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
+            }
+        },
+        "com.amazonaws.invoicing#TaxInheritanceDisabledFlag": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.invoicing#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.invoicing#BasicString"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvoicingThrottling",
+                    "httpResponseCode": 429
+                },
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.invoicing#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Removes a tag from a resource.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UntagResource",
+                        "input": {
+                            "ResourceArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678",
+                            "ResourceTagKeys": [
+                                "TagKey"
+                            ]
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.invoicing#TagrisArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) to untag.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTagKeys": {
+                    "target": "com.amazonaws.invoicing#ResourceTagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Keys for the tags to be removed.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#UpdateInvoiceUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#UpdateInvoiceUnitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#UpdateInvoiceUnitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>You can update the invoice unit configuration at any time, and Amazon Web Services will use the latest configuration at the end of the month.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateInvoiceUnit with all updatable fields",
+                        "input": {
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678",
+                            "Description": "Updated IU description",
+                            "TaxInheritanceDisabled": false,
+                            "Rule": {
+                                "LinkedAccounts": [
+                                    "111111111111",
+                                    "222222222222"
+                                ]
+                            }
+                        },
+                        "output": {
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
+                        }
+                    },
+                    {
+                        "title": "UpdateInvoiceUnit with specific fields",
+                        "input": {
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678",
+                            "Description": "Updated IU description. All other fields remain unchanged"
+                        },
+                        "output": {
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#UpdateInvoiceUnitRequest": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnitArn": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.invoicing#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assigned description for an invoice unit. This information can't be modified or deleted.\n    </p>"
+                    }
+                },
+                "TaxInheritanceDisabled": {
+                    "target": "com.amazonaws.invoicing#TaxInheritanceDisabledFlag",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Whether the invoice unit based tax inheritance is/ should be enabled or disabled.\n    </p>"
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>InvoiceUnitRule</code> object used to update invoice units.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#UpdateInvoiceUnitResponse": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnitArn": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN to identify an invoice unit. This information can't be modified or deleted.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.invoicing#BasicString"
+                },
+                "resourceName": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.\n        </p>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.invoicing#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.\n        </p>"
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.invoicing#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The input fails to satisfy the constraints specified by an Amazon Web Services service.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvoicingValidation",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n    The input fails to satisfy the constraints specified by an Amazon Web Services service.\n</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.invoicing#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The input fails to satisfy the constraints specified by an Amazon Web Services service.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The input fails to satisfy the constraints specified by an Amazon Web Services service.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The input fails to satisfy the constraints specified by an Amazon Web Services service.\n        </p>"
+            }
+        },
+        "com.amazonaws.invoicing#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.invoicing#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "NON_MEMBERS_PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nonMemberPresent"
+                    }
+                },
+                "MAX_ACCOUNTS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "maxAccountsExceeded"
+                    }
+                },
+                "MAX_INVOICE_UNITS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "maxInvoiceUnitsExceeded"
+                    }
+                },
+                "DUPLICATE_INVOICE_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "duplicateInvoiceUnit"
+                    }
+                },
+                "MUTUAL_EXCLUSION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mutualExclusionError"
+                    }
+                },
+                "ACCOUNT_MEMBERSHIP_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "accountMembershipError"
+                    }
+                },
+                "TAX_SETTINGS_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "taxSettingsError"
+                    }
+                },
+                "EXPIRED_NEXT_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "expiredNextToken"
+                    }
+                },
+                "INVALID_NEXT_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalidNextToken"
+                    }
+                },
+                "INVALID_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalidInput"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fieldValidationFailed"
+                    }
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cannotParse"
+                    }
+                },
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknownOperation"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                }
+            }
+        }
+    }
+}

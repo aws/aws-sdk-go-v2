@@ -1,3 +1,7 @@
+# v1.40.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2024-11-21)
 
 * **Feature**: Add support for the Amazon Bedrock Runtime.

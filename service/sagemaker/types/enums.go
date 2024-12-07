@@ -29,6 +29,25 @@ func (ActionStatus) Values() []ActionStatus {
 	}
 }
 
+type ActivationState string
+
+// Enum values for ActivationState
+const (
+	ActivationStateEnabled  ActivationState = "Enabled"
+	ActivationStateDisabled ActivationState = "Disabled"
+)
+
+// Values returns all known values for ActivationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActivationState) Values() []ActivationState {
+	return []ActivationState{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type AdditionalS3DataSourceDataType string
 
 // Enum values for AdditionalS3DataSourceDataType
@@ -1653,6 +1672,8 @@ const (
 	ClusterInstanceTypeMlG6e24xlarge   ClusterInstanceType = "ml.g6e.24xlarge"
 	ClusterInstanceTypeMlG6e48xlarge   ClusterInstanceType = "ml.g6e.48xlarge"
 	ClusterInstanceTypeMlP5e48xlarge   ClusterInstanceType = "ml.p5e.48xlarge"
+	ClusterInstanceTypeMlP5en48xlarge  ClusterInstanceType = "ml.p5en.48xlarge"
+	ClusterInstanceTypeMlTrn248xlarge  ClusterInstanceType = "ml.trn2.48xlarge"
 )
 
 // Values returns all known values for ClusterInstanceType. Note that this can be
@@ -1718,6 +1739,8 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.g6e.24xlarge",
 		"ml.g6e.48xlarge",
 		"ml.p5e.48xlarge",
+		"ml.p5en.48xlarge",
+		"ml.trn2.48xlarge",
 	}
 }
 
@@ -2429,6 +2452,25 @@ func (FailureHandlingPolicy) Values() []FailureHandlingPolicy {
 	return []FailureHandlingPolicy{
 		"ROLLBACK_ON_FAILURE",
 		"DO_NOTHING",
+	}
+}
+
+type FairShare string
+
+// Enum values for FairShare
+const (
+	FairShareEnabled  FairShare = "Enabled"
+	FairShareDisabled FairShare = "Disabled"
+)
+
+// Values returns all known values for FairShare. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FairShare) Values() []FairShare {
+	return []FairShare{
+		"Enabled",
+		"Disabled",
 	}
 }
 
@@ -3283,6 +3325,35 @@ func (InputMode) Values() []InputMode {
 	}
 }
 
+type InstanceGroupStatus string
+
+// Enum values for InstanceGroupStatus
+const (
+	InstanceGroupStatusInservice      InstanceGroupStatus = "InService"
+	InstanceGroupStatusCreating       InstanceGroupStatus = "Creating"
+	InstanceGroupStatusUpdating       InstanceGroupStatus = "Updating"
+	InstanceGroupStatusFailed         InstanceGroupStatus = "Failed"
+	InstanceGroupStatusDegraded       InstanceGroupStatus = "Degraded"
+	InstanceGroupStatusSystemupdating InstanceGroupStatus = "SystemUpdating"
+	InstanceGroupStatusDeleting       InstanceGroupStatus = "Deleting"
+)
+
+// Values returns all known values for InstanceGroupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceGroupStatus) Values() []InstanceGroupStatus {
+	return []InstanceGroupStatus{
+		"InService",
+		"Creating",
+		"Updating",
+		"Failed",
+		"Degraded",
+		"SystemUpdating",
+		"Deleting",
+	}
+}
+
 type InstanceType string
 
 // Enum values for InstanceType
@@ -4026,21 +4097,26 @@ type MlTools string
 
 // Enum values for MlTools
 const (
-	MlToolsDataWrangler          MlTools = "DataWrangler"
-	MlToolsFeatureStore          MlTools = "FeatureStore"
-	MlToolsEmrClusters           MlTools = "EmrClusters"
-	MlToolsAutoMl                MlTools = "AutoMl"
-	MlToolsExperiments           MlTools = "Experiments"
-	MlToolsTraining              MlTools = "Training"
-	MlToolsModelEvaluation       MlTools = "ModelEvaluation"
-	MlToolsPipelines             MlTools = "Pipelines"
-	MlToolsModels                MlTools = "Models"
-	MlToolsJumpStart             MlTools = "JumpStart"
-	MlToolsInferenceRecommender  MlTools = "InferenceRecommender"
-	MlToolsEndpoints             MlTools = "Endpoints"
-	MlToolsProjects              MlTools = "Projects"
-	MlToolsInferenceOptimization MlTools = "InferenceOptimization"
-	MlToolsPerformanceEvaluation MlTools = "PerformanceEvaluation"
+	MlToolsDataWrangler            MlTools = "DataWrangler"
+	MlToolsFeatureStore            MlTools = "FeatureStore"
+	MlToolsEmrClusters             MlTools = "EmrClusters"
+	MlToolsAutoMl                  MlTools = "AutoMl"
+	MlToolsExperiments             MlTools = "Experiments"
+	MlToolsTraining                MlTools = "Training"
+	MlToolsModelEvaluation         MlTools = "ModelEvaluation"
+	MlToolsPipelines               MlTools = "Pipelines"
+	MlToolsModels                  MlTools = "Models"
+	MlToolsJumpStart               MlTools = "JumpStart"
+	MlToolsInferenceRecommender    MlTools = "InferenceRecommender"
+	MlToolsEndpoints               MlTools = "Endpoints"
+	MlToolsProjects                MlTools = "Projects"
+	MlToolsInferenceOptimization   MlTools = "InferenceOptimization"
+	MlToolsPerformanceEvaluation   MlTools = "PerformanceEvaluation"
+	MlToolsHyperPodClusters        MlTools = "HyperPodClusters"
+	MlToolsLakeraGuard             MlTools = "LakeraGuard"
+	MlToolsComet                   MlTools = "Comet"
+	MlToolsDeepchecksLlmEvaluation MlTools = "DeepchecksLLMEvaluation"
+	MlToolsFiddler                 MlTools = "Fiddler"
 )
 
 // Values returns all known values for MlTools. Note that this can be expanded in
@@ -4064,6 +4140,11 @@ func (MlTools) Values() []MlTools {
 		"Projects",
 		"InferenceOptimization",
 		"PerformanceEvaluation",
+		"HyperPodClusters",
+		"LakeraGuard",
+		"Comet",
+		"DeepchecksLLMEvaluation",
+		"Fiddler",
 	}
 }
 
@@ -5044,6 +5125,75 @@ func (ParameterType) Values() []ParameterType {
 	}
 }
 
+type PartnerAppAuthType string
+
+// Enum values for PartnerAppAuthType
+const (
+	PartnerAppAuthTypeIam PartnerAppAuthType = "IAM"
+)
+
+// Values returns all known values for PartnerAppAuthType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PartnerAppAuthType) Values() []PartnerAppAuthType {
+	return []PartnerAppAuthType{
+		"IAM",
+	}
+}
+
+type PartnerAppStatus string
+
+// Enum values for PartnerAppStatus
+const (
+	PartnerAppStatusCreating     PartnerAppStatus = "Creating"
+	PartnerAppStatusUpdating     PartnerAppStatus = "Updating"
+	PartnerAppStatusDeleting     PartnerAppStatus = "Deleting"
+	PartnerAppStatusAvailable    PartnerAppStatus = "Available"
+	PartnerAppStatusFailed       PartnerAppStatus = "Failed"
+	PartnerAppStatusUpdateFailed PartnerAppStatus = "UpdateFailed"
+	PartnerAppStatusDeleted      PartnerAppStatus = "Deleted"
+)
+
+// Values returns all known values for PartnerAppStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PartnerAppStatus) Values() []PartnerAppStatus {
+	return []PartnerAppStatus{
+		"Creating",
+		"Updating",
+		"Deleting",
+		"Available",
+		"Failed",
+		"UpdateFailed",
+		"Deleted",
+	}
+}
+
+type PartnerAppType string
+
+// Enum values for PartnerAppType
+const (
+	PartnerAppTypeLakeraGuard             PartnerAppType = "lakera-guard"
+	PartnerAppTypeComet                   PartnerAppType = "comet"
+	PartnerAppTypeDeepchecksLlmEvaluation PartnerAppType = "deepchecks-llm-evaluation"
+	PartnerAppTypeFiddler                 PartnerAppType = "fiddler"
+)
+
+// Values returns all known values for PartnerAppType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PartnerAppType) Values() []PartnerAppType {
+	return []PartnerAppType{
+		"lakera-guard",
+		"comet",
+		"deepchecks-llm-evaluation",
+		"fiddler",
+	}
+}
+
 type PipelineExecutionStatus string
 
 // Enum values for PipelineExecutionStatus
@@ -5085,6 +5235,25 @@ func (PipelineStatus) Values() []PipelineStatus {
 	return []PipelineStatus{
 		"Active",
 		"Deleting",
+	}
+}
+
+type PreemptTeamTasks string
+
+// Enum values for PreemptTeamTasks
+const (
+	PreemptTeamTasksNever         PreemptTeamTasks = "Never"
+	PreemptTeamTasksLowerpriority PreemptTeamTasks = "LowerPriority"
+)
+
+// Values returns all known values for PreemptTeamTasks. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreemptTeamTasks) Values() []PreemptTeamTasks {
+	return []PreemptTeamTasks{
+		"Never",
+		"LowerPriority",
 	}
 }
 
@@ -6157,6 +6326,57 @@ func (RepositoryAccessMode) Values() []RepositoryAccessMode {
 	}
 }
 
+type ReservedCapacityInstanceType string
+
+// Enum values for ReservedCapacityInstanceType
+const (
+	ReservedCapacityInstanceTypeMlP4d24xlarge  ReservedCapacityInstanceType = "ml.p4d.24xlarge"
+	ReservedCapacityInstanceTypeMlP548xlarge   ReservedCapacityInstanceType = "ml.p5.48xlarge"
+	ReservedCapacityInstanceTypeMlP5e48xlarge  ReservedCapacityInstanceType = "ml.p5e.48xlarge"
+	ReservedCapacityInstanceTypeMlP5en48xlarge ReservedCapacityInstanceType = "ml.p5en.48xlarge"
+	ReservedCapacityInstanceTypeMlTrn248xlarge ReservedCapacityInstanceType = "ml.trn2.48xlarge"
+)
+
+// Values returns all known values for ReservedCapacityInstanceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReservedCapacityInstanceType) Values() []ReservedCapacityInstanceType {
+	return []ReservedCapacityInstanceType{
+		"ml.p4d.24xlarge",
+		"ml.p5.48xlarge",
+		"ml.p5e.48xlarge",
+		"ml.p5en.48xlarge",
+		"ml.trn2.48xlarge",
+	}
+}
+
+type ReservedCapacityStatus string
+
+// Enum values for ReservedCapacityStatus
+const (
+	ReservedCapacityStatusPending   ReservedCapacityStatus = "Pending"
+	ReservedCapacityStatusActive    ReservedCapacityStatus = "Active"
+	ReservedCapacityStatusScheduled ReservedCapacityStatus = "Scheduled"
+	ReservedCapacityStatusExpired   ReservedCapacityStatus = "Expired"
+	ReservedCapacityStatusFailed    ReservedCapacityStatus = "Failed"
+)
+
+// Values returns all known values for ReservedCapacityStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReservedCapacityStatus) Values() []ReservedCapacityStatus {
+	return []ReservedCapacityStatus{
+		"Pending",
+		"Active",
+		"Scheduled",
+		"Expired",
+		"Failed",
+	}
+}
+
 type ResourceCatalogSortBy string
 
 // Enum values for ResourceCatalogSortBy
@@ -6190,6 +6410,27 @@ func (ResourceCatalogSortOrder) Values() []ResourceCatalogSortOrder {
 	return []ResourceCatalogSortOrder{
 		"Ascending",
 		"Descending",
+	}
+}
+
+type ResourceSharingStrategy string
+
+// Enum values for ResourceSharingStrategy
+const (
+	ResourceSharingStrategyLend          ResourceSharingStrategy = "Lend"
+	ResourceSharingStrategyDontlend      ResourceSharingStrategy = "DontLend"
+	ResourceSharingStrategyLendandborrow ResourceSharingStrategy = "LendAndBorrow"
+)
+
+// Values returns all known values for ResourceSharingStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceSharingStrategy) Values() []ResourceSharingStrategy {
+	return []ResourceSharingStrategy{
+		"Lend",
+		"DontLend",
+		"LendAndBorrow",
 	}
 }
 
@@ -6441,6 +6682,25 @@ func (SageMakerImageName) Values() []SageMakerImageName {
 	}
 }
 
+type SageMakerResourceName string
+
+// Enum values for SageMakerResourceName
+const (
+	SageMakerResourceNameTrainingJob     SageMakerResourceName = "training-job"
+	SageMakerResourceNameHyperpodCluster SageMakerResourceName = "hyperpod-cluster"
+)
+
+// Values returns all known values for SageMakerResourceName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SageMakerResourceName) Values() []SageMakerResourceName {
+	return []SageMakerResourceName{
+		"training-job",
+		"hyperpod-cluster",
+	}
+}
+
 type SagemakerServicecatalogStatus string
 
 // Enum values for SagemakerServicecatalogStatus
@@ -6458,6 +6718,45 @@ func (SagemakerServicecatalogStatus) Values() []SagemakerServicecatalogStatus {
 	return []SagemakerServicecatalogStatus{
 		"Enabled",
 		"Disabled",
+	}
+}
+
+type SchedulerResourceStatus string
+
+// Enum values for SchedulerResourceStatus
+const (
+	SchedulerResourceStatusCreating             SchedulerResourceStatus = "Creating"
+	SchedulerResourceStatusCreateFailed         SchedulerResourceStatus = "CreateFailed"
+	SchedulerResourceStatusCreateRollbackFailed SchedulerResourceStatus = "CreateRollbackFailed"
+	SchedulerResourceStatusCreated              SchedulerResourceStatus = "Created"
+	SchedulerResourceStatusUpdating             SchedulerResourceStatus = "Updating"
+	SchedulerResourceStatusUpdateFailed         SchedulerResourceStatus = "UpdateFailed"
+	SchedulerResourceStatusUpdateRollbackFailed SchedulerResourceStatus = "UpdateRollbackFailed"
+	SchedulerResourceStatusUpdated              SchedulerResourceStatus = "Updated"
+	SchedulerResourceStatusDeleting             SchedulerResourceStatus = "Deleting"
+	SchedulerResourceStatusDeleteFailed         SchedulerResourceStatus = "DeleteFailed"
+	SchedulerResourceStatusDeleteRollbackFailed SchedulerResourceStatus = "DeleteRollbackFailed"
+	SchedulerResourceStatusDeleted              SchedulerResourceStatus = "Deleted"
+)
+
+// Values returns all known values for SchedulerResourceStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SchedulerResourceStatus) Values() []SchedulerResourceStatus {
+	return []SchedulerResourceStatus{
+		"Creating",
+		"CreateFailed",
+		"CreateRollbackFailed",
+		"Created",
+		"Updating",
+		"UpdateFailed",
+		"UpdateRollbackFailed",
+		"Updated",
+		"Deleting",
+		"DeleteFailed",
+		"DeleteRollbackFailed",
+		"Deleted",
 	}
 }
 
@@ -6672,6 +6971,28 @@ func (SortBy) Values() []SortBy {
 	}
 }
 
+type SortClusterSchedulerConfigBy string
+
+// Enum values for SortClusterSchedulerConfigBy
+const (
+	SortClusterSchedulerConfigByName         SortClusterSchedulerConfigBy = "Name"
+	SortClusterSchedulerConfigByCreationTime SortClusterSchedulerConfigBy = "CreationTime"
+	SortClusterSchedulerConfigByStatus       SortClusterSchedulerConfigBy = "Status"
+)
+
+// Values returns all known values for SortClusterSchedulerConfigBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortClusterSchedulerConfigBy) Values() []SortClusterSchedulerConfigBy {
+	return []SortClusterSchedulerConfigBy{
+		"Name",
+		"CreationTime",
+		"Status",
+	}
+}
+
 type SortContextsBy string
 
 // Enum values for SortContextsBy
@@ -6804,6 +7125,29 @@ func (SortPipelinesBy) Values() []SortPipelinesBy {
 	return []SortPipelinesBy{
 		"Name",
 		"CreationTime",
+	}
+}
+
+type SortQuotaBy string
+
+// Enum values for SortQuotaBy
+const (
+	SortQuotaByName         SortQuotaBy = "Name"
+	SortQuotaByCreationTime SortQuotaBy = "CreationTime"
+	SortQuotaByStatus       SortQuotaBy = "Status"
+	SortQuotaByClusterArn   SortQuotaBy = "ClusterArn"
+)
+
+// Values returns all known values for SortQuotaBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortQuotaBy) Values() []SortQuotaBy {
+	return []SortQuotaBy{
+		"Name",
+		"CreationTime",
+		"Status",
+		"ClusterArn",
 	}
 }
 
@@ -7486,6 +7830,7 @@ const (
 	TrainingInstanceTypeMlP4de24xlarge  TrainingInstanceType = "ml.p4de.24xlarge"
 	TrainingInstanceTypeMlP548xlarge    TrainingInstanceType = "ml.p5.48xlarge"
 	TrainingInstanceTypeMlP5e48xlarge   TrainingInstanceType = "ml.p5e.48xlarge"
+	TrainingInstanceTypeMlP5en48xlarge  TrainingInstanceType = "ml.p5en.48xlarge"
 	TrainingInstanceTypeMlC5Xlarge      TrainingInstanceType = "ml.c5.xlarge"
 	TrainingInstanceTypeMlC52xlarge     TrainingInstanceType = "ml.c5.2xlarge"
 	TrainingInstanceTypeMlC54xlarge     TrainingInstanceType = "ml.c5.4xlarge"
@@ -7523,6 +7868,7 @@ const (
 	TrainingInstanceTypeMlTrn12xlarge   TrainingInstanceType = "ml.trn1.2xlarge"
 	TrainingInstanceTypeMlTrn132xlarge  TrainingInstanceType = "ml.trn1.32xlarge"
 	TrainingInstanceTypeMlTrn1n32xlarge TrainingInstanceType = "ml.trn1n.32xlarge"
+	TrainingInstanceTypeMlTrn248xlarge  TrainingInstanceType = "ml.trn2.48xlarge"
 	TrainingInstanceTypeMlM6iLarge      TrainingInstanceType = "ml.m6i.large"
 	TrainingInstanceTypeMlM6iXlarge     TrainingInstanceType = "ml.m6i.xlarge"
 	TrainingInstanceTypeMlM6i2xlarge    TrainingInstanceType = "ml.m6i.2xlarge"
@@ -7600,6 +7946,7 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.p4de.24xlarge",
 		"ml.p5.48xlarge",
 		"ml.p5e.48xlarge",
+		"ml.p5en.48xlarge",
 		"ml.c5.xlarge",
 		"ml.c5.2xlarge",
 		"ml.c5.4xlarge",
@@ -7637,6 +7984,7 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.trn1.2xlarge",
 		"ml.trn1.32xlarge",
 		"ml.trn1n.32xlarge",
+		"ml.trn2.48xlarge",
 		"ml.m6i.large",
 		"ml.m6i.xlarge",
 		"ml.m6i.2xlarge",
@@ -7742,6 +8090,88 @@ func (TrainingJobStatus) Values() []TrainingJobStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type TrainingPlanFilterName string
+
+// Enum values for TrainingPlanFilterName
+const (
+	TrainingPlanFilterNameStatus TrainingPlanFilterName = "Status"
+)
+
+// Values returns all known values for TrainingPlanFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingPlanFilterName) Values() []TrainingPlanFilterName {
+	return []TrainingPlanFilterName{
+		"Status",
+	}
+}
+
+type TrainingPlanSortBy string
+
+// Enum values for TrainingPlanSortBy
+const (
+	TrainingPlanSortByName      TrainingPlanSortBy = "TrainingPlanName"
+	TrainingPlanSortByStartTime TrainingPlanSortBy = "StartTime"
+	TrainingPlanSortByStatus    TrainingPlanSortBy = "Status"
+)
+
+// Values returns all known values for TrainingPlanSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingPlanSortBy) Values() []TrainingPlanSortBy {
+	return []TrainingPlanSortBy{
+		"TrainingPlanName",
+		"StartTime",
+		"Status",
+	}
+}
+
+type TrainingPlanSortOrder string
+
+// Enum values for TrainingPlanSortOrder
+const (
+	TrainingPlanSortOrderAscending  TrainingPlanSortOrder = "Ascending"
+	TrainingPlanSortOrderDescending TrainingPlanSortOrder = "Descending"
+)
+
+// Values returns all known values for TrainingPlanSortOrder. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingPlanSortOrder) Values() []TrainingPlanSortOrder {
+	return []TrainingPlanSortOrder{
+		"Ascending",
+		"Descending",
+	}
+}
+
+type TrainingPlanStatus string
+
+// Enum values for TrainingPlanStatus
+const (
+	TrainingPlanStatusPending   TrainingPlanStatus = "Pending"
+	TrainingPlanStatusActive    TrainingPlanStatus = "Active"
+	TrainingPlanStatusScheduled TrainingPlanStatus = "Scheduled"
+	TrainingPlanStatusExpired   TrainingPlanStatus = "Expired"
+	TrainingPlanStatusFailed    TrainingPlanStatus = "Failed"
+)
+
+// Values returns all known values for TrainingPlanStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingPlanStatus) Values() []TrainingPlanStatus {
+	return []TrainingPlanStatus{
+		"Pending",
+		"Active",
+		"Scheduled",
+		"Expired",
+		"Failed",
 	}
 }
 

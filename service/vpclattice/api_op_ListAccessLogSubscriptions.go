@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all access log subscriptions for the specified service network or service.
+// Lists the access log subscriptions for the specified service network or service.
 func (c *Client) ListAccessLogSubscriptions(ctx context.Context, params *ListAccessLogSubscriptionsInput, optFns ...func(*Options)) (*ListAccessLogSubscriptionsOutput, error) {
 	if params == nil {
 		params = &ListAccessLogSubscriptionsInput{}
@@ -29,7 +29,7 @@ func (c *Client) ListAccessLogSubscriptions(ctx context.Context, params *ListAcc
 
 type ListAccessLogSubscriptionsInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service.
+	// The ID or ARN of the service network or service.
 	//
 	// This member is required.
 	ResourceIdentifier *string

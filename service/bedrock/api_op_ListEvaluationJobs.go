@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Lists model evaluation jobs.
+// Lists all existing evaluation jobs.
 func (c *Client) ListEvaluationJobs(ctx context.Context, params *ListEvaluationJobsInput, optFns ...func(*Options)) (*ListEvaluationJobsOutput, error) {
 	if params == nil {
 		params = &ListEvaluationJobsInput{}
@@ -30,30 +30,36 @@ func (c *Client) ListEvaluationJobs(ctx context.Context, params *ListEvaluationJ
 
 type ListEvaluationJobsInput struct {
 
-	// A filter that includes model evaluation jobs created after the time specified.
+	// A filter to only list evaluation jobs that are either model evaluations or
+	// knowledge base evaluations.
+	ApplicationTypeEquals types.ApplicationType
+
+	// A filter to only list evaluation jobs created after a specified time.
 	CreationTimeAfter *time.Time
 
-	// A filter that includes model evaluation jobs created prior to the time
-	// specified.
+	// A filter to only list evaluation jobs created before a specified time.
 	CreationTimeBefore *time.Time
 
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// Query parameter string for model evaluation job names.
+	// A filter to only list evaluation jobs that contain a specified string in the
+	// job name.
 	NameContains *string
 
 	// Continuation token from the previous response, for Amazon Bedrock to list the
 	// next set of results.
 	NextToken *string
 
-	// Allows you to sort model evaluation jobs by when they were created.
+	// Specifies a creation time to sort the list of evaluation jobs by when they were
+	// created.
 	SortBy types.SortJobsBy
 
-	// How you want the order of jobs sorted.
+	// Specifies whether to sort the list of evaluation jobs by either ascending or
+	// descending order.
 	SortOrder types.SortOrder
 
-	// Only return jobs where the status condition is met.
+	// A filter to only list evaluation jobs that are of a certain status.
 	StatusEquals types.EvaluationJobStatus
 
 	noSmithyDocumentSerde
@@ -61,7 +67,7 @@ type ListEvaluationJobsInput struct {
 
 type ListEvaluationJobsOutput struct {
 
-	// A summary of the model evaluation jobs.
+	// A list of summaries of the evaluation jobs.
 	JobSummaries []types.EvaluationSummary
 
 	// Continuation token from the previous response, for Amazon Bedrock to list the

@@ -1,3 +1,7 @@
+# v1.25.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2024-11-20)
 
 * **Feature**: Added data protection settings with support for inline data redaction.

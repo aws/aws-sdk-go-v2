@@ -1,3 +1,7 @@
+# v1.9.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2024-11-22)
 
 * **Feature**: Adds support for programmatic management of custom actions and aliases which can be associated with channel configurations.

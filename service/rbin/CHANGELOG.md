@@ -1,3 +1,7 @@
+# v1.21.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2024-11-20)
 
 * **Feature**: This release adds support for exclusion tags for Recycle Bin, which allows you to identify resources that are to be excluded, or ignored, by a Region-level retention rule.

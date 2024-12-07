@@ -1,0 +1,1310 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.bedrockdataautomationruntime#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception will be thrown when customer does not have access to API.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#AmazonBedrockKeystoneRuntimeService": {
+            "type": "service",
+            "version": "2024-06-13",
+            "resources": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#AutomationJobResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Bedrock Data Automation Runtime",
+                    "arnNamespace": "bedrock",
+                    "endpointPrefix": "bedrock-data-automation-runtime",
+                    "cloudTrailEventSource": "bedrock.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "bedrock"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "Amazon Bedrock Keystone Runtime",
+                "smithy.api#title": "Runtime for Amazon Bedrock Data Automation",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://bedrock-data-automation-runtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://bedrock-data-automation-runtime-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://bedrock-data-automation-runtime.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://bedrock-data-automation-runtime.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://bedrock-data-automation-runtime.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#AutomationJobResource": {
+            "type": "resource",
+            "identifiers": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#InvocationArn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsync"
+            },
+            "read": {
+                "target": "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatus"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#AutomationJobStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Created"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                },
+                "SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServiceError"
+                    }
+                },
+                "CLIENT_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClientError"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "List of status supported by automation jobs"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#Blueprint": {
+            "type": "structure",
+            "members": {
+                "blueprintArn": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "Arn of blueprint.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "Version of blueprint."
+                    }
+                },
+                "stage": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#BlueprintStage",
+                    "traits": {
+                        "smithy.api#documentation": "Stage of blueprint."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Structure for single blueprint entity."
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#BlueprintArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN of a Blueprint",
+                "smithy.api#length": {
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:(aws|[0-9]{12}):blueprint/(bedrock-data-insights-public-[a-zA-Z0-9-_]{1,30}|bedrock-data-automation-public-[a-zA-Z0-9-_]{1,30}|[a-zA-Z0-9-]{12,36})$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#BlueprintList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomationruntime#Blueprint",
+                "traits": {
+                    "smithy.api#documentation": "Blueprint."
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Blueprint list.",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#BlueprintStage": {
+            "type": "enum",
+            "members": {
+                "DEVELOPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVELOPMENT"
+                    }
+                },
+                "LIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Blueprint stage enum."
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#BlueprintVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Blueprint version.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9]*$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#DataAutomationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Data automation arn.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:(aws|[0-9]{12}):data-automation-project/[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#DataAutomationConfiguration": {
+            "type": "structure",
+            "members": {
+                "dataAutomationArn": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#DataAutomationArn",
+                    "traits": {
+                        "smithy.api#documentation": "Data automation arn.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stage": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#DataAutomationStage",
+                    "traits": {
+                        "smithy.api#documentation": "Data automation stage."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Data automation configuration."
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#DataAutomationStage": {
+            "type": "enum",
+            "members": {
+                "LIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIVE"
+                    }
+                },
+                "DEVELOPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVELOPMENT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Data automation stage."
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "kmsKeyId": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "KMS key id.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsEncryptionContext": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "KMS encryption context."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Encryption configuration."
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#EncryptionContextKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Excryption context key.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^.*\\S.*$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#EncryptionContextMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockdataautomationruntime#EncryptionContextKey"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockdataautomationruntime#EncryptionContextValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#EncryptionContextValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Encryption context value.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^.*\\S.*$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#EventBridgeConfiguration": {
+            "type": "structure",
+            "members": {
+                "eventBridgeEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Event bridge flag.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Event bridge configuration."
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "API used to get data automation status.",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#InvocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "Invocation arn.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Structure for request of GetDataAutomationStatus API.",
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockdataautomationruntime#AutomationJobResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#AutomationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Job Status."
+                    }
+                },
+                "errorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Error Type."
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Error Message."
+                    }
+                },
+                "outputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#OutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Output configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response of GetDataAutomationStatus API.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#IdempotencyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Client specified token used for idempotency checks",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#InputConfiguration": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "S3 uri.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input configuration."
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is for any internal un-expected service errors.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#InvocationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Invocation arn.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:(insights-invocation|data-automation-invocation)/[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsync": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Async API: Invoke data automation.",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "Idempotency token.",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "inputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#InputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Input configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#OutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Output configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataAutomationConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#DataAutomationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Data automation configuration."
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Encryption configuration."
+                    }
+                },
+                "notificationConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#NotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Notification configuration."
+                    }
+                },
+                "blueprints": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#BlueprintList",
+                    "traits": {
+                        "smithy.api#documentation": "Blueprint list."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Invoke Data Automation Async Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncResponse": {
+            "type": "structure",
+            "members": {
+                "invocationArn": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#InvocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the automation job",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Invoke Data Automation Async Response",
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockdataautomationruntime#AutomationJobResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#NonBlankString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#NonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^.*\\S.*$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#NotificationConfiguration": {
+            "type": "structure",
+            "members": {
+                "eventBridgeConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#EventBridgeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Event bridge configuration.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Notification configuration."
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#OutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "S3 uri.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output configuration."
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception will be thrown when resource provided from customer not found.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A path in S3",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]([^\\x00-\\x1F\\x7F\\{^}%`\\]\">\\[~<#|]*)?$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception will be thrown when service quota is exceeded.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception will be thrown when customer reached API TPS limit.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.bedrockdataautomationruntime#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockdataautomationruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception will be thrown when customer provided invalid parameters.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

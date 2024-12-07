@@ -47,15 +47,15 @@ func ExampleAssetFilterConfiguration_outputUsage() {
 var _ *types.ColumnFilterConfiguration
 var _ *types.RowFilterConfiguration
 
-func ExampleDataSourceConfigurationInput_outputUsage() {
-	var union types.DataSourceConfigurationInput
+func ExampleAwsAccount_outputUsage() {
+	var union types.AwsAccount
 	// type switches can be used to check the union value
 	switch v := union.(type) {
-	case *types.DataSourceConfigurationInputMemberGlueRunConfiguration:
-		_ = v.Value // Value is types.GlueRunConfigurationInput
+	case *types.AwsAccountMemberAwsAccountId:
+		_ = v.Value // Value is string
 
-	case *types.DataSourceConfigurationInputMemberRedshiftRunConfiguration:
-		_ = v.Value // Value is types.RedshiftRunConfigurationInput
+	case *types.AwsAccountMemberAwsAccountIdPath:
+		_ = v.Value // Value is string
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -66,6 +66,150 @@ func ExampleDataSourceConfigurationInput_outputUsage() {
 	}
 }
 
+var _ *string
+var _ *string
+
+func ExampleConnectionPropertiesInput_outputUsage() {
+	var union types.ConnectionPropertiesInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConnectionPropertiesInputMemberAthenaProperties:
+		_ = v.Value // Value is types.AthenaPropertiesInput
+
+	case *types.ConnectionPropertiesInputMemberGlueProperties:
+		_ = v.Value // Value is types.GluePropertiesInput
+
+	case *types.ConnectionPropertiesInputMemberHyperPodProperties:
+		_ = v.Value // Value is types.HyperPodPropertiesInput
+
+	case *types.ConnectionPropertiesInputMemberIamProperties:
+		_ = v.Value // Value is types.IamPropertiesInput
+
+	case *types.ConnectionPropertiesInputMemberRedshiftProperties:
+		_ = v.Value // Value is types.RedshiftPropertiesInput
+
+	case *types.ConnectionPropertiesInputMemberSparkEmrProperties:
+		_ = v.Value // Value is types.SparkEmrPropertiesInput
+
+	case *types.ConnectionPropertiesInputMemberSparkGlueProperties:
+		_ = v.Value // Value is types.SparkGluePropertiesInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SparkEmrPropertiesInput
+var _ *types.GluePropertiesInput
+var _ *types.AthenaPropertiesInput
+var _ *types.IamPropertiesInput
+var _ *types.SparkGluePropertiesInput
+var _ *types.HyperPodPropertiesInput
+var _ *types.RedshiftPropertiesInput
+
+func ExampleConnectionPropertiesOutput_outputUsage() {
+	var union types.ConnectionPropertiesOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConnectionPropertiesOutputMemberAthenaProperties:
+		_ = v.Value // Value is types.AthenaPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberGlueProperties:
+		_ = v.Value // Value is types.GluePropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberHyperPodProperties:
+		_ = v.Value // Value is types.HyperPodPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberIamProperties:
+		_ = v.Value // Value is types.IamPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberRedshiftProperties:
+		_ = v.Value // Value is types.RedshiftPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberSparkEmrProperties:
+		_ = v.Value // Value is types.SparkEmrPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberSparkGlueProperties:
+		_ = v.Value // Value is types.SparkGluePropertiesOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AthenaPropertiesOutput
+var _ *types.SparkGluePropertiesOutput
+var _ *types.IamPropertiesOutput
+var _ *types.RedshiftPropertiesOutput
+var _ *types.HyperPodPropertiesOutput
+var _ *types.GluePropertiesOutput
+var _ *types.SparkEmrPropertiesOutput
+
+func ExampleConnectionPropertiesPatch_outputUsage() {
+	var union types.ConnectionPropertiesPatch
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConnectionPropertiesPatchMemberAthenaProperties:
+		_ = v.Value // Value is types.AthenaPropertiesPatch
+
+	case *types.ConnectionPropertiesPatchMemberGlueProperties:
+		_ = v.Value // Value is types.GluePropertiesPatch
+
+	case *types.ConnectionPropertiesPatchMemberIamProperties:
+		_ = v.Value // Value is types.IamPropertiesPatch
+
+	case *types.ConnectionPropertiesPatchMemberRedshiftProperties:
+		_ = v.Value // Value is types.RedshiftPropertiesPatch
+
+	case *types.ConnectionPropertiesPatchMemberSparkEmrProperties:
+		_ = v.Value // Value is types.SparkEmrPropertiesPatch
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SparkEmrPropertiesPatch
+var _ *types.IamPropertiesPatch
+var _ *types.RedshiftPropertiesPatch
+var _ *types.AthenaPropertiesPatch
+var _ *types.GluePropertiesPatch
+
+func ExampleDataSourceConfigurationInput_outputUsage() {
+	var union types.DataSourceConfigurationInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DataSourceConfigurationInputMemberGlueRunConfiguration:
+		_ = v.Value // Value is types.GlueRunConfigurationInput
+
+	case *types.DataSourceConfigurationInputMemberRedshiftRunConfiguration:
+		_ = v.Value // Value is types.RedshiftRunConfigurationInput
+
+	case *types.DataSourceConfigurationInputMemberSageMakerRunConfiguration:
+		_ = v.Value // Value is types.SageMakerRunConfigurationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SageMakerRunConfigurationInput
 var _ *types.RedshiftRunConfigurationInput
 var _ *types.GlueRunConfigurationInput
 
@@ -79,6 +223,9 @@ func ExampleDataSourceConfigurationOutput_outputUsage() {
 	case *types.DataSourceConfigurationOutputMemberRedshiftRunConfiguration:
 		_ = v.Value // Value is types.RedshiftRunConfigurationOutput
 
+	case *types.DataSourceConfigurationOutputMemberSageMakerRunConfiguration:
+		_ = v.Value // Value is types.SageMakerRunConfigurationOutput
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -89,6 +236,7 @@ func ExampleDataSourceConfigurationOutput_outputUsage() {
 }
 
 var _ *types.GlueRunConfigurationOutput
+var _ *types.SageMakerRunConfigurationOutput
 var _ *types.RedshiftRunConfigurationOutput
 
 func ExampleDomainUnitGrantFilter_outputUsage() {
@@ -130,6 +278,24 @@ func ExampleDomainUnitOwnerProperties_outputUsage() {
 
 var _ *types.DomainUnitGroupProperties
 var _ *types.DomainUnitUserProperties
+
+func ExampleEventSummary_outputUsage() {
+	var union types.EventSummary
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EventSummaryMemberOpenLineageRunEventSummary:
+		_ = v.Value // Value is types.OpenLineageRunEventSummary
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OpenLineageRunEventSummary
 
 func ExampleFilterClause_outputUsage() {
 	var union types.FilterClause
@@ -209,6 +375,24 @@ func ExampleGroupPolicyGrantPrincipal_outputUsage() {
 }
 
 var _ *string
+
+func ExampleJobRunDetails_outputUsage() {
+	var union types.JobRunDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.JobRunDetailsMemberLineageRunDetails:
+		_ = v.Value // Value is types.LineageRunDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LineageRunDetails
 
 func ExampleListingItem_outputUsage() {
 	var union types.ListingItem
@@ -353,6 +537,9 @@ func ExamplePolicyGrantDetail_outputUsage() {
 	case *types.PolicyGrantDetailMemberCreateEnvironment:
 		_ = v.Value // Value is types.Unit
 
+	case *types.PolicyGrantDetailMemberCreateEnvironmentFromBlueprint:
+		_ = v.Value // Value is types.Unit
+
 	case *types.PolicyGrantDetailMemberCreateEnvironmentProfile:
 		_ = v.Value // Value is types.CreateEnvironmentProfilePolicyGrantDetail
 
@@ -364,6 +551,9 @@ func ExamplePolicyGrantDetail_outputUsage() {
 
 	case *types.PolicyGrantDetailMemberCreateProject:
 		_ = v.Value // Value is types.CreateProjectPolicyGrantDetail
+
+	case *types.PolicyGrantDetailMemberCreateProjectFromProjectProfile:
+		_ = v.Value // Value is types.CreateProjectFromProjectProfilePolicyGrantDetail
 
 	case *types.PolicyGrantDetailMemberDelegateCreateEnvironmentProfile:
 		_ = v.Value // Value is types.Unit
@@ -383,6 +573,7 @@ func ExamplePolicyGrantDetail_outputUsage() {
 	}
 }
 
+var _ *types.CreateProjectFromProjectProfilePolicyGrantDetail
 var _ *types.CreateDomainUnitPolicyGrantDetail
 var _ *types.OverrideProjectOwnersPolicyGrantDetail
 var _ *types.CreateEnvironmentProfilePolicyGrantDetail
@@ -478,6 +669,28 @@ func ExampleProvisioningProperties_outputUsage() {
 
 var _ *types.CloudFormationProperties
 
+func ExampleRedshiftCredentials_outputUsage() {
+	var union types.RedshiftCredentials
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RedshiftCredentialsMemberSecretArn:
+		_ = v.Value // Value is string
+
+	case *types.RedshiftCredentialsMemberUsernamePassword:
+		_ = v.Value // Value is types.UsernamePassword
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *types.UsernamePassword
+
 func ExampleRedshiftStorage_outputUsage() {
 	var union types.RedshiftStorage
 	// type switches can be used to check the union value
@@ -499,6 +712,49 @@ func ExampleRedshiftStorage_outputUsage() {
 
 var _ *types.RedshiftClusterStorage
 var _ *types.RedshiftServerlessStorage
+
+func ExampleRedshiftStorageProperties_outputUsage() {
+	var union types.RedshiftStorageProperties
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RedshiftStoragePropertiesMemberClusterName:
+		_ = v.Value // Value is string
+
+	case *types.RedshiftStoragePropertiesMemberWorkgroupName:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleRegion_outputUsage() {
+	var union types.Region
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RegionMemberRegionName:
+		_ = v.Value // Value is string
+
+	case *types.RegionMemberRegionNamePath:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string
 
 func ExampleRowFilter_outputUsage() {
 	var union types.RowFilter

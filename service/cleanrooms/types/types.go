@@ -491,6 +491,30 @@ type AnalysisTemplateValidationStatusReason struct {
 	noSmithyDocumentSerde
 }
 
+// A reference to a table within Athena.
+type AthenaTableReference struct {
+
+	//  The database name.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	//  The table reference.
+	//
+	// This member is required.
+	TableName *string
+
+	//  The workgroup of the Athena table reference.
+	//
+	// This member is required.
+	WorkGroup *string
+
+	//  The output location for the Athena table.
+	OutputLocation *string
+
+	noSmithyDocumentSerde
+}
+
 // Details of errors thrown by the call to retrieve multiple analysis templates
 // within a collaboration by their identifiers.
 type BatchGetCollaborationAnalysisTemplateError struct {
@@ -1244,7 +1268,7 @@ type CollaborationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A column within a schema relation, derived from the underlying Glue table.
+// A column within a schema relation, derived from the underlying table.
 type Column struct {
 
 	// The name of the column.
@@ -1478,7 +1502,7 @@ type ConfiguredTable struct {
 	// This member is required.
 	Name *string
 
-	// The Glue table that this configured table represents.
+	// The table that this configured table represents.
 	//
 	// This member is required.
 	TableReference TableReference
@@ -3912,15 +3936,100 @@ type SchemaTypePropertiesMemberIdMappingTable struct {
 
 func (*SchemaTypePropertiesMemberIdMappingTable) isSchemaTypeProperties() {}
 
-// A pointer to the dataset that underlies this table. Currently, this can only be
-// an Glue table.
+// A reference to a table within Snowflake.
+type SnowflakeTableReference struct {
+
+	//  The account identifier for the Snowflake table reference.
+	//
+	// This member is required.
+	AccountIdentifier *string
+
+	//  The name of the database the Snowflake table belongs to.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	//  The schema name of the Snowflake table reference.
+	//
+	// This member is required.
+	SchemaName *string
+
+	//  The secret ARN of the Snowflake table reference.
+	//
+	// This member is required.
+	SecretArn *string
+
+	//  The name of the Snowflake table.
+	//
+	// This member is required.
+	TableName *string
+
+	//  The schema of the Snowflake table.
+	//
+	// This member is required.
+	TableSchema SnowflakeTableSchema
+
+	noSmithyDocumentSerde
+}
+
+//	The schema of a Snowflake table.
 //
 // The following types satisfy this interface:
 //
+//	SnowflakeTableSchemaMemberV1
+type SnowflakeTableSchema interface {
+	isSnowflakeTableSchema()
+}
+
+// The schema of a Snowflake table.
+type SnowflakeTableSchemaMemberV1 struct {
+	Value []SnowflakeTableSchemaV1
+
+	noSmithyDocumentSerde
+}
+
+func (*SnowflakeTableSchemaMemberV1) isSnowflakeTableSchema() {}
+
+// The Snowflake table schema.
+type SnowflakeTableSchemaV1 struct {
+
+	//  The column name.
+	//
+	// This member is required.
+	ColumnName *string
+
+	//  The column's data type. Supported data types: ARRAY , BIGINT , BOOLEAN , CHAR ,
+	// DATE , DECIMAL , DOUBLE , DOUBLE PRECISION , FLOAT , FLOAT4 , INT , INTEGER ,
+	// MAP , NUMERIC , NUMBER , REAL , SMALLINT , STRING , TIMESTAMP , TIMESTAMP_LTZ ,
+	// TIMESTAMP_NTZ , DATETIME , TINYINT , VARCHAR , TEXT , CHARACTER .
+	//
+	// This member is required.
+	ColumnType *string
+
+	noSmithyDocumentSerde
+}
+
+// A pointer to the dataset that underlies this table.
+//
+// The following types satisfy this interface:
+//
+//	TableReferenceMemberAthena
 //	TableReferenceMemberGlue
+//	TableReferenceMemberSnowflake
 type TableReference interface {
 	isTableReference()
 }
+
+//	If present, a reference to the Athena table referred to by this table
+//
+// reference.
+type TableReferenceMemberAthena struct {
+	Value AthenaTableReference
+
+	noSmithyDocumentSerde
+}
+
+func (*TableReferenceMemberAthena) isTableReference() {}
 
 // If present, a reference to the Glue table referred to by this table reference.
 type TableReferenceMemberGlue struct {
@@ -3930,6 +4039,17 @@ type TableReferenceMemberGlue struct {
 }
 
 func (*TableReferenceMemberGlue) isTableReference() {}
+
+//	If present, a reference to the Snowflake table referred to by this table
+//
+// reference.
+type TableReferenceMemberSnowflake struct {
+	Value SnowflakeTableReference
+
+	noSmithyDocumentSerde
+}
+
+func (*TableReferenceMemberSnowflake) isTableReference() {}
 
 // Describes validation errors for specific input parameters.
 type ValidationExceptionField struct {
@@ -3992,4 +4112,5 @@ func (*UnknownUnionMember) isProtectedQueryOutput()                           {}
 func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()              {}
 func (*UnknownUnionMember) isQueryConstraint()                                {}
 func (*UnknownUnionMember) isSchemaTypeProperties()                           {}
+func (*UnknownUnionMember) isSnowflakeTableSchema()                           {}
 func (*UnknownUnionMember) isTableReference()                                 {}

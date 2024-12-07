@@ -1,3 +1,7 @@
+# v1.29.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2024-11-20)
 
 * **Feature**: Add support to import data from commercially available discovery tools without file manipulation.

@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the service networks owned by the caller account or shared with the
-// caller account. Also includes the account ID in the ARN to show which account
-// owns the service network.
+// Lists the service networks owned by or shared with this account. The account ID
+// in the ARN shows which account owns the service network.
 func (c *Client) ListServiceNetworks(ctx context.Context, params *ListServiceNetworksInput, optFns ...func(*Options)) (*ListServiceNetworksOutput, error) {
 	if params == nil {
 		params = &ListServiceNetworksInput{}

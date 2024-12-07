@@ -1,3 +1,7 @@
+# v1.37.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2024-11-22)
 
 * **Feature**: AWS CodePipeline V2 type pipelines now support ECRBuildAndPublish and InspectorScan actions.

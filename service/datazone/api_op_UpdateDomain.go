@@ -48,6 +48,9 @@ type UpdateDomainInput struct {
 	// The name to be updated as part of the UpdateDomain action.
 	Name *string
 
+	// The service role of the domain.
+	ServiceRole *string
+
 	// The single sign-on option to be updated as part of the UpdateDomain action.
 	SingleSignOn *types.SingleSignOn
 
@@ -75,6 +78,9 @@ type UpdateDomainOutput struct {
 
 	// The ID of the root domain unit.
 	RootDomainUnitId *string
+
+	// The service role of the domain.
+	ServiceRole *string
 
 	// The single sign-on option of the Amazon DataZone domain.
 	SingleSignOn *types.SingleSignOn

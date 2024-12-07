@@ -66,6 +66,51 @@ func (AttributeMatchingModel) Values() []AttributeMatchingModel {
 	}
 }
 
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
+const (
+	ComparisonOperatorInclusive          ComparisonOperator = "INCLUSIVE"
+	ComparisonOperatorExclusive          ComparisonOperator = "EXCLUSIVE"
+	ComparisonOperatorContains           ComparisonOperator = "CONTAINS"
+	ComparisonOperatorBeginsWith         ComparisonOperator = "BEGINS_WITH"
+	ComparisonOperatorEndsWith           ComparisonOperator = "ENDS_WITH"
+	ComparisonOperatorGreaterThan        ComparisonOperator = "GREATER_THAN"
+	ComparisonOperatorLessThan           ComparisonOperator = "LESS_THAN"
+	ComparisonOperatorGreaterThanOrEqual ComparisonOperator = "GREATER_THAN_OR_EQUAL"
+	ComparisonOperatorLessThanOrEqual    ComparisonOperator = "LESS_THAN_OR_EQUAL"
+	ComparisonOperatorEqual              ComparisonOperator = "EQUAL"
+	ComparisonOperatorBefore             ComparisonOperator = "BEFORE"
+	ComparisonOperatorAfter              ComparisonOperator = "AFTER"
+	ComparisonOperatorOn                 ComparisonOperator = "ON"
+	ComparisonOperatorBetween            ComparisonOperator = "BETWEEN"
+	ComparisonOperatorNotBetween         ComparisonOperator = "NOT_BETWEEN"
+)
+
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"INCLUSIVE",
+		"EXCLUSIVE",
+		"CONTAINS",
+		"BEGINS_WITH",
+		"ENDS_WITH",
+		"GREATER_THAN",
+		"LESS_THAN",
+		"GREATER_THAN_OR_EQUAL",
+		"LESS_THAN_OR_EQUAL",
+		"EQUAL",
+		"BEFORE",
+		"AFTER",
+		"ON",
+		"BETWEEN",
+		"NOT_BETWEEN",
+	}
+}
+
 type ConflictResolvingModel string
 
 // Enum values for ConflictResolvingModel
@@ -207,6 +252,27 @@ func (EventStreamState) Values() []EventStreamState {
 	return []EventStreamState{
 		"RUNNING",
 		"STOPPED",
+	}
+}
+
+type EventTriggerLogicalOperator string
+
+// Enum values for EventTriggerLogicalOperator
+const (
+	EventTriggerLogicalOperatorAny  EventTriggerLogicalOperator = "ANY"
+	EventTriggerLogicalOperatorAll  EventTriggerLogicalOperator = "ALL"
+	EventTriggerLogicalOperatorNone EventTriggerLogicalOperator = "NONE"
+)
+
+// Values returns all known values for EventTriggerLogicalOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventTriggerLogicalOperator) Values() []EventTriggerLogicalOperator {
+	return []EventTriggerLogicalOperator{
+		"ANY",
+		"ALL",
+		"NONE",
 	}
 }
 
@@ -570,6 +636,29 @@ func (PartyType) Values() []PartyType {
 		"INDIVIDUAL",
 		"BUSINESS",
 		"OTHER",
+	}
+}
+
+type PeriodUnit string
+
+// Enum values for PeriodUnit
+const (
+	PeriodUnitHours  PeriodUnit = "HOURS"
+	PeriodUnitDays   PeriodUnit = "DAYS"
+	PeriodUnitWeeks  PeriodUnit = "WEEKS"
+	PeriodUnitMonths PeriodUnit = "MONTHS"
+)
+
+// Values returns all known values for PeriodUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PeriodUnit) Values() []PeriodUnit {
+	return []PeriodUnit{
+		"HOURS",
+		"DAYS",
+		"WEEKS",
+		"MONTHS",
 	}
 }
 

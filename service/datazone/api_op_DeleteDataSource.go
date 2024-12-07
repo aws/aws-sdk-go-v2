@@ -42,6 +42,8 @@ type DeleteDataSourceInput struct {
 
 	// A unique, case-sensitive identifier that is provided to ensure the idempotency
 	// of the request.
+	//
+	// Deprecated: This field is no longer required for idempotency.
 	ClientToken *string
 
 	// Specifies that the granted permissions are retained in case of a self-subscribe
@@ -57,11 +59,6 @@ type DeleteDataSourceOutput struct {
 	//
 	// This member is required.
 	DomainId *string
-
-	// The ID of the environemnt associated with this data source.
-	//
-	// This member is required.
-	EnvironmentId *string
 
 	// The ID of the data source that is deleted.
 	//
@@ -85,6 +82,9 @@ type DeleteDataSourceOutput struct {
 	// The configuration of the data source that is deleted.
 	Configuration types.DataSourceConfigurationOutput
 
+	// The ID of the connection that is deleted.
+	ConnectionId *string
+
 	// The timestamp of when this data source was created.
 	CreatedAt *time.Time
 
@@ -94,6 +94,9 @@ type DeleteDataSourceOutput struct {
 	// The enable setting of the data source that specifies whether the data source is
 	// enabled or disabled.
 	EnableSetting types.EnableSetting
+
+	// The ID of the environemnt associated with this data source.
+	EnvironmentId *string
 
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Provides information about contact tree, a list of associated contacts with a
+// unique identifier.
 func (c *Client) ListAssociatedContacts(ctx context.Context, params *ListAssociatedContactsInput, optFns ...func(*Options)) (*ListAssociatedContactsOutput, error) {
 	if params == nil {
 		params = &ListAssociatedContactsInput{}
@@ -28,20 +30,29 @@ func (c *Client) ListAssociatedContacts(ctx context.Context, params *ListAssocia
 
 type ListAssociatedContactsInput struct {
 
-	//
+	// The identifier of the contact in this instance of Amazon Connect.
 	//
 	// This member is required.
 	ContactId *string
 
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
+	// The maximum number of results to return per page.
 	//
+	// The maximum number of results to return per page. The default MaxResult size is
+	// 25.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 100.
 	MaxResults *int32
 
-	//
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,10 +60,11 @@ type ListAssociatedContactsInput struct {
 
 type ListAssociatedContactsOutput struct {
 
-	//
+	// List of the contact summary for all the contacts in contact tree associated
+	// with unique identifier.
 	ContactSummaryList []types.AssociatedContactSummary
 
-	//
+	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

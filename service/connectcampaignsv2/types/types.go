@@ -387,6 +387,15 @@ type EncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Event trigger of the campaign
+type EventTrigger struct {
+
+	// Amazon Resource Names(ARN)
+	CustomerProfilesDomainArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Failed response of campaign state
 type FailedCampaignStateResponse struct {
 
@@ -396,6 +405,22 @@ type FailedCampaignStateResponse struct {
 	// A predefined code indicating the error that caused the failure in getting state
 	// of campaigns
 	FailureCode GetCampaignStateBatchFailureCode
+
+	noSmithyDocumentSerde
+}
+
+// Failure details for a profile outbound request
+type FailedProfileOutboundRequest struct {
+
+	// Client provided parameter used for idempotency. Its value must be unique for
+	// each request.
+	ClientToken *string
+
+	// Predefined code indicating the error that caused the failure
+	FailureCode ProfileOutboundRequestFailureCode
+
+	// Identifier of the profile outbound request
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -622,6 +647,26 @@ type PredictiveConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a profile outbound request
+type ProfileOutboundRequest struct {
+
+	// Client provided parameter used for idempotency. Its value must be unique for
+	// each request.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// Identifier of the customer profile
+	//
+	// This member is required.
+	ProfileId *string
+
+	// Timestamp with no UTC offset or timezone
+	ExpirationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Progressive config
 type ProgressiveConfig struct {
 
@@ -805,6 +850,7 @@ func (*SmsOutboundModeMemberAgentless) isSmsOutboundMode() {}
 // The following types satisfy this interface:
 //
 //	SourceMemberCustomerProfilesSegmentArn
+//	SourceMemberEventTrigger
 type Source interface {
 	isSource()
 }
@@ -818,6 +864,15 @@ type SourceMemberCustomerProfilesSegmentArn struct {
 
 func (*SourceMemberCustomerProfilesSegmentArn) isSource() {}
 
+// Event trigger of the campaign
+type SourceMemberEventTrigger struct {
+	Value EventTrigger
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceMemberEventTrigger) isSource() {}
+
 // Successful response of campaign state
 type SuccessfulCampaignStateResponse struct {
 
@@ -826,6 +881,19 @@ type SuccessfulCampaignStateResponse struct {
 
 	// State of a campaign
 	State CampaignState
+
+	noSmithyDocumentSerde
+}
+
+// Success details for a profile outbound request
+type SuccessfulProfileOutboundRequest struct {
+
+	// Client provided parameter used for idempotency. Its value must be unique for
+	// each request.
+	ClientToken *string
+
+	// Identifier of the profile outbound request
+	Id *string
 
 	noSmithyDocumentSerde
 }

@@ -89,6 +89,10 @@ type BatchPermissionsRequestEntry struct {
 
 // A structure for the catalog object.
 type CatalogResource struct {
+
+	// An identifier for the catalog resource.
+	Id *string
+
 	noSmithyDocumentSerde
 }
 
@@ -111,6 +115,17 @@ type ColumnWildcard struct {
 
 	// Excludes column names. Any column with this name will be excluded.
 	ExcludedColumnNames []string
+
+	noSmithyDocumentSerde
+}
+
+// A Lake Formation condition, which applies to permissions and opt-ins that
+// contain an expression.
+type Condition struct {
+
+	// An expression written based on the Cedar Policy Language used to match the
+	// principal attributes.
+	Expression *string
 
 	noSmithyDocumentSerde
 }
@@ -405,6 +420,10 @@ type FilterCondition struct {
 // A single principal-resource pair that has Lake Formation permissins enforced.
 type LakeFormationOptInsInfo struct {
 
+	// A Lake Formation condition, which applies to permissions and opt-ins that
+	// contain an expression.
+	Condition *Condition
+
 	// The last modified date and time of the record.
 	LastModified *time.Time
 
@@ -617,6 +636,10 @@ type PrincipalResourcePermissions struct {
 	// PrincipalResourcePermissions . Currently returns only as a RAM resource share
 	// ARN.
 	AdditionalDetails *DetailsMap
+
+	// A Lake Formation condition, which applies to permissions and opt-ins that
+	// contain an expression.
+	Condition *Condition
 
 	// The date and time when the resource was last updated.
 	LastUpdated *time.Time

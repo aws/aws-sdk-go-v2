@@ -30,7 +30,7 @@ func (c *Client) ListWorkflows(ctx context.Context, params *ListWorkflowsInput, 
 
 type ListWorkflowsInput struct {
 
-	// Specifies the maximum number of workflows to return.
+	// The maximum number of items to return.
 	MaxResults *int32
 
 	// ListWorkflows returns the NextToken parameter in the output. You can then pass
@@ -158,7 +158,7 @@ func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, o
 
 // ListWorkflowsPaginatorOptions is the paginator options for ListWorkflows
 type ListWorkflowsPaginatorOptions struct {
-	// Specifies the maximum number of workflows to return.
+	// The maximum number of items to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

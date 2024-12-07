@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about an FAQ list.
+// Gets information about a FAQ.
 func (c *Client) DescribeFaq(ctx context.Context, params *DescribeFaqInput, optFns ...func(*Options)) (*DescribeFaqOutput, error) {
 	if params == nil {
 		params = &DescribeFaqInput{}
@@ -55,7 +55,7 @@ type DescribeFaqOutput struct {
 	// the FAQ failed.
 	ErrorMessage *string
 
-	// The file format used by the input files for the FAQ.
+	// The file format used for the FAQ file.
 	FileFormat types.FaqFileFormat
 
 	// The identifier of the FAQ.
@@ -74,8 +74,8 @@ type DescribeFaqOutput struct {
 	// The name that you gave the FAQ when it was created.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the role that provides access to the S3
-	// bucket containing the input files for the FAQ.
+	// The Amazon Resource Name (ARN) of the IAM role that provides access to the S3
+	// bucket containing the FAQ file.
 	RoleArn *string
 
 	// Information required to find a specific file in an Amazon S3 bucket.

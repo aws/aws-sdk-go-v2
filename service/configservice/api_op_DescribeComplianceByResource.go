@@ -12,8 +12,8 @@ import (
 )
 
 // Indicates whether the specified Amazon Web Services resources are compliant. If
-// a resource is noncompliant, this action returns the number of Config rules that
-// the resource does not comply with.
+// a resource is noncompliant, this operation returns the number of Config rules
+// that the resource does not comply with.
 //
 // A resource is compliant if it complies with all the Config rules that evaluate
 // it. It is noncompliant if it does not comply with one or more of these rules.
@@ -69,8 +69,8 @@ type DescribeComplianceByResourceInput struct {
 	ResourceId *string
 
 	// The types of Amazon Web Services resources for which you want compliance
-	// information (for example, AWS::EC2::Instance ). For this action, you can specify
-	// that the resource type is an Amazon Web Services account by specifying
+	// information (for example, AWS::EC2::Instance ). For this operation, you can
+	// specify that the resource type is an Amazon Web Services account by specifying
 	// AWS::::Account .
 	ResourceType *string
 

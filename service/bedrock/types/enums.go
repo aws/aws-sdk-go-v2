@@ -2,6 +2,25 @@
 
 package types
 
+type ApplicationType string
+
+// Enum values for ApplicationType
+const (
+	ApplicationTypeModelEvaluation ApplicationType = "ModelEvaluation"
+	ApplicationTypeRagEvaluation   ApplicationType = "RagEvaluation"
+)
+
+// Values returns all known values for ApplicationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationType) Values() []ApplicationType {
+	return []ApplicationType{
+		"ModelEvaluation",
+		"RagEvaluation",
+	}
+}
+
 type CommitmentDuration string
 
 // Enum values for CommitmentDuration
@@ -27,6 +46,7 @@ type CustomizationType string
 const (
 	CustomizationTypeFineTuning           CustomizationType = "FINE_TUNING"
 	CustomizationTypeContinuedPreTraining CustomizationType = "CONTINUED_PRE_TRAINING"
+	CustomizationTypeDistillation         CustomizationType = "DISTILLATION"
 )
 
 // Values returns all known values for CustomizationType. Note that this can be
@@ -37,6 +57,7 @@ func (CustomizationType) Values() []CustomizationType {
 	return []CustomizationType{
 		"FINE_TUNING",
 		"CONTINUED_PRE_TRAINING",
+		"DISTILLATION",
 	}
 }
 
@@ -108,6 +129,25 @@ func (EvaluationTaskType) Values() []EvaluationTaskType {
 		"QuestionAndAnswer",
 		"Generation",
 		"Custom",
+	}
+}
+
+type ExternalSourceType string
+
+// Enum values for ExternalSourceType
+const (
+	ExternalSourceTypeS3          ExternalSourceType = "S3"
+	ExternalSourceTypeByteContent ExternalSourceType = "BYTE_CONTENT"
+)
+
+// Values returns all known values for ExternalSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExternalSourceType) Values() []ExternalSourceType {
+	return []ExternalSourceType{
+		"S3",
+		"BYTE_CONTENT",
 	}
 }
 
@@ -240,6 +280,25 @@ const (
 func (GuardrailManagedWordsType) Values() []GuardrailManagedWordsType {
 	return []GuardrailManagedWordsType{
 		"PROFANITY",
+	}
+}
+
+type GuardrailModality string
+
+// Enum values for GuardrailModality
+const (
+	GuardrailModalityText  GuardrailModality = "TEXT"
+	GuardrailModalityImage GuardrailModality = "IMAGE"
+)
+
+// Values returns all known values for GuardrailModality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailModality) Values() []GuardrailModality {
+	return []GuardrailModality{
+		"TEXT",
+		"IMAGE",
 	}
 }
 
@@ -466,6 +525,7 @@ type ModelCustomization string
 const (
 	ModelCustomizationFineTuning           ModelCustomization = "FINE_TUNING"
 	ModelCustomizationContinuedPreTraining ModelCustomization = "CONTINUED_PRE_TRAINING"
+	ModelCustomizationDistillation         ModelCustomization = "DISTILLATION"
 )
 
 // Values returns all known values for ModelCustomization. Note that this can be
@@ -476,6 +536,7 @@ func (ModelCustomization) Values() []ModelCustomization {
 	return []ModelCustomization{
 		"FINE_TUNING",
 		"CONTINUED_PRE_TRAINING",
+		"DISTILLATION",
 	}
 }
 
@@ -581,6 +642,42 @@ func (ModelModality) Values() []ModelModality {
 	}
 }
 
+type PromptRouterStatus string
+
+// Enum values for PromptRouterStatus
+const (
+	PromptRouterStatusAvailable PromptRouterStatus = "AVAILABLE"
+)
+
+// Values returns all known values for PromptRouterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PromptRouterStatus) Values() []PromptRouterStatus {
+	return []PromptRouterStatus{
+		"AVAILABLE",
+	}
+}
+
+type PromptRouterType string
+
+// Enum values for PromptRouterType
+const (
+	PromptRouterTypeCustom  PromptRouterType = "custom"
+	PromptRouterTypeDefault PromptRouterType = "default"
+)
+
+// Values returns all known values for PromptRouterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PromptRouterType) Values() []PromptRouterType {
+	return []PromptRouterType{
+		"custom",
+		"default",
+	}
+}
+
 type ProvisionedModelStatus string
 
 // Enum values for ProvisionedModelStatus
@@ -604,6 +701,42 @@ func (ProvisionedModelStatus) Values() []ProvisionedModelStatus {
 	}
 }
 
+type QueryTransformationType string
+
+// Enum values for QueryTransformationType
+const (
+	QueryTransformationTypeQueryDecomposition QueryTransformationType = "QUERY_DECOMPOSITION"
+)
+
+// Values returns all known values for QueryTransformationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryTransformationType) Values() []QueryTransformationType {
+	return []QueryTransformationType{
+		"QUERY_DECOMPOSITION",
+	}
+}
+
+type RetrieveAndGenerateType string
+
+// Enum values for RetrieveAndGenerateType
+const (
+	RetrieveAndGenerateTypeKnowledgeBase   RetrieveAndGenerateType = "KNOWLEDGE_BASE"
+	RetrieveAndGenerateTypeExternalSources RetrieveAndGenerateType = "EXTERNAL_SOURCES"
+)
+
+// Values returns all known values for RetrieveAndGenerateType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrieveAndGenerateType) Values() []RetrieveAndGenerateType {
+	return []RetrieveAndGenerateType{
+		"KNOWLEDGE_BASE",
+		"EXTERNAL_SOURCES",
+	}
+}
+
 type S3InputFormat string
 
 // Enum values for S3InputFormat
@@ -618,6 +751,25 @@ const (
 func (S3InputFormat) Values() []S3InputFormat {
 	return []S3InputFormat{
 		"JSONL",
+	}
+}
+
+type SearchType string
+
+// Enum values for SearchType
+const (
+	SearchTypeHybrid   SearchType = "HYBRID"
+	SearchTypeSemantic SearchType = "SEMANTIC"
+)
+
+// Values returns all known values for SearchType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchType) Values() []SearchType {
+	return []SearchType{
+		"HYBRID",
+		"SEMANTIC",
 	}
 }
 
@@ -688,5 +840,24 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"Ascending",
 		"Descending",
+	}
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusRegistered           Status = "REGISTERED"
+	StatusIncompatibleEndpoint Status = "INCOMPATIBLE_ENDPOINT"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"REGISTERED",
+		"INCOMPATIBLE_ENDPOINT",
 	}
 }

@@ -1,3 +1,8 @@
+# v1.36.0 (2024-12-02)
+
+* **Feature**: Add support for policy operations on the DECLARATIVE_POLICY_EC2 policy type.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

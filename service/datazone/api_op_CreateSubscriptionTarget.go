@@ -118,11 +118,6 @@ type CreateSubscriptionTargetOutput struct {
 	// This member is required.
 	Id *string
 
-	// The manage access role with which the subscription target was created.
-	//
-	// This member is required.
-	ManageAccessRole *string
-
 	// The name of the subscription target.
 	//
 	// This member is required.
@@ -147,6 +142,9 @@ type CreateSubscriptionTargetOutput struct {
 	//
 	// This member is required.
 	Type *string
+
+	// The manage access role with which the subscription target was created.
+	ManageAccessRole *string
 
 	// The timestamp of when the subscription target was updated.
 	UpdatedAt *time.Time

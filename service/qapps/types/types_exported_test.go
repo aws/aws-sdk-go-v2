@@ -15,6 +15,9 @@ func ExampleCard_outputUsage() {
 	case *types.CardMemberFileUpload:
 		_ = v.Value // Value is types.FileUploadCard
 
+	case *types.CardMemberFormInput:
+		_ = v.Value // Value is types.FormInputCard
+
 	case *types.CardMemberQPlugin:
 		_ = v.Value // Value is types.QPluginCard
 
@@ -35,6 +38,7 @@ func ExampleCard_outputUsage() {
 
 var _ *types.QQueryCard
 var _ *types.FileUploadCard
+var _ *types.FormInputCard
 var _ *types.TextInputCard
 var _ *types.QPluginCard
 
@@ -44,6 +48,9 @@ func ExampleCardInput_outputUsage() {
 	switch v := union.(type) {
 	case *types.CardInputMemberFileUpload:
 		_ = v.Value // Value is types.FileUploadCardInput
+
+	case *types.CardInputMemberFormInput:
+		_ = v.Value // Value is types.FormInputCardInput
 
 	case *types.CardInputMemberQPlugin:
 		_ = v.Value // Value is types.QPluginCardInput
@@ -66,6 +73,7 @@ func ExampleCardInput_outputUsage() {
 var _ *types.FileUploadCardInput
 var _ *types.QQueryCardInput
 var _ *types.QPluginCardInput
+var _ *types.FormInputCardInput
 var _ *types.TextInputCardInput
 
 func ExampleDocumentAttributeValue_outputUsage() {

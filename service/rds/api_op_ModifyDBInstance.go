@@ -308,6 +308,9 @@ type ModifyDBInstanceInput struct {
 	// [Working with a DB instance in a VPC]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
 	DBSubnetGroupName *string
 
+	// Specifies the mode of Database Insights to enable for the instance.
+	DatabaseInsightsMode types.DatabaseInsightsMode
+
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
 	DedicatedLogVolume *bool
 

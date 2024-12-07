@@ -1074,7 +1074,7 @@
                 "IdentityProviderDetails": {
                     "target": "com.amazonaws.transfer#IdentityProviderDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required when <code>IdentityProviderType</code> is set to\n        <code>AWS_DIRECTORY_SERVICE</code>, <code>Amazon Web Services_LAMBDA</code> or <code>API_GATEWAY</code>. Accepts an array containing\n      all of the information required to use a directory in <code>AWS_DIRECTORY_SERVICE</code> or\n      invoke a customer-supplied authentication API, including the API Gateway URL. Not required\n      when <code>IdentityProviderType</code> is set to <code>SERVICE_MANAGED</code>.</p>"
+                        "smithy.api#documentation": "<p>Required when <code>IdentityProviderType</code> is set to\n        <code>AWS_DIRECTORY_SERVICE</code>, <code>Amazon Web Services_LAMBDA</code> or\n        <code>API_GATEWAY</code>. Accepts an array containing all of the information required to use\n      a directory in <code>AWS_DIRECTORY_SERVICE</code> or invoke a customer-supplied authentication\n      API, including the API Gateway URL. Cannot be specified when <code>IdentityProviderType</code>\n      is set to <code>SERVICE_MANAGED</code>.</p>"
                     }
                 },
                 "IdentityProviderType": {
@@ -1288,6 +1288,94 @@
                     "target": "com.amazonaws.transfer#UserName",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique string that identifies a Transfer Family user.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.transfer#CreateWebApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#CreateWebAppRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#CreateWebAppResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "iam:PassRole",
+                        "transfer:CreateWebApp",
+                        "transfer:TagResource"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Creates a web app based on specified parameters, and returns the ID for the new web app.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/createWebApp"
+                }
+            }
+        },
+        "com.amazonaws.transfer#CreateWebAppRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityProviderDetails": {
+                    "target": "com.amazonaws.transfer#WebAppIdentityProviderDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can provide a structure that contains the details for the identity provider to use with your web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccessEndpoint": {
+                    "target": "com.amazonaws.transfer#WebAppAccessEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AccessEndpoint</code> is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.</p>"
+                    }
+                },
+                "WebAppUnits": {
+                    "target": "com.amazonaws.transfer#WebAppUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.transfer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for web apps.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#CreateWebAppResponse": {
+            "type": "structure",
+            "members": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a unique identifier for the web app.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1950,6 +2038,122 @@
                     "target": "com.amazonaws.transfer#UserName",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique string that identifies a user that is being deleted from a server.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#DeleteWebApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#DeleteWebAppRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "transfer:DeleteWebApp"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Deletes the specified web app.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deleteWebApp"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.transfer#DeleteWebAppCustomization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#DeleteWebAppCustomizationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "transfer:DeleteWebAppCustomization"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Deletes the <code>WebAppCustomization</code> object that corresponds to the web app ID specified.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deleteWebAppCustomization"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.transfer#DeleteWebAppCustomizationRequest": {
+            "type": "structure",
+            "members": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the unique identifier for the web app that contains the customizations that you are deleting.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.transfer#WebAppResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transfer#DeleteWebAppRequest": {
+            "type": "structure",
+            "members": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the unique identifier for the web app that you are deleting.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2700,6 +2904,151 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.transfer#DescribeWebApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#DescribeWebAppRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#DescribeWebAppResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "transfer:DescribeWebApp"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Describes the web app that's identified by <code>WebAppId</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describeWebApp"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.transfer#DescribeWebAppCustomization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#DescribeWebAppCustomizationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#DescribeWebAppCustomizationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "transfer:DescribeWebAppCustomization"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Describes the web app customization object that's identified by <code>WebAppId</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describeWebAppCustomization"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.transfer#DescribeWebAppCustomizationRequest": {
+            "type": "structure",
+            "members": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the unique identifier for the web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.transfer#WebAppResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transfer#DescribeWebAppCustomizationResponse": {
+            "type": "structure",
+            "members": {
+                "WebAppCustomization": {
+                    "target": "com.amazonaws.transfer#DescribedWebAppCustomization",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Returns a structure that contains the details of the web app customizations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.transfer#DescribeWebAppRequest": {
+            "type": "structure",
+            "members": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the unique identifier for the web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#DescribeWebAppResponse": {
+            "type": "structure",
+            "members": {
+                "WebApp": {
+                    "target": "com.amazonaws.transfer#DescribedWebApp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Returns a structure that contains the details of the web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.transfer#DescribeWorkflow": {
             "type": "operation",
             "input": {
@@ -3142,6 +3491,32 @@
                 "smithy.api#documentation": "<p>The details for a server host key.</p>"
             }
         },
+        "com.amazonaws.transfer#DescribedIdentityCenterConfig": {
+            "type": "structure",
+            "members": {
+                "ApplicationArn": {
+                    "target": "com.amazonaws.transfer#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM Identity Center application: this value is set automatically when you create your web app.</p>"
+                    }
+                },
+                "InstanceArn": {
+                    "target": "com.amazonaws.transfer#IdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM Identity Center used for the web app.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.transfer#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role in IAM Identity Center used for the web app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the details of the IAM Identity Center used for your web app. Returned during a call to <code>DescribeWebApp</code>.</p>"
+            }
+        },
         "com.amazonaws.transfer#DescribedProfile": {
             "type": "structure",
             "members": {
@@ -3489,6 +3864,117 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the properties of a user that was specified.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribedWebApp": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.transfer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DescribedIdentityProviderDetails": {
+                    "target": "com.amazonaws.transfer#DescribedWebAppIdentityProviderDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the details for the identity provider used by the web app.</p>"
+                    }
+                },
+                "AccessEndpoint": {
+                    "target": "com.amazonaws.transfer#WebAppAccessEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AccessEndpoint</code> is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.</p>"
+                    }
+                },
+                "WebAppEndpoint": {
+                    "target": "com.amazonaws.transfer#WebAppEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>WebAppEndpoint</code> is the unique URL for your Transfer Family web app. This is the value that you use when you configure <b>Origins</b> on CloudFront.</p>"
+                    }
+                },
+                "WebAppUnits": {
+                    "target": "com.amazonaws.transfer#WebAppUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.transfer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for web apps. Tags are metadata attached to web apps for any purpose.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes the parameters for the web app, as identified by the <code>WebAppId</code>.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribedWebAppCustomization": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.transfer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the Amazon Resource Name (ARN) for the web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the unique identifier for your web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.transfer#WebAppTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the page title that you defined for your web app.</p>"
+                    }
+                },
+                "LogoFile": {
+                    "target": "com.amazonaws.transfer#WebAppLogoFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a logo file data string (in base64 encoding).</p>"
+                    }
+                },
+                "FaviconFile": {
+                    "target": "com.amazonaws.transfer#WebAppFaviconFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a icon file data string (in base64 encoding).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the customization fields for the web app. You can provide a title, logo, and icon to customize the appearance of your web app.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.transfer#WebAppResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transfer#DescribedWebAppIdentityProviderDetails": {
+            "type": "union",
+            "members": {
+                "IdentityCenterConfig": {
+                    "target": "com.amazonaws.transfer#DescribedIdentityCenterConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a structure for your identity provider details. This structure contains the instance ARN and role being used for the web app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a structure that contains the identity provider details for your web app.</p>"
             }
         },
         "com.amazonaws.transfer#DescribedWorkflow": {
@@ -4087,6 +4573,46 @@
         "com.amazonaws.transfer#HostKeyType": {
             "type": "string"
         },
+        "com.amazonaws.transfer#IdentityCenterApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:[\\w-]+:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+            }
+        },
+        "com.amazonaws.transfer#IdentityCenterConfig": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.transfer#IdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM Identity Center used for the web app.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.transfer#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role in IAM Identity Center used for the web app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes the values to use for the IAM Identity Center settings when you create or update a web app.</p>"
+            }
+        },
+        "com.amazonaws.transfer#IdentityCenterInstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:[\\w-]+:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+            }
+        },
         "com.amazonaws.transfer#IdentityProviderDetails": {
             "type": "structure",
             "members": {
@@ -4550,7 +5076,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.transfer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the maximum number of access SIDs to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 },
                 "NextToken": {
@@ -4641,7 +5167,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.transfer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of agreements to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 },
                 "NextToken": {
@@ -4725,7 +5251,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.transfer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of certificates to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 },
                 "NextToken": {
@@ -4802,7 +5328,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.transfer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of connectors to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 },
                 "NextToken": {
@@ -4879,7 +5405,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.transfer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the maximum number of executions to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 },
                 "NextToken": {
@@ -5055,7 +5581,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.transfer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of host keys to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 },
                 "NextToken": {
@@ -5146,7 +5672,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.transfer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of profiles to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 },
                 "NextToken": {
@@ -5522,6 +6048,89 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.transfer#ListWebApps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#ListWebAppsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#ListWebAppsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "transfer:ListWebApps"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Lists all web apps associated with your Amazon Web Services account for your current region.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listWebApps"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "WebApps",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.transfer#ListWebAppsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.transfer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>NextToken</code> parameter in the output.\n      You can then pass the <code>NextToken</code> parameter in a subsequent command to\n      continue listing additional web apps.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#ListWebAppsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide this value for the <code>NextToken</code> parameter in a subsequent command to\n      continue listing additional web apps.</p>"
+                    }
+                },
+                "WebApps": {
+                    "target": "com.amazonaws.transfer#ListedWebApps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns, for each listed web app, a structure that contains details for the web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.transfer#ListWorkflows": {
             "type": "operation",
             "input": {
@@ -5561,7 +6170,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.transfer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the maximum number of workflows to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
                     }
                 },
                 "NextToken": {
@@ -6023,6 +6632,46 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.transfer#ListedUser"
+            }
+        },
+        "com.amazonaws.transfer#ListedWebApp": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.transfer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the web app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccessEndpoint": {
+                    "target": "com.amazonaws.transfer#WebAppAccessEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AccessEndpoint</code> is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.</p>"
+                    }
+                },
+                "WebAppEndpoint": {
+                    "target": "com.amazonaws.transfer#WebAppEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>WebAppEndpoint</code> is the unique URL for your Transfer Family web app. This is the value that you use when you configure <b>Origins</b> on CloudFront.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> a structure that contains details for the web app.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ListedWebApps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#ListedWebApp"
             }
         },
         "com.amazonaws.transfer#ListedWorkflow": {
@@ -8057,6 +8706,12 @@
                     "target": "com.amazonaws.transfer#UserResource"
                 },
                 {
+                    "target": "com.amazonaws.transfer#WebAppCustomizationResource"
+                },
+                {
+                    "target": "com.amazonaws.transfer#WebAppResource"
+                },
+                {
                     "target": "com.amazonaws.transfer#WorkflowResource"
                 }
             ],
@@ -9994,6 +10649,226 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.transfer#UpdateWebApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#UpdateWebAppRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#UpdateWebAppResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "iam:PassRole",
+                        "transfer:TagResource",
+                        "transfer:UnTagResource",
+                        "transfer:UpdateWebApp"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Assigns new properties to a web app. You can modify the access point, identity provider details, and the web app units.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateWebApp"
+                }
+            }
+        },
+        "com.amazonaws.transfer#UpdateWebAppCustomization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#UpdateWebAppCustomizationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#UpdateWebAppCustomizationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "transfer:UpdateWebAppCustomization"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Assigns new customization properties to a web app. You can modify the icon file, logo file, and title.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateWebAppCustomization"
+                }
+            }
+        },
+        "com.amazonaws.transfer#UpdateWebAppCustomizationRequest": {
+            "type": "structure",
+            "members": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the identifier of the web app that you are updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.transfer#WebAppTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide an updated title.</p>"
+                    }
+                },
+                "LogoFile": {
+                    "target": "com.amazonaws.transfer#WebAppLogoFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify logo file data string (in base64 encoding).</p>"
+                    }
+                },
+                "FaviconFile": {
+                    "target": "com.amazonaws.transfer#WebAppFaviconFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify icon file data string (in base64 encoding).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.transfer#WebAppResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transfer#UpdateWebAppCustomizationResponse": {
+            "type": "structure",
+            "members": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the unique identifier for the web app being updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.transfer#WebAppResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transfer#UpdateWebAppIdentityCenterConfig": {
+            "type": "structure",
+            "members": {
+                "Role": {
+                    "target": "com.amazonaws.transfer#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role used to access IAM Identity Center.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes the values to use for the IAM Identity Center settings when you update a web app.</p>"
+            }
+        },
+        "com.amazonaws.transfer#UpdateWebAppIdentityProviderDetails": {
+            "type": "union",
+            "members": {
+                "IdentityCenterConfig": {
+                    "target": "com.amazonaws.transfer#UpdateWebAppIdentityCenterConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that describes the values to use for the IAM Identity Center settings when you update a web app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union that contains the <code>UpdateWebAppIdentityCenterConfig</code> object.</p>"
+            }
+        },
+        "com.amazonaws.transfer#UpdateWebAppRequest": {
+            "type": "structure",
+            "members": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the identifier of the web app that you are updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProviderDetails": {
+                    "target": "com.amazonaws.transfer#UpdateWebAppIdentityProviderDetails",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Provide updated identity provider values in a <code>WebAppIdentityProviderDetails</code> object.</p>"
+                    }
+                },
+                "AccessEndpoint": {
+                    "target": "com.amazonaws.transfer#WebAppAccessEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AccessEndpoint</code> is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.</p>"
+                    }
+                },
+                "WebAppUnits": {
+                    "target": "com.amazonaws.transfer#WebAppUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#UpdateWebAppResponse": {
+            "type": "structure",
+            "members": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the unique identifier for the web app being updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.transfer#Url": {
             "type": "string",
             "traits": {
@@ -10108,6 +10983,161 @@
         },
         "com.amazonaws.transfer#VpcId": {
             "type": "string"
+        },
+        "com.amazonaws.transfer#WebAppAccessEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.transfer#WebAppCustomizationResource": {
+            "type": "resource",
+            "identifiers": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.transfer#DescribeWebAppCustomization"
+            },
+            "update": {
+                "target": "com.amazonaws.transfer#UpdateWebAppCustomization"
+            },
+            "delete": {
+                "target": "com.amazonaws.transfer#DeleteWebAppCustomization"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "WebAppCustomization",
+                    "additionalSchemas": [
+                        "com.amazonaws.transfer#DescribedWebAppCustomization"
+                    ]
+                }
+            }
+        },
+        "com.amazonaws.transfer#WebAppEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.transfer#WebAppFaviconFile": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20960
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.transfer#WebAppId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 24,
+                    "max": 24
+                },
+                "smithy.api#pattern": "^webapp-[0-9a-f]{17}$"
+            }
+        },
+        "com.amazonaws.transfer#WebAppIdentityProviderDetails": {
+            "type": "union",
+            "members": {
+                "IdentityCenterConfig": {
+                    "target": "com.amazonaws.transfer#IdentityCenterConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that describes the values to use for the IAM Identity Center settings when you create a web app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union that contains the <code>IdentityCenterConfig</code> object.</p>"
+            }
+        },
+        "com.amazonaws.transfer#WebAppLogoFile": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 51200
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.transfer#WebAppResource": {
+            "type": "resource",
+            "identifiers": {
+                "WebAppId": {
+                    "target": "com.amazonaws.transfer#WebAppId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.transfer#CreateWebApp"
+            },
+            "read": {
+                "target": "com.amazonaws.transfer#DescribeWebApp"
+            },
+            "update": {
+                "target": "com.amazonaws.transfer#UpdateWebApp"
+            },
+            "delete": {
+                "target": "com.amazonaws.transfer#DeleteWebApp"
+            },
+            "list": {
+                "target": "com.amazonaws.transfer#ListWebApps"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "webapp/{WebAppId}"
+                },
+                "aws.api#taggable": {
+                    "property": "Tags"
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "WebApp",
+                    "additionalSchemas": [
+                        "com.amazonaws.transfer#DescribedWebApp"
+                    ]
+                }
+            }
+        },
+        "com.amazonaws.transfer#WebAppTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.transfer#WebAppUnitCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.transfer#WebAppUnits": {
+            "type": "union",
+            "members": {
+                "Provisioned": {
+                    "target": "com.amazonaws.transfer#WebAppUnitCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer that represents the number of units for your desired number of concurrent connections, or the number of user sessions on your web app at the same time.</p>\n         <p>Each increment allows an additional 250 concurrent sessions: a value of <code>1</code> sets the number of concurrent sessions to 250; <code>2</code> sets a value of 500, and so on. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains an integer value that represents the value for number of concurrent connections or the user sessions on your web app.</p>"
+            }
         },
         "com.amazonaws.transfer#WorkflowDescription": {
             "type": "string",

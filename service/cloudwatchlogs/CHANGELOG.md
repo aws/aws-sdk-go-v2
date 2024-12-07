@@ -1,3 +1,8 @@
+# v1.45.0 (2024-12-02)
+
+* **Feature**: Adds PutIntegration, GetIntegration, ListIntegrations and DeleteIntegration APIs. Adds QueryLanguage support to StartQuery, GetQueryResults, DescribeQueries, DescribeQueryDefinitions, and PutQueryDefinition APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2024-11-21)
 
 * **Feature**: Adds "Create field indexes to improve query performance and reduce scan volume" and "Transform logs during ingestion". Updates documentation for "PutLogEvents with Entity".

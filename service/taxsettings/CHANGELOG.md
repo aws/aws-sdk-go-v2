@@ -1,3 +1,7 @@
+# v1.7.1 (2024-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2024-11-19)
 
 * **Feature**: Release Tax Inheritance APIs,  Tax Exemption APIs, and functionality update for some existing Tax Registration APIs

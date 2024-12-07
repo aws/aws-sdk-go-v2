@@ -34,7 +34,7 @@ type UpdateTargetGroupInput struct {
 	// This member is required.
 	HealthCheck *types.HealthCheckConfig
 
-	// The ID or Amazon Resource Name (ARN) of the target group.
+	// The ID or ARN of the target group.
 	//
 	// This member is required.
 	TargetGroupIdentifier *string

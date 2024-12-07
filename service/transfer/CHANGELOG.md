@@ -1,3 +1,8 @@
+# v1.54.0 (2024-12-02)
+
+* **Feature**: AWS Transfer Family now offers Web apps that enables simple and secure access to data stored in Amazon S3.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.5 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

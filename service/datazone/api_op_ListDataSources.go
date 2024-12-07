@@ -39,6 +39,9 @@ type ListDataSourcesInput struct {
 	// This member is required.
 	ProjectIdentifier *string
 
+	// The ID of the connection.
+	ConnectionIdentifier *string
+
 	// The identifier of the environment in which to list the data sources.
 	EnvironmentIdentifier *string
 

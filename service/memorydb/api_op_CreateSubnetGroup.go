@@ -59,7 +59,7 @@ type CreateSubnetGroupInput struct {
 
 type CreateSubnetGroupOutput struct {
 
-	// The newly-created subnet group
+	// The newly-created subnet group.
 	SubnetGroup *types.SubnetGroup
 
 	// Metadata pertaining to the operation's result.

@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes email address from the specified Amazon Connect instance.
 func (c *Client) DeleteEmailAddress(ctx context.Context, params *DeleteEmailAddressInput, optFns ...func(*Options)) (*DeleteEmailAddressOutput, error) {
 	if params == nil {
 		params = &DeleteEmailAddressInput{}
@@ -27,12 +28,15 @@ func (c *Client) DeleteEmailAddress(ctx context.Context, params *DeleteEmailAddr
 
 type DeleteEmailAddressInput struct {
 
-	//
+	// The identifier of the email address.
 	//
 	// This member is required.
 	EmailAddressId *string
 
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

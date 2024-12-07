@@ -308,7 +308,7 @@ type Entity struct {
 	//
 	// For details about how to use the attributes, see [How to add related information to telemetry] in the CloudWatch User Guide.
 	//
-	// [How to add related information to telemetry]: https://docs.aws.amazon.com/adding-your-own-related-telemetry.html
+	// [How to add related information to telemetry]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html
 	Attributes map[string]string
 
 	// The attributes of the entity which identify the specific entity, as a list of
@@ -322,7 +322,7 @@ type Entity struct {
 	// For details about how to use the key attributes to specify an entity, see [How to add related information to telemetry] in
 	// the CloudWatch User Guide.
 	//
-	// [How to add related information to telemetry]: https://docs.aws.amazon.com/adding-your-own-related-telemetry.html
+	// [How to add related information to telemetry]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html
 	KeyAttributes map[string]string
 
 	noSmithyDocumentSerde

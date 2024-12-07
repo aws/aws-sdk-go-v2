@@ -77,9 +77,9 @@ type DescribeExperienceOutput struct {
 	// Shows the name of your Amazon Kendra experience.
 	Name *string
 
-	// Shows the Amazon Resource Name (ARN) of a role with permission to access Query
-	// API, QuerySuggestions API, SubmitFeedback API, and IAM Identity Center that
-	// stores your user and group information.
+	// The Amazon Resource Name (ARN) of the IAM role with permission to access the
+	// Query API, QuerySuggestions API, SubmitFeedback API, and IAM Identity Center
+	// that stores your users and groups information.
 	RoleArn *string
 
 	// The current processing status of your Amazon Kendra experience. When the status

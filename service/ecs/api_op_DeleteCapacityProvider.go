@@ -14,7 +14,7 @@ import (
 // Deletes the specified capacity provider.
 //
 // The FARGATE and FARGATE_SPOT capacity providers are reserved and can't be
-// deleted. You can disassociate them from a cluster using either [PutCapacityProviderProviders]or by deleting
+// deleted. You can disassociate them from a cluster using either [PutClusterCapacityProviders]or by deleting
 // the cluster.
 //
 // Prior to a capacity provider being deleted, the capacity provider must be
@@ -27,9 +27,8 @@ import (
 // deleted. To remove a capacity provider from a cluster, you can either use [PutClusterCapacityProviders]or
 // delete the cluster.
 //
-// [PutCapacityProviderProviders]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProviderProviders.html
-// [UpdateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
 // [PutClusterCapacityProviders]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+// [UpdateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
 func (c *Client) DeleteCapacityProvider(ctx context.Context, params *DeleteCapacityProviderInput, optFns ...func(*Options)) (*DeleteCapacityProviderOutput, error) {
 	if params == nil {
 		params = &DeleteCapacityProviderInput{}

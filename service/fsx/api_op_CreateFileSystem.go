@@ -74,42 +74,6 @@ type CreateFileSystemInput struct {
 	// This member is required.
 	FileSystemType types.FileSystemType
 
-	// Sets the storage capacity of the file system that you're creating, in gibibytes
-	// (GiB).
-	//
-	// FSx for Lustre file systems - The amount of storage capacity that you can
-	// configure depends on the value that you set for StorageType and the Lustre
-	// DeploymentType , as follows:
-	//
-	//   - For SCRATCH_2 , PERSISTENT_2 , and PERSISTENT_1 deployment types using SSD
-	//   storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400
-	//   GiB.
-	//
-	//   - For PERSISTENT_1 HDD file systems, valid values are increments of 6000 GiB
-	//   for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file
-	//   systems.
-	//
-	//   - For SCRATCH_1 deployment type, valid values are 1200 GiB, 2400 GiB, and
-	//   increments of 3600 GiB.
-	//
-	// FSx for ONTAP file systems - The amount of storage capacity that you can
-	// configure depends on the value of the HAPairs property. The minimum value is
-	// calculated as 1,024 * HAPairs and the maximum is calculated as 524,288 * HAPairs
-	// .
-	//
-	// FSx for OpenZFS file systems - The amount of storage capacity that you can
-	// configure is from 64 GiB up to 524,288 GiB (512 TiB).
-	//
-	// FSx for Windows File Server file systems - The amount of storage capacity that
-	// you can configure depends on the value that you set for StorageType as follows:
-	//
-	//   - For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).
-	//
-	//   - For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).
-	//
-	// This member is required.
-	StorageCapacity *int32
-
 	// Specifies the IDs of the subnets that the file system will be accessible from.
 	// For Windows and ONTAP MULTI_AZ_1 deployment types,provide exactly two subnet
 	// IDs, one for the preferred file server and one for the standby file server. You
@@ -203,8 +167,42 @@ type CreateFileSystemInput struct {
 	// file system in a VPC subnet that has been shared with you.
 	SecurityGroupIds []string
 
-	// Sets the storage type for the file system that you're creating. Valid values
-	// are SSD and HDD .
+	// Sets the storage capacity of the file system that you're creating, in gibibytes
+	// (GiB).
+	//
+	// FSx for Lustre file systems - The amount of storage capacity that you can
+	// configure depends on the value that you set for StorageType and the Lustre
+	// DeploymentType , as follows:
+	//
+	//   - For SCRATCH_2 , PERSISTENT_2 , and PERSISTENT_1 deployment types using SSD
+	//   storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400
+	//   GiB.
+	//
+	//   - For PERSISTENT_1 HDD file systems, valid values are increments of 6000 GiB
+	//   for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file
+	//   systems.
+	//
+	//   - For SCRATCH_1 deployment type, valid values are 1200 GiB, 2400 GiB, and
+	//   increments of 3600 GiB.
+	//
+	// FSx for ONTAP file systems - The amount of storage capacity that you can
+	// configure depends on the value of the HAPairs property. The minimum value is
+	// calculated as 1,024 * HAPairs and the maximum is calculated as 524,288 * HAPairs
+	// .
+	//
+	// FSx for OpenZFS file systems - The amount of storage capacity that you can
+	// configure is from 64 GiB up to 524,288 GiB (512 TiB).
+	//
+	// FSx for Windows File Server file systems - The amount of storage capacity that
+	// you can configure depends on the value that you set for StorageType as follows:
+	//
+	//   - For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).
+	//
+	//   - For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).
+	StorageCapacity *int32
+
+	// Sets the storage class for the file system that you're creating. Valid values
+	// are SSD , HDD , and INTELLIGENT_TIERING .
 	//
 	//   - Set to SSD to use solid state drive storage. SSD is supported on all
 	//   Windows, Lustre, ONTAP, and OpenZFS deployment types.
@@ -213,11 +211,17 @@ type CreateFileSystemInput struct {
 	//   and MULTI_AZ_1 Windows file system deployment types, and on PERSISTENT_1
 	//   Lustre file system deployment types.
 	//
+	//   - Set to INTELLIGENT_TIERING to use fully elastic, intelligently-tiered
+	//   storage. Intelligent-Tiering is only available for OpenZFS file systems with the
+	//   Multi-AZ deployment type.
+	//
 	// Default value is SSD . For more information, see [Storage type options] in the FSx for Windows File
-	// Server User Guide and [Multiple storage options]in the FSx for Lustre User Guide.
+	// Server User Guide, [Multiple storage options]in the FSx for Lustre User Guide, and [Working with Intelligent-Tiering] in the Amazon FSx for
+	// OpenZFS User Guide.
 	//
 	// [Storage type options]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
 	// [Multiple storage options]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options
+	// [Working with Intelligent-Tiering]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance-intelligent-tiering
 	StorageType types.StorageType
 
 	// The tags to apply to the file system that's being created. The key value of the

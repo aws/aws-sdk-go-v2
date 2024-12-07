@@ -42,6 +42,19 @@ import (
 //
 // This operation requires permission for the bedrock:InvokeModel action.
 //
+// To deny all inference access to resources that you specify in the modelId
+// field, you need to deny access to the bedrock:InvokeModel and
+// bedrock:InvokeModelWithResponseStream actions. Doing this also denies access to
+// the resource through the base inference actions ([InvokeModel] and [InvokeModelWithResponseStream]). For more information
+// see [Deny access for inference on specific models].
+//
+// For troubleshooting some of the common errors you might encounter when using
+// the Converse API, see [Troubleshooting Amazon Bedrock API Error Codes] in the Amazon Bedrock User Guide
+//
+// [InvokeModelWithResponseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html
+// [Troubleshooting Amazon Bedrock API Error Codes]: https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html
+// [Deny access for inference on specific models]: https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference
+// [InvokeModel]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
 // [Use a prompt from Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html
 func (c *Client) Converse(ctx context.Context, params *ConverseInput, optFns ...func(*Options)) (*ConverseOutput, error) {
 	if params == nil {
@@ -77,13 +90,14 @@ type ConverseInput struct {
 	//   Then specify the ARN of the resulting provisioned model. For more information,
 	//   see [Use a custom model in Amazon Bedrock]in the Amazon Bedrock User Guide.
 	//
-	//   - To include a prompt that was defined in Prompt management, specify the ARN
-	//   of the prompt version to use.
+	//   - To include a prompt that was defined in [Prompt management], specify the ARN of the prompt
+	//   version to use.
 	//
 	// The Converse API doesn't support [imported models].
 	//
 	// [Run inference using a Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
 	// [Use a custom model in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+	// [Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html
 	// [Supported Regions and models for cross-region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
 	// [imported models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
 	// [Amazon Bedrock base model IDs (on-demand throughput)]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
@@ -129,10 +143,16 @@ type ConverseInput struct {
 	// The messages that you want to send to the model.
 	Messages []types.Message
 
+	// Model performance settings for the request.
+	PerformanceConfig *types.PerformanceConfiguration
+
 	// Contains a map of variables in a prompt from Prompt management to objects
 	// containing the values to fill in for them when running model invocation. This
 	// field is ignored if you don't specify a prompt resource in the modelId field.
 	PromptVariables map[string]types.PromptVariableValues
+
+	// Key-value pairs that you can use to filter invocation logs.
+	RequestMetadata map[string]string
 
 	// A prompt that provides instructions or context to the model about the task it
 	// should perform, or the persona it should adopt during the conversation.
@@ -141,8 +161,9 @@ type ConverseInput struct {
 	// Configuration information for the tools that the model can use when generating
 	// a response.
 	//
-	// This field is only supported by Anthropic Claude 3, Cohere Command R, Cohere
-	// Command R+, and Mistral Large models.
+	// For information about models that support tool use, see [Supported models and model features].
+	//
+	// [Supported models and model features]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features
 	ToolConfig *types.ToolConfiguration
 
 	noSmithyDocumentSerde
@@ -173,6 +194,9 @@ type ConverseOutput struct {
 
 	// Additional fields in the response that are unique to the model.
 	AdditionalModelResponseFields document.Interface
+
+	// Model performance settings for the request.
+	PerformanceConfig *types.PerformanceConfiguration
 
 	// A trace object that contains information about the Guardrail behavior.
 	Trace *types.ConverseTrace

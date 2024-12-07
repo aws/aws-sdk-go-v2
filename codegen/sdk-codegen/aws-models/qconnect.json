@@ -69,6 +69,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for AI Agents of type <code>ANSWER_RECOMMENDATION</code>.</p>"
                     }
+                },
+                "selfServiceAIAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#SelfServiceAIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for AI Agents of type SELF_SERVICE.</p>"
+                    }
                 }
             },
             "traits": {
@@ -313,6 +319,10 @@
                     {
                         "value": "ANSWER_RECOMMENDATION",
                         "name": "ANSWER_RECOMMENDATION"
+                    },
+                    {
+                        "value": "SELF_SERVICE",
+                        "name": "SELF_SERVICE"
                     }
                 ]
             }
@@ -341,6 +351,390 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The summary of the AI Agent version.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrail": {
+            "type": "resource",
+            "identifiers": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn"
+                },
+                "aiGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.qconnect#CreateAIGuardrail"
+            },
+            "read": {
+                "target": "com.amazonaws.qconnect#GetAIGuardrail"
+            },
+            "update": {
+                "target": "com.amazonaws.qconnect#UpdateAIGuardrail"
+            },
+            "delete": {
+                "target": "com.amazonaws.qconnect#DeleteAIGuardrail"
+            },
+            "list": {
+                "target": "com.amazonaws.qconnect#ListAIGuardrails"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.qconnect#CreateAIGuardrailVersion"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#DeleteAIGuardrailVersion"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ListAIGuardrailVersions"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "ai-guardrail/{assistantId}/{aiGuardrailId}"
+                },
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailBlockedMessaging": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Messaging for when violations are detected in text",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailContentPolicyConfig": {
+            "type": "structure",
+            "members": {
+                "filtersConfig": {
+                    "target": "com.amazonaws.qconnect#GuardrailContentFiltersConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the type of the content filter and how strongly it should apply to prompts and\n      model responses.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about how to handle harmful content.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailContextualGroundingPolicyConfig": {
+            "type": "structure",
+            "members": {
+                "filtersConfig": {
+                    "target": "com.amazonaws.qconnect#GuardrailContextualGroundingFiltersConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter configuration details for the AI Guardrails contextual grounding policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy configuration details for the AI Guardrail's contextual grounding\n      policy.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailData": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "blockedInputMessaging": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailBlockedMessaging",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message to return when the AI Guardrail blocks a prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "blockedOutputsMessaging": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailBlockedMessaging",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message to return when the AI Guardrail blocks a model response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the AI Guardrail.</p>"
+                    }
+                },
+                "topicPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailTopicPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about topics that the AI Guardrail should identify and deny.</p>"
+                    }
+                },
+                "contentPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailContentPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about how to handle harmful content.</p>"
+                    }
+                },
+                "wordPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailWordPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the word policy to configured for the AI Guardrail.</p>"
+                    }
+                },
+                "sensitiveInformationPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailSensitiveInformationPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about PII entities and regular expressions to configure for the AI\n      Guardrail.</p>"
+                    }
+                },
+                "contextualGroundingPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailContextualGroundingPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy configuration details for the AI Guardrail's contextual grounding\n      policy.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qconnect#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the AI Guardrail.</p>"
+                    }
+                },
+                "modifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the AI Guardrail was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data for the AI Guardrail</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#AIGuardrail"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Description of the guardrail or its version",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailSensitiveInformationPolicyConfig": {
+            "type": "structure",
+            "members": {
+                "piiEntitiesConfig": {
+                    "target": "com.amazonaws.qconnect#GuardrailPiiEntitiesConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of PII entities to configure to the AI Guardrail.</p>"
+                    }
+                },
+                "regexesConfig": {
+                    "target": "com.amazonaws.qconnect#GuardrailRegexesConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expressions to configure to the AI Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about PII entities and regular expressions to configure for the AI\n      Guardrail.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailSummariesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#AIGuardrailSummary"
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the AI Guardrail was last modified.</p>"
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the AI Guardrail.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qconnect#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the AI Guardrail.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the AI Guardrail.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#AIGuardrail"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailTopicPolicyConfig": {
+            "type": "structure",
+            "members": {
+                "topicsConfig": {
+                    "target": "com.amazonaws.qconnect#GuardrailTopicsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of policies related to topics that the AI Guardrail should deny.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about topics that the AI Guardrail should identify and deny.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailVersionSummariesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#AIGuardrailVersionSummary"
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailVersionSummary": {
+            "type": "structure",
+            "members": {
+                "aiGuardrailSummary": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data for the summary of the AI Guardrail version.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number for this AI Guardrail version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the AI Guardrail version.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIGuardrailWordPolicyConfig": {
+            "type": "structure",
+            "members": {
+                "wordsConfig": {
+                    "target": "com.amazonaws.qconnect#GuardrailWordsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of words to configure for the AI Guardrail.</p>"
+                    }
+                },
+                "managedWordListsConfig": {
+                    "target": "com.amazonaws.qconnect#GuardrailManagedWordListsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of managed words to configure for the AI Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the word policy to configured for the AI Guardrail.</p>"
             }
         },
         "com.amazonaws.qconnect#AIPrompt": {
@@ -689,6 +1083,14 @@
                     {
                         "value": "QUERY_REFORMULATION",
                         "name": "QUERY_REFORMULATION"
+                    },
+                    {
+                        "value": "SELF_SERVICE_PRE_PROCESSING",
+                        "name": "SELF_SERVICE_PRE_PROCESSING"
+                    },
+                    {
+                        "value": "SELF_SERVICE_ANSWER_GENERATION",
+                        "name": "SELF_SERVICE_ANSWER_GENERATION"
                     }
                 ]
             }
@@ -779,7 +1181,7 @@
                 "messageTemplateId": {
                     "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain\n      any qualifier.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -886,6 +1288,12 @@
                         "smithy.api#documentation": "<p>The AI Prompt identifier for the Answer Generation prompt used by the\n        <code>ANSWER_RECOMMENDATION</code> AI Agent.</p>"
                     }
                 },
+                "answerGenerationAIGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Guardrail identifier for the Answer Generation Guardrail used by the\n        <code>ANSWER_RECOMMENDATION</code> AI Agent.</p>"
+                    }
+                },
                 "associationConfigurations": {
                     "target": "com.amazonaws.qconnect#AssociationConfigurationList",
                     "traits": {
@@ -975,6 +1383,9 @@
             "resources": [
                 {
                     "target": "com.amazonaws.qconnect#AIAgent"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#AIGuardrail"
                 },
                 {
                     "target": "com.amazonaws.qconnect#AIPrompt"
@@ -2346,6 +2757,80 @@
                 "smithy.api#pattern": "^(text/(plain|html|csv))|(application/(pdf|vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document))|(application/x\\.wisdom-json;source=(salesforce|servicenow|zendesk))$"
             }
         },
+        "com.amazonaws.qconnect#ConversationContext": {
+            "type": "structure",
+            "members": {
+                "selfServiceConversationHistory": {
+                    "target": "com.amazonaws.qconnect#SelfServiceConversationHistoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The self service conversation history before the Amazon Q in Connect session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conversation context to include in SendMessage.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ConversationState": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.qconnect#ConversationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the conversation state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.qconnect#ConversationStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason of the conversation state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conversation state associated to a message.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ConversationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CLOSED",
+                        "name": "CLOSED"
+                    },
+                    {
+                        "value": "READY",
+                        "name": "READY"
+                    },
+                    {
+                        "value": "PROCESSING",
+                        "name": "PROCESSING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#ConversationStatusReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#CreateAIAgent": {
             "type": "operation",
             "input": {
@@ -2547,6 +3032,246 @@
                     "target": "com.amazonaws.qconnect#Version",
                     "traits": {
                         "smithy.api#documentation": "<p>The version number of the AI Agent version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIGuardrail": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateAIGuardrailRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateAIGuardrailResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Q in Connect AI Guardrail.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiguardrails",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#private": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIGuardrailRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "blockedInputMessaging": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailBlockedMessaging",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message to return when the AI Guardrail blocks a prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "blockedOutputsMessaging": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailBlockedMessaging",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message to return when the AI Guardrail blocks a model response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the AI Guardrail.</p>"
+                    }
+                },
+                "topicPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailTopicPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The topic policies to configure for the AI Guardrail.</p>"
+                    }
+                },
+                "contentPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailContentPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content filter policies to configure for the AI Guardrail.</p>"
+                    }
+                },
+                "wordPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailWordPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The word policy you configure for the AI Guardrail.</p>"
+                    }
+                },
+                "sensitiveInformationPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailSensitiveInformationPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitive information policy to configure for the AI Guardrail.</p>"
+                    }
+                },
+                "contextualGroundingPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailContextualGroundingPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual grounding policy configuration used to create an AI Guardrail.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIGuardrailResponse": {
+            "type": "structure",
+            "members": {
+                "aiGuardrail": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the AI Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIGuardrailVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateAIGuardrailVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateAIGuardrailVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Q in Connect AI Guardrail version.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiguardrails/{aiGuardrailId}/versions",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#private": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIGuardrailVersionRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Guardrail.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the AI Guardrail was last modified.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIGuardrailVersionResponse": {
+            "type": "structure",
+            "members": {
+                "aiGuardrail": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the AI Guardrail version.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the AI Guardrail version.</p>"
                     }
                 }
             },
@@ -3350,7 +4075,7 @@
                 "messageTemplateId": {
                     "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain\n      any qualifier.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3365,7 +4090,7 @@
                 "name": {
                     "target": "com.amazonaws.qconnect#AttachmentFileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attachment file being uploaded. The name should include the file extension.</p>",
+                        "smithy.api#documentation": "<p>The name of the attachment file being uploaded. The name should include the file\n      extension.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3536,7 +4261,7 @@
                 "messageTemplateId": {
                     "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain\n      any qualifier.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4284,7 +5009,7 @@
                 "messageTemplateId": {
                     "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain\n      any qualifier.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4461,6 +5186,148 @@
             }
         },
         "com.amazonaws.qconnect#DeleteAIAgentVersionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIGuardrail": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeleteAIGuardrailRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeleteAIGuardrailResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Q in Connect AI Guardrail.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiguardrails/{aiGuardrailId}",
+                    "method": "DELETE",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#private": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIGuardrailRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Guardrail. Can be either the ID or the ARN.\n      URLs cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIGuardrailResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIGuardrailVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeleteAIGuardrailVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeleteAIGuardrailVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete and Amazon Q in Connect AI Guardrail version.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiguardrails/{aiGuardrailId}/versions/{versionNumber}",
+                    "method": "DELETE",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#private": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIGuardrailVersionRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Guardrail.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the AI Guardrail version to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIGuardrailVersionResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -5022,7 +5889,7 @@
                 "messageTemplateId": {
                     "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain\n      any qualifier.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5706,6 +6573,82 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qconnect#GetAIGuardrail": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#GetAIGuardrailRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#GetAIGuardrailResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the Amazon Q in Connect AI Guardrail.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiguardrails/{aiGuardrailId}",
+                    "method": "GET"
+                },
+                "smithy.api#private": {},
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetAIGuardrailRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Guardrail.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetAIGuardrailResponse": {
+            "type": "structure",
+            "members": {
+                "aiGuardrail": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the AI Guardrail.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the AI Guardrail version (returned if an AI Guardrail version was\n      specified via use of a qualifier for the <code>aiGuardrailId</code> on the request). </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#GetAIPrompt": {
             "type": "operation",
             "input": {
@@ -6228,7 +7171,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the Amazon Q in Connect message template. The message template identifier can\n      contain an optional qualifier, for example,\n        <code>&lt;message-template-id&gt;:&lt;qualifier&gt;</code>, which is either an actual\n      version number or an Amazon Q Connect managed qualifier <code>$ACTIVE_VERSION</code> | <code>$LATEST</code>. If it is\n      not supplied, then <code>$LATEST</code> is assumed implicitly.</p>",
+                "smithy.api#documentation": "<p>Retrieves the Amazon Q in Connect message template. The message template identifier can\n      contain an optional qualifier, for example,\n        <code>&lt;message-template-id&gt;:&lt;qualifier&gt;</code>, which is either an actual\n      version number or an Amazon Q Connect managed qualifier <code>$ACTIVE_VERSION</code> |\n        <code>$LATEST</code>. If it is not supplied, then <code>$LATEST</code> is assumed\n      implicitly.</p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}",
                     "method": "GET"
@@ -6267,6 +7210,115 @@
                     "target": "com.amazonaws.qconnect#ExtendedMessageTemplateData",
                     "traits": {
                         "smithy.api#documentation": "<p>The message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetNextMessage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#GetNextMessageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#GetNextMessageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves next message on an Amazon Q in Connect session.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/sessions/{sessionId}/messages/next",
+                    "method": "GET"
+                },
+                "smithy.api#private": {},
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetNextMessageRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect session.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextMessageToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next message. Use the value returned in the SendMessage or previous\n      response in the next request to retrieve the next message.</p>",
+                        "smithy.api#httpQuery": "nextMessageToken",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetNextMessageResponse": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.qconnect#MessageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of message response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "response": {
+                    "target": "com.amazonaws.qconnect#MessageOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message response to the requested message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestMessageId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the submitted message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conversationState": {
+                    "target": "com.amazonaws.qconnect#ConversationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of current conversation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextMessageToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next message.</p>"
+                    }
+                },
+                "conversationSessionData": {
+                    "target": "com.amazonaws.qconnect#RuntimeSessionDataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conversation data stored on an Amazon Q in Connect Session.</p>"
                     }
                 }
             },
@@ -6532,6 +7584,613 @@
             },
             "traits": {
                 "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailContentFilterConfig": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.qconnect#GuardrailContentFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The harmful category that the content filter is applied to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputStrength": {
+                    "target": "com.amazonaws.qconnect#GuardrailFilterStrength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strength of the content filter to apply to prompts. As you increase the filter\n      strength, the likelihood of filtering harmful content increases and the probability of seeing\n      harmful content in your application reduces.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputStrength": {
+                    "target": "com.amazonaws.qconnect#GuardrailFilterStrength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strength of the content filter to apply to model responses. As you increase the filter\n      strength, the likelihood of filtering harmful content increases and the probability of seeing\n      harmful content in your application reduces.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains filter strengths for harmful content. AI Guardrail's support the following\n      content filters to detect and filter harmful user inputs and FM-generated outputs.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Hate</b>: Describes input prompts and model responses that\n          discriminate, criticize, insult, denounce, or dehumanize a person or group on the basis of\n          an identity (such as race, ethnicity, gender, religion, sexual orientation, ability, and\n          national origin).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Insults</b>: Describes input prompts and model responses that\n          includes demeaning, humiliating, mocking, insulting, or belittling language. This type of\n          language is also labeled as bullying.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Sexual</b>: Describes input prompts and model responses that\n          indicates sexual interest, activity, or arousal using direct or indirect references to\n          body parts, physical traits, or sex.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Violence</b>: Describes input prompts and model responses\n          that includes glorification of, or threats to inflict physical pain, hurt, or injury\n          toward a person, group, or thing.</p>\n            </li>\n         </ul>\n         <p>Content filtering depends on the confidence classification of user inputs and FM responses\n      across each of the four harmful categories. All input and output statements are classified\n      into one of four confidence levels (NONE, LOW, MEDIUM, HIGH) for each harmful category. For\n      example, if a statement is classified as <i>Hate</i> with HIGH confidence, the\n      likelihood of the statement representing hateful content is high. A single statement can be\n      classified across multiple categories with varying confidence levels. For example, a single\n      statement can be classified as <i>Hate</i> with HIGH confidence, <i>\n        Insults</i> with LOW confidence, <i>Sexual</i> with NONE confidence,\n      and <i>Violence</i> with MEDIUM confidence.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailContentFilterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Type of text to text filter in content policy",
+                "smithy.api#enum": [
+                    {
+                        "value": "SEXUAL",
+                        "name": "SEXUAL"
+                    },
+                    {
+                        "value": "VIOLENCE",
+                        "name": "VIOLENCE"
+                    },
+                    {
+                        "value": "HATE",
+                        "name": "HATE"
+                    },
+                    {
+                        "value": "INSULTS",
+                        "name": "INSULTS"
+                    },
+                    {
+                        "value": "MISCONDUCT",
+                        "name": "MISCONDUCT"
+                    },
+                    {
+                        "value": "PROMPT_ATTACK",
+                        "name": "PROMPT_ATTACK"
+                    }
+                ],
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailContentFiltersConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#GuardrailContentFilterConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of content filter configs in content policy.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailContextualGroundingFilterConfig": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.qconnect#GuardrailContextualGroundingFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter type for the AI Guardrail's contextual grounding filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "threshold": {
+                    "target": "com.amazonaws.qconnect#GuardrailContextualGroundingFilterThreshold",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The threshold details for the AI Guardrail's contextual grounding filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter configuration details for the AI Guardrail's contextual grounding\n      filter.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailContextualGroundingFilterThreshold": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#documentation": "The threshold for this filter.",
+                "smithy.api#range": {
+                    "min": 0
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailContextualGroundingFilterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Type of contextual grounding filter",
+                "smithy.api#enum": [
+                    {
+                        "value": "GROUNDING",
+                        "name": "GROUNDING"
+                    },
+                    {
+                        "value": "RELEVANCE",
+                        "name": "RELEVANCE"
+                    }
+                ],
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailContextualGroundingFiltersConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#GuardrailContextualGroundingFilterConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of contextual grounding filter configs.",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailFilterStrength": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Strength for filters",
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "LOW",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "MEDIUM",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    }
+                ],
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailManagedWordListsConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#GuardrailManagedWordsConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "A config for the list of managed words."
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailManagedWordsConfig": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.qconnect#GuardrailManagedWordsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed word type to configure for the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The managed word list to configure for the AI Guardrail.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailManagedWordsType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Options for managed words.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PROFANITY",
+                        "name": "PROFANITY"
+                    }
+                ],
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailPiiEntitiesConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#GuardrailPiiEntityConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of entities.",
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailPiiEntityConfig": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.qconnect#GuardrailPiiEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configure AI Guardrail type when the PII entity is detected.</p>\n         <p>The following PIIs are used to block or mask sensitive information:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>General</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>ADDRESS</b>\n                     </p>\n                     <p>A physical address, such as \"100 Main Street, Anytown, USA\" or \"Suite #12,\n              Building 123\". An address can include information such as the street, building,\n              location, city, state, country, county, zip code, precinct, and neighborhood. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AGE</b>\n                     </p>\n                     <p>An individual's age, including the quantity and unit of time. For example, in the\n              phrase \"I am 40 years old,\" Guarrails recognizes \"40 years\" as an age. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>NAME</b>\n                     </p>\n                     <p>An individual's name. This entity type does not include titles, such as Dr., Mr.,\n              Mrs., or Miss. AI Guardrail doesn't apply this entity type to names that are part of\n              organizations or addresses. For example, AI Guardrail recognizes the \"John Doe\n              Organization\" as an organization, and it recognizes \"Jane Doe Street\" as an address.\n            </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>EMAIL</b>\n                     </p>\n                     <p>An email address, such as <i>marymajor@email.com</i>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>PHONE</b>\n                     </p>\n                     <p>A phone number. This entity type also includes fax and pager numbers. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>USERNAME</b>\n                     </p>\n                     <p>A user name that identifies an account, such as a login name, screen name, nick\n              name, or handle. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>PASSWORD</b>\n                     </p>\n                     <p>An alphanumeric string that is used as a password, such as \"*<i>\n                very20special#pass*</i>\". </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>DRIVER_ID</b>\n                     </p>\n                     <p>The number assigned to a driver's license, which is an official document\n              permitting an individual to operate one or more motorized vehicles on a public road. A\n              driver's license number consists of alphanumeric characters. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>LICENSE_PLATE</b>\n                     </p>\n                     <p>A license plate for a vehicle is issued by the state or country where the vehicle\n              is registered. The format for passenger vehicles is typically five to eight digits,\n              consisting of upper-case letters and numbers. The format varies depending on the\n              location of the issuing state or country. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>VEHICLE_IDENTIFICATION_NUMBER</b>\n                     </p>\n                     <p>A Vehicle Identification Number (VIN) uniquely identifies a vehicle. VIN content\n              and format are defined in the <i>ISO 3779</i> specification. Each\n              country has specific codes and formats for VINs. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Finance</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>REDIT_DEBIT_CARD_CVV</b>\n                     </p>\n                     <p>A three-digit card verification code (CVV) that is present on VISA, MasterCard,\n              and Discover credit and debit cards. For American Express credit or debit cards, the\n              CVV is a four-digit numeric code. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CREDIT_DEBIT_CARD_EXPIRY</b>\n                     </p>\n                     <p>The expiration date for a credit or debit card. This number is usually four digits\n              long and is often formatted as <i>month/year</i> or\n                <i>MM/YY</i>. AI Guardrail recognizes expiration dates such as\n                <i>01/21</i>, <i>01/2021</i>, and <i>Jan\n                2021</i>. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CREDIT_DEBIT_CARD_NUMBER</b>\n                     </p>\n                     <p>The number for a credit or debit card. These numbers can vary from 13 to 16 digits\n              in length. However, Amazon Comprehend also recognizes credit or debit card numbers\n              when only the last four digits are present. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>PIN</b>\n                     </p>\n                     <p>A four-digit personal identification number (PIN) with which you can access your\n              bank account. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>INTERNATIONAL_BANK_ACCOUNT_NUMBER</b>\n                     </p>\n                     <p>An International Bank Account Number has specific formats in each country. For\n              more information, see <a href=\"https://www.iban.com/structure\">\n                www.iban.com/structure</a>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>SWIFT_CODE</b>\n                     </p>\n                     <p>A SWIFT code is a standard format of Bank Identifier Code (BIC) used to specify a\n              particular bank or branch. Banks use these codes for money transfers such as\n              international wire transfers.</p>\n                     <p>SWIFT codes consist of eight or 11 characters. The 11-digit codes refer to\n              specific branches, while eight-digit codes (or 11-digit codes ending in 'XXX') refer\n              to the head or primary office.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>IT</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>IP_ADDRESS</b>\n                     </p>\n                     <p>An IPv4 address, such as <i>198.51.100.0</i>. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>MAC_ADDRESS</b>\n                     </p>\n                     <p>A <i>media access control</i> (MAC) address is a unique identifier\n              assigned to a network interface controller (NIC). </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>URL</b>\n                     </p>\n                     <p>A web address, such as <i>www.example.com</i>. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AWS_ACCESS_KEY</b>\n                     </p>\n                     <p>A unique identifier that's associated with a secret access key; you use the access\n              key ID and secret access key to sign programmatic Amazon Web Services requests\n              cryptographically. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AWS_SECRET_KEY</b>\n                     </p>\n                     <p>A unique identifier that's associated with an access key. You use the access key\n              ID and secret access key to sign programmatic Amazon Web Services requests\n              cryptographically. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>USA specific</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>US_BANK_ACCOUNT_NUMBER</b>\n                     </p>\n                     <p>A US bank account number, which is typically 10 to 12 digits long. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>US_BANK_ROUTING_NUMBER</b>\n                     </p>\n                     <p>A US bank account routing number. These are typically nine digits long, </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER</b>\n                     </p>\n                     <p>A US Individual Taxpayer Identification Number (ITIN) is a nine-digit number that\n              starts with a \"9\" and contain a \"7\" or \"8\" as the fourth digit. An ITIN can be\n              formatted with a space or a dash after the third and forth digits. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>US_PASSPORT_NUMBER</b>\n                     </p>\n                     <p>A US passport number. Passport numbers range from six to nine alphanumeric\n              characters. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>US_SOCIAL_SECURITY_NUMBER</b>\n                     </p>\n                     <p>A US Social Security Number (SSN) is a nine-digit number that is issued to US\n              citizens, permanent residents, and temporary working residents. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Canada specific</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>CA_HEALTH_NUMBER</b>\n                     </p>\n                     <p>A Canadian Health Service Number is a 10-digit unique identifier, required for\n              individuals to access healthcare benefits. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CA_SOCIAL_INSURANCE_NUMBER</b>\n                     </p>\n                     <p>A Canadian Social Insurance Number (SIN) is a nine-digit unique identifier,\n              required for individuals to access government programs and benefits.</p>\n                     <p>The SIN is formatted as three groups of three digits, such as <i>\n                123-456-789</i>. A SIN can be validated through a simple check-digit process\n              called the <a href=\"https://www.wikipedia.org/wiki/Luhn_algorithm\">Luhn\n                algorithm</a> .</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>UK Specific</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>UK_NATIONAL_HEALTH_SERVICE_NUMBER</b>\n                     </p>\n                     <p>A UK National Health Service Number is a 10-17 digit number, such as <i>485\n                555 3456</i>. The current system formats the 10-digit number with spaces\n              after the third and sixth digits. The final digit is an error-detecting\n              checksum.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>UK_NATIONAL_INSURANCE_NUMBER</b>\n                     </p>\n                     <p>A UK National Insurance Number (NINO) provides individuals with access to National\n              Insurance (social security) benefits. It is also used for some purposes in the UK tax\n              system.</p>\n                     <p>The number is nine digits long and starts with two letters, followed by six\n              numbers and one letter. A NINO can be formatted with a space or a dash after the two\n              letters and after the second, forth, and sixth digits.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER</b>\n                     </p>\n                     <p>A UK Unique Taxpayer Reference (UTR) is a 10-digit number that identifies a\n              taxpayer or a business. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Custom</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Regex filter</b> - You can use a regular expressions to\n              define patterns for an AI Guardrail to recognize and act upon such as serial number,\n              booking ID etc..</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.qconnect#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configure AI Guardrail's action when the PII entity is detected.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The PII entity to configure for the AI Guardrail.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailPiiEntityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The currently supported PII entities",
+                "smithy.api#enum": [
+                    {
+                        "value": "ADDRESS",
+                        "name": "ADDRESS"
+                    },
+                    {
+                        "value": "AGE",
+                        "name": "AGE"
+                    },
+                    {
+                        "value": "AWS_ACCESS_KEY",
+                        "name": "AWS_ACCESS_KEY"
+                    },
+                    {
+                        "value": "AWS_SECRET_KEY",
+                        "name": "AWS_SECRET_KEY"
+                    },
+                    {
+                        "value": "CA_HEALTH_NUMBER",
+                        "name": "CA_HEALTH_NUMBER"
+                    },
+                    {
+                        "value": "CA_SOCIAL_INSURANCE_NUMBER",
+                        "name": "CA_SOCIAL_INSURANCE_NUMBER"
+                    },
+                    {
+                        "value": "CREDIT_DEBIT_CARD_CVV",
+                        "name": "CREDIT_DEBIT_CARD_CVV"
+                    },
+                    {
+                        "value": "CREDIT_DEBIT_CARD_EXPIRY",
+                        "name": "CREDIT_DEBIT_CARD_EXPIRY"
+                    },
+                    {
+                        "value": "CREDIT_DEBIT_CARD_NUMBER",
+                        "name": "CREDIT_DEBIT_CARD_NUMBER"
+                    },
+                    {
+                        "value": "DRIVER_ID",
+                        "name": "DRIVER_ID"
+                    },
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
+                    },
+                    {
+                        "value": "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+                        "name": "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+                    },
+                    {
+                        "value": "IP_ADDRESS",
+                        "name": "IP_ADDRESS"
+                    },
+                    {
+                        "value": "LICENSE_PLATE",
+                        "name": "LICENSE_PLATE"
+                    },
+                    {
+                        "value": "MAC_ADDRESS",
+                        "name": "MAC_ADDRESS"
+                    },
+                    {
+                        "value": "NAME",
+                        "name": "NAME"
+                    },
+                    {
+                        "value": "PASSWORD",
+                        "name": "PASSWORD"
+                    },
+                    {
+                        "value": "PHONE",
+                        "name": "PHONE"
+                    },
+                    {
+                        "value": "PIN",
+                        "name": "PIN"
+                    },
+                    {
+                        "value": "SWIFT_CODE",
+                        "name": "SWIFT_CODE"
+                    },
+                    {
+                        "value": "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+                        "name": "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+                    },
+                    {
+                        "value": "UK_NATIONAL_INSURANCE_NUMBER",
+                        "name": "UK_NATIONAL_INSURANCE_NUMBER"
+                    },
+                    {
+                        "value": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+                        "name": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+                    },
+                    {
+                        "value": "URL",
+                        "name": "URL"
+                    },
+                    {
+                        "value": "USERNAME",
+                        "name": "USERNAME"
+                    },
+                    {
+                        "value": "US_BANK_ACCOUNT_NUMBER",
+                        "name": "US_BANK_ACCOUNT_NUMBER"
+                    },
+                    {
+                        "value": "US_BANK_ROUTING_NUMBER",
+                        "name": "US_BANK_ROUTING_NUMBER"
+                    },
+                    {
+                        "value": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+                        "name": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+                    },
+                    {
+                        "value": "US_PASSPORT_NUMBER",
+                        "name": "US_PASSPORT_NUMBER"
+                    },
+                    {
+                        "value": "US_SOCIAL_SECURITY_NUMBER",
+                        "name": "US_SOCIAL_SECURITY_NUMBER"
+                    },
+                    {
+                        "value": "VEHICLE_IDENTIFICATION_NUMBER",
+                        "name": "VEHICLE_IDENTIFICATION_NUMBER"
+                    }
+                ],
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailRegexConfig": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#GuardrailRegexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the regular expression to configure for the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#GuardrailRegexDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the regular expression to configure for the AI Guardrail.</p>"
+                    }
+                },
+                "pattern": {
+                    "target": "com.amazonaws.qconnect#GuardrailRegexPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expression pattern to configure for the AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.qconnect#GuardrailSensitiveInformationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Guardrail action to configure when matching regular expression is detected.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The regular expression to configure for the AI Guardrail.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailRegexDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The regex description.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailRegexName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The regex name.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailRegexPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The regex pattern.",
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailRegexesConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#GuardrailRegexConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of regex.",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailSensitiveInformationAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Options for sensitive information action.",
+                "smithy.api#enum": [
+                    {
+                        "value": "BLOCK",
+                        "name": "BLOCK"
+                    },
+                    {
+                        "value": "ANONYMIZE",
+                        "name": "ANONYMIZE"
+                    }
+                ],
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailTopicConfig": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#GuardrailTopicName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the topic to deny.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "definition": {
+                    "target": "com.amazonaws.qconnect#GuardrailTopicDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A definition of the topic to deny.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "examples": {
+                    "target": "com.amazonaws.qconnect#GuardrailTopicExamples",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of prompts, each of which is an example of a prompt that can be categorized as\n      belonging to the topic.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qconnect#GuardrailTopicType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies to deny the topic.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about topics for the AI Guardrail to identify and deny.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailTopicDefinition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Definition of topic in topic policy",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailTopicExample": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Text example in topic policy",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailTopicExamples": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#GuardrailTopicExample"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of text examples",
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailTopicName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Name of topic in topic policy",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-_ !?.]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailTopicType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Type of topic in a policy",
+                "smithy.api#enum": [
+                    {
+                        "value": "DENY",
+                        "name": "DENY"
+                    }
+                ],
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailTopicsConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#GuardrailTopicConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of topic configs in topic policy.",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailWordConfig": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.qconnect#GuardrailWordText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Text of the word configured for the AI Guardrail to block.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A word to configure for the AI Guardrail.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailWordText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The custom word text.",
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailWordsConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#GuardrailWordConfig"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of custom word configs.",
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.qconnect#Headers": {
@@ -7478,6 +9137,192 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qconnect#ListAIGuardrailVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListAIGuardrailVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListAIGuardrailVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists AI Guardrail versions.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiguardrails/{aiGuardrailId}/versions",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "aiGuardrailVersionSummaries"
+                },
+                "smithy.api#private": {},
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIGuardrailVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Guardrail for which versions are to be\n      listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIGuardrailVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "aiGuardrailVersionSummaries": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailVersionSummariesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summaries of the AI Guardrail versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIGuardrails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListAIGuardrailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListAIGuardrailsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the AI Guardrails available on the Amazon Q in Connect assistant.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiguardrails",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "aiGuardrailSummaries"
+                },
+                "smithy.api#private": {},
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIGuardrailsRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIGuardrailsResponse": {
+            "type": "structure",
+            "members": {
+                "aiGuardrailSummaries": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailSummariesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summaries of the AI Guardrails.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#ListAIPromptVersions": {
             "type": "operation",
             "input": {
@@ -8196,7 +10041,7 @@
                 "messageTemplateId": {
                     "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain\n      any qualifier.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8322,6 +10167,100 @@
                     "target": "com.amazonaws.qconnect#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListMessages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListMessagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListMessagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists messages on an Amazon Q in Connect session.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/sessions/{sessionId}/messages",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "messages"
+                },
+                "smithy.api#private": {},
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListMessagesRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect session.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListMessagesResponse": {
+            "type": "structure",
+            "members": {
+                "messages": {
+                    "target": "com.amazonaws.qconnect#MessageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message information.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>"
                     }
                 }
             },
@@ -8492,6 +10431,12 @@
                         "smithy.api#documentation": "<p>The AI Prompt identifier for the Answer Generation prompt used by the MANUAL_SEARCH AI\n      Agent.</p>"
                     }
                 },
+                "answerGenerationAIGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Guardrail identifier for the Answer Generation guardrail used by the MANUAL_SEARCH\n      AI Agent.</p>"
+                    }
+                },
                 "associationConfigurations": {
                     "target": "com.amazonaws.qconnect#AssociationConfigurationList",
                     "traits": {
@@ -8510,6 +10455,77 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.qconnect#MessageData": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.qconnect#TextMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message data in text type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The message data.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageInput": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.qconnect#MessageData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message input value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The message input.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageOutput"
+            }
+        },
+        "com.amazonaws.qconnect#MessageOutput": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.qconnect#MessageData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a message data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "participant": {
+                    "target": "com.amazonaws.qconnect#Participant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant of a message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of a message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The message output.</p>"
             }
         },
         "com.amazonaws.qconnect#MessageTemplate": {
@@ -8583,7 +10599,7 @@
                 "name": {
                     "target": "com.amazonaws.qconnect#AttachmentFileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attachment file being uploaded. The name should include the file extension.</p>",
+                        "smithy.api#documentation": "<p>The name of the attachment file being uploaded. The name should include the file\n      extension.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9411,6 +11427,17 @@
                 "target": "com.amazonaws.qconnect#MessageTemplateVersionSummary"
             }
         },
+        "com.amazonaws.qconnect#MessageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TEXT",
+                        "name": "TEXT"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#Name": {
             "type": "string",
             "traits": {
@@ -9680,6 +11707,25 @@
                     {
                         "value": "BEDROCK_FOUNDATION_MODEL",
                         "name": "BEDROCK_FOUNDATION_MODEL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#Participant": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CUSTOMER",
+                        "name": "CUSTOMER"
+                    },
+                    {
+                        "value": "AGENT",
+                        "name": "AGENT"
+                    },
+                    {
+                        "value": "BOT",
+                        "name": "BOT"
                     }
                 ]
             }
@@ -11914,6 +13960,77 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#SelfServiceAIAgentConfiguration": {
+            "type": "structure",
+            "members": {
+                "selfServicePreProcessingAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Prompt identifier for the Self Service Pre-Processing prompt used by the\n      SELF_SERVICE AI Agent</p>"
+                    }
+                },
+                "selfServiceAnswerGenerationAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Prompt identifier for the Self Service Answer Generation prompt used by the\n      SELF_SERVICE AI Agent</p>"
+                    }
+                },
+                "selfServiceAIGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Guardrail identifier used by the SELF_SERVICE AI Agent.</p>"
+                    }
+                },
+                "associationConfigurations": {
+                    "target": "com.amazonaws.qconnect#AssociationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association configurations for overriding behavior on this AI Agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for AI Agents of type SELF_SERVICE.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#SelfServiceConversationHistory": {
+            "type": "structure",
+            "members": {
+                "turnNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of turn of the conversation history data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputTranscript": {
+                    "target": "com.amazonaws.qconnect#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input transcript of the conversation history data.</p>"
+                    }
+                },
+                "botResponse": {
+                    "target": "com.amazonaws.qconnect#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot response of the conversation history data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conversation history data to included in conversation context data before the the\n      Amazon Q in Connect session..</p>"
+            }
+        },
+        "com.amazonaws.qconnect#SelfServiceConversationHistoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#SelfServiceConversationHistory"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.qconnect#SemanticChunkingConfiguration": {
             "type": "structure",
             "members": {
@@ -11952,6 +14069,117 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Settings for semantic document chunking for a data source. Semantic chunking splits a\n      document into smaller documents based on groups of similar content derived from the text with\n      natural language processing.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#SendMessage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#SendMessageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#SendMessageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Submits a message to the Amazon Q in Connect session.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/sessions/{sessionId}/message",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#private": {}
+            }
+        },
+        "com.amazonaws.qconnect#SendMessageRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect session.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qconnect#MessageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.qconnect#MessageInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message data to submit to the Amazon Q in Connect session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conversationContext": {
+                    "target": "com.amazonaws.qconnect#ConversationContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conversation context before the Amazon Q in Connect session.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field.For more information about\n      idempotency, see Making retries safe with idempotent APIs.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#SendMessageResponse": {
+            "type": "structure",
+            "members": {
+                "requestMessageId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the submitted message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextMessageToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next message, used by GetNextMessage.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#SensitiveString": {
@@ -12007,6 +14235,15 @@
                 "target": "com.amazonaws.qconnect#UpdateSession"
             },
             "operations": [
+                {
+                    "target": "com.amazonaws.qconnect#GetNextMessage"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ListMessages"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#SendMessage"
+                },
                 {
                     "target": "com.amazonaws.qconnect#UpdateSessionData"
                 }
@@ -12496,7 +14733,7 @@
                 "address": {
                     "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer's phone number if used with <code>customerEndpoint</code>, or the number the customer\n      dialed to call your contact center if used with <code>systemEndpoint</code>.</p>"
+                        "smithy.api#documentation": "<p>The customer's phone number if used with <code>customerEndpoint</code>, or the number the\n      customer dialed to call your contact center if used with <code>systemEndpoint</code>.</p>"
                     }
                 }
             },
@@ -12694,6 +14931,24 @@
                 "smithy.api#documentation": "<p>The configuration for a prompt template that supports full textual prompt configuration\n      using a YAML prompt.</p>"
             }
         },
+        "com.amazonaws.qconnect#TextMessage": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.qconnect#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the message data in text type.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The message data in text type.</p>"
+            }
+        },
         "com.amazonaws.qconnect#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -12875,6 +15130,143 @@
                     "target": "com.amazonaws.qconnect#AIAgentData",
                     "traits": {
                         "smithy.api#documentation": "<p>The data of the updated Amazon Q in Connect AI Agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAIGuardrail": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#UpdateAIGuardrailRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#UpdateAIGuardrailResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an AI Guardrail.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiguardrails/{aiGuardrailId}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#private": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAIGuardrailRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiGuardrailId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Guardrail.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the Amazon Q in Connect AI Guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "blockedInputMessaging": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailBlockedMessaging",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message to return when the AI Guardrail blocks a prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "blockedOutputsMessaging": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailBlockedMessaging",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message to return when the AI Guardrail blocks a model response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the AI Guardrail.</p>"
+                    }
+                },
+                "topicPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailTopicPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The topic policies to configure for the AI Guardrail.</p>"
+                    }
+                },
+                "contentPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailContentPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content filter policies to configure for the AI Guardrail.</p>"
+                    }
+                },
+                "wordPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailWordPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The word policy you configure for the AI Guardrail.</p>"
+                    }
+                },
+                "sensitiveInformationPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailSensitiveInformationPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitive information policy to configure for the AI Guardrail.</p>"
+                    }
+                },
+                "contextualGroundingPolicyConfig": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailContextualGroundingPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual grounding policy configuration used to create an AI Guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAIGuardrailResponse": {
+            "type": "structure",
+            "members": {
+                "aiGuardrail": {
+                    "target": "com.amazonaws.qconnect#AIGuardrailData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the updated Amazon Q in Connect AI Guardrail.</p>"
                     }
                 }
             },
@@ -13287,7 +15679,7 @@
                 "messageTemplateId": {
                     "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain\n      any qualifier.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13340,7 +15732,7 @@
                 "messageTemplateId": {
                     "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain\n      any qualifier.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

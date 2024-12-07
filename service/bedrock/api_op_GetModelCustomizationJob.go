@@ -54,14 +54,6 @@ type GetModelCustomizationJobOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The hyperparameter values for the job. For details on the format for different
-	// models, see [Custom model hyperparameters].
-	//
-	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
-	//
-	// This member is required.
-	HyperParameters map[string]string
-
 	// The Amazon Resource Name (ARN) of the customization job.
 	//
 	// This member is required.
@@ -100,6 +92,9 @@ type GetModelCustomizationJobOutput struct {
 	// The token that you specified in the CreateCustomizationJob request.
 	ClientRequestToken *string
 
+	// The customization configuration for the model customization job.
+	CustomizationConfig types.CustomizationConfig
+
 	// The type of model customization.
 	CustomizationType types.CustomizationType
 
@@ -108,6 +103,12 @@ type GetModelCustomizationJobOutput struct {
 
 	// Information about why the job failed.
 	FailureMessage *string
+
+	// The hyperparameter values for the job. For details on the format for different
+	// models, see [Custom model hyperparameters].
+	//
+	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
+	HyperParameters map[string]string
 
 	// Time that the resource was last modified.
 	LastModifiedTime *time.Time

@@ -671,8 +671,9 @@ type IndexEdition string
 
 // Enum values for IndexEdition
 const (
-	IndexEditionDeveloperEdition  IndexEdition = "DEVELOPER_EDITION"
-	IndexEditionEnterpriseEdition IndexEdition = "ENTERPRISE_EDITION"
+	IndexEditionDeveloperEdition       IndexEdition = "DEVELOPER_EDITION"
+	IndexEditionEnterpriseEdition      IndexEdition = "ENTERPRISE_EDITION"
+	IndexEditionGenAiEnterpriseEdition IndexEdition = "GEN_AI_ENTERPRISE_EDITION"
 )
 
 // Values returns all known values for IndexEdition. Note that this can be
@@ -683,6 +684,7 @@ func (IndexEdition) Values() []IndexEdition {
 	return []IndexEdition{
 		"DEVELOPER_EDITION",
 		"ENTERPRISE_EDITION",
+		"GEN_AI_ENTERPRISE_EDITION",
 	}
 }
 

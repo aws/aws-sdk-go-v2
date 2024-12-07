@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,10 +67,12 @@ type PutQueryDefinitionInput struct {
 	ClientToken *string
 
 	// Use this parameter to include specific log groups as part of your query
-	// definition.
+	// definition. If your query uses the OpenSearch Service query language, you
+	// specify the log group names inside the querystring instead of here.
 	//
-	// If you are updating a query definition and you omit this parameter, then the
-	// updated definition will contain no log groups.
+	// If you are updating an existing query definition for the Logs Insights QL or
+	// OpenSearch Service PPL and you omit this parameter, then the updated definition
+	// will contain no log groups.
 	LogGroupNames []string
 
 	// If you are updating a query definition, use this parameter to specify the ID of
@@ -82,6 +85,13 @@ type PutQueryDefinitionInput struct {
 	//
 	// [DescribeQueryDefinitions]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
 	QueryDefinitionId *string
+
+	// Specify the query language to use for this query. The options are Logs Insights
+	// QL, OpenSearch PPL, and OpenSearch SQL. For more information about the query
+	// languages that CloudWatch Logs supports, see [Supported query languages].
+	//
+	// [Supported query languages]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_Languages.html
+	QueryLanguage types.QueryLanguage
 
 	noSmithyDocumentSerde
 }

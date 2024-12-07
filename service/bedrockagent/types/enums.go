@@ -65,6 +65,27 @@ func (AgentAliasStatus) Values() []AgentAliasStatus {
 	}
 }
 
+type AgentCollaboration string
+
+// Enum values for AgentCollaboration
+const (
+	AgentCollaborationSupervisor       AgentCollaboration = "SUPERVISOR"
+	AgentCollaborationSupervisorRouter AgentCollaboration = "SUPERVISOR_ROUTER"
+	AgentCollaborationDisabled         AgentCollaboration = "DISABLED"
+)
+
+// Values returns all known values for AgentCollaboration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentCollaboration) Values() []AgentCollaboration {
+	return []AgentCollaboration{
+		"SUPERVISOR",
+		"SUPERVISOR_ROUTER",
+		"DISABLED",
+	}
+}
+
 type AgentStatus string
 
 // Enum values for AgentStatus
@@ -155,6 +176,25 @@ func (ConfluenceHostType) Values() []ConfluenceHostType {
 	}
 }
 
+type ContentDataSourceType string
+
+// Enum values for ContentDataSourceType
+const (
+	ContentDataSourceTypeCustom ContentDataSourceType = "CUSTOM"
+	ContentDataSourceTypeS3     ContentDataSourceType = "S3"
+)
+
+// Values returns all known values for ContentDataSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentDataSourceType) Values() []ContentDataSourceType {
+	return []ContentDataSourceType{
+		"CUSTOM",
+		"S3",
+	}
+}
+
 type ConversationRole string
 
 // Enum values for ConversationRole
@@ -228,6 +268,25 @@ func (CustomControlMethod) Values() []CustomControlMethod {
 	}
 }
 
+type CustomSourceType string
+
+// Enum values for CustomSourceType
+const (
+	CustomSourceTypeInLine     CustomSourceType = "IN_LINE"
+	CustomSourceTypeS3Location CustomSourceType = "S3_LOCATION"
+)
+
+// Values returns all known values for CustomSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomSourceType) Values() []CustomSourceType {
+	return []CustomSourceType{
+		"IN_LINE",
+		"S3_LOCATION",
+	}
+}
+
 type DataDeletionPolicy string
 
 // Enum values for DataDeletionPolicy
@@ -272,11 +331,13 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeS3         DataSourceType = "S3"
-	DataSourceTypeWeb        DataSourceType = "WEB"
-	DataSourceTypeConfluence DataSourceType = "CONFLUENCE"
-	DataSourceTypeSalesforce DataSourceType = "SALESFORCE"
-	DataSourceTypeSharepoint DataSourceType = "SHAREPOINT"
+	DataSourceTypeS3               DataSourceType = "S3"
+	DataSourceTypeWeb              DataSourceType = "WEB"
+	DataSourceTypeConfluence       DataSourceType = "CONFLUENCE"
+	DataSourceTypeSalesforce       DataSourceType = "SALESFORCE"
+	DataSourceTypeSharepoint       DataSourceType = "SHAREPOINT"
+	DataSourceTypeCustom           DataSourceType = "CUSTOM"
+	DataSourceTypeRedshiftMetadata DataSourceType = "REDSHIFT_METADATA"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -290,6 +351,66 @@ func (DataSourceType) Values() []DataSourceType {
 		"CONFLUENCE",
 		"SALESFORCE",
 		"SHAREPOINT",
+		"CUSTOM",
+		"REDSHIFT_METADATA",
+	}
+}
+
+type DocumentStatus string
+
+// Enum values for DocumentStatus
+const (
+	DocumentStatusIndexed                  DocumentStatus = "INDEXED"
+	DocumentStatusPartiallyIndexed         DocumentStatus = "PARTIALLY_INDEXED"
+	DocumentStatusPending                  DocumentStatus = "PENDING"
+	DocumentStatusFailed                   DocumentStatus = "FAILED"
+	DocumentStatusMetadataPartiallyIndexed DocumentStatus = "METADATA_PARTIALLY_INDEXED"
+	DocumentStatusMetadataUpdateFailed     DocumentStatus = "METADATA_UPDATE_FAILED"
+	DocumentStatusIgnored                  DocumentStatus = "IGNORED"
+	DocumentStatusNotFound                 DocumentStatus = "NOT_FOUND"
+	DocumentStatusStarting                 DocumentStatus = "STARTING"
+	DocumentStatusInProgress               DocumentStatus = "IN_PROGRESS"
+	DocumentStatusDeleting                 DocumentStatus = "DELETING"
+	DocumentStatusDeleteInProgress         DocumentStatus = "DELETE_IN_PROGRESS"
+)
+
+// Values returns all known values for DocumentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentStatus) Values() []DocumentStatus {
+	return []DocumentStatus{
+		"INDEXED",
+		"PARTIALLY_INDEXED",
+		"PENDING",
+		"FAILED",
+		"METADATA_PARTIALLY_INDEXED",
+		"METADATA_UPDATE_FAILED",
+		"IGNORED",
+		"NOT_FOUND",
+		"STARTING",
+		"IN_PROGRESS",
+		"DELETING",
+		"DELETE_IN_PROGRESS",
+	}
+}
+
+type EmbeddingDataType string
+
+// Enum values for EmbeddingDataType
+const (
+	EmbeddingDataTypeFloat32 EmbeddingDataType = "FLOAT32"
+	EmbeddingDataTypeBinary  EmbeddingDataType = "BINARY"
+)
+
+// Values returns all known values for EmbeddingDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddingDataType) Values() []EmbeddingDataType {
+	return []EmbeddingDataType{
+		"FLOAT32",
+		"BINARY",
 	}
 }
 
@@ -483,6 +604,25 @@ func (FlowValidationType) Values() []FlowValidationType {
 	}
 }
 
+type IncludeExclude string
+
+// Enum values for IncludeExclude
+const (
+	IncludeExcludeInclude IncludeExclude = "INCLUDE"
+	IncludeExcludeExclude IncludeExclude = "EXCLUDE"
+)
+
+// Values returns all known values for IncludeExclude. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludeExclude) Values() []IncludeExclude {
+	return []IncludeExclude{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type IngestionJobFilterAttribute string
 
 // Enum values for IngestionJobFilterAttribute
@@ -563,6 +703,25 @@ func (IngestionJobStatus) Values() []IngestionJobStatus {
 	}
 }
 
+type InlineContentType string
+
+// Enum values for InlineContentType
+const (
+	InlineContentTypeByte InlineContentType = "BYTE"
+	InlineContentTypeText InlineContentType = "TEXT"
+)
+
+// Values returns all known values for InlineContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InlineContentType) Values() []InlineContentType {
+	return []InlineContentType{
+		"BYTE",
+		"TEXT",
+	}
+}
+
 type KnowledgeBaseState string
 
 // Enum values for KnowledgeBaseState
@@ -639,6 +798,8 @@ type KnowledgeBaseType string
 // Enum values for KnowledgeBaseType
 const (
 	KnowledgeBaseTypeVector KnowledgeBaseType = "VECTOR"
+	KnowledgeBaseTypeKendra KnowledgeBaseType = "KENDRA"
+	KnowledgeBaseTypeSql    KnowledgeBaseType = "SQL"
 )
 
 // Values returns all known values for KnowledgeBaseType. Note that this can be
@@ -648,6 +809,8 @@ const (
 func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 	return []KnowledgeBaseType{
 		"VECTOR",
+		"KENDRA",
+		"SQL",
 	}
 }
 
@@ -668,11 +831,90 @@ func (MemoryType) Values() []MemoryType {
 	}
 }
 
+type MetadataSourceType string
+
+// Enum values for MetadataSourceType
+const (
+	MetadataSourceTypeInLineAttribute MetadataSourceType = "IN_LINE_ATTRIBUTE"
+	MetadataSourceTypeS3Location      MetadataSourceType = "S3_LOCATION"
+)
+
+// Values returns all known values for MetadataSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataSourceType) Values() []MetadataSourceType {
+	return []MetadataSourceType{
+		"IN_LINE_ATTRIBUTE",
+		"S3_LOCATION",
+	}
+}
+
+type MetadataValueType string
+
+// Enum values for MetadataValueType
+const (
+	MetadataValueTypeBoolean    MetadataValueType = "BOOLEAN"
+	MetadataValueTypeNumber     MetadataValueType = "NUMBER"
+	MetadataValueTypeString     MetadataValueType = "STRING"
+	MetadataValueTypeStringList MetadataValueType = "STRING_LIST"
+)
+
+// Values returns all known values for MetadataValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataValueType) Values() []MetadataValueType {
+	return []MetadataValueType{
+		"BOOLEAN",
+		"NUMBER",
+		"STRING",
+		"STRING_LIST",
+	}
+}
+
+type OrchestrationType string
+
+// Enum values for OrchestrationType
+const (
+	OrchestrationTypeDefault             OrchestrationType = "DEFAULT"
+	OrchestrationTypeCustomOrchestration OrchestrationType = "CUSTOM_ORCHESTRATION"
+)
+
+// Values returns all known values for OrchestrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrchestrationType) Values() []OrchestrationType {
+	return []OrchestrationType{
+		"DEFAULT",
+		"CUSTOM_ORCHESTRATION",
+	}
+}
+
+type ParsingModality string
+
+// Enum values for ParsingModality
+const (
+	ParsingModalityMultimodal ParsingModality = "MULTIMODAL"
+)
+
+// Values returns all known values for ParsingModality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParsingModality) Values() []ParsingModality {
+	return []ParsingModality{
+		"MULTIMODAL",
+	}
+}
+
 type ParsingStrategy string
 
 // Enum values for ParsingStrategy
 const (
 	ParsingStrategyBedrockFoundationModel ParsingStrategy = "BEDROCK_FOUNDATION_MODEL"
+	ParsingStrategyBedrockDataAutomation  ParsingStrategy = "BEDROCK_DATA_AUTOMATION"
 )
 
 // Values returns all known values for ParsingStrategy. Note that this can be
@@ -682,6 +924,7 @@ const (
 func (ParsingStrategy) Values() []ParsingStrategy {
 	return []ParsingStrategy{
 		"BEDROCK_FOUNDATION_MODEL",
+		"BEDROCK_DATA_AUTOMATION",
 	}
 }
 
@@ -743,6 +986,121 @@ func (PromptType) Values() []PromptType {
 		"ORCHESTRATION",
 		"POST_PROCESSING",
 		"KNOWLEDGE_BASE_RESPONSE_GENERATION",
+	}
+}
+
+type QueryEngineType string
+
+// Enum values for QueryEngineType
+const (
+	QueryEngineTypeRedshift QueryEngineType = "REDSHIFT"
+)
+
+// Values returns all known values for QueryEngineType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryEngineType) Values() []QueryEngineType {
+	return []QueryEngineType{
+		"REDSHIFT",
+	}
+}
+
+type RedshiftProvisionedAuthType string
+
+// Enum values for RedshiftProvisionedAuthType
+const (
+	RedshiftProvisionedAuthTypeIam              RedshiftProvisionedAuthType = "IAM"
+	RedshiftProvisionedAuthTypeUsernamePassword RedshiftProvisionedAuthType = "USERNAME_PASSWORD"
+	RedshiftProvisionedAuthTypeUsername         RedshiftProvisionedAuthType = "USERNAME"
+)
+
+// Values returns all known values for RedshiftProvisionedAuthType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedshiftProvisionedAuthType) Values() []RedshiftProvisionedAuthType {
+	return []RedshiftProvisionedAuthType{
+		"IAM",
+		"USERNAME_PASSWORD",
+		"USERNAME",
+	}
+}
+
+type RedshiftQueryEngineStorageType string
+
+// Enum values for RedshiftQueryEngineStorageType
+const (
+	RedshiftQueryEngineStorageTypeRedshift       RedshiftQueryEngineStorageType = "REDSHIFT"
+	RedshiftQueryEngineStorageTypeAwsDataCatalog RedshiftQueryEngineStorageType = "AWS_DATA_CATALOG"
+)
+
+// Values returns all known values for RedshiftQueryEngineStorageType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedshiftQueryEngineStorageType) Values() []RedshiftQueryEngineStorageType {
+	return []RedshiftQueryEngineStorageType{
+		"REDSHIFT",
+		"AWS_DATA_CATALOG",
+	}
+}
+
+type RedshiftQueryEngineType string
+
+// Enum values for RedshiftQueryEngineType
+const (
+	RedshiftQueryEngineTypeServerless  RedshiftQueryEngineType = "SERVERLESS"
+	RedshiftQueryEngineTypeProvisioned RedshiftQueryEngineType = "PROVISIONED"
+)
+
+// Values returns all known values for RedshiftQueryEngineType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedshiftQueryEngineType) Values() []RedshiftQueryEngineType {
+	return []RedshiftQueryEngineType{
+		"SERVERLESS",
+		"PROVISIONED",
+	}
+}
+
+type RedshiftServerlessAuthType string
+
+// Enum values for RedshiftServerlessAuthType
+const (
+	RedshiftServerlessAuthTypeIam              RedshiftServerlessAuthType = "IAM"
+	RedshiftServerlessAuthTypeUsernamePassword RedshiftServerlessAuthType = "USERNAME_PASSWORD"
+)
+
+// Values returns all known values for RedshiftServerlessAuthType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedshiftServerlessAuthType) Values() []RedshiftServerlessAuthType {
+	return []RedshiftServerlessAuthType{
+		"IAM",
+		"USERNAME_PASSWORD",
+	}
+}
+
+type RelayConversationHistory string
+
+// Enum values for RelayConversationHistory
+const (
+	RelayConversationHistoryToCollaborator RelayConversationHistory = "TO_COLLABORATOR"
+	RelayConversationHistoryDisabled       RelayConversationHistory = "DISABLED"
+)
+
+// Values returns all known values for RelayConversationHistory. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RelayConversationHistory) Values() []RelayConversationHistory {
+	return []RelayConversationHistory{
+		"TO_COLLABORATOR",
+		"DISABLED",
 	}
 }
 
@@ -849,6 +1207,24 @@ const (
 func (StepType) Values() []StepType {
 	return []StepType{
 		"POST_CHUNKING",
+	}
+}
+
+type SupplementalDataStorageLocationType string
+
+// Enum values for SupplementalDataStorageLocationType
+const (
+	SupplementalDataStorageLocationTypeS3 SupplementalDataStorageLocationType = "S3"
+)
+
+// Values returns all known values for SupplementalDataStorageLocationType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupplementalDataStorageLocationType) Values() []SupplementalDataStorageLocationType {
+	return []SupplementalDataStorageLocationType{
+		"S3",
 	}
 }
 

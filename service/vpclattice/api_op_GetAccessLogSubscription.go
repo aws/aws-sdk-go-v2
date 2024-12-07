@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -29,7 +30,7 @@ func (c *Client) GetAccessLogSubscription(ctx context.Context, params *GetAccess
 
 type GetAccessLogSubscriptionInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the access log subscription.
+	// The ID or ARN of the access log subscription.
 	//
 	// This member is required.
 	AccessLogSubscriptionIdentifier *string
@@ -44,8 +45,8 @@ type GetAccessLogSubscriptionOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The date and time that the access log subscription was created, specified in
-	// ISO-8601 format.
+	// The date and time that the access log subscription was created, in ISO-8601
+	// format.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -60,8 +61,8 @@ type GetAccessLogSubscriptionOutput struct {
 	// This member is required.
 	Id *string
 
-	// The date and time that the access log subscription was last updated, specified
-	// in ISO-8601 format.
+	// The date and time that the access log subscription was last updated, in
+	// ISO-8601 format.
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
@@ -75,6 +76,9 @@ type GetAccessLogSubscriptionOutput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	// The log type for the service network.
+	ServiceNetworkLogType types.ServiceNetworkLogType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

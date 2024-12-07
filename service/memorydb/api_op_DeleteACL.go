@@ -32,7 +32,7 @@ func (c *Client) DeleteACL(ctx context.Context, params *DeleteACLInput, optFns .
 
 type DeleteACLInput struct {
 
-	// The name of the Access Control List to delete
+	// The name of the Access Control List to delete.
 	//
 	// This member is required.
 	ACLName *string

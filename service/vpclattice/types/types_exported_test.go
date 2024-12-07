@@ -73,6 +73,32 @@ func ExamplePathMatchType_outputUsage() {
 var _ *string
 var _ *string
 
+func ExampleResourceConfigurationDefinition_outputUsage() {
+	var union types.ResourceConfigurationDefinition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ResourceConfigurationDefinitionMemberArnResource:
+		_ = v.Value // Value is types.ArnResource
+
+	case *types.ResourceConfigurationDefinitionMemberDnsResource:
+		_ = v.Value // Value is types.DnsResource
+
+	case *types.ResourceConfigurationDefinitionMemberIpResource:
+		_ = v.Value // Value is types.IpResource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DnsResource
+var _ *types.IpResource
+var _ *types.ArnResource
+
 func ExampleRuleAction_outputUsage() {
 	var union types.RuleAction
 	// type switches can be used to check the union value

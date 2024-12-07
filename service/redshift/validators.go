@@ -990,6 +990,26 @@ func (m *validateOpDeleteUsageLimit) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterNamespace struct {
+}
+
+func (*validateOpDeregisterNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeClusterParameters struct {
 }
 
@@ -1830,6 +1850,26 @@ func (m *validateOpRebootCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterNamespace struct {
+}
+
+func (*validateOpRegisterNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRejectDataShare struct {
 }
 
@@ -2226,6 +2266,10 @@ func addOpDeleteUsageLimitValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUsageLimit{}, middleware.After)
 }
 
+func addOpDeregisterNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterNamespace{}, middleware.After)
+}
+
 func addOpDescribeClusterParametersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeClusterParameters{}, middleware.After)
 }
@@ -2394,6 +2438,10 @@ func addOpRebootClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRebootCluster{}, middleware.After)
 }
 
+func addOpRegisterNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterNamespace{}, middleware.After)
+}
+
 func addOpRejectDataShareValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRejectDataShare{}, middleware.After)
 }
@@ -2552,11 +2600,50 @@ func validateLakeFormationServiceIntegrations(v []types.LakeFormationScopeUnion)
 	}
 }
 
+func validateNamespaceIdentifierUnion(v types.NamespaceIdentifierUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NamespaceIdentifierUnion"}
+	switch uv := v.(type) {
+	case *types.NamespaceIdentifierUnionMemberProvisionedIdentifier:
+		if err := validateProvisionedIdentifier(&uv.Value); err != nil {
+			invalidParams.AddNested("[ProvisionedIdentifier]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.NamespaceIdentifierUnionMemberServerlessIdentifier:
+		if err := validateServerlessIdentifier(&uv.Value); err != nil {
+			invalidParams.AddNested("[ServerlessIdentifier]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePauseClusterMessage(v *types.PauseClusterMessage) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PauseClusterMessage"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProvisionedIdentifier(v *types.ProvisionedIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProvisionedIdentifier"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -2702,6 +2789,24 @@ func validateScheduledActionType(v *types.ScheduledActionType) error {
 		if err := validateResumeClusterMessage(v.ResumeCluster); err != nil {
 			invalidParams.AddNested("ResumeCluster", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerlessIdentifier(v *types.ServerlessIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerlessIdentifier"}
+	if v.NamespaceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NamespaceIdentifier"))
+	}
+	if v.WorkgroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkgroupIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3657,6 +3762,28 @@ func validateOpDeleteUsageLimitInput(v *DeleteUsageLimitInput) error {
 	}
 }
 
+func validateOpDeregisterNamespaceInput(v *DeregisterNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterNamespaceInput"}
+	if v.NamespaceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NamespaceIdentifier"))
+	} else if v.NamespaceIdentifier != nil {
+		if err := validateNamespaceIdentifierUnion(v.NamespaceIdentifier); err != nil {
+			invalidParams.AddNested("NamespaceIdentifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConsumerIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumerIdentifiers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeClusterParametersInput(v *DescribeClusterParametersInput) error {
 	if v == nil {
 		return nil
@@ -4328,6 +4455,28 @@ func validateOpRebootClusterInput(v *RebootClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RebootClusterInput"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterNamespaceInput(v *RegisterNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterNamespaceInput"}
+	if v.NamespaceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NamespaceIdentifier"))
+	} else if v.NamespaceIdentifier != nil {
+		if err := validateNamespaceIdentifierUnion(v.NamespaceIdentifier); err != nil {
+			invalidParams.AddNested("NamespaceIdentifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConsumerIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumerIdentifiers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

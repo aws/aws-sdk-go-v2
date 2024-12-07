@@ -427,6 +427,27 @@ func (ContactInitiationMethod) Values() []ContactInitiationMethod {
 	}
 }
 
+type ContactRecordingType string
+
+// Enum values for ContactRecordingType
+const (
+	ContactRecordingTypeAgent  ContactRecordingType = "AGENT"
+	ContactRecordingTypeIvr    ContactRecordingType = "IVR"
+	ContactRecordingTypeScreen ContactRecordingType = "SCREEN"
+)
+
+// Values returns all known values for ContactRecordingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactRecordingType) Values() []ContactRecordingType {
+	return []ContactRecordingType{
+		"AGENT",
+		"IVR",
+		"SCREEN",
+	}
+}
+
 type ContactState string
 
 // Enum values for ContactState
@@ -824,9 +845,11 @@ type FlowAssociationResourceType string
 
 // Enum values for FlowAssociationResourceType
 const (
-	FlowAssociationResourceTypeSmsPhoneNumber FlowAssociationResourceType = "SMS_PHONE_NUMBER"
-	FlowAssociationResourceTypeInboundEmail   FlowAssociationResourceType = "INBOUND_EMAIL"
-	FlowAssociationResourceTypeOutboundEmail  FlowAssociationResourceType = "OUTBOUND_EMAIL"
+	FlowAssociationResourceTypeSmsPhoneNumber               FlowAssociationResourceType = "SMS_PHONE_NUMBER"
+	FlowAssociationResourceTypeInboundEmail                 FlowAssociationResourceType = "INBOUND_EMAIL"
+	FlowAssociationResourceTypeOutboundEmail                FlowAssociationResourceType = "OUTBOUND_EMAIL"
+	FlowAssociationResourceTypeAnalyticsConnector           FlowAssociationResourceType = "ANALYTICS_CONNECTOR"
+	FlowAssociationResourceTypeWhatsappMessagingPhoneNumber FlowAssociationResourceType = "WHATSAPP_MESSAGING_PHONE_NUMBER"
 )
 
 // Values returns all known values for FlowAssociationResourceType. Note that this
@@ -838,6 +861,8 @@ func (FlowAssociationResourceType) Values() []FlowAssociationResourceType {
 		"SMS_PHONE_NUMBER",
 		"INBOUND_EMAIL",
 		"OUTBOUND_EMAIL",
+		"ANALYTICS_CONNECTOR",
+		"WHATSAPP_MESSAGING_PHONE_NUMBER",
 	}
 }
 
@@ -1141,17 +1166,19 @@ type IntegrationType string
 
 // Enum values for IntegrationType
 const (
-	IntegrationTypeEvent                IntegrationType = "EVENT"
-	IntegrationTypeVoiceId              IntegrationType = "VOICE_ID"
-	IntegrationTypePinpointApp          IntegrationType = "PINPOINT_APP"
-	IntegrationTypeWisdomAssistant      IntegrationType = "WISDOM_ASSISTANT"
-	IntegrationTypeWisdomKnowledgeBase  IntegrationType = "WISDOM_KNOWLEDGE_BASE"
-	IntegrationTypeWisdomQuickResponses IntegrationType = "WISDOM_QUICK_RESPONSES"
-	IntegrationTypeQMessageTemplates    IntegrationType = "Q_MESSAGE_TEMPLATES"
-	IntegrationTypeCasesDomain          IntegrationType = "CASES_DOMAIN"
-	IntegrationTypeApplication          IntegrationType = "APPLICATION"
-	IntegrationTypeFileScanner          IntegrationType = "FILE_SCANNER"
-	IntegrationTypeSesIdentity          IntegrationType = "SES_IDENTITY"
+	IntegrationTypeEvent                 IntegrationType = "EVENT"
+	IntegrationTypeVoiceId               IntegrationType = "VOICE_ID"
+	IntegrationTypePinpointApp           IntegrationType = "PINPOINT_APP"
+	IntegrationTypeWisdomAssistant       IntegrationType = "WISDOM_ASSISTANT"
+	IntegrationTypeWisdomKnowledgeBase   IntegrationType = "WISDOM_KNOWLEDGE_BASE"
+	IntegrationTypeWisdomQuickResponses  IntegrationType = "WISDOM_QUICK_RESPONSES"
+	IntegrationTypeQMessageTemplates     IntegrationType = "Q_MESSAGE_TEMPLATES"
+	IntegrationTypeCasesDomain           IntegrationType = "CASES_DOMAIN"
+	IntegrationTypeApplication           IntegrationType = "APPLICATION"
+	IntegrationTypeFileScanner           IntegrationType = "FILE_SCANNER"
+	IntegrationTypeSesIdentity           IntegrationType = "SES_IDENTITY"
+	IntegrationTypeAnalyticsConnector    IntegrationType = "ANALYTICS_CONNECTOR"
+	IntegrationTypeCallTransferConnector IntegrationType = "CALL_TRANSFER_CONNECTOR"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -1171,6 +1198,8 @@ func (IntegrationType) Values() []IntegrationType {
 		"APPLICATION",
 		"FILE_SCANNER",
 		"SES_IDENTITY",
+		"ANALYTICS_CONNECTOR",
+		"CALL_TRANSFER_CONNECTOR",
 	}
 }
 
@@ -1201,6 +1230,23 @@ func (IntervalPeriod) Values() []IntervalPeriod {
 	}
 }
 
+type IvrRecordingTrack string
+
+// Enum values for IvrRecordingTrack
+const (
+	IvrRecordingTrackAll IvrRecordingTrack = "ALL"
+)
+
+// Values returns all known values for IvrRecordingTrack. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IvrRecordingTrack) Values() []IvrRecordingTrack {
+	return []IvrRecordingTrack{
+		"ALL",
+	}
+}
+
 type LexVersion string
 
 // Enum values for LexVersion
@@ -1224,9 +1270,11 @@ type ListFlowAssociationResourceType string
 
 // Enum values for ListFlowAssociationResourceType
 const (
-	ListFlowAssociationResourceTypeVoicePhoneNumber ListFlowAssociationResourceType = "VOICE_PHONE_NUMBER"
-	ListFlowAssociationResourceTypeInboundEmail     ListFlowAssociationResourceType = "INBOUND_EMAIL"
-	ListFlowAssociationResourceTypeOutboundEmail    ListFlowAssociationResourceType = "OUTBOUND_EMAIL"
+	ListFlowAssociationResourceTypeWhatsappMessagingPhoneNumber ListFlowAssociationResourceType = "WHATSAPP_MESSAGING_PHONE_NUMBER"
+	ListFlowAssociationResourceTypeVoicePhoneNumber             ListFlowAssociationResourceType = "VOICE_PHONE_NUMBER"
+	ListFlowAssociationResourceTypeInboundEmail                 ListFlowAssociationResourceType = "INBOUND_EMAIL"
+	ListFlowAssociationResourceTypeOutboundEmail                ListFlowAssociationResourceType = "OUTBOUND_EMAIL"
+	ListFlowAssociationResourceTypeAnalyticsConnector           ListFlowAssociationResourceType = "ANALYTICS_CONNECTOR"
 )
 
 // Values returns all known values for ListFlowAssociationResourceType. Note that
@@ -1236,9 +1284,11 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ListFlowAssociationResourceType) Values() []ListFlowAssociationResourceType {
 	return []ListFlowAssociationResourceType{
+		"WHATSAPP_MESSAGING_PHONE_NUMBER",
 		"VOICE_PHONE_NUMBER",
 		"INBOUND_EMAIL",
 		"OUTBOUND_EMAIL",
+		"ANALYTICS_CONNECTOR",
 	}
 }
 

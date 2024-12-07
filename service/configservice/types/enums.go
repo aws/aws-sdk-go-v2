@@ -62,6 +62,23 @@ func (AggregatedSourceType) Values() []AggregatedSourceType {
 	}
 }
 
+type AggregatorFilterType string
+
+// Enum values for AggregatorFilterType
+const (
+	AggregatorFilterTypeInclude AggregatorFilterType = "INCLUDE"
+)
+
+// Values returns all known values for AggregatorFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AggregatorFilterType) Values() []AggregatorFilterType {
+	return []AggregatorFilterType{
+		"INCLUDE",
+	}
+}
+
 type ChronologicalOrder string
 
 // Enum values for ChronologicalOrder
@@ -169,6 +186,24 @@ func (ConfigurationItemStatus) Values() []ConfigurationItemStatus {
 		"ResourceNotRecorded",
 		"ResourceDeleted",
 		"ResourceDeletedNotRecorded",
+	}
+}
+
+type ConfigurationRecorderFilterName string
+
+// Enum values for ConfigurationRecorderFilterName
+const (
+	ConfigurationRecorderFilterNameRecordingScope ConfigurationRecorderFilterName = "recordingScope"
+)
+
+// Values returns all known values for ConfigurationRecorderFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationRecorderFilterName) Values() []ConfigurationRecorderFilterName {
+	return []ConfigurationRecorderFilterName{
+		"recordingScope",
 	}
 }
 
@@ -524,9 +559,10 @@ type RecorderStatus string
 
 // Enum values for RecorderStatus
 const (
-	RecorderStatusPending RecorderStatus = "Pending"
-	RecorderStatusSuccess RecorderStatus = "Success"
-	RecorderStatusFailure RecorderStatus = "Failure"
+	RecorderStatusPending       RecorderStatus = "Pending"
+	RecorderStatusSuccess       RecorderStatus = "Success"
+	RecorderStatusFailure       RecorderStatus = "Failure"
+	RecorderStatusNotApplicable RecorderStatus = "NotApplicable"
 )
 
 // Values returns all known values for RecorderStatus. Note that this can be
@@ -538,6 +574,7 @@ func (RecorderStatus) Values() []RecorderStatus {
 		"Pending",
 		"Success",
 		"Failure",
+		"NotApplicable",
 	}
 }
 
@@ -557,6 +594,25 @@ func (RecordingFrequency) Values() []RecordingFrequency {
 	return []RecordingFrequency{
 		"CONTINUOUS",
 		"DAILY",
+	}
+}
+
+type RecordingScope string
+
+// Enum values for RecordingScope
+const (
+	RecordingScopeInternal RecordingScope = "INTERNAL"
+	RecordingScopePaid     RecordingScope = "PAID"
+)
+
+// Values returns all known values for RecordingScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordingScope) Values() []RecordingScope {
+	return []RecordingScope{
+		"INTERNAL",
+		"PAID",
 	}
 }
 

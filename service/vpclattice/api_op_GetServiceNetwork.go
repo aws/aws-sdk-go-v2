@@ -30,7 +30,7 @@ func (c *Client) GetServiceNetwork(ctx context.Context, params *GetServiceNetwor
 
 type GetServiceNetworkInput struct {
 
-	// The ID or Amazon Resource Name (ARN) of the service network.
+	// The ID or ARN of the service network.
 	//
 	// This member is required.
 	ServiceNetworkIdentifier *string
@@ -46,14 +46,13 @@ type GetServiceNetworkOutput struct {
 	// The type of IAM policy.
 	AuthType types.AuthType
 
-	// The date and time that the service network was created, specified in ISO-8601
-	// format.
+	// The date and time that the service network was created, in ISO-8601 format.
 	CreatedAt *time.Time
 
 	// The ID of the service network.
 	Id *string
 
-	// The date and time of the last update, specified in ISO-8601 format.
+	// The date and time of the last update, in ISO-8601 format.
 	LastUpdatedAt *time.Time
 
 	// The name of the service network.
@@ -64,6 +63,9 @@ type GetServiceNetworkOutput struct {
 
 	// The number of VPCs associated with the service network.
 	NumberOfAssociatedVPCs *int64
+
+	// Specifies if the service network is enabled for sharing.
+	SharingConfig *types.SharingConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

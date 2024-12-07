@@ -65,6 +65,9 @@ type CreateAgentInput struct {
 	// This member is required.
 	AgentName *string
 
+	// The agent's collaboration role.
+	AgentCollaboration types.AgentCollaboration
+
 	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
 	// operations on the agent.
 	AgentResourceRoleArn *string
@@ -75,6 +78,9 @@ type CreateAgentInput struct {
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
+
+	//  Contains details of the custom orchestration configured for the agent.
+	CustomOrchestration *types.CustomOrchestration
 
 	// The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
 	CustomerEncryptionKeyArn *string
@@ -130,6 +136,10 @@ type CreateAgentInput struct {
 
 	//  Contains the details of the memory configured for the agent.
 	MemoryConfiguration *types.MemoryConfiguration
+
+	//  Specifies the type of orchestration strategy for the agent. This is set to
+	// DEFAULT orchestration type, by default.
+	OrchestrationType types.OrchestrationType
 
 	// Contains configurations to override prompts in different parts of an agent
 	// sequence. For more information, see [Advanced prompts].

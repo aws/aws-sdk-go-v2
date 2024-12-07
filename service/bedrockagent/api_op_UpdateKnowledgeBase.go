@@ -68,14 +68,12 @@ type UpdateKnowledgeBaseInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Specifies the configuration for the vector store used for the knowledge base.
-	// You must use the same configuration as when the knowledge base was created.
-	//
-	// This member is required.
-	StorageConfiguration *types.StorageConfiguration
-
 	// Specifies a new description for the knowledge base.
 	Description *string
+
+	// Specifies the configuration for the vector store used for the knowledge base.
+	// You must use the same configuration as when the knowledge base was created.
+	StorageConfiguration *types.StorageConfiguration
 
 	noSmithyDocumentSerde
 }
