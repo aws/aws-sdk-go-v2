@@ -223,6 +223,28 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 			},
 		},
 		"auto multipart part": {
+			"no checksum": {
+				payload: bytes.NewReader(multiPartBytes),
+				expectParts: []s3types.CompletedPart{
+					{
+						ChecksumCRC32: aws.String(singlePartCRC32),
+						ETag:          aws.String(singlePartETag),
+						PartNumber:    aws.Int32(1),
+					},
+					{
+						ChecksumCRC32: aws.String(singlePartCRC32),
+						ETag:          aws.String(singlePartETag),
+						PartNumber:    aws.Int32(2),
+					},
+					{
+						ChecksumCRC32: aws.String(multiPartTailCRC32),
+						ETag:          aws.String(multiPartTailETag),
+						PartNumber:    aws.Int32(3),
+					},
+				},
+				expectChecksumCRC32: multiPartCRC32,
+				expectETag:          multiPartETag,
+			},
 			"CRC32": {
 				algorithm: s3types.ChecksumAlgorithmCrc32,
 				payload:   bytes.NewReader(multiPartBytes),
