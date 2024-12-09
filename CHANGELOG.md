@@ -1,3 +1,9 @@
+# Release (2024-12-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dsql/token`: [v1.0.0](feature/dsql/token/CHANGELOG.md#v100-2024-12-09)
+  * **Release**: Add DSQL Auth Token Generator
+
 # Release (2024-12-06)
 
 ## Module Highlights
