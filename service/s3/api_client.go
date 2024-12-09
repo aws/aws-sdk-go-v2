@@ -847,6 +847,30 @@ func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
 	return nil
 }
 
+func addRequestChecksumMetricsTracking(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	return stack.Build.Insert(&internalChecksum.RequestChecksumMetricsTracking{
+		RequestChecksumCalculation: options.RequestChecksumCalculation,
+		UserAgent:                  ua,
+	}, "UserAgent", middleware.Before)
+}
+
+func addResponseChecksumMetricsTracking(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	return stack.Build.Insert(&internalChecksum.ResponseChecksumMetricsTracking{
+		ResponseChecksumValidation: options.ResponseChecksumValidation,
+		UserAgent:                  ua,
+	}, "UserAgent", middleware.Before)
+}
+
 func resolveTracerProvider(options *Options) {
 	if options.TracerProvider == nil {
 		options.TracerProvider = &tracing.NopTracerProvider{}
