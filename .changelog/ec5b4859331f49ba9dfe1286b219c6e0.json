@@ -1,8 +1,0 @@
-{
-    "id": "ec5b4859-331f-49ba-9dfe-1286b219c6e0",
-    "type": "feature",
-    "description": "This release includes a new API for modifying instance network-performance-options after launch.",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "b40ba78d-34ad-45ea-8258-cf5f11c1dbb2",
-    "type": "documentation",
-    "description": "Amazon Keyspaces: adding the list of IAM actions required by the UpdateKeyspace API.",
-    "modules": [
-        "service/keyspaces"
-    ]
-}

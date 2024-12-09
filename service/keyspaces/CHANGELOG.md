@@ -1,3 +1,7 @@
+# v1.16.2 (2024-12-09)
+
+* **Documentation**: Amazon Keyspaces: adding the list of IAM actions required by the UpdateKeyspace API.
+
 # v1.16.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

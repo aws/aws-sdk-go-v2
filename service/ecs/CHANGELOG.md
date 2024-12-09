@@ -1,3 +1,7 @@
+# v1.52.2 (2024-12-09)
+
+* **Documentation**: This is a documentation only update to address various tickets for Amazon ECS.
+
 # v1.52.1 (2024-12-02)
 
 * **Documentation**: This release adds support for Container Insights with Enhanced Observability for Amazon ECS.

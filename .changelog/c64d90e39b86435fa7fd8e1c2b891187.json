@@ -1,8 +1,0 @@
-{
-    "id": "c64d90e3-9b86-435f-a7fd-8e1c2b891187",
-    "type": "documentation",
-    "description": "Provides description of new Amazon Bedrock runtime datasource.",
-    "modules": [
-        "service/appsync"
-    ]
-}

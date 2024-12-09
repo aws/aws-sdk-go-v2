@@ -1,3 +1,7 @@
+# v1.48.0 (2024-12-09)
+
+* **Feature**: Change `CustomDomainConfig` from a required to an optional parameter for the `UpdateUserPoolDomain` operation.
+
 # v1.47.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

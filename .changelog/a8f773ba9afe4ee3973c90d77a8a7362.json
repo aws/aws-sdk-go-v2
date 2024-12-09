@@ -1,8 +1,0 @@
-{
-    "id": "a8f773ba-9afe-4ee3-973c-90d77a8a7362",
-    "type": "feature",
-    "description": "H265 outputs now support disabling the deblocking filter.",
-    "modules": [
-        "service/medialive"
-    ]
-}

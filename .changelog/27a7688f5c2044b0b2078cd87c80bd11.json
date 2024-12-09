@@ -1,8 +1,0 @@
-{
-    "id": "27a7688f-5c20-44b0-b207-8cd87c80bd11",
-    "type": "documentation",
-    "description": "Added text to clarify case-sensitivity",
-    "modules": [
-        "service/workspaces"
-    ]
-}

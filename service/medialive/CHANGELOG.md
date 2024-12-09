@@ -1,3 +1,7 @@
+# v1.63.0 (2024-12-09)
+
+* **Feature**: H265 outputs now support disabling the deblocking filter.
+
 # v1.62.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

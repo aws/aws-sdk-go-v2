@@ -1,3 +1,7 @@
+# v1.25.1 (2024-12-09)
+
+* No change notes available for this release.
+
 # v1.25.0 (2024-12-04)
 
 * **Feature**: Introduced two APIs ListPromptRouters and GetPromptRouter for Intelligent Prompt Router feature. Add support for Bedrock Guardrails image content filter. New Bedrock Marketplace feature enabling a wider range of bedrock compatible models with self-hosted capability.
