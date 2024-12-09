@@ -16268,8 +16268,7 @@
                 "CustomDomainConfig": {
                     "target": "com.amazonaws.cognitoidentityprovider#CustomDomainConfigType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for a custom domain that hosts the sign-up and sign-in pages for\n            your application. Use this object to specify an SSL certificate that is managed by\n            ACM.</p>\n         <p>When you create a custom domain, the passkey RP ID defaults to the custom domain. If\n            you had a prefix domain active, this will cause passkey integration for your prefix\n            domain to stop working due to a mismatch in RP ID. To keep the prefix domain passkey\n            integration working, you can explicitly set RP ID to the prefix domain. Update the RP ID\n            in a <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html\">SetUserPoolMfaConfig</a> request.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The configuration for a custom domain that hosts the sign-up and sign-in pages for\n            your application. Use this object to specify an SSL certificate that is managed by\n            ACM.</p>\n         <p>When you create a custom domain, the passkey RP ID defaults to the custom domain. If\n            you had a prefix domain active, this will cause passkey integration for your prefix\n            domain to stop working due to a mismatch in RP ID. To keep the prefix domain passkey\n            integration working, you can explicitly set RP ID to the prefix domain. Update the RP ID\n            in a <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html\">SetUserPoolMfaConfig</a> request.</p>"
                     }
                 }
             },

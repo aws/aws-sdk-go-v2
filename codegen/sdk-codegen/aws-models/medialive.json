@@ -16518,6 +16518,26 @@
                 "smithy.api#documentation": "H265 Color Space Settings"
             }
         },
+        "com.amazonaws.medialive#H265Deblocking": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "H265 Deblocking"
+            }
+        },
         "com.amazonaws.medialive#H265FilterSettings": {
             "type": "structure",
             "members": {
@@ -17086,6 +17106,13 @@
                     "traits": {
                         "smithy.api#documentation": "Sets the minimum QP. If you aren't familiar with quantization adjustment, leave the field empty. MediaLive will\napply an appropriate value.",
                         "smithy.api#jsonName": "minQp"
+                    }
+                },
+                "Deblocking": {
+                    "target": "com.amazonaws.medialive#H265Deblocking",
+                    "traits": {
+                        "smithy.api#documentation": "Enable or disable the deblocking filter for this codec. The filter reduces blocking artifacts at block boundaries,\nwhich improves overall video quality. If the filter is disabled, visible block edges might appear in the output,\nespecially at lower bitrates.",
+                        "smithy.api#jsonName": "deblocking"
                     }
                 }
             },
@@ -35050,6 +35077,10 @@
                 "Tags": {
                     "target": "com.amazonaws.medialive#Tags",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "2024-11-20",
+                            "message": "This API is deprecated. You must use UpdateTagsForResource instead."
+                        },
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
                     }
