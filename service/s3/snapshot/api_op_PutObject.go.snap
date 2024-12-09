@@ -23,6 +23,7 @@ PutObject
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
+		AWSChecksum:RequestMetricsTracking
 		UserAgent
 		AddTimeOffsetMiddleware
 		S3100Continue

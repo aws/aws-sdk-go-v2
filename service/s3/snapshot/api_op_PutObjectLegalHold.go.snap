@@ -23,6 +23,7 @@ PutObjectLegalHold
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
+		AWSChecksum:RequestMetricsTracking
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

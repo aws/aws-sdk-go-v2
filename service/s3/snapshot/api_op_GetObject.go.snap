@@ -23,6 +23,7 @@ GetObject
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
+		AWSChecksum:ResponseMetricsTracking
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
