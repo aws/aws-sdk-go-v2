@@ -17,15 +17,19 @@ var supportedChecksumFeatures = map[Algorithm]awsmiddleware.UserAgentFeature{
 	AlgorithmCRC64NVME: awsmiddleware.UserAgentFeatureRequestChecksumCRC64,
 }
 
+// RequestChecksumMetricsTracking is the middleware to track operation request's checksum usage
 type RequestChecksumMetricsTracking struct {
 	RequestChecksumCalculation aws.RequestChecksumCalculation
 	UserAgent                  *awsmiddleware.RequestUserAgent
 }
 
+// ID provides the middleware identifier
 func (m *RequestChecksumMetricsTracking) ID() string {
 	return "AWSChecksum:RequestMetricsTracking"
 }
 
+// HandleBuild checks request checksum config and checksum value sent
+// and sends corresponding feature id to user agent
 func (m *RequestChecksumMetricsTracking) HandleBuild(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
 ) (
@@ -53,15 +57,18 @@ func (m *RequestChecksumMetricsTracking) HandleBuild(
 	return next.HandleBuild(ctx, in)
 }
 
+// ResponseChecksumMetricsTracking is the middleware to track operation response's checksum usage
 type ResponseChecksumMetricsTracking struct {
 	ResponseChecksumValidation aws.ResponseChecksumValidation
 	UserAgent                  *awsmiddleware.RequestUserAgent
 }
 
+// ID provides the middleware identifier
 func (m *ResponseChecksumMetricsTracking) ID() string {
 	return "AWSChecksum:ResponseMetricsTracking"
 }
 
+// HandleBuild checks the response checksum config and sends corresponding feature id to user agent
 func (m *ResponseChecksumMetricsTracking) HandleBuild(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
 ) (
