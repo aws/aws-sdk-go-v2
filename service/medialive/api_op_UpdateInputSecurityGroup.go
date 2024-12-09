@@ -37,6 +37,8 @@ type UpdateInputSecurityGroupInput struct {
 	InputSecurityGroupId *string
 
 	// A collection of key-value pairs.
+	//
+	// Deprecated: This API is deprecated. You must use UpdateTagsForResource instead.
 	Tags map[string]string
 
 	// List of IPv4 CIDR addresses to whitelist

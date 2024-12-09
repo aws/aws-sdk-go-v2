@@ -1,0 +1,8 @@
+{
+    "id": "7e42f182-8f8b-4840-be3f-c134aba8fe4f",
+    "type": "feature",
+    "description": "Change `CustomDomainConfig` from a required to an optional parameter for the `UpdateUserPoolDomain` operation.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

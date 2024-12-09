@@ -274,7 +274,7 @@ type CapacityProvider struct {
 // supports Linux tasks with the ARM64 architecture on platform version 1.4.0 or
 // later.
 //
-// A capacity provider strategy may contain a maximum of 6 capacity providers.
+// A capacity provider strategy can contain a maximum of 20 capacity providers.
 //
 // [PutClusterCapacityProviders]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
 // [RunTask]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
@@ -1867,6 +1867,11 @@ type DeploymentConfiguration struct {
 	// cluster resources required to do this are available). The default maximumPercent
 	// value for a service using the REPLICA service scheduler is 200%.
 	//
+	// The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by
+	// starting replacement tasks first and then stopping the unhealthy tasks, as long
+	// as cluster resources for starting replacement tasks are available. For more
+	// information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services].
+	//
 	// If a service is using either the blue/green ( CODE_DEPLOY ) or EXTERNAL
 	// deployment types, and tasks in the service use the EC2 launch type, the maximum
 	// percent value is set to the default value. The maximum percent value is used to
@@ -1879,6 +1884,8 @@ type DeploymentConfiguration struct {
 	//
 	// If the tasks in the service use the Fargate launch type, the maximum percent
 	// value is not used, although it is returned when describing your service.
+	//
+	// [Amazon ECS services]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
 	MaximumPercent *int32
 
 	// If a service is using the rolling update ( ECS ) deployment type, the
@@ -1889,6 +1896,12 @@ type DeploymentConfiguration struct {
 	// example, if your service has a desiredCount of four tasks and a
 	// minimumHealthyPercent of 50%, the service scheduler may stop two existing tasks
 	// to free up cluster capacity before starting two new tasks.
+	//
+	// If any tasks are unhealthy and if maximumPercent doesn't allow the Amazon ECS
+	// scheduler to start replacement tasks, the scheduler stops the unhealthy tasks
+	// one-by-one — using the minimumHealthyPercent as a constraint — to clear up
+	// capacity to launch replacement tasks. For more information about how the
+	// scheduler replaces unhealthy tasks, see [Amazon ECS services].
 	//
 	// For services that do not use a load balancer, the following should be noted:
 	//
@@ -1942,6 +1955,8 @@ type DeploymentConfiguration struct {
 	// deployment types and is running tasks that use the Fargate launch type, the
 	// minimum healthy percent value is not used, although it is returned when
 	// describing your service.
+	//
+	// [Amazon ECS services]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
 	MinimumHealthyPercent *int32
 
 	noSmithyDocumentSerde

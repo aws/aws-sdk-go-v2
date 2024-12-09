@@ -1,0 +1,8 @@
+{
+    "id": "b1fd4a47-6d7d-4b09-abbc-d8426a4b34da",
+    "type": "documentation",
+    "description": "This is a documentation only update to address various tickets for Amazon ECS.",
+    "modules": [
+        "service/ecs"
+    ]
+}

@@ -33887,6 +33887,15 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				return err
 			}
 
+		case "deblocking":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265Deblocking to be of type string, got %T instead", value)
+				}
+				sv.Deblocking = types.H265Deblocking(jtv)
+			}
+
 		case "filterSettings":
 			if err := awsRestjson1_deserializeDocumentH265FilterSettings(&sv.FilterSettings, value); err != nil {
 				return err

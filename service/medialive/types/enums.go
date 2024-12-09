@@ -2872,6 +2872,25 @@ func (H265ColorMetadata) Values() []H265ColorMetadata {
 	}
 }
 
+type H265Deblocking string
+
+// Enum values for H265Deblocking
+const (
+	H265DeblockingDisabled H265Deblocking = "DISABLED"
+	H265DeblockingEnabled  H265Deblocking = "ENABLED"
+)
+
+// Values returns all known values for H265Deblocking. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265Deblocking) Values() []H265Deblocking {
+	return []H265Deblocking{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H265FlickerAq string
 
 // Enum values for H265FlickerAq
