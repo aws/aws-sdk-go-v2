@@ -3,6 +3,6 @@
     "type": "release",
     "description": "Add Aurora DSQL Auth Token Generator",
     "modules": [
-        "feature/dsql/token"
+        "feature/dsql/auth"
     ]
 }
