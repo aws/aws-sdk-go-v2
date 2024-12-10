@@ -23,7 +23,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
@@ -490,21 +489,21 @@ func toStringPtr(v string) *string {
 	return &v
 }
 
-type invalidateHash struct{}
+type failedMultipartUpload struct{}
 
-func (b *invalidateHash) ID() string {
-	return "s3manager:InvalidateHash"
+func (m *failedMultipartUpload) ID() string {
+	return "s3manager:FailedMultipartUpload"
 }
 
-func (b *invalidateHash) RegisterMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Add(b, middleware.After)
+func (m *failedMultipartUpload) RegisterMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Add(m, middleware.After)
 }
 
-func (b *invalidateHash) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *failedMultipartUpload) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if input, ok := in.Parameters.(*s3.UploadPartInput); ok && aws.ToInt32(input.PartNumber) == 2 {
-		ctx = v4.SetPayloadHash(ctx, "000")
+		return out, metadata, fmt.Errorf("multipart upload error")
 	}
 
 	return next.HandleSerialize(ctx, in)
@@ -515,7 +514,7 @@ func TestInteg_UploadFailCleanup(t *testing.T) {
 	mgr := manager.NewUploader(client, func(u *manager.Uploader) {
 		u.LeavePartsOnError = false
 		u.ClientOptions = append(u.ClientOptions, func(options *s3.Options) {
-			options.APIOptions = append(options.APIOptions, (&invalidateHash{}).RegisterMiddleware)
+			options.APIOptions = append(options.APIOptions, (&failedMultipartUpload{}).RegisterMiddleware)
 		})
 	})
 	_, err := mgr.Upload(context.Background(), &s3.PutObjectInput{
