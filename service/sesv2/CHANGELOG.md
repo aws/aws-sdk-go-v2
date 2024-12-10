@@ -1,3 +1,7 @@
+# v1.39.0 (2024-12-10)
+
+* **Feature**: Introduces support for creating DEED (Deterministic Easy-DKIM) identities.
+
 # v1.38.4 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

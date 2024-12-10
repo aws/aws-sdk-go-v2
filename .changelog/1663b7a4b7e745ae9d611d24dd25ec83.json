@@ -1,8 +1,0 @@
-{
-    "id": "1663b7a4-b7e7-45ae-9d61-1d24dd25ec83",
-    "type": "documentation",
-    "description": "Doc only update to examples for DeleteMultiRegionClusters \u0026 CreateMultiRegionClusters",
-    "modules": [
-        "service/dsql"
-    ]
-}

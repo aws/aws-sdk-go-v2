@@ -1,3 +1,15 @@
+# Release (2024-12-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.34.2](service/applicationautoscaling/CHANGELOG.md#v1342-2024-12-10)
+  * **Documentation**: Doc only update for AAS Predictive Scaling policy configuration API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.120.0](service/connect/CHANGELOG.md#v11200-2024-12-10)
+  * **Feature**: Add support for Push Notifications for Amazon Connect chat. With Push Notifications enabled an alert could be sent to customers about new messages even when they aren't actively using the mobile application.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.21.0](service/ivsrealtime/CHANGELOG.md#v1210-2024-12-10)
+  * **Feature**: IVS Real-Time now offers customers the ability to customize thumbnails recording mode and interval for both Individual Participant Recording (IPR) and Server-Side Compositions (SSC).
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.39.0](service/sesv2/CHANGELOG.md#v1390-2024-12-10)
+  * **Feature**: Introduces support for creating DEED (Deterministic Easy-DKIM) identities.
+
 # Release (2024-12-09)
 
 ## Module Highlights

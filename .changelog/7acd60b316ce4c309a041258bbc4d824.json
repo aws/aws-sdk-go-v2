@@ -1,8 +1,0 @@
-{
-    "id": "7acd60b3-16ce-4c30-9a04-1258bbc4d824",
-    "type": "feature",
-    "description": "Update KxCommandLineArgument value parameter regex to allow for spaces and semicolons",
-    "modules": [
-        "service/finspace"
-    ]
-}

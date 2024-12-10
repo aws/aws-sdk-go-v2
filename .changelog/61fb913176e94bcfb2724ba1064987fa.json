@@ -1,8 +1,0 @@
-{
-    "id": "61fb9131-76e9-4bcf-b272-4ba1064987fa",
-    "type": "documentation",
-    "description": "Doc only update for AAS Predictive Scaling policy configuration API.",
-    "modules": [
-        "service/applicationautoscaling"
-    ]
-}
