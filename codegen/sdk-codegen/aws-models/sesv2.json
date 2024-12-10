@@ -2939,7 +2939,7 @@
                 "SigningAttributesOrigin": {
                     "target": "com.amazonaws.sesv2#DkimSigningAttributesOrigin",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that indicates how DKIM was configured for the identity. These are the\n            possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Indicates that DKIM was configured for the\n                    identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Indicates that DKIM was configured for the\n                    identity by using Bring Your Own DKIM (BYODKIM).</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A string that indicates how DKIM was configured for the identity. These are the\n            possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Indicates that DKIM was configured for the\n                    identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Indicates that DKIM was configured for the\n                    identity by using Bring Your Own DKIM (BYODKIM).</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AF_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Africa (Cape Town) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_NORTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Stockholm) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (London) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Middle East (Bahrain) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_IL_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_SA_EAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in South America (São Paulo) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US East (N. Virginia) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US West (N. California) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextSigningKeyLength": {
@@ -2985,6 +2985,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be\n            changed at most once per day.</p>"
                     }
+                },
+                "DomainSigningAttributesOrigin": {
+                    "target": "com.amazonaws.sesv2#DkimSigningAttributesOrigin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute to use for configuring DKIM for the identity depends on the\n            operation:\n        </p>\n         <ol>\n            <li>\n               <p>For <code>PutEmailIdentityDkimSigningAttributes</code>:\n                </p>\n               <ul>\n                  <li>\n                     <p>None of the values are allowed - use the\n                            <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutEmailIdentityDkimSigningAttributes.html#SES-PutEmailIdentityDkimSigningAttributes-request-SigningAttributesOrigin\">\n                           <code>SigningAttributesOrigin</code>\n                        </a>\n                            parameter instead\n                        </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <code>CreateEmailIdentity</code> when replicating a parent identity's DKIM\n                    configuration:\n                </p>\n               <ul>\n                  <li>\n                     <p>Allowed values: All values except <code>AWS_SES</code> and\n                            <code>EXTERNAL</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ol>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Configure DKIM for the identity by using Easy DKIM.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Configure DKIM for the identity by using Bring Your Own DKIM\n                    (BYODKIM).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AF_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Africa (Cape Town) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_NORTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Stockholm) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_3</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (London) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_3</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_2</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Middle East (Bahrain) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_IL_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_SA_EAST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in South America (São Paulo) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_2</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_3</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US East (N. Virginia) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US West (N. California) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -3004,6 +3010,138 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EXTERNAL"
+                    }
+                },
+                "AWS_SES_AF_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AF_SOUTH_1"
+                    }
+                },
+                "AWS_SES_EU_NORTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_NORTH_1"
+                    }
+                },
+                "AWS_SES_AP_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_SOUTH_1"
+                    }
+                },
+                "AWS_SES_EU_WEST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_WEST_3"
+                    }
+                },
+                "AWS_SES_EU_WEST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_WEST_2"
+                    }
+                },
+                "AWS_SES_EU_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_SOUTH_1"
+                    }
+                },
+                "AWS_SES_EU_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_WEST_1"
+                    }
+                },
+                "AWS_SES_AP_NORTHEAST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_NORTHEAST_3"
+                    }
+                },
+                "AWS_SES_AP_NORTHEAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_NORTHEAST_2"
+                    }
+                },
+                "AWS_SES_ME_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_ME_SOUTH_1"
+                    }
+                },
+                "AWS_SES_AP_NORTHEAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_NORTHEAST_1"
+                    }
+                },
+                "AWS_SES_IL_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_IL_CENTRAL_1"
+                    }
+                },
+                "AWS_SES_SA_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_SA_EAST_1"
+                    }
+                },
+                "AWS_SES_CA_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_CA_CENTRAL_1"
+                    }
+                },
+                "AWS_SES_AP_SOUTHEAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_SOUTHEAST_1"
+                    }
+                },
+                "AWS_SES_AP_SOUTHEAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_SOUTHEAST_2"
+                    }
+                },
+                "AWS_SES_AP_SOUTHEAST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_SOUTHEAST_3"
+                    }
+                },
+                "AWS_SES_EU_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_CENTRAL_1"
+                    }
+                },
+                "AWS_SES_US_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_EAST_1"
+                    }
+                },
+                "AWS_SES_US_EAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_EAST_2"
+                    }
+                },
+                "AWS_SES_US_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_WEST_1"
+                    }
+                },
+                "AWS_SES_US_WEST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_WEST_2"
                     }
                 }
             }
@@ -12618,6 +12756,36 @@
                     "traits": {
                         "smithy.api#enumValue": "INVALID_VALUE"
                     }
+                },
+                "REPLICATION_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_ACCESS_DENIED"
+                    }
+                },
+                "REPLICATION_PRIMARY_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_PRIMARY_NOT_FOUND"
+                    }
+                },
+                "REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED"
+                    }
+                },
+                "REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED"
+                    }
+                },
+                "REPLICATION_PRIMARY_INVALID_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_PRIMARY_INVALID_REGION"
+                    }
                 }
             }
         },
@@ -12639,7 +12807,7 @@
                 "ErrorType": {
                     "target": "com.amazonaws.sesv2#VerificationError",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the reason for the failure describing why Amazon SES was not able to successfully\n            verify the identity. Below are the possible values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>INVALID_VALUE</code> – Amazon SES was able to find the record, but the\n                    value contained within the record was invalid. Ensure you have published the\n                    correct values for the record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TYPE_NOT_FOUND</code> – The queried hostname exists but does not\n                    have the requested type of DNS record. Ensure that you have published the\n                    correct type of DNS record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOST_NOT_FOUND</code> – The queried hostname does not exist or was\n                    not reachable at the time of the request. Ensure that you have published the\n                    required DNS record(s). </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_ERROR</code> – A temporary issue is preventing Amazon SES from\n                    determining the verification status of the domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_SERVER_ERROR</code> – The DNS server encountered an issue and\n                    was unable to complete the request.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Provides the reason for the failure describing why Amazon SES was not able to successfully\n            verify the identity. Below are the possible values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>INVALID_VALUE</code> – Amazon SES was able to find the record, but the\n                    value contained within the record was invalid. Ensure you have published the\n                    correct values for the record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TYPE_NOT_FOUND</code> – The queried hostname exists but does not\n                    have the requested type of DNS record. Ensure that you have published the\n                    correct type of DNS record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOST_NOT_FOUND</code> – The queried hostname does not exist or was\n                    not reachable at the time of the request. Ensure that you have published the\n                    required DNS record(s). </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_ERROR</code> – A temporary issue is preventing Amazon SES from\n                    determining the verification status of the domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_SERVER_ERROR</code> – The DNS server encountered an issue and\n                    was unable to complete the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_ACCESS_DENIED</code> – The verification failed because the user does not\n                    have the required permissions to replicate the DKIM key from the primary region. Ensure you have the\n                    necessary permissions in both primary and replica regions.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_NOT_FOUND</code> – The verification failed because no corresponding\n                    identity was found in the specified primary region. Ensure the identity exists in the primary region\n                    before attempting replication.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED</code> – The verification failed because the\n                    identity in the primary region is configured with Bring Your Own DKIM (BYODKIM). DKIM key\n                    replication is only supported for identities using Easy DKIM.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED</code> – The verification failed because\n                    the specified primary identity is a replica of another identity, and multi-level replication is not\n                    supported; the primary identity must be a non-replica identity.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_INVALID_REGION</code> – The verification failed due to an invalid\n                    primary region specified. Ensure you provide a valid AWS region where Amazon SES is available and different\n                    from the replica region.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "SOARecord": {

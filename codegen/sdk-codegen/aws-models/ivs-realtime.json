@@ -854,6 +854,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Types of media to be recorded. Default: <code>AUDIO_VIDEO</code>.</p>"
                     }
+                },
+                "thumbnailConfiguration": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantThumbnailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that allows you to enable/disable the recording of thumbnails for individual participant recording\n            and modify the interval at which thumbnails are generated for the live session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1082,6 +1088,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ivsrealtime#CompositionSummary"
+            }
+        },
+        "com.amazonaws.ivsrealtime#CompositionThumbnailConfiguration": {
+            "type": "structure",
+            "members": {
+                "targetIntervalSeconds": {
+                    "target": "com.amazonaws.ivsrealtime#ThumbnailIntervalSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The targeted thumbnail-generation interval in seconds. Default: 60.</p>"
+                    }
+                },
+                "storage": {
+                    "target": "com.amazonaws.ivsrealtime#ThumbnailStorageTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all generated thumbnails\n            in a serial manner, to the media/thumbnails/(width)x(height) directory, where (width) and (height) are the width\n\t    and height of the thumbnail. <code>LATEST</code> saves the latest thumbnail in\n\t    media/latest_thumbnail/(width)x(height)/thumb.jpg and overwrites it at the interval specified by\n\t    <code>targetIntervalSeconds</code>.  You can enable both <code>SEQUENTIAL</code> and <code>LATEST</code>.\n\t    Default: <code>SEQUENTIAL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a configuration of thumbnails for recorded video for a <a>Composition</a>.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#CompositionThumbnailConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#CompositionThumbnailConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.ivsrealtime#ConflictException": {
@@ -4318,18 +4356,26 @@
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantRecordingMediaType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AUDIO_VIDEO",
-                        "name": "AUDIO_VIDEO"
-                    },
-                    {
-                        "value": "AUDIO_ONLY",
-                        "name": "AUDIO_ONLY"
+            "type": "enum",
+            "members": {
+                "AUDIO_VIDEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIO_VIDEO"
                     }
-                ]
+                },
+                "AUDIO_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIO_ONLY"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantRecordingMediaTypeList": {
@@ -4453,6 +4499,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Summary object describing a participant that has joined a stage.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantThumbnailConfiguration": {
+            "type": "structure",
+            "members": {
+                "targetIntervalSeconds": {
+                    "target": "com.amazonaws.ivsrealtime#ThumbnailIntervalSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The targeted thumbnail-generation interval in seconds. This is configurable only if\n            <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p>"
+                    }
+                },
+                "storage": {
+                    "target": "com.amazonaws.ivsrealtime#ThumbnailStorageTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all generated thumbnails\n            in a serial manner, to the media/thumbnails/high directory. <code>LATEST</code> saves the latest thumbnail\n\t    in media/latest_thumbnail/high/thumb.jpg and overwrites it at the interval specified by\n\t    <code>targetIntervalSeconds</code>. You can enable both <code>SEQUENTIAL</code> and <code>LATEST</code>.\n\t    Default: <code>SEQUENTIAL</code>.</p>"
+                    }
+                },
+                "recordingMode": {
+                    "target": "com.amazonaws.ivsrealtime#ThumbnailRecordingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Thumbnail recording mode. Default: <code>DISABLED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a configuration of thumbnails for recorded video from an individual participant.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantToken": {
@@ -4969,6 +5041,12 @@
                     "target": "com.amazonaws.ivsrealtime#RecordingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Array of maps, each of the form <code>string:string (key:value)</code>. \n\t  This is an optional customer specification, currently used only to specify \n\t  the recording format for storing a recording in Amazon S3.</p>"
+                    }
+                },
+                "thumbnailConfigurations": {
+                    "target": "com.amazonaws.ivsrealtime#CompositionThumbnailConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that allows you to enable/disable the recording of thumbnails for a <a>Composition</a>\n            and modify the interval at which thumbnails are generated for the live session.</p>"
                     }
                 }
             },
@@ -5582,6 +5660,62 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ThumbnailIntervalSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 86400
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ThumbnailRecordingMode": {
+            "type": "enum",
+            "members": {
+                "INTERVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERVAL"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ThumbnailStorageType": {
+            "type": "enum",
+            "members": {
+                "SEQUENTIAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEQUENTIAL"
+                    }
+                },
+                "LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATEST"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ThumbnailStorageTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#ThumbnailStorageType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.ivsrealtime#Time": {
