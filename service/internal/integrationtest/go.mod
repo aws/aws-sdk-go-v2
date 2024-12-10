@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.7
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.37.1
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.47.1
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.44.5
@@ -29,9 +29,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.8
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.39.6
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.38.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.195.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.196.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.36.7
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.52.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.52.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.44.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.7
@@ -80,7 +80,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.25.7
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.25.7
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.55.6
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.50.2
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.50.3
 	github.com/aws/smithy-go v1.22.1
 )
 

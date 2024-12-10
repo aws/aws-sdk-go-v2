@@ -5258,9 +5258,7 @@ func validateOpUpdateUserPoolDomainInput(v *UpdateUserPoolDomainInput) error {
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
-	if v.CustomDomainConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainConfig"))
-	} else if v.CustomDomainConfig != nil {
+	if v.CustomDomainConfig != nil {
 		if err := validateCustomDomainConfigType(v.CustomDomainConfig); err != nil {
 			invalidParams.AddNested("CustomDomainConfig", err.(smithy.InvalidParamsError))
 		}

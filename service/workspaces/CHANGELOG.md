@@ -1,3 +1,7 @@
+# v1.50.3 (2024-12-09)
+
+* **Documentation**: Added text to clarify case-sensitivity
+
 # v1.50.2 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

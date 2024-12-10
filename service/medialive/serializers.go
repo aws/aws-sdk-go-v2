@@ -13633,6 +13633,11 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 		}
 	}
 
+	if len(v.Deblocking) > 0 {
+		ok := object.Key("deblocking")
+		ok.String(string(v.Deblocking))
+	}
+
 	if v.FilterSettings != nil {
 		ok := object.Key("filterSettings")
 		if err := awsRestjson1_serializeDocumentH265FilterSettings(v.FilterSettings, ok); err != nil {

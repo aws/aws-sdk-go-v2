@@ -235,13 +235,22 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.AwsIsoB,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.AwsIsoB,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-iso-b-global",
 		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "aws-iso-b-global",
+			}: endpoints.Endpoint{
+				Hostname: "budgets.global.sc2s.sgov.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "us-isob-east-1",
 			}: endpoints.Endpoint{
-				Hostname: "budgets.us-isob-east-1.sc2s.sgov.gov",
+				Hostname: "budgets.global.sc2s.sgov.gov",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-isob-east-1",
 				},

@@ -545,6 +545,27 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "bedrock-runtime-us-iso-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime.us-iso-east-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-us-iso-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock.us-iso-east-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "us-iso-east-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso-b",

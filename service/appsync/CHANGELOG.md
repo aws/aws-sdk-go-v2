@@ -1,3 +1,7 @@
+# v1.40.2 (2024-12-09)
+
+* **Documentation**: Provides description of new Amazon Bedrock runtime datasource.
+
 # v1.40.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -153,7 +153,7 @@ type CreateServiceInput struct {
 	// omitted. If no capacityProviderStrategy or launchType is specified, the
 	// defaultCapacityProviderStrategy for the cluster is used.
 	//
-	// A capacity provider strategy may contain a maximum of 6 capacity providers.
+	// A capacity provider strategy can contain a maximum of 20 capacity providers.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// An identifier that you provide to ensure the idempotency of the request. It

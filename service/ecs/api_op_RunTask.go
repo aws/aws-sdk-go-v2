@@ -105,7 +105,7 @@ type RunTaskInput struct {
 	// When you use cluster auto scaling, you must specify capacityProviderStrategy
 	// and not launchType .
 	//
-	// A capacity provider strategy may contain a maximum of 6 capacity providers.
+	// A capacity provider strategy can contain a maximum of 20 capacity providers.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// An identifier that you provide to ensure the idempotency of the request. It

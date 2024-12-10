@@ -2928,6 +2928,12 @@ type H265Settings struct {
 	// Color Space settings
 	ColorSpaceSettings *H265ColorSpaceSettings
 
+	// Enable or disable the deblocking filter for this codec. The filter reduces
+	// blocking artifacts at block boundaries, which improves overall video quality. If
+	// the filter is disabled, visible block edges might appear in the output,
+	// especially at lower bitrates.
+	Deblocking H265Deblocking
+
 	// Optional. Both filters reduce bandwidth by removing imperceptible details. You
 	// can enable one of the filters. We recommend that you try both filters and
 	// observe the results to decide which one to use.

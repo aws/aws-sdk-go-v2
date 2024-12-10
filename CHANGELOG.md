@@ -1,3 +1,21 @@
+# Release (2024-12-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.40.2](service/appsync/CHANGELOG.md#v1402-2024-12-09)
+  * **Documentation**: Provides description of new Amazon Bedrock runtime datasource.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.48.0](service/cognitoidentityprovider/CHANGELOG.md#v1480-2024-12-09)
+  * **Feature**: Change `CustomDomainConfig` from a required to an optional parameter for the `UpdateUserPoolDomain` operation.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.196.0](service/ec2/CHANGELOG.md#v11960-2024-12-09)
+  * **Feature**: This release includes a new API for modifying instance network-performance-options after launch.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.52.2](service/ecs/CHANGELOG.md#v1522-2024-12-09)
+  * **Documentation**: This is a documentation only update to address various tickets for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.16.2](service/keyspaces/CHANGELOG.md#v1162-2024-12-09)
+  * **Documentation**: Amazon Keyspaces: adding the list of IAM actions required by the UpdateKeyspace API.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.63.0](service/medialive/CHANGELOG.md#v1630-2024-12-09)
+  * **Feature**: H265 outputs now support disabling the deblocking filter.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.50.3](service/workspaces/CHANGELOG.md#v1503-2024-12-09)
+  * **Documentation**: Added text to clarify case-sensitivity
+
 # Release (2024-12-06)
 
 ## Module Highlights

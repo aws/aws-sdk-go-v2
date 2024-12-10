@@ -72,21 +72,6 @@ func (c *Client) UpdateUserPoolDomain(ctx context.Context, params *UpdateUserPoo
 // The UpdateUserPoolDomain request input.
 type UpdateUserPoolDomainInput struct {
 
-	// The configuration for a custom domain that hosts the sign-up and sign-in pages
-	// for your application. Use this object to specify an SSL certificate that is
-	// managed by ACM.
-	//
-	// When you create a custom domain, the passkey RP ID defaults to the custom
-	// domain. If you had a prefix domain active, this will cause passkey integration
-	// for your prefix domain to stop working due to a mismatch in RP ID. To keep the
-	// prefix domain passkey integration working, you can explicitly set RP ID to the
-	// prefix domain. Update the RP ID in a [SetUserPoolMfaConfig]request.
-	//
-	// [SetUserPoolMfaConfig]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
-	//
-	// This member is required.
-	CustomDomainConfig *types.CustomDomainConfigType
-
 	// The domain name for the custom domain that hosts the sign-up and sign-in pages
 	// for your application. One example might be auth.example.com .
 	//
@@ -102,6 +87,19 @@ type UpdateUserPoolDomainInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	// The configuration for a custom domain that hosts the sign-up and sign-in pages
+	// for your application. Use this object to specify an SSL certificate that is
+	// managed by ACM.
+	//
+	// When you create a custom domain, the passkey RP ID defaults to the custom
+	// domain. If you had a prefix domain active, this will cause passkey integration
+	// for your prefix domain to stop working due to a mismatch in RP ID. To keep the
+	// prefix domain passkey integration working, you can explicitly set RP ID to the
+	// prefix domain. Update the RP ID in a [SetUserPoolMfaConfig]request.
+	//
+	// [SetUserPoolMfaConfig]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
+	CustomDomainConfig *types.CustomDomainConfigType
 
 	// A version number that indicates the state of managed login for your domain.
 	// Version 1 is hosted UI (classic). Version 2 is the newer managed login with the
