@@ -676,6 +676,94 @@ type DkimAttributes struct {
 	//   - EXTERNAL – Indicates that DKIM was configured for the identity by using
 	//   Bring Your Own DKIM (BYODKIM).
 	//
+	//   - AWS_SES_AF_SOUTH_1 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in Africa (Cape Town)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_EU_NORTH_1 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in Europe (Stockholm)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_SOUTH_1 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in Asia Pacific (Mumbai)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_EU_WEST_3 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in Europe (Paris) region
+	//   using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_EU_WEST_2 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in Europe (London) region
+	//   using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_EU_SOUTH_1 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in Europe (Milan) region
+	//   using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_EU_WEST_1 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in Europe (Ireland) region
+	//   using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_NORTHEAST_3 – Indicates that DKIM was configured for the identity
+	//   by replicating signing attributes from a parent identity in Asia Pacific (Osaka)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_NORTHEAST_2 – Indicates that DKIM was configured for the identity
+	//   by replicating signing attributes from a parent identity in Asia Pacific (Seoul)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_ME_SOUTH_1 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in Middle East (Bahrain)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_NORTHEAST_1 – Indicates that DKIM was configured for the identity
+	//   by replicating signing attributes from a parent identity in Asia Pacific (Tokyo)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_IL_CENTRAL_1 – Indicates that DKIM was configured for the identity
+	//   by replicating signing attributes from a parent identity in Israel (Tel Aviv)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_SA_EAST_1 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in South America (São
+	//   Paulo) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_CA_CENTRAL_1 – Indicates that DKIM was configured for the identity
+	//   by replicating signing attributes from a parent identity in Canada (Central)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_SOUTHEAST_1 – Indicates that DKIM was configured for the identity
+	//   by replicating signing attributes from a parent identity in Asia Pacific
+	//   (Singapore) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_SOUTHEAST_2 – Indicates that DKIM was configured for the identity
+	//   by replicating signing attributes from a parent identity in Asia Pacific
+	//   (Sydney) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_SOUTHEAST_3 – Indicates that DKIM was configured for the identity
+	//   by replicating signing attributes from a parent identity in Asia Pacific
+	//   (Jakarta) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_EU_CENTRAL_1 – Indicates that DKIM was configured for the identity
+	//   by replicating signing attributes from a parent identity in Europe (Frankfurt)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_US_EAST_1 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in US East (N. Virginia)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_US_EAST_2 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in US East (Ohio) region
+	//   using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_US_WEST_1 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in US West (N. California)
+	//   region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_US_WEST_2 – Indicates that DKIM was configured for the identity by
+	//   replicating signing attributes from a parent identity in US West (Oregon) region
+	//   using Deterministic Easy-DKIM (DEED).
+	//
 	// [Easy DKIM]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
 	SigningAttributesOrigin DkimSigningAttributesOrigin
 
@@ -725,6 +813,109 @@ type DkimAttributes struct {
 // An object that contains configuration for Bring Your Own DKIM (BYODKIM), or,
 // for Easy DKIM
 type DkimSigningAttributes struct {
+
+	// The attribute to use for configuring DKIM for the identity depends on the
+	// operation:
+	//
+	//   - For PutEmailIdentityDkimSigningAttributes :
+	//
+	//   - None of the values are allowed - use the [SigningAttributesOrigin]SigningAttributesOrigin parameter
+	//   instead
+	//
+	//   - For CreateEmailIdentity when replicating a parent identity's DKIM
+	//   configuration:
+	//
+	//   - Allowed values: All values except AWS_SES and EXTERNAL
+	//
+	//   - AWS_SES – Configure DKIM for the identity by using Easy DKIM.
+	//
+	//   - EXTERNAL – Configure DKIM for the identity by using Bring Your Own DKIM
+	//   (BYODKIM).
+	//
+	//   - AWS_SES_AF_SOUTH_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Africa (Cape Town) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_EU_NORTH_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Europe (Stockholm) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_AP_SOUTH_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_EU_WEST_3 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_EU_WEST_2 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Europe (London) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_EU_SOUTH_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_EU_WEST_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_NORTHEAST_3 – Configure DKIM for the identity by replicating from
+	//   a parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_AP_NORTHEAST_2 – Configure DKIM for the identity by replicating from
+	//   a parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_ME_SOUTH_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Middle East (Bahrain) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_AP_NORTHEAST_1 – Configure DKIM for the identity by replicating from
+	//   a parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_IL_CENTRAL_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_SA_EAST_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in South America (São Paulo) region using Deterministic
+	//   Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_CA_CENTRAL_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_SOUTHEAST_1 – Configure DKIM for the identity by replicating from
+	//   a parent identity in Asia Pacific (Singapore) region using Deterministic
+	//   Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_AP_SOUTHEAST_2 – Configure DKIM for the identity by replicating from
+	//   a parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_AP_SOUTHEAST_3 – Configure DKIM for the identity by replicating from
+	//   a parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_EU_CENTRAL_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_US_EAST_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in US East (N. Virginia) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_US_EAST_2 – Configure DKIM for the identity by replicating from a
+	//   parent identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).
+	//
+	//   - AWS_SES_US_WEST_1 – Configure DKIM for the identity by replicating from a
+	//   parent identity in US West (N. California) region using Deterministic Easy-DKIM
+	//   (DEED).
+	//
+	//   - AWS_SES_US_WEST_2 – Configure DKIM for the identity by replicating from a
+	//   parent identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).
+	//
+	//
+	// [SigningAttributesOrigin]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutEmailIdentityDkimSigningAttributes.html#SES-PutEmailIdentityDkimSigningAttributes-request-SigningAttributesOrigin
+	DomainSigningAttributesOrigin DkimSigningAttributesOrigin
 
 	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature.
 	//
@@ -2338,6 +2529,29 @@ type VerificationInfo struct {
 	//
 	//   - DNS_SERVER_ERROR – The DNS server encountered an issue and was unable to
 	//   complete the request.
+	//
+	//   - REPLICATION_ACCESS_DENIED – The verification failed because the user does
+	//   not have the required permissions to replicate the DKIM key from the primary
+	//   region. Ensure you have the necessary permissions in both primary and replica
+	//   regions.
+	//
+	//   - REPLICATION_PRIMARY_NOT_FOUND – The verification failed because no
+	//   corresponding identity was found in the specified primary region. Ensure the
+	//   identity exists in the primary region before attempting replication.
+	//
+	//   - REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED – The verification failed because
+	//   the identity in the primary region is configured with Bring Your Own DKIM
+	//   (BYODKIM). DKIM key replication is only supported for identities using Easy
+	//   DKIM.
+	//
+	//   - REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED – The verification failed
+	//   because the specified primary identity is a replica of another identity, and
+	//   multi-level replication is not supported; the primary identity must be a
+	//   non-replica identity.
+	//
+	//   - REPLICATION_PRIMARY_INVALID_REGION – The verification failed due to an
+	//   invalid primary region specified. Ensure you provide a valid AWS region where
+	//   Amazon SES is available and different from the replica region.
 	ErrorType VerificationError
 
 	// The last time a verification attempt was made for this identity.

@@ -1,0 +1,8 @@
+{
+    "id": "4ea9c355-e6b5-4bbd-a803-50a7b486a50b",
+    "type": "feature",
+    "description": "Introduces support for creating DEED (Deterministic Easy-DKIM) identities.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

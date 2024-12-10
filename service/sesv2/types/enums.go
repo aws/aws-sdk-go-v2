@@ -235,8 +235,30 @@ type DkimSigningAttributesOrigin string
 
 // Enum values for DkimSigningAttributesOrigin
 const (
-	DkimSigningAttributesOriginAwsSes   DkimSigningAttributesOrigin = "AWS_SES"
-	DkimSigningAttributesOriginExternal DkimSigningAttributesOrigin = "EXTERNAL"
+	DkimSigningAttributesOriginAwsSes             DkimSigningAttributesOrigin = "AWS_SES"
+	DkimSigningAttributesOriginExternal           DkimSigningAttributesOrigin = "EXTERNAL"
+	DkimSigningAttributesOriginAwsSesAfSouth1     DkimSigningAttributesOrigin = "AWS_SES_AF_SOUTH_1"
+	DkimSigningAttributesOriginAwsSesEuNorth1     DkimSigningAttributesOrigin = "AWS_SES_EU_NORTH_1"
+	DkimSigningAttributesOriginAwsSesApSouth1     DkimSigningAttributesOrigin = "AWS_SES_AP_SOUTH_1"
+	DkimSigningAttributesOriginAwsSesEuWest3      DkimSigningAttributesOrigin = "AWS_SES_EU_WEST_3"
+	DkimSigningAttributesOriginAwsSesEuWest2      DkimSigningAttributesOrigin = "AWS_SES_EU_WEST_2"
+	DkimSigningAttributesOriginAwsSesEuSouth1     DkimSigningAttributesOrigin = "AWS_SES_EU_SOUTH_1"
+	DkimSigningAttributesOriginAwsSesEuWest1      DkimSigningAttributesOrigin = "AWS_SES_EU_WEST_1"
+	DkimSigningAttributesOriginAwsSesApNortheast3 DkimSigningAttributesOrigin = "AWS_SES_AP_NORTHEAST_3"
+	DkimSigningAttributesOriginAwsSesApNortheast2 DkimSigningAttributesOrigin = "AWS_SES_AP_NORTHEAST_2"
+	DkimSigningAttributesOriginAwsSesMeSouth1     DkimSigningAttributesOrigin = "AWS_SES_ME_SOUTH_1"
+	DkimSigningAttributesOriginAwsSesApNortheast1 DkimSigningAttributesOrigin = "AWS_SES_AP_NORTHEAST_1"
+	DkimSigningAttributesOriginAwsSesIlCentral1   DkimSigningAttributesOrigin = "AWS_SES_IL_CENTRAL_1"
+	DkimSigningAttributesOriginAwsSesSaEast1      DkimSigningAttributesOrigin = "AWS_SES_SA_EAST_1"
+	DkimSigningAttributesOriginAwsSesCaCentral1   DkimSigningAttributesOrigin = "AWS_SES_CA_CENTRAL_1"
+	DkimSigningAttributesOriginAwsSesApSoutheast1 DkimSigningAttributesOrigin = "AWS_SES_AP_SOUTHEAST_1"
+	DkimSigningAttributesOriginAwsSesApSoutheast2 DkimSigningAttributesOrigin = "AWS_SES_AP_SOUTHEAST_2"
+	DkimSigningAttributesOriginAwsSesApSoutheast3 DkimSigningAttributesOrigin = "AWS_SES_AP_SOUTHEAST_3"
+	DkimSigningAttributesOriginAwsSesEuCentral1   DkimSigningAttributesOrigin = "AWS_SES_EU_CENTRAL_1"
+	DkimSigningAttributesOriginAwsSesUsEast1      DkimSigningAttributesOrigin = "AWS_SES_US_EAST_1"
+	DkimSigningAttributesOriginAwsSesUsEast2      DkimSigningAttributesOrigin = "AWS_SES_US_EAST_2"
+	DkimSigningAttributesOriginAwsSesUsWest1      DkimSigningAttributesOrigin = "AWS_SES_US_WEST_1"
+	DkimSigningAttributesOriginAwsSesUsWest2      DkimSigningAttributesOrigin = "AWS_SES_US_WEST_2"
 )
 
 // Values returns all known values for DkimSigningAttributesOrigin. Note that this
@@ -247,6 +269,28 @@ func (DkimSigningAttributesOrigin) Values() []DkimSigningAttributesOrigin {
 	return []DkimSigningAttributesOrigin{
 		"AWS_SES",
 		"EXTERNAL",
+		"AWS_SES_AF_SOUTH_1",
+		"AWS_SES_EU_NORTH_1",
+		"AWS_SES_AP_SOUTH_1",
+		"AWS_SES_EU_WEST_3",
+		"AWS_SES_EU_WEST_2",
+		"AWS_SES_EU_SOUTH_1",
+		"AWS_SES_EU_WEST_1",
+		"AWS_SES_AP_NORTHEAST_3",
+		"AWS_SES_AP_NORTHEAST_2",
+		"AWS_SES_ME_SOUTH_1",
+		"AWS_SES_AP_NORTHEAST_1",
+		"AWS_SES_IL_CENTRAL_1",
+		"AWS_SES_SA_EAST_1",
+		"AWS_SES_CA_CENTRAL_1",
+		"AWS_SES_AP_SOUTHEAST_1",
+		"AWS_SES_AP_SOUTHEAST_2",
+		"AWS_SES_AP_SOUTHEAST_3",
+		"AWS_SES_EU_CENTRAL_1",
+		"AWS_SES_US_EAST_1",
+		"AWS_SES_US_EAST_2",
+		"AWS_SES_US_WEST_1",
+		"AWS_SES_US_WEST_2",
 	}
 }
 
@@ -832,11 +876,16 @@ type VerificationError string
 
 // Enum values for VerificationError
 const (
-	VerificationErrorServiceError   VerificationError = "SERVICE_ERROR"
-	VerificationErrorDnsServerError VerificationError = "DNS_SERVER_ERROR"
-	VerificationErrorHostNotFound   VerificationError = "HOST_NOT_FOUND"
-	VerificationErrorTypeNotFound   VerificationError = "TYPE_NOT_FOUND"
-	VerificationErrorInvalidValue   VerificationError = "INVALID_VALUE"
+	VerificationErrorServiceError                            VerificationError = "SERVICE_ERROR"
+	VerificationErrorDnsServerError                          VerificationError = "DNS_SERVER_ERROR"
+	VerificationErrorHostNotFound                            VerificationError = "HOST_NOT_FOUND"
+	VerificationErrorTypeNotFound                            VerificationError = "TYPE_NOT_FOUND"
+	VerificationErrorInvalidValue                            VerificationError = "INVALID_VALUE"
+	VerificationErrorReplicationAccessDenied                 VerificationError = "REPLICATION_ACCESS_DENIED"
+	VerificationErrorReplicationPrimaryNotFound              VerificationError = "REPLICATION_PRIMARY_NOT_FOUND"
+	VerificationErrorReplicationPrimaryByoDkimNotSupported   VerificationError = "REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED"
+	VerificationErrorReplicationReplicaAsPrimaryNotSupported VerificationError = "REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED"
+	VerificationErrorReplicationPrimaryInvalidRegion         VerificationError = "REPLICATION_PRIMARY_INVALID_REGION"
 )
 
 // Values returns all known values for VerificationError. Note that this can be
@@ -850,6 +899,11 @@ func (VerificationError) Values() []VerificationError {
 		"HOST_NOT_FOUND",
 		"TYPE_NOT_FOUND",
 		"INVALID_VALUE",
+		"REPLICATION_ACCESS_DENIED",
+		"REPLICATION_PRIMARY_NOT_FOUND",
+		"REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED",
+		"REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED",
+		"REPLICATION_PRIMARY_INVALID_REGION",
 	}
 }
 

@@ -1032,6 +1032,24 @@ type ContactAnalysis struct {
 	noSmithyDocumentSerde
 }
 
+// The contact configuration for push notification registration.
+type ContactConfiguration struct {
+
+	// The identifier of the contact within the Amazon Connect instance.
+	//
+	// This member is required.
+	ContactId *string
+
+	// Whether to include raw connect message in the push notification payload.
+	// Default is False .
+	IncludeRawMessage bool
+
+	// The role of the participant in the chat conversation.
+	ParticipantRole ParticipantRole
+
+	noSmithyDocumentSerde
+}
+
 // Request object with information to create a contact.
 type ContactDataRequest struct {
 
@@ -3727,14 +3745,10 @@ type MetricFilterV2 struct {
 	// description for the [Flow outcome]metric in the Amazon Connect Administrator Guide.
 	//
 	// For valid values of the metric-level filter BOT_CONVERSATION_OUTCOME_TYPE , see
-	// the description for the [Bot conversations completed]
-	//
-	// in the Amazon Connect Administrator Guide.
+	// the description for the [Bot conversations completed]in the Amazon Connect Administrator Guide.
 	//
 	// For valid values of the metric-level filter BOT_INTENT_OUTCOME_TYPE , see the
-	// description for the [Bot intents completed]
-	//
-	// metric in the Amazon Connect Administrator Guide.
+	// description for the [Bot intents completed]metric in the Amazon Connect Administrator Guide.
 	//
 	// [Bot intents completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric
 	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord

@@ -8233,6 +8233,11 @@ func awsRestjson1_serializeDocumentDkimSigningAttributes(v *types.DkimSigningAtt
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.DomainSigningAttributesOrigin) > 0 {
+		ok := object.Key("DomainSigningAttributesOrigin")
+		ok.String(string(v.DomainSigningAttributesOrigin))
+	}
+
 	if v.DomainSigningPrivateKey != nil {
 		ok := object.Key("DomainSigningPrivateKey")
 		ok.String(*v.DomainSigningPrivateKey)
