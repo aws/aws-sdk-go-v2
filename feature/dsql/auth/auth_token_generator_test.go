@@ -26,7 +26,7 @@ type tokenGenFunc func(ctx context.Context, endpoint, region string, creds aws.C
 func TestGenerateDbConnectAuthToken(t *testing.T) {
 	cases := map[string]dbTokenTestCase{
 		"no region": {
-			endpoint:      "https://oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
+			endpoint:      "https://oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws",
 			expectedError: "no region",
 		},
 		"no endpoint": {
@@ -34,18 +34,12 @@ func TestGenerateDbConnectAuthToken(t *testing.T) {
 			expectedError: "endpoint is required",
 		},
 		"endpoint with scheme": {
-			endpoint:            "https://oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
+			endpoint:            "https://oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws",
 			region:              "us-east-1",
-			expectedHost:        "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
+			expectedHost:        "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws",
 			expectedQueryParams: []string{"Action=DbConnect"},
 		},
 		"endpoint without scheme": {
-			endpoint:            "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
-			region:              "us-east-1",
-			expectedHost:        "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
-			expectedQueryParams: []string{"Action=DbConnect"},
-		},
-		"endpoint without port": {
 			endpoint:            "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws",
 			region:              "us-east-1",
 			expectedHost:        "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws",
