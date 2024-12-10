@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/feature/dsql/token
+module github.com/aws/aws-sdk-go-v2/feature/dsql/auth
 
 go 1.21
 

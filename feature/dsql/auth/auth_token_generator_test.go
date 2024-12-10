@@ -1,4 +1,4 @@
-package token
+package auth
 
 import (
 	"context"
@@ -21,7 +21,7 @@ type dbTokenTestCase struct {
 	expectedError       string
 }
 
-type tokenGenFunc func(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *AuthTokenOptions)) (string, error)
+type tokenGenFunc func(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *TokenOptions)) (string, error)
 
 func TestGenerateDbConnectAuthToken(t *testing.T) {
 	cases := map[string]dbTokenTestCase{
@@ -81,9 +81,9 @@ func TestGenerateDbConnectAuthToken(t *testing.T) {
 	for _, c := range cases {
 		creds := &staticCredentials{AccessKey: "akid", SecretKey: "secret", expiresIn: c.credsExpireIn}
 		defer withTempGlobalTime(time.Date(2024, time.August, 27, 0, 0, 0, 0, time.UTC))()
-		optFns := func(options *AuthTokenOptions) {}
+		optFns := func(options *TokenOptions) {}
 		if c.expires != 0 {
-			optFns = func(options *AuthTokenOptions) {
+			optFns = func(options *TokenOptions) {
 				options.ExpiresIn = c.expires
 			}
 		}
@@ -103,7 +103,7 @@ func TestGenerateDbConnectAuthToken(t *testing.T) {
 	}
 }
 
-func verifyTestCase(f tokenGenFunc, c dbTokenTestCase, creds aws.CredentialsProvider, optFns func(options *AuthTokenOptions), t *testing.T) {
+func verifyTestCase(f tokenGenFunc, c dbTokenTestCase, creds aws.CredentialsProvider, optFns func(options *TokenOptions), t *testing.T) {
 	token, err := f(context.Background(), c.endpoint, c.region, creds, optFns)
 	isErrorExpected := len(c.expectedError) > 0
 	if err != nil && !isErrorExpected {

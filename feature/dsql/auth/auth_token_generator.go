@@ -1,4 +1,4 @@
-package token
+package auth
 
 import (
 	"context"
@@ -17,12 +17,12 @@ import (
 const (
 	vendorCode       = "dsql"
 	emptyPayloadHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-	userAction        = "DbConnect"
-	adminUserAction   = "DbConnectAdmin"
+	userAction       = "DbConnect"
+	adminUserAction  = "DbConnectAdmin"
 )
 
-// AuthTokenOptions is the optional set of configuration properties for AuthToken
-type AuthTokenOptions struct {
+// TokenOptions is the optional set of configuration properties for AuthToken
+type TokenOptions struct {
 	ExpiresIn time.Duration
 }
 
@@ -33,7 +33,7 @@ type AuthTokenOptions struct {
 // * endpoint - Endpoint is the hostname to connect to the database
 // * region - Region is where the database is located
 // * creds - Credentials to use when signing the token
-func GenerateDbConnectAuthToken(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *AuthTokenOptions)) (string, error) {
+func GenerateDbConnectAuthToken(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *TokenOptions)) (string, error) {
 	values := url.Values{
 		"Action": []string{userAction},
 	}
@@ -47,7 +47,7 @@ func GenerateDbConnectAuthToken(ctx context.Context, endpoint, region string, cr
 // * endpoint - Endpoint is the hostname to connect to the database
 // * region - Region is where the database is located
 // * creds - Credentials to use when signing the token
-func GenerateDBConnectAdminAuthToken(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *AuthTokenOptions)) (string, error) {
+func GenerateDBConnectAdminAuthToken(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *TokenOptions)) (string, error) {
 	values := url.Values{
 		"Action": []string{adminUserAction},
 	}
@@ -56,7 +56,7 @@ func GenerateDBConnectAdminAuthToken(ctx context.Context, endpoint, region strin
 
 // All generate token functions are presigned URLs behind the scenes with the scheme stripped.
 // This function abstracts generating this for all use cases
-func generateAuthToken(ctx context.Context, endpoint, region string, values url.Values, signingID string, creds aws.CredentialsProvider, optFns ...func(options *AuthTokenOptions)) (string, error) {
+func generateAuthToken(ctx context.Context, endpoint, region string, values url.Values, signingID string, creds aws.CredentialsProvider, optFns ...func(options *TokenOptions)) (string, error) {
 	if len(region) == 0 {
 		return "", fmt.Errorf("region is required")
 	}
@@ -64,7 +64,7 @@ func generateAuthToken(ctx context.Context, endpoint, region string, values url.
 		return "", fmt.Errorf("endpoint is required")
 	}
 
-	o := AuthTokenOptions{}
+	o := TokenOptions{}
 
 	for _, fn := range optFns {
 		fn(&o)
