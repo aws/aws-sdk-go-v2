@@ -26,29 +26,29 @@ type tokenGenFunc func(ctx context.Context, endpoint, region string, creds aws.C
 func TestGenerateDbConnectAuthToken(t *testing.T) {
 	cases := map[string]dbTokenTestCase{
 		"no region": {
-			endpoint:      "https://prod-instance.us-east-1.rds.amazonaws.com:3306",
+			endpoint:      "https://oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
 			expectedError: "no region",
 		},
 		"no endpoint": {
 			region:        "us-west-2",
-			expectedError: "port",
+			expectedError: "endpoint is required",
 		},
 		"endpoint with scheme": {
-			endpoint:            "https://prod-instance.us-east-1.rds.amazonaws.com:3306",
+			endpoint:            "https://oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
 			region:              "us-east-1",
-			expectedHost:        "prod-instance.us-east-1.rds.amazonaws.com:3306",
+			expectedHost:        "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
 			expectedQueryParams: []string{"Action=DbConnect"},
 		},
 		"endpoint without scheme": {
-			endpoint:            "prod-instance.us-east-1.rds.amazonaws.com:3306",
+			endpoint:            "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
 			region:              "us-east-1",
-			expectedHost:        "prod-instance.us-east-1.rds.amazonaws.com:3306",
+			expectedHost:        "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws:3306",
 			expectedQueryParams: []string{"Action=DbConnect"},
 		},
 		"endpoint without port": {
-			endpoint:            "prod-instance.us-east-1.rds.amazonaws.com",
+			endpoint:            "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws",
 			region:              "us-east-1",
-			expectedHost:        "prod-instance.us-east-1.rds.amazonaws.com",
+			expectedHost:        "oo0bar1baz2quux3quuux4.dsql.us-east-1.on.aws",
 			expectedQueryParams: []string{"Action=DbConnect"},
 		},
 		"endpoint with region and expires": {
@@ -89,7 +89,7 @@ func TestGenerateDbConnectAuthToken(t *testing.T) {
 		}
 		verifyTestCase(GenerateDbConnectAuthToken, c, creds, optFns, t)
 
-		// Update the test case to use Superuser variant
+		// Update the test case to use Admin variant
 		updated := []string{}
 		for _, part := range c.expectedQueryParams {
 			if part == "Action=DbConnect" {
@@ -113,7 +113,7 @@ func verifyTestCase(f tokenGenFunc, c dbTokenTestCase, creds aws.CredentialsProv
 	}
 	// adding a scheme so we can parse it back as a URL. This is because comparing
 	// just direct string comparison was failing since "Action=DbConnect" is a substring or
-	// "Action=DBConnectSuperuser"
+	// "Action=DBConnectAdmin"
 	parsed, err := url.Parse("http://" + token)
 	if err != nil {
 		t.Fatalf("Couldn't parse the token %v to URL after adding a scheme, got: %v", token, err)

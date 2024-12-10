@@ -15,8 +15,8 @@ import (
 )
 
 const (
-	rdsClusterTokenID = "dsql"
-	emptyPayloadHash  = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+	vendorCode       = "dsql"
+	emptyPayloadHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 	userAction        = "DbConnect"
 	adminUserAction   = "DbConnectAdmin"
 )
@@ -30,28 +30,28 @@ type AuthTokenOptions struct {
 //
 // This is the regular user variant, see [GenerateDBConnectAdminAuthToken] for the admin variant
 //
-// * endpoint - Endpoint is the hostname and optional port to connect to the database
+// * endpoint - Endpoint is the hostname to connect to the database
 // * region - Region is where the database is located
 // * creds - Credentials to use when signing the token
 func GenerateDbConnectAuthToken(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *AuthTokenOptions)) (string, error) {
 	values := url.Values{
 		"Action": []string{userAction},
 	}
-	return generateAuthToken(ctx, endpoint, region, values, rdsClusterTokenID, creds, optFns...)
+	return generateAuthToken(ctx, endpoint, region, values, vendorCode, creds, optFns...)
 }
 
 // GenerateDBConnectAdminAuthToken Generates an admin authentication token for IAM authentication to a DSQL database.
 //
 // This is the admin user variant, see [GenerateDbConnectAuthToken] for the regular user variant
 //
-// * endpoint - Endpoint is the hostname and optional port to connect to the database
+// * endpoint - Endpoint is the hostname to connect to the database
 // * region - Region is where the database is located
 // * creds - Credentials to use when signing the token
 func GenerateDBConnectAdminAuthToken(ctx context.Context, endpoint, region string, creds aws.CredentialsProvider, optFns ...func(options *AuthTokenOptions)) (string, error) {
 	values := url.Values{
 		"Action": []string{adminUserAction},
 	}
-	return generateAuthToken(ctx, endpoint, region, values, rdsClusterTokenID, creds, optFns...)
+	return generateAuthToken(ctx, endpoint, region, values, vendorCode, creds, optFns...)
 }
 
 // All generate token functions are presigned URLs behind the scenes with the scheme stripped.
