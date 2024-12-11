@@ -1,8 +1,0 @@
-{
-    "id": "c70da81b-9dc4-4102-873a-518854ffad43",
-    "type": "feature",
-    "description": "Adds networkType parameter to CreateDbInstance API which allows IPv6 support to the InfluxDB endpoint",
-    "modules": [
-        "service/timestreaminfluxdb"
-    ]
-}

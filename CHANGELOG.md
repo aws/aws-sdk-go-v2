@@ -1,3 +1,26 @@
+# Release (2024-12-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.7.0](service/artifact/CHANGELOG.md#v170-2024-12-11)
+  * **Feature**: Add support for listing active customer agreements for the calling AWS Account.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.46.3](service/cloudtrail/CHANGELOG.md#v1463-2024-12-11)
+  * **Documentation**: Doc-only updates for CloudTrail.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.48.1](service/cognitoidentityprovider/CHANGELOG.md#v1481-2024-12-11)
+  * **Documentation**: Updated descriptions for some API operations and parameters, corrected some errors in Cognito user pools
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.6.3](service/controlcatalog/CHANGELOG.md#v163-2024-12-11)
+  * **Documentation**: Minor documentation updates to the content of ImplementationDetails object part of the Control Catalog GetControl API
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.27.0](service/emrserverless/CHANGELOG.md#v1270-2024-12-11)
+  * **Feature**: This release adds support for accessing system profile logs in Lake Formation-enabled jobs.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.25.0](service/migrationhub/CHANGELOG.md#v1250-2024-12-11)
+  * **Feature**: API and documentation updates for AWS MigrationHub related to adding support for listing migration task updates and associating, disassociating and listing source resources
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.40.0](service/sesv2/CHANGELOG.md#v1400-2024-12-11)
+  * **Feature**: Introduces support for multi-region endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.7.0](service/timestreaminfluxdb/CHANGELOG.md#v170-2024-12-11)
+  * **Feature**: Adds networkType parameter to CreateDbInstance API which allows IPv6 support to the InfluxDB endpoint
+
 # Release (2024-12-10)
 
 ## Module Highlights

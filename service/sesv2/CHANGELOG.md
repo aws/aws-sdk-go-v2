@@ -1,3 +1,7 @@
+# v1.40.0 (2024-12-11)
+
+* **Feature**: Introduces support for multi-region endpoint.
+
 # v1.39.0 (2024-12-10)
 
 * **Feature**: Introduces support for creating DEED (Deterministic Easy-DKIM) identities.

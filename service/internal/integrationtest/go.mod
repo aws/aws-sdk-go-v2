@@ -14,13 +14,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.56.1
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.27.8
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.46.2
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.46.3
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.43.3
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.49.2
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.7
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.37.1
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.48.0
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.48.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.44.5

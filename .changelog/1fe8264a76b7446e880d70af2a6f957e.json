@@ -1,8 +1,0 @@
-{
-    "id": "1fe8264a-76b7-446e-880d-70af2a6f957e",
-    "type": "feature",
-    "description": "API and documentation updates for AWS MigrationHub related to adding support for listing migration task updates and associating, disassociating and listing source resources",
-    "modules": [
-        "service/migrationhub"
-    ]
-}

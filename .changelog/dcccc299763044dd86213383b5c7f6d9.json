@@ -1,8 +1,0 @@
-{
-    "id": "dcccc299-7630-44dd-8621-3383b5c7f6d9",
-    "type": "documentation",
-    "description": "Minor documentation updates to the content of ImplementationDetails object part of the Control Catalog GetControl API",
-    "modules": [
-        "service/controlcatalog"
-    ]
-}
