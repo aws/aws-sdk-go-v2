@@ -109,7 +109,7 @@ type AdminLinkProviderForUserInput struct {
 	// This member is required.
 	SourceUser *types.ProviderUserIdentifierType
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool where you want to link a federated identity.
 	//
 	// This member is required.
 	UserPoolId *string

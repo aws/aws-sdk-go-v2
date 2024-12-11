@@ -1035,6 +1035,11 @@ func awsAwsjson10_serializeOpDocumentCreateDbInstanceInput(v *CreateDbInstanceIn
 		ok.String(*v.Name)
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("networkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.Organization != nil {
 		ok := object.Key("organization")
 		ok.String(*v.Organization)

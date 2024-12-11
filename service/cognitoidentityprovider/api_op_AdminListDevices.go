@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists a user's registered devices.
+// Lists a user's registered devices. Remembered devices are used in
+// authentication services where you offer a "Remember me" option for users who you
+// want to permit to sign in without MFA from a trusted device. Users can bypass
+// MFA while your application performs device SRP authentication on the back end.
+// For more information, see [Working with devices].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -24,6 +28,7 @@ import (
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
+// [Working with devices]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminListDevices(ctx context.Context, params *AdminListDevicesInput, optFns ...func(*Options)) (*AdminListDevicesOutput, error) {
@@ -44,7 +49,7 @@ func (c *Client) AdminListDevices(ctx context.Context, params *AdminListDevicesI
 // Represents the request to list devices, as an administrator.
 type AdminListDevicesInput struct {
 
-	// The user pool ID.
+	// The ID of the user pool where the device owner is a user.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -58,7 +63,8 @@ type AdminListDevicesInput struct {
 	// This member is required.
 	Username *string
 
-	// The limit of the devices request.
+	// The maximum number of devices that you want Amazon Cognito to return in the
+	// response.
 	Limit *int32
 
 	// This API operation returns a limited number of results. The pagination token is
@@ -75,7 +81,8 @@ type AdminListDevicesInput struct {
 // Lists the device's response, as an administrator.
 type AdminListDevicesOutput struct {
 
-	// The devices in the list of devices response.
+	// An array of devices and their information. Each entry that's returned includes
+	// device information, last-accessed and created dates, and the device key.
 	Devices []types.DeviceType
 
 	// The identifier that Amazon Cognito returned with the previous request to this

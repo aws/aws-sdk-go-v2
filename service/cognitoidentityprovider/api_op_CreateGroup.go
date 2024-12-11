@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new group in the specified user pool.
+// Creates a new group in the specified user pool. For more information about user
+// pool groups see [Adding groups to a user pool].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -25,6 +26,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Adding groups to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-user-groups.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
 	if params == nil {
@@ -43,17 +45,17 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 
 type CreateGroupInput struct {
 
-	// The name of the group. Must be unique.
+	// A name for the group. This name must be unique in your user pool.
 	//
 	// This member is required.
 	GroupName *string
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool where you want to create a user group.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// A string containing the description of the group.
+	// A description of the group that you're creating.
 	Description *string
 
 	// A non-negative integer value that specifies the precedence of this group
@@ -73,7 +75,12 @@ type CreateGroupInput struct {
 	// The default Precedence value is null. The maximum Precedence value is 2^31-1 .
 	Precedence *int32
 
-	// The role Amazon Resource Name (ARN) for the group.
+	// The Amazon Resource Name (ARN) for the IAM role that you want to associate with
+	// the group. A group role primarily declares a preferred role for the credentials
+	// that you get from an identity pool. Amazon Cognito ID tokens have a
+	// cognito:preferred_role claim that presents the highest-precedence group that a
+	// user belongs to. Both ID and access tokens also contain a cognito:groups claim
+	// that list all the groups that a user is a member of.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -81,7 +88,7 @@ type CreateGroupInput struct {
 
 type CreateGroupOutput struct {
 
-	// The group object for the group.
+	// The response object for a created group.
 	Group *types.GroupType
 
 	// Metadata pertaining to the operation's result.

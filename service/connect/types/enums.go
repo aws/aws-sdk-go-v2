@@ -522,6 +522,27 @@ func (CurrentMetricName) Values() []CurrentMetricName {
 	}
 }
 
+type DeviceType string
+
+// Enum values for DeviceType
+const (
+	DeviceTypeGcm         DeviceType = "GCM"
+	DeviceTypeApns        DeviceType = "APNS"
+	DeviceTypeApnsSandbox DeviceType = "APNS_SANDBOX"
+)
+
+// Values returns all known values for DeviceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceType) Values() []DeviceType {
+	return []DeviceType{
+		"GCM",
+		"APNS",
+		"APNS_SANDBOX",
+	}
+}
+
 type DirectoryType string
 
 // Enum values for DirectoryType

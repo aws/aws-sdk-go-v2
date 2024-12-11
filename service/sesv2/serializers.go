@@ -1382,6 +1382,101 @@ func awsRestjson1_serializeOpDocumentCreateImportJobInput(v *CreateImportJobInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateMultiRegionEndpoint struct {
+}
+
+func (*awsRestjson1_serializeOpCreateMultiRegionEndpoint) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateMultiRegionEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateMultiRegionEndpointInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/multi-region-endpoints")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateMultiRegionEndpointInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateMultiRegionEndpointInput(v *CreateMultiRegionEndpointInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateMultiRegionEndpointInput(v *CreateMultiRegionEndpointInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Details != nil {
+		ok := object.Key("Details")
+		if err := awsRestjson1_serializeDocumentDetails(v.Details, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EndpointName != nil {
+		ok := object.Key("EndpointName")
+		ok.String(*v.EndpointName)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteConfigurationSet struct {
 }
 
@@ -2041,6 +2136,77 @@ func awsRestjson1_serializeOpHttpBindingsDeleteEmailTemplateInput(v *DeleteEmail
 	}
 	if v.TemplateName != nil {
 		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteMultiRegionEndpoint struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteMultiRegionEndpoint) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteMultiRegionEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteMultiRegionEndpointInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/multi-region-endpoints/{EndpointName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteMultiRegionEndpointInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteMultiRegionEndpointInput(v *DeleteMultiRegionEndpointInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EndpointName == nil || len(*v.EndpointName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member EndpointName must not be empty")}
+	}
+	if v.EndpointName != nil {
+		if err := encoder.SetURI("EndpointName").String(*v.EndpointName); err != nil {
 			return err
 		}
 	}
@@ -3530,6 +3696,77 @@ func awsRestjson1_serializeOpHttpBindingsGetMessageInsightsInput(v *GetMessageIn
 	return nil
 }
 
+type awsRestjson1_serializeOpGetMultiRegionEndpoint struct {
+}
+
+func (*awsRestjson1_serializeOpGetMultiRegionEndpoint) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetMultiRegionEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMultiRegionEndpointInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/multi-region-endpoints/{EndpointName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetMultiRegionEndpointInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetMultiRegionEndpointInput(v *GetMultiRegionEndpointInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.EndpointName == nil || len(*v.EndpointName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member EndpointName must not be empty")}
+	}
+	if v.EndpointName != nil {
+		if err := encoder.SetURI("EndpointName").String(*v.EndpointName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetSuppressedDestination struct {
 }
 
@@ -4466,6 +4703,76 @@ func awsRestjson1_serializeOpDocumentListImportJobsInput(v *ListImportJobsInput,
 	if v.PageSize != nil {
 		ok := object.Key("PageSize")
 		ok.Integer(*v.PageSize)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListMultiRegionEndpoints struct {
+}
+
+func (*awsRestjson1_serializeOpListMultiRegionEndpoints) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListMultiRegionEndpoints) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMultiRegionEndpointsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/multi-region-endpoints")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListMultiRegionEndpointsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListMultiRegionEndpointsInput(v *ListMultiRegionEndpointsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		encoder.SetQuery("PageSize").Integer(*v.PageSize)
 	}
 
 	return nil
@@ -6770,6 +7077,11 @@ func awsRestjson1_serializeOpDocumentSendBulkEmailInput(v *SendBulkEmailInput, v
 		}
 	}
 
+	if v.EndpointId != nil {
+		ok := object.Key("EndpointId")
+		ok.String(*v.EndpointId)
+	}
+
 	if v.FeedbackForwardingEmailAddress != nil {
 		ok := object.Key("FeedbackForwardingEmailAddress")
 		ok.String(*v.FeedbackForwardingEmailAddress)
@@ -6988,6 +7300,11 @@ func awsRestjson1_serializeOpDocumentSendEmailInput(v *SendEmailInput, value smi
 		if err := awsRestjson1_serializeDocumentMessageTagList(v.EmailTags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.EndpointId != nil {
+		ok := object.Key("EndpointId")
+		ok.String(*v.EndpointId)
 	}
 
 	if v.FeedbackForwardingEmailAddress != nil {
@@ -8218,6 +8535,20 @@ func awsRestjson1_serializeDocumentDestination(v *types.Destination, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDetails(v *types.Details, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RoutesDetails != nil {
+		ok := object.Key("RoutesDetails")
+		if err := awsRestjson1_serializeDocumentRoutesDetails(v.RoutesDetails, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDimensions(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8232,6 +8563,11 @@ func awsRestjson1_serializeDocumentDimensions(v map[string]string, value smithyj
 func awsRestjson1_serializeDocumentDkimSigningAttributes(v *types.DkimSigningAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.DomainSigningAttributesOrigin) > 0 {
+		ok := object.Key("DomainSigningAttributesOrigin")
+		ok.String(string(v.DomainSigningAttributesOrigin))
+	}
 
 	if v.DomainSigningPrivateKey != nil {
 		ok := object.Key("DomainSigningPrivateKey")
@@ -9005,6 +9341,31 @@ func awsRestjson1_serializeDocumentReputationOptions(v *types.ReputationOptions,
 		ok.Boolean(v.ReputationMetricsEnabled)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteDetails(v *types.RouteDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRoutesDetails(v []types.RouteDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRouteDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

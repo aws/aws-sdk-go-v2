@@ -494,6 +494,18 @@ func TestCheckSnapshot_CreatePrompt(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePushNotificationRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePushNotificationRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePushNotificationRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateQueue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateQueue(context.Background(), nil, func(o *Options) {
@@ -787,6 +799,18 @@ func TestCheckSnapshot_DeletePrompt(t *testing.T) {
 	_, err := svc.DeletePrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeletePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePushNotificationRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePushNotificationRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePushNotificationRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3733,6 +3757,18 @@ func TestUpdateSnapshot_CreatePrompt(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePushNotificationRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePushNotificationRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePushNotificationRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateQueue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateQueue(context.Background(), nil, func(o *Options) {
@@ -4026,6 +4062,18 @@ func TestUpdateSnapshot_DeletePrompt(t *testing.T) {
 	_, err := svc.DeletePrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeletePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePushNotificationRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePushNotificationRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePushNotificationRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

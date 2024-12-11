@@ -86,6 +86,18 @@ func TestCheckSnapshot_AssociateDiscoveredResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateSourceResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSourceResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateSourceResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateProgressUpdateStream(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateProgressUpdateStream(context.Background(), nil, func(o *Options) {
@@ -158,6 +170,18 @@ func TestCheckSnapshot_DisassociateDiscoveredResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateSourceResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSourceResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateSourceResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ImportMigrationTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportMigrationTask(context.Background(), nil, func(o *Options) {
@@ -218,11 +242,35 @@ func TestCheckSnapshot_ListMigrationTasks(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListMigrationTaskUpdates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMigrationTaskUpdates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMigrationTaskUpdates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListProgressUpdateStreams(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProgressUpdateStreams(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListProgressUpdateStreams")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSourceResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSourceResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSourceResources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -282,6 +330,18 @@ func TestUpdateSnapshot_AssociateDiscoveredResource(t *testing.T) {
 	_, err := svc.AssociateDiscoveredResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateDiscoveredResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateSourceResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSourceResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateSourceResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -361,6 +421,18 @@ func TestUpdateSnapshot_DisassociateDiscoveredResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateSourceResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSourceResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateSourceResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ImportMigrationTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportMigrationTask(context.Background(), nil, func(o *Options) {
@@ -421,11 +493,35 @@ func TestUpdateSnapshot_ListMigrationTasks(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListMigrationTaskUpdates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMigrationTaskUpdates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMigrationTaskUpdates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListProgressUpdateStreams(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProgressUpdateStreams(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListProgressUpdateStreams")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSourceResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSourceResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSourceResources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

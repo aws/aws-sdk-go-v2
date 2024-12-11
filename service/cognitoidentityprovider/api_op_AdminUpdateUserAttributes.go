@@ -26,15 +26,16 @@ import (
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
 // Cognito Developer Guide.
 //
-// Updates the specified user's attributes, including developer attributes, as an
-// administrator. Works on any user. To delete an attribute from your user, submit
-// the attribute in your API request with a blank value.
+// Updates the specified user's attributes. To delete an attribute from your user,
+// submit the attribute in your API request with a blank value.
 //
 // For custom attributes, you must prepend the custom: prefix to the attribute
 // name.
 //
-// In addition to updating user attributes, this API can also be used to mark
-// phone and email as verified.
+// This operation can set a user's email address or phone number as verified and
+// permit immediate sign-in in user pools that require verification of these
+// attributes. To do this, set the email_verified or phone_number_verified
+// attribute to true .
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -92,7 +93,7 @@ type AdminUpdateUserAttributesInput struct {
 	// This member is required.
 	UserAttributes []types.AttributeType
 
-	// The user pool ID for the user pool where you want to update user attributes.
+	// The ID of the user pool where you want to update user attributes.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -121,8 +122,8 @@ type AdminUpdateUserAttributesInput struct {
 	//
 	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
 	//
-	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
-	// do the following:
+	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
+	// the following:
 	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
@@ -131,8 +132,8 @@ type AdminUpdateUserAttributesInput struct {
 	//
 	//   - Validate the ClientMetadata value.
 	//
-	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
-	//   sensitive information.
+	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
+	//   parameter.
 	//
 	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string

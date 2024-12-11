@@ -3015,7 +3015,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Represents a predictive scaling policy configuration.\n      </p>"
+                "smithy.api#documentation": "<p>\n         Represents a predictive scaling policy configuration. Predictive scaling is supported on Amazon ECS services.\n      </p>"
             }
         },
         "com.amazonaws.applicationautoscaling#PredictiveScalingPredefinedLoadMetricSpecification": {

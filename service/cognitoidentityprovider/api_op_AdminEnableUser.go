@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the specified user as an administrator. Works on any user.
+// Activate sign-in for a user profile that previously had sign-in access disabled.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -43,7 +43,7 @@ func (c *Client) AdminEnableUser(ctx context.Context, params *AdminEnableUserInp
 // Represents the request that enables the user as an administrator.
 type AdminEnableUserInput struct {
 
-	// The user pool ID for the user pool where you want to enable the user.
+	// The ID of the user pool where you want to activate sign-in for the user.
 	//
 	// This member is required.
 	UserPoolId *string

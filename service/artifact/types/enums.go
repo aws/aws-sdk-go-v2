@@ -7,7 +7,7 @@ type AcceptanceType string
 // Enum values for AcceptanceType
 const (
 	// Do not require explicit click-through acceptance of the Term associated with
-	// this Report.
+	// this Report
 	AcceptanceTypePassthrough AcceptanceType = "PASSTHROUGH"
 	// Require explicit click-through acceptance of the Term associated with this
 	// Report.
@@ -25,13 +25,53 @@ func (AcceptanceType) Values() []AcceptanceType {
 	}
 }
 
+type AgreementType string
+
+// Enum values for AgreementType
+const (
+	AgreementTypeCustom   AgreementType = "CUSTOM"
+	AgreementTypeDefault  AgreementType = "DEFAULT"
+	AgreementTypeModified AgreementType = "MODIFIED"
+)
+
+// Values returns all known values for AgreementType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgreementType) Values() []AgreementType {
+	return []AgreementType{
+		"CUSTOM",
+		"DEFAULT",
+		"MODIFIED",
+	}
+}
+
+type CustomerAgreementState string
+
+// Enum values for CustomerAgreementState
+const (
+	CustomerAgreementStateActive             CustomerAgreementState = "ACTIVE"
+	CustomerAgreementStateCustomerTerminated CustomerAgreementState = "CUSTOMER_TERMINATED"
+	CustomerAgreementStateAwsTerminated      CustomerAgreementState = "AWS_TERMINATED"
+)
+
+// Values returns all known values for CustomerAgreementState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomerAgreementState) Values() []CustomerAgreementState {
+	return []CustomerAgreementState{
+		"ACTIVE",
+		"CUSTOMER_TERMINATED",
+		"AWS_TERMINATED",
+	}
+}
+
 type NotificationSubscriptionStatus string
 
 // Enum values for NotificationSubscriptionStatus
 const (
-	// The account is subscribed for notification.
-	NotificationSubscriptionStatusSubscribed NotificationSubscriptionStatus = "SUBSCRIBED"
-	// The account is not subscribed for notification.
+	NotificationSubscriptionStatusSubscribed    NotificationSubscriptionStatus = "SUBSCRIBED"
 	NotificationSubscriptionStatusNotSubscribed NotificationSubscriptionStatus = "NOT_SUBSCRIBED"
 )
 
@@ -51,9 +91,7 @@ type PublishedState string
 
 // Enum values for PublishedState
 const (
-	// The resource is published for consumption.
-	PublishedStatePublished PublishedState = "PUBLISHED"
-	// The resource is not published for consumption.
+	PublishedStatePublished   PublishedState = "PUBLISHED"
 	PublishedStateUnpublished PublishedState = "UNPUBLISHED"
 )
 

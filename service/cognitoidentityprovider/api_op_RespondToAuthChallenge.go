@@ -200,8 +200,8 @@ type RespondToAuthChallengeInput struct {
 	//
 	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
 	//
-	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
-	// do the following:
+	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
+	// the following:
 	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
@@ -210,8 +210,8 @@ type RespondToAuthChallengeInput struct {
 	//
 	//   - Validate the ClientMetadata value.
 	//
-	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
-	//   sensitive information.
+	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
+	//   parameter.
 	//
 	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
@@ -227,6 +227,10 @@ type RespondToAuthChallengeInput struct {
 	// address, or location. Amazon Cognito advanced security evaluates the risk of an
 	// authentication event based on the context that your app generates and passes to
 	// Amazon Cognito when it makes API requests.
+	//
+	// For more information, see [Collecting data for threat protection in applications].
+	//
+	// [Collecting data for threat protection in applications]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html
 	UserContextData *types.UserContextDataType
 
 	noSmithyDocumentSerde

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the device, as an administrator.
+// Given the device key, returns details for a user' device. For more information,
+// see [Working with devices].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -24,6 +25,7 @@ import (
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
+// [Working with devices]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminGetDevice(ctx context.Context, params *AdminGetDeviceInput, optFns ...func(*Options)) (*AdminGetDeviceOutput, error) {
@@ -44,12 +46,15 @@ func (c *Client) AdminGetDevice(ctx context.Context, params *AdminGetDeviceInput
 // Represents the request to get the device, as an administrator.
 type AdminGetDeviceInput struct {
 
-	// The device key.
+	// The key of the device that you want to delete. You can get device IDs in the
+	// response to an [AdminListDevices]request.
+	//
+	// [AdminListDevices]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminListDevices.html
 	//
 	// This member is required.
 	DeviceKey *string
 
-	// The user pool ID.
+	// The ID of the user pool where the device owner is a user.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -69,7 +74,8 @@ type AdminGetDeviceInput struct {
 // Gets the device response, as an administrator.
 type AdminGetDeviceOutput struct {
 
-	// The device.
+	// Details of the requested device. Includes device information, last-accessed and
+	// created dates, and the device key.
 	//
 	// This member is required.
 	Device *types.DeviceType

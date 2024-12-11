@@ -1,3 +1,38 @@
+# Release (2024-12-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.7.0](service/artifact/CHANGELOG.md#v170-2024-12-11)
+  * **Feature**: Add support for listing active customer agreements for the calling AWS Account.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.46.3](service/cloudtrail/CHANGELOG.md#v1463-2024-12-11)
+  * **Documentation**: Doc-only updates for CloudTrail.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.48.1](service/cognitoidentityprovider/CHANGELOG.md#v1481-2024-12-11)
+  * **Documentation**: Updated descriptions for some API operations and parameters, corrected some errors in Cognito user pools
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.6.3](service/controlcatalog/CHANGELOG.md#v163-2024-12-11)
+  * **Documentation**: Minor documentation updates to the content of ImplementationDetails object part of the Control Catalog GetControl API
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.27.0](service/emrserverless/CHANGELOG.md#v1270-2024-12-11)
+  * **Feature**: This release adds support for accessing system profile logs in Lake Formation-enabled jobs.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.25.0](service/migrationhub/CHANGELOG.md#v1250-2024-12-11)
+  * **Feature**: API and documentation updates for AWS MigrationHub related to adding support for listing migration task updates and associating, disassociating and listing source resources
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.40.0](service/sesv2/CHANGELOG.md#v1400-2024-12-11)
+  * **Feature**: Introduces support for multi-region endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.7.0](service/timestreaminfluxdb/CHANGELOG.md#v170-2024-12-11)
+  * **Feature**: Adds networkType parameter to CreateDbInstance API which allows IPv6 support to the InfluxDB endpoint
+
+# Release (2024-12-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.34.2](service/applicationautoscaling/CHANGELOG.md#v1342-2024-12-10)
+  * **Documentation**: Doc only update for AAS Predictive Scaling policy configuration API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.120.0](service/connect/CHANGELOG.md#v11200-2024-12-10)
+  * **Feature**: Add support for Push Notifications for Amazon Connect chat. With Push Notifications enabled an alert could be sent to customers about new messages even when they aren't actively using the mobile application.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.21.0](service/ivsrealtime/CHANGELOG.md#v1210-2024-12-10)
+  * **Feature**: IVS Real-Time now offers customers the ability to customize thumbnails recording mode and interval for both Individual Participant Recording (IPR) and Server-Side Compositions (SSC).
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.39.0](service/sesv2/CHANGELOG.md#v1390-2024-12-10)
+  * **Feature**: Introduces support for creating DEED (Deterministic Easy-DKIM) identities.
+
 # Release (2024-12-09)
 
 ## Module Highlights

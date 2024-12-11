@@ -18,6 +18,9 @@ import (
 // preference is set, a challenge to choose an MFA option will be returned during
 // sign-in.
 //
+// This operation doesn't reset an existing TOTP MFA for a user. To register a new
+// TOTP factor for a user, make an [AssociateSoftwareToken]request. For more information, see [TOTP software token MFA].
+//
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
 // credentials to authorize requests, and you must grant yourself the corresponding
@@ -29,8 +32,10 @@ import (
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
+// [AssociateSoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+// [TOTP software token MFA]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa-totp.html
 func (c *Client) AdminSetUserMFAPreference(ctx context.Context, params *AdminSetUserMFAPreferenceInput, optFns ...func(*Options)) (*AdminSetUserMFAPreferenceOutput, error) {
 	if params == nil {
 		params = &AdminSetUserMFAPreferenceInput{}

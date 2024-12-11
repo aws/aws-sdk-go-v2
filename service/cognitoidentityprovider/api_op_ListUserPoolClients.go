@@ -44,7 +44,7 @@ func (c *Client) ListUserPoolClients(ctx context.Context, params *ListUserPoolCl
 // Represents the request to list the user pool clients.
 type ListUserPoolClientsInput struct {
 
-	// The user pool ID for the user pool where you want to list user pool clients.
+	// The ID of the user pool where you want to list user pool clients.
 	//
 	// This member is required.
 	UserPoolId *string

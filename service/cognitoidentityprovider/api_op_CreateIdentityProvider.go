@@ -12,7 +12,9 @@ import (
 )
 
 // Adds a configuration and trust relationship between a third-party identity
-// provider (IdP) and a user pool.
+// provider (IdP) and a user pool. Amazon Cognito accepts sign-in with third-party
+// identity providers through managed login and OIDC relying-party libraries. For
+// more information, see [Third-party IdP sign-in].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -26,6 +28,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Third-party IdP sign-in]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) CreateIdentityProvider(ctx context.Context, params *CreateIdentityProviderInput, optFns ...func(*Options)) (*CreateIdentityProviderOutput, error) {
 	if params == nil {
@@ -141,25 +144,38 @@ type CreateIdentityProviderInput struct {
 	// This member is required.
 	ProviderDetails map[string]string
 
-	// The IdP name.
+	// The name that you want to assign to the IdP. You can pass the identity provider
+	// name in the identity_provider query parameter of requests to the [Authorize endpoint] to silently
+	// redirect to sign-in with the associated IdP.
+	//
+	// [Authorize endpoint]: https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html
 	//
 	// This member is required.
 	ProviderName *string
 
-	// The IdP type.
+	// The type of IdP that you want to add. Amazon Cognito supports OIDC, SAML 2.0,
+	// Login With Amazon, Sign In With Apple, Google, and Facebook IdPs.
 	//
 	// This member is required.
 	ProviderType types.IdentityProviderTypeType
 
-	// The user pool ID.
+	// The Id of the user pool where you want to create an IdP.
 	//
 	// This member is required.
 	UserPoolId *string
 
 	// A mapping of IdP attributes to standard and custom user pool attributes.
+	// Specify a user pool attribute as the key of the key-value pair, and the IdP
+	// attribute claim name as the value.
 	AttributeMapping map[string]string
 
-	// A list of IdP identifiers.
+	// An array of IdP identifiers, for example "IdPIdentifiers": [ "MyIdP", "MyIdP2" ]
+	// . Identifiers are friendly names that you can pass in the idp_identifier query
+	// parameter of requests to the [Authorize endpoint]to silently redirect to sign-in with the
+	// associated IdP. Identifiers in a domain format also enable the use of [email-address matching with SAML providers].
+	//
+	// [Authorize endpoint]: https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html
+	// [email-address matching with SAML providers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managing-saml-idp-naming.html
 	IdpIdentifiers []string
 
 	noSmithyDocumentSerde
@@ -167,7 +183,7 @@ type CreateIdentityProviderInput struct {
 
 type CreateIdentityProviderOutput struct {
 
-	// The newly created IdP object.
+	// The details of the new user pool IdP.
 	//
 	// This member is required.
 	IdentityProvider *types.IdentityProviderType

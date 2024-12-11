@@ -385,7 +385,9 @@ type PredictiveScalingMetricStat struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a predictive scaling policy configuration.
+//	Represents a predictive scaling policy configuration. Predictive scaling is
+//
+// supported on Amazon ECS services.
 type PredictiveScalingPolicyConfiguration struct {
 
 	//  This structure includes the metrics and target utilization to use for

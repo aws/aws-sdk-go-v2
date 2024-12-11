@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This IAM-authenticated API operation confirms user sign-up as an administrator.
-// Unlike [ConfirmSignUp], your IAM credentials authorize user account confirmation. No
-// confirmation code is required.
+// Confirms user sign-up as an administrator. Unlike [ConfirmSignUp], your IAM credentials
+// authorize user account confirmation. No confirmation code is required.
 //
 // This request sets a user account active in a user pool that [requires confirmation of new user accounts] before they can
 // sign in. You can configure your user pool to not send confirmation codes to new
@@ -28,6 +27,10 @@ import (
 // [Signing Amazon Web Services API Requests]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// To configure your user pool to require administrative confirmation of users,
+// set AllowAdminCreateUserOnly to true in a CreateUserPool or UpdateUserPool
+// request.
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [ConfirmSignUp]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmSignUp.html
@@ -51,7 +54,7 @@ func (c *Client) AdminConfirmSignUp(ctx context.Context, params *AdminConfirmSig
 // Confirm a user's registration as a user pool administrator.
 type AdminConfirmSignUpInput struct {
 
-	// The user pool ID for which you want to confirm user registration.
+	// The ID of the user pool where you want to confirm a user's sign-up request.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -79,8 +82,8 @@ type AdminConfirmSignUpInput struct {
 	//
 	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
 	//
-	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
-	// do the following:
+	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
+	// the following:
 	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
@@ -89,8 +92,8 @@ type AdminConfirmSignUpInput struct {
 	//
 	//   - Validate the ClientMetadata value.
 	//
-	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
-	//   sensitive information.
+	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
+	//   parameter.
 	//
 	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string

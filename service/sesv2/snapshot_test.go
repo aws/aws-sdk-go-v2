@@ -230,6 +230,18 @@ func TestCheckSnapshot_CreateImportJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateMultiRegionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMultiRegionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateMultiRegionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteConfigurationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConfigurationSet(context.Background(), nil, func(o *Options) {
@@ -331,6 +343,18 @@ func TestCheckSnapshot_DeleteEmailTemplate(t *testing.T) {
 	_, err := svc.DeleteEmailTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteEmailTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteMultiRegionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMultiRegionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteMultiRegionEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -590,6 +614,18 @@ func TestCheckSnapshot_GetMessageInsights(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMultiRegionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMultiRegionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMultiRegionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSuppressedDestination(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSuppressedDestination(context.Background(), nil, func(o *Options) {
@@ -727,6 +763,18 @@ func TestCheckSnapshot_ListImportJobs(t *testing.T) {
 	_, err := svc.ListImportJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListImportJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListMultiRegionEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMultiRegionEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMultiRegionEndpoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1333,6 +1381,18 @@ func TestUpdateSnapshot_CreateImportJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateMultiRegionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMultiRegionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateMultiRegionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteConfigurationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConfigurationSet(context.Background(), nil, func(o *Options) {
@@ -1434,6 +1494,18 @@ func TestUpdateSnapshot_DeleteEmailTemplate(t *testing.T) {
 	_, err := svc.DeleteEmailTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteEmailTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteMultiRegionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMultiRegionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteMultiRegionEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1693,6 +1765,18 @@ func TestUpdateSnapshot_GetMessageInsights(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMultiRegionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMultiRegionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMultiRegionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSuppressedDestination(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSuppressedDestination(context.Background(), nil, func(o *Options) {
@@ -1830,6 +1914,18 @@ func TestUpdateSnapshot_ListImportJobs(t *testing.T) {
 	_, err := svc.ListImportJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListImportJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListMultiRegionEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMultiRegionEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMultiRegionEndpoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

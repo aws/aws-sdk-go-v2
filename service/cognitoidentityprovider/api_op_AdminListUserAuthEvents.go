@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A history of user activity and any risks detected as part of Amazon Cognito
-// advanced security.
+// Requests a history of user activity and any risks detected as part of Amazon
+// Cognito threat protection. For more information, see [Viewing user event history].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -26,6 +26,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Viewing user event history]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-event-user-history
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminListUserAuthEvents(ctx context.Context, params *AdminListUserAuthEventsInput, optFns ...func(*Options)) (*AdminListUserAuthEventsOutput, error) {
 	if params == nil {
@@ -44,7 +45,7 @@ func (c *Client) AdminListUserAuthEvents(ctx context.Context, params *AdminListU
 
 type AdminListUserAuthEventsInput struct {
 
-	// The user pool ID.
+	// The Id of the user pool that contains the user profile with the logged events.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -62,7 +63,12 @@ type AdminListUserAuthEventsInput struct {
 	// set MaxResults to 0, or if you don't include a MaxResults parameter.
 	MaxResults *int32
 
-	// A pagination token.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -74,7 +80,10 @@ type AdminListUserAuthEventsOutput struct {
 	// EventRisk , and EventResponse .
 	AuthEvents []types.AuthEventType
 
-	// A pagination token.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

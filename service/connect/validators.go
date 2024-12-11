@@ -730,6 +730,26 @@ func (m *validateOpCreatePrompt) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePushNotificationRegistration struct {
+}
+
+func (*validateOpCreatePushNotificationRegistration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePushNotificationRegistration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePushNotificationRegistrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePushNotificationRegistrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateQueue struct {
 }
 
@@ -1225,6 +1245,26 @@ func (m *validateOpDeletePrompt) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePushNotificationRegistration struct {
+}
+
+func (*validateOpDeletePushNotificationRegistration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePushNotificationRegistration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePushNotificationRegistrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePushNotificationRegistrationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5494,6 +5534,10 @@ func addOpCreatePromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePrompt{}, middleware.After)
 }
 
+func addOpCreatePushNotificationRegistrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePushNotificationRegistration{}, middleware.After)
+}
+
 func addOpCreateQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateQueue{}, middleware.After)
 }
@@ -5592,6 +5636,10 @@ func addOpDeletePredefinedAttributeValidationMiddleware(stack *middleware.Stack)
 
 func addOpDeletePromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePrompt{}, middleware.After)
+}
+
+func addOpDeletePushNotificationRegistrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePushNotificationRegistration{}, middleware.After)
 }
 
 func addOpDeleteQueueValidationMiddleware(stack *middleware.Stack) error {
@@ -6513,6 +6561,21 @@ func validateContactAnalysis(v *types.ContactAnalysis) error {
 		if err := validateTranscript(v.Transcript); err != nil {
 			invalidParams.AddNested("Transcript", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContactConfiguration(v *types.ContactConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContactConfiguration"}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9130,6 +9193,37 @@ func validateOpCreatePromptInput(v *CreatePromptInput) error {
 	}
 }
 
+func validateOpCreatePushNotificationRegistrationInput(v *CreatePushNotificationRegistrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePushNotificationRegistrationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.PinpointAppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PinpointAppArn"))
+	}
+	if v.DeviceToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceToken"))
+	}
+	if len(v.DeviceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceType"))
+	}
+	if v.ContactConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactConfiguration"))
+	} else if v.ContactConfiguration != nil {
+		if err := validateContactConfiguration(v.ContactConfiguration); err != nil {
+			invalidParams.AddNested("ContactConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateQueueInput(v *CreateQueueInput) error {
 	if v == nil {
 		return nil
@@ -9655,6 +9749,27 @@ func validateOpDeletePromptInput(v *DeletePromptInput) error {
 	}
 	if v.PromptId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PromptId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePushNotificationRegistrationInput(v *DeletePushNotificationRegistrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePushNotificationRegistrationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

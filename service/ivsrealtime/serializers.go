@@ -3256,6 +3256,13 @@ func awsRestjson1_serializeDocumentAutoParticipantRecordingConfiguration(v *type
 		ok.String(*v.StorageConfigurationArn)
 	}
 
+	if v.ThumbnailConfiguration != nil {
+		ok := object.Key("thumbnailConfiguration")
+		if err := awsRestjson1_serializeDocumentParticipantThumbnailConfiguration(v.ThumbnailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3273,6 +3280,38 @@ func awsRestjson1_serializeDocumentChannelDestinationConfiguration(v *types.Chan
 		ok.String(*v.EncoderConfigurationArn)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompositionThumbnailConfiguration(v *types.CompositionThumbnailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Storage != nil {
+		ok := object.Key("storage")
+		if err := awsRestjson1_serializeDocumentThumbnailStorageTypeList(v.Storage, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetIntervalSeconds != nil {
+		ok := object.Key("targetIntervalSeconds")
+		ok.Integer(*v.TargetIntervalSeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompositionThumbnailConfigurationList(v []types.CompositionThumbnailConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCompositionThumbnailConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -3398,6 +3437,30 @@ func awsRestjson1_serializeDocumentParticipantRecordingMediaTypeList(v []types.P
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParticipantThumbnailConfiguration(v *types.ParticipantThumbnailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RecordingMode) > 0 {
+		ok := object.Key("recordingMode")
+		ok.String(string(v.RecordingMode))
+	}
+
+	if v.Storage != nil {
+		ok := object.Key("storage")
+		if err := awsRestjson1_serializeDocumentThumbnailStorageTypeList(v.Storage, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetIntervalSeconds != nil {
+		ok := object.Key("targetIntervalSeconds")
+		ok.Integer(*v.TargetIntervalSeconds)
+	}
+
 	return nil
 }
 
@@ -3559,6 +3622,13 @@ func awsRestjson1_serializeDocumentS3DestinationConfiguration(v *types.S3Destina
 		ok.String(*v.StorageConfigurationArn)
 	}
 
+	if v.ThumbnailConfigurations != nil {
+		ok := object.Key("thumbnailConfigurations")
+		if err := awsRestjson1_serializeDocumentCompositionThumbnailConfigurationList(v.ThumbnailConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3581,6 +3651,17 @@ func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Va
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentThumbnailStorageTypeList(v []types.ThumbnailStorageType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

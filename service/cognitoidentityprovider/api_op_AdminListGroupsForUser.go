@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the groups that a user belongs to.
+// Lists the groups that a user belongs to. User pool groups are identifiers that
+// you can reference from the contents of ID and access tokens, and set preferred
+// IAM roles for identity-pool authentication. For more information, see [Adding groups to a user pool].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -25,6 +27,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Adding groups to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-user-groups.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminListGroupsForUser(ctx context.Context, params *AdminListGroupsForUserInput, optFns ...func(*Options)) (*AdminListGroupsForUserOutput, error) {
 	if params == nil {
@@ -43,7 +46,7 @@ func (c *Client) AdminListGroupsForUser(ctx context.Context, params *AdminListGr
 
 type AdminListGroupsForUserInput struct {
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool where you want to view a user's groups.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -57,11 +60,16 @@ type AdminListGroupsForUserInput struct {
 	// This member is required.
 	Username *string
 
-	// The limit of the request to list groups.
+	// The maximum number of groups that you want Amazon Cognito to return in the
+	// response.
 	Limit *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -69,11 +77,13 @@ type AdminListGroupsForUserInput struct {
 
 type AdminListGroupsForUserOutput struct {
 
-	// The groups that the user belongs to.
+	// An array of groups and information about them.
 	Groups []types.GroupType
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -185,7 +195,8 @@ func (c *Client) addOperationAdminListGroupsForUserMiddlewares(stack *middleware
 // AdminListGroupsForUserPaginatorOptions is the paginator options for
 // AdminListGroupsForUser
 type AdminListGroupsForUserPaginatorOptions struct {
-	// The limit of the request to list groups.
+	// The maximum number of groups that you want Amazon Cognito to return in the
+	// response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
