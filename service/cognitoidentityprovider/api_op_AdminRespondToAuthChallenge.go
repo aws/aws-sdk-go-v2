@@ -70,19 +70,21 @@ func (c *Client) AdminRespondToAuthChallenge(ctx context.Context, params *AdminR
 // The request to respond to the authentication challenge, as an administrator.
 type AdminRespondToAuthChallengeInput struct {
 
-	// The challenge name. For more information, see [AdminInitiateAuth].
+	// The name of the challenge that you are responding to. You can find more
+	// information about values for ChallengeName in the response parameters of [AdminInitiateAuth].
 	//
-	// [AdminInitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html
+	// [AdminInitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html#CognitoUserPools-AdminInitiateAuth-response-ChallengeName
 	//
 	// This member is required.
 	ChallengeName types.ChallengeNameType
 
-	// The app client ID.
+	// The ID of the app client where you initiated sign-in.
 	//
 	// This member is required.
 	ClientId *string
 
-	// The ID of the Amazon Cognito user pool.
+	// The ID of the user pool where you want to respond to an authentication
+	// challenge.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -200,21 +202,21 @@ type AdminRespondToAuthChallengeInput struct {
 	// triggers. When you use the AdminRespondToAuthChallenge API action, Amazon
 	// Cognito invokes any functions that you have assigned to the following triggers:
 	//
-	//   - pre sign-up
+	//   - Pre sign-up
 	//
 	//   - custom message
 	//
-	//   - post authentication
+	//   - Post authentication
 	//
-	//   - user migration
+	//   - User migration
 	//
-	//   - pre token generation
+	//   - Pre token generation
 	//
-	//   - define auth challenge
+	//   - Define auth challenge
 	//
-	//   - create auth challenge
+	//   - Create auth challenge
 	//
-	//   - verify auth challenge response
+	//   - Verify auth challenge response
 	//
 	// When Amazon Cognito invokes any of these functions, it passes a JSON payload,
 	// which the function receives as input. This payload contains a clientMetadata
@@ -225,8 +227,8 @@ type AdminRespondToAuthChallengeInput struct {
 	//
 	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
 	//
-	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
-	// do the following:
+	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
+	// the following:
 	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
@@ -235,8 +237,8 @@ type AdminRespondToAuthChallengeInput struct {
 	//
 	//   - Validate the ClientMetadata value.
 	//
-	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
-	//   sensitive information.
+	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
+	//   parameter.
 	//
 	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
@@ -245,13 +247,18 @@ type AdminRespondToAuthChallengeInput struct {
 	// address, or location. Amazon Cognito advanced security evaluates the risk of an
 	// authentication event based on the context that your app generates and passes to
 	// Amazon Cognito when it makes API requests.
+	//
+	// For more information, see [Collecting data for threat protection in applications].
+	//
+	// [Collecting data for threat protection in applications]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html
 	ContextData *types.ContextDataType
 
-	// The session that should be passed both ways in challenge-response calls to the
-	// service. If an InitiateAuth or RespondToAuthChallenge API call determines that
-	// the caller must pass another challenge, it returns a session with other
-	// challenge parameters. This session should be passed as it is to the next
-	// RespondToAuthChallenge API call.
+	// The session identifier that maintains the state of authentication requests and
+	// challenge responses. If an AdminInitiateAuth or AdminRespondToAuthChallenge API
+	// request results in a determination that your application must pass another
+	// challenge, Amazon Cognito returns a session with other challenge parameters.
+	// Send this session identifier, unmodified, to the next
+	// AdminRespondToAuthChallenge request.
 	Session *string
 
 	noSmithyDocumentSerde
@@ -260,23 +267,30 @@ type AdminRespondToAuthChallengeInput struct {
 // Responds to the authentication challenge, as an administrator.
 type AdminRespondToAuthChallengeOutput struct {
 
-	// The result returned by the server in response to the authentication request.
+	// The outcome of a successful authentication process. After your application has
+	// passed all challenges, Amazon Cognito returns an AuthenticationResult with the
+	// JSON web tokens (JWTs) that indicate successful sign-in.
 	AuthenticationResult *types.AuthenticationResultType
 
-	// The name of the challenge. For more information, see [AdminInitiateAuth].
+	// The name of the challenge that you must next respond to. You can find more
+	// information about values for ChallengeName in the response parameters of [AdminInitiateAuth].
 	//
-	// [AdminInitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html
+	// [AdminInitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html#CognitoUserPools-AdminInitiateAuth-response-ChallengeName
 	ChallengeName types.ChallengeNameType
 
-	// The challenge parameters. For more information, see [AdminInitiateAuth].
+	// The parameters that define your response to the next challenge. Take the values
+	// in ChallengeParameters and provide values for them in the [ChallengeResponses] of the next
+	// AdminRespondToAuthChallenge request.
 	//
-	// [AdminInitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html
+	// [ChallengeResponses]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminRespondToAuthChallenge.html#CognitoUserPools-AdminRespondToAuthChallenge-request-ChallengeResponses
 	ChallengeParameters map[string]string
 
-	// The session that should be passed both ways in challenge-response calls to the
-	// service. If the caller must pass another challenge, they return a session with
-	// other challenge parameters. This session should be passed as it is to the next
-	// RespondToAuthChallenge API call.
+	// The session identifier that maintains the state of authentication requests and
+	// challenge responses. If an AdminInitiateAuth or AdminRespondToAuthChallenge API
+	// request results in a determination that your application must pass another
+	// challenge, Amazon Cognito returns a session with other challenge parameters.
+	// Send this session identifier, unmodified, to the next
+	// AdminRespondToAuthChallenge request.
 	Session *string
 
 	// Metadata pertaining to the operation's result.

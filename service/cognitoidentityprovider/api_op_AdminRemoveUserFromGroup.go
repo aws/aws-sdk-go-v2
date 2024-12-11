@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified user from the specified group.
+// Given a username and a group name. removes them from the group. User pool
+// groups are identifiers that you can reference from the contents of ID and access
+// tokens, and set preferred IAM roles for identity-pool authentication. For more
+// information, see [Adding groups to a user pool].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -24,6 +27,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Adding groups to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-user-groups.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminRemoveUserFromGroup(ctx context.Context, params *AdminRemoveUserFromGroupInput, optFns ...func(*Options)) (*AdminRemoveUserFromGroupOutput, error) {
 	if params == nil {
@@ -42,12 +46,14 @@ func (c *Client) AdminRemoveUserFromGroup(ctx context.Context, params *AdminRemo
 
 type AdminRemoveUserFromGroupInput struct {
 
-	// The group name.
+	// The name of the group that you want to remove the user from, for example
+	// MyTestGroup .
 	//
 	// This member is required.
 	GroupName *string
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool that contains the group and the user that you want to
+	// remove.
 	//
 	// This member is required.
 	UserPoolId *string

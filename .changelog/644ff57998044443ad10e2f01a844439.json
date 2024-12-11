@@ -1,0 +1,8 @@
+{
+    "id": "644ff579-9804-4443-ad10-e2f01a844439",
+    "type": "feature",
+    "description": "This release adds support for accessing system profile logs in Lake Formation-enabled jobs.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

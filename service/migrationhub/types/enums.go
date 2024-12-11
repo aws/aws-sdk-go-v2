@@ -80,3 +80,20 @@ func (Status) Values() []Status {
 		"COMPLETED",
 	}
 }
+
+type UpdateType string
+
+// Enum values for UpdateType
+const (
+	UpdateTypeMigrationTaskStateUpdated UpdateType = "MIGRATION_TASK_STATE_UPDATED"
+)
+
+// Values returns all known values for UpdateType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateType) Values() []UpdateType {
+	return []UpdateType{
+		"MIGRATION_TASK_STATE_UPDATED",
+	}
+}

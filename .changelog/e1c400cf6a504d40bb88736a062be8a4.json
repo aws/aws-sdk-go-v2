@@ -1,0 +1,8 @@
+{
+    "id": "e1c400cf-6a50-4d40-bb88-736a062be8a4",
+    "type": "feature",
+    "description": "Introduces support for multi-region endpoint.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

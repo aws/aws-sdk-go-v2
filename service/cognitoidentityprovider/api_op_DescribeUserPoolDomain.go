@@ -11,7 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a domain.
+// Given a user pool domain name, returns information about the domain
+// configuration.
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) DescribeUserPoolDomain(ctx context.Context, params *DescribeUserPoolDomainInput, optFns ...func(*Options)) (*DescribeUserPoolDomainOutput, error) {
 	if params == nil {
 		params = &DescribeUserPoolDomainInput{}
@@ -29,9 +44,9 @@ func (c *Client) DescribeUserPoolDomain(ctx context.Context, params *DescribeUse
 
 type DescribeUserPoolDomainInput struct {
 
-	// The domain string. For custom domains, this is the fully-qualified domain name,
-	// such as auth.example.com . For Amazon Cognito prefix domains, this is the prefix
-	// alone, such as auth .
+	// The domain that you want to describe. For custom domains, this is the
+	// fully-qualified domain name, such as auth.example.com . For Amazon Cognito
+	// prefix domains, this is the prefix alone, such as auth .
 	//
 	// This member is required.
 	Domain *string
@@ -41,7 +56,7 @@ type DescribeUserPoolDomainInput struct {
 
 type DescribeUserPoolDomainOutput struct {
 
-	// A domain description object containing information about the domain.
+	// The details of the requested user pool domain.
 	DomainDescription *types.DomainDescriptionType
 
 	// Metadata pertaining to the operation's result.

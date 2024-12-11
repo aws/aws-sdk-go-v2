@@ -1,0 +1,8 @@
+{
+    "id": "c32c2809-0d7c-478b-9a56-7c5433100417",
+    "type": "documentation",
+    "description": "Updated descriptions for some API operations and parameters, corrected some errors in Cognito user pools",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

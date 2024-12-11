@@ -5,8 +5,10 @@ package sesv2
 import (
 	"context"
 	smithy "github.com/aws/smithy-go"
+	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/ptr"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
 	"reflect"
@@ -1629,6 +1631,329 @@ func TestEndpointCase46(t *testing.T) {
 		t.Fatalf("expect error, got none")
 	}
 	if e, a := "Invalid Configuration: Missing Region", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Valid EndpointId with dualstack and FIPS disabled. i.e, IPv4 Only stack with no
+// FIPS
+func TestEndpointCase47(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("us-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123.456def.endpoints.email.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Valid EndpointId with dualstack enabled
+func TestEndpointCase48(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(true),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("us-west-2"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123.456def.endpoints.email.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Valid EndpointId with FIPS set, dualstack disabled
+func TestEndpointCase49(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		UseFIPS:      ptr.Bool(true),
+		Region:       ptr.String("ap-northeast-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS is not supported with multi-region endpoints", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Valid EndpointId with both dualstack and FIPS enabled
+func TestEndpointCase50(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(true),
+		UseFIPS:      ptr.Bool(true),
+		Region:       ptr.String("ap-northeast-2"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS is not supported with multi-region endpoints", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Regular regional request, without EndpointId
+func TestEndpointCase51(t *testing.T) {
+	var params = EndpointParameters{
+		UseDualStack: ptr.Bool(false),
+		Region:       ptr.String("eu-west-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://email.eu-west-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Invalid EndpointId (Invalid chars / format)
+func TestEndpointCase52(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("badactor.com?foo=bar"),
+		UseDualStack: ptr.Bool(false),
+		Region:       ptr.String("eu-west-2"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "EndpointId must be a valid host label", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Invalid EndpointId (Empty)
+func TestEndpointCase53(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String(""),
+		UseDualStack: ptr.Bool(false),
+		Region:       ptr.String("ap-south-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "EndpointId must be a valid host label", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Valid EndpointId with custom sdk endpoint
+func TestEndpointCase54(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		Region:       ptr.String("us-east-1"),
+		Endpoint:     ptr.String("https://example.com"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Valid EndpointId with custom sdk endpoint with FIPS enabled
+func TestEndpointCase55(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		UseFIPS:      ptr.Bool(true),
+		Region:       ptr.String("us-east-1"),
+		Endpoint:     ptr.String("https://example.com"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS is not supported with multi-region endpoints", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Valid EndpointId with DualStack enabled and partition does not support DualStack
+func TestEndpointCase56(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(true),
+		Region:       ptr.String("us-isob-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }

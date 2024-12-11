@@ -10,9 +10,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a group.
+// Deletes a group from the specified user pool. When you delete a group, that
+// group no longer contributes to users' cognito:preferred_group or cognito:groups
+// claims, and no longer influence access-control decision that are based on group
+// membership. For more information about user pool groups, see [Adding groups to a user pool].
 //
-// Calling this action requires developer credentials.
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Adding groups to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-user-groups.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optFns ...func(*Options)) (*DeleteGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGroupInput{}
@@ -30,12 +46,12 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 
 type DeleteGroupInput struct {
 
-	// The name of the group.
+	// The name of the group that you want to delete.
 	//
 	// This member is required.
 	GroupName *string
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool where you want to delete the group.
 	//
 	// This member is required.
 	UserPoolId *string

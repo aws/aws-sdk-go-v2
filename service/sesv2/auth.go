@@ -141,6 +141,16 @@ func serviceAuthOptions(params *AuthResolverParameters) []*smithyauth.Option {
 				return props
 			}(),
 		},
+
+		{
+			SchemeID: smithyauth.SchemeIDSigV4A,
+			SignerProperties: func() smithy.Properties {
+				var props smithy.Properties
+				smithyhttp.SetSigV4ASigningName(&props, "ses")
+				smithyhttp.SetSigV4ASigningRegions(&props, []string{params.Region})
+				return props
+			}(),
+		},
 	}
 }
 

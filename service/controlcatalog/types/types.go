@@ -203,8 +203,7 @@ type DomainSummary struct {
 // AWS::CloudFormation::Type::HOOK have the format with four segments.
 //
 // Although the format is similar, the values for the Type field do not match any
-// Amazon Web Services CloudFormation values, and we do not use CloudFormation to
-// implement these controls.
+// Amazon Web Services CloudFormation values.
 type ImplementationDetails struct {
 
 	// A string that describes a control's implementation type.

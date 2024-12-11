@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deactivates a user and revokes all access tokens for the user. A deactivated
-// user can't sign in, but still appears in the responses to GetUser and ListUsers
+// Deactivates a user profile and revokes all access tokens for the user. A
+// deactivated user can't sign in, but still appears in the responses to ListUsers
 // API requests.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
@@ -45,7 +45,7 @@ func (c *Client) AdminDisableUser(ctx context.Context, params *AdminDisableUserI
 // Represents the request to disable the user as an administrator.
 type AdminDisableUserInput struct {
 
-	// The user pool ID for the user pool where you want to disable the user.
+	// The ID of the user pool where you want to disable the user.
 	//
 	// This member is required.
 	UserPoolId *string

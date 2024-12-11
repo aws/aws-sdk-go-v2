@@ -44,7 +44,7 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 // Represents the request to list users.
 type ListUsersInput struct {
 
-	// The user pool ID for the user pool on which the search should be performed.
+	// The ID of the user pool on which the search should be performed.
 	//
 	// This member is required.
 	UserPoolId *string

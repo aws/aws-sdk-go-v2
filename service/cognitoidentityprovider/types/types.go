@@ -964,14 +964,15 @@ type EmailConfigurationType struct {
 // [GetUserPoolMfaConfig]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_GetUserPoolMfaConfig.html
 type EmailMfaConfigType struct {
 
-	// The template for the email message that your user pool sends to users with an
-	// MFA code. The message must contain the {####} placeholder. In the message,
-	// Amazon Cognito replaces this placeholder with the code. If you don't provide
-	// this parameter, Amazon Cognito sends messages in the default format.
+	// The template for the email message that your user pool sends to users with a
+	// code for MFA and sign-in with an email OTP. The message must contain the {####}
+	// placeholder. In the message, Amazon Cognito replaces this placeholder with the
+	// code. If you don't provide this parameter, Amazon Cognito sends messages in the
+	// default format.
 	Message *string
 
-	// The subject of the email message that your user pool sends to users with an MFA
-	// code.
+	// The subject of the email message that your user pool sends to users with a code
+	// for MFA and email OTP sign-in.
 	Subject *string
 
 	noSmithyDocumentSerde
@@ -1508,8 +1509,12 @@ type ManagedLoginBrandingType struct {
 	// apply to your style.
 	Settings document.Interface
 
-	// When true, applies the default branding style options. This option reverts to a
-	// "blank" style that you can modify later in the branding designer.
+	// When true, applies the default branding style options. This option reverts to
+	// default style options that are managed by Amazon Cognito. You can modify them
+	// later in the branding designer.
+	//
+	// When you specify true for this option, you must also omit values for Settings
+	// and Assets in the request.
 	UseCognitoProvidedValues bool
 
 	// The user pool where the branding style is assigned.
@@ -2792,13 +2797,13 @@ type UserPoolClientType struct {
 	// configured for the SAML and OIDC IdPs in your user pool, for example MySAMLIdP
 	// or MyOIDCIdP .
 	//
-	// This setting applies to providers that you can access with the [hosted UI and OAuth 2.0 authorization server]. The removal of
+	// This setting applies to providers that you can access with [managed login]. The removal of
 	// COGNITO from this list doesn't prevent authentication operations for local users
 	// with the user pools API in an Amazon Web Services SDK. The only way to prevent
 	// API-based authentication is to block access with a [WAF rule].
 	//
 	// [WAF rule]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-waf.html
-	// [hosted UI and OAuth 2.0 authorization server]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-app-integration.html
+	// [managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 	SupportedIdentityProviders []string
 
 	// The time units that, with IdTokenValidity , AccessTokenValidity , and
@@ -3257,10 +3262,11 @@ type WebAuthnConfigurationType struct {
 	//   hosted UI.
 	RelyingPartyId *string
 
-	// Sets or displays your user-pool treatment for MFA with a passkey. You can
-	// override other MFA options and require passkey MFA, or you can set it as
-	// preferred. When passkey MFA is preferred, the hosted UI encourages users to
-	// register a passkey at sign-in.
+	// When required , users can only register and sign in users with passkeys that are
+	// capable of [user verification]. When preferred , your user pool doesn't require the use of
+	// authenticators with user verification but encourages it.
+	//
+	// [user verification]: https://www.w3.org/TR/webauthn-2/#enum-userVerificationRequirement
 	UserVerification UserVerificationType
 
 	noSmithyDocumentSerde

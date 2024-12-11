@@ -37,7 +37,7 @@ func (c *Client) CompleteWebAuthnRegistration(ctx context.Context, params *Compl
 type CompleteWebAuthnRegistrationInput struct {
 
 	// A valid access token that Amazon Cognito issued to the user whose passkey
-	// registration you want to verify.
+	// registration you want to complete.
 	//
 	// This member is required.
 	AccessToken *string

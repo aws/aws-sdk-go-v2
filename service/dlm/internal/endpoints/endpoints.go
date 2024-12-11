@@ -252,6 +252,12 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "dlm.ca-central-1.api.aws",
@@ -259,6 +265,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "ca-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.ca-west-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region:  "ca-west-1",
 				Variant: endpoints.DualStackVariant,
@@ -378,6 +390,12 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "dlm.us-east-1.api.aws",
@@ -385,6 +403,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.us-east-2.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region:  "us-east-2",
 				Variant: endpoints.DualStackVariant,
@@ -396,6 +420,12 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "dlm.us-west-1.api.aws",
@@ -403,6 +433,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.us-west-2.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region:  "us-west-2",
 				Variant: endpoints.DualStackVariant,
@@ -479,8 +515,20 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "us-iso-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "us-iso-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.us-iso-east-1.api.aws.ic.gov",
+			},
+			endpoints.EndpointKey{
 				Region: "us-iso-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-iso-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.us-iso-west-1.api.aws.ic.gov",
+			},
 		},
 	},
 	{
@@ -507,6 +555,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-isob-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isob-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.us-isob-east-1.api.aws.scloud",
+			},
 		},
 	},
 	{
@@ -591,6 +645,12 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.us-gov-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "dlm.us-gov-east-1.amazonaws.com",
@@ -607,6 +667,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm-fips.us-gov-west-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region:  "us-gov-west-1",
 				Variant: endpoints.FIPSVariant,

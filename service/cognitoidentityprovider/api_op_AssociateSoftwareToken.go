@@ -33,6 +33,9 @@ import (
 // policies. For more information about authorization models in Amazon Cognito, see
 // [Using the Amazon Cognito user pools API and user pool endpoints].
 //
+// Authorize this action with a signed-in user's access token. It must include the
+// scope aws.cognito.signin.user.admin .
+//
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [VerifySoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html
 func (c *Client) AssociateSoftwareToken(ctx context.Context, params *AssociateSoftwareTokenInput, optFns ...func(*Options)) (*AssociateSoftwareTokenOutput, error) {
@@ -53,12 +56,14 @@ func (c *Client) AssociateSoftwareToken(ctx context.Context, params *AssociateSo
 type AssociateSoftwareTokenInput struct {
 
 	// A valid access token that Amazon Cognito issued to the user whose software
-	// token you want to generate.
+	// token you want to generate. You can provide either an access token or a session
+	// ID in the request.
 	AccessToken *string
 
-	// The session that should be passed both ways in challenge-response calls to the
-	// service. This allows authentication of the user as part of the MFA setup
-	// process.
+	// The session identifier that maintains the state of authentication requests and
+	// challenge responses. In AssociateSoftwareToken , this is the session ID from a
+	// successful sign-in. You can provide either an access token or a session ID in
+	// the request.
 	Session *string
 
 	noSmithyDocumentSerde
@@ -66,13 +71,15 @@ type AssociateSoftwareTokenInput struct {
 
 type AssociateSoftwareTokenOutput struct {
 
-	// A unique generated shared secret code that is used in the TOTP algorithm to
+	// A unique generated shared secret code that is used by the TOTP algorithm to
 	// generate a one-time code.
 	SecretCode *string
 
-	// The session that should be passed both ways in challenge-response calls to the
-	// service. This allows authentication of the user as part of the MFA setup
-	// process.
+	// The session identifier that maintains the state of authentication requests and
+	// challenge responses. This session ID is valid for the next request in this flow,
+	// [VerifySoftwareToken].
+	//
+	// [VerifySoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html
 	Session *string
 
 	// Metadata pertaining to the operation's result.

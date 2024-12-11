@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds additional user attributes to the user pool schema.
+// Adds additional user attributes to the user pool schema. Custom attributes can
+// be mutable or immutable and have a custom: or dev: prefix. For more
+// information, see [Custom attributes].
+//
+// You can also create custom attributes in the [Schema parameter] of CreateUserPool and
+// UpdateUserPool . You can't delete custom attributes after you create them.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -24,6 +29,8 @@ import (
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
+// [Custom attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-custom-attributes
+// [Schema parameter]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateUserPool.html#CognitoUserPools-CreateUserPool-request-Schema
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AddCustomAttributes(ctx context.Context, params *AddCustomAttributesInput, optFns ...func(*Options)) (*AddCustomAttributesOutput, error) {
@@ -44,12 +51,36 @@ func (c *Client) AddCustomAttributes(ctx context.Context, params *AddCustomAttri
 // Represents the request to add custom attributes.
 type AddCustomAttributesInput struct {
 
-	// An array of custom attributes, such as Mutable and Name.
+	// An array of custom attribute names and other properties. Sets the following
+	// characteristics:
+	//
+	// AttributeDataType The expected data type. Can be a string, a number, a date and
+	// time, or a boolean.
+	//
+	// Mutable If true, you can grant app clients write access to the attribute value.
+	// If false, the attribute value can only be set up on sign-up or administrator
+	// creation of users.
+	//
+	// Name The attribute name. For an attribute like custom:myAttribute , enter
+	// myAttribute for this field.
+	//
+	// Required When true, users who sign up or are created must set a value for the
+	// attribute.
+	//
+	// NumberAttributeConstraints The minimum and maximum length of accepted values
+	// for a Number -type attribute.
+	//
+	// StringAttributeConstraints The minimum and maximum length of accepted values
+	// for a String -type attribute.
+	//
+	// DeveloperOnlyAttribute This legacy option creates an attribute with a dev:
+	// prefix. You can only set the value of a developer-only attribute with
+	// administrative IAM credentials.
 	//
 	// This member is required.
 	CustomAttributes []types.SchemaAttributeType
 
-	// The user pool ID for the user pool where you want to add custom attributes.
+	// The ID of the user pool where you want to add custom attributes.
 	//
 	// This member is required.
 	UserPoolId *string

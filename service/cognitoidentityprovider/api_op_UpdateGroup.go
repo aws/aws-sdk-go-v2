@@ -48,7 +48,7 @@ type UpdateGroupInput struct {
 	// This member is required.
 	GroupName *string
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool.
 	//
 	// This member is required.
 	UserPoolId *string

@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the risk configuration.
+// Given an app client or user pool ID where threat protection is configured,
+// describes the risk configuration. This operation returns details about adaptive
+// authentication, compromised credentials, and IP-address allow- and denylists.
+// For more information about threat protection, see [Threat protection].
+//
+// [Threat protection]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-threat-protection.html
 func (c *Client) DescribeRiskConfiguration(ctx context.Context, params *DescribeRiskConfigurationInput, optFns ...func(*Options)) (*DescribeRiskConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeRiskConfigurationInput{}
@@ -29,12 +34,20 @@ func (c *Client) DescribeRiskConfiguration(ctx context.Context, params *Describe
 
 type DescribeRiskConfigurationInput struct {
 
-	// The user pool ID.
+	// The ID of the user pool with the risk configuration that you want to inspect.
+	// You can apply default risk configuration at the user pool level and further
+	// customize it from user pool defaults at the app-client level. Specify ClientId
+	// to inspect client-level configuration, or UserPoolId to inspect pool-level
+	// configuration.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// The app client ID.
+	// The ID of the app client with the risk configuration that you want to inspect.
+	// You can apply default risk configuration at the user pool level and further
+	// customize it from user pool defaults at the app-client level. Specify ClientId
+	// to inspect client-level configuration, or UserPoolId to inspect pool-level
+	// configuration.
 	ClientId *string
 
 	noSmithyDocumentSerde
@@ -42,7 +55,7 @@ type DescribeRiskConfigurationInput struct {
 
 type DescribeRiskConfigurationOutput struct {
 
-	// The risk configuration.
+	// The details of the requested risk configuration.
 	//
 	// This member is required.
 	RiskConfiguration *types.RiskConfigurationType

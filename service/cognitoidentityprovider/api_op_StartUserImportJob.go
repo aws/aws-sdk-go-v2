@@ -35,7 +35,7 @@ type StartUserImportJobInput struct {
 	// This member is required.
 	JobId *string
 
-	// The user pool ID for the user pool that the users are being imported into.
+	// The ID of the user pool that the users are being imported into.
 	//
 	// This member is required.
 	UserPoolId *string

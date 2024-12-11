@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a domain for a user pool.
+// Given a user pool ID and domain identifier, deletes a user pool domain. After
+// you delete a user pool domain, your managed login pages and authorization server
+// are no longer available.
 func (c *Client) DeleteUserPoolDomain(ctx context.Context, params *DeleteUserPoolDomainInput, optFns ...func(*Options)) (*DeleteUserPoolDomainOutput, error) {
 	if params == nil {
 		params = &DeleteUserPoolDomainInput{}
@@ -28,14 +30,14 @@ func (c *Client) DeleteUserPoolDomain(ctx context.Context, params *DeleteUserPoo
 
 type DeleteUserPoolDomainInput struct {
 
-	// The domain string. For custom domains, this is the fully-qualified domain name,
-	// such as auth.example.com . For Amazon Cognito prefix domains, this is the prefix
-	// alone, such as auth .
+	// The domain that you want to delete. For custom domains, this is the
+	// fully-qualified domain name, such as auth.example.com . For Amazon Cognito
+	// prefix domains, this is the prefix alone, such as auth .
 	//
 	// This member is required.
 	Domain *string
 
-	// The user pool ID.
+	// The ID of the user pool where you want to delete the domain.
 	//
 	// This member is required.
 	UserPoolId *string

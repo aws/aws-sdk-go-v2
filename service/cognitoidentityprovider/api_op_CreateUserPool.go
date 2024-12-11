@@ -26,8 +26,10 @@ import (
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
 // Cognito Developer Guide.
 //
-// Creates a new Amazon Cognito user pool and sets the password policy for the
-// pool.
+// Creates a new Amazon Cognito user pool. This operation sets basic and advanced
+// configuration options. You can create a user pool in the Amazon Cognito console
+// to your preferences and use the output of [DescribeUserPool]to generate requests from that
+// baseline.
 //
 // If you don't provide a value for an attribute, Amazon Cognito sets it to its
 // default value.
@@ -45,6 +47,7 @@ import (
 //
 // [SMS message settings for Amazon Cognito user pools]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [DescribeUserPool]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html
 // [sandbox mode]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 // [Amazon Pinpoint]: https://console.aws.amazon.com/pinpoint/home/
@@ -66,7 +69,7 @@ func (c *Client) CreateUserPool(ctx context.Context, params *CreateUserPoolInput
 // Represents the request to create a user pool.
 type CreateUserPoolInput struct {
 
-	// A string used to name the user pool.
+	// A friendlhy name for your user pool.
 	//
 	// This member is required.
 	PoolName *string
@@ -80,14 +83,24 @@ type CreateUserPoolInput struct {
 	// SMS is preferred through email.
 	AccountRecoverySetting *types.AccountRecoverySettingType
 
-	// The configuration for AdminCreateUser requests.
+	// The configuration for [AdminCreateUser] requests. Includes the template for the invitation
+	// message for new users, the duration of temporary passwords, and permitting
+	// self-service sign-up.
+	//
+	// [AdminCreateUser]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminCreateUser.html
 	AdminCreateUserConfig *types.AdminCreateUserConfigType
 
 	// Attributes supported as an alias for this user pool. Possible values:
-	// phone_number, email, or preferred_username.
+	// phone_number, email, or preferred_username. For more information about alias
+	// attributes, see [Customizing sign-in attributes].
+	//
+	// [Customizing sign-in attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-aliases
 	AliasAttributes []types.AliasAttributeType
 
-	// The attributes to be auto-verified. Possible values: email, phone_number.
+	// The attributes that you want your user pool to automatically verify. Possible
+	// values: email, phone_number. For more information see [Verifying contact information at sign-up].
+	//
+	// [Verifying contact information at sign-up]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#allowing-users-to-sign-up-and-confirm-themselves
 	AutoVerifiedAttributes []types.VerifiedAttributeType
 
 	// When active, DeletionProtection prevents accidental deletion of your user pool.
@@ -100,11 +113,17 @@ type CreateUserPoolInput struct {
 	// deletion protection in an UpdateUserPool API request.
 	DeletionProtection types.DeletionProtectionType
 
-	// The device-remembering configuration for a user pool. A null value indicates
-	// that you have deactivated device remembering in your user pool.
+	// The device-remembering configuration for a user pool. Device remembering or
+	// device tracking is a "Remember me on this device" option for user pools that
+	// perform authentication with the device key of a trusted device in the back end,
+	// instead of a user-provided MFA code. For more information about device
+	// authentication, see [Working with user devices in your user pool]. A null value indicates that you have deactivated device
+	// remembering in your user pool.
 	//
 	// When you provide a value for any DeviceConfiguration field, you activate the
-	// Amazon Cognito device-remembering feature.
+	// Amazon Cognito device-remembering feature. For more infor
+	//
+	// [Working with user devices in your user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 	DeviceConfiguration *types.DeviceConfigurationType
 
 	// The email configuration of your user pool. The email configuration type sets
@@ -127,14 +146,26 @@ type CreateUserPoolInput struct {
 	// outcome of the operations that invoked them.
 	LambdaConfig *types.LambdaConfigType
 
-	// Specifies MFA configuration details.
+	// Sets multi-factor authentication (MFA) to be on, off, or optional. When ON , all
+	// users must set up MFA before they can sign in. When OPTIONAL , your application
+	// must make a client-side determination of whether a user wants to register an MFA
+	// device. For user pools with adaptive authentication with threat protection,
+	// choose OPTIONAL .
 	MfaConfiguration types.UserPoolMfaType
 
-	// The policies associated with the new user pool.
+	// The password policy and sign-in policy in the user pool. The password policy
+	// sets options like password complexity requirements and password history. The
+	// sign-in policy sets the options available to applications in [choice-based authentication].
+	//
+	// [choice-based authentication]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice
 	Policies *types.UserPoolPolicyType
 
-	// An array of schema attributes for the new user pool. These attributes can be
-	// standard or custom attributes.
+	// An array of attributes for the new user pool. You can add custom attributes and
+	// modify the properties of default attributes. The specifications in this
+	// parameter set the required attributes in your user pool. For more information,
+	// see [Working with user attributes].
+	//
+	// [Working with user attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html
 	Schema []types.SchemaAttributeType
 
 	// A string representing the SMS authentication message.
@@ -144,7 +175,10 @@ type CreateUserPoolInput struct {
 	// use to send an SMS message from your Amazon Web Services account through Amazon
 	// Simple Notification Service. To send SMS messages with Amazon SNS in the Amazon
 	// Web Services Region that you want, the Amazon Cognito user pool uses an Identity
-	// and Access Management (IAM) role in your Amazon Web Services account.
+	// and Access Management (IAM) role in your Amazon Web Services account. For more
+	// information see [SMS message settings].
+	//
+	// [SMS message settings]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
 	SmsConfiguration *types.SmsConfigurationType
 
 	// This parameter is no longer used. See [VerificationMessageTemplateType].
@@ -183,21 +217,24 @@ type CreateUserPoolInput struct {
 	UserPoolTier types.UserPoolTierType
 
 	// Specifies whether a user can use an email address or phone number as a username
-	// when they sign up.
+	// when they sign up. For more information, see [Customizing sign-in attributes].
+	//
+	// [Customizing sign-in attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-aliases
 	UsernameAttributes []types.UsernameAttributeType
 
-	// Case sensitivity on the username input for the selected sign-in option. When
-	// case sensitivity is set to False (case insensitive), users can sign in with any
-	// combination of capital and lowercase letters. For example, username , USERNAME ,
-	// or UserName , or for email, email@example.com or EMaiL@eXamplE.Com . For most
-	// use cases, set case sensitivity to False (case insensitive) as a best practice.
-	// When usernames and email addresses are case insensitive, Amazon Cognito treats
-	// any variation in case as the same user, and prevents a case variation from being
-	// assigned to the same attribute for a different user.
+	// Sets the case sensitivity option for sign-in usernames. When CaseSensitive is
+	// false (case insensitive), users can sign in with any combination of capital and
+	// lowercase letters. For example, username , USERNAME , or UserName , or for
+	// email, email@example.com or EMaiL@eXamplE.Com . For most use cases, set case
+	// sensitivity to false as a best practice. When usernames and email addresses are
+	// case insensitive, Amazon Cognito treats any variation in case as the same user,
+	// and prevents a case variation from being assigned to the same attribute for a
+	// different user.
 	//
-	// This configuration is immutable after you set it. For more information, see [UsernameConfigurationType].
+	// When CaseSensitive is true (case sensitive), Amazon Cognito interprets USERNAME
+	// and UserName as distinct users.
 	//
-	// [UsernameConfigurationType]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html
+	// This configuration is immutable after you set it.
 	UsernameConfiguration *types.UsernameConfigurationType
 
 	// The template for the verification message that your user pool delivers to users
@@ -216,7 +253,7 @@ type CreateUserPoolInput struct {
 // Represents the response from the server for the request to create a user pool.
 type CreateUserPoolOutput struct {
 
-	// A container for the user pool details.
+	// The details of the created user pool.
 	UserPool *types.UserPoolType
 
 	// Metadata pertaining to the operation's result.

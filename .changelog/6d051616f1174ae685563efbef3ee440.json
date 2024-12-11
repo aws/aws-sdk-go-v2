@@ -1,0 +1,8 @@
+{
+    "id": "6d051616-f117-4ae6-8556-3efbef3ee440",
+    "type": "feature",
+    "description": "Add support for listing active customer agreements for the calling AWS Account.",
+    "modules": [
+        "service/artifact"
+    ]
+}

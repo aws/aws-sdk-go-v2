@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// When given the ID of a managed login branding style, returns detailed
-// information about the style.
+// Given the ID of a managed login branding style, returns detailed information
+// about the style.
 func (c *Client) DescribeManagedLoginBranding(ctx context.Context, params *DescribeManagedLoginBrandingInput, optFns ...func(*Options)) (*DescribeManagedLoginBrandingOutput, error) {
 	if params == nil {
 		params = &DescribeManagedLoginBrandingInput{}

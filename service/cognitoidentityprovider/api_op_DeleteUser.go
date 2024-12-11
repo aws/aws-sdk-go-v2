@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows a user to delete their own user profile.
+// Self-deletes a user profile. A deleted user profile can no longer be used to
+// sign in and can't be restored.
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
