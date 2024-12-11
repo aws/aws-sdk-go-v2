@@ -18,6 +18,10 @@ func bindAuthParamsRegion(_ interface{}, params *AuthResolverParameters, _ inter
 	params.Region = options.Region
 }
 
+func bindAuthEndpointParams(ctx context.Context, params *AuthResolverParameters, input interface{}, options Options) {
+	params.endpointParams = bindEndpointParams(ctx, input, options)
+}
+
 type setLegacyContextSigningOptionsMiddleware struct {
 }
 
@@ -88,6 +92,10 @@ type AuthResolverParameters struct {
 	// The name of the operation being invoked.
 	Operation string
 
+	// The endpoint resolver parameters for this operation. This service's default
+	// resolver delegates to endpoint rules.
+	endpointParams *EndpointParameters
+
 	// The region in which the operation is being invoked.
 	Region string
 }
@@ -97,6 +105,7 @@ func bindAuthResolverParams(ctx context.Context, operation string, input interfa
 		Operation: operation,
 	}
 
+	bindAuthEndpointParams(ctx, params, input, options)
 	bindAuthParamsRegion(ctx, params, input, options)
 
 	return params

@@ -201,7 +201,7 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	ignoreAnonymousAuth(&options)
 
-	wrapWithAnonymousAuth(&options)
+	finalizeServiceEndpointAuthResolver(&options)
 
 	resolveAuthSchemes(&options)
 
@@ -242,6 +242,8 @@ func (c *Client) invokeOperation(
 	finalizeOperationRetryMaxAttempts(&options, *c)
 
 	finalizeClientEndpointResolverOptions(&options)
+
+	finalizeOperationEndpointAuthResolver(&options)
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
