@@ -969,6 +969,8 @@ func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectI
 	}
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
+	clientOptFns = append(options.ClientOptions, withNoDefaultChecksumAPIOption)
+
 	result, _, err := c.client.invokeOperation(ctx, "PutObject", params, clientOptFns,
 		c.client.addOperationPutObjectMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,

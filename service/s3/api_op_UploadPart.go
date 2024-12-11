@@ -646,6 +646,8 @@ func (c *PresignClient) PresignUploadPart(ctx context.Context, params *UploadPar
 	}
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
+	clientOptFns = append(options.ClientOptions, withNoDefaultChecksumAPIOption)
+
 	result, _, err := c.client.invokeOperation(ctx, "UploadPart", params, clientOptFns,
 		c.client.addOperationUploadPartMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,

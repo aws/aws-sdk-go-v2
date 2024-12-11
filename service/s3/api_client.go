@@ -1174,6 +1174,10 @@ func (c presignConverter) convertToPresignMiddleware(stack *middleware.Stack, op
 	return nil
 }
 
+func withNoDefaultChecksumAPIOption(options *Options) {
+	options.RequestChecksumCalculation = aws.RequestChecksumCalculationWhenRequired
+}
+
 func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 	return stack.Deserialize.Add(&smithyhttp.RequestResponseLogger{
 		LogRequest:          o.ClientLogMode.IsRequest(),
