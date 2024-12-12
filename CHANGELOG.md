@@ -1,3 +1,17 @@
+# Release (2024-12-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.121.0](service/connect/CHANGELOG.md#v11210-2024-12-12)
+  * **Feature**: Configure holidays and other overrides to hours of operation in advance. During contact handling, Amazon Connect automatically checks for overrides and provides customers with an appropriate flow path. After an override period passes call center automatically reverts to standard hours of operation.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.45.0](service/databasemigrationservice/CHANGELOG.md#v1450-2024-12-12)
+  * **Feature**: Add parameters to support for kerberos authentication. Add parameter for disabling the Unicode source filter with PostgreSQL settings. Add parameter to use large integer value with Kinesis/Kafka settings.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.104.0](service/glue/CHANGELOG.md#v11040-2024-12-12)
+  * **Feature**: To support customer-managed encryption in Data Quality to allow customers encrypt data with their own KMS key, we will add a DataQualityEncryption field to the SecurityConfiguration API where customers can provide their KMS keys.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.52.1](service/guardduty/CHANGELOG.md#v1521-2024-12-12)
+  * **Documentation**: Improved descriptions for certain APIs.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.28.0](service/route53domains/CHANGELOG.md#v1280-2024-12-12)
+  * **Feature**: This release includes the following API updates: added the enumeration type RESTORE_DOMAIN to the OperationType; constrained the Price attribute to non-negative values; updated the LangCode to allow 2 or 3 alphabetical characters.
+
 # Release (2024-12-11)
 
 ## General Highlights

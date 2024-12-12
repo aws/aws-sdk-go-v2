@@ -1,8 +1,0 @@
-{
-    "id": "0239a2be-f040-48d8-9ed2-0f62bb5c68ad",
-    "type": "feature",
-    "description": "Configure holidays and other overrides to hours of operation in advance. During contact handling, Amazon Connect automatically checks for overrides and provides customers with an appropriate flow path. After an override period passes call center automatically reverts to standard hours of operation.",
-    "modules": [
-        "service/connect"
-    ]
-}

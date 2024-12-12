@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.48.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.7
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.44.5
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.45.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.8
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.37.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.26.7
-	github.com/aws/aws-sdk-go-v2/service/glue v1.103.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.104.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.38.2
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.25.7
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.8
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.46.3
-	github.com/aws/aws-sdk-go-v2/service/route53domains v1.27.7
+	github.com/aws/aws-sdk-go-v2/service/route53domains v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.34.2
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.71.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.52.0

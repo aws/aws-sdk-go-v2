@@ -1,3 +1,7 @@
+# v1.52.1 (2024-12-12)
+
+* **Documentation**: Improved descriptions for certain APIs.
+
 # v1.52.0 (2024-12-02)
 
 * **Feature**: Add new Multi Domain Correlation findings.

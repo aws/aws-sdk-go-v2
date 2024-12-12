@@ -1,8 +1,0 @@
-{
-    "id": "bc4127c6-4d09-473e-9a74-180173056107",
-    "type": "feature",
-    "description": "This release includes the following API updates: added the enumeration type RESTORE_DOMAIN to the OperationType; constrained the Price attribute to non-negative values; updated the LangCode to allow 2 or 3 alphabetical characters.",
-    "modules": [
-        "service/route53domains"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "73daebd5-45e8-475c-8ec6-957d106ba9ce",
-    "type": "feature",
-    "description": "To support customer-managed encryption in Data Quality to allow customers encrypt data with their own KMS key, we will add a DataQualityEncryption field to the SecurityConfiguration API where customers can provide their KMS keys.",
-    "modules": [
-        "service/glue"
-    ]
-}
