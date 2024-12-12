@@ -18286,6 +18286,23 @@ func awsAwsjson11_serializeDocumentDatapointInclusionAnnotation(v *types.Datapoi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDataQualityEncryption(v *types.DataQualityEncryption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataQualityEncryptionMode) > 0 {
+		ok := object.Key("DataQualityEncryptionMode")
+		ok.String(string(v.DataQualityEncryptionMode))
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDataQualityEvaluationRunAdditionalRunOptions(v *types.DataQualityEvaluationRunAdditionalRunOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19188,6 +19205,13 @@ func awsAwsjson11_serializeDocumentEncryptionConfiguration(v *types.EncryptionCo
 	if v.CloudWatchEncryption != nil {
 		ok := object.Key("CloudWatchEncryption")
 		if err := awsAwsjson11_serializeDocumentCloudWatchEncryption(v.CloudWatchEncryption, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataQualityEncryption != nil {
+		ok := object.Key("DataQualityEncryption")
+		if err := awsAwsjson11_serializeDocumentDataQualityEncryption(v.DataQualityEncryption, ok); err != nil {
 			return err
 		}
 	}

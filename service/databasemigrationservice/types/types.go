@@ -1570,6 +1570,27 @@ type KafkaSettings struct {
 	// specifies "kafka-default-topic" as the migration topic.
 	Topic *string
 
+	// Specifies using the large integer value with Kafka.
+	UseLargeIntegerValue *bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies using Kerberos authentication settings for use with DMS.
+type KerberosAuthenticationSettings struct {
+
+	// Specifies the Amazon Resource Name (ARN) of the IAM role that grants Amazon Web
+	// Services DMS access to the secret containing key cache file for the replication
+	// instance.
+	KeyCacheSecretIamArn *string
+
+	// Specifies the secret ID of the key cache for the replication instance.
+	KeyCacheSecretId *string
+
+	// Specifies the ID of the secret that stores the key cache file required for
+	// kerberos authentication of the replication instance.
+	Krb5FileContents *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1626,6 +1647,9 @@ type KinesisSettings struct {
 
 	// The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.
 	StreamArn *string
+
+	// Specifies using the large integer value with Kinesis.
+	UseLargeIntegerValue *bool
 
 	noSmithyDocumentSerde
 }
@@ -1713,6 +1737,9 @@ type MicrosoftSqlServerDataProviderSettings struct {
 
 // Provides information that defines a Microsoft SQL Server endpoint.
 type MicrosoftSQLServerSettings struct {
+
+	// Specifies using Kerberos authentication with Microsoft SQL Server.
+	AuthenticationMethod SqlServerAuthenticationMethod
 
 	// The maximum size of the packets (in bytes) used to transfer data using BCP.
 	BcpPacketSize *int32
@@ -2262,9 +2289,9 @@ type OracleSettings struct {
 	// from the outset.
 	ArchivedLogDestId *int32
 
-	// When this field is set to Y , DMS only accesses the archived redo logs. If the
-	// archived redo logs are stored on Automatic Storage Management (ASM) only, the
-	// DMS user account needs to be granted ASM privileges.
+	// When this field is set to True , DMS only accesses the archived redo logs. If
+	// the archived redo logs are stored on Automatic Storage Management (ASM) only,
+	// the DMS user account needs to be granted ASM privileges.
 	ArchivedLogsOnly *bool
 
 	// For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM)
@@ -2291,6 +2318,9 @@ type OracleSettings struct {
 	//
 	// [Configuration for change data capture (CDC) on an Oracle source database]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration
 	AsmUser *string
+
+	// Specifies using Kerberos authentication with Oracle.
+	AuthenticationMethod OracleAuthenticationMethod
 
 	// Specifies whether the length of a character column is in bytes or in
 	// characters. To indicate that the character column length is in characters, set
@@ -2361,8 +2391,7 @@ type OracleSettings struct {
 	//
 	// You can specify an integer value between 0 (the default) and 240 (the maximum).
 	//
-	// This parameter is only valid in DMS version 3.5.0 and later. DMS supports a
-	// window of up to 9.5 hours including the value for OpenTransactionWindow .
+	// This parameter is only valid in DMS version 3.5.0 and later.
 	OpenTransactionWindow *int32
 
 	// Set this string attribute to the required value in order to use the Binary
@@ -2500,26 +2529,26 @@ type OracleSettings struct {
 	// use any specified prefix replacement to access all online redo logs.
 	UseAlternateFolderForOnline *bool
 
-	// Set this attribute to Y to capture change data using the Binary Reader utility.
-	// Set UseLogminerReader to N to set this attribute to Y. To use Binary Reader
-	// with Amazon RDS for Oracle as the source, you set additional attributes. For
-	// more information about using this setting with Oracle Automatic Storage
-	// Management (ASM), see [Using Oracle LogMiner or DMS Binary Reader for CDC].
+	// Set this attribute to True to capture change data using the Binary Reader
+	// utility. Set UseLogminerReader to False to set this attribute to True. To use
+	// Binary Reader with Amazon RDS for Oracle as the source, you set additional
+	// attributes. For more information about using this setting with Oracle Automatic
+	// Storage Management (ASM), see [Using Oracle LogMiner or DMS Binary Reader for CDC].
 	//
 	// [Using Oracle LogMiner or DMS Binary Reader for CDC]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC
 	UseBFile *bool
 
-	// Set this attribute to Y to have DMS use a direct path full load. Specify this
-	// value to use the direct path protocol in the Oracle Call Interface (OCI). By
-	// using this OCI protocol, you can bulk-load Oracle target tables during a full
+	// Set this attribute to True to have DMS use a direct path full load. Specify
+	// this value to use the direct path protocol in the Oracle Call Interface (OCI).
+	// By using this OCI protocol, you can bulk-load Oracle target tables during a full
 	// load.
 	UseDirectPathFullLoad *bool
 
-	// Set this attribute to Y to capture change data using the Oracle LogMiner
-	// utility (the default). Set this attribute to N if you want to access the redo
-	// logs as a binary file. When you set UseLogminerReader to N, also set UseBfile
-	// to Y. For more information on this setting and using Oracle ASM, see [Using Oracle LogMiner or DMS Binary Reader for CDC]in the DMS
-	// User Guide.
+	// Set this attribute to True to capture change data using the Oracle LogMiner
+	// utility (the default). Set this attribute to False if you want to access the
+	// redo logs as a binary file. When you set UseLogminerReader to False, also set
+	// UseBfile to True. For more information on this setting and using Oracle ASM, see [Using Oracle LogMiner or DMS Binary Reader for CDC]
+	// in the DMS User Guide.
 	//
 	// [Using Oracle LogMiner or DMS Binary Reader for CDC]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC
 	UseLogminerReader *bool
@@ -2660,6 +2689,8 @@ type PostgreSQLSettings struct {
 	// To capture DDL events, DMS creates various artifacts in the PostgreSQL database
 	// when the task starts. You can later remove these artifacts.
 	//
+	// The default value is true .
+	//
 	// If this value is set to N , you don't have to create tables or triggers on the
 	// source database.
 	CaptureDdls *bool
@@ -2674,8 +2705,19 @@ type PostgreSQLSettings struct {
 
 	// The schema in which the operational DDL database artifacts are created.
 	//
+	// The default value is public .
+	//
 	// Example: ddlArtifactsSchema=xyzddlschema;
 	DdlArtifactsSchema *string
+
+	// Disables the Unicode source filter with PostgreSQL, for values passed into the
+	// Selection rule filter on Source Endpoint column values. By default DMS performs
+	// source filter comparisons using a Unicode string which can cause look ups to
+	// ignore the indexes in the text columns and slow down migrations.
+	//
+	// Unicode support should only be disabled when using a selection rule filter is
+	// on a text column in the Source database that is indexed.
+	DisableUnicodeSourceFilter *bool
 
 	// Sets the client statement timeout for the PostgreSQL instance, in seconds. The
 	// default value is 60 seconds.
@@ -2686,6 +2728,8 @@ type PostgreSQLSettings struct {
 	// When set to true , this value causes a task to fail if the actual size of a LOB
 	// column is greater than the specified LobMaxSize .
 	//
+	// The default value is false .
+	//
 	// If task is set to Limited LOB mode and this option is set to true, the task
 	// fails instead of truncating the LOB data.
 	FailTasksOnLobTruncation *bool
@@ -2694,27 +2738,41 @@ type PostgreSQLSettings struct {
 	// doing this, it prevents idle logical replication slots from holding onto old WAL
 	// logs, which can result in storage full situations on the source. This heartbeat
 	// keeps restart_lsn moving and prevents storage full scenarios.
+	//
+	// The default value is false .
 	HeartbeatEnable *bool
 
 	// Sets the WAL heartbeat frequency (in minutes).
+	//
+	// The default value is 5 minutes.
 	HeartbeatFrequency *int32
 
 	// Sets the schema in which the heartbeat artifacts are created.
+	//
+	// The default value is public .
 	HeartbeatSchema *string
 
 	// When true, lets PostgreSQL migrate the boolean type as boolean. By default,
 	// PostgreSQL migrates booleans as varchar(5) . You must set this setting on both
 	// the source and target endpoints for it to take effect.
+	//
+	// The default value is false .
 	MapBooleanAsBoolean *bool
 
 	// When true, DMS migrates JSONB values as CLOB.
+	//
+	// The default value is false .
 	MapJsonbAsClob *bool
 
-	// When true, DMS migrates LONG values as VARCHAR.
+	// Sets what datatype to map LONG values as.
+	//
+	// The default value is wstring .
 	MapLongVarcharAs LongVarcharMappingType
 
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to
 	// PostgreSQL.
+	//
+	// The default value is 32,768 KB (32 MB).
 	//
 	// Example: maxFileSize=512
 	MaxFileSize *int32
@@ -2723,6 +2781,8 @@ type PostgreSQLSettings struct {
 	Password *string
 
 	// Specifies the plugin to use to create a replication slot.
+	//
+	// The default value is pglogical .
 	PluginName PluginNameValue
 
 	// Endpoint TCP port. The default is 5432.
@@ -3318,7 +3378,7 @@ type Replication struct {
 	// uses for its data source.
 	SourceEndpointArn *string
 
-	// The replication type.
+	// The type of replication to start.
 	StartReplicationType *string
 
 	// The current status of the serverless replication.
@@ -3442,6 +3502,10 @@ type ReplicationInstance struct {
 
 	// The time the replication instance was created.
 	InstanceCreateTime *time.Time
+
+	// Specifies the ID of the secret that stores the key cache file required for
+	// kerberos authentication, when replicating an instance.
+	KerberosAuthenticationSettings *KerberosAuthenticationSettings
 
 	// An KMS key identifier that is used to encrypt the data on the replication
 	// instance.
@@ -3811,13 +3875,16 @@ type ReplicationTask struct {
 	// The reason the replication task was stopped. This response parameter can return
 	// one of the following values:
 	//
-	//   - "Stop Reason NORMAL"
+	//   - "Stop Reason NORMAL" – The task completed successfully with no additional
+	//   information returned.
 	//
 	//   - "Stop Reason RECOVERABLE_ERROR"
 	//
 	//   - "Stop Reason FATAL_ERROR"
 	//
-	//   - "Stop Reason FULL_LOAD_ONLY_FINISHED"
+	//   - "Stop Reason FULL_LOAD_ONLY_FINISHED" – The task completed the full load
+	//   phase. DMS applied cached changes if you set StopTaskCachedChangesApplied to
+	//   true .
 	//
 	//   - "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load completed, with cached
 	//   changes not applied
@@ -3984,6 +4051,9 @@ type ReplicationTaskAssessmentRun struct {
 	//
 	//   - "starting" – The assessment run is starting, but resources are not yet being
 	//   provisioned for individual assessments.
+	//
+	//   - "warning" – At least one individual assessment completed with a warning
+	//   status.
 	Status *string
 
 	noSmithyDocumentSerde

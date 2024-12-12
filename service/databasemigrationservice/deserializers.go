@@ -2590,6 +2590,9 @@ func awsAwsjson11_deserializeOpErrorDeleteEventSubscription(response *smithyhttp
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedFault", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedFault(response, errorBody)
+
 	case strings.EqualFold("InvalidResourceStateFault", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidResourceStateFault(response, errorBody)
 
@@ -3387,6 +3390,9 @@ func awsAwsjson11_deserializeOpErrorDeleteReplicationSubnetGroup(response *smith
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedFault", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedFault(response, errorBody)
+
 	case strings.EqualFold("InvalidResourceStateFault", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidResourceStateFault(response, errorBody)
 
@@ -8529,6 +8535,9 @@ func awsAwsjson11_deserializeOpErrorDescribeTableStatistics(response *smithyhttp
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedFault", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedFault(response, errorBody)
+
 	case strings.EqualFold("InvalidResourceStateFault", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidResourceStateFault(response, errorBody)
 
@@ -9459,6 +9468,9 @@ func awsAwsjson11_deserializeOpErrorModifyEventSubscription(response *smithyhttp
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedFault", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedFault(response, errorBody)
+
 	case strings.EqualFold("KMSAccessDeniedFault", errorCode):
 		return awsAwsjson11_deserializeErrorKMSAccessDeniedFault(response, errorBody)
 
@@ -19191,6 +19203,73 @@ func awsAwsjson11_deserializeDocumentKafkaSettings(v **types.KafkaSettings, valu
 				sv.Topic = ptr.String(jtv)
 			}
 
+		case "UseLargeIntegerValue":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.UseLargeIntegerValue = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentKerberosAuthenticationSettings(v **types.KerberosAuthenticationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KerberosAuthenticationSettings
+	if *v == nil {
+		sv = &types.KerberosAuthenticationSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KeyCacheSecretIamArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KeyCacheSecretIamArn = ptr.String(jtv)
+			}
+
+		case "KeyCacheSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KeyCacheSecretId = ptr.String(jtv)
+			}
+
+		case "Krb5FileContents":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Krb5FileContents = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -19310,6 +19389,15 @@ func awsAwsjson11_deserializeDocumentKinesisSettings(v **types.KinesisSettings, 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StreamArn = ptr.String(jtv)
+			}
+
+		case "UseLargeIntegerValue":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.UseLargeIntegerValue = ptr.Bool(jtv)
 			}
 
 		default:
@@ -19893,6 +19981,15 @@ func awsAwsjson11_deserializeDocumentMicrosoftSQLServerSettings(v **types.Micros
 
 	for key, value := range shape {
 		switch key {
+		case "AuthenticationMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SqlServerAuthenticationMethod to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationMethod = types.SqlServerAuthenticationMethod(jtv)
+			}
+
 		case "BcpPacketSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21095,6 +21192,15 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 				sv.AsmUser = ptr.String(jtv)
 			}
 
+		case "AuthenticationMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OracleAuthenticationMethod to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationMethod = types.OracleAuthenticationMethod(jtv)
+			}
+
 		case "CharLengthSemantics":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21535,7 +21641,7 @@ func awsAwsjson11_deserializeDocumentOrderableReplicationInstance(v **types.Orde
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ReplicationInstanceClass to be of type string, got %T instead", value)
 				}
 				sv.ReplicationInstanceClass = ptr.String(jtv)
 			}
@@ -21920,6 +22026,15 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DdlArtifactsSchema = ptr.String(jtv)
+			}
+
+		case "DisableUnicodeSourceFilter":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.DisableUnicodeSourceFilter = ptr.Bool(jtv)
 			}
 
 		case "ExecuteTimeout":
@@ -23895,6 +24010,11 @@ func awsAwsjson11_deserializeDocumentReplicationInstance(v **types.ReplicationIn
 				}
 			}
 
+		case "KerberosAuthenticationSettings":
+			if err := awsAwsjson11_deserializeDocumentKerberosAuthenticationSettings(&sv.KerberosAuthenticationSettings, value); err != nil {
+				return err
+			}
+
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23958,7 +24078,7 @@ func awsAwsjson11_deserializeDocumentReplicationInstance(v **types.ReplicationIn
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ReplicationInstanceClass to be of type string, got %T instead", value)
 				}
 				sv.ReplicationInstanceClass = ptr.String(jtv)
 			}
@@ -24380,7 +24500,7 @@ func awsAwsjson11_deserializeDocumentReplicationPendingModifiedValues(v **types.
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ReplicationInstanceClass to be of type string, got %T instead", value)
 				}
 				sv.ReplicationInstanceClass = ptr.String(jtv)
 			}
@@ -25067,7 +25187,7 @@ func awsAwsjson11_deserializeDocumentReplicationTaskAssessmentResult(v **types.R
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SecretString to be of type string, got %T instead", value)
 				}
 				sv.S3ObjectUrl = ptr.String(jtv)
 			}

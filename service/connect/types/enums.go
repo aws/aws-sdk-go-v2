@@ -522,6 +522,31 @@ func (CurrentMetricName) Values() []CurrentMetricName {
 	}
 }
 
+type DateComparisonType string
+
+// Enum values for DateComparisonType
+const (
+	DateComparisonTypeGreaterThan          DateComparisonType = "GREATER_THAN"
+	DateComparisonTypeLessThan             DateComparisonType = "LESS_THAN"
+	DateComparisonTypeGreaterThanOrEqualTo DateComparisonType = "GREATER_THAN_OR_EQUAL_TO"
+	DateComparisonTypeLessThanOrEqualTo    DateComparisonType = "LESS_THAN_OR_EQUAL_TO"
+	DateComparisonTypeEqualTo              DateComparisonType = "EQUAL_TO"
+)
+
+// Values returns all known values for DateComparisonType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DateComparisonType) Values() []DateComparisonType {
+	return []DateComparisonType{
+		"GREATER_THAN",
+		"LESS_THAN",
+		"GREATER_THAN_OR_EQUAL_TO",
+		"LESS_THAN_OR_EQUAL_TO",
+		"EQUAL_TO",
+	}
+}
+
 type DeviceType string
 
 // Enum values for DeviceType
@@ -1462,6 +1487,35 @@ func (OutboundMessageSourceType) Values() []OutboundMessageSourceType {
 	return []OutboundMessageSourceType{
 		"TEMPLATE",
 		"RAW",
+	}
+}
+
+type OverrideDays string
+
+// Enum values for OverrideDays
+const (
+	OverrideDaysSunday    OverrideDays = "SUNDAY"
+	OverrideDaysMonday    OverrideDays = "MONDAY"
+	OverrideDaysTuesday   OverrideDays = "TUESDAY"
+	OverrideDaysWednesday OverrideDays = "WEDNESDAY"
+	OverrideDaysThursday  OverrideDays = "THURSDAY"
+	OverrideDaysFriday    OverrideDays = "FRIDAY"
+	OverrideDaysSaturday  OverrideDays = "SATURDAY"
+)
+
+// Values returns all known values for OverrideDays. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OverrideDays) Values() []OverrideDays {
+	return []OverrideDays{
+		"SUNDAY",
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
 	}
 }
 

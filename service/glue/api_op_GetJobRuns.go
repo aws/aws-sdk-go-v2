@@ -12,6 +12,9 @@ import (
 )
 
 // Retrieves metadata for all runs of a given job definition.
+//
+// GetJobRuns returns the job runs in chronological order, with the newest jobs
+// returned first.
 func (c *Client) GetJobRuns(ctx context.Context, params *GetJobRunsInput, optFns ...func(*Options)) (*GetJobRunsOutput, error) {
 	if params == nil {
 		params = &GetJobRunsInput{}

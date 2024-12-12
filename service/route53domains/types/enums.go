@@ -742,6 +742,7 @@ const (
 	OperationTypeInternalTransferInDomain  OperationType = "INTERNAL_TRANSFER_IN_DOMAIN"
 	OperationTypeReleaseToGandi            OperationType = "RELEASE_TO_GANDI"
 	OperationTypeTransferOnRenew           OperationType = "TRANSFER_ON_RENEW"
+	OperationTypeRestoreDomain             OperationType = "RESTORE_DOMAIN"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -770,6 +771,7 @@ func (OperationType) Values() []OperationType {
 		"INTERNAL_TRANSFER_IN_DOMAIN",
 		"RELEASE_TO_GANDI",
 		"TRANSFER_ON_RENEW",
+		"RESTORE_DOMAIN",
 	}
 }
 

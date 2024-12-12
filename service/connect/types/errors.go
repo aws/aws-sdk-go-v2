@@ -33,7 +33,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A conditional check failed.
+// Request processing failed because dependent condition failed.
 type ConditionalOperationFailedException struct {
 	Message *string
 

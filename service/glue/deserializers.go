@@ -41728,6 +41728,55 @@ func awsAwsjson11_deserializeDocumentDataQualityAnalyzerResults(v *[]types.DataQ
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDataQualityEncryption(v **types.DataQualityEncryption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataQualityEncryption
+	if *v == nil {
+		sv = &types.DataQualityEncryption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataQualityEncryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataQualityEncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.DataQualityEncryptionMode = types.DataQualityEncryptionMode(jtv)
+			}
+
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDataQualityEvaluationRunAdditionalRunOptions(v **types.DataQualityEvaluationRunAdditionalRunOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45054,6 +45103,11 @@ func awsAwsjson11_deserializeDocumentEncryptionConfiguration(v **types.Encryptio
 		switch key {
 		case "CloudWatchEncryption":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchEncryption(&sv.CloudWatchEncryption, value); err != nil {
+				return err
+			}
+
+		case "DataQualityEncryption":
+			if err := awsAwsjson11_deserializeDocumentDataQualityEncryption(&sv.DataQualityEncryption, value); err != nil {
 				return err
 			}
 

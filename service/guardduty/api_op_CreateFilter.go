@@ -63,9 +63,11 @@ type CreateFilterInput struct {
 	//
 	//   - Medium: ["4", "5", "6"]
 	//
-	//   - High: ["7", "8", "9"]
+	//   - High: ["7", "8"]
 	//
-	// For more information, see [Severity levels for GuardDuty findings].
+	//   - Critical: ["9", "10"]
+	//
+	// For more information, see [Findings severity levels]in the Amazon GuardDuty User Guide.
 	//
 	//   - type
 	//
@@ -256,8 +258,8 @@ type CreateFilterInput struct {
 	//
 	//   - resource.lambdaDetails.tags.value
 	//
+	// [Findings severity levels]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html
 	// [FindingCriteria]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html
-	// [Severity levels for GuardDuty findings]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings.html#guardduty_findings-severity
 	//
 	// This member is required.
 	FindingCriteria *types.FindingCriteria
