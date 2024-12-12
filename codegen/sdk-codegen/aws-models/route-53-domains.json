@@ -3638,10 +3638,7 @@
         "com.amazonaws.route53domains#LangCode": {
             "type": "string",
             "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 3
-                }
+                "smithy.api#pattern": "^|[A-Za-z]{2,3}$"
             }
         },
         "com.amazonaws.route53domains#ListDomains": {
@@ -4280,6 +4277,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TRANSFER_ON_RENEW"
                     }
+                },
+                "RESTORE_DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORE_DOMAIN"
+                    }
                 }
             }
         },
@@ -4291,7 +4294,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 20
+                    "max": 21
                 }
             }
         },
@@ -4344,7 +4347,10 @@
         "com.amazonaws.route53domains#Price": {
             "type": "double",
             "traits": {
-                "smithy.api#default": 0
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0.0
+                }
             }
         },
         "com.amazonaws.route53domains#PriceWithCurrency": {
