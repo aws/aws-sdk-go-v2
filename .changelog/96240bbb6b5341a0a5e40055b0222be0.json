@@ -1,0 +1,8 @@
+{
+    "id": "96240bbb-6b53-41a0-a5e4-0055b0222be0",
+    "type": "release",
+    "description": "Add Aurora DSQL Auth Token Generator",
+    "modules": [
+        "feature/dsql/auth"
+    ]
+}
