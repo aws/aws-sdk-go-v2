@@ -1,0 +1,8 @@
+{
+    "id": "3550fde8-f742-40d8-b0de-0755ef513a48",
+    "type": "feature",
+    "description": "Limit PutIntegration IntegrationName and ListIntegrations IntegrationNamePrefix parameters to 50 characters",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

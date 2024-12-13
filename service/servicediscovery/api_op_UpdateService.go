@@ -52,7 +52,8 @@ type UpdateServiceInput struct {
 	// This member is required.
 	Id *string
 
-	// A complex type that contains the new settings for the service.
+	// A complex type that contains the new settings for the service. You can specify
+	// a maximum of 30 attributes (key-value pairs).
 	//
 	// This member is required.
 	Service *types.ServiceChange

@@ -94,6 +94,9 @@ type AddBridgeNetworkSourceRequest struct {
 	// This member is required.
 	Protocol Protocol
 
+	// The settings related to the multicast source.
+	MulticastSourceSettings *MulticastSourceSettings
+
 	noSmithyDocumentSerde
 }
 
@@ -416,6 +419,9 @@ type BridgeNetworkSource struct {
 	//
 	// This member is required.
 	Protocol Protocol
+
+	// The settings related to the multicast source.
+	MulticastSourceSettings *MulticastSourceSettings
 
 	noSmithyDocumentSerde
 }
@@ -1397,6 +1403,15 @@ type MonitoringConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The settings related to the multicast source.
+type MulticastSourceSettings struct {
+
+	// The IP address of the source for source-specific multicast (SSM).
+	MulticastSourceIp *string
+
+	noSmithyDocumentSerde
+}
+
 // A savings plan that reserves a certain amount of outbound bandwidth usage at a
 // discounted rate each month over a period of time.
 type Offering struct {
@@ -1976,6 +1991,9 @@ type UpdateBridgeNetworkSourceRequest struct {
 
 	// The network source multicast IP.
 	MulticastIp *string
+
+	// The settings related to the multicast source.
+	MulticastSourceSettings *MulticastSourceSettings
 
 	// The network source's gateway network name.
 	NetworkName *string

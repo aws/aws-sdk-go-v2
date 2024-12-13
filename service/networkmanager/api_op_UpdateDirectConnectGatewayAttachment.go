@@ -37,7 +37,7 @@ type UpdateDirectConnectGatewayAttachmentInput struct {
 
 	// One or more edge locations to update for the Direct Connect gateway attachment.
 	// The updated array of edge locations overwrites the previous array of locations.
-	// EdgeLocations is only used for Direct Connect gateway attachments. Do
+	// EdgeLocations is only used for Direct Connect gateway attachments.
 	EdgeLocations []string
 
 	noSmithyDocumentSerde

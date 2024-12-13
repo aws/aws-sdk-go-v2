@@ -136,6 +136,9 @@ type CreateNodegroupInput struct {
 	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	LaunchTemplate *types.LaunchTemplateSpecification
 
+	// The node auto repair configuration for the node group.
+	NodeRepairConfig *types.NodeRepairConfig
+
 	// The AMI version of the Amazon EKS optimized AMI to use with your node group. By
 	// default, the latest available AMI version for the node group's current
 	// Kubernetes version is used. For information about Linux versions, see [Amazon EKS optimized Amazon Linux AMI versions]in the

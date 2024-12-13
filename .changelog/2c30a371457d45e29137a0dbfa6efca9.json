@@ -1,0 +1,8 @@
+{
+    "id": "2c30a371-457d-45e2-9137-a0dbfa6efca9",
+    "type": "feature",
+    "description": "This release adds GroupId to the response for DeleteSecurityGroup.",
+    "modules": [
+        "service/ec2"
+    ]
+}

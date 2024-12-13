@@ -1,0 +1,8 @@
+{
+    "id": "3d1e692c-20ca-4d70-be14-44940d66761a",
+    "type": "feature",
+    "description": "Add NodeRepairConfig in CreateNodegroupRequest and UpdateNodegroupConfigRequest",
+    "modules": [
+        "service/eks"
+    ]
+}

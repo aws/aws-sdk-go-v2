@@ -1254,6 +1254,11 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(string(v.Mode))
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.SourceBackupId != nil {
 		ok := object.Key("SourceBackupId")
 		ok.String(*v.SourceBackupId)

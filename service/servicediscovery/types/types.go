@@ -9,13 +9,14 @@ import (
 
 // A complex type that contains information about the Amazon Route 53 DNS records
 // that you want Cloud Map to create when you register an instance.
-//
-// The record types of a service can only be changed by deleting the service and
-// recreating it with a new Dnsconfig .
 type DnsConfig struct {
 
 	// An array that contains one DnsRecord object for each Route 53 DNS record that
 	// you want Cloud Map to create when you register an instance.
+	//
+	// The record type of a service specified in a DnsRecord object can't be updated.
+	// To change a record type, you need to delete the service and recreate it with a
+	// new DnsConfig .
 	//
 	// This member is required.
 	DnsRecords []DnsRecord
@@ -1053,6 +1054,26 @@ type Service struct {
 	//
 	// DNS Reserved.
 	Type ServiceType
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that contains information about attributes associated with a
+// specific service.
+type ServiceAttributes struct {
+
+	// A string map that contains the following information for the service that you
+	// specify in ServiceArn :
+	//
+	//   - The attributes that apply to the service.
+	//
+	//   - For each attribute, the applicable value.
+	//
+	// You can specify a total of 30 attributes.
+	Attributes map[string]string
+
+	// The ARN of the service that the attributes are associated with.
+	ServiceArn *string
 
 	noSmithyDocumentSerde
 }
