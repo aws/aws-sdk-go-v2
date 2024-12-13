@@ -636,7 +636,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a specified service. If the service still contains one or more registered instances, the request\n   fails.</p>",
+                "smithy.api#documentation": "<p>Deletes a specified service and all associated service attributes. If the service still contains one or more registered instances, the request\n   fails.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Example: Delete service",
@@ -647,6 +647,68 @@
                         "output": {}
                     }
                 ]
+            }
+        },
+        "com.amazonaws.servicediscovery#DeleteServiceAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicediscovery#DeleteServiceAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicediscovery#DeleteServiceAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicediscovery#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.servicediscovery#ServiceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes specific attributes associated with a service.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteServiceAttributes example",
+                        "documentation": "Example: Delete service attribute by providing attribute key and service ID",
+                        "input": {
+                            "Attributes": [
+                                "port"
+                            ],
+                            "ServiceId": "srv-e4anhexample0004"
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.servicediscovery#DeleteServiceAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceId": {
+                    "target": "com.amazonaws.servicediscovery#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service from which the attributes will be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.servicediscovery#ServiceAttributeKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of keys corresponding to each attribute that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicediscovery#DeleteServiceAttributesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicediscovery#DeleteServiceRequest": {
@@ -978,13 +1040,13 @@
                 "DnsRecords": {
                     "target": "com.amazonaws.servicediscovery#DnsRecordList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that contains one <code>DnsRecord</code> object for each Route 53 DNS record that you want Cloud Map\n   to create when you register an instance.</p>",
+                        "smithy.api#documentation": "<p>An array that contains one <code>DnsRecord</code> object for each Route 53 DNS record that you want Cloud Map\n   to create when you register an instance.</p>\n         <important>\n            <p>The record type of a service specified in a <code>DnsRecord</code> object can't be updated. To change a record type, you need to delete the service and recreate it with a new\n    <code>DnsConfig</code>.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the Amazon Route 53 DNS records that you want Cloud Map to create\n   when you register an instance.</p>\n         <important>\n            <p>The record types of a service can only be changed by deleting the service and recreating it with a new\n     <code>Dnsconfig</code>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the Amazon Route 53 DNS records that you want Cloud Map to create\n   when you register an instance.</p>"
             }
         },
         "com.amazonaws.servicediscovery#DnsConfigChange": {
@@ -1442,6 +1504,72 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets the settings for a specified service.</p>"
+            }
+        },
+        "com.amazonaws.servicediscovery#GetServiceAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicediscovery#GetServiceAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicediscovery#GetServiceAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicediscovery#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.servicediscovery#ServiceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the attributes associated with a specified service.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetServiceAttributes Example",
+                        "documentation": "This example gets the attributes for a specified service.",
+                        "input": {
+                            "ServiceId": "srv-e4anhexample0004"
+                        },
+                        "output": {
+                            "ServiceAttributes": {
+                                "Attributes": {
+                                    "port": "80"
+                                },
+                                "ServiceArn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.servicediscovery#GetServiceAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceId": {
+                    "target": "com.amazonaws.servicediscovery#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service that you want to get attributes for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicediscovery#GetServiceAttributesResponse": {
+            "type": "structure",
+            "members": {
+                "ServiceAttributes": {
+                    "target": "com.amazonaws.servicediscovery#ServiceAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains the service ARN and a list of attribute key-value pairs associated with the service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicediscovery#GetServiceRequest": {
@@ -2424,7 +2552,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1024
-                }
+                },
+                "smithy.api#pattern": "^[!-~]{1,1024}$"
             }
         },
         "com.amazonaws.servicediscovery#NamespaceNameHttp": {
@@ -3268,6 +3397,9 @@
                     "target": "com.amazonaws.servicediscovery#DeleteService"
                 },
                 {
+                    "target": "com.amazonaws.servicediscovery#DeleteServiceAttributes"
+                },
+                {
                     "target": "com.amazonaws.servicediscovery#DeregisterInstance"
                 },
                 {
@@ -3290,6 +3422,9 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#GetService"
+                },
+                {
+                    "target": "com.amazonaws.servicediscovery#GetServiceAttributes"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ListInstances"
@@ -3329,6 +3464,9 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#UpdateService"
+                },
+                {
+                    "target": "com.amazonaws.servicediscovery#UpdateServiceAttributes"
                 }
             ],
             "traits": {
@@ -4540,6 +4678,84 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.servicediscovery#ServiceAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.servicediscovery#ServiceAttributeKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.servicediscovery#ServiceAttributeKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.servicediscovery#ServiceAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.servicediscovery#ServiceAttributes": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.servicediscovery#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service that the attributes are associated with.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.servicediscovery#ServiceAttributesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string map that contains the following information for the service that you specify in\n   <code>ServiceArn</code>:</p>\n         <ul>\n            <li>\n               <p>The attributes that apply to the service. </p>\n            </li>\n            <li>\n               <p>For each attribute, the applicable value.</p>\n            </li>\n         </ul>\n         <p>You can specify a total of 30 attributes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that contains information about attributes associated with a specific service.</p>"
+            }
+        },
+        "com.amazonaws.servicediscovery#ServiceAttributesLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.servicediscovery#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The attribute can't be added to the service because you've exceeded the quota for the number of attributes you can add to a service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.servicediscovery#ServiceAttributesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.servicediscovery#ServiceAttributeKey"
+            },
+            "value": {
+                "target": "com.amazonaws.servicediscovery#ServiceAttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
         "com.amazonaws.servicediscovery#ServiceChange": {
             "type": "structure",
             "members": {
@@ -5330,6 +5546,71 @@
                 ]
             }
         },
+        "com.amazonaws.servicediscovery#UpdateServiceAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicediscovery#UpdateServiceAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicediscovery#UpdateServiceAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicediscovery#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.servicediscovery#ServiceAttributesLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.servicediscovery#ServiceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Submits a request to update a specified service to add service-level attributes.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateServiceAttributes Example",
+                        "documentation": "This example submits a request to update the specified service to add a port attribute with the value 80.",
+                        "input": {
+                            "ServiceId": "srv-e4anhexample0004",
+                            "Attributes": {
+                                "port": "80"
+                            }
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.servicediscovery#UpdateServiceAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceId": {
+                    "target": "com.amazonaws.servicediscovery#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.servicediscovery#ServiceAttributesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string map that contains attribute key-value pairs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicediscovery#UpdateServiceAttributesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.servicediscovery#UpdateServiceRequest": {
             "type": "structure",
             "members": {
@@ -5343,7 +5624,7 @@
                 "Service": {
                     "target": "com.amazonaws.servicediscovery#ServiceChange",
                     "traits": {
-                        "smithy.api#documentation": "<p>A complex type that contains the new settings for the service.</p>",
+                        "smithy.api#documentation": "<p>A complex type that contains the new settings for the service. You can specify a maximum of 30 attributes (key-value pairs).</p>",
                         "smithy.api#required": {}
                     }
                 }
