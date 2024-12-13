@@ -43,7 +43,7 @@ func (c *Client) ListResourceServers(ctx context.Context, params *ListResourceSe
 
 type ListResourceServersInput struct {
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool.
 	//
 	// This member is required.
 	UserPoolId *string

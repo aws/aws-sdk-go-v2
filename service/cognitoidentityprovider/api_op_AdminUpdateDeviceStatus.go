@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the device status as an administrator.
+// Updates the status of a user's device so that it is marked as remembered or not
+// remembered for the purpose of device authentication. Device authentication is a
+// "remember me" mechanism that silently completes sign-in from trusted devices
+// with a device key instead of a user-provided MFA code. This operation changes
+// the status of a device without deleting it, so you can enable it again later.
+// For more information about device authentication, see [Working with devices].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -24,6 +29,7 @@ import (
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
+// [Working with devices]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminUpdateDeviceStatus(ctx context.Context, params *AdminUpdateDeviceStatusInput, optFns ...func(*Options)) (*AdminUpdateDeviceStatusOutput, error) {
@@ -44,12 +50,13 @@ func (c *Client) AdminUpdateDeviceStatus(ctx context.Context, params *AdminUpdat
 // The request to update the device status, as an administrator.
 type AdminUpdateDeviceStatusInput struct {
 
-	// The device key.
+	// The unique identifier, or device key, of the device that you want to update the
+	// status for.
 	//
 	// This member is required.
 	DeviceKey *string
 
-	// The user pool ID.
+	// The ID of the user pool where you want to change a user's device status.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -63,7 +70,8 @@ type AdminUpdateDeviceStatusInput struct {
 	// This member is required.
 	Username *string
 
-	// The status indicating whether a device has been remembered or not.
+	// To enable device authentication with the specified device, set to remembered .To
+	// disable, set to not_remembered .
 	DeviceRememberedStatus types.DeviceRememberedStatusType
 
 	noSmithyDocumentSerde

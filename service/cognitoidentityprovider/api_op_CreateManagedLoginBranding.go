@@ -19,7 +19,8 @@ import (
 // Provides values for UI customization in a Settings JSON object and image files
 // in an Assets array. To send the JSON object Document type parameter in Settings
 // , you might need to update to the most recent version of your Amazon Web
-// Services SDK.
+// Services SDK. To create a new style with default settings, set
+// UseCognitoProvidedValues to true and don't provide values for any other options.
 //
 // This operation has a 2-megabyte request-size limit and include the CSS settings
 // and image assets for your app client. Your branding settings might exceed 2MB in
@@ -28,7 +29,9 @@ import (
 // larger than 2MB, separate it into multiple requests, each with a size smaller
 // than the limit.
 //
-// For more information, see [API and SDK operations for managed login branding]
+// As a best practice, modify the output of [DescribeManagedLoginBrandingByClient] into the request parameters for this
+// operation. To get all settings, set ReturnMergedResources to true . For more
+// information, see [API and SDK operations for managed login branding].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -42,6 +45,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [DescribeManagedLoginBrandingByClient]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeManagedLoginBrandingByClient.html
 // [API and SDK operations for managed login branding]: https://docs.aws.amazon.com/cognito/latest/developerguide/managed-login-brandingdesigner.html#branding-designer-api
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) CreateManagedLoginBranding(ctx context.Context, params *CreateManagedLoginBrandingInput, optFns ...func(*Options)) (*CreateManagedLoginBrandingOutput, error) {
@@ -84,9 +88,9 @@ type CreateManagedLoginBrandingInput struct {
 	// apply to your style.
 	Settings document.Interface
 
-	// When true, applies the default branding style options. This option reverts to
-	// default style options that are managed by Amazon Cognito. You can modify them
-	// later in the branding designer.
+	// When true, applies the default branding style options. These default options
+	// are managed by Amazon Cognito. You can modify them later in the branding
+	// designer.
 	//
 	// When you specify true for this option, you must also omit values for Settings
 	// and Assets in the request.

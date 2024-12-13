@@ -5703,6 +5703,11 @@ func awsRestjson1_deserializeDocumentAutoParticipantRecordingConfiguration(v **t
 				sv.StorageConfigurationArn = ptr.String(jtv)
 			}
 
+		case "thumbnailConfiguration":
+			if err := awsRestjson1_deserializeDocumentParticipantThumbnailConfiguration(&sv.ThumbnailConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5978,6 +5983,89 @@ func awsRestjson1_deserializeDocumentCompositionSummaryList(v *[]types.Compositi
 		var col types.CompositionSummary
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentCompositionSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCompositionThumbnailConfiguration(v **types.CompositionThumbnailConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CompositionThumbnailConfiguration
+	if *v == nil {
+		sv = &types.CompositionThumbnailConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "storage":
+			if err := awsRestjson1_deserializeDocumentThumbnailStorageTypeList(&sv.Storage, value); err != nil {
+				return err
+			}
+
+		case "targetIntervalSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ThumbnailIntervalSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetIntervalSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCompositionThumbnailConfigurationList(v *[]types.CompositionThumbnailConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CompositionThumbnailConfiguration
+	if *v == nil {
+		cv = []types.CompositionThumbnailConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CompositionThumbnailConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCompositionThumbnailConfiguration(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -7411,6 +7499,64 @@ func awsRestjson1_deserializeDocumentParticipantSummary(v **types.ParticipantSum
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentParticipantThumbnailConfiguration(v **types.ParticipantThumbnailConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParticipantThumbnailConfiguration
+	if *v == nil {
+		sv = &types.ParticipantThumbnailConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "recordingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ThumbnailRecordingMode to be of type string, got %T instead", value)
+				}
+				sv.RecordingMode = types.ThumbnailRecordingMode(jtv)
+			}
+
+		case "storage":
+			if err := awsRestjson1_deserializeDocumentThumbnailStorageTypeList(&sv.Storage, value); err != nil {
+				return err
+			}
+
+		case "targetIntervalSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ThumbnailIntervalSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetIntervalSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentParticipantToken(v **types.ParticipantToken, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8067,6 +8213,11 @@ func awsRestjson1_deserializeDocumentS3DestinationConfiguration(v **types.S3Dest
 					return fmt.Errorf("expected StorageConfigurationArn to be of type string, got %T instead", value)
 				}
 				sv.StorageConfigurationArn = ptr.String(jtv)
+			}
+
+		case "thumbnailConfigurations":
+			if err := awsRestjson1_deserializeDocumentCompositionThumbnailConfigurationList(&sv.ThumbnailConfigurations, value); err != nil {
+				return err
 			}
 
 		default:
@@ -8786,6 +8937,42 @@ func awsRestjson1_deserializeDocumentTags(v *map[string]string, value interface{
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentThumbnailStorageTypeList(v *[]types.ThumbnailStorageType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ThumbnailStorageType
+	if *v == nil {
+		cv = []types.ThumbnailStorageType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ThumbnailStorageType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ThumbnailStorageType to be of type string, got %T instead", value)
+			}
+			col = types.ThumbnailStorageType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

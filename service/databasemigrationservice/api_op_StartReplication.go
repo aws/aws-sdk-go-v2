@@ -41,6 +41,21 @@ type StartReplicationInput struct {
 
 	// The replication type.
 	//
+	// When the replication type is full-load or full-load-and-cdc , the only valid
+	// value for the first run of the replication is start-replication . This option
+	// will start the replication.
+	//
+	// You can also use ReloadTables to reload specific tables that failed during replication
+	// instead of restarting the replication.
+	//
+	// The resume-processing option isn't applicable for a full-load replication,
+	// because you can't resume partially loaded tables during the full load phase.
+	//
+	// For a full-load-and-cdc replication, DMS migrates table data, and then applies
+	// data changes that occur on the source. To load all the tables again, and start
+	// capturing source changes, use reload-target . Otherwise use resume-processing ,
+	// to replicate the changes from the last stop position.
+	//
 	// This member is required.
 	StartReplicationType *string
 

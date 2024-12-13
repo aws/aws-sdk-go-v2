@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified Amazon Cognito user pool.
+// Deletes a user pool. After you delete a user pool, users can no longer sign in
+// to any associated applications.
 func (c *Client) DeleteUserPool(ctx context.Context, params *DeleteUserPoolInput, optFns ...func(*Options)) (*DeleteUserPoolOutput, error) {
 	if params == nil {
 		params = &DeleteUserPoolInput{}
@@ -29,7 +30,7 @@ func (c *Client) DeleteUserPool(ctx context.Context, params *DeleteUserPoolInput
 // Represents the request to delete a user pool.
 type DeleteUserPoolInput struct {
 
-	// The user pool ID for the user pool you want to delete.
+	// The ID of the user pool that you want to delete.
 	//
 	// This member is required.
 	UserPoolId *string

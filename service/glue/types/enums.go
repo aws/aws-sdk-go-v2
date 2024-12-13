@@ -765,6 +765,25 @@ func (DataOperation) Values() []DataOperation {
 	}
 }
 
+type DataQualityEncryptionMode string
+
+// Enum values for DataQualityEncryptionMode
+const (
+	DataQualityEncryptionModeDisabled DataQualityEncryptionMode = "DISABLED"
+	DataQualityEncryptionModeSsekms   DataQualityEncryptionMode = "SSE-KMS"
+)
+
+// Values returns all known values for DataQualityEncryptionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEncryptionMode) Values() []DataQualityEncryptionMode {
+	return []DataQualityEncryptionMode{
+		"DISABLED",
+		"SSE-KMS",
+	}
+}
+
 type DataQualityModelStatus string
 
 // Enum values for DataQualityModelStatus

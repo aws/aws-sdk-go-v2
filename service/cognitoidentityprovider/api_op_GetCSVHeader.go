@@ -31,7 +31,7 @@ func (c *Client) GetCSVHeader(ctx context.Context, params *GetCSVHeaderInput, op
 // user import job.
 type GetCSVHeaderInput struct {
 
-	// The user pool ID for the user pool that the users are to be imported into.
+	// The ID of the user pool that the users are to be imported into.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -46,7 +46,7 @@ type GetCSVHeaderOutput struct {
 	// The header information of the CSV file for the user import job.
 	CSVHeader []string
 
-	// The user pool ID for the user pool that the users are to be imported into.
+	// The ID of the user pool that the users are to be imported into.
 	UserPoolId *string
 
 	// Metadata pertaining to the operation's result.

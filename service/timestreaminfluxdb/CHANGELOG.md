@@ -1,3 +1,7 @@
+# v1.7.0 (2024-12-11)
+
+* **Feature**: Adds networkType parameter to CreateDbInstance API which allows IPv6 support to the InfluxDB endpoint
+
 # v1.6.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

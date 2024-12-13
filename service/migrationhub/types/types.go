@@ -106,6 +106,21 @@ type MigrationTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A migration-task progress update.
+type MigrationTaskUpdate struct {
+
+	// Task object encapsulating task information.
+	MigrationTaskState *Task
+
+	// The timestamp for the update.
+	UpdateDateTime *time.Time
+
+	// The type of the update.
+	UpdateType UpdateType
+
+	noSmithyDocumentSerde
+}
+
 // Summary of the AWS resource used for access control that is implicitly linked
 // to your AWS account.
 type ProgressUpdateStreamSummary struct {
@@ -130,7 +145,7 @@ type ProgressUpdateStreamSummary struct {
 //
 // MAC_ADDRESS ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
 //
-// FQDN ^[^<>{}\\/?,=\p{Cntrl}]{1,256}$
+// FQDN ^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$
 type ResourceAttribute struct {
 
 	// Type of resource.
@@ -142,6 +157,27 @@ type ResourceAttribute struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A source resource can be a source server, a migration wave, an application, or
+// any other resource that you track.
+type SourceResource struct {
+
+	// This is the name that you want to use to identify the resource. If the resource
+	// is an AWS resource, we recommend that you set this parameter to the ARN of the
+	// resource.
+	//
+	// This member is required.
+	Name *string
+
+	// A description that can be free-form text to record additional detail about the
+	// resource for clarity or later reference.
+	Description *string
+
+	// A free-form description of the status of the resource.
+	StatusDetail *string
 
 	noSmithyDocumentSerde
 }

@@ -4952,6 +4952,13 @@ func awsRestjson1_serializeDocumentAddBridgeNetworkSourceRequest(v *types.AddBri
 		ok.String(*v.MulticastIp)
 	}
 
+	if v.MulticastSourceSettings != nil {
+		ok := object.Key("multicastSourceSettings")
+		if err := awsRestjson1_serializeDocumentMulticastSourceSettings(v.MulticastSourceSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -5547,6 +5554,18 @@ func awsRestjson1_serializeDocumentMonitoringConfig(v *types.MonitoringConfig, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMulticastSourceSettings(v *types.MulticastSourceSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MulticastSourceIp != nil {
+		ok := object.Key("multicastSourceIp")
+		ok.String(*v.MulticastSourceIp)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSetGatewayBridgeSourceRequest(v *types.SetGatewayBridgeSourceRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5744,6 +5763,13 @@ func awsRestjson1_serializeDocumentUpdateBridgeNetworkSourceRequest(v *types.Upd
 	if v.MulticastIp != nil {
 		ok := object.Key("multicastIp")
 		ok.String(*v.MulticastIp)
+	}
+
+	if v.MulticastSourceSettings != nil {
+		ok := object.Key("multicastSourceSettings")
+		if err := awsRestjson1_serializeDocumentMulticastSourceSettings(v.MulticastSourceSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.NetworkName != nil {

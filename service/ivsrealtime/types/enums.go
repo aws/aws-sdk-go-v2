@@ -223,6 +223,7 @@ type ParticipantRecordingMediaType string
 const (
 	ParticipantRecordingMediaTypeAudioVideo ParticipantRecordingMediaType = "AUDIO_VIDEO"
 	ParticipantRecordingMediaTypeAudioOnly  ParticipantRecordingMediaType = "AUDIO_ONLY"
+	ParticipantRecordingMediaTypeNone       ParticipantRecordingMediaType = "NONE"
 )
 
 // Values returns all known values for ParticipantRecordingMediaType. Note that
@@ -234,6 +235,7 @@ func (ParticipantRecordingMediaType) Values() []ParticipantRecordingMediaType {
 	return []ParticipantRecordingMediaType{
 		"AUDIO_VIDEO",
 		"AUDIO_ONLY",
+		"NONE",
 	}
 }
 
@@ -359,6 +361,44 @@ const (
 func (RecordingConfigurationFormat) Values() []RecordingConfigurationFormat {
 	return []RecordingConfigurationFormat{
 		"HLS",
+	}
+}
+
+type ThumbnailRecordingMode string
+
+// Enum values for ThumbnailRecordingMode
+const (
+	ThumbnailRecordingModeInterval ThumbnailRecordingMode = "INTERVAL"
+	ThumbnailRecordingModeDisabled ThumbnailRecordingMode = "DISABLED"
+)
+
+// Values returns all known values for ThumbnailRecordingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThumbnailRecordingMode) Values() []ThumbnailRecordingMode {
+	return []ThumbnailRecordingMode{
+		"INTERVAL",
+		"DISABLED",
+	}
+}
+
+type ThumbnailStorageType string
+
+// Enum values for ThumbnailStorageType
+const (
+	ThumbnailStorageTypeSequential ThumbnailStorageType = "SEQUENTIAL"
+	ThumbnailStorageTypeLatest     ThumbnailStorageType = "LATEST"
+)
+
+// Values returns all known values for ThumbnailStorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThumbnailStorageType) Values() []ThumbnailStorageType {
+	return []ThumbnailStorageType{
+		"SEQUENTIAL",
+		"LATEST",
 	}
 }
 

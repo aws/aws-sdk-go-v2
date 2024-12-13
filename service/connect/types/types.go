@@ -1032,6 +1032,27 @@ type ContactAnalysis struct {
 	noSmithyDocumentSerde
 }
 
+// The contact configuration for push notification registration.
+type ContactConfiguration struct {
+
+	// The identifier of the contact within the Amazon Connect instance.
+	//
+	// This member is required.
+	ContactId *string
+
+	// Whether to include raw connect message in the push notification payload.
+	// Default is False .
+	IncludeRawMessage bool
+
+	// The role of the participant in the chat conversation.
+	//
+	// Only CUSTOMER is currently supported. Any other values other than CUSTOMER will
+	// result in an exception (4xx error).
+	ParticipantRole ParticipantRole
+
+	noSmithyDocumentSerde
+}
+
 // Request object with information to create a contact.
 type ContactDataRequest struct {
 
@@ -1169,6 +1190,12 @@ type ContactFlowModuleSearchCriteria struct {
 
 	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []ContactFlowModuleSearchCriteria
+
+	// The state of the flow.
+	StateCondition ContactFlowModuleState
+
+	// The status of the flow.
+	StatusCondition ContactFlowModuleStatus
 
 	// A leaf node condition which can be used to specify a string condition.
 	StringCondition *StringCondition
@@ -1622,6 +1649,22 @@ type CustomerVoiceActivity struct {
 	noSmithyDocumentSerde
 }
 
+// An object to specify the hours of operation override date condition.
+type DateCondition struct {
+
+	// An object to specify the hours of operation override date condition
+	// comparisonType .
+	ComparisonType DateComparisonType
+
+	// An object to specify the hours of operation override date field.
+	FieldName *string
+
+	// An object to specify the hours of operation override date value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a reference when the referenceType is DATE . Otherwise, null.
 type DateReference struct {
 
@@ -1744,6 +1787,18 @@ type DownloadUrlMetadata struct {
 	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601
 	// format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	UrlExpiry *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the hours of operations with the effective override applied.
+type EffectiveHoursOfOperations struct {
+
+	// The date that the hours of operation or overrides applies to.
+	Date *string
+
+	// Information about the hours of operations with the effective override applied.
+	OperationalHours []OperationalHour
 
 	noSmithyDocumentSerde
 }
@@ -3117,6 +3172,71 @@ type HoursOfOperationConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the hours of operations override.
+type HoursOfOperationOverride struct {
+
+	// Configuration information for the hours of operation override: day, start time,
+	// and end time.
+	Config []HoursOfOperationOverrideConfig
+
+	// The description of the hours of operation override.
+	Description *string
+
+	// The date from which the hours of operation override would be effective.
+	EffectiveFrom *string
+
+	// The date till which the hours of operation override would be effective.
+	EffectiveTill *string
+
+	// The Amazon Resource Name (ARN) for the hours of operation.
+	HoursOfOperationArn *string
+
+	// The identifier for the hours of operation.
+	HoursOfOperationId *string
+
+	// The identifier for the hours of operation override.
+	HoursOfOperationOverrideId *string
+
+	// The name of the hours of operation override.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the hours of operation override config: day, start time, and
+// end time.
+type HoursOfOperationOverrideConfig struct {
+
+	// The day that the hours of operation override applies to.
+	Day OverrideDays
+
+	// The end time that your contact center closes if overrides are applied.
+	EndTime *OverrideTimeSlice
+
+	// The start time when your contact center opens if overrides are applied.
+	StartTime *OverrideTimeSlice
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return hours of operations overrides.
+type HoursOfOperationOverrideSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []HoursOfOperationOverrideSearchCriteria
+
+	// A leaf node condition which can be used to specify a date condition.
+	DateCondition *DateCondition
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []HoursOfOperationOverrideSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
 // The search criteria to be used to return hours of operations.
 type HoursOfOperationSearchCriteria struct {
 
@@ -3727,14 +3847,10 @@ type MetricFilterV2 struct {
 	// description for the [Flow outcome]metric in the Amazon Connect Administrator Guide.
 	//
 	// For valid values of the metric-level filter BOT_CONVERSATION_OUTCOME_TYPE , see
-	// the description for the [Bot conversations completed]
-	//
-	// in the Amazon Connect Administrator Guide.
+	// the description for the [Bot conversations completed]in the Amazon Connect Administrator Guide.
 	//
 	// For valid values of the metric-level filter BOT_INTENT_OUTCOME_TYPE , see the
-	// description for the [Bot intents completed]
-	//
-	// metric in the Amazon Connect Administrator Guide.
+	// description for the [Bot intents completed]metric in the Amazon Connect Administrator Guide.
 	//
 	// [Bot intents completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric
 	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
@@ -3903,6 +4019,18 @@ type NumericQuestionPropertyValueAutomation struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the hours of operations with the effective override applied.
+type OperationalHour struct {
+
+	// The end time that your contact center closes.
+	End *OverrideTimeSlice
+
+	// The start time that your contact center opens.
+	Start *OverrideTimeSlice
+
+	noSmithyDocumentSerde
+}
+
 // The additional recipients information of outbound email.
 type OutboundAdditionalRecipients struct {
 
@@ -3970,6 +4098,22 @@ type OutboundRawMessage struct {
 	//
 	// This member is required.
 	Subject *string
+
+	noSmithyDocumentSerde
+}
+
+// The start time or end time for an hours of operation override.
+type OverrideTimeSlice struct {
+
+	// The hours.
+	//
+	// This member is required.
+	Hours *int32
+
+	// The minutes.
+	//
+	// This member is required.
+	Minutes *int32
 
 	noSmithyDocumentSerde
 }
@@ -6803,11 +6947,15 @@ type UserIdentityInfo struct {
 	Email *string
 
 	// The first name. This is required if you are using Amazon Connect or SAML for
-	// identity management.
+	// identity management. Inputs must be in Unicode Normalization Form C (NFC). Text
+	// containing characters in a non-NFC form (for example, decomposed characters or
+	// combining marks) are not accepted.
 	FirstName *string
 
 	// The last name. This is required if you are using Amazon Connect or SAML for
-	// identity management.
+	// identity management. Inputs must be in Unicode Normalization Form C (NFC). Text
+	// containing characters in a non-NFC form (for example, decomposed characters or
+	// combining marks) are not accepted.
 	LastName *string
 
 	// The user's mobile number.

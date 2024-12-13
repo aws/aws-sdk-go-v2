@@ -1,3 +1,7 @@
+# v1.28.0 (2024-12-12)
+
+* **Feature**: This release includes the following API updates: added the enumeration type RESTORE_DOMAIN to the OperationType; constrained the Price attribute to non-negative values; updated the LangCode to allow 2 or 3 alphabetical characters.
+
 # v1.27.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

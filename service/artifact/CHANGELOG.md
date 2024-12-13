@@ -1,3 +1,7 @@
+# v1.7.0 (2024-12-11)
+
+* **Feature**: Add support for listing active customer agreements for the calling AWS Account.
+
 # v1.6.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

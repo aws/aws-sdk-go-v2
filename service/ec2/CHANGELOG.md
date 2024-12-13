@@ -1,3 +1,7 @@
+# v1.197.0 (2024-12-13)
+
+* **Feature**: This release adds GroupId to the response for DeleteSecurityGroup.
+
 # v1.196.0 (2024-12-09)
 
 * **Feature**: This release includes a new API for modifying instance network-performance-options after launch.

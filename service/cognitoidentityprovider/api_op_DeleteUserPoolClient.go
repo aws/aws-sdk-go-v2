@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows the developer to delete the user pool client.
+// Deletes a user pool app client. After you delete an app client, users can no
+// longer sign in to the associated application.
 func (c *Client) DeleteUserPoolClient(ctx context.Context, params *DeleteUserPoolClientInput, optFns ...func(*Options)) (*DeleteUserPoolClientOutput, error) {
 	if params == nil {
 		params = &DeleteUserPoolClientInput{}
@@ -29,12 +30,12 @@ func (c *Client) DeleteUserPoolClient(ctx context.Context, params *DeleteUserPoo
 // Represents the request to delete a user pool client.
 type DeleteUserPoolClientInput struct {
 
-	// The app client ID of the app associated with the user pool.
+	// The ID of the user pool app client that you want to delete.
 	//
 	// This member is required.
 	ClientId *string
 
-	// The user pool ID for the user pool where you want to delete the client.
+	// The ID of the user pool where you want to delete the client.
 	//
 	// This member is required.
 	UserPoolId *string

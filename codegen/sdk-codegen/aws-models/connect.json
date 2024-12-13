@@ -980,6 +980,9 @@
                     "target": "com.amazonaws.connect#CreateHoursOfOperation"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateHoursOfOperationOverride"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateInstance"
                 },
                 {
@@ -996,6 +999,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#CreatePrompt"
+                },
+                {
+                    "target": "com.amazonaws.connect#CreatePushNotificationRegistration"
                 },
                 {
                     "target": "com.amazonaws.connect#CreateQueue"
@@ -1061,6 +1067,9 @@
                     "target": "com.amazonaws.connect#DeleteHoursOfOperation"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteHoursOfOperationOverride"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteInstance"
                 },
                 {
@@ -1071,6 +1080,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DeletePrompt"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeletePushNotificationRegistration"
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteQueue"
@@ -1137,6 +1149,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeHoursOfOperation"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeHoursOfOperationOverride"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeInstance"
@@ -1244,6 +1259,9 @@
                     "target": "com.amazonaws.connect#GetCurrentUserData"
                 },
                 {
+                    "target": "com.amazonaws.connect#GetEffectiveHoursOfOperations"
+                },
+                {
                     "target": "com.amazonaws.connect#GetFederationToken"
                 },
                 {
@@ -1311,6 +1329,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ListFlowAssociations"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListHoursOfOperationOverrides"
                 },
                 {
                     "target": "com.amazonaws.connect#ListHoursOfOperations"
@@ -1446,6 +1467,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#SearchEmailAddresses"
+                },
+                {
+                    "target": "com.amazonaws.connect#SearchHoursOfOperationOverrides"
                 },
                 {
                     "target": "com.amazonaws.connect#SearchHoursOfOperations"
@@ -1598,6 +1622,9 @@
                     "target": "com.amazonaws.connect#UpdateHoursOfOperation"
                 },
                 {
+                    "target": "com.amazonaws.connect#UpdateHoursOfOperationOverride"
+                },
+                {
                     "target": "com.amazonaws.connect#UpdateInstanceAttribute"
                 },
                 {
@@ -1712,7 +1739,7 @@
                     "name": "connect"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Service.html\">Amazon Connect actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Service.html\">Amazon Connect\n      data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>You can use an endpoint to connect programmatically to an Amazon Web Services service. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>",
+                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Service.html\">Amazon Connect actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Service.html\">Amazon Connect\n      data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>You can use an endpoint to connect programmatically to an Amazon Web Services service. For a\n   list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>",
                 "smithy.api#title": "Amazon Connect Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3092,7 +3119,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the resource.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services End User Messaging SMS phone number ARN when using <code>SMS_PHONE_NUMBER</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Web Services End User Messaging Social phone number ARN when using <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier of the resource.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services End User Messaging SMS phone number ARN when using\n      <code>SMS_PHONE_NUMBER</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Web Services End User Messaging Social phone number ARN when using\n      <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4706,7 +4733,7 @@
                 "ResourceIds": {
                     "target": "com.amazonaws.connect#resourceArnListMaxLimit100",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of resource identifiers to retrieve flow associations.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services End User Messaging SMS phone number ARN when using <code>SMS_PHONE_NUMBER</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Web Services End User Messaging Social phone number ARN when using <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A list of resource identifiers to retrieve flow associations.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services End User Messaging SMS phone number ARN when using\n      <code>SMS_PHONE_NUMBER</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Web Services End User Messaging Social phone number ARN when using\n      <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5266,7 +5293,7 @@
                 "SourcePhoneNumberArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The claimed phone number ARN that was previously imported from the external service, such as\n   Amazon Web Services End User Messaging. If it is from Amazon Web Services End User Messaging, it looks like the ARN of the phone number\n   that was imported from Amazon Web Services End User Messaging.</p>"
+                        "smithy.api#documentation": "<p>The claimed phone number ARN that was previously imported from the external service, such as\n    Amazon Web Services End User Messaging. If it is from Amazon Web Services End User Messaging, it\n   looks like the ARN of the phone number that was imported from Amazon Web Services End User\n   Messaging.</p>"
                     }
                 }
             },
@@ -5301,6 +5328,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#CommonAttributeAndCondition"
+            }
+        },
+        "com.amazonaws.connect#CommonHumanReadableDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[\\P{C}\\r\\n\\t]{1,250}$"
+            }
+        },
+        "com.amazonaws.connect#CommonHumanReadableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[\\P{C}\\r\\n\\t]{1,127}$"
             }
         },
         "com.amazonaws.connect#CommonNameLength127": {
@@ -5444,7 +5483,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A conditional check failed.</p>",
+                "smithy.api#documentation": "<p>Request processing failed because dependent condition failed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -5721,6 +5760,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that defines search criteria for contacts using analysis outputs from Amazon Connect Contact Lens.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactConfiguration": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact within the Amazon Connect instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ParticipantRole": {
+                    "target": "com.amazonaws.connect#ParticipantRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the participant in the chat conversation.</p>\n         <note>\n            <p>Only <code>CUSTOMER</code> is currently supported. Any other values other than\n     <code>CUSTOMER</code> will result in an exception (4xx error).</p>\n         </note>"
+                    }
+                },
+                "IncludeRawMessage": {
+                    "target": "com.amazonaws.connect#IncludeRawMessage",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether to include raw connect message in the push notification payload. Default is\n    <code>False</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The contact configuration for push notification registration.</p>"
             }
         },
         "com.amazonaws.connect#ContactDataRequest": {
@@ -6017,6 +6084,18 @@
                 },
                 "StringCondition": {
                     "target": "com.amazonaws.connect#StringCondition"
+                },
+                "StateCondition": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the flow.</p>"
+                    }
+                },
+                "StatusCondition": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the flow.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7782,6 +7861,118 @@
                 }
             }
         },
+        "com.amazonaws.connect#CreateHoursOfOperationOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateHoursOfOperationOverrideRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateHoursOfOperationOverrideResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an hours of operation override in an Amazon Connect hours of operation\n   resource</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}/overrides",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateHoursOfOperationOverrideRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#CommonHumanReadableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the hours of operation override.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#CommonHumanReadableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the hours of operation override.</p>"
+                    }
+                },
+                "Config": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the hours of operation override: day, start time, and end\n   time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EffectiveFrom": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date from when the hours of operation override would be effective.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EffectiveTill": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date until when the hours of operation override would be effective.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateHoursOfOperationOverrideResponse": {
+            "type": "structure",
+            "members": {
+                "HoursOfOperationOverrideId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation override.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#CreateHoursOfOperationRequest": {
             "type": "structure",
             "members": {
@@ -8013,7 +8204,7 @@
                 "IntegrationArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the integration.</p>\n         <note>\n            <p>When integrating with Amazon Web Services End User Messaging, the Amazon Connect and Amazon Web Services End User Messaging\n    instances must be in the same account.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the integration.</p>\n         <note>\n            <p>When integrating with Amazon Web Services End User Messaging, the Amazon Connect and\n     Amazon Web Services End User Messaging instances must be in the same account.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8420,6 +8611,109 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#CreatePushNotificationRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreatePushNotificationRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreatePushNotificationRegistrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates registration for a device token and a chat contact to receive real-time push\n   notifications. For more information about push notifications, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-up-push-notifications-for-mobile-chat.html\">Set up push\n    notifications in Amazon Connect for mobile chat</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/push-notification/{InstanceId}/registrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreatePushNotificationRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the\n   Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "PinpointAppArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Pinpoint application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceToken": {
+                    "target": "com.amazonaws.connect#DeviceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The push notification token issued by the Apple or Google gateways.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceType": {
+                    "target": "com.amazonaws.connect#DeviceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device type to use when sending the message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactConfiguration": {
+                    "target": "com.amazonaws.connect#ContactConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact configuration for push notification registration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreatePushNotificationRegistrationResponse": {
+            "type": "structure",
+            "members": {
+                "RegistrationId": {
+                    "target": "com.amazonaws.connect#RegistrationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the registration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#CreateQueue": {
             "type": "operation",
             "input": {
@@ -8452,7 +8746,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Creates a new queue for the specified Amazon Connect instance.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>If the phone number is claimed to a traffic distribution group that was created in the\n      same Region as the Amazon Connect instance where you are calling this API, then you can use a\n      full phone number ARN or a UUID for <code>OutboundCallerIdNumberId</code>. However, if the phone number is claimed\n      to a traffic distribution group that is in one Region, and you are calling this API from an instance in another Amazon Web Services Region that is associated with the traffic distribution group, you must provide a full phone number ARN. If a\n      UUID is provided in this scenario, you will receive a\n      <code>ResourceNotFoundException</code>.</p>\n               </li>\n               <li>\n                  <p>Only use the phone number ARN format that doesn't contain <code>instance</code> in the\n      path, for example, <code>arn:aws:connect:us-east-1:1234567890:phone-number/uuid</code>. This\n      is the same ARN format that is returned when you call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a>\n      API.</p>\n               </li>\n               <li>\n                  <p>If you plan to use IAM policies to allow/deny access to this API for phone\n      number resources claimed to a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_resource-level-policy-examples.html#allow-deny-queue-actions-replica-region\">Allow or Deny queue API actions for phone numbers in a replica Region</a>.</p>\n               </li>\n            </ul>\n         </important>",
+                "smithy.api#documentation": "<p>Creates a new queue for the specified Amazon Connect instance.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>If the phone number is claimed to a traffic distribution group that was created in the\n      same Region as the Amazon Connect instance where you are calling this API, then you can use a\n      full phone number ARN or a UUID for <code>OutboundCallerIdNumberId</code>. However, if the phone number is claimed\n      to a traffic distribution group that is in one Region, and you are calling this API from an instance in another Amazon Web Services Region that is associated with the traffic distribution group, you must provide a full phone number ARN. If a\n      UUID is provided in this scenario, you will receive a\n      <code>ResourceNotFoundException</code>.</p>\n               </li>\n               <li>\n                  <p>Only use the phone number ARN format that doesn't contain <code>instance</code> in the\n      path, for example, <code>arn:aws:connect:us-east-1:1234567890:phone-number/uuid</code>. This\n      is the same ARN format that is returned when you call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a>\n      API.</p>\n               </li>\n               <li>\n                  <p>If you plan to use IAM policies to allow/deny access to this API for phone\n      number resources claimed to a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_resource-level-policy-examples.html#allow-deny-queue-actions-replica-region\">Allow or Deny queue API actions for phone numbers in a replica Region</a>.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/queues/{InstanceId}",
@@ -10247,6 +10541,67 @@
                 "target": "com.amazonaws.connect#DataSetId"
             }
         },
+        "com.amazonaws.connect#DateComparisonType": {
+            "type": "enum",
+            "members": {
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DateCondition": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to specify the hours of operation override date field.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#DateYearMonthDayFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to specify the hours of operation override date value.</p>"
+                    }
+                },
+                "ComparisonType": {
+                    "target": "com.amazonaws.connect#DateComparisonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to specify the hours of operation override date condition\n   <code>comparisonType</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object to specify the hours of operation override date condition.</p>"
+            }
+        },
         "com.amazonaws.connect#DateReference": {
             "type": "structure",
             "members": {
@@ -10265,6 +10620,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>DATE</code>.\n   Otherwise, null.</p>"
+            }
+        },
+        "com.amazonaws.connect#DateYearMonthDayFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{4}-\\d{2}-\\d{2}$"
             }
         },
         "com.amazonaws.connect#DeactivateEvaluationForm": {
@@ -10857,6 +11218,72 @@
                 }
             }
         },
+        "com.amazonaws.connect#DeleteHoursOfOperationOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteHoursOfOperationOverrideRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an hours of operation override in an Amazon Connect hours of operation\n   resource</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}/overrides/{HoursOfOperationOverrideId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteHoursOfOperationOverrideRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationOverrideId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation override.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.connect#DeleteHoursOfOperationRequest": {
             "type": "structure",
             "members": {
@@ -11098,6 +11525,79 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeletePushNotificationRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeletePushNotificationRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeletePushNotificationRegistrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes registration for a device token and a chat contact.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/push-notification/{InstanceId}/registrations/{RegistrationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeletePushNotificationRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the\n   Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegistrationId": {
+                    "target": "com.amazonaws.connect#RegistrationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the registration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact within the Amazon Connect instance.</p>",
+                        "smithy.api#httpQuery": "contactId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeletePushNotificationRegistrationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connect#DeleteQueue": {
@@ -12619,6 +13119,86 @@
                 }
             }
         },
+        "com.amazonaws.connect#DescribeHoursOfOperationOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeHoursOfOperationOverrideRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeHoursOfOperationOverrideResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the hours of operation override.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}/overrides/{HoursOfOperationOverrideId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeHoursOfOperationOverrideRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationOverrideId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation override.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeHoursOfOperationOverrideResponse": {
+            "type": "structure",
+            "members": {
+                "HoursOfOperationOverride": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the hours of operations override. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#DescribeHoursOfOperationRequest": {
             "type": "structure",
             "members": {
@@ -12899,7 +13479,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets details and status of a phone number that’s claimed to your Amazon Connect instance\n   or traffic distribution group.</p>\n         <important>\n            <p>If the number is claimed to a traffic distribution group, and you are calling in the Amazon Web Services Region\n    where the traffic distribution group was created, you can use either a phone number ARN or UUID value for the\n     <code>PhoneNumberId</code> URI request parameter. However, if the number is claimed to a traffic distribution group\n    and you are calling this API in the alternate Amazon Web Services Region associated with the\n    traffic distribution group, you must provide a full phone number ARN. If a UUID is provided\n    in\n    this scenario, you receive a\n    <code>ResourceNotFoundException</code>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Gets details and status of a phone number that’s claimed to your Amazon Connect instance\n   or traffic distribution group.</p>\n         <important>\n            <p>If the number is claimed to a traffic distribution group, and you are calling in the Amazon Web Services Region\n    where the traffic distribution group was created, you can use either a phone number ARN or UUID value for the\n     <code>PhoneNumberId</code> URI request parameter. However, if the number is claimed to a traffic distribution group\n    and you are calling this API in the alternate Amazon Web Services Region associated with the\n    traffic distribution group, you must provide a full phone number ARN. If a UUID is provided\n    in\n    this scenario, you receive a <code>ResourceNotFoundException</code>.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/phone-number/{PhoneNumberId}",
@@ -13937,6 +14517,38 @@
                 "smithy.api#documentation": "<p>Information regarding the device.</p>"
             }
         },
+        "com.amazonaws.connect#DeviceToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#DeviceType": {
+            "type": "enum",
+            "members": {
+                "GCM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCM"
+                    }
+                },
+                "APNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS"
+                    }
+                },
+                "APNS_SANDBOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APNS_SANDBOX"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#Dimensions": {
             "type": "structure",
             "members": {
@@ -14256,7 +14868,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the resource.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services End User Messaging SMS phone number ARN when using <code>SMS_PHONE_NUMBER</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Web Services End User Messaging Social phone number ARN when using <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier of the resource.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services End User Messaging SMS phone number ARN when using\n      <code>SMS_PHONE_NUMBER</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Web Services End User Messaging Social phone number ARN when using\n      <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -15041,6 +15653,32 @@
         },
         "com.amazonaws.connect#DurationInSeconds": {
             "type": "integer"
+        },
+        "com.amazonaws.connect#EffectiveHoursOfOperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EffectiveHoursOfOperations"
+            }
+        },
+        "com.amazonaws.connect#EffectiveHoursOfOperations": {
+            "type": "structure",
+            "members": {
+                "Date": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that the hours of operation or overrides applies to.</p>"
+                    }
+                },
+                "OperationalHours": {
+                    "target": "com.amazonaws.connect#OperationalHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the hours of operations with the effective override applied.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the hours of operations with the effective override applied.</p>"
+            }
         },
         "com.amazonaws.connect#Email": {
             "type": "string",
@@ -17868,6 +18506,100 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#GetEffectiveHoursOfOperations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#GetEffectiveHoursOfOperationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#GetEffectiveHoursOfOperationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the hours of operations with the effective override applied.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/effective-hours-of-operations/{InstanceId}/{HoursOfOperationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#GetEffectiveHoursOfOperationsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FromDate": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Date from when the hours of operation are listed.</p>",
+                        "smithy.api#httpQuery": "fromDate",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ToDate": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Date until when the hours of operation are listed.</p>",
+                        "smithy.api#httpQuery": "toDate",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#GetEffectiveHoursOfOperationsResponse": {
+            "type": "structure",
+            "members": {
+                "EffectiveHoursOfOperationList": {
+                    "target": "com.amazonaws.connect#EffectiveHoursOfOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the effective hours of operations</p>"
+                    }
+                },
+                "TimeZone": {
+                    "target": "com.amazonaws.connect#TimeZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone for the hours of operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#GetFederationToken": {
             "type": "operation",
             "input": {
@@ -18004,7 +18736,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the resource.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services End User Messaging SMS phone number ARN when using <code>SMS_PHONE_NUMBER</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Web Services End User Messaging Social phone number ARN when using <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier of the resource.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services End User Messaging SMS phone number ARN when using\n      <code>SMS_PHONE_NUMBER</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Web Services End User Messaging Social phone number ARN when using\n      <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -19570,6 +20302,156 @@
         "com.amazonaws.connect#HoursOfOperationName": {
             "type": "string"
         },
+        "com.amazonaws.connect#HoursOfOperationOverride": {
+            "type": "structure",
+            "members": {
+                "HoursOfOperationOverrideId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation override.</p>"
+                    }
+                },
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation.</p>"
+                    }
+                },
+                "HoursOfOperationArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the hours of operation.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#CommonHumanReadableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the hours of operation override.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#CommonHumanReadableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the hours of operation override.</p>"
+                    }
+                },
+                "Config": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the hours of operation override: day, start time, and end\n   time.</p>"
+                    }
+                },
+                "EffectiveFrom": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date from which the hours of operation override would be effective.</p>"
+                    }
+                },
+                "EffectiveTill": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date till which the hours of operation override would be effective.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the hours of operations override.</p>"
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationOverrideConfig": {
+            "type": "structure",
+            "members": {
+                "Day": {
+                    "target": "com.amazonaws.connect#OverrideDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day that the hours of operation override applies to.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.connect#OverrideTimeSlice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time when your contact center opens if overrides are applied.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.connect#OverrideTimeSlice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time that your contact center closes if overrides are applied.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the hours of operation override config: day, start time, and end\n   time.</p>"
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationOverrideConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#HoursOfOperationOverrideConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationOverrideId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                }
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#HoursOfOperationOverride"
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationOverrideSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#HoursOfOperationOverrideSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationOverrideSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an OR condition.</p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an AND condition.</p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition"
+                },
+                "DateCondition": {
+                    "target": "com.amazonaws.connect#DateCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a date condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return hours of operations overrides.</p>"
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+        },
         "com.amazonaws.connect#HoursOfOperationSearchConditionList": {
             "type": "list",
             "member": {
@@ -19726,7 +20608,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports a claimed phone number from an external service, such as Amazon Web Services End User Messaging, into an\n    Amazon Connect instance. You can call this API only in the same Amazon Web Services Region\n   where the Amazon Connect instance was created.</p>\n         <important>\n            <p>Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <code>ImportPhoneNumber</code> operation. </p>\n         </important>\n         <p>If you plan to claim or import numbers and then release numbers frequently, contact us for a\n   service quota exception. Otherwise, it is possible you will be blocked from claiming and\n   releasing any more numbers until up to 180 days past the oldest number released has expired. </p>\n         <p> By default you can claim or import and then release up to 200% of your maximum number of\n   active phone numbers. If you claim or import and then release phone numbers using the UI or API\n   during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you\n   will be blocked from claiming or importing any more numbers until 180 days past the oldest number\n   released has expired. </p>\n         <p>For example, if you already have 99 claimed or imported numbers and a service level quota of\n   99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you\n   will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers\n   until you open an Amazon Web Services Support ticket. </p>",
+                "smithy.api#documentation": "<p>Imports a claimed phone number from an external service, such as Amazon Web Services End User\n   Messaging, into an Amazon Connect instance. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance was created.</p>\n         <important>\n            <p>Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <code>ImportPhoneNumber</code> operation. </p>\n         </important>\n         <p>If you plan to claim or import numbers and then release numbers frequently, contact us for a\n   service quota exception. Otherwise, it is possible you will be blocked from claiming and\n   releasing any more numbers until up to 180 days past the oldest number released has expired. </p>\n         <p> By default you can claim or import and then release up to 200% of your maximum number of\n   active phone numbers. If you claim or import and then release phone numbers using the UI or API\n   during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you\n   will be blocked from claiming or importing any more numbers until 180 days past the oldest number\n   released has expired. </p>\n         <p>For example, if you already have 99 claimed or imported numbers and a service level quota of\n   99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you\n   will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers\n   until you open an Amazon Web Services Support ticket. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/import",
@@ -19747,7 +20629,7 @@
                 "SourcePhoneNumberArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The claimed phone number ARN being imported from the external service, such as Amazon Web Services End User Messaging. If it is from Amazon Web Services End User Messaging, it looks like the ARN of the phone number to\n   import from Amazon Web Services End User Messaging.</p>",
+                        "smithy.api#documentation": "<p>The claimed phone number ARN being imported from the external service, such as Amazon Web Services End User Messaging. If it is from Amazon Web Services End User Messaging, it looks\n   like the ARN of the phone number to import from Amazon Web Services End User Messaging.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -19893,6 +20775,12 @@
                     "max": 998
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#IncludeRawMessage": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.connect#Index": {
@@ -22430,6 +23318,116 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#ListHoursOfOperationOverrides": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListHoursOfOperationOverridesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListHoursOfOperationOverridesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the hours of operation overrides.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}/overrides",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "HoursOfOperationOverrideList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListHoursOfOperationOverridesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100. Valid\n   Range: Minimum value of 1. Maximum value of 1000.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListHoursOfOperationOverridesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "HoursOfOperationOverrideList": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the hours of operation override.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region where this resource was last modified.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this resource was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#ListHoursOfOperations": {
             "type": "operation",
             "input": {
@@ -23220,7 +24218,7 @@
                 "SourcePhoneNumberArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The claimed phone number ARN that was previously imported from the external service, such as\n   Amazon Web Services End User Messaging. If it is from Amazon Web Services End User Messaging, it looks like the ARN of the phone number\n   that was imported from Amazon Web Services End User Messaging.</p>"
+                        "smithy.api#documentation": "<p>The claimed phone number ARN that was previously imported from the external service, such as\n    Amazon Web Services End User Messaging. If it is from Amazon Web Services End User Messaging, it\n   looks like the ARN of the phone number that was imported from Amazon Web Services End User\n   Messaging.</p>"
                     }
                 }
             },
@@ -25914,7 +26912,7 @@
                 "MetricFilterValues": {
                     "target": "com.amazonaws.connect#MetricFilterValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to use for filtering data. Values for metric-level filters can be either a fixed\n   set of values or a customized list, depending on the use case.</p>\n         <p>For valid values of metric-level filters <code>INITIATION_METHOD</code>,\n    <code>DISCONNECT_REASON</code>, and <code>ANSWERING_MACHINE_DETECTION_STATUS</code>, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n         <p>For valid values of the metric-level filter <code>FLOWS_OUTCOME_TYPE</code>, see the\n   description for the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical\">Flow outcome</a> metric in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n         <p>For valid values of the metric-level filter <code>BOT_CONVERSATION_OUTCOME_TYPE</code>, see the\n   description for the \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed-metric\">Bot conversations completed</a>\n   \n   in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>For valid values of the metric-level filter <code>BOT_INTENT_OUTCOME_TYPE</code>, see the description for\n   the \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric\">Bot intents completed</a>\n   \n    metric in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The values to use for filtering data. Values for metric-level filters can be either a fixed\n   set of values or a customized list, depending on the use case.</p>\n         <p>For valid values of metric-level filters <code>INITIATION_METHOD</code>,\n    <code>DISCONNECT_REASON</code>, and <code>ANSWERING_MACHINE_DETECTION_STATUS</code>, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n         <p>For valid values of the metric-level filter <code>FLOWS_OUTCOME_TYPE</code>, see the\n   description for the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical\">Flow outcome</a> metric in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n         <p>For valid values of the metric-level filter <code>BOT_CONVERSATION_OUTCOME_TYPE</code>, see\n   the description for the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed-metric\">Bot\n    conversations completed</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>For valid values of the metric-level filter <code>BOT_INTENT_OUTCOME_TYPE</code>, see the\n   description for the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric\">Bot intents\n    completed</a> metric in the <i>Amazon Connect Administrator\n   Guide</i>.</p>"
                     }
                 },
                 "Negate": {
@@ -26475,6 +27473,32 @@
                 }
             }
         },
+        "com.amazonaws.connect#OperationalHour": {
+            "type": "structure",
+            "members": {
+                "Start": {
+                    "target": "com.amazonaws.connect#OverrideTimeSlice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time that your contact center opens.</p>"
+                    }
+                },
+                "End": {
+                    "target": "com.amazonaws.connect#OverrideTimeSlice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time that your contact center closes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the hours of operations with the effective override applied.</p>"
+            }
+        },
+        "com.amazonaws.connect#OperationalHours": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#OperationalHour"
+            }
+        },
         "com.amazonaws.connect#Origin": {
             "type": "string",
             "traits": {
@@ -26679,6 +27703,77 @@
                 "smithy.api#documentation": "<p>Thrown for analyzed content when requested OutputType was not enabled for a given contact.\n   For example, if an OutputType.Raw was requested for a contact that had `RedactedOnly` Redaction\n   policy set in the flow.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.connect#OverrideDays": {
+            "type": "enum",
+            "members": {
+                "SUNDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUNDAY"
+                    }
+                },
+                "MONDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONDAY"
+                    }
+                },
+                "TUESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUESDAY"
+                    }
+                },
+                "WEDNESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEDNESDAY"
+                    }
+                },
+                "THURSDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THURSDAY"
+                    }
+                },
+                "FRIDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRIDAY"
+                    }
+                },
+                "SATURDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SATURDAY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#OverrideTimeSlice": {
+            "type": "structure",
+            "members": {
+                "Hours": {
+                    "target": "com.amazonaws.connect#Hours24Format",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The hours.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Minutes": {
+                    "target": "com.amazonaws.connect#MinutesLimit60",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The minutes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The start time or end time for an hours of operation override.</p>"
             }
         },
         "com.amazonaws.connect#PEM": {
@@ -31014,6 +32109,15 @@
                 "smithy.api#pattern": "^[a-z]{2}(-[a-z]+){1,2}(-[0-9])?$"
             }
         },
+        "com.amazonaws.connect#RegistrationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.connect#RehydrationType": {
             "type": "enum",
             "members": {
@@ -33212,6 +34316,108 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#SearchHoursOfOperationOverrides": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchHoursOfOperationOverridesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchHoursOfOperationOverridesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches the hours of operation overrides.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-hours-of-operation-overrides",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "HoursOfOperationOverrides",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchHoursOfOperationOverridesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results. Length Constraints: Minimum length of 1.\n   Maximum length of 2500.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. Valid Range: Minimum value of 1. Maximum\n   value of 100.</p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#HoursOfOperationSearchFilter"
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to be used to return hours of operations overrides.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchHoursOfOperationOverridesResponse": {
+            "type": "structure",
+            "members": {
+                "HoursOfOperationOverrides": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the hours of operations overrides.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results. Length Constraints: Minimum length of 1.\n   Maximum length of 2500.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of hours of operations which matched your search query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#SearchHoursOfOperations": {
             "type": "operation",
             "input": {
@@ -34958,7 +36164,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Processes chat integration events from Amazon Web Services or external integrations to\n    Amazon Connect. A chat integration event includes:</p>\n         <ul>\n            <li>\n               <p>SourceId, DestinationId, and Subtype: a set of identifiers, uniquely representing a\n     chat</p>\n            </li>\n            <li>\n               <p> ChatEvent: details of the chat action to perform such as sending a message, event, or\n     disconnecting from a chat</p>\n            </li>\n         </ul>\n         <p>When a chat integration event is sent with chat identifiers that do not map to an active\n   chat contact, a new chat contact is also created before handling chat action. </p>\n         <p>Access to this API is currently restricted to Amazon Web Services End User Messaging for supporting SMS\n   integration. </p>",
+                "smithy.api#documentation": "<p>Processes chat integration events from Amazon Web Services or external integrations to\n    Amazon Connect. A chat integration event includes:</p>\n         <ul>\n            <li>\n               <p>SourceId, DestinationId, and Subtype: a set of identifiers, uniquely representing a\n     chat</p>\n            </li>\n            <li>\n               <p> ChatEvent: details of the chat action to perform such as sending a message, event, or\n     disconnecting from a chat</p>\n            </li>\n         </ul>\n         <p>When a chat integration event is sent with chat identifiers that do not map to an active\n   chat contact, a new chat contact is also created before handling chat action. </p>\n         <p>Access to this API is currently restricted to Amazon Web Services End User Messaging for\n   supporting SMS integration. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/chat-integration-event",
@@ -34979,7 +36185,7 @@
                 "DestinationId": {
                     "target": "com.amazonaws.connect#DestinationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Chat system identifier, used in part to uniquely identify chat. This is associated with the\n    Amazon Connect instance and flow to be used to start chats. For Server Migration Service, this is the phone\n   number destination of inbound Server Migration Service messages represented by an Amazon Web Services End User Messaging phone number\n   ARN.</p>",
+                        "smithy.api#documentation": "<p>Chat system identifier, used in part to uniquely identify chat. This is associated with the\n    Amazon Connect instance and flow to be used to start chats. For Server Migration Service, this is\n   the phone number destination of inbound Server Migration Service messages represented by an Amazon Web Services End User Messaging phone number ARN.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -36195,7 +37401,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a new outbound SMS contact to a customer. Response of this API provides the\n   <code>ContactId</code> of the outbound SMS contact created.</p>\n         <p>\n            <b>SourceEndpoint</b> only supports Endpoints with\n    <code>CONNECT_PHONENUMBER_ARN</code> as Type and <b>DestinationEndpoint</b> only supports Endpoints with <code>TELEPHONE_NUMBER</code> as\n   Type. <b>ContactFlowId</b> initiates the flow to manage the new SMS\n   contact created.</p>\n         <p>This API can be used to initiate outbound SMS contacts for an agent, or it can also deflect\n   an ongoing contact to an outbound SMS contact by using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html\">StartOutboundChatContact</a> Flow Action.</p>\n         <p>For more information about using SMS in Amazon Connect, see the following topics in the\n     <i>Amazon Connect Administrator Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-sms-messaging.html\">Set\n      up SMS messaging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/sms-number.html\">Request an\n      SMS-enabled phone number through AWS End User Messaging SMS</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Initiates a new outbound SMS contact to a customer. Response of this API provides the\n    <code>ContactId</code> of the outbound SMS contact created.</p>\n         <p>\n            <b>SourceEndpoint</b> only supports Endpoints with\n    <code>CONNECT_PHONENUMBER_ARN</code> as Type and <b>DestinationEndpoint</b> only supports Endpoints with <code>TELEPHONE_NUMBER</code> as\n   Type. <b>ContactFlowId</b> initiates the flow to manage the new SMS\n   contact created.</p>\n         <p>This API can be used to initiate outbound SMS contacts for an agent, or it can also deflect\n   an ongoing contact to an outbound SMS contact by using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html\">StartOutboundChatContact</a> Flow Action.</p>\n         <p>For more information about using SMS in Amazon Connect, see the following topics in the\n     <i>Amazon Connect Administrator Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-sms-messaging.html\">Set\n      up SMS messaging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/sms-number.html\">Request an\n      SMS-enabled phone number through AWS End User Messaging SMS</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/outbound-chat",
@@ -39853,13 +41059,13 @@
                 "CustomerEndpoint": {
                     "target": "com.amazonaws.connect#Endpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint of the customer for which the contact was initiated. For external audio\n   contacts, this is usually the end customer's phone number. This value can only be updated for\n   external audio contacts. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html\">Amazon Connect\n    Contact Lens integration</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The endpoint of the customer for which the contact was initiated. For external audio\n   contacts, this is usually the end customer's phone number. This value can only be updated for\n   external audio contacts. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html\">Amazon Connect Contact Lens\n    integration</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
                     }
                 },
                 "SystemEndpoint": {
                     "target": "com.amazonaws.connect#Endpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>External system endpoint for the contact was initiated. For external audio contacts, this is\n   the phone number of the external system such as the contact center. This value can only be\n   updated for external audio contacts. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html\">Amazon Connect\n    Contact Lens integration</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>External system endpoint for the contact was initiated. For external audio contacts, this is\n   the phone number of the external system such as the contact center. This value can only be\n   updated for external audio contacts. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html\">Amazon Connect Contact Lens\n    integration</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
                     }
                 }
             },
@@ -40319,6 +41525,108 @@
                     "min": 0,
                     "max": 250
                 }
+            }
+        },
+        "com.amazonaws.connect#UpdateHoursOfOperationOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateHoursOfOperationOverrideRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#ConditionalOperationFailedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the hours of operation override.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}/overrides/{HoursOfOperationOverrideId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateHoursOfOperationOverrideRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationOverrideId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation override.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#CommonHumanReadableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the hours of operation override.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#CommonHumanReadableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the hours of operation override.</p>"
+                    }
+                },
+                "Config": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the hours of operation override: day, start time, and end\n   time.</p>"
+                    }
+                },
+                "EffectiveFrom": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date from when the hours of operation override would be effective.</p>"
+                    }
+                },
+                "EffectiveTill": {
+                    "target": "com.amazonaws.connect#HoursOfOperationOverrideYearMonthDayDateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date till when the hours of operation override would be effective.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.connect#UpdateHoursOfOperationRequest": {
@@ -43359,13 +44667,13 @@
                 "FirstName": {
                     "target": "com.amazonaws.connect#AgentFirstName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The first name. This is required if you are using Amazon Connect or SAML for identity\n   management.</p>"
+                        "smithy.api#documentation": "<p>The first name. This is required if you are using Amazon Connect or SAML for identity\n   management. Inputs must be in Unicode Normalization Form C (NFC). Text containing characters in a\n   non-NFC form (for example, decomposed characters or combining marks) are not accepted.</p>"
                     }
                 },
                 "LastName": {
                     "target": "com.amazonaws.connect#AgentLastName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last name. This is required if you are using Amazon Connect or SAML for identity\n   management.</p>"
+                        "smithy.api#documentation": "<p>The last name. This is required if you are using Amazon Connect or SAML for identity\n   management. Inputs must be in Unicode Normalization Form C (NFC). Text containing characters in a\n   non-NFC form (for example, decomposed characters or combining marks) are not accepted.</p>"
                     }
                 },
                 "Email": {

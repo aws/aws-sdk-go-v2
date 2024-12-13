@@ -50,7 +50,7 @@ type CreateDbInstanceInput struct {
 	// The password of the initial admin user created in InfluxDB. This password will
 	// allow you to access the InfluxDB UI to perform various administrative tasks and
 	// also use the InfluxDB CLI to create an operator token. These attributes will be
-	// stored in a Secret created in AWS SecretManager in your account.
+	// stored in a Secret created in Amazon Web Services SecretManager in your account.
 	//
 	// This member is required.
 	Password *string
@@ -96,6 +96,11 @@ type CreateDbInstanceInput struct {
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
+
+	// Specifies whether the networkType of the Timestream for InfluxDB instance is
+	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can
+	// communicate over both IPv4 and IPv6 protocols.
+	NetworkType types.NetworkType
 
 	// The name of the initial organization for the initial admin user in InfluxDB. An
 	// InfluxDB organization is a workspace for a group of users.
@@ -172,14 +177,19 @@ type CreateDbInstanceOutput struct {
 	// The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.
 	Endpoint *string
 
-	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the
-	// initial InfluxDB authorization parameters. The secret value is a JSON formatted
-	// key-value pair holding InfluxDB authorization values: organization, bucket,
-	// username, and password.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret containing the initial InfluxDB authorization parameters. The secret
+	// value is a JSON formatted key-value pair holding InfluxDB authorization values:
+	// organization, bucket, username, and password.
 	InfluxAuthParametersSecretArn *string
 
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
+
+	// Specifies whether the networkType of the Timestream for InfluxDB instance is
+	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can
+	// communicate over both IPv4 and IPv6 protocols.
+	NetworkType types.NetworkType
 
 	// The port number on which InfluxDB accepts connections. The default value is
 	// 8086.

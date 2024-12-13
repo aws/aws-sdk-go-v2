@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Forgets the device, as an administrator.
+// Forgets, or deletes, a remembered device from a user's profile. After you
+// forget the device, the user can no longer complete device authentication with
+// that device and when applicable, must submit MFA codes again. For more
+// information, see [Working with devices].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -23,6 +26,7 @@ import (
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
+// [Working with devices]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminForgetDevice(ctx context.Context, params *AdminForgetDeviceInput, optFns ...func(*Options)) (*AdminForgetDeviceOutput, error) {
@@ -43,12 +47,15 @@ func (c *Client) AdminForgetDevice(ctx context.Context, params *AdminForgetDevic
 // Sends the forgot device request, as an administrator.
 type AdminForgetDeviceInput struct {
 
-	// The device key.
+	// The key ID of the device that you want to delete. You can get device keys in
+	// the response to an [AdminListDevices]request.
+	//
+	// [AdminListDevices]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminListDevices.html
 	//
 	// This member is required.
 	DeviceKey *string
 
-	// The user pool ID.
+	// The ID of the user pool where the device owner is a user.
 	//
 	// This member is required.
 	UserPoolId *string

@@ -1,3 +1,68 @@
+# Release (2024-12-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.28.0](service/cloudhsmv2/CHANGELOG.md#v1280-2024-12-13)
+  * **Feature**: Add support for Dual-Stack hsm2m.medium clusters. The customers will now be able to create hsm2m.medium clusters having both IPv4 and IPv6 connection capabilities by specifying a new param called NetworkType=DUALSTACK during cluster creation.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.197.0](service/ec2/CHANGELOG.md#v11970-2024-12-13)
+  * **Feature**: This release adds GroupId to the response for DeleteSecurityGroup.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.54.0](service/eks/CHANGELOG.md#v1540-2024-12-13)
+  * **Feature**: Add NodeRepairConfig in CreateNodegroupRequest and UpdateNodegroupConfigRequest
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.36.0](service/mediaconnect/CHANGELOG.md#v1360-2024-12-13)
+  * **Feature**: AWS Elemental MediaConnect Gateway now supports Source Specific Multicast (SSM) for ingress bridges. This enables you to specify a source IP address in addition to a multicast IP when creating or updating an ingress bridge source.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.32.2](service/networkmanager/CHANGELOG.md#v1322-2024-12-13)
+  * **Documentation**: There was a sentence fragment in UpdateDirectConnectGatewayAttachment that was causing customer confusion as to whether it's an incomplete sentence or if it was a typo. Removed the fragment.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.34.0](service/servicediscovery/CHANGELOG.md#v1340-2024-12-13)
+  * **Feature**: AWS Cloud Map now supports service-level attributes, allowing you to associate custom metadata directly with services. These attributes can be retrieved, updated, and deleted using the new GetServiceAttributes, UpdateServiceAttributes, and DeleteServiceAttributes API calls.
+
+# Release (2024-12-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.121.0](service/connect/CHANGELOG.md#v11210-2024-12-12)
+  * **Feature**: Configure holidays and other overrides to hours of operation in advance. During contact handling, Amazon Connect automatically checks for overrides and provides customers with an appropriate flow path. After an override period passes call center automatically reverts to standard hours of operation.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.45.0](service/databasemigrationservice/CHANGELOG.md#v1450-2024-12-12)
+  * **Feature**: Add parameters to support for kerberos authentication. Add parameter for disabling the Unicode source filter with PostgreSQL settings. Add parameter to use large integer value with Kinesis/Kafka settings.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.104.0](service/glue/CHANGELOG.md#v11040-2024-12-12)
+  * **Feature**: To support customer-managed encryption in Data Quality to allow customers encrypt data with their own KMS key, we will add a DataQualityEncryption field to the SecurityConfiguration API where customers can provide their KMS keys.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.52.1](service/guardduty/CHANGELOG.md#v1521-2024-12-12)
+  * **Documentation**: Improved descriptions for certain APIs.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.28.0](service/route53domains/CHANGELOG.md#v1280-2024-12-12)
+  * **Feature**: This release includes the following API updates: added the enumeration type RESTORE_DOMAIN to the OperationType; constrained the Price attribute to non-negative values; updated the LangCode to allow 2 or 3 alphabetical characters.
+
+# Release (2024-12-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.7.0](service/artifact/CHANGELOG.md#v170-2024-12-11)
+  * **Feature**: Add support for listing active customer agreements for the calling AWS Account.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.46.3](service/cloudtrail/CHANGELOG.md#v1463-2024-12-11)
+  * **Documentation**: Doc-only updates for CloudTrail.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.48.1](service/cognitoidentityprovider/CHANGELOG.md#v1481-2024-12-11)
+  * **Documentation**: Updated descriptions for some API operations and parameters, corrected some errors in Cognito user pools
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.6.3](service/controlcatalog/CHANGELOG.md#v163-2024-12-11)
+  * **Documentation**: Minor documentation updates to the content of ImplementationDetails object part of the Control Catalog GetControl API
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.27.0](service/emrserverless/CHANGELOG.md#v1270-2024-12-11)
+  * **Feature**: This release adds support for accessing system profile logs in Lake Formation-enabled jobs.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.25.0](service/migrationhub/CHANGELOG.md#v1250-2024-12-11)
+  * **Feature**: API and documentation updates for AWS MigrationHub related to adding support for listing migration task updates and associating, disassociating and listing source resources
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.40.0](service/sesv2/CHANGELOG.md#v1400-2024-12-11)
+  * **Feature**: Introduces support for multi-region endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.7.0](service/timestreaminfluxdb/CHANGELOG.md#v170-2024-12-11)
+  * **Feature**: Adds networkType parameter to CreateDbInstance API which allows IPv6 support to the InfluxDB endpoint
+
+# Release (2024-12-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.34.2](service/applicationautoscaling/CHANGELOG.md#v1342-2024-12-10)
+  * **Documentation**: Doc only update for AAS Predictive Scaling policy configuration API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.120.0](service/connect/CHANGELOG.md#v11200-2024-12-10)
+  * **Feature**: Add support for Push Notifications for Amazon Connect chat. With Push Notifications enabled an alert could be sent to customers about new messages even when they aren't actively using the mobile application.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.21.0](service/ivsrealtime/CHANGELOG.md#v1210-2024-12-10)
+  * **Feature**: IVS Real-Time now offers customers the ability to customize thumbnails recording mode and interval for both Individual Participant Recording (IPR) and Server-Side Compositions (SSC).
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.39.0](service/sesv2/CHANGELOG.md#v1390-2024-12-10)
+  * **Feature**: Introduces support for creating DEED (Deterministic Easy-DKIM) identities.
+
 # Release (2024-12-09)
 
 ## Module Highlights

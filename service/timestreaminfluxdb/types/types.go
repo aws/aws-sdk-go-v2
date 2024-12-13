@@ -20,7 +20,8 @@ type DbInstanceSummary struct {
 	Id *string
 
 	// This customer-supplied name uniquely identifies the DB instance when
-	// interacting with the Amazon Timestream for InfluxDB API and AWS CLI commands.
+	// interacting with the Amazon Timestream for InfluxDB API and Amazon Web Services
+	// CLI commands.
 	//
 	// This member is required.
 	Name *string
@@ -39,6 +40,11 @@ type DbInstanceSummary struct {
 
 	// The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.
 	Endpoint *string
+
+	// Specifies whether the networkType of the Timestream for InfluxDB instance is
+	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can
+	// communicate over both IPv4 and IPv6 protocols.
+	NetworkType NetworkType
 
 	// The port number on which InfluxDB accepts connections.
 	Port *int32

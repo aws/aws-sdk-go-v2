@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the attributes for a user.
+// Self-deletes attributes for a user. For example, your application can submit a
+// request to this operation when a user wants to remove their birthdate attribute
+// value.
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
@@ -48,8 +50,8 @@ type DeleteUserAttributesInput struct {
 
 	// An array of strings representing the user attribute names you want to delete.
 	//
-	// For custom attributes, you must prependattach the custom: prefix to the front
-	// of the attribute name.
+	// For custom attributes, you must prepend the custom: prefix to the attribute
+	// name, for example custom:department .
 	//
 	// This member is required.
 	UserAttributeNames []string

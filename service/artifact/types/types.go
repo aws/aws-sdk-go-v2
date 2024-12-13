@@ -16,6 +16,51 @@ type AccountSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Summary for customer-agreement resource.
+type CustomerAgreementSummary struct {
+
+	// Terms required to accept the agreement resource.
+	AcceptanceTerms []string
+
+	// ARN of the agreement resource the customer-agreement resource represents.
+	AgreementArn *string
+
+	// ARN of the customer-agreement resource.
+	Arn *string
+
+	// AWS account Id that owns the resource.
+	AwsAccountId *string
+
+	// Description of the resource.
+	Description *string
+
+	// Timestamp indicating when the agreement was terminated.
+	EffectiveEnd *time.Time
+
+	// Timestamp indicating when the agreement became effective.
+	EffectiveStart *time.Time
+
+	// Identifier of the customer-agreement resource.
+	Id *string
+
+	// Name of the customer-agreement resource.
+	Name *string
+
+	// ARN of the organization that owns the resource.
+	OrganizationArn *string
+
+	// State of the resource.
+	State CustomerAgreementState
+
+	// Terms required to terminate the customer-agreement resource.
+	TerminateTerms []string
+
+	// Type of the customer-agreement resource.
+	Type AgreementType
+
+	noSmithyDocumentSerde
+}
+
 // Full detail for report resource metadata.
 type ReportDetail struct {
 

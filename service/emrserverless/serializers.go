@@ -482,6 +482,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDashboardForJobRunInput(v *GetDashbo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AccessSystemProfileLogs != nil {
+		encoder.SetQuery("accessSystemProfileLogs").Boolean(*v.AccessSystemProfileLogs)
+	}
+
 	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member applicationId must not be empty")}
 	}

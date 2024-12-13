@@ -25,7 +25,9 @@ import (
 // larger than 2MB, separate it into multiple requests, each with a size smaller
 // than the limit.
 //
-// For more information, see [API and SDK operations for managed login branding].
+// As a best practice, modify the output of [DescribeManagedLoginBrandingByClient] into the request parameters for this
+// operation. To get all settings, set ReturnMergedResources to true . For more
+// information, see [API and SDK operations for managed login branding]
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -39,6 +41,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [DescribeManagedLoginBrandingByClient]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeManagedLoginBrandingByClient.html
 // [API and SDK operations for managed login branding]: https://docs.aws.amazon.com/cognito/latest/developerguide/managed-login-brandingdesigner.html#branding-designer-api
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) UpdateManagedLoginBranding(ctx context.Context, params *UpdateManagedLoginBrandingInput, optFns ...func(*Options)) (*UpdateManagedLoginBrandingOutput, error) {

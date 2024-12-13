@@ -422,6 +422,18 @@ func TestCheckSnapshot_CreateHoursOfOperation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateHoursOfOperationOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHoursOfOperationOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateHoursOfOperationOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInstance(context.Background(), nil, func(o *Options) {
@@ -487,6 +499,18 @@ func TestCheckSnapshot_CreatePrompt(t *testing.T) {
 	_, err := svc.CreatePrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreatePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePushNotificationRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePushNotificationRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePushNotificationRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -746,6 +770,18 @@ func TestCheckSnapshot_DeleteHoursOfOperation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteHoursOfOperationOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHoursOfOperationOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteHoursOfOperationOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteInstance(context.Background(), nil, func(o *Options) {
@@ -787,6 +823,18 @@ func TestCheckSnapshot_DeletePrompt(t *testing.T) {
 	_, err := svc.DeletePrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeletePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePushNotificationRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePushNotificationRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePushNotificationRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1051,6 +1099,18 @@ func TestCheckSnapshot_DescribeHoursOfOperation(t *testing.T) {
 	_, err := svc.DescribeHoursOfOperation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeHoursOfOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeHoursOfOperationOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeHoursOfOperationOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeHoursOfOperationOverride")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1478,6 +1538,18 @@ func TestCheckSnapshot_GetCurrentUserData(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetEffectiveHoursOfOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEffectiveHoursOfOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEffectiveHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFederationToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFederationToken(context.Background(), nil, func(o *Options) {
@@ -1747,6 +1819,18 @@ func TestCheckSnapshot_ListFlowAssociations(t *testing.T) {
 	_, err := svc.ListFlowAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListFlowAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListHoursOfOperationOverrides(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHoursOfOperationOverrides(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHoursOfOperationOverrides")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2287,6 +2371,18 @@ func TestCheckSnapshot_SearchEmailAddresses(t *testing.T) {
 	_, err := svc.SearchEmailAddresses(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchEmailAddresses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchHoursOfOperationOverrides(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchHoursOfOperationOverrides(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchHoursOfOperationOverrides")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2887,6 +2983,18 @@ func TestCheckSnapshot_UpdateHoursOfOperation(t *testing.T) {
 	_, err := svc.UpdateHoursOfOperation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateHoursOfOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateHoursOfOperationOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHoursOfOperationOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateHoursOfOperationOverride")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3661,6 +3769,18 @@ func TestUpdateSnapshot_CreateHoursOfOperation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateHoursOfOperationOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHoursOfOperationOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateHoursOfOperationOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInstance(context.Background(), nil, func(o *Options) {
@@ -3726,6 +3846,18 @@ func TestUpdateSnapshot_CreatePrompt(t *testing.T) {
 	_, err := svc.CreatePrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreatePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePushNotificationRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePushNotificationRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePushNotificationRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3985,6 +4117,18 @@ func TestUpdateSnapshot_DeleteHoursOfOperation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteHoursOfOperationOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHoursOfOperationOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteHoursOfOperationOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteInstance(context.Background(), nil, func(o *Options) {
@@ -4026,6 +4170,18 @@ func TestUpdateSnapshot_DeletePrompt(t *testing.T) {
 	_, err := svc.DeletePrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeletePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePushNotificationRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePushNotificationRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePushNotificationRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4290,6 +4446,18 @@ func TestUpdateSnapshot_DescribeHoursOfOperation(t *testing.T) {
 	_, err := svc.DescribeHoursOfOperation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeHoursOfOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeHoursOfOperationOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeHoursOfOperationOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeHoursOfOperationOverride")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4717,6 +4885,18 @@ func TestUpdateSnapshot_GetCurrentUserData(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetEffectiveHoursOfOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEffectiveHoursOfOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEffectiveHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFederationToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFederationToken(context.Background(), nil, func(o *Options) {
@@ -4986,6 +5166,18 @@ func TestUpdateSnapshot_ListFlowAssociations(t *testing.T) {
 	_, err := svc.ListFlowAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFlowAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListHoursOfOperationOverrides(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHoursOfOperationOverrides(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHoursOfOperationOverrides")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5526,6 +5718,18 @@ func TestUpdateSnapshot_SearchEmailAddresses(t *testing.T) {
 	_, err := svc.SearchEmailAddresses(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchEmailAddresses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchHoursOfOperationOverrides(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchHoursOfOperationOverrides(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchHoursOfOperationOverrides")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6126,6 +6330,18 @@ func TestUpdateSnapshot_UpdateHoursOfOperation(t *testing.T) {
 	_, err := svc.UpdateHoursOfOperation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateHoursOfOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateHoursOfOperationOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHoursOfOperationOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateHoursOfOperationOverride")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

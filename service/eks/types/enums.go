@@ -759,6 +759,7 @@ const (
 	UpdateParamTypeResolveConflicts         UpdateParamType = "ResolveConflicts"
 	UpdateParamTypeMaxUnavailable           UpdateParamType = "MaxUnavailable"
 	UpdateParamTypeMaxUnavailablePercentage UpdateParamType = "MaxUnavailablePercentage"
+	UpdateParamTypeNodeRepairEnabled        UpdateParamType = "NodeRepairEnabled"
 	UpdateParamTypeConfigurationValues      UpdateParamType = "ConfigurationValues"
 	UpdateParamTypeSecurityGroups           UpdateParamType = "SecurityGroups"
 	UpdateParamTypeSubnets                  UpdateParamType = "Subnets"
@@ -800,6 +801,7 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"ResolveConflicts",
 		"MaxUnavailable",
 		"MaxUnavailablePercentage",
+		"NodeRepairEnabled",
 		"ConfigurationValues",
 		"SecurityGroups",
 		"Subnets",

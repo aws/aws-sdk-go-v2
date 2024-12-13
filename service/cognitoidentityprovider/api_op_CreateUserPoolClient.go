@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the user pool client.
+// Creates an app client in a user pool. This operation sets basic and advanced
+// configuration options. You can create an app client in the Amazon Cognito
+// console to your preferences and use the output of [DescribeUserPoolClient]to generate requests from
+// that baseline.
 //
-// When you create a new user pool client, token revocation is automatically
-// activated. For more information about revoking tokens, see [RevokeToken].
+// New app clients activate token revocation by default. For more information
+// about revoking tokens, see [RevokeToken].
 //
 // If you don't provide a value for an attribute, Amazon Cognito sets it to its
 // default value.
@@ -32,6 +35,7 @@ import (
 //
 // [RevokeToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [DescribeUserPoolClient]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPoolClient.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) CreateUserPoolClient(ctx context.Context, params *CreateUserPoolClientInput, optFns ...func(*Options)) (*CreateUserPoolClientOutput, error) {
 	if params == nil {
@@ -51,12 +55,12 @@ func (c *Client) CreateUserPoolClient(ctx context.Context, params *CreateUserPoo
 // Represents the request to create a user pool client.
 type CreateUserPoolClientInput struct {
 
-	// The client name for the user pool client you would like to create.
+	// A friendly name for the app client that you want to create.
 	//
 	// This member is required.
 	ClientName *string
 
-	// The user pool ID for the user pool where you want to create a user pool client.
+	// The ID of the user pool where you want to create an app client.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -113,20 +117,22 @@ type CreateUserPoolClientInput struct {
 	// defaults to false .
 	AllowedOAuthFlowsUserPoolClient bool
 
-	// The allowed OAuth scopes. Possible values provided by OAuth are phone , email ,
-	// openid , and profile . Possible values provided by Amazon Web Services are
-	// aws.cognito.signin.user.admin . Custom scopes created in Resource Servers are
-	// also supported.
+	// The OAuth 2.0 scopes that you want to permit your app client to authorize.
+	// Scopes govern access control to user pool self-service API operations, user data
+	// from the userInfo endpoint, and third-party APIs. Possible values provided by
+	// OAuth are phone , email , openid , and profile . Possible values provided by
+	// Amazon Web Services are aws.cognito.signin.user.admin . Custom scopes created in
+	// Resource Servers are also supported.
 	AllowedOAuthScopes []string
 
 	// The user pool analytics configuration for collecting metrics and sending them
 	// to your Amazon Pinpoint campaign.
 	//
 	// In Amazon Web Services Regions where Amazon Pinpoint isn't available, user
-	// pools only support sending events to Amazon Pinpoint projects in Amazon Web
-	// Services Region us-east-1. In Regions where Amazon Pinpoint is available, user
-	// pools support sending events to Amazon Pinpoint projects within that same
-	// Region.
+	// pools might not have access to analytics or might be configurable with campaigns
+	// in the US East (N. Virginia) Region. For more information, see [Using Amazon Pinpoint analytics].
+	//
+	// [Using Amazon Pinpoint analytics]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-pinpoint-integration.html
 	AnalyticsConfiguration *types.AnalyticsConfigurationType
 
 	// Amazon Cognito creates a session token for each API request in an
@@ -141,7 +147,9 @@ type CreateUserPoolClientInput struct {
 	//
 	//   - Be an absolute URI.
 	//
-	//   - Be registered with the authorization server.
+	//   - Be registered with the authorization server. Amazon Cognito doesn't accept
+	//   authorization requests with redirect_uri values that aren't in the list of
+	//   CallbackURLs that you provide in this parameter.
 	//
 	//   - Not include a fragment component.
 	//
@@ -157,23 +165,6 @@ type CreateUserPoolClientInput struct {
 
 	// The default redirect URI. In app clients with one assigned IdP, replaces
 	// redirect_uri in authentication requests. Must be in the CallbackURLs list.
-	//
-	// A redirect URI must:
-	//
-	//   - Be an absolute URI.
-	//
-	//   - Be registered with the authorization server.
-	//
-	//   - Not include a fragment component.
-	//
-	// For more information, see [Default redirect URI].
-	//
-	// Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing
-	// purposes only.
-	//
-	// App callback URLs such as myapp://example are also supported.
-	//
-	// [Default redirect URI]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html#cognito-user-pools-app-idp-settings-about
 	DefaultRedirectURI *string
 
 	// Activates the propagation of additional user context data. For more information
@@ -236,8 +227,11 @@ type CreateUserPoolClientInput struct {
 	// begin with ALLOW_ , like ALLOW_USER_SRP_AUTH .
 	ExplicitAuthFlows []types.ExplicitAuthFlowsType
 
-	// Boolean to specify whether you want to generate a secret for the user pool
-	// client being created.
+	// When true , generates a client secret for the app client. Client secrets are
+	// used with server-side and machine-to-machine applications. For more information,
+	// see [App client types].
+	//
+	// [App client types]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html#user-pool-settings-client-app-client-types
 	GenerateSecret bool
 
 	// The ID token time limit. After this limit expires, your user can't use their ID
@@ -254,7 +248,10 @@ type CreateUserPoolClientInput struct {
 	// tokens are valid for one hour.
 	IdTokenValidity *int32
 
-	// A list of allowed logout URLs for the IdPs.
+	// A list of allowed logout URLs for managed login authentication. For more
+	// information, see [Logout endpoint].
+	//
+	// [Logout endpoint]: https://docs.aws.amazon.com/cognito/latest/developerguide/logout-endpoint.html
 	LogoutURLs []string
 
 	// Errors and responses that you want Amazon Cognito APIs to return during
@@ -317,17 +314,17 @@ type CreateUserPoolClientInput struct {
 	// configured for the SAML and OIDC IdPs in your user pool, for example MySAMLIdP
 	// or MyOIDCIdP .
 	//
-	// This setting applies to providers that you can access with the [hosted UI and OAuth 2.0 authorization server]. The removal of
+	// This setting applies to providers that you can access with [managed login]. The removal of
 	// COGNITO from this list doesn't prevent authentication operations for local users
 	// with the user pools API in an Amazon Web Services SDK. The only way to prevent
 	// API-based authentication is to block access with a [WAF rule].
 	//
 	// [WAF rule]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-waf.html
-	// [hosted UI and OAuth 2.0 authorization server]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-app-integration.html
+	// [managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 	SupportedIdentityProviders []string
 
-	// The units in which the validity times are represented. The default unit for
-	// RefreshToken is days, and default for ID and access tokens are hours.
+	// The units that validity times are represented in. The default unit for refresh
+	// tokens is days, and the default for ID and access tokens are hours.
 	TokenValidityUnits *types.TokenValidityUnitsType
 
 	// The list of user attributes that you want your app client to have write access
@@ -360,7 +357,7 @@ type CreateUserPoolClientInput struct {
 // Represents the response from the server to create a user pool client.
 type CreateUserPoolClientOutput struct {
 
-	// The user pool client that was just created.
+	// The details of the new app client.
 	UserPoolClient *types.UserPoolClientType
 
 	// Metadata pertaining to the operation's result.

@@ -52,6 +52,9 @@ type SendBulkEmailInput struct {
 	// email that you define, so that you can publish email sending events.
 	DefaultEmailTags []types.MessageTag
 
+	// The ID of the multi-region endpoint (global-endpoint).
+	EndpointId *string
+
 	// The address that you want bounce and complaint notifications to be sent to.
 	FeedbackForwardingEmailAddress *string
 
@@ -97,6 +100,12 @@ type SendBulkEmailInput struct {
 	ReplyToAddresses []string
 
 	noSmithyDocumentSerde
+}
+
+func (in *SendBulkEmailInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.EndpointId = in.EndpointId
+
 }
 
 // The following data is returned in JSON format by the service.

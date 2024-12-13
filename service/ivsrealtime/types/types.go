@@ -21,6 +21,11 @@ type AutoParticipantRecordingConfiguration struct {
 	// Types of media to be recorded. Default: AUDIO_VIDEO .
 	MediaTypes []ParticipantRecordingMediaType
 
+	// A complex type that allows you to enable/disable the recording of thumbnails
+	// for individual participant recording and modify the interval at which thumbnails
+	// are generated for the live session.
+	ThumbnailConfiguration *ParticipantThumbnailConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -129,6 +134,24 @@ type CompositionSummary struct {
 	//
 	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a configuration of thumbnails for recorded video for a Composition.
+type CompositionThumbnailConfiguration struct {
+
+	// Indicates the format in which thumbnails are recorded. SEQUENTIAL records all
+	// generated thumbnails in a serial manner, to the
+	// media/thumbnails/(width)x(height) directory, where (width) and (height) are the
+	// width and height of the thumbnail. LATEST saves the latest thumbnail in
+	// media/latest_thumbnail/(width)x(height)/thumb.jpg and overwrites it at the
+	// interval specified by targetIntervalSeconds . You can enable both SEQUENTIAL
+	// and LATEST . Default: SEQUENTIAL .
+	Storage []ThumbnailStorageType
+
+	// The targeted thumbnail-generation interval in seconds. Default: 60.
+	TargetIntervalSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -578,6 +601,27 @@ type ParticipantSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An object representing a configuration of thumbnails for recorded video from an
+// individual participant.
+type ParticipantThumbnailConfiguration struct {
+
+	// Thumbnail recording mode. Default: DISABLED .
+	RecordingMode ThumbnailRecordingMode
+
+	// Indicates the format in which thumbnails are recorded. SEQUENTIAL records all
+	// generated thumbnails in a serial manner, to the media/thumbnails/high directory.
+	// LATEST saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg and
+	// overwrites it at the interval specified by targetIntervalSeconds . You can
+	// enable both SEQUENTIAL and LATEST . Default: SEQUENTIAL .
+	Storage []ThumbnailStorageType
+
+	// The targeted thumbnail-generation interval in seconds. This is configurable
+	// only if recordingMode is INTERVAL . Default: 60.
+	TargetIntervalSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // Object specifying a participant token in a stage.
 //
 // Important: Treat tokens as opaque; i.e., do not build functionality based on
@@ -768,6 +812,11 @@ type S3DestinationConfiguration struct {
 	// customer specification, currently used only to specify the recording format for
 	// storing a recording in Amazon S3.
 	RecordingConfiguration *RecordingConfiguration
+
+	// A complex type that allows you to enable/disable the recording of thumbnails
+	// for a Compositionand modify the interval at which thumbnails are generated for the live
+	// session.
+	ThumbnailConfigurations []CompositionThumbnailConfiguration
 
 	noSmithyDocumentSerde
 }

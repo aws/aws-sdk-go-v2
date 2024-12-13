@@ -10,7 +10,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an IdP for a user pool.
+// Deletes a user pool identity provider (IdP). After you delete an IdP, users can
+// no longer sign in to your user pool through that IdP. For more information about
+// user pool IdPs, see [Third-party IdP sign-in].
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Third-party IdP sign-in]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) DeleteIdentityProvider(ctx context.Context, params *DeleteIdentityProviderInput, optFns ...func(*Options)) (*DeleteIdentityProviderOutput, error) {
 	if params == nil {
 		params = &DeleteIdentityProviderInput{}
@@ -28,12 +45,12 @@ func (c *Client) DeleteIdentityProvider(ctx context.Context, params *DeleteIdent
 
 type DeleteIdentityProviderInput struct {
 
-	// The IdP name.
+	// The name of the IdP that you want to delete.
 	//
 	// This member is required.
 	ProviderName *string
 
-	// The user pool ID.
+	// The ID of the user pool where you want to delete the identity provider.
 	//
 	// This member is required.
 	UserPoolId *string

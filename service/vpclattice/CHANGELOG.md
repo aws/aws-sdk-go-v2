@@ -1,3 +1,7 @@
+# v1.13.1 (2024-12-11)
+
+* No change notes available for this release.
+
 # v1.13.0 (2024-12-02)
 
 * **Feature**: Lattice APIs that allow sharing and access of VPC resources across accounts.

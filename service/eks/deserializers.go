@@ -13827,6 +13827,11 @@ func awsRestjson1_deserializeDocumentNodegroup(v **types.Nodegroup, value interf
 				sv.NodegroupName = ptr.String(jtv)
 			}
 
+		case "nodeRepairConfig":
+			if err := awsRestjson1_deserializeDocumentNodeRepairConfig(&sv.NodeRepairConfig, value); err != nil {
+				return err
+			}
+
 		case "nodeRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14104,6 +14109,46 @@ func awsRestjson1_deserializeDocumentNodegroupUpdateConfig(v **types.NodegroupUp
 					return err
 				}
 				sv.MaxUnavailablePercentage = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeRepairConfig(v **types.NodeRepairConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeRepairConfig
+	if *v == nil {
+		sv = &types.NodeRepairConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:

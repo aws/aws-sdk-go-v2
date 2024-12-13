@@ -67,7 +67,7 @@ func (c *Client) UpdateUserPool(ctx context.Context, params *UpdateUserPoolInput
 // Represents the request to update the user pool.
 type UpdateUserPoolInput struct {
 
-	// The user pool ID for the user pool you want to update.
+	// The ID of the user pool you want to update.
 	//
 	// This member is required.
 	UserPoolId *string

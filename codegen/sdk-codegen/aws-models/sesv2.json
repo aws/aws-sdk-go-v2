@@ -1893,6 +1893,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#CreateMultiRegionEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#CreateMultiRegionEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#CreateMultiRegionEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a multi-region endpoint (global-endpoint).</p>\n         <p>The primary region is going to be the AWS-Region where the operation is executed.\n            The secondary region has to be provided in request's parameters.\n            From the data flow standpoint there is no difference between primary\n            and secondary regions - sending traffic will be split equally between the two.\n            The primary region is the region where the resource has been created and where it can be managed.\n        </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/multi-region-endpoints",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#CreateMultiRegionEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "EndpointName": {
+                    "target": "com.amazonaws.sesv2#EndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-region endpoint (global-endpoint).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Details": {
+                    "target": "com.amazonaws.sesv2#Details",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details of a multi-region endpoint (global-endpoint) being created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sesv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) to associate with the multi-region endpoint (global-endpoint).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to create a multi-region endpoint (global-endpoint).</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#CreateMultiRegionEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sesv2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status of the multi-region endpoint (global-endpoint) right after the create request.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The resource is being provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> – The resource is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The resource failed to be provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> – The resource is being deleted as requested.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "EndpointId": {
+                    "target": "com.amazonaws.sesv2#EndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the multi-region endpoint (global-endpoint).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#CustomRedirectDomain": {
             "type": "string",
             "traits": {
@@ -2607,6 +2688,69 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#DeleteMultiRegionEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#DeleteMultiRegionEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#DeleteMultiRegionEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a multi-region endpoint (global-endpoint).</p>\n         <p>Only multi-region endpoints (global-endpoints) whose primary region is the AWS-Region\n            where operation is executed can be deleted.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v2/email/multi-region-endpoints/{EndpointName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#DeleteMultiRegionEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "EndpointName": {
+                    "target": "com.amazonaws.sesv2#EndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-region endpoint (global-endpoint) to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to delete a multi-region endpoint (global-endpoint).</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#DeleteMultiRegionEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sesv2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status of the multi-region endpoint (global-endpoint) right after the delete request.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The resource is being provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> – The resource is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The resource failed to be provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> – The resource is being deleted as requested.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#DeleteSuppressedDestination": {
             "type": "operation",
             "input": {
@@ -2861,6 +3005,21 @@
                 "smithy.api#documentation": "<p>An object that describes the recipients for an email.</p>\n         <note>\n            <p>Amazon SES does not support the SMTPUTF8 extension, as described in <a href=\"https://tools.ietf.org/html/rfc6531\">RFC6531</a>. For this reason, the\n                    <i>local part</i> of a destination email address (the part of the\n                email address that precedes the @ sign) may only contain <a href=\"https://en.wikipedia.org/wiki/Email_address#Local-part\">7-bit ASCII\n                    characters</a>. If the <i>domain part</i> of an address (the\n                part after the @ sign) contains non-ASCII characters, they must be encoded using\n                Punycode, as described in <a href=\"https://tools.ietf.org/html/rfc3492.html\">RFC3492</a>.</p>\n         </note>"
             }
         },
+        "com.amazonaws.sesv2#Details": {
+            "type": "structure",
+            "members": {
+                "RoutesDetails": {
+                    "target": "com.amazonaws.sesv2#RoutesDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of route configuration details. Must contain exactly one route configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains configuration details of multi-region endpoint (global-endpoint).</p>"
+            }
+        },
         "com.amazonaws.sesv2#DiagnosticCode": {
             "type": "string"
         },
@@ -2939,7 +3098,7 @@
                 "SigningAttributesOrigin": {
                     "target": "com.amazonaws.sesv2#DkimSigningAttributesOrigin",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that indicates how DKIM was configured for the identity. These are the\n            possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Indicates that DKIM was configured for the\n                    identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Indicates that DKIM was configured for the\n                    identity by using Bring Your Own DKIM (BYODKIM).</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A string that indicates how DKIM was configured for the identity. These are the\n            possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Indicates that DKIM was configured for the\n                    identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Indicates that DKIM was configured for the\n                    identity by using Bring Your Own DKIM (BYODKIM).</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AF_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Africa (Cape Town) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_NORTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Stockholm) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (London) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Middle East (Bahrain) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_IL_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_SA_EAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in South America (São Paulo) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US East (N. Virginia) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US West (N. California) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextSigningKeyLength": {
@@ -2985,6 +3144,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be\n            changed at most once per day.</p>"
                     }
+                },
+                "DomainSigningAttributesOrigin": {
+                    "target": "com.amazonaws.sesv2#DkimSigningAttributesOrigin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute to use for configuring DKIM for the identity depends on the\n            operation:\n        </p>\n         <ol>\n            <li>\n               <p>For <code>PutEmailIdentityDkimSigningAttributes</code>:\n                </p>\n               <ul>\n                  <li>\n                     <p>None of the values are allowed - use the\n                            <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutEmailIdentityDkimSigningAttributes.html#SES-PutEmailIdentityDkimSigningAttributes-request-SigningAttributesOrigin\">\n                           <code>SigningAttributesOrigin</code>\n                        </a>\n                            parameter instead\n                        </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <code>CreateEmailIdentity</code> when replicating a parent identity's DKIM\n                    configuration:\n                </p>\n               <ul>\n                  <li>\n                     <p>Allowed values: All values except <code>AWS_SES</code> and\n                            <code>EXTERNAL</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ol>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Configure DKIM for the identity by using Easy DKIM.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Configure DKIM for the identity by using Bring Your Own DKIM\n                    (BYODKIM).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AF_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Africa (Cape Town) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_NORTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Stockholm) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_3</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (London) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_3</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_2</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Middle East (Bahrain) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_IL_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_SA_EAST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in South America (São Paulo) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_2</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_3</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US East (N. Virginia) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US West (N. California) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -3004,6 +3169,138 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EXTERNAL"
+                    }
+                },
+                "AWS_SES_AF_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AF_SOUTH_1"
+                    }
+                },
+                "AWS_SES_EU_NORTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_NORTH_1"
+                    }
+                },
+                "AWS_SES_AP_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_SOUTH_1"
+                    }
+                },
+                "AWS_SES_EU_WEST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_WEST_3"
+                    }
+                },
+                "AWS_SES_EU_WEST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_WEST_2"
+                    }
+                },
+                "AWS_SES_EU_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_SOUTH_1"
+                    }
+                },
+                "AWS_SES_EU_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_WEST_1"
+                    }
+                },
+                "AWS_SES_AP_NORTHEAST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_NORTHEAST_3"
+                    }
+                },
+                "AWS_SES_AP_NORTHEAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_NORTHEAST_2"
+                    }
+                },
+                "AWS_SES_ME_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_ME_SOUTH_1"
+                    }
+                },
+                "AWS_SES_AP_NORTHEAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_NORTHEAST_1"
+                    }
+                },
+                "AWS_SES_IL_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_IL_CENTRAL_1"
+                    }
+                },
+                "AWS_SES_SA_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_SA_EAST_1"
+                    }
+                },
+                "AWS_SES_CA_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_CA_CENTRAL_1"
+                    }
+                },
+                "AWS_SES_AP_SOUTHEAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_SOUTHEAST_1"
+                    }
+                },
+                "AWS_SES_AP_SOUTHEAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_SOUTHEAST_2"
+                    }
+                },
+                "AWS_SES_AP_SOUTHEAST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_AP_SOUTHEAST_3"
+                    }
+                },
+                "AWS_SES_EU_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_EU_CENTRAL_1"
+                    }
+                },
+                "AWS_SES_US_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_EAST_1"
+                    }
+                },
+                "AWS_SES_US_EAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_EAST_2"
+                    }
+                },
+                "AWS_SES_US_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_WEST_1"
+                    }
+                },
+                "AWS_SES_US_WEST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_WEST_2"
                     }
                 }
             }
@@ -3456,6 +3753,23 @@
         },
         "com.amazonaws.sesv2#EnabledWrapper": {
             "type": "boolean"
+        },
+        "com.amazonaws.sesv2#EndpointId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of the multi-region endpoint (global-endpoint).</p>"
+            }
+        },
+        "com.amazonaws.sesv2#EndpointName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the multi-region endpoint (global-endpoint).</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\w\\-_]+$"
+            }
         },
         "com.amazonaws.sesv2#EngagementEventType": {
             "type": "enum",
@@ -5613,6 +5927,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#GetMultiRegionEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#GetMultiRegionEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#GetMultiRegionEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays the multi-region endpoint (global-endpoint) configuration.</p>\n         <p>Only multi-region endpoints (global-endpoints) whose primary region is the AWS-Region\n            where operation is executed can be displayed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/email/multi-region-endpoints/{EndpointName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#GetMultiRegionEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "EndpointName": {
+                    "target": "com.amazonaws.sesv2#EndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-region endpoint (global-endpoint).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to display the multi-region endpoint (global-endpoint).</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#GetMultiRegionEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "EndpointName": {
+                    "target": "com.amazonaws.sesv2#EndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-region endpoint (global-endpoint).</p>"
+                    }
+                },
+                "EndpointId": {
+                    "target": "com.amazonaws.sesv2#EndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the multi-region endpoint (global-endpoint).</p>"
+                    }
+                },
+                "Routes": {
+                    "target": "com.amazonaws.sesv2#Routes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains routes information for the multi-region endpoint (global-endpoint).</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sesv2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the multi-region endpoint (global-endpoint).</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The resource is being provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> – The resource is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The resource failed to be provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> – The resource is being deleted as requested.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the multi-region endpoint (global-endpoint) was created.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the multi-region endpoint (global-endpoint) was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#GetSuppressedDestination": {
             "type": "operation",
             "input": {
@@ -7085,6 +7489,81 @@
                 "smithy.api#documentation": "<p>An object used to specify a list or topic to which an email belongs, which will be\n            used when a contact chooses to unsubscribe.</p>"
             }
         },
+        "com.amazonaws.sesv2#ListMultiRegionEndpoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#ListMultiRegionEndpointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#ListMultiRegionEndpointsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the multi-region endpoints (global-endpoints).</p>\n         <p>Only multi-region endpoints (global-endpoints) whose primary region is the AWS-Region\n            where operation is executed will be listed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/email/multi-region-endpoints",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "MultiRegionEndpoints",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListMultiRegionEndpointsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextTokenV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a previous call to <code>ListMultiRegionEndpoints</code> to indicate\n            the position in the list of multi-region endpoints (global-endpoints).</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.sesv2#PageSizeV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to show in a single call to <code>ListMultiRegionEndpoints</code>.\n            If the number of results is larger than the number you specified in this parameter,\n            the response includes a <code>NextToken</code> element\n            that you can use to retrieve the next page of results.\n        </p>",
+                        "smithy.api#httpQuery": "PageSize"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to list all the multi-region endpoints (global-endpoints)\n            whose primary region is the AWS-Region where operation is executed.\n        </p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListMultiRegionEndpointsResponse": {
+            "type": "structure",
+            "members": {
+                "MultiRegionEndpoints": {
+                    "target": "com.amazonaws.sesv2#MultiRegionEndpoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains key multi-region endpoint (global-endpoint) properties.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextTokenV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token indicating that there are additional multi-region endpoints (global-endpoints) available to be listed.\n            Pass this token to a subsequent <code>ListMultiRegionEndpoints</code> call to retrieve the\n            next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The following elements are returned by the service.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#ListOfContactLists": {
             "type": "list",
             "member": {
@@ -8009,8 +8488,68 @@
                 "smithy.api#documentation": "<p>An object that contains details about the data source for the metrics export.</p>"
             }
         },
+        "com.amazonaws.sesv2#MultiRegionEndpoint": {
+            "type": "structure",
+            "members": {
+                "EndpointName": {
+                    "target": "com.amazonaws.sesv2#EndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-region endpoint (global-endpoint).</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sesv2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the multi-region endpoint (global-endpoint).</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The resource is being provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> – The resource is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The resource failed to be provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> – The resource is being deleted as requested.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "EndpointId": {
+                    "target": "com.amazonaws.sesv2#EndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the multi-region endpoint (global-endpoint).</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.sesv2#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Primary and secondary regions between which multi-region endpoint splits sending traffic.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the multi-region endpoint (global-endpoint) was created.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the multi-region endpoint (global-endpoint) was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains multi-region endpoint (global-endpoint) properties.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#MultiRegionEndpoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#MultiRegionEndpoint"
+            }
+        },
         "com.amazonaws.sesv2#NextToken": {
             "type": "string"
+        },
+        "com.amazonaws.sesv2#NextTokenV2": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000
+                },
+                "smithy.api#pattern": "^^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+            }
         },
         "com.amazonaws.sesv2#NotFoundException": {
             "type": "structure",
@@ -8052,6 +8591,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains information about email that was sent from the selected\n            domain.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#PageSizeV2": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.sesv2#Percentage": {
@@ -9634,6 +10182,18 @@
                 "target": "com.amazonaws.sesv2#Recommendation"
             }
         },
+        "com.amazonaws.sesv2#Region": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of an AWS-Region.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#Regions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#Region"
+            }
+        },
         "com.amazonaws.sesv2#RenderedEmailTemplate": {
             "type": "string",
             "traits": {
@@ -9748,6 +10308,54 @@
                         "smithy.api#enumValue": "DENIED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sesv2#Route": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.sesv2#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an AWS-Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object which contains an AWS-Region and routing status.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#RouteDetails": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.sesv2#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an AWS-Region to be a secondary region for the multi-region endpoint (global-endpoint).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains route configuration. Includes secondary region name.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#Routes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#Route"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of routes between which the traffic will be split when sending through the multi-region endpoint (global-endpoint).</p>"
+            }
+        },
+        "com.amazonaws.sesv2#RoutesDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#RouteDetails"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of route configuration details. Must contain exactly one route configuration.</p>"
             }
         },
         "com.amazonaws.sesv2#S3Url": {
@@ -9911,6 +10519,15 @@
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the configuration set to use when sending the email.</p>"
+                    }
+                },
+                "EndpointId": {
+                    "target": "com.amazonaws.sesv2#EndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the multi-region endpoint (global-endpoint).</p>",
+                        "smithy.rules#contextParam": {
+                            "name": "EndpointId"
+                        }
                     }
                 }
             },
@@ -10120,6 +10737,15 @@
                         "smithy.api#documentation": "<p>The name of the configuration set to use when sending the email.</p>"
                     }
                 },
+                "EndpointId": {
+                    "target": "com.amazonaws.sesv2#EndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the multi-region endpoint (global-endpoint).</p>",
+                        "smithy.rules#contextParam": {
+                            "name": "EndpointId"
+                        }
+                    }
+                },
                 "ListManagementOptions": {
                     "target": "com.amazonaws.sesv2#ListManagementOptions",
                     "traits": {
@@ -10269,6 +10895,9 @@
                     "target": "com.amazonaws.sesv2#CreateImportJob"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#CreateMultiRegionEndpoint"
+                },
+                {
                     "target": "com.amazonaws.sesv2#DeleteConfigurationSet"
                 },
                 {
@@ -10294,6 +10923,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#DeleteEmailTemplate"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#DeleteMultiRegionEndpoint"
                 },
                 {
                     "target": "com.amazonaws.sesv2#DeleteSuppressedDestination"
@@ -10359,6 +10991,9 @@
                     "target": "com.amazonaws.sesv2#GetMessageInsights"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#GetMultiRegionEndpoint"
+                },
+                {
                     "target": "com.amazonaws.sesv2#GetSuppressedDestination"
                 },
                 {
@@ -10393,6 +11028,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#ListImportJobs"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ListMultiRegionEndpoints"
                 },
                 {
                     "target": "com.amazonaws.sesv2#ListRecommendations"
@@ -10545,9 +11183,199 @@
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
                             "type": "String"
+                        },
+                        "EndpointId": {
+                            "required": false,
+                            "documentation": "Operation parameter for EndpointId",
+                            "type": "String"
                         }
                     },
                     "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "EndpointId"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isValidHostLabel",
+                                            "argv": [
+                                                {
+                                                    "ref": "EndpointId"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        false
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "isSet",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "Endpoint"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4a",
+                                                                    "signingName": "ses",
+                                                                    "signingRegionSet": [
+                                                                        "*"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://{EndpointId}.endpoints.email.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "name": "sigv4a",
+                                                                                    "signingName": "ses",
+                                                                                    "signingRegionSet": [
+                                                                                        "*"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://{EndpointId}.endpoints.email.{PartitionResult#dnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4a",
+                                                                    "signingName": "ses",
+                                                                    "signingRegionSet": [
+                                                                        "*"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints",
+                                            "type": "error"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "EndpointId must be a valid host label",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        },
                         {
                             "conditions": [
                                 {
@@ -11427,6 +12255,163 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with dualstack and FIPS disabled. i.e, IPv4 Only stack with no FIPS",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://abc123.456def.endpoints.email.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with dualstack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://abc123.456def.endpoints.email.api.aws"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with FIPS set, dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with both dualstack and FIPS enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "Regular regional request, without EndpointId",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "Invalid EndpointId (Invalid chars / format)",
+                            "expect": {
+                                "error": "EndpointId must be a valid host label"
+                            },
+                            "params": {
+                                "EndpointId": "badactor.com?foo=bar",
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "Invalid EndpointId (Empty)",
+                            "expect": {
+                                "error": "EndpointId must be a valid host label"
+                            },
+                            "params": {
+                                "EndpointId": "",
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with custom sdk endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with custom sdk endpoint with FIPS enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with DualStack enabled and partition does not support DualStack",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -11446,6 +12431,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to\n            send notifications when certain email events occur.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#Status": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the multi-region endpoint (global-endpoint).</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The resource is being provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> – The resource is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The resource failed to be provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> – The resource is being deleted as requested.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#Subject": {
@@ -12618,6 +13635,36 @@
                     "traits": {
                         "smithy.api#enumValue": "INVALID_VALUE"
                     }
+                },
+                "REPLICATION_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_ACCESS_DENIED"
+                    }
+                },
+                "REPLICATION_PRIMARY_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_PRIMARY_NOT_FOUND"
+                    }
+                },
+                "REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED"
+                    }
+                },
+                "REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED"
+                    }
+                },
+                "REPLICATION_PRIMARY_INVALID_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_PRIMARY_INVALID_REGION"
+                    }
                 }
             }
         },
@@ -12639,7 +13686,7 @@
                 "ErrorType": {
                     "target": "com.amazonaws.sesv2#VerificationError",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the reason for the failure describing why Amazon SES was not able to successfully\n            verify the identity. Below are the possible values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>INVALID_VALUE</code> – Amazon SES was able to find the record, but the\n                    value contained within the record was invalid. Ensure you have published the\n                    correct values for the record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TYPE_NOT_FOUND</code> – The queried hostname exists but does not\n                    have the requested type of DNS record. Ensure that you have published the\n                    correct type of DNS record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOST_NOT_FOUND</code> – The queried hostname does not exist or was\n                    not reachable at the time of the request. Ensure that you have published the\n                    required DNS record(s). </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_ERROR</code> – A temporary issue is preventing Amazon SES from\n                    determining the verification status of the domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_SERVER_ERROR</code> – The DNS server encountered an issue and\n                    was unable to complete the request.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Provides the reason for the failure describing why Amazon SES was not able to successfully\n            verify the identity. Below are the possible values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>INVALID_VALUE</code> – Amazon SES was able to find the record, but the\n                    value contained within the record was invalid. Ensure you have published the\n                    correct values for the record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TYPE_NOT_FOUND</code> – The queried hostname exists but does not\n                    have the requested type of DNS record. Ensure that you have published the\n                    correct type of DNS record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOST_NOT_FOUND</code> – The queried hostname does not exist or was\n                    not reachable at the time of the request. Ensure that you have published the\n                    required DNS record(s). </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_ERROR</code> – A temporary issue is preventing Amazon SES from\n                    determining the verification status of the domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_SERVER_ERROR</code> – The DNS server encountered an issue and\n                    was unable to complete the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_ACCESS_DENIED</code> – The verification failed because the user does not\n                    have the required permissions to replicate the DKIM key from the primary region. Ensure you have the\n                    necessary permissions in both primary and replica regions.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_NOT_FOUND</code> – The verification failed because no corresponding\n                    identity was found in the specified primary region. Ensure the identity exists in the primary region\n                    before attempting replication.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED</code> – The verification failed because the\n                    identity in the primary region is configured with Bring Your Own DKIM (BYODKIM). DKIM key\n                    replication is only supported for identities using Easy DKIM.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED</code> – The verification failed because\n                    the specified primary identity is a replica of another identity, and multi-level replication is not\n                    supported; the primary identity must be a non-replica identity.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_INVALID_REGION</code> – The verification failed due to an invalid\n                    primary region specified. Ensure you provide a valid AWS region where Amazon SES is available and different\n                    from the replica region.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "SOARecord": {

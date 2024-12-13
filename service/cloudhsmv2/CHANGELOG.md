@@ -1,3 +1,7 @@
+# v1.28.0 (2024-12-13)
+
+* **Feature**: Add support for Dual-Stack hsm2m.medium clusters. The customers will now be able to create hsm2m.medium clusters having both IPv4 and IPv6 connection capabilities by specifying a new param called NetworkType=DUALSTACK during cluster creation.
+
 # v1.27.8 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

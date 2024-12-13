@@ -10,8 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resets the specified user's password in a user pool as an administrator. Works
-// on any user.
+// Resets the specified user's password in a user pool. This operation doesn't
+// change the user's password, but sends a password-reset code. This operation is
+// the administrative authentication API equivalent to [ForgotPassword].
+//
+// This operation deactivates a user's password, requiring them to change it. If a
+// user tries to sign in after the API request, Amazon Cognito responds with a
+// PasswordResetRequiredException error. Your app must then complete the
+// forgot-password flow by prompting the user for their code and a new password,
+// then submitting those values in a [ConfirmForgotPassword]request. In addition, if the user pool has
+// phone verification selected and a verified phone number exists for the user, or
+// if email verification is selected and a verified email exists for the user,
+// calling this API will also result in sending a message to the end user with the
+// code to change their password.
 //
 // To use this API operation, your user pool must have self-service account
 // recovery configured. Use [AdminSetUserPassword]if you manage passwords as an administrator.
@@ -31,15 +42,6 @@ import (
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
 // Cognito Developer Guide.
 //
-// Deactivates a user's password, requiring them to change it. If a user tries to
-// sign in after the API is called, Amazon Cognito responds with a
-// PasswordResetRequiredException error. Your app must then perform the actions
-// that reset your user's password: the forgot-password flow. In addition, if the
-// user pool has phone verification selected and a verified phone number exists for
-// the user, or if email verification is selected and a verified email exists for
-// the user, calling this API will also result in sending a message to the end user
-// with the code to change their password.
-//
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
 // credentials to authorize requests, and you must grant yourself the corresponding
@@ -52,8 +54,10 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [SMS message settings for Amazon Cognito user pools]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
+// [ConfirmForgotPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [AdminSetUserPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html
+// [ForgotPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html
 // [sandbox mode]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 // [Amazon Pinpoint]: https://console.aws.amazon.com/pinpoint/home/
@@ -75,7 +79,7 @@ func (c *Client) AdminResetUserPassword(ctx context.Context, params *AdminResetU
 // Represents the request to reset a user's password as an administrator.
 type AdminResetUserPasswordInput struct {
 
-	// The user pool ID for the user pool where you want to reset the user's password.
+	// The ID of the user pool where you want to reset the user's password.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -93,18 +97,18 @@ type AdminResetUserPasswordInput struct {
 	// workflows that this action triggers.
 	//
 	// You create custom workflows by assigning Lambda functions to user pool
-	// triggers. When you use the AdminResetUserPassword API action, Amazon Cognito
-	// invokes the function that is assigned to the custom message trigger. When Amazon
-	// Cognito invokes this function, it passes a JSON payload, which the function
-	// receives as input. This payload contains a clientMetadata attribute, which
-	// provides the data that you assigned to the ClientMetadata parameter in your
-	// AdminResetUserPassword request. In your function code in Lambda, you can process
-	// the clientMetadata value to enhance your workflow for your specific needs.
+	// triggers. The AdminResetUserPassword API operation invokes the function that is
+	// assigned to the custom message trigger. When Amazon Cognito invokes this
+	// function, it passes a JSON payload, which the function receives as input. This
+	// payload contains a clientMetadata attribute, which provides the data that you
+	// assigned to the ClientMetadata parameter in your AdminResetUserPassword request.
+	// In your function code in Lambda, you can process the clientMetadata value to
+	// enhance your workflow for your specific needs.
 	//
 	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
 	//
-	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
-	// do the following:
+	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
+	// the following:
 	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
@@ -113,8 +117,8 @@ type AdminResetUserPasswordInput struct {
 	//
 	//   - Validate the ClientMetadata value.
 	//
-	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
-	//   sensitive information.
+	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
+	//   parameter.
 	//
 	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
