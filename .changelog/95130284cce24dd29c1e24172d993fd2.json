@@ -1,8 +1,0 @@
-{
-    "id": "95130284-cce2-4dd2-9c1e-24172d993fd2",
-    "type": "documentation",
-    "description": "There was a sentence fragment in UpdateDirectConnectGatewayAttachment that was causing customer confusion as to whether it's an incomplete sentence or if it was a typo. Removed the fragment.",
-    "modules": [
-        "service/networkmanager"
-    ]
-}

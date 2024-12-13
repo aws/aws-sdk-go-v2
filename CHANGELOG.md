@@ -1,3 +1,19 @@
+# Release (2024-12-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.28.0](service/cloudhsmv2/CHANGELOG.md#v1280-2024-12-13)
+  * **Feature**: Add support for Dual-Stack hsm2m.medium clusters. The customers will now be able to create hsm2m.medium clusters having both IPv4 and IPv6 connection capabilities by specifying a new param called NetworkType=DUALSTACK during cluster creation.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.197.0](service/ec2/CHANGELOG.md#v11970-2024-12-13)
+  * **Feature**: This release adds GroupId to the response for DeleteSecurityGroup.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.54.0](service/eks/CHANGELOG.md#v1540-2024-12-13)
+  * **Feature**: Add NodeRepairConfig in CreateNodegroupRequest and UpdateNodegroupConfigRequest
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.36.0](service/mediaconnect/CHANGELOG.md#v1360-2024-12-13)
+  * **Feature**: AWS Elemental MediaConnect Gateway now supports Source Specific Multicast (SSM) for ingress bridges. This enables you to specify a source IP address in addition to a multicast IP when creating or updating an ingress bridge source.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.32.2](service/networkmanager/CHANGELOG.md#v1322-2024-12-13)
+  * **Documentation**: There was a sentence fragment in UpdateDirectConnectGatewayAttachment that was causing customer confusion as to whether it's an incomplete sentence or if it was a typo. Removed the fragment.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.34.0](service/servicediscovery/CHANGELOG.md#v1340-2024-12-13)
+  * **Feature**: AWS Cloud Map now supports service-level attributes, allowing you to associate custom metadata directly with services. These attributes can be retrieved, updated, and deleted using the new GetServiceAttributes, UpdateServiceAttributes, and DeleteServiceAttributes API calls.
+
 # Release (2024-12-12)
 
 ## Module Highlights

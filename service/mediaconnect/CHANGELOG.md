@@ -1,3 +1,7 @@
+# v1.36.0 (2024-12-13)
+
+* **Feature**: AWS Elemental MediaConnect Gateway now supports Source Specific Multicast (SSM) for ingress bridges. This enables you to specify a source IP address in addition to a multicast IP when creating or updating an ingress bridge source.
+
 # v1.35.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions
