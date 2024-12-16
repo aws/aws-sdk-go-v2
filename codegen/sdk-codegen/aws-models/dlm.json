@@ -306,7 +306,7 @@
                 "Location": {
                     "target": "com.amazonaws.dlm#LocationValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> Specifies the destination for snapshots created by the policy. To create \n\t\t\tsnapshots in the same Region as the source resource, specify <code>CLOUD</code>. To create \n\t\t\tsnapshots on the same Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. \n\t\t\tIf you omit this parameter, <code>CLOUD</code> is used by default.</p>\n         <p>If the policy targets resources in an Amazon Web Services Region, then you must create \n\t\t\tsnapshots in the same Region as the source resource. If the policy targets resources on an \n\t\t\tOutpost, then you can create snapshots on the same Outpost as the source resource, or in \n\t\t\tthe Region of that Outpost.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot policies only]</b> Specifies the destination for snapshots created by the policy. The \n\t\t\tallowed destinations depend on the location of the targeted resources.</p>\n         <ul>\n            <li>\n               <p>If the policy targets resources in a Region, then you must create snapshots \n\t\t\t\t\tin the same Region as the source resource.</p>\n            </li>\n            <li>\n               <p>If the policy targets resources in a Local Zone, you can create snapshots in \n\t\t\t\t\tthe same Local Zone or in its parent Region.</p>\n            </li>\n            <li>\n               <p>If the policy targets resources on an Outpost, then you can create snapshots \n\t\t\t\t\ton the same Outpost or in its parent Region.</p>\n            </li>\n         </ul>\n         <p>Specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>To create snapshots in the same Region as the source resource, specify \n\t\t\t\t\t<code>CLOUD</code>.</p>\n            </li>\n            <li>\n               <p>To create snapshots in the same Local Zone as the source resource, specify \n\t\t\t\t\t<code>LOCAL_ZONE</code>.</p>\n            </li>\n            <li>\n               <p>To create snapshots on the same Outpost as the source resource, specify \n\t\t\t\t\t<code>OUTPOST_LOCAL</code>.</p>\n            </li>\n         </ul>\n         <p>Default: <code>CLOUD</code>\n         </p>"
                     }
                 },
                 "Interval": {
@@ -330,7 +330,7 @@
                 "CronExpression": {
                     "target": "com.amazonaws.dlm#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1\n\t\t\tyear. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron\n\t\t\t\texpressions</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1\n\t\t\tyear. For more information, see the <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cron-expressions.html\">Cron expressions reference</a> in \n\t\t\tthe <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 },
                 "Scripts": {
@@ -1204,12 +1204,12 @@
                 "DefaultPolicy": {
                     "target": "com.amazonaws.dlm#DefaultPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Default policies only]</b> The type of default policy. Values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VOLUME</code> - Default policy for EBS snapshots</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE</code> - Default policy for EBS-backed AMIs</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates whether the policy is a default lifecycle policy or a custom \n\t\t\tlifecycle policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>true</code> - the policy is a default policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>false</code> - the policy is a custom policy.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Custom policies only]</b> Detailed information about a snapshot, AMI, or event-based lifecycle policy.</p>"
+                "smithy.api#documentation": "<p>Information about a lifecycle policy.</p>"
             }
         },
         "com.amazonaws.dlm#LifecyclePolicySummary": {
@@ -1356,6 +1356,12 @@
                     "traits": {
                         "smithy.api#enumValue": "OUTPOST_LOCAL"
                     }
+                },
+                "LOCAL_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCAL_ZONE"
+                    }
                 }
             }
         },
@@ -1423,7 +1429,7 @@
                 "PolicyType": {
                     "target": "com.amazonaws.dlm#PolicyTypeValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Custom policies only]</b> The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> \n\t\t\tto create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p>\n         <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of policy. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> \n\t\t\tto create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p>\n         <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
                     }
                 },
                 "ResourceTypes": {
@@ -1435,7 +1441,7 @@
                 "ResourceLocations": {
                     "target": "com.amazonaws.dlm#ResourceLocationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> The location of the resources to backup. If the source resources are located in an \n\t\t\tAmazon Web Services Region, specify <code>CLOUD</code>. If the source resources are located on an Outpost \n\t\t\tin your account, specify <code>OUTPOST</code>.</p>\n         <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources \n\t\t\t\tof the specified type with matching target tags across all of the Outposts in your account.</p>"
+                        "smithy.api#documentation": "<p>\n            <b>[Custom snapshot and AMI policies only]</b> The location of the resources to backup.</p>\n         <ul>\n            <li>\n               <p>If the source resources are located in a Region, specify <code>CLOUD</code>. In this case, \n\t\t\t\t\tthe policy targets all resources of the specified type with matching target tags across all \n\t\t\t\t\tAvailability Zones in the Region.</p>\n            </li>\n            <li>\n               <p>\n                  <b>[Custom snapshot policies only]</b> If the source resources are located in a Local Zone, specify <code>LOCAL_ZONE</code>. \n\t\t\t\t\tIn this case, the policy targets all resources of the specified type with matching target \n\t\t\t\t\ttags across all Local Zones in the Region.</p>\n            </li>\n            <li>\n               <p>If the source resources are located on an Outpost in your account, specify <code>OUTPOST</code>. \n\t\t\t\t\tIn this case, the policy targets all resources of the specified type with matching target \n\t\t\t\t\ttags across all of the Outposts in your account.</p>\n            </li>\n         </ul>\n         <p></p>"
                     }
                 },
                 "TargetTags": {
@@ -1602,6 +1608,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OUTPOST"
+                    }
+                },
+                "LOCAL_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCAL_ZONE"
                     }
                 }
             }
@@ -1800,7 +1812,7 @@
                 "CrossRegionCopyRules": {
                     "target": "com.amazonaws.dlm#CrossRegionCopyRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a rule for copying snapshots or AMIs across regions.</p>\n         <note>\n            <p>You can't specify cross-Region copy rules for policies that create snapshots on an Outpost. \n\t\t\tIf the policy creates snapshots in a Region, then snapshots can be copied to up to three \n\t\t\tRegions or Outposts.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a rule for copying snapshots or AMIs across Regions.</p>\n         <note>\n            <p>You can't specify cross-Region copy rules for policies that create snapshots on an \n\t\t\t\tOutpost or in a Local Zone. If the policy creates snapshots in a Region, then snapshots \n\t\t\t\tcan be copied to up to three Regions or Outposts.</p>\n         </note>"
                     }
                 },
                 "ShareRules": {

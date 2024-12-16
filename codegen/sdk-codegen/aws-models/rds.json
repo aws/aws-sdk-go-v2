@@ -2874,6 +2874,12 @@
                         "smithy.api#enumValue": "MYSQL_NATIVE_PASSWORD"
                     }
                 },
+                "MYSQL_CACHING_SHA2_PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MYSQL_CACHING_SHA2_PASSWORD"
+                    }
+                },
                 "POSTGRES_SCRAM_SHA_256": {
                     "target": "smithy.api#Unit",
                     "traits": {

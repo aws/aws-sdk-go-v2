@@ -85,7 +85,7 @@
                     "name": "cloud9"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Cloud9</fullname>\n         <p>Cloud9 is a collection of tools that you can use to code, build, run, test, debug, and\n      release software in the cloud.</p>\n         <p>For more information about Cloud9, see the <a href=\"https://docs.aws.amazon.com/cloud9/latest/user-guide\">Cloud9 User Guide</a>.</p>\n         <p>Cloud9 supports these operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateEnvironmentEC2</code>: Creates an Cloud9 development environment, launches\n          an Amazon EC2 instance, and then connects from the instance to the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateEnvironmentMembership</code>: Adds an environment member to an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteEnvironment</code>: Deletes an environment. If an Amazon EC2 instance is\n          connected to the environment, also terminates the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteEnvironmentMembership</code>: Deletes an environment member from an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironmentMemberships</code>: Gets information about environment\n          members for an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironments</code>: Gets information about environments.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironmentStatus</code>: Gets status information for an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListEnvironments</code>: Gets a list of environment identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListTagsForResource</code>: Gets the tags for an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TagResource</code>: Adds tags to an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UntagResource</code>: Removes tags from an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateEnvironment</code>: Changes the settings of an existing\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateEnvironmentMembership</code>: Changes the settings of an existing\n          environment member for an environment.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>Cloud9</fullname>\n         <p>Cloud9 is a collection of tools that you can use to code, build, run, test, debug, and\n      release software in the cloud.</p>\n         <p>For more information about Cloud9, see the <a href=\"https://docs.aws.amazon.com/cloud9/latest/user-guide\">Cloud9 User Guide</a>.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>\n         <p>Cloud9 supports these operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateEnvironmentEC2</code>: Creates an Cloud9 development environment, launches\n          an Amazon EC2 instance, and then connects from the instance to the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateEnvironmentMembership</code>: Adds an environment member to an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteEnvironment</code>: Deletes an environment. If an Amazon EC2 instance is\n          connected to the environment, also terminates the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteEnvironmentMembership</code>: Deletes an environment member from an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironmentMemberships</code>: Gets information about environment\n          members for an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironments</code>: Gets information about environments.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironmentStatus</code>: Gets status information for an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListEnvironments</code>: Gets a list of environment identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListTagsForResource</code>: Gets the tags for an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TagResource</code>: Adds tags to an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UntagResource</code>: Removes tags from an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateEnvironment</code>: Changes the settings of an existing\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateEnvironmentMembership</code>: Changes the settings of an existing\n          environment member for an environment.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Cloud9",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1116,7 +1116,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and\n      then connects from the instance to the environment.</p>",
+                "smithy.api#documentation": "<p>Creates an Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and\n      then connects from the instance to the environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "CreateEnvironmentEC2",
@@ -1176,7 +1176,7 @@
                 "imageId": {
                     "target": "com.amazonaws.cloud9#ImageId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance.\n      To choose an AMI for the instance, you must specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM)\n      path.</p>\n         <p>From December 04, 2023, you will be required to include the <code>imageId</code> parameter\n      for the <code>CreateEnvironmentEC2</code> action. This change will be reflected across all\n      direct methods of communicating with the API, such as Amazon Web Services SDK, Amazon Web Services CLI and Amazon Web Services\n      CloudFormation. This change will only affect direct API consumers, and not Cloud9 console\n      users.</p>\n         <p>We recommend using Amazon Linux 2023 as the AMI to create your environment as it is fully\n      supported. </p>\n         <p>Since Ubuntu 18.04 has ended standard support as of May 31, 2023, we recommend you choose Ubuntu 22.04.</p>\n         <p>\n            <b>AMI aliases </b>\n         </p>\n         <ul>\n            <li>\n               <p>Amazon Linux 2: <code>amazonlinux-2-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Linux 2023 (recommended): <code>amazonlinux-2023-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 18.04: <code>ubuntu-18.04-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 22.04:  <code>ubuntu-22.04-x86_64</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>SSM paths</b>\n         </p>\n         <ul>\n            <li>\n               <p>Amazon Linux 2:\n          <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Linux 2023 (recommended): <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2023-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 18.04:\n          <code>resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 22.04:\n        <code>resolve:ssm:/aws/service/cloud9/amis/ubuntu-22.04-x86_64</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance.\n      To choose an AMI for the instance, you must specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM)\n      path.</p>\n         <p></p>\n         <p>We recommend using Amazon Linux 2023 as the AMI to create your environment as it is fully\n      supported.</p>\n         <p>From December 16, 2024, Ubuntu 18.04 will be removed from the list of available\n        <code>imageIds</code> for Cloud9. This change is necessary as Ubuntu 18.04 has ended standard\n      support on May 31, 2023. This change will only affect direct API consumers, and not Cloud9\n      console users.</p>\n         <p>Since Ubuntu 18.04 has ended standard support as of May 31, 2023, we recommend you choose\n      Ubuntu 22.04.</p>\n         <p>\n            <b>AMI aliases </b>\n         </p>\n         <ul>\n            <li>\n               <p>Amazon Linux 2: <code>amazonlinux-2-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Linux 2023 (recommended): <code>amazonlinux-2023-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 18.04: <code>ubuntu-18.04-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 22.04: <code>ubuntu-22.04-x86_64</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>SSM paths</b>\n         </p>\n         <ul>\n            <li>\n               <p>Amazon Linux 2:\n          <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Linux 2023 (recommended):\n            <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2023-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 18.04:\n          <code>resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 22.04:\n          <code>resolve:ssm:/aws/service/cloud9/amis/ubuntu-22.04-x86_64</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1261,7 +1261,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an environment member to an Cloud9 development environment.</p>",
+                "smithy.api#documentation": "<p>Adds an environment member to an Cloud9 development environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "CreateEnvironmentMembership",
@@ -1360,7 +1360,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Cloud9 development environment. If an Amazon EC2 instance is connected to the\n      environment, also terminates the instance.</p>",
+                "smithy.api#documentation": "<p>Deletes an Cloud9 development environment. If an Amazon EC2 instance is connected to the\n      environment, also terminates the instance.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "DeleteEnvironment",
@@ -1406,7 +1406,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an environment member from a development environment.</p>",
+                "smithy.api#documentation": "<p>Deletes an environment member from a development environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "DeleteEnvironmentMembership",
@@ -1504,31 +1504,8 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about environment members for an Cloud9 development environment.</p>",
+                "smithy.api#documentation": "<p>Gets information about environment members for an Cloud9 development environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
-                    {
-                        "title": "DescribeEnvironmentMemberships1",
-                        "documentation": "The following example gets information about all of the environment members for the specified development environment.",
-                        "input": {
-                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX"
-                        },
-                        "output": {
-                            "memberships": [
-                                {
-                                    "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
-                                    "permissions": "read-write",
-                                    "userArn": "arn:aws:iam::123456789012:user/AnotherDemoUser",
-                                    "userId": "AIDAJ3BA6O2FMJWCWXHEX"
-                                },
-                                {
-                                    "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
-                                    "permissions": "owner",
-                                    "userArn": "arn:aws:iam::123456789012:user/MyDemoUser",
-                                    "userId": "AIDAJNUEDQAQWFELJDLEX"
-                                }
-                            ]
-                        }
-                    },
                     {
                         "title": "DescribeEnvironmentMemberships2",
                         "documentation": "The following example gets information about the owner of the specified development environment.",
@@ -1567,6 +1544,29 @@
                                 {
                                     "environmentId": "12bfc3cd537f41cb9776f8af5525c9EX",
                                     "lastAccess": "2018-01-19T11:39:19Z",
+                                    "permissions": "owner",
+                                    "userArn": "arn:aws:iam::123456789012:user/MyDemoUser",
+                                    "userId": "AIDAJNUEDQAQWFELJDLEX"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "DescribeEnvironmentMemberships1",
+                        "documentation": "The following example gets information about all of the environment members for the specified development environment.",
+                        "input": {
+                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX"
+                        },
+                        "output": {
+                            "memberships": [
+                                {
+                                    "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
+                                    "permissions": "read-write",
+                                    "userArn": "arn:aws:iam::123456789012:user/AnotherDemoUser",
+                                    "userId": "AIDAJ3BA6O2FMJWCWXHEX"
+                                },
+                                {
+                                    "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
                                     "permissions": "owner",
                                     "userArn": "arn:aws:iam::123456789012:user/MyDemoUser",
                                     "userId": "AIDAJNUEDQAQWFELJDLEX"
@@ -1672,7 +1672,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets status information for an Cloud9 development environment.</p>",
+                "smithy.api#documentation": "<p>Gets status information for an Cloud9 development environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "DescribeEnvironmentStatus",
@@ -1757,7 +1757,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about Cloud9 development environments.</p>",
+                "smithy.api#documentation": "<p>Gets information about Cloud9 development environments.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "DescribeEnvironments",
@@ -2228,7 +2228,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of Cloud9 development environment identifiers.</p>",
+                "smithy.api#documentation": "<p>Gets a list of Cloud9 development environment identifiers.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "ListEnvironments",
@@ -2308,7 +2308,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of the tags associated with an Cloud9 development environment.</p>"
+                "smithy.api#documentation": "<p>Gets a list of the tags associated with an Cloud9 development environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>"
             }
         },
         "com.amazonaws.cloud9#ListTagsForResourceRequest": {
@@ -2602,7 +2602,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds tags to an Cloud9 development environment.</p>\n         <important>\n            <p>Tags that you add to an Cloud9 environment by using this method will NOT be\n        automatically propagated to underlying resources.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Adds tags to an Cloud9 development environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>\n         <important>\n            <p>Tags that you add to an Cloud9 environment by using this method will NOT be\n        automatically propagated to underlying resources.</p>\n         </important>"
             }
         },
         "com.amazonaws.cloud9#TagResourceRequest": {
@@ -2691,7 +2691,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes tags from an Cloud9 development environment.</p>"
+                "smithy.api#documentation": "<p>Removes tags from an Cloud9 development environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>"
             }
         },
         "com.amazonaws.cloud9#UntagResourceRequest": {
@@ -2755,7 +2755,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the settings of an existing Cloud9 development environment.</p>",
+                "smithy.api#documentation": "<p>Changes the settings of an existing Cloud9 development environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "UpdateEnvironment",
@@ -2803,7 +2803,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the settings of an existing environment member for an Cloud9 development\n      environment.</p>",
+                "smithy.api#documentation": "<p>Changes the settings of an existing environment member for an Cloud9 development\n      environment.</p>\n         <important>\n            <p>Cloud9 is no longer available to new customers. Existing customers of \n        Cloud9 can continue to use the service as normal. \n        <a href=\"http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/\">Learn more\"</a>\n            </p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "UpdateEnvironmentMembership",
