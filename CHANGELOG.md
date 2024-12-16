@@ -1,3 +1,21 @@
+# Release (2024-12-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dsql/auth`: [v1.0.0](feature/dsql/auth/CHANGELOG.md#v100-2024-12-16)
+  * **Release**: Add Aurora DSQL Auth Token Generator
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.28.8](service/cloud9/CHANGELOG.md#v1288-2024-12-16)
+  * **Documentation**: Added information about Ubuntu 18.04 will be removed from the available imageIds for Cloud9 because Ubuntu 18.04 has ended standard support on May 31, 2023.
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.29.0](service/dlm/CHANGELOG.md#v1290-2024-12-16)
+  * **Feature**: This release adds support for Local Zones in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.198.0](service/ec2/CHANGELOG.md#v11980-2024-12-16)
+  * **Feature**: This release adds support for EBS local snapshots in AWS Dedicated Local Zones, which allows you to store snapshots of EBS volumes locally in Dedicated Local Zones.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.36.0](service/greengrassv2/CHANGELOG.md#v1360-2024-12-16)
+  * **Feature**: Add support for runtime in GetCoreDevice and ListCoreDevices APIs.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.64.0](service/medialive/CHANGELOG.md#v1640-2024-12-16)
+  * **Feature**: AWS Elemental MediaLive adds three new features: MediaPackage v2 endpoint support for live stream delivery, KLV metadata passthrough in CMAF Ingest output groups, and Metadata Name Modifier in CMAF Ingest output groups for customizing metadata track names in output streams.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.93.0](service/rds/CHANGELOG.md#v1930-2024-12-16)
+  * **Feature**: This release adds support for the "MYSQL_CACHING_SHA2_PASSWORD" enum value for RDS Proxy ClientPasswordAuthType.
+
 # Release (2024-12-13)
 
 ## Module Highlights

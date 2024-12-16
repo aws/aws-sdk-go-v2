@@ -1,3 +1,7 @@
+# v1.29.0 (2024-12-16)
+
+* **Feature**: This release adds support for Local Zones in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.
+
 # v1.28.10 (2024-12-13)
 
 * No change notes available for this release.

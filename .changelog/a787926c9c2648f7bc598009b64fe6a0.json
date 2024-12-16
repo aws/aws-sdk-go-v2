@@ -1,8 +1,0 @@
-{
-    "id": "a787926c-9c26-48f7-bc59-8009b64fe6a0",
-    "type": "feature",
-    "description": "This release adds support for EBS local snapshots in AWS Dedicated Local Zones, which allows you to store snapshots of EBS volumes locally in Dedicated Local Zones.",
-    "modules": [
-        "service/ec2"
-    ]
-}
