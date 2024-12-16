@@ -29906,6 +29906,24 @@ func awsRestjson1_deserializeDocumentCmafIngestGroupSettings(v **types.CmafInges
 				return err
 			}
 
+		case "klvBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafKLVBehavior to be of type string, got %T instead", value)
+				}
+				sv.KlvBehavior = types.CmafKLVBehavior(jtv)
+			}
+
+		case "klvNameModifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax100 to be of type string, got %T instead", value)
+				}
+				sv.KlvNameModifier = ptr.String(jtv)
+			}
+
 		case "nielsenId3Behavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -29913,6 +29931,24 @@ func awsRestjson1_deserializeDocumentCmafIngestGroupSettings(v **types.CmafInges
 					return fmt.Errorf("expected CmafNielsenId3Behavior to be of type string, got %T instead", value)
 				}
 				sv.NielsenId3Behavior = types.CmafNielsenId3Behavior(jtv)
+			}
+
+		case "nielsenId3NameModifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax100 to be of type string, got %T instead", value)
+				}
+				sv.NielsenId3NameModifier = ptr.String(jtv)
+			}
+
+		case "scte35NameModifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax100 to be of type string, got %T instead", value)
+				}
+				sv.Scte35NameModifier = ptr.String(jtv)
 			}
 
 		case "scte35Type":
@@ -38549,6 +38585,15 @@ func awsRestjson1_deserializeDocumentMediaPackageOutputDestinationSettings(v **t
 
 	for key, value := range shape {
 		switch key {
+		case "channelGroup":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
+				}
+				sv.ChannelGroup = ptr.String(jtv)
+			}
+
 		case "channelId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -38556,6 +38601,15 @@ func awsRestjson1_deserializeDocumentMediaPackageOutputDestinationSettings(v **t
 					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
 				}
 				sv.ChannelId = ptr.String(jtv)
+			}
+
+		case "channelName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
+				}
+				sv.ChannelName = ptr.String(jtv)
 			}
 
 		default:

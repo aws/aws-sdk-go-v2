@@ -1,0 +1,8 @@
+{
+    "id": "3869f407-9000-4a2c-9092-eca750a92802",
+    "type": "feature",
+    "description": "Add support for runtime in GetCoreDevice and ListCoreDevices APIs.",
+    "modules": [
+        "service/greengrassv2"
+    ]
+}

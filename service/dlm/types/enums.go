@@ -138,6 +138,7 @@ type LocationValues string
 const (
 	LocationValuesCloud        LocationValues = "CLOUD"
 	LocationValuesOutpostLocal LocationValues = "OUTPOST_LOCAL"
+	LocationValuesLocalZone    LocationValues = "LOCAL_ZONE"
 )
 
 // Values returns all known values for LocationValues. Note that this can be
@@ -148,6 +149,7 @@ func (LocationValues) Values() []LocationValues {
 	return []LocationValues{
 		"CLOUD",
 		"OUTPOST_LOCAL",
+		"LOCAL_ZONE",
 	}
 }
 
@@ -195,8 +197,9 @@ type ResourceLocationValues string
 
 // Enum values for ResourceLocationValues
 const (
-	ResourceLocationValuesCloud   ResourceLocationValues = "CLOUD"
-	ResourceLocationValuesOutpost ResourceLocationValues = "OUTPOST"
+	ResourceLocationValuesCloud     ResourceLocationValues = "CLOUD"
+	ResourceLocationValuesOutpost   ResourceLocationValues = "OUTPOST"
+	ResourceLocationValuesLocalZone ResourceLocationValues = "LOCAL_ZONE"
 )
 
 // Values returns all known values for ResourceLocationValues. Note that this can
@@ -207,6 +210,7 @@ func (ResourceLocationValues) Values() []ResourceLocationValues {
 	return []ResourceLocationValues{
 		"CLOUD",
 		"OUTPOST",
+		"LOCAL_ZONE",
 	}
 }
 

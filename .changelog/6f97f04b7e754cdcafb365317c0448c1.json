@@ -1,0 +1,8 @@
+{
+    "id": "6f97f04b-7e75-4cdc-afb3-65317c0448c1",
+    "type": "feature",
+    "description": "This release adds support for the \"MYSQL_CACHING_SHA2_PASSWORD\" enum value for RDS Proxy ClientPasswordAuthType.",
+    "modules": [
+        "service/rds"
+    ]
+}

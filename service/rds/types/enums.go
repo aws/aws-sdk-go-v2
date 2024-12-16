@@ -145,10 +145,11 @@ type ClientPasswordAuthType string
 
 // Enum values for ClientPasswordAuthType
 const (
-	ClientPasswordAuthTypeMysqlNativePassword     ClientPasswordAuthType = "MYSQL_NATIVE_PASSWORD"
-	ClientPasswordAuthTypePostgresScramSha256     ClientPasswordAuthType = "POSTGRES_SCRAM_SHA_256"
-	ClientPasswordAuthTypePostgresMd5             ClientPasswordAuthType = "POSTGRES_MD5"
-	ClientPasswordAuthTypeSqlServerAuthentication ClientPasswordAuthType = "SQL_SERVER_AUTHENTICATION"
+	ClientPasswordAuthTypeMysqlNativePassword      ClientPasswordAuthType = "MYSQL_NATIVE_PASSWORD"
+	ClientPasswordAuthTypeMysqlCachingSha2Password ClientPasswordAuthType = "MYSQL_CACHING_SHA2_PASSWORD"
+	ClientPasswordAuthTypePostgresScramSha256      ClientPasswordAuthType = "POSTGRES_SCRAM_SHA_256"
+	ClientPasswordAuthTypePostgresMd5              ClientPasswordAuthType = "POSTGRES_MD5"
+	ClientPasswordAuthTypeSqlServerAuthentication  ClientPasswordAuthType = "SQL_SERVER_AUTHENTICATION"
 )
 
 // Values returns all known values for ClientPasswordAuthType. Note that this can
@@ -158,6 +159,7 @@ const (
 func (ClientPasswordAuthType) Values() []ClientPasswordAuthType {
 	return []ClientPasswordAuthType{
 		"MYSQL_NATIVE_PASSWORD",
+		"MYSQL_CACHING_SHA2_PASSWORD",
 		"POSTGRES_SCRAM_SHA_256",
 		"POSTGRES_MD5",
 		"SQL_SERVER_AUTHENTICATION",

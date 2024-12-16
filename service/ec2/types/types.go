@@ -16778,6 +16778,10 @@ type SlotStartTimeRangeRequest struct {
 // Describes a snapshot.
 type Snapshot struct {
 
+	// The Availability Zone or Local Zone of the snapshot. For example, us-west-1a
+	// (Availability Zone) or us-west-2-lax-1a (Local Zone).
+	AvailabilityZone *string
+
 	// Only for snapshot copies created with time-based snapshot copy operations.
 	//
 	// The completion duration requested for the time-based snapshot copy operation.
@@ -16936,6 +16940,10 @@ type SnapshotDiskContainer struct {
 
 // Information about a snapshot.
 type SnapshotInfo struct {
+
+	// The Availability Zone or Local Zone of the snapshots. For example, us-west-1a
+	// (Availability Zone) or us-west-2-lax-1a (Local Zone).
+	AvailabilityZone *string
 
 	// Description specified by the CreateSnapshotRequest that has been applied to all
 	// snapshots.

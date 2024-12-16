@@ -66,9 +66,10 @@ type ArchiveRule struct {
 type CreateRule struct {
 
 	// The schedule, as a Cron expression. The schedule interval must be between 1
-	// hour and 1 year. For more information, see [Cron expressions]in the Amazon CloudWatch User Guide.
+	// hour and 1 year. For more information, see the [Cron expressions reference]in the Amazon EventBridge User
+	// Guide.
 	//
-	// [Cron expressions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+	// [Cron expressions reference]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cron-expressions.html
 	CronExpression *string
 
 	// The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12,
@@ -79,15 +80,30 @@ type CreateRule struct {
 	IntervalUnit IntervalUnitValues
 
 	//  [Custom snapshot policies only] Specifies the destination for snapshots
-	// created by the policy. To create snapshots in the same Region as the source
-	// resource, specify CLOUD . To create snapshots on the same Outpost as the source
-	// resource, specify OUTPOST_LOCAL . If you omit this parameter, CLOUD is used by
-	// default.
+	// created by the policy. The allowed destinations depend on the location of the
+	// targeted resources.
 	//
-	// If the policy targets resources in an Amazon Web Services Region, then you must
-	// create snapshots in the same Region as the source resource. If the policy
-	// targets resources on an Outpost, then you can create snapshots on the same
-	// Outpost as the source resource, or in the Region of that Outpost.
+	//   - If the policy targets resources in a Region, then you must create snapshots
+	//   in the same Region as the source resource.
+	//
+	//   - If the policy targets resources in a Local Zone, you can create snapshots
+	//   in the same Local Zone or in its parent Region.
+	//
+	//   - If the policy targets resources on an Outpost, then you can create
+	//   snapshots on the same Outpost or in its parent Region.
+	//
+	// Specify one of the following values:
+	//
+	//   - To create snapshots in the same Region as the source resource, specify CLOUD
+	//   .
+	//
+	//   - To create snapshots in the same Local Zone as the source resource, specify
+	//   LOCAL_ZONE .
+	//
+	//   - To create snapshots on the same Outpost as the source resource, specify
+	//   OUTPOST_LOCAL .
+	//
+	// Default: CLOUD
 	Location LocationValues
 
 	//  [Custom snapshot policies that target instances only] Specifies pre and/or
@@ -376,9 +392,7 @@ type FastRestoreRule struct {
 	noSmithyDocumentSerde
 }
 
-//	[Custom policies only] Detailed information about a snapshot, AMI, or
-//
-// event-based lifecycle policy.
+// Information about a lifecycle policy.
 type LifecyclePolicy struct {
 
 	// The local date and time when the lifecycle policy was created.
@@ -387,11 +401,12 @@ type LifecyclePolicy struct {
 	// The local date and time when the lifecycle policy was last modified.
 	DateModified *time.Time
 
-	//  [Default policies only] The type of default policy. Values include:
+	// Indicates whether the policy is a default lifecycle policy or a custom
+	// lifecycle policy.
 	//
-	//   - VOLUME - Default policy for EBS snapshots
+	//   - true - the policy is a default policy.
 	//
-	//   - INSTANCE - Default policy for EBS-backed AMIs
+	//   - false - the policy is a custom policy.
 	DefaultPolicy *bool
 
 	// The description of the lifecycle policy.
@@ -568,24 +583,31 @@ type PolicyDetails struct {
 	//   - STANDARD To create a custom policy.
 	PolicyLanguage PolicyLanguageValues
 
-	//  [Custom policies only] The valid target resource types and actions a policy
-	// can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that
-	// manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to
-	// create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify
-	// EVENT_BASED_POLICY  to create an event-based policy that performs specific
-	// actions when a defined event occurs in your Amazon Web Services account.
+	// The type of policy. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle
+	// policy that manages the lifecycle of Amazon EBS snapshots. Specify
+	// IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of
+	// EBS-backed AMIs. Specify EVENT_BASED_POLICY  to create an event-based policy
+	// that performs specific actions when a defined event occurs in your Amazon Web
+	// Services account.
 	//
 	// The default is EBS_SNAPSHOT_MANAGEMENT .
 	PolicyType PolicyTypeValues
 
 	//  [Custom snapshot and AMI policies only] The location of the resources to
-	// backup. If the source resources are located in an Amazon Web Services Region,
-	// specify CLOUD . If the source resources are located on an Outpost in your
-	// account, specify OUTPOST .
+	// backup.
 	//
-	// If you specify OUTPOST , Amazon Data Lifecycle Manager backs up all resources of
-	// the specified type with matching target tags across all of the Outposts in your
-	// account.
+	//   - If the source resources are located in a Region, specify CLOUD . In this
+	//   case, the policy targets all resources of the specified type with matching
+	//   target tags across all Availability Zones in the Region.
+	//
+	//   - [Custom snapshot policies only] If the source resources are located in a
+	//   Local Zone, specify LOCAL_ZONE . In this case, the policy targets all
+	//   resources of the specified type with matching target tags across all Local Zones
+	//   in the Region.
+	//
+	//   - If the source resources are located on an Outpost in your account, specify
+	//   OUTPOST . In this case, the policy targets all resources of the specified type
+	//   with matching target tags across all of the Outposts in your account.
 	ResourceLocations []ResourceLocationValues
 
 	//  [Default policies only] Specify the type of default policy to create.
@@ -741,11 +763,11 @@ type Schedule struct {
 	// The creation rule.
 	CreateRule *CreateRule
 
-	// Specifies a rule for copying snapshots or AMIs across regions.
+	// Specifies a rule for copying snapshots or AMIs across Regions.
 	//
 	// You can't specify cross-Region copy rules for policies that create snapshots on
-	// an Outpost. If the policy creates snapshots in a Region, then snapshots can be
-	// copied to up to three Regions or Outposts.
+	// an Outpost or in a Local Zone. If the policy creates snapshots in a Region, then
+	// snapshots can be copied to up to three Regions or Outposts.
 	CrossRegionCopyRules []CrossRegionCopyRule
 
 	//  [Custom AMI policies only] The AMI deprecation rule for the schedule.
