@@ -1,8 +1,0 @@
-{
-    "id": "f3755521-f374-4199-bfd9-098e1085ca05",
-    "type": "feature",
-    "description": "Adds support for OriginReadTimeout and OriginKeepaliveTimeout to create CloudFront Distributions with VPC Origins.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

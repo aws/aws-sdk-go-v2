@@ -1,3 +1,28 @@
+# Release (2024-12-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.22.0](service/account/CHANGELOG.md#v1220-2024-12-17)
+  * **Feature**: Update endpoint configuration.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.40.0](service/backup/CHANGELOG.md#v1400-2024-12-17)
+  * **Feature**: Add Support for Backup Indexing
+* `github.com/aws/aws-sdk-go-v2/service/backupsearch`: [v1.0.0](service/backupsearch/CHANGELOG.md#v100-2024-12-17)
+  * **Release**: New AWS service client module
+  * **Feature**: Add support for searching backups
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.49.0](service/batch/CHANGELOG.md#v1490-2024-12-17)
+  * **Feature**: This feature allows AWS Batch on Amazon EKS to support configuration of Pod Annotations, overriding Namespace on which the Batch job's Pod runs on, and allows Subpath and Persistent Volume claim to be set for AWS Batch on Amazon EKS jobs.
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.11.0](service/cleanroomsml/CHANGELOG.md#v1110-2024-12-17)
+  * **Feature**: Add support for SQL compute configuration for StartAudienceGenerationJob API.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.44.0](service/cloudfront/CHANGELOG.md#v1440-2024-12-17)
+  * **Feature**: Adds support for OriginReadTimeout and OriginKeepaliveTimeout to create CloudFront Distributions with VPC Origins.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.38.0](service/codepipeline/CHANGELOG.md#v1380-2024-12-17)
+  * **Feature**: AWS CodePipeline V2 type pipelines now support Managed Compute Rule.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.53.0](service/ecs/CHANGELOG.md#v1530-2024-12-17)
+  * **Feature**: Added support for enableFaultInjection task definition parameter which can be used to enable Fault Injection feature on ECS tasks.
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.19.0](service/m2/CHANGELOG.md#v1190-2024-12-17)
+  * **Feature**: This release adds support for AWS Mainframe Modernization(M2) Service to allow specifying network type(ipv4, dual) for the environment instances. For dual network type, m2 environment applications will serve both IPv4 and IPv6 requests, whereas for ipv4 it will serve only IPv4 requests.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.31.0](service/synthetics/CHANGELOG.md#v1310-2024-12-17)
+  * **Feature**: Add support to toggle outbound IPv6 traffic on canaries connected to dualstack subnets.  This behavior can be controlled via the new Ipv6AllowedForDualStack parameter of the VpcConfig input object in CreateCanary and UpdateCanary APIs.
+
 # Release (2024-12-16)
 
 ## Module Highlights

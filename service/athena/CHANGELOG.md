@@ -1,3 +1,7 @@
+# v1.49.1 (2024-12-17)
+
+* No change notes available for this release.
+
 # v1.49.0 (2024-12-03.2)
 
 * **Feature**: Add FEDERATED type to CreateDataCatalog. This creates Athena Data Catalog, AWS Lambda connector, and AWS Glue connection. Create/DeleteDataCatalog returns DataCatalog. Add Status, ConnectionType, and Error to DataCatalog and DataCatalogSummary. Add DeleteCatalogOnly to delete Athena Catalog only.

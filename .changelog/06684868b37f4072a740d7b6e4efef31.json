@@ -1,8 +1,0 @@
-{
-    "id": "06684868-b37f-4072-a740-d7b6e4efef31",
-    "type": "feature",
-    "description": "This feature allows AWS Batch on Amazon EKS to support configuration of Pod Annotations, overriding Namespace on which the Batch job's Pod runs on, and allows Subpath and Persistent Volume claim to be set for AWS Batch on Amazon EKS jobs.",
-    "modules": [
-        "service/batch"
-    ]
-}

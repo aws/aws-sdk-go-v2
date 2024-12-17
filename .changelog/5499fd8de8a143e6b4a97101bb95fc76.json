@@ -1,8 +1,0 @@
-{
-    "id": "5499fd8d-e8a1-43e6-b4a9-7101bb95fc76",
-    "type": "feature",
-    "description": "Add support for searching backups",
-    "modules": [
-        "service/backupsearch"
-    ]
-}

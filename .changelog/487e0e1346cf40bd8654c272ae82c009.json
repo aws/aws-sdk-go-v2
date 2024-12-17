@@ -1,8 +1,0 @@
-{
-    "id": "487e0e13-46cf-40bd-8654-c272ae82c009",
-    "type": "feature",
-    "description": "Add Support for Backup Indexing",
-    "modules": [
-        "service/backup"
-    ]
-}

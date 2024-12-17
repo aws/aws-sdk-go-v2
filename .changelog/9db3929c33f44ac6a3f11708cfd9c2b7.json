@@ -1,8 +1,0 @@
-{
-    "id": "9db3929c-33f4-4ac6-a3f1-1708cfd9c2b7",
-    "type": "feature",
-    "description": "Add support to toggle outbound IPv6 traffic on canaries connected to dualstack subnets.  This behavior can be controlled via the new Ipv6AllowedForDualStack parameter of the VpcConfig input object in CreateCanary and UpdateCanary APIs.",
-    "modules": [
-        "service/synthetics"
-    ]
-}
