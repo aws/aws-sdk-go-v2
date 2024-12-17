@@ -1,0 +1,8 @@
+{
+    "id": "9f4d13f3-c61c-41b3-8c49-b7b80bcd2f95",
+    "type": "feature",
+    "description": "Added support for enableFaultInjection task definition parameter which can be used to enable Fault Injection feature on ECS tasks.",
+    "modules": [
+        "service/ecs"
+    ]
+}

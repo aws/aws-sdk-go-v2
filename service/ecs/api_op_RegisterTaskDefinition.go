@@ -107,6 +107,11 @@ type RegisterTaskDefinitionInput struct {
 	// This option requires Linux platform 1.4.0 or later.
 	Cpu *string
 
+	// Enables fault injection when you register your task definition and allows for
+	// fault injection requests to be accepted from the task's containers. The default
+	// value is false .
+	EnableFaultInjection *bool
+
 	// The amount of ephemeral storage to allocate for the task. This parameter is
 	// used to expand the total amount of ephemeral storage available, beyond the
 	// default amount, for tasks hosted on Fargate. For more information, see [Using data volumes in tasks]in the

@@ -63,6 +63,9 @@ type CreateEnvironmentInput struct {
 	// The identifier of a customer managed key.
 	KmsKeyId *string
 
+	// The network type required for the runtime environment.
+	NetworkType types.NetworkType
+
 	// Configures the maintenance window that you want for the runtime environment.
 	// The maintenance window must have the format ddd:hh24:mi-ddd:hh24:mi and must be
 	// less than 24 hours. The following two examples are valid maintenance windows:

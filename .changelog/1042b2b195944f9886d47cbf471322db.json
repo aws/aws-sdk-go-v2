@@ -1,0 +1,8 @@
+{
+    "id": "1042b2b1-9594-4f98-86d4-7cbf471322db",
+    "type": "feature",
+    "description": "AWS CodePipeline V2 type pipelines now support Managed Compute Rule.",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

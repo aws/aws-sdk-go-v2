@@ -4002,6 +4002,13 @@ func awsAwsjson11_serializeDocumentRuleDeclaration(v *types.RuleDeclaration, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Commands != nil {
+		ok := object.Key("commands")
+		if err := awsAwsjson11_serializeDocumentCommandList(v.Commands, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Configuration != nil {
 		ok := object.Key("configuration")
 		if err := awsAwsjson11_serializeDocumentRuleConfigurationMap(v.Configuration, ok); err != nil {

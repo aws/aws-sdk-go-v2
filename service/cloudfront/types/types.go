@@ -1424,9 +1424,9 @@ type CustomOriginConfig struct {
 	// origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the
 	// default (if you don't specify otherwise) is 5 seconds.
 	//
-	// For more information, see [Origin Keep-alive Timeout] in the Amazon CloudFront Developer Guide.
+	// For more information, see [Keep-alive timeout (custom origins only)] in the Amazon CloudFront Developer Guide.
 	//
-	// [Origin Keep-alive Timeout]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout
+	// [Keep-alive timeout (custom origins only)]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout
 	OriginKeepaliveTimeout *int32
 
 	// Specifies how long, in seconds, CloudFront waits for a response from the
@@ -1434,9 +1434,9 @@ type CustomOriginConfig struct {
 	// is 1 second, the maximum is 60 seconds, and the default (if you don't specify
 	// otherwise) is 30 seconds.
 	//
-	// For more information, see [Origin Response Timeout] in the Amazon CloudFront Developer Guide.
+	// For more information, see [Response timeout (custom origins only)] in the Amazon CloudFront Developer Guide.
 	//
-	// [Origin Response Timeout]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout
+	// [Response timeout (custom origins only)]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout
 	OriginReadTimeout *int32
 
 	// Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to
@@ -1816,14 +1816,18 @@ type DistributionConfig struct {
 	// [Customizing Error Responses]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
 	CustomErrorResponses *CustomErrorResponses
 
-	// The object that you want CloudFront to request from your origin (for example,
-	// index.html ) when a viewer requests the root URL for your distribution (
-	// https://www.example.com ) instead of an object in your distribution (
-	// https://www.example.com/product-description.html ). Specifying a default root
-	// object avoids exposing the contents of your distribution.
+	// When a viewer requests the root URL for your distribution, the default root
+	// object is the object that you want CloudFront to request from your origin. For
+	// example, if your root URL is https://www.example.com , you can specify
+	// CloudFront to return the index.html file as the default root object. You can
+	// specify a default root object so that viewers see a specific file or object,
+	// instead of another object in your distribution (for example,
+	// https://www.example.com/product-description.html ). A default root object avoids
+	// exposing the contents of your distribution.
 	//
-	// Specify only the object name, for example, index.html . Don't add a / before
-	// the object name.
+	// You can specify the object name or a path to the object name (for example,
+	// index.html or exampleFolderName/index.html ). Your string can't begin with a
+	// forward slash ( / ). Only specify the object name or the path to the object.
 	//
 	// If you don't want to specify a default root object when you create a
 	// distribution, include an empty DefaultRootObject element.
@@ -1834,10 +1838,10 @@ type DistributionConfig struct {
 	// To replace the default root object, update the distribution configuration and
 	// specify the new object.
 	//
-	// For more information about the default root object, see [Creating a Default Root Object] in the Amazon
+	// For more information about the default root object, see [Specify a default root object] in the Amazon
 	// CloudFront Developer Guide.
 	//
-	// [Creating a Default Root Object]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html
+	// [Specify a default root object]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html
 	DefaultRootObject *string
 
 	// (Optional) Specify the HTTP version(s) that you want viewers to use to
@@ -5807,6 +5811,25 @@ type VpcOriginConfig struct {
 	//
 	// This member is required.
 	VpcOriginId *string
+
+	// Specifies how long, in seconds, CloudFront persists its connection to the
+	// origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the
+	// default (if you don't specify otherwise) is 5 seconds.
+	//
+	// For more information, see [Keep-alive timeout (custom origins only)] in the Amazon CloudFront Developer Guide.
+	//
+	// [Keep-alive timeout (custom origins only)]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout
+	OriginKeepaliveTimeout *int32
+
+	// Specifies how long, in seconds, CloudFront waits for a response from the
+	// origin. This is also known as the origin response timeout. The minimum timeout
+	// is 1 second, the maximum is 60 seconds, and the default (if you don't specify
+	// otherwise) is 30 seconds.
+	//
+	// For more information, see [Response timeout (custom origins only)] in the Amazon CloudFront Developer Guide.
+	//
+	// [Response timeout (custom origins only)]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout
+	OriginReadTimeout *int32
 
 	noSmithyDocumentSerde
 }

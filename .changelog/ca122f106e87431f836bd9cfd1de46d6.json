@@ -1,0 +1,8 @@
+{
+    "id": "ca122f10-6e87-431f-836b-d9cfd1de46d6",
+    "type": "feature",
+    "description": "Add support for SQL compute configuration for StartAudienceGenerationJob API.",
+    "modules": [
+        "service/cleanroomsml"
+    ]
+}

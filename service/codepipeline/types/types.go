@@ -520,6 +520,8 @@ type ActionTypeId struct {
 	//
 	//   - Approval
 	//
+	//   - Compute
+	//
 	// This member is required.
 	Category ActionCategory
 
@@ -878,7 +880,11 @@ type BlockerDeclaration struct {
 }
 
 // The condition for the stage. A condition is made up of the rules and the result
-// for the condition.
+// for the condition. For more information about conditions, see [Stage conditions]. For more
+// information about rules, see the [CodePipeline rule reference].
+//
+// [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+// [CodePipeline rule reference]: https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html
 type Condition struct {
 
 	// The action to be done when the condition is met. For example, rolling back an
@@ -1847,10 +1853,14 @@ type RuleConfigurationProperty struct {
 // Represents information about the rule to be created for an associated
 // condition. An example would be creating a new rule for an entry condition, such
 // as a rule that checks for a test result before allowing the run to enter the
-// deployment stage.
+// deployment stage. For more information about conditions, see [Stage conditions]. For more
+// information about rules, see the [CodePipeline rule reference].
+//
+// [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+// [CodePipeline rule reference]: https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html
 type RuleDeclaration struct {
 
-	// The name of the rule that is created for the condition, such as CheckAllResults.
+	// The name of the rule that is created for the condition, such as VariableCheck .
 	//
 	// This member is required.
 	Name *string
@@ -1860,6 +1870,13 @@ type RuleDeclaration struct {
 	//
 	// This member is required.
 	RuleTypeId *RuleTypeId
+
+	// The shell commands to run with your commands rule in CodePipeline. All commands
+	// are supported except multi-line formats. While CodeBuild logs and permissions
+	// are used, you do not need to create any resources in CodeBuild.
+	//
+	// Using compute time for this action will incur separate charges in CodeBuild.
+	Commands []string
 
 	// The action configuration fields for the rule.
 	Configuration map[string]string

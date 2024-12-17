@@ -50745,6 +50745,40 @@ func awsRestxml_deserializeDocumentVpcOriginConfig(v **types.VpcOriginConfig, de
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("OriginKeepaliveTimeout", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.OriginKeepaliveTimeout = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("OriginReadTimeout", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.OriginReadTimeout = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("VpcOriginId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

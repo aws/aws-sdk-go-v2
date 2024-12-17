@@ -1,0 +1,8 @@
+{
+    "id": "73a69719-27f2-4ef4-8d7f-e23e0bb1c9f6",
+    "type": "feature",
+    "description": "Update endpoint configuration.",
+    "modules": [
+        "service/account"
+    ]
+}

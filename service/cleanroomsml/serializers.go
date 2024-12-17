@@ -5088,6 +5088,13 @@ func awsRestjson1_serializeDocumentAudienceGenerationJobDataSource(v *types.Audi
 		ok.String(*v.RoleArn)
 	}
 
+	if v.SqlComputeConfiguration != nil {
+		ok := object.Key("sqlComputeConfiguration")
+		if err := awsRestjson1_serializeDocumentComputeConfiguration(v.SqlComputeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SqlParameters != nil {
 		ok := object.Key("sqlParameters")
 		if err := awsRestjson1_serializeDocumentProtectedQuerySQLParameters(v.SqlParameters, ok); err != nil {

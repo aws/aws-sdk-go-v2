@@ -5663,6 +5663,42 @@ func awsRestjson1_deserializeDocumentEFSVolumeConfiguration(v **types.EFSVolumeC
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEksAnnotationsMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEksAttemptContainerDetail(v **types.EksAttemptContainerDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6495,6 +6531,15 @@ func awsRestjson1_deserializeDocumentEksContainerVolumeMount(v **types.EksContai
 				sv.ReadOnly = ptr.Bool(jtv)
 			}
 
+		case "subPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SubPath = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6721,9 +6766,72 @@ func awsRestjson1_deserializeDocumentEksMetadata(v **types.EksMetadata, value in
 
 	for key, value := range shape {
 		switch key {
+		case "annotations":
+			if err := awsRestjson1_deserializeDocumentEksAnnotationsMap(&sv.Annotations, value); err != nil {
+				return err
+			}
+
 		case "labels":
 			if err := awsRestjson1_deserializeDocumentEksLabelsMap(&sv.Labels, value); err != nil {
 				return err
+			}
+
+		case "namespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Namespace = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEksPersistentVolumeClaim(v **types.EksPersistentVolumeClaim, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EksPersistentVolumeClaim
+	if *v == nil {
+		sv = &types.EksPersistentVolumeClaim{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "claimName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ClaimName = ptr.String(jtv)
+			}
+
+		case "readOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ReadOnly = ptr.Bool(jtv)
 			}
 
 		default:
@@ -7133,6 +7241,11 @@ func awsRestjson1_deserializeDocumentEksVolume(v **types.EksVolume, value interf
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "persistentVolumeClaim":
+			if err := awsRestjson1_deserializeDocumentEksPersistentVolumeClaim(&sv.PersistentVolumeClaim, value); err != nil {
+				return err
 			}
 
 		case "secret":

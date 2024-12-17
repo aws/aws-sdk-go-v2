@@ -13203,6 +13203,11 @@ func awsAwsjson11_deserializeDocumentRuleDeclaration(v **types.RuleDeclaration, 
 
 	for key, value := range shape {
 		switch key {
+		case "commands":
+			if err := awsAwsjson11_deserializeDocumentCommandList(&sv.Commands, value); err != nil {
+				return err
+			}
+
 		case "configuration":
 			if err := awsAwsjson11_deserializeDocumentRuleConfigurationMap(&sv.Configuration, value); err != nil {
 				return err

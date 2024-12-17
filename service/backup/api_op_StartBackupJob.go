@@ -71,6 +71,23 @@ type StartBackupJobInput struct {
 	// idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
+	// Include this parameter to enable index creation if your backup job has a
+	// resource type that supports backup indexes.
+	//
+	// Resource types that support backup indexes include:
+	//
+	//   - EBS for Amazon Elastic Block Store
+	//
+	//   - S3 for Amazon Simple Storage Service (Amazon S3)
+	//
+	// Index can have 1 of 2 possible values, either ENABLED or DISABLED .
+	//
+	// To create a backup index for an eligible ACTIVE recovery point that does not
+	// yet have a backup index, set value to ENABLED .
+	//
+	// To delete a backup index, set value to DISABLED .
+	Index types.Index
+
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup will transition and expire backups automatically
 	// according to the lifecycle that you define.

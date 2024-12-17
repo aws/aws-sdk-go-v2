@@ -566,6 +566,18 @@ func TestCheckSnapshot_GetLegalHold(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetRecoveryPointIndexDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPointIndexDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRecoveryPointIndexDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRecoveryPointRestoreMetadata(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRecoveryPointRestoreMetadata(context.Background(), nil, func(o *Options) {
@@ -751,6 +763,18 @@ func TestCheckSnapshot_ListFrameworks(t *testing.T) {
 	_, err := svc.ListFrameworks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListFrameworks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIndexedRecoveryPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIndexedRecoveryPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIndexedRecoveryPoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1087,6 +1111,18 @@ func TestCheckSnapshot_UpdateGlobalSettings(t *testing.T) {
 	_, err := svc.UpdateGlobalSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateGlobalSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRecoveryPointIndexSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecoveryPointIndexSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRecoveryPointIndexSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1657,6 +1693,18 @@ func TestUpdateSnapshot_GetLegalHold(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetRecoveryPointIndexDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPointIndexDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRecoveryPointIndexDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRecoveryPointRestoreMetadata(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRecoveryPointRestoreMetadata(context.Background(), nil, func(o *Options) {
@@ -1842,6 +1890,18 @@ func TestUpdateSnapshot_ListFrameworks(t *testing.T) {
 	_, err := svc.ListFrameworks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFrameworks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIndexedRecoveryPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIndexedRecoveryPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIndexedRecoveryPoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2178,6 +2238,18 @@ func TestUpdateSnapshot_UpdateGlobalSettings(t *testing.T) {
 	_, err := svc.UpdateGlobalSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateGlobalSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRecoveryPointIndexSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecoveryPointIndexSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRecoveryPointIndexSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

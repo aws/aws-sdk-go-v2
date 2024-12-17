@@ -902,6 +902,21 @@ func validateEksContainers(v []types.EksContainer) error {
 	}
 }
 
+func validateEksPersistentVolumeClaim(v *types.EksPersistentVolumeClaim) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksPersistentVolumeClaim"}
+	if v.ClaimName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClaimName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEksPodProperties(v *types.EksPodProperties) error {
 	if v == nil {
 		return nil
@@ -1016,6 +1031,11 @@ func validateEksVolume(v *types.EksVolume) error {
 	if v.Secret != nil {
 		if err := validateEksSecret(v.Secret); err != nil {
 			invalidParams.AddNested("Secret", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PersistentVolumeClaim != nil {
+		if err := validateEksPersistentVolumeClaim(v.PersistentVolumeClaim); err != nil {
+			invalidParams.AddNested("PersistentVolumeClaim", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

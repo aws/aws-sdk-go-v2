@@ -559,6 +559,11 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironment
 		ok.String(*v.Name)
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("networkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.PreferredMaintenanceWindow != nil {
 		ok := object.Key("preferredMaintenanceWindow")
 		ok.String(*v.PreferredMaintenanceWindow)
