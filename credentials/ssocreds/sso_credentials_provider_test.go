@@ -189,7 +189,7 @@ func TestProvider(t *testing.T) {
 			}
 
 			if diff := cmpDiff(tt.ExpectedCredentials, credentials); len(diff) > 0 {
-				t.Errorf(diff)
+				t.Error(diff)
 			}
 		})
 	}
