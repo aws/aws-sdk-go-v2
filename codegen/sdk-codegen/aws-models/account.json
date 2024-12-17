@@ -123,6 +123,9 @@
                 "aws.auth#sigv4": {
                     "name": "account"
                 },
+                "aws.endpoints#standardPartitionalEndpoints": {
+                    "endpointPatternType": "service_region_dnsSuffix"
+                },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
                 "smithy.api#documentation": "<p>Operations for Amazon Web Services Account Management</p>",
@@ -138,12 +141,6 @@
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
-                        "Region": {
-                            "builtIn": "AWS::Region",
-                            "required": false,
-                            "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
-                        },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
@@ -162,6 +159,12 @@
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         }
                     },
@@ -194,173 +197,11 @@
                                     "type": "error"
                                 },
                                 {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                    "type": "error"
-                                },
-                                {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": {
-                                            "ref": "Endpoint"
-                                        },
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
-                                }
-                            ],
-                            "type": "tree"
-                        },
-                        {
-                            "conditions": [
-                                {
-                                    "fn": "isSet",
-                                    "argv": [
-                                        {
-                                            "ref": "Region"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "aws.partition",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ],
-                                            "assign": "PartitionResult"
-                                        }
-                                    ],
                                     "rules": [
                                         {
                                             "conditions": [
                                                 {
-                                                    "fn": "stringEquals",
-                                                    "argv": [
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "name"
-                                                            ]
-                                                        },
-                                                        "aws"
-                                                    ]
-                                                },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        false
-                                                    ]
-                                                },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseDualStack"
-                                                        },
-                                                        false
-                                                    ]
-                                                }
-                                            ],
-                                            "endpoint": {
-                                                "url": "https://account.us-east-1.amazonaws.com",
-                                                "properties": {
-                                                    "authSchemes": [
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingName": "account",
-                                                            "signingRegion": "us-east-1"
-                                                        }
-                                                    ]
-                                                },
-                                                "headers": {}
-                                            },
-                                            "type": "endpoint"
-                                        },
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "stringEquals",
-                                                    "argv": [
-                                                        {
-                                                            "fn": "getAttr",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "PartitionResult"
-                                                                },
-                                                                "name"
-                                                            ]
-                                                        },
-                                                        "aws-cn"
-                                                    ]
-                                                },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        false
-                                                    ]
-                                                },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseDualStack"
-                                                        },
-                                                        false
-                                                    ]
-                                                }
-                                            ],
-                                            "endpoint": {
-                                                "url": "https://account.cn-northwest-1.amazonaws.com.cn",
-                                                "properties": {
-                                                    "authSchemes": [
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingName": "account",
-                                                            "signingRegion": "cn-northwest-1"
-                                                        }
-                                                    ]
-                                                },
-                                                "headers": {}
-                                            },
-                                            "type": "endpoint"
-                                        },
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
-                                                },
-                                                {
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
@@ -370,169 +211,15 @@
                                                     ]
                                                 }
                                             ],
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                true,
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "PartitionResult"
-                                                                        },
-                                                                        "supportsFIPS"
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                true,
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "PartitionResult"
-                                                                        },
-                                                                        "supportsDualStack"
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://account-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                    "type": "error"
-                                                }
-                                            ],
-                                            "type": "tree"
-                                        },
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
-                                                }
-                                            ],
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "PartitionResult"
-                                                                        },
-                                                                        "supportsFIPS"
-                                                                    ]
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://account-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                    "type": "error"
-                                                }
-                                            ],
-                                            "type": "tree"
-                                        },
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseDualStack"
-                                                        },
-                                                        true
-                                                    ]
-                                                }
-                                            ],
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                true,
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "PartitionResult"
-                                                                        },
-                                                                        "supportsDualStack"
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://account.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                    "type": "error"
-                                                }
-                                            ],
-                                            "type": "tree"
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": "https://account.{Region}.{PartitionResult#dnsSuffix}",
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -546,39 +233,330 @@
                         },
                         {
                             "conditions": [],
-                            "error": "Invalid Configuration: Missing Region",
-                            "type": "error"
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://account-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "name": "sigv4",
+                                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://account-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "name": "sigv4",
+                                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://account.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "name": "sigv4",
+                                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://account.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region aws-global with FIPS disabled and DualStack disabled",
+                            "documentation": "For custom endpoint with region not set and fips disabled",
                             "expect": {
                                 "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingName": "account",
-                                                "signingRegion": "us-east-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://account.us-east-1.amazonaws.com"
+                                    "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "Region": "aws-global",
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": true
                             }
                         },
                         {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
                                     "url": "https://account-fips.us-east-1.api.aws"
                                 }
                             },
@@ -592,6 +570,14 @@
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
                                     "url": "https://account-fips.us-east-1.amazonaws.com"
                                 }
                             },
@@ -605,6 +591,14 @@
                             "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
                                     "url": "https://account.us-east-1.api.aws"
                                 }
                             },
@@ -622,7 +616,6 @@
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingName": "account",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -637,14 +630,76 @@
                             }
                         },
                         {
-                            "documentation": "For region aws-cn-global with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingName": "account",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
                                                 "signingRegion": "cn-northwest-1"
                                             }
                                         ]
@@ -653,120 +708,91 @@
                                 }
                             },
                             "params": {
-                                "Region": "aws-cn-global",
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://account-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://account-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://account.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingName": "account",
-                                                "signingRegion": "cn-northwest-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://account.cn-northwest-1.amazonaws.com.cn"
+                                    "url": "https://account-fips.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://account-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://account-fips.us-gov-east-1.amazonaws.com"
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account-fips.us-gov-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://account.us-gov-east-1.api.aws"
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://account.us-gov-east-1.amazonaws.com"
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account.us-gov-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -786,6 +812,14 @@
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-iso-east-1"
+                                            }
+                                        ]
+                                    },
                                     "url": "https://account-fips.us-iso-east-1.c2s.ic.gov"
                                 }
                             },
@@ -810,6 +844,14 @@
                             "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-iso-east-1"
+                                            }
+                                        ]
+                                    },
                                     "url": "https://account.us-iso-east-1.c2s.ic.gov"
                                 }
                             },
@@ -834,6 +876,14 @@
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isob-east-1"
+                                            }
+                                        ]
+                                    },
                                     "url": "https://account-fips.us-isob-east-1.sc2s.sgov.gov"
                                 }
                             },
@@ -858,6 +908,14 @@
                             "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isob-east-1"
+                                            }
+                                        ]
+                                    },
                                     "url": "https://account.us-isob-east-1.sc2s.sgov.gov"
                                 }
                             },
@@ -868,54 +926,131 @@
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
-                                "endpoint": {
-                                    "url": "https://example.com"
-                                }
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Endpoint": "https://example.com"
-                            }
-                        },
-                        {
-                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://example.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Endpoint": "https://example.com"
-                            }
-                        },
-                        {
-                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                            "expect": {
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                            },
-                            "params": {
-                                "Region": "us-east-1",
+                                "Region": "eu-isoe-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Endpoint": "https://example.com"
+                                "UseDualStack": true
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled",
                             "expect": {
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "eu-isoe-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Endpoint": "https://example.com"
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "eu-isoe-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isof-south-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isof-south-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {

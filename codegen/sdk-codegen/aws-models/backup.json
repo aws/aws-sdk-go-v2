@@ -743,6 +743,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timezone in which the schedule expression is set. By default, \n         ScheduleExpressions are in UTC. You can modify this to a specified timezone.</p>"
                     }
+                },
+                "IndexActions": {
+                    "target": "com.amazonaws.backup#IndexActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IndexActions is an array you use to specify how backup data should \n         be indexed.</p>\n         <p>eEach BackupRule can have 0 or 1 IndexAction, as each backup can have up \n         to one index associated with it.</p>\n         <p>Within the array is ResourceType. Only one will be accepted for each BackupRule.</p>"
+                    }
                 }
             },
             "traits": {
@@ -812,6 +818,12 @@
                     "target": "com.amazonaws.backup#Timezone",
                     "traits": {
                         "smithy.api#documentation": "<p>The timezone in which the schedule expression is set. By default, \n         ScheduleExpressions are in UTC. You can modify this to a specified timezone.</p>"
+                    }
+                },
+                "IndexActions": {
+                    "target": "com.amazonaws.backup#IndexActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>There can up to one IndexAction in each BackupRule, as each backup \n         can have 0 or 1 backup index associated with it.</p>\n         <p>Within the array is ResourceTypes. Only 1 resource type will \n         be accepted for each BackupRule. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> for Amazon Simple Storage Service (Amazon S3)</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2851,6 +2863,9 @@
                     "target": "com.amazonaws.backup#GetLegalHold"
                 },
                 {
+                    "target": "com.amazonaws.backup#GetRecoveryPointIndexDetails"
+                },
+                {
                     "target": "com.amazonaws.backup#GetRecoveryPointRestoreMetadata"
                 },
                 {
@@ -2897,6 +2912,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#ListFrameworks"
+                },
+                {
+                    "target": "com.amazonaws.backup#ListIndexedRecoveryPoints"
                 },
                 {
                     "target": "com.amazonaws.backup#ListLegalHolds"
@@ -2981,6 +2999,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#UpdateGlobalSettings"
+                },
+                {
+                    "target": "com.amazonaws.backup#UpdateRecoveryPointIndexSettings"
                 },
                 {
                     "target": "com.amazonaws.backup#UpdateRecoveryPointLifecycle"
@@ -5475,6 +5496,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of vault in which the described recovery point is stored.</p>"
                     }
+                },
+                "IndexStatus": {
+                    "target": "com.amazonaws.backup#IndexStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the current status for the backup index associated with the specified recovery\n         point.</p>\n         <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> |\n         <code>DELETING</code>\n         </p>\n         <p>A recovery point with an index that has the status of <code>ACTIVE</code> can be\n         included in a search.</p>"
+                    }
+                },
+                "IndexStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string in the form of a detailed message explaining the status of a backup index\n         associated with the recovery point.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6717,6 +6750,124 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.backup#GetRecoveryPointIndexDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#GetRecoveryPointIndexDetailsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#GetRecoveryPointIndexDetailsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation returns the metadata and details specific to \n         the backup index associated with the specified recovery point.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/backup-vaults/{BackupVaultName}/recovery-points/{RecoveryPointArn}/index",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#GetRecoveryPointIndexDetailsInput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Region where they are\n         created.</p>\n         <p>Accepted characters include lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies a recovery point; for example,\n         <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#GetRecoveryPointIndexDetailsOutput": {
+            "type": "structure",
+            "members": {
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies a recovery point; for example,\n         <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>"
+                    }
+                },
+                "BackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies the backup vault where the recovery \n         point index is stored.</p>\n         <p>For example,\n         <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>"
+                    }
+                },
+                "SourceResourceArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string of the  Amazon Resource Name (ARN) that uniquely identifies \n         the source resource.</p>"
+                    }
+                },
+                "IndexCreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a backup index was created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "IndexDeletionDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a backup index was deleted, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "IndexCompletionDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a backup index finished creation, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "IndexStatus": {
+                    "target": "com.amazonaws.backup#IndexStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the current status for the backup index associated \n         with the specified recovery point.</p>\n         <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>\n         </p>\n         <p>A recovery point with an index that has the status of <code>ACTIVE</code> \n         can be included in a search.</p>"
+                    }
+                },
+                "IndexStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed message explaining the status of a backup index associated \n         with the recovery point.</p>"
+                    }
+                },
+                "TotalItemsIndexed": {
+                    "target": "com.amazonaws.backup#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Count of items within the backup index associated with the \n         recovery point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.backup#GetRecoveryPointRestoreMetadata": {
             "type": "operation",
             "input": {
@@ -7132,6 +7283,140 @@
         },
         "com.amazonaws.backup#IAMRoleArn": {
             "type": "string"
+        },
+        "com.amazonaws.backup#Index": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#IndexAction": {
+            "type": "structure",
+            "members": {
+                "ResourceTypes": {
+                    "target": "com.amazonaws.backup#ResourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>0 or 1 index action will be accepted for each BackupRule.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> for Amazon Simple Storage Service (Amazon S3)</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This is an optional array within a BackupRule.</p>\n         <p>IndexAction consists of one ResourceTypes.</p>"
+            }
+        },
+        "com.amazonaws.backup#IndexActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#IndexAction"
+            }
+        },
+        "com.amazonaws.backup#IndexStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#IndexedRecoveryPoint": {
+            "type": "structure",
+            "members": {
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies a recovery point; for example,\n         <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>\n         </p>"
+                    }
+                },
+                "SourceResourceArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string of the  Amazon Resource Name (ARN) that uniquely identifies \n         the source resource.</p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This specifies the IAM role ARN used for this operation.</p>\n         <p>For example, arn:aws:iam::123456789012:role/S3Access</p>"
+                    }
+                },
+                "BackupCreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a backup was created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.backup#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the indexed recovery point.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> for Amazon Simple Storage Service (Amazon S3)</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "IndexCreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a backup index was created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "IndexStatus": {
+                    "target": "com.amazonaws.backup#IndexStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the current status for the backup index associated \n         with the specified recovery point.</p>\n         <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>\n         </p>\n         <p>A recovery point with an index that has the status of <code>ACTIVE</code> \n         can be included in a search.</p>"
+                    }
+                },
+                "IndexStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string in the form of a detailed message explaining the status of a backup index associated \n         with the recovery point.</p>"
+                    }
+                },
+                "BackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies the backup vault where the recovery \n         point index is stored.</p>\n         <p>For example,\n         <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This is a recovery point that has an associated backup index.</p>\n         <p>Only recovery points with a backup index can be \n         included in a search.</p>"
+            }
+        },
+        "com.amazonaws.backup#IndexedRecoveryPointList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#IndexedRecoveryPoint"
+            }
         },
         "com.amazonaws.backup#InvalidParameterValueException": {
             "type": "structure",
@@ -8415,6 +8700,118 @@
                     "target": "com.amazonaws.backup#string",
                     "traits": {
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#ListIndexedRecoveryPoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListIndexedRecoveryPointsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListIndexedRecoveryPointsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation returns a list of recovery points that have an \n         associated index, belonging to the specified account.</p>\n         <p>Optional parameters you can include are: MaxResults; \n         NextToken; SourceResourceArns; CreatedBefore; CreatedAfter; \n         and ResourceType.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/indexes/recovery-point",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "IndexedRecoveryPoints",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListIndexedRecoveryPointsInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned recovery points.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of indexed recovery points, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of resource list items to be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "SourceResourceArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string of the  Amazon Resource Name (ARN) that uniquely identifies \n         the source resource.</p>",
+                        "smithy.api#httpQuery": "sourceResourceArn"
+                    }
+                },
+                "CreatedBefore": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only indexed recovery points that were created before the \n         specified date.</p>",
+                        "smithy.api#httpQuery": "createdBefore"
+                    }
+                },
+                "CreatedAfter": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only indexed recovery points that were created after the \n         specified date.</p>",
+                        "smithy.api#httpQuery": "createdAfter"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.backup#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of indexed recovery points for the specified \n         resource type(s).</p>\n         <p>Accepted values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> for Amazon Simple Storage Service (Amazon S3)</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "resourceType"
+                    }
+                },
+                "IndexStatus": {
+                    "target": "com.amazonaws.backup#IndexStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include this parameter to filter the returned list by \n         the indicated statuses.</p>\n         <p>Accepted values: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>\n         </p>\n         <p>A recovery point with an index that has the status of <code>ACTIVE</code> \n         can be included in a search.</p>",
+                        "smithy.api#httpQuery": "indexStatus"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListIndexedRecoveryPointsOutput": {
+            "type": "structure",
+            "members": {
+                "IndexedRecoveryPoints": {
+                    "target": "com.amazonaws.backup#IndexedRecoveryPointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a list of recovery points that have an \n         associated index, belonging to the specified account.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned recovery points.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of indexed recovery points, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
                     }
                 }
             },
@@ -10316,6 +10713,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of vault in which the described recovery point is stored.</p>"
                     }
+                },
+                "IndexStatus": {
+                    "target": "com.amazonaws.backup#IndexStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the current status for the backup index associated \n         with the specified recovery point.</p>\n         <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> |\n         <code>DELETING</code>\n         </p>\n         <p>A recovery point with an index that has the status of <code>ACTIVE</code> \n         can be included in a search.</p>"
+                    }
+                },
+                "IndexStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string in the form of a detailed message explaining the status of a backup index associated \n         with the recovery point.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10396,6 +10805,18 @@
                     "target": "com.amazonaws.backup#VaultType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of vault in which the described recovery point is \n         stored.</p>"
+                    }
+                },
+                "IndexStatus": {
+                    "target": "com.amazonaws.backup#IndexStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the current status for the backup index associated \n         with the specified recovery point.</p>\n         <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>\n         </p>\n         <p>A recovery point with an index that has the status of <code>ACTIVE</code> \n         can be included in a search.</p>"
+                    }
+                },
+                "IndexStatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string in the form of a detailed message explaining the status of a backup index\n         associated with the recovery point.</p>"
                     }
                 }
             },
@@ -11851,6 +12272,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The backup option for a selected resource. This option is only available for\n         Windows Volume Shadow Copy Service (VSS) backup jobs.</p>\n         <p>Valid values: Set to <code>\"WindowsVSS\":\"enabled\"</code> to enable the\n         <code>WindowsVSS</code> backup option and create a Windows VSS backup. Set to\n         <code>\"WindowsVSS\"\"disabled\"</code> to create a regular backup. The\n         <code>WindowsVSS</code> option is not enabled by default.</p>"
                     }
+                },
+                "Index": {
+                    "target": "com.amazonaws.backup#Index",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include this parameter to enable index creation if your backup \n         job has a resource type that supports backup indexes.</p>\n         <p>Resource types that support backup indexes include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> for Amazon Simple Storage Service (Amazon S3)</p>\n            </li>\n         </ul>\n         <p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or \n         <code>DISABLED</code>.</p>\n         <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point \n         that does not yet have a backup index, set value to <code>ENABLED</code>.</p>\n         <p>To delete a backup index, set value to <code>DISABLED</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12619,6 +13046,110 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateRecoveryPointIndexSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#UpdateRecoveryPointIndexSettingsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#UpdateRecoveryPointIndexSettingsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation updates the settings of a recovery point index.</p>\n         <p>Required: BackupVaultName, RecoveryPointArn, and IAMRoleArn</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backup-vaults/{BackupVaultName}/recovery-points/{RecoveryPointArn}/index",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateRecoveryPointIndexSettingsInput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Region where they are\n         created.</p>\n         <p>Accepted characters include lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies a recovery point; for example,\n         <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.backup#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This specifies the IAM role ARN used for this operation.</p>\n         <p>For example, arn:aws:iam::123456789012:role/S3Access</p>"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.backup#Index",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or \n         <code>DISABLED</code>.</p>\n         <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point \n         that does not yet have a backup index, set value to <code>ENABLED</code>.</p>\n         <p>To delete a backup index, set value to <code>DISABLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateRecoveryPointIndexSettingsOutput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Region where they are\n         created.</p>"
+                    }
+                },
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies a recovery point; for example,\n         <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>"
+                    }
+                },
+                "IndexStatus": {
+                    "target": "com.amazonaws.backup#IndexStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the current status for the backup index associated \n         with the specified recovery point.</p>\n         <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>\n         </p>\n         <p>A recovery point with an index that has the status of <code>ACTIVE</code> \n         can be included in a search.</p>"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.backup#Index",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or\n         <code>DISABLED</code>.</p>\n         <p>A value of <code>ENABLED</code> means a backup index for an eligible <code>ACTIVE</code>\n         recovery point has been created.</p>\n         <p>A value of <code>DISABLED</code> means a backup index was deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#UpdateRecoveryPointLifecycle": {
