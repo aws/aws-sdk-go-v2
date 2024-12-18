@@ -48,7 +48,7 @@ type UpdateEnvironmentInput struct {
 	// Airflow version. For more information about updating your resources, see [Upgrading an Amazon MWAA environment].
 	//
 	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 , 2.8.1 ,
-	// 2.9.2 , and 2.10.1 .
+	// 2.9.2 , 2.10.1 , and 2.10.3 .
 	//
 	// [Upgrading an Amazon MWAA environment]: https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html
 	AirflowVersion *string

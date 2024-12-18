@@ -42,6 +42,11 @@ type PutWorkflowRunPropertiesInput struct {
 
 	// The properties to put for the specified run.
 	//
+	// Run properties may be logged. Do not pass plaintext secrets as properties.
+	// Retrieve secrets from a Glue Connection, Amazon Web Services Secrets Manager or
+	// other secret management mechanism if you intend to use them within the workflow
+	// run.
+	//
 	// This member is required.
 	RunProperties map[string]string
 

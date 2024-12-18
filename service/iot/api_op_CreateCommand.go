@@ -62,7 +62,10 @@ type CreateCommandInput struct {
 	// specify the payload content type.
 	Payload *types.CommandPayload
 
-	// The IAM role that allows access to create the command.
+	// The IAM role that you must provide when using the AWS-IoT-FleetWise namespace.
+	// The role grants IoT Device Management the permission to access IoT FleetWise
+	// resources for generating the payload for the command. This field is not required
+	// when you use the AWS-IoT namespace.
 	RoleArn *string
 
 	// Name-value pairs that are used as metadata to manage a command.

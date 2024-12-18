@@ -34,6 +34,11 @@ type StartWorkflowRunInput struct {
 	Name *string
 
 	// The workflow run properties for the new workflow run.
+	//
+	// Run properties may be logged. Do not pass plaintext secrets as properties.
+	// Retrieve secrets from a Glue Connection, Amazon Web Services Secrets Manager or
+	// other secret management mechanism if you intend to use them within the workflow
+	// run.
 	RunProperties map[string]string
 
 	noSmithyDocumentSerde

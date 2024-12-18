@@ -426,6 +426,74 @@ func (r *resolver) ResolveEndpoint(
 					}
 				}
 			}
+			if _PartitionResult.Name == "aws-iso" {
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://budgets.c2s.ic.gov"
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetSigV4SigningName(&sp, "budgets")
+											smithyhttp.SetSigV4ASigningName(&sp, "budgets")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, "us-iso-east-1")
+											return sp
+										}(),
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+			}
+			if _PartitionResult.Name == "aws-iso-b" {
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://budgets.global.sc2s.sgov.gov"
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetSigV4SigningName(&sp, "budgets")
+											smithyhttp.SetSigV4ASigningName(&sp, "budgets")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, "us-isob-east-1")
+											return sp
+										}(),
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+			}
 			if _PartitionResult.Name == "aws-iso-e" {
 				if _UseFIPS == false {
 					if _UseDualStack == false {

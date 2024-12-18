@@ -1,3 +1,7 @@
+# v1.82.0 (2024-12-18)
+
+* **Feature**: Add support for PerformanceConfiguration attribute to Dataset entity. Allow PerformanceConfiguration specification in CreateDataset and UpdateDataset APIs.
+
 # v1.81.0 (2024-12-03.2)
 
 * **Feature**: This release includes API needed to support for Unstructured Data in Q in QuickSight Q&A (IDC).

@@ -13,6 +13,8 @@ import (
 
 // Creates the participant's connection.
 //
+// For security recommendations, see [Amazon Connect Chat security best practices].
+//
 // ParticipantToken is used for invoking this API instead of ConnectionToken .
 //
 // The participant token is valid for the lifetime of the participant – until they
@@ -46,6 +48,7 @@ import (
 // [StartContactStreaming]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
 // [Enable real-time chat message streaming]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) CreateParticipantConnection(ctx context.Context, params *CreateParticipantConnectionInput, optFns ...func(*Options)) (*CreateParticipantConnectionOutput, error) {
 	if params == nil {
 		params = &CreateParticipantConnectionInput{}

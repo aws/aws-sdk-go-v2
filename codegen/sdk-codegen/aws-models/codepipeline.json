@@ -1155,7 +1155,7 @@
                 "category": {
                     "target": "com.amazonaws.codepipeline#ActionCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A category defines what kind of action can be taken in the stage, and constrains\n            the provider type for the action. Valid categories are limited to one of the following\n            values. </p>\n         <ul>\n            <li>\n               <p>Source</p>\n            </li>\n            <li>\n               <p>Build</p>\n            </li>\n            <li>\n               <p>Test</p>\n            </li>\n            <li>\n               <p>Deploy</p>\n            </li>\n            <li>\n               <p>Invoke</p>\n            </li>\n            <li>\n               <p>Approval</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A category defines what kind of action can be taken in the stage, and constrains\n            the provider type for the action. Valid categories are limited to one of the following\n            values. </p>\n         <ul>\n            <li>\n               <p>Source</p>\n            </li>\n            <li>\n               <p>Build</p>\n            </li>\n            <li>\n               <p>Test</p>\n            </li>\n            <li>\n               <p>Deploy</p>\n            </li>\n            <li>\n               <p>Invoke</p>\n            </li>\n            <li>\n               <p>Approval</p>\n            </li>\n            <li>\n               <p>Compute</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2955,7 +2955,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The condition for the stage. A condition is made up of the rules and the result for\n            the condition.</p>"
+                "smithy.api#documentation": "<p>The condition for the stage. A condition is made up of the rules and the result for\n            the condition. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>.\n            For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule\n                reference</a>.</p>"
             }
         },
         "com.amazonaws.codepipeline#ConditionExecution": {
@@ -4024,7 +4024,7 @@
                 "category": {
                     "target": "com.amazonaws.codepipeline#ActionCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines what kind of action can be taken in the stage. The following are the valid\n            values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Source</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Build</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Test</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Deploy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Approval</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Invoke</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Defines what kind of action can be taken in the stage. The following are the valid\n            values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Source</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Build</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Test</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Deploy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Approval</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Invoke</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Compute</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5611,7 +5611,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the rules for the condition.</p>"
+                "smithy.api#documentation": "<p>Lists the rules for the condition. For more information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage\n                conditions</a>. For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule reference</a>.</p>"
             }
         },
         "com.amazonaws.codepipeline#ListRuleTypesInput": {
@@ -8057,7 +8057,7 @@
                 "name": {
                     "target": "com.amazonaws.codepipeline#RuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the rule that is created for the condition, such as\n            CheckAllResults.</p>",
+                        "smithy.api#documentation": "<p>The name of the rule that is created for the condition, such as\n                <code>VariableCheck</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8072,6 +8072,12 @@
                     "target": "com.amazonaws.codepipeline#RuleConfigurationMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The action configuration fields for the rule.</p>"
+                    }
+                },
+                "commands": {
+                    "target": "com.amazonaws.codepipeline#CommandList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shell commands to run with your commands rule in CodePipeline. All commands\n            are supported except multi-line formats. While CodeBuild logs and permissions\n            are used, you do not need to create any resources in CodeBuild.</p>\n         <note>\n            <p>Using compute time for this action will incur separate charges in CodeBuild.</p>\n         </note>"
                     }
                 },
                 "inputArtifacts": {
@@ -8100,7 +8106,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents information about the rule to be created for an associated condition. An\n            example would be creating a new rule for an entry condition, such as a rule that checks\n            for a test result before allowing the run to enter the deployment stage.</p>"
+                "smithy.api#documentation": "<p>Represents information about the rule to be created for an associated condition. An\n            example would be creating a new rule for an entry condition, such as a rule that checks\n            for a test result before allowing the run to enter the deployment stage. For more\n            information about conditions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html\">Stage conditions</a>.\n            For more information about rules, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html\">CodePipeline rule\n                reference</a>.</p>"
             }
         },
         "com.amazonaws.codepipeline#RuleDeclarationList": {

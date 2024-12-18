@@ -6489,6 +6489,27 @@ func awsRestjson1_deserializeDocumentApp(v **types.App, value interface{}) error
 				}
 			}
 
+		case "wafConfiguration":
+			if err := awsRestjson1_deserializeDocumentWafConfiguration(&sv.WafConfiguration, value); err != nil {
+				return err
+			}
+
+		case "webhookCreateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.WebhookCreateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected webhookCreateTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8744,6 +8765,64 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWafConfiguration(v **types.WafConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WafConfiguration
+	if *v == nil {
+		sv = &types.WafConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusReason to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = ptr.String(jtv)
+			}
+
+		case "wafStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WafStatus to be of type string, got %T instead", value)
+				}
+				sv.WafStatus = types.WafStatus(jtv)
+			}
+
+		case "webAclArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebAclArn to be of type string, got %T instead", value)
+				}
+				sv.WebAclArn = ptr.String(jtv)
 			}
 
 		default:

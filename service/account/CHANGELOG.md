@@ -1,3 +1,7 @@
+# v1.22.0 (2024-12-17)
+
+* **Feature**: Update endpoint configuration.
+
 # v1.21.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

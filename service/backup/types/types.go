@@ -363,6 +363,14 @@ type BackupRule struct {
 	// specified) causes Backup to create snapshot backups.
 	EnableContinuousBackup *bool
 
+	// IndexActions is an array you use to specify how backup data should be indexed.
+	//
+	// eEach BackupRule can have 0 or 1 IndexAction, as each backup can have up to one
+	// index associated with it.
+	//
+	// Within the array is ResourceType. Only one will be accepted for each BackupRule.
+	IndexActions []IndexAction
+
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup transitions and expires backups automatically
 	// according to the lifecycle that you define.
@@ -444,6 +452,17 @@ type BackupRuleInput struct {
 	// create continuous backups capable of point-in-time restore (PITR). False (or not
 	// specified) causes Backup to create snapshot backups.
 	EnableContinuousBackup *bool
+
+	// There can up to one IndexAction in each BackupRule, as each backup can have 0
+	// or 1 backup index associated with it.
+	//
+	// Within the array is ResourceTypes. Only 1 resource type will be accepted for
+	// each BackupRule. Valid values:
+	//
+	//   - EBS for Amazon Elastic Block Store
+	//
+	//   - S3 for Amazon Simple Storage Service (Amazon S3)
+	IndexActions []IndexAction
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup will transition and expire backups automatically
@@ -1103,6 +1122,82 @@ type FrameworkControl struct {
 	noSmithyDocumentSerde
 }
 
+// This is an optional array within a BackupRule.
+//
+// IndexAction consists of one ResourceTypes.
+type IndexAction struct {
+
+	// 0 or 1 index action will be accepted for each BackupRule.
+	//
+	// Valid values:
+	//
+	//   - EBS for Amazon Elastic Block Store
+	//
+	//   - S3 for Amazon Simple Storage Service (Amazon S3)
+	ResourceTypes []string
+
+	noSmithyDocumentSerde
+}
+
+// This is a recovery point that has an associated backup index.
+//
+// Only recovery points with a backup index can be included in a search.
+type IndexedRecoveryPoint struct {
+
+	// The date and time that a backup was created, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	BackupCreationDate *time.Time
+
+	// An ARN that uniquely identifies the backup vault where the recovery point index
+	// is stored.
+	//
+	// For example, arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
+	BackupVaultArn *string
+
+	// This specifies the IAM role ARN used for this operation.
+	//
+	// For example, arn:aws:iam::123456789012:role/S3Access
+	IamRoleArn *string
+
+	// The date and time that a backup index was created, in Unix format and
+	// Coordinated Universal Time (UTC). The value of CreationDate is accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087 AM.
+	IndexCreationDate *time.Time
+
+	// This is the current status for the backup index associated with the specified
+	// recovery point.
+	//
+	// Statuses are: PENDING | ACTIVE | FAILED | DELETING
+	//
+	// A recovery point with an index that has the status of ACTIVE can be included in
+	// a search.
+	IndexStatus IndexStatus
+
+	// A string in the form of a detailed message explaining the status of a backup
+	// index associated with the recovery point.
+	IndexStatusMessage *string
+
+	// An ARN that uniquely identifies a recovery point; for example,
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	RecoveryPointArn *string
+
+	// The resource type of the indexed recovery point.
+	//
+	//   - EBS for Amazon Elastic Block Store
+	//
+	//   - S3 for Amazon Simple Storage Service (Amazon S3)
+	ResourceType *string
+
+	// A string of the Amazon Resource Name (ARN) that uniquely identifies the source
+	// resource.
+	SourceResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Pair of two related strings. Allowed characters are letters, white space, and
 // numbers that can be represented in UTF-8 and the following characters: + - = .
 // _ : /
@@ -1299,6 +1394,19 @@ type RecoveryPointByBackupVault struct {
 	// example, arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string
 
+	// This is the current status for the backup index associated with the specified
+	// recovery point.
+	//
+	// Statuses are: PENDING | ACTIVE | FAILED | DELETING
+	//
+	// A recovery point with an index that has the status of ACTIVE can be included in
+	// a search.
+	IndexStatus IndexStatus
+
+	// A string in the form of a detailed message explaining the status of a backup
+	// index associated with the recovery point.
+	IndexStatusMessage *string
+
 	// A Boolean value that is returned as TRUE if the specified recovery point is
 	// encrypted, or FALSE if the recovery point is not encrypted.
 	IsEncrypted bool
@@ -1386,6 +1494,19 @@ type RecoveryPointByResource struct {
 	// example,
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
 	EncryptionKeyArn *string
+
+	// This is the current status for the backup index associated with the specified
+	// recovery point.
+	//
+	// Statuses are: PENDING | ACTIVE | FAILED | DELETING
+	//
+	// A recovery point with an index that has the status of ACTIVE can be included in
+	// a search.
+	IndexStatus IndexStatus
+
+	// A string in the form of a detailed message explaining the status of a backup
+	// index associated with the recovery point.
+	IndexStatusMessage *string
 
 	// This is a boolean value indicating this is a parent (composite) recovery point.
 	IsParent bool

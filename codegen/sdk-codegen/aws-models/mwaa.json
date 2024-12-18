@@ -1136,7 +1136,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>,\n                <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>,\n                <code>2.8.1</code>, <code>2.9.2</code>, and <code>2.10.1</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>,\n                <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>,\n            <code>2.8.1</code>, <code>2.9.2</code>, <code>2.10.1</code>, and <code>2.10.3</code>.</p>"
                     }
                 },
                 "LoggingConfiguration": {
@@ -1443,7 +1443,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>,\n                <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>,\n                <code>2.8.1</code>, <code>2.9.2</code>, and <code>2.10.1</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>,\n                <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>,\n            <code>2.8.1</code>, <code>2.9.2</code>, <code>2.10.1</code>, and <code>2.10.3</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {
@@ -2989,7 +2989,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA.</p>\n         <p>Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating\n            your resources, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html\">Upgrading an Amazon MWAA environment</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>,\n                <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>,\n                <code>2.8.1</code>, <code>2.9.2</code>, and <code>2.10.1</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA.</p>\n         <p>Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating\n            your resources, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html\">Upgrading an Amazon MWAA environment</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>,\n                <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>,\n            <code>2.8.1</code>, <code>2.9.2</code>, <code>2.10.1</code>, and <code>2.10.3</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {

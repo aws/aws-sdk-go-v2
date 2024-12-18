@@ -469,6 +469,9 @@
                     "target": "com.amazonaws.iot#GetStatistics"
                 },
                 {
+                    "target": "com.amazonaws.iot#GetThingConnectivityData"
+                },
+                {
                     "target": "com.amazonaws.iot#GetTopicRule"
                 },
                 {
@@ -6890,6 +6893,17 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9:.]+$"
             }
         },
+        "com.amazonaws.iot#ConnectivityApiThingName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.iot#ConnectivityTimestamp": {
             "type": "long"
         },
@@ -7492,7 +7506,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that allows access to create the command.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that you must provide when using the <code>AWS-IoT-FleetWise</code> namespace.\n        The role grants IoT Device Management the permission to access IoT FleetWise resources \n        for generating the payload for the command. This field is not required when you use the\n        <code>AWS-IoT</code> namespace.</p>"
                     }
                 },
                 "tags": {
@@ -16802,6 +16816,95 @@
         "com.amazonaws.iot#DisconnectReason": {
             "type": "string"
         },
+        "com.amazonaws.iot#DisconnectReasonValue": {
+            "type": "enum",
+            "members": {
+                "AUTH_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTH_ERROR"
+                    }
+                },
+                "CLIENT_INITIATED_DISCONNECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIENT_INITIATED_DISCONNECT"
+                    }
+                },
+                "CLIENT_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIENT_ERROR"
+                    }
+                },
+                "CONNECTION_LOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTION_LOST"
+                    }
+                },
+                "DUPLICATE_CLIENTID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_CLIENTID"
+                    }
+                },
+                "FORBIDDEN_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORBIDDEN_ACCESS"
+                    }
+                },
+                "MQTT_KEEP_ALIVE_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MQTT_KEEP_ALIVE_TIMEOUT"
+                    }
+                },
+                "SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER_ERROR"
+                    }
+                },
+                "SERVER_INITIATED_DISCONNECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER_INITIATED_DISCONNECT"
+                    }
+                },
+                "THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROTTLED"
+                    }
+                },
+                "WEBSOCKET_TTL_EXPIRATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBSOCKET_TTL_EXPIRATION"
+                    }
+                },
+                "CUSTOMAUTH_TTL_EXPIRATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMAUTH_TTL_EXPIRATION"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iot#DisplayName": {
             "type": "string",
             "traits": {
@@ -18414,7 +18517,7 @@
                 "timeToLive": {
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time to live (TTL) parameter for the <code>GetCommandExecution</code> API.</p>"
+                        "smithy.api#documentation": "<p>The time to live (TTL) parameter that indicates the duration for which executions will\n        be retained in your account. The default value is six months.</p>"
                     }
                 }
             },
@@ -18486,7 +18589,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that allows access to retrieve information about the command.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that you provided when creating the command with <code>AWS-IoT-FleetWise</code>\n        as the namespace.</p>"
                     }
                 },
                 "createdAt": {
@@ -19598,6 +19701,94 @@
                     "target": "com.amazonaws.iot#Statistics",
                     "traits": {
                         "smithy.api#documentation": "<p>The statistics returned by the Fleet Indexing service based on the query and aggregation\n      field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#GetThingConnectivityData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#GetThingConnectivityDataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#GetThingConnectivityDataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#IndexNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the live connectivity status per device.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/things/{thingName}/connectivity-data",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#GetThingConnectivityDataRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iot#ConnectivityApiThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your IoT thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#GetThingConnectivityDataResponse": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iot#ConnectivityApiThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your IoT thing.</p>"
+                    }
+                },
+                "connected": {
+                    "target": "com.amazonaws.iot#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean that indicates the connectivity status.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.iot#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the event occurred.</p>"
+                    }
+                },
+                "disconnectReason": {
+                    "target": "com.amazonaws.iot#DisconnectReasonValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the client is disconnecting.</p>"
                     }
                 }
             },
@@ -22712,7 +22903,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List all command executions.</p>\n         <important>\n            <p>You must provide only the\n                <code>startedTimeFilter</code> or the <code>completedTimeFilter</code> information. If you \n                provide both time filters, the API will generate an error.\n                You can use this information to find command executions that started within\n                a specific timeframe.</p>\n         </important>",
+                "smithy.api#documentation": "<p>List all command executions.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>You must provide only the <code>startedTimeFilter</code> or \n                    the <code>completedTimeFilter</code> information. If you provide \n                    both time filters, the API will generate an error. You can use \n                    this information to retrieve a list of command executions \n                    within a specific timeframe.</p>\n               </li>\n               <li>\n                  <p>You must provide only the <code>commandArn</code> or \n                    the <code>thingArn</code> information depending on whether you want\n                    to list executions for a specific command or an IoT thing. If you provide \n                    both fields, the API will generate an error.</p>\n               </li>\n            </ul>\n            <p>For more information about considerations for using this API, see\n                <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-remote-command-execution-start-monitor.html#iot-remote-command-execution-list-cli\">List\n                command executions in your account (CLI)</a>.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/command-executions",

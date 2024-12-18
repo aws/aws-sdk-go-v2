@@ -840,6 +840,49 @@ func (DimensionValueOperator) Values() []DimensionValueOperator {
 	}
 }
 
+type DisconnectReasonValue string
+
+// Enum values for DisconnectReasonValue
+const (
+	DisconnectReasonValueAuthError                 DisconnectReasonValue = "AUTH_ERROR"
+	DisconnectReasonValueClientInitiatedDisconnect DisconnectReasonValue = "CLIENT_INITIATED_DISCONNECT"
+	DisconnectReasonValueClientError               DisconnectReasonValue = "CLIENT_ERROR"
+	DisconnectReasonValueConnectionLost            DisconnectReasonValue = "CONNECTION_LOST"
+	DisconnectReasonValueDuplicateClientid         DisconnectReasonValue = "DUPLICATE_CLIENTID"
+	DisconnectReasonValueForbiddenAccess           DisconnectReasonValue = "FORBIDDEN_ACCESS"
+	DisconnectReasonValueMqttKeepAliveTimeout      DisconnectReasonValue = "MQTT_KEEP_ALIVE_TIMEOUT"
+	DisconnectReasonValueServerError               DisconnectReasonValue = "SERVER_ERROR"
+	DisconnectReasonValueServerInitiatedDisconnect DisconnectReasonValue = "SERVER_INITIATED_DISCONNECT"
+	DisconnectReasonValueThrottled                 DisconnectReasonValue = "THROTTLED"
+	DisconnectReasonValueWebsocketTtlExpiration    DisconnectReasonValue = "WEBSOCKET_TTL_EXPIRATION"
+	DisconnectReasonValueCustomauthTtlExpiration   DisconnectReasonValue = "CUSTOMAUTH_TTL_EXPIRATION"
+	DisconnectReasonValueUnknown                   DisconnectReasonValue = "UNKNOWN"
+	DisconnectReasonValueNone                      DisconnectReasonValue = "NONE"
+)
+
+// Values returns all known values for DisconnectReasonValue. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DisconnectReasonValue) Values() []DisconnectReasonValue {
+	return []DisconnectReasonValue{
+		"AUTH_ERROR",
+		"CLIENT_INITIATED_DISCONNECT",
+		"CLIENT_ERROR",
+		"CONNECTION_LOST",
+		"DUPLICATE_CLIENTID",
+		"FORBIDDEN_ACCESS",
+		"MQTT_KEEP_ALIVE_TIMEOUT",
+		"SERVER_ERROR",
+		"SERVER_INITIATED_DISCONNECT",
+		"THROTTLED",
+		"WEBSOCKET_TTL_EXPIRATION",
+		"CUSTOMAUTH_TTL_EXPIRATION",
+		"UNKNOWN",
+		"NONE",
+	}
+}
+
 type DomainConfigurationStatus string
 
 // Enum values for DomainConfigurationStatus

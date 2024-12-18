@@ -83,6 +83,13 @@ type GetCoreDeviceOutput struct {
 	// The operating system platform that the core device runs.
 	Platform *string
 
+	// The runtime for the core device. The runtime can be:
+	//
+	//   - aws_nucleus_classic
+	//
+	//   - aws_nucleus_lite
+	Runtime *string
+
 	// The status of the core device. The core device status can be:
 	//
 	//   - HEALTHY – The IoT Greengrass Core software and all components run on the

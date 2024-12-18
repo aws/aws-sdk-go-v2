@@ -2371,6 +2371,9 @@ type Organization struct {
 
 // A list of additional configurations which will be configured for the
 // organization.
+//
+// Additional configuration applies to only GuardDuty Runtime Monitoring
+// protection plan.
 type OrganizationAdditionalConfiguration struct {
 
 	// The status of the additional configuration that will be configured for the
@@ -2394,7 +2397,8 @@ type OrganizationAdditionalConfiguration struct {
 	AutoEnable OrgFeatureStatus
 
 	// The name of the additional configuration that will be configured for the
-	// organization.
+	// organization. These values are applicable to only Runtime Monitoring protection
+	// plan.
 	Name OrgFeatureAdditionalConfiguration
 
 	noSmithyDocumentSerde
@@ -2425,7 +2429,8 @@ type OrganizationAdditionalConfigurationResult struct {
 	AutoEnable OrgFeatureStatus
 
 	// The name of the additional configuration that is configured for the member
-	// accounts within the organization.
+	// accounts within the organization. These values are applicable to only Runtime
+	// Monitoring protection plan.
 	Name OrgFeatureAdditionalConfiguration
 
 	noSmithyDocumentSerde
@@ -3454,7 +3459,8 @@ type S3ObjectDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a malware scan.
+// Contains information about malware scans associated with GuardDuty Malware
+// Protection for EC2.
 type Scan struct {
 
 	// The ID for the account that belongs to the scan.
@@ -3473,7 +3479,7 @@ type Scan struct {
 	// List of volumes that were attached to the original instance to be scanned.
 	AttachedVolumes []VolumeDetail
 
-	// The unique ID of the detector that the request is associated with.
+	// The unique ID of the detector that is associated with the request.
 	//
 	// To find the detectorId in the current Region, see the Settings page in the
 	// GuardDuty console, or run the [ListDetectors]API.

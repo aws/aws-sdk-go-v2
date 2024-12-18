@@ -12,6 +12,11 @@ import (
 )
 
 // Gets information about Cloud9 development environments.
+//
+// Cloud9 is no longer available to new customers. Existing customers of Cloud9
+// can continue to use the service as normal. [Learn more"]
+//
+// [Learn more"]: http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/
 func (c *Client) DescribeEnvironments(ctx context.Context, params *DescribeEnvironmentsInput, optFns ...func(*Options)) (*DescribeEnvironmentsOutput, error) {
 	if params == nil {
 		params = &DescribeEnvironmentsInput{}

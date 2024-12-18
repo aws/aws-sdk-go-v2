@@ -58820,6 +58820,11 @@ func awsRestjson1_deserializeDocumentDataSet(v **types.DataSet, value interface{
 				return err
 			}
 
+		case "PerformanceConfiguration":
+			if err := awsRestjson1_deserializeDocumentPerformanceConfiguration(&sv.PerformanceConfiguration, value); err != nil {
+				return err
+			}
+
 		case "PhysicalTableMap":
 			if err := awsRestjson1_deserializeDocumentPhysicalTableMap(&sv.PhysicalTableMap, value); err != nil {
 				return err
@@ -81249,6 +81254,42 @@ func awsRestjson1_deserializeDocumentPercentVisibleRange(v **types.PercentVisibl
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPerformanceConfiguration(v **types.PerformanceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PerformanceConfiguration
+	if *v == nil {
+		sv = &types.PerformanceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "UniqueKeys":
+			if err := awsRestjson1_deserializeDocumentUniqueKeyList(&sv.UniqueKeys, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPeriodOverPeriodComputation(v **types.PeriodOverPeriodComputation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -100847,6 +100888,112 @@ func awsRestjson1_deserializeDocumentUnaggregatedFieldList(v *[]types.Unaggregat
 		var col types.UnaggregatedField
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentUnaggregatedField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUniqueKey(v **types.UniqueKey, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UniqueKey
+	if *v == nil {
+		sv = &types.UniqueKey{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ColumnNames":
+			if err := awsRestjson1_deserializeDocumentUniqueKeyColumnNameList(&sv.ColumnNames, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUniqueKeyColumnNameList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUniqueKeyList(v *[]types.UniqueKey, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.UniqueKey
+	if *v == nil {
+		cv = []types.UniqueKey{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.UniqueKey
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentUniqueKey(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

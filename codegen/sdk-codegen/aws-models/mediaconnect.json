@@ -137,6 +137,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "MulticastSourceSettings": {
+                    "target": "com.amazonaws.mediaconnect#MulticastSourceSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "multicastSourceSettings"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.mediaconnect#__string",
                     "traits": {
@@ -1274,6 +1280,12 @@
                         "smithy.api#documentation": "The network source multicast IP.",
                         "smithy.api#jsonName": "multicastIp",
                         "smithy.api#required": {}
+                    }
+                },
+                "MulticastSourceSettings": {
+                    "target": "com.amazonaws.mediaconnect#MulticastSourceSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "multicastSourceSettings"
                     }
                 },
                 "Name": {
@@ -6594,6 +6606,21 @@
                 "smithy.api#documentation": "The settings for source monitoring."
             }
         },
+        "com.amazonaws.mediaconnect#MulticastSourceSettings": {
+            "type": "structure",
+            "members": {
+                "MulticastSourceIp": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The IP address of the source for source-specific multicast (SSM).",
+                        "smithy.api#jsonName": "multicastSourceIp"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The settings related to the multicast source."
+            }
+        },
         "com.amazonaws.mediaconnect#NetworkInterfaceType": {
             "type": "enum",
             "members": {
@@ -9004,6 +9031,12 @@
                     "traits": {
                         "smithy.api#documentation": "The network source multicast IP.",
                         "smithy.api#jsonName": "multicastIp"
+                    }
+                },
+                "MulticastSourceSettings": {
+                    "target": "com.amazonaws.mediaconnect#MulticastSourceSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "multicastSourceSettings"
                     }
                 },
                 "NetworkName": {

@@ -83,6 +83,16 @@ type UpdateAgreementInput struct {
 	// agreement.
 	Description *string
 
+	//  Determines whether or not unsigned messages from your trading partners will be
+	// accepted.
+	//
+	//   - ENABLED : Transfer Family rejects unsigned messages from your trading
+	//   partner.
+	//
+	//   - DISABLED (default value): Transfer Family accepts unsigned messages from
+	//   your trading partner.
+	EnforceMessageSigning types.EnforceMessageSigningType
+
 	// A unique identifier for the AS2 local profile.
 	//
 	// To change the local profile identifier, provide a new value here.
@@ -91,6 +101,18 @@ type UpdateAgreementInput struct {
 	// A unique identifier for the partner profile. To change the partner profile
 	// identifier, provide a new value here.
 	PartnerProfileId *string
+
+	//  Determines whether or not Transfer Family appends a unique string of
+	// characters to the end of the AS2 message payload filename when saving it.
+	//
+	//   - ENABLED : the filename provided by your trading parter is preserved when the
+	//   file is saved.
+	//
+	//   - DISABLED (default value): when Transfer Family saves the file, the filename
+	//   is adjusted, as described in [File names and locations].
+	//
+	// [File names and locations]: https://docs.aws.amazon.com/transfer/latest/userguide/send-as2-messages.html#file-names-as2
+	PreserveFilename types.PreserveFilenameType
 
 	// You can update the status for the agreement, either activating an inactive
 	// agreement or the reverse.

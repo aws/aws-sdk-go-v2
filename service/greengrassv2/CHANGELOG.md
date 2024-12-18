@@ -1,3 +1,7 @@
+# v1.36.0 (2024-12-16)
+
+* **Feature**: Add support for runtime in GetCoreDevice and ListCoreDevices APIs.
+
 # v1.35.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

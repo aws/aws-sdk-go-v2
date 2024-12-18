@@ -2119,6 +2119,9 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	case strings.EqualFold("CloudHsmInvalidRequestException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudHsmInvalidRequestException(response, errorBody)
 
+	case strings.EqualFold("CloudHsmResourceLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudHsmResourceLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("CloudHsmResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudHsmResourceNotFoundException(response, errorBody)
 
@@ -2354,6 +2357,41 @@ func awsAwsjson11_deserializeErrorCloudHsmInvalidRequestException(response *smit
 
 	output := &types.CloudHsmInvalidRequestException{}
 	err := awsAwsjson11_deserializeDocumentCloudHsmInvalidRequestException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorCloudHsmResourceLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.CloudHsmResourceLimitExceededException{}
+	err := awsAwsjson11_deserializeDocumentCloudHsmResourceLimitExceededException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -2927,6 +2965,46 @@ func awsAwsjson11_deserializeDocumentCloudHsmInvalidRequestException(v **types.C
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCloudHsmResourceLimitExceededException(v **types.CloudHsmResourceLimitExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CloudHsmResourceLimitExceededException
+	if *v == nil {
+		sv = &types.CloudHsmResourceLimitExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCloudHsmResourceNotFoundException(v **types.CloudHsmResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3134,6 +3212,15 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 					return fmt.Errorf("expected ClusterMode to be of type string, got %T instead", value)
 				}
 				sv.Mode = types.ClusterMode(jtv)
+			}
+
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
 			}
 
 		case "PreCoPassword":
@@ -3409,6 +3496,15 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
 				}
 				sv.EniIp = ptr.String(jtv)
+			}
+
+		case "EniIpV6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpV6Address to be of type string, got %T instead", value)
+				}
+				sv.EniIpV6 = ptr.String(jtv)
 			}
 
 		case "HsmId":

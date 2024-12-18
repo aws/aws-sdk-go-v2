@@ -62,7 +62,8 @@ type CreateLocationFsxOntapInput struct {
 	// This member is required.
 	StorageVirtualMachineArn *string
 
-	// Specifies a path to the file share in the SVM where you'll copy your data.
+	// Specifies a path to the file share in the SVM where you want to transfer data
+	// to or from.
 	//
 	// You can specify a junction path (also known as a mount point), qtree path (for
 	// NFS file shares), or share name (for SMB file shares). For example, your mount

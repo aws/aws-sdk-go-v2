@@ -11,6 +11,14 @@ import (
 )
 
 // Gets a list of Cloud9 development environment identifiers.
+//
+// Cloud9 is no longer available to new customers. Existing customers of Cloud9
+// can continue to use the service as normal. [Learn more"]
+//
+// Cloud9 is no longer available to new customers. Existing customers of Cloud9
+// can continue to use the service as normal. [Learn more"]
+//
+// [Learn more"]: http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/
 func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsInput, optFns ...func(*Options)) (*ListEnvironmentsOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentsInput{}

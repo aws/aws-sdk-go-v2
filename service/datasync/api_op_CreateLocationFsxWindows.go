@@ -79,8 +79,8 @@ type CreateLocationFsxWindowsInput struct {
 	// This member is required.
 	User *string
 
-	// Specifies the name of the Microsoft Active Directory domain that the FSx for
-	// Windows File Server file system belongs to.
+	// Specifies the name of the Windows domain that the FSx for Windows File Server
+	// file system belongs to.
 	//
 	// If you have multiple Active Directory domains in your environment, configuring
 	// this parameter makes sure that DataSync connects to the right file system.

@@ -348,12 +348,25 @@ type ConnectivityInfo struct {
 // runs the IoT Greengrass Core software.
 type CoreDevice struct {
 
+	// The computer architecture of the core device.
+	Architecture *string
+
 	// The name of the core device. This is also the name of the IoT thing.
 	CoreDeviceThingName *string
 
 	// The time at which the core device's status last updated, expressed in ISO 8601
 	// format.
 	LastStatusUpdateTimestamp *time.Time
+
+	// The operating system platform that the core device runs.
+	Platform *string
+
+	// The runtime for the core device. The runtime can be:
+	//
+	//   - aws_nucleus_classic
+	//
+	//   - aws_nucleus_lite
+	Runtime *string
 
 	// The status of the core device. Core devices can have the following statuses:
 	//

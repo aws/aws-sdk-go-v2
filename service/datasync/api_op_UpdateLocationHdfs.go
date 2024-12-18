@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates some parameters of a previously created location for a Hadoop
-// Distributed File System cluster.
+// Modifies the following configuration parameters of the Hadoop Distributed File
+// System (HDFS) transfer location that you're using with DataSync.
+//
+// For more information, see [Configuring DataSync transfers with an HDFS cluster].
+//
+// [Configuring DataSync transfers with an HDFS cluster]: https://docs.aws.amazon.com/datasync/latest/userguide/create-hdfs-location.html
 func (c *Client) UpdateLocationHdfs(ctx context.Context, params *UpdateLocationHdfsInput, optFns ...func(*Options)) (*UpdateLocationHdfsOutput, error) {
 	if params == nil {
 		params = &UpdateLocationHdfsInput{}

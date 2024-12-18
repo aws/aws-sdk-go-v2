@@ -1,3 +1,7 @@
+# v1.40.0 (2024-12-17)
+
+* **Feature**: Add Support for Backup Indexing
+
 # v1.39.8 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

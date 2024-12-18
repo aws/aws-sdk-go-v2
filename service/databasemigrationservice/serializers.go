@@ -7525,6 +7525,33 @@ func awsAwsjson11_serializeDocumentKafkaSettings(v *types.KafkaSettings, value s
 		ok.String(*v.Topic)
 	}
 
+	if v.UseLargeIntegerValue != nil {
+		ok := object.Key("UseLargeIntegerValue")
+		ok.Boolean(*v.UseLargeIntegerValue)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentKerberosAuthenticationSettings(v *types.KerberosAuthenticationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyCacheSecretIamArn != nil {
+		ok := object.Key("KeyCacheSecretIamArn")
+		ok.String(*v.KeyCacheSecretIamArn)
+	}
+
+	if v.KeyCacheSecretId != nil {
+		ok := object.Key("KeyCacheSecretId")
+		ok.String(*v.KeyCacheSecretId)
+	}
+
+	if v.Krb5FileContents != nil {
+		ok := object.Key("Krb5FileContents")
+		ok.String(*v.Krb5FileContents)
+	}
+
 	return nil
 }
 
@@ -7593,6 +7620,11 @@ func awsAwsjson11_serializeDocumentKinesisSettings(v *types.KinesisSettings, val
 		ok.String(*v.StreamArn)
 	}
 
+	if v.UseLargeIntegerValue != nil {
+		ok := object.Key("UseLargeIntegerValue")
+		ok.Boolean(*v.UseLargeIntegerValue)
+	}
+
 	return nil
 }
 
@@ -7658,6 +7690,11 @@ func awsAwsjson11_serializeDocumentMicrosoftSqlServerDataProviderSettings(v *typ
 func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.MicrosoftSQLServerSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AuthenticationMethod) > 0 {
+		ok := object.Key("AuthenticationMethod")
+		ok.String(string(v.AuthenticationMethod))
+	}
 
 	if v.BcpPacketSize != nil {
 		ok := object.Key("BcpPacketSize")
@@ -8138,6 +8175,11 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 		ok.String(*v.AsmUser)
 	}
 
+	if len(v.AuthenticationMethod) > 0 {
+		ok := object.Key("AuthenticationMethod")
+		ok.String(string(v.AuthenticationMethod))
+	}
+
 	if len(v.CharLengthSemantics) > 0 {
 		ok := object.Key("CharLengthSemantics")
 		ok.String(string(v.CharLengthSemantics))
@@ -8377,6 +8419,11 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 	if v.DdlArtifactsSchema != nil {
 		ok := object.Key("DdlArtifactsSchema")
 		ok.String(*v.DdlArtifactsSchema)
+	}
+
+	if v.DisableUnicodeSourceFilter != nil {
+		ok := object.Key("DisableUnicodeSourceFilter")
+		ok.Boolean(*v.DisableUnicodeSourceFilter)
 	}
 
 	if v.ExecuteTimeout != nil {
@@ -9854,6 +9901,13 @@ func awsAwsjson11_serializeOpDocumentCreateReplicationInstanceInput(v *CreateRep
 	if v.EngineVersion != nil {
 		ok := object.Key("EngineVersion")
 		ok.String(*v.EngineVersion)
+	}
+
+	if v.KerberosAuthenticationSettings != nil {
+		ok := object.Key("KerberosAuthenticationSettings")
+		if err := awsAwsjson11_serializeDocumentKerberosAuthenticationSettings(v.KerberosAuthenticationSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KmsKeyId != nil {
@@ -11925,6 +11979,13 @@ func awsAwsjson11_serializeOpDocumentModifyReplicationInstanceInput(v *ModifyRep
 	if v.EngineVersion != nil {
 		ok := object.Key("EngineVersion")
 		ok.String(*v.EngineVersion)
+	}
+
+	if v.KerberosAuthenticationSettings != nil {
+		ok := object.Key("KerberosAuthenticationSettings")
+		if err := awsAwsjson11_serializeDocumentKerberosAuthenticationSettings(v.KerberosAuthenticationSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MultiAZ != nil {

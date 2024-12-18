@@ -522,6 +522,31 @@ func (CurrentMetricName) Values() []CurrentMetricName {
 	}
 }
 
+type DateComparisonType string
+
+// Enum values for DateComparisonType
+const (
+	DateComparisonTypeGreaterThan          DateComparisonType = "GREATER_THAN"
+	DateComparisonTypeLessThan             DateComparisonType = "LESS_THAN"
+	DateComparisonTypeGreaterThanOrEqualTo DateComparisonType = "GREATER_THAN_OR_EQUAL_TO"
+	DateComparisonTypeLessThanOrEqualTo    DateComparisonType = "LESS_THAN_OR_EQUAL_TO"
+	DateComparisonTypeEqualTo              DateComparisonType = "EQUAL_TO"
+)
+
+// Values returns all known values for DateComparisonType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DateComparisonType) Values() []DateComparisonType {
+	return []DateComparisonType{
+		"GREATER_THAN",
+		"LESS_THAN",
+		"GREATER_THAN_OR_EQUAL_TO",
+		"LESS_THAN_OR_EQUAL_TO",
+		"EQUAL_TO",
+	}
+}
+
 type DeviceType string
 
 // Enum values for DeviceType
@@ -1072,6 +1097,7 @@ const (
 	InstanceAttributeTypeHighVolumeOutbound        InstanceAttributeType = "HIGH_VOLUME_OUTBOUND"
 	InstanceAttributeTypeEnhancedContactMonitoring InstanceAttributeType = "ENHANCED_CONTACT_MONITORING"
 	InstanceAttributeTypeEnhancedChatMonitoring    InstanceAttributeType = "ENHANCED_CHAT_MONITORING"
+	InstanceAttributeTypeMultiPartyChatConference  InstanceAttributeType = "MULTI_PARTY_CHAT_CONFERENCE"
 )
 
 // Values returns all known values for InstanceAttributeType. Note that this can
@@ -1091,6 +1117,7 @@ func (InstanceAttributeType) Values() []InstanceAttributeType {
 		"HIGH_VOLUME_OUTBOUND",
 		"ENHANCED_CONTACT_MONITORING",
 		"ENHANCED_CHAT_MONITORING",
+		"MULTI_PARTY_CHAT_CONFERENCE",
 	}
 }
 
@@ -1200,6 +1227,7 @@ const (
 	IntegrationTypeSesIdentity           IntegrationType = "SES_IDENTITY"
 	IntegrationTypeAnalyticsConnector    IntegrationType = "ANALYTICS_CONNECTOR"
 	IntegrationTypeCallTransferConnector IntegrationType = "CALL_TRANSFER_CONNECTOR"
+	IntegrationTypeCognitoUserPool       IntegrationType = "COGNITO_USER_POOL"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -1221,6 +1249,7 @@ func (IntegrationType) Values() []IntegrationType {
 		"SES_IDENTITY",
 		"ANALYTICS_CONNECTOR",
 		"CALL_TRANSFER_CONNECTOR",
+		"COGNITO_USER_POOL",
 	}
 }
 
@@ -1462,6 +1491,35 @@ func (OutboundMessageSourceType) Values() []OutboundMessageSourceType {
 	return []OutboundMessageSourceType{
 		"TEMPLATE",
 		"RAW",
+	}
+}
+
+type OverrideDays string
+
+// Enum values for OverrideDays
+const (
+	OverrideDaysSunday    OverrideDays = "SUNDAY"
+	OverrideDaysMonday    OverrideDays = "MONDAY"
+	OverrideDaysTuesday   OverrideDays = "TUESDAY"
+	OverrideDaysWednesday OverrideDays = "WEDNESDAY"
+	OverrideDaysThursday  OverrideDays = "THURSDAY"
+	OverrideDaysFriday    OverrideDays = "FRIDAY"
+	OverrideDaysSaturday  OverrideDays = "SATURDAY"
+)
+
+// Values returns all known values for OverrideDays. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OverrideDays) Values() []OverrideDays {
+	return []OverrideDays{
+		"SUNDAY",
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
 	}
 }
 

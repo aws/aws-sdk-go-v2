@@ -85,6 +85,10 @@ type AudienceGenerationJobDataSource struct {
 	//     ...
 	DataSource *S3ConfigMap
 
+	// Provides configuration information for the instances that will perform the
+	// compute work.
+	SqlComputeConfiguration ComputeConfiguration
+
 	// The protected SQL query parameters.
 	SqlParameters *ProtectedQuerySQLParameters
 

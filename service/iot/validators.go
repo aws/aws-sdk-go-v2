@@ -2590,6 +2590,26 @@ func (m *validateOpGetStatistics) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetThingConnectivityData struct {
+}
+
+func (*validateOpGetThingConnectivityData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetThingConnectivityData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetThingConnectivityDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetThingConnectivityDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTopicRuleDestination struct {
 }
 
@@ -4704,6 +4724,10 @@ func addOpGetPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetStatisticsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStatistics{}, middleware.After)
+}
+
+func addOpGetThingConnectivityDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetThingConnectivityData{}, middleware.After)
 }
 
 func addOpGetTopicRuleDestinationValidationMiddleware(stack *middleware.Stack) error {
@@ -9210,6 +9234,21 @@ func validateOpGetStatisticsInput(v *GetStatisticsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetStatisticsInput"}
 	if v.QueryString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetThingConnectivityDataInput(v *GetThingConnectivityDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetThingConnectivityDataInput"}
+	if v.ThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

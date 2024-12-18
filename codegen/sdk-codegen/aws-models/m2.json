@@ -1974,6 +1974,12 @@
                         "smithy.api#documentation": "<p>Configures the maintenance window that you want for the runtime environment. The maintenance window must have the format <code>ddd:hh24:mi-ddd:hh24:mi</code> and must be less than 24 hours. The following two examples are valid maintenance windows: <code>sun:23:45-mon:00:15</code> or <code>sat:01:00-sat:03:00</code>. </p>\n         <p>If you do not provide a value, a random system-generated value will be assigned.</p>"
                     }
                 },
+                "networkType": {
+                    "target": "com.amazonaws.m2#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type required for the runtime environment.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.m2#ClientToken",
                     "traits": {
@@ -2852,6 +2858,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the runtime environment was created.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.m2#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type supported by the runtime environment.</p>"
                     }
                 }
             },
@@ -3959,6 +3971,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of a customer managed key.</p>"
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.m2#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type supported by the runtime environment.</p>"
                     }
                 }
             }
@@ -5287,6 +5305,21 @@
                     "min": 1,
                     "max": 2000
                 }
+            }
+        },
+        "com.amazonaws.m2#NetworkType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ipv4",
+                        "name": "IPV4"
+                    },
+                    {
+                        "value": "dual",
+                        "name": "DUAL"
+                    }
+                ]
             }
         },
         "com.amazonaws.m2#NextToken": {

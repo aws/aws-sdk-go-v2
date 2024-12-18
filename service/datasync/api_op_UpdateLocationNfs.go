@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies some configurations of the Network File System (NFS) transfer location
-// that you're using with DataSync.
+// Modifies the following configuration parameters of the Network File System
+// (NFS) transfer location that you're using with DataSync.
 //
-// For more information, see [Configuring transfers to or from an NFS file server].
+// For more information, see [Configuring transfers with an NFS file server].
 //
-// [Configuring transfers to or from an NFS file server]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html
+// [Configuring transfers with an NFS file server]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html
 func (c *Client) UpdateLocationNfs(ctx context.Context, params *UpdateLocationNfsInput, optFns ...func(*Options)) (*UpdateLocationNfsOutput, error) {
 	if params == nil {
 		params = &UpdateLocationNfsInput{}

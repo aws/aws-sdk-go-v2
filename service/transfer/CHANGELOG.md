@@ -1,3 +1,7 @@
+# v1.55.0 (2024-12-18)
+
+* **Feature**: Added AS2 agreement configurations to control filename preservation and message signing enforcement. Added AS2 connector configuration to preserve content type from S3 objects.
+
 # v1.54.0 (2024-12-02)
 
 * **Feature**: AWS Transfer Family now offers Web apps that enables simple and secure access to data stored in Amazon S3.

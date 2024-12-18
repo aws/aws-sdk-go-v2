@@ -102,6 +102,19 @@ type DescribeRecoveryPointOutput struct {
 	// example, arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string
 
+	// This is the current status for the backup index associated with the specified
+	// recovery point.
+	//
+	// Statuses are: PENDING | ACTIVE | FAILED | DELETING
+	//
+	// A recovery point with an index that has the status of ACTIVE can be included in
+	// a search.
+	IndexStatus types.IndexStatus
+
+	// A string in the form of a detailed message explaining the status of a backup
+	// index associated with the recovery point.
+	IndexStatusMessage *string
+
 	// A Boolean value that is returned as TRUE if the specified recovery point is
 	// encrypted, or FALSE if the recovery point is not encrypted.
 	IsEncrypted bool

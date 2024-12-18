@@ -56,6 +56,10 @@ type CreateClusterInput struct {
 	// The mode to use in the cluster. The allowed values are FIPS and NON_FIPS .
 	Mode types.ClusterMode
 
+	// The NetworkType to create a cluster with. The allowed values are IPV4 and
+	// DUALSTACK .
+	NetworkType types.NetworkType
+
 	// The identifier (ID) or the Amazon Resource Name (ARN) of the cluster backup to
 	// restore. Use this value to restore the cluster from a backup instead of creating
 	// a new cluster. To find the backup ID or ARN, use DescribeBackups. If using a backup in another

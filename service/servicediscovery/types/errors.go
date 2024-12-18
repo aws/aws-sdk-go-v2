@@ -337,6 +337,35 @@ func (e *ServiceAlreadyExists) ErrorCode() string {
 }
 func (e *ServiceAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The attribute can't be added to the service because you've exceeded the quota
+// for the number of attributes you can add to a service.
+type ServiceAttributesLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceAttributesLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceAttributesLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceAttributesLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceAttributesLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceAttributesLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // No service exists with the specified ID.
 type ServiceNotFound struct {
 	Message *string

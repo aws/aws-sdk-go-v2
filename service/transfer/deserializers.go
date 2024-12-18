@@ -8618,6 +8618,15 @@ func awsAwsjson11_deserializeDocumentAs2ConnectorConfig(v **types.As2ConnectorCo
 				sv.PartnerProfileId = ptr.String(jtv)
 			}
 
+		case "PreserveContentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PreserveContentType to be of type string, got %T instead", value)
+				}
+				sv.PreserveContentType = types.PreserveContentType(jtv)
+			}
+
 		case "SigningAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9257,6 +9266,15 @@ func awsAwsjson11_deserializeDocumentDescribedAgreement(v **types.DescribedAgree
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "EnforceMessageSigning":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnforceMessageSigningType to be of type string, got %T instead", value)
+				}
+				sv.EnforceMessageSigning = types.EnforceMessageSigningType(jtv)
+			}
+
 		case "LocalProfileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9273,6 +9291,15 @@ func awsAwsjson11_deserializeDocumentDescribedAgreement(v **types.DescribedAgree
 					return fmt.Errorf("expected ProfileId to be of type string, got %T instead", value)
 				}
 				sv.PartnerProfileId = ptr.String(jtv)
+			}
+
+		case "PreserveFilename":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PreserveFilenameType to be of type string, got %T instead", value)
+				}
+				sv.PreserveFilename = types.PreserveFilenameType(jtv)
 			}
 
 		case "ServerId":

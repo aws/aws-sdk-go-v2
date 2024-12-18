@@ -11520,6 +11520,55 @@ func awsRestjson1_deserializeDocumentAdditionalInfoValueList(v *[]string, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAlarm(v **types.Alarm, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Alarm
+	if *v == nil {
+		sv = &types.Alarm{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "alarmArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.AlarmArn = ptr.String(jtv)
+			}
+
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.Source = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAlarmRecommendation(v **types.AlarmRecommendation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13373,6 +13422,15 @@ func awsRestjson1_deserializeDocumentBatchUpdateRecommendationStatusSuccessfulEn
 
 	for key, value := range shape {
 		switch key {
+		case "appComponentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityName255 to be of type string, got %T instead", value)
+				}
+				sv.AppComponentId = ptr.String(jtv)
+			}
+
 		case "entryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14535,6 +14593,55 @@ func awsRestjson1_deserializeDocumentEventSubscriptionList(v *[]types.EventSubsc
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExperiment(v **types.Experiment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Experiment
+	if *v == nil {
+		sv = &types.Experiment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "experimentArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.ExperimentArn = ptr.String(jtv)
+			}
+
+		case "experimentTemplateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.ExperimentTemplateId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFailedGroupingRecommendationEntries(v *[]types.FailedGroupingRecommendationEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15586,6 +15693,11 @@ func awsRestjson1_deserializeDocumentRecommendationItem(v **types.Recommendation
 				sv.AlreadyImplemented = ptr.Bool(jtv)
 			}
 
+		case "discoveredAlarm":
+			if err := awsRestjson1_deserializeDocumentAlarm(&sv.DiscoveredAlarm, value); err != nil {
+				return err
+			}
+
 		case "excluded":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -15602,6 +15714,11 @@ func awsRestjson1_deserializeDocumentRecommendationItem(v **types.Recommendation
 					return fmt.Errorf("expected ExcludeRecommendationReason to be of type string, got %T instead", value)
 				}
 				sv.ExcludeReason = types.ExcludeRecommendationReason(jtv)
+			}
+
+		case "latestDiscoveredExperiment":
+			if err := awsRestjson1_deserializeDocumentExperiment(&sv.LatestDiscoveredExperiment, value); err != nil {
+				return err
 			}
 
 		case "resourceId":
@@ -17261,6 +17378,15 @@ func awsRestjson1_deserializeDocumentTestRecommendation(v **types.TestRecommenda
 
 	for key, value := range shape {
 		switch key {
+		case "appComponentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityName255 to be of type string, got %T instead", value)
+				}
+				sv.AppComponentId = ptr.String(jtv)
+			}
+
 		case "appComponentName":
 			if value != nil {
 				jtv, ok := value.(string)

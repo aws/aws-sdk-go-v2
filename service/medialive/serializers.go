@@ -12217,9 +12217,29 @@ func awsRestjson1_serializeDocumentCmafIngestGroupSettings(v *types.CmafIngestGr
 		}
 	}
 
+	if len(v.KlvBehavior) > 0 {
+		ok := object.Key("klvBehavior")
+		ok.String(string(v.KlvBehavior))
+	}
+
+	if v.KlvNameModifier != nil {
+		ok := object.Key("klvNameModifier")
+		ok.String(*v.KlvNameModifier)
+	}
+
 	if len(v.NielsenId3Behavior) > 0 {
 		ok := object.Key("nielsenId3Behavior")
 		ok.String(string(v.NielsenId3Behavior))
+	}
+
+	if v.NielsenId3NameModifier != nil {
+		ok := object.Key("nielsenId3NameModifier")
+		ok.String(*v.NielsenId3NameModifier)
+	}
+
+	if v.Scte35NameModifier != nil {
+		ok := object.Key("scte35NameModifier")
+		ok.String(*v.Scte35NameModifier)
 	}
 
 	if len(v.Scte35Type) > 0 {
@@ -15434,9 +15454,19 @@ func awsRestjson1_serializeDocumentMediaPackageOutputDestinationSettings(v *type
 	object := value.Object()
 	defer object.Close()
 
+	if v.ChannelGroup != nil {
+		ok := object.Key("channelGroup")
+		ok.String(*v.ChannelGroup)
+	}
+
 	if v.ChannelId != nil {
 		ok := object.Key("channelId")
 		ok.String(*v.ChannelId)
+	}
+
+	if v.ChannelName != nil {
+		ok := object.Key("channelName")
+		ok.String(*v.ChannelName)
 	}
 
 	return nil

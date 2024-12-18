@@ -11,8 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-//
 // Creates a new queue for the specified Amazon Connect instance.
 //
 //   - If the phone number is claimed to a traffic distribution group that was

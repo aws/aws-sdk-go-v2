@@ -10,6 +10,9 @@
 //
 // For more information about Cloud9, see the [Cloud9 User Guide].
 //
+// Cloud9 is no longer available to new customers. Existing customers of Cloud9
+// can continue to use the service as normal. [Learn more"]
+//
 // Cloud9 supports these operations:
 //
 //   - CreateEnvironmentEC2 : Creates an Cloud9 development environment, launches
@@ -44,4 +47,5 @@
 //     environment member for an environment.
 //
 // [Cloud9 User Guide]: https://docs.aws.amazon.com/cloud9/latest/user-guide
+// [Learn more"]: http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/
 package cloud9

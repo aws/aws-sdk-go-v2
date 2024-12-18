@@ -60530,6 +60530,11 @@ func awsEc2query_serializeOpDocumentCreateSnapshotInput(v *CreateSnapshotInput, 
 		objectKey.Boolean(*v.DryRun)
 	}
 
+	if len(v.Location) > 0 {
+		objectKey := object.Key("Location")
+		objectKey.String(string(v.Location))
+	}
+
 	if v.OutpostArn != nil {
 		objectKey := object.Key("OutpostArn")
 		objectKey.String(*v.OutpostArn)
@@ -60574,6 +60579,11 @@ func awsEc2query_serializeOpDocumentCreateSnapshotsInput(v *CreateSnapshotsInput
 		if err := awsEc2query_serializeDocumentInstanceSpecification(v.InstanceSpecification, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if len(v.Location) > 0 {
+		objectKey := object.Key("Location")
+		objectKey.String(string(v.Location))
 	}
 
 	if v.OutpostArn != nil {

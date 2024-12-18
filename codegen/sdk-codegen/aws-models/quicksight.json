@@ -9141,6 +9141,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When you create the dataset, Amazon QuickSight adds the dataset to these folders.</p>"
                     }
+                },
+                "PerformanceConfiguration": {
+                    "target": "com.amazonaws.quicksight#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the performance optimization of the dataset that contains a <code>UniqueKey</code> configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13417,6 +13423,12 @@
                     "target": "com.amazonaws.quicksight#DatasetParameterList",
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters that are declared in a dataset.</p>"
+                    }
+                },
+                "PerformanceConfiguration": {
+                    "target": "com.amazonaws.quicksight#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance optimization configuration of a dataset.</p>"
                     }
                 }
             },
@@ -40442,6 +40454,20 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#PerformanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "UniqueKeys": {
+                    "target": "com.amazonaws.quicksight#UniqueKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>UniqueKey</code> configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the performance optimization of the dataset that contains a <code>UniqueKey</code> configuration.</p>"
+            }
+        },
         "com.amazonaws.quicksight#PeriodOverPeriodComputation": {
             "type": "structure",
             "members": {
@@ -56274,6 +56300,45 @@
                 "smithy.api#pattern": "^[^\\u0000-\\u00FF]$"
             }
         },
+        "com.amazonaws.quicksight#UniqueKey": {
+            "type": "structure",
+            "members": {
+                "ColumnNames": {
+                    "target": "com.amazonaws.quicksight#UniqueKeyColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column that is referenced in the <code>UniqueKey</code> configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>UniqueKey</code> configuration that references a dataset column.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#UniqueKeyColumnNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ColumnName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UniqueKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#UniqueKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.quicksight#UniqueValuesComputation": {
             "type": "structure",
             "members": {
@@ -58186,6 +58251,12 @@
                     "target": "com.amazonaws.quicksight#DatasetParameterList",
                     "traits": {
                         "smithy.api#documentation": "<p>The parameter declarations of the dataset.</p>"
+                    }
+                },
+                "PerformanceConfiguration": {
+                    "target": "com.amazonaws.quicksight#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the performance optimization of the dataset that contains a <code>UniqueKey</code> configuration.</p>"
                     }
                 }
             },

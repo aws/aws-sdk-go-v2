@@ -3150,6 +3150,17 @@ func awsRestjson1_serializeDocumentEFSVolumeConfiguration(v *types.EFSVolumeConf
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEksAnnotationsMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEksConfiguration(v *types.EksConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3409,6 +3420,11 @@ func awsRestjson1_serializeDocumentEksContainerVolumeMount(v *types.EksContainer
 		ok.Boolean(*v.ReadOnly)
 	}
 
+	if v.SubPath != nil {
+		ok := object.Key("subPath")
+		ok.String(*v.SubPath)
+	}
+
 	return nil
 }
 
@@ -3480,11 +3496,40 @@ func awsRestjson1_serializeDocumentEksMetadata(v *types.EksMetadata, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.Annotations != nil {
+		ok := object.Key("annotations")
+		if err := awsRestjson1_serializeDocumentEksAnnotationsMap(v.Annotations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Labels != nil {
 		ok := object.Key("labels")
 		if err := awsRestjson1_serializeDocumentEksLabelsMap(v.Labels, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("namespace")
+		ok.String(*v.Namespace)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksPersistentVolumeClaim(v *types.EksPersistentVolumeClaim, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClaimName != nil {
+		ok := object.Key("claimName")
+		ok.String(*v.ClaimName)
+	}
+
+	if v.ReadOnly != nil {
+		ok := object.Key("readOnly")
+		ok.Boolean(*v.ReadOnly)
 	}
 
 	return nil
@@ -3657,6 +3702,13 @@ func awsRestjson1_serializeDocumentEksVolume(v *types.EksVolume, value smithyjso
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.PersistentVolumeClaim != nil {
+		ok := object.Key("persistentVolumeClaim")
+		if err := awsRestjson1_serializeDocumentEksPersistentVolumeClaim(v.PersistentVolumeClaim, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Secret != nil {

@@ -7963,6 +7963,25 @@ func (SnapshotBlockPublicAccessState) Values() []SnapshotBlockPublicAccessState 
 	}
 }
 
+type SnapshotLocationEnum string
+
+// Enum values for SnapshotLocationEnum
+const (
+	SnapshotLocationEnumRegional SnapshotLocationEnum = "regional"
+	SnapshotLocationEnumLocal    SnapshotLocationEnum = "local"
+)
+
+// Values returns all known values for SnapshotLocationEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotLocationEnum) Values() []SnapshotLocationEnum {
+	return []SnapshotLocationEnum{
+		"regional",
+		"local",
+	}
+}
+
 type SnapshotState string
 
 // Enum values for SnapshotState

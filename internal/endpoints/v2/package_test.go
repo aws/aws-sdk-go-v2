@@ -1303,7 +1303,7 @@ func TestLogDeprecated(t *testing.T) {
 						Logger: log.New(buffer, "", 0),
 					}, func(t *testing.T) {
 						if diff := cmpDiff("WARN endpoint identifier \"bar\", url \"https://foo.bar.bar.tld\" marked as deprecated\n", buffer.String()); len(diff) > 0 {
-							t.Errorf(diff)
+							t.Error(diff)
 						}
 					}
 			},
@@ -1326,7 +1326,7 @@ func TestLogDeprecated(t *testing.T) {
 						Logger: log.New(buffer, "", 0),
 					}, func(t *testing.T) {
 						if diff := cmpDiff("WARN endpoint identifier \"bar\", url \"https://foo-fips.bar.bar.tld\" marked as deprecated\n", buffer.String()); len(diff) > 0 {
-							t.Errorf(diff)
+							t.Error(diff)
 						}
 					}
 			},
@@ -1352,7 +1352,7 @@ func TestLogDeprecated(t *testing.T) {
 			}
 
 			if diff := cmpDiff(tt.Expected, endpoint); len(diff) > 0 {
-				t.Errorf(diff)
+				t.Error(diff)
 			}
 
 			if verifyLog != nil {

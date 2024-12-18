@@ -74,7 +74,8 @@ type GetCommandOutput struct {
 	// Indicates whether the command is being deleted.
 	PendingDeletion *bool
 
-	// The IAM role that allows access to retrieve information about the command.
+	// The IAM role that you provided when creating the command with AWS-IoT-FleetWise
+	// as the namespace.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

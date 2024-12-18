@@ -32,6 +32,14 @@ type DescribeMigrationProjectsInput struct {
 
 	// Filters applied to the migration projects described in the form of key-value
 	// pairs.
+	//
+	// Valid filter names and values:
+	//
+	//   - instance-profile-identifier, instance profile arn or name
+	//
+	//   - data-provider-identifier, data provider arn or name
+	//
+	//   - migration-project-identifier, migration project arn or name
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the

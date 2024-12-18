@@ -221,6 +221,48 @@ func (CopyJobStatus) Values() []CopyJobStatus {
 	}
 }
 
+type Index string
+
+// Enum values for Index
+const (
+	IndexEnabled  Index = "ENABLED"
+	IndexDisabled Index = "DISABLED"
+)
+
+// Values returns all known values for Index. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Index) Values() []Index {
+	return []Index{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type IndexStatus string
+
+// Enum values for IndexStatus
+const (
+	IndexStatusPending  IndexStatus = "PENDING"
+	IndexStatusActive   IndexStatus = "ACTIVE"
+	IndexStatusFailed   IndexStatus = "FAILED"
+	IndexStatusDeleting IndexStatus = "DELETING"
+)
+
+// Values returns all known values for IndexStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IndexStatus) Values() []IndexStatus {
+	return []IndexStatus{
+		"PENDING",
+		"ACTIVE",
+		"FAILED",
+		"DELETING",
+	}
+}
+
 type LegalHoldStatus string
 
 // Enum values for LegalHoldStatus

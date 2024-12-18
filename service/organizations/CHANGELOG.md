@@ -1,3 +1,7 @@
+# v1.36.1 (2024-12-12)
+
+* No change notes available for this release.
+
 # v1.36.0 (2024-12-02)
 
 * **Feature**: Add support for policy operations on the DECLARATIVE_POLICY_EC2 policy type.

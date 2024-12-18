@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specified service. If the service still contains one or more
-// registered instances, the request fails.
+// Deletes a specified service and all associated service attributes. If the
+// service still contains one or more registered instances, the request fails.
 func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, optFns ...func(*Options)) (*DeleteServiceOutput, error) {
 	if params == nil {
 		params = &DeleteServiceInput{}

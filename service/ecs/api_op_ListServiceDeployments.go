@@ -46,8 +46,8 @@ type ListServiceDeploymentsInput struct {
 	// The cluster that hosts the service. This can either be the cluster name or ARN.
 	// Starting April 15, 2023, Amazon Web Services will not onboard new customers to
 	// Amazon Elastic Inference (EI), and will help current customers migrate their
-	// workloads to options that offer better price and performanceIf you don't specify
-	// a cluster, default is used.
+	// workloads to options that offer better price and performance. If you don't
+	// specify a cluster, default is used.
 	Cluster *string
 
 	// An optional filter you can use to narrow the results by the service creation

@@ -1034,6 +1034,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The protected SQL query parameters.</p>"
                     }
+                },
+                "sqlComputeConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#ComputeConfiguration"
                 }
             },
             "traits": {
@@ -9925,7 +9928,7 @@
                 "dataSource": {
                     "target": "com.amazonaws.cleanroomsml#ModelInferenceDataSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines he data source that is used for the trained model inference job.</p>",
+                        "smithy.api#documentation": "<p>Defines the data source that is used for the trained model inference job.</p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -10698,6 +10698,11 @@ func awsRestjson1_deserializeDocumentBridgeNetworkSource(v **types.BridgeNetwork
 				sv.MulticastIp = ptr.String(jtv)
 			}
 
+		case "multicastSourceSettings":
+			if err := awsRestjson1_deserializeDocumentMulticastSourceSettings(&sv.MulticastSourceSettings, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13099,6 +13104,46 @@ func awsRestjson1_deserializeDocumentMonitoringConfig(v **types.MonitoringConfig
 					return fmt.Errorf("expected ThumbnailState to be of type string, got %T instead", value)
 				}
 				sv.ThumbnailState = types.ThumbnailState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMulticastSourceSettings(v **types.MulticastSourceSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MulticastSourceSettings
+	if *v == nil {
+		sv = &types.MulticastSourceSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "multicastSourceIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.MulticastSourceIp = ptr.String(jtv)
 			}
 
 		default:

@@ -7806,6 +7806,11 @@ func awsAwsjson11_serializeOpDocumentRegisterTaskDefinitionInput(v *RegisterTask
 		ok.String(*v.Cpu)
 	}
 
+	if v.EnableFaultInjection != nil {
+		ok := object.Key("enableFaultInjection")
+		ok.Boolean(*v.EnableFaultInjection)
+	}
+
 	if v.EphemeralStorage != nil {
 		ok := object.Key("ephemeralStorage")
 		if err := awsAwsjson11_serializeDocumentEphemeralStorage(v.EphemeralStorage, ok); err != nil {

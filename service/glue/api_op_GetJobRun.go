@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves the metadata for a given job run. Job run history is accessible for
-// 90 days for your workflow and job run.
+// 365 days for your workflow and job run.
 func (c *Client) GetJobRun(ctx context.Context, params *GetJobRunInput, optFns ...func(*Options)) (*GetJobRunOutput, error) {
 	if params == nil {
 		params = &GetJobRunInput{}
