@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates some parameters of an existing DataSync location for an object storage
-// system.
+// Modifies the following configuration parameters of the object storage transfer
+// location that you're using with DataSync.
+//
+// For more information, see [Configuring DataSync transfers with an object storage system].
+//
+// [Configuring DataSync transfers with an object storage system]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html
 func (c *Client) UpdateLocationObjectStorage(ctx context.Context, params *UpdateLocationObjectStorageInput, optFns ...func(*Options)) (*UpdateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &UpdateLocationObjectStorageInput{}

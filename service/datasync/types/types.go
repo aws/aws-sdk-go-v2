@@ -194,8 +194,8 @@ type FsxProtocol struct {
 }
 
 // Specifies the Network File System (NFS) protocol configuration that DataSync
-// uses to access your Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP file
-// system.
+// uses to access your FSx for OpenZFS file system or FSx for ONTAP file system's
+// storage virtual machine (SVM).
 type FsxProtocolNfs struct {
 
 	// Specifies how DataSync can access a location using the NFS protocol.
@@ -205,10 +205,10 @@ type FsxProtocolNfs struct {
 }
 
 // Specifies the Server Message Block (SMB) protocol configuration that DataSync
-// uses to access your Amazon FSx for NetApp ONTAP file system. For more
-// information, see [Accessing FSx for ONTAP file systems].
+// uses to access your Amazon FSx for NetApp ONTAP file system's storage virtual
+// machine (SVM). For more information, see [Providing DataSync access to FSx for ONTAP file systems].
 //
-// [Accessing FSx for ONTAP file systems]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access
+// [Providing DataSync access to FSx for ONTAP file systems]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access
 type FsxProtocolSmb struct {
 
 	// Specifies the password of a user who has permission to access your SVM.
@@ -227,16 +227,72 @@ type FsxProtocolSmb struct {
 	// This member is required.
 	User *string
 
-	// Specifies the fully qualified domain name (FQDN) of the Microsoft Active
-	// Directory that your storage virtual machine (SVM) belongs to.
+	// Specifies the name of the Windows domain that your storage virtual machine
+	// (SVM) belongs to.
 	//
 	// If you have multiple domains in your environment, configuring this setting
 	// makes sure that DataSync connects to the right SVM.
+	//
+	// If you have multiple Active Directory domains in your environment, configuring
+	// this parameter makes sure that DataSync connects to the right SVM.
 	Domain *string
 
 	// Specifies the version of the Server Message Block (SMB) protocol that DataSync
 	// uses to access an SMB file server.
 	MountOptions *SmbMountOptions
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the data transfer protocol that DataSync uses to access your Amazon
+// FSx file system.
+//
+// You can't update the Network File System (NFS) protocol configuration for FSx
+// for ONTAP locations. DataSync currently only supports NFS version 3 with this
+// location type.
+type FsxUpdateProtocol struct {
+
+	// Specifies the Network File System (NFS) protocol configuration that DataSync
+	// uses to access your FSx for OpenZFS file system or FSx for ONTAP file system's
+	// storage virtual machine (SVM).
+	NFS *FsxProtocolNfs
+
+	// Specifies the Server Message Block (SMB) protocol configuration that DataSync
+	// uses to access your FSx for ONTAP file system's storage virtual machine (SVM).
+	SMB *FsxUpdateProtocolSmb
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the Server Message Block (SMB) protocol configuration that DataSync
+// uses to access your Amazon FSx for NetApp ONTAP file system's storage virtual
+// machine (SVM). For more information, see [Providing DataSync access to FSx for ONTAP file systems].
+//
+// [Providing DataSync access to FSx for ONTAP file systems]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access
+type FsxUpdateProtocolSmb struct {
+
+	// Specifies the name of the Windows domain that your storage virtual machine
+	// (SVM) belongs to.
+	//
+	// If you have multiple Active Directory domains in your environment, configuring
+	// this parameter makes sure that DataSync connects to the right SVM.
+	Domain *string
+
+	// Specifies the version of the Server Message Block (SMB) protocol that DataSync
+	// uses to access an SMB file server.
+	MountOptions *SmbMountOptions
+
+	// Specifies the password of a user who has permission to access your SVM.
+	Password *string
+
+	// Specifies a user that can mount and access the files, folders, and metadata in
+	// your SVM.
+	//
+	// For information about choosing a user with the right level of access for your
+	// transfer, see [Using the SMB protocol].
+	//
+	// [Using the SMB protocol]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb
+	User *string
 
 	noSmithyDocumentSerde
 }
@@ -1143,9 +1199,9 @@ type ResourceMetrics struct {
 // Specifies the Amazon Resource Name (ARN) of the Identity and Access Management
 // (IAM) role that DataSync uses to access your S3 bucket.
 //
-// For more information, see [Accessing S3 buckets].
+// For more information, see [Providing DataSync access to S3 buckets].
 //
-// [Accessing S3 buckets]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access
+// [Providing DataSync access to S3 buckets]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access
 type S3Config struct {
 
 	// Specifies the ARN of the IAM role that DataSync uses to access your S3 bucket.

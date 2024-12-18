@@ -1,0 +1,8 @@
+{
+    "id": "b8e3aa73-d4f5-448a-ba67-7f7df43ed7f1",
+    "type": "feature",
+    "description": "Releasing minor partition endpoint updates",
+    "modules": [
+        "service/budgets"
+    ]
+}

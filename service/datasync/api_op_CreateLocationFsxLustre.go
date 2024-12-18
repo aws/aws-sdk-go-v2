@@ -34,25 +34,34 @@ func (c *Client) CreateLocationFsxLustre(ctx context.Context, params *CreateLoca
 
 type CreateLocationFsxLustreInput struct {
 
-	// The Amazon Resource Name (ARN) for the FSx for Lustre file system.
+	// Specifies the Amazon Resource Name (ARN) of the FSx for Lustre file system.
 	//
 	// This member is required.
 	FsxFilesystemArn *string
 
-	// The Amazon Resource Names (ARNs) of the security groups that are used to
-	// configure the FSx for Lustre file system.
+	// Specifies the Amazon Resource Names (ARNs) of up to five security groups that
+	// provide access to your FSx for Lustre file system.
+	//
+	// The security groups must be able to access the file system's ports. The file
+	// system must also allow access from the security groups. For information about
+	// file system access, see the [Amazon FSx for Lustre User Guide].
+	//
+	// [Amazon FSx for Lustre User Guide]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/limit-access-security-groups.html
 	//
 	// This member is required.
 	SecurityGroupArns []string
 
-	// A subdirectory in the location's path. This subdirectory in the FSx for Lustre
-	// file system is used to read data from the FSx for Lustre source location or
-	// write data to the FSx for Lustre destination.
+	// Specifies a mount path for your FSx for Lustre file system. The path can
+	// include subdirectories.
+	//
+	// When the location is used as a source, DataSync reads data from the mount path.
+	// When the location is used as a destination, DataSync writes data to the mount
+	// path. If you don't include this parameter, DataSync uses the file system's root
+	// directory ( / ).
 	Subdirectory *string
 
-	// The key-value pair that represents a tag that you want to add to the resource.
-	// The value can be an empty string. This value helps you manage, filter, and
-	// search for your resources. We recommend that you create a name tag for your
+	// Specifies labels that help you categorize, filter, and search for your Amazon
+	// Web Services resources. We recommend creating at least a name tag for your
 	// location.
 	Tags []types.TagListEntry
 
@@ -61,8 +70,8 @@ type CreateLocationFsxLustreInput struct {
 
 type CreateLocationFsxLustreOutput struct {
 
-	// The Amazon Resource Name (ARN) of the FSx for Lustre file system location
-	// that's created.
+	// The Amazon Resource Name (ARN) of the FSx for Lustre file system location that
+	// you created.
 	LocationArn *string
 
 	// Metadata pertaining to the operation's result.

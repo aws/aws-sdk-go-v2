@@ -1802,6 +1802,18 @@ func TestCheckSnapshot_GetStatistics(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetThingConnectivityData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetThingConnectivityData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetThingConnectivityData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTopicRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTopicRule(context.Background(), nil, func(o *Options) {
@@ -5022,6 +5034,18 @@ func TestUpdateSnapshot_GetStatistics(t *testing.T) {
 	_, err := svc.GetStatistics(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetThingConnectivityData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetThingConnectivityData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetThingConnectivityData")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

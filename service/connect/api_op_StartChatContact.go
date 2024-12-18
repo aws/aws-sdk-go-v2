@@ -102,6 +102,10 @@ type StartChatContactInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
+	// The customer's identification number. For example, the CustomerId may be a
+	// customer number from your CRM.
+	CustomerId *string
+
 	// The initial message to be sent to the newly created chat. If you have a Lex bot
 	// in your flow, the initial message is not delivered to the Lex bot.
 	InitialMessage *types.ChatMessage

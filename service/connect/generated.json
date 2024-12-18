@@ -255,6 +255,7 @@
         "api_op_UpdateHoursOfOperationOverride.go",
         "api_op_UpdateInstanceAttribute.go",
         "api_op_UpdateInstanceStorageConfig.go",
+        "api_op_UpdateParticipantAuthentication.go",
         "api_op_UpdateParticipantRoleConfig.go",
         "api_op_UpdatePhoneNumber.go",
         "api_op_UpdatePhoneNumberMetadata.go",

@@ -1,0 +1,8 @@
+{
+    "id": "239e820f-d89e-4ace-b07f-1e4d404079ac",
+    "type": "documentation",
+    "description": "Added support for Apache Airflow version 2.10.3 to MWAA.",
+    "modules": [
+        "service/mwaa"
+    ]
+}

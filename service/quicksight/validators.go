@@ -15035,6 +15035,23 @@ func validatePercentageDisplayFormatConfiguration(v *types.PercentageDisplayForm
 	}
 }
 
+func validatePerformanceConfiguration(v *types.PerformanceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PerformanceConfiguration"}
+	if v.UniqueKeys != nil {
+		if err := validateUniqueKeyList(v.UniqueKeys); err != nil {
+			invalidParams.AddNested("UniqueKeys", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePeriodOverPeriodComputation(v *types.PeriodOverPeriodComputation) error {
 	if v == nil {
 		return nil
@@ -20039,6 +20056,38 @@ func validateUnaggregatedFieldList(v []types.UnaggregatedField) error {
 	}
 }
 
+func validateUniqueKey(v *types.UniqueKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UniqueKey"}
+	if v.ColumnNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUniqueKeyList(v []types.UniqueKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UniqueKeyList"}
+	for i := range v {
+		if err := validateUniqueKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUniqueValuesComputation(v *types.UniqueValuesComputation) error {
 	if v == nil {
 		return nil
@@ -21055,6 +21104,11 @@ func validateOpCreateDataSetInput(v *CreateDataSetInput) error {
 	if v.DatasetParameters != nil {
 		if err := validateDatasetParameterList(v.DatasetParameters); err != nil {
 			invalidParams.AddNested("DatasetParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PerformanceConfiguration != nil {
+		if err := validatePerformanceConfiguration(v.PerformanceConfiguration); err != nil {
+			invalidParams.AddNested("PerformanceConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -24559,6 +24613,11 @@ func validateOpUpdateDataSetInput(v *UpdateDataSetInput) error {
 	if v.DatasetParameters != nil {
 		if err := validateDatasetParameterList(v.DatasetParameters); err != nil {
 			invalidParams.AddNested("DatasetParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PerformanceConfiguration != nil {
+		if err := validatePerformanceConfiguration(v.PerformanceConfiguration); err != nil {
+			invalidParams.AddNested("PerformanceConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

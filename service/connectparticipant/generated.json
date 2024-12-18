@@ -8,11 +8,13 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_CancelParticipantAuthentication.go",
         "api_op_CompleteAttachmentUpload.go",
         "api_op_CreateParticipantConnection.go",
         "api_op_DescribeView.go",
         "api_op_DisconnectParticipant.go",
         "api_op_GetAttachment.go",
+        "api_op_GetAuthenticationUrl.go",
         "api_op_GetTranscript.go",
         "api_op_SendEvent.go",
         "api_op_SendMessage.go",

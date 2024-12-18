@@ -3026,6 +3026,18 @@ func TestCheckSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateParticipantAuthentication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateParticipantAuthentication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateParticipantAuthentication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateParticipantRoleConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateParticipantRoleConfig(context.Background(), nil, func(o *Options) {
@@ -6366,6 +6378,18 @@ func TestUpdateSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 	_, err := svc.UpdateInstanceStorageConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateInstanceStorageConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateParticipantAuthentication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateParticipantAuthentication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateParticipantAuthentication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

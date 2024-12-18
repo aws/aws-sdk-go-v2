@@ -79,6 +79,10 @@ type UpdateDataSetInput struct {
 	// tables.
 	LogicalTableMap map[string]types.LogicalTable
 
+	// The configuration for the performance optimization of the dataset that contains
+	// a UniqueKey configuration.
+	PerformanceConfiguration *types.PerformanceConfiguration
+
 	// The row-level security configuration for the data you want to create.
 	RowLevelPermissionDataSet *types.RowLevelPermissionDataSet
 

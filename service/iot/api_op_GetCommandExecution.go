@@ -104,7 +104,8 @@ type GetCommandExecutionOutput struct {
 	// is being performed.
 	TargetArn *string
 
-	// The time to live (TTL) parameter for the GetCommandExecution API.
+	// The time to live (TTL) parameter that indicates the duration for which
+	// executions will be retained in your account. The default value is six months.
 	TimeToLive *time.Time
 
 	// Metadata pertaining to the operation's result.

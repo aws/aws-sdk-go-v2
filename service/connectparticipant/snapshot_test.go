@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CancelParticipantAuthentication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelParticipantAuthentication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelParticipantAuthentication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CompleteAttachmentUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CompleteAttachmentUpload(context.Background(), nil, func(o *Options) {
@@ -122,6 +134,18 @@ func TestCheckSnapshot_GetAttachment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAuthenticationUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAuthenticationUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAuthenticationUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTranscript(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTranscript(context.Background(), nil, func(o *Options) {
@@ -169,6 +193,18 @@ func TestCheckSnapshot_StartAttachmentUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CancelParticipantAuthentication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelParticipantAuthentication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelParticipantAuthentication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CompleteAttachmentUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CompleteAttachmentUpload(context.Background(), nil, func(o *Options) {
@@ -222,6 +258,18 @@ func TestUpdateSnapshot_GetAttachment(t *testing.T) {
 	_, err := svc.GetAttachment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAuthenticationUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAuthenticationUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAuthenticationUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

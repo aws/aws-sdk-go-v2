@@ -1097,6 +1097,7 @@ const (
 	InstanceAttributeTypeHighVolumeOutbound        InstanceAttributeType = "HIGH_VOLUME_OUTBOUND"
 	InstanceAttributeTypeEnhancedContactMonitoring InstanceAttributeType = "ENHANCED_CONTACT_MONITORING"
 	InstanceAttributeTypeEnhancedChatMonitoring    InstanceAttributeType = "ENHANCED_CHAT_MONITORING"
+	InstanceAttributeTypeMultiPartyChatConference  InstanceAttributeType = "MULTI_PARTY_CHAT_CONFERENCE"
 )
 
 // Values returns all known values for InstanceAttributeType. Note that this can
@@ -1116,6 +1117,7 @@ func (InstanceAttributeType) Values() []InstanceAttributeType {
 		"HIGH_VOLUME_OUTBOUND",
 		"ENHANCED_CONTACT_MONITORING",
 		"ENHANCED_CHAT_MONITORING",
+		"MULTI_PARTY_CHAT_CONFERENCE",
 	}
 }
 
@@ -1225,6 +1227,7 @@ const (
 	IntegrationTypeSesIdentity           IntegrationType = "SES_IDENTITY"
 	IntegrationTypeAnalyticsConnector    IntegrationType = "ANALYTICS_CONNECTOR"
 	IntegrationTypeCallTransferConnector IntegrationType = "CALL_TRANSFER_CONNECTOR"
+	IntegrationTypeCognitoUserPool       IntegrationType = "COGNITO_USER_POOL"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -1246,6 +1249,7 @@ func (IntegrationType) Values() []IntegrationType {
 		"SES_IDENTITY",
 		"ANALYTICS_CONNECTOR",
 		"CALL_TRANSFER_CONNECTOR",
+		"COGNITO_USER_POOL",
 	}
 }
 

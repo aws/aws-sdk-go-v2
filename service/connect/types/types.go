@@ -915,6 +915,13 @@ type Contact struct {
 	// The customer or external third party participant endpoint.
 	CustomerEndpoint *EndpointInfo
 
+	// The customer's identification number. For example, the CustomerId may be a
+	// customer number from your CRM. You can create a Lambda function to pull the
+	// unique customer ID of the caller from your CRM system. If you enable Amazon
+	// Connect Voice ID capability, this attribute is populated with the
+	// CustomerSpeakerId of the caller.
+	CustomerId *string
+
 	// Information about customer’s voice activity.
 	CustomerVoiceActivity *CustomerVoiceActivity
 
@@ -7435,6 +7442,8 @@ type VocabularySummary struct {
 type VoiceRecordingConfiguration struct {
 
 	// Identifies which IVR track is being recorded.
+	//
+	// One and only one of the track configurations should be presented in the request.
 	IvrRecordingTrack IvrRecordingTrack
 
 	// Identifies which track is being recorded.

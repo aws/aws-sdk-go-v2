@@ -3,6 +3,10 @@
 // Package connectparticipant provides the API client, operations, and parameter
 // types for Amazon Connect Participant Service.
 //
+// [Participant Service actions]
+//
+// [Participant Service data types]
+//
 // Amazon Connect is an easy-to-use omnichannel cloud contact center service that
 // enables companies of any size to deliver superior customer service at a lower
 // cost. Amazon Connect communications capabilities make it easy for companies to
@@ -13,4 +17,7 @@
 // within a chat contact. The APIs in the service enable the following: sending
 // chat messages, attachment sharing, managing a participant's connection state and
 // message events, and retrieving chat transcripts.
+//
+// [Participant Service data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Participant_Service.html
+// [Participant Service actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Participant_Service.html
 package connectparticipant

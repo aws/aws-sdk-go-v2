@@ -15,7 +15,7 @@ import (
 // push notifications. For more information about push notifications, see [Set up push notifications in Amazon Connect for mobile chat]in the
 // Amazon Connect Administrator Guide.
 //
-// [Set up push notifications in Amazon Connect for mobile chat]: https://docs.aws.amazon.com/connect/latest/adminguide/set-up-push-notifications-for-mobile-chat.html
+// [Set up push notifications in Amazon Connect for mobile chat]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-push-notifications-for-mobile-chat.html
 func (c *Client) CreatePushNotificationRegistration(ctx context.Context, params *CreatePushNotificationRegistrationInput, optFns ...func(*Options)) (*CreatePushNotificationRegistrationOutput, error) {
 	if params == nil {
 		params = &CreatePushNotificationRegistrationInput{}

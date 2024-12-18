@@ -18,12 +18,15 @@ import (
 // active participants in the chat. Using the SendEvent API for message receipts
 // when a supervisor is barged-in will result in a conflict exception.
 //
+// For security recommendations, see [Amazon Connect Chat security best practices].
+//
 // ConnectionToken is used for invoking this API instead of ParticipantToken .
 //
 // The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
 //
 // [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns ...func(*Options)) (*SendEventOutput, error) {
 	if params == nil {
 		params = &SendEventInput{}

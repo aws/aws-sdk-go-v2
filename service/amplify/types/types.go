@@ -21,7 +21,7 @@ type App struct {
 	// This member is required.
 	AppId *string
 
-	// Creates a date and time for the Amplify app.
+	// A timestamp of when Amplify created the application.
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -77,7 +77,7 @@ type App struct {
 	// This member is required.
 	Repository *string
 
-	// Updates the date and time for the Amplify app.
+	// A timestamp of when Amplify updated the application.
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -131,6 +131,14 @@ type App struct {
 
 	// The tag for the Amplify app.
 	Tags map[string]string
+
+	// Describes the Firewall configuration for the Amplify app. Firewall support
+	// enables you to protect your hosted applications with a direct integration with
+	// WAF.
+	WafConfiguration *WafConfiguration
+
+	// A timestamp of when Amplify created the webhook in your Git repository.
+	WebhookCreateTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -261,7 +269,7 @@ type Branch struct {
 	// This member is required.
 	BranchName *string
 
-	//  The creation date and time for a branch that is part of an Amplify app.
+	// A timestamp of when Amplify created the branch.
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -326,7 +334,7 @@ type Branch struct {
 	// This member is required.
 	Ttl *string
 
-	//  The last updated date and time for a branch that is part of an Amplify app.
+	// A timestamp for the last updated time for a branch.
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -614,7 +622,7 @@ type JobSummary struct {
 	// This member is required.
 	CommitMessage *string
 
-	//  The commit date and time for the job.
+	// The commit date and time for the job.
 	//
 	// This member is required.
 	CommitTime *time.Time
@@ -769,6 +777,27 @@ type SubDomainSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the Firewall configuration for a hosted Amplify application. Firewall
+// support enables you to protect your web applications with a direct integration
+// with WAF. For more information about using WAF protections for an Amplify
+// application, see [Firewall support for hosted sites]in the Amplify User Guide.
+//
+// [Firewall support for hosted sites]: https://docs.aws.amazon.com/amplify/latest/userguide/WAF-integration.html
+type WafConfiguration struct {
+
+	// The reason for the current status of the Firewall configuration.
+	StatusReason *string
+
+	// The status of the process to associate or disassociate a web ACL to an Amplify
+	// app.
+	WafStatus WafStatus
+
+	// The Amazon Resource Name (ARN) for the web ACL associated with an Amplify app.
+	WebAclArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a webhook that connects repository events to an Amplify app.
 type Webhook struct {
 
@@ -777,7 +806,7 @@ type Webhook struct {
 	// This member is required.
 	BranchName *string
 
-	// The create date and time for a webhook.
+	// A timestamp of when Amplify created the webhook in your Git repository.
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -787,7 +816,7 @@ type Webhook struct {
 	// This member is required.
 	Description *string
 
-	// Updates the date and time for a webhook.
+	// A timestamp of when Amplify updated the webhook in your Git repository.
 	//
 	// This member is required.
 	UpdateTime *time.Time
