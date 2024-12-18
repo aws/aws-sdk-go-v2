@@ -532,6 +532,7 @@ func (c *Client) GetObject(ctx context.Context, input *GetObjectInput, opts ...f
 	for _, opt := range opts {
 		opt(&i.options)
 	}
+	i.options.Concurrency = 1
 
 	return i.download(ctx)
 }
@@ -570,6 +571,7 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 		func(o *s3.Options) {
 			o.APIOptions = append(o.APIOptions,
 				middleware.AddSDKAgentKey(middleware.FeatureMetadata, userAgentKey),
+				addFeatureUserAgent,
 			)
 		}}
 
@@ -583,10 +585,14 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 			return d.singleDownload(ctx, clientOptions...)
 		}
 		output = d.getChunk(ctx, 1, "", clientOptions...)
+		if d.getErr() != nil {
+			return output, d.err
+		}
+
 		if output.PartsCount > 1 {
 			partSize := output.ContentLength
 			ch := make(chan dlchunk, d.options.Concurrency)
-			for i := 0; i <= d.options.Concurrency; i++ {
+			for i := 0; i < d.options.Concurrency; i++ {
 				d.wg.Add(1)
 				go d.downloadPart(ctx, ch, clientOptions...)
 			}
@@ -691,6 +697,7 @@ func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clien
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
 		d.setErr(err)
+		return output
 	}
 	d.pos += output.ContentLength
 	return output
