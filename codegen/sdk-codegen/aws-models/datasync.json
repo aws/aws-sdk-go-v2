@@ -626,7 +626,7 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#EfsSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a mount path for your Amazon EFS file system. This is where DataSync reads or writes data (depending on if this is a source or destination location)\n      on your file system.</p>\n         <p>By default, DataSync uses the root directory (or <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">access point</a> if you provide one by using\n        <code>AccessPointArn</code>). You can also include subdirectories using forward slashes (for\n      example, <code>/path/to/folder</code>).</p>"
+                        "smithy.api#documentation": "<p>Specifies a mount path for your Amazon EFS file system. This is where DataSync reads or writes data on your file system (depending on if this is a source or destination location).</p>\n         <p>By default, DataSync uses the root directory (or <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">access point</a> if you provide one by using\n        <code>AccessPointArn</code>). You can also include subdirectories using forward slashes (for\n      example, <code>/path/to/folder</code>).</p>"
                     }
                 },
                 "EfsFilesystemArn": {
@@ -714,27 +714,27 @@
                 "FsxFilesystemArn": {
                     "target": "com.amazonaws.datasync#FsxFilesystemArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the FSx for Lustre file system.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the FSx for Lustre file system.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SecurityGroupArns": {
                     "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are used to configure the\n        FSx for Lustre file system.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Names (ARNs) of up to five security groups that provide access to your\n        FSx for Lustre file system.</p>\n         <p>The security groups must be able to access the file system's ports. The file system must\n      also allow access from the security groups. For information about file system access, see the\n      <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/limit-access-security-groups.html\">\n               <i>Amazon FSx for Lustre User Guide</i>\n            </a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#FsxLustreSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A subdirectory in the location's path. This subdirectory in the FSx for Lustre\n      file system is used to read data from the FSx for Lustre source location or write\n      data to the FSx for Lustre destination.</p>"
+                        "smithy.api#documentation": "<p>Specifies a mount path for your FSx for Lustre file system. The path can include subdirectories.</p>\n         <p>When the location is used as a source, DataSync reads data from the mount path. When the location is used as a destination, DataSync writes data to the mount path. If you don't include this parameter, DataSync uses the file system's root directory (<code>/</code>).</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.datasync#InputTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair that represents a tag that you want to add to the resource. The value\n      can be an empty string. This value helps you manage, filter, and search for your resources. We\n      recommend that you create a name tag for your location.</p>"
+                        "smithy.api#documentation": "<p>Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.</p>"
                     }
                 }
             },
@@ -748,7 +748,7 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Lustre file system location that's\n      created. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Lustre file system location that\n      you created. </p>"
                     }
                 }
             },
@@ -802,7 +802,7 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#FsxOntapSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a path to the file share in the SVM where you'll copy your data.</p>\n         <p>You can specify a junction path (also known as a mount point), qtree path (for NFS file\n      shares), or share name (for SMB file shares). For example, your mount path might be\n        <code>/vol1</code>, <code>/vol1/tree1</code>, or <code>/share1</code>.</p>\n         <note>\n            <p>Don't specify a junction path in the SVM's root volume. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html\">Managing FSx for ONTAP storage virtual machines</a> in the <i>Amazon FSx for NetApp ONTAP User Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a path to the file share in the SVM where you want to transfer data to or from.</p>\n         <p>You can specify a junction path (also known as a mount point), qtree path (for NFS file\n      shares), or share name (for SMB file shares). For example, your mount path might be\n        <code>/vol1</code>, <code>/vol1/tree1</code>, or <code>/share1</code>.</p>\n         <note>\n            <p>Don't specify a junction path in the SVM's root volume. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html\">Managing FSx for ONTAP storage virtual machines</a> in the <i>Amazon FSx for NetApp ONTAP User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "Tags": {
@@ -964,7 +964,7 @@
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the Microsoft Active Directory domain that the FSx for Windows File Server file system belongs to.</p>\n         <p>If you have multiple Active Directory domains in your environment, configuring this\n      parameter makes sure that DataSync connects to the right file system.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the Windows domain that the FSx for Windows File Server file system belongs to.</p>\n         <p>If you have multiple Active Directory domains in your environment, configuring this\n      parameter makes sure that DataSync connects to the right file system.</p>"
                     }
                 },
                 "Password": {
@@ -1133,7 +1133,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a transfer <i>location</i> for a Network File System (NFS) file\n      server. DataSync can use this location as a source or destination for\n      transferring data.</p>\n         <p>Before you begin, make sure that you understand how DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs\">accesses\n        NFS file servers</a>.</p>\n         <note>\n            <p>If you're copying data to or from an Snowcone device, you can also use\n          <code>CreateLocationNfs</code> to create your transfer location. For more information, see\n          <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/nfs-on-snowcone.html\">Configuring transfers with Snowcone</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a transfer <i>location</i> for a Network File System (NFS) file\n      server. DataSync can use this location as a source or destination for\n      transferring data.</p>\n         <p>Before you begin, make sure that you understand how DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs\">accesses\n        NFS file servers</a>.</p>"
             }
         },
         "com.amazonaws.datasync#CreateLocationNfsRequest": {
@@ -4113,6 +4113,21 @@
                     "target": "com.amazonaws.datasync#UpdateLocationAzureBlob"
                 },
                 {
+                    "target": "com.amazonaws.datasync#UpdateLocationEfs"
+                },
+                {
+                    "target": "com.amazonaws.datasync#UpdateLocationFsxLustre"
+                },
+                {
+                    "target": "com.amazonaws.datasync#UpdateLocationFsxOntap"
+                },
+                {
+                    "target": "com.amazonaws.datasync#UpdateLocationFsxOpenZfs"
+                },
+                {
+                    "target": "com.amazonaws.datasync#UpdateLocationFsxWindows"
+                },
+                {
                     "target": "com.amazonaws.datasync#UpdateLocationHdfs"
                 },
                 {
@@ -4120,6 +4135,9 @@
                 },
                 {
                     "target": "com.amazonaws.datasync#UpdateLocationObjectStorage"
+                },
+                {
+                    "target": "com.amazonaws.datasync#UpdateLocationS3"
                 },
                 {
                     "target": "com.amazonaws.datasync#UpdateLocationSmb"
@@ -5197,7 +5215,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the Network File System (NFS) protocol configuration that DataSync\n      uses to access your Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP file\n      system.</p>"
+                "smithy.api#documentation": "<p>Specifies the Network File System (NFS) protocol configuration that DataSync\n      uses to access your FSx for OpenZFS file system or FSx for ONTAP file\n      system's storage virtual machine (SVM).</p>"
             }
         },
         "com.amazonaws.datasync#FsxProtocolSmb": {
@@ -5206,7 +5224,7 @@
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the fully qualified domain name (FQDN) of the Microsoft Active Directory that\n      your storage virtual machine (SVM) belongs to.</p>\n         <p>If you have multiple domains in your environment, configuring this setting makes sure that\n      DataSync connects to the right SVM.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the Windows domain that your storage virtual machine (SVM) belongs to.</p>\n         <p>If you have multiple domains in your environment, configuring this setting makes sure that\n      DataSync connects to the right SVM.</p>\n         <p>If you have multiple Active Directory domains in your environment, configuring this parameter makes sure that DataSync connects to the right SVM.</p>"
                     }
                 },
                 "MountOptions": {
@@ -5228,7 +5246,63 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the Server Message Block (SMB) protocol configuration that DataSync uses to access your Amazon FSx for NetApp ONTAP file system. For more information, see\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access\">Accessing FSx for ONTAP file systems</a>.</p>"
+                "smithy.api#documentation": "<p>Specifies the Server Message Block (SMB) protocol configuration that DataSync uses to access your Amazon FSx for NetApp ONTAP file system's storage virtual machine (SVM). For more information, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access\">Providing DataSync access to FSx for ONTAP file systems</a>.</p>"
+            }
+        },
+        "com.amazonaws.datasync#FsxUpdateProtocol": {
+            "type": "structure",
+            "members": {
+                "NFS": {
+                    "target": "com.amazonaws.datasync#FsxProtocolNfs"
+                },
+                "SMB": {
+                    "target": "com.amazonaws.datasync#FsxUpdateProtocolSmb",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Server Message Block (SMB) protocol configuration that DataSync\n      uses to access your FSx for ONTAP file system's storage virtual machine (SVM).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the data transfer protocol that DataSync uses to access your\n      Amazon FSx file system.</p>\n         <note>\n            <p>You can't update the Network File System (NFS) protocol configuration for FSx for ONTAP locations. DataSync currently only supports NFS version 3 with this location type.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.datasync#FsxUpdateProtocolSmb": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.datasync#FsxUpdateSmbDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the Windows domain that your storage virtual machine (SVM) belongs to.</p>\n         <p>If you have multiple Active Directory domains in your environment, configuring this parameter makes sure that DataSync connects to the right SVM.</p>"
+                    }
+                },
+                "MountOptions": {
+                    "target": "com.amazonaws.datasync#SmbMountOptions"
+                },
+                "Password": {
+                    "target": "com.amazonaws.datasync#SmbPassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the password of a user who has permission to access your SVM.</p>"
+                    }
+                },
+                "User": {
+                    "target": "com.amazonaws.datasync#SmbUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a user that can mount and access the files, folders, and metadata in your SVM.</p>\n         <p>For information about choosing a user with the right level of access for your transfer, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb\">Using\n      the SMB protocol</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Server Message Block (SMB) protocol configuration that DataSync uses to access your Amazon FSx for NetApp ONTAP file system's storage virtual machine (SVM). For more information, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access\">Providing DataSync access to FSx for ONTAP file systems</a>.</p>"
+            }
+        },
+        "com.amazonaws.datasync#FsxUpdateSmbDomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9]((\\.|-+)?[A-Za-z0-9]){0,252})?$"
             }
         },
         "com.amazonaws.datasync#FsxWindowsSubdirectory": {
@@ -7750,7 +7824,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that DataSync uses to access your S3 bucket.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access\">Accessing\n        S3 buckets</a>.</p>"
+                "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that DataSync uses to access your S3 bucket.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access\">Providing DataSync access to S3 buckets</a>.</p>"
             }
         },
         "com.amazonaws.datasync#S3ManifestConfig": {
@@ -9174,7 +9248,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies some configurations of the Microsoft Azure Blob Storage transfer location that you're using with DataSync.</p>"
+                "smithy.api#documentation": "<p>Modifies the following configurations of the Microsoft Azure Blob Storage transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html\">Configuring DataSync transfers with Azure Blob Storage</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationAzureBlobRequest": {
@@ -9235,6 +9309,291 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datasync#UpdateLocationEfs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationEfsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationEfsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the Amazon EFS transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html\">Configuring DataSync transfers with Amazon EFS</a>.</p>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationEfsRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the Amazon EFS transfer location that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#EfsSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a mount path for your Amazon EFS file system. This is where DataSync reads or writes data on your file system (depending on if this is a source or destination location).</p>\n         <p>By default, DataSync uses the root directory (or <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">access point</a> if you provide one by using\n      <code>AccessPointArn</code>). You can also include subdirectories using forward slashes (for\n      example, <code>/path/to/folder</code>).</p>"
+                    }
+                },
+                "AccessPointArn": {
+                    "target": "com.amazonaws.datasync#UpdatedEfsAccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the access point that DataSync uses\n      to mount your Amazon EFS file system.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam\">Accessing restricted Amazon EFS file systems</a>.</p>"
+                    }
+                },
+                "FileSystemAccessRoleArn": {
+                    "target": "com.amazonaws.datasync#UpdatedEfsIamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an Identity and Access Management (IAM) role that allows DataSync to access your Amazon EFS file system.</p>\n         <p>For information on creating this role, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam-role\">Creating a DataSync IAM role for Amazon EFS file system access</a>.</p>"
+                    }
+                },
+                "InTransitEncryption": {
+                    "target": "com.amazonaws.datasync#EfsInTransitEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2\n      encryption when it transfers data to or from your Amazon EFS file system.</p>\n         <p>If you specify an access point using <code>AccessPointArn</code> or an IAM\n      role using <code>FileSystemAccessRoleArn</code>, you must set this parameter to\n      <code>TLS1_2</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationEfsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxLustre": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationFsxLustreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationFsxLustreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the Amazon FSx for Lustre transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-lustre-location.html\">Configuring DataSync transfers with FSx for Lustre</a>.</p>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxLustreRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the FSx for Lustre transfer location that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#SmbSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a mount path for your FSx for Lustre file system. The path can include subdirectories.</p>\n         <p>When the location is used as a source, DataSync reads data from the mount path. When the location is used as a destination, DataSync writes data to the mount path. If you don't include this parameter, DataSync uses the file system's root directory (<code>/</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxLustreResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxOntap": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationFsxOntapRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationFsxOntapResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the Amazon FSx for NetApp ONTAP transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html\">Configuring DataSync transfers with FSx for ONTAP</a>.</p>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxOntapRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP transfer location that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.datasync#FsxUpdateProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data transfer protocol that DataSync uses to access your Amazon FSx file system.</p>"
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#FsxOntapSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a path to the file share in the storage virtual machine (SVM) where you want to transfer data to or from.</p>\n         <p>You can specify a junction path (also known as a mount point), qtree path (for NFS file\n      shares), or share name (for SMB file shares). For example, your mount path might be\n      <code>/vol1</code>, <code>/vol1/tree1</code>, or <code>/share1</code>.</p>\n         <note>\n            <p>Don't specify a junction path in the SVM's root volume. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html\">Managing FSx for ONTAP storage virtual machines</a> in the <i>Amazon FSx for NetApp ONTAP User Guide</i>.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxOntapResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxOpenZfs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationFsxOpenZfsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationFsxOpenZfsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the Amazon FSx for OpenZFS transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html\">Configuring DataSync transfers with FSx for OpenZFS</a>.</p>\n         <note>\n            <p>Request parameters related to <code>SMB</code> aren't supported with the\n        <code>UpdateLocationFsxOpenZfs</code> operation.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxOpenZfsRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the FSx for OpenZFS transfer location that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.datasync#FsxProtocol"
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#SmbSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a subdirectory in the location's path that must begin with <code>/fsx</code>. DataSync uses this subdirectory to read or write data (depending on whether the file\n      system is a source or destination location).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxOpenZfsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxWindows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationFsxWindowsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationFsxWindowsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the Amazon FSx for Windows File Server transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html\">Configuring DataSync transfers with FSx for Windows File Server</a>.</p>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxWindowsRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the FSx for Windows File Server transfer location that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#FsxWindowsSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a mount path for your file system using forward slashes. DataSync uses this subdirectory to read or write data (depending on whether the file\n      system is a source or destination location).</p>"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.datasync#FsxUpdateSmbDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the Windows domain that your FSx for Windows File Server file system belongs to.</p>\n         <p>If you have multiple Active Directory domains in your environment, configuring this parameter makes sure that DataSync connects to the right file system.</p>"
+                    }
+                },
+                "User": {
+                    "target": "com.amazonaws.datasync#SmbUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the user with the permissions to mount and access the files, folders, and file\n      metadata in your FSx for Windows File Server file system.</p>\n         <p>For information about choosing a user with the right level of access for your transfer, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions\">required permissions</a> for FSx for Windows File Server locations.</p>"
+                    }
+                },
+                "Password": {
+                    "target": "com.amazonaws.datasync#SmbPassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the password of the user with the permissions to mount and access the files,\n      folders, and file metadata in your FSx for Windows File Server file system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationFsxWindowsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datasync#UpdateLocationHdfs": {
             "type": "operation",
             "input": {
@@ -9252,7 +9611,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some parameters of a previously created location for a Hadoop Distributed File\n      System cluster.</p>"
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the Hadoop Distributed File\n      System (HDFS) transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-hdfs-location.html\">Configuring DataSync transfers with an HDFS cluster</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationHdfsRequest": {
@@ -9366,7 +9725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies some configurations of the Network File System (NFS) transfer location that\n      you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html\">Configuring transfers to or from an\n        NFS file server</a>.</p>"
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the Network File System (NFS) transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html\">Configuring transfers with an\n        NFS file server</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationNfsRequest": {
@@ -9420,7 +9779,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some parameters of an existing DataSync location for an object\n      storage system.</p>"
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the object storage transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html\">Configuring DataSync transfers with an object storage system</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationObjectStorageRequest": {
@@ -9487,6 +9846,63 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datasync#UpdateLocationS3": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationS3Request"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationS3Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the Amazon S3 transfer location that you're using with DataSync.</p>\n         <important>\n            <p>Before you begin, make sure that you read the following topics:</p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Storage\n            class considerations with Amazon S3 locations</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests\">Evaluating S3 request costs when using DataSync</a>\n                  </p>\n               </li>\n            </ul>\n         </important>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationS3Request": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the Amazon S3 transfer location that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#S3Subdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a prefix in the S3 bucket that DataSync  reads from or writes to\n      (depending on whether the bucket is a source or destination location).</p>\n         <note>\n            <p>DataSync can't transfer objects with a prefix that begins with a slash\n        (<code>/</code>) or includes <code>//</code>, <code>/./</code>, or\n        <code>/../</code> patterns. For example:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>/photos</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>photos//2006/January</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>photos/./2006/February</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>photos/../2006/March</code>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                },
+                "S3StorageClass": {
+                    "target": "com.amazonaws.datasync#S3StorageClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the storage class that you want your objects to use when Amazon S3 is a\n      transfer destination.</p>\n         <p>For buckets in Amazon Web Services Regions, the storage class defaults to\n      <code>STANDARD</code>. For buckets on Outposts, the storage class defaults to\n      <code>OUTPOSTS</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Storage class\n      considerations with Amazon S3 transfers</a>.</p>"
+                    }
+                },
+                "S3Config": {
+                    "target": "com.amazonaws.datasync#S3Config"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationS3Response": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datasync#UpdateLocationSmb": {
             "type": "operation",
             "input": {
@@ -9504,7 +9920,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some of the parameters of a Server Message Block\n      (SMB) file server location that you can use for DataSync transfers.</p>"
+                "smithy.api#documentation": "<p>Modifies the following configuration parameters of the Server Message Block\n      (SMB) transfer location that you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html\">Configuring DataSync transfers with an SMB file server</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationSmbRequest": {
@@ -9771,6 +10187,26 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdatedEfsAccessPointArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$)|(^$)$"
+            }
+        },
+        "com.amazonaws.datasync#UpdatedEfsIamRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$)|(^$)$"
             }
         },
         "com.amazonaws.datasync#VerifyMode": {

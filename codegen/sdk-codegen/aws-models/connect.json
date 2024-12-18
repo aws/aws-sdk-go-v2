@@ -1631,6 +1631,9 @@
                     "target": "com.amazonaws.connect#UpdateInstanceStorageConfig"
                 },
                 {
+                    "target": "com.amazonaws.connect#UpdateParticipantAuthentication"
+                },
+                {
                     "target": "com.amazonaws.connect#UpdateParticipantRoleConfig"
                 },
                 {
@@ -4224,6 +4227,28 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.connect#AuthenticationError": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\x20-\\x21\\x23-\\x5B\\x5D-\\x7E]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#AuthenticationErrorDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\x20-\\x21\\x23-\\x5B\\x5D-\\x7E]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.connect#AuthenticationProfile": {
             "type": "structure",
             "members": {
@@ -4381,6 +4406,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#AuthenticationProfileSummary"
+            }
+        },
+        "com.amazonaws.connect#AuthorizationCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#AutoAccept": {
@@ -5654,6 +5689,12 @@
                     "target": "com.amazonaws.connect#WisdomInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about Amazon Connect Wisdom.</p>"
+                    }
+                },
+                "CustomerId": {
+                    "target": "com.amazonaws.connect#CustomerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's identification number. For example, the <code>CustomerId</code> may be a\n   customer number from your CRM. You can create a Lambda function to pull the unique customer ID of\n   the caller from your CRM system. If you enable Amazon Connect Voice ID capability, this\n   attribute is populated with the <code>CustomerSpeakerId</code> of the caller.</p>"
                     }
                 },
                 "CustomerEndpoint": {
@@ -8640,7 +8681,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates registration for a device token and a chat contact to receive real-time push\n   notifications. For more information about push notifications, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-up-push-notifications-for-mobile-chat.html\">Set up push\n    notifications in Amazon Connect for mobile chat</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates registration for a device token and a chat contact to receive real-time push\n   notifications. For more information about push notifications, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-push-notifications-for-mobile-chat.html\">Set up push\n    notifications in Amazon Connect for mobile chat</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/push-notification/{InstanceId}/registrations",
@@ -10489,6 +10530,25 @@
                 "smithy.api#documentation": "<p>Information about the Customer on the contact.</p>"
             }
         },
+        "com.amazonaws.connect#CustomerId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#CustomerIdNonEmpty": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.connect#CustomerProfileAttributesSerialized": {
             "type": "string"
         },
@@ -10594,7 +10654,7 @@
                 "ComparisonType": {
                     "target": "com.amazonaws.connect#DateComparisonType",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object to specify the hours of operation override date condition\n   <code>comparisonType</code>.</p>"
+                        "smithy.api#documentation": "<p>An object to specify the hours of operation override date condition\n    <code>comparisonType</code>.</p>"
                     }
                 }
             },
@@ -20957,6 +21017,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ENHANCED_CHAT_MONITORING"
                     }
+                },
+                "MULTI_PARTY_CHAT_CONFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI_PARTY_CHAT_CONFERENCE"
+                    }
                 }
             }
         },
@@ -21438,6 +21504,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CALL_TRANSFER_CONNECTOR"
+                    }
+                },
+                "COGNITO_USER_POOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COGNITO_USER_POOL"
                     }
                 }
             }
@@ -22331,7 +22403,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. Use this API to returns both Amazon Lex V1 and V2 bots.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. Use this API to return both Amazon Lex V1 and V2 bots.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/bots",
@@ -36923,6 +36995,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments using an\n   attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in\n   flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>\n         <note>\n            <p>The types <code>application/vnd.amazonaws.connect.message.interactive</code> and\n     <code>application/vnd.amazonaws.connect.message.interactive.response</code> must be present in\n    the SupportedMessagingContentTypes field of this API in order to set\n     <code>SegmentAttributes</code> as {<code> \"connect:Subtype\": {\"valueString\" : \"connect:Guide\"\n     }}</code>.</p>\n         </note>"
                     }
+                },
+                "CustomerId": {
+                    "target": "com.amazonaws.connect#CustomerIdNonEmpty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's identification number. For example, the <code>CustomerId</code> may be a\n   customer number from your CRM.</p>"
+                    }
                 }
             },
             "traits": {
@@ -41814,6 +41892,90 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#UpdateParticipantAuthentication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateParticipantAuthenticationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateParticipantAuthenticationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Instructs Amazon Connect to resume the authentication process. The subsequent actions\n   depend on the request body contents:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>If a code is provided</b>: Connect retrieves the identity\n     information from Amazon Cognito and imports it into Connect Customer Profiles.</p>\n            </li>\n            <li>\n               <p>\n                  <b>If an error is provided</b>: The error branch of the\n     Authenticate Customer block is executed.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The API returns a success response to acknowledge the request. However, the interaction and\n    exchange of identity information occur asynchronously after the response is returned.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contact/update-participant-authentication",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateParticipantAuthenticationRequest": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.connect#ParticipantToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>state</code> query parameter that was provided by Cognito in the\n    <code>redirectUri</code>. This will also match the <code>state</code> parameter provided in the\n    <code>AuthenticationUrl</code> from the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetAuthenticationUrl.html\">GetAuthenticationUrl</a>\n   response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.connect#AuthorizationCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>code</code> query parameter provided by Cognito in the\n   <code>redirectUri</code>.</p>"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.connect#AuthenticationError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>error</code> query parameter provided by Cognito in the\n   <code>redirectUri</code>.</p>"
+                    }
+                },
+                "ErrorDescription": {
+                    "target": "com.amazonaws.connect#AuthenticationErrorDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>error_description</code> parameter provided by Cognito in the\n    <code>redirectUri</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateParticipantAuthenticationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#UpdateParticipantRoleConfig": {
             "type": "operation",
             "input": {
@@ -45890,7 +46052,7 @@
                 "IvrRecordingTrack": {
                     "target": "com.amazonaws.connect#IvrRecordingTrack",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies which IVR track is being recorded.</p>"
+                        "smithy.api#documentation": "<p>Identifies which IVR track is being recorded.</p>\n         <p>One and only one of the track configurations should be presented in the request.</p>"
                     }
                 }
             },

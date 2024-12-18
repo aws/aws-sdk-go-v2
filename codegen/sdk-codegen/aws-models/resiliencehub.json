@@ -225,6 +225,26 @@
                 }
             }
         },
+        "com.amazonaws.resiliencehub#Alarm": {
+            "type": "structure",
+            "members": {
+                "alarmArn": {
+                    "target": "com.amazonaws.resiliencehub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.resiliencehub#String255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the source of the Amazon CloudWatch alarm. That is, it indicates if the\n      alarm was created using Resilience Hub recommendation (<code>AwsResilienceHub</code>),\n      or if you had created the alarm in Amazon CloudWatch (<code>Customer</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the Amazon CloudWatch alarm detected while running an assessment.</p>"
+            }
+        },
         "com.amazonaws.resiliencehub#AlarmRecommendation": {
             "type": "structure",
             "members": {
@@ -683,7 +703,7 @@
                 "complianceStatus": {
                     "target": "com.amazonaws.resiliencehub#ComplianceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Current\n      status of compliance for the resiliency policy.</p>"
+                        "smithy.api#documentation": "<p>Current status of compliance for the resiliency policy.</p>"
                     }
                 },
                 "cost": {
@@ -1146,7 +1166,7 @@
                 "appComponents": {
                     "target": "com.amazonaws.resiliencehub#AppComponentNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the Application Components (AppComponents) that were assessed as part of the\n      assessnent and are associated with the identified risk and recommendation.</p>\n         <note>\n            <p>This property is available only in the US East (N. Virginia) Region.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates the Application Components (AppComponents) that were assessed as part of the\n      assessment and are associated with the identified risk and recommendation.</p>\n         <note>\n            <p>This property is available only in the US East (N. Virginia) Region.</p>\n         </note>"
                     }
                 }
             },
@@ -2465,6 +2485,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "appComponentId": {
+                    "target": "com.amazonaws.resiliencehub#EntityName255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the identifier of an AppComponent.</p>"
+                    }
+                },
                 "excludeReason": {
                     "target": "com.amazonaws.resiliencehub#ExcludeRecommendationReason",
                     "traits": {
@@ -2549,7 +2575,7 @@
                 "diffType": {
                     "target": "com.amazonaws.resiliencehub#DifferenceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Difference type between actual and expected recovery point objective (RPO) and recovery\n      time objective (RTO) values. Currently, Resilience Hub supports only\n          <code>NotEqual</code> difference type.</p>"
+                        "smithy.api#documentation": "<p>Difference type between actual and expected recovery point objective (RPO) and recovery\n      time objective (RTO) values. Currently, Resilience Hub supports only\n        <code>NotEqual</code> difference type.</p>"
                     }
                 }
             },
@@ -5422,6 +5448,26 @@
                 }
             }
         },
+        "com.amazonaws.resiliencehub#Experiment": {
+            "type": "structure",
+            "members": {
+                "experimentArn": {
+                    "target": "com.amazonaws.resiliencehub#String255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the FIS experiment.</p>"
+                    }
+                },
+                "experimentTemplateId": {
+                    "target": "com.amazonaws.resiliencehub#String255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the FIS experiment template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the FIS experiment detected while running an assessment.</p>"
+            }
+        },
         "com.amazonaws.resiliencehub#FailedGroupingRecommendationEntries": {
             "type": "list",
             "member": {
@@ -7987,7 +8033,7 @@
                 "invokerRoleName": {
                     "target": "com.amazonaws.resiliencehub#IamRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Existing Amazon Web Services\n      IAM role name in the primary Amazon Web Services account that will be assumed by\n        Resilience Hub Service Principle to obtain a read-only access to your application\n      resources while running an assessment.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must have <code>iam:passRole</code> permission for this role while creating or\n            updating the application.</p>\n               </li>\n               <li>\n                  <p>Currently, <code>invokerRoleName</code> accepts only <code>[A-Za-z0-9_+=,.@-]</code>\n            characters.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>Existing Amazon Web Services\n      IAM role name in the primary Amazon Web Services account that will be assumed by\n        Resilience Hub Service Principle to obtain a read-only access to your application\n      resources while running an assessment. </p>\n         <p>If your IAM role includes a path, you must include the path in the <code>invokerRoleName</code> parameter. \n      For example, if your IAM role's ARN is <code>arn:aws:iam:123456789012:role/my-path/role-name</code>, you should pass <code>my-path/role-name</code>.\n    </p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must have <code>iam:passRole</code> permission for this role while creating or\n            updating the application.</p>\n               </li>\n               <li>\n                  <p>Currently, <code>invokerRoleName</code> accepts only <code>[A-Za-z0-9_+=,.@-]</code>\n            characters.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "crossAccountRoleArns": {
@@ -8426,6 +8472,18 @@
                     "target": "com.amazonaws.resiliencehub#ExcludeRecommendationReason",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the reason for excluding an operational recommendation.</p>"
+                    }
+                },
+                "latestDiscoveredExperiment": {
+                    "target": "com.amazonaws.resiliencehub#Experiment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the experiment created in FIS that was discovered by Resilience Hub, which matches the recommendation.</p>"
+                    }
+                },
+                "discoveredAlarm": {
+                    "target": "com.amazonaws.resiliencehub#Alarm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the previously implemented Amazon CloudWatch alarm discovered by Resilience Hub.</p>"
                     }
                 }
             },
@@ -9205,7 +9263,7 @@
                 "hasMoreErrors": {
                     "target": "com.amazonaws.resiliencehub#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p> This indicates if there are more errors not listed in the\n        <code>resourceErrors</code>\n      list. </p>"
+                        "smithy.api#documentation": "<p> This indicates if there are more errors not listed in the <code>resourceErrors</code>\n      list. </p>"
                     }
                 }
             },
@@ -10204,6 +10262,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "appComponentId": {
+                    "target": "com.amazonaws.resiliencehub#EntityName255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the identifier of the AppComponent.</p>"
+                    }
+                },
                 "appComponentName": {
                     "target": "com.amazonaws.resiliencehub#EntityId",
                     "traits": {
@@ -10922,6 +10986,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates if the operational recommendation needs to be excluded. If set to True, the\n      operational recommendation will be excluded.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "appComponentId": {
+                    "target": "com.amazonaws.resiliencehub#EntityName255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the identifier of the AppComponent.</p>"
                     }
                 },
                 "excludeReason": {
