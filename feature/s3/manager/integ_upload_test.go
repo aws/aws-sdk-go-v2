@@ -222,7 +222,7 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 			},
 		},
 		"auto multipart part": {
-			"no checksum": {
+			"no checksum algorithm passed": {
 				payload: bytes.NewReader(multiPartBytes),
 				expectParts: []s3types.CompletedPart{
 					{

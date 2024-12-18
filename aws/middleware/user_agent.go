@@ -89,15 +89,15 @@ const (
 	UserAgentFeatureS3AccessGrants                                 = "K" // not yet implemented
 	UserAgentFeatureGZIPRequestCompression                         = "L"
 	UserAgentFeatureProtocolRPCV2CBOR                              = "M"
-	UserAgentFeatureRequestChecksumWhenSupported                   = "Z"
-	UserAgentFeatureRequestChecksumWhenRequired                    = "a"
-	UserAgentFeatureResponseChecksumWhenSupported                  = "b"
-	UserAgentFeatureResponseChecksumWhenRequired                   = "c"
 	UserAgentFeatureRequestChecksumCRC32                           = "U"
 	UserAgentFeatureRequestChecksumCRC32C                          = "V"
 	UserAgentFeatureRequestChecksumCRC64                           = "W"
 	UserAgentFeatureRequestChecksumSHA1                            = "X"
 	UserAgentFeatureRequestChecksumSHA256                          = "Y"
+	UserAgentFeatureRequestChecksumWhenSupported                   = "Z"
+	UserAgentFeatureRequestChecksumWhenRequired                    = "a"
+	UserAgentFeatureResponseChecksumWhenSupported                  = "b"
+	UserAgentFeatureResponseChecksumWhenRequired                   = "c"
 )
 
 // RequestUserAgent is a build middleware that set the User-Agent for the request.
