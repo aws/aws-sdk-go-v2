@@ -28,12 +28,12 @@ func AssertURL(t *testing.T, expect, actual string, msgAndArgs ...interface{}) b
 
 	expectURL, err := url.Parse(expect)
 	if err != nil {
-		t.Errorf(errMsg("unable to parse expected URL", err, msgAndArgs))
+		t.Error(errMsg("unable to parse expected URL", err, msgAndArgs))
 		return false
 	}
 	actualURL, err := url.Parse(actual)
 	if err != nil {
-		t.Errorf(errMsg("unable to parse actual URL", err, msgAndArgs))
+		t.Error(errMsg("unable to parse actual URL", err, msgAndArgs))
 		return false
 	}
 
@@ -52,12 +52,12 @@ func AssertQuery(t *testing.T, expect, actual string, msgAndArgs ...interface{})
 
 	expectQ, err := url.ParseQuery(expect)
 	if err != nil {
-		t.Errorf(errMsg("unable to parse expected Query", err, msgAndArgs))
+		t.Error(errMsg("unable to parse expected Query", err, msgAndArgs))
 		return false
 	}
 	actualQ, err := url.ParseQuery(actual)
 	if err != nil {
-		t.Errorf(errMsg("unable to parse actual Query", err, msgAndArgs))
+		t.Error(errMsg("unable to parse actual Query", err, msgAndArgs))
 		return false
 	}
 
@@ -106,13 +106,13 @@ func AssertJSON(t *testing.T, expect, actual string, msgAndArgs ...interface{}) 
 
 	expectVal := map[string]interface{}{}
 	if err := json.Unmarshal([]byte(expect), &expectVal); err != nil {
-		t.Errorf(errMsg("unable to parse expected JSON", err, msgAndArgs...))
+		t.Error(errMsg("unable to parse expected JSON", err, msgAndArgs...))
 		return false
 	}
 
 	actualVal := map[string]interface{}{}
 	if err := json.Unmarshal([]byte(actual), &actualVal); err != nil {
-		t.Errorf(errMsg("unable to parse actual JSON", err, msgAndArgs...))
+		t.Error(errMsg("unable to parse actual JSON", err, msgAndArgs...))
 		return false
 	}
 
@@ -123,12 +123,12 @@ func AssertJSON(t *testing.T, expect, actual string, msgAndArgs ...interface{}) 
 func AssertXML(t *testing.T, expect, actual string, container interface{}, msgAndArgs ...interface{}) bool {
 	expectVal := container
 	if err := xml.Unmarshal([]byte(expect), &expectVal); err != nil {
-		t.Errorf(errMsg("unable to parse expected XML", err, msgAndArgs...))
+		t.Error(errMsg("unable to parse expected XML", err, msgAndArgs...))
 	}
 
 	actualVal := container
 	if err := xml.Unmarshal([]byte(actual), &actualVal); err != nil {
-		t.Errorf(errMsg("unable to parse actual XML", err, msgAndArgs...))
+		t.Error(errMsg("unable to parse actual XML", err, msgAndArgs...))
 	}
 	return equal(t, expectVal, actualVal, msgAndArgs...)
 }

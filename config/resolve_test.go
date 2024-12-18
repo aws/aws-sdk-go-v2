@@ -514,11 +514,11 @@ func TestResolveDefaultsMode(t *testing.T) {
 			}
 
 			if diff := cmpDiff(tt.ExpectedDefaultsMode, cfg.DefaultsMode); len(diff) > 0 {
-				t.Errorf(diff)
+				t.Error(diff)
 			}
 
 			if diff := cmpDiff(tt.ExpectedRuntimeEnvironment, cfg.RuntimeEnvironment); len(diff) > 0 {
-				t.Errorf(diff)
+				t.Error(diff)
 			}
 		})
 	}

@@ -1,0 +1,15 @@
+{
+    "id": "96979b8a-b9d0-4d28-990d-fe28ae1aca84",
+    "type": "bugfix",
+    "collapse": true,
+    "description": "Fix improper use of printf-style functions.",
+    "modules": [
+        ".",
+        "config",
+        "credentials",
+        "feature/s3/manager",
+        "internal/endpoints/v2",
+        "service/kinesis/internal/testing",
+        "service/transcribestreaming/internal/testing"
+    ]
+}
