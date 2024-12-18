@@ -1,8 +1,0 @@
-{
-    "id": "f1d8a4b0-2f09-4952-86df-77e1d64a7906",
-    "type": "feature",
-    "description": "This release adds support for the UpdateParticipantAuthentication API used for customer authentication within Amazon Connect chats.",
-    "modules": [
-        "service/connect"
-    ]
-}

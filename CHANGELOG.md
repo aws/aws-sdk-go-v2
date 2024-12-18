@@ -1,3 +1,27 @@
+# Release (2024-12-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.28.0](service/amplify/CHANGELOG.md#v1280-2024-12-18)
+  * **Feature**: Added WAF Configuration to Amplify Apps
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.29.0](service/budgets/CHANGELOG.md#v1290-2024-12-18)
+  * **Feature**: Releasing minor partition endpoint updates
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.122.0](service/connect/CHANGELOG.md#v11220-2024-12-18)
+  * **Feature**: This release adds support for the UpdateParticipantAuthentication API used for customer authentication within Amazon Connect chats.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.28.0](service/connectparticipant/CHANGELOG.md#v1280-2024-12-18)
+  * **Feature**: This release adds support for the GetAuthenticationUrl and CancelParticipantAuthentication APIs used for customer authentication within Amazon Connect chats. There are also minor updates to the GetAttachment API.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.44.0](service/datasync/CHANGELOG.md#v1440-2024-12-18)
+  * **Feature**: AWS DataSync introduces the ability to update attributes for in-cloud locations.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.62.0](service/iot/CHANGELOG.md#v1620-2024-12-18)
+  * **Feature**: Release connectivity status query API which is a dedicated high throughput(TPS) API to query a specific device's most recent connectivity state and metadata.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.33.2](service/mwaa/CHANGELOG.md#v1332-2024-12-18)
+  * **Documentation**: Added support for Apache Airflow version 2.10.3 to MWAA.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.82.0](service/quicksight/CHANGELOG.md#v1820-2024-12-18)
+  * **Feature**: Add support for PerformanceConfiguration attribute to Dataset entity. Allow PerformanceConfiguration specification in CreateDataset and UpdateDataset APIs.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.29.0](service/resiliencehub/CHANGELOG.md#v1290-2024-12-18)
+  * **Feature**: AWS Resilience Hub now automatically detects already configured CloudWatch alarms and FIS experiments as part of the assessment process and returns the discovered resources in the corresponding list API responses. It also allows you to include or exclude test recommendations for an AppComponent.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.55.0](service/transfer/CHANGELOG.md#v1550-2024-12-18)
+  * **Feature**: Added AS2 agreement configurations to control filename preservation and message signing enforcement. Added AS2 connector configuration to preserve content type from S3 objects.
+
 # Release (2024-12-17)
 
 ## Module Highlights

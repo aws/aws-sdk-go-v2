@@ -1,8 +1,0 @@
-{
-    "id": "43c13b22-acd8-423a-9a32-6b337704798c",
-    "type": "feature",
-    "description": "Release connectivity status query API which is a dedicated high throughput(TPS) API to query a specific device's most recent connectivity state and metadata.",
-    "modules": [
-        "service/iot"
-    ]
-}

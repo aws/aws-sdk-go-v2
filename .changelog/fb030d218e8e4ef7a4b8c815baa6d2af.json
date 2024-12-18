@@ -1,8 +1,0 @@
-{
-    "id": "fb030d21-8e8e-4ef7-a4b8-c815baa6d2af",
-    "type": "feature",
-    "description": "Added AS2 agreement configurations to control filename preservation and message signing enforcement. Added AS2 connector configuration to preserve content type from S3 objects.",
-    "modules": [
-        "service/transfer"
-    ]
-}

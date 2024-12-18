@@ -1,8 +1,0 @@
-{
-    "id": "b667d103-412a-428d-9c87-055bb5d11aa3",
-    "type": "feature",
-    "description": "Added WAF Configuration to Amplify Apps",
-    "modules": [
-        "service/amplify"
-    ]
-}

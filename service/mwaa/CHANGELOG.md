@@ -1,3 +1,7 @@
+# v1.33.2 (2024-12-18)
+
+* **Documentation**: Added support for Apache Airflow version 2.10.3 to MWAA.
+
 # v1.33.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

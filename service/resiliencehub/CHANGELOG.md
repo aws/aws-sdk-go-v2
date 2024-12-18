@@ -1,3 +1,7 @@
+# v1.29.0 (2024-12-18)
+
+* **Feature**: AWS Resilience Hub now automatically detects already configured CloudWatch alarms and FIS experiments as part of the assessment process and returns the discovered resources in the corresponding list API responses. It also allows you to include or exclude test recommendations for an AppComponent.
+
 # v1.28.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions
