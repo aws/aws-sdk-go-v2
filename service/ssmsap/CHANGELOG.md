@@ -1,3 +1,8 @@
+# v1.19.0 (2024-12-19)
+
+* **Feature**: AWS Systems Manager for SAP added support for registration and discovery of distributed ABAP applications
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

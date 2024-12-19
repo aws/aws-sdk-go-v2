@@ -1,3 +1,7 @@
+# v1.28.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2024-12-18)
 
 * **Feature**: Added WAF Configuration to Amplify Apps

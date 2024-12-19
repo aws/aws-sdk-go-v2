@@ -1,3 +1,7 @@
+# v1.122.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.122.0 (2024-12-18)
 
 * **Feature**: This release adds support for the UpdateParticipantAuthentication API used for customer authentication within Amazon Connect chats.

@@ -1,3 +1,7 @@
+# v1.34.3 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.2 (2024-12-10)
 
 * **Documentation**: Doc only update for AAS Predictive Scaling policy configuration API.

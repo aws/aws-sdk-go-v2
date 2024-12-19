@@ -1,3 +1,7 @@
+# v1.45.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2024-12-12)
 
 * **Feature**: Add parameters to support for kerberos authentication. Add parameter for disabling the Unicode source filter with PostgreSQL settings. Add parameter to use large integer value with Kinesis/Kafka settings.

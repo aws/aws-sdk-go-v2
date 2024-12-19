@@ -1,3 +1,7 @@
+# v1.6.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2024-12-03.2)
 
 * **Feature**: Add support for 11 new plugins as action cards to help automate repetitive tasks and improve productivity.

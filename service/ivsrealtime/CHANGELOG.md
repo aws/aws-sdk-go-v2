@@ -1,3 +1,7 @@
+# v1.21.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2024-12-10)
 
 * **Feature**: IVS Real-Time now offers customers the ability to customize thumbnails recording mode and interval for both Individual Participant Recording (IPR) and Server-Side Compositions (SSC).

@@ -1,3 +1,7 @@
+# v1.82.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.82.0 (2024-12-18)
 
 * **Feature**: Add support for PerformanceConfiguration attribute to Dataset entity. Allow PerformanceConfiguration specification in CreateDataset and UpdateDataset APIs.

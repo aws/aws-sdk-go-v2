@@ -1,3 +1,7 @@
+# v1.54.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2024-12-13)
 
 * **Feature**: Add NodeRepairConfig in CreateNodegroupRequest and UpdateNodegroupConfigRequest

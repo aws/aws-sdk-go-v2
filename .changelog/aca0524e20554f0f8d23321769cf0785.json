@@ -1,8 +1,0 @@
-{
-    "id": "aca0524e-2055-4f0f-8d23-321769cf0785",
-    "type": "feature",
-    "description": "MediaLive is releasing ListVersions api",
-    "modules": [
-        "service/medialive"
-    ]
-}

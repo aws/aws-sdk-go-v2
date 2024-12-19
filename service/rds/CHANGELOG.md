@@ -1,3 +1,7 @@
+# v1.93.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.93.0 (2024-12-16)
 
 * **Feature**: This release adds support for the "MYSQL_CACHING_SHA2_PASSWORD" enum value for RDS Proxy ClientPasswordAuthType.

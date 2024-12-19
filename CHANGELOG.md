@@ -1,3 +1,23 @@
+# Release (2024-12-19)
+
+## General Highlights
+* **Bug Fix**: Fix improper use of printf-style functions.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.42.0](service/appstream/CHANGELOG.md#v1420-2024-12-19)
+  * **Feature**: Added support for Rocky Linux 8 on Amazon AppStream 2.0
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.64.0](service/mediaconvert/CHANGELOG.md#v1640-2024-12-19)
+  * **Feature**: This release adds support for inserting timecode tracks into MP4 container outputs.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.65.0](service/medialive/CHANGELOG.md#v1650-2024-12-19)
+  * **Feature**: MediaLive is releasing ListVersions api
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.15.0](service/qconnect/CHANGELOG.md#v1150-2024-12-19)
+  * **Feature**: Amazon Q in Connect enables agents to ask Q for assistance in multiple languages and Q will provide answers and recommended step-by-step guides in those languages. Qs default language is English (United States) and you can switch this by setting the locale configuration on the AI Agent.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.19.0](service/ssmsap/CHANGELOG.md#v1190-2024-12-19)
+  * **Feature**: AWS Systems Manager for SAP added support for registration and discovery of distributed ABAP applications
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.51.0](service/workspaces/CHANGELOG.md#v1510-2024-12-19)
+  * **Feature**: Added AWS Global Accelerator (AGA) support for WorkSpaces Personal.
+
 # Release (2024-12-18)
 
 ## Module Highlights

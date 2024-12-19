@@ -1,3 +1,7 @@
+# v1.55.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2024-12-02)
 
 * **Feature**: Add new Multi Domain Correlation findings.

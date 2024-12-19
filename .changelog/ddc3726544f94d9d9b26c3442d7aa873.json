@@ -1,8 +1,0 @@
-{
-    "id": "ddc37265-44f9-4d9d-9b26-c3442d7aa873",
-    "type": "feature",
-    "description": "Added AWS Global Accelerator (AGA) support for WorkSpaces Personal.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.198.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.198.0 (2024-12-16)
 
 * **Feature**: This release adds support for EBS local snapshots in AWS Dedicated Local Zones, which allows you to store snapshots of EBS volumes locally in Dedicated Local Zones.

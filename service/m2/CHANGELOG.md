@@ -1,3 +1,7 @@
+# v1.19.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2024-12-17)
 
 * **Feature**: This release adds support for AWS Mainframe Modernization(M2) Service to allow specifying network type(ipv4, dual) for the environment instances. For dual network type, m2 environment applications will serve both IPv4 and IPv6 requests, whereas for ipv4 it will serve only IPv4 requests.

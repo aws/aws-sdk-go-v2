@@ -1,3 +1,8 @@
+# v1.64.0 (2024-12-19)
+
+* **Feature**: This release adds support for inserting timecode tracks into MP4 container outputs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

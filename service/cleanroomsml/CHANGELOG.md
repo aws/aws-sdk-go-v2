@@ -1,3 +1,7 @@
+# v1.11.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2024-12-17)
 
 * **Feature**: Add support for SQL compute configuration for StartAudienceGenerationJob API.

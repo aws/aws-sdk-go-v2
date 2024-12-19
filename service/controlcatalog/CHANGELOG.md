@@ -1,3 +1,7 @@
+# v1.6.4 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.3 (2024-12-11)
 
 * **Documentation**: Minor documentation updates to the content of ImplementationDetails object part of the Control Catalog GetControl API

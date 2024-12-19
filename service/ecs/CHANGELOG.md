@@ -1,3 +1,7 @@
+# v1.53.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2024-12-17)
 
 * **Feature**: Added support for enableFaultInjection task definition parameter which can be used to enable Fault Injection feature on ECS tasks.
