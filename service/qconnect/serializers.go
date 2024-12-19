@@ -9137,6 +9137,11 @@ func awsRestjson1_serializeDocumentAnswerRecommendationAIAgentConfiguration(v *t
 		ok.String(*v.IntentLabelingGenerationAIPromptId)
 	}
 
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
+
 	if v.QueryReformulationAIPromptId != nil {
 		ok := object.Key("queryReformulationAIPromptId")
 		ok.String(*v.QueryReformulationAIPromptId)
@@ -10268,6 +10273,11 @@ func awsRestjson1_serializeDocumentManualSearchAIAgentConfiguration(v *types.Man
 		if err := awsRestjson1_serializeDocumentAssociationConfigurationList(v.AssociationConfigurations, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
 	}
 
 	return nil

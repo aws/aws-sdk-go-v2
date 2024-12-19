@@ -11,73 +11,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a channel.
-func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {
+// Retrieves an array of all the encoder engine versions that are available in
+// this AWS account.
+func (c *Client) ListVersions(ctx context.Context, params *ListVersionsInput, optFns ...func(*Options)) (*ListVersionsOutput, error) {
 	if params == nil {
-		params = &UpdateChannelInput{}
+		params = &ListVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateChannel", params, optFns, c.addOperationUpdateChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVersions", params, optFns, c.addOperationListVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateChannelOutput)
+	out := result.(*ListVersionsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// A request to update a channel.
-type UpdateChannelInput struct {
-
-	// channel ID
-	//
-	// This member is required.
-	ChannelId *string
-
-	// Specification of CDI inputs for this channel
-	CdiInputSpecification *types.CdiInputSpecification
-
-	// Channel engine version for this channel
-	ChannelEngineVersion *types.ChannelEngineVersionRequest
-
-	// A list of output destinations for this channel.
-	Destinations []types.OutputDestination
-
-	// Placeholder documentation for __boolean
-	DryRun *bool
-
-	// The encoder settings for this channel.
-	EncoderSettings *types.EncoderSettings
-
-	// Placeholder documentation for __listOfInputAttachment
-	InputAttachments []types.InputAttachment
-
-	// Specification of network and file inputs for this channel
-	InputSpecification *types.InputSpecification
-
-	// The log level to write to CloudWatch Logs.
-	LogLevel types.LogLevel
-
-	// Maintenance settings for this channel.
-	Maintenance *types.MaintenanceUpdateSettings
-
-	// The name of the channel.
-	Name *string
-
-	// An optional Amazon Resource Name (ARN) of the role to assume when running the
-	// Channel. If you do not specify this on an update call but the role was
-	// previously set that role will be removed.
-	RoleArn *string
-
+// Placeholder documentation for ListVersionsRequest
+type ListVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Placeholder documentation for UpdateChannelResponse
-type UpdateChannelOutput struct {
+// Placeholder documentation for ListVersionsResponse
+type ListVersionsOutput struct {
 
-	// Placeholder documentation for Channel
-	Channel *types.Channel
+	// List of engine versions that are available for this AWS account.
+	Versions []types.ChannelEngineVersionResponse
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,19 +45,19 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannel{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVersions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannel{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVersions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateChannel"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVersions"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -149,10 +109,7 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpUpdateChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChannel(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -185,10 +142,10 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateChannel(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "UpdateChannel",
+		OperationName: "ListVersions",
 	}
 }

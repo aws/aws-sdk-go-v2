@@ -214,6 +214,34 @@ type Component struct {
 	noSmithyDocumentSerde
 }
 
+// This is information about the component of your SAP application, such as Web
+// Dispatcher.
+type ComponentInfo struct {
+
+	// This string is the type of the component.
+	//
+	// Accepted value is WD .
+	//
+	// This member is required.
+	ComponentType ComponentType
+
+	// This is the Amazon EC2 instance on which your SAP component is running.
+	//
+	// Accepted values are alphanumeric.
+	//
+	// This member is required.
+	Ec2InstanceId *string
+
+	// This string is the SAP System ID of the component.
+	//
+	// Accepted values are alphanumeric.
+	//
+	// This member is required.
+	Sid *string
+
+	noSmithyDocumentSerde
+}
+
 // The summary of the component.
 type ComponentSummary struct {
 

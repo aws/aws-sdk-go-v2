@@ -718,11 +718,23 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(string(v.ChannelClass))
 	}
 
+	if v.ChannelEngineVersion != nil {
+		ok := object.Key("channelEngineVersion")
+		if err := awsRestjson1_serializeDocumentChannelEngineVersionRequest(v.ChannelEngineVersion, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Destinations != nil {
 		ok := object.Key("destinations")
 		if err := awsRestjson1_serializeDocument__listOfOutputDestination(v.Destinations, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
 	}
 
 	if v.EncoderSettings != nil {
@@ -6827,6 +6839,64 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	return nil
 }
 
+type awsRestjson1_serializeOpListVersions struct {
+}
+
+func (*awsRestjson1_serializeOpListVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListVersionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prod/versions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListVersionsInput(v *ListVersionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPurchaseOffering struct {
 }
 
@@ -8276,11 +8346,23 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		}
 	}
 
+	if v.ChannelEngineVersion != nil {
+		ok := object.Key("channelEngineVersion")
+		if err := awsRestjson1_serializeDocumentChannelEngineVersionRequest(v.ChannelEngineVersion, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Destinations != nil {
 		ok := object.Key("destinations")
 		if err := awsRestjson1_serializeDocument__listOfOutputDestination(v.Destinations, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
 	}
 
 	if v.EncoderSettings != nil {
@@ -12163,6 +12245,18 @@ func awsRestjson1_serializeDocumentCdiInputSpecification(v *types.CdiInputSpecif
 	if len(v.Resolution) > 0 {
 		ok := object.Key("resolution")
 		ok.String(string(v.Resolution))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChannelEngineVersionRequest(v *types.ChannelEngineVersionRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Version != nil {
+		ok := object.Key("version")
+		ok.String(*v.Version)
 	}
 
 	return nil

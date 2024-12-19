@@ -474,6 +474,44 @@ func validateBackintConfig(v *types.BackintConfig) error {
 	}
 }
 
+func validateComponentInfo(v *types.ComponentInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentInfo"}
+	if len(v.ComponentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentType"))
+	}
+	if v.Sid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sid"))
+	}
+	if v.Ec2InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ec2InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentInfoList(v []types.ComponentInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentInfoList"}
+	for i := range v {
+		if err := validateComponentInfo(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilter(v *types.Filter) error {
 	if v == nil {
 		return nil
@@ -700,6 +738,11 @@ func validateOpRegisterApplicationInput(v *RegisterApplicationInput) error {
 	if v.Credentials != nil {
 		if err := validateApplicationCredentialList(v.Credentials); err != nil {
 			invalidParams.AddNested("Credentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComponentsInfo != nil {
+		if err := validateComponentInfoList(v.ComponentsInfo); err != nil {
+			invalidParams.AddNested("ComponentsInfo", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

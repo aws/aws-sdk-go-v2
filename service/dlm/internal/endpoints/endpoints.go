@@ -486,8 +486,20 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "cn-north-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "cn-north-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm.cn-north-1.api.amazonwebservices.com.cn",
+			},
+			endpoints.EndpointKey{
 				Region: "cn-northwest-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "cn-northwest-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm.cn-northwest-1.api.amazonwebservices.com.cn",
+			},
 		},
 	},
 	{

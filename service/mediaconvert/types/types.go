@@ -1062,6 +1062,13 @@ type BurninDestinationSettings struct {
 	// your input captions, if present.
 	OutlineSize *int32
 
+	// Optionally remove any tts:rubyReserve attributes present in your input, that do
+	// not have a tts:ruby attribute in the same element, from your output. Use if your
+	// vertical Japanese output captions have alignment issues. To remove ruby reserve
+	// attributes when present: Choose Enabled. To not remove any ruby reserve
+	// attributes: Keep the default value, Disabled.
+	RemoveRubyReserveAttributes RemoveRubyReserveAttributes
+
 	// Specify the color of the shadow cast by the captions. Leave Shadow color blank
 	// and set Style passthrough to enabled to use the shadow color data from your
 	// input captions, if present.
@@ -8071,7 +8078,7 @@ type VideoDescription struct {
 	// Applies only to 29.97 fps outputs. When this feature is enabled, the service
 	// will use drop-frame timecode on outputs. If it is not possible to use drop-frame
 	// timecode, the system will fall back to non-drop-frame. This setting is enabled
-	// by default when Timecode insertion is enabled.
+	// by default when Timecode insertion or Timecode track is enabled.
 	DropFrameTimecode DropFrameTimecode
 
 	// Applies only if you set AFD Signaling to Fixed. Use Fixed to specify a four-bit
@@ -8121,6 +8128,13 @@ type VideoDescription struct {
 	// settings does not affect the timecodes that are inserted in the output. Source
 	// under Job settings > Timecode configuration does.
 	TimecodeInsertion VideoTimecodeInsertion
+
+	// To include a timecode track in your MP4 output: Choose Enabled. MediaConvert
+	// writes the timecode track in the Null Media Header box (NMHD), without any
+	// timecode text formatting information. You can also specify dropframe or
+	// non-dropframe timecode under the Drop Frame Timecode setting. To not include a
+	// timecode track: Keep the default value, Disabled.
+	TimecodeTrack TimecodeTrack
 
 	// Find additional transcoding features under Preprocessors. Enable the features
 	// at each output individually. These features are disabled by default.

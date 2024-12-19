@@ -1,0 +1,8 @@
+{
+    "id": "e559ca29-9013-46e7-9636-bb2cd6ea4f76",
+    "type": "feature",
+    "description": "AWS Systems Manager for SAP added support for registration and discovery of distributed ABAP applications",
+    "modules": [
+        "service/ssmsap"
+    ]
+}

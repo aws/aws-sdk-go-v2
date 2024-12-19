@@ -54,6 +54,12 @@ type RegisterApplicationInput struct {
 	// This member is required.
 	Instances []string
 
+	// This is an optional parameter for component details to which the SAP ABAP
+	// application is attached, such as Web Dispatcher.
+	//
+	// This is an array of ApplicationComponent objects. You may input 0 to 5 items.
+	ComponentsInfo []types.ComponentInfo
+
 	// The credentials of the SAP application.
 	Credentials []types.ApplicationCredential
 

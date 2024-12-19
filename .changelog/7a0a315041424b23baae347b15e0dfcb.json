@@ -1,0 +1,8 @@
+{
+    "id": "7a0a3150-4142-4b23-baae-347b15e0dfcb",
+    "type": "feature",
+    "description": "Added support for Rocky Linux 8 on Amazon AppStream 2.0",
+    "modules": [
+        "service/appstream"
+    ]
+}

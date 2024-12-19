@@ -622,6 +622,16 @@ type AnswerRecommendationAIAgentConfiguration struct {
 	// ANSWER_RECOMMENDATION AI Agent.
 	IntentLabelingGenerationAIPromptId *string
 
+	// The locale to which specifies the language and region settings that determine
+	// the response language for [QueryAssistant].
+	//
+	// Changing this locale to anything other than en_US will turn off recommendations
+	// triggered by contact transcripts for agent assistance, as this feature is not
+	// supported in multiple languages.
+	//
+	// [QueryAssistant]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html
+	Locale *string
+
 	// The AI Prompt identifier for the Query Reformulation prompt used by the
 	// ANSWER_RECOMMENDATION AI Agent.
 	QueryReformulationAIPromptId *string
@@ -2137,7 +2147,7 @@ type GuardrailPiiEntityConfig struct {
 	//
 	//   - Finance
 	//
-	//   - REDIT_DEBIT_CARD_CVV
+	//   - CREDIT_DEBIT_CARD_CVV
 	//
 	// A three-digit card verification code (CVV) that is present on VISA, MasterCard,
 	//   and Discover credit and debit cards. For American Express credit or debit cards,
@@ -2721,6 +2731,12 @@ type ManualSearchAIAgentConfiguration struct {
 
 	// The association configurations for overriding behavior on this AI Agent.
 	AssociationConfigurations []AssociationConfiguration
+
+	// The locale to which specifies the language and region settings that determine
+	// the response language for [QueryAssistant].
+	//
+	// [QueryAssistant]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html
+	Locale *string
 
 	noSmithyDocumentSerde
 }

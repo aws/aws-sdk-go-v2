@@ -1,0 +1,8 @@
+{
+    "id": "9fca1acb-9b18-4f80-95f6-75c080780e7e",
+    "type": "feature",
+    "description": "This release adds support for inserting timecode tracks into MP4 container outputs.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

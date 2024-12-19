@@ -4066,6 +4066,11 @@ func awsRestjson1_serializeDocumentBurninDestinationSettings(v *types.BurninDest
 		ok.Integer(*v.OutlineSize)
 	}
 
+	if len(v.RemoveRubyReserveAttributes) > 0 {
+		ok := object.Key("removeRubyReserveAttributes")
+		ok.String(string(v.RemoveRubyReserveAttributes))
+	}
+
 	if len(v.ShadowColor) > 0 {
 		ok := object.Key("shadowColor")
 		ok.String(string(v.ShadowColor))
@@ -10067,6 +10072,11 @@ func awsRestjson1_serializeDocumentVideoDescription(v *types.VideoDescription, v
 	if len(v.TimecodeInsertion) > 0 {
 		ok := object.Key("timecodeInsertion")
 		ok.String(string(v.TimecodeInsertion))
+	}
+
+	if len(v.TimecodeTrack) > 0 {
+		ok := object.Key("timecodeTrack")
+		ok.String(string(v.TimecodeTrack))
 	}
 
 	if v.VideoPreprocessors != nil {

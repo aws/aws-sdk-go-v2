@@ -90,6 +90,7 @@
         "api_op_ListReservations.go",
         "api_op_ListSignalMaps.go",
         "api_op_ListTagsForResource.go",
+        "api_op_ListVersions.go",
         "api_op_PurchaseOffering.go",
         "api_op_RebootInputDevice.go",
         "api_op_RejectInputDeviceTransfer.go",

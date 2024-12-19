@@ -7866,6 +7866,25 @@ func (QueueStatus) Values() []QueueStatus {
 	}
 }
 
+type RemoveRubyReserveAttributes string
+
+// Enum values for RemoveRubyReserveAttributes
+const (
+	RemoveRubyReserveAttributesDisabled RemoveRubyReserveAttributes = "DISABLED"
+	RemoveRubyReserveAttributesEnabled  RemoveRubyReserveAttributes = "ENABLED"
+)
+
+// Values returns all known values for RemoveRubyReserveAttributes. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemoveRubyReserveAttributes) Values() []RemoveRubyReserveAttributes {
+	return []RemoveRubyReserveAttributes{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type RenewalType string
 
 // Enum values for RenewalType
@@ -8268,6 +8287,25 @@ func (TimecodeSource) Values() []TimecodeSource {
 		"EMBEDDED",
 		"ZEROBASED",
 		"SPECIFIEDSTART",
+	}
+}
+
+type TimecodeTrack string
+
+// Enum values for TimecodeTrack
+const (
+	TimecodeTrackDisabled TimecodeTrack = "DISABLED"
+	TimecodeTrackEnabled  TimecodeTrack = "ENABLED"
+)
+
+// Values returns all known values for TimecodeTrack. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TimecodeTrack) Values() []TimecodeTrack {
+	return []TimecodeTrack{
+		"DISABLED",
+		"ENABLED",
 	}
 }
 
