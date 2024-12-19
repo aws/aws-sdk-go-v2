@@ -8186,6 +8186,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RHEL8"
                     }
+                },
+                "ROCKY_LINUX8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROCKY_LINUX8"
+                    }
                 }
             }
         },

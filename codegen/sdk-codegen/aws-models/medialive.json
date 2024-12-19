@@ -3555,6 +3555,13 @@
                         "smithy.api#documentation": "Anywhere settings for this channel.",
                         "smithy.api#jsonName": "anywhereSettings"
                     }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "Requested engine version for this channel.",
+                        "smithy.api#jsonName": "channelEngineVersion"
+                    }
                 }
             },
             "traits": {
@@ -3594,6 +3601,43 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for ChannelEgressEndpoint"
+            }
+        },
+        "com.amazonaws.medialive#ChannelEngineVersionRequest": {
+            "type": "structure",
+            "members": {
+                "Version": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The build identifier of the engine version to use for this channel. Specify 'DEFAULT' to reset to the default version.",
+                        "smithy.api#jsonName": "version"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ChannelEngineVersionRequest"
+            }
+        },
+        "com.amazonaws.medialive#ChannelEngineVersionResponse": {
+            "type": "structure",
+            "members": {
+                "ExpirationDate": {
+                    "target": "com.amazonaws.medialive#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "The UTC time when the version expires.",
+                        "smithy.api#jsonName": "expirationDate"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The build identifier for this version of the channel version.",
+                        "smithy.api#jsonName": "version"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ChannelEngineVersionResponse"
             }
         },
         "com.amazonaws.medialive#ChannelPipelineIdToRestart": {
@@ -3859,6 +3903,20 @@
                     "traits": {
                         "smithy.api#documentation": "AnywhereSettings settings for this channel.",
                         "smithy.api#jsonName": "anywhereSettings"
+                    }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "The engine version that you requested for this channel.",
+                        "smithy.api#jsonName": "channelEngineVersion"
+                    }
+                },
+                "UsedChannelEngineVersions": {
+                    "target": "com.amazonaws.medialive#__listOfChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "The engine version that the running pipelines are using.",
+                        "smithy.api#jsonName": "usedChannelEngineVersions"
                     }
                 }
             },
@@ -5001,6 +5059,19 @@
                     "traits": {
                         "smithy.api#documentation": "The Elemental Anywhere settings for this channel.",
                         "smithy.api#jsonName": "anywhereSettings"
+                    }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionRequest",
+                    "traits": {
+                        "smithy.api#documentation": "The desired engine version for this channel.",
+                        "smithy.api#jsonName": "channelEngineVersion"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.medialive#__boolean",
+                    "traits": {
+                        "smithy.api#jsonName": "dryRun"
                     }
                 }
             },
@@ -7553,6 +7624,13 @@
                         "smithy.api#documentation": "Anywhere settings for this channel.",
                         "smithy.api#jsonName": "anywhereSettings"
                     }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "Requested engine version for this channel.",
+                        "smithy.api#jsonName": "channelEngineVersion"
+                    }
                 }
             },
             "traits": {
@@ -9614,6 +9692,13 @@
                     "traits": {
                         "smithy.api#documentation": "Anywhere settings for this channel.",
                         "smithy.api#jsonName": "anywhereSettings"
+                    }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "Requested engine version for this channel.",
+                        "smithy.api#jsonName": "channelEngineVersion"
                     }
                 }
             },
@@ -22786,6 +22871,73 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.medialive#ListVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#ListVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#ListVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieves an array of all the encoder engine versions that are available in this AWS account.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/prod/versions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.medialive#ListVersionsRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListVersionsRequest",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#ListVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "Versions": {
+                    "target": "com.amazonaws.medialive#__listOfChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "List of engine versions that are available for this AWS account.",
+                        "smithy.api#jsonName": "versions"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListVersionsResponse",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.medialive#LogLevel": {
             "type": "enum",
             "members": {
@@ -24236,6 +24388,9 @@
                 },
                 {
                     "target": "com.amazonaws.medialive#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ListVersions"
                 },
                 {
                     "target": "com.amazonaws.medialive#PurchaseOffering"
@@ -27971,6 +28126,13 @@
                         "smithy.api#documentation": "Pipeline ID",
                         "smithy.api#jsonName": "pipelineId"
                     }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "Current engine version of the encoder for this pipeline.",
+                        "smithy.api#jsonName": "channelEngineVersion"
+                    }
                 }
             },
             "traits": {
@@ -29088,6 +29250,13 @@
                     "traits": {
                         "smithy.api#documentation": "Anywhere settings for this channel.",
                         "smithy.api#jsonName": "anywhereSettings"
+                    }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "Requested engine version for this channel.",
+                        "smithy.api#jsonName": "channelEngineVersion"
                     }
                 }
             },
@@ -31135,6 +31304,13 @@
                         "smithy.api#documentation": "Anywhere settings for this channel.",
                         "smithy.api#jsonName": "anywhereSettings"
                     }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "Requested engine version for this channel.",
+                        "smithy.api#jsonName": "channelEngineVersion"
+                    }
                 }
             },
             "traits": {
@@ -32450,6 +32626,13 @@
                     "traits": {
                         "smithy.api#documentation": "Anywhere settings for this channel.",
                         "smithy.api#jsonName": "anywhereSettings"
+                    }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionResponse",
+                    "traits": {
+                        "smithy.api#documentation": "Requested engine version for this channel.",
+                        "smithy.api#jsonName": "channelEngineVersion"
                     }
                 }
             },
@@ -33941,6 +34124,19 @@
                     "traits": {
                         "smithy.api#documentation": "An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.",
                         "smithy.api#jsonName": "roleArn"
+                    }
+                },
+                "ChannelEngineVersion": {
+                    "target": "com.amazonaws.medialive#ChannelEngineVersionRequest",
+                    "traits": {
+                        "smithy.api#documentation": "Channel engine version for this channel",
+                        "smithy.api#jsonName": "channelEngineVersion"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.medialive#__boolean",
+                    "traits": {
+                        "smithy.api#jsonName": "dryRun"
                     }
                 }
             },
@@ -37167,6 +37363,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfChannelEgressEndpoint"
+            }
+        },
+        "com.amazonaws.medialive#__listOfChannelEngineVersionResponse": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#ChannelEngineVersionResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfChannelEngineVersionResponse"
             }
         },
         "com.amazonaws.medialive#__listOfChannelPipelineIdToRestart": {

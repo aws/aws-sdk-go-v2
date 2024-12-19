@@ -572,6 +572,47 @@
                 "target": "com.amazonaws.ssmsap#ComponentId"
             }
         },
+        "com.amazonaws.ssmsap#ComponentInfo": {
+            "type": "structure",
+            "members": {
+                "ComponentType": {
+                    "target": "com.amazonaws.ssmsap#ComponentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This string is the type of the component.</p>\n         <p>Accepted value is <code>WD</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sid": {
+                    "target": "com.amazonaws.ssmsap#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This string is the SAP System ID of the component.</p>\n         <p>Accepted values are alphanumeric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Ec2InstanceId": {
+                    "target": "com.amazonaws.ssmsap#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the Amazon EC2 instance on which your SAP component is running.</p>\n         <p>Accepted values are alphanumeric.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This is information about the component of \n         your SAP application, such as Web Dispatcher.</p>"
+            }
+        },
+        "com.amazonaws.ssmsap#ComponentInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#ComponentInfo"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.ssmsap#ComponentStatus": {
             "type": "enum",
             "members": {
@@ -2517,6 +2558,12 @@
                     "target": "com.amazonaws.ssmsap#SsmSapArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name of the SAP HANA database.</p>"
+                    }
+                },
+                "ComponentsInfo": {
+                    "target": "com.amazonaws.ssmsap#ComponentInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an optional parameter for component details \n         to which the SAP ABAP application is attached, \n         such as Web Dispatcher.</p>\n         <p>This is an array of ApplicationComponent objects. \n         You may input 0 to 5 items.</p>"
                     }
                 }
             }
