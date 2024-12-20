@@ -8,6 +8,7 @@ type BillingViewType string
 const (
 	BillingViewTypePrimary      BillingViewType = "PRIMARY"
 	BillingViewTypeBillingGroup BillingViewType = "BILLING_GROUP"
+	BillingViewTypeCustom       BillingViewType = "CUSTOM"
 )
 
 // Values returns all known values for BillingViewType. Note that this can be
@@ -18,6 +19,24 @@ func (BillingViewType) Values() []BillingViewType {
 	return []BillingViewType{
 		"PRIMARY",
 		"BILLING_GROUP",
+		"CUSTOM",
+	}
+}
+
+type Dimension string
+
+// Enum values for Dimension
+const (
+	DimensionLinkedAccount Dimension = "LINKED_ACCOUNT"
+)
+
+// Values returns all known values for Dimension. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Dimension) Values() []Dimension {
+	return []Dimension{
+		"LINKED_ACCOUNT",
 	}
 }
 

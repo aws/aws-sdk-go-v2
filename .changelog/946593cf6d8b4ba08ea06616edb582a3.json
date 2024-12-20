@@ -1,0 +1,8 @@
+{
+    "id": "946593cf-6d8b-4ba0-8ea0-6616edb582a3",
+    "type": "feature",
+    "description": "Support for custom user agent and max web pages crawled for web connector. Support app only credentials for SharePoint connector. Increase agents memory duration limit to 365 days. Support to specify max number of session summaries to include in agent invocation context.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "e4eb9093-ea3d-4407-bcb2-f36275167673",
+    "type": "feature",
+    "description": "This release supports adding NotAttributeCondition and Range to the RoutingCriteria object.",
+    "modules": [
+        "service/connect"
+    ]
+}

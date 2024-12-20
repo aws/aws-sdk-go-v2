@@ -99,12 +99,50 @@ type ModifyDBClusterInput struct {
 	//     "DBEngineVersions[].EngineVersion"
 	EngineVersion *string
 
+	// Specifies whether to manage the master user password with Amazon Web Services
+	// Secrets Manager. If the cluster doesn't manage the master user password with
+	// Amazon Web Services Secrets Manager, you can turn on this management. In this
+	// case, you can't specify MasterUserPassword . If the cluster already manages the
+	// master user password with Amazon Web Services Secrets Manager, and you specify
+	// that the master user password is not managed with Amazon Web Services Secrets
+	// Manager, then you must specify MasterUserPassword . In this case, Amazon
+	// DocumentDB deletes the secret and uses the new password for the master user
+	// specified by MasterUserPassword .
+	ManageMasterUserPassword *bool
+
 	// The password for the master database user. This password can contain any
 	// printable ASCII character except forward slash (/), double quote ("), or the
 	// "at" symbol (@).
 	//
 	// Constraints: Must contain from 8 to 100 characters.
 	MasterUserPassword *string
+
+	// The Amazon Web Services KMS key identifier to encrypt a secret that is
+	// automatically generated and managed in Amazon Web Services Secrets Manager.
+	//
+	// This setting is valid only if both of the following conditions are met:
+	//
+	//   - The cluster doesn't manage the master user password in Amazon Web Services
+	//   Secrets Manager. If the cluster already manages the master user password in
+	//   Amazon Web Services Secrets Manager, you can't change the KMS key that is used
+	//   to encrypt the secret.
+	//
+	//   - You are enabling ManageMasterUserPassword to manage the master user password
+	//   in Amazon Web Services Secrets Manager. If you are turning on
+	//   ManageMasterUserPassword and don't specify MasterUserSecretKmsKeyId , then the
+	//   aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in
+	//   a different Amazon Web Services account, then you can't use the
+	//   aws/secretsmanager KMS key to encrypt the secret, and you must use a customer
+	//   managed KMS key.
+	//
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key. To use a KMS key in a different Amazon Web
+	// Services account, specify the key ARN or alias ARN.
+	//
+	// There is a default KMS key for your Amazon Web Services account. Your Amazon
+	// Web Services account has a different default KMS key for each Amazon Web
+	// Services Region.
+	MasterUserSecretKmsKeyId *string
 
 	// The new cluster identifier for the cluster when renaming a cluster. This value
 	// is stored as a lowercase string.
@@ -156,6 +194,17 @@ type ModifyDBClusterInput struct {
 	//
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
+
+	// Specifies whether to rotate the secret managed by Amazon Web Services Secrets
+	// Manager for the master user password.
+	//
+	// This setting is valid only if the master user password is managed by Amazon
+	// DocumentDB in Amazon Web Services Secrets Manager for the cluster. The secret
+	// value contains the updated password.
+	//
+	// Constraint: You must apply the change immediately when rotating the master user
+	// password.
+	RotateMasterUserPassword *bool
 
 	// The storage type to associate with the DB cluster.
 	//

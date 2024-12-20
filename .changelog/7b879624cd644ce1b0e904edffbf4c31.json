@@ -1,0 +1,8 @@
+{
+    "id": "7b879624-cd64-4ce1-b0e9-04edffbf4c31",
+    "type": "feature",
+    "description": "Add CS8365C as a supported power connector for Outpost sites.",
+    "modules": [
+        "service/outposts"
+    ]
+}

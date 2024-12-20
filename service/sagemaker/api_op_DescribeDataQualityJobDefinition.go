@@ -76,8 +76,8 @@ type DescribeDataQualityJobDefinitionOutput struct {
 	// This member is required.
 	JobResources *types.MonitoringResources
 
-	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
-	// to perform tasks on your behalf.
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker AI can
+	// assume to perform tasks on your behalf.
 	//
 	// This member is required.
 	RoleArn *string

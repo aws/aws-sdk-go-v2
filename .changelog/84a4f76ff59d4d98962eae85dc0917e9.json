@@ -1,0 +1,8 @@
+{
+    "id": "84a4f76f-f59d-4d98-962e-ae85dc0917e9",
+    "type": "feature",
+    "description": "Added new API's for defining and fetching Billing Views.",
+    "modules": [
+        "service/billing"
+    ]
+}

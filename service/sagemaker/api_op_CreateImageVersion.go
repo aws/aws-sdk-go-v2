@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a version of the SageMaker image specified by ImageName . The version
+// Creates a version of the SageMaker AI image specified by ImageName . The version
 // represents the Amazon ECR container image specified by BaseImage .
 func (c *Client) CreateImageVersion(ctx context.Context, params *CreateImageVersionInput, optFns ...func(*Options)) (*CreateImageVersionOutput, error) {
 	if params == nil {
@@ -56,13 +56,13 @@ type CreateImageVersionInput struct {
 	// Indicates Horovod compatibility.
 	Horovod *bool
 
-	// Indicates SageMaker job type compatibility.
+	// Indicates SageMaker AI job type compatibility.
 	//
-	//   - TRAINING : The image version is compatible with SageMaker training jobs.
+	//   - TRAINING : The image version is compatible with SageMaker AI training jobs.
 	//
-	//   - INFERENCE : The image version is compatible with SageMaker inference jobs.
+	//   - INFERENCE : The image version is compatible with SageMaker AI inference jobs.
 	//
-	//   - NOTEBOOK_KERNEL : The image version is compatible with SageMaker notebook
+	//   - NOTEBOOK_KERNEL : The image version is compatible with SageMaker AI notebook
 	//   kernels.
 	JobType types.JobType
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Bedrock Blueprint
+// Updates an existing Amazon Bedrock Data Automation Blueprint
 func (c *Client) UpdateBlueprint(ctx context.Context, params *UpdateBlueprintInput, optFns ...func(*Options)) (*UpdateBlueprintOutput, error) {
 	if params == nil {
 		params = &UpdateBlueprintInput{}

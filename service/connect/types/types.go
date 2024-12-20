@@ -519,6 +519,9 @@ type AttributeCondition struct {
 	// The proficiency level of the condition.
 	ProficiencyLevel *float32
 
+	// An Object to define the minimum and maximum proficiency levels.
+	Range *Range
+
 	// The value of predefined attribute.
 	Value *string
 
@@ -2755,6 +2758,9 @@ type Expression struct {
 	// An object to specify the predefined attribute condition.
 	AttributeCondition *AttributeCondition
 
+	// An object to specify the predefined attribute condition.
+	NotAttributeCondition *AttributeCondition
+
 	// List of routing expressions which will be OR-ed together.
 	OrExpression []Expression
 
@@ -4792,6 +4798,18 @@ type QuickConnectSummary struct {
 	// a quick connect, you are prompted to assign one of the following types: Agent
 	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 	QuickConnectType QuickConnectType
+
+	noSmithyDocumentSerde
+}
+
+// An Object to define the minimum and maximum proficiency levels.
+type Range struct {
+
+	// The maximum proficiency level of the range.
+	MaxProficiencyLevel *float32
+
+	// The minimum proficiency level of the range.
+	MinProficiencyLevel *float32
 
 	noSmithyDocumentSerde
 }

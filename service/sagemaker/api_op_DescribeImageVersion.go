@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-// Describes a version of a SageMaker image.
+// Describes a version of a SageMaker AI image.
 func (c *Client) DescribeImageVersion(ctx context.Context, params *DescribeImageVersionInput, optFns ...func(*Options)) (*DescribeImageVersionOutput, error) {
 	if params == nil {
 		params = &DescribeImageVersionInput{}
@@ -75,13 +75,13 @@ type DescribeImageVersionOutput struct {
 	// The status of the version.
 	ImageVersionStatus types.ImageVersionStatus
 
-	// Indicates SageMaker job type compatibility.
+	// Indicates SageMaker AI job type compatibility.
 	//
-	//   - TRAINING : The image version is compatible with SageMaker training jobs.
+	//   - TRAINING : The image version is compatible with SageMaker AI training jobs.
 	//
-	//   - INFERENCE : The image version is compatible with SageMaker inference jobs.
+	//   - INFERENCE : The image version is compatible with SageMaker AI inference jobs.
 	//
-	//   - NOTEBOOK_KERNEL : The image version is compatible with SageMaker notebook
+	//   - NOTEBOOK_KERNEL : The image version is compatible with SageMaker AI notebook
 	//   kernels.
 	JobType types.JobType
 

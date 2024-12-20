@@ -12,6 +12,8 @@ import (
 )
 
 // Updates the settings of a space.
+//
+// You can't edit the app type of a space in the SpaceSettings .
 func (c *Client) UpdateSpace(ctx context.Context, params *UpdateSpaceInput, optFns ...func(*Options)) (*UpdateSpaceOutput, error) {
 	if params == nil {
 		params = &UpdateSpaceInput{}

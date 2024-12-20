@@ -157,6 +157,12 @@ type Alarm struct {
 
 // Specifies the training algorithm to use in a [CreateTrainingJob] request.
 //
+// SageMaker uses its own SageMaker account credentials to pull and access
+// built-in algorithms so built-in algorithms are universally accessible across all
+// Amazon Web Services accounts. As a result, built-in algorithms have standard,
+// unrestricted access. You cannot restrict built-in algorithms using IAM roles.
+// Use custom algorithms if you require specific access controls.
+//
 // For more information about algorithms provided by SageMaker, see [Algorithms]. For
 // information about using your own algorithms, see [Using Your Own Algorithms with Amazon SageMaker].
 //
@@ -1194,7 +1200,7 @@ type AnnotationConsolidationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Details about an Amazon SageMaker app.
+// Details about an Amazon SageMaker AI app.
 type AppDetails struct {
 
 	// The name of the app.
@@ -1209,8 +1215,8 @@ type AppDetails struct {
 	// The domain ID.
 	DomainId *string
 
-	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
-	// instance type that the version runs on.
+	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
+	// the instance type that the version runs on.
 	ResourceSpec *ResourceSpec
 
 	// The name of the space.
@@ -1225,7 +1231,7 @@ type AppDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for running a SageMaker image as a KernelGateway app.
+// The configuration for running a SageMaker AI image as a KernelGateway app.
 type AppImageConfigDetails struct {
 
 	// The ARN of the AppImageConfig.
@@ -1245,7 +1251,7 @@ type AppImageConfigDetails struct {
 	// variables and entry point.
 	JupyterLabAppImageConfig *JupyterLabAppImageConfig
 
-	// The configuration for the file system and kernels in the SageMaker image.
+	// The configuration for the file system and kernels in the SageMaker AI image.
 	KernelGatewayImageConfig *KernelGatewayImageConfig
 
 	// When the AppImageConfig was last modified.
@@ -2235,16 +2241,16 @@ type AutoMLS3DataSource struct {
 
 	// The data type.
 	//
-	//   - If you choose S3Prefix , S3Uri identifies a key name prefix. SageMaker uses
-	//   all objects that match the specified key name prefix for model training.
+	//   - If you choose S3Prefix , S3Uri identifies a key name prefix. SageMaker AI
+	//   uses all objects that match the specified key name prefix for model training.
 	//
 	// The S3Prefix should have the following format:
 	//
 	// s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE
 	//
 	//   - If you choose ManifestFile , S3Uri identifies an object that is a manifest
-	//   file containing a list of object keys that you want SageMaker to use for model
-	//   training.
+	//   file containing a list of object keys that you want SageMaker AI to use for
+	//   model training.
 	//
 	// A ManifestFile should have the format shown below:
 	//
@@ -2773,15 +2779,15 @@ type CapacitySize struct {
 }
 
 // Configuration specifying how to treat different headers. If no headers are
-// specified Amazon SageMaker will by default base64 encode when capturing the
+// specified Amazon SageMaker AI will by default base64 encode when capturing the
 // data.
 type CaptureContentTypeHeader struct {
 
-	// The list of all content type headers that Amazon SageMaker will treat as CSV
+	// The list of all content type headers that Amazon SageMaker AI will treat as CSV
 	// and capture accordingly.
 	CsvContentTypes []string
 
-	// The list of all content type headers that SageMaker will treat as JSON and
+	// The list of all content type headers that SageMaker AI will treat as JSON and
 	// capture accordingly.
 	JsonContentTypes []string
 
@@ -3656,7 +3662,7 @@ type CodeEditorAppImageConfig struct {
 	// The configuration used to run the application image container.
 	ContainerConfig *ContainerConfig
 
-	// The Amazon Elastic File System storage configuration for a SageMaker image.
+	// The Amazon Elastic File System storage configuration for a SageMaker AI image.
 	FileSystemConfig *FileSystemConfig
 
 	noSmithyDocumentSerde
@@ -3682,8 +3688,8 @@ type CodeEditorAppSettings struct {
 	// app.
 	CustomImages []CustomImage
 
-	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
-	// instance type that the version runs on.
+	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
+	// the instance type that the version runs on.
 	DefaultResourceSpec *ResourceSpec
 
 	// The Amazon Resource Name (ARN) of the Code Editor application lifecycle
@@ -3693,8 +3699,8 @@ type CodeEditorAppSettings struct {
 	noSmithyDocumentSerde
 }
 
-// A Git repository that SageMaker automatically displays to users for cloning in
-// the JupyterServer application.
+// A Git repository that SageMaker AI automatically displays to users for cloning
+// in the JupyterServer application.
 type CodeRepository struct {
 
 	// The URL of the Git repository.
@@ -4226,8 +4232,8 @@ type ConvergenceDetected struct {
 }
 
 // A file system, created by you, that you assign to a user profile or space for
-// an Amazon SageMaker Domain. Permitted users can access this file system in
-// Amazon SageMaker Studio.
+// an Amazon SageMaker AI Domain. Permitted users can access this file system in
+// Amazon SageMaker AI Studio.
 //
 // The following types satisfy this interface:
 //
@@ -4256,8 +4262,8 @@ type CustomFileSystemMemberFSxLustreFileSystem struct {
 func (*CustomFileSystemMemberFSxLustreFileSystem) isCustomFileSystem() {}
 
 // The settings for assigning a custom file system to a user profile or space for
-// an Amazon SageMaker Domain. Permitted users can access this file system in
-// Amazon SageMaker Studio.
+// an Amazon SageMaker AI Domain. Permitted users can access this file system in
+// Amazon SageMaker AI Studio.
 //
 // The following types satisfy this interface:
 //
@@ -4285,9 +4291,9 @@ type CustomFileSystemConfigMemberFSxLustreFileSystemConfig struct {
 
 func (*CustomFileSystemConfigMemberFSxLustreFileSystemConfig) isCustomFileSystemConfig() {}
 
-// A custom SageMaker image. For more information, see [Bring your own SageMaker image].
+// A custom SageMaker AI image. For more information, see [Bring your own SageMaker AI image].
 //
-// [Bring your own SageMaker image]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html
+// [Bring your own SageMaker AI image]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html
 type CustomImage struct {
 
 	// The name of the AppImageConfig.
@@ -4337,7 +4343,7 @@ type CustomPosixUserConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration to control how SageMaker captures inference data.
+// Configuration to control how SageMaker AI captures inference data.
 type DataCaptureConfig struct {
 
 	// Specifies data Model Monitor will capture. You can configure whether to collect
@@ -4351,21 +4357,21 @@ type DataCaptureConfig struct {
 	// This member is required.
 	DestinationS3Uri *string
 
-	// The percentage of requests SageMaker will capture. A lower value is recommended
-	// for Endpoints with high traffic.
+	// The percentage of requests SageMaker AI will capture. A lower value is
+	// recommended for Endpoints with high traffic.
 	//
 	// This member is required.
 	InitialSamplingPercentage *int32
 
 	// Configuration specifying how to treat different headers. If no headers are
-	// specified SageMaker will by default base64 encode when capturing the data.
+	// specified SageMaker AI will by default base64 encode when capturing the data.
 	CaptureContentTypeHeader *CaptureContentTypeHeader
 
 	// Whether data capture should be enabled or disabled (defaults to enabled).
 	EnableCapture *bool
 
 	// The Amazon Resource Name (ARN) of an Key Management Service key that SageMaker
-	// uses to encrypt the captured data at rest using Amazon S3 server-side
+	// AI uses to encrypt the captured data at rest using Amazon S3 server-side
 	// encryption.
 	//
 	// The KmsKeyId can be any of the following formats:
@@ -4706,7 +4712,7 @@ type DefaultEbsStorageSettings struct {
 type DefaultSpaceSettings struct {
 
 	// The settings for assigning a custom file system to a domain. Permitted users
-	// can access this file system in Amazon SageMaker Studio.
+	// can access this file system in Amazon SageMaker AI Studio.
 	CustomFileSystemConfigs []CustomFileSystemConfig
 
 	// Details about the POSIX identity that is used for file system operations.
@@ -5118,8 +5124,8 @@ type DomainSettings struct {
 	// A collection of settings that configure the domain's Docker interaction.
 	DockerSettings *DockerSettings
 
-	// The configuration for attaching a SageMaker user profile name to the execution
-	// role as a [sts:SourceIdentity key].
+	// The configuration for attaching a SageMaker AI user profile name to the
+	// execution role as a [sts:SourceIdentity key].
 	//
 	// [sts:SourceIdentity key]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
 	ExecutionRoleIdentityConfig ExecutionRoleIdentityConfig
@@ -5144,9 +5150,9 @@ type DomainSettingsForUpdate struct {
 	// A collection of settings that configure the domain's Docker interaction.
 	DockerSettings *DockerSettings
 
-	// The configuration for attaching a SageMaker user profile name to the execution
-	// role as a [sts:SourceIdentity key]. This configuration can only be modified if there are no apps in the
-	// InService or Pending state.
+	// The configuration for attaching a SageMaker AI user profile name to the
+	// execution role as a [sts:SourceIdentity key]. This configuration can only be modified if there are no
+	// apps in the InService or Pending state.
 	//
 	// [sts:SourceIdentity key]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
 	ExecutionRoleIdentityConfig ExecutionRoleIdentityConfig
@@ -5580,8 +5586,8 @@ type EdgePresetDeploymentOutput struct {
 }
 
 // A file system, created by you in Amazon EFS, that you assign to a user profile
-// or space for an Amazon SageMaker Domain. Permitted users can access this file
-// system in Amazon SageMaker Studio.
+// or space for an Amazon SageMaker AI Domain. Permitted users can access this file
+// system in Amazon SageMaker AI Studio.
 type EFSFileSystem struct {
 
 	// The ID of your Amazon EFS file system.
@@ -5593,7 +5599,7 @@ type EFSFileSystem struct {
 }
 
 // The settings for assigning a custom Amazon EFS file system to a user profile or
-// space for an Amazon SageMaker Domain.
+// space for an Amazon SageMaker AI Domain.
 type EFSFileSystemConfig struct {
 
 	// The ID of your Amazon EFS file system.
@@ -5601,7 +5607,7 @@ type EFSFileSystemConfig struct {
 	// This member is required.
 	FileSystemId *string
 
-	// The path to the file system directory that is accessible in Amazon SageMaker
+	// The path to the file system directory that is accessible in Amazon SageMaker AI
 	// Studio. Permitted users can access only this directory and below.
 	FileSystemPath *string
 
@@ -6411,7 +6417,7 @@ type FileSource struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Elastic File System storage configuration for a SageMaker image.
+// The Amazon Elastic File System storage configuration for a SageMaker AI image.
 type FileSystemConfig struct {
 
 	// The default POSIX group ID (GID). If not specified, defaults to 100 .
@@ -8997,9 +9003,9 @@ type IdleSettings struct {
 	noSmithyDocumentSerde
 }
 
-// A SageMaker image. A SageMaker image represents a set of container images that
-// are derived from a common base container image. Each of these container images
-// is represented by a SageMaker ImageVersion .
+// A SageMaker AI image. A SageMaker AI image represents a set of container images
+// that are derived from a common base container image. Each of these container
+// images is represented by a SageMaker AI ImageVersion .
 type Image struct {
 
 	// When the image was created.
@@ -9073,7 +9079,7 @@ type ImageConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A version of a SageMaker Image . A version represents an existing container
+// A version of a SageMaker AI Image . A version represents an existing container
 // image.
 type ImageVersion struct {
 
@@ -9246,8 +9252,8 @@ type InferenceComponentSpecification struct {
 	// deploy with an inference component.
 	Container *InferenceComponentContainerSpecification
 
-	// The name of an existing SageMaker model object in your account that you want to
-	// deploy with the inference component.
+	// The name of an existing SageMaker AI model object in your account that you want
+	// to deploy with the inference component.
 	ModelName *string
 
 	// Settings that take effect while the model container starts up.
@@ -9270,7 +9276,7 @@ type InferenceComponentSpecificationSummary struct {
 	// that is deployed with the inference component.
 	Container *InferenceComponentContainerSpecificationSummary
 
-	// The name of the SageMaker model object that is deployed with the inference
+	// The name of the SageMaker AI model object that is deployed with the inference
 	// component.
 	ModelName *string
 
@@ -9367,7 +9373,7 @@ type InferenceExperimentDataStorageConfig struct {
 	Destination *string
 
 	// Configuration specifying how to treat different headers. If no headers are
-	// specified Amazon SageMaker will by default base64 encode when capturing the
+	// specified Amazon SageMaker AI will by default base64 encode when capturing the
 	// data.
 	ContentType *CaptureContentTypeHeader
 
@@ -9918,14 +9924,14 @@ type IntegerParameterRangeSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for the file system and kernels in a SageMaker image running
-// as a JupyterLab app. The FileSystemConfig object is not supported.
+// The configuration for the file system and kernels in a SageMaker AI image
+// running as a JupyterLab app. The FileSystemConfig object is not supported.
 type JupyterLabAppImageConfig struct {
 
 	// The configuration used to run the application image container.
 	ContainerConfig *ContainerConfig
 
-	// The Amazon Elastic File System storage configuration for a SageMaker image.
+	// The Amazon Elastic File System storage configuration for a SageMaker AI image.
 	FileSystemConfig *FileSystemConfig
 
 	noSmithyDocumentSerde
@@ -9950,8 +9956,8 @@ type JupyterLabAppSettings struct {
 	// app.
 	CustomImages []CustomImage
 
-	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
-	// instance type that the version runs on.
+	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
+	// the instance type that the version runs on.
 	DefaultResourceSpec *ResourceSpec
 
 	// The configuration parameters that specify the IAM roles assumed by the
@@ -9972,12 +9978,12 @@ type JupyterLabAppSettings struct {
 // The JupyterServer app settings.
 type JupyterServerAppSettings struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for
-	// cloning in the JupyterServer application.
+	// A list of Git repositories that SageMaker AI automatically displays to users
+	// for cloning in the JupyterServer application.
 	CodeRepositories []CodeRepository
 
 	// The default instance type and the Amazon Resource Name (ARN) of the default
-	// SageMaker image used by the JupyterServer app. If you use the
+	// SageMaker AI image used by the JupyterServer app. If you use the
 	// LifecycleConfigArns parameter, then this parameter is also required.
 	DefaultResourceSpec *ResourceSpec
 
@@ -10005,16 +10011,16 @@ type KendraSettings struct {
 // The KernelGateway app settings.
 type KernelGatewayAppSettings struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway
-	// app.
+	// A list of custom SageMaker AI images that are configured to run as a
+	// KernelGateway app.
 	CustomImages []CustomImage
 
 	// The default instance type and the Amazon Resource Name (ARN) of the default
-	// SageMaker image used by the KernelGateway app.
+	// SageMaker AI image used by the KernelGateway app.
 	//
-	// The Amazon SageMaker Studio UI does not use the default instance type value set
-	// here. The default instance type set here is used when Apps are created using the
-	// CLI or CloudFormation and the instance type parameter value is not passed.
+	// The Amazon SageMaker AI Studio UI does not use the default instance type value
+	// set here. The default instance type set here is used when Apps are created using
+	// the CLI or CloudFormation and the instance type parameter value is not passed.
 	DefaultResourceSpec *ResourceSpec
 
 	//  The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the
@@ -10026,8 +10032,8 @@ type KernelGatewayAppSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for the file system and kernels in a SageMaker image running
-// as a KernelGateway app.
+// The configuration for the file system and kernels in a SageMaker AI image
+// running as a KernelGateway app.
 type KernelGatewayImageConfig struct {
 
 	// The specification of the Jupyter kernels in the image.
@@ -10035,7 +10041,7 @@ type KernelGatewayImageConfig struct {
 	// This member is required.
 	KernelSpecs []KernelSpec
 
-	// The Amazon Elastic File System storage configuration for a SageMaker image.
+	// The Amazon Elastic File System storage configuration for a SageMaker AI image.
 	FileSystemConfig *FileSystemConfig
 
 	noSmithyDocumentSerde
@@ -12234,9 +12240,9 @@ type MonitoringClusterConfig struct {
 	// This member is required.
 	VolumeSizeInGB *int32
 
-	// The Key Management Service (KMS) key that Amazon SageMaker uses to encrypt data
-	// on the storage volume attached to the ML compute instance(s) that run the model
-	// monitoring job.
+	// The Key Management Service (KMS) key that Amazon SageMaker AI uses to encrypt
+	// data on the storage volume attached to the ML compute instance(s) that run the
+	// model monitoring job.
 	VolumeKmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -12351,7 +12357,7 @@ type MonitoringJobDefinition struct {
 	MonitoringAppSpecification *MonitoringAppSpecification
 
 	// The array of inputs for the monitoring job. Currently we support monitoring an
-	// Amazon SageMaker Endpoint.
+	// Amazon SageMaker AI Endpoint.
 	//
 	// This member is required.
 	MonitoringInputs []MonitoringInput
@@ -12368,8 +12374,8 @@ type MonitoringJobDefinition struct {
 	// This member is required.
 	MonitoringResources *MonitoringResources
 
-	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
-	// to perform tasks on your behalf.
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker AI can
+	// assume to perform tasks on your behalf.
 	//
 	// This member is required.
 	RoleArn *string
@@ -12467,8 +12473,8 @@ type MonitoringOutputConfig struct {
 	// This member is required.
 	MonitoringOutputs []MonitoringOutput
 
-	// The Key Management Service (KMS) key that Amazon SageMaker uses to encrypt the
-	// model artifacts at rest using Amazon S3 server-side encryption.
+	// The Key Management Service (KMS) key that Amazon SageMaker AI uses to encrypt
+	// the model artifacts at rest using Amazon S3 server-side encryption.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -12494,14 +12500,14 @@ type MonitoringResources struct {
 // job.
 type MonitoringS3Output struct {
 
-	// The local path to the Amazon S3 storage location where Amazon SageMaker saves
-	// the results of a monitoring job. LocalPath is an absolute path for the output
-	// data.
+	// The local path to the Amazon S3 storage location where Amazon SageMaker AI
+	// saves the results of a monitoring job. LocalPath is an absolute path for the
+	// output data.
 	//
 	// This member is required.
 	LocalPath *string
 
-	// A URI that identifies the Amazon S3 storage location where Amazon SageMaker
+	// A URI that identifies the Amazon S3 storage location where Amazon SageMaker AI
 	// saves the results of a monitoring job.
 	//
 	// This member is required.
@@ -12666,10 +12672,10 @@ type MultiModelConfig struct {
 
 // The [VpcConfig] configuration object that specifies the VPC that you want the compilation
 // jobs to connect to. For more information on controlling access to your Amazon S3
-// buckets used for compilation job, see [Give Amazon SageMaker Compilation Jobs Access to Resources in Your Amazon VPC].
+// buckets used for compilation job, see [Give Amazon SageMaker AI Compilation Jobs Access to Resources in Your Amazon VPC].
 //
 // [VpcConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html
-// [Give Amazon SageMaker Compilation Jobs Access to Resources in Your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
+// [Give Amazon SageMaker AI Compilation Jobs Access to Resources in Your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
 type NeoVpcConfig struct {
 
 	// The VPC security group IDs. IDs have the form of sg-xxxxxxxx . Specify the
@@ -12793,7 +12799,7 @@ type NotebookInstanceLifecycleHook struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information for an SageMaker notebook instance.
+// Provides summary information for an SageMaker AI notebook instance.
 type NotebookInstanceSummary struct {
 
 	// The Amazon Resource Name (ARN) of the notebook instance.
@@ -12810,10 +12816,10 @@ type NotebookInstanceSummary struct {
 	// These can be either the names of Git repositories stored as resources in your
 	// account, or the URL of Git repositories in [Amazon Web Services CodeCommit]or in any other Git repository.
 	// These repositories are cloned at the same level as the default repository of
-	// your notebook instance. For more information, see [Associating Git Repositories with SageMaker Notebook Instances].
+	// your notebook instance. For more information, see [Associating Git Repositories with SageMaker AI Notebook Instances].
 	//
 	// [Amazon Web Services CodeCommit]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
-	// [Associating Git Repositories with SageMaker Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+	// [Associating Git Repositories with SageMaker AI Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
 	AdditionalCodeRepositories []string
 
 	// A timestamp that shows when the notebook instance was created.
@@ -12823,10 +12829,10 @@ type NotebookInstanceSummary struct {
 	// repository. This can be either the name of a Git repository stored as a resource
 	// in your account, or the URL of a Git repository in [Amazon Web Services CodeCommit]or in any other Git
 	// repository. When you open a notebook instance, it opens in the directory that
-	// contains this repository. For more information, see [Associating Git Repositories with SageMaker Notebook Instances].
+	// contains this repository. For more information, see [Associating Git Repositories with SageMaker AI Notebook Instances].
 	//
 	// [Amazon Web Services CodeCommit]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
-	// [Associating Git Repositories with SageMaker Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+	// [Associating Git Repositories with SageMaker AI Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
 	DefaultCodeRepository *string
 
 	// The type of ML compute instance that the notebook instance is running on.
@@ -13314,7 +13320,7 @@ type OptimizationVpcConfig struct {
 // recommended to use for particular TargetPlatform.
 type OutputConfig struct {
 
-	// Identifies the S3 bucket where you want Amazon SageMaker to store the model
+	// Identifies the S3 bucket where you want Amazon SageMaker AI to store the model
 	// artifacts. For example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
@@ -13387,10 +13393,11 @@ type OutputConfig struct {
 	CompilerOptions *string
 
 	// The Amazon Web Services Key Management Service key (Amazon Web Services KMS)
-	// that Amazon SageMaker uses to encrypt your output models with Amazon S3
+	// that Amazon SageMaker AI uses to encrypt your output models with Amazon S3
 	// server-side encryption after compilation job. If you don't provide a KMS key ID,
-	// Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
-	// For more information, see [KMS-Managed Encryption Keys]in the Amazon Simple Storage Service Developer Guide.
+	// Amazon SageMaker AI uses the default KMS key for Amazon S3 for your role's
+	// account. For more information, see [KMS-Managed Encryption Keys]in the Amazon Simple Storage Service
+	// Developer Guide.
 	//
 	// The KmsKeyId can be any of the following formats:
 	//
@@ -16185,8 +16192,8 @@ type ResourceSharingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
-// instance type that the version runs on.
+// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
+// the instance type that the version runs on.
 type ResourceSpec struct {
 
 	// The instance type that the image version runs on.
@@ -16201,7 +16208,7 @@ type ResourceSpec struct {
 	// Resource.
 	LifecycleConfigArn *string
 
-	// The ARN of the SageMaker image that the image version belongs to.
+	// The ARN of the SageMaker AI image that the image version belongs to.
 	SageMakerImageArn *string
 
 	// The SageMakerImageVersionAlias of the image to launch with. This value is in
@@ -16274,11 +16281,12 @@ type RollingUpdatePolicy struct {
 // A collection of settings that apply to an RSessionGateway app.
 type RSessionAppSettings struct {
 
-	// A list of custom SageMaker images that are configured to run as a RSession app.
+	// A list of custom SageMaker AI images that are configured to run as a RSession
+	// app.
 	CustomImages []CustomImage
 
-	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
-	// instance type that the version runs on.
+	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
+	// the instance type that the version runs on.
 	DefaultResourceSpec *ResourceSpec
 
 	noSmithyDocumentSerde
@@ -16307,8 +16315,8 @@ type RStudioServerProDomainSettings struct {
 	// This member is required.
 	DomainExecutionRoleArn *string
 
-	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
-	// instance type that the version runs on.
+	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
+	// the instance type that the version runs on.
 	DefaultResourceSpec *ResourceSpec
 
 	// A URL pointing to an RStudio Connect server.
@@ -16329,8 +16337,8 @@ type RStudioServerProDomainSettingsForUpdate struct {
 	// This member is required.
 	DomainExecutionRoleArn *string
 
-	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
-	// instance type that the version runs on.
+	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
+	// the instance type that the version runs on.
 	DefaultResourceSpec *ResourceSpec
 
 	// A URL pointing to an RStudio Connect server.
@@ -16668,7 +16676,7 @@ type ScheduleConfig struct {
 	//   execution.
 	//
 	//   - We recommend that if you would like a daily schedule, you do not provide
-	//   this parameter. Amazon SageMaker will pick a time for running every day.
+	//   this parameter. Amazon SageMaker AI will pick a time for running every day.
 	//
 	// You can also specify the keyword NOW to run the monitoring job immediately, one
 	// time, without recurring.
@@ -17098,10 +17106,10 @@ type ShadowModelVariantConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies options for sharing Amazon SageMaker Studio notebooks. These settings
-// are specified as part of DefaultUserSettings when the CreateDomain API is
-// called, and as part of UserSettings when the CreateUserProfile API is called.
-// When SharingSettings is not specified, notebook sharing isn't allowed.
+// Specifies options for sharing Amazon SageMaker AI Studio notebooks. These
+// settings are specified as part of DefaultUserSettings when the CreateDomain API
+// is called, and as part of UserSettings when the CreateUserProfile API is
+// called. When SharingSettings is not specified, notebook sharing isn't allowed.
 type SharingSettings struct {
 
 	// Whether to include the notebook cell output when sharing the notebook. The
@@ -17221,8 +17229,8 @@ type SpaceCodeEditorAppSettings struct {
 	// applications in a space.
 	AppLifecycleManagement *SpaceAppLifecycleManagement
 
-	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
-	// instance type that the version runs on.
+	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
+	// the instance type that the version runs on.
 	DefaultResourceSpec *ResourceSpec
 
 	noSmithyDocumentSerde
@@ -17282,8 +17290,8 @@ type SpaceJupyterLabAppSettings struct {
 	// cloning in the JupyterLab application.
 	CodeRepositories []CodeRepository
 
-	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
-	// instance type that the version runs on.
+	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
+	// the instance type that the version runs on.
 	DefaultResourceSpec *ResourceSpec
 
 	noSmithyDocumentSerde
@@ -17293,14 +17301,19 @@ type SpaceJupyterLabAppSettings struct {
 type SpaceSettings struct {
 
 	// The type of app created within the space.
+	//
+	// If using the [UpdateSpace] API, you can't change the app type of your space by specifying a
+	// different value for this field.
+	//
+	// [UpdateSpace]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateSpace.html
 	AppType AppType
 
 	// The Code Editor application settings.
 	CodeEditorAppSettings *SpaceCodeEditorAppSettings
 
 	// A file system, created by you, that you assign to a space for an Amazon
-	// SageMaker Domain. Permitted users can access this file system in Amazon
-	// SageMaker Studio.
+	// SageMaker AI Domain. Permitted users can access this file system in Amazon
+	// SageMaker AI Studio.
 	CustomFileSystems []CustomFileSystem
 
 	// The settings for the JupyterLab application.
@@ -17433,13 +17446,13 @@ type StoppingCondition struct {
 	noSmithyDocumentSerde
 }
 
-// Details of the Amazon SageMaker Studio Lifecycle Configuration.
+// Details of the Amazon SageMaker AI Studio Lifecycle Configuration.
 type StudioLifecycleConfigDetails struct {
 
-	// The creation time of the Amazon SageMaker Studio Lifecycle Configuration.
+	// The creation time of the Amazon SageMaker AI Studio Lifecycle Configuration.
 	CreationTime *time.Time
 
-	// This value is equivalent to CreationTime because Amazon SageMaker Studio
+	// This value is equivalent to CreationTime because Amazon SageMaker AI Studio
 	// Lifecycle Configurations are immutable.
 	LastModifiedTime *time.Time
 
@@ -17449,7 +17462,7 @@ type StudioLifecycleConfigDetails struct {
 	//  The Amazon Resource Name (ARN) of the Lifecycle Configuration.
 	StudioLifecycleConfigArn *string
 
-	// The name of the Amazon SageMaker Studio Lifecycle Configuration.
+	// The name of the Amazon SageMaker AI Studio Lifecycle Configuration.
 	StudioLifecycleConfigName *string
 
 	noSmithyDocumentSerde
@@ -17724,7 +17737,7 @@ type TargetTrackingScalingPolicyConfiguration struct {
 type TensorBoardAppSettings struct {
 
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
-	// image created on the instance.
+	// AI image created on the instance.
 	DefaultResourceSpec *ResourceSpec
 
 	noSmithyDocumentSerde
@@ -19890,7 +19903,7 @@ type UserSettings struct {
 	CodeEditorAppSettings *CodeEditorAppSettings
 
 	// The settings for assigning a custom file system to a user profile. Permitted
-	// users can access this file system in Amazon SageMaker Studio.
+	// users can access this file system in Amazon SageMaker AI Studio.
 	//
 	// SageMaker applies these settings only to private spaces that the user creates
 	// in the domain. SageMaker doesn't apply these settings to shared spaces.
@@ -19945,15 +19958,15 @@ type UserSettings struct {
 	// Required when the CreateDomain.AppNetworkAccessType parameter is set to VpcOnly
 	// , unless specified as part of the DefaultUserSettings for the domain.
 	//
-	// Amazon SageMaker adds a security group to allow NFS traffic from Amazon
-	// SageMaker Studio. Therefore, the number of security groups that you can specify
-	// is one less than the maximum number shown.
+	// Amazon SageMaker AI adds a security group to allow NFS traffic from Amazon
+	// SageMaker AI Studio. Therefore, the number of security groups that you can
+	// specify is one less than the maximum number shown.
 	//
 	// SageMaker applies these settings only to private spaces that the user creates
 	// in the domain. SageMaker doesn't apply these settings to shared spaces.
 	SecurityGroups []string
 
-	// Specifies options for sharing Amazon SageMaker Studio notebooks.
+	// Specifies options for sharing Amazon SageMaker AI Studio notebooks.
 	SharingSettings *SharingSettings
 
 	// The storage settings for a space.

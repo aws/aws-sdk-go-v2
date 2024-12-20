@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to
-// monitor the data captured for an Amazon SageMaker Endpoint.
+// Creates a schedule that regularly starts Amazon SageMaker AI Processing Jobs to
+// monitor the data captured for an Amazon SageMaker AI Endpoint.
 func (c *Client) CreateMonitoringSchedule(ctx context.Context, params *CreateMonitoringScheduleInput, optFns ...func(*Options)) (*CreateMonitoringScheduleOutput, error) {
 	if params == nil {
 		params = &CreateMonitoringScheduleInput{}

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an inference component, which is a SageMaker hosting object that you
+// Creates an inference component, which is a SageMaker AI hosting object that you
 // can use to deploy a model to an endpoint. In the inference component settings,
 // you specify the model, the endpoint, and how the model utilizes the resources
 // that the endpoint hosts. You can optimize resource utilization by tailoring how

@@ -144,6 +144,38 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+//	The model specified in the request is not ready to serve inference requests.
+//
+// The AWS SDK will automatically retry the operation up to 5 times. For
+// information about configuring automatic retries, see [Retry behavior]in the AWS SDKs and Tools
+// reference guide.
+//
+// [Retry behavior]: https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+type ModelNotReadyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ModelNotReadyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ModelNotReadyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ModelNotReadyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ModelNotReadyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ModelNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified resource Amazon Resource Name (ARN) was not found. Check the
 // Amazon Resource Name (ARN) and try your request again.
 type ResourceNotFoundException struct {

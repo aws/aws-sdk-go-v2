@@ -68,7 +68,7 @@ type DescribeEndpointConfigOutput struct {
 	// [CreateEndpointConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
-	// Configuration to control how SageMaker captures inference data.
+	// Configuration to control how SageMaker AI captures inference data.
 	DataCaptureConfig *types.DataCaptureConfig
 
 	// Indicates whether all model containers deployed to the endpoint are isolated.

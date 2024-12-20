@@ -1,0 +1,8 @@
+{
+    "id": "695bfc00-bcde-4c2b-9f84-6218c8fae770",
+    "type": "feature",
+    "description": "bedrock agents now supports long term memory and performance configs. Invokeflow supports performance configs. RetrieveAndGenerate performance configs",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

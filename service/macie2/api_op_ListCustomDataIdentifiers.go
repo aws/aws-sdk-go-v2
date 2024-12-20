@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a subset of information about all the custom data identifiers for an
+// Retrieves a subset of information about the custom data identifiers for an
 // account.
 func (c *Client) ListCustomDataIdentifiers(ctx context.Context, params *ListCustomDataIdentifiersInput, optFns ...func(*Options)) (*ListCustomDataIdentifiersOutput, error) {
 	if params == nil {

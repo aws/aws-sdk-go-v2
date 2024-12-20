@@ -1,0 +1,8 @@
+{
+    "id": "e2059bee-752f-478a-be9b-976ff9a5ff8d",
+    "type": "documentation",
+    "description": "Documentation update for Amazon Bedrock Data Automation",
+    "modules": [
+        "service/bedrockdataautomation"
+    ]
+}

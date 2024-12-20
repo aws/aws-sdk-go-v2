@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all existing Amazon Bedrock Keystone DataAutomationProjects
+// Lists all existing Amazon Bedrock Data Automation Projects
 func (c *Client) ListDataAutomationProjects(ctx context.Context, params *ListDataAutomationProjectsInput, optFns ...func(*Options)) (*ListDataAutomationProjectsOutput, error) {
 	if params == nil {
 		params = &ListDataAutomationProjectsInput{}

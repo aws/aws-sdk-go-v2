@@ -65,10 +65,10 @@ type CreateOptimizationJobInput struct {
 	// This member is required.
 	OutputConfig *types.OptimizationJobOutputConfig
 
-	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to
-	// perform tasks on your behalf.
+	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI
+	// to perform tasks on your behalf.
 	//
-	// During model optimization, Amazon SageMaker needs your permission to:
+	// During model optimization, Amazon SageMaker AI needs your permission to:
 	//
 	//   - Read input data from an S3 bucket
 	//
@@ -79,10 +79,10 @@ type CreateOptimizationJobInput struct {
 	//   - Publish metrics to Amazon CloudWatch
 	//
 	// You grant permissions for all of these tasks to an IAM role. To pass this role
-	// to Amazon SageMaker, the caller of this API must have the iam:PassRole
-	// permission. For more information, see [Amazon SageMaker Roles.]
+	// to Amazon SageMaker AI, the caller of this API must have the iam:PassRole
+	// permission. For more information, see [Amazon SageMaker AI Roles.]
 	//
-	// [Amazon SageMaker Roles.]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+	// [Amazon SageMaker AI Roles.]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
 	//
 	// This member is required.
 	RoleArn *string

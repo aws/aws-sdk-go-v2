@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves (queries) statistical data and other information about Amazon Web
-// Services resources that Amazon Macie monitors and analyzes.
+// Services resources that Amazon Macie monitors and analyzes for an account.
 func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
 		params = &SearchResourcesInput{}

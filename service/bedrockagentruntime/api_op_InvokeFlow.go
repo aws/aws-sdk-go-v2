@@ -59,6 +59,9 @@ type InvokeFlowInput struct {
 	// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
 	EnableTrace *bool
 
+	// Model performance settings for the request.
+	ModelPerformanceConfiguration *types.ModelPerformanceConfiguration
+
 	noSmithyDocumentSerde
 }
 

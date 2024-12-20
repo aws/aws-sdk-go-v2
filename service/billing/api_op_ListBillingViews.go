@@ -38,15 +38,23 @@ type ListBillingViewsInput struct {
 	// listed. BILLING_GROUP billing views are listed for time ranges when the
 	// associated billing group resource in Billing Conductor is active. The time range
 	// must be within one calendar month.
-	//
-	// This member is required.
 	ActiveTimeRange *types.ActiveTimeRange
+
+	// The Amazon Resource Name (ARN) that can be used to uniquely identify the
+	// billing view.
+	Arns []string
+
+	// The type of billing view.
+	BillingViewTypes []types.BillingViewType
 
 	// The maximum number of billing views to retrieve. Default is 100.
 	MaxResults *int32
 
 	// The pagination token that is used on subsequent calls to list billing views.
 	NextToken *string
+
+	//  The list of owners of the billing view.
+	OwnerAccountId *string
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,8 @@
+{
+    "id": "aab14b51-9d13-49a4-b2b5-074ba7c3661a",
+    "type": "feature",
+    "description": "Support AWS Secret Manager managed password for AWS DocumentDB instance-based cluster.",
+    "modules": [
+        "service/docdb"
+    ]
+}

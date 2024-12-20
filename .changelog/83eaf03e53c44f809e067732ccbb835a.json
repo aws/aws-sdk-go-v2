@@ -1,0 +1,8 @@
+{
+    "id": "83eaf03e-53c4-4f80-9e06-7732ccbb835a",
+    "type": "feature",
+    "description": "This release expands the catalog of upgrade insight checks",
+    "modules": [
+        "service/eks"
+    ]
+}

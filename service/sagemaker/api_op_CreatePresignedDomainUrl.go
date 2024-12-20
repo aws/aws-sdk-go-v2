@@ -23,7 +23,7 @@ import (
 //
 // You can restrict access to this API and to the URL that it returns to a list of
 // IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more
-// information, see [Connect to Amazon SageMaker Studio Through an Interface VPC Endpoint].
+// information, see [Connect to Amazon SageMaker AI Studio Through an Interface VPC Endpoint].
 //
 //   - The URL that you get from a call to CreatePresignedDomainUrl has a default
 //     timeout of 5 minutes. You can configure this value using ExpiresInSeconds . If
@@ -33,7 +33,7 @@ import (
 //   - The JupyterLab session default expiration time is 12 hours. You can
 //     configure this value using SessionExpirationDurationInSeconds.
 //
-// [Connect to Amazon SageMaker Studio Through an Interface VPC Endpoint]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html
+// [Connect to Amazon SageMaker AI Studio Through an Interface VPC Endpoint]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html
 func (c *Client) CreatePresignedDomainUrl(ctx context.Context, params *CreatePresignedDomainUrlInput, optFns ...func(*Options)) (*CreatePresignedDomainUrlOutput, error) {
 	if params == nil {
 		params = &CreatePresignedDomainUrlInput{}

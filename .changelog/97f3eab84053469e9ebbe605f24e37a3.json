@@ -1,0 +1,8 @@
+{
+    "id": "97f3eab8-4053-469e-9ebb-e605f24e37a3",
+    "type": "feature",
+    "description": "Support for retrieving cost, usage, and forecast for billing view.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

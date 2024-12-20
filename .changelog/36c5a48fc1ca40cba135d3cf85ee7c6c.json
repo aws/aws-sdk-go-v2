@@ -1,0 +1,8 @@
+{
+    "id": "36c5a48f-c1ca-40cb-a135-d3cf85ee7c6c",
+    "type": "feature",
+    "description": "This release adds support for identifying S3 general purpose buckets that exceed the Amazon Macie quota for preventative control monitoring.",
+    "modules": [
+        "service/macie2"
+    ]
+}

@@ -8614,6 +8614,13 @@ func awsRestjson1_serializeDocumentMemoryConfiguration(v *types.MemoryConfigurat
 		}
 	}
 
+	if v.SessionSummaryConfiguration != nil {
+		ok := object.Key("sessionSummaryConfiguration")
+		if err := awsRestjson1_serializeDocumentSessionSummaryConfiguration(v.SessionSummaryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StorageDays != nil {
 		ok := object.Key("storageDays")
 		ok.Integer(*v.StorageDays)
@@ -10127,6 +10134,18 @@ func awsRestjson1_serializeDocumentServerSideEncryptionConfiguration(v *types.Se
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSessionSummaryConfiguration(v *types.SessionSummaryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxRecentSessions != nil {
+		ok := object.Key("maxRecentSessions")
+		ok.Integer(*v.MaxRecentSessions)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSharePointCrawlerConfiguration(v *types.SharePointCrawlerConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10759,12 +10778,22 @@ func awsRestjson1_serializeDocumentWebCrawlerConfiguration(v *types.WebCrawlerCo
 		ok.String(string(v.Scope))
 	}
 
+	if v.UserAgent != nil {
+		ok := object.Key("userAgent")
+		ok.String(*v.UserAgent)
+	}
+
 	return nil
 }
 
 func awsRestjson1_serializeDocumentWebCrawlerLimits(v *types.WebCrawlerLimits, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MaxPages != nil {
+		ok := object.Key("maxPages")
+		ok.Integer(*v.MaxPages)
+	}
 
 	if v.RateLimit != nil {
 		ok := object.Key("rateLimit")

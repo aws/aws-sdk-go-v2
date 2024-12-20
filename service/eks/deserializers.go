@@ -10076,6 +10076,85 @@ func awsRestjson1_deserializeDocumentAddon(v **types.Addon, value interface{}) e
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAddonCompatibilityDetail(v **types.AddonCompatibilityDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AddonCompatibilityDetail
+	if *v == nil {
+		sv = &types.AddonCompatibilityDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "compatibleVersions":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.CompatibleVersions, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAddonCompatibilityDetails(v *[]types.AddonCompatibilityDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AddonCompatibilityDetail
+	if *v == nil {
+		cv = []types.AddonCompatibilityDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AddonCompatibilityDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAddonCompatibilityDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAddonHealth(v **types.AddonHealth, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12791,6 +12870,11 @@ func awsRestjson1_deserializeDocumentInsightCategorySpecificSummary(v **types.In
 
 	for key, value := range shape {
 		switch key {
+		case "addonCompatibilityDetails":
+			if err := awsRestjson1_deserializeDocumentAddonCompatibilityDetails(&sv.AddonCompatibilityDetails, value); err != nil {
+				return err
+			}
+
 		case "deprecationDetails":
 			if err := awsRestjson1_deserializeDocumentDeprecationDetails(&sv.DeprecationDetails, value); err != nil {
 				return err

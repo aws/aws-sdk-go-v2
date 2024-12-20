@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the properties of a SageMaker image. To change the image's tags, use
+// Updates the properties of a SageMaker AI image. To change the image's tags, use
 // the [AddTags]and [DeleteTags] APIs.
 //
 // [AddTags]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AddTags.html
@@ -47,8 +47,8 @@ type UpdateImageInput struct {
 	// The new display name for the image.
 	DisplayName *string
 
-	// The new ARN for the IAM role that enables Amazon SageMaker to perform tasks on
-	// your behalf.
+	// The new ARN for the IAM role that enables Amazon SageMaker AI to perform tasks
+	// on your behalf.
 	RoleArn *string
 
 	noSmithyDocumentSerde

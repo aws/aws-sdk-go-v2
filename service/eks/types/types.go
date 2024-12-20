@@ -167,6 +167,20 @@ type Addon struct {
 	noSmithyDocumentSerde
 }
 
+// The summary information about the Amazon EKS add-on compatibility for the next
+// Kubernetes version for an insight check in the UPGRADE_READINESS category.
+type AddonCompatibilityDetail struct {
+
+	// The list of compatible Amazon EKS add-on versions for the next Kubernetes
+	// version.
+	CompatibleVersions []string
+
+	// The name of the Amazon EKS add-on.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // The health of the add-on.
 type AddonHealth struct {
 
@@ -946,6 +960,9 @@ type Insight struct {
 // Summary information that relates to the category of the insight. Currently only
 // returned with certain insights having category UPGRADE_READINESS .
 type InsightCategorySpecificSummary struct {
+
+	// A list of AddonCompatibilityDetail objects for Amazon EKS add-ons.
+	AddonCompatibilityDetails []AddonCompatibilityDetail
 
 	// The summary information about deprecated resource usage for an insight check in
 	// the UPGRADE_READINESS category.
