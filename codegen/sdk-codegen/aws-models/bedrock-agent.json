@@ -11871,6 +11871,14 @@
                 "smithy.api#documentation": "<p>Details about a malformed input expression in a node.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#MaxRecentSessions": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#MaxResults": {
             "type": "integer",
             "traits": {
@@ -11904,6 +11912,12 @@
                     "traits": {
                         "smithy.api#default": 30,
                         "smithy.api#documentation": "<p>The number of days the agent is configured to retain the conversational context.</p>"
+                    }
+                },
+                "sessionSummaryConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#SessionSummaryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration for SESSION_SUMMARY memory type enabled for the agent. </p>"
                     }
                 }
             },
@@ -13571,6 +13585,12 @@
                     "traits": {
                         "smithy.api#enumValue": "KNOWLEDGE_BASE_RESPONSE_GENERATION"
                     }
+                },
+                "MEMORY_SUMMARIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEMORY_SUMMARIZATION"
+                    }
                 }
             }
         },
@@ -14744,6 +14764,21 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.bedrockagent#SessionSummaryConfiguration": {
+            "type": "structure",
+            "members": {
+                "maxRecentSessions": {
+                    "target": "com.amazonaws.bedrockagent#MaxRecentSessions",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Maximum number of recent session summaries to include in the agent's prompt context.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for SESSION_SUMMARY memory type enabled for the agent.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#SessionTTL": {
             "type": "integer",
             "traits": {
@@ -14760,6 +14795,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OAUTH2_CLIENT_CREDENTIALS"
+                    }
+                },
+                "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS"
                     }
                 }
             }
@@ -15200,7 +15241,7 @@
                 "smithy.api#default": 30,
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 30
+                    "max": 365
                 }
             }
         },
@@ -17332,6 +17373,16 @@
                 "smithy.api#documentation": "<p>The configuration of web URLs that you want to crawl. \n            You should be authorized to crawl the URLs.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#UserAgent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 40
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagent#ValidateFlowDefinition": {
             "type": "operation",
             "input": {
@@ -17547,6 +17598,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The scope of what is crawled for your URLs.</p>\n         <p>You can choose to crawl only web pages that belong to the same host or primary \n            domain. For example, only web pages that contain the seed URL \n            \"https://docs.aws.amazon.com/bedrock/latest/userguide/\" and no other domains. \n            You can choose to include sub domains in addition to the host or primary domain. \n            For example, web pages that contain \"aws.amazon.com\" can also include sub domain \n            \"docs.aws.amazon.com\".</p>"
                     }
+                },
+                "userAgent": {
+                    "target": "com.amazonaws.bedrockagent#UserAgent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string used for identifying the crawler or a bot when it accesses a web server. By default, \n            this is set to <code>bedrockbot_UUID</code> for your crawler.  You can optionally append a custom \n            string to <code>bedrockbot_UUID</code> to allowlist a specific user agent permitted to access your source URLs.            \n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -17563,6 +17620,15 @@
                         "smithy.api#range": {
                             "min": 1,
                             "max": 300
+                        }
+                    }
+                },
+                "maxPages": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The max number of web pages crawled from your source URLs, up to 25,000 pages.  If \n            the web pages exceed this limit, the data source sync will fail and no web pages will be ingested.\n        </p>",
+                        "smithy.api#range": {
+                            "min": 1
                         }
                     }
                 }

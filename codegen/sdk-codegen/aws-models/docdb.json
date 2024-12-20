@@ -1636,6 +1636,32 @@
                 "smithy.api#documentation": "<p>The configuration setting for the log types to be enabled for export to Amazon\n            CloudWatch Logs for a specific instance or cluster.</p>\n         <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine\n            which logs are exported (or not exported) to CloudWatch Logs. The values within these\n            arrays depend on the engine that is being used.</p>"
             }
         },
+        "com.amazonaws.docdb#ClusterMasterUserSecret": {
+            "type": "structure",
+            "members": {
+                "SecretArn": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret.</p>"
+                    }
+                },
+                "SecretStatus": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the secret.</p>\n         <p>The possible status values include the following:</p>\n         <ul>\n            <li>\n               <p>creating - The secret is being created.</p>\n            </li>\n            <li>\n               <p>active - The secret is available for normal use and rotation.</p>\n            </li>\n            <li>\n               <p>rotating - The secret is being rotated.</p>\n            </li>\n            <li>\n               <p>impaired - The secret can be used to access database credentials, but it can't be rotated. \n                A secret might have this status if, for example, permissions are changed so that Amazon DocumentDB can no longer access either the secret or the KMS key for the secret.</p>\n               <p>When a secret has this status, you can correct the condition that caused the status. \n                    Alternatively, modify the instance to turn off automatic management of database credentials, and then modify the instance again to turn on automatic management of database credentials.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier that is used to encrypt the secret.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the secret managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the master user password.</p>"
+            }
+        },
         "com.amazonaws.docdb#CopyDBClusterParameterGroup": {
             "type": "operation",
             "input": {
@@ -1997,6 +2023,18 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>\n         <note>\n            <p>When you create a DocumentDB DB cluster with the storage type set to <code>iopt1</code>, the storage type is returned\n                    in the response. The storage type isn't returned when you set it to <code>standard</code>.</p>\n         </note>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>Constraint: You can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> is specified.</p>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.\n            This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the DB cluster.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. \n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. \n            If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. \n            Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
                 }
             },
@@ -2791,6 +2829,12 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Storage type associated with your cluster</p>\n         <p>Storage type associated with your cluster</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                    }
+                },
+                "MasterUserSecret": {
+                    "target": "com.amazonaws.docdb#ClusterMasterUserSecret",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secret managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the master user password.</p>"
                     }
                 }
             },
@@ -4791,6 +4835,21 @@
                 "smithy.api#suppress": [
                     "WaitableTraitInvalidErrorType"
                 ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeDBInstancesFailure",
+                        "params": {
+                            "DBInstanceIdentifier": "fake-id"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ],
                 "smithy.waiters#waitable": {
                     "DBInstanceAvailable": {
                         "acceptors": [
@@ -6596,6 +6655,24 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.\n            If the cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn on this management. \n            In this case, you can't specify <code>MasterUserPassword</code>.\n            If the cluster already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>. \n            In this case, Amazon DocumentDB deletes the secret and uses the new password for the master user specified by <code>MasterUserPassword</code>.</p>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if both of the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>The cluster doesn't manage the master user password in Amazon Web Services Secrets Manager. \n                If the cluster already manages the master user password in Amazon Web Services Secrets Manager, you can't change the KMS key that is used to encrypt the secret.</p>\n            </li>\n            <li>\n               <p>You are enabling <code>ManageMasterUserPassword</code> to manage the master user password in Amazon Web Services Secrets Manager. \n                If you are turning on <code>ManageMasterUserPassword</code> and don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. \n                If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>\n            </li>\n         </ul>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. \n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. \n            Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "RotateMasterUserPassword": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to rotate the secret managed by Amazon Web Services Secrets Manager for the master user password.</p>\n         <p>This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the cluster. \n            The secret value contains the updated password.</p>\n         <p>Constraint: You must apply the change immediately when rotating the master user password.</p>"
                     }
                 }
             },

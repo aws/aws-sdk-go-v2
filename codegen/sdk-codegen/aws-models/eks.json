@@ -1616,6 +1616,32 @@
                 "smithy.api#documentation": "<p>An Amazon EKS add-on. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html\">Amazon EKS add-ons</a> in\n            the <i>Amazon EKS User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.eks#AddonCompatibilityDetail": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS add-on.</p>"
+                    }
+                },
+                "compatibleVersions": {
+                    "target": "com.amazonaws.eks#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of compatible Amazon EKS add-on versions for the next Kubernetes version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary information about the Amazon EKS add-on compatibility for the next Kubernetes \n            version for an insight check in the <code>UPGRADE_READINESS</code> category.</p>"
+            }
+        },
+        "com.amazonaws.eks#AddonCompatibilityDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#AddonCompatibilityDetail"
+            }
+        },
         "com.amazonaws.eks#AddonHealth": {
             "type": "structure",
             "members": {
@@ -6628,6 +6654,12 @@
                     "target": "com.amazonaws.eks#DeprecationDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>The summary information about deprecated resource usage for an insight check in the\n                <code>UPGRADE_READINESS</code> category.</p>"
+                    }
+                },
+                "addonCompatibilityDetails": {
+                    "target": "com.amazonaws.eks#AddonCompatibilityDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>AddonCompatibilityDetail</code> objects for Amazon EKS add-ons.</p>"
                     }
                 }
             },
