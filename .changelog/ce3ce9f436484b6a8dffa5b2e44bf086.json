@@ -1,8 +1,0 @@
-{
-    "id": "ce3ce9f4-3648-4b6a-8dff-a5b2e44bf086",
-    "type": "documentation",
-    "description": "Documentation update for Amazon Bedrock Data Automation Runtime",
-    "modules": [
-        "service/bedrockdataautomationruntime"
-    ]
-}

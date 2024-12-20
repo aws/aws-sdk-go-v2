@@ -1,3 +1,7 @@
+# v1.55.0 (2024-12-20)
+
+* **Feature**: This release expands the catalog of upgrade insight checks
+
 # v1.54.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.31.0 (2024-12-20)
+
+* **Feature**: bedrock agents now supports long term memory and performance configs. Invokeflow supports performance configs. RetrieveAndGenerate performance configs
+
 # v1.30.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

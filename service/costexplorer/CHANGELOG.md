@@ -1,3 +1,7 @@
+# v1.46.0 (2024-12-20)
+
+* **Feature**: Support for retrieving cost, usage, and forecast for billing view.
+
 # v1.45.2 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

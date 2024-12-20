@@ -1,3 +1,7 @@
+# v1.33.0 (2024-12-20)
+
+* **Feature**: Support for custom user agent and max web pages crawled for web connector. Support app only credentials for SharePoint connector. Increase agents memory duration limit to 365 days. Support to specify max number of session summaries to include in agent invocation context.
+
 # v1.32.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

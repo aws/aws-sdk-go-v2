@@ -1,3 +1,31 @@
+# Release (2024-12-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.33.0](service/bedrockagent/CHANGELOG.md#v1330-2024-12-20)
+  * **Feature**: Support for custom user agent and max web pages crawled for web connector. Support app only credentials for SharePoint connector. Increase agents memory duration limit to 365 days. Support to specify max number of session summaries to include in agent invocation context.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.31.0](service/bedrockagentruntime/CHANGELOG.md#v1310-2024-12-20)
+  * **Feature**: bedrock agents now supports long term memory and performance configs. Invokeflow supports performance configs. RetrieveAndGenerate performance configs
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.0.2](service/bedrockdataautomation/CHANGELOG.md#v102-2024-12-20)
+  * **Documentation**: Documentation update for Amazon Bedrock Data Automation
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.0.2](service/bedrockdataautomationruntime/CHANGELOG.md#v102-2024-12-20)
+  * **Documentation**: Documentation update for Amazon Bedrock Data Automation Runtime
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.1.0](service/billing/CHANGELOG.md#v110-2024-12-20)
+  * **Feature**: Added new API's for defining and fetching Billing Views.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.123.0](service/connect/CHANGELOG.md#v11230-2024-12-20)
+  * **Feature**: This release supports adding NotAttributeCondition and Range to the RoutingCriteria object.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.46.0](service/costexplorer/CHANGELOG.md#v1460-2024-12-20)
+  * **Feature**: Support for retrieving cost, usage, and forecast for billing view.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.40.0](service/docdb/CHANGELOG.md#v1400-2024-12-20)
+  * **Feature**: Support AWS Secret Manager managed password for AWS DocumentDB instance-based cluster.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.55.0](service/eks/CHANGELOG.md#v1550-2024-12-20)
+  * **Feature**: This release expands the catalog of upgrade insight checks
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.44.0](service/macie2/CHANGELOG.md#v1440-2024-12-20)
+  * **Feature**: This release adds support for identifying S3 general purpose buckets that exceed the Amazon Macie quota for preventative control monitoring.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.48.0](service/outposts/CHANGELOG.md#v1480-2024-12-20)
+  * **Feature**: Add CS8365C as a supported power connector for Outpost sites.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.170.0](service/sagemaker/CHANGELOG.md#v11700-2024-12-20)
+  * **Feature**: This release adds support for c6i, m6i and r6i instance on SageMaker Hyperpod and trn1 instances in batch
+
 # Release (2024-12-19)
 
 ## General Highlights

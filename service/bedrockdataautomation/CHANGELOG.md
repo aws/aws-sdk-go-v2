@@ -1,3 +1,7 @@
+# v1.0.2 (2024-12-20)
+
+* **Documentation**: Documentation update for Amazon Bedrock Data Automation
+
 # v1.0.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.170.0 (2024-12-20)
+
+* **Feature**: This release adds support for c6i, m6i and r6i instance on SageMaker Hyperpod and trn1 instances in batch
+
 # v1.169.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

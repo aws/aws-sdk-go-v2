@@ -1,3 +1,7 @@
+# v1.48.0 (2024-12-20)
+
+* **Feature**: Add CS8365C as a supported power connector for Outpost sites.
+
 # v1.47.3 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

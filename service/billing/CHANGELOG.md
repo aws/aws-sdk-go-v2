@@ -1,3 +1,7 @@
+# v1.1.0 (2024-12-20)
+
+* **Feature**: Added new API's for defining and fetching Billing Views.
+
 # v1.0.3 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.40.0 (2024-12-20)
+
+* **Feature**: Support AWS Secret Manager managed password for AWS DocumentDB instance-based cluster.
+
 # v1.39.7 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions
