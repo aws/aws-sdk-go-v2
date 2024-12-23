@@ -207,7 +207,7 @@ func TestUploadOrderSingle(t *testing.T) {
 func TestUploadSingleFailure(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 
-	c.PutObjectFn = func(*s3testing.UploadLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
+	c.PutObjectFn = func(*s3testing.TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
 		return nil, fmt.Errorf("put object failure")
 	}
 
@@ -260,7 +260,7 @@ func TestUploadOrderZero(t *testing.T) {
 func TestUploadOrderMultiFailure(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 
-	c.UploadPartFn = func(u *s3testing.UploadLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
+	c.UploadPartFn = func(u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
 		if *params.PartNumber == 2 {
 			return nil, fmt.Errorf("an unexpected error")
 		}
@@ -288,7 +288,7 @@ func TestUploadOrderMultiFailure(t *testing.T) {
 func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 
-	c.CompleteMultipartUploadFn = func(*s3testing.UploadLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error) {
+	c.CompleteMultipartUploadFn = func(*s3testing.TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error) {
 		return nil, fmt.Errorf("complete multipart error")
 	}
 
@@ -314,7 +314,7 @@ func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 
-	c.CreateMultipartUploadFn = func(*s3testing.UploadLoggingClient, *s3.CreateMultipartUploadInput) (*s3.CreateMultipartUploadOutput, error) {
+	c.CreateMultipartUploadFn = func(*s3testing.TransferManagerLoggingClient, *s3.CreateMultipartUploadInput) (*s3.CreateMultipartUploadOutput, error) {
 		return nil, fmt.Errorf("create multipart upload failure")
 	}
 
@@ -597,7 +597,7 @@ func TestUploadUnexpectedEOF(t *testing.T) {
 
 func TestSSE(t *testing.T) {
 	c, _, _ := s3testing.NewUploadLoggingClient(nil)
-	c.UploadPartFn = func(u *s3testing.UploadLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
+	c.UploadPartFn = func(u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
 		if params.SSECustomerAlgorithm == nil {
 			t.Fatal("SSECustomerAlgoritm should not be nil")
 		}
