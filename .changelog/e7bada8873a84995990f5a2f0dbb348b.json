@@ -1,0 +1,8 @@
+{
+    "id": "e7bada88-73a8-4995-990f-5a2f0dbb348b",
+    "type": "feature",
+    "description": "Add support for Dualstack endpoints",
+    "modules": [
+        "service/ecrpublic"
+    ]
+}

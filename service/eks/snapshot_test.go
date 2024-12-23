@@ -338,6 +338,18 @@ func TestCheckSnapshot_DescribeCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeClusterVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeClusterVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeClusterVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeEksAnywhereSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeEksAnywhereSubscription(context.Background(), nil, func(o *Options) {
@@ -1002,6 +1014,18 @@ func TestUpdateSnapshot_DescribeCluster(t *testing.T) {
 	_, err := svc.DescribeCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeClusterVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeClusterVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeClusterVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

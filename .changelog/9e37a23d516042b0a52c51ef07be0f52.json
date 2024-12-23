@@ -1,0 +1,8 @@
+{
+    "id": "9e37a23d-5160-42b0-a52c-51ef07be0f52",
+    "type": "feature",
+    "description": "This release adds support for DescribeClusterVersions API that provides important information about Kubernetes versions along with end of support dates",
+    "modules": [
+        "service/eks"
+    ]
+}
