@@ -1,8 +1,0 @@
-{
-    "id": "cb7255cd-10bd-4d0c-a22f-9f848081b95d",
-    "type": "documentation",
-    "description": "Documentation update for ECR GetAccountSetting and PutAccountSetting APIs.",
-    "modules": [
-        "service/ecr"
-    ]
-}

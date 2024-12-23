@@ -1,3 +1,7 @@
+# v1.36.9 (2024-12-23)
+
+* **Documentation**: Documentation update for ECR GetAccountSetting and PutAccountSetting APIs.
+
 # v1.36.8 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

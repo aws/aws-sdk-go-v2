@@ -1,8 +1,0 @@
-{
-    "id": "d8979807-dd95-44b0-8a01-8b99b3600281",
-    "type": "feature",
-    "description": "Add IncludeRoot parameters to GetCatalogs API to return root catalog.",
-    "modules": [
-        "service/glue"
-    ]
-}

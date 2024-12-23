@@ -1,3 +1,7 @@
+# v1.64.1 (2024-12-23)
+
+* No change notes available for this release.
+
 # v1.64.0 (2024-12-19)
 
 * **Feature**: This release adds support for inserting timecode tracks into MP4 container outputs.

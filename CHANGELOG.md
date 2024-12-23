@@ -1,3 +1,15 @@
+# Release (2024-12-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.36.9](service/ecr/CHANGELOG.md#v1369-2024-12-23)
+  * **Documentation**: Documentation update for ECR GetAccountSetting and PutAccountSetting APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.28.0](service/ecrpublic/CHANGELOG.md#v1280-2024-12-23)
+  * **Feature**: Add support for Dualstack endpoints
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.56.0](service/eks/CHANGELOG.md#v1560-2024-12-23)
+  * **Feature**: This release adds support for DescribeClusterVersions API that provides important information about Kubernetes versions along with end of support dates
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.105.0](service/glue/CHANGELOG.md#v11050-2024-12-23)
+  * **Feature**: Add IncludeRoot parameters to GetCatalogs API to return root catalog.
+
 # Release (2024-12-20)
 
 ## Module Highlights
