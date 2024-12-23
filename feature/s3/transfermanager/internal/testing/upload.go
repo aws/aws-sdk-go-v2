@@ -14,26 +14,34 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-// UploadLoggingClient is a mock client that can be used to record and stub responses for testing the Uploader.
-type UploadLoggingClient struct {
-	Invocations []string
-	Params      []interface{}
+// TransferManagerLoggingClient is a mock client that can be used to record and stub responses for testing the transfer manager.
+type TransferManagerLoggingClient struct {
+	// params for upload test
+	UploadInvocations []string
+	Params            []interface{}
 
 	ConsumeBody bool
 
 	ignoredOperations []string
 
 	PartNum int
-	m       sync.Mutex
 
-	PutObjectFn               func(*UploadLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
-	UploadPartFn              func(*UploadLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error)
-	CreateMultipartUploadFn   func(*UploadLoggingClient, *s3.CreateMultipartUploadInput) (*s3.CreateMultipartUploadOutput, error)
-	CompleteMultipartUploadFn func(*UploadLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error)
-	AbortMultipartUploadFn    func(*UploadLoggingClient, *s3.AbortMultipartUploadInput) (*s3.AbortMultipartUploadOutput, error)
+	// params for download test
+	GetObjectInvocations int
+
+	RetrievedRanges []string
+
+	m sync.Mutex
+
+	PutObjectFn               func(*TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
+	UploadPartFn              func(*TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error)
+	CreateMultipartUploadFn   func(*TransferManagerLoggingClient, *s3.CreateMultipartUploadInput) (*s3.CreateMultipartUploadOutput, error)
+	CompleteMultipartUploadFn func(*TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error)
+	AbortMultipartUploadFn    func(*TransferManagerLoggingClient, *s3.AbortMultipartUploadInput) (*s3.AbortMultipartUploadOutput, error)
+	GetObjectFn               func(*TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 }
 
-func (u *UploadLoggingClient) simulateHTTPClientOption(optFns ...func(*s3.Options)) error {
+func (u *TransferManagerLoggingClient) simulateHTTPClientOption(optFns ...func(*s3.Options)) error {
 
 	o := s3.Options{
 		HTTPClient: httpDoFunc(func(r *http.Request) (*http.Response, error) {
@@ -68,17 +76,17 @@ func (f httpDoFunc) Do(r *http.Request) (*http.Response, error) {
 	return f(r)
 }
 
-func (u *UploadLoggingClient) traceOperation(name string, params interface{}) {
+func (u *TransferManagerLoggingClient) traceOperation(name string, params interface{}) {
 	if slices.Contains(u.ignoredOperations, name) {
 		return
 	}
-	u.Invocations = append(u.Invocations, name)
+	u.UploadInvocations = append(u.UploadInvocations, name)
 	u.Params = append(u.Params, params)
 
 }
 
 // PutObject is the S3 PutObject API.
-func (u *UploadLoggingClient) PutObject(ctx context.Context, params *s3.PutObjectInput, optFns ...func(*s3.Options)) (*s3.PutObjectOutput, error) {
+func (u *TransferManagerLoggingClient) PutObject(ctx context.Context, params *s3.PutObjectInput, optFns ...func(*s3.Options)) (*s3.PutObjectOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
 
@@ -102,7 +110,7 @@ func (u *UploadLoggingClient) PutObject(ctx context.Context, params *s3.PutObjec
 }
 
 // UploadPart is the S3 UploadPart API.
-func (u *UploadLoggingClient) UploadPart(ctx context.Context, params *s3.UploadPartInput, optFns ...func(*s3.Options)) (*s3.UploadPartOutput, error) {
+func (u *TransferManagerLoggingClient) UploadPart(ctx context.Context, params *s3.UploadPartInput, optFns ...func(*s3.Options)) (*s3.UploadPartOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
 
@@ -126,7 +134,7 @@ func (u *UploadLoggingClient) UploadPart(ctx context.Context, params *s3.UploadP
 }
 
 // CreateMultipartUpload is the S3 CreateMultipartUpload API.
-func (u *UploadLoggingClient) CreateMultipartUpload(ctx context.Context, params *s3.CreateMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.CreateMultipartUploadOutput, error) {
+func (u *TransferManagerLoggingClient) CreateMultipartUpload(ctx context.Context, params *s3.CreateMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.CreateMultipartUploadOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
 
@@ -146,7 +154,7 @@ func (u *UploadLoggingClient) CreateMultipartUpload(ctx context.Context, params 
 }
 
 // CompleteMultipartUpload is the S3 CompleteMultipartUpload API.
-func (u *UploadLoggingClient) CompleteMultipartUpload(ctx context.Context, params *s3.CompleteMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.CompleteMultipartUploadOutput, error) {
+func (u *TransferManagerLoggingClient) CompleteMultipartUpload(ctx context.Context, params *s3.CompleteMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.CompleteMultipartUploadOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
 
@@ -167,7 +175,7 @@ func (u *UploadLoggingClient) CompleteMultipartUpload(ctx context.Context, param
 }
 
 // AbortMultipartUpload is the S3 AbortMultipartUpload API.
-func (u *UploadLoggingClient) AbortMultipartUpload(ctx context.Context, params *s3.AbortMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.AbortMultipartUploadOutput, error) {
+func (u *TransferManagerLoggingClient) AbortMultipartUpload(ctx context.Context, params *s3.AbortMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.AbortMultipartUploadOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
 
@@ -183,11 +191,15 @@ func (u *UploadLoggingClient) AbortMultipartUpload(ctx context.Context, params *
 	return &s3.AbortMultipartUploadOutput{}, nil
 }
 
-// NewUploadLoggingClient returns a new UploadLoggingClient.
-func NewUploadLoggingClient(ignoredOps []string) (*UploadLoggingClient, *[]string, *[]interface{}) {
-	c := &UploadLoggingClient{
+func (u *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
+	return &s3.GetObjectOutput{}, nil
+}
+
+// NewUploadLoggingClient returns a new TransferManagerLoggingClient for upload testing.
+func NewUploadLoggingClient(ignoredOps []string) (*TransferManagerLoggingClient, *[]string, *[]interface{}) {
+	c := &TransferManagerLoggingClient{
 		ignoredOperations: ignoredOps,
 	}
 
-	return c, &c.Invocations, &c.Params
+	return c, &c.UploadInvocations, &c.Params
 }
