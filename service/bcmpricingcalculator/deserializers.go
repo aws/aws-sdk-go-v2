@@ -1679,6 +1679,9 @@ func awsAwsjson10_deserializeOpErrorDeleteBillEstimate(response *smithyhttp.Resp
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("DataUnavailableException", errorCode):
 		return awsAwsjson10_deserializeErrorDataUnavailableException(response, errorBody)
 

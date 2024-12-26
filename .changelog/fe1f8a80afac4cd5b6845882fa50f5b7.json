@@ -1,0 +1,8 @@
+{
+    "id": "fe1f8a80-afac-4cd5-b684-5882fa50f5b7",
+    "type": "feature",
+    "description": "Added ConflictException to DeleteBillEstimate.",
+    "modules": [
+        "service/bcmpricingcalculator"
+    ]
+}

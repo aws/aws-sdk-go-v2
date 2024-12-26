@@ -1,0 +1,8 @@
+{
+    "id": "d6cfaab3-0429-4a4c-94b4-7343e20090a5",
+    "type": "documentation",
+    "description": "Dual-stack endpoints are now supported.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}
