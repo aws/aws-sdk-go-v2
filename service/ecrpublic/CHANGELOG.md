@@ -1,3 +1,7 @@
+# v1.28.1 (2024-12-26)
+
+* No change notes available for this release.
+
 # v1.28.0 (2024-12-23)
 
 * **Feature**: Add support for Dualstack endpoints

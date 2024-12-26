@@ -1,3 +1,15 @@
+# Release (2024-12-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.1.0](service/bcmpricingcalculator/CHANGELOG.md#v110-2024-12-26)
+  * **Feature**: Added ConflictException to DeleteBillEstimate.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.37.0](service/ecr/CHANGELOG.md#v1370-2024-12-26)
+  * **Feature**: Add support for Dualstack Endpoints
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.44.7](service/networkfirewall/CHANGELOG.md#v1447-2024-12-26)
+  * **Documentation**: Dual-stack endpoints are now supported.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.55.2](service/securityhub/CHANGELOG.md#v1552-2024-12-26)
+  * **Documentation**: Documentation updates for AWS Security Hub
+
 # Release (2024-12-23)
 
 ## Module Highlights

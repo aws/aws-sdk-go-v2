@@ -1,3 +1,7 @@
+# v1.55.2 (2024-12-26)
+
+* **Documentation**: Documentation updates for AWS Security Hub
+
 # v1.55.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions
