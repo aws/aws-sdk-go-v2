@@ -102,7 +102,7 @@ type CreateDBClusterInput struct {
 	// cluster during the maintenance window. By default, minor engine upgrades are
 	// applied automatically.
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster
 	AutoMinorVersionUpgrade *bool
 
 	// A list of Availability Zones (AZs) where you specifically want to create DB
@@ -213,7 +213,13 @@ type CreateDBClusterInput struct {
 	// Reserved for future use.
 	DBSystemId *string
 
-	// Specifies the mode of Database Insights to enable for the cluster.
+	// The mode of Database Insights to enable for the DB cluster.
+	//
+	// If you set this value to advanced , you must also set the
+	// PerformanceInsightsEnabled parameter to true and the
+	// PerformanceInsightsRetentionPeriod parameter to 465.
+	//
+	// Valid for Cluster Type: Aurora DB clusters only
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// The name for your database of up to 64 alphanumeric characters. A database
@@ -337,7 +343,7 @@ type CreateDBClusterInput struct {
 	//
 	// For more information, see [Using Amazon Performance Insights] in the Amazon RDS User Guide.
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 	EnablePerformanceInsights *bool
@@ -557,7 +563,7 @@ type CreateDBClusterInput struct {
 	// If MonitoringRoleArn is specified, also set MonitoringInterval to a value other
 	// than 0 .
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// Valid Values: 0 | 1 | 5 | 10 | 15 | 30 | 60
 	//
@@ -572,7 +578,7 @@ type CreateDBClusterInput struct {
 	// If MonitoringInterval is set to a value other than 0 , supply a
 	// MonitoringRoleArn value.
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// [Setting up and enabling Enhanced Monitoring]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling
 	MonitoringRoleArn *string
@@ -608,12 +614,12 @@ type CreateDBClusterInput struct {
 	// Services account. Your Amazon Web Services account has a different default KMS
 	// key for each Amazon Web Services Region.
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	PerformanceInsightsKMSKeyId *string
 
 	// The number of days to retain Performance Insights data.
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// Valid Values:
 	//

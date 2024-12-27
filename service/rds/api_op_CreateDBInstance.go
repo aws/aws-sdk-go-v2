@@ -481,7 +481,11 @@ type CreateDBInstanceInput struct {
 	// The Oracle SID is also the name of your CDB.
 	DBSystemId *string
 
-	// Specifies the mode of Database Insights to enable for the instance.
+	// The mode of Database Insights to enable for the DB instance.
+	//
+	// This setting only applies to Amazon Aurora DB instances.
+	//
+	// Currently, this value is inherited from the DB cluster and can't be changed.
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.

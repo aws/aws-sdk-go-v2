@@ -1,0 +1,8 @@
+{
+    "id": "05554441-db52-4db7-8120-bb7f19d08e4c",
+    "type": "documentation",
+    "description": "Updates Amazon RDS documentation to correct various descriptions.",
+    "modules": [
+        "service/rds"
+    ]
+}
