@@ -1,3 +1,7 @@
+# v1.93.2 (2024-12-27)
+
+* **Documentation**: Updates Amazon RDS documentation to correct various descriptions.
+
 # v1.93.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

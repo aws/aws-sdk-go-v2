@@ -56,7 +56,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.35.7
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.23.8
 	github.com/aws/aws-sdk-go-v2/service/polly v1.45.9
-	github.com/aws/aws-sdk-go-v2/service/rds v1.93.1
+	github.com/aws/aws-sdk-go-v2/service/rds v1.93.2
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.53.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.9
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.46.4

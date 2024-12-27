@@ -1,3 +1,9 @@
+# Release (2024-12-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.93.2](service/rds/CHANGELOG.md#v1932-2024-12-27)
+  * **Documentation**: Updates Amazon RDS documentation to correct various descriptions.
+
 # Release (2024-12-26)
 
 ## Module Highlights
