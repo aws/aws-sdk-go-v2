@@ -1,8 +1,0 @@
-{
-    "id": "0003ebfb-261b-440b-a7c0-46c8fa3a7671",
-    "type": "feature",
-    "description": "Restoring custom endpoint functionality for ECR",
-    "modules": [
-        "service/ecr"
-    ]
-}

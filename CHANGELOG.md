@@ -1,3 +1,11 @@
+# Release (2024-12-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.38.0](service/ecr/CHANGELOG.md#v1380-2024-12-28)
+  * **Feature**: Restoring custom endpoint functionality for ECR
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.29.0](service/ecrpublic/CHANGELOG.md#v1290-2024-12-28)
+  * **Feature**: Restoring custom endpoint functionality for ECR Public
+
 # Release (2024-12-27)
 
 ## Module Highlights
