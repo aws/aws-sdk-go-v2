@@ -235,6 +235,15 @@ type EndpointParameters struct {
 	// AWS::Region
 	Region *string
 
+	// When true, use the dual-stack endpoint. If the configured endpoint does not
+	// support dual-stack, dispatching the request MAY return an error.
+	//
+	// Defaults to
+	// false if no value is provided.
+	//
+	// AWS::UseDualStack
+	UseDualStack *bool
+
 	// When true, send this request to the FIPS-compliant regional endpoint. If the
 	// configured endpoint does not have a FIPS compliant endpoint, dispatching the
 	// request will return an error.
@@ -245,14 +254,13 @@ type EndpointParameters struct {
 	// AWS::UseFIPS
 	UseFIPS *bool
 
-	// When true, use the dual-stack endpoint. If the configured endpoint does not
-	// support dual-stack, dispatching the request MAY return an error.
+	// Override the endpoint used to send this request
 	//
-	// Defaults to
-	// false if no value is provided.
+	// Parameter is
+	// required.
 	//
-	// AWS::UseDualStack
-	UseDualStack *bool
+	// SDK::Endpoint
+	Endpoint *string
 }
 
 // ValidateRequired validates required parameters are set.
@@ -319,9 +327,30 @@ func (r *resolver) ResolveEndpoint(
 	if err = params.ValidateRequired(); err != nil {
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
 	}
-	_UseFIPS := *params.UseFIPS
 	_UseDualStack := *params.UseDualStack
+	_UseFIPS := *params.UseFIPS
 
+	if exprVal := params.Endpoint; exprVal != nil {
+		_Endpoint := *exprVal
+		_ = _Endpoint
+		if _UseFIPS == true {
+			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS and custom endpoint are not supported")
+		}
+		if _UseDualStack == true {
+			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Dualstack and custom endpoint are not supported")
+		}
+		uriString := _Endpoint
+
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	}
 	if exprVal := params.Region; exprVal != nil {
 		_Region := *exprVal
 		_ = _Region
@@ -329,13 +358,60 @@ func (r *resolver) ResolveEndpoint(
 			_PartitionResult := *exprVal
 			_ = _PartitionResult
 			if _UseFIPS == true {
-				return endpoint, fmt.Errorf("endpoint rule error, %s", "ECR Public does not support FIPS")
+				if _UseDualStack == true {
+					if true == _PartitionResult.SupportsFIPS {
+						if true == _PartitionResult.SupportsDualStack {
+							uriString := func() string {
+								var out strings.Builder
+								out.WriteString("https://api.ecr-public-fips.")
+								out.WriteString(_Region)
+								out.WriteString(".")
+								out.WriteString(_PartitionResult.DualStackDnsSuffix)
+								return out.String()
+							}()
+
+							uri, err := url.Parse(uriString)
+							if err != nil {
+								return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+							}
+
+							return smithyendpoints.Endpoint{
+								URI:     *uri,
+								Headers: http.Header{},
+							}, nil
+						}
+					}
+					return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS and DualStack are enabled, but this partition does not support one or both")
+				}
+			}
+			if _UseFIPS == true {
+				if _PartitionResult.SupportsFIPS == true {
+					uriString := func() string {
+						var out strings.Builder
+						out.WriteString("https://api.ecr-public-fips.")
+						out.WriteString(_Region)
+						out.WriteString(".")
+						out.WriteString(_PartitionResult.DnsSuffix)
+						return out.String()
+					}()
+
+					uri, err := url.Parse(uriString)
+					if err != nil {
+						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+					}
+
+					return smithyendpoints.Endpoint{
+						URI:     *uri,
+						Headers: http.Header{},
+					}, nil
+				}
+				return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
 			}
 			if _UseDualStack == true {
 				if true == _PartitionResult.SupportsDualStack {
 					uriString := func() string {
 						var out strings.Builder
-						out.WriteString("https://ecr-public.")
+						out.WriteString("https://api.ecr-public.")
 						out.WriteString(_Region)
 						out.WriteString(".")
 						out.WriteString(_PartitionResult.DualStackDnsSuffix)
@@ -352,7 +428,7 @@ func (r *resolver) ResolveEndpoint(
 						Headers: http.Header{},
 					}, nil
 				}
-				return endpoint, fmt.Errorf("endpoint rule error, %s", "Dualstack is enabled but this partition does not support dualstack")
+				return endpoint, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
 			}
 			uriString := func() string {
 				var out strings.Builder
@@ -373,8 +449,9 @@ func (r *resolver) ResolveEndpoint(
 				Headers: http.Header{},
 			}, nil
 		}
+		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 	}
-	return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
+	return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
 }
 
 type endpointParamsBinder interface {
@@ -385,8 +462,9 @@ func bindEndpointParams(ctx context.Context, input interface{}, options Options)
 	params := &EndpointParameters{}
 
 	params.Region = bindRegion(options.Region)
-	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
 	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
+	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
+	params.Endpoint = options.BaseEndpoint
 
 	if b, ok := input.(endpointParamsBinder); ok {
 		b.bindEndpointParams(params)

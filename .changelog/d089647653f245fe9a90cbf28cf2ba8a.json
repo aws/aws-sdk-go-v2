@@ -1,0 +1,8 @@
+{
+    "id": "d0896476-53f2-45fe-9a90-cbf28cf2ba8a",
+    "type": "feature",
+    "description": "Restoring custom endpoint functionality for ECR Public",
+    "modules": [
+        "service/ecrpublic"
+    ]
+}
