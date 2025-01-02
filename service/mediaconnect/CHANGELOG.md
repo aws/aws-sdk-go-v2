@@ -1,3 +1,7 @@
+# v1.37.0 (2025-01-02)
+
+* **Feature**: AWS Elemental MediaConnect now supports Content Quality Analysis for enhanced source stream monitoring. This enables you to track specific audio and video metrics in transport stream source flows, ensuring your content meets quality standards.
+
 # v1.36.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

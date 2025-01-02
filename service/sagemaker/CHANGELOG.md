@@ -1,3 +1,7 @@
+# v1.171.0 (2025-01-02)
+
+* **Feature**: Adding ETag information with Model Artifacts for Model Registry
+
 # v1.170.0 (2024-12-20)
 
 * **Feature**: This release adds support for c6i, m6i and r6i instance on SageMaker Hyperpod and trn1 instances in batch

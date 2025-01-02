@@ -1,3 +1,7 @@
+# v1.37.4 (2025-01-02)
+
+* **Documentation**: In-flight message typo fix from 20k to 120k.
+
 # v1.37.3 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

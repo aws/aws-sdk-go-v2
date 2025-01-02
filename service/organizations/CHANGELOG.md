@@ -1,3 +1,7 @@
+# v1.37.0 (2025-01-02)
+
+* **Feature**: Added ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED to ConstraintViolationException for the EnableAllFeatures operation.
+
 # v1.36.2 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

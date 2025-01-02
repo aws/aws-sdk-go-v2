@@ -1,8 +1,0 @@
-{
-    "id": "e1d2080d-8d70-4b5e-9c8b-ddcea0638ca2",
-    "type": "feature",
-    "description": "Adding ETag information with Model Artifacts for Model Registry",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,3 +1,21 @@
+# Release (2025-01-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.41.0](service/appsync/CHANGELOG.md#v1410-2025-01-02)
+  * **Feature**: Modify UpdateGraphQLAPI operation and flag authenticationType as required.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.38.0](service/gamelift/CHANGELOG.md#v1380-2025-01-02)
+  * **Feature**: Amazon GameLift releases a new game session shutdown feature. Use the Amazon GameLift console or AWS CLI to terminate an in-progress game session that's entered a bad state or is no longer needed.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.37.0](service/mediaconnect/CHANGELOG.md#v1370-2025-01-02)
+  * **Feature**: AWS Elemental MediaConnect now supports Content Quality Analysis for enhanced source stream monitoring. This enables you to track specific audio and video metrics in transport stream source flows, ensuring your content meets quality standards.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.65.0](service/mediaconvert/CHANGELOG.md#v1650-2025-01-02)
+  * **Feature**: This release adds support for the AVC3 codec and fixes an alignment issue with Japanese vertical captions.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.37.0](service/organizations/CHANGELOG.md#v1370-2025-01-02)
+  * **Feature**: Added ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED to ConstraintViolationException for the EnableAllFeatures operation.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.171.0](service/sagemaker/CHANGELOG.md#v11710-2025-01-02)
+  * **Feature**: Adding ETag information with Model Artifacts for Model Registry
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.37.4](service/sqs/CHANGELOG.md#v1374-2025-01-02)
+  * **Documentation**: In-flight message typo fix from 20k to 120k.
+
 # Release (2024-12-28)
 
 ## Module Highlights

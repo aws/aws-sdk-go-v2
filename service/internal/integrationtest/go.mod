@@ -41,7 +41,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/emr v1.47.2
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.35.3
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.37.3
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.26.8
 	github.com/aws/aws-sdk-go-v2/service/glue v1.105.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.29.2
@@ -71,7 +71,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/shield v1.29.8
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.30.8
 	github.com/aws/aws-sdk-go-v2/service/sns v1.33.8
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.37.3
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.37.4
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.56.2
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.3
 	github.com/aws/aws-sdk-go-v2/service/support v1.26.8
