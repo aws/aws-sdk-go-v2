@@ -13,7 +13,7 @@ import (
 
 // Updates the properties of a managed container fleet. Depending on the
 // properties being updated, this operation might initiate a fleet deployment. You
-// can track deployments for a fleet using DescribeFleetDeployment.
+// can track deployments for a fleet using [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetDeployment.html].
 //
 // # Request options
 //
@@ -52,6 +52,8 @@ import (
 // You can have only one update deployment active at a time for a fleet. If a
 // second update request initiates a deployment while another deployment is in
 // progress, the first deployment is cancelled.
+//
+// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetDeployment.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetDeployment.html
 func (c *Client) UpdateContainerFleet(ctx context.Context, params *UpdateContainerFleetInput, optFns ...func(*Options)) (*UpdateContainerFleetOutput, error) {
 	if params == nil {
 		params = &UpdateContainerFleetInput{}
@@ -90,8 +92,11 @@ type UpdateContainerFleetInput struct {
 	// can use the name value. You can't remove a fleet's game server container group
 	// definition, you can only update or replace it with another definition.
 	//
-	// Update a container group definition by calling UpdateContainerGroupDefinition. This operation creates a ContainerGroupDefinition
+	// Update a container group definition by calling [UpdateContainerGroupDefinition]. This operation creates a [ContainerGroupDefinition]
 	// resource with an incremented version.
+	//
+	// [ContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
+	// [UpdateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html
 	GameServerContainerGroupDefinitionName *string
 
 	// The number of times to replicate the game server container group on each fleet
@@ -136,11 +141,14 @@ type UpdateContainerFleetInput struct {
 	// you're updating the fleet to the latest version of a container group definition,
 	// you can use the name value.
 	//
-	// Update a container group definition by calling UpdateContainerGroupDefinition. This operation creates a ContainerGroupDefinition
+	// Update a container group definition by calling [UpdateContainerGroupDefinition]. This operation creates a [ContainerGroupDefinition]
 	// resource with an incremented version.
 	//
 	// To remove a fleet's per-instance container group definition, leave this
 	// parameter empty and use the parameter RemoveAttributes .
+	//
+	// [ContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
+	// [UpdateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html
 	PerInstanceContainerGroupDefinitionName *string
 
 	// If set, this update removes a fleet's per-instance container group definition.

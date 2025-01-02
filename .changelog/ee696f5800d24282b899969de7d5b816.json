@@ -1,0 +1,8 @@
+{
+    "id": "ee696f58-00d2-4282-b899-969de7d5b816",
+    "type": "feature",
+    "description": "Added ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED to ConstraintViolationException for the EnableAllFeatures operation.",
+    "modules": [
+        "service/organizations"
+    ]
+}

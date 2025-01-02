@@ -1,0 +1,8 @@
+{
+    "id": "65383f99-3357-456a-a66c-5076b4ab5172",
+    "type": "documentation",
+    "description": "In-flight message typo fix from 20k to 120k.",
+    "modules": [
+        "service/sqs"
+    ]
+}

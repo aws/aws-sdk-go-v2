@@ -16,7 +16,7 @@ import (
 // groups.
 //
 // With multi-location fleets, this operation retrieves data for the fleet's home
-// Region only. To retrieve capacity for remote locations, see DescribeFleetLocationCapacity.
+// Region only. To retrieve capacity for remote locations, see [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html].
 //
 // This operation can be used in the following ways:
 //
@@ -43,6 +43,7 @@ import (
 //
 // [GameLift metrics for fleets]
 //
+// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html
 // [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 // [GameLift metrics for fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet
 func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFleetCapacityInput, optFns ...func(*Options)) (*DescribeFleetCapacityOutput, error) {

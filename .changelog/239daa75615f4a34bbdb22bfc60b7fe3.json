@@ -1,0 +1,8 @@
+{
+    "id": "239daa75-615f-4a34-bbdb-22bfc60b7fe3",
+    "type": "feature",
+    "description": "Amazon GameLift releases a new game session shutdown feature. Use the Amazon GameLift console or AWS CLI to terminate an in-progress game session that's entered a bad state or is no longer needed.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

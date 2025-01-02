@@ -1439,7 +1439,9 @@ type GameSessionStatusReason string
 
 // Enum values for GameSessionStatusReason
 const (
-	GameSessionStatusReasonInterrupted GameSessionStatusReason = "INTERRUPTED"
+	GameSessionStatusReasonInterrupted                 GameSessionStatusReason = "INTERRUPTED"
+	GameSessionStatusReasonTriggeredOnProcessTerminate GameSessionStatusReason = "TRIGGERED_ON_PROCESS_TERMINATE"
+	GameSessionStatusReasonForceTerminated             GameSessionStatusReason = "FORCE_TERMINATED"
 )
 
 // Values returns all known values for GameSessionStatusReason. Note that this can
@@ -1449,6 +1451,8 @@ const (
 func (GameSessionStatusReason) Values() []GameSessionStatusReason {
 	return []GameSessionStatusReason{
 		"INTERRUPTED",
+		"TRIGGERED_ON_PROCESS_TERMINATE",
+		"FORCE_TERMINATED",
 	}
 }
 
@@ -1870,5 +1874,24 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type TerminationMode string
+
+// Enum values for TerminationMode
+const (
+	TerminationModeTriggerOnProcessTerminate TerminationMode = "TRIGGER_ON_PROCESS_TERMINATE"
+	TerminationModeForceTerminate            TerminationMode = "FORCE_TERMINATE"
+)
+
+// Values returns all known values for TerminationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TerminationMode) Values() []TerminationMode {
+	return []TerminationMode{
+		"TRIGGER_ON_PROCESS_TERMINATE",
+		"FORCE_TERMINATE",
 	}
 }

@@ -14,7 +14,7 @@ import (
 // Requests authorization to remotely connect to an instance in an Amazon GameLift
 // managed fleet. Use this operation to connect to instances with game servers that
 // use Amazon GameLift server SDK 4.x or earlier. To connect to instances with game
-// servers that use server SDK 5.x or later, call GetComputeAccess.
+// servers that use server SDK 5.x or later, call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess].
 //
 // To request access to an instance, specify IDs for the instance and the fleet it
 // belongs to. You can retrieve instance IDs for a fleet by calling [DescribeInstances]with the fleet
@@ -42,6 +42,7 @@ import (
 // [All APIs by task]
 //
 // [Remotely connect to fleet instances]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html
+// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess
 // [DescribeInstances]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeInstances.html
 // [Get credentials for a Linux instance]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetInstanceAccess.html#API_GetInstanceAccess_Examples
 // [Debug fleet issues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html

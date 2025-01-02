@@ -128,8 +128,11 @@ type CreateContainerFleetInput struct {
 	// can specify the container group definition's name to use the latest version.
 	// Alternatively, provide an ARN value with a specific version number.
 	//
-	// Create a container group definition by calling CreateContainerGroupDefinition. This operation creates a ContainerGroupDefinition
+	// Create a container group definition by calling [CreateContainerGroupDefinition]. This operation creates a [ContainerGroupDefinition]
 	// resource.
+	//
+	// [ContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
+	// [CreateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html
 	GameServerContainerGroupDefinitionName *string
 
 	// The number of times to replicate the game server container group on each fleet
@@ -265,8 +268,11 @@ type CreateContainerFleetInput struct {
 	// specify the container group definition's name to use the latest version.
 	// Alternatively, provide an ARN value with a specific version number.
 	//
-	// Create a container group definition by calling CreateContainerGroupDefinition. This operation creates a ContainerGroupDefinition
+	// Create a container group definition by calling [https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html]. This operation creates a [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html]
 	// resource.
+	//
+	// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html
+	// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
 	PerInstanceContainerGroupDefinitionName *string
 
 	// A list of labels to assign to the new fleet resource. Tags are

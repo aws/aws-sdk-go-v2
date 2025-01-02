@@ -13630,6 +13630,15 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.UnregisteredSeiTimecode = types.H264UnregisteredSeiTimecode(jtv)
 			}
 
+		case "writeMp4PackagingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H264WriteMp4PackagingType to be of type string, got %T instead", value)
+				}
+				sv.WriteMp4PackagingType = types.H264WriteMp4PackagingType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -17128,7 +17137,7 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringMin1Max2048PatternArnAwsAwsUsGovAwsCnSecretsmanagerUsGovApCaCnEuSaCentralNorthSouthEastWestDD12SecretAZAZ09 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09 to be of type string, got %T instead", value)
 				}
 				sv.CredentialsSecretName = ptr.String(jtv)
 			}

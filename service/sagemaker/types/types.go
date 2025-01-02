@@ -127,6 +127,9 @@ type AdditionalS3DataSource struct {
 	// training. Specify None if your additional data source is not compressed.
 	CompressionType CompressionType
 
+	// The ETag associated with S3 URI.
+	ETag *string
+
 	noSmithyDocumentSerde
 }
 
@@ -11623,6 +11626,9 @@ type ModelPackageContainerDefinition struct {
 	// training.
 	ImageDigest *string
 
+	// The ETag associated with Model Data URL.
+	ModelDataETag *string
+
 	// Specifies the location of ML model data to deploy during endpoint creation.
 	ModelDataSource *ModelDataSource
 
@@ -16528,8 +16534,14 @@ type S3ModelDataSource struct {
 	// This member is required.
 	S3Uri *string
 
+	// The ETag associated with S3 URI.
+	ETag *string
+
 	// Configuration information for hub access.
 	HubAccessConfig *InferenceHubAccessConfig
+
+	// The ETag associated with Manifest S3URI.
+	ManifestEtag *string
 
 	// The Amazon S3 URI of the manifest file. The manifest file is a CSV file that
 	// stores the artifact locations.
@@ -17163,6 +17175,9 @@ type SourceAlgorithm struct {
 	//
 	// This member is required.
 	AlgorithmName *string
+
+	// The ETag associated with Model Data URL.
+	ModelDataETag *string
 
 	// Specifies the location of ML model data to deploy during endpoint creation.
 	ModelDataSource *ModelDataSource

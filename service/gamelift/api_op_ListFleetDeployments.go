@@ -12,7 +12,8 @@ import (
 )
 
 // Retrieves a collection of container fleet deployments in an Amazon Web Services
-// Region.
+// Region. Use the pagination parameters to retrieve results as a set of sequential
+// pages.
 //
 // Request options
 //
@@ -22,18 +23,13 @@ import (
 //   - Get a list of all deployments for a fleet. Specify the container fleet ID
 //     or ARN value.
 //
-//   - To get a list of all Realtime Servers fleets with a specific configuration
-//     script, provide the script ID.
-//
-// Use the pagination parameters to retrieve results as a set of sequential pages.
-//
 // # Results
 //
 // If successful, this operation returns a list of deployments that match the
 // request parameters. A NextToken value is also returned if there are more result
 // pages to retrieve.
 //
-// Fleet IDs are returned in no particular order.
+// Deployments are returned starting with the latest.
 func (c *Client) ListFleetDeployments(ctx context.Context, params *ListFleetDeploymentsInput, optFns ...func(*Options)) (*ListFleetDeploymentsOutput, error) {
 	if params == nil {
 		params = &ListFleetDeploymentsInput{}

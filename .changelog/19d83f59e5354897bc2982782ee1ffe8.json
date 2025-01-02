@@ -1,0 +1,8 @@
+{
+    "id": "19d83f59-e535-4897-bc29-82782ee1ffe8",
+    "type": "feature",
+    "description": "This release adds support for the AVC3 codec and fixes an alignment issue with Japanese vertical captions.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "cb97ba81-f9d8-4e18-a9f4-f0f93b65b74d",
+    "type": "feature",
+    "description": "Modify UpdateGraphQLAPI operation and flag authenticationType as required.",
+    "modules": [
+        "service/appsync"
+    ]
+}
