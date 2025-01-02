@@ -471,6 +471,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of compression used for an additional data source used in inference or\n            training. Specify <code>None</code> if your additional data source is not\n            compressed.</p>"
                     }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with S3 URI.</p>"
+                    }
                 }
             },
             "traits": {
@@ -49142,6 +49148,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The additional data source that is used during inference in the Docker container for\n            your model package.</p>"
                     }
+                },
+                "ModelDataETag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with Model Data URL.</p>"
+                    }
                 }
             },
             "traits": {
@@ -60711,6 +60723,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 URI of the manifest file. The manifest file is a CSV file that stores the\n            artifact locations.</p>"
                     }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with S3 URI.</p>"
+                    }
+                },
+                "ManifestEtag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with Manifest S3URI.</p>"
+                    }
                 }
             },
             "traits": {
@@ -64576,6 +64600,12 @@
                     "target": "com.amazonaws.sagemaker#ModelDataSource",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy during endpoint creation.</p>"
+                    }
+                },
+                "ModelDataETag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with Model Data URL.</p>"
                     }
                 },
                 "AlgorithmName": {

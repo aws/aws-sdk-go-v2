@@ -1033,6 +1033,21 @@
                 }
             }
         },
+        "com.amazonaws.mediaconnect#AudioMonitoringSetting": {
+            "type": "structure",
+            "members": {
+                "SilentAudio": {
+                    "target": "com.amazonaws.mediaconnect#SilentAudio",
+                    "traits": {
+                        "smithy.api#documentation": "Detects periods of silence.",
+                        "smithy.api#jsonName": "silentAudio"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specifies the configuration for audio stream metrics monitoring."
+            }
+        },
         "com.amazonaws.mediaconnect#BadRequestException": {
             "type": "structure",
             "members": {
@@ -1050,6 +1065,28 @@
                 "smithy.api#documentation": "Exception raised by AWS Elemental MediaConnect. See the error message and documentation for the operation for more information on the cause of this exception.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.mediaconnect#BlackFrames": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.mediaconnect#State",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates whether the BlackFrames metric is enabled or disabled.",
+                        "smithy.api#jsonName": "state"
+                    }
+                },
+                "ThresholdSeconds": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the number of consecutive seconds of black frames that triggers an event or alert.",
+                        "smithy.api#jsonName": "thresholdSeconds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures settings for the BlackFrames metric."
             }
         },
         "com.amazonaws.mediaconnect#Bridge": {
@@ -1542,6 +1579,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DISCONNECTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediaconnect#ContentQualityAnalysisState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
                 }
             }
@@ -3689,6 +3743,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "The frame resolution used by the video stream."
+            }
+        },
+        "com.amazonaws.mediaconnect#FrozenFrames": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.mediaconnect#State",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates whether the FrozenFrames metric is enabled or disabled.",
+                        "smithy.api#jsonName": "state"
+                    }
+                },
+                "ThresholdSeconds": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the number of consecutive seconds of a static image that triggers an event or alert.",
+                        "smithy.api#jsonName": "thresholdSeconds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures settings for the FrozenFrames metric."
             }
         },
         "com.amazonaws.mediaconnect#Gateway": {
@@ -6600,6 +6676,27 @@
                         "smithy.api#documentation": "The state of thumbnail monitoring.",
                         "smithy.api#jsonName": "thumbnailState"
                     }
+                },
+                "AudioMonitoringSettings": {
+                    "target": "com.amazonaws.mediaconnect#__listOfAudioMonitoringSetting",
+                    "traits": {
+                        "smithy.api#documentation": "Contains the settings for audio stream metrics monitoring.",
+                        "smithy.api#jsonName": "audioMonitoringSettings"
+                    }
+                },
+                "ContentQualityAnalysisState": {
+                    "target": "com.amazonaws.mediaconnect#ContentQualityAnalysisState",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates whether content quality analysis is enabled or disabled.",
+                        "smithy.api#jsonName": "contentQualityAnalysisState"
+                    }
+                },
+                "VideoMonitoringSettings": {
+                    "target": "com.amazonaws.mediaconnect#__listOfVideoMonitoringSetting",
+                    "traits": {
+                        "smithy.api#documentation": "Contains the settings for video stream metrics monitoring.",
+                        "smithy.api#jsonName": "videoMonitoringSettings"
+                    }
                 }
             },
             "traits": {
@@ -8065,6 +8162,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "The settings for the source of the flow."
+            }
+        },
+        "com.amazonaws.mediaconnect#SilentAudio": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.mediaconnect#State",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates whether the SilentAudio metric is enabled or disabled.",
+                        "smithy.api#jsonName": "state"
+                    }
+                },
+                "ThresholdSeconds": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the number of consecutive seconds of silence that triggers an event or alert.",
+                        "smithy.api#jsonName": "thresholdSeconds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures settings for the SilentAudio metric."
             }
         },
         "com.amazonaws.mediaconnect#Source": {
@@ -10404,6 +10523,28 @@
                 "smithy.api#documentation": "Update maintenance setting for a flow"
             }
         },
+        "com.amazonaws.mediaconnect#VideoMonitoringSetting": {
+            "type": "structure",
+            "members": {
+                "BlackFrames": {
+                    "target": "com.amazonaws.mediaconnect#BlackFrames",
+                    "traits": {
+                        "smithy.api#documentation": "Detects video frames that are black.",
+                        "smithy.api#jsonName": "blackFrames"
+                    }
+                },
+                "FrozenFrames": {
+                    "target": "com.amazonaws.mediaconnect#FrozenFrames",
+                    "traits": {
+                        "smithy.api#documentation": "Detects video frames that have not changed.",
+                        "smithy.api#jsonName": "frozenFrames"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specifies the configuration for video stream metrics monitoring."
+            }
+        },
         "com.amazonaws.mediaconnect#VpcInterface": {
             "type": "structure",
             "members": {
@@ -10563,6 +10704,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconnect#AddOutputRequest"
+            }
+        },
+        "com.amazonaws.mediaconnect#__listOfAudioMonitoringSetting": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconnect#AudioMonitoringSetting"
             }
         },
         "com.amazonaws.mediaconnect#__listOfBridgeOutput": {
@@ -10725,6 +10872,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconnect#TransportStreamProgram"
+            }
+        },
+        "com.amazonaws.mediaconnect#__listOfVideoMonitoringSetting": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconnect#VideoMonitoringSetting"
             }
         },
         "com.amazonaws.mediaconnect#__listOfVpcInterface": {
