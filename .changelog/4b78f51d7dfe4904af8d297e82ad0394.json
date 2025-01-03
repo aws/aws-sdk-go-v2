@@ -1,8 +1,0 @@
-{
-    "id": "4b78f51d-7dfe-4904-af8d-297e82ad0394",
-    "type": "feature",
-    "description": "This change is only for updating the model regexp of CopySource which is not for validation but only for documentation and user guide change.",
-    "modules": [
-        "service/s3"
-    ]
-}

@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.32.7
 	github.com/aws/aws-sdk-go-v2/config v1.28.7
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.44
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.45
 	github.com/aws/aws-sdk-go-v2/service/acm v1.30.8
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.34.3
@@ -30,8 +30,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.38.1
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.198.1
-	github.com/aws/aws-sdk-go-v2/service/ecr v1.38.0
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.1
+	github.com/aws/aws-sdk-go-v2/service/ecr v1.38.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.34.2
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.44.2
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.8
@@ -60,9 +60,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.53.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.9
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.46.4
-	github.com/aws/aws-sdk-go-v2/service/route53domains v1.28.1
+	github.com/aws/aws-sdk-go-v2/service/route53domains v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.34.3
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.71.1
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.72.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.52.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.34.8
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.32.8

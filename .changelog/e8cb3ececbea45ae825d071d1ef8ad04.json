@@ -1,8 +1,0 @@
-{
-    "id": "e8cb3ece-cbea-45ae-825d-071d1ef8ad04",
-    "type": "documentation",
-    "description": "Doc only update for Route 53 Domains that fixes several customer-reported issues",
-    "modules": [
-        "service/route53domains"
-    ]
-}

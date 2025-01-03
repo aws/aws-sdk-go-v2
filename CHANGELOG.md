@@ -1,3 +1,16 @@
+# Release (2025-01-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.53.2](service/ecs/CHANGELOG.md#v1532-2025-01-03)
+  * **Documentation**: Adding SDK reference examples for Amazon ECS operations.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.28.2](service/route53domains/CHANGELOG.md#v1282-2025-01-03)
+  * **Documentation**: Doc only update for Route 53 Domains that fixes several customer-reported issues
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.72.0](service/s3/CHANGELOG.md#v1720-2025-01-03)
+  * **Feature**: This change is only for updating the model regexp of CopySource which is not for validation but only for documentation and user guide change.
+
 # Release (2025-01-02)
 
 ## Module Highlights
