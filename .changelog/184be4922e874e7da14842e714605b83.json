@@ -1,0 +1,8 @@
+{
+    "id": "184be492-2e87-4e7d-a148-42e714605b83",
+    "type": "documentation",
+    "description": "Adding SDK reference examples for Amazon ECS operations.",
+    "modules": [
+        "service/ecs"
+    ]
+}

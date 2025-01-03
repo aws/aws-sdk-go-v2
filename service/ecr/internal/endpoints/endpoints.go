@@ -151,6 +151,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "af-south-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.af-south-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "af-south-1",
 				},
@@ -167,6 +168,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-east-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-east-1",
 				},
@@ -183,6 +185,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-northeast-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-northeast-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-northeast-1",
 				},
@@ -199,6 +202,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-northeast-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-northeast-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-northeast-2",
 				},
@@ -215,6 +219,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-northeast-3",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-northeast-3.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-northeast-3",
 				},
@@ -231,6 +236,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-south-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-south-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-south-1",
 				},
@@ -247,6 +253,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-south-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-south-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-south-2",
 				},
@@ -263,6 +270,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-southeast-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-southeast-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-southeast-1",
 				},
@@ -279,6 +287,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-southeast-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-southeast-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-southeast-2",
 				},
@@ -295,6 +304,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-southeast-3",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-southeast-3.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-southeast-3",
 				},
@@ -311,6 +321,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-southeast-4",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-southeast-4.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-southeast-4",
 				},
@@ -327,6 +338,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-southeast-5",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ap-southeast-5.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-southeast-5",
 				},
@@ -343,6 +355,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ca-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ca-central-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ca-central-1",
 				},
@@ -359,317 +372,14 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ca-west-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.ca-west-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ca-west-1",
 				},
 			},
 			endpoints.EndpointKey{
-				Region: "dkr-af-south-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-af-south-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-east-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-east-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-northeast-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-northeast-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-northeast-2",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-northeast-2",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-northeast-3",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-northeast-3",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-south-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-south-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-south-2",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-south-2",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-southeast-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-southeast-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-southeast-2",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-southeast-2",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-southeast-3",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-southeast-3",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-southeast-4",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-southeast-4",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ap-southeast-5",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ap-southeast-5",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ca-central-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ca-central-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-ca-west-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-ca-west-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-eu-central-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-eu-central-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-eu-central-2",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-eu-central-2",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-eu-north-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-eu-north-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-eu-south-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-eu-south-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-eu-south-2",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-eu-south-2",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-eu-west-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-eu-west-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-eu-west-2",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-eu-west-2",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-eu-west-3",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-eu-west-3",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-il-central-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-il-central-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-me-central-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-me-central-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-me-south-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-me-south-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-sa-east-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-sa-east-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
 				Region: "dkr-us-east-1",
 			}: endpoints.Endpoint{
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-east-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-east-1",
-				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
-			}: {
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
@@ -695,24 +405,6 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "dkr-us-east-2",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-east-2",
-				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
-			}: {
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-east-2",
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "ecr-fips.us-east-2.amazonaws.com",
@@ -731,24 +423,6 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "dkr-us-west-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-west-1",
-				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
-			}: {
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-west-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "ecr-fips.us-west-1.amazonaws.com",
@@ -760,24 +434,6 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "dkr-us-west-2",
 			}: endpoints.Endpoint{
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-west-2",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-west-2",
-				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
-			}: {
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
 				},
@@ -805,6 +461,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.eu-central-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-central-1",
 				},
@@ -821,6 +478,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-central-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.eu-central-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-central-2",
 				},
@@ -837,6 +495,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-north-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.eu-north-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-north-1",
 				},
@@ -853,6 +512,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-south-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.eu-south-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-south-1",
 				},
@@ -869,6 +529,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-south-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.eu-south-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-south-2",
 				},
@@ -885,6 +546,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-west-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.eu-west-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-west-1",
 				},
@@ -901,6 +563,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-west-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.eu-west-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-west-2",
 				},
@@ -917,6 +580,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-west-3",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.eu-west-3.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-west-3",
 				},
@@ -1005,6 +669,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "il-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.il-central-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "il-central-1",
 				},
@@ -1021,6 +686,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "me-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.me-central-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "me-central-1",
 				},
@@ -1037,6 +703,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "me-south-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.me-south-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "me-south-1",
 				},
@@ -1053,6 +720,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "sa-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.sa-east-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "sa-east-1",
 				},
@@ -1067,8 +735,9 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-east-1",
-				Variant: endpoints.DualStackVariant,
+				Variant: endpoints.FIPSVariant,
 			}: {
+				Hostname: "ecr-fips.us-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
@@ -1077,15 +746,16 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-1",
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr-fips.us-east-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
 			},
 			endpoints.EndpointKey{
 				Region:  "us-east-1",
-				Variant: endpoints.FIPSVariant,
+				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "ecr-fips.us-east-1.amazonaws.com",
+				Hostname: "ecr.us-east-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
@@ -1100,8 +770,9 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-east-2",
-				Variant: endpoints.DualStackVariant,
+				Variant: endpoints.FIPSVariant,
 			}: {
+				Hostname: "ecr-fips.us-east-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-2",
 				},
@@ -1110,15 +781,16 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-2",
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr-fips.us-east-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-2",
 				},
 			},
 			endpoints.EndpointKey{
 				Region:  "us-east-2",
-				Variant: endpoints.FIPSVariant,
+				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "ecr-fips.us-east-2.amazonaws.com",
+				Hostname: "ecr.us-east-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-2",
 				},
@@ -1133,8 +805,9 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-west-1",
-				Variant: endpoints.DualStackVariant,
+				Variant: endpoints.FIPSVariant,
 			}: {
+				Hostname: "ecr-fips.us-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-1",
 				},
@@ -1143,15 +816,16 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-west-1",
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr-fips.us-west-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-1",
 				},
 			},
 			endpoints.EndpointKey{
 				Region:  "us-west-1",
-				Variant: endpoints.FIPSVariant,
+				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "ecr-fips.us-west-1.amazonaws.com",
+				Hostname: "ecr.us-west-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-1",
 				},
@@ -1166,8 +840,9 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-west-2",
-				Variant: endpoints.DualStackVariant,
+				Variant: endpoints.FIPSVariant,
 			}: {
+				Hostname: "ecr-fips.us-west-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
 				},
@@ -1176,15 +851,16 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-west-2",
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr-fips.us-west-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
 				},
 			},
 			endpoints.EndpointKey{
 				Region:  "us-west-2",
-				Variant: endpoints.FIPSVariant,
+				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "ecr-fips.us-west-2.amazonaws.com",
+				Hostname: "ecr.us-west-2.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
 				},
@@ -1238,6 +914,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "cn-north-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.cn-north-1.api.amazonwebservices.com.cn",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "cn-north-1",
 				},
@@ -1254,31 +931,10 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "cn-northwest-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr.cn-northwest-1.api.amazonwebservices.com.cn",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "cn-northwest-1",
 				},
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-cn-north-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-cn-north-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "dkr-cn-northwest-1",
-			}: endpoints.Endpoint{
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-cn-northwest-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				Deprecated: aws.TrueTernary,
 			},
 		},
 	},
@@ -1439,24 +1095,6 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "dkr-us-gov-east-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-gov-east-1",
-				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
-			}: {
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-gov-east-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "ecr-fips.us-gov-east-1.amazonaws.com",
@@ -1468,24 +1106,6 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "dkr-us-gov-west-1",
 			}: endpoints.Endpoint{
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-gov-west-1",
-				Variant: endpoints.DualStackVariant,
-			}: {
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "dkr-us-gov-west-1",
-				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
-			}: {
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
@@ -1547,8 +1167,9 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-gov-east-1",
-				Variant: endpoints.DualStackVariant,
+				Variant: endpoints.FIPSVariant,
 			}: {
+				Hostname: "ecr-fips.us-gov-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-east-1",
 				},
@@ -1557,15 +1178,16 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-gov-east-1",
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr-fips.us-gov-east-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-east-1",
 				},
 			},
 			endpoints.EndpointKey{
 				Region:  "us-gov-east-1",
-				Variant: endpoints.FIPSVariant,
+				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "ecr-fips.us-gov-east-1.amazonaws.com",
+				Hostname: "ecr.us-gov-east-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-east-1",
 				},
@@ -1580,8 +1202,9 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-gov-west-1",
-				Variant: endpoints.DualStackVariant,
+				Variant: endpoints.FIPSVariant,
 			}: {
+				Hostname: "ecr-fips.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
@@ -1590,15 +1213,16 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-gov-west-1",
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr-fips.us-gov-west-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
 			},
 			endpoints.EndpointKey{
 				Region:  "us-gov-west-1",
-				Variant: endpoints.FIPSVariant,
+				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "ecr-fips.us-gov-west-1.amazonaws.com",
+				Hostname: "ecr.us-gov-west-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
