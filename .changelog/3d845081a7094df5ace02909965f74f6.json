@@ -1,8 +1,0 @@
-{
-    "id": "3d845081-a709-4df5-ace0-2909965f74f6",
-    "type": "feature",
-    "description": "Allow vanity DNS domain when creating a new ASC instance",
-    "modules": [
-        "service/supplychain"
-    ]
-}

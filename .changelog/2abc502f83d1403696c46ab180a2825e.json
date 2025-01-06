@@ -1,8 +1,0 @@
-{
-    "id": "2abc502f-83d1-4036-96c4-6ab180a2825e",
-    "type": "feature",
-    "description": "Adds dualstack endpoint support for IoT Secure Tunneling",
-    "modules": [
-        "service/iotsecuretunneling"
-    ]
-}

@@ -1,3 +1,11 @@
+# Release (2025-01-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.28.0](service/iotsecuretunneling/CHANGELOG.md#v1280-2025-01-06)
+  * **Feature**: Adds dualstack endpoint support for IoT Secure Tunneling
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.11.0](service/supplychain/CHANGELOG.md#v1110-2025-01-06)
+  * **Feature**: Allow vanity DNS domain when creating a new ASC instance
+
 # Release (2025-01-03)
 
 ## General Highlights
