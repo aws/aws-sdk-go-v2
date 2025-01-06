@@ -32,9 +32,14 @@ type TransferManagerLoggingClient struct {
 
 	// params for download test
 
+	Data []byte
+
 	GetObjectInvocations int
 
 	RetrievedRanges []string
+
+	ErrReaders []TestErrReader
+	index      int
 
 	m sync.Mutex
 
@@ -213,15 +218,6 @@ func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3
 	return &s3.GetObjectOutput{}, nil
 }
 
-var rangeValueRegex = regexp.MustCompile(`bytes=(\d+)-(\d+)`)
-
-func parseRange(rangeValue string) (start, fin int64) {
-	rng := rangeValueRegex.FindStringSubmatch(rangeValue)
-	start, _ = strconv.ParseInt(rng[1], 10, 64)
-	fin, _ = strconv.ParseInt(rng[2], 10, 64)
-	return start, fin
-}
-
 // NewUploadLoggingClient returns a new TransferManagerLoggingClient for upload testing.
 func NewUploadLoggingClient(ignoredOps []string) (*TransferManagerLoggingClient, *[]string, *[]interface{}) {
 	c := &TransferManagerLoggingClient{
@@ -231,25 +227,83 @@ func NewUploadLoggingClient(ignoredOps []string) (*TransferManagerLoggingClient,
 	return c, &c.UploadInvocations, &c.Params
 }
 
-func NewDownloadRangeClient(data []byte) (*TransferManagerLoggingClient, *int, *[]string) {
+func NewDownloadClient() (*TransferManagerLoggingClient, *int, *[]string) {
 	c := &TransferManagerLoggingClient{}
 
-	c.GetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
-		start, fin := parseRange(aws.ToString(params.Range))
-		fin++
+	return c, &c.GetObjectInvocations, &c.RetrievedRanges
+}
 
-		if fin >= int64(len(data)) {
-			fin = int64(len(data))
-		}
+var rangeValueRegex = regexp.MustCompile(`bytes=(\d+)-(\d+)`)
 
-		bodyBytes := data[start:fin]
+func parseRange(rangeValue string) (start, fin int64) {
+	rng := rangeValueRegex.FindStringSubmatch(rangeValue)
+	start, _ = strconv.ParseInt(rng[1], 10, 64)
+	fin, _ = strconv.ParseInt(rng[2], 10, 64)
+	return start, fin
+}
 
-		return &s3.GetObjectOutput{
-			Body:          ioutil.NopCloser(bytes.NewReader(bodyBytes)),
-			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, fin-1, len(data))),
-			ContentLength: aws.Int64(int64(len(bodyBytes))),
-		}, nil
+var RangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	start, fin := parseRange(aws.ToString(params.Range))
+	fin++
+
+	if fin >= int64(len(c.Data)) {
+		fin = int64(len(c.Data))
 	}
 
-	return c, &c.GetObjectInvocations, &c.RetrievedRanges
+	bodyBytes := c.Data[start:fin]
+
+	return &s3.GetObjectOutput{
+		Body:          ioutil.NopCloser(bytes.NewReader(bodyBytes)),
+		ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, fin-1, len(c.Data))),
+		ContentLength: aws.Int64(int64(len(bodyBytes))),
+	}, nil
+}
+
+var ErrGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	out, err := RangeGetObjectFn(c, params)
+	c.index++
+	if c.index > 1 {
+		return &s3.GetObjectOutput{}, fmt.Errorf("s3 service error")
+	}
+	return out, err
+}
+
+var NonRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	return &s3.GetObjectOutput{
+		Body:          ioutil.NopCloser(bytes.NewReader(c.Data[:])),
+		ContentLength: aws.Int64(int64(len(c.Data))),
+	}, nil
+}
+
+var ErrReaderFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	r := c.ErrReaders[c.index]
+	out := &s3.GetObjectOutput{
+		Body:          ioutil.NopCloser(&r),
+		ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", 0, r.Len-1, r.Len)),
+		ContentLength: aws.Int64(r.Len),
+	}
+	c.index++
+	return out, nil
+}
+
+type TestErrReader struct {
+	Buf []byte
+	Err error
+	Len int64
+
+	off int
+}
+
+func (r *TestErrReader) Read(p []byte) (int, error) {
+	to := len(r.Buf) - r.off
+
+	n := copy(p, r.Buf[r.off:to])
+	r.off += n
+
+	if n < len(p) {
+		return n, r.Err
+
+	}
+
+	return n, nil
 }
