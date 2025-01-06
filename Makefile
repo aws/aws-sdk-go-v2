@@ -484,6 +484,14 @@ set-smithy-go-version:
 	fi
 	go run ${REPOTOOLS_CMD_EDIT_MODULE_DEPENDENCY} -s "github.com/aws/smithy-go" -v "${SMITHY_GO_VERSION}"
 
+external-changelog:
+	mkdir -p .changelog
+	cp changelog-template.json .changelog/00000000-0000-0000-0000-000000000000.json
+	@echo "Generate a new UUID and update the file at .changelog/00000000-0000-0000-0000-000000000000.json"
+	@echo "Make sure to rename the file with your new id, like .changelog/12345678-1234-1234-1234-123456789012.json"
+	@echo "See CONTRIBUTING.md 'Changelog Documents' and an example at https://github.com/aws/aws-sdk-go-v2/pull/2934/files"
+
+
 ##################
 # Linting/Verify #
 ##################
