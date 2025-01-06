@@ -12,6 +12,8 @@ import (
 
 // Updates a placement with the given attributes. To clear an attribute, pass an
 // empty value (i.e., "").
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdatePlacement(ctx context.Context, params *UpdatePlacementInput, optFns ...func(*Options)) (*UpdatePlacementOutput, error) {
 	if params == nil {
 		params = &UpdatePlacementInput{}
@@ -32,15 +34,21 @@ type UpdatePlacementInput struct {
 	// The name of the placement to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementName *string
 
 	// The name of the project containing the placement to be updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The user-defined object of attributes used to update the placement. The maximum
 	// number of key/value pairs is 50.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	noSmithyDocumentSerde

@@ -13,6 +13,8 @@ import (
 
 // Creates an empty project with a placement template. A project contains zero or
 // more placements that adhere to the placement template defined in the project.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
 		params = &CreateProjectInput{}
@@ -33,21 +35,29 @@ type CreateProjectInput struct {
 	// The name of the project to create.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// An optional description for the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The schema defining the placement to be created. A placement template defines
 	// placement default attributes and device templates. You cannot add or remove
 	// device templates after the project has been created. However, you can update
 	// callbackOverrides for the device templates using the UpdateProject API.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementTemplate *types.PlacementTemplate
 
 	// Optional tags (metadata key/value pairs) to be associated with the project. For
 	// example, { {"key1": "value1", "key2": "value2"} } . For more information, see [AWS Tagging Strategies].
 	//
 	// [AWS Tagging Strategies]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -14,6 +14,8 @@ import (
 // associated with it.
 //
 // When you delete a project, all associated data becomes irretrievable.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}
@@ -34,6 +36,8 @@ type DeleteProjectInput struct {
 	// The name of the empty project to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde

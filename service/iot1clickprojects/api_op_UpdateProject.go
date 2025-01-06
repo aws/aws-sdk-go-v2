@@ -15,6 +15,8 @@ import (
 // exception of device template names, you can pass just the values that need to be
 // updated because the update request will change only the values that are
 // provided. To clear a value, pass the empty string (i.e., "" ).
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, optFns ...func(*Options)) (*UpdateProjectOutput, error) {
 	if params == nil {
 		params = &UpdateProjectInput{}
@@ -35,15 +37,21 @@ type UpdateProjectInput struct {
 	// The name of the project to be updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// An optional user-defined description for the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// An object defining the project update. Once a project has been created, you
 	// cannot add device template names to the project. However, for a given
 	// placementTemplate , you can update the associated callbackOverrides for the
 	// device definition using this API.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementTemplate *types.PlacementTemplate
 
 	noSmithyDocumentSerde

@@ -11,6 +11,8 @@ import (
 )
 
 // Creates an empty placement.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreatePlacement(ctx context.Context, params *CreatePlacementInput, optFns ...func(*Options)) (*CreatePlacementOutput, error) {
 	if params == nil {
 		params = &CreatePlacementInput{}
@@ -31,15 +33,21 @@ type CreatePlacementInput struct {
 	// The name of the placement to be created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementName *string
 
 	// The name of the project in which to create the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// Optional user-defined key/value pairs providing contextual data (such as
 	// location or function) for the placement.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	noSmithyDocumentSerde

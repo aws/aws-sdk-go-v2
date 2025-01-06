@@ -11,6 +11,8 @@ import (
 )
 
 // Associates a physical device with a placement.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) AssociateDeviceWithPlacement(ctx context.Context, params *AssociateDeviceWithPlacementInput, optFns ...func(*Options)) (*AssociateDeviceWithPlacementOutput, error) {
 	if params == nil {
 		params = &AssociateDeviceWithPlacementInput{}
@@ -33,22 +35,30 @@ type AssociateDeviceWithPlacementInput struct {
 	// values.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The device template name to associate with the device ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceTemplateName *string
 
 	// The name of the placement in which to associate the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementName *string
 
 	// The name of the project containing the placement in which to associate the
 	// device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde

@@ -11,6 +11,8 @@ import (
 )
 
 // Removes a physical device from a placement.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DisassociateDeviceFromPlacement(ctx context.Context, params *DisassociateDeviceFromPlacementInput, optFns ...func(*Options)) (*DisassociateDeviceFromPlacementOutput, error) {
 	if params == nil {
 		params = &DisassociateDeviceFromPlacementInput{}
@@ -31,16 +33,22 @@ type DisassociateDeviceFromPlacementInput struct {
 	// The device ID that should be removed from the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceTemplateName *string
 
 	// The name of the placement that the device should be removed from.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementName *string
 
 	// The name of the project that contains the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde

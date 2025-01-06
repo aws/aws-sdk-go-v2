@@ -15,6 +15,8 @@ import (
 // Claiming a device consists of initiating a claim, then publishing a device
 // event, and finalizing the claim. For a device of type button, a device event can
 // be published by simply clicking the device.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) InitiateDeviceClaim(ctx context.Context, params *InitiateDeviceClaimInput, optFns ...func(*Options)) (*InitiateDeviceClaimOutput, error) {
 	if params == nil {
 		params = &InitiateDeviceClaimInput{}
@@ -35,6 +37,8 @@ type InitiateDeviceClaimInput struct {
 	// The unique identifier of the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	noSmithyDocumentSerde
@@ -43,6 +47,8 @@ type InitiateDeviceClaimInput struct {
 type InitiateDeviceClaimOutput struct {
 
 	// The device's final claim state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State *string
 
 	// Metadata pertaining to the operation's result.

@@ -14,6 +14,8 @@ import (
 
 // Using a device ID, returns a DeviceEventsResponse object containing an array of
 // events for the device.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDeviceEvents(ctx context.Context, params *ListDeviceEventsInput, optFns ...func(*Options)) (*ListDeviceEventsOutput, error) {
 	if params == nil {
 		params = &ListDeviceEventsInput{}
@@ -34,25 +36,35 @@ type ListDeviceEventsInput struct {
 	// The unique identifier of the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The start date for the device event query, in ISO8061 format. For example,
 	// 2018-03-28T15:45:12.880Z
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FromTimeStamp *time.Time
 
 	// The end date for the device event query, in ISO8061 format. For example,
 	// 2018-03-28T15:45:12.880Z
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ToTimeStamp *time.Time
 
 	// The maximum number of results to return per request. If not set, a default
 	// value of 100 is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token to retrieve the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -62,9 +74,13 @@ type ListDeviceEventsOutput struct {
 
 	// An array of zero or more elements describing the event(s) associated with the
 	// device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Events []types.DeviceEvent
 
 	// The token to retrieve the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

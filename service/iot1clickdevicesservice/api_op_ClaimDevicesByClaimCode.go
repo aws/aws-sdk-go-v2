@@ -12,6 +12,8 @@ import (
 
 // Adds device(s) to your account (i.e., claim one or more devices) if and only if
 // you received a claim code with the device(s).
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ClaimDevicesByClaimCode(ctx context.Context, params *ClaimDevicesByClaimCodeInput, optFns ...func(*Options)) (*ClaimDevicesByClaimCodeOutput, error) {
 	if params == nil {
 		params = &ClaimDevicesByClaimCodeInput{}
@@ -32,6 +34,8 @@ type ClaimDevicesByClaimCodeInput struct {
 	// The claim code, starting with "C-", as provided by the device manufacturer.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClaimCode *string
 
 	noSmithyDocumentSerde
@@ -40,10 +44,14 @@ type ClaimDevicesByClaimCodeInput struct {
 type ClaimDevicesByClaimCodeOutput struct {
 
 	// The claim code provided by the device manufacturer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClaimCode *string
 
 	// The total number of devices associated with the claim code that has been
 	// processed in the claim request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Total *int32
 
 	// Metadata pertaining to the operation's result.

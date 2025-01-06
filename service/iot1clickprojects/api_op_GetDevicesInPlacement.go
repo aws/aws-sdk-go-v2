@@ -11,6 +11,8 @@ import (
 )
 
 // Returns an object enumerating the devices in a placement.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetDevicesInPlacement(ctx context.Context, params *GetDevicesInPlacementInput, optFns ...func(*Options)) (*GetDevicesInPlacementOutput, error) {
 	if params == nil {
 		params = &GetDevicesInPlacementInput{}
@@ -31,11 +33,15 @@ type GetDevicesInPlacementInput struct {
 	// The name of the placement to get the devices from.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementName *string
 
 	// The name of the project containing the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -46,6 +52,8 @@ type GetDevicesInPlacementOutput struct {
 	// An object containing the devices (zero or more) within the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Devices map[string]string
 
 	// Metadata pertaining to the operation's result.

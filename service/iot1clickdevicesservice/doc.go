@@ -6,4 +6,6 @@
 // Describes all of the AWS IoT 1-Click device-related API operations for the
 // service. Also provides sample requests, responses, and errors for the supported
 // web services protocols.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package iot1clickdevicesservice

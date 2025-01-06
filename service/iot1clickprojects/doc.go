@@ -3,5 +3,7 @@
 // Package iot1clickprojects provides the API client, operations, and parameter
 // types for AWS IoT 1-Click Projects Service.
 //
-// The AWS IoT 1-Click Projects API Reference
+// # The AWS IoT 1-Click Projects API Reference
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package iot1clickprojects

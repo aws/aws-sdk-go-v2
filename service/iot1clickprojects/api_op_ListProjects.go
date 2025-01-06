@@ -13,6 +13,8 @@ import (
 
 // Lists the AWS IoT 1-Click project(s) associated with your AWS account and
 // region.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, optFns ...func(*Options)) (*ListProjectsOutput, error) {
 	if params == nil {
 		params = &ListProjectsInput{}
@@ -32,9 +34,13 @@ type ListProjectsInput struct {
 
 	// The maximum number of results to return per request. If not set, a default
 	// value of 100 is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token to retrieve the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,10 +51,14 @@ type ListProjectsOutput struct {
 	// An object containing the list of projects.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Projects []types.ProjectSummary
 
 	// The token used to retrieve the next set of results - will be effectively empty
 	// if there are no further results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

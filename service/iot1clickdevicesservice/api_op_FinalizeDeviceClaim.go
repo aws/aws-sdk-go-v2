@@ -15,6 +15,8 @@ import (
 // Claiming a device consists of initiating a claim, then publishing a device
 // event, and finalizing the claim. For a device of type button, a device event can
 // be published by simply clicking the device.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) FinalizeDeviceClaim(ctx context.Context, params *FinalizeDeviceClaimInput, optFns ...func(*Options)) (*FinalizeDeviceClaimOutput, error) {
 	if params == nil {
 		params = &FinalizeDeviceClaimInput{}
@@ -35,12 +37,16 @@ type FinalizeDeviceClaimInput struct {
 	// The unique identifier of the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// A collection of key/value pairs defining the resource tags. For example, {
 	// "tags": {"key1": "value1", "key2": "value2"} }. For more information, see [AWS Tagging Strategies].
 	//
 	// [AWS Tagging Strategies]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -49,6 +55,8 @@ type FinalizeDeviceClaimInput struct {
 type FinalizeDeviceClaimOutput struct {
 
 	// The device's final claim state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State *string
 
 	// Metadata pertaining to the operation's result.

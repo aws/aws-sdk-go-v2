@@ -11,6 +11,8 @@ import (
 )
 
 // Disassociates a device from your AWS account using its device ID.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UnclaimDevice(ctx context.Context, params *UnclaimDeviceInput, optFns ...func(*Options)) (*UnclaimDeviceOutput, error) {
 	if params == nil {
 		params = &UnclaimDeviceInput{}
@@ -31,6 +33,8 @@ type UnclaimDeviceInput struct {
 	// The unique identifier of the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	noSmithyDocumentSerde
@@ -39,6 +43,8 @@ type UnclaimDeviceInput struct {
 type UnclaimDeviceOutput struct {
 
 	// The device's final claim state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,6 +13,8 @@ import (
 
 // Given a device ID, returns a DescribeDeviceResponse object describing the
 // details of the device.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeDevice(ctx context.Context, params *DescribeDeviceInput, optFns ...func(*Options)) (*DescribeDeviceOutput, error) {
 	if params == nil {
 		params = &DescribeDeviceInput{}
@@ -33,6 +35,8 @@ type DescribeDeviceInput struct {
 	// The unique identifier of the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	noSmithyDocumentSerde
@@ -41,6 +45,8 @@ type DescribeDeviceInput struct {
 type DescribeDeviceOutput struct {
 
 	// Device details.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceDescription *types.DeviceDescription
 
 	// Metadata pertaining to the operation's result.
