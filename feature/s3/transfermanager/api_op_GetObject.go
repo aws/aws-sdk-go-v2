@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"math"
 	"strconv"
 	"strings"
 	"sync"
@@ -615,7 +616,8 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 			d.getChunk(ctx, 0, d.byteRange(), clientOptions...)
 			total = d.getTotalBytes()
 		} else {
-			d.pos, total = d.getDownloadRange()
+			d.pos, d.totalBytes = d.getDownloadRange()
+			total = d.totalBytes
 		}
 
 		ch := make(chan dlchunk, d.options.Concurrency)
@@ -640,7 +642,7 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 		d.wg.Wait()
 	}
 
-	if d.err == nil {
+	if d.err == nil && d.buf != nil {
 		output.Body = io.NopCloser(bytes.NewReader(d.buf))
 	}
 
@@ -657,6 +659,7 @@ func (d *downloader) init(ctx context.Context) error {
 	}
 
 	d.options.Logger = logging.WithContext(ctx, d.options.Logger)
+	d.totalBytes = -1
 
 	return nil
 }
@@ -716,7 +719,7 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlchunk, clientOpt
 	var out *s3.GetObjectOutput
 	var n int64
 	var err error
-	for retry := 0; retry <= d.options.PartBodyMaxRetries; retry++ {
+	for retry := 0; retry < d.options.PartBodyMaxRetries; retry++ {
 		out, n, err = d.tryDownloadChunk(ctx, params, &chunk, clientOptions...)
 		if err == nil {
 			break
@@ -742,7 +745,9 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlchunk, clientOpt
 	d.incrWritten(n)
 
 	output := GetObjectOutput{}
-	output.mapFromGetObjectOutput(out)
+	if out != nil {
+		output.mapFromGetObjectOutput(out)
+	}
 	return &output, err
 }
 
@@ -772,6 +777,7 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 
 	return out, n, nil
 }
+
 func (d *downloader) incrWritten(n int64) {
 	d.m.Lock()
 	defer d.m.Unlock()
@@ -847,6 +853,9 @@ func (d *downloader) getDownloadRange() (int64, int64) {
 // byteRange returns a HTTP Byte-Range header value that should be used by the
 // client to request a chunk range.
 func (d *downloader) byteRange() string {
+	if d.totalBytes >= 0 {
+		return fmt.Sprintf("bytes=%d-%d", d.pos, int64(math.Min(float64(d.totalBytes-1), float64(d.pos+d.options.PartSizeBytes-1))))
+	}
 	return fmt.Sprintf("bytes=%d-%d", d.pos, d.pos+d.options.PartSizeBytes-1)
 }
 
