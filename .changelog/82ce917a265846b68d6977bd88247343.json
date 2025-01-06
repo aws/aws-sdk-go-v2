@@ -1,0 +1,9 @@
+{
+    "id": "82ce917a-2658-46b6-8d69-77bd88247343",
+    "type": "feature",
+    "description": "Mark service/iot1clickdevicesservice and service/iot1clickprojects as deprecated. Those 2 services are no longer available for use. See https://docs.aws.amazon.com/iot/latest/developerguide/iot-legacy-services.html",
+    "modules": [
+        "service/iot1clickdevicesservice",
+        "service/iot1clickprojects"
+    ]
+}
