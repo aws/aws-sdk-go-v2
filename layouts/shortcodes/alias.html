@@ -1,7 +1,0 @@
-{{- $resolved := "" -}}
-{{- if .Get "service" -}}
-    {{- $resolved = (index .Site.Data.aliases.service (.Get "service")) -}}
-{{- else if .Get 0 -}}
-    {{- $resolved = (index .Site.Data.aliases (.Get 0)) -}}
-{{- end -}}
-{{- print $resolved -}}

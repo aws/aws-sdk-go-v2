@@ -1,6 +1,0 @@
-{
-  "PathComment": "Path defines where the XLM/Zonbook files are found",
-  "Path": "",
-  "LanguageComment": "Language defines the name of the entity file in shared",
-  "Language": "go"
-}
