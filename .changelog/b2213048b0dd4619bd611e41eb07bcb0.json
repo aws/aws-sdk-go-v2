@@ -1,0 +1,8 @@
+{
+    "id": "b2213048-b0dd-4619-bd61-1e41eb07bcb0",
+    "type": "bugfix",
+    "description": "Retry transient net.ErrClosed errors by default.",
+    "modules": [
+        "."
+    ]
+}
