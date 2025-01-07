@@ -136,6 +136,10 @@ func TestRetryConnectionErrors(t *testing.T) {
 				Err: fmt.Errorf("some error %w", mockTimeoutError{b: true}),
 			},
 		},
+		"net.ErrClosed": {
+			Retryable: aws.TrueTernary,
+			Err:       net.ErrClosed,
+		},
 	}
 
 	for name, c := range cases {
