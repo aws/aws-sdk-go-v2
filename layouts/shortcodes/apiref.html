@@ -1,8 +1,0 @@
-{{- $pkgGoDev := "https://pkg.go.dev/" -}}
-{{- if (.Get 0) -}}
-    {{- print $pkgGoDev "github.com/aws/aws-sdk-go-v2/" (.Get 0) -}}
-{{- else if (.Get "smithy") -}}
-    {{- print $pkgGoDev "github.com/aws/smithy-go/" (.Get "smithy") -}}
-{{- else if (.Get "v1") -}}
-    {{- print "https://docs.aws.amazon.com/sdk-for-go/api/" (.Get "v1") -}}
-{{- end -}}
