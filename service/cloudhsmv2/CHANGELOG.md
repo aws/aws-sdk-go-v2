@@ -1,3 +1,7 @@
+# v1.29.0 (2025-01-07)
+
+* **Feature**: Adds support to ModifyCluster for modifying a Cluster's Hsm Type.
+
 # v1.28.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

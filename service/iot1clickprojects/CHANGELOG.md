@@ -1,3 +1,7 @@
+# v1.24.0 (2025-01-07)
+
+* **Feature**: Mark service/iot1clickdevicesservice and service/iot1clickprojects as deprecated. Those 2 services are no longer available for use. See https://docs.aws.amazon.com/iot/latest/developerguide/iot-legacy-services.html#faq-1-click-eol
+
 # v1.23.8 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions
