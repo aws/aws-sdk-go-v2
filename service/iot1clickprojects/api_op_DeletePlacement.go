@@ -14,6 +14,8 @@ import (
 // associated with it.
 //
 // When you delete a placement, all associated data becomes irretrievable.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeletePlacement(ctx context.Context, params *DeletePlacementInput, optFns ...func(*Options)) (*DeletePlacementOutput, error) {
 	if params == nil {
 		params = &DeletePlacementInput{}
@@ -34,11 +36,15 @@ type DeletePlacementInput struct {
 	// The name of the empty placement to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementName *string
 
 	// The project containing the empty placement to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde

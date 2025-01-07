@@ -12,6 +12,8 @@ import (
 )
 
 // Lists the placement(s) of a project.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListPlacements(ctx context.Context, params *ListPlacementsInput, optFns ...func(*Options)) (*ListPlacementsOutput, error) {
 	if params == nil {
 		params = &ListPlacementsInput{}
@@ -32,13 +34,19 @@ type ListPlacementsInput struct {
 	// The project containing the placements to be listed.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The maximum number of results to return per request. If not set, a default
 	// value of 100 is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token to retrieve the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,10 +57,14 @@ type ListPlacementsOutput struct {
 	// An object listing the requested placements.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Placements []types.PlacementSummary
 
 	// The token used to retrieve the next set of results - will be effectively empty
 	// if there are no further results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

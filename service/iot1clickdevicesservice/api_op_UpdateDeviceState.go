@@ -12,6 +12,8 @@ import (
 
 // Using a Boolean value (true or false), this operation enables or disables the
 // device given a device ID.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateDeviceState(ctx context.Context, params *UpdateDeviceStateInput, optFns ...func(*Options)) (*UpdateDeviceStateOutput, error) {
 	if params == nil {
 		params = &UpdateDeviceStateInput{}
@@ -32,9 +34,13 @@ type UpdateDeviceStateInput struct {
 	// The unique identifier of the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// If true, the device is enabled. If false, the device is disabled.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Enabled *bool
 
 	noSmithyDocumentSerde

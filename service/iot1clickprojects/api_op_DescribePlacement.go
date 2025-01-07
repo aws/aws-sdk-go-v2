@@ -12,6 +12,8 @@ import (
 )
 
 // Describes a placement in a project.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribePlacement(ctx context.Context, params *DescribePlacementInput, optFns ...func(*Options)) (*DescribePlacementOutput, error) {
 	if params == nil {
 		params = &DescribePlacementInput{}
@@ -32,11 +34,15 @@ type DescribePlacementInput struct {
 	// The name of the placement within a project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementName *string
 
 	// The project containing the placement to be described.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -47,6 +53,8 @@ type DescribePlacementOutput struct {
 	// An object describing the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Placement *types.PlacementDescription
 
 	// Metadata pertaining to the operation's result.

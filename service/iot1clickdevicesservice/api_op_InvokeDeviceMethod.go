@@ -13,6 +13,8 @@ import (
 
 // Given a device ID, issues a request to invoke a named device method (with
 // possible parameters). See the "Example POST" code snippet below.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) InvokeDeviceMethod(ctx context.Context, params *InvokeDeviceMethodInput, optFns ...func(*Options)) (*InvokeDeviceMethodOutput, error) {
 	if params == nil {
 		params = &InvokeDeviceMethodInput{}
@@ -33,12 +35,18 @@ type InvokeDeviceMethodInput struct {
 	// The unique identifier of the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The device method to invoke.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceMethod *types.DeviceMethod
 
 	// A JSON encoded string containing the device method request parameters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceMethodParameters *string
 
 	noSmithyDocumentSerde
@@ -47,6 +55,8 @@ type InvokeDeviceMethodInput struct {
 type InvokeDeviceMethodOutput struct {
 
 	// A JSON encoded string containing the device method response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceMethodResponse *string
 
 	// Metadata pertaining to the operation's result.

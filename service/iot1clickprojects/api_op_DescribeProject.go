@@ -12,6 +12,8 @@ import (
 )
 
 // Returns an object describing a project.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeProject(ctx context.Context, params *DescribeProjectInput, optFns ...func(*Options)) (*DescribeProjectOutput, error) {
 	if params == nil {
 		params = &DescribeProjectInput{}
@@ -32,6 +34,8 @@ type DescribeProjectInput struct {
 	// The name of the project to be described.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type DescribeProjectOutput struct {
 	// An object describing the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Project *types.ProjectDescription
 
 	// Metadata pertaining to the operation's result.

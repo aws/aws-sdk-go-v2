@@ -12,6 +12,8 @@ import (
 )
 
 // Given a device ID, returns the invokable methods associated with the device.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetDeviceMethods(ctx context.Context, params *GetDeviceMethodsInput, optFns ...func(*Options)) (*GetDeviceMethodsOutput, error) {
 	if params == nil {
 		params = &GetDeviceMethodsInput{}
@@ -32,6 +34,8 @@ type GetDeviceMethodsInput struct {
 	// The unique identifier of the device.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	noSmithyDocumentSerde
@@ -40,6 +44,8 @@ type GetDeviceMethodsInput struct {
 type GetDeviceMethodsOutput struct {
 
 	// List of available device APIs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceMethods []types.DeviceMethod
 
 	// Metadata pertaining to the operation's result.

@@ -13,6 +13,8 @@ import (
 // Creates or modifies tags for a resource. Tags are key/value pairs (metadata)
 // that can be used to manage a resource. For more information, see [AWS Tagging Strategies].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [AWS Tagging Strategies]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
@@ -34,6 +36,8 @@ type TagResourceInput struct {
 	// The ARN of the resouce for which tag(s) should be added or modified.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// The new or modifying tag(s) for the resource. See [AWS IoT 1-Click Service Limits] for the maximum number of
@@ -42,6 +46,8 @@ type TagResourceInput struct {
 	// [AWS IoT 1-Click Service Limits]: https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -11,6 +11,8 @@ import (
 )
 
 // Lists the tags associated with the specified resource ARN.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -31,6 +33,8 @@ type ListTagsForResourceInput struct {
 	// The ARN of the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type ListTagsForResourceOutput struct {
 	// "tags": {"key1": "value1", "key2": "value2"} }. For more information, see [AWS Tagging Strategies].
 	//
 	// [AWS Tagging Strategies]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

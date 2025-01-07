@@ -13,12 +13,18 @@ type Attributes struct {
 type Device struct {
 
 	// The user specified attributes associated with the device for an event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes *Attributes
 
 	// The unique identifier of the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// The device type, such as "button".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -27,26 +33,40 @@ type Device struct {
 type DeviceDescription struct {
 
 	// The ARN of the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// An array of zero or more elements of DeviceAttribute objects providing user
 	// specified device attributes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// The unique identifier of the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceId *string
 
 	// A Boolean value indicating whether or not the device is enabled.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Enabled *bool
 
 	// A value between 0 and 1 inclusive, representing the fraction of life remaining
 	// for the device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RemainingLife *float64
 
 	// The tags currently associated with the AWS IoT 1-Click device.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The type of the device, such as "button".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -55,9 +75,13 @@ type DeviceDescription struct {
 type DeviceEvent struct {
 
 	// An object representing the device associated with the event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Device *Device
 
 	// A serialized JSON object representing the device-type specific event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StdEvent *string
 
 	noSmithyDocumentSerde
@@ -66,9 +90,13 @@ type DeviceEvent struct {
 type DeviceMethod struct {
 
 	// The type of the device, such as "button".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceType *string
 
 	// The name of the method applicable to the deviceType.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MethodName *string
 
 	noSmithyDocumentSerde

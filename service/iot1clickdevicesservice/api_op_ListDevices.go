@@ -12,6 +12,8 @@ import (
 )
 
 // Lists the 1-Click compatible devices associated with your AWS account.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optFns ...func(*Options)) (*ListDevicesOutput, error) {
 	if params == nil {
 		params = &ListDevicesInput{}
@@ -30,13 +32,19 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 type ListDevicesInput struct {
 
 	// The type of the device, such as "button".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceType *string
 
 	// The maximum number of results to return per request. If not set, a default
 	// value of 100 is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token to retrieve the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,9 +53,13 @@ type ListDevicesInput struct {
 type ListDevicesOutput struct {
 
 	// A list of devices.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Devices []types.DeviceDescription
 
 	// The token to retrieve the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

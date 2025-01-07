@@ -12,9 +12,13 @@ type DeviceTemplate struct {
 
 	// An optional Lambda function to invoke instead of the default Lambda function
 	// provided by the placement template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CallbackOverrides map[string]string
 
 	// The device type, which currently must be "button" .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceType *string
 
 	noSmithyDocumentSerde
@@ -26,27 +30,37 @@ type PlacementDescription struct {
 	// The user-defined attributes associated with the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// The date when the placement was initially created, in UNIX epoch time format.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedDate *time.Time
 
 	// The name of the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementName *string
 
 	// The name of the project containing the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The date when the placement was last updated, in UNIX epoch time format. If the
 	// placement was not updated, then createdDate and updatedDate are the same.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedDate *time.Time
 
 	noSmithyDocumentSerde
@@ -58,22 +72,30 @@ type PlacementSummary struct {
 	// The date when the placement was originally created, in UNIX epoch time format.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedDate *time.Time
 
 	// The name of the placement being summarized.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementName *string
 
 	// The name of the project containing the placement.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The date when the placement was last updated, in UNIX epoch time format. If the
 	// placement was not updated, then createdDate and updatedDate are the same.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedDate *time.Time
 
 	noSmithyDocumentSerde
@@ -84,9 +106,13 @@ type PlacementTemplate struct {
 
 	// The default attributes (key/value pairs) to be applied to all placements using
 	// this template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultAttributes map[string]string
 
 	// An object specifying the DeviceTemplate for all placements using this (PlacementTemplate ) template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceTemplates map[string]DeviceTemplate
 
 	noSmithyDocumentSerde
@@ -99,29 +125,43 @@ type ProjectDescription struct {
 	// The date when the project was originally created, in UNIX epoch time format.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedDate *time.Time
 
 	// The name of the project for which to obtain information from.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The date when the project was last updated, in UNIX epoch time format. If the
 	// project was not updated, then createdDate and updatedDate are the same.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedDate *time.Time
 
 	// The ARN of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The description of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// An object describing the project's placement specifications.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PlacementTemplate *PlacementTemplate
 
 	// The tags (metadata key/value pairs) associated with the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -134,23 +174,33 @@ type ProjectSummary struct {
 	// The date when the project was originally created, in UNIX epoch time format.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedDate *time.Time
 
 	// The name of the project being summarized.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The date when the project was last updated, in UNIX epoch time format. If the
 	// project was not updated, then createdDate and updatedDate are the same.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedDate *time.Time
 
 	// The ARN of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The tags (metadata key/value pairs) associated with the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

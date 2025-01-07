@@ -13,6 +13,8 @@ import (
 // Adds or updates the tags associated with the resource ARN. See [AWS IoT 1-Click Service Limits] for the maximum
 // number of tags allowed per resource.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [AWS IoT 1-Click Service Limits]: https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
@@ -34,6 +36,8 @@ type TagResourceInput struct {
 	// The ARN of the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// A collection of key/value pairs defining the resource tags. For example, {
@@ -42,6 +46,8 @@ type TagResourceInput struct {
 	// [AWS Tagging Strategies]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
