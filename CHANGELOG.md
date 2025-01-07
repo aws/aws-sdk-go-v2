@@ -1,3 +1,20 @@
+# Release (2025-01-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.29.0](service/cloudhsmv2/CHANGELOG.md#v1290-2025-01-07)
+  * **Feature**: Adds support to ModifyCluster for modifying a Cluster's Hsm Type.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.39.0](service/dynamodb/CHANGELOG.md#v1390-2025-01-07)
+  * **Feature**: This release makes Amazon DynamoDB point-in-time-recovery (PITR) to be configurable. You can set PITR recovery period for each table individually to between 1 and 35 days.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.40.0](service/imagebuilder/CHANGELOG.md#v1400-2025-01-07)
+  * **Feature**: This release adds support for importing images from ISO disk files. Added new ImportDiskImage API operation.
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice`: [v1.24.0](service/iot1clickdevicesservice/CHANGELOG.md#v1240-2025-01-07)
+  * **Feature**: Mark service/iot1clickdevicesservice and service/iot1clickprojects as deprecated. Those 2 services are no longer available for use. See https://docs.aws.amazon.com/iot/latest/developerguide/iot-legacy-services.html#faq-1-click-eol
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickprojects`: [v1.24.0](service/iot1clickprojects/CHANGELOG.md#v1240-2025-01-07)
+  * **Feature**: Mark service/iot1clickdevicesservice and service/iot1clickprojects as deprecated. Those 2 services are no longer available for use. See https://docs.aws.amazon.com/iot/latest/developerguide/iot-legacy-services.html#faq-1-click-eol
+
 # Release (2025-01-06)
 
 ## Module Highlights

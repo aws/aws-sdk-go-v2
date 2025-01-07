@@ -1,3 +1,7 @@
+# v1.39.0 (2025-01-07)
+
+* **Feature**: This release makes Amazon DynamoDB point-in-time-recovery (PITR) to be configurable. You can set PITR recovery period for each table individually to between 1 and 35 days.
+
 # v1.38.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

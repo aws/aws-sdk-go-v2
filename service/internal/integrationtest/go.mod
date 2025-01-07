@@ -13,7 +13,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/batch v1.49.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.56.2
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.44.1
-	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.28.1
+	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.46.4
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.43.4
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.49.4
@@ -28,7 +28,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.9
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.40.0
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.38.1
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.198.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.38.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.2

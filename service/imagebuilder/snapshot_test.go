@@ -518,6 +518,18 @@ func TestCheckSnapshot_ImportComponent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ImportDiskImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ImportDiskImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ImportDiskImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ImportVmImage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportVmImage(context.Background(), nil, func(o *Options) {
@@ -1398,6 +1410,18 @@ func TestUpdateSnapshot_ImportComponent(t *testing.T) {
 	_, err := svc.ImportComponent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ImportComponent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ImportDiskImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ImportDiskImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ImportDiskImage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
