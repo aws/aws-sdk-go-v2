@@ -1,14 +1,21 @@
 package transfermanager
 
 import (
+	"bytes"
 	"context"
+	"fmt"
 	"io"
+	"io/ioutil"
 	"reflect"
 	"strings"
+	"sync/atomic"
 	"testing"
+	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
 func TestDownloadObject(t *testing.T) {
@@ -209,11 +216,11 @@ func TestDownloadObject(t *testing.T) {
 				if c.expectErr == "" {
 					t.Fatalf("expect no error, got %v", err)
 				} else if e, a := c.expectErr, err.Error(); !strings.Contains(a, e) {
-					t.Errorf("expect %s error message to be in %s", e, a)
+					t.Fatalf("expect %s error message to be in %s", e, a)
 				}
 			} else {
 				if c.expectErr != "" {
-					t.Fatalf("expect error, got nil")
+					t.Fatal("expect error, got nil")
 				}
 			}
 
@@ -231,5 +238,57 @@ func TestDownloadObject(t *testing.T) {
 				c.dataValidationFn(t, w)
 			}
 		})
+	}
+}
+
+func TestDownload_WithFailure(t *testing.T) {
+	startingByte := 0
+	reqCount := int64(0)
+
+	s3Client, _, _ := s3testing.NewDownloadClient()
+	s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (out *s3.GetObjectOutput, err error) {
+		switch atomic.LoadInt64(&reqCount) {
+		case 1:
+			// Give a chance for the multipart chunks to be queued up
+			time.Sleep(1 * time.Second)
+			err = fmt.Errorf("some connection error")
+		default:
+			body := bytes.NewReader(make([]byte, minPartSizeBytes))
+			out = &s3.GetObjectOutput{
+				Body:          ioutil.NopCloser(body),
+				ContentLength: aws.Int64(int64(body.Len())),
+				ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", startingByte, body.Len()-1, body.Len()*10)),
+			}
+
+			startingByte += body.Len()
+			if reqCount > 0 {
+				// sleep here to ensure context switching between goroutines
+				time.Sleep(25 * time.Millisecond)
+			}
+		}
+		atomic.AddInt64(&reqCount, 1)
+		return out, err
+	}
+
+	d := New(s3Client, Options{
+		Concurrency:           2,
+		MultipartDownloadType: types.MultipartDownloadTypeRange,
+	})
+
+	w := types.NewWriteAtBuffer(make([]byte, 0))
+
+	// Expect this request to exit quickly after failure
+	_, err := d.DownloadObject(context.Background(), w, &GetObjectInput{
+		Bucket: "Bucket",
+		Key:    "Key",
+	})
+	if err == nil {
+		t.Fatal("expect error, got none")
+	} else if e, a := "some connection error", err.Error(); !strings.Contains(a, e) {
+		t.Fatalf("expect %s error message to be in %s", e, a)
+	}
+
+	if atomic.LoadInt64(&reqCount) > 3 {
+		t.Errorf("expect no more than 3 requests, but received %d", reqCount)
 	}
 }
