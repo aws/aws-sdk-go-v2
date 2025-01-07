@@ -1,0 +1,8 @@
+{
+    "id": "9cd99f49-78c0-4578-b0d4-19e7c7eba632",
+    "type": "feature",
+    "description": "Adds support to ModifyCluster for modifying a Cluster's Hsm Type.",
+    "modules": [
+        "service/cloudhsmv2"
+    ]
+}

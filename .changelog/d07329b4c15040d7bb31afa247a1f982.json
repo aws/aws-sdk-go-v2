@@ -1,0 +1,8 @@
+{
+    "id": "d07329b4-c150-40d7-bb31-afa247a1f982",
+    "type": "feature",
+    "description": "This release adds support for importing images from ISO disk files. Added new ImportDiskImage API operation.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

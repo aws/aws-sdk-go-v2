@@ -3205,6 +3205,22 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				sv.HsmType = ptr.String(jtv)
 			}
 
+		case "HsmTypeRollbackExpiration":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.HsmTypeRollbackExpiration = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3514,6 +3530,15 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 					return fmt.Errorf("expected HsmId to be of type string, got %T instead", value)
 				}
 				sv.HsmId = ptr.String(jtv)
+			}
+
+		case "HsmType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HsmType to be of type string, got %T instead", value)
+				}
+				sv.HsmType = ptr.String(jtv)
 			}
 
 		case "State":
