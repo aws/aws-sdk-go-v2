@@ -1,3 +1,16 @@
+# Release (2025-01-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.93.3](service/rds/CHANGELOG.md#v1933-2025-01-08)
+  * **Documentation**: Updates Amazon RDS documentation to clarify the RestoreDBClusterToPointInTime description.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.47.0](service/route53/CHANGELOG.md#v1470-2025-01-08)
+  * **Feature**: Amazon Route 53 now supports the Asia Pacific (Thailand) Region (ap-southeast-7) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.172.0](service/sagemaker/CHANGELOG.md#v11720-2025-01-08)
+  * **Feature**: Adds support for IPv6 for SageMaker HyperPod cluster nodes.
+
 # Release (2025-01-07)
 
 ## General Highlights

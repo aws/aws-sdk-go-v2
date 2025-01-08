@@ -1,3 +1,7 @@
+# v1.37.5 (2025-01-08)
+
+* No change notes available for this release.
+
 # v1.37.4 (2025-01-02)
 
 * **Documentation**: In-flight message typo fix from 20k to 120k.

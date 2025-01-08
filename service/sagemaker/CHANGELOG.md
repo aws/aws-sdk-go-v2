@@ -1,3 +1,7 @@
+# v1.172.0 (2025-01-08)
+
+* **Feature**: Adds support for IPv6 for SageMaker HyperPod cluster nodes.
+
 # v1.171.0 (2025-01-02)
 
 * **Feature**: Adding ETag information with Model Artifacts for Model Registry

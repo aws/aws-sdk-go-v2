@@ -1,3 +1,7 @@
+# v1.56.1 (2025-01-08)
+
+* No change notes available for this release.
+
 # v1.56.0 (2024-12-23)
 
 * **Feature**: This release adds support for DescribeClusterVersions API that provides important information about Kubernetes versions along with end of support dates

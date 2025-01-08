@@ -1,8 +1,0 @@
-{
-    "id": "bff86a6b-dea1-4de9-9439-28625d1e0aff",
-    "type": "feature",
-    "description": "Adds support for IPv6 for SageMaker HyperPod cluster nodes.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
