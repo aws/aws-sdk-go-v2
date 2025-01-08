@@ -1,0 +1,8 @@
+{
+    "id": "2d0f60f3-1aab-4bf7-8d98-eb9952199812",
+    "type": "documentation",
+    "description": "Updates Amazon RDS documentation to clarify the RestoreDBClusterToPointInTime description.",
+    "modules": [
+        "service/rds"
+    ]
+}

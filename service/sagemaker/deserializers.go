@@ -45476,6 +45476,15 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 				sv.PrivatePrimaryIp = ptr.String(jtv)
 			}
 
+		case "PrivatePrimaryIpv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterPrivatePrimaryIpv6 to be of type string, got %T instead", value)
+				}
+				sv.PrivatePrimaryIpv6 = ptr.String(jtv)
+			}
+
 		case "ThreadsPerCore":
 			if value != nil {
 				jtv, ok := value.(json.Number)

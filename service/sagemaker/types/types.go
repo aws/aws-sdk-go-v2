@@ -3520,6 +3520,9 @@ type ClusterNodeDetails struct {
 	// The private primary IP address of the SageMaker HyperPod cluster node.
 	PrivatePrimaryIp *string
 
+	// The private primary IPv6 address of the SageMaker HyperPod cluster node.
+	PrivatePrimaryIpv6 *string
+
 	// The number of threads per CPU core you specified under CreateCluster .
 	ThreadsPerCore *int32
 
@@ -11591,8 +11594,7 @@ type ModelPackage struct {
 // Describes the Docker container for the model package.
 type ModelPackageContainerDefinition struct {
 
-	// The Amazon EC2 Container Registry (Amazon ECR) path where inference code is
-	// stored.
+	// The Amazon EC2 Container Registry path where inference code is stored.
 	//
 	// If you are using your own custom algorithm instead of an algorithm provided by
 	// SageMaker, the inference code must meet SageMaker requirements. SageMaker
@@ -16540,7 +16542,7 @@ type S3ModelDataSource struct {
 	// Configuration information for hub access.
 	HubAccessConfig *InferenceHubAccessConfig
 
-	// The ETag associated with Manifest S3URI.
+	// The ETag associated with Manifest S3 URI.
 	ManifestEtag *string
 
 	// The Amazon S3 URI of the manifest file. The manifest file is a CSV file that
