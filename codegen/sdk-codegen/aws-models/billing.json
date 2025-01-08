@@ -6,7 +6,34 @@
             "version": "2023-09-07",
             "operations": [
                 {
+                    "target": "com.amazonaws.billing#CreateBillingView"
+                },
+                {
+                    "target": "com.amazonaws.billing#DeleteBillingView"
+                },
+                {
+                    "target": "com.amazonaws.billing#GetBillingView"
+                },
+                {
+                    "target": "com.amazonaws.billing#GetResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.billing#ListBillingViews"
+                },
+                {
+                    "target": "com.amazonaws.billing#ListSourceViewsForBillingView"
+                },
+                {
+                    "target": "com.amazonaws.billing#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.billing#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.billing#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.billing#UpdateBillingView"
                 }
             ],
             "traits": {
@@ -543,7 +570,86 @@
         "com.amazonaws.billing#BillingViewArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9_\\+=\\.\\-@]{1,43}$"
+                "smithy.api#pattern": "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_\\+=\\.\\-@]{0,59}[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.billing#BillingViewArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingViewArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.billing#BillingViewDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^([ a-zA-Z0-9_\\+=\\.\\-@]+)?$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.billing#BillingViewElement": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.billing#BillingViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of names of the billing view.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.billing#BillingViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the billing view.\n    </p>"
+                    }
+                },
+                "billingViewType": {
+                    "target": "com.amazonaws.billing#BillingViewType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of billing group.\n    </p>"
+                    }
+                },
+                "ownerAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of owners of the billing view.\n    </p>"
+                    }
+                },
+                "dataFilterExpression": {
+                    "target": "com.amazonaws.billing#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.\n    </p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the billing view was created.\n    </p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the billing view was last updated.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata associated to the billing view.\n    </p>"
             }
         },
         "com.amazonaws.billing#BillingViewList": {
@@ -567,6 +673,12 @@
                         "smithy.api#documentation": "<p>\n      A list of names of the Billing view.\n    </p>"
                     }
                 },
+                "description": {
+                    "target": "com.amazonaws.billing#BillingViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the billing view.\n    </p>"
+                    }
+                },
                 "ownerAccountId": {
                     "target": "com.amazonaws.billing#AccountId",
                     "traits": {
@@ -587,8 +699,24 @@
         "com.amazonaws.billing#BillingViewName": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
                 "smithy.api#pattern": "^[ a-zA-Z0-9_\\+=\\.\\-@]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.billing#BillingViewSourceViewsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingViewArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.billing#BillingViewType": {
@@ -605,7 +733,19 @@
                     "traits": {
                         "smithy.api#enumValue": "BILLING_GROUP"
                     }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.billing#BillingViewTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingViewType"
             }
         },
         "com.amazonaws.billing#BillingViewsMaxResults": {
@@ -617,6 +757,276 @@
                 }
             }
         },
+        "com.amazonaws.billing#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.billing#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.billing#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.billing#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The identifier for the service resource associated with the request.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.billing#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of resource associated with the request.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BillingConflict",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>\n      The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.billing#CreateBillingView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#CreateBillingViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#CreateBillingViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nCreates a billing view with the specified billing view attributes.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke CreateBillingView",
+                        "input": {
+                            "name": "Example Custom Billing View",
+                            "sourceViews": [
+                                "arn:aws:billing::123456789101:billingview/primary"
+                            ],
+                            "description": "Custom Billing View Example",
+                            "dataFilterExpression": {
+                                "dimensions": {
+                                    "key": "LINKED_ACCOUNT",
+                                    "values": [
+                                        "000000000000"
+                                    ]
+                                }
+                            }
+                        },
+                        "output": {
+                            "arn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+                            "createdAt": 1719792001
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.billing#CreateBillingViewRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.billing#BillingViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n     The name of the billing view.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.billing#BillingViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the billing view.\n    </p>"
+                    }
+                },
+                "sourceViews": {
+                    "target": "com.amazonaws.billing#BillingViewSourceViewsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of billing views used as the data source for the custom billing view.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataFilterExpression": {
+                    "target": "com.amazonaws.billing#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.\n    </p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.billing#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. If the original request completes successfully, any subsequent retries complete successfully without performing any further actions with an idempotent request.\n    </p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "resourceTags": {
+                    "target": "com.amazonaws.billing#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key value map specifying tags associated to the billing view being created.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#CreateBillingViewResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The time when the billing view was created.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#DeleteBillingView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#DeleteBillingViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#DeleteBillingViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified billing view.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke DeleteBillingView",
+                        "input": {
+                            "arn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+                        },
+                        "output": {
+                            "arn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.billing#DeleteBillingViewRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#DeleteBillingViewResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#Dimension": {
+            "type": "enum",
+            "members": {
+                "LINKED_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED_ACCOUNT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billing#DimensionValues": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.billing#Dimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The names of the metadata types that you can use to filter and group your results. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.billing#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The metadata values that you can use to filter and group your results. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The metadata that you can use to filter and group your results.\n    </p>"
+            }
+        },
         "com.amazonaws.billing#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -625,12 +1035,195 @@
                 }
             }
         },
+        "com.amazonaws.billing#Expression": {
+            "type": "structure",
+            "members": {
+                "dimensions": {
+                    "target": "com.amazonaws.billing#DimensionValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The specific <code>Dimension</code> to use for <code>Expression</code>.\n    </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.billing#TagValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The specific <code>Tag</code> to use for <code>Expression</code>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.\n    </p>"
+            }
+        },
         "com.amazonaws.billing#FieldName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.billing#GetBillingView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#GetBillingViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#GetBillingViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the metadata associated to the specified billing view ARN.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke GetBillingView",
+                        "input": {
+                            "arn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+                        },
+                        "output": {
+                            "billingView": {
+                                "arn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+                                "name": "Example Custom Billing View",
+                                "description": "Custom Billing View Example -- updated description",
+                                "dataFilterExpression": {
+                                    "dimensions": {
+                                        "key": "LINKED_ACCOUNT",
+                                        "values": [
+                                            "000000000000"
+                                        ]
+                                    }
+                                },
+                                "ownerAccountId": "123456789101",
+                                "billingViewType": "CUSTOM"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.billing#GetBillingViewRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#GetBillingViewResponse": {
+            "type": "structure",
+            "members": {
+                "billingView": {
+                    "target": "com.amazonaws.billing#BillingViewElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing view element associated with the specified ARN.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#GetResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the resource-based policy document attached to the resource in <code>JSON</code> format.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke GetResourcePolicy",
+                        "input": {
+                            "resourceArn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+                        },
+                        "output": {
+                            "resourceArn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+                            "policy": "{\"Version\":\"2012-10-17\",\"Id\":\"46f47cb2-a11d-43f3-983d-470b5708a899\",\"Statement\":[{\"Sid\":\"ExampleStatement1\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::000000000000:root\"},\"Action\":[\"ce:GetDimensionValues\",\"ce:GetCostAndUsageWithResources\",\"ce:GetCostAndUsage\",\"ce:GetCostForecast\",\"ce:GetTags\",\"ce:GetUsageForecast\",\"ce:GetCostCategories\",\"billing:GetBillingView\"],\"Resource\":\"arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899\"}]}"
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.billing#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.billing#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#GetResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.billing#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.billing#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document attached to the resource in <code>JSON</code> format.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.billing#InternalServerException": {
@@ -753,8 +1346,25 @@
                 "activeTimeRange": {
                     "target": "com.amazonaws.billing#ActiveTimeRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The time range for the billing views listed. <code>PRIMARY</code> billing view is always listed. <code>BILLING_GROUP</code> billing views are listed for time ranges when the associated billing group resource in Billing Conductor is active. The time range must be within one calendar month.\n    </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>\n      The time range for the billing views listed. <code>PRIMARY</code> billing view is always listed. <code>BILLING_GROUP</code> billing views are listed for time ranges when the associated billing group resource in Billing Conductor is active. The time range must be within one calendar month.\n    </p>"
+                    }
+                },
+                "arns": {
+                    "target": "com.amazonaws.billing#BillingViewArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n      </p>"
+                    }
+                },
+                "billingViewTypes": {
+                    "target": "com.amazonaws.billing#BillingViewTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of billing view.</p>"
+                    }
+                },
+                "ownerAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of owners of the billing view.\n    </p>"
                     }
                 },
                 "maxResults": {
@@ -795,6 +1405,178 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.billing#ListSourceViewsForBillingView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#ListSourceViewsForBillingViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#ListSourceViewsForBillingViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the source views (managed Amazon Web Services billing views) associated with the billing view.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke ListSourceViewsForBillingView",
+                        "input": {
+                            "arn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+                        },
+                        "output": {
+                            "sourceViews": [
+                                "arn:aws:billing::123456789101:billingview/primary"
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "sourceViews"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.billing#ListSourceViewsForBillingViewRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.billing#BillingViewsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number of entries a paginated response contains.\n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The pagination token that is used on subsequent calls to list billing views.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#ListSourceViewsForBillingViewResponse": {
+            "type": "structure",
+            "members": {
+                "sourceViews": {
+                    "target": "com.amazonaws.billing#BillingViewSourceViewsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of billing views used as the data source for the custom billing view.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The pagination token that is used on subsequent calls to list billing views.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists tags associated with the billing view resource.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke ListTagsForResource",
+                        "input": {
+                            "resourceArn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+                        },
+                        "output": {
+                            "resourceTags": [
+                                {
+                                    "key": "ExampleTagKey",
+                                    "value": "ExampleTagValue"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.billing#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.billing#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the resource. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "resourceTags": {
+                    "target": "com.amazonaws.billing#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of tag key value pairs that are associated with the resource.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.billing#PageToken": {
             "type": "string",
             "traits": {
@@ -802,6 +1584,301 @@
                     "min": 1,
                     "max": 2047
                 }
+            }
+        },
+        "com.amazonaws.billing#PolicyDocument": {
+            "type": "string"
+        },
+        "com.amazonaws.billing#QuotaCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.billing#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-z-]*:(billing)::[0-9]{12}:[a-zA-Z0-9/:_\\+=\\.\\@-]{0,70}[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.billing#ResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.billing#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.billing#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.billing#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Value is a list of resource IDs that were not found.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.billing#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Value is the type of resource that was not found.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BillingResourceNotFound",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>\n      The specified ARN in the request doesn't exist.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.billing#ResourceTag": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.billing#ResourceTagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The key that's associated with the tag.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.billing#ResourceTagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The value that's associated with the tag.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The tag structure that contains a tag key and value.\n    </p>"
+            }
+        },
+        "com.amazonaws.billing#ResourceTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.billing#ResourceTagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#ResourceTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.billing#ResourceTagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#ResourceTag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.billing#ResourceTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.billing#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.billing#ServiceCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.billing#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.billing#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.billing#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the resource.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.billing#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of Amazon Web Services resource.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.billing#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The container for the <code>serviceCode</code>.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaCode": {
+                    "target": "com.amazonaws.billing#QuotaCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The container for the <code>quotaCode</code>.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BillingServiceQuotaExceeded",
+                    "httpResponseCode": 402
+                },
+                "smithy.api#documentation": "<p>\n      You've reached the limit of resources you can create, or exceeded the size of an individual resource.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.billing#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.billing#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      An API operation for adding one or more tags (key-value pairs) to a resource.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke TagResource",
+                        "input": {
+                            "resourceArn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+                            "resourceTags": [
+                                {
+                                    "key": "ExampleTagKey",
+                                    "value": "ExampleTagValue"
+                                }
+                            ]
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.billing#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.billing#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the resource.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceTags": {
+                    "target": "com.amazonaws.billing#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of tag key value pairs that are associated with the resource.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#TagValues": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.billing#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The key for the tag.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.billing#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The specific value of the tag.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The values that are available for a tag.\n    </p>"
             }
         },
         "com.amazonaws.billing#ThrottlingException": {
@@ -822,6 +1899,188 @@
                 "smithy.api#documentation": "<p>The request was denied due to request throttling.\n      </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.billing#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Removes one or more tags from a resource. Specify only tag keys in your request. Don't specify the value.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke UntagResource",
+                        "input": {
+                            "resourceArn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+                            "resourceTagKeys": [
+                                "ExampleTagKey"
+                            ]
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.billing#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.billing#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the resource.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceTagKeys": {
+                    "target": "com.amazonaws.billing#ResourceTagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of tag key value pairs that are associated with the resource.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#UpdateBillingView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#UpdateBillingViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#UpdateBillingViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>An API to update the attributes of the billing view.\n    </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke UpdateBillingView",
+                        "input": {
+                            "name": "Example Custom Billing View",
+                            "arn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+                            "description": "Custom Billing View Example -- updated description",
+                            "dataFilterExpression": {
+                                "dimensions": {
+                                    "key": "LINKED_ACCOUNT",
+                                    "values": [
+                                        "000000000000"
+                                    ]
+                                }
+                            }
+                        },
+                        "output": {
+                            "arn": "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+                            "updatedAt": 1719792001
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.billing#UpdateBillingViewRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.billing#BillingViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the billing view.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.billing#BillingViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the billing view.\n    </p>"
+                    }
+                },
+                "dataFilterExpression": {
+                    "target": "com.amazonaws.billing#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#UpdateBillingViewResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The time when the billing view was last updated.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.billing#ValidationException": {
@@ -911,6 +2170,28 @@
                     "traits": {
                         "smithy.api#enumValue": "other"
                     }
+                }
+            }
+        },
+        "com.amazonaws.billing#Value": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.billing#Values": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#Value"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
                 }
             }
         }

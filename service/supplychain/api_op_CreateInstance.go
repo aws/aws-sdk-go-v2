@@ -58,6 +58,12 @@ type CreateInstanceInput struct {
 	// The Amazon Web Services tags of an instance to be created.
 	Tags map[string]string
 
+	// The DNS subdomain of the web app. This would be "example" in the URL
+	// "example.scn.global.on.aws". You can set this to a custom value, as long as the
+	// domain isn't already being used by someone else. The name may only include
+	// alphanumeric characters and hyphens.
+	WebAppDnsDomain *string
+
 	noSmithyDocumentSerde
 }
 

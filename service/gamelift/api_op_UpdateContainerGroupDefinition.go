@@ -48,7 +48,9 @@ import (
 //
 // If the container group definition version is used in an active fleets, the
 // update automatically initiates a new fleet deployment of the new version. You
-// can track a fleet's deployments using ListFleetDeployments.
+// can track a fleet's deployments using [ListFleetDeployments].
+//
+// [ListFleetDeployments]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListFleetDeployments.html
 func (c *Client) UpdateContainerGroupDefinition(ctx context.Context, params *UpdateContainerGroupDefinitionInput, optFns ...func(*Options)) (*UpdateContainerGroupDefinitionOutput, error) {
 	if params == nil {
 		params = &UpdateContainerGroupDefinitionInput{}

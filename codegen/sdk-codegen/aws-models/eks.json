@@ -204,6 +204,9 @@
                     "target": "com.amazonaws.eks#DescribeCluster"
                 },
                 {
+                    "target": "com.amazonaws.eks#DescribeClusterVersions"
+                },
+                {
                     "target": "com.amazonaws.eks#DescribeEksAnywhereSubscription"
                 },
                 {
@@ -1616,6 +1619,32 @@
                 "smithy.api#documentation": "<p>An Amazon EKS add-on. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html\">Amazon EKS add-ons</a> in\n            the <i>Amazon EKS User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.eks#AddonCompatibilityDetail": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS add-on.</p>"
+                    }
+                },
+                "compatibleVersions": {
+                    "target": "com.amazonaws.eks#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of compatible add-on versions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains compatibility information for an Amazon EKS add-on.</p>"
+            }
+        },
+        "com.amazonaws.eks#AddonCompatibilityDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#AddonCompatibilityDetail"
+            }
+        },
         "com.amazonaws.eks#AddonHealth": {
             "type": "structure",
             "members": {
@@ -2837,6 +2866,98 @@
                 }
             }
         },
+        "com.amazonaws.eks#ClusterVersionInformation": {
+            "type": "structure",
+            "members": {
+                "clusterVersion": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kubernetes version for the cluster.</p>"
+                    }
+                },
+                "clusterType": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of cluster this version is for.</p>"
+                    }
+                },
+                "defaultPlatformVersion": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Default platform version for this Kubernetes version.</p>"
+                    }
+                },
+                "defaultVersion": {
+                    "target": "com.amazonaws.eks#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates if this is a default version.</p>"
+                    }
+                },
+                "releaseDate": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The release date of this cluster version.</p>"
+                    }
+                },
+                "endOfStandardSupportDate": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date when standard support ends for this version.</p>"
+                    }
+                },
+                "endOfExtendedSupportDate": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date when extended support ends for this version.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.eks#ClusterVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current status of this cluster version.</p>"
+                    }
+                },
+                "kubernetesPatchVersion": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patch version of Kubernetes for this cluster version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a specific EKS cluster version.</p>"
+            }
+        },
+        "com.amazonaws.eks#ClusterVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#ClusterVersionInformation"
+            }
+        },
+        "com.amazonaws.eks#ClusterVersionStatus": {
+            "type": "enum",
+            "members": {
+                "unsupported": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unsupported"
+                    }
+                },
+                "standard_support": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard-support"
+                    }
+                },
+                "extended_support": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "extended-support"
+                    }
+                }
+            }
+        },
         "com.amazonaws.eks#Compatibilities": {
             "type": "list",
             "member": {
@@ -3841,6 +3962,12 @@
                     "target": "com.amazonaws.eks#NodegroupUpdateConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The node group update configuration.</p>"
+                    }
+                },
+                "nodeRepairConfig": {
+                    "target": "com.amazonaws.eks#NodeRepairConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node auto repair configuration for the node group.</p>"
                     }
                 },
                 "capacityType": {
@@ -5135,6 +5262,126 @@
                     "target": "com.amazonaws.eks#Cluster",
                     "traits": {
                         "smithy.api#documentation": "<p>The full description of your specified cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#DescribeClusterVersionMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.eks#DescribeClusterVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DescribeClusterVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DescribeClusterVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists available Kubernetes versions for Amazon EKS clusters.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/cluster-versions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "clusterVersions",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.eks#DescribeClusterVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "clusterType": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of cluster to filter versions by.</p>",
+                        "smithy.api#httpQuery": "clusterType"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.eks#DescribeClusterVersionMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token for the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "defaultOnly": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter to show only default versions.</p>",
+                        "smithy.api#httpQuery": "defaultOnly"
+                    }
+                },
+                "includeAll": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include all available versions in the response.</p>",
+                        "smithy.api#httpQuery": "includeAll"
+                    }
+                },
+                "clusterVersions": {
+                    "target": "com.amazonaws.eks#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of specific cluster versions to describe.</p>",
+                        "smithy.api#httpQuery": "clusterVersions"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.eks#ClusterVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter versions by their current status.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DescribeClusterVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token for the next set of results.</p>"
+                    }
+                },
+                "clusterVersions": {
+                    "target": "com.amazonaws.eks#ClusterVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of cluster version information objects.</p>"
                     }
                 }
             },
@@ -6622,6 +6869,12 @@
                     "target": "com.amazonaws.eks#DeprecationDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>The summary information about deprecated resource usage for an insight check in the\n                <code>UPGRADE_READINESS</code> category.</p>"
+                    }
+                },
+                "addonCompatibilityDetails": {
+                    "target": "com.amazonaws.eks#AddonCompatibilityDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of AddonCompatibilityDetail objects for Amazon EKS add-ons.</p>"
                     }
                 }
             },
@@ -8400,6 +8653,20 @@
                 "smithy.api#documentation": "<p>Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.</p>"
             }
         },
+        "com.amazonaws.eks#NodeRepairConfig": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable node auto repair for the node group. Node auto repair is \n         disabled by default.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The node auto repair configuration for the node group.</p>"
+            }
+        },
         "com.amazonaws.eks#Nodegroup": {
             "type": "structure",
             "members": {
@@ -8527,6 +8794,12 @@
                     "target": "com.amazonaws.eks#NodegroupUpdateConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The node group update configuration.</p>"
+                    }
+                },
+                "nodeRepairConfig": {
+                    "target": "com.amazonaws.eks#NodeRepairConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node auto repair configuration for the node group.</p>"
                     }
                 },
                 "launchTemplate": {
@@ -9383,13 +9656,13 @@
                 "remoteNodeNetworks": {
                     "target": "com.amazonaws.eks#RemoteNodeNetworkList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of network CIDRs that can contain hybrid nodes.</p>"
+                        "smithy.api#documentation": "<p>The list of network CIDRs that can contain hybrid nodes.</p>\n         <p>These CIDR blocks define the expected IP address range of the hybrid nodes that join\n            the cluster. These blocks are typically determined by your network administrator. </p>\n         <p>Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for example, <code>\n            10.2.0.0/16</code>).</p>\n         <p>It must satisfy the following requirements:</p>\n         <ul>\n            <li>\n               <p>Each block must be within an <code>IPv4</code> RFC-1918 network range. Minimum\n                    allowed size is /24, maximum allowed size is /8. Publicly-routable addresses\n                    aren't supported.</p>\n            </li>\n            <li>\n               <p>Each block cannot overlap with the range of the VPC CIDR blocks for your EKS\n                    resources, or the block of the Kubernetes service IP range.</p>\n            </li>\n            <li>\n               <p>Each block must have a route to the VPC that uses the VPC CIDR blocks, not\n                    public IPs or Elastic IPs. There are many options including Transit Gateway,\n                    Site-to-Site VPN, or Direct Connect.</p>\n            </li>\n            <li>\n               <p>Each host must allow outbound connection to the EKS cluster control plane on\n                    TCP ports <code>443</code> and <code>10250</code>.</p>\n            </li>\n            <li>\n               <p>Each host must allow inbound connection from the EKS cluster control plane on\n                    TCP port 10250 for logs, exec and port-forward operations.</p>\n            </li>\n            <li>\n               <p> Each host must allow TCP and UDP network connectivity to and from other hosts\n                    that are running <code>CoreDNS</code> on UDP port <code>53</code> for service and pod DNS\n                    names.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "remotePodNetworks": {
                     "target": "com.amazonaws.eks#RemotePodNetworkList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of network CIDRs that can contain pods that run Kubernetes webhooks on hybrid nodes.</p>"
+                        "smithy.api#documentation": "<p>The list of network CIDRs that can contain pods that run Kubernetes webhooks on hybrid nodes.</p>\n         <p>These CIDR blocks are determined by configuring your Container Network Interface (CNI)\n            plugin. We recommend the Calico CNI or Cilium CNI. Note that the Amazon VPC CNI plugin for Kubernetes isn't\n            available for on-premises and edge locations.</p>\n         <p>Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for example, <code>\n            10.2.0.0/16</code>).</p>\n         <p>It must satisfy the following requirements:</p>\n         <ul>\n            <li>\n               <p>Each block must be within an <code>IPv4</code> RFC-1918 network range. Minimum\n                    allowed size is /24, maximum allowed size is /8. Publicly-routable addresses\n                    aren't supported.</p>\n            </li>\n            <li>\n               <p>Each block cannot overlap with the range of the VPC CIDR blocks for your EKS\n                    resources, or the block of the Kubernetes service IP range.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -9423,12 +9696,12 @@
                 "cidrs": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A network CIDR that can contain hybrid nodes.</p>"
+                        "smithy.api#documentation": "<p>A network CIDR that can contain hybrid nodes.</p>\n         <p>These CIDR blocks define the expected IP address range of the hybrid nodes that join\n            the cluster. These blocks are typically determined by your network administrator. </p>\n         <p>Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for example, <code>\n            10.2.0.0/16</code>).</p>\n         <p>It must satisfy the following requirements:</p>\n         <ul>\n            <li>\n               <p>Each block must be within an <code>IPv4</code> RFC-1918 network range. Minimum\n                    allowed size is /24, maximum allowed size is /8. Publicly-routable addresses\n                    aren't supported.</p>\n            </li>\n            <li>\n               <p>Each block cannot overlap with the range of the VPC CIDR blocks for your EKS\n                    resources, or the block of the Kubernetes service IP range.</p>\n            </li>\n            <li>\n               <p>Each block must have a route to the VPC that uses the VPC CIDR blocks, not\n                    public IPs or Elastic IPs. There are many options including Transit Gateway,\n                    Site-to-Site VPN, or Direct Connect.</p>\n            </li>\n            <li>\n               <p>Each host must allow outbound connection to the EKS cluster control plane on\n                    TCP ports <code>443</code> and <code>10250</code>.</p>\n            </li>\n            <li>\n               <p>Each host must allow inbound connection from the EKS cluster control plane on\n                    TCP port 10250 for logs, exec and port-forward operations.</p>\n            </li>\n            <li>\n               <p> Each host must allow TCP and UDP network connectivity to and from other hosts\n                    that are running <code>CoreDNS</code> on UDP port <code>53</code> for service and pod DNS\n                    names.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A network CIDR that can contain hybrid nodes.</p>"
+                "smithy.api#documentation": "<p>A network CIDR that can contain hybrid nodes.</p>\n         <p>These CIDR blocks define the expected IP address range of the hybrid nodes that join\n            the cluster. These blocks are typically determined by your network administrator. </p>\n         <p>Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for example, <code>\n            10.2.0.0/16</code>).</p>\n         <p>It must satisfy the following requirements:</p>\n         <ul>\n            <li>\n               <p>Each block must be within an <code>IPv4</code> RFC-1918 network range. Minimum\n                    allowed size is /24, maximum allowed size is /8. Publicly-routable addresses\n                    aren't supported.</p>\n            </li>\n            <li>\n               <p>Each block cannot overlap with the range of the VPC CIDR blocks for your EKS\n                    resources, or the block of the Kubernetes service IP range.</p>\n            </li>\n            <li>\n               <p>Each block must have a route to the VPC that uses the VPC CIDR blocks, not\n                    public IPs or Elastic IPs. There are many options including Transit Gateway,\n                    Site-to-Site VPN, or Direct Connect.</p>\n            </li>\n            <li>\n               <p>Each host must allow outbound connection to the EKS cluster control plane on\n                    TCP ports <code>443</code> and <code>10250</code>.</p>\n            </li>\n            <li>\n               <p>Each host must allow inbound connection from the EKS cluster control plane on\n                    TCP port 10250 for logs, exec and port-forward operations.</p>\n            </li>\n            <li>\n               <p> Each host must allow TCP and UDP network connectivity to and from other hosts\n                    that are running <code>CoreDNS</code> on UDP port <code>53</code> for service and pod DNS\n                    names.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.eks#RemoteNodeNetworkList": {
@@ -9449,12 +9722,12 @@
                 "cidrs": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A network CIDR that can contain pods that run Kubernetes webhooks on hybrid nodes.</p>"
+                        "smithy.api#documentation": "<p>A network CIDR that can contain pods that run Kubernetes webhooks on hybrid nodes.</p>\n         <p>These CIDR blocks are determined by configuring your Container Network Interface (CNI)\n            plugin. We recommend the Calico CNI or Cilium CNI. Note that the Amazon VPC CNI plugin for Kubernetes isn't\n            available for on-premises and edge locations.</p>\n         <p>Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for example, <code>\n            10.2.0.0/16</code>).</p>\n         <p>It must satisfy the following requirements:</p>\n         <ul>\n            <li>\n               <p>Each block must be within an <code>IPv4</code> RFC-1918 network range. Minimum\n                    allowed size is /24, maximum allowed size is /8. Publicly-routable addresses\n                    aren't supported.</p>\n            </li>\n            <li>\n               <p>Each block cannot overlap with the range of the VPC CIDR blocks for your EKS\n                    resources, or the block of the Kubernetes service IP range.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A network CIDR that can contain pods that run Kubernetes webhooks on hybrid nodes.</p>"
+                "smithy.api#documentation": "<p>A network CIDR that can contain pods that run Kubernetes webhooks on hybrid nodes.</p>\n         <p>These CIDR blocks are determined by configuring your Container Network Interface (CNI)\n            plugin. We recommend the Calico CNI or Cilium CNI. Note that the Amazon VPC CNI plugin for Kubernetes isn't\n            available for on-premises and edge locations.</p>\n         <p>Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for example, <code>\n            10.2.0.0/16</code>).</p>\n         <p>It must satisfy the following requirements:</p>\n         <ul>\n            <li>\n               <p>Each block must be within an <code>IPv4</code> RFC-1918 network range. Minimum\n                    allowed size is /24, maximum allowed size is /8. Publicly-routable addresses\n                    aren't supported.</p>\n            </li>\n            <li>\n               <p>Each block cannot overlap with the range of the VPC CIDR blocks for your EKS\n                    resources, or the block of the Kubernetes service IP range.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.eks#RemotePodNetworkList": {
@@ -10614,6 +10887,12 @@
                         "smithy.api#documentation": "<p>The node group update configuration.</p>"
                     }
                 },
+                "nodeRepairConfig": {
+                    "target": "com.amazonaws.eks#NodeRepairConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node auto repair configuration for the node group.</p>"
+                    }
+                },
                 "clientRequestToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
@@ -10900,6 +11179,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MaxUnavailablePercentage"
+                    }
+                },
+                "NODE_REPAIR_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeRepairEnabled"
                     }
                 },
                 "CONFIGURATION_VALUES": {

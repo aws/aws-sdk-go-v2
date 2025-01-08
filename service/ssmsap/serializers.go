@@ -1348,6 +1348,13 @@ func awsRestjson1_serializeOpDocumentRegisterApplicationInput(v *RegisterApplica
 		ok.String(string(v.ApplicationType))
 	}
 
+	if v.ComponentsInfo != nil {
+		ok := object.Key("ComponentsInfo")
+		if err := awsRestjson1_serializeDocumentComponentInfoList(v.ComponentsInfo, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Credentials != nil {
 		ok := object.Key("Credentials")
 		if err := awsRestjson1_serializeDocumentApplicationCredentialList(v.Credentials, ok); err != nil {
@@ -1969,6 +1976,41 @@ func awsRestjson1_serializeDocumentBackintConfig(v *types.BackintConfig, value s
 		ok.Boolean(*v.EnsureNoBackupInProcess)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComponentInfo(v *types.ComponentInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComponentType) > 0 {
+		ok := object.Key("ComponentType")
+		ok.String(string(v.ComponentType))
+	}
+
+	if v.Ec2InstanceId != nil {
+		ok := object.Key("Ec2InstanceId")
+		ok.String(*v.Ec2InstanceId)
+	}
+
+	if v.Sid != nil {
+		ok := object.Key("Sid")
+		ok.String(*v.Sid)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComponentInfoList(v []types.ComponentInfo, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentComponentInfo(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

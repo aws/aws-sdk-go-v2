@@ -50,6 +50,8 @@
 //
 // [Amazon Web Services SDK for Ruby V3]
 //
+// [Amazon Web Services SDK for Kotlin]
+//
 // To get started with an Amazon Web Services SDK, see [Tools to Build on Amazon Web Services]. For example actions and
 // scenarios, see [Code examples for Amazon Cognito Identity Provider using Amazon Web Services SDKs].
 //
@@ -69,4 +71,5 @@
 // [Amazon Web Services Command Line Interface]: https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/index.html#cli-aws-cognito-idp
 // [Amazon Web Services SDK for Go]: https://docs.aws.amazon.com/sdk-for-go/api/service/cognitoidentityprovider/#CognitoIdentityProvider
 // [Amazon Web Services SDK for JavaScript]: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html
+// [Amazon Web Services SDK for Kotlin]: https://sdk.amazonaws.com/kotlin/api/latest/cognitoidentityprovider/aws.sdk.kotlin.services.cognitoidentityprovider/-cognito-identity-provider-client/index.html
 package cognitoidentityprovider

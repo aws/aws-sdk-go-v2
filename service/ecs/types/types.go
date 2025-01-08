@@ -164,7 +164,7 @@ type AutoScalingGroupProviderUpdate struct {
 type AwsVpcConfiguration struct {
 
 	// The IDs of the subnets associated with the task or service. There's a limit of
-	// 16 subnets that can be specified per awsvpcConfiguration .
+	// 16 subnets that can be specified.
 	//
 	// All specified subnets must be from the same VPC.
 	//
@@ -177,8 +177,7 @@ type AwsVpcConfiguration struct {
 
 	// The IDs of the security groups associated with the task or service. If you
 	// don't specify a security group, the default security group for the VPC is used.
-	// There's a limit of 5 security groups that can be specified per
-	// awsvpcConfiguration .
+	// There's a limit of 5 security groups that can be specified.
 	//
 	// All specified security groups must be from the same VPC.
 	SecurityGroups []string
@@ -1882,8 +1881,10 @@ type DeploymentConfiguration struct {
 	// the blue/green ( CODE_DEPLOY ) or EXTERNAL deployment types and has tasks that
 	// use the EC2 launch type.
 	//
-	// If the tasks in the service use the Fargate launch type, the maximum percent
-	// value is not used, although it is returned when describing your service.
+	// If the service uses either the blue/green ( CODE_DEPLOY ) or EXTERNAL
+	// deployment types, and the tasks in the service use the Fargate launch type, the
+	// maximum percent value is not used. The value is still returned when describing
+	// your service.
 	//
 	// [Amazon ECS services]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
 	MaximumPercent *int32
@@ -3036,7 +3037,8 @@ type LogConfiguration struct {
 	//
 	// When you export logs to Amazon OpenSearch Service, you can specify options like
 	// Name , Host (OpenSearch Service endpoint without protocol), Port , Index , Type
-	// , Aws_auth , Aws_region , Suppress_Type_Name , and tls .
+	// , Aws_auth , Aws_region , Suppress_Type_Name , and tls . For more information,
+	// see [Under the hood: FireLens for Amazon ECS Tasks].
 	//
 	// When you export logs to Amazon S3, you can specify the bucket using the bucket
 	// option. You can also specify region , total_file_size , upload_timeout , and
@@ -3048,6 +3050,7 @@ type LogConfiguration struct {
 	// command: sudo docker version --format '{{.Server.APIVersion}}'
 	//
 	// [awslogs-multiline-pattern]: https://docs.docker.com/config/containers/logging/awslogs/#awslogs-multiline-pattern
+	// [Under the hood: FireLens for Amazon ECS Tasks]: http://aws.amazon.com/blogs/containers/under-the-hood-firelens-for-amazon-ecs-tasks/
 	// [awslogs-datetime-format]: https://docs.docker.com/config/containers/logging/awslogs/#awslogs-datetime-format
 	// [Preventing log loss with non-blocking mode in the awslogs container log driver]: http://aws.amazon.com/blogs/containers/preventing-log-loss-with-non-blocking-mode-in-the-awslogs-container-log-driver/
 	Options map[string]string
@@ -5166,6 +5169,10 @@ type TaskDefinition struct {
 
 	// The Unix timestamp for the time when the task definition was deregistered.
 	DeregisteredAt *time.Time
+
+	// Enables fault injection and allows for fault injection requests to be accepted
+	// from the task's containers. The default value is false .
+	EnableFaultInjection *bool
 
 	// The ephemeral storage settings to use for tasks run with the task definition.
 	EphemeralStorage *EphemeralStorage

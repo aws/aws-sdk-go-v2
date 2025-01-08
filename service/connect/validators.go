@@ -610,6 +610,26 @@ func (m *validateOpCreateHoursOfOperation) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateHoursOfOperationOverride struct {
+}
+
+func (*validateOpCreateHoursOfOperationOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHoursOfOperationOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHoursOfOperationOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHoursOfOperationOverrideInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateInstance struct {
 }
 
@@ -1170,6 +1190,26 @@ func (m *validateOpDeleteHoursOfOperation) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteHoursOfOperationOverride struct {
+}
+
+func (*validateOpDeleteHoursOfOperationOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHoursOfOperationOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHoursOfOperationOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHoursOfOperationOverrideInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteInstance struct {
 }
 
@@ -1705,6 +1745,26 @@ func (m *validateOpDescribeHoursOfOperation) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeHoursOfOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeHoursOfOperationOverride struct {
+}
+
+func (*validateOpDescribeHoursOfOperationOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeHoursOfOperationOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeHoursOfOperationOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeHoursOfOperationOverrideInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2410,6 +2470,26 @@ func (m *validateOpGetCurrentUserData) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEffectiveHoursOfOperations struct {
+}
+
+func (*validateOpGetEffectiveHoursOfOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEffectiveHoursOfOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEffectiveHoursOfOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEffectiveHoursOfOperationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFederationToken struct {
 }
 
@@ -2865,6 +2945,26 @@ func (m *validateOpListFlowAssociations) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListFlowAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListHoursOfOperationOverrides struct {
+}
+
+func (*validateOpListHoursOfOperationOverrides) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListHoursOfOperationOverrides) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListHoursOfOperationOverridesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListHoursOfOperationOverridesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3705,6 +3805,26 @@ func (m *validateOpSearchEmailAddresses) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchEmailAddressesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchHoursOfOperationOverrides struct {
+}
+
+func (*validateOpSearchHoursOfOperationOverrides) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchHoursOfOperationOverrides) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchHoursOfOperationOverridesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchHoursOfOperationOverridesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4710,6 +4830,26 @@ func (m *validateOpUpdateHoursOfOperation) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateHoursOfOperationOverride struct {
+}
+
+func (*validateOpUpdateHoursOfOperationOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHoursOfOperationOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHoursOfOperationOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHoursOfOperationOverrideInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateInstanceAttribute struct {
 }
 
@@ -4745,6 +4885,26 @@ func (m *validateOpUpdateInstanceStorageConfig) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateInstanceStorageConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateParticipantAuthentication struct {
+}
+
+func (*validateOpUpdateParticipantAuthentication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateParticipantAuthentication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateParticipantAuthenticationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateParticipantAuthenticationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5510,6 +5670,10 @@ func addOpCreateHoursOfOperationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateHoursOfOperation{}, middleware.After)
 }
 
+func addOpCreateHoursOfOperationOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHoursOfOperationOverride{}, middleware.After)
+}
+
 func addOpCreateInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInstance{}, middleware.After)
 }
@@ -5622,6 +5786,10 @@ func addOpDeleteHoursOfOperationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteHoursOfOperation{}, middleware.After)
 }
 
+func addOpDeleteHoursOfOperationOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHoursOfOperationOverride{}, middleware.After)
+}
+
 func addOpDeleteInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInstance{}, middleware.After)
 }
@@ -5728,6 +5896,10 @@ func addOpDescribeEvaluationFormValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDescribeHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeHoursOfOperation{}, middleware.After)
+}
+
+func addOpDescribeHoursOfOperationOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeHoursOfOperationOverride{}, middleware.After)
 }
 
 func addOpDescribeInstanceAttributeValidationMiddleware(stack *middleware.Stack) error {
@@ -5870,6 +6042,10 @@ func addOpGetCurrentUserDataValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetCurrentUserData{}, middleware.After)
 }
 
+func addOpGetEffectiveHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEffectiveHoursOfOperations{}, middleware.After)
+}
+
 func addOpGetFederationTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFederationToken{}, middleware.After)
 }
@@ -5960,6 +6136,10 @@ func addOpListEvaluationFormVersionsValidationMiddleware(stack *middleware.Stack
 
 func addOpListFlowAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFlowAssociations{}, middleware.After)
+}
+
+func addOpListHoursOfOperationOverridesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListHoursOfOperationOverrides{}, middleware.After)
 }
 
 func addOpListHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
@@ -6128,6 +6308,10 @@ func addOpSearchContactsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchEmailAddressesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchEmailAddresses{}, middleware.After)
+}
+
+func addOpSearchHoursOfOperationOverridesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchHoursOfOperationOverrides{}, middleware.After)
 }
 
 func addOpSearchHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
@@ -6330,12 +6514,20 @@ func addOpUpdateHoursOfOperationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpUpdateHoursOfOperation{}, middleware.After)
 }
 
+func addOpUpdateHoursOfOperationOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHoursOfOperationOverride{}, middleware.After)
+}
+
 func addOpUpdateInstanceAttributeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInstanceAttribute{}, middleware.After)
 }
 
 func addOpUpdateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpUpdateParticipantAuthenticationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateParticipantAuthentication{}, middleware.After)
 }
 
 func addOpUpdateParticipantRoleConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -7222,6 +7414,45 @@ func validateHoursOfOperationConfigList(v []types.HoursOfOperationConfig) error 
 	}
 }
 
+func validateHoursOfOperationOverrideConfig(v *types.HoursOfOperationOverrideConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HoursOfOperationOverrideConfig"}
+	if v.StartTime != nil {
+		if err := validateOverrideTimeSlice(v.StartTime); err != nil {
+			invalidParams.AddNested("StartTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EndTime != nil {
+		if err := validateOverrideTimeSlice(v.EndTime); err != nil {
+			invalidParams.AddNested("EndTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHoursOfOperationOverrideConfigList(v []types.HoursOfOperationOverrideConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HoursOfOperationOverrideConfigList"}
+	for i := range v {
+		if err := validateHoursOfOperationOverrideConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHoursOfOperationTimeSlice(v *types.HoursOfOperationTimeSlice) error {
 	if v == nil {
 		return nil
@@ -7540,6 +7771,24 @@ func validateOutboundRawMessage(v *types.OutboundRawMessage) error {
 	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOverrideTimeSlice(v *types.OverrideTimeSlice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OverrideTimeSlice"}
+	if v.Hours == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Hours"))
+	}
+	if v.Minutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Minutes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9064,6 +9313,40 @@ func validateOpCreateHoursOfOperationInput(v *CreateHoursOfOperationInput) error
 	}
 }
 
+func validateOpCreateHoursOfOperationOverrideInput(v *CreateHoursOfOperationOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHoursOfOperationOverrideInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Config == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Config"))
+	} else if v.Config != nil {
+		if err := validateHoursOfOperationOverrideConfigList(v.Config); err != nil {
+			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EffectiveFrom == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EffectiveFrom"))
+	}
+	if v.EffectiveTill == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EffectiveTill"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateInstanceInput(v *CreateInstanceInput) error {
 	if v == nil {
 		return nil
@@ -9688,6 +9971,27 @@ func validateOpDeleteHoursOfOperationInput(v *DeleteHoursOfOperationInput) error
 	}
 }
 
+func validateOpDeleteHoursOfOperationOverrideInput(v *DeleteHoursOfOperationOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHoursOfOperationOverrideInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if v.HoursOfOperationOverrideId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationOverrideId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteInstanceInput(v *DeleteInstanceInput) error {
 	if v == nil {
 		return nil
@@ -10169,6 +10473,27 @@ func validateOpDescribeHoursOfOperationInput(v *DescribeHoursOfOperationInput) e
 	}
 	if v.HoursOfOperationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeHoursOfOperationOverrideInput(v *DescribeHoursOfOperationOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeHoursOfOperationOverrideInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if v.HoursOfOperationOverrideId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationOverrideId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10838,6 +11163,30 @@ func validateOpGetCurrentUserDataInput(v *GetCurrentUserDataInput) error {
 	}
 }
 
+func validateOpGetEffectiveHoursOfOperationsInput(v *GetEffectiveHoursOfOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEffectiveHoursOfOperationsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if v.FromDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromDate"))
+	}
+	if v.ToDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFederationTokenInput(v *GetFederationTokenInput) error {
 	if v == nil {
 		return nil
@@ -11235,6 +11584,24 @@ func validateOpListFlowAssociationsInput(v *ListFlowAssociationsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListFlowAssociationsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListHoursOfOperationOverridesInput(v *ListHoursOfOperationOverridesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListHoursOfOperationOverridesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11946,6 +12313,21 @@ func validateOpSearchEmailAddressesInput(v *SearchEmailAddressesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchEmailAddressesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchHoursOfOperationOverridesInput(v *SearchHoursOfOperationOverridesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchHoursOfOperationOverridesInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -13053,6 +13435,32 @@ func validateOpUpdateHoursOfOperationInput(v *UpdateHoursOfOperationInput) error
 	}
 }
 
+func validateOpUpdateHoursOfOperationOverrideInput(v *UpdateHoursOfOperationOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHoursOfOperationOverrideInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if v.HoursOfOperationOverrideId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationOverrideId"))
+	}
+	if v.Config != nil {
+		if err := validateHoursOfOperationOverrideConfigList(v.Config); err != nil {
+			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateInstanceAttributeInput(v *UpdateInstanceAttributeInput) error {
 	if v == nil {
 		return nil
@@ -13094,6 +13502,24 @@ func validateOpUpdateInstanceStorageConfigInput(v *UpdateInstanceStorageConfigIn
 		if err := validateInstanceStorageConfig(v.StorageConfig); err != nil {
 			invalidParams.AddNested("StorageConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateParticipantAuthenticationInput(v *UpdateParticipantAuthenticationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateParticipantAuthenticationInput"}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

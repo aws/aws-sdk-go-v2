@@ -40,7 +40,7 @@ func (c *Client) SetUICustomization(ctx context.Context, params *SetUICustomizat
 
 type SetUICustomizationInput struct {
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool.
 	//
 	// This member is required.
 	UserPoolId *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Bedrock Keystone Blueprint
+// Creates an Amazon Bedrock Data Automation Blueprint
 func (c *Client) CreateBlueprint(ctx context.Context, params *CreateBlueprintInput, optFns ...func(*Options)) (*CreateBlueprintOutput, error) {
 	if params == nil {
 		params = &CreateBlueprintInput{}

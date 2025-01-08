@@ -1,3 +1,11 @@
+# v1.29.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.0 (2024-12-18)
+
+* **Feature**: Releasing minor partition endpoint updates
+
 # v1.28.8 (2024-12-09)
 
 * No change notes available for this release.

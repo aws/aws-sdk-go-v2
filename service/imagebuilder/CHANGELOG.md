@@ -1,3 +1,11 @@
+# v1.40.0 (2025-01-07)
+
+* **Feature**: This release adds support for importing images from ISO disk files. Added new ImportDiskImage API operation.
+
+# v1.39.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2024-12-02)
 
 * **Feature**: Added support for EC2 Image Builder's integration with AWS Marketplace for Marketplace components.

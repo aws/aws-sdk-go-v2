@@ -32,6 +32,7 @@
         "api_op_DescribeAddonConfiguration.go",
         "api_op_DescribeAddonVersions.go",
         "api_op_DescribeCluster.go",
+        "api_op_DescribeClusterVersions.go",
         "api_op_DescribeEksAnywhereSubscription.go",
         "api_op_DescribeFargateProfile.go",
         "api_op_DescribeIdentityProviderConfig.go",

@@ -186,6 +186,24 @@ type ModifyDBInstanceInput struct {
 	// no effect.
 	//
 	// This setting doesn't apply to RDS Custom DB instances.
+	//
+	// The following values are valid for each DB engine:
+	//
+	//   - Aurora MySQL - audit | error | general | slowquery
+	//
+	//   - Aurora PostgreSQL - postgresql
+	//
+	//   - RDS for MySQL - error | general | slowquery
+	//
+	//   - RDS for PostgreSQL - postgresql | upgrade
+	//
+	// For more information about exporting CloudWatch Logs for Amazon RDS, see [Publishing Database Logs to Amazon CloudWatch Logs] in
+	// the Amazon RDS User Guide.
+	//
+	// For more information about exporting CloudWatch Logs for Amazon Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs] in
+	// the Amazon Aurora User Guide.
+	//
+	// [Publishing Database Logs to Amazon CloudWatch Logs]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
 	// Specifies whether to copy all tags from the DB instance to snapshots of the DB
@@ -308,7 +326,11 @@ type ModifyDBInstanceInput struct {
 	// [Working with a DB instance in a VPC]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
 	DBSubnetGroupName *string
 
-	// Specifies the mode of Database Insights to enable for the instance.
+	// Specifies the mode of Database Insights to enable for the DB instance.
+	//
+	// This setting only applies to Amazon Aurora DB instances.
+	//
+	// Currently, this value is inherited from the DB cluster and can't be changed.
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.

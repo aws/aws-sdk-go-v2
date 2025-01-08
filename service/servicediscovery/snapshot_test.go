@@ -134,6 +134,18 @@ func TestCheckSnapshot_DeleteService(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteServiceAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteServiceAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeregisterInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeregisterInstance(context.Background(), nil, func(o *Options) {
@@ -223,6 +235,18 @@ func TestCheckSnapshot_GetService(t *testing.T) {
 	_, err := svc.GetService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetServiceAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetServiceAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetServiceAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -385,6 +409,18 @@ func TestCheckSnapshot_UpdateService(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateServiceAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateServiceAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateServiceAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateHttpNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateHttpNamespace(context.Background(), nil, func(o *Options) {
@@ -450,6 +486,18 @@ func TestUpdateSnapshot_DeleteService(t *testing.T) {
 	_, err := svc.DeleteService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteServiceAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteServiceAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -546,6 +594,18 @@ func TestUpdateSnapshot_GetService(t *testing.T) {
 	_, err := svc.GetService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetServiceAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetServiceAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetServiceAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -702,6 +762,18 @@ func TestUpdateSnapshot_UpdateService(t *testing.T) {
 	_, err := svc.UpdateService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateServiceAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateServiceAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateServiceAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

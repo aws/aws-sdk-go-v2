@@ -529,7 +529,9 @@ type VisualReferenceInput struct {
 	// future visual monitoring with this canary. Valid values are nextrun to use the
 	// screenshots from the next run after this update is made, lastrun to use the
 	// screenshots from the most recent run before this update was made, or the value
-	// of Id in the [CanaryRun] from any past run of this canary.
+	// of Id in the [CanaryRun] from a run of this a canary in the past 31 days. If you specify
+	// the Id of a canary run older than 31 days, the operation returns a 400
+	// validation exception error..
 	//
 	// [CanaryRun]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html
 	//
@@ -571,6 +573,10 @@ type VisualReferenceOutput struct {
 // [Running a Canary in a VPC]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
 type VpcConfigInput struct {
 
+	// Set this to true to allow outbound IPv6 traffic on VPC canaries that are
+	// connected to dual-stack subnets. The default is false
+	Ipv6AllowedForDualStack *bool
+
 	// The IDs of the security groups for this canary.
 	SecurityGroupIds []string
 
@@ -586,6 +592,10 @@ type VpcConfigInput struct {
 //
 // [Running a Canary in a VPC]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
 type VpcConfigOutput struct {
+
+	// Indicates whether this canary allows outbound IPv6 traffic if it is connected
+	// to dual-stack subnets.
+	Ipv6AllowedForDualStack *bool
 
 	// The IDs of the security groups for this canary.
 	SecurityGroupIds []string

@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Git repository as a resource in your SageMaker account. You can
+// Creates a Git repository as a resource in your SageMaker AI account. You can
 // associate the repository with notebook instances so that you can use Git source
 // control for the notebooks you create. The Git repository is a resource in your
-// SageMaker account, so it can be associated with more than one notebook instance,
-// and it persists independently from the lifecycle of any notebook instances it is
-// associated with.
+// SageMaker AI account, so it can be associated with more than one notebook
+// instance, and it persists independently from the lifecycle of any notebook
+// instances it is associated with.
 //
 // The repository can be hosted either in [Amazon Web Services CodeCommit] or in any other Git repository.
 //

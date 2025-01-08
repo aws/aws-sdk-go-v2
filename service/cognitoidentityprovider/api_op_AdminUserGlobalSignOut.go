@@ -29,7 +29,10 @@ import (
 //	- Amazon Cognito no longer accepts a signed-out user's refresh tokens in
 //	refresh requests.
 //
-// Other requests might be valid until your user's token expires.
+// Other requests might be valid until your user's token expires. This operation
+// doesn't clear the [managed login]session cookie. To clear the session for a user who signed in
+// with managed login or the classic hosted UI, direct their browser session to the
+// [logout endpoint].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -42,7 +45,9 @@ import (
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
+// [logout endpoint]: https://docs.aws.amazon.com/cognito/latest/developerguide/logout-endpoint.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 //
 // [CognitoIdentityProvider]: https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_CognitoIdentityProvider.html
@@ -65,7 +70,7 @@ func (c *Client) AdminUserGlobalSignOut(ctx context.Context, params *AdminUserGl
 // The request to sign out of all devices, as an administrator.
 type AdminUserGlobalSignOutInput struct {
 
-	// The user pool ID.
+	// The ID of the user pool where you want to sign out a user.
 	//
 	// This member is required.
 	UserPoolId *string

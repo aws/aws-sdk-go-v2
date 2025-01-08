@@ -99,6 +99,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAgentMemoryInput(v *DeleteAgentMe
 		encoder.SetQuery("memoryId").String(*v.MemoryId)
 	}
 
+	if v.SessionId != nil {
+		encoder.SetQuery("sessionId").String(*v.SessionId)
+	}
+
 	return nil
 }
 
@@ -397,6 +401,13 @@ func awsRestjson1_serializeOpDocumentInvokeAgentInput(v *InvokeAgentInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.BedrockModelConfigurations != nil {
+		ok := object.Key("bedrockModelConfigurations")
+		if err := awsRestjson1_serializeDocumentBedrockModelConfigurations(v.BedrockModelConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EnableTrace != nil {
 		ok := object.Key("enableTrace")
 		ok.Boolean(*v.EnableTrace)
@@ -541,6 +552,13 @@ func awsRestjson1_serializeOpDocumentInvokeFlowInput(v *InvokeFlowInput, value s
 		}
 	}
 
+	if v.ModelPerformanceConfiguration != nil {
+		ok := object.Key("modelPerformanceConfiguration")
+		if err := awsRestjson1_serializeDocumentModelPerformanceConfiguration(v.ModelPerformanceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -633,6 +651,13 @@ func awsRestjson1_serializeOpDocumentInvokeInlineAgentInput(v *InvokeInlineAgent
 	if v.ActionGroups != nil {
 		ok := object.Key("actionGroups")
 		if err := awsRestjson1_serializeDocumentAgentActionGroups(v.ActionGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BedrockModelConfigurations != nil {
+		ok := object.Key("bedrockModelConfigurations")
+		if err := awsRestjson1_serializeDocumentInlineBedrockModelConfigurations(v.BedrockModelConfigurations, ok); err != nil {
 			return err
 		}
 	}
@@ -1390,6 +1415,20 @@ func awsRestjson1_serializeDocumentAPISchema(v types.APISchema, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBedrockModelConfigurations(v *types.BedrockModelConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PerformanceConfig != nil {
+		ok := object.Key("performanceConfig")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBedrockRerankingConfiguration(v *types.BedrockRerankingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1585,6 +1624,13 @@ func awsRestjson1_serializeDocumentExternalSourcesGenerationConfiguration(v *typ
 	if v.InferenceConfig != nil {
 		ok := object.Key("inferenceConfig")
 		if err := awsRestjson1_serializeDocumentInferenceConfig(v.InferenceConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PerformanceConfig != nil {
+		ok := object.Key("performanceConfig")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -1889,6 +1935,13 @@ func awsRestjson1_serializeDocumentGenerationConfiguration(v *types.GenerationCo
 		}
 	}
 
+	if v.PerformanceConfig != nil {
+		ok := object.Key("performanceConfig")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PromptTemplate != nil {
 		ok := object.Key("promptTemplate")
 		if err := awsRestjson1_serializeDocumentPromptTemplate(v.PromptTemplate, ok); err != nil {
@@ -2020,6 +2073,20 @@ func awsRestjson1_serializeDocumentInferenceConfiguration(v *types.InferenceConf
 		default:
 			ok.Float(*v.TopP)
 
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInlineBedrockModelConfigurations(v *types.InlineBedrockModelConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PerformanceConfig != nil {
+		ok := object.Key("performanceConfig")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfig, ok); err != nil {
+			return err
 		}
 	}
 
@@ -2402,6 +2469,20 @@ func awsRestjson1_serializeDocumentMetadataConfigurationForReranking(v *types.Me
 	return nil
 }
 
+func awsRestjson1_serializeDocumentModelPerformanceConfiguration(v *types.ModelPerformanceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PerformanceConfig != nil {
+		ok := object.Key("performanceConfig")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOrchestrationConfiguration(v *types.OrchestrationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2416,6 +2497,13 @@ func awsRestjson1_serializeDocumentOrchestrationConfiguration(v *types.Orchestra
 	if v.InferenceConfig != nil {
 		ok := object.Key("inferenceConfig")
 		if err := awsRestjson1_serializeDocumentInferenceConfig(v.InferenceConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PerformanceConfig != nil {
+		ok := object.Key("performanceConfig")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -2470,6 +2558,18 @@ func awsRestjson1_serializeDocumentParameterMap(v map[string]types.ParameterDeta
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPerformanceConfiguration(v *types.PerformanceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Latency) > 0 {
+		ok := object.Key("latency")
+		ok.String(string(v.Latency))
+	}
+
 	return nil
 }
 

@@ -1766,6 +1766,13 @@
                         "smithy.api#documentation": "<p>An optimal parameter that indicates the amount of attempts for the job. If not specified,\n         this value defaults to the attempt of the latest job.</p>",
                         "smithy.api#httpQuery": "attempt"
                     }
+                },
+                "accessSystemProfileLogs": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows access to system profile logs for Lake Formation-enabled jobs. Default is false.</p>",
+                        "smithy.api#httpQuery": "accessSystemProfileLogs"
+                    }
                 }
             }
         },
@@ -1949,7 +1956,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^([a-z0-9]+[a-z0-9-.]*)\\/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?:\\:([a-zA-Z0-9_][a-zA-Z0-9-._]{0,299})|@(sha256:[0-9a-f]{64}))$"
+                "smithy.api#pattern": "^([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+).([a-z0-9._-]+)\\/((?:[a-z0-9]+(?:[-._][a-z0-9]+)*/)*[a-z0-9]+(?:[-._][a-z0-9]+)*)(?::([a-zA-Z0-9_]+[a-zA-Z0-9-._]*)|@(sha256:[0-9a-f]{64}))$"
             }
         },
         "com.amazonaws.emrserverless#InitScriptPath": {

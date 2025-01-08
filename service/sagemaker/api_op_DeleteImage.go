@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a SageMaker image and all versions of the image. The container images
-// aren't deleted.
+// Deletes a SageMaker AI image and all versions of the image. The container
+// images aren't deleted.
 func (c *Client) DeleteImage(ctx context.Context, params *DeleteImageInput, optFns ...func(*Options)) (*DeleteImageOutput, error) {
 	if params == nil {
 		params = &DeleteImageInput{}

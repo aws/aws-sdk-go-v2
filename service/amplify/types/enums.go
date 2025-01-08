@@ -79,6 +79,7 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
+	JobStatusCreated      JobStatus = "CREATED"
 	JobStatusPending      JobStatus = "PENDING"
 	JobStatusProvisioning JobStatus = "PROVISIONING"
 	JobStatusRunning      JobStatus = "RUNNING"
@@ -94,6 +95,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
+		"CREATED",
 		"PENDING",
 		"PROVISIONING",
 		"RUNNING",
@@ -239,5 +241,30 @@ func (UpdateStatus) Values() []UpdateStatus {
 		"AWAITING_APP_CNAME",
 		"UPDATE_COMPLETE",
 		"UPDATE_FAILED",
+	}
+}
+
+type WafStatus string
+
+// Enum values for WafStatus
+const (
+	WafStatusAssociating          WafStatus = "ASSOCIATING"
+	WafStatusAssociationFailed    WafStatus = "ASSOCIATION_FAILED"
+	WafStatusAssociationSuccess   WafStatus = "ASSOCIATION_SUCCESS"
+	WafStatusDisassociating       WafStatus = "DISASSOCIATING"
+	WafStatusDisassociationFailed WafStatus = "DISASSOCIATION_FAILED"
+)
+
+// Values returns all known values for WafStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WafStatus) Values() []WafStatus {
+	return []WafStatus{
+		"ASSOCIATING",
+		"ASSOCIATION_FAILED",
+		"ASSOCIATION_SUCCESS",
+		"DISASSOCIATING",
+		"DISASSOCIATION_FAILED",
 	}
 }

@@ -1590,6 +1590,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTerminateGameSession struct {
+}
+
+func (*validateOpTerminateGameSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTerminateGameSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TerminateGameSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTerminateGameSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUntagResource struct {
 }
 
@@ -2224,6 +2244,10 @@ func addOpSuspendGameServerGroupValidationMiddleware(stack *middleware.Stack) er
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpTerminateGameSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTerminateGameSession{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -4348,6 +4372,24 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTerminateGameSessionInput(v *TerminateGameSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerminateGameSessionInput"}
+	if v.GameSessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GameSessionId"))
+	}
+	if len(v.TerminationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TerminationMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

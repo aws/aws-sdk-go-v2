@@ -13745,6 +13745,104 @@ func awsAwsjson11_deserializeDocumentFailedWorkspaceChangeRequest(v **types.Fail
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentGlobalAcceleratorForDirectory(v **types.GlobalAcceleratorForDirectory, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GlobalAcceleratorForDirectory
+	if *v == nil {
+		sv = &types.GlobalAcceleratorForDirectory{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AGAModeForDirectoryEnum to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.AGAModeForDirectoryEnum(jtv)
+			}
+
+		case "PreferredProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AGAPreferredProtocolForDirectory to be of type string, got %T instead", value)
+				}
+				sv.PreferredProtocol = types.AGAPreferredProtocolForDirectory(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGlobalAcceleratorForWorkSpace(v **types.GlobalAcceleratorForWorkSpace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GlobalAcceleratorForWorkSpace
+	if *v == nil {
+		sv = &types.GlobalAcceleratorForWorkSpace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AGAModeForWorkSpaceEnum to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.AGAModeForWorkSpaceEnum(jtv)
+			}
+
+		case "PreferredProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AGAPreferredProtocolForWorkSpace to be of type string, got %T instead", value)
+				}
+				sv.PreferredProtocol = types.AGAPreferredProtocolForWorkSpace(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentIDCConfig(v **types.IDCConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15855,6 +15953,11 @@ func awsAwsjson11_deserializeDocumentStreamingProperties(v **types.StreamingProp
 
 	for key, value := range shape {
 		switch key {
+		case "GlobalAccelerator":
+			if err := awsAwsjson11_deserializeDocumentGlobalAcceleratorForDirectory(&sv.GlobalAccelerator, value); err != nil {
+				return err
+			}
+
 		case "StorageConnectors":
 			if err := awsAwsjson11_deserializeDocumentStorageConnectors(&sv.StorageConnectors, value); err != nil {
 				return err
@@ -17556,6 +17659,11 @@ func awsAwsjson11_deserializeDocumentWorkspaceProperties(v **types.WorkspaceProp
 					return fmt.Errorf("expected Compute to be of type string, got %T instead", value)
 				}
 				sv.ComputeTypeName = types.Compute(jtv)
+			}
+
+		case "GlobalAccelerator":
+			if err := awsAwsjson11_deserializeDocumentGlobalAcceleratorForWorkSpace(&sv.GlobalAccelerator, value); err != nil {
+				return err
 			}
 
 		case "OperatingSystemName":

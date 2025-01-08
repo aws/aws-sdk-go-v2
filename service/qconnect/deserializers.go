@@ -16124,6 +16124,15 @@ func awsRestjson1_deserializeDocumentAnswerRecommendationAIAgentConfiguration(v 
 				sv.IntentLabelingGenerationAIPromptId = ptr.String(jtv)
 			}
 
+		case "locale":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Locale = ptr.String(jtv)
+			}
+
 		case "queryReformulationAIPromptId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21455,6 +21464,15 @@ func awsRestjson1_deserializeDocumentManualSearchAIAgentConfiguration(v **types.
 		case "associationConfigurations":
 			if err := awsRestjson1_deserializeDocumentAssociationConfigurationList(&sv.AssociationConfigurations, value); err != nil {
 				return err
+			}
+
+		case "locale":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Locale = ptr.String(jtv)
 			}
 
 		default:

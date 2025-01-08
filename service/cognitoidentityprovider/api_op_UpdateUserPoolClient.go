@@ -58,8 +58,7 @@ type UpdateUserPoolClientInput struct {
 	// This member is required.
 	ClientId *string
 
-	// The user pool ID for the user pool where you want to update the user pool
-	// client.
+	// The ID of the user pool where you want to update the user pool client.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -312,13 +311,13 @@ type UpdateUserPoolClientInput struct {
 	// configured for the SAML and OIDC IdPs in your user pool, for example MySAMLIdP
 	// or MyOIDCIdP .
 	//
-	// This setting applies to providers that you can access with the [hosted UI and OAuth 2.0 authorization server]. The removal of
+	// This setting applies to providers that you can access with [managed login]. The removal of
 	// COGNITO from this list doesn't prevent authentication operations for local users
 	// with the user pools API in an Amazon Web Services SDK. The only way to prevent
 	// API-based authentication is to block access with a [WAF rule].
 	//
 	// [WAF rule]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-waf.html
-	// [hosted UI and OAuth 2.0 authorization server]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-app-integration.html
+	// [managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 	SupportedIdentityProviders []string
 
 	// The time units you use when you set the duration of ID, access, and refresh

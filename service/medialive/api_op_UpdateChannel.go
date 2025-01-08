@@ -38,8 +38,14 @@ type UpdateChannelInput struct {
 	// Specification of CDI inputs for this channel
 	CdiInputSpecification *types.CdiInputSpecification
 
+	// Channel engine version for this channel
+	ChannelEngineVersion *types.ChannelEngineVersionRequest
+
 	// A list of output destinations for this channel.
 	Destinations []types.OutputDestination
+
+	// Placeholder documentation for __boolean
+	DryRun *bool
 
 	// The encoder settings for this channel.
 	EncoderSettings *types.EncoderSettings

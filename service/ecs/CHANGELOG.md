@@ -1,3 +1,15 @@
+# v1.53.2 (2025-01-03)
+
+* **Documentation**: Adding SDK reference examples for Amazon ECS operations.
+
+# v1.53.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.0 (2024-12-17)
+
+* **Feature**: Added support for enableFaultInjection task definition parameter which can be used to enable Fault Injection feature on ECS tasks.
+
 # v1.52.2 (2024-12-09)
 
 * **Documentation**: This is a documentation only update to address various tickets for Amazon ECS.

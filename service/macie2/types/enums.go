@@ -197,7 +197,8 @@ type BucketMetadataErrorCode string
 
 // Enum values for BucketMetadataErrorCode
 const (
-	BucketMetadataErrorCodeAccessDenied BucketMetadataErrorCode = "ACCESS_DENIED"
+	BucketMetadataErrorCodeAccessDenied            BucketMetadataErrorCode = "ACCESS_DENIED"
+	BucketMetadataErrorCodeBucketCountExceedsQuota BucketMetadataErrorCode = "BUCKET_COUNT_EXCEEDS_QUOTA"
 )
 
 // Values returns all known values for BucketMetadataErrorCode. Note that this can
@@ -207,6 +208,7 @@ const (
 func (BucketMetadataErrorCode) Values() []BucketMetadataErrorCode {
 	return []BucketMetadataErrorCode{
 		"ACCESS_DENIED",
+		"BUCKET_COUNT_EXCEEDS_QUOTA",
 	}
 }
 

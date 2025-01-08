@@ -29,7 +29,7 @@ func (c *Client) StartTrainedModelInferenceJob(ctx context.Context, params *Star
 
 type StartTrainedModelInferenceJobInput struct {
 
-	// Defines he data source that is used for the trained model inference job.
+	// Defines the data source that is used for the trained model inference job.
 	//
 	// This member is required.
 	DataSource *types.ModelInferenceDataSource

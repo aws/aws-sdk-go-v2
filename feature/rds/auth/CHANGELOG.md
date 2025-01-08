@@ -1,3 +1,7 @@
+# v1.5.2 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.1 (2024-12-06)
 
 * **Bug Fix**: **BREAKFIX**: Revert bad API release.

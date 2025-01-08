@@ -1,3 +1,11 @@
+# v1.34.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.0 (2024-12-13)
+
+* **Feature**: AWS Cloud Map now supports service-level attributes, allowing you to associate custom metadata directly with services. These attributes can be retrieved, updated, and deleted using the new GetServiceAttributes, UpdateServiceAttributes, and DeleteServiceAttributes API calls.
+
 # v1.33.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

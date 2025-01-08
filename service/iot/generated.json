@@ -153,6 +153,7 @@
         "api_op_GetPolicyVersion.go",
         "api_op_GetRegistrationCode.go",
         "api_op_GetStatistics.go",
+        "api_op_GetThingConnectivityData.go",
         "api_op_GetTopicRule.go",
         "api_op_GetTopicRuleDestination.go",
         "api_op_GetV2LoggingOptions.go",

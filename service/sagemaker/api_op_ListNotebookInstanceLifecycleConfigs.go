@@ -71,8 +71,8 @@ type ListNotebookInstanceLifecycleConfigsInput struct {
 
 type ListNotebookInstanceLifecycleConfigsOutput struct {
 
-	// If the response is truncated, SageMaker returns this token. To get the next set
-	// of lifecycle configurations, use it in the next request.
+	// If the response is truncated, SageMaker AI returns this token. To get the next
+	// set of lifecycle configurations, use it in the next request.
 	NextToken *string
 
 	// An array of NotebookInstanceLifecycleConfiguration objects, each listing a

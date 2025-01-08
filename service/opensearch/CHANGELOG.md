@@ -1,3 +1,7 @@
+# v1.45.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2024-12-02)
 
 * **Feature**: This feature introduces support for CRUDL APIs, enabling the creation and management of Connected data sources.

@@ -3738,6 +3738,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.bcmpricingcalculator#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.bcmpricingcalculator#DataUnavailableException"
                 }
             ],

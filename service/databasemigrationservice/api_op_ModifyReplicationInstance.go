@@ -75,6 +75,10 @@ type ModifyReplicationInstanceInput struct {
 	// AllowMajorVersionUpgrade to true .
 	EngineVersion *string
 
+	// Specifies the ID of the secret that stores the key cache file required for
+	// kerberos authentication, when modifying a replication instance.
+	KerberosAuthenticationSettings *types.KerberosAuthenticationSettings
+
 	//  Specifies whether the replication instance is a Multi-AZ deployment. You can't
 	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true .
 	MultiAZ *bool

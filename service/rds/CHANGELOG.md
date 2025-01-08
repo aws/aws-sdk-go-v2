@@ -1,3 +1,15 @@
+# v1.93.2 (2024-12-27)
+
+* **Documentation**: Updates Amazon RDS documentation to correct various descriptions.
+
+# v1.93.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.93.0 (2024-12-16)
+
+* **Feature**: This release adds support for the "MYSQL_CACHING_SHA2_PASSWORD" enum value for RDS Proxy ClientPasswordAuthType.
+
 # v1.92.0 (2024-12-02)
 
 * **Feature**: Amazon RDS supports CloudWatch Database Insights. You can use the SDK to create, modify, and describe the DatabaseInsightsMode for your DB instances and clusters.

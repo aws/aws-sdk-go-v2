@@ -662,6 +662,9 @@ type EnvironmentSummary struct {
 	// This member is required.
 	Status EnvironmentLifecycle
 
+	// The network type supported by the runtime environment.
+	NetworkType NetworkType
+
 	noSmithyDocumentSerde
 }
 

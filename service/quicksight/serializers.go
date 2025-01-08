@@ -1325,6 +1325,13 @@ func awsRestjson1_serializeOpDocumentCreateDataSetInput(v *CreateDataSetInput, v
 		ok.String(*v.Name)
 	}
 
+	if v.PerformanceConfiguration != nil {
+		ok := object.Key("PerformanceConfiguration")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Permissions != nil {
 		ok := object.Key("Permissions")
 		if err := awsRestjson1_serializeDocumentResourcePermissionList(v.Permissions, ok); err != nil {
@@ -17078,6 +17085,13 @@ func awsRestjson1_serializeOpDocumentUpdateDataSetInput(v *UpdateDataSetInput, v
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.PerformanceConfiguration != nil {
+		ok := object.Key("PerformanceConfiguration")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PhysicalTableMap != nil {
@@ -36464,6 +36478,20 @@ func awsRestjson1_serializeDocumentPercentVisibleRange(v *types.PercentVisibleRa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPerformanceConfiguration(v *types.PerformanceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UniqueKeys != nil {
+		ok := object.Key("UniqueKeys")
+		if err := awsRestjson1_serializeDocumentUniqueKeyList(v.UniqueKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPeriodOverPeriodComputation(v *types.PeriodOverPeriodComputation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -44829,6 +44857,44 @@ func awsRestjson1_serializeDocumentUnaggregatedFieldList(v []types.UnaggregatedF
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentUnaggregatedField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUniqueKey(v *types.UniqueKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnNames != nil {
+		ok := object.Key("ColumnNames")
+		if err := awsRestjson1_serializeDocumentUniqueKeyColumnNameList(v.ColumnNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUniqueKeyColumnNameList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUniqueKeyList(v []types.UniqueKey, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentUniqueKey(&v[i], av); err != nil {
 			return err
 		}
 	}

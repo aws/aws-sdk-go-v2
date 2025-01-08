@@ -608,6 +608,35 @@ type FailedWorkspaceChangeRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the Global Accelerator for directory
+type GlobalAcceleratorForDirectory struct {
+
+	// Indicates if Global Accelerator for directory is enabled or disabled.
+	//
+	// This member is required.
+	Mode AGAModeForDirectoryEnum
+
+	// Indicates the preferred protocol for Global Accelerator.
+	PreferredProtocol AGAPreferredProtocolForDirectory
+
+	noSmithyDocumentSerde
+}
+
+// Describes the Global Accelerator for WorkSpaces.
+type GlobalAcceleratorForWorkSpace struct {
+
+	// Indicates if Global Accelerator for WorkSpaces is enabled, disabled, or the
+	// same mode as the associated directory.
+	//
+	// This member is required.
+	Mode AGAModeForWorkSpaceEnum
+
+	// Indicates the preferred protocol for Global Accelerator.
+	PreferredProtocol AGAPreferredProtocolForWorkSpace
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the configurations of the identity center.
 type IDCConfig struct {
 
@@ -1081,6 +1110,9 @@ type StorageConnector struct {
 
 // Describes the streaming properties.
 type StreamingProperties struct {
+
+	// Indicates the Global Accelerator properties.
+	GlobalAccelerator *GlobalAcceleratorForDirectory
 
 	// Indicates the storage connector used
 	StorageConnectors []StorageConnector
@@ -1662,6 +1694,9 @@ type WorkspaceProperties struct {
 	//
 	// [Amazon WorkSpaces Bundles]: http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles
 	ComputeTypeName Compute
+
+	// Indicates the Global Accelerator properties.
+	GlobalAccelerator *GlobalAcceleratorForWorkSpace
 
 	// The name of the operating system.
 	OperatingSystemName OperatingSystemName

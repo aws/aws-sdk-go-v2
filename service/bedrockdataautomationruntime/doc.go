@@ -3,5 +3,5 @@
 // Package bedrockdataautomationruntime provides the API client, operations, and
 // parameter types for Runtime for Amazon Bedrock Data Automation.
 //
-// Amazon Bedrock Keystone Runtime
+// Amazon Bedrock Data Automation Runtime
 package bedrockdataautomationruntime

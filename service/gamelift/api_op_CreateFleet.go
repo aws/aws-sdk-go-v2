@@ -133,9 +133,9 @@ type CreateFleetInput struct {
 	//   - EC2 – The game server build is deployed to Amazon EC2 instances for cloud
 	//   hosting. This is the default setting.
 	//
-	//   - ANYWHERE – Your game server and supporting software is deployed to compute
-	//   resources that are provided and managed by you. With this compute type, you can
-	//   also set the AnywhereConfiguration parameter.
+	//   - ANYWHERE – Game servers and supporting software are deployed to compute
+	//   resources that you provide and manage. With this compute type, you can also set
+	//   the AnywhereConfiguration parameter.
 	ComputeType types.ComputeType
 
 	// A description for the fleet.
@@ -144,10 +144,12 @@ type CreateFleetInput struct {
 	// The IP address ranges and port settings that allow inbound traffic to access
 	// game server processes and other processes on this fleet. Set this parameter for
 	// managed EC2 fleets. You can leave this parameter empty when creating the fleet,
-	// but you must call UpdateFleetPortSettingsto set it before players can connect to game sessions. As a
+	// but you must call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings]to set it before players can connect to game sessions. As a
 	// best practice, we recommend opening ports for remote access only when you need
 	// them and closing them when you're finished. For Realtime Servers fleets, Amazon
 	// GameLift automatically sets TCP and UDP ranges.
+	//
+	// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings
 	EC2InboundPermissions []types.IpPermission
 
 	// The Amazon GameLift-supported Amazon EC2 instance type to use with managed EC2

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a resource server.
+// Describes a resource server. For more information about resource servers, see [Access control with resource servers].
+//
+// [Access control with resource servers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html
 func (c *Client) DescribeResourceServer(ctx context.Context, params *DescribeResourceServerInput, optFns ...func(*Options)) (*DescribeResourceServerOutput, error) {
 	if params == nil {
 		params = &DescribeResourceServerInput{}
@@ -40,7 +42,7 @@ type DescribeResourceServerInput struct {
 	// This member is required.
 	Identifier *string
 
-	// The user pool ID for the user pool that hosts the resource server.
+	// The ID of the user pool that hosts the resource server.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -50,7 +52,7 @@ type DescribeResourceServerInput struct {
 
 type DescribeResourceServerOutput struct {
 
-	// The resource server.
+	// The details of the requested resource server.
 	//
 	// This member is required.
 	ResourceServer *types.ResourceServerType

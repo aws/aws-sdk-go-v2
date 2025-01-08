@@ -86,7 +86,9 @@ public class AwsAuthResolution implements GoIntegration {
 
     private boolean isEndpointAuthService(Model model, ServiceShape service) {
         final String sdkId = service.expectTrait(ServiceTrait.class).getSdkId();
-        return sdkId.equalsIgnoreCase("s3") || sdkId.equalsIgnoreCase("eventbridge");
+        return sdkId.equalsIgnoreCase("s3")
+                || sdkId.equalsIgnoreCase("eventbridge")
+                || sdkId.equalsIgnoreCase("sesv2");
     };
 
     private boolean isSigV4Service(Model model, ServiceShape service) {

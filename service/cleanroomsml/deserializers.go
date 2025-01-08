@@ -10453,6 +10453,11 @@ func awsRestjson1_deserializeDocumentAudienceGenerationJobDataSource(v **types.A
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "sqlComputeConfiguration":
+			if err := awsRestjson1_deserializeDocumentComputeConfiguration(&sv.SqlComputeConfiguration, value); err != nil {
+				return err
+			}
+
 		case "sqlParameters":
 			if err := awsRestjson1_deserializeDocumentProtectedQuerySQLParameters(&sv.SqlParameters, value); err != nil {
 				return err

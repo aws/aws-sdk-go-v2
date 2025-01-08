@@ -1100,14 +1100,14 @@
                 "createTime": {
                     "target": "com.amazonaws.amplify#CreateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>Creates a date and time for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>A timestamp of when Amplify created the application.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updateTime": {
                     "target": "com.amazonaws.amplify#UpdateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates the date and time for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p>A timestamp of when Amplify updated the application.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1209,6 +1209,18 @@
                     "target": "com.amazonaws.amplify#CacheConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The cache configuration for the Amplify app. If you don't specify the\n            cache configuration <code>type</code>, Amplify uses the default\n                <code>AMPLIFY_MANAGED</code> setting.</p>"
+                    }
+                },
+                "webhookCreateTime": {
+                    "target": "com.amazonaws.amplify#webhookCreateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp of when Amplify created the webhook in your Git repository.</p>"
+                    }
+                },
+                "wafConfiguration": {
+                    "target": "com.amazonaws.amplify#WafConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the Firewall configuration for the Amplify app. Firewall support enables you to protect your hosted applications with a direct integration\n            with WAF.</p>"
                     }
                 }
             },
@@ -1587,14 +1599,14 @@
                 "createTime": {
                     "target": "com.amazonaws.amplify#CreateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> The creation date and time for a branch that is part of an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>A timestamp of when Amplify created the branch.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updateTime": {
                     "target": "com.amazonaws.amplify#UpdateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> The last updated date and time for a branch that is part of an Amplify app. </p>",
+                        "smithy.api#documentation": "<p>A timestamp for the last updated time for a branch.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4169,6 +4181,12 @@
         "com.amazonaws.amplify#JobStatus": {
             "type": "enum",
             "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
                 "PENDING": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -4253,7 +4271,7 @@
                 "commitTime": {
                     "target": "com.amazonaws.amplify#CommitTime",
                     "traits": {
-                        "smithy.api#documentation": "<p> The commit date and time for the job. </p>",
+                        "smithy.api#documentation": "<p>The commit date and time for the job. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6686,6 +6704,77 @@
         "com.amazonaws.amplify#Verified": {
             "type": "boolean"
         },
+        "com.amazonaws.amplify#WafConfiguration": {
+            "type": "structure",
+            "members": {
+                "webAclArn": {
+                    "target": "com.amazonaws.amplify#WebAclArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the web ACL associated with an Amplify app.</p>"
+                    }
+                },
+                "wafStatus": {
+                    "target": "com.amazonaws.amplify#WafStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the process to associate or disassociate a web ACL to an Amplify app.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.amplify#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status of the Firewall configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Firewall configuration for a hosted Amplify application.\n            Firewall support enables you to protect your web applications with a direct integration\n            with WAF. For more information about using WAF protections for an Amplify application, see\n            <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/WAF-integration.html\">Firewall support for hosted sites</a> in the <i>Amplify\n                    User Guide</i>. </p>"
+            }
+        },
+        "com.amazonaws.amplify#WafStatus": {
+            "type": "enum",
+            "members": {
+                "ASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATING"
+                    }
+                },
+                "ASSOCIATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATION_FAILED"
+                    }
+                },
+                "ASSOCIATION_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATION_SUCCESS"
+                    }
+                },
+                "DISASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATING"
+                    }
+                },
+                "DISASSOCIATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATION_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplify#WebAclArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:aws:wafv2:"
+            }
+        },
         "com.amazonaws.amplify#Webhook": {
             "type": "structure",
             "members": {
@@ -6727,14 +6816,14 @@
                 "createTime": {
                     "target": "com.amazonaws.amplify#CreateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The create date and time for a webhook. </p>",
+                        "smithy.api#documentation": "<p>A timestamp of when Amplify created the webhook in your Git repository.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updateTime": {
                     "target": "com.amazonaws.amplify#UpdateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates the date and time for a webhook. </p>",
+                        "smithy.api#documentation": "<p>A timestamp of when Amplify updated the webhook in your Git repository.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6776,6 +6865,9 @@
             "member": {
                 "target": "com.amazonaws.amplify#Webhook"
             }
+        },
+        "com.amazonaws.amplify#webhookCreateTime": {
+            "type": "timestamp"
         }
     }
 }

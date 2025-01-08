@@ -15,6 +15,8 @@ import (
 // For information about accessing past chat contact transcripts for a persistent
 // chat, see [Enable persistent chat].
 //
+// For security recommendations, see [Amazon Connect Chat security best practices].
+//
 // If you have a process that consumes events in the transcript of an chat that
 // has ended, note that chat transcripts contain the following event content types
 // if the event has occurred during the chat session:
@@ -35,6 +37,7 @@ import (
 //
 // [Enable persistent chat]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) GetTranscript(ctx context.Context, params *GetTranscriptInput, optFns ...func(*Options)) (*GetTranscriptOutput, error) {
 	if params == nil {
 		params = &GetTranscriptInput{}

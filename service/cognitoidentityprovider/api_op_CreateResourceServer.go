@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a new OAuth2.0 resource server and defines custom scopes within it.
+// Resource servers are associated with custom scopes and machine-to-machine (M2M)
+// authorization. For more information, see [Access control with resource servers].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -25,6 +27,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Access control with resource servers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) CreateResourceServer(ctx context.Context, params *CreateResourceServerInput, optFns ...func(*Options)) (*CreateResourceServerOutput, error) {
 	if params == nil {
@@ -59,13 +62,15 @@ type CreateResourceServerInput struct {
 	// This member is required.
 	Name *string
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool where you want to create a resource server.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// A list of scopes. Each scope is a key-value map with the keys name and
-	// description .
+	// A list of custom scopes. Each scope is a key-value map with the keys ScopeName
+	// and ScopeDescription . The name of a custom scope is a combination of ScopeName
+	// and the resource server Name in this request, for example
+	// MyResourceServerName/MyScopeName .
 	Scopes []types.ResourceServerScopeType
 
 	noSmithyDocumentSerde
@@ -73,7 +78,7 @@ type CreateResourceServerInput struct {
 
 type CreateResourceServerOutput struct {
 
-	// The newly created resource server.
+	// The details of the new resource server.
 	//
 	// This member is required.
 	ResourceServer *types.ResourceServerType

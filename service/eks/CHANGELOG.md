@@ -1,3 +1,19 @@
+# v1.56.0 (2024-12-23)
+
+* **Feature**: This release adds support for DescribeClusterVersions API that provides important information about Kubernetes versions along with end of support dates
+
+# v1.55.0 (2024-12-20)
+
+* **Feature**: This release expands the catalog of upgrade insight checks
+
+# v1.54.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.54.0 (2024-12-13)
+
+* **Feature**: Add NodeRepairConfig in CreateNodegroupRequest and UpdateNodegroupConfigRequest
+
 # v1.53.0 (2024-12-02)
 
 * **Feature**: Added support for Auto Mode Clusters, Hybrid Nodes, and specifying computeTypes in the DescribeAddonVersions API.

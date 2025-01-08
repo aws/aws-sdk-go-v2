@@ -299,7 +299,7 @@ func TestSubscribeToShard_ReadException(t *testing.T) {
 		expectedErr,
 		&types.InternalFailureException{Message: aws.String("this is an exception message")},
 	); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Error(diff)
 	}
 }
 
@@ -366,7 +366,7 @@ func TestSubscribeToShard_ReadUnmodeledException(t *testing.T) {
 			Message: "this is an unmodeled exception message",
 		},
 	); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Error(diff)
 	}
 }
 
@@ -437,7 +437,7 @@ func TestSubscribeToShard_ReadErrorEvent(t *testing.T) {
 			Message: "An error message",
 		},
 	); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Error(diff)
 	}
 }
 
@@ -478,7 +478,7 @@ func TestSubscribeToShard_ResponseError(t *testing.T) {
 			Message: "this is an exception message",
 		},
 	); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Error(diff)
 	}
 }
 

@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates some of the parameters of a Server Message Block (SMB) file server
-// location that you can use for DataSync transfers.
+// Modifies the following configuration parameters of the Server Message Block
+// (SMB) transfer location that you're using with DataSync.
+//
+// For more information, see [Configuring DataSync transfers with an SMB file server].
+//
+// [Configuring DataSync transfers with an SMB file server]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html
 func (c *Client) UpdateLocationSmb(ctx context.Context, params *UpdateLocationSmbInput, optFns ...func(*Options)) (*UpdateLocationSmbOutput, error) {
 	if params == nil {
 		params = &UpdateLocationSmbInput{}

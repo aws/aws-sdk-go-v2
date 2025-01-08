@@ -1,3 +1,11 @@
+# v1.27.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.0 (2024-12-11)
+
+* **Feature**: This release adds support for accessing system profile logs in Lake Formation-enabled jobs.
+
 # v1.26.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

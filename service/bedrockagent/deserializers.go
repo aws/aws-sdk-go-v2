@@ -20389,6 +20389,11 @@ func awsRestjson1_deserializeDocumentMemoryConfiguration(v **types.MemoryConfigu
 				return err
 			}
 
+		case "sessionSummaryConfiguration":
+			if err := awsRestjson1_deserializeDocumentSessionSummaryConfiguration(&sv.SessionSummaryConfiguration, value); err != nil {
+				return err
+			}
+
 		case "storageDays":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24466,6 +24471,50 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSessionSummaryConfiguration(v **types.SessionSummaryConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SessionSummaryConfiguration
+	if *v == nil {
+		sv = &types.SessionSummaryConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxRecentSessions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxRecentSessions to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRecentSessions = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSharePointCrawlerConfiguration(v **types.SharePointCrawlerConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26358,6 +26407,15 @@ func awsRestjson1_deserializeDocumentWebCrawlerConfiguration(v **types.WebCrawle
 				sv.Scope = types.WebScopeType(jtv)
 			}
 
+		case "userAgent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserAgent to be of type string, got %T instead", value)
+				}
+				sv.UserAgent = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -26389,6 +26447,19 @@ func awsRestjson1_deserializeDocumentWebCrawlerLimits(v **types.WebCrawlerLimits
 
 	for key, value := range shape {
 		switch key {
+		case "maxPages":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxPages = ptr.Int32(int32(i64))
+			}
+
 		case "rateLimit":
 			if value != nil {
 				jtv, ok := value.(json.Number)

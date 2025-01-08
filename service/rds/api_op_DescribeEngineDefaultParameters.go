@@ -135,7 +135,10 @@ type DescribeEngineDefaultParametersInput struct {
 	// This member is required.
 	DBParameterGroupFamily *string
 
-	// This parameter isn't currently supported.
+	// A filter that specifies one or more parameters to describe.
+	//
+	// The only supported filter is parameter-name . The results list only includes
+	// information about the parameters with these names.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous

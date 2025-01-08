@@ -770,6 +770,26 @@ func (m *validateOpImportComponent) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportDiskImage struct {
+}
+
+func (*validateOpImportDiskImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportDiskImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportDiskImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportDiskImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportVmImage struct {
 }
 
@@ -1400,6 +1420,10 @@ func addOpGetWorkflowStepExecutionValidationMiddleware(stack *middleware.Stack) 
 
 func addOpImportComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportComponent{}, middleware.After)
+}
+
+func addOpImportDiskImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportDiskImage{}, middleware.After)
 }
 
 func addOpImportVmImageValidationMiddleware(stack *middleware.Stack) error {
@@ -2716,6 +2740,39 @@ func validateOpImportComponentInput(v *ImportComponentInput) error {
 	}
 	if len(v.Platform) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportDiskImageInput(v *ImportDiskImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportDiskImageInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SemanticVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
+	}
+	if v.Platform == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
+	}
+	if v.OsVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OsVersion"))
+	}
+	if v.InfrastructureConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))
+	}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))

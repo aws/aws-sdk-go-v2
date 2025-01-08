@@ -1,3 +1,16 @@
+# v1.65.0 (2025-01-02)
+
+* **Feature**: This release adds support for the AVC3 codec and fixes an alignment issue with Japanese vertical captions.
+
+# v1.64.1 (2024-12-23)
+
+* No change notes available for this release.
+
+# v1.64.0 (2024-12-19)
+
+* **Feature**: This release adds support for inserting timecode tracks into MP4 container outputs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

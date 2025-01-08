@@ -1,3 +1,11 @@
+# v1.39.2 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.39.1 (2024-12-17)
+
+* No change notes available for this release.
+
 # v1.39.0 (2024-12-03.2)
 
 * **Feature**: This release added two new LakeFormation Permissions (CREATE_CATALOG, SUPER_USER) and added Id field for CatalogResource. It also added new conditon and expression field.

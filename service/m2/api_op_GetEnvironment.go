@@ -117,6 +117,9 @@ type GetEnvironmentOutput struct {
 	// environment.
 	LoadBalancerArn *string
 
+	// The network type supported by the runtime environment.
+	NetworkType types.NetworkType
+
 	// Indicates the pending maintenance scheduled on this environment.
 	PendingMaintenance *types.PendingMaintenance
 

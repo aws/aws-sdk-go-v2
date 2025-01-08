@@ -100,7 +100,7 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's objective.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
-	// The best model candidate selected by SageMaker Autopilot using both the best
+	// The best model candidate selected by SageMaker AI Autopilot using both the best
 	// objective metric and lowest [InferenceLatency]for an experiment.
 	//
 	// [InferenceLatency]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html

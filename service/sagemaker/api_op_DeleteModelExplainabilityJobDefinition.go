@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon SageMaker model explainability job definition.
+// Deletes an Amazon SageMaker AI model explainability job definition.
 func (c *Client) DeleteModelExplainabilityJobDefinition(ctx context.Context, params *DeleteModelExplainabilityJobDefinitionInput, optFns ...func(*Options)) (*DeleteModelExplainabilityJobDefinitionOutput, error) {
 	if params == nil {
 		params = &DeleteModelExplainabilityJobDefinitionInput{}

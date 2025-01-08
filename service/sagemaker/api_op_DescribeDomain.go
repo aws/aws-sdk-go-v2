@@ -44,7 +44,7 @@ type DescribeDomainOutput struct {
 	// PublicInternetOnly .
 	//
 	//   - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon
-	//   SageMaker, which allows direct internet access
+	//   SageMaker AI, which allows direct internet access
 	//
 	//   - VpcOnly - All traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
@@ -102,7 +102,7 @@ type DescribeDomainOutput struct {
 	// apps and the RStudioServerPro app.
 	SecurityGroupIdForDomainBoundary *string
 
-	// The ARN of the application managed by SageMaker in IAM Identity Center. This
+	// The ARN of the application managed by SageMaker AI in IAM Identity Center. This
 	// value is only returned for domains created after October 1, 2023.
 	SingleSignOnApplicationArn *string
 

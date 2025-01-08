@@ -110,6 +110,18 @@ func TestCheckSnapshot_GetTermForReport(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCustomerAgreements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomerAgreements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCustomerAgreements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListReports(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListReports(context.Background(), nil, func(o *Options) {
@@ -174,6 +186,18 @@ func TestUpdateSnapshot_GetTermForReport(t *testing.T) {
 	_, err := svc.GetTermForReport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTermForReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCustomerAgreements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomerAgreements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCustomerAgreements")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

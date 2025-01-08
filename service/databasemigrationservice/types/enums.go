@@ -465,6 +465,25 @@ func (NestingLevelValue) Values() []NestingLevelValue {
 	}
 }
 
+type OracleAuthenticationMethod string
+
+// Enum values for OracleAuthenticationMethod
+const (
+	OracleAuthenticationMethodPassword OracleAuthenticationMethod = "password"
+	OracleAuthenticationMethodKerberos OracleAuthenticationMethod = "kerberos"
+)
+
+// Values returns all known values for OracleAuthenticationMethod. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OracleAuthenticationMethod) Values() []OracleAuthenticationMethod {
+	return []OracleAuthenticationMethod{
+		"password",
+		"kerberos",
+	}
+}
+
 type OriginTypeValue string
 
 // Enum values for OriginTypeValue
@@ -660,6 +679,26 @@ const (
 func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"replication-instance",
+	}
+}
+
+type SqlServerAuthenticationMethod string
+
+// Enum values for SqlServerAuthenticationMethod
+const (
+	SqlServerAuthenticationMethodPassword SqlServerAuthenticationMethod = "password"
+	SqlServerAuthenticationMethodKerberos SqlServerAuthenticationMethod = "kerberos"
+)
+
+// Values returns all known values for SqlServerAuthenticationMethod. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SqlServerAuthenticationMethod) Values() []SqlServerAuthenticationMethod {
+	return []SqlServerAuthenticationMethod{
+		"password",
+		"kerberos",
 	}
 }
 

@@ -23,6 +23,39 @@ type ActiveTimeRange struct {
 	noSmithyDocumentSerde
 }
 
+// The metadata associated to the billing view.
+type BillingViewElement struct {
+
+	//  The Amazon Resource Name (ARN) that can be used to uniquely identify the
+	// billing view.
+	Arn *string
+
+	// The type of billing group.
+	BillingViewType BillingViewType
+
+	// The time when the billing view was created.
+	CreatedAt *time.Time
+
+	//  See [Expression]. Billing view only supports LINKED_ACCOUNT and Tags .
+	//
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+	DataFilterExpression *Expression
+
+	//  The description of the billing view.
+	Description *string
+
+	//  A list of names of the billing view.
+	Name *string
+
+	//  The list of owners of the billing view.
+	OwnerAccountId *string
+
+	// The time when the billing view was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A representation of a billing view.
 type BillingViewListElement struct {
 
@@ -33,11 +66,75 @@ type BillingViewListElement struct {
 	// The type of billing view.
 	BillingViewType BillingViewType
 
+	//  The description of the billing view.
+	Description *string
+
 	//  A list of names of the Billing view.
 	Name *string
 
 	//  The list of owners of the Billing view.
 	OwnerAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata that you can use to filter and group your results.
+type DimensionValues struct {
+
+	//  The names of the metadata types that you can use to filter and group your
+	// results.
+	//
+	// This member is required.
+	Key Dimension
+
+	//  The metadata values that you can use to filter and group your results.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+//	See [Expression]. Billing view only supports LINKED_ACCOUNT and Tags .
+//
+// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+type Expression struct {
+
+	//  The specific Dimension to use for Expression .
+	Dimensions *DimensionValues
+
+	//  The specific Tag to use for Expression .
+	Tags *TagValues
+
+	noSmithyDocumentSerde
+}
+
+// The tag structure that contains a tag key and value.
+type ResourceTag struct {
+
+	//  The key that's associated with the tag.
+	//
+	// This member is required.
+	Key *string
+
+	//  The value that's associated with the tag.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The values that are available for a tag.
+type TagValues struct {
+
+	//  The key for the tag.
+	//
+	// This member is required.
+	Key *string
+
+	//  The specific value of the tag.
+	//
+	// This member is required.
+	Values []string
 
 	noSmithyDocumentSerde
 }

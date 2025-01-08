@@ -990,6 +990,106 @@ func (m *validateOpUpdateLocationAzureBlob) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLocationEfs struct {
+}
+
+func (*validateOpUpdateLocationEfs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationEfs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationEfsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationEfsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLocationFsxLustre struct {
+}
+
+func (*validateOpUpdateLocationFsxLustre) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationFsxLustre) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationFsxLustreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationFsxLustreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLocationFsxOntap struct {
+}
+
+func (*validateOpUpdateLocationFsxOntap) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationFsxOntap) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationFsxOntapInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationFsxOntapInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLocationFsxOpenZfs struct {
+}
+
+func (*validateOpUpdateLocationFsxOpenZfs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationFsxOpenZfs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationFsxOpenZfsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationFsxOpenZfsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLocationFsxWindows struct {
+}
+
+func (*validateOpUpdateLocationFsxWindows) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationFsxWindows) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationFsxWindowsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationFsxWindowsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLocationHdfs struct {
 }
 
@@ -1045,6 +1145,26 @@ func (m *validateOpUpdateLocationObjectStorage) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateLocationObjectStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLocationS3 struct {
+}
+
+func (*validateOpUpdateLocationS3) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationS3) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationS3Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationS3Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1326,6 +1446,26 @@ func addOpUpdateLocationAzureBlobValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpUpdateLocationAzureBlob{}, middleware.After)
 }
 
+func addOpUpdateLocationEfsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationEfs{}, middleware.After)
+}
+
+func addOpUpdateLocationFsxLustreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationFsxLustre{}, middleware.After)
+}
+
+func addOpUpdateLocationFsxOntapValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationFsxOntap{}, middleware.After)
+}
+
+func addOpUpdateLocationFsxOpenZfsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationFsxOpenZfs{}, middleware.After)
+}
+
+func addOpUpdateLocationFsxWindowsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationFsxWindows{}, middleware.After)
+}
+
 func addOpUpdateLocationHdfsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLocationHdfs{}, middleware.After)
 }
@@ -1336,6 +1476,10 @@ func addOpUpdateLocationNfsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateLocationObjectStorageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLocationObjectStorage{}, middleware.After)
+}
+
+func addOpUpdateLocationS3ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationS3{}, middleware.After)
 }
 
 func addOpUpdateLocationSmbValidationMiddleware(stack *middleware.Stack) error {
@@ -2753,6 +2897,86 @@ func validateOpUpdateLocationAzureBlobInput(v *UpdateLocationAzureBlobInput) err
 	}
 }
 
+func validateOpUpdateLocationEfsInput(v *UpdateLocationEfsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationEfsInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationFsxLustreInput(v *UpdateLocationFsxLustreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationFsxLustreInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationFsxOntapInput(v *UpdateLocationFsxOntapInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationFsxOntapInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationFsxOpenZfsInput(v *UpdateLocationFsxOpenZfsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationFsxOpenZfsInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if v.Protocol != nil {
+		if err := validateFsxProtocol(v.Protocol); err != nil {
+			invalidParams.AddNested("Protocol", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationFsxWindowsInput(v *UpdateLocationFsxWindowsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationFsxWindowsInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateLocationHdfsInput(v *UpdateLocationHdfsInput) error {
 	if v == nil {
 		return nil
@@ -2800,6 +3024,26 @@ func validateOpUpdateLocationObjectStorageInput(v *UpdateLocationObjectStorageIn
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationObjectStorageInput"}
 	if v.LocationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationS3Input(v *UpdateLocationS3Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationS3Input"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if v.S3Config != nil {
+		if err := validateS3Config(v.S3Config); err != nil {
+			invalidParams.AddNested("S3Config", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

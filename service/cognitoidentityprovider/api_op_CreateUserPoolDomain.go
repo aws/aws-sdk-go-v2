@@ -11,9 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new domain for a user pool. The domain hosts user pool domain
-// services like managed login, the hosted UI (classic), and the user pool
-// authorization server.
+// A user pool domain hosts managed login, an authorization server and web server
+// for authentication in your application. This operation creates a new user pool
+// prefix or custom domain and sets the managed login branding version. Set the
+// branding version to 1 for hosted UI (classic) or 2 for managed login. When you
+// choose a custom domain, you must provide an SSL certificate in the US East (N.
+// Virginia) Amazon Web Services Region in your request.
+//
+// Your prefix domain might take up to one minute to take effect. Your custom
+// domain is online within five minutes, but it can take up to one hour to
+// distribute your SSL certificate.
+//
+// For more information about adding a custom domain to your user pool, see [Configuring a user pool domain].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -27,6 +36,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Configuring a user pool domain]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) CreateUserPoolDomain(ctx context.Context, params *CreateUserPoolDomainInput, optFns ...func(*Options)) (*CreateUserPoolDomainOutput, error) {
 	if params == nil {
@@ -46,8 +56,9 @@ func (c *Client) CreateUserPoolDomain(ctx context.Context, params *CreateUserPoo
 type CreateUserPoolDomainInput struct {
 
 	// The domain string. For custom domains, this is the fully-qualified domain name,
-	// such as auth.example.com . For Amazon Cognito prefix domains, this is the prefix
-	// alone, such as auth .
+	// such as auth.example.com . For prefix domains, this is the prefix alone, such as
+	// myprefix . A prefix value of myprefix for a user pool in the us-east-1 Region
+	// results in a domain of myprefix.auth.us-east-1.amazoncognito.com .
 	//
 	// This member is required.
 	Domain *string
@@ -57,12 +68,11 @@ type CreateUserPoolDomainInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The configuration for a custom domain that hosts the sign-up and sign-in
-	// webpages for your application.
+	// The configuration for a custom domain. Configures your domain with an
+	// Certificate Manager certificate in the us-east-1 Region.
 	//
 	// Provide this parameter only if you want to use a custom domain for your user
-	// pool. Otherwise, you can exclude this parameter and use the Amazon Cognito
-	// hosted domain instead.
+	// pool. Otherwise, you can exclude this parameter and use a prefix domain instead.
 	//
 	// For more information about the hosted domain and custom domains, see [Configuring a User Pool Domain].
 	//
@@ -70,8 +80,8 @@ type CreateUserPoolDomainInput struct {
 	CustomDomainConfig *types.CustomDomainConfigType
 
 	// The version of managed login branding that you want to apply to your domain. A
-	// value of 1 indicates hosted UI (classic) branding and a version of 2 indicates
-	// managed login branding.
+	// value of 1 indicates hosted UI (classic) and a version of 2 indicates managed
+	// login.
 	//
 	// Managed login requires that your user pool be configured for any [feature plan] other than
 	// Lite .
@@ -91,8 +101,7 @@ type CreateUserPoolDomainOutput struct {
 	CloudFrontDomain *string
 
 	// The version of managed login branding applied your domain. A value of 1
-	// indicates hosted UI (classic) branding and a version of 2 indicates managed
-	// login branding.
+	// indicates hosted UI (classic) and a version of 2 indicates managed login.
 	ManagedLoginVersion *int32
 
 	// Metadata pertaining to the operation's result.

@@ -228,6 +228,25 @@ func (EnvironmentLifecycle) Values() []EnvironmentLifecycle {
 	}
 }
 
+type NetworkType string
+
+// Enum values for NetworkType
+const (
+	NetworkTypeIpv4 NetworkType = "ipv4"
+	NetworkTypeDual NetworkType = "dual"
+)
+
+// Values returns all known values for NetworkType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkType) Values() []NetworkType {
+	return []NetworkType{
+		"ipv4",
+		"dual",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

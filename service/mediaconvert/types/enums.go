@@ -4214,6 +4214,25 @@ func (H264UnregisteredSeiTimecode) Values() []H264UnregisteredSeiTimecode {
 	}
 }
 
+type H264WriteMp4PackagingType string
+
+// Enum values for H264WriteMp4PackagingType
+const (
+	H264WriteMp4PackagingTypeAvc1 H264WriteMp4PackagingType = "AVC1"
+	H264WriteMp4PackagingTypeAvc3 H264WriteMp4PackagingType = "AVC3"
+)
+
+// Values returns all known values for H264WriteMp4PackagingType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H264WriteMp4PackagingType) Values() []H264WriteMp4PackagingType {
+	return []H264WriteMp4PackagingType{
+		"AVC1",
+		"AVC3",
+	}
+}
+
 type H265AdaptiveQuantization string
 
 // Enum values for H265AdaptiveQuantization
@@ -7866,6 +7885,25 @@ func (QueueStatus) Values() []QueueStatus {
 	}
 }
 
+type RemoveRubyReserveAttributes string
+
+// Enum values for RemoveRubyReserveAttributes
+const (
+	RemoveRubyReserveAttributesDisabled RemoveRubyReserveAttributes = "DISABLED"
+	RemoveRubyReserveAttributesEnabled  RemoveRubyReserveAttributes = "ENABLED"
+)
+
+// Values returns all known values for RemoveRubyReserveAttributes. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemoveRubyReserveAttributes) Values() []RemoveRubyReserveAttributes {
+	return []RemoveRubyReserveAttributes{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type RenewalType string
 
 // Enum values for RenewalType
@@ -8268,6 +8306,25 @@ func (TimecodeSource) Values() []TimecodeSource {
 		"EMBEDDED",
 		"ZEROBASED",
 		"SPECIFIEDSTART",
+	}
+}
+
+type TimecodeTrack string
+
+// Enum values for TimecodeTrack
+const (
+	TimecodeTrackDisabled TimecodeTrack = "DISABLED"
+	TimecodeTrackEnabled  TimecodeTrack = "ENABLED"
+)
+
+// Values returns all known values for TimecodeTrack. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TimecodeTrack) Values() []TimecodeTrack {
+	return []TimecodeTrack{
+		"DISABLED",
+		"ENABLED",
 	}
 }
 

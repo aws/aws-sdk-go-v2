@@ -4597,6 +4597,9 @@ type DataSet struct {
 	// templates, analyses, and dashboards.
 	OutputColumns []OutputColumn
 
+	// The performance optimization configuration of a dataset.
+	PerformanceConfiguration *PerformanceConfiguration
+
 	// Declares the physical tables that are available in the underlying data sources.
 	PhysicalTableMap map[string]PhysicalTable
 
@@ -11327,6 +11330,16 @@ type PercentVisibleRange struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the performance optimization of the dataset that contains
+// a UniqueKey configuration.
+type PerformanceConfiguration struct {
+
+	// A UniqueKey configuration.
+	UniqueKeys []UniqueKey
+
+	noSmithyDocumentSerde
+}
+
 // The period over period computation configuration.
 type PeriodOverPeriodComputation struct {
 
@@ -17282,6 +17295,17 @@ type UnaggregatedField struct {
 
 	// The format configuration of the field.
 	FormatConfiguration *FormatConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A UniqueKey configuration that references a dataset column.
+type UniqueKey struct {
+
+	// The name of the column that is referenced in the UniqueKey configuration.
+	//
+	// This member is required.
+	ColumnNames []string
 
 	noSmithyDocumentSerde
 }

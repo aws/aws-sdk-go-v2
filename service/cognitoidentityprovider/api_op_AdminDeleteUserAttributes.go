@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the user attributes in a user pool as an administrator. Works on any
-// user.
+// Deletes attribute values from a user. This operation doesn't affect tokens for
+// existing user sessions. The next ID token that the user receives will no longer
+// have this attribute.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -52,7 +53,7 @@ type AdminDeleteUserAttributesInput struct {
 	// This member is required.
 	UserAttributeNames []string
 
-	// The user pool ID for the user pool where you want to delete user attributes.
+	// The ID of the user pool where you want to delete user attributes.
 	//
 	// This member is required.
 	UserPoolId *string

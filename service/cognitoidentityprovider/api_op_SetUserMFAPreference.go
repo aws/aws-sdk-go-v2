@@ -22,6 +22,9 @@ import (
 // assessed risk level of sign-in attempts, deactivate MFA for users and turn on
 // Adaptive Authentication for the user pool.
 //
+// This operation doesn't reset an existing TOTP MFA for a user. To register a new
+// TOTP factor for a user, make an [AssociateSoftwareToken]request. For more information, see [TOTP software token MFA].
+//
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
 //
@@ -31,7 +34,9 @@ import (
 // policies. For more information about authorization models in Amazon Cognito, see
 // [Using the Amazon Cognito user pools API and user pool endpoints].
 //
+// [AssociateSoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [TOTP software token MFA]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa-totp.html
 func (c *Client) SetUserMFAPreference(ctx context.Context, params *SetUserMFAPreferenceInput, optFns ...func(*Options)) (*SetUserMFAPreferenceOutput, error) {
 	if params == nil {
 		params = &SetUserMFAPreferenceInput{}

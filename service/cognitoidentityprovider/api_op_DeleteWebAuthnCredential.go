@@ -10,11 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a registered passkey, or webauthN, device for the currently signed-in
-// user.
+// Deletes a registered passkey, or webauthN, authenticator for the currently
+// signed-in user.
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 func (c *Client) DeleteWebAuthnCredential(ctx context.Context, params *DeleteWebAuthnCredentialInput, optFns ...func(*Options)) (*DeleteWebAuthnCredentialOutput, error) {
 	if params == nil {
 		params = &DeleteWebAuthnCredentialInput{}
@@ -32,8 +40,8 @@ func (c *Client) DeleteWebAuthnCredential(ctx context.Context, params *DeleteWeb
 
 type DeleteWebAuthnCredentialInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose passkey you
-	// want to delete.
+	// A valid access token that Amazon Cognito issued to the user whose passkey
+	// credential you want to delete.
 	//
 	// This member is required.
 	AccessToken *string

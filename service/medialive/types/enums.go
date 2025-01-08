@@ -1181,6 +1181,25 @@ func (CmafIngestSegmentLengthUnits) Values() []CmafIngestSegmentLengthUnits {
 	}
 }
 
+type CmafKLVBehavior string
+
+// Enum values for CmafKLVBehavior
+const (
+	CmafKLVBehaviorNoPassthrough CmafKLVBehavior = "NO_PASSTHROUGH"
+	CmafKLVBehaviorPassthrough   CmafKLVBehavior = "PASSTHROUGH"
+)
+
+// Values returns all known values for CmafKLVBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CmafKLVBehavior) Values() []CmafKLVBehavior {
+	return []CmafKLVBehavior{
+		"NO_PASSTHROUGH",
+		"PASSTHROUGH",
+	}
+}
+
 type CmafNielsenId3Behavior string
 
 // Enum values for CmafNielsenId3Behavior

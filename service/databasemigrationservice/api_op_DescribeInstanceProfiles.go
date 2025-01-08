@@ -32,6 +32,9 @@ type DescribeInstanceProfilesInput struct {
 
 	// Filters applied to the instance profiles described in the form of key-value
 	// pairs.
+	//
+	// Valid filter names and values: instance-profile-identifier, instance profile
+	// arn or name
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the

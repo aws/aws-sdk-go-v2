@@ -55,7 +55,7 @@ type ListAliasesOutput struct {
 	// A token for getting the next set of aliases, if more aliases exist.
 	NextToken *string
 
-	// A list of SageMaker image version aliases.
+	// A list of SageMaker AI image version aliases.
 	SageMakerImageVersionAliases []string
 
 	// Metadata pertaining to the operation's result.

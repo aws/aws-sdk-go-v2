@@ -46,7 +46,7 @@ type ChangePasswordInput struct {
 	// This member is required.
 	AccessToken *string
 
-	// The new password.
+	// A new password that you prompted the user to enter in your application.
 	//
 	// This member is required.
 	ProposedPassword *string

@@ -15349,6 +15349,28 @@ func awsRestxml_serializeDocumentViewerCertificate(v *types.ViewerCertificate, v
 
 func awsRestxml_serializeDocumentVpcOriginConfig(v *types.VpcOriginConfig, value smithyxml.Value) error {
 	defer value.Close()
+	if v.OriginKeepaliveTimeout != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginKeepaliveTimeout",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.OriginKeepaliveTimeout)
+	}
+	if v.OriginReadTimeout != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginReadTimeout",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.OriginReadTimeout)
+	}
 	if v.VpcOriginId != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

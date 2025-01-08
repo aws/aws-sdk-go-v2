@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Lists the Amazon SageMaker Studio Lifecycle Configurations in your Amazon Web
-// Services Account.
+// Lists the Amazon SageMaker AI Studio Lifecycle Configurations in your Amazon
+// Web Services Account.
 func (c *Client) ListStudioLifecycleConfigs(ctx context.Context, params *ListStudioLifecycleConfigsInput, optFns ...func(*Options)) (*ListStudioLifecycleConfigsOutput, error) {
 	if params == nil {
 		params = &ListStudioLifecycleConfigsInput{}

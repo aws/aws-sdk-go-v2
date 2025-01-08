@@ -1,3 +1,11 @@
+# v1.25.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.0 (2024-12-11)
+
+* **Feature**: API and documentation updates for AWS MigrationHub related to adding support for listing migration task updates and associating, disassociating and listing source resources
+
 # v1.24.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

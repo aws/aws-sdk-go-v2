@@ -1,3 +1,12 @@
+# v1.65.0 (2024-12-19)
+
+* **Feature**: MediaLive is releasing ListVersions api
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.0 (2024-12-16)
+
+* **Feature**: AWS Elemental MediaLive adds three new features: MediaPackage v2 endpoint support for live stream delivery, KLV metadata passthrough in CMAF Ingest output groups, and Metadata Name Modifier in CMAF Ingest output groups for customizing metadata track names in output streams.
+
 # v1.63.0 (2024-12-09)
 
 * **Feature**: H265 outputs now support disabling the deblocking filter.

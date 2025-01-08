@@ -40,8 +40,14 @@ type CreateChannelInput struct {
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass types.ChannelClass
 
+	// The desired engine version for this channel.
+	ChannelEngineVersion *types.ChannelEngineVersionRequest
+
 	// Placeholder documentation for __listOfOutputDestination
 	Destinations []types.OutputDestination
+
+	// Placeholder documentation for __boolean
+	DryRun *bool
 
 	// Encoder Settings
 	EncoderSettings *types.EncoderSettings

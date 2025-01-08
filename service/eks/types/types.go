@@ -167,6 +167,18 @@ type Addon struct {
 	noSmithyDocumentSerde
 }
 
+// Contains compatibility information for an Amazon EKS add-on.
+type AddonCompatibilityDetail struct {
+
+	// A list of compatible add-on versions.
+	CompatibleVersions []string
+
+	// The name of the Amazon EKS add-on.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // The health of the add-on.
 type AddonHealth struct {
 
@@ -482,6 +494,39 @@ type ClusterIssue struct {
 
 	// The resource IDs that the issue relates to.
 	ResourceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a specific EKS cluster version.
+type ClusterVersionInformation struct {
+
+	// The type of cluster this version is for.
+	ClusterType *string
+
+	// The Kubernetes version for the cluster.
+	ClusterVersion *string
+
+	// Default platform version for this Kubernetes version.
+	DefaultPlatformVersion *string
+
+	// Indicates if this is a default version.
+	DefaultVersion bool
+
+	// Date when extended support ends for this version.
+	EndOfExtendedSupportDate *time.Time
+
+	// Date when standard support ends for this version.
+	EndOfStandardSupportDate *time.Time
+
+	// The patch version of Kubernetes for this cluster version.
+	KubernetesPatchVersion *string
+
+	// The release date of this cluster version.
+	ReleaseDate *time.Time
+
+	// Current status of this cluster version.
+	Status ClusterVersionStatus
 
 	noSmithyDocumentSerde
 }
@@ -947,6 +992,9 @@ type Insight struct {
 // returned with certain insights having category UPGRADE_READINESS .
 type InsightCategorySpecificSummary struct {
 
+	// A list of AddonCompatibilityDetail objects for Amazon EKS add-ons.
+	AddonCompatibilityDetails []AddonCompatibilityDetail
+
 	// The summary information about deprecated resource usage for an insight check in
 	// the UPGRADE_READINESS category.
 	DeprecationDetails []DeprecationDetail
@@ -1307,6 +1355,9 @@ type Nodegroup struct {
 	// The Unix epoch timestamp for the last modification to the object.
 	ModifiedAt *time.Time
 
+	// The node auto repair configuration for the node group.
+	NodeRepairConfig *NodeRepairConfig
+
 	// The IAM role associated with your node group. The Amazon EKS node kubelet
 	// daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive
 	// permissions for these API calls through an IAM instance profile and associated
@@ -1446,6 +1497,16 @@ type NodegroupUpdateConfig struct {
 	// percentage of nodes are updated in parallel, up to 100 nodes at once. This value
 	// or maxUnavailable is required to have a value.
 	MaxUnavailablePercentage *int32
+
+	noSmithyDocumentSerde
+}
+
+// The node auto repair configuration for the node group.
+type NodeRepairConfig struct {
+
+	// Specifies whether to enable node auto repair for the node group. Node auto
+	// repair is disabled by default.
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1790,10 +1851,56 @@ type RemoteAccessConfig struct {
 type RemoteNetworkConfigRequest struct {
 
 	// The list of network CIDRs that can contain hybrid nodes.
+	//
+	// These CIDR blocks define the expected IP address range of the hybrid nodes that
+	// join the cluster. These blocks are typically determined by your network
+	// administrator.
+	//
+	// Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for
+	// example, 10.2.0.0/16 ).
+	//
+	// It must satisfy the following requirements:
+	//
+	//   - Each block must be within an IPv4 RFC-1918 network range. Minimum allowed
+	//   size is /24, maximum allowed size is /8. Publicly-routable addresses aren't
+	//   supported.
+	//
+	//   - Each block cannot overlap with the range of the VPC CIDR blocks for your
+	//   EKS resources, or the block of the Kubernetes service IP range.
+	//
+	//   - Each block must have a route to the VPC that uses the VPC CIDR blocks, not
+	//   public IPs or Elastic IPs. There are many options including Transit Gateway,
+	//   Site-to-Site VPN, or Direct Connect.
+	//
+	//   - Each host must allow outbound connection to the EKS cluster control plane
+	//   on TCP ports 443 and 10250 .
+	//
+	//   - Each host must allow inbound connection from the EKS cluster control plane
+	//   on TCP port 10250 for logs, exec and port-forward operations.
+	//
+	//   - Each host must allow TCP and UDP network connectivity to and from other
+	//   hosts that are running CoreDNS on UDP port 53 for service and pod DNS names.
 	RemoteNodeNetworks []RemoteNodeNetwork
 
 	// The list of network CIDRs that can contain pods that run Kubernetes webhooks on
 	// hybrid nodes.
+	//
+	// These CIDR blocks are determined by configuring your Container Network
+	// Interface (CNI) plugin. We recommend the Calico CNI or Cilium CNI. Note that the
+	// Amazon VPC CNI plugin for Kubernetes isn't available for on-premises and edge
+	// locations.
+	//
+	// Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for
+	// example, 10.2.0.0/16 ).
+	//
+	// It must satisfy the following requirements:
+	//
+	//   - Each block must be within an IPv4 RFC-1918 network range. Minimum allowed
+	//   size is /24, maximum allowed size is /8. Publicly-routable addresses aren't
+	//   supported.
+	//
+	//   - Each block cannot overlap with the range of the VPC CIDR blocks for your
+	//   EKS resources, or the block of the Kubernetes service IP range.
 	RemotePodNetworks []RemotePodNetwork
 
 	noSmithyDocumentSerde
@@ -1814,9 +1921,67 @@ type RemoteNetworkConfigResponse struct {
 }
 
 // A network CIDR that can contain hybrid nodes.
+//
+// These CIDR blocks define the expected IP address range of the hybrid nodes that
+// join the cluster. These blocks are typically determined by your network
+// administrator.
+//
+// Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for
+// example, 10.2.0.0/16 ).
+//
+// It must satisfy the following requirements:
+//
+//   - Each block must be within an IPv4 RFC-1918 network range. Minimum allowed
+//     size is /24, maximum allowed size is /8. Publicly-routable addresses aren't
+//     supported.
+//
+//   - Each block cannot overlap with the range of the VPC CIDR blocks for your
+//     EKS resources, or the block of the Kubernetes service IP range.
+//
+//   - Each block must have a route to the VPC that uses the VPC CIDR blocks, not
+//     public IPs or Elastic IPs. There are many options including Transit Gateway,
+//     Site-to-Site VPN, or Direct Connect.
+//
+//   - Each host must allow outbound connection to the EKS cluster control plane
+//     on TCP ports 443 and 10250 .
+//
+//   - Each host must allow inbound connection from the EKS cluster control plane
+//     on TCP port 10250 for logs, exec and port-forward operations.
+//
+//   - Each host must allow TCP and UDP network connectivity to and from other
+//     hosts that are running CoreDNS on UDP port 53 for service and pod DNS names.
 type RemoteNodeNetwork struct {
 
 	// A network CIDR that can contain hybrid nodes.
+	//
+	// These CIDR blocks define the expected IP address range of the hybrid nodes that
+	// join the cluster. These blocks are typically determined by your network
+	// administrator.
+	//
+	// Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for
+	// example, 10.2.0.0/16 ).
+	//
+	// It must satisfy the following requirements:
+	//
+	//   - Each block must be within an IPv4 RFC-1918 network range. Minimum allowed
+	//   size is /24, maximum allowed size is /8. Publicly-routable addresses aren't
+	//   supported.
+	//
+	//   - Each block cannot overlap with the range of the VPC CIDR blocks for your
+	//   EKS resources, or the block of the Kubernetes service IP range.
+	//
+	//   - Each block must have a route to the VPC that uses the VPC CIDR blocks, not
+	//   public IPs or Elastic IPs. There are many options including Transit Gateway,
+	//   Site-to-Site VPN, or Direct Connect.
+	//
+	//   - Each host must allow outbound connection to the EKS cluster control plane
+	//   on TCP ports 443 and 10250 .
+	//
+	//   - Each host must allow inbound connection from the EKS cluster control plane
+	//   on TCP port 10250 for logs, exec and port-forward operations.
+	//
+	//   - Each host must allow TCP and UDP network connectivity to and from other
+	//   hosts that are running CoreDNS on UDP port 53 for service and pod DNS names.
 	Cidrs []string
 
 	noSmithyDocumentSerde
@@ -1824,10 +1989,44 @@ type RemoteNodeNetwork struct {
 
 // A network CIDR that can contain pods that run Kubernetes webhooks on hybrid
 // nodes.
+//
+// These CIDR blocks are determined by configuring your Container Network
+// Interface (CNI) plugin. We recommend the Calico CNI or Cilium CNI. Note that the
+// Amazon VPC CNI plugin for Kubernetes isn't available for on-premises and edge
+// locations.
+//
+// Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for
+// example, 10.2.0.0/16 ).
+//
+// It must satisfy the following requirements:
+//
+//   - Each block must be within an IPv4 RFC-1918 network range. Minimum allowed
+//     size is /24, maximum allowed size is /8. Publicly-routable addresses aren't
+//     supported.
+//
+//   - Each block cannot overlap with the range of the VPC CIDR blocks for your
+//     EKS resources, or the block of the Kubernetes service IP range.
 type RemotePodNetwork struct {
 
 	// A network CIDR that can contain pods that run Kubernetes webhooks on hybrid
 	// nodes.
+	//
+	// These CIDR blocks are determined by configuring your Container Network
+	// Interface (CNI) plugin. We recommend the Calico CNI or Cilium CNI. Note that the
+	// Amazon VPC CNI plugin for Kubernetes isn't available for on-premises and edge
+	// locations.
+	//
+	// Enter one or more IPv4 CIDR blocks in decimal dotted-quad notation (for
+	// example, 10.2.0.0/16 ).
+	//
+	// It must satisfy the following requirements:
+	//
+	//   - Each block must be within an IPv4 RFC-1918 network range. Minimum allowed
+	//   size is /24, maximum allowed size is /8. Publicly-routable addresses aren't
+	//   supported.
+	//
+	//   - Each block cannot overlap with the range of the VPC CIDR blocks for your
+	//   EKS resources, or the block of the Kubernetes service IP range.
 	Cidrs []string
 
 	noSmithyDocumentSerde

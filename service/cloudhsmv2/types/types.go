@@ -123,11 +123,26 @@ type Cluster struct {
 	// The type of HSM that the cluster contains.
 	HsmType *string
 
+	// The timestamp until when the cluster can be rolled back to its original HSM
+	// type.
+	HsmTypeRollbackExpiration *time.Time
+
 	// Contains information about the HSMs in the cluster.
 	Hsms []Hsm
 
 	// The mode of the cluster.
 	Mode ClusterMode
+
+	// The cluster's NetworkType can be IPv4 (the default) or DUALSTACK. The IPv4
+	// NetworkType restricts communication between your application and the hardware
+	// security modules (HSMs) to the IPv4 protocol only. The DUALSTACK NetworkType
+	// enables communication over both IPv4 and IPv6 protocols. To use DUALSTACK,
+	// configure your virtual private cloud (VPC) and subnets to support both IPv4 and
+	// IPv6. This configuration involves adding IPv6 Classless Inter-Domain Routing
+	// (CIDR) blocks to the existing IPv4 CIDR blocks in your subnets. The NetworkType
+	// you choose affects the network addressing options for your cluster. DUALSTACK
+	// provides more flexibility by supporting both IPv4 and IPv6 communication.
+	NetworkType NetworkType
 
 	// The default password for the cluster's Pre-Crypto Officer (PRECO) user.
 	PreCoPassword *string
@@ -199,6 +214,12 @@ type Hsm struct {
 
 	// The IP address of the HSM's elastic network interface (ENI).
 	EniIp *string
+
+	// The IPv6 address (if any) of the HSM's elastic network interface (ENI).
+	EniIpV6 *string
+
+	// The type of HSM.
+	HsmType *string
 
 	// The HSM's state.
 	State HsmState

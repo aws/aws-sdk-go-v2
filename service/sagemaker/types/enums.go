@@ -1674,6 +1674,33 @@ const (
 	ClusterInstanceTypeMlP5e48xlarge   ClusterInstanceType = "ml.p5e.48xlarge"
 	ClusterInstanceTypeMlP5en48xlarge  ClusterInstanceType = "ml.p5en.48xlarge"
 	ClusterInstanceTypeMlTrn248xlarge  ClusterInstanceType = "ml.trn2.48xlarge"
+	ClusterInstanceTypeMlC6iLarge      ClusterInstanceType = "ml.c6i.large"
+	ClusterInstanceTypeMlC6iXlarge     ClusterInstanceType = "ml.c6i.xlarge"
+	ClusterInstanceTypeMlC6i2xlarge    ClusterInstanceType = "ml.c6i.2xlarge"
+	ClusterInstanceTypeMlC6i4xlarge    ClusterInstanceType = "ml.c6i.4xlarge"
+	ClusterInstanceTypeMlC6i8xlarge    ClusterInstanceType = "ml.c6i.8xlarge"
+	ClusterInstanceTypeMlC6i12xlarge   ClusterInstanceType = "ml.c6i.12xlarge"
+	ClusterInstanceTypeMlC6i16xlarge   ClusterInstanceType = "ml.c6i.16xlarge"
+	ClusterInstanceTypeMlC6i24xlarge   ClusterInstanceType = "ml.c6i.24xlarge"
+	ClusterInstanceTypeMlC6i32xlarge   ClusterInstanceType = "ml.c6i.32xlarge"
+	ClusterInstanceTypeMlM6iLarge      ClusterInstanceType = "ml.m6i.large"
+	ClusterInstanceTypeMlM6iXlarge     ClusterInstanceType = "ml.m6i.xlarge"
+	ClusterInstanceTypeMlM6i2xlarge    ClusterInstanceType = "ml.m6i.2xlarge"
+	ClusterInstanceTypeMlM6i4xlarge    ClusterInstanceType = "ml.m6i.4xlarge"
+	ClusterInstanceTypeMlM6i8xlarge    ClusterInstanceType = "ml.m6i.8xlarge"
+	ClusterInstanceTypeMlM6i12xlarge   ClusterInstanceType = "ml.m6i.12xlarge"
+	ClusterInstanceTypeMlM6i16xlarge   ClusterInstanceType = "ml.m6i.16xlarge"
+	ClusterInstanceTypeMlM6i24xlarge   ClusterInstanceType = "ml.m6i.24xlarge"
+	ClusterInstanceTypeMlM6i32xlarge   ClusterInstanceType = "ml.m6i.32xlarge"
+	ClusterInstanceTypeMlR6iLarge      ClusterInstanceType = "ml.r6i.large"
+	ClusterInstanceTypeMlR6iXlarge     ClusterInstanceType = "ml.r6i.xlarge"
+	ClusterInstanceTypeMlR6i2xlarge    ClusterInstanceType = "ml.r6i.2xlarge"
+	ClusterInstanceTypeMlR6i4xlarge    ClusterInstanceType = "ml.r6i.4xlarge"
+	ClusterInstanceTypeMlR6i8xlarge    ClusterInstanceType = "ml.r6i.8xlarge"
+	ClusterInstanceTypeMlR6i12xlarge   ClusterInstanceType = "ml.r6i.12xlarge"
+	ClusterInstanceTypeMlR6i16xlarge   ClusterInstanceType = "ml.r6i.16xlarge"
+	ClusterInstanceTypeMlR6i24xlarge   ClusterInstanceType = "ml.r6i.24xlarge"
+	ClusterInstanceTypeMlR6i32xlarge   ClusterInstanceType = "ml.r6i.32xlarge"
 )
 
 // Values returns all known values for ClusterInstanceType. Note that this can be
@@ -1741,6 +1768,33 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.p5e.48xlarge",
 		"ml.p5en.48xlarge",
 		"ml.trn2.48xlarge",
+		"ml.c6i.large",
+		"ml.c6i.xlarge",
+		"ml.c6i.2xlarge",
+		"ml.c6i.4xlarge",
+		"ml.c6i.8xlarge",
+		"ml.c6i.12xlarge",
+		"ml.c6i.16xlarge",
+		"ml.c6i.24xlarge",
+		"ml.c6i.32xlarge",
+		"ml.m6i.large",
+		"ml.m6i.xlarge",
+		"ml.m6i.2xlarge",
+		"ml.m6i.4xlarge",
+		"ml.m6i.8xlarge",
+		"ml.m6i.12xlarge",
+		"ml.m6i.16xlarge",
+		"ml.m6i.24xlarge",
+		"ml.m6i.32xlarge",
+		"ml.r6i.large",
+		"ml.r6i.xlarge",
+		"ml.r6i.2xlarge",
+		"ml.r6i.4xlarge",
+		"ml.r6i.8xlarge",
+		"ml.r6i.12xlarge",
+		"ml.r6i.16xlarge",
+		"ml.r6i.24xlarge",
+		"ml.r6i.32xlarge",
 	}
 }
 
@@ -4112,11 +4166,11 @@ const (
 	MlToolsProjects                MlTools = "Projects"
 	MlToolsInferenceOptimization   MlTools = "InferenceOptimization"
 	MlToolsPerformanceEvaluation   MlTools = "PerformanceEvaluation"
-	MlToolsHyperPodClusters        MlTools = "HyperPodClusters"
 	MlToolsLakeraGuard             MlTools = "LakeraGuard"
 	MlToolsComet                   MlTools = "Comet"
 	MlToolsDeepchecksLlmEvaluation MlTools = "DeepchecksLLMEvaluation"
 	MlToolsFiddler                 MlTools = "Fiddler"
+	MlToolsHyperPodClusters        MlTools = "HyperPodClusters"
 )
 
 // Values returns all known values for MlTools. Note that this can be expanded in
@@ -4140,11 +4194,11 @@ func (MlTools) Values() []MlTools {
 		"Projects",
 		"InferenceOptimization",
 		"PerformanceEvaluation",
-		"HyperPodClusters",
 		"LakeraGuard",
 		"Comet",
 		"DeepchecksLLMEvaluation",
 		"Fiddler",
+		"HyperPodClusters",
 	}
 }
 
@@ -8293,6 +8347,8 @@ const (
 	TransformInstanceTypeMlG516xlarge   TransformInstanceType = "ml.g5.16xlarge"
 	TransformInstanceTypeMlG524xlarge   TransformInstanceType = "ml.g5.24xlarge"
 	TransformInstanceTypeMlG548xlarge   TransformInstanceType = "ml.g5.48xlarge"
+	TransformInstanceTypeMlTrn12xlarge  TransformInstanceType = "ml.trn1.2xlarge"
+	TransformInstanceTypeMlTrn132xlarge TransformInstanceType = "ml.trn1.32xlarge"
 	TransformInstanceTypeMlInf2Xlarge   TransformInstanceType = "ml.inf2.xlarge"
 	TransformInstanceTypeMlInf28xlarge  TransformInstanceType = "ml.inf2.8xlarge"
 	TransformInstanceTypeMlInf224xlarge TransformInstanceType = "ml.inf2.24xlarge"
@@ -8399,6 +8455,8 @@ func (TransformInstanceType) Values() []TransformInstanceType {
 		"ml.g5.16xlarge",
 		"ml.g5.24xlarge",
 		"ml.g5.48xlarge",
+		"ml.trn1.2xlarge",
+		"ml.trn1.32xlarge",
 		"ml.inf2.xlarge",
 		"ml.inf2.8xlarge",
 		"ml.inf2.24xlarge",

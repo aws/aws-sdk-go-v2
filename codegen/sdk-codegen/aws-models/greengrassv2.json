@@ -958,6 +958,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the core device's status last updated, expressed in ISO 8601\n      format.</p>"
                     }
+                },
+                "platform": {
+                    "target": "com.amazonaws.greengrassv2#CoreDevicePlatformString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system platform that the core device runs.</p>"
+                    }
+                },
+                "architecture": {
+                    "target": "com.amazonaws.greengrassv2#CoreDeviceArchitectureString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The computer architecture of the core device.</p>"
+                    }
+                },
+                "runtime": {
+                    "target": "com.amazonaws.greengrassv2#CoreDeviceRuntimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime for the core device. The runtime can be:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws_nucleus_classic</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws_nucleus_lite</code>\n               </p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -974,6 +992,15 @@
             }
         },
         "com.amazonaws.greengrassv2#CoreDevicePlatformString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#CoreDeviceRuntimeString": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -2423,6 +2450,12 @@
                     "target": "com.amazonaws.greengrassv2#CoreDeviceArchitectureString",
                     "traits": {
                         "smithy.api#documentation": "<p>The computer architecture of the core device.</p>"
+                    }
+                },
+                "runtime": {
+                    "target": "com.amazonaws.greengrassv2#CoreDeviceRuntimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime for the core device. The runtime can be:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws_nucleus_classic</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws_nucleus_lite</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "status": {
@@ -4828,7 +4861,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of Greengrass core devices.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the\n        IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud,\n        then the reported status of that device might not reflect its current status. The status\n        timestamp indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes\n            <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of Greengrass core devices.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the\n        IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud,\n        then the reported status of that device might not reflect its current status. The status\n        timestamp indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>For Greengrass nucleus 2.12.2 and earlier, the core device sends status updates when the\n            status of any component on the core device becomes <code>ERRORED</code> or\n              <code>BROKEN</code>.</p>\n               </li>\n               <li>\n                  <p>For Greengrass nucleus 2.12.3 and later, the core device sends status updates when the\n            status of any component on the core device becomes <code>ERRORED</code>,\n              <code>BROKEN</code>, <code>RUNNING</code>, or <code>FINISHED</code>.</p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices",
@@ -4871,6 +4904,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "runtime": {
+                    "target": "com.amazonaws.greengrassv2#CoreDeviceRuntimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime to be used by the core device. The runtime can be:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws_nucleus_classic</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws_nucleus_lite</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "runtime"
                     }
                 }
             },

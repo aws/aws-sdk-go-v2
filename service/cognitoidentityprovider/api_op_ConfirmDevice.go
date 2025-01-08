@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Confirms tracking of the device. This API call is the call that begins device
-// tracking. For more information about device authentication, see [Working with user devices in your user pool].
+// Confirms a device that a user wants to remember. A remembered device is a
+// "Remember me on this device" option for user pools that perform authentication
+// with the device key of a trusted device in the back end, instead of a
+// user-provided MFA code. For more information about device authentication, see [Working with user devices in your user pool].
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
@@ -40,7 +42,7 @@ func (c *Client) ConfirmDevice(ctx context.Context, params *ConfirmDeviceInput, 
 	return out, nil
 }
 
-// Confirms the device request.
+// The confirm-device request.
 type ConfirmDeviceInput struct {
 
 	// A valid access token that Amazon Cognito issued to the user whose device you
@@ -49,12 +51,13 @@ type ConfirmDeviceInput struct {
 	// This member is required.
 	AccessToken *string
 
-	// The device key.
+	// The unique identifier, or device key, of the device that you want to update the
+	// status for.
 	//
 	// This member is required.
 	DeviceKey *string
 
-	// The device name.
+	// A friendly name for the device, for example MyMobilePhone .
 	DeviceName *string
 
 	// The configuration of the device secret verifier.
@@ -63,10 +66,26 @@ type ConfirmDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Confirms the device response.
+// The confirm-device response.
 type ConfirmDeviceOutput struct {
 
-	// Indicates whether the user confirmation must confirm the device response.
+	// When true , your user must confirm that they want to remember the device. Prompt
+	// the user for an answer. You must then make an [UpdateUserDevice]request that sets the device to
+	// remembered or not_remembered .
+	//
+	// When false , immediately sets the device as remembered and eligible for device
+	// authentication.
+	//
+	// You can configure your user pool to always remember devices, in which case this
+	// response is false , or to allow users to opt in, in which case this response is
+	// true . Configure this option under Device tracking in the Sign-in menu of your
+	// user pool. You can also configure this option with the [DeviceConfiguration]parameter of a [CreateUserPool] or [UpdateUserPool]
+	// request.
+	//
+	// [UpdateUserPool]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateUserPool.html
+	// [CreateUserPool]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateUserPool.html
+	// [UpdateUserDevice]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateDeviceStatus.html
+	// [DeviceConfiguration]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateUserPool.html#CognitoUserPools-CreateUserPool-request-DeviceConfiguration
 	UserConfirmationNecessary bool
 
 	// Metadata pertaining to the operation's result.

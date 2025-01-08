@@ -47,6 +47,10 @@ type GetDashboardForJobRunInput struct {
 	// This member is required.
 	JobRunId *string
 
+	// Allows access to system profile logs for Lake Formation-enabled jobs. Default
+	// is false.
+	AccessSystemProfileLogs *bool
+
 	// An optimal parameter that indicates the amount of attempts for the job. If not
 	// specified, this value defaults to the attempt of the latest job.
 	Attempt *int32

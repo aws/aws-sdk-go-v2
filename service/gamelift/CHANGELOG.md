@@ -1,3 +1,11 @@
+# v1.38.0 (2025-01-02)
+
+* **Feature**: Amazon GameLift releases a new game session shutdown feature. Use the Amazon GameLift console or AWS CLI to terminate an in-progress game session that's entered a bad state or is no longer needed.
+
+# v1.37.3 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.2 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

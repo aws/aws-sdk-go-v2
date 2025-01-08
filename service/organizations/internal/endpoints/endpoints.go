@@ -232,8 +232,19 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.AwsIso,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.AwsIso,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-iso-global",
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "aws-iso-global",
+			}: endpoints.Endpoint{
+				Hostname: "organizations.us-iso-east-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-iso-b",
@@ -253,8 +264,19 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.AwsIsoB,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.AwsIsoB,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-iso-b-global",
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "aws-iso-b-global",
+			}: endpoints.Endpoint{
+				Hostname: "organizations.us-isob-east-1.sc2s.sgov.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-iso-e",

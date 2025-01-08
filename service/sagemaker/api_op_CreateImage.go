@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a custom SageMaker image. A SageMaker image is a set of image versions.
-// Each image version represents a container image stored in Amazon ECR. For more
-// information, see [Bring your own SageMaker image].
+// Creates a custom SageMaker AI image. A SageMaker AI image is a set of image
+// versions. Each image version represents a container image stored in Amazon ECR.
+// For more information, see [Bring your own SageMaker AI image].
 //
-// [Bring your own SageMaker image]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html
+// [Bring your own SageMaker AI image]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html
 func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optFns ...func(*Options)) (*CreateImageOutput, error) {
 	if params == nil {
 		params = &CreateImageInput{}
@@ -38,8 +38,8 @@ type CreateImageInput struct {
 	// This member is required.
 	ImageName *string
 
-	// The ARN of an IAM role that enables Amazon SageMaker to perform tasks on your
-	// behalf.
+	// The ARN of an IAM role that enables Amazon SageMaker AI to perform tasks on
+	// your behalf.
 	//
 	// This member is required.
 	RoleArn *string

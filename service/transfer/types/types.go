@@ -84,6 +84,13 @@ type As2ConnectorConfig struct {
 	// A unique identifier for the partner profile for the connector.
 	PartnerProfileId *string
 
+	// Allows you to use the Amazon S3 Content-Type that is associated with objects in
+	// S3 instead of having the content type mapped based on the file extension. This
+	// parameter is enabled by default when you create an AS2 connector from the
+	// console, but disabled by default when you create an AS2 connector by calling the
+	// API directly.
+	PreserveContentType PreserveContentType
+
 	// The algorithm that is used to sign the AS2 messages sent with the connector.
 	SigningAlgorithm SigningAlg
 
@@ -397,11 +404,33 @@ type DescribedAgreement struct {
 	// The name or short description that's used to identify the agreement.
 	Description *string
 
+	//  Determines whether or not unsigned messages from your trading partners will be
+	// accepted.
+	//
+	//   - ENABLED : Transfer Family rejects unsigned messages from your trading
+	//   partner.
+	//
+	//   - DISABLED (default value): Transfer Family accepts unsigned messages from
+	//   your trading partner.
+	EnforceMessageSigning EnforceMessageSigningType
+
 	// A unique identifier for the AS2 local profile.
 	LocalProfileId *string
 
 	// A unique identifier for the partner profile used in the agreement.
 	PartnerProfileId *string
+
+	//  Determines whether or not Transfer Family appends a unique string of
+	// characters to the end of the AS2 message payload filename when saving it.
+	//
+	//   - ENABLED : the filename provided by your trading parter is preserved when the
+	//   file is saved.
+	//
+	//   - DISABLED (default value): when Transfer Family saves the file, the filename
+	//   is adjusted, as described in [File names and locations].
+	//
+	// [File names and locations]: https://docs.aws.amazon.com/transfer/latest/userguide/send-as2-messages.html#file-names-as2
+	PreserveFilename PreserveFilenameType
 
 	// A system-assigned unique identifier for a server instance. This identifier
 	// indicates the specific server that the agreement uses.
@@ -452,9 +481,8 @@ type DescribedCertificate struct {
 	// The serial number for the certificate.
 	Serial *string
 
-	// The certificate can be either ACTIVE , PENDING_ROTATION , or INACTIVE .
-	// PENDING_ROTATION means that this certificate will replace the current
-	// certificate when it expires.
+	// Currently, the only available status is ACTIVE : all other values are reserved
+	// for future use.
 	Status CertificateStatusType
 
 	// Key-value pairs that can be used to group and search for certificates.

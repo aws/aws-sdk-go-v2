@@ -5168,6 +5168,15 @@ func awsRestjson1_deserializeDocumentVpcConfigOutput(v **types.VpcConfigOutput, 
 
 	for key, value := range shape {
 		switch key {
+		case "Ipv6AllowedForDualStack":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Ipv6AllowedForDualStack = ptr.Bool(jtv)
+			}
+
 		case "SecurityGroupIds":
 			if err := awsRestjson1_deserializeDocumentSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
 				return err

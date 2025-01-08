@@ -31,6 +31,14 @@ func (c *Client) GetCatalogs(ctx context.Context, params *GetCatalogsInput, optF
 
 type GetCatalogsInput struct {
 
+	// Whether to list the default catalog in the account and region in the response.
+	// Defaults to false . When true and ParentCatalogId = NULL | Amazon Web Services
+	// Account ID , all catalogs and the default catalog are enumerated in the response.
+	//
+	// When the ParentCatalogId is not equal to null, and this attribute is passed as
+	// false or true , an InvalidInputException is thrown.
+	IncludeRoot *bool
+
 	// The maximum number of catalogs to return in one response.
 	MaxResults *int32
 
@@ -41,8 +49,9 @@ type GetCatalogsInput struct {
 	// the Amazon Web Services Account Number is used by default.
 	ParentCatalogId *string
 
-	// When specified as true, iterates through the account and returns all catalog
-	// resources (including top-level resources and child resources)
+	// Whether to list all catalogs across the catalog hierarchy, starting from the
+	// ParentCatalogId . Defaults to false . When true , all catalog objects in the
+	// ParentCatalogID hierarchy are enumerated in the response.
 	Recursive bool
 
 	noSmithyDocumentSerde

@@ -18283,6 +18283,15 @@ func awsAwsjson11_deserializeDocumentTaskDefinition(v **types.TaskDefinition, va
 				}
 			}
 
+		case "enableFaultInjection":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableFaultInjection = ptr.Bool(jtv)
+			}
+
 		case "ephemeralStorage":
 			if err := awsAwsjson11_deserializeDocumentEphemeralStorage(&sv.EphemeralStorage, value); err != nil {
 				return err

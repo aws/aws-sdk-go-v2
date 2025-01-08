@@ -22,7 +22,7 @@ import (
 // within the domain. Each user receives a private home directory within the EFS
 // volume for notebooks, Git repositories, and data files.
 //
-// SageMaker uses the Amazon Web Services Key Management Service (Amazon Web
+// SageMaker AI uses the Amazon Web Services Key Management Service (Amazon Web
 // Services KMS) to encrypt the EFS volume attached to the domain with an Amazon
 // Web Services managed key by default. For more control, you can specify a
 // customer managed key. For more information, see [Protect Data at Rest Using Encryption].
@@ -36,7 +36,7 @@ import (
 // options are available:
 //
 //   - PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon
-//     SageMaker, which allows internet access. This is the default value.
+//     SageMaker AI, which allows internet access. This is the default value.
 //
 //   - VpcOnly - All traffic is through the specified VPC and subnets. Internet
 //     access is disabled by default. To allow internet access, you must specify a NAT
@@ -44,16 +44,16 @@ import (
 //
 // When internet access is disabled, you won't be able to run a Amazon SageMaker
 //
-//	Studio notebook or to train or host models unless your VPC has an interface
-//	endpoint to the SageMaker API and runtime or a NAT gateway and your security
+//	AI Studio notebook or to train or host models unless your VPC has an interface
+//	endpoint to the SageMaker AI API and runtime or a NAT gateway and your security
 //	groups allow outbound connections.
 //
 // NFS traffic over TCP on port 2049 needs to be allowed in both inbound and
-// outbound rules in order to launch a Amazon SageMaker Studio app successfully.
+// outbound rules in order to launch a Amazon SageMaker AI Studio app successfully.
 //
-// For more information, see [Connect Amazon SageMaker Studio Notebooks to Resources in a VPC].
+// For more information, see [Connect Amazon SageMaker AI Studio Notebooks to Resources in a VPC].
 //
-// [Connect Amazon SageMaker Studio Notebooks to Resources in a VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html
+// [Connect Amazon SageMaker AI Studio Notebooks to Resources in a VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html
 // [Protect Data at Rest Using Encryption]: https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
@@ -107,7 +107,7 @@ type CreateDomainInput struct {
 	// PublicInternetOnly .
 	//
 	//   - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon
-	//   SageMaker, which allows direct internet access
+	//   SageMaker AI, which allows direct internet access
 	//
 	//   - VpcOnly - All traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
@@ -131,9 +131,9 @@ type CreateDomainInput struct {
 	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string
 
-	// SageMaker uses Amazon Web Services KMS to encrypt EFS and EBS volumes attached
-	// to the domain with an Amazon Web Services managed key by default. For more
-	// control, specify a customer managed key.
+	// SageMaker AI uses Amazon Web Services KMS to encrypt EFS and EBS volumes
+	// attached to the domain with an Amazon Web Services managed key by default. For
+	// more control, specify a customer managed key.
 	KmsKeyId *string
 
 	// Indicates whether custom tag propagation is supported for the domain. Defaults

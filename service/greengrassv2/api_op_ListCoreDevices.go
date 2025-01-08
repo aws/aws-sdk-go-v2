@@ -26,7 +26,13 @@ import (
 //   - When the core device receives a deployment from the Amazon Web Services
 //     Cloud
 //
-//   - When the status of any component on the core device becomes BROKEN
+//   - For Greengrass nucleus 2.12.2 and earlier, the core device sends status
+//     updates when the status of any component on the core device becomes ERRORED or
+//     BROKEN .
+//
+//   - For Greengrass nucleus 2.12.3 and later, the core device sends status
+//     updates when the status of any component on the core device becomes ERRORED ,
+//     BROKEN , RUNNING , or FINISHED .
 //
 //   - At a [regular interval that you can configure], which defaults to 24 hours
 //
@@ -56,6 +62,13 @@ type ListCoreDevicesInput struct {
 
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
+	// The runtime to be used by the core device. The runtime can be:
+	//
+	//   - aws_nucleus_classic
+	//
+	//   - aws_nucleus_lite
+	Runtime *string
 
 	// The core device status by which to filter. If you specify this parameter, the
 	// list includes only core devices that have this status. Choose one of the

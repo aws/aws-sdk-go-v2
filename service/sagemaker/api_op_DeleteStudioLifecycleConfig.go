@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the Amazon SageMaker Studio Lifecycle Configuration. In order to delete
-// the Lifecycle Configuration, there must be no running apps using the Lifecycle
-// Configuration. You must also remove the Lifecycle Configuration from
+// Deletes the Amazon SageMaker AI Studio Lifecycle Configuration. In order to
+// delete the Lifecycle Configuration, there must be no running apps using the
+// Lifecycle Configuration. You must also remove the Lifecycle Configuration from
 // UserSettings in all Domains and UserProfiles.
 func (c *Client) DeleteStudioLifecycleConfig(ctx context.Context, params *DeleteStudioLifecycleConfigInput, optFns ...func(*Options)) (*DeleteStudioLifecycleConfigOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) DeleteStudioLifecycleConfig(ctx context.Context, params *Delete
 
 type DeleteStudioLifecycleConfigInput struct {
 
-	// The name of the Amazon SageMaker Studio Lifecycle Configuration to delete.
+	// The name of the Amazon SageMaker AI Studio Lifecycle Configuration to delete.
 	//
 	// This member is required.
 	StudioLifecycleConfigName *string

@@ -1660,6 +1660,10 @@ func awsRestjson1_serializeOpHttpBindingsListCoreDevicesInput(v *ListCoreDevices
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.Runtime != nil {
+		encoder.SetQuery("runtime").String(*v.Runtime)
+	}
+
 	if len(v.Status) > 0 {
 		encoder.SetQuery("status").String(string(v.Status))
 	}

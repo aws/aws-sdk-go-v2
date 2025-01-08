@@ -4280,6 +4280,11 @@ func awsAwsjson11_serializeDocumentAs2ConnectorConfig(v *types.As2ConnectorConfi
 		ok.String(*v.PartnerProfileId)
 	}
 
+	if len(v.PreserveContentType) > 0 {
+		ok := object.Key("PreserveContentType")
+		ok.String(string(v.PreserveContentType))
+	}
+
 	if len(v.SigningAlgorithm) > 0 {
 		ok := object.Key("SigningAlgorithm")
 		ok.String(string(v.SigningAlgorithm))
@@ -5108,6 +5113,11 @@ func awsAwsjson11_serializeOpDocumentCreateAgreementInput(v *CreateAgreementInpu
 		ok.String(*v.Description)
 	}
 
+	if len(v.EnforceMessageSigning) > 0 {
+		ok := object.Key("EnforceMessageSigning")
+		ok.String(string(v.EnforceMessageSigning))
+	}
+
 	if v.LocalProfileId != nil {
 		ok := object.Key("LocalProfileId")
 		ok.String(*v.LocalProfileId)
@@ -5116,6 +5126,11 @@ func awsAwsjson11_serializeOpDocumentCreateAgreementInput(v *CreateAgreementInpu
 	if v.PartnerProfileId != nil {
 		ok := object.Key("PartnerProfileId")
 		ok.String(*v.PartnerProfileId)
+	}
+
+	if len(v.PreserveFilename) > 0 {
+		ok := object.Key("PreserveFilename")
+		ok.String(string(v.PreserveFilename))
 	}
 
 	if v.ServerId != nil {
@@ -6463,6 +6478,11 @@ func awsAwsjson11_serializeOpDocumentUpdateAgreementInput(v *UpdateAgreementInpu
 		ok.String(*v.Description)
 	}
 
+	if len(v.EnforceMessageSigning) > 0 {
+		ok := object.Key("EnforceMessageSigning")
+		ok.String(string(v.EnforceMessageSigning))
+	}
+
 	if v.LocalProfileId != nil {
 		ok := object.Key("LocalProfileId")
 		ok.String(*v.LocalProfileId)
@@ -6471,6 +6491,11 @@ func awsAwsjson11_serializeOpDocumentUpdateAgreementInput(v *UpdateAgreementInpu
 	if v.PartnerProfileId != nil {
 		ok := object.Key("PartnerProfileId")
 		ok.String(*v.PartnerProfileId)
+	}
+
+	if len(v.PreserveFilename) > 0 {
+		ok := object.Key("PreserveFilename")
+		ok.String(string(v.PreserveFilename))
 	}
 
 	if v.ServerId != nil {

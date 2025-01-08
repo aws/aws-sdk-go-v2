@@ -13,11 +13,14 @@ import (
 // Provides a pre-signed URL for download of a completed attachment. This is an
 // asynchronous API for use with active contacts.
 //
+// For security recommendations, see [Amazon Connect Chat security best practices].
+//
 // ConnectionToken is used for invoking this API instead of ParticipantToken .
 //
 // The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
 //
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) GetAttachment(ctx context.Context, params *GetAttachmentInput, optFns ...func(*Options)) (*GetAttachmentOutput, error) {
 	if params == nil {
 		params = &GetAttachmentInput{}
@@ -45,10 +48,19 @@ type GetAttachmentInput struct {
 	// This member is required.
 	ConnectionToken *string
 
+	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601
+	// format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	UrlExpiryInSeconds *int32
+
 	noSmithyDocumentSerde
 }
 
 type GetAttachmentOutput struct {
+
+	// The size of the attachment in bytes.
+	//
+	// This member is required.
+	AttachmentSizeInBytes *int64
 
 	// This is the pre-signed URL that can be used for uploading the file to Amazon S3
 	// when used in response to [StartAttachmentUpload].

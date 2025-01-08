@@ -86,7 +86,7 @@ type ListCompilationJobsOutput struct {
 	// This member is required.
 	CompilationJobSummaries []types.CompilationJobSummary
 
-	// If the response is truncated, Amazon SageMaker returns this NextToken . To
+	// If the response is truncated, Amazon SageMaker AI returns this NextToken . To
 	// retrieve the next set of model compilation jobs, use this token in the next
 	// request.
 	NextToken *string

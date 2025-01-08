@@ -83,6 +83,10 @@ type CreateDataSetInput struct {
 	// tables.
 	LogicalTableMap map[string]types.LogicalTable
 
+	// The configuration for the performance optimization of the dataset that contains
+	// a UniqueKey configuration.
+	PerformanceConfiguration *types.PerformanceConfiguration
+
 	// A list of resource permissions on the dataset.
 	Permissions []types.ResourcePermission
 

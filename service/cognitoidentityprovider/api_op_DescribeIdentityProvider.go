@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a specific IdP.
+// Given a user pool ID and identity provider (IdP) name, returns details about
+// the IdP.
 func (c *Client) DescribeIdentityProvider(ctx context.Context, params *DescribeIdentityProviderInput, optFns ...func(*Options)) (*DescribeIdentityProviderOutput, error) {
 	if params == nil {
 		params = &DescribeIdentityProviderInput{}
@@ -29,12 +30,12 @@ func (c *Client) DescribeIdentityProvider(ctx context.Context, params *DescribeI
 
 type DescribeIdentityProviderInput struct {
 
-	// The IdP name.
+	// The name of the IdP that you want to describe.
 	//
 	// This member is required.
 	ProviderName *string
 
-	// The user pool ID.
+	// The ID of the user pool that has the IdP that you want to describe..
 	//
 	// This member is required.
 	UserPoolId *string
@@ -44,7 +45,7 @@ type DescribeIdentityProviderInput struct {
 
 type DescribeIdentityProviderOutput struct {
 
-	// The identity provider details.
+	// The details of the requested IdP.
 	//
 	// This member is required.
 	IdentityProvider *types.IdentityProviderType

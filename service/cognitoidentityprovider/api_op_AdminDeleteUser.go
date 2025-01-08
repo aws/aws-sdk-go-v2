@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a user as an administrator. Works on any user.
+// Deletes a user profile in your user pool.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -43,7 +43,7 @@ func (c *Client) AdminDeleteUser(ctx context.Context, params *AdminDeleteUserInp
 // Represents the request to delete a user as an administrator.
 type AdminDeleteUserInput struct {
 
-	// The user pool ID for the user pool where you want to delete the user.
+	// The ID of the user pool where you want to delete the user.
 	//
 	// This member is required.
 	UserPoolId *string

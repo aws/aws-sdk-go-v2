@@ -46,6 +46,8 @@ type GetActionTypeInput struct {
 	//
 	//   - Invoke
 	//
+	//   - Compute
+	//
 	// This member is required.
 	Category types.ActionCategory
 

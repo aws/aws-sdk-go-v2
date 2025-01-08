@@ -10,18 +10,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the specified user's password in a user pool as an administrator. Works on
-// any user.
+// Sets the specified user's password in a user pool. This operation
+// administratively sets a temporary or permanent password for a user. With this
+// operation, you can bypass self-service password changes and permit immediate
+// sign-in with the password that you set. To do this, set Permanent to true .
 //
-// The password can be temporary or permanent. If it is temporary, the user status
-// enters the FORCE_CHANGE_PASSWORD state. When the user next tries to sign in,
-// the InitiateAuth/AdminInitiateAuth response will contain the
-// NEW_PASSWORD_REQUIRED challenge. If the user doesn't sign in before it expires,
-// the user won't be able to sign in, and an administrator must reset their
-// password.
+// You can also set a new temporary password in this request, send it to a user,
+// and require them to choose a new password on their next sign-in. To do this, set
+// Permanent to false .
 //
-// Once the user has set a new password, or the password is permanent, the user
-// status is set to Confirmed .
+// If the password is temporary, the user's Status becomes FORCE_CHANGE_PASSWORD .
+// When the user next tries to sign in, the InitiateAuth or AdminInitiateAuth
+// response includes the NEW_PASSWORD_REQUIRED challenge. If the user doesn't sign
+// in before the temporary password expires, they can no longer sign in and you
+// must repeat this operation to set a temporary or permanent password for them.
+//
+// After the user sets a new password, or if you set a permanent password, their
+// status becomes Confirmed .
 //
 // AdminSetUserPassword can set a password for the user profile that Amazon
 // Cognito creates for third-party federated users. When you set a password, the
@@ -64,12 +69,15 @@ func (c *Client) AdminSetUserPassword(ctx context.Context, params *AdminSetUserP
 
 type AdminSetUserPasswordInput struct {
 
-	// The password for the user.
+	// The new temporary or permanent password that you want to set for the user. You
+	// can't remove the password for a user who already has a password so that they can
+	// only sign in with passwordless methods. In this scenario, you must create a new
+	// user without a password.
 	//
 	// This member is required.
 	Password *string
 
-	// The user pool ID for the user pool where you want to set the user's password.
+	// The ID of the user pool where you want to set the user's password.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -83,7 +91,9 @@ type AdminSetUserPasswordInput struct {
 	// This member is required.
 	Username *string
 
-	// True if the password is permanent, False if it is temporary.
+	// Set to true to set a password that the user can immediately sign in with. Set
+	// to false to set a temporary password that the user must change on their next
+	// sign-in.
 	Permanent bool
 
 	noSmithyDocumentSerde

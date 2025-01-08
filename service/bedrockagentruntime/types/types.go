@@ -132,7 +132,7 @@ type AgentActionGroup struct {
 	// request, it will invoke this action group instead and return an [Observation]reprompting the
 	// user for more information.
 	//
-	// [Observation]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
+	// [Observation]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
 	ParentActionGroupSignature ActionGroupSignature
 
 	noSmithyDocumentSerde
@@ -376,6 +376,15 @@ type Attribution struct {
 
 	// A list of citations and related information for a part of an agent response.
 	Citations []Citation
+
+	noSmithyDocumentSerde
+}
+
+// Settings for a model called with InvokeAgent.
+type BedrockModelConfigurations struct {
+
+	// The performance configuration for the model.
+	PerformanceConfig *PerformanceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -625,6 +634,9 @@ type ExternalSourcesGenerationConfiguration struct {
 	//  Configuration settings for inference when using RetrieveAndGenerate to
 	// generate responses while using an external source.
 	InferenceConfig *InferenceConfig
+
+	// The latency configuration for the model.
+	PerformanceConfig *PerformanceConfiguration
 
 	// Contain the textPromptTemplate string for the external source wrapper object.
 	PromptTemplate *PromptTemplate
@@ -1278,6 +1290,9 @@ type GenerationConfiguration struct {
 	// generate responses while using a knowledge base as a source.
 	InferenceConfig *InferenceConfig
 
+	// The latency configuration for the model.
+	PerformanceConfig *PerformanceConfiguration
+
 	// Contains the template for the prompt that's sent to the model for response
 	// generation. Generation prompts must include the $search_results$ variable. For
 	// more information, see [Use placeholder variables]in the user guide.
@@ -1686,6 +1701,15 @@ type InlineAgentTracePart struct {
 	//
 	// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 	Trace Trace
+
+	noSmithyDocumentSerde
+}
+
+// Settings for a model called with InvokeInlineAgent.
+type InlineBedrockModelConfigurations struct {
+
+	// The latency configuration for the model.
+	PerformanceConfig *PerformanceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2249,6 +2273,15 @@ type ModelInvocationInput struct {
 	noSmithyDocumentSerde
 }
 
+// The performance configuration for a model called with InvokeFlow.
+type ModelPerformanceConfiguration struct {
+
+	// The latency configuration for the model.
+	PerformanceConfig *PerformanceConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Contains the result or output of an action group or knowledge base, or the
 // response to the user.
 type Observation struct {
@@ -2360,6 +2393,9 @@ type OrchestrationConfiguration struct {
 	//  Configuration settings for inference when using RetrieveAndGenerate to
 	// generate responses while using a knowledge base as a source.
 	InferenceConfig *InferenceConfig
+
+	// The latency configuration for the model.
+	PerformanceConfig *PerformanceConfiguration
 
 	// Contains the template for the prompt that's sent to the model. Orchestration
 	// prompts must include the $conversation_history$ and
@@ -2521,6 +2557,15 @@ type PayloadPart struct {
 
 	// A part of the agent response in bytes.
 	Bytes []byte
+
+	noSmithyDocumentSerde
+}
+
+// Performance settings for a model.
+type PerformanceConfiguration struct {
+
+	// To use a latency-optimized version of the model, set to optimized .
+	Latency PerformanceConfigLatency
 
 	noSmithyDocumentSerde
 }

@@ -5193,6 +5193,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AH532P6W"
                     }
+                },
+                "CS8365C": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CS8365C"
+                    }
                 }
             }
         },
@@ -5593,7 +5599,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the specified capacity task. You can have one active capacity task per order or Outpost.</p>",
+                "smithy.api#documentation": "<p>Starts the specified capacity task. You can have one active capacity task for each order and each Outpost.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/outposts/{OutpostIdentifier}/capacity",
@@ -6409,7 +6415,7 @@
                 "PowerConnector": {
                     "target": "com.amazonaws.outposts#PowerConnector",
                     "traits": {
-                        "smithy.api#documentation": "<p>The power connector that Amazon Web Services should plan to provide for connections to the hardware.\n      Note the correlation between <code>PowerPhase</code> and <code>PowerConnector</code>. </p>\n         <ul>\n            <li>\n               <p>Single-phase AC feed</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>L6-30P</b> – (common in US); 30A; single phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>IEC309 (blue)</b> – P+N+E, 6hr; 32 A; single\n              phase</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Three-phase AC feed</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>AH530P7W (red)</b> – 3P+N+E, 7hr; 30A; three\n              phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AH532P6W (red)</b> – 3P+N+E, 6hr; 32A; three\n              phase</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The power connector that Amazon Web Services should plan to provide for connections to the hardware.\n      Note the correlation between <code>PowerPhase</code> and <code>PowerConnector</code>. </p>\n         <ul>\n            <li>\n               <p>Single-phase AC feed</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>L6-30P</b> – (common in US); 30A; single phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>IEC309 (blue)</b> – P+N+E, 6hr; 32 A; single\n              phase</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Three-phase AC feed</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>AH530P7W (red)</b> – 3P+N+E, 7hr; 30A; three\n              phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AH532P6W (red)</b> – 3P+N+E, 6hr; 32A; three\n              phase</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CS8365C</b> – (common in US); 3P+E, 50A; three phase</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "PowerFeedDrop": {

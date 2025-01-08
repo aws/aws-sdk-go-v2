@@ -12,9 +12,10 @@ import (
 )
 
 // Retrieves a fleet's runtime configuration settings. The runtime configuration
-// determines which server processes run, and how they run, and how many run
-// concurrently on computes in managed EC2 and Anywhere fleets. You can update a
-// fleet's runtime configuration at any time using UpdateRuntimeConfiguration.
+// determines which server processes run, and how, on computes in the fleet. For
+// managed EC2 fleets, the runtime configuration describes server processes that
+// run on each fleet instance. can update a fleet's runtime configuration at any
+// time using [UpdateRuntimeConfiguration].
 //
 // To get the current runtime configuration for a fleet, provide the fleet ID.
 //
@@ -27,6 +28,7 @@ import (
 //
 // [Running multiple processes on a fleet]
 //
+// [UpdateRuntimeConfiguration]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateRuntimeConfiguration.html
 // [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 // [Running multiple processes on a fleet]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html
 func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *DescribeRuntimeConfigurationInput, optFns ...func(*Options)) (*DescribeRuntimeConfigurationOutput, error) {

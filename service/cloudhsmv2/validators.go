@@ -525,9 +525,6 @@ func validateOpModifyClusterInput(v *ModifyClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyClusterInput"}
-	if v.BackupRetentionPolicy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BackupRetentionPolicy"))
-	}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
 	}

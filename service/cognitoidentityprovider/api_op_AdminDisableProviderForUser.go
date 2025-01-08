@@ -71,12 +71,12 @@ func (c *Client) AdminDisableProviderForUser(ctx context.Context, params *AdminD
 
 type AdminDisableProviderForUserInput struct {
 
-	// The user to be disabled.
+	// The user profile that you want to delete a linked identity from.
 	//
 	// This member is required.
 	User *types.ProviderUserIdentifierType
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool where you want to delete the user's linked identities.
 	//
 	// This member is required.
 	UserPoolId *string

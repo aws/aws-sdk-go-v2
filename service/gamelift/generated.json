@@ -109,6 +109,7 @@
         "api_op_StopMatchmaking.go",
         "api_op_SuspendGameServerGroup.go",
         "api_op_TagResource.go",
+        "api_op_TerminateGameSession.go",
         "api_op_UntagResource.go",
         "api_op_UpdateAlias.go",
         "api_op_UpdateBuild.go",

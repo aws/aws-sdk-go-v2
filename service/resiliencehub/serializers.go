@@ -6576,6 +6576,11 @@ func awsRestjson1_serializeDocumentUpdateRecommendationStatusRequestEntry(v *typ
 	object := value.Object()
 	defer object.Close()
 
+	if v.AppComponentId != nil {
+		ok := object.Key("appComponentId")
+		ok.String(*v.AppComponentId)
+	}
+
 	if v.EntryId != nil {
 		ok := object.Key("entryId")
 		ok.String(*v.EntryId)

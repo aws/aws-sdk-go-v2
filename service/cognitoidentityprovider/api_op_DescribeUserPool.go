@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the configuration information and metadata of the specified user pool.
+// Given a user pool ID, returns configuration information. This operation is
+// useful when you want to inspect an existing user pool and programmatically
+// replicate the configuration to another user pool.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -44,7 +46,7 @@ func (c *Client) DescribeUserPool(ctx context.Context, params *DescribeUserPoolI
 // Represents the request to describe the user pool.
 type DescribeUserPoolInput struct {
 
-	// The user pool ID for the user pool you want to describe.
+	// The ID of the user pool you want to describe.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -55,7 +57,7 @@ type DescribeUserPoolInput struct {
 // Represents the response to describe the user pool.
 type DescribeUserPoolOutput struct {
 
-	// The container of metadata returned by the server to describe the pool.
+	// The details of the requested user pool.
 	UserPool *types.UserPoolType
 
 	// Metadata pertaining to the operation's result.

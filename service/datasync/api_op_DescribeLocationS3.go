@@ -63,9 +63,9 @@ type DescribeLocationS3Output struct {
 	// Specifies the Amazon Resource Name (ARN) of the Identity and Access Management
 	// (IAM) role that DataSync uses to access your S3 bucket.
 	//
-	// For more information, see [Accessing S3 buckets].
+	// For more information, see [Providing DataSync access to S3 buckets].
 	//
-	// [Accessing S3 buckets]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access
+	// [Providing DataSync access to S3 buckets]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access
 	S3Config *types.S3Config
 
 	// When Amazon S3 is a destination location, this is the storage class that you

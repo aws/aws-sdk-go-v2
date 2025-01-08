@@ -37,6 +37,13 @@ type GetCostCategoriesInput struct {
 	// This member is required.
 	TimePeriod *types.DateInterval
 
+	// The Amazon Resource Name (ARN) that uniquely identifies a specific billing
+	// view. The ARN is used to specify which particular billing view you want to
+	// interact with or retrieve information from when making API calls related to
+	// Amazon Web Services Billing and Cost Management features. The BillingViewArn can
+	// be retrieved by calling the ListBillingViews API.
+	BillingViewArn *string
+
 	// The unique name of the Cost Category.
 	CostCategoryName *string
 

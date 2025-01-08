@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Client method for returning the configuration information and metadata of the
-// specified user pool app client.
+// Given an app client ID, returns configuration information. This operation is
+// useful when you want to inspect an existing app client and programmatically
+// replicate the configuration to another app client. For more information about
+// app clients, see [App clients].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -26,6 +28,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [App clients]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) DescribeUserPoolClient(ctx context.Context, params *DescribeUserPoolClientInput, optFns ...func(*Options)) (*DescribeUserPoolClientOutput, error) {
 	if params == nil {
@@ -45,12 +48,12 @@ func (c *Client) DescribeUserPoolClient(ctx context.Context, params *DescribeUse
 // Represents the request to describe a user pool client.
 type DescribeUserPoolClientInput struct {
 
-	// The app client ID of the app associated with the user pool.
+	// The ID of the app client that you want to describe.
 	//
 	// This member is required.
 	ClientId *string
 
-	// The user pool ID for the user pool you want to describe.
+	// The ID of the user pool that contains the app client you want to describe.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -62,7 +65,7 @@ type DescribeUserPoolClientInput struct {
 // pool client.
 type DescribeUserPoolClientOutput struct {
 
-	// The user pool client from a server response to describe the user pool client.
+	// The details of the request app client.
 	UserPoolClient *types.UserPoolClientType
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,9 @@ import (
 )
 
 // Deletes a managed login branding style. When you delete a style, you delete the
-// branding association for an app client and restore it to default settings.
+// branding association for an app client. When an app client doesn't have a style
+// assigned, your managed login pages for that app client are nonfunctional until
+// you create a new style or switch the domain branding version.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM

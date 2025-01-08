@@ -974,6 +974,7 @@ const (
 	PromptTypeOrchestration                   PromptType = "ORCHESTRATION"
 	PromptTypePostProcessing                  PromptType = "POST_PROCESSING"
 	PromptTypeKnowledgeBaseResponseGeneration PromptType = "KNOWLEDGE_BASE_RESPONSE_GENERATION"
+	PromptTypeMemorySummarization             PromptType = "MEMORY_SUMMARIZATION"
 )
 
 // Values returns all known values for PromptType. Note that this can be expanded
@@ -986,6 +987,7 @@ func (PromptType) Values() []PromptType {
 		"ORCHESTRATION",
 		"POST_PROCESSING",
 		"KNOWLEDGE_BASE_RESPONSE_GENERATION",
+		"MEMORY_SUMMARIZATION",
 	}
 }
 
@@ -1144,7 +1146,8 @@ type SharePointAuthType string
 
 // Enum values for SharePointAuthType
 const (
-	SharePointAuthTypeOauth2ClientCredentials SharePointAuthType = "OAUTH2_CLIENT_CREDENTIALS"
+	SharePointAuthTypeOauth2ClientCredentials                  SharePointAuthType = "OAUTH2_CLIENT_CREDENTIALS"
+	SharePointAuthTypeOauth2SharepointAppOnlyClientCredentials SharePointAuthType = "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS"
 )
 
 // Values returns all known values for SharePointAuthType. Note that this can be
@@ -1154,6 +1157,7 @@ const (
 func (SharePointAuthType) Values() []SharePointAuthType {
 	return []SharePointAuthType{
 		"OAUTH2_CLIENT_CREDENTIALS",
+		"OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS",
 	}
 }
 

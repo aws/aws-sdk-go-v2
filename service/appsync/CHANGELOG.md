@@ -1,3 +1,11 @@
+# v1.41.0 (2025-01-02)
+
+* **Feature**: Modify UpdateGraphQLAPI operation and flag authenticationType as required.
+
+# v1.40.3 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.2 (2024-12-09)
 
 * **Documentation**: Provides description of new Amazon Bedrock runtime datasource.

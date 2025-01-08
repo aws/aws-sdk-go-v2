@@ -10207,7 +10207,8 @@
                 "authenticationType": {
                     "target": "com.amazonaws.appsync#AuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new authentication type for the <code>GraphqlApi</code> object.</p>"
+                        "smithy.api#documentation": "<p>The new authentication type for the <code>GraphqlApi</code> object.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "userPoolConfig": {

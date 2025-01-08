@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// When given the ID of a user pool app client, returns detailed information about
-// the style assigned to the app client.
+// Given the ID of a user pool app client, returns detailed information about the
+// style assigned to the app client.
 func (c *Client) DescribeManagedLoginBrandingByClient(ctx context.Context, params *DescribeManagedLoginBrandingByClientInput, optFns ...func(*Options)) (*DescribeManagedLoginBrandingByClientOutput, error) {
 	if params == nil {
 		params = &DescribeManagedLoginBrandingByClientInput{}

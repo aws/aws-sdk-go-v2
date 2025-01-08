@@ -1,3 +1,11 @@
+# v1.31.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.31.0 (2024-12-17)
+
+* **Feature**: Add support to toggle outbound IPv6 traffic on canaries connected to dualstack subnets.  This behavior can be controlled via the new Ipv6AllowedForDualStack parameter of the VpcConfig input object in CreateCanary and UpdateCanary APIs.
+
 # v1.30.2 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

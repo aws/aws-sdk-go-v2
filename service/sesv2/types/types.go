@@ -643,6 +643,19 @@ type Destination struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains configuration details of multi-region endpoint
+// (global-endpoint).
+type Details struct {
+
+	// A list of route configuration details. Must contain exactly one route
+	// configuration.
+	//
+	// This member is required.
+	RoutesDetails []RouteDetails
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information about the DKIM authentication status for an
 // email identity.
 //
@@ -1944,6 +1957,40 @@ type MetricsDataSource struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains multi-region endpoint (global-endpoint) properties.
+type MultiRegionEndpoint struct {
+
+	// The time stamp of when the multi-region endpoint (global-endpoint) was created.
+	CreatedTimestamp *time.Time
+
+	// The ID of the multi-region endpoint (global-endpoint).
+	EndpointId *string
+
+	// The name of the multi-region endpoint (global-endpoint).
+	EndpointName *string
+
+	// The time stamp of when the multi-region endpoint (global-endpoint) was last
+	// updated.
+	LastUpdatedTimestamp *time.Time
+
+	// Primary and secondary regions between which multi-region endpoint splits
+	// sending traffic.
+	Regions []string
+
+	// The status of the multi-region endpoint (global-endpoint).
+	//
+	//   - CREATING – The resource is being provisioned.
+	//
+	//   - READY – The resource is ready to use.
+	//
+	//   - FAILED – The resource failed to be provisioned.
+	//
+	//   - DELETING – The resource is being deleted as requested.
+	Status Status
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information about email that was sent from the selected
 // domain.
 type OverallVolume struct {
@@ -2125,6 +2172,29 @@ type ReviewDetails struct {
 	//   - FAILED – An internal error occurred and we didn't receive your appeal. You
 	//   can submit your appeal again.
 	Status ReviewStatus
+
+	noSmithyDocumentSerde
+}
+
+// An object which contains an AWS-Region and routing status.
+type Route struct {
+
+	// The name of an AWS-Region.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains route configuration. Includes secondary region name.
+type RouteDetails struct {
+
+	// The name of an AWS-Region to be a secondary region for the multi-region
+	// endpoint (global-endpoint).
+	//
+	// This member is required.
+	Region *string
 
 	noSmithyDocumentSerde
 }

@@ -19,6 +19,20 @@ type AcceptGroupingRecommendationEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates the Amazon CloudWatch alarm detected while running an assessment.
+type Alarm struct {
+
+	// Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.
+	AlarmArn *string
+
+	// Indicates the source of the Amazon CloudWatch alarm. That is, it indicates if
+	// the alarm was created using Resilience Hub recommendation ( AwsResilienceHub ),
+	// or if you had created the alarm in Amazon CloudWatch ( Customer ).
+	Source *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a recommendation for a CloudWatch alarm.
 type AlarmRecommendation struct {
 
@@ -483,7 +497,7 @@ type AppVersionSummary struct {
 type AssessmentRiskRecommendation struct {
 
 	// Indicates the Application Components (AppComponents) that were assessed as part
-	// of the assessnent and are associated with the identified risk and
+	// of the assessment and are associated with the identified risk and
 	// recommendation.
 	//
 	// This property is available only in the US East (N. Virginia) Region.
@@ -563,6 +577,9 @@ type BatchUpdateRecommendationStatusSuccessfulEntry struct {
 	//
 	// This member is required.
 	ReferenceId *string
+
+	// Indicates the identifier of an AppComponent.
+	AppComponentId *string
 
 	// Indicates the reason for excluding an operational recommendation.
 	ExcludeReason ExcludeRecommendationReason
@@ -847,6 +864,18 @@ type EventSubscription struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates the FIS experiment detected while running an assessment.
+type Experiment struct {
+
+	// Amazon Resource Name (ARN) of the FIS experiment.
+	ExperimentArn *string
+
+	// Identifier of the FIS experiment template.
+	ExperimentTemplateId *string
+
+	noSmithyDocumentSerde
+}
+
 // Indicates the accepted grouping recommendation whose implementation failed.
 type FailedGroupingRecommendationEntry struct {
 
@@ -1051,6 +1080,11 @@ type PermissionModel struct {
 	// account that will be assumed by Resilience Hub Service Principle to obtain a
 	// read-only access to your application resources while running an assessment.
 	//
+	// If your IAM role includes a path, you must include the path in the
+	// invokerRoleName parameter. For example, if your IAM role's ARN is
+	// arn:aws:iam:123456789012:role/my-path/role-name , you should pass
+	// my-path/role-name .
+	//
 	//   - You must have iam:passRole permission for this role while creating or
 	//   updating the application.
 	//
@@ -1220,11 +1254,19 @@ type RecommendationItem struct {
 	// Specifies if the recommendation has already been implemented.
 	AlreadyImplemented *bool
 
+	// Indicates the previously implemented Amazon CloudWatch alarm discovered by
+	// Resilience Hub.
+	DiscoveredAlarm *Alarm
+
 	// Indicates the reason for excluding an operational recommendation.
 	ExcludeReason ExcludeRecommendationReason
 
 	// Indicates if an operational recommendation item is excluded.
 	Excluded *bool
+
+	// Indicates the experiment created in FIS that was discovered by Resilience Hub,
+	// which matches the recommendation.
+	LatestDiscoveredExperiment *Experiment
 
 	// Identifier of the resource.
 	ResourceId *string
@@ -1635,6 +1677,9 @@ type TestRecommendation struct {
 	// This member is required.
 	ReferenceId *string
 
+	// Indicates the identifier of the AppComponent.
+	AppComponentId *string
+
 	// Name of the Application Component.
 	AppComponentName *string
 
@@ -1731,6 +1776,9 @@ type UpdateRecommendationStatusRequestEntry struct {
 	//
 	// This member is required.
 	ReferenceId *string
+
+	// Indicates the identifier of the AppComponent.
+	AppComponentId *string
 
 	// Indicates the reason for excluding an operational recommendation.
 	ExcludeReason ExcludeRecommendationReason

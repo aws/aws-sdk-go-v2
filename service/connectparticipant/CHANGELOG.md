@@ -1,3 +1,11 @@
+# v1.28.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.0 (2024-12-18)
+
+* **Feature**: This release adds support for the GetAuthenticationUrl and CancelParticipantAuthentication APIs used for customer authentication within Amazon Connect chats. There are also minor updates to the GetAttachment API.
+
 # v1.27.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

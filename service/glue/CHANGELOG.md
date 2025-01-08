@@ -1,3 +1,15 @@
+# v1.105.0 (2024-12-23)
+
+* **Feature**: Add IncludeRoot parameters to GetCatalogs API to return root catalog.
+
+# v1.104.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.104.0 (2024-12-12)
+
+* **Feature**: To support customer-managed encryption in Data Quality to allow customers encrypt data with their own KMS key, we will add a DataQualityEncryption field to the SecurityConfiguration API where customers can provide their KMS keys.
+
 # v1.103.0 (2024-12-03.2)
 
 * **Feature**: This release includes(1)Zero-ETL integration to ingest data from 3P SaaS and DynamoDB to Redshift/Redlake (2)new properties on Connections to enable reuse; new connection APIs for retrieve/preview metadata (3)support of CRUD operations for Multi-catalog (4)support of automatic statistics collections

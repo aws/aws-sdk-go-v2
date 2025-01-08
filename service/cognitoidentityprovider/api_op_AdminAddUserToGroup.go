@@ -49,7 +49,8 @@ type AdminAddUserToGroupInput struct {
 	// This member is required.
 	GroupName *string
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool that contains the group that you want to add the user
+	// to.
 	//
 	// This member is required.
 	UserPoolId *string

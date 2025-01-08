@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a container group definition. You can delete a container group
-// definition if there are no fleets using the definition.
+// Deletes a container group definition.
 //
 // Request options:
 //
@@ -26,6 +25,20 @@ import (
 //     container group definition name and the number of versions to retain. For
 //     example, set VersionCountToRetain to 5 to delete all but the five most recent
 //     versions.
+//
+// # Result
+//
+// If successful, Amazon GameLift removes the container group definition versions
+// that you request deletion for. This request will fail for any requested versions
+// if the following is true:
+//
+//   - If the version is being used in an active fleet
+//
+//   - If the version is being deployed to a fleet in a deployment that's
+//     currently in progress.
+//
+//   - If the version is designated as a rollback definition in a fleet deployment
+//     that's currently in progress.
 //
 // # Learn more
 //

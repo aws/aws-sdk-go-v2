@@ -1,3 +1,23 @@
+# v1.123.1 (2025-01-02)
+
+* No change notes available for this release.
+
+# v1.123.0 (2024-12-20)
+
+* **Feature**: This release supports adding NotAttributeCondition and Range to the RoutingCriteria object.
+
+# v1.122.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.122.0 (2024-12-18)
+
+* **Feature**: This release adds support for the UpdateParticipantAuthentication API used for customer authentication within Amazon Connect chats.
+
+# v1.121.0 (2024-12-12)
+
+* **Feature**: Configure holidays and other overrides to hours of operation in advance. During contact handling, Amazon Connect automatically checks for overrides and provides customers with an appropriate flow path. After an override period passes call center automatically reverts to standard hours of operation.
+
 # v1.120.0 (2024-12-10)
 
 * **Feature**: Add support for Push Notifications for Amazon Connect chat. With Push Notifications enabled an alert could be sent to customers about new messages even when they aren't actively using the mobile application.

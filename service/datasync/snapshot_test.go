@@ -698,6 +698,66 @@ func TestCheckSnapshot_UpdateLocationAzureBlob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateLocationEfs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationEfs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLocationEfs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateLocationFsxLustre(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationFsxLustre(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLocationFsxLustre")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateLocationFsxOntap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationFsxOntap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLocationFsxOntap")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateLocationFsxOpenZfs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationFsxOpenZfs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLocationFsxOpenZfs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateLocationFsxWindows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationFsxWindows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLocationFsxWindows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateLocationHdfs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateLocationHdfs(context.Background(), nil, func(o *Options) {
@@ -727,6 +787,18 @@ func TestCheckSnapshot_UpdateLocationObjectStorage(t *testing.T) {
 	_, err := svc.UpdateLocationObjectStorage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateLocationObjectStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateLocationS3(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationS3(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLocationS3")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1417,6 +1489,66 @@ func TestUpdateSnapshot_UpdateLocationAzureBlob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateLocationEfs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationEfs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLocationEfs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLocationFsxLustre(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationFsxLustre(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLocationFsxLustre")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLocationFsxOntap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationFsxOntap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLocationFsxOntap")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLocationFsxOpenZfs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationFsxOpenZfs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLocationFsxOpenZfs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLocationFsxWindows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationFsxWindows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLocationFsxWindows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateLocationHdfs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateLocationHdfs(context.Background(), nil, func(o *Options) {
@@ -1446,6 +1578,18 @@ func TestUpdateSnapshot_UpdateLocationObjectStorage(t *testing.T) {
 	_, err := svc.UpdateLocationObjectStorage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLocationObjectStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLocationS3(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLocationS3(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLocationS3")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

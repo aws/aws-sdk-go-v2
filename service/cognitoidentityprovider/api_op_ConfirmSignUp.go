@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This public API operation provides a code that Amazon Cognito sent to your user
+// This public API operation submits a code that Amazon Cognito sent to your user
 // when they signed up in your user pool via the [SignUp]API operation. After your user
 // enters their code, they confirm ownership of the email address or phone number
 // that they provided, and their user account becomes active. Depending on your
@@ -57,7 +57,8 @@ type ConfirmSignUpInput struct {
 	// This member is required.
 	ClientId *string
 
-	// The confirmation code sent by a user's request to confirm registration.
+	// The confirmation code that your user pool sent in response to the SignUp
+	// request.
 	//
 	// This member is required.
 	ConfirmationCode *string
@@ -89,8 +90,8 @@ type ConfirmSignUpInput struct {
 	//
 	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
 	//
-	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
-	// do the following:
+	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
+	// the following:
 	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
@@ -99,22 +100,36 @@ type ConfirmSignUpInput struct {
 	//
 	//   - Validate the ClientMetadata value.
 	//
-	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
-	//   sensitive information.
+	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
+	//   parameter.
 	//
 	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
-	// Boolean to be specified to force user confirmation irrespective of existing
-	// alias. By default set to False . If this parameter is set to True and the phone
-	// number/email used for sign up confirmation already exists as an alias with a
-	// different user, the API call will migrate the alias from the previous user to
-	// the newly created user being confirmed. If set to False , the API will throw an
+	// When true , forces user confirmation despite any existing aliases. Defaults to
+	// false . A value of true migrates the alias from an existing user to the new
+	// user if an existing user already has the phone number or email address as an
+	// alias.
+	//
+	// Say, for example, that an existing user has an email attribute of
+	// bob@example.com and email is an alias in your user pool. If the new user also
+	// has an email of bob@example.com and your ConfirmSignUp response sets
+	// ForceAliasCreation to true , the new user can sign in with a username of
+	// bob@example.com and the existing user can no longer do so.
+	//
+	// If false and an attribute belongs to an existing alias, this request returns an
 	// AliasExistsException error.
+	//
+	// For more information about sign-in aliases, see [Customizing sign-in attributes].
+	//
+	// [Customizing sign-in attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-aliases
 	ForceAliasCreation bool
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
-	// of a user pool client and username plus the client ID in the message.
+	// of a user pool client and username plus the client ID in the message. For more
+	// information about SecretHash , see [Computing secret hash values].
+	//
+	// [Computing secret hash values]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
 	SecretHash *string
 
 	// The optional session ID from a SignUp API request. You can sign in a user
@@ -125,6 +140,10 @@ type ConfirmSignUpInput struct {
 	// address, or location. Amazon Cognito advanced security evaluates the risk of an
 	// authentication event based on the context that your app generates and passes to
 	// Amazon Cognito when it makes API requests.
+	//
+	// For more information, see [Collecting data for threat protection in applications].
+	//
+	// [Collecting data for threat protection in applications]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html
 	UserContextData *types.UserContextDataType
 
 	noSmithyDocumentSerde
@@ -133,10 +152,10 @@ type ConfirmSignUpInput struct {
 // Represents the response from the server for the registration confirmation.
 type ConfirmSignUpOutput struct {
 
-	// You can automatically sign users in with the one-time password that they
+	// A session identifier that you can use to immediately sign in the confirmed
+	// user. You can automatically sign users in with the one-time password that they
 	// provided in a successful ConfirmSignUp request. To do this, pass the Session
-	// parameter from the ConfirmSignUp response in the Session parameter of an [InitiateAuth] or [AdminInitiateAuth]
-	// request.
+	// parameter from this response in the Session parameter of an [InitiateAuth] or [AdminInitiateAuth] request.
 	//
 	// [AdminInitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html
 	// [InitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html

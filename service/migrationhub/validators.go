@@ -50,6 +50,26 @@ func (m *validateOpAssociateDiscoveredResource) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateSourceResource struct {
+}
+
+func (*validateOpAssociateSourceResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateSourceResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateSourceResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateSourceResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateProgressUpdateStream struct {
 }
 
@@ -170,6 +190,26 @@ func (m *validateOpDisassociateDiscoveredResource) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateSourceResource struct {
+}
+
+func (*validateOpDisassociateSourceResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateSourceResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateSourceResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateSourceResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportMigrationTask struct {
 }
 
@@ -225,6 +265,46 @@ func (m *validateOpListDiscoveredResources) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDiscoveredResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMigrationTaskUpdates struct {
+}
+
+func (*validateOpListMigrationTaskUpdates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMigrationTaskUpdates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMigrationTaskUpdatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMigrationTaskUpdatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSourceResources struct {
+}
+
+func (*validateOpListSourceResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSourceResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSourceResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSourceResourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -298,6 +378,10 @@ func addOpAssociateDiscoveredResourceValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpAssociateDiscoveredResource{}, middleware.After)
 }
 
+func addOpAssociateSourceResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateSourceResource{}, middleware.After)
+}
+
 func addOpCreateProgressUpdateStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProgressUpdateStream{}, middleware.After)
 }
@@ -322,6 +406,10 @@ func addOpDisassociateDiscoveredResourceValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpDisassociateDiscoveredResource{}, middleware.After)
 }
 
+func addOpDisassociateSourceResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateSourceResource{}, middleware.After)
+}
+
 func addOpImportMigrationTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportMigrationTask{}, middleware.After)
 }
@@ -332,6 +420,14 @@ func addOpListCreatedArtifactsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpListDiscoveredResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDiscoveredResources{}, middleware.After)
+}
+
+func addOpListMigrationTaskUpdatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMigrationTaskUpdates{}, middleware.After)
+}
+
+func addOpListSourceResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSourceResources{}, middleware.After)
 }
 
 func addOpNotifyApplicationStateValidationMiddleware(stack *middleware.Stack) error {
@@ -411,6 +507,21 @@ func validateResourceAttributeList(v []types.ResourceAttribute) error {
 	}
 }
 
+func validateSourceResource(v *types.SourceResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTask(v *types.Task) error {
 	if v == nil {
 		return nil
@@ -467,6 +578,31 @@ func validateOpAssociateDiscoveredResourceInput(v *AssociateDiscoveredResourceIn
 	} else if v.DiscoveredResource != nil {
 		if err := validateDiscoveredResource(v.DiscoveredResource); err != nil {
 			invalidParams.AddNested("DiscoveredResource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateSourceResourceInput(v *AssociateSourceResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateSourceResourceInput"}
+	if v.ProgressUpdateStream == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
+	}
+	if v.SourceResource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceResource"))
+	} else if v.SourceResource != nil {
+		if err := validateSourceResource(v.SourceResource); err != nil {
+			invalidParams.AddNested("SourceResource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -581,6 +717,27 @@ func validateOpDisassociateDiscoveredResourceInput(v *DisassociateDiscoveredReso
 	}
 }
 
+func validateOpDisassociateSourceResourceInput(v *DisassociateSourceResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateSourceResourceInput"}
+	if v.ProgressUpdateStream == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
+	}
+	if v.SourceResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceResourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportMigrationTaskInput(v *ImportMigrationTaskInput) error {
 	if v == nil {
 		return nil
@@ -622,6 +779,42 @@ func validateOpListDiscoveredResourcesInput(v *ListDiscoveredResourcesInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListDiscoveredResourcesInput"}
+	if v.ProgressUpdateStream == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMigrationTaskUpdatesInput(v *ListMigrationTaskUpdatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMigrationTaskUpdatesInput"}
+	if v.ProgressUpdateStream == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSourceResourcesInput(v *ListSourceResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSourceResourcesInput"}
 	if v.ProgressUpdateStream == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
 	}

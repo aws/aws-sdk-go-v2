@@ -41,6 +41,9 @@ type DeleteAgentMemoryInput struct {
 	// The unique identifier of the memory.
 	MemoryId *string
 
+	// The unique session identifier of the memory.
+	SessionId *string
+
 	noSmithyDocumentSerde
 }
 

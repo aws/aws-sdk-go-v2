@@ -88,6 +88,8 @@ const (
 	ClusterStateInitialized          ClusterState = "INITIALIZED"
 	ClusterStateActive               ClusterState = "ACTIVE"
 	ClusterStateUpdateInProgress     ClusterState = "UPDATE_IN_PROGRESS"
+	ClusterStateModifyInProgress     ClusterState = "MODIFY_IN_PROGRESS"
+	ClusterStateRollbackInProgress   ClusterState = "ROLLBACK_IN_PROGRESS"
 	ClusterStateDeleteInProgress     ClusterState = "DELETE_IN_PROGRESS"
 	ClusterStateDeleted              ClusterState = "DELETED"
 	ClusterStateDegraded             ClusterState = "DEGRADED"
@@ -105,6 +107,8 @@ func (ClusterState) Values() []ClusterState {
 		"INITIALIZED",
 		"ACTIVE",
 		"UPDATE_IN_PROGRESS",
+		"MODIFY_IN_PROGRESS",
+		"ROLLBACK_IN_PROGRESS",
 		"DELETE_IN_PROGRESS",
 		"DELETED",
 		"DEGRADED",
@@ -133,5 +137,24 @@ func (HsmState) Values() []HsmState {
 		"DEGRADED",
 		"DELETE_IN_PROGRESS",
 		"DELETED",
+	}
+}
+
+type NetworkType string
+
+// Enum values for NetworkType
+const (
+	NetworkTypeIpv4      NetworkType = "IPV4"
+	NetworkTypeDualstack NetworkType = "DUALSTACK"
+)
+
+// Values returns all known values for NetworkType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkType) Values() []NetworkType {
+	return []NetworkType{
+		"IPV4",
+		"DUALSTACK",
 	}
 }

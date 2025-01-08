@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing Amazon Bedrock Keystone DataAutomationProject
+// Deletes an existing Amazon Bedrock Data Automation Project
 func (c *Client) DeleteDataAutomationProject(ctx context.Context, params *DeleteDataAutomationProjectInput, optFns ...func(*Options)) (*DeleteDataAutomationProjectOutput, error) {
 	if params == nil {
 		params = &DeleteDataAutomationProjectInput{}

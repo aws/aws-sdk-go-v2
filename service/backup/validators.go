@@ -810,6 +810,26 @@ func (m *validateOpGetLegalHold) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRecoveryPointIndexDetails struct {
+}
+
+func (*validateOpGetRecoveryPointIndexDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecoveryPointIndexDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecoveryPointIndexDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecoveryPointIndexDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetRecoveryPointRestoreMetadata struct {
 }
 
@@ -1350,6 +1370,26 @@ func (m *validateOpUpdateFramework) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRecoveryPointIndexSettings struct {
+}
+
+func (*validateOpUpdateRecoveryPointIndexSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRecoveryPointIndexSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRecoveryPointIndexSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRecoveryPointIndexSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRecoveryPointLifecycle struct {
 }
 
@@ -1590,6 +1630,10 @@ func addOpGetLegalHoldValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLegalHold{}, middleware.After)
 }
 
+func addOpGetRecoveryPointIndexDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecoveryPointIndexDetails{}, middleware.After)
+}
+
 func addOpGetRecoveryPointRestoreMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRecoveryPointRestoreMetadata{}, middleware.After)
 }
@@ -1696,6 +1740,10 @@ func addOpUpdateBackupPlanValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateFrameworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFramework{}, middleware.After)
+}
+
+func addOpUpdateRecoveryPointIndexSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRecoveryPointIndexSettings{}, middleware.After)
 }
 
 func addOpUpdateRecoveryPointLifecycleValidationMiddleware(stack *middleware.Stack) error {
@@ -2768,6 +2816,24 @@ func validateOpGetLegalHoldInput(v *GetLegalHoldInput) error {
 	}
 }
 
+func validateOpGetRecoveryPointIndexDetailsInput(v *GetRecoveryPointIndexDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecoveryPointIndexDetailsInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetRecoveryPointRestoreMetadataInput(v *GetRecoveryPointRestoreMetadataInput) error {
 	if v == nil {
 		return nil
@@ -3219,6 +3285,27 @@ func validateOpUpdateFrameworkInput(v *UpdateFrameworkInput) error {
 		if err := validateFrameworkControls(v.FrameworkControls); err != nil {
 			invalidParams.AddNested("FrameworkControls", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRecoveryPointIndexSettingsInput(v *UpdateRecoveryPointIndexSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRecoveryPointIndexSettingsInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if len(v.Index) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Index"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

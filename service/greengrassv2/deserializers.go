@@ -2534,6 +2534,15 @@ func awsRestjson1_deserializeOpDocumentGetCoreDeviceOutput(v **GetCoreDeviceOutp
 				sv.Platform = ptr.String(jtv)
 			}
 
+		case "runtime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoreDeviceRuntimeString to be of type string, got %T instead", value)
+				}
+				sv.Runtime = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6258,6 +6267,15 @@ func awsRestjson1_deserializeDocumentCoreDevice(v **types.CoreDevice, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "architecture":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoreDeviceArchitectureString to be of type string, got %T instead", value)
+				}
+				sv.Architecture = ptr.String(jtv)
+			}
+
 		case "coreDeviceThingName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6281,6 +6299,24 @@ func awsRestjson1_deserializeDocumentCoreDevice(v **types.CoreDevice, value inte
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "platform":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoreDevicePlatformString to be of type string, got %T instead", value)
+				}
+				sv.Platform = ptr.String(jtv)
+			}
+
+		case "runtime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoreDeviceRuntimeString to be of type string, got %T instead", value)
+				}
+				sv.Runtime = ptr.String(jtv)
 			}
 
 		case "status":

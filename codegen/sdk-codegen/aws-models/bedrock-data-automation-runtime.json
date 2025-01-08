@@ -33,7 +33,7 @@
                     "name": "bedrock"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "Amazon Bedrock Keystone Runtime",
+                "smithy.api#documentation": "Amazon Bedrock Data Automation Runtime",
                 "smithy.api#title": "Runtime for Amazon Bedrock Data Automation",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",

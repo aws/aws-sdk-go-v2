@@ -1179,6 +1179,9 @@ type Channel struct {
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass ChannelClass
 
+	// Requested engine version for this channel.
+	ChannelEngineVersion *ChannelEngineVersionResponse
+
 	// A list of destinations of the channel. For UDP outputs, there is one
 	// destination per output. For other types (HLS, for example), there is one
 	// destination per packager.
@@ -1238,6 +1241,28 @@ type ChannelEgressEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// Placeholder documentation for ChannelEngineVersionRequest
+type ChannelEngineVersionRequest struct {
+
+	// The build identifier of the engine version to use for this channel. Specify
+	// 'DEFAULT' to reset to the default version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for ChannelEngineVersionResponse
+type ChannelEngineVersionResponse struct {
+
+	// The UTC time when the version expires.
+	ExpirationDate *time.Time
+
+	// The build identifier for this version of the channel version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Placeholder documentation for ChannelSummary
 type ChannelSummary struct {
 
@@ -1253,6 +1278,9 @@ type ChannelSummary struct {
 	// The class for this channel. STANDARD for a channel with two pipelines or
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass ChannelClass
+
+	// The engine version that you requested for this channel.
+	ChannelEngineVersion *ChannelEngineVersionResponse
 
 	// A list of destinations of the channel. For UDP outputs, there is one
 	// destination per output. For other types (HLS, for example), there is one
@@ -1291,6 +1319,9 @@ type ChannelSummary struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]string
+
+	// The engine version that the running pipelines are using.
+	UsedChannelEngineVersions []ChannelEngineVersionResponse
 
 	// Settings for any VPC outputs.
 	Vpc *VpcOutputSettingsDescription
@@ -1510,10 +1541,35 @@ type CmafIngestGroupSettings struct {
 	// This member is required.
 	Destination *OutputLocationRef
 
+	// If set to passthrough, passes any KLV data from the input source to this output.
+	KlvBehavior CmafKLVBehavior
+
+	// Change the modifier that MediaLive automatically adds to the Streams() name
+	// that identifies a KLV track. The default is "klv", which means the default name
+	// will be Streams(klv.cmfm). Any string you enter here will replace the "klv"
+	// string.\nThe modifier can only contain: numbers, letters, plus (+), minus (-),
+	// underscore (_) and period (.) and has a maximum length of 100 characters.
+	KlvNameModifier *string
+
 	// If set to passthrough, Nielsen inaudible tones for media tracking will be
 	// detected in the input audio and an equivalent ID3 tag will be inserted in the
 	// output.
 	NielsenId3Behavior CmafNielsenId3Behavior
+
+	// Change the modifier that MediaLive automatically adds to the Streams() name
+	// that identifies a Nielsen ID3 track. The default is "nid3", which means the
+	// default name will be Streams(nid3.cmfm). Any string you enter here will replace
+	// the "nid3" string.\nThe modifier can only contain: numbers, letters, plus (+),
+	// minus (-), underscore (_) and period (.) and has a maximum length of 100
+	// characters.
+	NielsenId3NameModifier *string
+
+	// Change the modifier that MediaLive automatically adds to the Streams() name for
+	// a SCTE 35 track. The default is "scte", which means the default name will be
+	// Streams(scte.cmfm). Any string you enter here will replace the "scte"
+	// string.\nThe modifier can only contain: numbers, letters, plus (+), minus (-),
+	// underscore (_) and period (.) and has a maximum length of 100 characters.
+	Scte35NameModifier *string
 
 	// Type of scte35 track to add. none or scte35WithoutSegmentation
 	Scte35Type Scte35Type
@@ -2428,7 +2484,9 @@ type Fmp4HlsSettings struct {
 	// output.
 	NielsenId3Behavior Fmp4NielsenId3Behavior
 
-	// When set to passthrough, timed metadata is passed through from input to output.
+	// Set to PASSTHROUGH to enable ID3 metadata insertion. To include metadata, you
+	// configure other parameters in the output group or individual outputs, or you add
+	// an ID3 action to the channel schedule.
 	TimedMetadataBehavior Fmp4TimedMetadataBehavior
 
 	noSmithyDocumentSerde
@@ -3435,16 +3493,19 @@ type HlsGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for the action to insert a user-defined ID3 tag in each HLS segment
+// Settings for the action to insert ID3 metadata in every segment, in HLS output
+// groups.
 type HlsId3SegmentTaggingScheduleActionSettings struct {
 
-	// Base64 string formatted according to the ID3 specification:
-	// http://id3.org/id3v2.4.0-structure
+	// Complete this parameter if you want to specify the entire ID3 metadata. Enter a
+	// base64 string that contains one or more fully formed ID3 tags, according to the
+	// ID3 specification: http://id3.org/id3v2.4.0-structure
 	Id3 *string
 
-	// ID3 tag to insert into each segment. Supports special keyword identifiers to
-	// substitute in segment-related values.\nSupported keyword identifiers:
-	// https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html
+	// Complete this parameter if you want to specify only the metadata, not the
+	// entire frame. MediaLive will insert the metadata in a TXXX frame. Enter the
+	// value as plain text. You can include standard MediaLive variable data such as
+	// the current segment number.
 	Tag *string
 
 	noSmithyDocumentSerde
@@ -3557,11 +3618,12 @@ type HlsSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for the action to emit HLS metadata
+// Settings for the action to insert ID3 metadata (as a one-time action) in HLS
+// output groups.
 type HlsTimedMetadataScheduleActionSettings struct {
 
-	// Base64 string formatted according to the ID3 specification:
-	// http://id3.org/id3v2.4.0-structure
+	// Enter a base64 string that contains one or more fully formed ID3 tags.See the
+	// ID3 specification: http://id3.org/id3v2.4.0-structure
 	//
 	// This member is required.
 	Id3 *string
@@ -4776,7 +4838,9 @@ type M3u8Settings struct {
 	// entered as a decimal or hexadecimal value.
 	Scte35Pid *string
 
-	// When set to passthrough, timed metadata is passed through from input to output.
+	// Set to PASSTHROUGH to enable ID3 metadata insertion. To include metadata, you
+	// configure other parameters in the output group or individual outputs, or you add
+	// an ID3 action to the channel schedule.
 	TimedMetadataBehavior M3u8TimedMetadataBehavior
 
 	// Packet Identifier (PID) of the timed metadata stream in the transport stream.
@@ -4876,12 +4940,22 @@ type MediaPackageGroupSettings struct {
 // MediaPackage Output Destination Settings
 type MediaPackageOutputDestinationSettings struct {
 
+	// Name of the channel group in MediaPackageV2. Only use if you are sending CMAF
+	// Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses
+	// MediaPackage v2.
+	ChannelGroup *string
+
 	// ID of the channel in MediaPackage that is the destination for this output
 	// group. You do not need to specify the individual inputs in MediaPackage;
 	// MediaLive will handle the connection of the two MediaLive pipelines to the two
 	// MediaPackage inputs. The MediaPackage channel and MediaLive channel must be in
 	// the same region.
 	ChannelId *string
+
+	// Name of the channel in MediaPackageV2. Only use if you are sending CMAF Ingest
+	// output to a CMAF ingest endpoint on a MediaPackage channel that uses
+	// MediaPackage v2.
+	ChannelName *string
 
 	noSmithyDocumentSerde
 }
@@ -6092,6 +6166,9 @@ type PipelineDetail struct {
 	// The current URI being used for HTML5 motion graphics for this pipeline.
 	ActiveMotionGraphicsUri *string
 
+	// Current engine version of the encoder for this pipeline.
+	ChannelEngineVersion *ChannelEngineVersionResponse
+
 	// Pipeline ID
 	PipelineId *string
 
@@ -6399,10 +6476,10 @@ type ScheduleAction struct {
 // Holds the settings for a single schedule action.
 type ScheduleActionSettings struct {
 
-	// Action to insert HLS ID3 segment tagging
+	// Action to insert ID3 metadata in every segment, in HLS output groups
 	HlsId3SegmentTaggingSettings *HlsId3SegmentTaggingScheduleActionSettings
 
-	// Action to insert HLS metadata
+	// Action to insert ID3 metadata once, in HLS output groups
 	HlsTimedMetadataSettings *HlsTimedMetadataScheduleActionSettings
 
 	// Action to prepare an input for a future immediate input switch

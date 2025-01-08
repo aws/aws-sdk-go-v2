@@ -125,7 +125,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an attribute for describing the schema for the table and\n            indexes.</p>"
+                "smithy.api#documentation": "<p>Represents an attribute for describing the schema for the table and indexes.</p>"
             }
         },
         "com.amazonaws.dynamodb#AttributeDefinitions": {
@@ -1009,7 +1009,7 @@
                 "Item": {
                     "target": "com.amazonaws.dynamodb#AttributeMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The item which caused the condition check to fail. This will be set if ReturnValuesOnConditionCheckFailure is specified as <code>ALL_OLD</code>.</p>"
+                        "smithy.api#documentation": "<p>The item which caused the condition check to fail. This will be set if\n            ReturnValuesOnConditionCheckFailure is specified as <code>ALL_OLD</code>.</p>"
                     }
                 }
             },
@@ -1575,27 +1575,27 @@
                 "TableName": {
                     "target": "com.amazonaws.dynamodb#TableArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the table for the check item request. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.</p>",
+                        "smithy.api#documentation": "<p>Name of the table for the check item request. You can also provide the Amazon Resource Name (ARN) of\n            the table in this parameter.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ConditionExpression": {
                     "target": "com.amazonaws.dynamodb#ConditionExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A condition that must be satisfied in order for a conditional update to\n            succeed. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html\">Condition expressions</a> in the <i>Amazon DynamoDB Developer\n                    Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>A condition that must be satisfied in order for a conditional update to succeed. For\n            more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html\">Condition expressions</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ExpressionAttributeNames": {
                     "target": "com.amazonaws.dynamodb#ExpressionAttributeNameMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more substitution tokens for attribute names in an expression. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html\">Expression attribute names</a> \n            in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>One or more substitution tokens for attribute names in an expression. For more\n            information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html\">Expression attribute names</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
                     }
                 },
                 "ExpressionAttributeValues": {
                     "target": "com.amazonaws.dynamodb#ExpressionAttributeValueMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more values that can be substituted in an expression. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html\">Condition expressions</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>One or more values that can be substituted in an expression. For more information, see\n                <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html\">Condition expressions</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
                     }
                 },
                 "ReturnValuesOnConditionCheckFailure": {
@@ -1665,7 +1665,7 @@
                 "TableName": {
                     "target": "com.amazonaws.dynamodb#TableArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the table that was affected by the operation. If you had specified the Amazon Resource Name (ARN) of a table in the input, you'll see the table ARN in the response.</p>"
+                        "smithy.api#documentation": "<p>The name of the table that was affected by the operation. If you had specified the\n            Amazon Resource Name (ARN) of a table in the input, you'll see the table ARN in the response.</p>"
                     }
                 },
                 "CapacityUnits": {
@@ -1971,13 +1971,13 @@
                 "OnDemandThroughput": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of read and write units for the global secondary index being created. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the global secondary index being\n            created. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 },
                 "WarmThroughput": {
                     "target": "com.amazonaws.dynamodb#WarmThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per second) when creating a secondary index.</p>"
+                        "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per\n            second) when creating a secondary index.</p>"
                     }
                 }
             },
@@ -2093,7 +2093,7 @@
                 "OnDemandThroughputOverride": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughputOverride",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum on-demand throughput settings for the specified replica table being created. You can only modify <code>MaxReadRequestUnits</code>, because you can't modify <code>MaxWriteRequestUnits</code> for individual replica tables.\n        </p>"
+                        "smithy.api#documentation": "<p>The maximum on-demand throughput settings for the specified replica table being\n            created. You can only modify <code>MaxReadRequestUnits</code>, because you can't modify\n                <code>MaxWriteRequestUnits</code> for individual replica tables. </p>"
                     }
                 },
                 "GlobalSecondaryIndexes": {
@@ -2327,7 +2327,7 @@
                 "TableName": {
                     "target": "com.amazonaws.dynamodb#TableArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the table in which the item to be deleted resides. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.</p>",
+                        "smithy.api#documentation": "<p>Name of the table in which the item to be deleted resides. You can also provide the\n            Amazon Resource Name (ARN) of the table in this parameter.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2885,7 +2885,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Checks the status of continuous backups and point in time recovery on the specified\n            table. Continuous backups are <code>ENABLED</code> on all tables at table creation. If\n            point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to\n            ENABLED.</p>\n         <p> After continuous backups and point in time recovery are enabled, you can restore to\n            any point in time within <code>EarliestRestorableDateTime</code> and\n                <code>LatestRestorableDateTime</code>. </p>\n         <p>\n            <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time.\n            You can restore your table to any point in time during the last 35 days. </p>\n         <p>You can call <code>DescribeContinuousBackups</code> at a maximum rate of 10 times per\n            second.</p>"
+                "smithy.api#documentation": "<p>Checks the status of continuous backups and point in time recovery on the specified\n            table. Continuous backups are <code>ENABLED</code> on all tables at table creation. If\n            point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to\n            ENABLED.</p>\n         <p> After continuous backups and point in time recovery are enabled, you can restore to\n            any point in time within <code>EarliestRestorableDateTime</code> and\n                <code>LatestRestorableDateTime</code>. </p>\n         <p>\n            <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time.\n            You can restore your table to any point in time in the last 35 days. You can set the recovery period to any value between 1 and 35 days. </p>\n         <p>You can call <code>DescribeContinuousBackups</code> at a maximum rate of 10 times per\n            second.</p>"
             }
         },
         "com.amazonaws.dynamodb#DescribeContinuousBackupsInput": {
@@ -4043,9 +4043,9 @@
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
-                                                                    "signingRegion": "us-east-1",
+                                                                    "name": "sigv4",
                                                                     "signingName": "dynamodb",
-                                                                    "name": "sigv4"
+                                                                    "signingRegion": "us-east-1"
                                                                 }
                                                             ]
                                                         },
@@ -6150,7 +6150,7 @@
                 "ApproximateCreationDateTimePrecision": {
                     "target": "com.amazonaws.dynamodb#ApproximateCreationDateTimePrecision",
                     "traits": {
-                        "smithy.api#documentation": "<p>Toggle for the precision of Kinesis data stream timestamp. The values are either <code>MILLISECOND</code> or <code>MICROSECOND</code>.</p>"
+                        "smithy.api#documentation": "<p>Toggle for the precision of Kinesis data stream timestamp. The values are either\n                <code>MILLISECOND</code> or <code>MICROSECOND</code>.</p>"
                     }
                 }
             },
@@ -6617,7 +6617,7 @@
                 "ExportType": {
                     "target": "com.amazonaws.dynamodb#ExportType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of export that was performed. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of export that was performed. Valid values are <code>FULL_EXPORT</code> or\n                <code>INCREMENTAL_EXPORT</code>.</p>"
                     }
                 },
                 "IncrementalExportSpecification": {
@@ -6722,7 +6722,7 @@
                 "ExportType": {
                     "target": "com.amazonaws.dynamodb#ExportType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of export that was performed. Valid values are <code>FULL_EXPORT</code> or <code>INCREMENTAL_EXPORT</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of export that was performed. Valid values are <code>FULL_EXPORT</code> or\n                <code>INCREMENTAL_EXPORT</code>.</p>"
                     }
                 }
             },
@@ -6965,7 +6965,7 @@
                 "TableName": {
                     "target": "com.amazonaws.dynamodb#TableArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the table from which to retrieve the specified item. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.</p>",
+                        "smithy.api#documentation": "<p>The name of the table from which to retrieve the specified item. You can also provide\n            the Amazon Resource Name (ARN) of the table in this parameter.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7216,13 +7216,13 @@
                 "OnDemandThroughput": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index.\n            If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 },
                 "WarmThroughput": {
                     "target": "com.amazonaws.dynamodb#WarmThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per second) for the specified secondary index. If you use this parameter, you must specify <code>ReadUnitsPerSecond</code>, <code>WriteUnitsPerSecond</code>, or both.</p>"
+                        "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per\n            second) for the specified secondary index. If you use this parameter, you must specify\n                <code>ReadUnitsPerSecond</code>, <code>WriteUnitsPerSecond</code>, or both.</p>"
                     }
                 }
             },
@@ -7318,13 +7318,13 @@
                 "OnDemandThroughput": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index.\n            If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 },
                 "WarmThroughput": {
                     "target": "com.amazonaws.dynamodb#GlobalSecondaryIndexWarmThroughputDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per second) for the specified secondary index.</p>"
+                        "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per\n            second) for the specified secondary index.</p>"
                     }
                 }
             },
@@ -7417,19 +7417,19 @@
                 "ReadUnitsPerSecond": {
                     "target": "com.amazonaws.dynamodb#PositiveLongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents warm throughput read units per second value for a global secondary index.</p>"
+                        "smithy.api#documentation": "<p>Represents warm throughput read units per second value for a global secondary\n            index.</p>"
                     }
                 },
                 "WriteUnitsPerSecond": {
                     "target": "com.amazonaws.dynamodb#PositiveLongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents warm throughput write units per second value for a global secondary index.</p>"
+                        "smithy.api#documentation": "<p>Represents warm throughput write units per second value for a global secondary\n            index.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.dynamodb#IndexStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the warm throughput status being created or updated on a global secondary index. The status can only be <code>UPDATING</code> or <code>ACTIVE</code>.</p>"
+                        "smithy.api#documentation": "<p>Represents the warm throughput status being created or updated on a global secondary\n            index. The status can only be <code>UPDATING</code> or <code>ACTIVE</code>.</p>"
                     }
                 }
             },
@@ -7986,19 +7986,19 @@
                 "ExportFromTime": {
                     "target": "com.amazonaws.dynamodb#ExportFromTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time in the past which provides the inclusive start range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state including and after this point in time.</p>"
+                        "smithy.api#documentation": "<p>Time in the past which provides the inclusive start range for the export table's data,\n            counted in seconds from the start of the Unix epoch. The incremental export will reflect\n            the table's state including and after this point in time.</p>"
                     }
                 },
                 "ExportToTime": {
                     "target": "com.amazonaws.dynamodb#ExportToTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time in the past which provides the exclusive end range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state just prior to this point in time. If this is not provided, the latest time with data available will be used.</p>"
+                        "smithy.api#documentation": "<p>Time in the past which provides the exclusive end range for the export table's data,\n            counted in seconds from the start of the Unix epoch. The incremental export will reflect\n            the table's state just prior to this point in time. If this is not provided, the latest\n            time with data available will be used.</p>"
                     }
                 },
                 "ExportViewType": {
                     "target": "com.amazonaws.dynamodb#ExportViewType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The view type that was chosen for the export. Valid values are <code>NEW_AND_OLD_IMAGES</code> and <code>NEW_IMAGES</code>. The default value is <code>NEW_AND_OLD_IMAGES</code>.</p>"
+                        "smithy.api#documentation": "<p>The view type that was chosen for the export. Valid values are\n                <code>NEW_AND_OLD_IMAGES</code> and <code>NEW_IMAGES</code>. The default value is\n                <code>NEW_AND_OLD_IMAGES</code>.</p>"
                     }
                 }
             },
@@ -8447,7 +8447,7 @@
                 "ApproximateCreationDateTimePrecision": {
                     "target": "com.amazonaws.dynamodb#ApproximateCreationDateTimePrecision",
                     "traits": {
-                        "smithy.api#documentation": "<p>The precision of the Kinesis data stream timestamp. The values are either <code>MILLISECOND</code> or <code>MICROSECOND</code>.</p>"
+                        "smithy.api#documentation": "<p>The precision of the Kinesis data stream timestamp. The values are either\n                <code>MILLISECOND</code> or <code>MICROSECOND</code>.</p>"
                     }
                 }
             },
@@ -9311,18 +9311,18 @@
                 "MaxReadRequestUnits": {
                     "target": "com.amazonaws.dynamodb#LongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of read request units for the specified table.</p>\n         <p>To specify a maximum <code>OnDemandThroughput</code> on your table, set the value of <code>MaxReadRequestUnits</code> as greater than or equal to 1. To remove the maximum <code>OnDemandThroughput</code> that is currently set on your table, set the value of <code>MaxReadRequestUnits</code> to -1.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of read request units for the specified table.</p>\n         <p>To specify a maximum <code>OnDemandThroughput</code> on your table, set the value of\n                <code>MaxReadRequestUnits</code> as greater than or equal to 1. To remove the\n            maximum <code>OnDemandThroughput</code> that is currently set on your table, set the\n            value of <code>MaxReadRequestUnits</code> to -1.</p>"
                     }
                 },
                 "MaxWriteRequestUnits": {
                     "target": "com.amazonaws.dynamodb#LongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of write request units for the specified table.</p>\n         <p>To specify a maximum <code>OnDemandThroughput</code> on your table, set the value of <code>MaxWriteRequestUnits</code> as greater than or equal to 1. To remove the maximum <code>OnDemandThroughput</code> that is currently set on your table, set the value of <code>MaxWriteRequestUnits</code> to -1.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of write request units for the specified table.</p>\n         <p>To specify a maximum <code>OnDemandThroughput</code> on your table, set the value of\n                <code>MaxWriteRequestUnits</code> as greater than or equal to 1. To remove the\n            maximum <code>OnDemandThroughput</code> that is currently set on your table, set the\n            value of <code>MaxWriteRequestUnits</code> to -1.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sets the maximum number of read and write units for the specified on-demand table. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+                "smithy.api#documentation": "<p>Sets the maximum number of read and write units for the specified on-demand table. If\n            you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both.</p>"
             }
         },
         "com.amazonaws.dynamodb#OnDemandThroughputOverride": {
@@ -9336,7 +9336,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Overrides the on-demand throughput settings for this replica table. If you don't specify a value for this parameter, it uses the source table's on-demand throughput settings.</p>"
+                "smithy.api#documentation": "<p>Overrides the on-demand throughput settings for this replica table. If you don't\n            specify a value for this parameter, it uses the source table's on-demand throughput\n            settings.</p>"
             }
         },
         "com.amazonaws.dynamodb#ParameterizedStatement": {
@@ -9358,7 +9358,7 @@
                 "ReturnValuesOnConditionCheckFailure": {
                     "target": "com.amazonaws.dynamodb#ReturnValuesOnConditionCheckFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that returns the item attributes for a PartiQL\n            <code>ParameterizedStatement</code> operation that failed a condition check.</p>\n         <p>There is no additional cost associated with requesting a return value aside from the\n            small network and processing overhead of receiving a larger response. No read capacity\n            units are consumed.</p>"
+                        "smithy.api#documentation": "<p>An optional parameter that returns the item attributes for a PartiQL\n                <code>ParameterizedStatement</code> operation that failed a condition check.</p>\n         <p>There is no additional cost associated with requesting a return value aside from the\n            small network and processing overhead of receiving a larger response. No read capacity\n            units are consumed.</p>"
                     }
                 }
             },
@@ -9423,6 +9423,12 @@
                         "smithy.api#documentation": "<p>The current state of point in time recovery:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> - Point in time recovery is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - Point in time recovery is disabled.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "RecoveryPeriodInDays": {
+                    "target": "com.amazonaws.dynamodb#RecoveryPeriodInDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of preceding days for which continuous backups are taken and maintained.\n            Your table data is only recoverable to any point-in-time from within the configured\n            recovery period. This parameter is optional. If no value is provided, the value will\n            default to 35.</p>"
+                    }
+                },
                 "EarliestRestorableDateTime": {
                     "target": "com.amazonaws.dynamodb#Date",
                     "traits": {
@@ -9448,6 +9454,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether point in time recovery is enabled (true) or disabled (false) on the\n            table.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RecoveryPeriodInDays": {
+                    "target": "com.amazonaws.dynamodb#RecoveryPeriodInDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of preceding days for which continuous backups are taken and maintained.\n            Your table data is only recoverable to any point-in-time from within the configured\n            recovery period. This parameter is optional. If no value is provided, the value will\n            default to 35.</p>"
                     }
                 }
             },
@@ -9593,14 +9605,14 @@
                 "ReadCapacityUnits": {
                     "target": "com.amazonaws.dynamodb#PositiveLongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of strongly consistent reads consumed per second before DynamoDB\n            returns a <code>ThrottlingException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB\n                Developer Guide</i>.</p>\n         <p>If read/write capacity mode is <code>PAY_PER_REQUEST</code> the value is set to\n            0.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of strongly consistent reads consumed per second before DynamoDB\n            returns a <code>ThrottlingException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html\">Specifying\n                Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>\n         <p>If read/write capacity mode is <code>PAY_PER_REQUEST</code> the value is set to\n            0.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "WriteCapacityUnits": {
                     "target": "com.amazonaws.dynamodb#PositiveLongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of writes consumed per second before DynamoDB returns a\n                <code>ThrottlingException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html\">Specifying Read and Write Requirements</a> in the <i>Amazon DynamoDB\n                Developer Guide</i>.</p>\n         <p>If read/write capacity mode is <code>PAY_PER_REQUEST</code> the value is set to\n            0.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of writes consumed per second before DynamoDB returns a\n                <code>ThrottlingException</code>. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html\">Specifying\n                Read and Write Requirements</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>\n         <p>If read/write capacity mode is <code>PAY_PER_REQUEST</code> the value is set to\n            0.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9689,7 +9701,7 @@
                 "TableName": {
                     "target": "com.amazonaws.dynamodb#TableArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the table in which to write the item. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.</p>",
+                        "smithy.api#documentation": "<p>Name of the table in which to write the item. You can also provide the Amazon Resource Name (ARN) of\n            the table in this parameter.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10222,6 +10234,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.dynamodb#RecoveryPeriodInDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 35
+                }
+            }
+        },
         "com.amazonaws.dynamodb#RegionName": {
             "type": "string"
         },
@@ -10366,7 +10387,7 @@
                 "OnDemandThroughputOverride": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughputOverride",
                     "traits": {
-                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput settings for the specified replica table.</p>"
+                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput settings for the specified replica\n            table.</p>"
                     }
                 },
                 "WarmThroughput": {
@@ -10420,7 +10441,7 @@
                 "OnDemandThroughputOverride": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughputOverride",
                     "traits": {
-                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput settings for the specified global secondary index in the specified replica table.</p>"
+                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput settings for the specified global secondary\n            index in the specified replica table.</p>"
                     }
                 }
             },
@@ -10501,7 +10522,7 @@
                 "OnDemandThroughputOverride": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughputOverride",
                     "traits": {
-                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput for the specified global secondary index in the specified replica table.</p>"
+                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput for the specified global secondary index in\n            the specified replica table.</p>"
                     }
                 },
                 "WarmThroughput": {
@@ -11121,7 +11142,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Restores the specified table to the specified point in time within\n                <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>.\n            You can restore your table to any point in time during the last 35 days. Any number of\n            users can execute up to 50 concurrent restores (any type of restore) in a given account. </p>\n         <p>When you restore using point in time recovery, DynamoDB restores your table data to\n            the state based on the selected date and time (day:hour:minute:second) to a new table. </p>\n         <p>Along with data, the following are also included on the new restored table using point\n            in time recovery: </p>\n         <ul>\n            <li>\n               <p>Global secondary indexes (GSIs)</p>\n            </li>\n            <li>\n               <p>Local secondary indexes (LSIs)</p>\n            </li>\n            <li>\n               <p>Provisioned read and write capacity</p>\n            </li>\n            <li>\n               <p>Encryption settings</p>\n               <important>\n                  <p> All these settings come from the current settings of the source table at\n                        the time of restore. </p>\n               </important>\n            </li>\n         </ul>\n         <p>You must manually set up the following on the restored table:</p>\n         <ul>\n            <li>\n               <p>Auto scaling policies</p>\n            </li>\n            <li>\n               <p>IAM policies</p>\n            </li>\n            <li>\n               <p>Amazon CloudWatch metrics and alarms</p>\n            </li>\n            <li>\n               <p>Tags</p>\n            </li>\n            <li>\n               <p>Stream settings</p>\n            </li>\n            <li>\n               <p>Time to Live (TTL) settings</p>\n            </li>\n            <li>\n               <p>Point in time recovery settings</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Restores the specified table to the specified point in time within\n                <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>.\n            You can restore your table to any point in time in the last 35 days. You can set the recovery period to any value between 1 and 35 days. Any number of\n            users can execute up to 50 concurrent restores (any type of restore) in a given account. </p>\n         <p>When you restore using point in time recovery, DynamoDB restores your table data to\n            the state based on the selected date and time (day:hour:minute:second) to a new table. </p>\n         <p>Along with data, the following are also included on the new restored table using point\n            in time recovery: </p>\n         <ul>\n            <li>\n               <p>Global secondary indexes (GSIs)</p>\n            </li>\n            <li>\n               <p>Local secondary indexes (LSIs)</p>\n            </li>\n            <li>\n               <p>Provisioned read and write capacity</p>\n            </li>\n            <li>\n               <p>Encryption settings</p>\n               <important>\n                  <p> All these settings come from the current settings of the source table at\n                        the time of restore. </p>\n               </important>\n            </li>\n         </ul>\n         <p>You must manually set up the following on the restored table:</p>\n         <ul>\n            <li>\n               <p>Auto scaling policies</p>\n            </li>\n            <li>\n               <p>IAM policies</p>\n            </li>\n            <li>\n               <p>Amazon CloudWatch metrics and alarms</p>\n            </li>\n            <li>\n               <p>Tags</p>\n            </li>\n            <li>\n               <p>Stream settings</p>\n            </li>\n            <li>\n               <p>Time to Live (TTL) settings</p>\n            </li>\n            <li>\n               <p>Point in time recovery settings</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.dynamodb#RestoreTableToPointInTimeInput": {
@@ -12260,13 +12281,13 @@
                 "DeletionProtectionEnabled": {
                     "target": "com.amazonaws.dynamodb#DeletionProtectionEnabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether deletion protection is enabled (true) or disabled (false) on the table.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether deletion protection is enabled (true) or disabled (false) on the\n            table.</p>"
                     }
                 },
                 "OnDemandThroughput": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified on-demand table. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified on-demand table. If you\n            use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 },
                 "WarmThroughput": {
@@ -12402,7 +12423,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per second) of the base table.</p>"
+                "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per\n            second) of the base table.</p>"
             }
         },
         "com.amazonaws.dynamodb#Tag": {
@@ -12955,7 +12976,7 @@
                 "TableName": {
                     "target": "com.amazonaws.dynamodb#TableArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the table for the <code>UpdateItem</code> request. You can also provide the Amazon Resource Name (ARN) of the table in this parameter.</p>",
+                        "smithy.api#documentation": "<p>Name of the table for the <code>UpdateItem</code> request. You can also provide the\n            Amazon Resource Name (ARN) of the table in this parameter.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13014,7 +13035,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>\n            <code>UpdateContinuousBackups</code> enables or disables point in time recovery for\n            the specified table. A successful <code>UpdateContinuousBackups</code> call returns the\n            current <code>ContinuousBackupsDescription</code>. Continuous backups are\n                <code>ENABLED</code> on all tables at table creation. If point in time recovery is\n            enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p>\n         <p> Once continuous backups and point in time recovery are enabled, you can restore to\n            any point in time within <code>EarliestRestorableDateTime</code> and\n                <code>LatestRestorableDateTime</code>. </p>\n         <p>\n            <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time.\n            You can restore your table to any point in time during the last 35 days. </p>"
+                "smithy.api#documentation": "<p>\n            <code>UpdateContinuousBackups</code> enables or disables point in time recovery for\n            the specified table. A successful <code>UpdateContinuousBackups</code> call returns the\n            current <code>ContinuousBackupsDescription</code>. Continuous backups are\n                <code>ENABLED</code> on all tables at table creation. If point in time recovery is\n            enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p>\n         <p> Once continuous backups and point in time recovery are enabled, you can restore to\n            any point in time within <code>EarliestRestorableDateTime</code> and\n                <code>LatestRestorableDateTime</code>. </p>\n         <p>\n            <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time.\n            You can restore your table to any point in time in the last 35 days. You can set the recovery period to any value between 1 and 35 days.</p>"
             }
         },
         "com.amazonaws.dynamodb#UpdateContinuousBackupsInput": {
@@ -13149,13 +13170,13 @@
                 "OnDemandThroughput": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates the maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+                        "smithy.api#documentation": "<p>Updates the maximum number of read and write units for the specified global secondary\n            index. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 },
                 "WarmThroughput": {
                     "target": "com.amazonaws.dynamodb#WarmThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the warm throughput value of the new provisioned throughput settings to be applied to a global secondary index.</p>"
+                        "smithy.api#documentation": "<p>Represents the warm throughput value of the new provisioned throughput settings to be\n            applied to a global secondary index.</p>"
                     }
                 }
             },
@@ -13972,18 +13993,18 @@
                 "ReadUnitsPerSecond": {
                     "target": "com.amazonaws.dynamodb#LongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the number of read operations your base table can instantaneously support.</p>"
+                        "smithy.api#documentation": "<p>Represents the number of read operations your base table can instantaneously\n            support.</p>"
                     }
                 },
                 "WriteUnitsPerSecond": {
                     "target": "com.amazonaws.dynamodb#LongObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the number of write operations your base table can instantaneously support.</p>"
+                        "smithy.api#documentation": "<p>Represents the number of write operations your base table can instantaneously\n            support.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides visibility into the number of read and write operations your table or secondary index can instantaneously support. The settings can be modified using the <code>UpdateTable</code> operation to meet the throughput requirements of an upcoming peak event.</p>"
+                "smithy.api#documentation": "<p>Provides visibility into the number of read and write operations your table or\n            secondary index can instantaneously support. The settings can be modified using the\n                <code>UpdateTable</code> operation to meet the throughput requirements of an\n            upcoming peak event.</p>"
             }
         },
         "com.amazonaws.dynamodb#WriteRequest": {

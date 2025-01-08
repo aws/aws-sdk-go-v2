@@ -7285,7 +7285,7 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMax2048 to be of type string, got %T instead", value)
 				}
 				sv.AudioSourceName = ptr.String(jtv)
 			}
@@ -8616,6 +8616,15 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 					return err
 				}
 				sv.OutlineSize = ptr.Int32(int32(i64))
+			}
+
+		case "removeRubyReserveAttributes":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RemoveRubyReserveAttributes to be of type string, got %T instead", value)
+				}
+				sv.RemoveRubyReserveAttributes = types.RemoveRubyReserveAttributes(jtv)
 			}
 
 		case "shadowColor":
@@ -13621,6 +13630,15 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.UnregisteredSeiTimecode = types.H264UnregisteredSeiTimecode(jtv)
 			}
 
+		case "writeMp4PackagingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H264WriteMp4PackagingType to be of type string, got %T instead", value)
+				}
+				sv.WriteMp4PackagingType = types.H264WriteMp4PackagingType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15585,7 +15603,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3Https to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMax2048PatternS3Https to be of type string, got %T instead", value)
 				}
 				sv.FileInput = ptr.String(jtv)
 			}
@@ -17119,7 +17137,7 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringMin1Max2048PatternArnAwsAwsUsGovAwsCnSecretsmanagerUsGovApCaCnEuSaCentralNorthSouthEastWestDD12SecretAZAZ09 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09 to be of type string, got %T instead", value)
 				}
 				sv.CredentialsSecretName = ptr.String(jtv)
 			}
@@ -20204,7 +20222,7 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMax256 to be of type string, got %T instead", value)
 				}
 				sv.Extension = ptr.String(jtv)
 			}
@@ -20376,7 +20394,7 @@ func awsRestjson1_deserializeDocumentOutputGroup(v **types.OutputGroup, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMax2048 to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -22942,6 +22960,15 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 					return fmt.Errorf("expected VideoTimecodeInsertion to be of type string, got %T instead", value)
 				}
 				sv.TimecodeInsertion = types.VideoTimecodeInsertion(jtv)
+			}
+
+		case "timecodeTrack":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimecodeTrack to be of type string, got %T instead", value)
+				}
+				sv.TimecodeTrack = types.TimecodeTrack(jtv)
 			}
 
 		case "videoPreprocessors":

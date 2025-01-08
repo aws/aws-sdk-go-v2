@@ -1,3 +1,11 @@
+# v1.44.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.0 (2024-12-17)
+
+* **Feature**: Adds support for OriginReadTimeout and OriginKeepaliveTimeout to create CloudFront Distributions with VPC Origins.
+
 # v1.43.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

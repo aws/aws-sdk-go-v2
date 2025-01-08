@@ -239,6 +239,25 @@ func (EndpointType) Values() []EndpointType {
 	}
 }
 
+type EnforceMessageSigningType string
+
+// Enum values for EnforceMessageSigningType
+const (
+	EnforceMessageSigningTypeEnabled  EnforceMessageSigningType = "ENABLED"
+	EnforceMessageSigningTypeDisabled EnforceMessageSigningType = "DISABLED"
+)
+
+// Values returns all known values for EnforceMessageSigningType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnforceMessageSigningType) Values() []EnforceMessageSigningType {
+	return []EnforceMessageSigningType{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ExecutionErrorType string
 
 // Enum values for ExecutionErrorType
@@ -416,6 +435,44 @@ func (OverwriteExisting) Values() []OverwriteExisting {
 	return []OverwriteExisting{
 		"TRUE",
 		"FALSE",
+	}
+}
+
+type PreserveContentType string
+
+// Enum values for PreserveContentType
+const (
+	PreserveContentTypeEnabled  PreserveContentType = "ENABLED"
+	PreserveContentTypeDisabled PreserveContentType = "DISABLED"
+)
+
+// Values returns all known values for PreserveContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreserveContentType) Values() []PreserveContentType {
+	return []PreserveContentType{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type PreserveFilenameType string
+
+// Enum values for PreserveFilenameType
+const (
+	PreserveFilenameTypeEnabled  PreserveFilenameType = "ENABLED"
+	PreserveFilenameTypeDisabled PreserveFilenameType = "DISABLED"
+)
+
+// Values returns all known values for PreserveFilenameType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreserveFilenameType) Values() []PreserveFilenameType {
+	return []PreserveFilenameType{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

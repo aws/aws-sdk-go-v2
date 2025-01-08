@@ -78,6 +78,9 @@ type InvokeInlineAgentInput struct {
 	// agent needs to carry out.
 	ActionGroups []types.AgentActionGroup
 
+	// Model settings for the request.
+	BedrockModelConfigurations *types.InlineBedrockModelConfigurations
+
 	//  The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to use to
 	// encrypt your inline agent.
 	CustomerEncryptionKeyArn *string

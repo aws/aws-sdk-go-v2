@@ -35,6 +35,11 @@ type CreateWorkflowInput struct {
 	Name *string
 
 	// A collection of properties to be used as part of each execution of the workflow.
+	//
+	// Run properties may be logged. Do not pass plaintext secrets as properties.
+	// Retrieve secrets from a Glue Connection, Amazon Web Services Secrets Manager or
+	// other secret management mechanism if you intend to use them within the workflow
+	// run.
 	DefaultRunProperties map[string]string
 
 	// A description of the workflow.

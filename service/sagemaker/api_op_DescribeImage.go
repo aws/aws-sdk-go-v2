@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-// Describes a SageMaker image.
+// Describes a SageMaker AI image.
 func (c *Client) DescribeImage(ctx context.Context, params *DescribeImageInput, optFns ...func(*Options)) (*DescribeImageOutput, error) {
 	if params == nil {
 		params = &DescribeImageInput{}
@@ -69,8 +69,8 @@ type DescribeImageOutput struct {
 	// When the image was last modified.
 	LastModifiedTime *time.Time
 
-	// The ARN of the IAM role that enables Amazon SageMaker to perform tasks on your
-	// behalf.
+	// The ARN of the IAM role that enables Amazon SageMaker AI to perform tasks on
+	// your behalf.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

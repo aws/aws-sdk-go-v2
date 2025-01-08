@@ -43,7 +43,7 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 
 type ListGroupsInput struct {
 
-	// The user pool ID for the user pool.
+	// The ID of the user pool.
 	//
 	// This member is required.
 	UserPoolId *string

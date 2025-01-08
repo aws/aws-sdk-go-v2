@@ -21872,6 +21872,11 @@ func awsAwsjson11_serializeDocumentAdditionalS3DataSource(v *types.AdditionalS3D
 		ok.String(string(v.CompressionType))
 	}
 
+	if v.ETag != nil {
+		ok := object.Key("ETag")
+		ok.String(*v.ETag)
+	}
+
 	if len(v.S3DataType) > 0 {
 		ok := object.Key("S3DataType")
 		ok.String(string(v.S3DataType))
@@ -28324,6 +28329,11 @@ func awsAwsjson11_serializeDocumentModelPackageContainerDefinition(v *types.Mode
 		ok.String(*v.ImageDigest)
 	}
 
+	if v.ModelDataETag != nil {
+		ok := object.Key("ModelDataETag")
+		ok.String(*v.ModelDataETag)
+	}
+
 	if v.ModelDataSource != nil {
 		ok := object.Key("ModelDataSource")
 		if err := awsAwsjson11_serializeDocumentModelDataSource(v.ModelDataSource, ok); err != nil {
@@ -31493,11 +31503,21 @@ func awsAwsjson11_serializeDocumentS3ModelDataSource(v *types.S3ModelDataSource,
 		ok.String(string(v.CompressionType))
 	}
 
+	if v.ETag != nil {
+		ok := object.Key("ETag")
+		ok.String(*v.ETag)
+	}
+
 	if v.HubAccessConfig != nil {
 		ok := object.Key("HubAccessConfig")
 		if err := awsAwsjson11_serializeDocumentInferenceHubAccessConfig(v.HubAccessConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ManifestEtag != nil {
+		ok := object.Key("ManifestEtag")
+		ok.String(*v.ManifestEtag)
 	}
 
 	if v.ManifestS3Uri != nil {
@@ -31892,6 +31912,11 @@ func awsAwsjson11_serializeDocumentSourceAlgorithm(v *types.SourceAlgorithm, val
 	if v.AlgorithmName != nil {
 		ok := object.Key("AlgorithmName")
 		ok.String(*v.AlgorithmName)
+	}
+
+	if v.ModelDataETag != nil {
+		ok := object.Key("ModelDataETag")
+		ok.String(*v.ModelDataETag)
 	}
 
 	if v.ModelDataSource != nil {

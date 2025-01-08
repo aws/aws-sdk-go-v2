@@ -80,7 +80,7 @@
                         "*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon Timestream for InfluxDB is a managed time-series database engine that makes it easy for application developers and DevOps teams to run InfluxDB databases on AWS for near real-time time-series applications using open-source APIs. With Amazon Timestream for InfluxDB, it is easy to set up, operate, and scale time-series workloads that can answer queries with single-digit millisecond query response time.</p>",
+                "smithy.api#documentation": "<p>Amazon Timestream for InfluxDB is a managed time-series database engine that makes it easy for application developers and DevOps teams to run InfluxDB databases on Amazon Web Services for near real-time time-series applications using open-source APIs. With Amazon Timestream for InfluxDB, it is easy to set up, operate, and scale time-series workloads that can answer queries with single-digit millisecond query response time.</p>",
                 "smithy.api#title": "Timestream InfluxDB",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -860,7 +860,7 @@
                 "password": {
                     "target": "com.amazonaws.timestreaminfluxdb#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. These attributes will be stored in a Secret created in AWS SecretManager in your account.</p>",
+                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. These attributes will be stored in a Secret created in Amazon Web Services SecretManager in your account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -946,6 +946,12 @@
                         "smithy.api#default": 8086,
                         "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>\n         <p>Valid Values: 1024-65535</p>\n         <p>Default: 8086</p>\n         <p>Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680</p>"
                     }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>"
+                    }
                 }
             },
             "traits": {
@@ -997,6 +1003,12 @@
                     "target": "com.amazonaws.timestreaminfluxdb#Port",
                     "traits": {
                         "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections. The default value is 8086.</p>"
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>"
                     }
                 },
                 "dbInstanceType": {
@@ -1069,7 +1081,7 @@
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
                     }
                 }
             },
@@ -1272,7 +1284,7 @@
                 "name": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and AWS CLI commands.</p>",
+                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and Amazon Web Services CLI commands.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1299,6 +1311,12 @@
                     "target": "com.amazonaws.timestreaminfluxdb#Port",
                     "traits": {
                         "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>"
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>"
                     }
                 },
                 "dbInstanceType": {
@@ -1602,6 +1620,12 @@
                         "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>"
                     }
                 },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>"
+                    }
+                },
                 "dbInstanceType": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
                     "traits": {
@@ -1672,7 +1696,7 @@
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
                     }
                 }
             },
@@ -1842,6 +1866,12 @@
                         "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>"
                     }
                 },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>"
+                    }
+                },
                 "dbInstanceType": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
                     "traits": {
@@ -1912,7 +1942,7 @@
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
                     }
                 }
             },
@@ -2578,6 +2608,23 @@
                 }
             }
         },
+        "com.amazonaws.timestreaminfluxdb#NetworkType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "DUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUAL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#NextToken": {
             "type": "string",
             "traits": {
@@ -2822,6 +2869,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ServiceQuotaExceededException"
                 }
             ],
             "traits": {
@@ -3080,7 +3130,7 @@
                 "name": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and AWS CLI commands.</p>",
+                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and Amazon Web Services CLI commands.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3107,6 +3157,12 @@
                     "target": "com.amazonaws.timestreaminfluxdb#Port",
                     "traits": {
                         "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>"
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>"
                     }
                 },
                 "dbInstanceType": {
@@ -3179,7 +3235,7 @@
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
                     }
                 }
             },
