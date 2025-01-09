@@ -336,6 +336,25 @@ func (ResourceSetStatus) Values() []ResourceSetStatus {
 	}
 }
 
+type ResourceTagLogicalOperator string
+
+// Enum values for ResourceTagLogicalOperator
+const (
+	ResourceTagLogicalOperatorAnd ResourceTagLogicalOperator = "AND"
+	ResourceTagLogicalOperatorOr  ResourceTagLogicalOperator = "OR"
+)
+
+// Values returns all known values for ResourceTagLogicalOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceTagLogicalOperator) Values() []ResourceTagLogicalOperator {
+	return []ResourceTagLogicalOperator{
+		"AND",
+		"OR",
+	}
+}
+
 type RuleOrder string
 
 // Enum values for RuleOrder

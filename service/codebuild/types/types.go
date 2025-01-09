@@ -39,6 +39,12 @@ type BatchRestrictions struct {
 	// [Build environment compute types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
 	ComputeTypesAllowed []string
 
+	// An array of strings that specify the fleets that are allowed for the batch
+	// build. See [Run builds on reserved capacity fleets]in the CodeBuild User Guide for more information.
+	//
+	// [Run builds on reserved capacity fleets]: https://docs.aws.amazon.com/codebuild/latest/userguide/fleets.html
+	FleetsAllowed []string
+
 	// Specifies the maximum number of builds allowed.
 	MaximumBuildsAllowed *int32
 
@@ -2050,8 +2056,9 @@ type ProjectSource struct {
 
 	//  Set to true to report the status of a build's start and finish to your source
 	// provider. This option is valid only when your source provider is GitHub, GitHub
-	// Enterprise, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you
-	// use a different source provider, an invalidInputException is thrown.
+	// Enterprise, GitLab, GitLab Self Managed, GitLab, GitLab Self Managed, or
+	// Bitbucket. If this is set and you use a different source provider, an
+	// invalidInputException is thrown.
 	//
 	// To be able to report the build status to the source provider, the user
 	// associated with the source provider must have write access to the repo. If the

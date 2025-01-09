@@ -3039,6 +3039,11 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 		}
 	}
 
+	if len(v.ResourceTagLogicalOperator) > 0 {
+		ok := object.Key("ResourceTagLogicalOperator")
+		ok.String(string(v.ResourceTagLogicalOperator))
+	}
+
 	if v.ResourceTags != nil {
 		ok := object.Key("ResourceTags")
 		if err := awsAwsjson11_serializeDocumentResourceTags(v.ResourceTags, ok); err != nil {

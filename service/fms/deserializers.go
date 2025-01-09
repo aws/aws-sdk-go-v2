@@ -9739,6 +9739,15 @@ func awsAwsjson11_deserializeDocumentPolicy(v **types.Policy, value interface{})
 				return err
 			}
 
+		case "ResourceTagLogicalOperator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceTagLogicalOperator to be of type string, got %T instead", value)
+				}
+				sv.ResourceTagLogicalOperator = types.ResourceTagLogicalOperator(jtv)
+			}
+
 		case "ResourceTags":
 			if err := awsAwsjson11_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
 				return err
