@@ -95,6 +95,40 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.computeoptimizer#AllocationStrategy": {
+            "type": "enum",
+            "members": {
+                "PRIORITIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Prioritized"
+                    }
+                },
+                "LOWEST_PRICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LowestPrice"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#AsgType": {
+            "type": "enum",
+            "members": {
+                "SINGLE_INSTANCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SingleInstanceType"
+                    }
+                },
+                "MIXED_INSTANCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MixedInstanceTypes"
+                    }
+                }
+            }
+        },
         "com.amazonaws.computeoptimizer#AutoScalingConfiguration": {
             "type": "enum",
             "members": {
@@ -128,32 +162,56 @@
                     "target": "com.amazonaws.computeoptimizer#DesiredCapacity",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The desired capacity, or number of instances, for the Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The desired capacity, or number of instances, for the EC2 Auto Scaling group.</p>"
                     }
                 },
                 "minSize": {
                     "target": "com.amazonaws.computeoptimizer#MinSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The minimum size, or minimum number of instances, for the Auto Scaling\n            group.</p>"
+                        "smithy.api#documentation": "<p>The minimum size, or minimum number of instances, for the EC2 Auto Scaling\n            group.</p>"
                     }
                 },
                 "maxSize": {
                     "target": "com.amazonaws.computeoptimizer#MaxSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum size, or maximum number of instances, for the Auto Scaling\n            group.</p>"
+                        "smithy.api#documentation": "<p>The maximum size, or maximum number of instances, for the EC2 Auto Scaling\n            group.</p>"
                     }
                 },
                 "instanceType": {
-                    "target": "com.amazonaws.computeoptimizer#InstanceType",
+                    "target": "com.amazonaws.computeoptimizer#NullableInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type for the Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The instance type for the EC2 Auto Scaling group.</p>"
+                    }
+                },
+                "allocationStrategy": {
+                    "target": "com.amazonaws.computeoptimizer#AllocationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the allocation strategy that the EC2 Auto Scaling group uses. This field is only available for EC2 Auto Scaling groups with mixed instance types.\n        </p>"
+                    }
+                },
+                "estimatedInstanceHourReductionPercentage": {
+                    "target": "com.amazonaws.computeoptimizer#NullableEstimatedInstanceHourReductionPercentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the projected percentage reduction in instance hours after adopting the recommended configuration. This field is only available for EC2 Auto Scaling groups with scaling policies.\n        </p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.computeoptimizer#AsgType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes whether the EC2 Auto Scaling group has a single instance type or a mixed instance type configuration.\n        </p>"
+                    }
+                },
+                "mixedInstanceTypes": {
+                    "target": "com.amazonaws.computeoptimizer#MixedInstanceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            List the instance types within an EC2 Auto Scaling group that has mixed instance types.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration of an Auto Scaling group.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration of an EC2 Auto Scaling group.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#AutoScalingGroupEstimatedMonthlySavings": {
@@ -3719,6 +3777,24 @@
                         "smithy.api#enumValue": "CurrentConfigurationMaxSize"
                     }
                 },
+                "CURRENT_CONFIGURATION_ALLOCATION_STRATEGY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentConfigurationAllocationStrategy"
+                    }
+                },
+                "CURRENT_CONFIGURATION_MIXED_INSTANCE_TYPES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentConfigurationMixedInstanceTypes"
+                    }
+                },
+                "CURRENT_CONFIGURATION_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentConfigurationType"
+                    }
+                },
                 "CURRENT_ON_DEMAND_PRICE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -3783,6 +3859,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsConfigurationMaxSize"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_CONFIGURATION_ESTIMATED_INSTANCE_HOUR_REDUCTION_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsConfigurationEstimatedInstanceHourReductionPercentage"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_CONFIGURATION_ALLOCATION_STRATEGY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsConfigurationAllocationStrategy"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_CONFIGURATION_MIXED_INSTANCE_TYPES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsConfigurationMixedInstanceTypes"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_CONFIGURATION_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsConfigurationType"
                     }
                 },
                 "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM": {
@@ -9926,14 +10026,29 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.computeoptimizer#MixedInstanceType": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#MixedInstanceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#MixedInstanceType"
+            }
+        },
         "com.amazonaws.computeoptimizer#NextToken": {
             "type": "string"
         },
         "com.amazonaws.computeoptimizer#NullableCpu": {
             "type": "integer"
         },
+        "com.amazonaws.computeoptimizer#NullableEstimatedInstanceHourReductionPercentage": {
+            "type": "double"
+        },
         "com.amazonaws.computeoptimizer#NullableIOPS": {
             "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#NullableInstanceType": {
+            "type": "string"
         },
         "com.amazonaws.computeoptimizer#NullableMaxAllocatedStorage": {
             "type": "integer"

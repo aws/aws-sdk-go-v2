@@ -560,6 +560,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of strings that specify the compute types that are allowed for the batch\n            build. See <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment\n                compute types</a> in the <i>CodeBuild User Guide</i> for these values.\n        </p>"
                     }
+                },
+                "fleetsAllowed": {
+                    "target": "com.amazonaws.codebuild#FleetsAllowed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of strings that specify the fleets that are allowed\n            for the batch build. See <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/fleets.html\">Run builds on reserved capacity fleets</a> in the <i>CodeBuild User Guide</i> \n                for more information. </p>"
+                    }
                 }
             },
             "traits": {
@@ -4626,6 +4632,12 @@
                 }
             }
         },
+        "com.amazonaws.codebuild#FleetsAllowed": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#NonEmptyString"
+            }
+        },
         "com.amazonaws.codebuild#GetReportGroupTrend": {
             "type": "operation",
             "input": {
@@ -6736,7 +6748,7 @@
                 "reportBuildStatus": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Set to true to report the status of a build's start and finish to your source\n            provider. This option is valid only when your source provider is GitHub, GitHub\n            Enterprise, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you use a different source provider, an\n            <code>invalidInputException</code> is thrown. </p>\n         <p>To be able to report the build status to the source provider, the user associated with the source provider must\nhave write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p>\n         <p>The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n         <p>If your project's builds are triggered by a webhook, you must push a\n              new commit to the repo for a change to this property to take\n              effect.</p>"
+                        "smithy.api#documentation": "<p> Set to true to report the status of a build's start and finish to your source\n            provider. This option is valid only when your source provider is GitHub, GitHub\n            Enterprise, GitLab, GitLab Self Managed, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you use a different source provider, an\n            <code>invalidInputException</code> is thrown. </p>\n         <p>To be able to report the build status to the source provider, the user associated with the source provider must\nhave write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p>\n         <p>The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n         <p>If your project's builds are triggered by a webhook, you must push a\n              new commit to the repo for a change to this property to take\n              effect.</p>"
                     }
                 },
                 "buildStatusConfig": {
@@ -8334,7 +8346,7 @@
                 "reportBuildStatusOverride": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Set to true to report to your source provider the status of a build's start and\n            completion. If you use this option with a source provider other than GitHub, GitHub\n            Enterprise, or Bitbucket, an <code>invalidInputException</code> is thrown. </p>\n         <p>To be able to report the build status to the source provider, the user associated with the source provider must\nhave write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p>\n         <note>\n            <p> The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n         </note>"
+                        "smithy.api#documentation": "<p> Set to true to report to your source provider the status of a build's start and\n            completion. If you use this option with a source provider other than GitHub, GitHub\n            Enterprise, GitLab, GitLab Self Managed, or Bitbucket, an <code>invalidInputException</code> is thrown. </p>\n         <p>To be able to report the build status to the source provider, the user associated with the source provider must\nhave write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p>\n         <note>\n            <p> The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n         </note>"
                     }
                 },
                 "buildStatusConfigOverride": {
