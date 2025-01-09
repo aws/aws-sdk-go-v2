@@ -1,3 +1,18 @@
+# Release (2025-01-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.32.8
+  * **Bug Fix**: Retry transient net.ErrClosed errors by default.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.50.0](service/codebuild/CHANGELOG.md#v1500-2025-01-09)
+  * **Feature**: AWS CodeBuild Now Supports BuildBatch in Reserved Capacity and Lambda
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.41.0](service/computeoptimizer/CHANGELOG.md#v1410-2025-01-09)
+  * **Feature**: This release expands AWS Compute Optimizer rightsizing recommendation support for Amazon EC2 Auto Scaling groups to include those with scaling policies and multiple instance types.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.39.0](service/fms/CHANGELOG.md#v1390-2025-01-09)
+  * **Feature**: AWS Firewall Manager now lets you combine multiple resource tags using the logical AND operator or the logical OR operator.
+
 # Release (2025-01-08)
 
 ## General Highlights

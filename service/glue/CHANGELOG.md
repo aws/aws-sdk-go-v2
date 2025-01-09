@@ -1,3 +1,7 @@
+# v1.105.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.105.0 (2024-12-23)
 
 * **Feature**: Add IncludeRoot parameters to GetCatalogs API to return root catalog.

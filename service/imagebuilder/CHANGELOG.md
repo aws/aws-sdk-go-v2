@@ -1,3 +1,7 @@
+# v1.40.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2025-01-07)
 
 * **Feature**: This release adds support for importing images from ISO disk files. Added new ImportDiskImage API operation.

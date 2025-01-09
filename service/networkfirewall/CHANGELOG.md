@@ -1,3 +1,7 @@
+# v1.44.8 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.7 (2024-12-26)
 
 * **Documentation**: Dual-stack endpoints are now supported.

@@ -1,3 +1,7 @@
+# v1.172.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.172.0 (2025-01-08)
 
 * **Feature**: Adds support for IPv6 for SageMaker HyperPod cluster nodes.

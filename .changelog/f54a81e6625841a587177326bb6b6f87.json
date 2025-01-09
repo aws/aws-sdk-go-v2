@@ -1,8 +1,0 @@
-{
-    "id": "f54a81e6-6258-41a5-8717-7326bb6b6f87",
-    "type": "feature",
-    "description": "This release expands AWS Compute Optimizer rightsizing recommendation support for Amazon EC2 Auto Scaling groups to include those with scaling policies and multiple instance types.",
-    "modules": [
-        "service/computeoptimizer"
-    ]
-}

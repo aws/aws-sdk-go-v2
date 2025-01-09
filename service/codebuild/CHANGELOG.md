@@ -1,3 +1,8 @@
+# v1.50.0 (2025-01-09)
+
+* **Feature**: AWS CodeBuild Now Supports BuildBatch in Reserved Capacity and Lambda
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.4 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

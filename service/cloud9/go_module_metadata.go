@@ -3,4 +3,4 @@
 package cloud9
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.28.9"
+const goModuleVersion = "1.28.10"

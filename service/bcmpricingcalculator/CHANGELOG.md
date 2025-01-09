@@ -1,3 +1,7 @@
+# v1.1.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2024-12-26)
 
 * **Feature**: Added ConflictException to DeleteBillEstimate.

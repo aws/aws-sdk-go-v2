@@ -1,3 +1,7 @@
+# v1.65.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.65.0 (2025-01-02)
 
 * **Feature**: This release adds support for the AVC3 codec and fixes an alignment issue with Japanese vertical captions.
