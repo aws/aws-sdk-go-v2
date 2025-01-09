@@ -217,6 +217,12 @@
                     "traits": {
                         "smithy.api#enumValue": "IMPORT"
                     }
+                },
+                "IMPORT_ISO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_ISO"
+                    }
                 }
             }
         },
@@ -5500,7 +5506,7 @@
                 "buildType": {
                     "target": "com.amazonaws.imagebuilder#BuildType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated in the\n\t\t\tfollowing ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated in the\n\t\t\tfollowing ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT_ISO</b> – An ISO disk import created \n\t\t\t\t\tthe image.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "imageSource": {
@@ -6402,7 +6408,7 @@
                 "buildType": {
                     "target": "com.amazonaws.imagebuilder#BuildType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated in the\n\t\t\tfollowing ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated in the\n\t\t\tfollowing ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT_ISO</b> – An ISO disk import created \n\t\t\t\t\tthe image.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "imageSource": {
@@ -6446,7 +6452,7 @@
                 "timeoutMinutes": {
                     "target": "com.amazonaws.imagebuilder#ImageTestsTimeoutMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time in minutes that tests are permitted to run.</p>\n         <note>\n            <p>The timeout attribute is not currently active. This value is\n\t\t\t\tignored.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The maximum time in minutes that tests are permitted to run.</p>\n         <note>\n            <p>The timeout property is not currently active. This value is\n\t\t\t\tignored.</p>\n         </note>"
                     }
                 }
             },
@@ -6534,7 +6540,7 @@
                 "buildType": {
                     "target": "com.amazonaws.imagebuilder#BuildType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated in the\n\t\t\tfollowing ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the type of build that created this image. The build can be initiated in the\n\t\t\tfollowing ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>USER_INITIATED</b> – A manual \n\t\t\t\t\tpipeline build request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULED</b> – A pipeline build \n\t\t\t\t\tinitiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT</b> – A VM import created \n\t\t\t\t\tthe image to use as the base image for the recipe.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORT_ISO</b> – An ISO disk import created \n\t\t\t\t\tthe image.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "imageSource": {
@@ -6721,6 +6727,130 @@
                     "target": "com.amazonaws.imagebuilder#ComponentBuildVersionArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the imported component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ImportDiskImage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#ImportDiskImageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#ImportDiskImageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Import a Windows operating system image from a verified Microsoft ISO disk \n\t\t\tfile. The following disk images are supported:</p>\n         <ul>\n            <li>\n               <p>Windows 11 Enterprise</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/ImportDiskImage",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ImportDiskImageRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the image resource that's created from the import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "semanticVersion": {
+                    "target": "com.amazonaws.imagebuilder#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic version to attach to the image that's created during the import\n\t\t\tprocess. This version follows the semantic version syntax.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for your disk image import.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system platform for the imported image. Allowed values include \n\t\t\tthe following: <code>Windows</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "osVersion": {
+                    "target": "com.amazonaws.imagebuilder#OsVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system version for the imported image. Allowed values include \n\t\t\tthe following: <code>Microsoft Windows 11</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access \n\t\t\tto perform workflow actions to import an image from a Microsoft ISO file.</p>"
+                    }
+                },
+                "infrastructureConfigurationArn": {
+                    "target": "com.amazonaws.imagebuilder#InfrastructureConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the infrastructure configuration resource that's used for \n\t\t\tlaunching the EC2 instance on which the ISO image is built.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "uri": {
+                    "target": "com.amazonaws.imagebuilder#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>uri</code> of the ISO disk file that's stored in Amazon S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that are attached to image resources created from the import.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#ImportDiskImageResponse": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token that uniquely identifies the request.</p>"
+                    }
+                },
+                "imageBuildVersionArn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the output AMI that was created from the ISO disk file.</p>"
                     }
                 }
             },
@@ -11507,7 +11637,7 @@
                 "pipelineExecutionStartCondition": {
                     "target": "com.amazonaws.imagebuilder#PipelineExecutionStartCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition configures when the pipeline should trigger a new image build. When the\n\t\t\t\t<code>pipelineExecutionStartCondition</code> is set to\n\t\t\t\t<code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic\n\t\t\tversion filters on the base image or components in your image recipe, EC2 Image Builder will\n\t\t\tbuild a new image only when there are new versions of the image or components in your\n\t\t\trecipe that match the semantic version filter. When it is set to\n\t\t\t\t<code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON\n\t\t\texpression matches the current time. For semantic version syntax, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html\">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The start condition configures when the pipeline should trigger a new image build, \n\t\t\tas follows. If no value is set Image Builder defaults to \n\t\t\t<code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code> (default) – \n\t\t\t\t\tWhen you use semantic version filters on the base image or components in your \n\t\t\t\t\timage recipe, EC2 Image Builder builds a new image only when there are new versions of \n\t\t\t\t\tthe base image or components in your recipe that match the filter.</p>\n               <note>\n                  <p>For semantic version syntax, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html\">CreateComponent</a>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>EXPRESSION_MATCH_ONLY</code> – This condition builds a new \n\t\t\t\t\timage every time the CRON expression matches the current time.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -13886,6 +14016,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#ImportComponent"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ImportDiskImage"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#ImportVmImage"

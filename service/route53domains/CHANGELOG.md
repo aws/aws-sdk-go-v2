@@ -1,3 +1,7 @@
+# v1.28.2 (2025-01-03)
+
+* **Documentation**: Doc only update for Route 53 Domains that fixes several customer-reported issues
+
 # v1.28.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

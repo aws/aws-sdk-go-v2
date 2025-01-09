@@ -1,4 +1,4 @@
-DescribePlacement
+TerminateGameSession
 	Initialize stack step
 		spanInitializeStart
 		RegisterServiceMetadata

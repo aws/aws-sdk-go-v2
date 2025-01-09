@@ -3416,6 +3416,9 @@ func awsAwsjson11_deserializeOpErrorEnableAllFeatures(response *smithyhttp.Respo
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
 
+	case strings.EqualFold("ConstraintViolationException", errorCode):
+		return awsAwsjson11_deserializeErrorConstraintViolationException(response, errorBody)
+
 	case strings.EqualFold("HandshakeConstraintViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorHandshakeConstraintViolationException(response, errorBody)
 

@@ -151,6 +151,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
+				Hostname: "ecr-public.us-east-1.api.aws",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},

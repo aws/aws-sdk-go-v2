@@ -9492,6 +9492,40 @@ func awsRestjson1_deserializeDocument__listOf__string(v *[]string, value interfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfAudioMonitoringSetting(v *[]types.AudioMonitoringSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AudioMonitoringSetting
+	if *v == nil {
+		cv = []types.AudioMonitoringSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AudioMonitoringSetting
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAudioMonitoringSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfBridgeOutput(v *[]types.BridgeOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10206,6 +10240,40 @@ func awsRestjson1_deserializeDocument__listOfTransportStreamProgram(v *[]types.T
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfVideoMonitoringSetting(v *[]types.VideoMonitoringSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VideoMonitoringSetting
+	if *v == nil {
+		cv = []types.VideoMonitoringSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VideoMonitoringSetting
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVideoMonitoringSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfVpcInterface(v *[]types.VpcInterface, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10316,6 +10384,42 @@ func awsRestjson1_deserializeDocumentAddFlowOutputs420Exception(v **types.AddFlo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioMonitoringSetting(v **types.AudioMonitoringSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioMonitoringSetting
+	if *v == nil {
+		sv = &types.AudioMonitoringSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "silentAudio":
+			if err := awsRestjson1_deserializeDocumentSilentAudio(&sv.SilentAudio, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10345,6 +10449,59 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBlackFrames(v **types.BlackFrames, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BlackFrames
+	if *v == nil {
+		sv = &types.BlackFrames{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected State to be of type string, got %T instead", value)
+				}
+				sv.State = types.State(jtv)
+			}
+
+		case "thresholdSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThresholdSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -11778,6 +11935,59 @@ func awsRestjson1_deserializeDocumentFrameResolution(v **types.FrameResolution, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFrozenFrames(v **types.FrozenFrames, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FrozenFrames
+	if *v == nil {
+		sv = &types.FrozenFrames{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected State to be of type string, got %T instead", value)
+				}
+				sv.State = types.State(jtv)
+			}
+
+		case "thresholdSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThresholdSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGateway(v **types.Gateway, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13097,6 +13307,20 @@ func awsRestjson1_deserializeDocumentMonitoringConfig(v **types.MonitoringConfig
 
 	for key, value := range shape {
 		switch key {
+		case "audioMonitoringSettings":
+			if err := awsRestjson1_deserializeDocument__listOfAudioMonitoringSetting(&sv.AudioMonitoringSettings, value); err != nil {
+				return err
+			}
+
+		case "contentQualityAnalysisState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentQualityAnalysisState to be of type string, got %T instead", value)
+				}
+				sv.ContentQualityAnalysisState = types.ContentQualityAnalysisState(jtv)
+			}
+
 		case "thumbnailState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13104,6 +13328,11 @@ func awsRestjson1_deserializeDocumentMonitoringConfig(v **types.MonitoringConfig
 					return fmt.Errorf("expected ThumbnailState to be of type string, got %T instead", value)
 				}
 				sv.ThumbnailState = types.ThumbnailState(jtv)
+			}
+
+		case "videoMonitoringSettings":
+			if err := awsRestjson1_deserializeDocument__listOfVideoMonitoringSetting(&sv.VideoMonitoringSettings, value); err != nil {
+				return err
 			}
 
 		default:
@@ -13691,6 +13920,59 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSilentAudio(v **types.SilentAudio, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SilentAudio
+	if *v == nil {
+		sv = &types.SilentAudio{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected State to be of type string, got %T instead", value)
+				}
+				sv.State = types.State(jtv)
+			}
+
+		case "thresholdSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThresholdSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14415,6 +14697,47 @@ func awsRestjson1_deserializeDocumentTransportStreamProgram(v **types.TransportS
 
 		case "streams":
 			if err := awsRestjson1_deserializeDocument__listOfTransportStream(&sv.Streams, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoMonitoringSetting(v **types.VideoMonitoringSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoMonitoringSetting
+	if *v == nil {
+		sv = &types.VideoMonitoringSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "blackFrames":
+			if err := awsRestjson1_deserializeDocumentBlackFrames(&sv.BlackFrames, value); err != nil {
+				return err
+			}
+
+		case "frozenFrames":
+			if err := awsRestjson1_deserializeDocumentFrozenFrames(&sv.FrozenFrames, value); err != nil {
 				return err
 			}
 

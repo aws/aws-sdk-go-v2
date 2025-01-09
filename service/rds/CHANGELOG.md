@@ -1,3 +1,7 @@
+# v1.93.3 (2025-01-08)
+
+* **Documentation**: Updates Amazon RDS documentation to clarify the RestoreDBClusterToPointInTime description.
+
 # v1.93.2 (2024-12-27)
 
 * **Documentation**: Updates Amazon RDS documentation to correct various descriptions.

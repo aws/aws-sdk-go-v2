@@ -248,6 +248,15 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "dlm.ap-southeast-5.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-7",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-7",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "dlm.ap-southeast-7.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

@@ -129,6 +129,25 @@ func (ConnectionStatus) Values() []ConnectionStatus {
 	}
 }
 
+type ContentQualityAnalysisState string
+
+// Enum values for ContentQualityAnalysisState
+const (
+	ContentQualityAnalysisStateEnabled  ContentQualityAnalysisState = "ENABLED"
+	ContentQualityAnalysisStateDisabled ContentQualityAnalysisState = "DISABLED"
+)
+
+// Values returns all known values for ContentQualityAnalysisState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentQualityAnalysisState) Values() []ContentQualityAnalysisState {
+	return []ContentQualityAnalysisState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type DesiredState string
 
 // Enum values for DesiredState

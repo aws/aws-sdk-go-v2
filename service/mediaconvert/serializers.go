@@ -6312,6 +6312,11 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 		ok.String(string(v.UnregisteredSeiTimecode))
 	}
 
+	if len(v.WriteMp4PackagingType) > 0 {
+		ok := object.Key("writeMp4PackagingType")
+		ok.String(string(v.WriteMp4PackagingType))
+	}
+
 	return nil
 }
 

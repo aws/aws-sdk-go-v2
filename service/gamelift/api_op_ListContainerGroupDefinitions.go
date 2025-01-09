@@ -16,7 +16,7 @@ import (
 // a set of sequential pages.
 //
 // This operation returns only the latest version of each definition. To retrieve
-// all versions of a container group definition, use ListContainerGroupDefinitionVersions.
+// all versions of a container group definition, use [ListContainerGroupDefinitionVersions].
 //
 // Request options:
 //
@@ -33,11 +33,7 @@ import (
 // This operation returns the list of container group definitions in no particular
 // order.
 //
-// # Learn more
-//
-// [Manage a container group definition]
-//
-// [Manage a container group definition]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html
+// [ListContainerGroupDefinitionVersions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitionVersions.html
 func (c *Client) ListContainerGroupDefinitions(ctx context.Context, params *ListContainerGroupDefinitionsInput, optFns ...func(*Options)) (*ListContainerGroupDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListContainerGroupDefinitionsInput{}

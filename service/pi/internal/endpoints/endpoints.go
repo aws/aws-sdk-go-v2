@@ -284,6 +284,18 @@ var defaultPartitions = endpoints.Partitions{
 				Protocols: []string{"https"},
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-7",
+			}: endpoints.Endpoint{
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-7",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:  "pi.ap-southeast-7.api.aws",
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{
 				Protocols: []string{"https"},

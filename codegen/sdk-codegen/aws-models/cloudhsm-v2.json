@@ -1437,6 +1437,12 @@
                         "smithy.api#documentation": "<p>The type of HSM that the cluster contains.</p>"
                     }
                 },
+                "HsmTypeRollbackExpiration": {
+                    "target": "com.amazonaws.cloudhsmv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp until when the cluster can be rolled back to its original HSM type.</p>"
+                    }
+                },
                 "PreCoPassword": {
                     "target": "com.amazonaws.cloudhsmv2#PreCoPassword",
                     "traits": {
@@ -1482,7 +1488,7 @@
                 "NetworkType": {
                     "target": "com.amazonaws.cloudhsmv2#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster's NetworkType can be set to either IPV4 (which is the default) or DUALSTACK.\n        When set to IPV4, communication between your application and the Hardware Security Modules (HSMs) is restricted to the IPv4 protocol only.\n        In contrast, the DUALSTACK network type enables communication over both the IPv4 and IPv6 protocols.\n        To use the DUALSTACK option, you'll need to configure your Virtual Private Cloud (VPC) and subnets to support both IPv4 and IPv6. This involves adding IPv6 Classless Inter-Domain Routing (CIDR) blocks to the existing IPv4 CIDR blocks in your subnets.\n        The choice between IPV4 and DUALSTACK network types determines the flexibility of the network addressing setup for your cluster. The DUALSTACK option provides more flexibility by allowing both IPv4 and IPv6 communication.</p>"
+                        "smithy.api#documentation": "<p>The cluster's NetworkType can be IPv4 (the default) or DUALSTACK.\n        The IPv4 NetworkType restricts communication between your application and the hardware security modules (HSMs) to the IPv4 protocol only. The DUALSTACK NetworkType enables communication over both IPv4 and IPv6 protocols.\n        To use DUALSTACK, configure your virtual private cloud (VPC) and subnets to support both IPv4 and IPv6.\n        This configuration involves adding IPv6 Classless Inter-Domain Routing (CIDR) blocks to the existing IPv4 CIDR blocks in your subnets.\n        The NetworkType you choose affects the network addressing options for your cluster. DUALSTACK provides more flexibility by supporting both IPv4 and IPv6 communication.</p>"
                     }
                 },
                 "Certificates": {
@@ -2483,6 +2489,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "HsmType": {
+                    "target": "com.amazonaws.cloudhsmv2#HsmType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of HSM.</p>"
+                    }
+                },
                 "State": {
                     "target": "com.amazonaws.cloudhsmv2#HsmState",
                     "traits": {
@@ -2838,11 +2850,16 @@
         "com.amazonaws.cloudhsmv2#ModifyClusterRequest": {
             "type": "structure",
             "members": {
+                "HsmType": {
+                    "target": "com.amazonaws.cloudhsmv2#HsmType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired HSM type of the cluster.</p>"
+                    }
+                },
                 "BackupRetentionPolicy": {
                     "target": "com.amazonaws.cloudhsmv2#BackupRetentionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A policy that defines how the service retains backups.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A policy that defines how the service retains backups.</p>"
                     }
                 },
                 "ClusterId": {

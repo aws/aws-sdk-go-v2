@@ -1,3 +1,11 @@
+# v1.53.3 (2025-01-08)
+
+* No change notes available for this release.
+
+# v1.53.2 (2025-01-03)
+
+* **Documentation**: Adding SDK reference examples for Amazon ECS operations.
+
 # v1.53.1 (2024-12-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

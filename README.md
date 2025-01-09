@@ -66,7 +66,7 @@ import (
 )
 
 func main() {
-    // Using the SDK's default configuration, loading additional config
+    // Using the SDK's default configuration, load additional config
     // and credentials values from the environment variables, shared
     // credentials, and shared configuration files
     cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-west-2"))

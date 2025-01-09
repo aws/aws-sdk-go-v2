@@ -36,21 +36,22 @@ type DeleteDataLakeDatasetInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of the dataset. If the namespace is asc, the name must be one of the
-	// supported [data entities].
+	// The name of the dataset. For asc name space, the name must be one of the
+	// supported data entities under [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html].
 	//
-	// [data entities]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+	// [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
 	//
 	// This member is required.
 	Name *string
 
-	// The namespace of the dataset. The available values are:
+	// The name space of the dataset. The available values are:
 	//
-	//   - asc: for [AWS Supply Chain supported datasets].
+	//   - asc - For information on the Amazon Web Services Supply Chain supported
+	//   datasets see [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html].
 	//
-	//   - default: for datasets with custom user-defined schemas.
+	//   - default - For datasets with custom user-defined schemas.
 	//
-	// [AWS Supply Chain supported datasets]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+	// [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
 	//
 	// This member is required.
 	Namespace *string
@@ -71,7 +72,7 @@ type DeleteDataLakeDatasetOutput struct {
 	// This member is required.
 	Name *string
 
-	// The namespace of deleted dataset.
+	// The name space of deleted dataset.
 	//
 	// This member is required.
 	Namespace *string

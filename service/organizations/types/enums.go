@@ -141,6 +141,7 @@ const (
 	ConstraintViolationExceptionReasonInvalidPaymentInstrument                               ConstraintViolationExceptionReason = "INVALID_PAYMENT_INSTRUMENT"
 	ConstraintViolationExceptionReasonAccountCreationNotComplete                             ConstraintViolationExceptionReason = "ACCOUNT_CREATION_NOT_COMPLETE"
 	ConstraintViolationExceptionReasonCannotRegisterSuspendedAccountAsDelegatedAdministrator ConstraintViolationExceptionReason = "CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR"
+	ConstraintViolationExceptionReasonAllFeaturesMigrationOrganizationSizeLimitExceeded      ConstraintViolationExceptionReason = "ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for ConstraintViolationExceptionReason. Note
@@ -185,6 +186,7 @@ func (ConstraintViolationExceptionReason) Values() []ConstraintViolationExceptio
 		"INVALID_PAYMENT_INSTRUMENT",
 		"ACCOUNT_CREATION_NOT_COMPLETE",
 		"CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR",
+		"ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED",
 	}
 }
 

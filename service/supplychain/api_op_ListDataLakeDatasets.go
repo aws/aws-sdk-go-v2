@@ -38,13 +38,14 @@ type ListDataLakeDatasetsInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The namespace of the dataset. The available values are:
+	// The name space of the dataset. The available values are:
 	//
-	//   - asc: for [AWS Supply Chain supported datasets].
+	//   - asc - For information on the Amazon Web Services Supply Chain supported
+	//   datasets see [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html].
 	//
-	//   - default: for datasets with custom user-defined schemas.
+	//   - default - For datasets with custom user-defined schemas.
 	//
-	// [AWS Supply Chain supported datasets]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+	// [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
 	//
 	// This member is required.
 	Namespace *string

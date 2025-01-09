@@ -471,6 +471,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of compression used for an additional data source used in inference or\n            training. Specify <code>None</code> if your additional data source is not\n            compressed.</p>"
                     }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with S3 URI.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7808,6 +7814,12 @@
                         "smithy.api#documentation": "<p>The private primary IP address of the SageMaker HyperPod cluster node.</p>"
                     }
                 },
+                "PrivatePrimaryIpv6": {
+                    "target": "com.amazonaws.sagemaker#ClusterPrivatePrimaryIpv6",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private primary IPv6 address of the SageMaker HyperPod cluster node.</p>"
+                    }
+                },
                 "PrivateDnsHostname": {
                     "target": "com.amazonaws.sagemaker#ClusterPrivateDnsHostname",
                     "traits": {
@@ -7969,6 +7981,9 @@
             "traits": {
                 "smithy.api#pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$"
             }
+        },
+        "com.amazonaws.sagemaker#ClusterPrivatePrimaryIpv6": {
+            "type": "string"
         },
         "com.amazonaws.sagemaker#ClusterSchedulerConfigArn": {
             "type": "string",
@@ -49079,7 +49094,7 @@
                     "target": "com.amazonaws.sagemaker#ContainerImage",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.</p>\n         <p>If you are using your own custom algorithm instead of an algorithm provided by SageMaker,\n            the inference code must meet SageMaker requirements. SageMaker supports both\n            <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code>\n            image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon\n                SageMaker</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 Container Registry path where inference code is stored.</p>\n         <p>If you are using your own custom algorithm instead of an algorithm provided by SageMaker,\n            the inference code must meet SageMaker requirements. SageMaker supports both\n            <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code>\n            image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon\n                SageMaker</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -49141,6 +49156,12 @@
                     "target": "com.amazonaws.sagemaker#AdditionalS3DataSource",
                     "traits": {
                         "smithy.api#documentation": "<p>The additional data source that is used during inference in the Docker container for\n            your model package.</p>"
+                    }
+                },
+                "ModelDataETag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with Model Data URL.</p>"
                     }
                 }
             },
@@ -60609,7 +60630,7 @@
                     "target": "com.amazonaws.sagemaker#S3DataType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix.\n            SageMaker uses all objects that match the specified key name prefix for model training. </p>\n         <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that\n            is a manifest file containing a list of object keys that you want SageMaker to use for model\n            training. </p>\n         <p>If you choose <code>AugmentedManifestFile</code>, S3Uri identifies an object that is\n            an augmented manifest file in JSON lines format. This file contains the data you want to\n            use for model training. <code>AugmentedManifestFile</code> can only be used if the\n            Channel's input mode is <code>Pipe</code>.</p>",
+                        "smithy.api#documentation": "<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix.\n            SageMaker uses all objects that match the specified key name prefix for model training. </p>\n         <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that\n            is a manifest file containing a list of object keys that you want SageMaker to use for model\n            training. </p>\n         <p>If you choose <code>AugmentedManifestFile</code>, <code>S3Uri</code> identifies an object that is\n            an augmented manifest file in JSON lines format. This file contains the data you want to\n            use for model training. <code>AugmentedManifestFile</code> can only be used if the\n            Channel's input mode is <code>Pipe</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -60710,6 +60731,18 @@
                     "target": "com.amazonaws.sagemaker#S3ModelUri",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 URI of the manifest file. The manifest file is a CSV file that stores the\n            artifact locations.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with S3 URI.</p>"
+                    }
+                },
+                "ManifestEtag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with Manifest S3 URI.</p>"
                     }
                 }
             },
@@ -64576,6 +64609,12 @@
                     "target": "com.amazonaws.sagemaker#ModelDataSource",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy during endpoint creation.</p>"
+                    }
+                },
+                "ModelDataETag": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag associated with Model Data URL.</p>"
                     }
                 },
                 "AlgorithmName": {

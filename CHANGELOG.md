@@ -1,3 +1,72 @@
+# Release (2025-01-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.93.3](service/rds/CHANGELOG.md#v1933-2025-01-08)
+  * **Documentation**: Updates Amazon RDS documentation to clarify the RestoreDBClusterToPointInTime description.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.47.0](service/route53/CHANGELOG.md#v1470-2025-01-08)
+  * **Feature**: Amazon Route 53 now supports the Asia Pacific (Thailand) Region (ap-southeast-7) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.172.0](service/sagemaker/CHANGELOG.md#v11720-2025-01-08)
+  * **Feature**: Adds support for IPv6 for SageMaker HyperPod cluster nodes.
+
+# Release (2025-01-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.29.0](service/cloudhsmv2/CHANGELOG.md#v1290-2025-01-07)
+  * **Feature**: Adds support to ModifyCluster for modifying a Cluster's Hsm Type.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.39.0](service/dynamodb/CHANGELOG.md#v1390-2025-01-07)
+  * **Feature**: This release makes Amazon DynamoDB point-in-time-recovery (PITR) to be configurable. You can set PITR recovery period for each table individually to between 1 and 35 days.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.40.0](service/imagebuilder/CHANGELOG.md#v1400-2025-01-07)
+  * **Feature**: This release adds support for importing images from ISO disk files. Added new ImportDiskImage API operation.
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice`: [v1.24.0](service/iot1clickdevicesservice/CHANGELOG.md#v1240-2025-01-07)
+  * **Feature**: Mark service/iot1clickdevicesservice and service/iot1clickprojects as deprecated. Those 2 services are no longer available for use. See https://docs.aws.amazon.com/iot/latest/developerguide/iot-legacy-services.html#faq-1-click-eol
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickprojects`: [v1.24.0](service/iot1clickprojects/CHANGELOG.md#v1240-2025-01-07)
+  * **Feature**: Mark service/iot1clickdevicesservice and service/iot1clickprojects as deprecated. Those 2 services are no longer available for use. See https://docs.aws.amazon.com/iot/latest/developerguide/iot-legacy-services.html#faq-1-click-eol
+
+# Release (2025-01-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.28.0](service/iotsecuretunneling/CHANGELOG.md#v1280-2025-01-06)
+  * **Feature**: Adds dualstack endpoint support for IoT Secure Tunneling
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.11.0](service/supplychain/CHANGELOG.md#v1110-2025-01-06)
+  * **Feature**: Allow vanity DNS domain when creating a new ASC instance
+
+# Release (2025-01-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.53.2](service/ecs/CHANGELOG.md#v1532-2025-01-03)
+  * **Documentation**: Adding SDK reference examples for Amazon ECS operations.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.28.2](service/route53domains/CHANGELOG.md#v1282-2025-01-03)
+  * **Documentation**: Doc only update for Route 53 Domains that fixes several customer-reported issues
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.72.0](service/s3/CHANGELOG.md#v1720-2025-01-03)
+  * **Feature**: This change is only for updating the model regexp of CopySource which is not for validation but only for documentation and user guide change.
+
+# Release (2025-01-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.41.0](service/appsync/CHANGELOG.md#v1410-2025-01-02)
+  * **Feature**: Modify UpdateGraphQLAPI operation and flag authenticationType as required.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.38.0](service/gamelift/CHANGELOG.md#v1380-2025-01-02)
+  * **Feature**: Amazon GameLift releases a new game session shutdown feature. Use the Amazon GameLift console or AWS CLI to terminate an in-progress game session that's entered a bad state or is no longer needed.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.37.0](service/mediaconnect/CHANGELOG.md#v1370-2025-01-02)
+  * **Feature**: AWS Elemental MediaConnect now supports Content Quality Analysis for enhanced source stream monitoring. This enables you to track specific audio and video metrics in transport stream source flows, ensuring your content meets quality standards.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.65.0](service/mediaconvert/CHANGELOG.md#v1650-2025-01-02)
+  * **Feature**: This release adds support for the AVC3 codec and fixes an alignment issue with Japanese vertical captions.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.37.0](service/organizations/CHANGELOG.md#v1370-2025-01-02)
+  * **Feature**: Added ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED to ConstraintViolationException for the EnableAllFeatures operation.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.171.0](service/sagemaker/CHANGELOG.md#v11710-2025-01-02)
+  * **Feature**: Adding ETag information with Model Artifacts for Model Registry
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.37.4](service/sqs/CHANGELOG.md#v1374-2025-01-02)
+  * **Documentation**: In-flight message typo fix from 20k to 120k.
+
 # Release (2024-12-28)
 
 ## Module Highlights
