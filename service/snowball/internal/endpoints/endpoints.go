@@ -143,8 +143,20 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "af-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "af-south-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "snowball-fips.af-south-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "snowball-fips.ap-east-1.amazonaws.com",
+			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{},
@@ -203,6 +215,12 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-southeast-3",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-southeast-3",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "snowball-fips.ap-southeast-3.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -224,8 +242,20 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "eu-north-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "snowball-fips.eu-north-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-south-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-south-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "snowball-fips.eu-south-1.amazonaws.com",
+			},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",
 			}: endpoints.Endpoint{},
@@ -252,6 +282,24 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.eu-west-3.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "fips-af-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "snowball-fips.af-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-ap-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "snowball-fips.ap-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-east-1",
+				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "fips-ap-northeast-1",
@@ -308,6 +356,15 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-ap-southeast-3",
+			}: endpoints.Endpoint{
+				Hostname: "snowball-fips.ap-southeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-3",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "fips-ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "snowball-fips.ca-central-1.amazonaws.com",
@@ -322,6 +379,24 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.eu-central-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-eu-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "snowball-fips.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-eu-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "snowball-fips.eu-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
 				},
 				Deprecated: aws.TrueTernary,
 			},
@@ -349,6 +424,24 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.eu-west-3.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-west-3",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-il-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "snowball-fips.il-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "il-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-me-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "snowball-fips.me-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-central-1",
 				},
 				Deprecated: aws.TrueTernary,
 			},
@@ -401,8 +494,20 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "il-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "il-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "snowball-fips.il-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "me-central-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "me-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "snowball-fips.me-central-1.amazonaws.com",
+			},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},

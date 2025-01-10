@@ -320,6 +320,8 @@ type ModifyClusterInput struct {
 
 	// If true , the cluster can be accessed from a public network. Only clusters in
 	// VPCs can be set to be publicly available.
+	//
+	// Default: false
 	PubliclyAccessible *bool
 
 	// A list of virtual private cloud (VPC) security groups to be associated with the

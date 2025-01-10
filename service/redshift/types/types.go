@@ -381,6 +381,8 @@ type Cluster struct {
 
 	// A boolean value that, if true , indicates that the cluster can be accessed from
 	// a public network.
+	//
+	// Default: false
 	PubliclyAccessible *bool
 
 	// The status of the reserved-node exchange request. Statuses include in-progress

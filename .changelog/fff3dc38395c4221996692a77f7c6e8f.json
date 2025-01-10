@@ -1,0 +1,8 @@
+{
+    "id": "fff3dc38-395c-4221-9966-92a77f7c6e8f",
+    "type": "documentation",
+    "description": "Doc only update for ServiceName that fixes several customer-reported issues",
+    "modules": [
+        "service/securitylake"
+    ]
+}

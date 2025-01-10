@@ -1,0 +1,8 @@
+{
+    "id": "143de6be-44df-4ba3-85df-90526622d72e",
+    "type": "documentation",
+    "description": "Fixed typos in the descriptions.",
+    "modules": [
+        "service/sts"
+    ]
+}

@@ -274,6 +274,8 @@ type RestoreFromClusterSnapshotInput struct {
 	PreferredMaintenanceWindow *string
 
 	// If true , the cluster can be accessed from a public network.
+	//
+	// Default: false
 	PubliclyAccessible *bool
 
 	// The identifier of the target reserved node offering.
