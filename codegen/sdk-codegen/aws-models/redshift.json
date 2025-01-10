@@ -1337,7 +1337,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.redshift#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A boolean value that, if <code>true</code>, indicates that the cluster can be\n            accessed from a public network.</p>"
+                        "smithy.api#documentation": "<p>A boolean value that, if <code>true</code>, indicates that the cluster can be\n            accessed from a public network.</p>\n         <p>Default: false</p>"
                     }
                 },
                 "Encrypted": {
@@ -2919,13 +2919,13 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.redshift#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, the cluster can be accessed from a public network. </p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, the cluster can be accessed from a public network. </p>\n         <p>Default: false</p>"
                     }
                 },
                 "Encrypted": {
                     "target": "com.amazonaws.redshift#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, the data in the cluster is encrypted at rest. </p>\n         <p>Default: false</p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, the data in the cluster is encrypted at rest. \n            If you set the value on this parameter to <code>false</code>, the request will fail.</p>\n         <p>Default: true</p>"
                     }
                 },
                 "HsmClientCertificateIdentifier": {
@@ -12156,7 +12156,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.redshift#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, the cluster can be accessed from a public network. Only\n            clusters in VPCs can be set to be publicly available.</p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, the cluster can be accessed from a public network. Only\n            clusters in VPCs can be set to be publicly available.</p>\n         <p>Default: false</p>"
                     }
                 },
                 "ElasticIp": {
@@ -17035,7 +17035,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.redshift#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, the cluster can be accessed from a public network. </p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, the cluster can be accessed from a public network. </p>\n         <p>Default: false</p>"
                     }
                 },
                 "OwnerAccount": {
