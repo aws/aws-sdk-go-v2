@@ -1,3 +1,16 @@
+# Release (2025-01-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.53.4](service/redshift/CHANGELOG.md#v1534-2025-01-10)
+  * **Documentation**: Additions to the PubliclyAccessible and Encrypted parameters clarifying what the defaults are.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.19.8](service/securitylake/CHANGELOG.md#v1198-2025-01-10)
+  * **Documentation**: Doc only update for ServiceName that fixes several customer-reported issues
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.33.6](service/sts/CHANGELOG.md#v1336-2025-01-10)
+  * **Documentation**: Fixed typos in the descriptions.
+
 # Release (2025-01-09)
 
 ## General Highlights

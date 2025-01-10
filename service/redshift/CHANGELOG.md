@@ -1,3 +1,7 @@
+# v1.53.4 (2025-01-10)
+
+* **Documentation**: Additions to the PubliclyAccessible and Encrypted parameters clarifying what the defaults are.
+
 # v1.53.3 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "079440de-1e9b-4932-a37d-5686c12435fa",
-    "type": "documentation",
-    "description": "Additions to the PubliclyAccessible and Encrypted parameters clarifying what the defaults are.",
-    "modules": [
-        "service/redshift"
-    ]
-}

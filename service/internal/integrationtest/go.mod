@@ -2,8 +2,8 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.32.8
-	github.com/aws/aws-sdk-go-v2/config v1.28.9
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.47
+	github.com/aws/aws-sdk-go-v2/config v1.28.10
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.48
 	github.com/aws/aws-sdk-go-v2/service/acm v1.30.10
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.34.5
@@ -57,7 +57,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.23.9
 	github.com/aws/aws-sdk-go-v2/service/polly v1.45.10
 	github.com/aws/aws-sdk-go-v2/service/rds v1.93.4
-	github.com/aws/aws-sdk-go-v2/service/redshift v1.53.3
+	github.com/aws/aws-sdk-go-v2/service/redshift v1.53.4
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.10
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.47.1
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.28.3
@@ -69,11 +69,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ses v1.29.3
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.34.4
 	github.com/aws/aws-sdk-go-v2/service/shield v1.29.9
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.30.9
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.30.10
 	github.com/aws/aws-sdk-go-v2/service/sns v1.33.10
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.37.6
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.56.4
-	github.com/aws/aws-sdk-go-v2/service/sts v1.33.5
+	github.com/aws/aws-sdk-go-v2/service/sts v1.33.6
 	github.com/aws/aws-sdk-go-v2/service/support v1.26.9
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.29.10
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.22.7
@@ -86,7 +86,7 @@ require (
 
 require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.7 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.50 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.51 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.23 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.27 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.27 // indirect
