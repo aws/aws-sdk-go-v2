@@ -642,7 +642,7 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 		d.wg.Wait()
 	}
 
-	if d.err == nil && d.buf != nil {
+	if d.buf != nil {
 		output.Body = io.NopCloser(bytes.NewReader(d.buf))
 	}
 
@@ -669,7 +669,10 @@ func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*
 
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
-		d.setErr(err)
+		return output, err
+	}
+	if d.buf != nil {
+		output.Body = io.NopCloser(bytes.NewReader(d.buf))
 	}
 
 	return output, err
