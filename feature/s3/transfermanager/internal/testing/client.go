@@ -32,11 +32,13 @@ type TransferManagerLoggingClient struct {
 
 	// params for download test
 
-	Data []byte
+	Data       []byte
+	PartsCount int32
 
 	GetObjectInvocations int
 
 	RetrievedRanges []string
+	RetrievedParts  []int32
 
 	ErrReaders []TestErrReader
 	index      int
@@ -210,6 +212,9 @@ func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3
 	if params.Range != nil {
 		c.RetrievedRanges = append(c.RetrievedRanges, aws.ToString(params.Range))
 	}
+	if params.PartNumber != nil {
+		c.RetrievedParts = append(c.RetrievedParts, aws.ToInt32(params.PartNumber))
+	}
 
 	if c.GetObjectFn != nil {
 		return c.GetObjectFn(c, params)
@@ -227,10 +232,10 @@ func NewUploadLoggingClient(ignoredOps []string) (*TransferManagerLoggingClient,
 	return c, &c.UploadInvocations, &c.Params
 }
 
-func NewDownloadClient() (*TransferManagerLoggingClient, *int, *[]string) {
+func NewDownloadClient() (*TransferManagerLoggingClient, *int, *[]int32, *[]string) {
 	c := &TransferManagerLoggingClient{}
 
-	return c, &c.GetObjectInvocations, &c.RetrievedRanges
+	return c, &c.GetObjectInvocations, &c.RetrievedParts, &c.RetrievedRanges
 }
 
 var rangeValueRegex = regexp.MustCompile(`bytes=(\d+)-(\d+)`)
@@ -259,7 +264,7 @@ var RangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjec
 	}, nil
 }
 
-var ErrGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+var ErrRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	out, err := RangeGetObjectFn(c, params)
 	c.index++
 	if c.index > 1 {
@@ -284,6 +289,23 @@ var ErrReaderFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInpu
 	}
 	c.index++
 	return out, nil
+}
+
+var PartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	return &s3.GetObjectOutput{
+		Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
+		ContentLength: aws.Int64(8 * 1024 * 1024),
+		PartsCount:    aws.Int32(c.PartsCount),
+	}, nil
+}
+
+var ErrPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	out, err := PartGetObjectFn(c, params)
+	c.index++
+	if c.index > 1 {
+		return &s3.GetObjectOutput{}, fmt.Errorf("s3 service error")
+	}
+	return out, err
 }
 
 type TestErrReader struct {
