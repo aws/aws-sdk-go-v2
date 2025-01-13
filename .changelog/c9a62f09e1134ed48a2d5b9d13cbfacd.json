@@ -1,0 +1,8 @@
+{
+    "id": "c9a62f09-e113-4ed4-8a2d-5b9d13cbfacd",
+    "type": "feature",
+    "description": "Support updating connector configuration via UpdateConnector API. Release Operations API to monitor the status of the connector operation.",
+    "modules": [
+        "service/kafkaconnect"
+    ]
+}

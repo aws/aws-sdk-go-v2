@@ -149,6 +149,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.af-south-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "af-south-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.af-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "af-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.af-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -156,6 +168,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.ap-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.ap-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.ap-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
@@ -167,6 +191,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.ap-northeast-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "ap-northeast-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.ap-northeast-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.ap-northeast-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -174,6 +210,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.ap-northeast-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.ap-northeast-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.ap-northeast-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-3",
@@ -185,6 +233,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.ap-northeast-3.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "ap-northeast-3",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.ap-northeast-3.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.ap-northeast-3.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -192,6 +252,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.ap-south-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-south-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.ap-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.ap-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
@@ -203,6 +275,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.ap-southeast-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "ap-southeast-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.ap-southeast-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.ap-southeast-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -210,6 +294,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.ap-southeast-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.ap-southeast-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.ap-southeast-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-3",
@@ -221,6 +317,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.ap-southeast-3.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "ap-southeast-3",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.ap-southeast-3.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.ap-southeast-3.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -228,6 +336,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.ca-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.ca-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
@@ -239,6 +359,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.eu-central-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "eu-central-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.eu-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.eu-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -246,6 +378,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.eu-north-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-north-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.eu-north-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-north-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.eu-north-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-south-1",
@@ -257,6 +401,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.eu-south-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "eu-south-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.eu-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.eu-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -264,6 +420,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.eu-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.eu-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.eu-west-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-2",
@@ -275,6 +443,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.eu-west-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "eu-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.eu-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-west-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.eu-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-west-3",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -282,6 +462,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.eu-west-3.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-west-3",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.eu-west-3.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-west-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.eu-west-3.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "fips-af-south-1",
@@ -500,6 +692,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.il-central-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "il-central-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.il-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "il-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.il-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "me-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -507,6 +711,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.me-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "me-central-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.me-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "me-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.me-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",
@@ -518,6 +734,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.sa-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "sa-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.sa-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "sa-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.sa-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -525,6 +753,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.us-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.us-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-2",
@@ -536,6 +776,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.us-east-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -545,6 +797,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "snowball-fips.us-west-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -552,6 +816,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "snowball-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball-fips.us-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "snowball.us-west-2.api.aws",
 			},
 		},
 	},

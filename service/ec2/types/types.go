@@ -2254,6 +2254,12 @@ type ClientVpnEndpoint struct {
 	// A brief description of the endpoint.
 	Description *string
 
+	// Indicates whether the client VPN session is disconnected after the maximum
+	// sessionTimeoutHours is reached. If true , users are prompted to reconnect client
+	// VPN. If false , client VPN attempts to reconnect automatically. The default
+	// value is false .
+	DisconnectOnSessionTimeout *bool
+
 	// The DNS name to be used by clients when connecting to the Client VPN endpoint.
 	DnsName *string
 
@@ -7089,7 +7095,7 @@ type InstanceBlockDeviceMappingSpecification struct {
 	// launched.
 	Ebs *EbsInstanceBlockDeviceSpecification
 
-	// suppress the specified device included in the block device mapping.
+	// Suppresses the specified device included in the block device mapping.
 	NoDevice *string
 
 	// The virtual device name.
@@ -7837,12 +7843,9 @@ type InstanceNetworkInterfaceSpecification struct {
 	// [RunInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
 	PrivateIpAddresses []PrivateIpAddressSpecification
 
-	// The number of secondary private IPv4 addresses. You can't specify this option
-	// and specify more than one private IP address using the private IP addresses
-	// option. You cannot specify this option if you're launching more than one
-	// instance in a [RunInstances]request.
-	//
-	// [RunInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
+	// The number of secondary private IPv4 addresses. You can’t specify this
+	// parameter and also specify a secondary private IP address using the
+	// PrivateIpAddress parameter.
 	SecondaryPrivateIpAddressCount *int32
 
 	// The ID of the subnet associated with the network interface. Applies only if

@@ -3475,6 +3475,13 @@ func awsAwsjson11_serializeOpDocumentCreateCallAnalyticsCategoryInput(v *CreateC
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4122,6 +4129,13 @@ func awsAwsjson11_serializeOpDocumentStartCallAnalyticsJobInput(v *StartCallAnal
 	if v.Settings != nil {
 		ok := object.Key("Settings")
 		if err := awsAwsjson11_serializeDocumentCallAnalyticsJobSettings(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
 	}

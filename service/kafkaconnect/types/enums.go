@@ -2,6 +2,108 @@
 
 package types
 
+type ConnectorOperationState string
+
+// Enum values for ConnectorOperationState
+const (
+	ConnectorOperationStatePending            ConnectorOperationState = "PENDING"
+	ConnectorOperationStateUpdateInProgress   ConnectorOperationState = "UPDATE_IN_PROGRESS"
+	ConnectorOperationStateUpdateComplete     ConnectorOperationState = "UPDATE_COMPLETE"
+	ConnectorOperationStateUpdateFailed       ConnectorOperationState = "UPDATE_FAILED"
+	ConnectorOperationStateRollbackInProgress ConnectorOperationState = "ROLLBACK_IN_PROGRESS"
+	ConnectorOperationStateRollbackFailed     ConnectorOperationState = "ROLLBACK_FAILED"
+	ConnectorOperationStateRollbackComplete   ConnectorOperationState = "ROLLBACK_COMPLETE"
+)
+
+// Values returns all known values for ConnectorOperationState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorOperationState) Values() []ConnectorOperationState {
+	return []ConnectorOperationState{
+		"PENDING",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETE",
+		"UPDATE_FAILED",
+		"ROLLBACK_IN_PROGRESS",
+		"ROLLBACK_FAILED",
+		"ROLLBACK_COMPLETE",
+	}
+}
+
+type ConnectorOperationStepState string
+
+// Enum values for ConnectorOperationStepState
+const (
+	ConnectorOperationStepStatePending    ConnectorOperationStepState = "PENDING"
+	ConnectorOperationStepStateInProgress ConnectorOperationStepState = "IN_PROGRESS"
+	ConnectorOperationStepStateCompleted  ConnectorOperationStepState = "COMPLETED"
+	ConnectorOperationStepStateFailed     ConnectorOperationStepState = "FAILED"
+	ConnectorOperationStepStateCancelled  ConnectorOperationStepState = "CANCELLED"
+)
+
+// Values returns all known values for ConnectorOperationStepState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorOperationStepState) Values() []ConnectorOperationStepState {
+	return []ConnectorOperationStepState{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"CANCELLED",
+	}
+}
+
+type ConnectorOperationStepType string
+
+// Enum values for ConnectorOperationStepType
+const (
+	ConnectorOperationStepTypeInitializeUpdate             ConnectorOperationStepType = "INITIALIZE_UPDATE"
+	ConnectorOperationStepTypeFinalizeUpdate               ConnectorOperationStepType = "FINALIZE_UPDATE"
+	ConnectorOperationStepTypeUpdateWorkerSetting          ConnectorOperationStepType = "UPDATE_WORKER_SETTING"
+	ConnectorOperationStepTypeUpdateConnectorConfiguration ConnectorOperationStepType = "UPDATE_CONNECTOR_CONFIGURATION"
+	ConnectorOperationStepTypeValidateUpdate               ConnectorOperationStepType = "VALIDATE_UPDATE"
+)
+
+// Values returns all known values for ConnectorOperationStepType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorOperationStepType) Values() []ConnectorOperationStepType {
+	return []ConnectorOperationStepType{
+		"INITIALIZE_UPDATE",
+		"FINALIZE_UPDATE",
+		"UPDATE_WORKER_SETTING",
+		"UPDATE_CONNECTOR_CONFIGURATION",
+		"VALIDATE_UPDATE",
+	}
+}
+
+type ConnectorOperationType string
+
+// Enum values for ConnectorOperationType
+const (
+	ConnectorOperationTypeUpdateWorkerSetting          ConnectorOperationType = "UPDATE_WORKER_SETTING"
+	ConnectorOperationTypeUpdateConnectorConfiguration ConnectorOperationType = "UPDATE_CONNECTOR_CONFIGURATION"
+	ConnectorOperationTypeIsolateConnector             ConnectorOperationType = "ISOLATE_CONNECTOR"
+	ConnectorOperationTypeRestoreConnector             ConnectorOperationType = "RESTORE_CONNECTOR"
+)
+
+// Values returns all known values for ConnectorOperationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorOperationType) Values() []ConnectorOperationType {
+	return []ConnectorOperationType{
+		"UPDATE_WORKER_SETTING",
+		"UPDATE_CONNECTOR_CONFIGURATION",
+		"ISOLATE_CONNECTOR",
+		"RESTORE_CONNECTOR",
+	}
+}
+
 type ConnectorState string
 
 // Enum values for ConnectorState

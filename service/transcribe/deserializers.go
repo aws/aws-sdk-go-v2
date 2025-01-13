@@ -5499,6 +5499,11 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 				}
 			}
 
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		case "Transcript":
 			if err := awsAwsjson11_deserializeDocumentTranscript(&sv.Transcript, value); err != nil {
 				return err
@@ -5956,6 +5961,11 @@ func awsAwsjson11_deserializeDocumentCategoryProperties(v **types.CategoryProper
 
 		case "Rules":
 			if err := awsAwsjson11_deserializeDocumentRuleList(&sv.Rules, value); err != nil {
+				return err
+			}
+
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
 

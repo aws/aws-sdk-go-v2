@@ -146,6 +146,18 @@ func TestCheckSnapshot_DescribeConnector(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeConnectorOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeConnectorOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeConnectorOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeCustomPlugin(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCustomPlugin(context.Background(), nil, func(o *Options) {
@@ -163,6 +175,18 @@ func TestCheckSnapshot_DescribeWorkerConfiguration(t *testing.T) {
 	_, err := svc.DescribeWorkerConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeWorkerConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConnectorOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectorOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConnectorOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -337,6 +361,18 @@ func TestUpdateSnapshot_DescribeConnector(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeConnectorOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeConnectorOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeConnectorOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeCustomPlugin(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCustomPlugin(context.Background(), nil, func(o *Options) {
@@ -354,6 +390,18 @@ func TestUpdateSnapshot_DescribeWorkerConfiguration(t *testing.T) {
 	_, err := svc.DescribeWorkerConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeWorkerConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConnectorOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectorOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConnectorOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

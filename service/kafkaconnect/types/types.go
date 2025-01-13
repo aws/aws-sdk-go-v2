@@ -183,6 +183,39 @@ type CloudWatchLogsLogDeliveryDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Details of a step that is involved in a connector's operation.
+type ConnectorOperationStep struct {
+
+	// The step state of the operation.
+	StepState ConnectorOperationStepState
+
+	// The step type of the operation.
+	StepType ConnectorOperationStepType
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a connector operation.
+type ConnectorOperationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the connector operation.
+	ConnectorOperationArn *string
+
+	// The state of the connector operation.
+	ConnectorOperationState ConnectorOperationState
+
+	// The type of connector operation performed.
+	ConnectorOperationType ConnectorOperationType
+
+	// The time when operation was created.
+	CreationTime *time.Time
+
+	// The time when operation ended.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Summary of a connector.
 type ConnectorSummary struct {
 
@@ -821,6 +854,15 @@ type WorkerLogDeliveryDescription struct {
 
 	// Details about delivering logs to Amazon S3.
 	S3 *S3LogDeliveryDescription
+
+	noSmithyDocumentSerde
+}
+
+// Details about worker setting of a connector
+type WorkerSetting struct {
+
+	// A description of the connector's capacity.
+	Capacity *CapacityDescription
 
 	noSmithyDocumentSerde
 }

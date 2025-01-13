@@ -11142,6 +11142,11 @@ func awsRestjson1_deserializeDocumentEvaluationBedrockModel(v **types.Evaluation
 				sv.ModelIdentifier = ptr.String(jtv)
 			}
 
+		case "performanceConfig":
+			if err := awsRestjson1_deserializeDocumentPerformanceConfiguration(&sv.PerformanceConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15941,6 +15946,46 @@ func awsRestjson1_deserializeDocumentOutputDataConfig(v **types.OutputDataConfig
 					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPerformanceConfiguration(v **types.PerformanceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PerformanceConfiguration
+	if *v == nil {
+		sv = &types.PerformanceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "latency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PerformanceConfigLatency to be of type string, got %T instead", value)
+				}
+				sv.Latency = types.PerformanceConfigLatency(jtv)
 			}
 
 		default:

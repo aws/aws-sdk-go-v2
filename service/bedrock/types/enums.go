@@ -642,6 +642,25 @@ func (ModelModality) Values() []ModelModality {
 	}
 }
 
+type PerformanceConfigLatency string
+
+// Enum values for PerformanceConfigLatency
+const (
+	PerformanceConfigLatencyStandard  PerformanceConfigLatency = "standard"
+	PerformanceConfigLatencyOptimized PerformanceConfigLatency = "optimized"
+)
+
+// Values returns all known values for PerformanceConfigLatency. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PerformanceConfigLatency) Values() []PerformanceConfigLatency {
+	return []PerformanceConfigLatency{
+		"standard",
+		"optimized",
+	}
+}
+
 type PromptRouterStatus string
 
 // Enum values for PromptRouterStatus

@@ -1087,6 +1087,11 @@ func validateOpCreateCallAnalyticsCategoryInput(v *CreateCallAnalyticsCategoryIn
 			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1498,6 +1503,11 @@ func validateOpStartCallAnalyticsJobInput(v *StartCallAnalyticsJobInput) error {
 	if v.Settings != nil {
 		if err := validateCallAnalyticsJobSettings(v.Settings); err != nil {
 			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
