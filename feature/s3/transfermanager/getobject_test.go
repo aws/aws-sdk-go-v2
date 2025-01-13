@@ -19,7 +19,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func TestDownloadObject(t *testing.T) {
+func TestDownloadObjectInRanges(t *testing.T) {
 	cases := map[string]struct {
 		data              []byte
 		errReaders        []s3testing.TestErrReader
@@ -28,8 +28,11 @@ func TestDownloadObject(t *testing.T) {
 		downloadRange     string
 		expectInvocations int
 		expectRanges      []string
+		partNumber        int32
+		partsCount        int32
+		expectParts       []int32
 		expectErr         string
-		dataValidationFn  func(t *testing.T, w *types.WriteAtBuffer)
+		dataValidationFn  func(*testing.T, *types.WriteAtBuffer)
 	}{
 		"range download in order": {
 			data:        buf20MB,
@@ -63,7 +66,7 @@ func TestDownloadObject(t *testing.T) {
 		},
 		"range download with s3 error": {
 			data:        buf20MB,
-			getObjectFn: s3testing.ErrGetObjectFn,
+			getObjectFn: s3testing.ErrRangeGetObjectFn,
 			options: Options{
 				Concurrency:           1,
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
@@ -160,8 +163,8 @@ func TestDownloadObject(t *testing.T) {
 			},
 		},
 		"range download a range of object": {
-			getObjectFn: s3testing.RangeGetObjectFn,
 			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
 				Concurrency:           1,
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
@@ -170,25 +173,67 @@ func TestDownloadObject(t *testing.T) {
 			expectInvocations: 2,
 			expectRanges:      []string{"bytes=0-8388607", "bytes=8388608-10485759"},
 		},
+		"parts download in order": {
+			data:        buf2MB,
+			getObjectFn: s3testing.PartGetObjectFn,
+			options: Options{
+				Concurrency: 1,
+			},
+			partsCount:        3,
+			expectInvocations: 3,
+			expectParts:       []int32{1, 2, 3},
+		},
+		"parts download zero": {
+			data:              buf2MB,
+			getObjectFn:       s3testing.PartGetObjectFn,
+			options:           Options{},
+			partsCount:        1,
+			expectInvocations: 1,
+			expectParts:       []int32{1},
+		},
+		"parts download with s3 error": {
+			data:        buf2MB,
+			getObjectFn: s3testing.ErrPartGetObjectFn,
+			options: Options{
+				Concurrency: 1,
+			},
+			partsCount:        3,
+			expectInvocations: 2,
+			expectErr:         "s3 service error",
+		},
+		"parts download single chunk": {
+			data:              []byte("123"),
+			getObjectFn:       s3testing.PartGetObjectFn,
+			options:           Options{},
+			partsCount:        1,
+			expectInvocations: 1,
+			expectParts:       []int32{1},
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "123", string(w.Bytes()); e != a {
+					t.Errorf("expect %q response, got %q", e, a)
+				}
+			},
+		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			s3Client, invocations, ranges := s3testing.NewDownloadClient()
+			s3Client, invocations, parts, ranges := s3testing.NewDownloadClient()
 			s3Client.Data = c.data
 			s3Client.GetObjectFn = c.getObjectFn
 			s3Client.ErrReaders = c.errReaders
+			s3Client.PartsCount = c.partsCount
 			mgr := New(s3Client, c.options)
 			w := types.NewWriteAtBuffer(make([]byte, 0))
 
-			ctx := context.Background()
 			input := &GetObjectInput{
 				Bucket: "bucket",
 				Key:    "key",
 			}
 			input.Range = c.downloadRange
+			input.PartNumber = c.partNumber
 
-			_, err := mgr.DownloadObject(ctx, w, input)
+			_, err := mgr.DownloadObject(context.Background(), w, input)
 			if err != nil {
 				if c.expectErr == "" {
 					t.Fatalf("expect no error, got %v", err)
@@ -205,6 +250,11 @@ func TestDownloadObject(t *testing.T) {
 				t.Errorf("expect %v API calls, got %v", e, a)
 			}
 
+			if len(c.expectParts) > 0 {
+				if e, a := c.expectParts, *parts; !reflect.DeepEqual(e, a) {
+					t.Errorf("expect %v parts, got %v", e, a)
+				}
+			}
 			if len(c.expectRanges) > 0 {
 				if e, a := c.expectRanges, *ranges; !reflect.DeepEqual(e, a) {
 					t.Errorf("expect %v ranges, got %v", e, a)
@@ -222,7 +272,7 @@ func TestDownload_WithFailure(t *testing.T) {
 	startingByte := 0
 	reqCount := int64(0)
 
-	s3Client, _, _ := s3testing.NewDownloadClient()
+	s3Client, _, _, _ := s3testing.NewDownloadClient()
 	s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (out *s3.GetObjectOutput, err error) {
 		switch atomic.LoadInt64(&reqCount) {
 		case 1:
@@ -293,21 +343,4 @@ func TestDownloadObjectWithContextCanceled(t *testing.T) {
 	if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected error message to contain %q, but did not %q", e, a)
 	}
-}
-
-func TestGetObject(t *testing.T) {
-	cases := map[string]struct {
-		data              []byte
-		errReaders        []s3testing.TestErrReader
-		getObjectFn       func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
-		options           Options
-		downloadRange     string
-		partNum           int32
-		expectInvocations int
-		expectParts       []int32
-		expectErr         string
-		dataValidationFn  func(t *testing.T, w *types.WriteAtBuffer)
-	}
-
-	_ = cases
 }
