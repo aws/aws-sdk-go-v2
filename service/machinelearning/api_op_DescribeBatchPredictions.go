@@ -446,6 +446,9 @@ func batchPredictionAvailableStateRetryable(ctx context.Context, input *Describe
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

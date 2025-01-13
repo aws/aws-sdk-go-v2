@@ -382,6 +382,9 @@ func groupExistsStateRetryable(ctx context.Context, input *DescribeAutoScalingGr
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -586,6 +589,9 @@ func groupInServiceStateRetryable(ctx context.Context, input *DescribeAutoScalin
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -790,6 +796,9 @@ func groupNotExistsStateRetryable(ctx context.Context, input *DescribeAutoScalin
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

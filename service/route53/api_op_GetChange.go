@@ -348,6 +348,9 @@ func resourceRecordSetsChangedStateRetryable(ctx context.Context, input *GetChan
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

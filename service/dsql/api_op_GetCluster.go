@@ -358,6 +358,9 @@ func clusterActiveStateRetryable(ctx context.Context, input *GetClusterInput, ou
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -527,6 +530,9 @@ func clusterNotExistsStateRetryable(ctx context.Context, input *GetClusterInput,
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

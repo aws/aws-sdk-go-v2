@@ -448,6 +448,9 @@ func fleetActiveStateRetryable(ctx context.Context, input *GetFleetInput, output
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

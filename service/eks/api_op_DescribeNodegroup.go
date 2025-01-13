@@ -351,6 +351,9 @@ func nodegroupActiveStateRetryable(ctx context.Context, input *DescribeNodegroup
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -537,6 +540,9 @@ func nodegroupDeletedStateRetryable(ctx context.Context, input *DescribeNodegrou
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

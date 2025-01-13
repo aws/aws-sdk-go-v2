@@ -447,6 +447,9 @@ func mLModelAvailableStateRetryable(ctx context.Context, input *DescribeMLModels
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

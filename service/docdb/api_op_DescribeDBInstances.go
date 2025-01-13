@@ -506,6 +506,9 @@ func dBInstanceAvailableStateRetryable(ctx context.Context, input *DescribeDBIns
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -808,6 +811,9 @@ func dBInstanceDeletedStateRetryable(ctx context.Context, input *DescribeDBInsta
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

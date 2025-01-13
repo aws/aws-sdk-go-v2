@@ -441,6 +441,9 @@ func workflowActiveStateRetryable(ctx context.Context, input *GetWorkflowInput, 
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

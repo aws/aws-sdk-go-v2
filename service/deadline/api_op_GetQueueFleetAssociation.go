@@ -373,6 +373,9 @@ func queueFleetAssociationStoppedStateRetryable(ctx context.Context, input *GetQ
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

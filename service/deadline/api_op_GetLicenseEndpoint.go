@@ -375,6 +375,9 @@ func licenseEndpointValidStateRetryable(ctx context.Context, input *GetLicenseEn
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -563,6 +566,9 @@ func licenseEndpointDeletedStateRetryable(ctx context.Context, input *GetLicense
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

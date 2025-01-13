@@ -395,6 +395,9 @@ func privateGraphEndpointAvailableStateRetryable(ctx context.Context, input *Get
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -589,6 +592,9 @@ func privateGraphEndpointDeletedStateRetryable(ctx context.Context, input *GetPr
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

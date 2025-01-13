@@ -472,6 +472,9 @@ func readSetExportJobCompletedStateRetryable(ctx context.Context, input *GetRead
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

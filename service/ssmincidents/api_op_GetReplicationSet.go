@@ -386,6 +386,9 @@ func waitForReplicationSetActiveStateRetryable(ctx context.Context, input *GetRe
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -593,6 +596,9 @@ func waitForReplicationSetDeletedStateRetryable(ctx context.Context, input *GetR
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

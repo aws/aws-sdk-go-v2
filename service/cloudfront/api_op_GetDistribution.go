@@ -337,6 +337,9 @@ func distributionDeployedStateRetryable(ctx context.Context, input *GetDistribut
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

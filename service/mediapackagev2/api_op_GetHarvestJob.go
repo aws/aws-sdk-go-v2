@@ -481,6 +481,9 @@ func harvestJobFinishedStateRetryable(ctx context.Context, input *GetHarvestJobI
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

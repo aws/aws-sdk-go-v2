@@ -550,6 +550,9 @@ func instanceOnlineStateRetryable(ctx context.Context, input *DescribeInstancesI
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -912,6 +915,9 @@ func instanceRegisteredStateRetryable(ctx context.Context, input *DescribeInstan
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1298,6 +1304,9 @@ func instanceStoppedStateRetryable(ctx context.Context, input *DescribeInstances
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1691,6 +1700,9 @@ func instanceTerminatedStateRetryable(ctx context.Context, input *DescribeInstan
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

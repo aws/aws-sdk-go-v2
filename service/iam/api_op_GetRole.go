@@ -347,6 +347,9 @@ func roleExistsStateRetryable(ctx context.Context, input *GetRoleInput, output *
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

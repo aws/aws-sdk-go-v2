@@ -349,6 +349,9 @@ func environmentDeployedStateRetryable(ctx context.Context, input *GetEnvironmen
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

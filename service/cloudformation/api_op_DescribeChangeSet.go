@@ -477,6 +477,9 @@ func changeSetCreateCompleteStateRetryable(ctx context.Context, input *DescribeC
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -411,6 +411,9 @@ func queueSchedulingBlockedStateRetryable(ctx context.Context, input *GetQueueIn
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -590,6 +593,9 @@ func queueSchedulingStateRetryable(ctx context.Context, input *GetQueueInput, ou
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

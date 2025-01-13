@@ -400,6 +400,9 @@ func graphSnapshotAvailableStateRetryable(ctx context.Context, input *GetGraphSn
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -592,6 +595,9 @@ func graphSnapshotDeletedStateRetryable(ctx context.Context, input *GetGraphSnap
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

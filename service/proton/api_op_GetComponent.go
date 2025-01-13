@@ -350,6 +350,9 @@ func componentDeployedStateRetryable(ctx context.Context, input *GetComponentInp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -536,6 +539,9 @@ func componentDeletedStateRetryable(ctx context.Context, input *GetComponentInpu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -380,6 +380,9 @@ func environmentTemplateVersionRegisteredStateRetryable(ctx context.Context, inp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

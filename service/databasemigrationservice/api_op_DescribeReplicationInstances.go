@@ -465,6 +465,9 @@ func replicationInstanceAvailableStateRetryable(ctx context.Context, input *Desc
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -662,6 +665,9 @@ func replicationInstanceDeletedStateRetryable(ctx context.Context, input *Descri
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

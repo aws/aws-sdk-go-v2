@@ -419,6 +419,9 @@ func signalMapCreatedStateRetryable(ctx context.Context, input *GetSignalMapInpu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -634,6 +637,9 @@ func signalMapMonitorDeletedStateRetryable(ctx context.Context, input *GetSignal
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -900,6 +906,9 @@ func signalMapMonitorDeployedStateRetryable(ctx context.Context, input *GetSigna
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1130,6 +1139,9 @@ func signalMapUpdatedStateRetryable(ctx context.Context, input *GetSignalMapInpu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -445,6 +445,9 @@ func notebookInstanceDeletedStateRetryable(ctx context.Context, input *DescribeN
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -644,6 +647,9 @@ func notebookInstanceInServiceStateRetryable(ctx context.Context, input *Describ
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -842,6 +848,9 @@ func notebookInstanceStoppedStateRetryable(ctx context.Context, input *DescribeN
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

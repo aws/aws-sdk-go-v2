@@ -461,6 +461,9 @@ func processingJobCompletedOrStoppedStateRetryable(ctx context.Context, input *D
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

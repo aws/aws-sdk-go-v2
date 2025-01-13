@@ -365,6 +365,9 @@ func findingRevealedStateRetryable(ctx context.Context, input *GetSensitiveDataO
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

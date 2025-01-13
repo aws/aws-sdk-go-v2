@@ -416,6 +416,9 @@ func portalActiveStateRetryable(ctx context.Context, input *DescribePortalInput,
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -585,6 +588,9 @@ func portalNotExistsStateRetryable(ctx context.Context, input *DescribePortalInp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

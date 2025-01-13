@@ -605,6 +605,9 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

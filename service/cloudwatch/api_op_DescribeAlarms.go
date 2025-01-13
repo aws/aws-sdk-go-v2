@@ -407,6 +407,9 @@ func alarmExistsStateRetryable(ctx context.Context, input *DescribeAlarmsInput, 
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -592,6 +595,9 @@ func compositeAlarmExistsStateRetryable(ctx context.Context, input *DescribeAlar
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

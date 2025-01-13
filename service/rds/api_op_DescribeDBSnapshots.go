@@ -578,6 +578,9 @@ func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSna
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -869,6 +872,9 @@ func dBSnapshotDeletedStateRetryable(ctx context.Context, input *DescribeDBSnaps
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

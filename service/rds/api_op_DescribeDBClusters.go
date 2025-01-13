@@ -525,6 +525,9 @@ func dBClusterAvailableStateRetryable(ctx context.Context, input *DescribeDBClus
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -811,6 +814,9 @@ func dBClusterDeletedStateRetryable(ctx context.Context, input *DescribeDBCluste
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

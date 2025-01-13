@@ -450,6 +450,9 @@ func assetModelActiveStateRetryable(ctx context.Context, input *DescribeAssetMod
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -621,6 +624,9 @@ func assetModelNotExistsStateRetryable(ctx context.Context, input *DescribeAsset
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

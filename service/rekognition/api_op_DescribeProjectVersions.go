@@ -401,6 +401,9 @@ func projectVersionRunningStateRetryable(ctx context.Context, input *DescribePro
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -624,6 +627,9 @@ func projectVersionTrainingCompletedStateRetryable(ctx context.Context, input *D
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

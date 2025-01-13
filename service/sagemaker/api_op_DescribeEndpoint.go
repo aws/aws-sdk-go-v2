@@ -439,6 +439,9 @@ func endpointDeletedStateRetryable(ctx context.Context, input *DescribeEndpointI
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -647,6 +650,9 @@ func endpointInServiceStateRetryable(ctx context.Context, input *DescribeEndpoin
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

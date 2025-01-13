@@ -366,6 +366,9 @@ func codeReviewCompletedStateRetryable(ctx context.Context, input *DescribeCodeR
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

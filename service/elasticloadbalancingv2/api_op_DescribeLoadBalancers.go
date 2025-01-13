@@ -393,6 +393,9 @@ func loadBalancerAvailableStateRetryable(ctx context.Context, input *DescribeLoa
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -571,6 +574,9 @@ func loadBalancerExistsStateRetryable(ctx context.Context, input *DescribeLoadBa
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -779,6 +785,9 @@ func loadBalancersDeletedStateRetryable(ctx context.Context, input *DescribeLoad
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -446,6 +446,9 @@ func taskRunningStateRetryable(ctx context.Context, input *GetRunTaskInput, outp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -710,6 +713,9 @@ func taskCompletedStateRetryable(ctx context.Context, input *GetRunTaskInput, ou
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -356,6 +356,9 @@ func userExistsStateRetryable(ctx context.Context, input *GetUserInput, output *
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

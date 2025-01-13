@@ -351,6 +351,9 @@ func serverOfflineStateRetryable(ctx context.Context, input *DescribeServerInput
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -546,6 +549,9 @@ func serverOnlineStateRetryable(ctx context.Context, input *DescribeServerInput,
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -494,6 +494,9 @@ func transformJobCompletedOrStoppedStateRetryable(ctx context.Context, input *De
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

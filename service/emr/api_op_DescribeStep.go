@@ -368,6 +368,9 @@ func stepCompleteStateRetryable(ctx context.Context, input *DescribeStepInput, o
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

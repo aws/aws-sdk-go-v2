@@ -442,6 +442,9 @@ func variantStoreCreatedStateRetryable(ctx context.Context, input *GetVariantSto
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -647,6 +650,9 @@ func variantStoreDeletedStateRetryable(ctx context.Context, input *GetVariantSto
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

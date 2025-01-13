@@ -444,6 +444,9 @@ func evaluationAvailableStateRetryable(ctx context.Context, input *DescribeEvalu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

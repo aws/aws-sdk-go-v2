@@ -380,6 +380,9 @@ func serviceCreatedStateRetryable(ctx context.Context, input *GetServiceInput, o
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -627,6 +630,9 @@ func serviceUpdatedStateRetryable(ctx context.Context, input *GetServiceInput, o
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -813,6 +819,9 @@ func serviceDeletedStateRetryable(ctx context.Context, input *GetServiceInput, o
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1011,6 +1020,9 @@ func servicePipelineDeployedStateRetryable(ctx context.Context, input *GetServic
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

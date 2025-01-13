@@ -370,6 +370,9 @@ func nodeAssociatedStateRetryable(ctx context.Context, input *DescribeNodeAssoci
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

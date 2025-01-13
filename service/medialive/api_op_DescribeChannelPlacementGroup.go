@@ -385,6 +385,9 @@ func channelPlacementGroupAssignedStateRetryable(ctx context.Context, input *Des
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -592,6 +595,9 @@ func channelPlacementGroupDeletedStateRetryable(ctx context.Context, input *Desc
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -800,6 +806,9 @@ func channelPlacementGroupUnassignedStateRetryable(ctx context.Context, input *D
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

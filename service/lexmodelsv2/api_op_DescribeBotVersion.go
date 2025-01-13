@@ -417,6 +417,9 @@ func botVersionAvailableStateRetryable(ctx context.Context, input *DescribeBotVe
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

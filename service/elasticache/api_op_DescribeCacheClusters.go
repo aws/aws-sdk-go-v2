@@ -491,6 +491,9 @@ func cacheClusterAvailableStateRetryable(ctx context.Context, input *DescribeCac
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -843,6 +846,9 @@ func cacheClusterDeletedStateRetryable(ctx context.Context, input *DescribeCache
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

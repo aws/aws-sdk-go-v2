@@ -399,6 +399,9 @@ func functionActiveV2StateRetryable(ctx context.Context, input *GetFunctionInput
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -572,6 +575,9 @@ func functionExistsStateRetryable(ctx context.Context, input *GetFunctionInput, 
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -785,6 +791,9 @@ func functionUpdatedV2StateRetryable(ctx context.Context, input *GetFunctionInpu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

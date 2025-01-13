@@ -347,6 +347,9 @@ func policyExistsStateRetryable(ctx context.Context, input *GetPolicyInput, outp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

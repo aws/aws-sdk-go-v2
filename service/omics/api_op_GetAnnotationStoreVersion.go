@@ -453,6 +453,9 @@ func annotationStoreVersionCreatedStateRetryable(ctx context.Context, input *Get
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -661,6 +664,9 @@ func annotationStoreVersionDeletedStateRetryable(ctx context.Context, input *Get
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

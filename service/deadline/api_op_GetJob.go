@@ -505,6 +505,9 @@ func jobCreateCompleteStateRetryable(ctx context.Context, input *GetJobInput, ou
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -395,6 +395,9 @@ func replicationGroupAvailableStateRetryable(ctx context.Context, input *Describ
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -622,6 +625,9 @@ func replicationGroupDeletedStateRetryable(ctx context.Context, input *DescribeR
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

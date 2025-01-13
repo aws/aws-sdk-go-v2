@@ -371,6 +371,9 @@ func deploymentSuccessfulStateRetryable(ctx context.Context, input *GetDeploymen
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

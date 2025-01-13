@@ -545,6 +545,9 @@ func functionActiveStateRetryable(ctx context.Context, input *GetFunctionConfigu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -758,6 +761,9 @@ func functionUpdatedStateRetryable(ctx context.Context, input *GetFunctionConfig
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -973,6 +979,9 @@ func publishedVersionActiveStateRetryable(ctx context.Context, input *GetFunctio
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

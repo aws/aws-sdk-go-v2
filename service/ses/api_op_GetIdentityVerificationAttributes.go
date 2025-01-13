@@ -372,6 +372,9 @@ func identityExistsStateRetryable(ctx context.Context, input *GetIdentityVerific
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -380,6 +380,9 @@ func serviceTemplateVersionRegisteredStateRetryable(ctx context.Context, input *
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
