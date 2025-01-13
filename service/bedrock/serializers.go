@@ -5203,6 +5203,13 @@ func awsRestjson1_serializeDocumentEvaluationBedrockModel(v *types.EvaluationBed
 		ok.String(*v.ModelIdentifier)
 	}
 
+	if v.PerformanceConfig != nil {
+		ok := object.Key("performanceConfig")
+		if err := awsRestjson1_serializeDocumentPerformanceConfiguration(v.PerformanceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6383,6 +6390,18 @@ func awsRestjson1_serializeDocumentOutputDataConfig(v *types.OutputDataConfig, v
 	if v.S3Uri != nil {
 		ok := object.Key("s3Uri")
 		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPerformanceConfiguration(v *types.PerformanceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Latency) > 0 {
+		ok := object.Key("latency")
+		ok.String(string(v.Latency))
 	}
 
 	return nil

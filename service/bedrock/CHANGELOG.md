@@ -1,3 +1,15 @@
+# v1.26.0 (2025-01-13)
+
+* **Feature**: With this release, Bedrock Evaluation will now support latency-optimized inference for foundation models.
+
+# v1.25.3 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.2 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.1 (2024-12-09)
 
 * No change notes available for this release.

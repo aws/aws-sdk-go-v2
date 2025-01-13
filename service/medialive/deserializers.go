@@ -4847,6 +4847,11 @@ func awsRestjson1_deserializeOpDocumentDeleteChannelOutput(v **DeleteChannelOutp
 				sv.ChannelClass = types.ChannelClass(jtv)
 			}
 
+		case "channelEngineVersion":
+			if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&sv.ChannelEngineVersion, value); err != nil {
+				return err
+			}
+
 		case "destinations":
 			if err := awsRestjson1_deserializeDocument__listOfOutputDestination(&sv.Destinations, value); err != nil {
 				return err
@@ -8037,6 +8042,11 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 					return fmt.Errorf("expected ChannelClass to be of type string, got %T instead", value)
 				}
 				sv.ChannelClass = types.ChannelClass(jtv)
+			}
+
+		case "channelEngineVersion":
+			if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&sv.ChannelEngineVersion, value); err != nil {
+				return err
 			}
 
 		case "destinations":
@@ -16187,6 +16197,179 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 	return nil
 }
 
+type awsRestjson1_deserializeOpListVersions struct {
+}
+
+func (*awsRestjson1_deserializeOpListVersions) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListVersions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListVersions(response, &metadata)
+	}
+	output := &ListVersionsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListVersionsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListVersions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadGatewayException", errorCode):
+		return awsRestjson1_deserializeErrorBadGatewayException(response, errorBody)
+
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("GatewayTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorGatewayTimeoutException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListVersionsOutput(v **ListVersionsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListVersionsOutput
+	if *v == nil {
+		sv = &ListVersionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "versions":
+			if err := awsRestjson1_deserializeDocument__listOfChannelEngineVersionResponse(&sv.Versions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpPurchaseOffering struct {
 }
 
@@ -16768,6 +16951,11 @@ func awsRestjson1_deserializeOpDocumentRestartChannelPipelinesOutput(v **Restart
 				sv.ChannelClass = types.ChannelClass(jtv)
 			}
 
+		case "channelEngineVersion":
+			if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&sv.ChannelEngineVersion, value); err != nil {
+				return err
+			}
+
 		case "destinations":
 			if err := awsRestjson1_deserializeDocument__listOfOutputDestination(&sv.Destinations, value); err != nil {
 				return err
@@ -17074,6 +17262,11 @@ func awsRestjson1_deserializeOpDocumentStartChannelOutput(v **StartChannelOutput
 					return fmt.Errorf("expected ChannelClass to be of type string, got %T instead", value)
 				}
 				sv.ChannelClass = types.ChannelClass(jtv)
+			}
+
+		case "channelEngineVersion":
+			if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&sv.ChannelEngineVersion, value); err != nil {
+				return err
 			}
 
 		case "destinations":
@@ -18765,6 +18958,11 @@ func awsRestjson1_deserializeOpDocumentStopChannelOutput(v **StopChannelOutput, 
 					return fmt.Errorf("expected ChannelClass to be of type string, got %T instead", value)
 				}
 				sv.ChannelClass = types.ChannelClass(jtv)
+			}
+
+		case "channelEngineVersion":
+			if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&sv.ChannelEngineVersion, value); err != nil {
+				return err
 			}
 
 		case "destinations":
@@ -24015,6 +24213,40 @@ func awsRestjson1_deserializeDocument__listOfChannelEgressEndpoint(v *[]types.Ch
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfChannelEngineVersionResponse(v *[]types.ChannelEngineVersionResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ChannelEngineVersionResponse
+	if *v == nil {
+		cv = []types.ChannelEngineVersionResponse{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ChannelEngineVersionResponse
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfChannelSummary(v *[]types.ChannelSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29194,6 +29426,11 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				sv.ChannelClass = types.ChannelClass(jtv)
 			}
 
+		case "channelEngineVersion":
+			if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&sv.ChannelEngineVersion, value); err != nil {
+				return err
+			}
+
 		case "destinations":
 			if err := awsRestjson1_deserializeDocument__listOfOutputDestination(&sv.Destinations, value); err != nil {
 				return err
@@ -29346,6 +29583,59 @@ func awsRestjson1_deserializeDocumentChannelEgressEndpoint(v **types.ChannelEgre
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentChannelEngineVersionResponse(v **types.ChannelEngineVersionResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChannelEngineVersionResponse
+	if *v == nil {
+		sv = &types.ChannelEngineVersionResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "expirationDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __timestampIso8601 to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.ExpirationDate = ptr.Time(t)
+			}
+
+		case "version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29394,6 +29684,11 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 					return fmt.Errorf("expected ChannelClass to be of type string, got %T instead", value)
 				}
 				sv.ChannelClass = types.ChannelClass(jtv)
+			}
+
+		case "channelEngineVersion":
+			if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&sv.ChannelEngineVersion, value); err != nil {
+				return err
 			}
 
 		case "destinations":
@@ -29481,6 +29776,11 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "usedChannelEngineVersions":
+			if err := awsRestjson1_deserializeDocument__listOfChannelEngineVersionResponse(&sv.UsedChannelEngineVersions, value); err != nil {
 				return err
 			}
 
@@ -42335,6 +42635,11 @@ func awsRestjson1_deserializeDocumentPipelineDetail(v **types.PipelineDetail, va
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.ActiveMotionGraphicsUri = ptr.String(jtv)
+			}
+
+		case "channelEngineVersion":
+			if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&sv.ChannelEngineVersion, value); err != nil {
+				return err
 			}
 
 		case "pipelineId":

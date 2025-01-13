@@ -1,3 +1,15 @@
+# v1.29.3 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.2 (2025-01-08)
+
+* No change notes available for this release.
+
+# v1.29.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2024-12-16)
 
 * **Feature**: This release adds support for Local Zones in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.

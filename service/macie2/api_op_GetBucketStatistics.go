@@ -61,7 +61,7 @@ type GetBucketStatisticsOutput struct {
 
 	// The aggregated sensitive data discovery statistics for the buckets. If
 	// automated sensitive data discovery is currently disabled for your account, the
-	// value for each statistic is 0.
+	// value for most statistics is 0.
 	BucketStatisticsBySensitivity *types.BucketStatisticsBySensitivity
 
 	// The total number of objects that Amazon Macie can analyze in the buckets. These

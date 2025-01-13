@@ -95,22 +95,22 @@ type DescribeCompilationJobOutput struct {
 	// This member is required.
 	OutputConfig *types.OutputConfig
 
-	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker assumes to
-	// perform the model compilation job.
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker AI assumes
+	// to perform the model compilation job.
 	//
 	// This member is required.
 	RoleArn *string
 
 	// Specifies a limit to how long a model compilation job can run. When the job
-	// reaches the time limit, Amazon SageMaker ends the compilation job. Use this API
-	// to cap model training costs.
+	// reaches the time limit, Amazon SageMaker AI ends the compilation job. Use this
+	// API to cap model training costs.
 	//
 	// This member is required.
 	StoppingCondition *types.StoppingCondition
 
 	// The time when the model compilation job on a compilation job instance ended.
 	// For a successful or stopped job, this is when the job's model artifacts have
-	// finished uploading. For a failed job, this is when Amazon SageMaker detected
+	// finished uploading. For a failed job, this is when Amazon SageMaker AI detected
 	// that the job failed.
 	CompilationEndTime *time.Time
 

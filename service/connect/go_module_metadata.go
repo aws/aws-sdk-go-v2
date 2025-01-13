@@ -3,4 +3,4 @@
 package connect
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.122.0"
+const goModuleVersion = "1.123.2"

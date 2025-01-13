@@ -836,6 +836,8 @@ type Image struct {
 	//
 	//   - IMPORT – A VM import created the image to use as the base image for the
 	//   recipe.
+	//
+	//   - IMPORT_ISO – An ISO disk import created the image.
 	BuildType BuildType
 
 	// For container images, this is the container recipe that Image Builder used to
@@ -1271,6 +1273,8 @@ type ImageSummary struct {
 	//
 	//   - IMPORT – A VM import created the image to use as the base image for the
 	//   recipe.
+	//
+	//   - IMPORT_ISO – An ISO disk import created the image.
 	BuildType BuildType
 
 	// The date on which Image Builder created this image.
@@ -1329,7 +1333,7 @@ type ImageTestsConfiguration struct {
 
 	// The maximum time in minutes that tests are permitted to run.
 	//
-	// The timeout attribute is not currently active. This value is ignored.
+	// The timeout property is not currently active. This value is ignored.
 	TimeoutMinutes *int32
 
 	noSmithyDocumentSerde
@@ -1363,6 +1367,8 @@ type ImageVersion struct {
 	//
 	//   - IMPORT – A VM import created the image to use as the base image for the
 	//   recipe.
+	//
+	//   - IMPORT_ISO – An ISO disk import created the image.
 	BuildType BuildType
 
 	// The date on which this specific version of the Image Builder image was created.
@@ -2249,15 +2255,19 @@ type S3Logs struct {
 // new image.
 type Schedule struct {
 
-	// The condition configures when the pipeline should trigger a new image build.
-	// When the pipelineExecutionStartCondition is set to
-	// EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE , and you use semantic version
-	// filters on the base image or components in your image recipe, EC2 Image Builder
-	// will build a new image only when there are new versions of the image or
-	// components in your recipe that match the semantic version filter. When it is set
-	// to EXPRESSION_MATCH_ONLY , it will build a new image every time the CRON
-	// expression matches the current time. For semantic version syntax, see [CreateComponent]in the
-	// EC2 Image Builder API Reference.
+	// The start condition configures when the pipeline should trigger a new image
+	// build, as follows. If no value is set Image Builder defaults to
+	// EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE .
+	//
+	//   - EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE (default) – When you use
+	//   semantic version filters on the base image or components in your image recipe,
+	//   EC2 Image Builder builds a new image only when there are new versions of the
+	//   base image or components in your recipe that match the filter.
+	//
+	// For semantic version syntax, see [CreateComponent].
+	//
+	//   - EXPRESSION_MATCH_ONLY – This condition builds a new image every time the
+	//   CRON expression matches the current time.
 	//
 	// [CreateComponent]: https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html
 	PipelineExecutionStartCondition PipelineExecutionStartCondition

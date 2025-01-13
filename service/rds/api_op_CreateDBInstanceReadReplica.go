@@ -57,6 +57,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The amount of storage (in gibibytes) to allocate initially for the read
 	// replica. Follow the allocation rules specified in CreateDBInstance .
 	//
+	// This setting isn't valid for RDS for SQL Server.
+	//
 	// Be sure to allocate enough storage for your read replica so that the create
 	// operation can succeed. You can also allocate additional storage for future
 	// growth.
@@ -172,7 +174,9 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
-	// Specifies the mode of Database Insights.
+	// The mode of Database Insights to enable for the read replica.
+	//
+	// Currently, this setting is not supported.
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.

@@ -104,6 +104,8 @@ type RestoreDBInstanceFromS3Input struct {
 	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
 	// Follow the allocation rules specified in CreateDBInstance .
 	//
+	// This setting isn't valid for RDS for SQL Server.
+	//
 	// Be sure to allocate enough storage for your new DB instance so that the restore
 	// operation can succeed. You can also allocate additional storage for future
 	// growth.
@@ -172,7 +174,11 @@ type RestoreDBInstanceFromS3Input struct {
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
-	// Specifies the mode of Database Insights to enable for the instance.
+	// Specifies the mode of Database Insights to enable for the DB instance.
+	//
+	// This setting only applies to Amazon Aurora DB instances.
+	//
+	// Currently, this value is inherited from the DB cluster and can't be changed.
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// Specifies whether to enable a dedicated log volume (DLV) for the DB instance.

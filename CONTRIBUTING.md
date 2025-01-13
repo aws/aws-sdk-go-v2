@@ -29,7 +29,9 @@ Jump To:
 1. Fork the repository.
 2. In your fork, make your change in a branch that's based on this repo's `main` branch.
 3. Commit the change to your fork, using a clear and descriptive commit message.
-4. Create a pull request, answering any questions in the pull request form.
+4. Create a changelog message running `make external-changelog`, replacing all
+   values in the template
+5. Open a pull request, answering any questions in the pull request form.
 
 For contributions that will take a significant amount of time, open a new
 issue to pitch your idea before you get started. Explain the problem and
@@ -155,19 +157,37 @@ make sandbox-go18
 
 ### Changelog Documents
 
-You can see all release changes in the `CHANGELOG.md` file at the root of the
-repository. The release notes added to this file will contain service client
-updates, and major SDK changes. When submitting a pull request please include an entry in `CHANGELOG_PENDING.md` under the appropriate changelog type so your changelog entry is included on the following release.
+When submitting a pull request please include a changelog file on a folder named `.changelog`.
+These are used to generate the content `CHANGELOG.md` and Release Notes. The format of the file is as follows:
 
-#### Changelog Types
+```
+{
+    "id": "12345678-1234-1234-1234-123456789012"
+    "type": "bugfix"
+    "collapse": true
+    "description": "Fix improper use of printf-style functions.",
+    "modules": [
+        ".",
+        "config",
+        "credentials",
+        "feature/s3/manager",
+        "internal/endpoints/v2",
+        "service/kinesis/internal/testing",
+        "service/transcribestreaming/internal/testing"
+    ]
+}
+```
 
-* `SDK Features` - For major additive features, internal changes that have
-outward impact, or updates to the SDK foundations. This will result in a minor
-version change.
-* `SDK Enhancements` - For minor additive features or incremental sized changes.
-This will result in a patch version change.
-* `SDK Bugs` - For minor changes that resolve an issue. This will result in a
-patch version change.
+* id: a UUID. This should also be used for the name of the file, so if your id is `12345678-1234-1234-1234-123456789012` the file should be named `12345678-1234-1234-1234-123456789012.json/`
+* type: one of the following:
+ * bugfix: Fixing an existing bug
+ * Feature: Adding a new feature to an existing service
+ * Release: Releasing a new module
+ * Dependency: Updating dependencies
+ * Announcement: Making an announcement, like deprecation of a module
+* collapse: whether this change should appear separately on the release notes on every module listed on `modules` (`"collapse": false`), or if it should show up as a single entry (`"collapse": true`)
+* description: Description of this change. Most of the times is the same as the title of the PR
+* modules: which modules does this change impact. Most of the times, these are the same as the directories that you're modifying on the PR
 
 [issues]: https://github.com/aws/aws-sdk-go-v2/issues
 [pr]: https://github.com/aws/aws-sdk-go-v2/pulls

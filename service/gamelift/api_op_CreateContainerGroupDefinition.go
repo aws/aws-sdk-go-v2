@@ -14,7 +14,7 @@ import (
 // Creates a ContainerGroupDefinition that describes a set of containers for
 // hosting your game server with Amazon GameLift managed containers hosting. An
 // Amazon GameLift container group is similar to a container task or pod. Use
-// container group definitions when you create a container fleet with CreateContainerFleet.
+// container group definitions when you create a container fleet with [CreateContainerFleet].
 //
 // A container group definition determines how Amazon GameLift deploys your
 // containers to each instance in a container fleet. You can maintain multiple
@@ -104,8 +104,10 @@ import (
 //
 // If successful, this request creates a ContainerGroupDefinition resource and
 // assigns a unique ARN value. You can update most properties of a container group
-// definition by calling UpdateContainerGroupDefinition, and optionally save the update as a new version.
+// definition by calling [UpdateContainerGroupDefinition], and optionally save the update as a new version.
 //
+// [UpdateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html
+// [CreateContainerFleet]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerFleet.html
 // [IAM permissions for Amazon GameLift]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html
 func (c *Client) CreateContainerGroupDefinition(ctx context.Context, params *CreateContainerGroupDefinitionInput, optFns ...func(*Options)) (*CreateContainerGroupDefinitionOutput, error) {
 	if params == nil {

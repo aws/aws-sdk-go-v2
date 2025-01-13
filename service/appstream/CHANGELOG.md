@@ -1,3 +1,12 @@
+# v1.42.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.0 (2024-12-19)
+
+* **Feature**: Added support for Rocky Linux 8 on Amazon AppStream 2.0
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

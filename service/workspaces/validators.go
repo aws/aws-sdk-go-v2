@@ -1925,6 +1925,36 @@ func validateDescribeWorkspacesPoolsFilters(v []types.DescribeWorkspacesPoolsFil
 	}
 }
 
+func validateGlobalAcceleratorForDirectory(v *types.GlobalAcceleratorForDirectory) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalAcceleratorForDirectory"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlobalAcceleratorForWorkSpace(v *types.GlobalAcceleratorForWorkSpace) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalAcceleratorForWorkSpace"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRebootRequest(v *types.RebootRequest) error {
 	if v == nil {
 		return nil
@@ -2094,6 +2124,11 @@ func validateStreamingProperties(v *types.StreamingProperties) error {
 			invalidParams.AddNested("StorageConnectors", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.GlobalAccelerator != nil {
+		if err := validateGlobalAcceleratorForDirectory(v.GlobalAccelerator); err != nil {
+			invalidParams.AddNested("GlobalAccelerator", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2215,6 +2250,23 @@ func validateUserStorage(v *types.UserStorage) error {
 	}
 }
 
+func validateWorkspaceProperties(v *types.WorkspaceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkspaceProperties"}
+	if v.GlobalAccelerator != nil {
+		if err := validateGlobalAcceleratorForWorkSpace(v.GlobalAccelerator); err != nil {
+			invalidParams.AddNested("GlobalAccelerator", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWorkspaceRequest(v *types.WorkspaceRequest) error {
 	if v == nil {
 		return nil
@@ -2228,6 +2280,11 @@ func validateWorkspaceRequest(v *types.WorkspaceRequest) error {
 	}
 	if v.BundleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if v.WorkspaceProperties != nil {
+		if err := validateWorkspaceProperties(v.WorkspaceProperties); err != nil {
+			invalidParams.AddNested("WorkspaceProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -3271,6 +3328,11 @@ func validateOpModifyWorkspacePropertiesInput(v *ModifyWorkspacePropertiesInput)
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyWorkspacePropertiesInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.WorkspaceProperties != nil {
+		if err := validateWorkspaceProperties(v.WorkspaceProperties); err != nil {
+			invalidParams.AddNested("WorkspaceProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

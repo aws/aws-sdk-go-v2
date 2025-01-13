@@ -3004,6 +3004,10 @@ type MemoryConfiguration struct {
 	// This member is required.
 	EnabledMemoryTypes []MemoryType
 
+	// Contains the configuration for SESSION_SUMMARY memory type enabled for the
+	// agent.
+	SessionSummaryConfiguration *SessionSummaryConfiguration
+
 	// The number of days the agent is configured to retain the conversational context.
 	StorageDays *int32
 
@@ -4468,6 +4472,16 @@ type ServerSideEncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for SESSION_SUMMARY memory type enabled for the agent.
+type SessionSummaryConfiguration struct {
+
+	// Maximum number of recent session summaries to include in the agent's prompt
+	// context.
+	MaxRecentSessions *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the SharePoint content. For example, configuring specific
 // types of SharePoint content.
 type SharePointCrawlerConfiguration struct {
@@ -5085,12 +5099,23 @@ type WebCrawlerConfiguration struct {
 	// "docs.aws.amazon.com".
 	Scope WebScopeType
 
+	// A string used for identifying the crawler or a bot when it accesses a web
+	// server. By default, this is set to bedrockbot_UUID for your crawler. You can
+	// optionally append a custom string to bedrockbot_UUID to allowlist a specific
+	// user agent permitted to access your source URLs.
+	UserAgent *string
+
 	noSmithyDocumentSerde
 }
 
 // The rate limits for the URLs that you want to crawl. You should be authorized
 // to crawl the URLs.
 type WebCrawlerLimits struct {
+
+	//  The max number of web pages crawled from your source URLs, up to 25,000 pages.
+	// If the web pages exceed this limit, the data source sync will fail and no web
+	// pages will be ingested.
+	MaxPages *int32
 
 	// The max rate at which pages are crawled, up to 300 per minute per host.
 	RateLimit *int32

@@ -46,6 +46,7 @@
         "api_op_GetWorkflowExecution.go",
         "api_op_GetWorkflowStepExecution.go",
         "api_op_ImportComponent.go",
+        "api_op_ImportDiskImage.go",
         "api_op_ImportVmImage.go",
         "api_op_ListComponentBuildVersions.go",
         "api_op_ListComponents.go",

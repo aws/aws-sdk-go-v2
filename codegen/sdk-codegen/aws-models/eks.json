@@ -204,6 +204,9 @@
                     "target": "com.amazonaws.eks#DescribeCluster"
                 },
                 {
+                    "target": "com.amazonaws.eks#DescribeClusterVersions"
+                },
+                {
                     "target": "com.amazonaws.eks#DescribeEksAnywhereSubscription"
                 },
                 {
@@ -1616,6 +1619,32 @@
                 "smithy.api#documentation": "<p>An Amazon EKS add-on. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html\">Amazon EKS add-ons</a> in\n            the <i>Amazon EKS User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.eks#AddonCompatibilityDetail": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS add-on.</p>"
+                    }
+                },
+                "compatibleVersions": {
+                    "target": "com.amazonaws.eks#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of compatible add-on versions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains compatibility information for an Amazon EKS add-on.</p>"
+            }
+        },
+        "com.amazonaws.eks#AddonCompatibilityDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#AddonCompatibilityDetail"
+            }
+        },
         "com.amazonaws.eks#AddonHealth": {
             "type": "structure",
             "members": {
@@ -2833,6 +2862,98 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PENDING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#ClusterVersionInformation": {
+            "type": "structure",
+            "members": {
+                "clusterVersion": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kubernetes version for the cluster.</p>"
+                    }
+                },
+                "clusterType": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of cluster this version is for.</p>"
+                    }
+                },
+                "defaultPlatformVersion": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Default platform version for this Kubernetes version.</p>"
+                    }
+                },
+                "defaultVersion": {
+                    "target": "com.amazonaws.eks#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates if this is a default version.</p>"
+                    }
+                },
+                "releaseDate": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The release date of this cluster version.</p>"
+                    }
+                },
+                "endOfStandardSupportDate": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date when standard support ends for this version.</p>"
+                    }
+                },
+                "endOfExtendedSupportDate": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date when extended support ends for this version.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.eks#ClusterVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current status of this cluster version.</p>"
+                    }
+                },
+                "kubernetesPatchVersion": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patch version of Kubernetes for this cluster version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a specific EKS cluster version.</p>"
+            }
+        },
+        "com.amazonaws.eks#ClusterVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#ClusterVersionInformation"
+            }
+        },
+        "com.amazonaws.eks#ClusterVersionStatus": {
+            "type": "enum",
+            "members": {
+                "unsupported": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unsupported"
+                    }
+                },
+                "standard_support": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard-support"
+                    }
+                },
+                "extended_support": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "extended-support"
                     }
                 }
             }
@@ -5148,6 +5269,126 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#DescribeClusterVersionMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.eks#DescribeClusterVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DescribeClusterVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DescribeClusterVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists available Kubernetes versions for Amazon EKS clusters.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/cluster-versions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "clusterVersions",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.eks#DescribeClusterVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "clusterType": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of cluster to filter versions by.</p>",
+                        "smithy.api#httpQuery": "clusterType"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.eks#DescribeClusterVersionMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token for the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "defaultOnly": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter to show only default versions.</p>",
+                        "smithy.api#httpQuery": "defaultOnly"
+                    }
+                },
+                "includeAll": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include all available versions in the response.</p>",
+                        "smithy.api#httpQuery": "includeAll"
+                    }
+                },
+                "clusterVersions": {
+                    "target": "com.amazonaws.eks#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of specific cluster versions to describe.</p>",
+                        "smithy.api#httpQuery": "clusterVersions"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.eks#ClusterVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter versions by their current status.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DescribeClusterVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token for the next set of results.</p>"
+                    }
+                },
+                "clusterVersions": {
+                    "target": "com.amazonaws.eks#ClusterVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of cluster version information objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#DescribeEksAnywhereSubscription": {
             "type": "operation",
             "input": {
@@ -6628,6 +6869,12 @@
                     "target": "com.amazonaws.eks#DeprecationDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>The summary information about deprecated resource usage for an insight check in the\n                <code>UPGRADE_READINESS</code> category.</p>"
+                    }
+                },
+                "addonCompatibilityDetails": {
+                    "target": "com.amazonaws.eks#AddonCompatibilityDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of AddonCompatibilityDetail objects for Amazon EKS add-ons.</p>"
                     }
                 }
             },

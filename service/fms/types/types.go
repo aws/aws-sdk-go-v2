@@ -1430,6 +1430,13 @@ type Policy struct {
 	// The unique identifiers of the resource sets used by the policy.
 	ResourceSetIds []string
 
+	// Specifies whether to combine multiple resource tags with AND, so that a
+	// resource must have all tags to be included or excluded, or OR, so that a
+	// resource must have at least one tag.
+	//
+	// Default: AND
+	ResourceTagLogicalOperator ResourceTagLogicalOperator
+
 	// An array of ResourceTag objects.
 	ResourceTags []ResourceTag
 
@@ -1866,9 +1873,9 @@ type ResourceSetSummary struct {
 // resource should be included or excluded from the Firewall Manager policy. Tags
 // enable you to categorize your Amazon Web Services resources in different ways,
 // for example, by purpose, owner, or environment. Each tag consists of a key and
-// an optional value. Firewall Manager combines the tags with "AND" so that, if you
-// add more than one tag to a policy scope, a resource must have all the specified
-// tags to be included or excluded. For more information, see [Working with Tag Editor].
+// an optional value. If you add more than one tag to a policy, you can specify
+// whether to combine them using the logical AND operator or the logical OR
+// operator. For more information, see [Working with Tag Editor].
 //
 // Every resource tag must have a string value, either a non-empty string or an
 // empty string. If you don't provide a value for a resource tag, Firewall Manager

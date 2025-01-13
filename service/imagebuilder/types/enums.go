@@ -9,6 +9,7 @@ const (
 	BuildTypeUserInitiated BuildType = "USER_INITIATED"
 	BuildTypeScheduled     BuildType = "SCHEDULED"
 	BuildTypeImport        BuildType = "IMPORT"
+	BuildTypeImportIso     BuildType = "IMPORT_ISO"
 )
 
 // Values returns all known values for BuildType. Note that this can be expanded
@@ -20,6 +21,7 @@ func (BuildType) Values() []BuildType {
 		"USER_INITIATED",
 		"SCHEDULED",
 		"IMPORT",
+		"IMPORT_ISO",
 	}
 }
 

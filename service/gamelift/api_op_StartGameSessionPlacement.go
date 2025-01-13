@@ -51,7 +51,7 @@ import (
 // To track the status of a placement request, call [DescribeGameSessionPlacement] and check the request's
 // status. If the status is FULFILLED , a new game session has been created and a
 // game session ARN and Region are referenced. If the placement request times out,
-// submit a new request to the same queue or a different queue.
+// you can resubmit the request or retry it with a different queue.
 //
 // [DescribeGameSessionPlacement]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionPlacement.html
 func (c *Client) StartGameSessionPlacement(ctx context.Context, params *StartGameSessionPlacementInput, optFns ...func(*Options)) (*StartGameSessionPlacementOutput, error) {

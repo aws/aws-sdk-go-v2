@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves properties for a compute resource in an Amazon GameLift fleet. To get
-// a list of all computes in a fleet, call ListCompute.
+// a list of all computes in a fleet, call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html].
 //
 // To request information on a specific compute, provide the fleet ID and compute
 // name.
@@ -26,6 +26,8 @@ import (
 //
 //   - For Anywhere fleets, this operation returns information about the
 //     registered compute.
+//
+// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html
 func (c *Client) DescribeCompute(ctx context.Context, params *DescribeComputeInput, optFns ...func(*Options)) (*DescribeComputeOutput, error) {
 	if params == nil {
 		params = &DescribeComputeInput{}

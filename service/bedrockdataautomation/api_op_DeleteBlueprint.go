@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing Amazon Bedrock Keystone Blueprint
+// Deletes an existing Amazon Bedrock Data Automation Blueprint
 func (c *Client) DeleteBlueprint(ctx context.Context, params *DeleteBlueprintInput, optFns ...func(*Options)) (*DeleteBlueprintOutput, error) {
 	if params == nil {
 		params = &DeleteBlueprintInput{}

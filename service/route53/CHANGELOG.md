@@ -1,3 +1,15 @@
+# v1.47.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.0 (2025-01-08)
+
+* **Feature**: Amazon Route 53 now supports the Asia Pacific (Thailand) Region (ap-southeast-7) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region
+
+# v1.46.4 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.3 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

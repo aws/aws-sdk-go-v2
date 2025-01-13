@@ -169,8 +169,8 @@ type ApiCallDetails struct {
 	// finding.
 	Api *string
 
-	// The URL of the Amazon Web Service that provides the operation, for example:
-	// s3.amazonaws.com.
+	// The URL of the Amazon Web Services service that provides the operation, for
+	// example: s3.amazonaws.com.
 	ApiServiceName *string
 
 	// The first date and time, in UTC and extended ISO 8601 format, when any
@@ -352,8 +352,9 @@ type BucketCountByEffectivePermission struct {
 	PubliclyWritable *int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate
-	// permissions settings for. Macie can't determine whether these buckets are
-	// publicly accessible.
+	// permissions settings for. For example, the buckets' policies or a quota
+	// prevented Macie from retrieving the requisite data. Macie can't determine
+	// whether the buckets are publicly accessible.
 	Unknown *int64
 
 	noSmithyDocumentSerde
@@ -384,8 +385,8 @@ type BucketCountByEncryptionType struct {
 	Unencrypted *int64
 
 	// The total number of buckets that Amazon Macie doesn't have current encryption
-	// metadata for. Macie can't provide current data about the default encryption
-	// settings for these buckets.
+	// metadata for. For example, the buckets' permissions settings or a quota
+	// prevented Macie from retrieving the default encryption settings for the buckets.
 	Unknown *int64
 
 	noSmithyDocumentSerde
@@ -415,8 +416,10 @@ type BucketCountBySharedAccessType struct {
 	NotShared *int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate shared
-	// access settings for. Macie can't determine whether these buckets are shared with
-	// other Amazon Web Services accounts, Amazon CloudFront OAIs, or CloudFront OACs.
+	// access settings for. For example, the buckets' permissions settings or a quota
+	// prevented Macie from retrieving the requisite data. Macie can't determine
+	// whether the buckets are shared with other Amazon Web Services accounts, Amazon
+	// CloudFront OAIs, or CloudFront OACs.
 	Unknown *int64
 
 	noSmithyDocumentSerde
@@ -443,8 +446,10 @@ type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
 	DeniesUnencryptedObjectUploads *int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate
-	// server-side encryption requirements for. Macie can't determine whether the
-	// bucket policies for these buckets require server-side encryption of new objects.
+	// server-side encryption requirements for. For example, the buckets' permissions
+	// settings or a quota prevented Macie from retrieving the requisite data. Macie
+	// can't determine whether bucket policies for the buckets require server-side
+	// encryption of new objects.
 	Unknown *int64
 
 	noSmithyDocumentSerde
@@ -504,11 +509,11 @@ type BucketLevelPermissions struct {
 // incomplete multipart uploads. For more information, see [How Macie monitors Amazon S3 data security]in the Amazon Macie
 // User Guide.
 //
-// If an error occurs when Macie attempts to retrieve and process metadata from
-// Amazon S3 for the bucket or the bucket's objects, the value for the versioning
-// property is false and the value for most other properties is null. Key
-// exceptions are accountId, bucketArn, bucketCreatedAt, bucketName, lastUpdated,
-// and region. To identify the cause of the error, refer to the errorCode and
+// If an error or issue prevents Macie from retrieving and processing metadata
+// from Amazon S3 for the bucket or the bucket's objects, the value for the
+// versioning property is false and the value for most other properties is null or
+// UNKNOWN. Key exceptions are accountId, bucketArn, bucketCreatedAt, bucketName,
+// lastUpdated, and region. To identify the cause, refer to the errorCode and
 // errorMessage values.
 //
 // [How Macie monitors Amazon S3 data security]: https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html
@@ -569,17 +574,25 @@ type BucketMetadata struct {
 	// in the bucket.
 	ClassifiableSizeInBytes *int64
 
-	// The error code for an error that prevented Amazon Macie from retrieving and
-	// processing information about the bucket and the bucket's objects. If this value
-	// is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For
-	// example, the bucket has a restrictive bucket policy and Amazon S3 denied the
-	// request. If this value is null, Macie was able to retrieve and process the
-	// information.
+	// The code for an error or issue that prevented Amazon Macie from retrieving and
+	// processing information about the bucket and the bucket's objects. Possible
+	// values are:
+	//
+	//   - ACCESS_DENIED - Macie doesn't have permission to retrieve the information.
+	//   For example, the bucket has a restrictive bucket policy and Amazon S3 denied the
+	//   request.
+	//
+	//   - BUCKET_COUNT_EXCEEDS_QUOTA - Retrieving and processing the information
+	//   would exceed the quota for the number of buckets that Macie monitors for an
+	//   account (10,000).
+	//
+	// If this value is null, Macie was able to retrieve and process the information.
 	ErrorCode BucketMetadataErrorCode
 
-	// A brief description of the error (errorCode) that prevented Amazon Macie from
-	// retrieving and processing information about the bucket and the bucket's objects.
-	// This value is null if Macie was able to retrieve and process the information.
+	// A brief description of the error or issue (errorCode) that prevented Amazon
+	// Macie from retrieving and processing information about the bucket and the
+	// bucket's objects. This value is null if Macie was able to retrieve and process
+	// the information.
 	ErrorMessage *string
 
 	// Specifies whether any one-time or recurring classification jobs are configured
@@ -589,8 +602,7 @@ type BucketMetadata struct {
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
 	// recently analyzed objects in the bucket while performing automated sensitive
-	// data discovery. This value is null if automated sensitive data discovery is
-	// disabled for your account.
+	// data discovery. This value is null if this analysis hasn't occurred.
 	LastAutomatedDiscoveryTime *time.Time
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
@@ -621,9 +633,9 @@ type BucketMetadata struct {
 	// 100 (sensitive).
 	//
 	// If automated sensitive data discovery has never been enabled for your account
-	// or it’s been disabled for your organization or your standalone account for more
-	// than 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket
-	// stores objects but it’s been excluded from recent analyses.
+	// or it's been disabled for your organization or standalone account for more than
+	// 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket stores
+	// objects but it's been excluded from recent analyses.
 	SensitivityScore *int32
 
 	// The default server-side encryption settings for the bucket.
@@ -792,7 +804,7 @@ type BucketSortCriteria struct {
 // Provides aggregated statistical data for sensitive data discovery metrics that
 // apply to S3 buckets, grouped by bucket sensitivity score (sensitivityScore). If
 // automated sensitive data discovery is currently disabled for your account, the
-// value for each metric is 0.
+// value for most of these metrics is 0.
 type BucketStatisticsBySensitivity struct {
 
 	// The aggregated statistical data for all buckets that have a sensitivity score
@@ -1232,7 +1244,8 @@ type Detection struct {
 	Name *string
 
 	// Specifies whether occurrences of this type of sensitive data are excluded
-	// (true) or included (false) in the bucket's sensitivity score.
+	// (true) or included (false) in the bucket's sensitivity score, if the score is
+	// calculated by Amazon Macie.
 	Suppressed *bool
 
 	// The type of data identifier that detected the sensitive data. Possible values
@@ -1858,10 +1871,10 @@ type ManagedDataIdentifierSummary struct {
 // incomplete multipart uploads. For more information, see [How Macie monitors Amazon S3 data security]in the Amazon Macie
 // User Guide.
 //
-// If an error occurs when Macie attempts to retrieve and process information
-// about the bucket or the bucket's objects, the value for most of these properties
-// is null. Key exceptions are accountId and bucketName. To identify the cause of
-// the error, refer to the errorCode and errorMessage values.
+// If an error or issue prevents Macie from retrieving and processing information
+// about the bucket or the bucket's objects, the value for many of these properties
+// is null. Key exceptions are accountId and bucketName. To identify the cause,
+// refer to the errorCode and errorMessage values.
 //
 // [How Macie monitors Amazon S3 data security]: https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html
 type MatchingBucket struct {
@@ -1894,17 +1907,25 @@ type MatchingBucket struct {
 	// in the bucket.
 	ClassifiableSizeInBytes *int64
 
-	// The error code for an error that prevented Amazon Macie from retrieving and
-	// processing information about the bucket and the bucket's objects. If this value
-	// is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For
-	// example, the bucket has a restrictive bucket policy and Amazon S3 denied the
-	// request. If this value is null, Macie was able to retrieve and process the
-	// information.
+	// The code for an error or issue that prevented Amazon Macie from retrieving and
+	// processing information about the bucket and the bucket's objects. Possible
+	// values are:
+	//
+	//   - ACCESS_DENIED - Macie doesn't have permission to retrieve the information.
+	//   For example, the bucket has a restrictive bucket policy and Amazon S3 denied the
+	//   request.
+	//
+	//   - BUCKET_COUNT_EXCEEDS_QUOTA - Retrieving and processing the information
+	//   would exceed the quota for the number of buckets that Macie monitors for an
+	//   account (10,000).
+	//
+	// If this value is null, Macie was able to retrieve and process the information.
 	ErrorCode BucketMetadataErrorCode
 
-	// A brief description of the error (errorCode) that prevented Amazon Macie from
-	// retrieving and processing information about the bucket and the bucket's objects.
-	// This value is null if Macie was able to retrieve and process the information.
+	// A brief description of the error or issue (errorCode) that prevented Amazon
+	// Macie from retrieving and processing information about the bucket and the
+	// bucket's objects. This value is null if Macie was able to retrieve and process
+	// the information.
 	ErrorMessage *string
 
 	// Specifies whether any one-time or recurring classification jobs are configured
@@ -1914,8 +1935,7 @@ type MatchingBucket struct {
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
 	// recently analyzed objects in the bucket while performing automated sensitive
-	// data discovery. This value is null if automated sensitive data discovery is
-	// disabled for your account.
+	// data discovery. This value is null if this analysis hasn't occurred.
 	LastAutomatedDiscoveryTime *time.Time
 
 	// The total number of objects in the bucket.
@@ -1930,9 +1950,9 @@ type MatchingBucket struct {
 	// 100 (sensitive).
 	//
 	// If automated sensitive data discovery has never been enabled for your account
-	// or it’s been disabled for your organization or your standalone account for more
-	// than 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket
-	// stores objects but it’s been excluded from recent analyses.
+	// or it's been disabled for your organization or standalone account for more than
+	// 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket stores
+	// objects but it's been excluded from recent analyses.
 	SensitivityScore *int32
 
 	// The total storage size, in bytes, of the bucket.
@@ -1968,7 +1988,8 @@ type MatchingBucket struct {
 // resource that Amazon Macie monitors and analyzes for your account.
 type MatchingResource struct {
 
-	// The details of an S3 bucket that Amazon Macie monitors and analyzes.
+	// The details of an S3 bucket that Amazon Macie monitors and analyzes for your
+	// account.
 	MatchingBucket *MatchingBucket
 
 	noSmithyDocumentSerde
@@ -2399,7 +2420,11 @@ type RevealConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the S3 bucket that a finding applies to.
+// Provides information about the S3 bucket that a finding applies to. If a quota
+// prevented Amazon Macie from retrieving and processing all the bucket's
+// information prior to generating the finding, the following values are UNKNOWN or
+// null: allowsUnencryptedObjectUploads, defaultServerSideEncryption, publicAccess,
+// and tags.
 type S3Bucket struct {
 
 	// Specifies whether the bucket policy for the bucket requires server-side
@@ -2530,7 +2555,7 @@ type S3ClassificationScopeExclusionUpdate struct {
 	// (ClassificationScopeUpdateOperation), an array of strings that: lists the names
 	// of buckets to add or remove from the list, or specifies a new set of bucket
 	// names that overwrites all existing names in the list. Each string must be the
-	// full name of an S3 bucket. Values are case sensitive.
+	// full name of an existing S3 bucket. Values are case sensitive.
 	//
 	// This member is required.
 	BucketNames []string
@@ -2826,9 +2851,9 @@ type SearchResourcesTagCriterionPair struct {
 
 // Specifies configuration settings that determine which findings are published to
 // Security Hub automatically. For information about how Macie publishes findings
-// to Security Hub, see [Amazon Macie integration with Security Hub]in the Amazon Macie User Guide.
+// to Security Hub, see [Evaluating findings with Security Hub]in the Amazon Macie User Guide.
 //
-// [Amazon Macie integration with Security Hub]: https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html
+// [Evaluating findings with Security Hub]: https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html
 type SecurityHubConfiguration struct {
 
 	// Specifies whether to publish sensitive data findings to Security Hub. If you
@@ -2877,7 +2902,8 @@ type SensitiveDataItem struct {
 // apply to S3 buckets. Each field contains aggregated data for all the buckets
 // that have a sensitivity score (sensitivityScore) of a specified value or within
 // a specified range (BucketStatisticsBySensitivity). If automated sensitive data
-// discovery is currently disabled for your account, the value for each field is 0.
+// discovery is currently disabled for your account, the value for most fields is
+// 0.
 type SensitivityAggregations struct {
 
 	// The total storage size, in bytes, of all the objects that Amazon Macie can
@@ -3209,12 +3235,11 @@ type Statistics struct {
 }
 
 // Specifies a custom data identifier or managed data identifier that detected a
-// type of sensitive data to start excluding or including in an S3 bucket's
-// sensitivity score.
+// type of sensitive data to exclude from an S3 bucket's sensitivity score.
 type SuppressDataIdentifier struct {
 
 	// The unique identifier for the custom data identifier or managed data identifier
-	// that detected the type of sensitive data to exclude or include in the score.
+	// that detected the type of sensitive data to exclude from the score.
 	Id *string
 
 	// The type of data identifier that detected the sensitive data. Possible values
@@ -3315,10 +3340,10 @@ type UnprocessedAccount struct {
 // sensitive data reported by findings. If your request specifies an Identity and
 // Access Management (IAM) role to assume, Amazon Macie verifies that the role
 // exists and the attached policies are configured correctly. If there's an issue,
-// Macie returns an error. For information about addressing the issue, see [Configuration options and requirements for retrieving sensitive data samples]in the
+// Macie returns an error. For information about addressing the issue, see [Configuration options for retrieving sensitive data samples]in the
 // Amazon Macie User Guide.
 //
-// [Configuration options and requirements for retrieving sensitive data samples]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd-options.html
+// [Configuration options for retrieving sensitive data samples]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd-options.html
 type UpdateRetrievalConfiguration struct {
 
 	// The access method to use when retrieving sensitive data from affected S3
@@ -3479,7 +3504,7 @@ type UserIdentity struct {
 	AwsAccount *AwsAccount
 
 	// If the action was performed by an Amazon Web Services account that belongs to
-	// an Amazon Web Service, the name of the service.
+	// an Amazon Web Services service, the name of the service.
 	AwsService *AwsService
 
 	// If the action was performed with temporary security credentials that were

@@ -1,3 +1,15 @@
+# v1.19.3 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.2 (2025-01-08)
+
+* No change notes available for this release.
+
+# v1.19.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2024-12-05)
 
 * **Feature**: This release removes the deprecated UserId and UserGroups fields from SearchRelevantContent api's request parameters.

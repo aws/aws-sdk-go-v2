@@ -1,3 +1,15 @@
+# v1.48.4 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.3 (2024-12-20)
+
+* No change notes available for this release.
+
+# v1.48.2 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.1 (2024-12-11)
 
 * **Documentation**: Updated descriptions for some API operations and parameters, corrected some errors in Cognito user pools

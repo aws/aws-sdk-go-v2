@@ -29,11 +29,6 @@ func (c *Client) UpdateConnector(ctx context.Context, params *UpdateConnectorInp
 
 type UpdateConnectorInput struct {
 
-	// The target capacity.
-	//
-	// This member is required.
-	Capacity *types.CapacityUpdate
-
 	// The Amazon Resource Name (ARN) of the connector that you want to update.
 	//
 	// This member is required.
@@ -44,6 +39,12 @@ type UpdateConnectorInput struct {
 	// This member is required.
 	CurrentVersion *string
 
+	// The target capacity.
+	Capacity *types.CapacityUpdate
+
+	// A map of keys to values that represent the configuration for the connector.
+	ConnectorConfiguration map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -51,6 +52,9 @@ type UpdateConnectorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connector.
 	ConnectorArn *string
+
+	// The Amazon Resource Name (ARN) of the connector operation.
+	ConnectorOperationArn *string
 
 	// The state of the connector.
 	ConnectorState types.ConnectorState

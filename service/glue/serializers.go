@@ -27798,6 +27798,11 @@ func awsAwsjson11_serializeOpDocumentGetCatalogsInput(v *GetCatalogsInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.IncludeRoot != nil {
+		ok := object.Key("IncludeRoot")
+		ok.Boolean(*v.IncludeRoot)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)

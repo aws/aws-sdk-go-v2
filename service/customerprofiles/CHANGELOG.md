@@ -1,3 +1,11 @@
+# v1.44.2 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2024-12-02)
 
 * **Feature**: This release introduces Event Trigger APIs as part of Amazon Connect Customer Profiles service.

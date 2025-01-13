@@ -20,9 +20,6 @@ import (
 // InboundPermissionRevocations . Permissions to be removed must match existing
 // fleet permissions.
 //
-// For a container fleet, inbound permissions must specify port numbers that are
-// defined in the fleet's connection port settings.
-//
 // If successful, the fleet ID for the updated fleet is returned. For fleets with
 // remote locations, port setting updates can take time to propagate across all
 // locations. You can check the status of updates in each location by calling

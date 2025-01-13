@@ -11,9 +11,9 @@ import (
 )
 
 // Terminates the ML compute instance. Before terminating the instance, SageMaker
-// disconnects the ML storage volume from it. SageMaker preserves the ML storage
-// volume. SageMaker stops charging you for the ML compute instance when you call
-// StopNotebookInstance .
+// AI disconnects the ML storage volume from it. SageMaker AI preserves the ML
+// storage volume. SageMaker AI stops charging you for the ML compute instance when
+// you call StopNotebookInstance .
 //
 // To access data on the ML storage volume for a notebook instance that has been
 // terminated, call the StartNotebookInstance API. StartNotebookInstance launches

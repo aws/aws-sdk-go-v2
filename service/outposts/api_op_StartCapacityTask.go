@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Starts the specified capacity task. You can have one active capacity task per
-// order or Outpost.
+// Starts the specified capacity task. You can have one active capacity task for
+// each order and each Outpost.
 func (c *Client) StartCapacityTask(ctx context.Context, params *StartCapacityTaskInput, optFns ...func(*Options)) (*StartCapacityTaskOutput, error) {
 	if params == nil {
 		params = &StartCapacityTaskInput{}

@@ -70,7 +70,7 @@ type DescribeAppOutput struct {
 
 	// The creation time of the application.
 	//
-	// After an application has been shut down for 24 hours, SageMaker deletes all
+	// After an application has been shut down for 24 hours, SageMaker AI deletes all
 	// metadata for the application. To be considered an update and retain application
 	// metadata, applications must be restarted within 24 hours after the previous
 	// application has been shut down. After this time window, creation of an
@@ -88,11 +88,11 @@ type DescribeAppOutput struct {
 	LastHealthCheckTimestamp *time.Time
 
 	// The timestamp of the last user's activity. LastUserActivityTimestamp is also
-	// updated when SageMaker performs health checks without user activity. As a
+	// updated when SageMaker AI performs health checks without user activity. As a
 	// result, this value is set to the same value as LastHealthCheckTimestamp .
 	LastUserActivityTimestamp *time.Time
 
-	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image
+	// The instance type and the Amazon Resource Name (ARN) of the SageMaker AI image
 	// created on the instance.
 	ResourceSpec *types.ResourceSpec
 

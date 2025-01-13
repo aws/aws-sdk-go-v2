@@ -52,66 +52,10 @@ type CreateCustomLogSourceInput struct {
 	SourceName *string
 
 	// The Open Cybersecurity Schema Framework (OCSF) event classes which describes
-	// the type of data that the custom source will send to Security Lake. The
-	// supported event classes are:
+	// the type of data that the custom source will send to Security Lake. For the list
+	// of supported event classes, see the [Amazon Security Lake User Guide].
 	//
-	//   - ACCESS_ACTIVITY
-	//
-	//   - FILE_ACTIVITY
-	//
-	//   - KERNEL_ACTIVITY
-	//
-	//   - KERNEL_EXTENSION
-	//
-	//   - MEMORY_ACTIVITY
-	//
-	//   - MODULE_ACTIVITY
-	//
-	//   - PROCESS_ACTIVITY
-	//
-	//   - REGISTRY_KEY_ACTIVITY
-	//
-	//   - REGISTRY_VALUE_ACTIVITY
-	//
-	//   - RESOURCE_ACTIVITY
-	//
-	//   - SCHEDULED_JOB_ACTIVITY
-	//
-	//   - SECURITY_FINDING
-	//
-	//   - ACCOUNT_CHANGE
-	//
-	//   - AUTHENTICATION
-	//
-	//   - AUTHORIZATION
-	//
-	//   - ENTITY_MANAGEMENT_AUDIT
-	//
-	//   - DHCP_ACTIVITY
-	//
-	//   - NETWORK_ACTIVITY
-	//
-	//   - DNS_ACTIVITY
-	//
-	//   - FTP_ACTIVITY
-	//
-	//   - HTTP_ACTIVITY
-	//
-	//   - RDP_ACTIVITY
-	//
-	//   - SMB_ACTIVITY
-	//
-	//   - SSH_ACTIVITY
-	//
-	//   - CONFIG_STATE
-	//
-	//   - INVENTORY_INFO
-	//
-	//   - EMAIL_ACTIVITY
-	//
-	//   - API_ACTIVITY
-	//
-	//   - CLOUD_API
+	// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/adding-custom-sources.html#ocsf-eventclass
 	EventClasses []string
 
 	// Specify the source version for the third-party custom source, to limit log

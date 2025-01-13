@@ -1,3 +1,19 @@
+# v1.123.2 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.123.1 (2025-01-02)
+
+* No change notes available for this release.
+
+# v1.123.0 (2024-12-20)
+
+* **Feature**: This release supports adding NotAttributeCondition and Range to the RoutingCriteria object.
+
+# v1.122.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.122.0 (2024-12-18)
 
 * **Feature**: This release adds support for the UpdateParticipantAuthentication API used for customer authentication within Amazon Connect chats.

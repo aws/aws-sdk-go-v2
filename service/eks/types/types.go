@@ -167,6 +167,18 @@ type Addon struct {
 	noSmithyDocumentSerde
 }
 
+// Contains compatibility information for an Amazon EKS add-on.
+type AddonCompatibilityDetail struct {
+
+	// A list of compatible add-on versions.
+	CompatibleVersions []string
+
+	// The name of the Amazon EKS add-on.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // The health of the add-on.
 type AddonHealth struct {
 
@@ -482,6 +494,39 @@ type ClusterIssue struct {
 
 	// The resource IDs that the issue relates to.
 	ResourceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a specific EKS cluster version.
+type ClusterVersionInformation struct {
+
+	// The type of cluster this version is for.
+	ClusterType *string
+
+	// The Kubernetes version for the cluster.
+	ClusterVersion *string
+
+	// Default platform version for this Kubernetes version.
+	DefaultPlatformVersion *string
+
+	// Indicates if this is a default version.
+	DefaultVersion bool
+
+	// Date when extended support ends for this version.
+	EndOfExtendedSupportDate *time.Time
+
+	// Date when standard support ends for this version.
+	EndOfStandardSupportDate *time.Time
+
+	// The patch version of Kubernetes for this cluster version.
+	KubernetesPatchVersion *string
+
+	// The release date of this cluster version.
+	ReleaseDate *time.Time
+
+	// Current status of this cluster version.
+	Status ClusterVersionStatus
 
 	noSmithyDocumentSerde
 }
@@ -946,6 +991,9 @@ type Insight struct {
 // Summary information that relates to the category of the insight. Currently only
 // returned with certain insights having category UPGRADE_READINESS .
 type InsightCategorySpecificSummary struct {
+
+	// A list of AddonCompatibilityDetail objects for Amazon EKS add-ons.
+	AddonCompatibilityDetails []AddonCompatibilityDetail
 
 	// The summary information about deprecated resource usage for an insight check in
 	// the UPGRADE_READINESS category.

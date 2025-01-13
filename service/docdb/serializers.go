@@ -4305,6 +4305,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.String(*v.KmsKeyId)
 	}
 
+	if v.ManageMasterUserPassword != nil {
+		objectKey := object.Key("ManageMasterUserPassword")
+		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
 	if v.MasterUsername != nil {
 		objectKey := object.Key("MasterUsername")
 		objectKey.String(*v.MasterUsername)
@@ -4313,6 +4318,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
+	}
+
+	if v.MasterUserSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterUserSecretKmsKeyId")
+		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
 	if v.Port != nil {
@@ -5347,9 +5357,19 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.String(*v.EngineVersion)
 	}
 
+	if v.ManageMasterUserPassword != nil {
+		objectKey := object.Key("ManageMasterUserPassword")
+		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
+	}
+
+	if v.MasterUserSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterUserSecretKmsKeyId")
+		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
 	if v.NewDBClusterIdentifier != nil {
@@ -5370,6 +5390,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 	if v.PreferredMaintenanceWindow != nil {
 		objectKey := object.Key("PreferredMaintenanceWindow")
 		objectKey.String(*v.PreferredMaintenanceWindow)
+	}
+
+	if v.RotateMasterUserPassword != nil {
+		objectKey := object.Key("RotateMasterUserPassword")
+		objectKey.Boolean(*v.RotateMasterUserPassword)
 	}
 
 	if v.StorageType != nil {

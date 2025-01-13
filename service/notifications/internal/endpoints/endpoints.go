@@ -200,6 +200,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "notifications.ap-southeast-5.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-7",
+			}: endpoints.Endpoint{
+				Hostname: "notifications.ap-southeast-7.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "notifications.ca-central-1.api.aws",

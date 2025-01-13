@@ -5727,6 +5727,40 @@ func awsAwsjson11_serializeDocumentDirectoryIdList(v []string, value smithyjson.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentGlobalAcceleratorForDirectory(v *types.GlobalAcceleratorForDirectory, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	if len(v.PreferredProtocol) > 0 {
+		ok := object.Key("PreferredProtocol")
+		ok.String(string(v.PreferredProtocol))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGlobalAcceleratorForWorkSpace(v *types.GlobalAcceleratorForWorkSpace, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	if len(v.PreferredProtocol) > 0 {
+		ok := object.Key("PreferredProtocol")
+		ok.String(string(v.PreferredProtocol))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentImageAssociatedResourceTypeList(v []types.ImageAssociatedResourceType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -6153,6 +6187,13 @@ func awsAwsjson11_serializeDocumentStreamingProperties(v *types.StreamingPropert
 	object := value.Object()
 	defer object.Close()
 
+	if v.GlobalAccelerator != nil {
+		ok := object.Key("GlobalAccelerator")
+		if err := awsAwsjson11_serializeDocumentGlobalAcceleratorForDirectory(v.GlobalAccelerator, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StorageConnectors != nil {
 		ok := object.Key("StorageConnectors")
 		if err := awsAwsjson11_serializeDocumentStorageConnectors(v.StorageConnectors, ok); err != nil {
@@ -6472,6 +6513,13 @@ func awsAwsjson11_serializeDocumentWorkspaceProperties(v *types.WorkspacePropert
 	if len(v.ComputeTypeName) > 0 {
 		ok := object.Key("ComputeTypeName")
 		ok.String(string(v.ComputeTypeName))
+	}
+
+	if v.GlobalAccelerator != nil {
+		ok := object.Key("GlobalAccelerator")
+		if err := awsAwsjson11_serializeDocumentGlobalAcceleratorForWorkSpace(v.GlobalAccelerator, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.OperatingSystemName) > 0 {

@@ -96,6 +96,8 @@ type UpdateSiteRackPhysicalPropertiesInput struct {
 	//   - AH530P7W (red) – 3P+N+E, 7hr; 30A; three phase
 	//
 	//   - AH532P6W (red) – 3P+N+E, 6hr; 32A; three phase
+	//
+	//   - CS8365C – (common in US); 3P+E, 50A; three phase
 	PowerConnector types.PowerConnector
 
 	// The power draw, in kVA, available at the hardware placement position for the

@@ -4767,6 +4767,19 @@ func awsRestjson1_serializeDocument__listOfAddOutputRequest(v []types.AddOutputR
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfAudioMonitoringSetting(v []types.AudioMonitoringSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAudioMonitoringSetting(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfDestinationConfigurationRequest(v []types.DestinationConfigurationRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4852,6 +4865,19 @@ func awsRestjson1_serializeDocument__listOfSetSourceRequest(v []types.SetSourceR
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentSetSourceRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfVideoMonitoringSetting(v []types.VideoMonitoringSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentVideoMonitoringSetting(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -5202,6 +5228,37 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioMonitoringSetting(v *types.AudioMonitoringSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SilentAudio != nil {
+		ok := object.Key("silentAudio")
+		if err := awsRestjson1_serializeDocumentSilentAudio(v.SilentAudio, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBlackFrames(v *types.BlackFrames, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	if v.ThresholdSeconds != nil {
+		ok := object.Key("thresholdSeconds")
+		ok.Integer(*v.ThresholdSeconds)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDestinationConfigurationRequest(v *types.DestinationConfigurationRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5379,6 +5436,23 @@ func awsRestjson1_serializeDocumentFmtpRequest(v *types.FmtpRequest, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFrozenFrames(v *types.FrozenFrames, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	if v.ThresholdSeconds != nil {
+		ok := object.Key("thresholdSeconds")
+		ok.Integer(*v.ThresholdSeconds)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGatewayNetwork(v *types.GatewayNetwork, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5546,9 +5620,28 @@ func awsRestjson1_serializeDocumentMonitoringConfig(v *types.MonitoringConfig, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AudioMonitoringSettings != nil {
+		ok := object.Key("audioMonitoringSettings")
+		if err := awsRestjson1_serializeDocument__listOfAudioMonitoringSetting(v.AudioMonitoringSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ContentQualityAnalysisState) > 0 {
+		ok := object.Key("contentQualityAnalysisState")
+		ok.String(string(v.ContentQualityAnalysisState))
+	}
+
 	if len(v.ThumbnailState) > 0 {
 		ok := object.Key("thumbnailState")
 		ok.String(string(v.ThumbnailState))
+	}
+
+	if v.VideoMonitoringSettings != nil {
+		ok := object.Key("videoMonitoringSettings")
+		if err := awsRestjson1_serializeDocument__listOfVideoMonitoringSetting(v.VideoMonitoringSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -5688,6 +5781,23 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 	if v.WhitelistCidr != nil {
 		ok := object.Key("whitelistCidr")
 		ok.String(*v.WhitelistCidr)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSilentAudio(v *types.SilentAudio, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	if v.ThresholdSeconds != nil {
+		ok := object.Key("thresholdSeconds")
+		ok.Integer(*v.ThresholdSeconds)
 	}
 
 	return nil
@@ -5936,6 +6046,27 @@ func awsRestjson1_serializeDocumentUpdateMaintenance(v *types.UpdateMaintenance,
 	if v.MaintenanceStartHour != nil {
 		ok := object.Key("maintenanceStartHour")
 		ok.String(*v.MaintenanceStartHour)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoMonitoringSetting(v *types.VideoMonitoringSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BlackFrames != nil {
+		ok := object.Key("blackFrames")
+		if err := awsRestjson1_serializeDocumentBlackFrames(v.BlackFrames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FrozenFrames != nil {
+		ok := object.Key("frozenFrames")
+		if err := awsRestjson1_serializeDocumentFrozenFrames(v.FrozenFrames, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

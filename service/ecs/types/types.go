@@ -164,7 +164,7 @@ type AutoScalingGroupProviderUpdate struct {
 type AwsVpcConfiguration struct {
 
 	// The IDs of the subnets associated with the task or service. There's a limit of
-	// 16 subnets that can be specified per awsvpcConfiguration .
+	// 16 subnets that can be specified.
 	//
 	// All specified subnets must be from the same VPC.
 	//
@@ -177,8 +177,7 @@ type AwsVpcConfiguration struct {
 
 	// The IDs of the security groups associated with the task or service. If you
 	// don't specify a security group, the default security group for the VPC is used.
-	// There's a limit of 5 security groups that can be specified per
-	// awsvpcConfiguration .
+	// There's a limit of 5 security groups that can be specified.
 	//
 	// All specified security groups must be from the same VPC.
 	SecurityGroups []string

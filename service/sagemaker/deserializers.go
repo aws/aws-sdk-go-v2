@@ -38847,6 +38847,15 @@ func awsAwsjson11_deserializeDocumentAdditionalS3DataSource(v **types.Additional
 				sv.CompressionType = types.CompressionType(jtv)
 			}
 
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
 		case "S3DataType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -45465,6 +45474,15 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 					return fmt.Errorf("expected ClusterPrivatePrimaryIp to be of type string, got %T instead", value)
 				}
 				sv.PrivatePrimaryIp = ptr.String(jtv)
+			}
+
+		case "PrivatePrimaryIpv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterPrivatePrimaryIpv6 to be of type string, got %T instead", value)
+				}
+				sv.PrivatePrimaryIpv6 = ptr.String(jtv)
 			}
 
 		case "ThreadsPerCore":
@@ -66102,6 +66120,15 @@ func awsAwsjson11_deserializeDocumentModelPackageContainerDefinition(v **types.M
 				sv.ImageDigest = ptr.String(jtv)
 			}
 
+		case "ModelDataETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ModelDataETag = ptr.String(jtv)
+			}
+
 		case "ModelDataSource":
 			if err := awsAwsjson11_deserializeDocumentModelDataSource(&sv.ModelDataSource, value); err != nil {
 				return err
@@ -79071,9 +79098,27 @@ func awsAwsjson11_deserializeDocumentS3ModelDataSource(v **types.S3ModelDataSour
 				sv.CompressionType = types.ModelCompressionType(jtv)
 			}
 
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
 		case "HubAccessConfig":
 			if err := awsAwsjson11_deserializeDocumentInferenceHubAccessConfig(&sv.HubAccessConfig, value); err != nil {
 				return err
+			}
+
+		case "ManifestEtag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ManifestEtag = ptr.String(jtv)
 			}
 
 		case "ManifestS3Uri":
@@ -80397,6 +80442,15 @@ func awsAwsjson11_deserializeDocumentSourceAlgorithm(v **types.SourceAlgorithm, 
 					return fmt.Errorf("expected ArnOrName to be of type string, got %T instead", value)
 				}
 				sv.AlgorithmName = ptr.String(jtv)
+			}
+
+		case "ModelDataETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ModelDataETag = ptr.String(jtv)
 			}
 
 		case "ModelDataSource":

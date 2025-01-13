@@ -46,7 +46,10 @@ type DescribeDBClusterParametersInput struct {
 	// This member is required.
 	DBClusterParameterGroupName *string
 
-	// This parameter isn't currently supported.
+	// A filter that specifies one or more DB cluster parameters to describe.
+	//
+	// The only supported filter is parameter-name . The results list only includes
+	// information about the DB cluster parameters with these names.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusterParameters
@@ -67,11 +70,11 @@ type DescribeDBClusterParametersInput struct {
 	//
 	// Valid Values:
 	//
-	//   - customer
+	//   - engine-default
 	//
-	//   - engine
+	//   - system
 	//
-	//   - service
+	//   - user
 	Source *string
 
 	noSmithyDocumentSerde

@@ -1,3 +1,12 @@
+# v1.41.0 (2025-01-09)
+
+* **Feature**: This release expands AWS Compute Optimizer rightsizing recommendation support for Amazon EC2 Auto Scaling groups to include those with scaling policies and multiple instance types.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.2 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.1 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

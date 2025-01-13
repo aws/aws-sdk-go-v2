@@ -108,7 +108,7 @@ type StartAttachedFileUploadOutput struct {
 	// The current status of the attached file.
 	FileStatus types.FileStatusType
 
-	// Information to be used while uploading the attached file.
+	// The headers to be provided while uploading the file to the URL.
 	UploadUrlMetadata *types.UploadUrlMetadata
 
 	// Metadata pertaining to the operation's result.

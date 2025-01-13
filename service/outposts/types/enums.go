@@ -423,6 +423,7 @@ const (
 	PowerConnectorIec309   PowerConnector = "IEC309"
 	PowerConnectorAh530p7w PowerConnector = "AH530P7W"
 	PowerConnectorAh532p6w PowerConnector = "AH532P6W"
+	PowerConnectorCs8365c  PowerConnector = "CS8365C"
 )
 
 // Values returns all known values for PowerConnector. Note that this can be
@@ -435,6 +436,7 @@ func (PowerConnector) Values() []PowerConnector {
 		"IEC309",
 		"AH530P7W",
 		"AH532P6W",
+		"CS8365C",
 	}
 }
 

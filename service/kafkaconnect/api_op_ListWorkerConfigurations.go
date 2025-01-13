@@ -30,7 +30,7 @@ func (c *Client) ListWorkerConfigurations(ctx context.Context, params *ListWorke
 type ListWorkerConfigurationsInput struct {
 
 	// The maximum number of worker configurations to list in one response.
-	MaxResults int32
+	MaxResults *int32
 
 	// Lists worker configuration names that start with the specified text string.
 	NamePrefix *string
@@ -184,8 +184,8 @@ func NewListWorkerConfigurationsPaginator(client ListWorkerConfigurationsAPIClie
 	}
 
 	options := ListWorkerConfigurationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -215,7 +215,11 @@ func (p *ListWorkerConfigurationsPaginator) NextPage(ctx context.Context, optFns
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,

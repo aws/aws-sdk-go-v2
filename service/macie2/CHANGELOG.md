@@ -1,3 +1,19 @@
+# v1.44.2 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.1 (2024-12-23)
+
+* No change notes available for this release.
+
+# v1.44.0 (2024-12-20)
+
+* **Feature**: This release adds support for identifying S3 general purpose buckets that exceed the Amazon Macie quota for preventative control monitoring.
+
+# v1.43.8 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

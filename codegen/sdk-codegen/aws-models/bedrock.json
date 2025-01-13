@@ -3027,6 +3027,12 @@
                         "smithy.api#default": "{}",
                         "smithy.api#documentation": "<p>Each Amazon Bedrock support different inference parameters that change how the model behaves during inference.</p>"
                     }
+                },
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrock#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies performance settings for the model or inference profile.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10534,6 +10540,37 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^\\S*$"
+            }
+        },
+        "com.amazonaws.bedrock#PerformanceConfigLatency": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
+                    }
+                },
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "optimized"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrock#PerformanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "latency": {
+                    "target": "com.amazonaws.bedrock#PerformanceConfigLatency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to use the latency-optimized or standard version of a model or inference profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains performance settings for a model.</p>"
             }
         },
         "com.amazonaws.bedrock#PositiveInteger": {

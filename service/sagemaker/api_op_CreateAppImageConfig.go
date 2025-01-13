@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a configuration for running a SageMaker image as a KernelGateway app.
-// The configuration specifies the Amazon Elastic File System storage volume on the
-// image, and a list of the kernels in the image.
+// Creates a configuration for running a SageMaker AI image as a KernelGateway
+// app. The configuration specifies the Amazon Elastic File System storage volume
+// on the image, and a list of the kernels in the image.
 func (c *Client) CreateAppImageConfig(ctx context.Context, params *CreateAppImageConfigInput, optFns ...func(*Options)) (*CreateAppImageConfigOutput, error) {
 	if params == nil {
 		params = &CreateAppImageConfigInput{}

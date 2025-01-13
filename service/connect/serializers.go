@@ -27819,6 +27819,13 @@ func awsRestjson1_serializeDocumentAttributeCondition(v *types.AttributeConditio
 		}
 	}
 
+	if v.Range != nil {
+		ok := object.Key("Range")
+		if err := awsRestjson1_serializeDocumentRange(v.Range, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Value != nil {
 		ok := object.Key("Value")
 		ok.String(*v.Value)
@@ -29251,6 +29258,13 @@ func awsRestjson1_serializeDocumentExpression(v *types.Expression, value smithyj
 	if v.AttributeCondition != nil {
 		ok := object.Key("AttributeCondition")
 		if err := awsRestjson1_serializeDocumentAttributeCondition(v.AttributeCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotAttributeCondition != nil {
+		ok := object.Key("NotAttributeCondition")
+		if err := awsRestjson1_serializeDocumentAttributeCondition(v.NotAttributeCondition, ok); err != nil {
 			return err
 		}
 	}
@@ -30915,6 +30929,49 @@ func awsRestjson1_serializeDocumentQuickConnectsList(v []string, value smithyjso
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRange(v *types.Range, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxProficiencyLevel != nil {
+		ok := object.Key("MaxProficiencyLevel")
+		switch {
+		case math.IsNaN(float64(*v.MaxProficiencyLevel)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MaxProficiencyLevel), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MaxProficiencyLevel), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MaxProficiencyLevel)
+
+		}
+	}
+
+	if v.MinProficiencyLevel != nil {
+		ok := object.Key("MinProficiencyLevel")
+		switch {
+		case math.IsNaN(float64(*v.MinProficiencyLevel)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinProficiencyLevel), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinProficiencyLevel), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinProficiencyLevel)
+
+		}
+	}
+
 	return nil
 }
 

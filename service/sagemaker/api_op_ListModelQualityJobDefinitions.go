@@ -72,9 +72,9 @@ type ListModelQualityJobDefinitionsOutput struct {
 	// This member is required.
 	JobDefinitionSummaries []types.MonitoringJobDefinitionSummary
 
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of model quality monitoring job definitions, use it in the next
-	// request.
+	// If the response is truncated, Amazon SageMaker AI returns this token. To
+	// retrieve the next set of model quality monitoring job definitions, use it in the
+	// next request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -271,6 +271,28 @@ type AddOutputRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the configuration for audio stream metrics monitoring.
+type AudioMonitoringSetting struct {
+
+	// Detects periods of silence.
+	SilentAudio *SilentAudio
+
+	noSmithyDocumentSerde
+}
+
+// Configures settings for the BlackFrames metric.
+type BlackFrames struct {
+
+	// Indicates whether the BlackFrames metric is enabled or disabled.
+	State State
+
+	// Specifies the number of consecutive seconds of black frames that triggers an
+	// event or alert.
+	ThresholdSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // A Bridge is the connection between your datacenter's Instances and the AWS
 // cloud. A bridge can be used to send video from the AWS cloud to your datacenter
 // or from your datacenter to the AWS cloud.
@@ -808,6 +830,19 @@ type FrameResolution struct {
 	//
 	// This member is required.
 	FrameWidth *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configures settings for the FrozenFrames metric.
+type FrozenFrames struct {
+
+	// Indicates whether the FrozenFrames metric is enabled or disabled.
+	State State
+
+	// Specifies the number of consecutive seconds of a static image that triggers an
+	// event or alert.
+	ThresholdSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -1397,8 +1432,17 @@ type Messages struct {
 // The settings for source monitoring.
 type MonitoringConfig struct {
 
+	// Contains the settings for audio stream metrics monitoring.
+	AudioMonitoringSettings []AudioMonitoringSetting
+
+	// Indicates whether content quality analysis is enabled or disabled.
+	ContentQualityAnalysisState ContentQualityAnalysisState
+
 	// The state of thumbnail monitoring.
 	ThumbnailState ThumbnailState
+
+	// Contains the settings for video stream metrics monitoring.
+	VideoMonitoringSettings []VideoMonitoringSetting
 
 	noSmithyDocumentSerde
 }
@@ -1717,6 +1761,19 @@ type SetSourceRequest struct {
 	// source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string
+
+	noSmithyDocumentSerde
+}
+
+// Configures settings for the SilentAudio metric.
+type SilentAudio struct {
+
+	// Indicates whether the SilentAudio metric is enabled or disabled.
+	State State
+
+	// Specifies the number of consecutive seconds of silence that triggers an event
+	// or alert.
+	ThresholdSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -2121,6 +2178,18 @@ type UpdateMaintenance struct {
 	// UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
 	// must be 00. Example: 13:00. The default value is 02:00.
 	MaintenanceStartHour *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration for video stream metrics monitoring.
+type VideoMonitoringSetting struct {
+
+	// Detects video frames that are black.
+	BlackFrames *BlackFrames
+
+	// Detects video frames that have not changed.
+	FrozenFrames *FrozenFrames
 
 	noSmithyDocumentSerde
 }

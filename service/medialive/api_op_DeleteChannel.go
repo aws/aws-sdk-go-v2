@@ -54,6 +54,9 @@ type DeleteChannelOutput struct {
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass types.ChannelClass
 
+	// Requested engine version for this channel.
+	ChannelEngineVersion *types.ChannelEngineVersionResponse
+
 	// A list of destinations of the channel. For UDP outputs, there is one
 	// destination per output. For other types (HLS, for example), there is one
 	// destination per packager.

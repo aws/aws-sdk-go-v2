@@ -1,3 +1,15 @@
+# v1.44.3 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.2 (2025-01-08)
+
+* No change notes available for this release.
+
+# v1.44.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2024-12-18)
 
 * **Feature**: AWS DataSync introduces the ability to update attributes for in-cloud locations.

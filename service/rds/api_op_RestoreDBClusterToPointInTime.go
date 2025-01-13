@@ -228,7 +228,8 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Serverless v1 clone from a provisioned cluster, or a provisioned clone from an
 	// Aurora Serverless v1 cluster. To create a clone that is an Aurora Serverless v1
 	// cluster, the original cluster must be an Aurora Serverless v1 cluster or an
-	// encrypted provisioned cluster.
+	// encrypted provisioned cluster. To create a full copy that is an Aurora
+	// Serverless v1 cluster, specify the engine mode serverless .
 	//
 	// Valid for: Aurora DB clusters only
 	EngineMode *string

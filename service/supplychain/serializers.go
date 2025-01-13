@@ -467,6 +467,11 @@ func awsRestjson1_serializeOpDocumentCreateInstanceInput(v *CreateInstanceInput,
 		}
 	}
 
+	if v.WebAppDnsDomain != nil {
+		ok := object.Key("webAppDnsDomain")
+		ok.String(*v.WebAppDnsDomain)
+	}
+
 	return nil
 }
 

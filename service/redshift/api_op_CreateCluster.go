@@ -241,9 +241,10 @@ type CreateClusterInput struct {
 	// [Supported Platforms to Launch Your Cluster]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
 	ElasticIp *string
 
-	// If true , the data in the cluster is encrypted at rest.
+	// If true , the data in the cluster is encrypted at rest. If you set the value on
+	// this parameter to false , the request will fail.
 	//
-	// Default: false
+	// Default: true
 	Encrypted *bool
 
 	// An option that specifies whether to create the cluster with enhanced VPC
@@ -383,6 +384,8 @@ type CreateClusterInput struct {
 	PreferredMaintenanceWindow *string
 
 	// If true , the cluster can be accessed from a public network.
+	//
+	// Default: false
 	PubliclyAccessible *bool
 
 	// The Amazon resource name (ARN) of the Amazon Redshift IAM Identity Center

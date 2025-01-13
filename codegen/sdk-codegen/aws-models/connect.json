@@ -4130,6 +4130,12 @@
                         "smithy.api#documentation": "<p>The proficiency level of the condition.</p>"
                     }
                 },
+                "Range": {
+                    "target": "com.amazonaws.connect#Range",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Object to define the minimum and maximum proficiency levels.</p>"
+                    }
+                },
                 "MatchCriteria": {
                     "target": "com.amazonaws.connect#MatchCriteria",
                     "traits": {
@@ -17684,6 +17690,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of routing expressions which will be OR-ed together.</p>"
                     }
+                },
+                "NotAttributeCondition": {
+                    "target": "com.amazonaws.connect#AttributeCondition"
                 }
             },
             "traits": {
@@ -31141,6 +31150,26 @@
                 }
             }
         },
+        "com.amazonaws.connect#Range": {
+            "type": "structure",
+            "members": {
+                "MinProficiencyLevel": {
+                    "target": "com.amazonaws.connect#NullableProficiencyLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum proficiency level of the range.</p>"
+                    }
+                },
+                "MaxProficiencyLevel": {
+                    "target": "com.amazonaws.connect#NullableProficiencyLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum proficiency level of the range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Object to define the minimum and maximum proficiency levels.</p>"
+            }
+        },
         "com.amazonaws.connect#ReadOnlyFieldInfo": {
             "type": "structure",
             "members": {
@@ -36880,7 +36909,7 @@
                 "UploadUrlMetadata": {
                     "target": "com.amazonaws.connect#UploadUrlMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information to be used while uploading the attached file. </p>"
+                        "smithy.api#documentation": "<p>The headers to be provided while uploading the file to the URL.</p>"
                     }
                 }
             },

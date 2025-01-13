@@ -1513,6 +1513,11 @@ func awsAwsjson11_serializeOpDocumentModifyClusterInput(v *ModifyClusterInput, v
 		ok.String(*v.ClusterId)
 	}
 
+	if v.HsmType != nil {
+		ok := object.Key("HsmType")
+		ok.String(*v.HsmType)
+	}
+
 	return nil
 }
 

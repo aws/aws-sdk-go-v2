@@ -41,7 +41,7 @@
                     "name": "bedrock"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "Amazon Bedrock Keystone Build",
+                "smithy.api#documentation": "Amazon Bedrock Data Automation BuildTime",
                 "smithy.api#title": "Data Automation for Amazon Bedrock",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1148,7 +1148,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Creates an Amazon Bedrock Keystone Blueprint",
+                "smithy.api#documentation": "Creates an Amazon Bedrock Data Automation Blueprint",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "PUT",
@@ -1241,7 +1241,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Creates a new version of an existing Amazon Bedrock Keystone Blueprint",
+                "smithy.api#documentation": "Creates a new version of an existing Amazon Bedrock Data Automation Blueprint",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -1318,7 +1318,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Creates an Amazon Bedrock Keystone DataAutomationProject",
+                "smithy.api#documentation": "Creates an Amazon Bedrock Data Automation Project",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "PUT",
@@ -1669,7 +1669,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Deletes an existing Amazon Bedrock Keystone Blueprint",
+                "smithy.api#documentation": "Deletes an existing Amazon Bedrock Data Automation Blueprint",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -1736,7 +1736,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Deletes an existing Amazon Bedrock Keystone DataAutomationProject",
+                "smithy.api#documentation": "Deletes an existing Amazon Bedrock Data Automation Project",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -2037,7 +2037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Gets an existing Amazon Bedrock Keystone Blueprint",
+                "smithy.api#documentation": "Gets an existing Amazon Bedrock Data Automation Blueprint",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2117,7 +2117,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Gets an existing Amazon Bedrock Keystone DataAutomationProject",
+                "smithy.api#documentation": "Gets an existing Amazon Bedrock Data Automation Project",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2363,7 +2363,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Lists all existing Amazon Bedrock Keystone Blueprints",
+                "smithy.api#documentation": "Lists all existing Amazon Bedrock Data Automation Blueprints",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2449,7 +2449,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Lists all existing Amazon Bedrock Keystone DataAutomationProjects",
+                "smithy.api#documentation": "Lists all existing Amazon Bedrock Data Automation Projects",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2704,7 +2704,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Updates an existing Amazon Bedrock Blueprint",
+                "smithy.api#documentation": "Updates an existing Amazon Bedrock Data Automation Blueprint",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -2783,7 +2783,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Updates an existing Amazon Bedrock DataAutomationProject",
+                "smithy.api#documentation": "Updates an existing Amazon Bedrock Data Automation Project",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",

@@ -4190,6 +4190,15 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 
 	for key, value := range shape {
 		switch key {
+		case "allocationStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AllocationStrategy to be of type string, got %T instead", value)
+				}
+				sv.AllocationStrategy = types.AllocationStrategy(jtv)
+			}
+
 		case "desiredCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4203,11 +4212,45 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 				sv.DesiredCapacity = int32(i64)
 			}
 
+		case "estimatedInstanceHourReductionPercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EstimatedInstanceHourReductionPercentage = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.EstimatedInstanceHourReductionPercentage = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected NullableEstimatedInstanceHourReductionPercentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "instanceType":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
+					return fmt.Errorf("expected NullableInstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = ptr.String(jtv)
 			}
@@ -4236,6 +4279,20 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 					return err
 				}
 				sv.MinSize = int32(i64)
+			}
+
+		case "mixedInstanceTypes":
+			if err := awsAwsjson10_deserializeDocumentMixedInstanceTypes(&sv.MixedInstanceTypes, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AsgType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AsgType(jtv)
 			}
 
 		default:
@@ -10097,6 +10154,42 @@ func awsAwsjson10_deserializeDocumentMissingAuthenticationToken(v **types.Missin
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentMixedInstanceTypes(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected MixedInstanceType to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

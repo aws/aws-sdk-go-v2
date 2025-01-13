@@ -225,7 +225,7 @@
                 "parentActionGroupSignature": {
                     "target": "com.amazonaws.bedrockagentruntime#ActionGroupSignature",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. \n            You must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields blank for this action group.\n        </p>\n         <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>. You must \n            leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields blank for this action group.</p>\n         <p>During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request,\n            it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
+                        "smithy.api#documentation": "<p>\n            To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. \n            You must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields blank for this action group.\n        </p>\n         <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>. You must \n            leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields blank for this action group.</p>\n         <p>During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request,\n            it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
                     }
                 },
                 "actionGroupExecutor": {
@@ -1279,10 +1279,10 @@
                         "smithy.api#documentation": "<p>Controls the API operations or functions to invoke based on the user confirmation.</p>"
                     }
                 },
-                "responseBody": {
-                    "target": "com.amazonaws.bedrockagentruntime#ResponseBody",
+                "responseState": {
+                    "target": "com.amazonaws.bedrockagentruntime#ResponseState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response body from the API operation. The key of the object is the content type (currently, only <code>TEXT</code> is supported). The response may be returned directly or from the Lambda function.</p>"
+                        "smithy.api#documentation": "<p>Controls the final response state returned to end user when API/Function execution failed. When this state is FAILURE, the request would fail with dependency failure exception. When this state is REPROMPT, the API/function response will be sent to model for re-prompt</p>"
                     }
                 },
                 "httpStatusCode": {
@@ -1291,10 +1291,10 @@
                         "smithy.api#documentation": "<p>http status code from API execution response (for example: 200, 400, 500).</p>"
                     }
                 },
-                "responseState": {
-                    "target": "com.amazonaws.bedrockagentruntime#ResponseState",
+                "responseBody": {
+                    "target": "com.amazonaws.bedrockagentruntime#ResponseBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>Controls the final response state returned to end user when API/Function execution failed. When this state is FAILURE, the request would fail with dependency failure exception. When this state is REPROMPT, the API/function response will be sent to model for re-prompt</p>"
+                        "smithy.api#documentation": "<p>The response body from the API operation. The key of the object is the content type (currently, only <code>TEXT</code> is supported). The response may be returned directly or from the Lambda function.</p>"
                     }
                 },
                 "agentId": {
@@ -1388,6 +1388,20 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(arn:aws(-[^:]+)?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#BedrockModelConfigurations": {
+            "type": "structure",
+            "members": {
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockagentruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance configuration for the model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for a model called with <a>InvokeAgent</a>.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#BedrockRerankingConfiguration": {
@@ -1873,6 +1887,13 @@
                         "smithy.api#documentation": "<p>The unique identifier of the memory.</p>",
                         "smithy.api#httpQuery": "memoryId"
                     }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique session identifier of the memory.</p>",
+                        "smithy.api#httpQuery": "sessionId"
+                    }
                 }
             },
             "traits": {
@@ -2003,6 +2024,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#AdditionalModelRequestFields",
                     "traits": {
                         "smithy.api#documentation": "<p> Additional model parameters and their corresponding values not included in the textInferenceConfig structure for an external source. Takes in custom model parameters specific to the language model being used. </p>"
+                    }
+                },
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockagentruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latency configuration for the model.</p>"
                     }
                 }
             },
@@ -3097,6 +3124,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#AdditionalModelRequestFields",
                     "traits": {
                         "smithy.api#documentation": "<p> Additional model parameters and corresponding values not included in the textInferenceConfig structure for a knowledge base. This allows users to provide custom model parameters specific to the language model being used. </p>"
+                    }
+                },
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockagentruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latency configuration for the model.</p>"
                     }
                 }
             },
@@ -4308,6 +4341,20 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentruntime#InlineBedrockModelConfigurations": {
+            "type": "structure",
+            "members": {
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockagentruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latency configuration for the model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for a model called with <a>InvokeInlineAgent</a>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#InlineSessionState": {
             "type": "structure",
             "members": {
@@ -4594,6 +4641,9 @@
                     "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentruntime#ModelNotReadyException"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
                 },
                 {
@@ -4607,7 +4657,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeAgent</code>.</p>\n         </note>\n         <p>Sends a prompt for the agent to process and respond to. Note the following fields for the request:</p>\n         <ul>\n            <li>\n               <p>To continue the same conversation with an agent, use the same <code>sessionId</code> value in the request.</p>\n            </li>\n            <li>\n               <p>To activate trace enablement, turn <code>enableTrace</code> to <code>true</code>. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events\">Trace enablement</a>.</p>\n            </li>\n            <li>\n               <p>End a conversation by setting <code>endSession</code> to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>In the <code>sessionState</code> object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.</p>\n            </li>\n         </ul>\n         <p>The response is returned in the <code>bytes</code> field of the <code>chunk</code> object.</p>\n         <ul>\n            <li>\n               <p>The <code>attribution</code> object contains citations for parts of the response.</p>\n            </li>\n            <li>\n               <p>If you set <code>enableTrace</code> to <code>true</code> in the request, you can trace the agent's steps and reasoning process that led it to the response.</p>\n            </li>\n            <li>\n               <p>If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the <code>returnControl</code> field.</p>\n            </li>\n            <li>\n               <p>Errors are also surfaced in the response.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeAgent</code>.</p>\n         </note>\n         <p>Sends a prompt for the agent to process and respond to. Note the following fields for the request:</p>\n         <ul>\n            <li>\n               <p>To continue the same conversation with an agent, use the same <code>sessionId</code> value in the request.</p>\n            </li>\n            <li>\n               <p>To activate trace enablement, turn <code>enableTrace</code> to <code>true</code>. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events\">Trace enablement</a>.</p>\n            </li>\n            <li>\n               <p>To stream agent responses, make sure that only orchestration prompt is enabled. Agent streaming is not supported for the following steps:\n        </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Pre-processing</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Post-processing</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Agent with 1 Knowledge base and <code>User Input</code> not enabled</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>End a conversation by setting <code>endSession</code> to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>In the <code>sessionState</code> object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.</p>\n            </li>\n         </ul>\n         <p>The response is returned in the <code>bytes</code> field of the <code>chunk</code> object.</p>\n         <ul>\n            <li>\n               <p>The <code>attribution</code> object contains citations for parts of the response.</p>\n            </li>\n            <li>\n               <p>If you set <code>enableTrace</code> to <code>true</code> in the request, you can trace the agent's steps and reasoning process that led it to the response.</p>\n            </li>\n            <li>\n               <p>If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the <code>returnControl</code> field.</p>\n            </li>\n            <li>\n               <p>Errors are also surfaced in the response.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4672,10 +4722,16 @@
                         "smithy.api#documentation": "<p>The unique identifier of the agent memory.</p>"
                     }
                 },
+                "bedrockModelConfigurations": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockModelConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model performance settings for the request.</p>"
+                    }
+                },
                 "streamingConfigurations": {
                     "target": "com.amazonaws.bedrockagentruntime#StreamingConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n           Specifies the configurations for streaming.\n        </p>"
+                        "smithy.api#documentation": "<p>\n           Specifies the configurations for streaming.\n        </p>\n         <note>\n            <p>To use agent streaming, you need permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action.</p>\n         </note>"
                     }
                 },
                 "sourceArn": {
@@ -4805,6 +4861,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to return the trace for the flow or not. Traces track inputs and outputs for nodes in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>"
+                    }
+                },
+                "modelPerformanceConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#ModelPerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model performance settings for the request.</p>"
                     }
                 }
             },
@@ -4957,6 +5019,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#PromptOverrideConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>\n           Configurations for advanced prompts used to override the default prompts to enhance the accuracy of the inline agent.\n        </p>"
+                    }
+                },
+                "bedrockModelConfigurations": {
+                    "target": "com.amazonaws.bedrockagentruntime#InlineBedrockModelConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model settings for the request.</p>"
                     }
                 }
             },
@@ -5607,6 +5675,33 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentruntime#ModelNotReadyException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The model specified in the request is not ready to serve inference requests. The AWS SDK\n      will automatically retry the operation up to 5 times. For information about configuring\n      automatic retries, see <a href=\"https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html\">Retry behavior</a> in the <i>AWS SDKs and Tools</i>\n      reference guide.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 424
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ModelPerformanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockagentruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latency configuration for the model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The performance configuration for a model called with <a>InvokeFlow</a>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#Name": {
             "type": "string",
             "traits": {
@@ -5952,6 +6047,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>To split up the prompt and retrieve multiple sources, set the transformation type to\n    <code>QUERY_DECOMPOSITION</code>.</p>"
                     }
+                },
+                "performanceConfig": {
+                    "target": "com.amazonaws.bedrockagentruntime#PerformanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latency configuration for the model.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6244,6 +6345,38 @@
                         "smithy.api#enumValue": "RETURN_CONTROL"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PerformanceConfigLatency": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
+                    }
+                },
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "optimized"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PerformanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "latency": {
+                    "target": "com.amazonaws.bedrockagentruntime#PerformanceConfigLatency",
+                    "traits": {
+                        "smithy.api#default": "standard",
+                        "smithy.api#documentation": "<p>To use a latency-optimized version of the model, set to <code>optimized</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Performance settings for a model.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#PostProcessingModelInvocationOutput": {
@@ -7249,6 +7382,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#BadGatewayException",
                     "traits": {
                         "smithy.api#documentation": "<p>There was an issue with a dependency due to a server issue. Retry your request.</p>"
+                    }
+                },
+                "modelNotReadyException": {
+                    "target": "com.amazonaws.bedrockagentruntime#ModelNotReadyException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The model specified in the request is not ready to serve Inference requests. The AWS SDK\n      will automatically retry the operation up to 5 times. For information about configuring\n      automatic retries, see <a href=\"https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html\">Retry behavior</a> in the <i>AWS SDKs and Tools</i>\n      reference guide.\n    </p>"
                     }
                 },
                 "files": {
@@ -8721,7 +8860,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Configurations for streaming.\n        </p>"
+                "smithy.api#documentation": "<p>\n            Configurations for streaming.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#SummaryText": {

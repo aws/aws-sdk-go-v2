@@ -3077,6 +3077,13 @@ func awsAwsjson11_serializeDocumentBatchRestrictions(v *types.BatchRestrictions,
 		}
 	}
 
+	if v.FleetsAllowed != nil {
+		ok := object.Key("fleetsAllowed")
+		if err := awsAwsjson11_serializeDocumentFleetsAllowed(v.FleetsAllowed, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumBuildsAllowed != nil {
 		ok := object.Key("maximumBuildsAllowed")
 		ok.Integer(*v.MaximumBuildsAllowed)
@@ -3315,6 +3322,17 @@ func awsAwsjson11_serializeDocumentFleetProxyRules(v []types.FleetProxyRule, val
 		if err := awsAwsjson11_serializeDocumentFleetProxyRule(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFleetsAllowed(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

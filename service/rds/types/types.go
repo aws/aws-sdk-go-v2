@@ -326,9 +326,29 @@ type CharacterSet struct {
 type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to disable.
+	//
+	// The following values are valid for each DB engine:
+	//
+	//   - Aurora MySQL - audit | error | general | slowquery
+	//
+	//   - Aurora PostgreSQL - postgresql
+	//
+	//   - RDS for MySQL - error | general | slowquery
+	//
+	//   - RDS for PostgreSQL - postgresql | upgrade
 	DisableLogTypes []string
 
 	// The list of log types to enable.
+	//
+	// The following values are valid for each DB engine:
+	//
+	//   - Aurora MySQL - audit | error | general | slowquery
+	//
+	//   - Aurora PostgreSQL - postgresql
+	//
+	//   - RDS for MySQL - error | general | slowquery
+	//
+	//   - RDS for PostgreSQL - postgresql | upgrade
 	EnableLogTypes []string
 
 	noSmithyDocumentSerde
@@ -576,7 +596,7 @@ type DBCluster struct {
 
 	// Indicates whether minor version patches are applied automatically.
 	//
-	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	// This setting is for Aurora DB clusters and Multi-AZ DB clusters.
 	AutoMinorVersionUpgrade *bool
 
 	// The time when a stopped DB cluster is restarted automatically.
@@ -672,7 +692,7 @@ type DBCluster struct {
 	// Reserved for future use.
 	DBSystemId *string
 
-	// The mode of Database Insights that is enabled for the cluster.
+	// The mode of Database Insights that is enabled for the DB cluster.
 	DatabaseInsightsMode DatabaseInsightsMode
 
 	// The name of the initial database that was specified for the DB cluster when it
@@ -800,13 +820,13 @@ type DBCluster struct {
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the DB cluster.
 	//
-	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	// This setting is only for -Aurora DB clusters and Multi-AZ DB clusters.
 	MonitoringInterval *int32
 
 	// The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics
 	// to Amazon CloudWatch Logs.
 	//
-	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	// This setting is only for Aurora DB clusters and Multi-AZ DB clusters.
 	MonitoringRoleArn *string
 
 	// Indicates whether the DB cluster has instances in multiple Availability Zones.
@@ -837,7 +857,7 @@ type DBCluster struct {
 
 	// Indicates whether Performance Insights is enabled for the DB cluster.
 	//
-	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	// This setting is only for Aurora DB clusters and Multi-AZ DB clusters.
 	PerformanceInsightsEnabled *bool
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
@@ -846,12 +866,12 @@ type DBCluster struct {
 	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
 	// or alias name for the KMS key.
 	//
-	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	// This setting is only for Aurora DB clusters and Multi-AZ DB clusters.
 	PerformanceInsightsKMSKeyId *string
 
 	// The number of days to retain Performance Insights data.
 	//
-	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	// This setting is only for Aurora DB clusters and Multi-AZ DB clusters.
 	//
 	// Valid Values:
 	//

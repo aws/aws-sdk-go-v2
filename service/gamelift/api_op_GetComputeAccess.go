@@ -47,7 +47,9 @@ func (c *Client) GetComputeAccess(ctx context.Context, params *GetComputeAccessI
 type GetComputeAccessInput struct {
 
 	// A unique identifier for the compute resource that you want to connect to. For
-	// an EC2 fleet compute, use the instance ID. Use ListComputeto retrieve compute identifiers.
+	// an EC2 fleet compute, use the instance ID. Use [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html]to retrieve compute identifiers.
+	//
+	// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListCompute.html
 	//
 	// This member is required.
 	ComputeName *string

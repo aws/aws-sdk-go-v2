@@ -12,8 +12,9 @@ import (
 
 // Launches an ML compute instance with the latest version of the libraries and
 // attaches your ML storage volume. After configuring the notebook instance,
-// SageMaker sets the notebook instance status to InService . A notebook instance's
-// status must be InService before you can connect to your Jupyter notebook.
+// SageMaker AI sets the notebook instance status to InService . A notebook
+// instance's status must be InService before you can connect to your Jupyter
+// notebook.
 func (c *Client) StartNotebookInstance(ctx context.Context, params *StartNotebookInstanceInput, optFns ...func(*Options)) (*StartNotebookInstanceOutput, error) {
 	if params == nil {
 		params = &StartNotebookInstanceInput{}

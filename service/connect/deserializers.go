@@ -44748,6 +44748,11 @@ func awsRestjson1_deserializeDocumentAttributeCondition(v **types.AttributeCondi
 				}
 			}
 
+		case "Range":
+			if err := awsRestjson1_deserializeDocumentRange(&sv.Range, value); err != nil {
+				return err
+			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -51306,6 +51311,11 @@ func awsRestjson1_deserializeDocumentExpression(v **types.Expression, value inte
 				return err
 			}
 
+		case "NotAttributeCondition":
+			if err := awsRestjson1_deserializeDocumentAttributeCondition(&sv.NotAttributeCondition, value); err != nil {
+				return err
+			}
+
 		case "OrExpression":
 			if err := awsRestjson1_deserializeDocumentExpressions(&sv.OrExpression, value); err != nil {
 				return err
@@ -57858,6 +57868,105 @@ func awsRestjson1_deserializeDocumentQuickConnectSummaryList(v *[]types.QuickCon
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRange(v **types.Range, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Range
+	if *v == nil {
+		sv = &types.Range{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxProficiencyLevel":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxProficiencyLevel = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxProficiencyLevel = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected NullableProficiencyLevel to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "MinProficiencyLevel":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MinProficiencyLevel = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MinProficiencyLevel = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected NullableProficiencyLevel to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

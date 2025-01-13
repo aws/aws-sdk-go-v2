@@ -1,3 +1,12 @@
+# v1.51.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.0 (2024-12-19)
+
+* **Feature**: Added AWS Global Accelerator (AGA) support for WorkSpaces Personal.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.3 (2024-12-09)
 
 * **Documentation**: Added text to clarify case-sensitivity

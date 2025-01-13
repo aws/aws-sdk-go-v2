@@ -273,6 +273,27 @@ func (ClusterStatus) Values() []ClusterStatus {
 	}
 }
 
+type ClusterVersionStatus string
+
+// Enum values for ClusterVersionStatus
+const (
+	ClusterVersionStatusUnsupported     ClusterVersionStatus = "unsupported"
+	ClusterVersionStatusStandardSupport ClusterVersionStatus = "standard-support"
+	ClusterVersionStatusExtendedSupport ClusterVersionStatus = "extended-support"
+)
+
+// Values returns all known values for ClusterVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterVersionStatus) Values() []ClusterVersionStatus {
+	return []ClusterVersionStatus{
+		"unsupported",
+		"standard-support",
+		"extended-support",
+	}
+}
+
 type ConfigStatus string
 
 // Enum values for ConfigStatus

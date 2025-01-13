@@ -29,6 +29,86 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.workspaces#AGAModeForDirectoryEnum": {
+            "type": "enum",
+            "members": {
+                "ENABLED_AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED_AUTO"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#AGAModeForWorkSpaceEnum": {
+            "type": "enum",
+            "members": {
+                "ENABLED_AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED_AUTO"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "INHERITED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INHERITED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#AGAPreferredProtocolForDirectory": {
+            "type": "enum",
+            "members": {
+                "TCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#AGAPreferredProtocolForWorkSpace": {
+            "type": "enum",
+            "members": {
+                "TCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "INHERITED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INHERITED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#ARN": {
             "type": "string",
             "traits": {
@@ -5691,6 +5771,48 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspaces#GlobalAcceleratorForDirectory": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.workspaces#AGAModeForDirectoryEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if Global Accelerator for directory is enabled or disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PreferredProtocol": {
+                    "target": "com.amazonaws.workspaces#AGAPreferredProtocolForDirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the preferred protocol for Global Accelerator.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Global Accelerator for directory</p>"
+            }
+        },
+        "com.amazonaws.workspaces#GlobalAcceleratorForWorkSpace": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.workspaces#AGAModeForWorkSpaceEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if Global Accelerator for WorkSpaces is enabled, disabled, \n         or the same mode as the associated directory.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PreferredProtocol": {
+                    "target": "com.amazonaws.workspaces#AGAPreferredProtocolForWorkSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the preferred protocol for Global Accelerator.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Global Accelerator for WorkSpaces.</p>"
+            }
+        },
         "com.amazonaws.workspaces#IDCConfig": {
             "type": "structure",
             "members": {
@@ -8813,6 +8935,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the storage connector used </p>"
                     }
+                },
+                "GlobalAccelerator": {
+                    "target": "com.amazonaws.workspaces#GlobalAcceleratorForDirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the Global Accelerator properties.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11132,6 +11260,12 @@
                     "target": "com.amazonaws.workspaces#OperatingSystemName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the operating system.</p>"
+                    }
+                },
+                "GlobalAccelerator": {
+                    "target": "com.amazonaws.workspaces#GlobalAcceleratorForWorkSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the Global Accelerator properties.</p>"
                     }
                 }
             },

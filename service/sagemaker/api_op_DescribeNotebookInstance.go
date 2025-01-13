@@ -56,10 +56,10 @@ type DescribeNotebookInstanceOutput struct {
 	// These can be either the names of Git repositories stored as resources in your
 	// account, or the URL of Git repositories in [Amazon Web Services CodeCommit]or in any other Git repository.
 	// These repositories are cloned at the same level as the default repository of
-	// your notebook instance. For more information, see [Associating Git Repositories with SageMaker Notebook Instances].
+	// your notebook instance. For more information, see [Associating Git Repositories with SageMaker AI Notebook Instances].
 	//
 	// [Amazon Web Services CodeCommit]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
-	// [Associating Git Repositories with SageMaker Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+	// [Associating Git Repositories with SageMaker AI Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
 	AdditionalCodeRepositories []string
 
 	// A timestamp. Use this parameter to return the time when the notebook instance
@@ -70,15 +70,16 @@ type DescribeNotebookInstanceOutput struct {
 	// repository. This can be either the name of a Git repository stored as a resource
 	// in your account, or the URL of a Git repository in [Amazon Web Services CodeCommit]or in any other Git
 	// repository. When you open a notebook instance, it opens in the directory that
-	// contains this repository. For more information, see [Associating Git Repositories with SageMaker Notebook Instances].
+	// contains this repository. For more information, see [Associating Git Repositories with SageMaker AI Notebook Instances].
 	//
 	// [Amazon Web Services CodeCommit]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
-	// [Associating Git Repositories with SageMaker Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+	// [Associating Git Repositories with SageMaker AI Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
 	DefaultCodeRepository *string
 
-	// Describes whether SageMaker provides internet access to the notebook instance.
-	// If this value is set to Disabled, the notebook instance does not have internet
-	// access, and cannot connect to SageMaker training and endpoint services.
+	// Describes whether SageMaker AI provides internet access to the notebook
+	// instance. If this value is set to Disabled, the notebook instance does not have
+	// internet access, and cannot connect to SageMaker AI training and endpoint
+	// services.
 	//
 	// For more information, see [Notebook Instances Are Internet-Enabled by Default].
 	//
@@ -94,15 +95,15 @@ type DescribeNotebookInstanceOutput struct {
 	// The type of ML compute instance running on the notebook instance.
 	InstanceType types.InstanceType
 
-	// The Amazon Web Services KMS key ID SageMaker uses to encrypt data when storing
-	// it on the ML storage volume attached to the instance.
+	// The Amazon Web Services KMS key ID SageMaker AI uses to encrypt data when
+	// storing it on the ML storage volume attached to the instance.
 	KmsKeyId *string
 
 	// A timestamp. Use this parameter to retrieve the time when the notebook instance
 	// was last modified.
 	LastModifiedTime *time.Time
 
-	// The network interface IDs that SageMaker created at the time of creating the
+	// The network interface IDs that SageMaker AI created at the time of creating the
 	// instance.
 	NetworkInterfaceId *string
 
@@ -116,7 +117,7 @@ type DescribeNotebookInstanceOutput struct {
 	// [Step 2.1: (Optional) Customize a Notebook Instance]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
 	NotebookInstanceLifecycleConfigName *string
 
-	// The name of the SageMaker notebook instance.
+	// The name of the SageMaker AI notebook instance.
 	NotebookInstanceName *string
 
 	// The status of the notebook instance.

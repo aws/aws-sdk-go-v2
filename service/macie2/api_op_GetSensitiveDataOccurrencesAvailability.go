@@ -81,7 +81,8 @@ type GetSensitiveDataOccurrencesAvailabilityOutput struct {
 	//
 	//   - OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object was
 	//   renamed, moved, deleted, or changed after Macie created the finding. Or the
-	//   object is encrypted with an KMS key that's currently disabled.
+	//   object is encrypted with an KMS key that isn’t available. For example, the key
+	//   is disabled, is scheduled for deletion, or was deleted.
 	//
 	//   - RESULT_NOT_SIGNED - The corresponding sensitive data discovery result is
 	//   stored in an S3 object that hasn't been signed. Macie can't verify the integrity

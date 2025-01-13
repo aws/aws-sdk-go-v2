@@ -186,6 +186,24 @@ type ModifyDBInstanceInput struct {
 	// no effect.
 	//
 	// This setting doesn't apply to RDS Custom DB instances.
+	//
+	// The following values are valid for each DB engine:
+	//
+	//   - Aurora MySQL - audit | error | general | slowquery
+	//
+	//   - Aurora PostgreSQL - postgresql
+	//
+	//   - RDS for MySQL - error | general | slowquery
+	//
+	//   - RDS for PostgreSQL - postgresql | upgrade
+	//
+	// For more information about exporting CloudWatch Logs for Amazon RDS, see [Publishing Database Logs to Amazon CloudWatch Logs] in
+	// the Amazon RDS User Guide.
+	//
+	// For more information about exporting CloudWatch Logs for Amazon Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs] in
+	// the Amazon Aurora User Guide.
+	//
+	// [Publishing Database Logs to Amazon CloudWatch Logs]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
 	// Specifies whether to copy all tags from the DB instance to snapshots of the DB
@@ -308,7 +326,11 @@ type ModifyDBInstanceInput struct {
 	// [Working with a DB instance in a VPC]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
 	DBSubnetGroupName *string
 
-	// Specifies the mode of Database Insights to enable for the instance.
+	// Specifies the mode of Database Insights to enable for the DB instance.
+	//
+	// This setting only applies to Amazon Aurora DB instances.
+	//
+	// Currently, this value is inherited from the DB cluster and can't be changed.
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
@@ -492,8 +514,8 @@ type ModifyDBInstanceInput struct {
 	// storage, set this value to 0. The DB instance will require a reboot for the
 	// change in storage type to take effect.
 	//
-	// If you choose to migrate your DB instance from using standard storage to using
-	// Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the
+	// If you choose to migrate your DB instance from using standard storage to
+	// Provisioned IOPS (io1), or from Provisioned IOPS to standard storage, the
 	// process can take time. The duration of the migration depends on several factors
 	// such as database load, storage size, storage type (standard or Provisioned
 	// IOPS), amount of IOPS provisioned (if any), and the number of prior scale
@@ -926,18 +948,19 @@ type ModifyDBInstanceInput struct {
 	// If you specify io1 , io2 , or gp3 you must also include a value for the Iops
 	// parameter.
 	//
-	// If you choose to migrate your DB instance from using standard storage to using
-	// Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the
-	// process can take time. The duration of the migration depends on several factors
-	// such as database load, storage size, storage type (standard or Provisioned
-	// IOPS), amount of IOPS provisioned (if any), and the number of prior scale
-	// storage operations. Typical migration times are under 24 hours, but the process
-	// can take up to several days in some cases. During the migration, the DB instance
-	// is available for use, but might experience performance degradation. While the
-	// migration takes place, nightly backups for the instance are suspended. No other
-	// Amazon RDS operations can take place for the instance, including modifying the
-	// instance, rebooting the instance, deleting the instance, creating a read replica
-	// for the instance, and creating a DB snapshot of the instance.
+	// If you choose to migrate your DB instance from using standard storage to gp2
+	// (General Purpose SSD), gp3, or Provisioned IOPS (io1), or from these storage
+	// types to standard storage, the process can take time. The duration of the
+	// migration depends on several factors such as database load, storage size,
+	// storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if
+	// any), and the number of prior scale storage operations. Typical migration times
+	// are under 24 hours, but the process can take up to several days in some cases.
+	// During the migration, the DB instance is available for use, but might experience
+	// performance degradation. While the migration takes place, nightly backups for
+	// the instance are suspended. No other Amazon RDS operations can take place for
+	// the instance, including modifying the instance, rebooting the instance, deleting
+	// the instance, creating a read replica for the instance, and creating a DB
+	// snapshot of the instance.
 	//
 	// Valid Values: gp2 | gp3 | io1 | io2 | standard
 	//

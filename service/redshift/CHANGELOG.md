@@ -1,3 +1,19 @@
+# v1.53.4 (2025-01-10)
+
+* **Documentation**: Additions to the PubliclyAccessible and Encrypted parameters clarifying what the defaults are.
+
+# v1.53.3 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.2 (2025-01-08)
+
+* No change notes available for this release.
+
+# v1.53.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2024-12-03.2)
 
 * **Feature**: Adds support for Amazon Redshift RegisterNamespace and DeregisterNamespace APIs to share data to AWS Glue Data Catalog.

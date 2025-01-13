@@ -1,3 +1,15 @@
+# v1.46.6 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.5 (2025-01-08)
+
+* No change notes available for this release.
+
+# v1.46.4 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.3 (2024-12-11)
 
 * **Documentation**: Doc-only updates for CloudTrail.

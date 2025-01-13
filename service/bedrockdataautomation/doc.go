@@ -3,5 +3,5 @@
 // Package bedrockdataautomation provides the API client, operations, and
 // parameter types for Data Automation for Amazon Bedrock.
 //
-// Amazon Bedrock Keystone Build
+// Amazon Bedrock Data Automation BuildTime
 package bedrockdataautomation

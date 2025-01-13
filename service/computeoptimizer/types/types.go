@@ -30,20 +30,39 @@ type AccountEnrollmentStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration of an Auto Scaling group.
+// Describes the configuration of an EC2 Auto Scaling group.
 type AutoScalingGroupConfiguration struct {
 
-	// The desired capacity, or number of instances, for the Auto Scaling group.
+	//  Describes the allocation strategy that the EC2 Auto Scaling group uses. This
+	// field is only available for EC2 Auto Scaling groups with mixed instance types.
+	AllocationStrategy AllocationStrategy
+
+	// The desired capacity, or number of instances, for the EC2 Auto Scaling group.
 	DesiredCapacity int32
 
-	// The instance type for the Auto Scaling group.
+	//  Describes the projected percentage reduction in instance hours after adopting
+	// the recommended configuration. This field is only available for EC2 Auto Scaling
+	// groups with scaling policies.
+	EstimatedInstanceHourReductionPercentage *float64
+
+	// The instance type for the EC2 Auto Scaling group.
 	InstanceType *string
 
-	// The maximum size, or maximum number of instances, for the Auto Scaling group.
+	// The maximum size, or maximum number of instances, for the EC2 Auto Scaling
+	// group.
 	MaxSize int32
 
-	// The minimum size, or minimum number of instances, for the Auto Scaling group.
+	// The minimum size, or minimum number of instances, for the EC2 Auto Scaling
+	// group.
 	MinSize int32
+
+	//  List the instance types within an EC2 Auto Scaling group that has mixed
+	// instance types.
+	MixedInstanceTypes []string
+
+	//  Describes whether the EC2 Auto Scaling group has a single instance type or a
+	// mixed instance type configuration.
+	Type AsgType
 
 	noSmithyDocumentSerde
 }

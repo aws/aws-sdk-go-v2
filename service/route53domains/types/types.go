@@ -21,7 +21,8 @@ type BillingRecord struct {
 	// [DNS Domain Name Format]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html
 	DomainName *string
 
-	// The ID of the invoice that is associated with the billing record.
+	// Deprecated property. This field is retained in report structure for backwards
+	// compatibility, but will appear blank.
 	InvoiceId *string
 
 	// The operation that you were charged for.

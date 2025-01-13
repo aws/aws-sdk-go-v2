@@ -46,6 +46,88 @@ func (AccountLinkStatusEnum) Values() []AccountLinkStatusEnum {
 	}
 }
 
+type AGAModeForDirectoryEnum string
+
+// Enum values for AGAModeForDirectoryEnum
+const (
+	AGAModeForDirectoryEnumEnabledAuto AGAModeForDirectoryEnum = "ENABLED_AUTO"
+	AGAModeForDirectoryEnumDisabled    AGAModeForDirectoryEnum = "DISABLED"
+)
+
+// Values returns all known values for AGAModeForDirectoryEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AGAModeForDirectoryEnum) Values() []AGAModeForDirectoryEnum {
+	return []AGAModeForDirectoryEnum{
+		"ENABLED_AUTO",
+		"DISABLED",
+	}
+}
+
+type AGAModeForWorkSpaceEnum string
+
+// Enum values for AGAModeForWorkSpaceEnum
+const (
+	AGAModeForWorkSpaceEnumEnabledAuto AGAModeForWorkSpaceEnum = "ENABLED_AUTO"
+	AGAModeForWorkSpaceEnumDisabled    AGAModeForWorkSpaceEnum = "DISABLED"
+	AGAModeForWorkSpaceEnumInherited   AGAModeForWorkSpaceEnum = "INHERITED"
+)
+
+// Values returns all known values for AGAModeForWorkSpaceEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AGAModeForWorkSpaceEnum) Values() []AGAModeForWorkSpaceEnum {
+	return []AGAModeForWorkSpaceEnum{
+		"ENABLED_AUTO",
+		"DISABLED",
+		"INHERITED",
+	}
+}
+
+type AGAPreferredProtocolForDirectory string
+
+// Enum values for AGAPreferredProtocolForDirectory
+const (
+	AGAPreferredProtocolForDirectoryTcp  AGAPreferredProtocolForDirectory = "TCP"
+	AGAPreferredProtocolForDirectoryNone AGAPreferredProtocolForDirectory = "NONE"
+)
+
+// Values returns all known values for AGAPreferredProtocolForDirectory. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AGAPreferredProtocolForDirectory) Values() []AGAPreferredProtocolForDirectory {
+	return []AGAPreferredProtocolForDirectory{
+		"TCP",
+		"NONE",
+	}
+}
+
+type AGAPreferredProtocolForWorkSpace string
+
+// Enum values for AGAPreferredProtocolForWorkSpace
+const (
+	AGAPreferredProtocolForWorkSpaceTcp       AGAPreferredProtocolForWorkSpace = "TCP"
+	AGAPreferredProtocolForWorkSpaceNone      AGAPreferredProtocolForWorkSpace = "NONE"
+	AGAPreferredProtocolForWorkSpaceInherited AGAPreferredProtocolForWorkSpace = "INHERITED"
+)
+
+// Values returns all known values for AGAPreferredProtocolForWorkSpace. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AGAPreferredProtocolForWorkSpace) Values() []AGAPreferredProtocolForWorkSpace {
+	return []AGAPreferredProtocolForWorkSpace{
+		"TCP",
+		"NONE",
+		"INHERITED",
+	}
+}
+
 type Application string
 
 // Enum values for Application

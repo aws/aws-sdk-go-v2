@@ -1179,6 +1179,9 @@ type Channel struct {
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass ChannelClass
 
+	// Requested engine version for this channel.
+	ChannelEngineVersion *ChannelEngineVersionResponse
+
 	// A list of destinations of the channel. For UDP outputs, there is one
 	// destination per output. For other types (HLS, for example), there is one
 	// destination per packager.
@@ -1238,6 +1241,28 @@ type ChannelEgressEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// Placeholder documentation for ChannelEngineVersionRequest
+type ChannelEngineVersionRequest struct {
+
+	// The build identifier of the engine version to use for this channel. Specify
+	// 'DEFAULT' to reset to the default version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for ChannelEngineVersionResponse
+type ChannelEngineVersionResponse struct {
+
+	// The UTC time when the version expires.
+	ExpirationDate *time.Time
+
+	// The build identifier for this version of the channel version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Placeholder documentation for ChannelSummary
 type ChannelSummary struct {
 
@@ -1253,6 +1278,9 @@ type ChannelSummary struct {
 	// The class for this channel. STANDARD for a channel with two pipelines or
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass ChannelClass
+
+	// The engine version that you requested for this channel.
+	ChannelEngineVersion *ChannelEngineVersionResponse
 
 	// A list of destinations of the channel. For UDP outputs, there is one
 	// destination per output. For other types (HLS, for example), there is one
@@ -1291,6 +1319,9 @@ type ChannelSummary struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]string
+
+	// The engine version that the running pipelines are using.
+	UsedChannelEngineVersions []ChannelEngineVersionResponse
 
 	// Settings for any VPC outputs.
 	Vpc *VpcOutputSettingsDescription
@@ -6134,6 +6165,9 @@ type PipelineDetail struct {
 
 	// The current URI being used for HTML5 motion graphics for this pipeline.
 	ActiveMotionGraphicsUri *string
+
+	// Current engine version of the encoder for this pipeline.
+	ChannelEngineVersion *ChannelEngineVersionResponse
 
 	// Pipeline ID
 	PipelineId *string

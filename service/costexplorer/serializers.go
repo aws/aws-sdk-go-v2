@@ -3922,6 +3922,11 @@ func awsAwsjson11_serializeOpDocumentGetCostAndUsageInput(v *GetCostAndUsageInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
+
 	if v.Filter != nil {
 		ok := object.Key("Filter")
 		if err := awsAwsjson11_serializeDocumentExpression(v.Filter, ok); err != nil {
@@ -3967,6 +3972,11 @@ func awsAwsjson11_serializeOpDocumentGetCostAndUsageWithResourcesInput(v *GetCos
 	object := value.Object()
 	defer object.Close()
 
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
+
 	if v.Filter != nil {
 		ok := object.Key("Filter")
 		if err := awsAwsjson11_serializeDocumentExpression(v.Filter, ok); err != nil {
@@ -4011,6 +4021,11 @@ func awsAwsjson11_serializeOpDocumentGetCostAndUsageWithResourcesInput(v *GetCos
 func awsAwsjson11_serializeOpDocumentGetCostCategoriesInput(v *GetCostCategoriesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
 
 	if v.CostCategoryName != nil {
 		ok := object.Key("CostCategoryName")
@@ -4060,6 +4075,11 @@ func awsAwsjson11_serializeOpDocumentGetCostForecastInput(v *GetCostForecastInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
+
 	if v.Filter != nil {
 		ok := object.Key("Filter")
 		if err := awsAwsjson11_serializeDocumentExpression(v.Filter, ok); err != nil {
@@ -4095,6 +4115,11 @@ func awsAwsjson11_serializeOpDocumentGetCostForecastInput(v *GetCostForecastInpu
 func awsAwsjson11_serializeOpDocumentGetDimensionValuesInput(v *GetDimensionValuesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
 
 	if len(v.Context) > 0 {
 		ok := object.Key("Context")
@@ -4549,6 +4574,11 @@ func awsAwsjson11_serializeOpDocumentGetTagsInput(v *GetTagsInput, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
+
 	if v.Filter != nil {
 		ok := object.Key("Filter")
 		if err := awsAwsjson11_serializeDocumentExpression(v.Filter, ok); err != nil {
@@ -4596,6 +4626,11 @@ func awsAwsjson11_serializeOpDocumentGetTagsInput(v *GetTagsInput, value smithyj
 func awsAwsjson11_serializeOpDocumentGetUsageForecastInput(v *GetUsageForecastInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
 
 	if v.Filter != nil {
 		ok := object.Key("Filter")

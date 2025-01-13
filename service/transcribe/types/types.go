@@ -180,6 +180,10 @@ type CallAnalyticsJob struct {
 	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	StartTime *time.Time
 
+	// The tags, each in the form of a key:value pair, assigned to the specified call
+	// analytics job.
+	Tags []Tag
+
 	// Provides you with the Amazon S3 URI you can use to access your transcript.
 	Transcript *Transcript
 
@@ -400,6 +404,10 @@ type CategoryProperties struct {
 	// The rules used to define a Call Analytics category. Each category can have
 	// between 1 and 20 rules.
 	Rules []Rule
+
+	// The tags, each in the form of a key:value pair, assigned to the specified call
+	// analytics category.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }

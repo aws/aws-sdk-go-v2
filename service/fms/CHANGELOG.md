@@ -1,3 +1,12 @@
+# v1.39.0 (2025-01-09)
+
+* **Feature**: AWS Firewall Manager now lets you combine multiple resource tags using the logical AND operator or the logical OR operator.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.6 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.5 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

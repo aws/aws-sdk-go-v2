@@ -228,6 +228,9 @@ type EvaluationBedrockModel struct {
 	// model behaves during inference.
 	InferenceParams *string
 
+	// Specifies performance settings for the model or inference profile.
+	PerformanceConfig *PerformanceConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -2221,6 +2224,16 @@ type OutputDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains performance settings for a model.
+type PerformanceConfiguration struct {
+
+	// Specifies whether to use the latency-optimized or standard version of a model
+	// or inference profile.
+	Latency PerformanceConfigLatency
 
 	noSmithyDocumentSerde
 }

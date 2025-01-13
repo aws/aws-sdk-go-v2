@@ -1529,6 +1529,16 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.costexplorer#BillingViewArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[-a-zA-Z0-9/:_+=.-@]{1,43}$"
+            }
+        },
         "com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration": {
             "type": "structure",
             "members": {
@@ -4288,6 +4298,9 @@
                 },
                 {
                     "target": "com.amazonaws.costexplorer#RequestChangedException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
                 }
             ],
             "traits": {
@@ -4328,6 +4341,12 @@
                     "target": "com.amazonaws.costexplorer#GroupDefinitions",
                     "traits": {
                         "smithy.api#documentation": "<p>You can group Amazon Web Services costs using up to two different groups, either\n      dimensions, tag keys, cost categories, or any two group by types.</p>\n         <p>Valid values for the <code>DIMENSION</code> type are <code>AZ</code>,\n        <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>INVOICING_ENTITY</code>,\n        <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>,\n        <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TENANCY</code>,\n        <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>When you group by the <code>TAG</code> type and include a valid tag key, you get all\n      tag values, including empty strings.</p>"
+                    }
+                },
+                "BillingViewArn": {
+                    "target": "com.amazonaws.costexplorer#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN\n      is used to specify which particular billing view you want to interact with or retrieve\n      information from when making API calls related to Amazon Web Services Billing and Cost\n      Management features. The BillingViewArn can be retrieved by calling the ListBillingViews\n      API.</p>"
                     }
                 },
                 "NextPageToken": {
@@ -4396,6 +4415,9 @@
                 },
                 {
                     "target": "com.amazonaws.costexplorer#RequestChangedException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
                 }
             ],
             "traits": {
@@ -4436,6 +4458,12 @@
                     "target": "com.amazonaws.costexplorer#GroupDefinitions",
                     "traits": {
                         "smithy.api#documentation": "<p>You can group Amazon Web Services costs using up to two different groups:\n        <code>DIMENSION</code>, <code>TAG</code>, <code>COST_CATEGORY</code>.</p>"
+                    }
+                },
+                "BillingViewArn": {
+                    "target": "com.amazonaws.costexplorer#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN\n      is used to specify which particular billing view you want to interact with or retrieve\n      information from when making API calls related to Amazon Web Services Billing and Cost\n      Management features. The BillingViewArn can be retrieved by calling the ListBillingViews\n      API.</p>"
                     }
                 },
                 "NextPageToken": {
@@ -4504,6 +4532,9 @@
                 },
                 {
                     "target": "com.amazonaws.costexplorer#RequestChangedException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
                 }
             ],
             "traits": {
@@ -4535,6 +4566,12 @@
                     "target": "com.amazonaws.costexplorer#SortDefinitions",
                     "traits": {
                         "smithy.api#documentation": "<p>The value that you sort the data by.</p>\n         <p>The key represents the cost and usage metrics. The following values are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BlendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetAmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetUnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsageQuantity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NormalizedUsageAmount</code>\n               </p>\n            </li>\n         </ul>\n         <p>The supported key values for the <code>SortOrder</code> value are <code>ASCENDING</code>\n      and <code>DESCENDING</code>.</p>\n         <p>When you use the <code>SortBy</code> value, the <code>NextPageToken</code> and\n        <code>SearchString</code> key values aren't supported.</p>"
+                    }
+                },
+                "BillingViewArn": {
+                    "target": "com.amazonaws.costexplorer#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN\n      is used to specify which particular billing view you want to interact with or retrieve\n      information from when making API calls related to Amazon Web Services Billing and Cost\n      Management features. The BillingViewArn can be retrieved by calling the ListBillingViews\n      API.</p>"
                     }
                 },
                 "MaxResults": {
@@ -4608,6 +4645,9 @@
                 },
                 {
                     "target": "com.amazonaws.costexplorer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
                 }
             ],
             "traits": {
@@ -4642,6 +4682,12 @@
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
                         "smithy.api#documentation": "<p>The filters that you want to use to filter your forecast. The\n        <code>GetCostForecast</code> API supports filtering by the following dimensions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AZ</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OPERATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PURCHASE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>USAGE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>USAGE_TYPE_GROUP</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RECORD_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OPERATING_SYSTEM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TENANCY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SCOPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PLATFORM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUBSCRIPTION_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGAL_ENTITY_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPLOYMENT_OPTION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DATABASE_ENGINE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE_FAMILY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>BILLING_ENTITY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESERVATION_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SAVINGS_PLAN_ARN</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "BillingViewArn": {
+                    "target": "com.amazonaws.costexplorer#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN\n      is used to specify which particular billing view you want to interact with or retrieve\n      information from when making API calls related to Amazon Web Services Billing and Cost\n      Management features. The BillingViewArn can be retrieved by calling the ListBillingViews\n      API.</p>"
                     }
                 },
                 "PredictionIntervalLevel": {
@@ -4698,6 +4744,9 @@
                 },
                 {
                     "target": "com.amazonaws.costexplorer#RequestChangedException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
                 }
             ],
             "traits": {
@@ -4740,6 +4789,12 @@
                     "target": "com.amazonaws.costexplorer#SortDefinitions",
                     "traits": {
                         "smithy.api#documentation": "<p>The value that you want to sort the data by.</p>\n         <p>The key represents cost and usage metrics. The following values are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BlendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetAmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetUnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsageQuantity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NormalizedUsageAmount</code>\n               </p>\n            </li>\n         </ul>\n         <p>The supported values for the <code>SortOrder</code> key are <code>ASCENDING</code> or\n        <code>DESCENDING</code>.</p>\n         <p>When you specify a <code>SortBy</code> paramater, the context must be\n        <code>COST_AND_USAGE</code>. Further, when using <code>SortBy</code>,\n        <code>NextPageToken</code> and <code>SearchString</code> aren't supported.</p>"
+                    }
+                },
+                "BillingViewArn": {
+                    "target": "com.amazonaws.costexplorer#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN\n      is used to specify which particular billing view you want to interact with or retrieve\n      information from when making API calls related to Amazon Web Services Billing and Cost\n      Management features. The BillingViewArn can be retrieved by calling the ListBillingViews\n      API.</p>"
                     }
                 },
                 "MaxResults": {
@@ -5685,6 +5740,9 @@
                 },
                 {
                     "target": "com.amazonaws.costexplorer#RequestChangedException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
                 }
             ],
             "traits": {
@@ -5720,6 +5778,12 @@
                     "target": "com.amazonaws.costexplorer#SortDefinitions",
                     "traits": {
                         "smithy.api#documentation": "<p>The value that you want to sort the data by.</p>\n         <p>The key represents cost and usage metrics. The following values are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BlendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetAmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetUnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsageQuantity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NormalizedUsageAmount</code>\n               </p>\n            </li>\n         </ul>\n         <p>The supported values for <code>SortOrder</code> are <code>ASCENDING</code> and\n        <code>DESCENDING</code>.</p>\n         <p>When you use <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code>\n      aren't supported.</p>"
+                    }
+                },
+                "BillingViewArn": {
+                    "target": "com.amazonaws.costexplorer#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN\n      is used to specify which particular billing view you want to interact with or retrieve\n      information from when making API calls related to Amazon Web Services Billing and Cost\n      Management features. The BillingViewArn can be retrieved by calling the ListBillingViews\n      API.</p>"
                     }
                 },
                 "MaxResults": {
@@ -5790,6 +5854,9 @@
                     "target": "com.amazonaws.costexplorer#LimitExceededException"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#UnresolvableUsageUnitException"
                 }
             ],
@@ -5825,6 +5892,12 @@
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
                         "smithy.api#documentation": "<p>The filters that you want to use to filter your forecast. The\n        <code>GetUsageForecast</code> API supports filtering by the following dimensions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AZ</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OPERATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PURCHASE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>USAGE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>USAGE_TYPE_GROUP</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RECORD_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OPERATING_SYSTEM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TENANCY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SCOPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PLATFORM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUBSCRIPTION_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGAL_ENTITY_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPLOYMENT_OPTION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DATABASE_ENGINE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE_FAMILY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>BILLING_ENTITY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESERVATION_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SAVINGS_PLAN_ARN</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "BillingViewArn": {
+                    "target": "com.amazonaws.costexplorer#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN\n      is used to specify which particular billing view you want to interact with or retrieve\n      information from when making API calls related to Amazon Web Services Billing and Cost\n      Management features. The BillingViewArn can be retrieved by calling the ListBillingViews\n      API.</p>"
                     }
                 },
                 "PredictionIntervalLevel": {

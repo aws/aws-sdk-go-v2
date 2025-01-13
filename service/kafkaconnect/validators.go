@@ -150,6 +150,26 @@ func (m *validateOpDescribeConnector) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeConnectorOperation struct {
+}
+
+func (*validateOpDescribeConnectorOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeConnectorOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeConnectorOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeConnectorOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCustomPlugin struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpDescribeWorkerConfiguration) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeWorkerConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListConnectorOperations struct {
+}
+
+func (*validateOpListConnectorOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListConnectorOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListConnectorOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListConnectorOperationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -298,12 +338,20 @@ func addOpDescribeConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeConnector{}, middleware.After)
 }
 
+func addOpDescribeConnectorOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeConnectorOperation{}, middleware.After)
+}
+
 func addOpDescribeCustomPluginValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCustomPlugin{}, middleware.After)
 }
 
 func addOpDescribeWorkerConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeWorkerConfiguration{}, middleware.After)
+}
+
+func addOpListConnectorOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListConnectorOperations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -929,6 +977,21 @@ func validateOpDescribeConnectorInput(v *DescribeConnectorInput) error {
 	}
 }
 
+func validateOpDescribeConnectorOperationInput(v *DescribeConnectorOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeConnectorOperationInput"}
+	if v.ConnectorOperationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorOperationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeCustomPluginInput(v *DescribeCustomPluginInput) error {
 	if v == nil {
 		return nil
@@ -951,6 +1014,21 @@ func validateOpDescribeWorkerConfigurationInput(v *DescribeWorkerConfigurationIn
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkerConfigurationInput"}
 	if v.WorkerConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkerConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListConnectorOperationsInput(v *ListConnectorOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListConnectorOperationsInput"}
+	if v.ConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1015,9 +1093,7 @@ func validateOpUpdateConnectorInput(v *UpdateConnectorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorInput"}
-	if v.Capacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Capacity"))
-	} else if v.Capacity != nil {
+	if v.Capacity != nil {
 		if err := validateCapacityUpdate(v.Capacity); err != nil {
 			invalidParams.AddNested("Capacity", err.(smithy.InvalidParamsError))
 		}

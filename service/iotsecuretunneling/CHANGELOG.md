@@ -1,3 +1,19 @@
+# v1.28.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.0 (2025-01-06)
+
+* **Feature**: Adds dualstack endpoint support for IoT Secure Tunneling
+
+# v1.27.9 (2024-12-20)
+
+* No change notes available for this release.
+
+# v1.27.8 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.7 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

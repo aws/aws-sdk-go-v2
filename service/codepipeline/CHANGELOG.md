@@ -1,3 +1,11 @@
+# v1.38.2 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2024-12-17)
 
 * **Feature**: AWS CodePipeline V2 type pipelines now support Managed Compute Rule.

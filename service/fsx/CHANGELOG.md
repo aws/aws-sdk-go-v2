@@ -1,3 +1,15 @@
+# v1.51.3 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.2 (2025-01-03)
+
+* No change notes available for this release.
+
+# v1.51.1 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.0 (2024-12-02)
 
 * **Feature**: FSx API changes to support the public launch of the Amazon FSx Intelligent Tiering for OpenZFS storage class.

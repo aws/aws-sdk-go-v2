@@ -26,6 +26,15 @@ import (
 //     processed, the actions it took, and the final result it yielded. For more
 //     information, see [Trace enablement].
 //
+//   - To stream agent responses, make sure that only orchestration prompt is
+//     enabled. Agent streaming is not supported for the following steps:
+//
+//   - Pre-processing
+//
+//   - Post-processing
+//
+//   - Agent with 1 Knowledge base and User Input not enabled
+//
 //   - End a conversation by setting endSession to true .
 //
 //   - In the sessionState object, you can include attributes for the session or
@@ -79,6 +88,9 @@ type InvokeAgentInput struct {
 	// This member is required.
 	SessionId *string
 
+	// Model performance settings for the request.
+	BedrockModelConfigurations *types.BedrockModelConfigurations
+
 	// Specifies whether to turn on the trace or not to track the agent's reasoning
 	// process. For more information, see [Trace enablement].
 	//
@@ -110,6 +122,9 @@ type InvokeAgentInput struct {
 	SourceArn *string
 
 	//  Specifies the configurations for streaming.
+	//
+	// To use agent streaming, you need permissions to perform the
+	// bedrock:InvokeModelWithResponseStream action.
 	StreamingConfigurations *types.StreamingConfigurations
 
 	noSmithyDocumentSerde

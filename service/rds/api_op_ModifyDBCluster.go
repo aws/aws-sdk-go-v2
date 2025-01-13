@@ -98,7 +98,7 @@ type ModifyDBClusterInput struct {
 	// cluster during the maintenance window. By default, minor engine upgrades are
 	// applied automatically.
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	AutoMinorVersionUpgrade *bool
 
 	// The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services
@@ -205,7 +205,16 @@ type ModifyDBClusterInput struct {
 	//   AllowMajorVersionUpgrade parameter for a major version upgrade only.
 	DBInstanceParameterGroupName *string
 
-	// Specifies the mode of Database Insights to enable for the cluster.
+	// Specifies the mode of Database Insights to enable for the DB cluster.
+	//
+	// If you change the value from standard to advanced , you must set the
+	// PerformanceInsightsEnabled parameter to true and the
+	// PerformanceInsightsRetentionPeriod parameter to 465.
+	//
+	// If you change the value from advanced to standard , you must set the
+	// PerformanceInsightsEnabled parameter to false .
+	//
+	// Valid for Cluster Type: Aurora DB clusters only
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// Specifies whether the DB cluster has deletion protection enabled. The database
@@ -504,12 +513,12 @@ type ModifyDBClusterInput struct {
 	// Services account. Your Amazon Web Services account has a different default KMS
 	// key for each Amazon Web Services Region.
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	PerformanceInsightsKMSKeyId *string
 
 	// The number of days to retain Performance Insights data.
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// Valid Values:
 	//

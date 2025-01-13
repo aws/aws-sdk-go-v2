@@ -1,3 +1,15 @@
+# v1.11.1 (2025-01-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.0 (2025-01-06)
+
+* **Feature**: Allow vanity DNS domain when creating a new ASC instance
+
+# v1.10.6 (2024-12-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.5 (2024-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions
