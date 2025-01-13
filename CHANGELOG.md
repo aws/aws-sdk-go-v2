@@ -1,3 +1,17 @@
+# Release (2025-01-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.8.0](service/artifact/CHANGELOG.md#v180-2025-01-13)
+  * **Feature**: Support resolving regional API calls to partition's leader region endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.26.0](service/bedrock/CHANGELOG.md#v1260-2025-01-13)
+  * **Feature**: With this release, Bedrock Evaluation will now support latency-optimized inference for foundation models.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.199.0](service/ec2/CHANGELOG.md#v11990-2025-01-13)
+  * **Feature**: Add support for DisconnectOnSessionTimeout flag in CreateClientVpnEndpoint and ModifyClientVpnEndpoint requests and DescribeClientVpnEndpoints responses
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.22.0](service/kafkaconnect/CHANGELOG.md#v1220-2025-01-13)
+  * **Feature**: Support updating connector configuration via UpdateConnector API. Release Operations API to monitor the status of the connector operation.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.42.0](service/transcribe/CHANGELOG.md#v1420-2025-01-13)
+  * **Feature**: This update provides tagging support for Transcribe's Call Analytics Jobs and Call Analytics Categories.
+
 # Release (2025-01-10)
 
 ## General Highlights

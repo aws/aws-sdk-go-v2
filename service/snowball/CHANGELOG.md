@@ -1,3 +1,7 @@
+# v1.30.11 (2025-01-13)
+
+* No change notes available for this release.
+
 # v1.30.10 (2025-01-10)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.199.0 (2025-01-13)
+
+* **Feature**: Add support for DisconnectOnSessionTimeout flag in CreateClientVpnEndpoint and ModifyClientVpnEndpoint requests and DescribeClientVpnEndpoints responses
+
 # v1.198.3 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

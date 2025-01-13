@@ -1,8 +1,0 @@
-{
-    "id": "c32d3b03-2473-4527-9488-492b01f7d860",
-    "type": "feature",
-    "description": "This update provides tagging support for Transcribe's Call Analytics Jobs and Call Analytics Categories.",
-    "modules": [
-        "service/transcribe"
-    ]
-}

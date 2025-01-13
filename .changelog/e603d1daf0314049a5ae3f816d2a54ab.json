@@ -1,8 +1,0 @@
-{
-    "id": "e603d1da-f031-4049-a5ae-3f816d2a54ab",
-    "type": "feature",
-    "description": "Add support for DisconnectOnSessionTimeout flag in CreateClientVpnEndpoint and ModifyClientVpnEndpoint requests and DescribeClientVpnEndpoints responses",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "db6cb38d-7aa0-4cbe-92de-91fd44160b66",
-    "type": "feature",
-    "description": "Support resolving regional API calls to partition's leader region endpoint.",
-    "modules": [
-        "service/artifact"
-    ]
-}

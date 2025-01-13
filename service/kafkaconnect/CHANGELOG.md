@@ -1,3 +1,7 @@
+# v1.22.0 (2025-01-13)
+
+* **Feature**: Support updating connector configuration via UpdateConnector API. Release Operations API to monitor the status of the connector operation.
+
 # v1.21.9 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

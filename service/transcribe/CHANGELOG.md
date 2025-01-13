@@ -1,3 +1,7 @@
+# v1.42.0 (2025-01-13)
+
+* **Feature**: This update provides tagging support for Transcribe's Call Analytics Jobs and Call Analytics Categories.
+
 # v1.41.9 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions
