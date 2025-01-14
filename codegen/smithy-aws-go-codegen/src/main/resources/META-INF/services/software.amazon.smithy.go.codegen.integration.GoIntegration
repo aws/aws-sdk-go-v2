@@ -88,4 +88,4 @@ software.amazon.smithy.aws.go.codegen.customization.s3.ExpressUserAgent
 software.amazon.smithy.aws.go.codegen.customization.BackfillRequiredTrait
 software.amazon.smithy.aws.go.codegen.customization.DeprecateService
 software.amazon.smithy.aws.go.codegen.customization.BasicUserAgentFeatures
-
+software.amazon.smithy.aws.go.codegen.customization.ChecksumMetricsTracking

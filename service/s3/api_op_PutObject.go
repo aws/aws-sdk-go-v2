@@ -836,6 +836,9 @@ func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, optio
 	if err = addIsExpressUserAgent(stack); err != nil {
 		return err
 	}
+	if err = addRequestChecksumMetricsTracking(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutObjectValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -922,6 +925,7 @@ func addPutObjectInputChecksumMiddlewares(stack *middleware.Stack, options Optio
 	return internalChecksum.AddInputMiddleware(stack, internalChecksum.InputMiddlewareOptions{
 		GetAlgorithm:                     getPutObjectRequestAlgorithmMember,
 		RequireChecksum:                  false,
+		RequestChecksumCalculation:       options.RequestChecksumCalculation,
 		EnableTrailingChecksum:           true,
 		EnableComputeSHA256PayloadHash:   true,
 		EnableDecodedContentLengthHeader: true,
@@ -964,6 +968,8 @@ func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectI
 		fn(&options)
 	}
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
+
+	clientOptFns = append(options.ClientOptions, withNoDefaultChecksumAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "PutObject", params, clientOptFns,
 		c.client.addOperationPutObjectMiddlewares,

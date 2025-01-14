@@ -23,6 +23,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.aws.go.codegen.customization.PresignURLAutoFill;
+import software.amazon.smithy.aws.traits.HttpChecksumTrait;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryTrait;
 import software.amazon.smithy.aws.traits.protocols.Ec2QueryTrait;
@@ -67,7 +68,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
     private static final String CONVERT_TO_PRESIGN_MIDDLEWARE_NAME = "convertToPresignMiddleware";
     private static final String CONVERT_TO_PRESIGN_TYPE_NAME = "presignConverter";
     private static final String NOP_HTTP_CLIENT_OPTION_FUNC_NAME = "withNopHTTPClientAPIOption";
-
+    private static final String NO_DEFAULT_CHECKSUM_OPTION_FUNC_NAME = "withNoDefaultChecksumAPIOption";
     private static final String PRESIGN_CLIENT = "PresignClient";
     private static final Symbol presignClientSymbol = buildSymbol(PRESIGN_CLIENT, true);
 
@@ -218,7 +219,11 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             writeConvertToPresignMiddleware(writer, model, symbolProvider, serviceShape);
         });
 
+        boolean supportsComputeInputChecksumsWorkflow = false;
         for (OperationShape operationShape : TopDownIndex.of(model).getContainedOperations(serviceShape)) {
+            if (hasInputChecksumTrait(operationShape)) {
+                supportsComputeInputChecksumsWorkflow = true;
+            }
             if (!validOperations.contains(operationShape.getId())) {
                 continue;
             }
@@ -230,6 +235,10 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                 // generate s3 unsigned payload middleware helper
                 writeS3AddAsUnsignedPayloadHelper(writer, model, symbolProvider, serviceShape, operationShape);
             });
+        }
+
+        if (supportsComputeInputChecksumsWorkflow) {
+            writePresignRequestChecksumConfigHelpers(settings, goDelegator);
         }
     }
 
@@ -263,6 +272,10 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
                     writer.write("clientOptFns := append(options.ClientOptions, $L)", NOP_HTTP_CLIENT_OPTION_FUNC_NAME);
                     writer.write("");
+                    if (hasInputChecksumTrait(operationShape)) {
+                        writer.write("clientOptFns = append(options.ClientOptions, $L)", NO_DEFAULT_CHECKSUM_OPTION_FUNC_NAME);
+                        writer.write("");
+                    }
 
                     writer.openBlock("result, _, err := c.client.invokeOperation(ctx, $S, params, clientOptFns,", ")",
                             operationSymbol.getName(), () -> {
@@ -570,6 +583,29 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             writer.write("o.HTTPClient = $T{}", nopClientSymbol);
         });
         writer.write("");
+    }
+
+    private void writePresignRequestChecksumConfigHelpers(
+            GoSettings settings,
+            GoDelegator goDelegator
+    ) {
+        goDelegator.useFileWriter("api_client.go", settings.getModuleName(), goTemplate("""
+            func $fn:L(options *Options) {
+                options.RequestChecksumCalculation = $requestChecksumCalculationWhenRequired:T
+            }""",
+                Map.of(
+                        "fn", NO_DEFAULT_CHECKSUM_OPTION_FUNC_NAME,
+                        "requestChecksumCalculationWhenRequired",
+                        AwsGoDependency.AWS_CORE.valueSymbol("RequestChecksumCalculationWhenRequired")
+                    )));
+    }
+
+    private static boolean hasInputChecksumTrait(OperationShape operation) {
+        if (!operation.hasTrait(HttpChecksumTrait.class)) {
+            return false;
+        }
+        HttpChecksumTrait trait = operation.expectTrait(HttpChecksumTrait.class);
+        return trait.isRequestChecksumRequired() || trait.getRequestAlgorithmMember().isPresent();
     }
 
     /**

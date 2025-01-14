@@ -512,6 +512,9 @@ func (c *Client) addOperationUploadPartMiddlewares(stack *middleware.Stack, opti
 	if err = addIsExpressUserAgent(stack); err != nil {
 		return err
 	}
+	if err = addRequestChecksumMetricsTracking(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUploadPartValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -598,6 +601,7 @@ func addUploadPartInputChecksumMiddlewares(stack *middleware.Stack, options Opti
 	return internalChecksum.AddInputMiddleware(stack, internalChecksum.InputMiddlewareOptions{
 		GetAlgorithm:                     getUploadPartRequestAlgorithmMember,
 		RequireChecksum:                  false,
+		RequestChecksumCalculation:       options.RequestChecksumCalculation,
 		EnableTrailingChecksum:           true,
 		EnableComputeSHA256PayloadHash:   true,
 		EnableDecodedContentLengthHeader: true,
@@ -641,6 +645,8 @@ func (c *PresignClient) PresignUploadPart(ctx context.Context, params *UploadPar
 		fn(&options)
 	}
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
+
+	clientOptFns = append(options.ClientOptions, withNoDefaultChecksumAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "UploadPart", params, clientOptFns,
 		c.client.addOperationUploadPartMiddlewares,

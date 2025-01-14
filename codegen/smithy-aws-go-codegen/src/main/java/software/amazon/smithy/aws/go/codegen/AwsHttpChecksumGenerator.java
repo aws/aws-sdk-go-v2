@@ -22,6 +22,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -73,9 +74,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
     @Override
     public void processFinalizedModel(GoSettings settings, Model model) {
         ServiceShape service = settings.getService(model);
-        for (ShapeId operationId : service.getAllOperations()) {
-            final OperationShape operation = model.expectShape(operationId, OperationShape.class);
-
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             // Create a symbol provider because one is not available in this call.
             SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings);
 
@@ -128,8 +127,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
         boolean supportsComputeInputChecksumsWorkflow = false;
         boolean supportsChecksumValidationWorkflow = false;
 
-        for (ShapeId operationID : service.getAllOperations()) {
-            OperationShape operation = model.expectShape(operationID, OperationShape.class);
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             if (!hasChecksumTrait(model, service, operation)) {
                 continue;
             }
@@ -178,11 +176,11 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
     }
 
     // return true if operation shape is decorated with `httpChecksum` trait.
-    private boolean hasChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
+    private static boolean hasChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
         return operation.hasTrait(HttpChecksumTrait.class);
     }
 
-    private boolean hasInputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
+    private static boolean hasInputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
         if (!hasChecksumTrait(model, service, operation)) {
             return false;
         }
@@ -190,12 +188,30 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
         return trait.isRequestChecksumRequired() || trait.getRequestAlgorithmMember().isPresent();
     }
 
-    private boolean hasOutputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
+    public static boolean hasInputChecksumTrait(Model model, ServiceShape service) {
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
+                if (hasInputChecksumTrait(model, service, operation)) {
+                    return true;
+                }
+        }
+        return false;
+    }
+
+        private static boolean hasOutputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
         if (!hasChecksumTrait(model, service, operation)) {
             return false;
         }
         HttpChecksumTrait trait = operation.expectTrait(HttpChecksumTrait.class);
         return trait.getRequestValidationModeMember().isPresent() && !trait.getResponseAlgorithms().isEmpty();
+    }
+
+    public static boolean hasOutputChecksumTrait(Model model, ServiceShape service) {
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
+            if (hasOutputChecksumTrait(model, service, operation)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isS3ServiceShape(Model model, ServiceShape service) {
@@ -244,6 +260,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                                     return $T(stack, $T{
                                         GetAlgorithm: $L,
                                         RequireChecksum: $L,
+                                        RequestChecksumCalculation: options.RequestChecksumCalculation,
                                         EnableTrailingChecksum: $L,
                                         EnableComputeSHA256PayloadHash: true,
                                         EnableDecodedContentLengthHeader: $L,
@@ -284,6 +301,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                     writer.write("""
                                     return $T(stack, $T{
                                         GetValidationMode: $L,
+                                        ResponseChecksumValidation: options.ResponseChecksumValidation,
                                         ValidationAlgorithms: $L,
                                         IgnoreMultipartValidation: $L,
                                         LogValidationSkipped: true,
@@ -293,7 +311,6 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
                             SymbolUtils.createValueSymbolBuilder("OutputMiddlewareOptions",
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
-
                             getRequestValidationModeAccessorFuncName(operationName),
                             convertToGoStringList(responseAlgorithms),
                             ignoreMultipartChecksumValidationMap.getOrDefault(

@@ -1,5 +1,5 @@
-//go:build go1.16
-// +build go1.16
+//go:build go1.21
+// +build go1.21
 
 package checksum
 
@@ -49,7 +49,21 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectAlgorithmsUsed:     []string{"CRC32"},
 			expectPayload:            []byte("hello world"),
 		},
-		"failure": {
+		"no checksum required": {
+			response: &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode: 200,
+					Header: func() http.Header {
+						h := http.Header{}
+						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32C), "crUfeA==")
+						return h
+					}(),
+					Body: ioutil.NopCloser(strings.NewReader("Hello world")),
+				},
+			},
+			expectPayload: []byte("Hello world"),
+		},
+		"checksum mismatch failure": {
 			modifyContext: func(ctx context.Context) context.Context {
 				return setContextOutputValidationMode(ctx, "ENABLED")
 			},
@@ -99,19 +113,6 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 				},
 			},
 			expectLogged:  "no supported checksum",
-			expectPayload: []byte("hello world"),
-		},
-		"no output validation model": {
-			response: &smithyhttp.Response{
-				Response: &http.Response{
-					StatusCode: 200,
-					Header: func() http.Header {
-						h := http.Header{}
-						return h
-					}(),
-					Body: ioutil.NopCloser(strings.NewReader("hello world")),
-				},
-			},
 			expectPayload: []byte("hello world"),
 		},
 		"unknown output validation model": {
@@ -189,7 +190,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 
 			validateOutput := validateOutputPayloadChecksum{
 				Algorithms: []Algorithm{
-					AlgorithmSHA1, AlgorithmCRC32, AlgorithmCRC32C,
+					AlgorithmSHA1, AlgorithmCRC32, AlgorithmCRC32C, AlgorithmSHA256,
 				},
 				LogValidationSkipped:          true,
 				LogMultipartValidationSkipped: true,

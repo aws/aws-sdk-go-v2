@@ -66,7 +66,14 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 				},
 				getObjectChecksumMode: s3types.ChecksumModeEnabled,
 				expectPayload:         []byte("abc123"),
-				expectLogged:          "Response has no supported checksum.",
+				expectComputedChecksums: &s3.ComputedInputChecksumsMetadata{
+					ComputedChecksums: map[string]string{
+						"CRC32": "zwK7XA==",
+					},
+				},
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC32"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -170,7 +177,14 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 				},
 				getObjectChecksumMode: s3types.ChecksumModeEnabled,
 				expectPayload:         []byte("abc123"),
-				expectLogged:          "Response has no supported checksum.",
+				expectComputedChecksums: &s3.ComputedInputChecksumsMetadata{
+					ComputedChecksums: map[string]string{
+						"CRC32": "zwK7XA==",
+					},
+				},
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC32"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -251,7 +265,14 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 			"no checksum": {
 				params:                &s3.PutObjectInput{},
 				getObjectChecksumMode: s3types.ChecksumModeEnabled,
-				expectLogged:          "Response has no supported checksum.",
+				expectComputedChecksums: &s3.ComputedInputChecksumsMetadata{
+					ComputedChecksums: map[string]string{
+						"CRC32": "AAAAAA==",
+					},
+				},
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC32"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -304,7 +325,14 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 					Body: bytes.NewBuffer([]byte{}),
 				},
 				getObjectChecksumMode: s3types.ChecksumModeEnabled,
-				expectLogged:          "Response has no supported checksum.",
+				expectComputedChecksums: &s3.ComputedInputChecksumsMetadata{
+					ComputedChecksums: map[string]string{
+						"CRC32": "AAAAAA==",
+					},
+				},
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC32"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -394,7 +422,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 					}
 					// assert computed input checksums metadata
 					computedChecksums, ok := s3.GetComputedInputChecksumsMetadata(putResult.ResultMetadata)
-					if e, a := ok, (c.expectComputedChecksums != nil); e != a {
+					if e, a := (c.expectComputedChecksums != nil), ok; e != a {
 						t.Fatalf("expect computed checksum metadata %t, got %t, %v", e, a, computedChecksums)
 					}
 					if c.expectComputedChecksums != nil {
@@ -442,7 +470,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 
 					// assert checksum validation metadata
 					algorithmsUsed, ok := s3.GetChecksumValidationMetadata(getResult.ResultMetadata)
-					if e, a := ok, (c.expectAlgorithmsUsed != nil); e != a {
+					if e, a := (c.expectAlgorithmsUsed != nil), ok; e != a {
 						t.Fatalf("expect algorithms used metadata %t, got %t, %v", e, a, algorithmsUsed)
 					}
 					if c.expectAlgorithmsUsed != nil {
@@ -468,7 +496,7 @@ func TestInteg_RequireChecksum(t *testing.T) {
 		expectComputedChecksums []string
 	}{
 		"no algorithm": {
-			expectComputedChecksums: []string{"MD5"},
+			expectComputedChecksums: []string{"CRC32"},
 		},
 		"with algorithm": {
 			checksumAlgorithm:       types.ChecksumAlgorithmCrc32c,

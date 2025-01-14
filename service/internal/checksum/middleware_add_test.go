@@ -1,5 +1,5 @@
-//go:build go1.16
-// +build go1.16
+//go:build go1.21
+// +build go1.21
 
 package checksum
 
@@ -87,7 +87,6 @@ func TestAddInputMiddleware(t *testing.T) {
 				},
 			},
 			expectFinalize: &computeInputPayloadChecksum{
-				RequireChecksum:        true,
 				EnableTrailingChecksum: true,
 			},
 		},
@@ -167,9 +166,6 @@ func TestAddInputMiddleware(t *testing.T) {
 			var computeInput *computeInputPayloadChecksum
 			if c.expectFinalize != nil && ok {
 				computeInput = finalizeMW.(*computeInputPayloadChecksum)
-				if e, a := c.expectFinalize.RequireChecksum, computeInput.RequireChecksum; e != a {
-					t.Errorf("expect %v require checksum, got %v", e, a)
-				}
 				if e, a := c.expectFinalize.EnableTrailingChecksum, computeInput.EnableTrailingChecksum; e != a {
 					t.Errorf("expect %v enable trailing checksum, got %v", e, a)
 				}
