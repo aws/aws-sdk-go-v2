@@ -339,6 +339,9 @@ func invalidationCompletedStateRetryable(ctx context.Context, input *GetInvalida
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

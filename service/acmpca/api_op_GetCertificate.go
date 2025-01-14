@@ -362,6 +362,9 @@ func certificateIssuedStateRetryable(ctx context.Context, input *GetCertificateI
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

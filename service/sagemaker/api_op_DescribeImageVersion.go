@@ -435,6 +435,9 @@ func imageVersionCreatedStateRetryable(ctx context.Context, input *DescribeImage
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -640,6 +643,9 @@ func imageVersionDeletedStateRetryable(ctx context.Context, input *DescribeImage
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

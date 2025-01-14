@@ -358,6 +358,9 @@ func tableExistsStateRetryable(ctx context.Context, input *DescribeTableInput, o
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -527,6 +530,9 @@ func tableNotExistsStateRetryable(ctx context.Context, input *DescribeTableInput
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

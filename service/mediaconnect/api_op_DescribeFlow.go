@@ -398,6 +398,9 @@ func flowActiveStateRetryable(ctx context.Context, input *DescribeFlowInput, out
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -614,6 +617,9 @@ func flowDeletedStateRetryable(ctx context.Context, input *DescribeFlowInput, ou
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -840,6 +846,9 @@ func flowStandbyStateRetryable(ctx context.Context, input *DescribeFlowInput, ou
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

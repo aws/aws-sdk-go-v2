@@ -408,6 +408,9 @@ func nodeDeregisteredStateRetryable(ctx context.Context, input *DescribeNodeInpu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -635,6 +638,9 @@ func nodeRegisteredStateRetryable(ctx context.Context, input *DescribeNodeInput,
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

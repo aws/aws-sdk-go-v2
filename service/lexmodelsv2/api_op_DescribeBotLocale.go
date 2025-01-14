@@ -446,6 +446,9 @@ func botLocaleBuiltStateRetryable(ctx context.Context, input *DescribeBotLocaleI
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -693,6 +696,9 @@ func botLocaleCreatedStateRetryable(ctx context.Context, input *DescribeBotLocal
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -945,6 +951,9 @@ func botLocaleExpressTestingAvailableStateRetryable(ctx context.Context, input *
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

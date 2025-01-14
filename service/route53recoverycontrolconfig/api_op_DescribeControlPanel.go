@@ -355,6 +355,9 @@ func controlPanelCreatedStateRetryable(ctx context.Context, input *DescribeContr
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -550,6 +553,9 @@ func controlPanelDeletedStateRetryable(ctx context.Context, input *DescribeContr
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

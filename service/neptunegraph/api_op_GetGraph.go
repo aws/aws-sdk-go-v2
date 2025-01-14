@@ -421,6 +421,9 @@ func graphAvailableStateRetryable(ctx context.Context, input *GetGraphInput, out
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -610,6 +613,9 @@ func graphDeletedStateRetryable(ctx context.Context, input *GetGraphInput, outpu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

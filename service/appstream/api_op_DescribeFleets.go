@@ -394,6 +394,9 @@ func fleetStartedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -635,6 +638,9 @@ func fleetStoppedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

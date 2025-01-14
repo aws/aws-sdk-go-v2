@@ -463,6 +463,9 @@ func annotationImportJobCreatedStateRetryable(ctx context.Context, input *GetAnn
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

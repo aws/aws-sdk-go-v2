@@ -511,6 +511,9 @@ func runRunningStateRetryable(ctx context.Context, input *GetRunInput, output *G
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -774,6 +777,9 @@ func runCompletedStateRetryable(ctx context.Context, input *GetRunInput, output 
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -417,6 +417,9 @@ func assetActiveStateRetryable(ctx context.Context, input *DescribeAssetInput, o
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -586,6 +589,9 @@ func assetNotExistsStateRetryable(ctx context.Context, input *DescribeAssetInput
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

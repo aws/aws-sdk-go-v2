@@ -372,6 +372,9 @@ func addonActiveStateRetryable(ctx context.Context, input *DescribeAddonInput, o
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -557,6 +560,9 @@ func addonDeletedStateRetryable(ctx context.Context, input *DescribeAddonInput, 
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

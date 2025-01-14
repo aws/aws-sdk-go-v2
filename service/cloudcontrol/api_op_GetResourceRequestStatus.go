@@ -374,6 +374,9 @@ func resourceRequestSuccessStateRetryable(ctx context.Context, input *GetResourc
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

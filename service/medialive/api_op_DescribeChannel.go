@@ -432,6 +432,9 @@ func channelCreatedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -635,6 +638,9 @@ func channelDeletedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -838,6 +844,9 @@ func channelRunningStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1041,6 +1050,9 @@ func channelStoppedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

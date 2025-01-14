@@ -353,6 +353,9 @@ func fargateProfileActiveStateRetryable(ctx context.Context, input *DescribeFarg
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -541,6 +544,9 @@ func fargateProfileDeletedStateRetryable(ctx context.Context, input *DescribeFar
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

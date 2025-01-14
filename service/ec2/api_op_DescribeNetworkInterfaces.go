@@ -487,6 +487,9 @@ func networkInterfaceAvailableStateRetryable(ctx context.Context, input *Describ
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -414,6 +414,9 @@ func successfulSigningJobStateRetryable(ctx context.Context, input *DescribeSign
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

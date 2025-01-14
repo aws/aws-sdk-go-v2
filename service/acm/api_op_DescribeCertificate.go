@@ -405,6 +405,9 @@ func certificateValidatedStateRetryable(ctx context.Context, input *DescribeCert
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

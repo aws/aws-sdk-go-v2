@@ -386,6 +386,9 @@ func botExportCompletedStateRetryable(ctx context.Context, input *DescribeExport
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

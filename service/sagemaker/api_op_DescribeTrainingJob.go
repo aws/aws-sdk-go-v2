@@ -672,6 +672,9 @@ func trainingJobCompletedOrStoppedStateRetryable(ctx context.Context, input *Des
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

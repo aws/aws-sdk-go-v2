@@ -467,6 +467,9 @@ func replicationTaskDeletedStateRetryable(ctx context.Context, input *DescribeRe
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -855,6 +858,9 @@ func replicationTaskReadyStateRetryable(ctx context.Context, input *DescribeRepl
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1243,6 +1249,9 @@ func replicationTaskRunningStateRetryable(ctx context.Context, input *DescribeRe
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1607,6 +1616,9 @@ func replicationTaskStoppedStateRetryable(ctx context.Context, input *DescribeRe
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -327,6 +327,9 @@ func appExistsStateRetryable(ctx context.Context, input *DescribeAppsInput, outp
 		return false, fmt.Errorf("waiter state transitioned to Failure")
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -438,6 +438,9 @@ func dataSourceAvailableStateRetryable(ctx context.Context, input *DescribeDataS
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

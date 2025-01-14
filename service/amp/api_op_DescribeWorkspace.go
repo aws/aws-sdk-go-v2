@@ -367,6 +367,9 @@ func workspaceActiveStateRetryable(ctx context.Context, input *DescribeWorkspace
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -553,6 +556,9 @@ func workspaceDeletedStateRetryable(ctx context.Context, input *DescribeWorkspac
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

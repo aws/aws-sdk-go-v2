@@ -407,6 +407,9 @@ func botAliasAvailableStateRetryable(ctx context.Context, input *DescribeBotAlia
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

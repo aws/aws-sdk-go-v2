@@ -372,6 +372,9 @@ func clusterActiveStateRetryable(ctx context.Context, input *DescribeClusterInpu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -592,6 +595,9 @@ func clusterDeletedStateRetryable(ctx context.Context, input *DescribeClusterInp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

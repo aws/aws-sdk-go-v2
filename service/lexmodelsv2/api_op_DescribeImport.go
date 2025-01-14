@@ -391,6 +391,9 @@ func botImportCompletedStateRetryable(ctx context.Context, input *DescribeImport
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -432,6 +432,9 @@ func exportTaskSuccessfulStateRetryable(ctx context.Context, input *GetExportTas
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -634,6 +637,9 @@ func exportTaskCancelledStateRetryable(ctx context.Context, input *GetExportTask
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

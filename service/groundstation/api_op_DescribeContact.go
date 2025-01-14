@@ -400,6 +400,9 @@ func contactScheduledStateRetryable(ctx context.Context, input *DescribeContactI
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

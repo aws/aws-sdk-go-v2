@@ -385,6 +385,9 @@ func vaultExistsStateRetryable(ctx context.Context, input *DescribeVaultInput, o
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -558,6 +561,9 @@ func vaultNotExistsStateRetryable(ctx context.Context, input *DescribeVaultInput
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

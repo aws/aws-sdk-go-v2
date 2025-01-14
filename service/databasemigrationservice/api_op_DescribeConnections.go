@@ -390,6 +390,9 @@ func testConnectionSucceedsStateRetryable(ctx context.Context, input *DescribeCo
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

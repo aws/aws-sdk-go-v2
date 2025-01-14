@@ -350,6 +350,9 @@ func scraperActiveStateRetryable(ctx context.Context, input *DescribeScraperInpu
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -536,6 +539,9 @@ func scraperDeletedStateRetryable(ctx context.Context, input *DescribeScraperInp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

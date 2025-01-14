@@ -355,6 +355,9 @@ func serviceInstanceDeployedStateRetryable(ctx context.Context, input *GetServic
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

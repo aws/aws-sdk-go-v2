@@ -767,6 +767,9 @@ func stackCreateCompleteStateRetryable(ctx context.Context, input *DescribeStack
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1143,6 +1146,9 @@ func stackDeleteCompleteStateRetryable(ctx context.Context, input *DescribeStack
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1320,6 +1326,9 @@ func stackExistsStateRetryable(ctx context.Context, input *DescribeStacksInput, 
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1648,6 +1657,9 @@ func stackImportCompleteStateRetryable(ctx context.Context, input *DescribeStack
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1928,6 +1940,9 @@ func stackRollbackCompleteStateRetryable(ctx context.Context, input *DescribeSta
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -2208,6 +2223,9 @@ func stackUpdateCompleteStateRetryable(ctx context.Context, input *DescribeStack
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

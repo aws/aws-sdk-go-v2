@@ -475,6 +475,9 @@ func referenceImportJobCompletedStateRetryable(ctx context.Context, input *GetRe
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

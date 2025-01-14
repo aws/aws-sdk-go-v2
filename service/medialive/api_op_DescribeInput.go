@@ -420,6 +420,9 @@ func inputAttachedStateRetryable(ctx context.Context, input *DescribeInputInput,
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -622,6 +625,9 @@ func inputDeletedStateRetryable(ctx context.Context, input *DescribeInputInput, 
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -842,6 +848,9 @@ func inputDetachedStateRetryable(ctx context.Context, input *DescribeInputInput,
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

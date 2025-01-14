@@ -384,6 +384,9 @@ func auditReportCreatedStateRetryable(ctx context.Context, input *DescribeCertif
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

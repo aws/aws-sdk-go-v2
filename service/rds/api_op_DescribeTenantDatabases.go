@@ -455,6 +455,9 @@ func tenantDatabaseAvailableStateRetryable(ctx context.Context, input *DescribeT
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -647,6 +650,9 @@ func tenantDatabaseDeletedStateRetryable(ctx context.Context, input *DescribeTen
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

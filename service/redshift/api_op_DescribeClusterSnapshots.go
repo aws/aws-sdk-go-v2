@@ -502,6 +502,9 @@ func snapshotAvailableStateRetryable(ctx context.Context, input *DescribeCluster
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -363,6 +363,9 @@ func targetDeregisteredStateRetryable(ctx context.Context, input *DescribeTarget
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -569,6 +572,9 @@ func targetInServiceStateRetryable(ctx context.Context, input *DescribeTargetHea
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

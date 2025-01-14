@@ -375,6 +375,9 @@ func servicesInactiveStateRetryable(ctx context.Context, input *DescribeServices
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -630,6 +633,9 @@ func servicesStableStateRetryable(ctx context.Context, input *DescribeServicesIn
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

@@ -338,6 +338,9 @@ func instanceProfileExistsStateRetryable(ctx context.Context, input *GetInstance
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

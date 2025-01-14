@@ -360,6 +360,9 @@ func routingControlCreatedStateRetryable(ctx context.Context, input *DescribeRou
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -555,6 +558,9 @@ func routingControlDeletedStateRetryable(ctx context.Context, input *DescribeRou
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

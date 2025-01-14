@@ -415,6 +415,9 @@ func environmentExistsStateRetryable(ctx context.Context, input *DescribeEnviron
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -643,6 +646,9 @@ func environmentTerminatedStateRetryable(ctx context.Context, input *DescribeEnv
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -869,6 +875,9 @@ func environmentUpdatedStateRetryable(ctx context.Context, input *DescribeEnviro
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

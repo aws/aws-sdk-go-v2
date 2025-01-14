@@ -399,6 +399,9 @@ func multiplexCreatedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -602,6 +605,9 @@ func multiplexDeletedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -805,6 +811,9 @@ func multiplexRunningStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -1008,6 +1017,9 @@ func multiplexStoppedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

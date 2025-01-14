@@ -449,6 +449,9 @@ func variantImportJobCreatedStateRetryable(ctx context.Context, input *GetVarian
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

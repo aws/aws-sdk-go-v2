@@ -363,6 +363,9 @@ func jobCompleteStateRetryable(ctx context.Context, input *ReadJobInput, output 
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

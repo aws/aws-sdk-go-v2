@@ -437,6 +437,9 @@ func clusterAvailableStateRetryable(ctx context.Context, input *DescribeClusters
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -659,6 +662,9 @@ func clusterDeletedStateRetryable(ctx context.Context, input *DescribeClustersIn
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -877,6 +883,9 @@ func clusterRestoredStateRetryable(ctx context.Context, input *DescribeClustersI
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

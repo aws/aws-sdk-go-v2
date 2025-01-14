@@ -392,6 +392,9 @@ func codeBindingExistsStateRetryable(ctx context.Context, input *DescribeCodeBin
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

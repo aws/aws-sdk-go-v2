@@ -380,6 +380,9 @@ func streamExistsStateRetryable(ctx context.Context, input *DescribeStreamInput,
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -549,6 +552,9 @@ func streamNotExistsStateRetryable(ctx context.Context, input *DescribeStreamInp
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 

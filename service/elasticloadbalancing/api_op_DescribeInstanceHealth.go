@@ -348,6 +348,9 @@ func anyInstanceInServiceStateRetryable(ctx context.Context, input *DescribeInst
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -556,6 +559,9 @@ func instanceDeregisteredStateRetryable(ctx context.Context, input *DescribeInst
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
@@ -762,6 +768,9 @@ func instanceInServiceStateRetryable(ctx context.Context, input *DescribeInstanc
 		}
 	}
 
+	if err != nil {
+		return false, err
+	}
 	return true, nil
 }
 
