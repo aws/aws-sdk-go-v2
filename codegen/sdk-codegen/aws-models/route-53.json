@@ -3450,6 +3450,12 @@
                         "smithy.api#enumValue": "ap-southeast-5"
                     }
                 },
+                "mx_central_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mx-central-1"
+                    }
+                },
                 "ap_southeast_7": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -10891,6 +10897,12 @@
                         "smithy.api#enumValue": "ap-southeast-5"
                     }
                 },
+                "mx_central_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mx-central-1"
+                    }
+                },
                 "ap_southeast_7": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -12529,6 +12541,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ap-southeast-5"
+                    }
+                },
+                "mx_central_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mx-central-1"
                     }
                 },
                 "ap_southeast_7": {
