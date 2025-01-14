@@ -1,8 +1,0 @@
-{
-    "id": "e295c0d2-40e0-4b54-9e0f-ef0a820140be",
-    "type": "feature",
-    "description": "Amazon Route 53 now supports the Mexico (Central) Region (mx-central-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region",
-    "modules": [
-        "service/route53"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.48.0 (2025-01-14)
+
+* **Feature**: Amazon Route 53 now supports the Mexico (Central) Region (mx-central-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region
+* **Bug Fix**: Fix issue where waiters were not failing on unmatched errors as they should. This may have breaking behavioral changes for users in fringe cases. See [this announcement](https://github.com/aws/aws-sdk-go-v2/discussions/2954) for more information.
+
 # v1.47.1 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

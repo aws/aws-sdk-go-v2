@@ -1,3 +1,17 @@
+# Release (2025-01-14)
+
+## General Highlights
+* **Bug Fix**: Fix issue where waiters were not failing on unmatched errors as they should. This may have breaking behavioral changes for users in fringe cases. See [this announcement](https://github.com/aws/aws-sdk-go-v2/discussions/2954) for more information.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.199.1](service/ec2/CHANGELOG.md#v11991-2025-01-14)
+  * **Bug Fix**: Fix nil dereference panic in certain waiters.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.39.0](service/gamelift/CHANGELOG.md#v1390-2025-01-14)
+  * **Feature**: Amazon GameLift releases a new game session placement feature: PriorityConfigurationOverride. You can now override how a game session queue prioritizes placement locations for a single StartGameSessionPlacement request.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.48.0](service/route53/CHANGELOG.md#v1480-2025-01-14)
+  * **Feature**: Amazon Route 53 now supports the Mexico (Central) Region (mx-central-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region
+
 # Release (2025-01-13)
 
 ## Module Highlights

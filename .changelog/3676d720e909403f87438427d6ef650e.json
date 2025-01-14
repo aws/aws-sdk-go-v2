@@ -1,8 +1,0 @@
-{
-    "id": "3676d720-e909-403f-8743-8427d6ef650e",
-    "type": "bugfix",
-    "description": "Fix nil dereference panic in certain waiters.",
-    "modules": [
-        "service/ec2"
-    ]
-}

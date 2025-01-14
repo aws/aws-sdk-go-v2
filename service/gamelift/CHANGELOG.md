@@ -1,3 +1,7 @@
+# v1.39.0 (2025-01-14)
+
+* **Feature**: Amazon GameLift releases a new game session placement feature: PriorityConfigurationOverride. You can now override how a game session queue prioritizes placement locations for a single StartGameSessionPlacement request.
+
 # v1.38.1 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,8 @@
+# v1.199.1 (2025-01-14)
+
+* **Bug Fix**: Fix issue where waiters were not failing on unmatched errors as they should. This may have breaking behavioral changes for users in fringe cases. See [this announcement](https://github.com/aws/aws-sdk-go-v2/discussions/2954) for more information.
+* **Bug Fix**: Fix nil dereference panic in certain waiters.
+
 # v1.199.0 (2025-01-13)
 
 * **Feature**: Add support for DisconnectOnSessionTimeout flag in CreateClientVpnEndpoint and ModifyClientVpnEndpoint requests and DescribeClientVpnEndpoints responses
