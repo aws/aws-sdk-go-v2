@@ -248,6 +248,9 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "me-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "rds-fips.ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "rds-fips.ca-central-1.amazonaws.com",

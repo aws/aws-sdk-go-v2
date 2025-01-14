@@ -446,6 +446,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "rbin.me-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

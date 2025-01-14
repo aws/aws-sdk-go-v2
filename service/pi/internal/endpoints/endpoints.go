@@ -534,6 +534,18 @@ var defaultPartitions = endpoints.Partitions{
 				Protocols: []string{"https"},
 			},
 			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region:  "mx-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:  "pi.mx-central-1.api.aws",
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{
 				Protocols: []string{"https"},

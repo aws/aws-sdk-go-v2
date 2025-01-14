@@ -617,6 +617,24 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "mx-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "kms-fips.mx-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "mx-central-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "kms-fips.mx-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "mx-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

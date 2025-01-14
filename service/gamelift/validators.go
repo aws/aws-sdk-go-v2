@@ -2738,6 +2738,21 @@ func validateLocationConfigurationList(v []types.LocationConfiguration) error {
 	}
 }
 
+func validatePriorityConfigurationOverride(v *types.PriorityConfigurationOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PriorityConfigurationOverride"}
+	if v.LocationOrder == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationOrder"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRuntimeConfiguration(v *types.RuntimeConfiguration) error {
 	if v == nil {
 		return nil
@@ -4248,6 +4263,11 @@ func validateOpStartGameSessionPlacementInput(v *StartGameSessionPlacementInput)
 	}
 	if v.MaximumPlayerSessionCount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaximumPlayerSessionCount"))
+	}
+	if v.PriorityConfigurationOverride != nil {
+		if err := validatePriorityConfigurationOverride(v.PriorityConfigurationOverride); err != nil {
+			invalidParams.AddNested("PriorityConfigurationOverride", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

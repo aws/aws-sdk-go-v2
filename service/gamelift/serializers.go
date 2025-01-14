@@ -7937,6 +7937,17 @@ func awsAwsjson11_serializeDocumentLocationList(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLocationOrderOverrideList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentLogConfiguration(v *types.LogConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8223,6 +8234,25 @@ func awsAwsjson11_serializeDocumentPriorityConfiguration(v *types.PriorityConfig
 		if err := awsAwsjson11_serializeDocumentPriorityTypeList(v.PriorityOrder, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPriorityConfigurationOverride(v *types.PriorityConfigurationOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LocationOrder != nil {
+		ok := object.Key("LocationOrder")
+		if err := awsAwsjson11_serializeDocumentLocationOrderOverrideList(v.LocationOrder, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.PlacementFallbackStrategy) > 0 {
+		ok := object.Key("PlacementFallbackStrategy")
+		ok.String(string(v.PlacementFallbackStrategy))
 	}
 
 	return nil
@@ -11064,6 +11094,13 @@ func awsAwsjson11_serializeOpDocumentStartGameSessionPlacementInput(v *StartGame
 	if v.PlayerLatencies != nil {
 		ok := object.Key("PlayerLatencies")
 		if err := awsAwsjson11_serializeDocumentPlayerLatencyList(v.PlayerLatencies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PriorityConfigurationOverride != nil {
+		ok := object.Key("PriorityConfigurationOverride")
+		if err := awsAwsjson11_serializeDocumentPriorityConfigurationOverride(v.PriorityConfigurationOverride, ok); err != nil {
 			return err
 		}
 	}

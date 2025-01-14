@@ -416,6 +416,15 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "servicediscovery.me-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "mx-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "servicediscovery.mx-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

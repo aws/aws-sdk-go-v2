@@ -1152,9 +1152,10 @@ type Event struct {
 }
 
 // A list of fleet locations where a game session queue can place new game
-// sessions. You can use a filter to temporarily turn off placements for specific
-// locations. For queues that have multi-location fleets, you can use a filter
-// configuration allow placement with some, but not all of these locations.
+// sessions. You can use a filter to temporarily exclude specific locations from
+// receiving placements. For queues that have multi-location fleets, you can use a
+// filter configuration allow placement with some, but not all, of a fleet's
+// locations.
 type FilterConfiguration struct {
 
 	//  A list of locations to allow game session placement in, in the form of Amazon
@@ -2163,7 +2164,7 @@ type GameSessionDetail struct {
 // not active and ready to accept players until placement status reaches FULFILLED
 // . When the placement is in PENDING status, Amazon GameLift may attempt to place
 // a game session multiple times before succeeding. With each attempt it creates a [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameSession]
-// object and updates this placement object with the new game session properties..
+// object and updates this placement object with the new game session properties.
 //
 // [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameSession]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameSession
 type GameSessionPlacement struct {
@@ -2245,13 +2246,22 @@ type GameSessionPlacement struct {
 	PlacementId *string
 
 	// A set of values, expressed in milliseconds, that indicates the amount of
-	// latency that a player experiences when connected to @aws; Regions.
+	// latency that a player experiences when connected to Amazon Web Services Regions.
 	PlayerLatencies []PlayerLatency
 
 	// The port number for the game session. To connect to a Amazon GameLift game
 	// server, an app needs both the IP address and port number. This value isn't final
 	// until placement status is FULFILLED .
 	Port *int32
+
+	// A prioritized list of locations to use with a game session placement request
+	// and instructions on how to use it. This list overrides a queue's prioritized
+	// location list for a single game session placement request only. The list can
+	// include Amazon Web Services Regions, local zones, and custom locations (for
+	// Anywhere fleets). The fallback strategy instructs Amazon GameLift to use the
+	// override list for the first placement attempt only or for all placement
+	// attempts.
+	PriorityConfigurationOverride *PriorityConfigurationOverride
 
 	// Time stamp indicating when this request was placed in the queue. Format is a
 	// number expressed in Unix time as milliseconds (for example "1469498468.057" ).
@@ -2997,9 +3007,9 @@ type PlacedPlayerSession struct {
 type Player struct {
 
 	// A set of values, expressed in milliseconds, that indicates the amount of
-	// latency that a player experiences when connected to @aws; Regions. If this
-	// property is present, FlexMatch considers placing the match only in Regions for
-	// which latency is reported.
+	// latency that a player experiences when connected to Amazon Web Services Regions.
+	// If this property is present, FlexMatch considers placing the match only in
+	// Regions for which latency is reported.
 	//
 	// If a matchmaker has a rule that evaluates player latency, players must report
 	// latency in order to be matched. If no latency is reported in this scenario,
@@ -3152,48 +3162,95 @@ type PlayerSession struct {
 	noSmithyDocumentSerde
 }
 
-// Custom prioritization settings for use by a game session queue when placing new
-// game sessions with available game servers. When defined, this configuration
-// replaces the default FleetIQ prioritization process, which is as follows:
+// Custom prioritization settings for a game session queue to use when searching
+// for available game servers to place new game sessions. This configuration
+// replaces the default FleetIQ prioritization process.
 //
-//   - If player latency data is included in a game session request, destinations
-//     and locations are prioritized first based on lowest average latency (1), then on
-//     lowest hosting cost (2), then on destination list order (3), and finally on
-//     location (alphabetical) (4). This approach ensures that the queue's top priority
-//     is to place game sessions where average player latency is lowest, and--if
-//     latency is the same--where the hosting cost is less, etc.
+// By default, a queue makes placements based on the following default
+// prioritizations:
 //
-//   - If player latency data is not included, destinations and locations are
-//     prioritized first on destination list order (1), and then on location
-//     (alphabetical) (2). This approach ensures that the queue's top priority is to
-//     place game sessions on the first destination fleet listed. If that fleet has
-//     multiple locations, the game session is placed on the first location (when
-//     listed alphabetically).
+//   - If player latency data is included in a game session request, Amazon
+//     GameLift prioritizes placing game sessions where the average player latency is
+//     lowest. Amazon GameLift re-orders the queue's destinations and locations (for
+//     multi-location fleets) based on the following priorities: (1) the lowest average
+//     latency across all players, (2) the lowest hosting cost, (3) the queue's default
+//     destination order, and then (4), an alphabetic list of locations.
 //
-// Changing the priority order will affect how game sessions are placed.
+//   - If player latency data is not included, Amazon GameLift prioritizes placing
+//     game sessions in the queue's first destination. If that fleet has multiple
+//     locations, the game session is placed on the first location (when listed
+//     alphabetically). Amazon GameLift re-orders the queue's destinations and
+//     locations (for multi-location fleets) based on the following priorities: (1) the
+//     queue's default destination order, and then (2) an alphabetic list of locations.
 type PriorityConfiguration struct {
 
 	// The prioritization order to use for fleet locations, when the PriorityOrder
-	// property includes LOCATION . Locations are identified by Amazon Web Services
-	// Region codes such as us-west-2 . Each location can only be listed once.
+	// property includes LOCATION . Locations can include Amazon Web Services Region
+	// codes (such as us-west-2 ), local zones, and custom locations (for Anywhere
+	// fleets). Each location must be listed only once. For details, see [Amazon GameLift service locations.]
+	//
+	// [Amazon GameLift service locations.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
 	LocationOrder []string
 
-	// The recommended sequence to use when prioritizing where to place new game
-	// sessions. Each type can only be listed once.
+	// A custom sequence to use when prioritizing where to place new game sessions.
+	// Each priority type is listed once.
 	//
-	//   - LATENCY -- FleetIQ prioritizes locations where the average player latency
-	//   (provided in each game session request) is lowest.
+	//   - LATENCY -- Amazon GameLift prioritizes locations where the average player
+	//   latency is lowest. Player latency data is provided in each game session
+	//   placement request.
 	//
-	//   - COST -- FleetIQ prioritizes destinations with the lowest current hosting
-	//   costs. Cost is evaluated based on the location, instance type, and fleet type
-	//   (Spot or On-Demand) for each destination in the queue.
+	//   - COST -- Amazon GameLift prioritizes destinations with the lowest current
+	//   hosting costs. Cost is evaluated based on the location, instance type, and fleet
+	//   type (Spot or On-Demand) of each destination in the queue.
 	//
-	//   - DESTINATION -- FleetIQ prioritizes based on the order that destinations are
-	//   listed in the queue configuration.
+	//   - DESTINATION -- Amazon GameLift prioritizes based on the list order of
+	//   destinations in the queue configuration.
 	//
-	//   - LOCATION -- FleetIQ prioritizes based on the provided order of locations, as
-	//   defined in LocationOrder .
+	//   - LOCATION -- Amazon GameLift prioritizes based on the provided order of
+	//   locations, as defined in LocationOrder .
 	PriorityOrder []PriorityType
+
+	noSmithyDocumentSerde
+}
+
+// An alternate list of prioritized locations for use with a game session queue.
+// When this property is included in a [StartGameSessionPlacement]request, this list overrides the queue's
+// default location prioritization, as defined in the queue's PriorityConfigurationsetting
+// (LocationOrder). This property overrides the queue's default priority list for
+// individual placement requests only. Use this property only with queues that have
+// a PriorityConfiguration setting that prioritizes first.
+//
+// A priority configuration override list does not override a queue's
+// FilterConfiguration setting, if the queue has one. Filter configurations are
+// used to limit placements to a subset of the locations in a queue's destinations.
+// If the override list includes a location that's not included in the
+// FilterConfiguration allowed list, Amazon GameLift won't attempt to place a game
+// session there.
+//
+// [StartGameSessionPlacement]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html
+type PriorityConfigurationOverride struct {
+
+	// A prioritized list of hosting locations. The list can include Amazon Web
+	// Services Regions (such as us-west-2 ), local zones, and custom locations (for
+	// Anywhere fleets). Each location must be listed only once. For details, see [Amazon GameLift service locations.]
+	//
+	// [Amazon GameLift service locations.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
+	//
+	// This member is required.
+	LocationOrder []string
+
+	// Instructions for how to use the override list if the first round of placement
+	// attempts fails. The first round is a failure if Amazon GameLift searches all
+	// listed locations, in all of the queue's destinations, without finding an
+	// available hosting resource for a new game session. Valid strategies include:
+	//
+	//   - DEFAULT_AFTER_SINGLE_PASS -- After the first round of placement attempts,
+	//   discard the override list and use the queue's default location priority list.
+	//   Continue to use the queue's default list until the placement request times out.
+	//
+	//   - NONE -- Continue to use the override list for all rounds of placement
+	//   attempts until the placement request times out.
+	PlacementFallbackStrategy PlacementFallbackStrategy
 
 	noSmithyDocumentSerde
 }

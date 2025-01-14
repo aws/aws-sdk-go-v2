@@ -11,40 +11,53 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Ends a game session that's currently in progress. You can use this action to
-// terminate any game session that isn't in TERMINATED or TERMINATING status.
-// Terminating a game session is the most efficient way to free up a server process
-// when it's hosting a game session that's in a bad state or not ending naturally.
-// You can use this action to terminate a game session that's being hosted on any
-// type of Amazon GameLift fleet compute, including computes for managed EC2,
-// managed container, and Anywhere fleets.
+// Ends a game session that's currently in progress. Use this action to terminate
+// any game session that isn't in ERROR status. Terminating a game session is the
+// most efficient way to free up a server process when it's hosting a game session
+// that's in a bad state or not ending properly. You can use this action to
+// terminate a game session that's being hosted on any type of Amazon GameLift
+// fleet compute, including computes for managed EC2, managed container, and
+// Anywhere fleets. The game server must be integrated with Amazon GameLift server
+// SDK 5.x or greater.
 //
-// There are two potential methods for terminating a game session:
+// # Request options
 //
-//   - With a graceful termination, the Amazon GameLift service prompts the server
-//     process to initiate its normal game session shutdown sequence. This sequence is
-//     implemented in the game server code and might involve a variety of actions to
-//     gracefully end a game session, such as notifying players, and stop the server
-//     process.
+// Request termination for a single game session. Provide the game session ID and
+// the termination mode. There are two potential methods for terminating a game
+// session:
 //
-//   - With a forceful termination, the Amazon GameLift service takes immediate
-//     action to terminate the game session by stopping the server process. Termination
-//     occurs without the normal game session shutdown sequence.
+//   - Initiate a graceful termination using the normal game session shutdown
+//     sequence. With this mode, the Amazon GameLift service prompts the server process
+//     that's hosting the game session by calling the server SDK callback method
+//     OnProcessTerminate() . The callback implementation is part of the custom game
+//     server code. It might involve a variety of actions to gracefully end a game
+//     session, such as notifying players, before stopping the server process.
 //
-// Request options
-//
-//   - Request termination for a single game session. Provide the game session ID
-//     and the termination method.
+//   - Force an immediate game session termination. With this mode, the Amazon
+//     GameLift service takes action to stop the server process, which ends the game
+//     session without the normal game session shutdown sequence.
 //
 // # Results
 //
-// If successful, game session termination is initiated, which includes changing
-// the game session status to TERMINATING . As a result of this action, and
-// depending on the implementation of OnProcessTerminate() , the server process
-// either becomes available to host a new game session, or it's recycled and a new
-// server process started with availability to host a game session. The game
-// session status is changed to TERMINATED , with a status reason that indicates
+// If successful, game session termination is initiated. During this activity, the
+// game session status is changed to TERMINATING . When completed, the server
+// process that was hosting the game session has been stopped and replaced with a
+// new server process that's ready to host a new game session. The old game
+// session's status is changed to TERMINATED with a status reason that indicates
 // the termination method used.
+//
+// # Learn more
+//
+// [Add Amazon GameLift to your game server]
+//
+// Amazon GameLift server SDK 5 reference guide for OnProcessTerminate() ([C++] ) ([C#] ) ([Unreal]
+// ) ([Go] )
+//
+// [C#]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-csharp-initsdk.html
+// [C++]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-cpp-initsdk.html
+// [Add Amazon GameLift to your game server]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html
+// [Unreal]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-unreal-initsdk.html
+// [Go]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk-go-initsdk.html
 func (c *Client) TerminateGameSession(ctx context.Context, params *TerminateGameSessionInput, optFns ...func(*Options)) (*TerminateGameSessionOutput, error) {
 	if params == nil {
 		params = &TerminateGameSessionInput{}
@@ -70,16 +83,18 @@ type TerminateGameSessionInput struct {
 
 	// The method to use to terminate the game session. Available methods include:
 	//
-	//   - TRIGGER_ON_PROCESS_TERMINATE – Sends an OnProcessTerminate() callback to the
-	//   server process to initiate the normal game session shutdown sequence. At a
-	//   minimum, the callback method must include a call to the server SDK action
-	//   ProcessEnding() , which is how the server process signals that a game session
-	//   is ending. If the server process doesn't call ProcessEnding() , this
-	//   termination method won't be successful.
+	//   - TRIGGER_ON_PROCESS_TERMINATE – Prompts the Amazon GameLift service to send
+	//   an OnProcessTerminate() callback to the server process and initiate the normal
+	//   game session shutdown sequence. The OnProcessTerminate method, which is
+	//   implemented in the game server code, must include a call to the server SDK
+	//   action ProcessEnding() , which is how the server process signals to Amazon
+	//   GameLift that a game session is ending. If the server process doesn't call
+	//   ProcessEnding() , the game session termination won't conclude successfully.
 	//
-	//   - FORCE_TERMINATE – Takes action to stop the server process, using existing
-	//   methods to control how server processes run on an Amazon GameLift managed
-	//   compute.
+	//   - FORCE_TERMINATE – Prompts the Amazon GameLift service to stop the server
+	//   process immediately. Amazon GameLift takes action (depending on the type of
+	//   fleet) to shut down the server process without the normal game session shutdown
+	//   sequence.
 	//
 	// This method is not available for game sessions that are running on Anywhere
 	//   fleets unless the fleet is deployed with the Amazon GameLift Agent. In this

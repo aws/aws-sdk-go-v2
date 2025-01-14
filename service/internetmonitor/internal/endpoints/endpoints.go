@@ -414,6 +414,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "internetmonitor.me-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "internetmonitor.mx-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.sa-east-1.api.aws",

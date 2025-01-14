@@ -11400,6 +11400,9 @@ func awsAwsjson11_deserializeOpErrorStartGameSessionPlacement(response *smithyht
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorUnauthorizedException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedRegionException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedRegionException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -16113,7 +16116,7 @@ func awsAwsjson11_deserializeDocumentContainerFleet(v **types.ContainerFleet, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ArnStringModel to be of type string, got %T instead", value)
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
 				}
 				sv.FleetRoleArn = ptr.String(jtv)
 			}
@@ -19722,6 +19725,11 @@ func awsAwsjson11_deserializeDocumentGameSessionPlacement(v **types.GameSessionP
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "PriorityConfigurationOverride":
+			if err := awsAwsjson11_deserializeDocumentPriorityConfigurationOverride(&sv.PriorityConfigurationOverride, value); err != nil {
+				return err
+			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -20990,6 +20998,42 @@ func awsAwsjson11_deserializeDocumentLocationModelList(v *[]types.LocationModel,
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLocationOrderOverrideList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LocationStringModel to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}
@@ -22625,6 +22669,51 @@ func awsAwsjson11_deserializeDocumentPriorityConfiguration(v **types.PriorityCon
 		case "PriorityOrder":
 			if err := awsAwsjson11_deserializeDocumentPriorityTypeList(&sv.PriorityOrder, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPriorityConfigurationOverride(v **types.PriorityConfigurationOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PriorityConfigurationOverride
+	if *v == nil {
+		sv = &types.PriorityConfigurationOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LocationOrder":
+			if err := awsAwsjson11_deserializeDocumentLocationOrderOverrideList(&sv.LocationOrder, value); err != nil {
+				return err
+			}
+
+		case "PlacementFallbackStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlacementFallbackStrategy to be of type string, got %T instead", value)
+				}
+				sv.PlacementFallbackStrategy = types.PlacementFallbackStrategy(jtv)
 			}
 
 		default:
