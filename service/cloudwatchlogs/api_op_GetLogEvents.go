@@ -238,6 +238,7 @@ type GetLogEventsPaginator struct {
 	client    GetLogEventsAPIClient
 	params    *GetLogEventsInput
 	nextToken *string
+	lastToken *string
 	firstPage bool
 }
 
@@ -267,7 +268,7 @@ func NewGetLogEventsPaginator(client GetLogEventsAPIClient, params *GetLogEvents
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *GetLogEventsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+	return p.firstPage || (p.nextToken != nil && p.nextToken != p.lastToken)
 }
 
 // NextPage retrieves the next GetLogEvents page.
@@ -278,6 +279,7 @@ func (p *GetLogEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	params := *p.params
 	params.NextToken = p.nextToken
+	*p.lastToken = *p.nextToken
 
 	var limit *int32
 	if p.options.Limit > 0 {
