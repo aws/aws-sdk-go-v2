@@ -2255,7 +2255,7 @@
                 "domainNameId": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the domain name resource. Supported only for private custom domain names.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the domain name resource. Required for private custom domain names.</p>",
                         "smithy.api#httpQuery": "domainNameId"
                     }
                 },
@@ -6765,7 +6765,7 @@
                 "domainNameId": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n  The identifier for the domain name resource. Supported only for private custom domain names.\n</p>",
+                        "smithy.api#documentation": "<p>\n  The identifier for the domain name resource. Required for private custom domain names.\n</p>",
                         "smithy.api#httpQuery": "domainNameId"
                     }
                 }

@@ -1432,6 +1432,18 @@
                         "smithy.api#enumValue": "POWERPRO"
                     }
                 },
+                "GENERALPURPOSE_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERALPURPOSE_4XLARGE"
+                    }
+                },
+                "GENERALPURPOSE_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERALPURPOSE_8XLARGE"
+                    }
+                },
                 "GRAPHICSPRO": {
                     "target": "smithy.api#Unit",
                     "traits": {

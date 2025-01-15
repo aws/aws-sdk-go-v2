@@ -1710,7 +1710,8 @@
                 "type": {
                     "target": "com.amazonaws.workspacesthinclient#MaintenanceWindowType",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to select the default or custom maintenance window.</p>"
+                        "smithy.api#documentation": "<p>An option to select the default or custom maintenance window.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "startTimeHour": {
