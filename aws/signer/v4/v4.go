@@ -483,25 +483,37 @@ func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, he
 }
 
 func (s *httpSigner) buildCanonicalString(method, uri, query, signedHeaders, canonicalHeaders string) string {
-	return strings.Join([]string{
-		method,
-		uri,
-		query,
-		canonicalHeaders,
-		signedHeaders,
-		s.PayloadHash,
-	}, "\n")
+	var sb strings.Builder
+	sb.Grow(len(method) + 1 + len(uri) + 1 + len(query) + 1 + len(canonicalHeaders) + 1 + len(signedHeaders) + 1 + len(s.PayloadHash))
+	sb.WriteString(method)
+	sb.WriteByte('\n')
+	sb.WriteString(uri)
+	sb.WriteByte('\n')
+	sb.WriteString(query)
+	sb.WriteByte('\n')
+	sb.WriteString(canonicalHeaders)
+	sb.WriteByte('\n')
+	sb.WriteString(signedHeaders)
+	sb.WriteByte('\n')
+	sb.WriteString(s.PayloadHash)
+	return sb.String()
 }
 
 func (s *httpSigner) buildStringToSign(credentialScope, canonicalRequestString string) string {
 	h := sha256.Sum256([]byte(canonicalRequestString))
+	encodedHash := hex.EncodeToString(h[:])
+	t := s.Time.TimeFormat()
 
-	return strings.Join([]string{
-		signingAlgorithm,
-		s.Time.TimeFormat(),
-		credentialScope,
-		hex.EncodeToString(h[:]),
-	}, "\n")
+	var sb strings.Builder
+	sb.Grow(len(signingAlgorithm) + 1 + len(t) + 1 + len(credentialScope) + 1 + len(encodedHash))
+	sb.WriteString(signingAlgorithm)
+	sb.WriteByte('\n')
+	sb.WriteString(t)
+	sb.WriteByte('\n')
+	sb.WriteString(credentialScope)
+	sb.WriteByte('\n')
+	sb.WriteString(encodedHash)
+	return sb.String()
 }
 
 func makeHash(hash hash.Hash, b []byte) []byte {
