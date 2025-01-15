@@ -375,7 +375,7 @@ func (s *Signer) PresignHTTP(
 
 	logSigningInfo(ctx, options, &signedRequest, true)
 
-	signedHeaders = make(http.Header)
+	signedHeaders = make(http.Header, len(signedRequest.SignedHeaders))
 
 	// For the signed headers we canonicalize the header keys in the returned map.
 	// This avoids situations where can standard library double headers like host header. For example the standard
