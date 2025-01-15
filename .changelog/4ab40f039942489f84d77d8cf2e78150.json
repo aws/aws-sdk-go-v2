@@ -1,0 +1,8 @@
+{
+    "id": "4ab40f03-9942-489f-84d7-7d8cf2e78150",
+    "type": "feature",
+    "description": "Added GeneralPurpose.4xlarge \u0026 GeneralPurpose.8xlarge ComputeTypes.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

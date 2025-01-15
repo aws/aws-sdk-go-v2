@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Use this action to submit an opportunity that was previously created by
-//
-// partner for AWS review. After you perform this action, the opportunity becomes
+// Use this action to submit an Opportunity that was previously created by partner
+// for AWS review. After you perform this action, the Opportunity becomes
 // non-editable until it is reviewed by AWS and has LifeCycle.ReviewStatus  as
 // either Approved or Action Required .
 func (c *Client) SubmitOpportunity(ctx context.Context, params *SubmitOpportunityInput, optFns ...func(*Options)) (*SubmitOpportunityOutput, error) {
@@ -33,24 +32,41 @@ func (c *Client) SubmitOpportunity(ctx context.Context, params *SubmitOpportunit
 
 type SubmitOpportunityInput struct {
 
-	//  Specifies the catalog related to the request.
+	// Specifies the catalog related to the request. Valid values are:
+	//
+	//   - AWS: Submits the opportunity request from the production AWS environment.
+	//
+	//   - Sandbox: Submits the opportunity request from a sandbox environment used
+	//   for testing or development purposes.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  The identifier of the opportunity previously created by partner and needs to
-	// be submitted.
+	// The identifier of the Opportunity previously created by partner and needs to be
+	// submitted.
 	//
 	// This member is required.
 	Identifier *string
 
-	//  Specifies the level of AWS sellers' involvement on the opportunity.
+	// Specifies the level of AWS sellers' involvement on the opportunity. Valid
+	// values:
+	//
+	//   - Co-sell : Indicates the user wants to co-sell with AWS. Share the
+	//   opportunity with AWS to receive deal assistance and support.
+	//
+	//   - For Visibility Only : Indicates that the user does not need support from AWS
+	//   Sales Rep. Share this opportunity with AWS for visibility only, you will not
+	//   receive deal assistance and support.
 	//
 	// This member is required.
 	InvolvementType types.SalesInvolvementType
 
-	//  Determines whether to restrict visibility of the opportunity from AWS sales.
-	// Default value is Full.
+	// Determines whether to restrict visibility of the opportunity from AWS sales.
+	// Default value is Full. Valid values:
+	//
+	//   - Full : The opportunity is fully visible to AWS sales.
+	//
+	//   - Limited : The opportunity has restricted visibility to AWS sales.
 	Visibility types.Visibility
 
 	noSmithyDocumentSerde

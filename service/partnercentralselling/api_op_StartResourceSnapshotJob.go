@@ -28,12 +28,17 @@ func (c *Client) StartResourceSnapshotJob(ctx context.Context, params *StartReso
 
 type StartResourceSnapshotJobInput struct {
 
-	//  Specifies the catalog related to the request.
+	// Specifies the catalog related to the request. Valid values are:
+	//
+	//   - AWS: Starts the request from the production AWS environment.
+	//
+	//   - Sandbox: Starts the request from a sandbox environment used for testing or
+	//   development purposes.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  The identifier of the resource snapshot job to start.
+	// The identifier of the resource snapshot job to start.
 	//
 	// This member is required.
 	ResourceSnapshotJobIdentifier *string

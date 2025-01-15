@@ -1652,12 +1652,12 @@ const (
 	ReasonCodeEngagementConflict                  ReasonCode = "EngagementConflict"
 	ReasonCodeOpportunitySubmissionFailed         ReasonCode = "OpportunitySubmissionFailed"
 	ReasonCodeEngagementInvitationConflict        ReasonCode = "EngagementInvitationConflict"
+	ReasonCodeInternalError                       ReasonCode = "InternalError"
 	ReasonCodeOpportunityValidationFailed         ReasonCode = "OpportunityValidationFailed"
 	ReasonCodeOpportunityConflict                 ReasonCode = "OpportunityConflict"
 	ReasonCodeResourceSnapshotAccessDenied        ReasonCode = "ResourceSnapshotAccessDenied"
 	ReasonCodeResourceSnapshotValidationFailed    ReasonCode = "ResourceSnapshotValidationFailed"
 	ReasonCodeResourceSnapshotConflict            ReasonCode = "ResourceSnapshotConflict"
-	ReasonCodeInternalError                       ReasonCode = "InternalError"
 	ReasonCodeServiceQuotaExceeded                ReasonCode = "ServiceQuotaExceeded"
 	ReasonCodeRequestThrottled                    ReasonCode = "RequestThrottled"
 )
@@ -1679,12 +1679,12 @@ func (ReasonCode) Values() []ReasonCode {
 		"EngagementConflict",
 		"OpportunitySubmissionFailed",
 		"EngagementInvitationConflict",
+		"InternalError",
 		"OpportunityValidationFailed",
 		"OpportunityConflict",
 		"ResourceSnapshotAccessDenied",
 		"ResourceSnapshotValidationFailed",
 		"ResourceSnapshotConflict",
-		"InternalError",
 		"ServiceQuotaExceeded",
 		"RequestThrottled",
 	}

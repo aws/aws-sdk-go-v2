@@ -22,7 +22,7 @@ import (
 //
 //   - To associate a solution with the opportunity, use AssociateOpportunity .
 //
-//   - To submit the opportunity, use StartEngagementFromOpportunityTask .
+//   - To start the engagement with AWS, use StartEngagementFromOpportunity .
 //
 // After submission, you can't edit the opportunity until the review is complete.
 // But opportunities in the Pending Submission state must have complete details.
@@ -154,12 +154,6 @@ type CreateOpportunityInput struct {
 	//
 	//   - Cosell—Support for Public Tender/RFx: Opportunity related to the public
 	//   sector where the partner needs Amazon Web Services RFx support.
-	//
-	//   - Do Not Need Support from AWS Sales Rep: Indicates that a partner doesn't
-	//   need support from an Amazon Web Services sales representative, and the partner
-	//   solely manages the opportunity. It's possible to request coselling support on
-	//   these opportunities at any stage during their lifecycles. This is also known as
-	//   a for-visibility-only (FVO) opportunity.
 	PrimaryNeedsFromAws []types.PrimaryNeedFromAws
 
 	// An object that contains project details for the Opportunity .

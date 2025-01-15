@@ -83,8 +83,7 @@ type GetResourceSnapshotOutput struct {
 	// This member is required.
 	Catalog *string
 
-	//  The Amazon Resource Name (ARN) of the snapshot. This globally unique
-	// identifier can be used for resource-specific operations across AWS services.
+	// The Amazon Resource Name (ARN) that uniquely identifies the resource snapshot.
 	Arn *string
 
 	// The timestamp when the snapshot was created, in ISO 8601 format (e.g.,
@@ -105,19 +104,19 @@ type GetResourceSnapshotOutput struct {
 	// opportunity summaries.
 	Payload types.ResourceSnapshotPayload
 
-	//  The identifier of the specific resource that was snapshotted. Matches the
+	// The identifier of the specific resource that was snapshotted. Matches the
 	// ResourceIdentifier specified in the request.
 	ResourceId *string
 
-	//  The name of the view used for this snapshot. This is the same as the template
+	// The name of the view used for this snapshot. This is the same as the template
 	// name.
 	ResourceSnapshotTemplateName *string
 
-	//  The type of the resource that was snapshotted. Matches the ResourceType
+	// The type of the resource that was snapshotted. Matches the ResourceType
 	// specified in the request.
 	ResourceType types.ResourceType
 
-	//  The revision number of this snapshot. This is a positive integer that is
+	// The revision number of this snapshot. This is a positive integer that is
 	// sequential and unique within the context of a resource view.
 	Revision *int32
 

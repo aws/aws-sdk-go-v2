@@ -59,16 +59,19 @@ type StartEngagementFromOpportunityTaskInput struct {
 	// This member is required.
 	Identifier *string
 
+	// A list of objects specifying each tag name and value.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 
 type StartEngagementFromOpportunityTaskOutput struct {
 
-	//  The identifier of the newly created engagement. Only populated if TaskStatus
-	// is COMPLETE.
+	// The identifier of the newly created Engagement. Only populated if TaskStatus is
+	// COMPLETE.
 	EngagementId *string
 
-	//  The identifier of the new engagement invitation. Only populated if TaskStatus
+	// The identifier of the new Engagement invitation. Only populated if TaskStatus
 	// is COMPLETE.
 	EngagementInvitationId *string
 
@@ -83,8 +86,8 @@ type StartEngagementFromOpportunityTaskOutput struct {
 	// Indicates the reason for task failure using an enumerated code.
 	ReasonCode types.ReasonCode
 
-	//  The identifier of the resource snapshot job created to add the opportunity
-	// resource snapshot to the Engagement. Only populated if TaskStatus is COMPLETE.
+	// The identifier of the resource snapshot job created to add the opportunity
+	// resource snapshot to the Engagement. Only populated if TaskStatus is COMPLETE
 	ResourceSnapshotJobId *string
 
 	// The timestamp indicating when the task was initiated. The format follows RFC

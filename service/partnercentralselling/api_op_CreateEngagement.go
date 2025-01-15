@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	The CreateEngagement action allows you to create an Engagement , which serves
-//
-// as a collaborative space between different parties such as AWS Partners and AWS
+// The CreateEngagement action allows you to create an Engagement , which serves as
+// a collaborative space between different parties such as AWS Partners and AWS
 // Sellers. This action automatically adds the caller's AWS account as an active
 // member of the newly created Engagement .
 func (c *Client) CreateEngagement(ctx context.Context, params *CreateEngagementInput, optFns ...func(*Options)) (*CreateEngagementOutput, error) {
@@ -33,37 +32,37 @@ func (c *Client) CreateEngagement(ctx context.Context, params *CreateEngagementI
 
 type CreateEngagementInput struct {
 
-	//  The CreateEngagementRequest$Catalog parameter specifies the catalog related to
+	// The CreateEngagementRequest$Catalog parameter specifies the catalog related to
 	// the engagement. Accepted values are AWS and Sandbox , which determine the
 	// environment in which the engagement is managed.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  The CreateEngagementRequest$ClientToken parameter specifies a unique,
+	// The CreateEngagementRequest$ClientToken parameter specifies a unique,
 	// case-sensitive identifier to ensure that the request is handled exactly once.
 	// The value must not exceed sixty-four alphanumeric characters.
 	//
 	// This member is required.
 	ClientToken *string
 
-	//  Provides a description of the Engagement .
+	// Provides a description of the Engagement .
 	//
 	// This member is required.
 	Description *string
 
-	//  Specifies the title of the Engagement .
+	// Specifies the title of the Engagement .
 	//
 	// This member is required.
 	Title *string
 
-	//  The Contexts field is a required array of objects, with a maximum of 5
-	// contexts allowed, specifying detailed information about customer projects
-	// associated with the Engagement. Each context object contains a Type field
-	// indicating the context type, which must be CustomerProject in this version, and
-	// a Payload field containing the CustomerProject details. The CustomerProject
-	// object is composed of two main components: Customer and Project . The Customer
-	// object includes information such as CompanyName , WebsiteUrl , Industry , and
+	// The Contexts field is a required array of objects, with a maximum of 5 contexts
+	// allowed, specifying detailed information about customer projects associated with
+	// the Engagement. Each context object contains a Type field indicating the
+	// context type, which must be CustomerProject in this version, and a Payload
+	// field containing the CustomerProject details. The CustomerProject object is
+	// composed of two main components: Customer and Project . The Customer object
+	// includes information such as CompanyName , WebsiteUrl , Industry , and
 	// CountryCode , providing essential details about the customer. The Project
 	// object contains Title , BusinessProblem , and TargetCompletionDate , offering
 	// insights into the specific project associated with the customer. This structure
@@ -77,10 +76,10 @@ type CreateEngagementInput struct {
 
 type CreateEngagementOutput struct {
 
-	//  The Amazon Resource Name (ARN) that identifies the engagement.
+	// The Amazon Resource Name (ARN) that identifies the engagement.
 	Arn *string
 
-	//  Unique identifier assigned to the newly created engagement.
+	// Unique identifier assigned to the newly created engagement.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

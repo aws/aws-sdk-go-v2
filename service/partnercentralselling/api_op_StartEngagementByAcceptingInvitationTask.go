@@ -55,6 +55,9 @@ type StartEngagementByAcceptingInvitationTaskInput struct {
 	// This member is required.
 	Identifier *string
 
+	// A list of objects specifying each tag name and value.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 
@@ -75,7 +78,7 @@ type StartEngagementByAcceptingInvitationTaskOutput struct {
 	// Indicates the reason for task failure using an enumerated code.
 	ReasonCode types.ReasonCode
 
-	//  The identifier of the resource snapshot job created as part of this task.
+	// The identifier of the Resource Snapshot Job created as part of this task.
 	ResourceSnapshotJobId *string
 
 	// The timestamp indicating when the task was initiated. The format follows RFC

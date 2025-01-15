@@ -735,10 +735,11 @@ type RecommendationType string
 
 // Enum values for RecommendationType
 const (
-	RecommendationTypeDkim  RecommendationType = "DKIM"
-	RecommendationTypeDmarc RecommendationType = "DMARC"
-	RecommendationTypeSpf   RecommendationType = "SPF"
-	RecommendationTypeBimi  RecommendationType = "BIMI"
+	RecommendationTypeDkim      RecommendationType = "DKIM"
+	RecommendationTypeDmarc     RecommendationType = "DMARC"
+	RecommendationTypeSpf       RecommendationType = "SPF"
+	RecommendationTypeBimi      RecommendationType = "BIMI"
+	RecommendationTypeComplaint RecommendationType = "COMPLAINT"
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
@@ -751,6 +752,7 @@ func (RecommendationType) Values() []RecommendationType {
 		"DMARC",
 		"SPF",
 		"BIMI",
+		"COMPLAINT",
 	}
 }
 

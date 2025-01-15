@@ -361,6 +361,58 @@ func (r *resolver) ResolveEndpoint(
 				if _UseDualStack == true {
 					if true == _PartitionResult.SupportsFIPS {
 						if true == _PartitionResult.SupportsDualStack {
+							if _Region == "us-east-1" {
+								uriString := "https://cognito-identity-fips.us-east-1.amazonaws.com"
+
+								uri, err := url.Parse(uriString)
+								if err != nil {
+									return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+								}
+
+								return smithyendpoints.Endpoint{
+									URI:     *uri,
+									Headers: http.Header{},
+								}, nil
+							}
+							if _Region == "us-east-2" {
+								uriString := "https://cognito-identity-fips.us-east-2.amazonaws.com"
+
+								uri, err := url.Parse(uriString)
+								if err != nil {
+									return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+								}
+
+								return smithyendpoints.Endpoint{
+									URI:     *uri,
+									Headers: http.Header{},
+								}, nil
+							}
+							if _Region == "us-west-1" {
+								uriString := "https://cognito-identity-fips.us-west-1.amazonaws.com"
+
+								uri, err := url.Parse(uriString)
+								if err != nil {
+									return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+								}
+
+								return smithyendpoints.Endpoint{
+									URI:     *uri,
+									Headers: http.Header{},
+								}, nil
+							}
+							if _Region == "us-west-2" {
+								uriString := "https://cognito-identity-fips.us-west-2.amazonaws.com"
+
+								uri, err := url.Parse(uriString)
+								if err != nil {
+									return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+								}
+
+								return smithyendpoints.Endpoint{
+									URI:     *uri,
+									Headers: http.Header{},
+								}, nil
+							}
 							uriString := func() string {
 								var out strings.Builder
 								out.WriteString("https://cognito-identity-fips.")
@@ -409,6 +461,25 @@ func (r *resolver) ResolveEndpoint(
 			}
 			if _UseDualStack == true {
 				if true == _PartitionResult.SupportsDualStack {
+					if "aws" == _PartitionResult.Name {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://cognito-identity.")
+							out.WriteString(_Region)
+							out.WriteString(".amazonaws.com")
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+						}, nil
+					}
 					uriString := func() string {
 						var out strings.Builder
 						out.WriteString("https://cognito-identity.")

@@ -1,0 +1,8 @@
+{
+    "id": "a8bc4a5a-a3f8-4ed3-8fe7-15d77e4c932d",
+    "type": "feature",
+    "description": "Add Tagging support for ResourceSnapshotJob resources",
+    "modules": [
+        "service/partnercentralselling"
+    ]
+}

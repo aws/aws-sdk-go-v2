@@ -5,6 +5,7 @@ package workspacesthinclient
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -321,6 +322,21 @@ func addOpUpdateSoftwareSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSoftwareSet{}, middleware.After)
 }
 
+func validateMaintenanceWindow(v *types.MaintenanceWindow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MaintenanceWindow"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -328,6 +344,11 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentInput"}
 	if v.DesktopArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DesktopArn"))
+	}
+	if v.MaintenanceWindow != nil {
+		if err := validateMaintenanceWindow(v.MaintenanceWindow); err != nil {
+			invalidParams.AddNested("MaintenanceWindow", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -499,6 +520,11 @@ func validateOpUpdateEnvironmentInput(v *UpdateEnvironmentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnvironmentInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.MaintenanceWindow != nil {
+		if err := validateMaintenanceWindow(v.MaintenanceWindow); err != nil {
+			invalidParams.AddNested("MaintenanceWindow", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

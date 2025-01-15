@@ -364,8 +364,7 @@ type Customer struct {
 	noSmithyDocumentSerde
 }
 
-//	The CustomerProjects structure in Engagements offers a flexible framework for
-//
+// The CustomerProjects structure in Engagements offers a flexible framework for
 // managing customer-project relationships. It supports multiple customers per
 // Engagement and multiple projects per customer, while also allowing for customers
 // without projects and projects without specific customers.
@@ -381,7 +380,7 @@ type CustomerProjectsContext struct {
 	// including company information and industry.
 	Customer *EngagementCustomer
 
-	//  Information about the customer project associated with the Engagement.
+	// Information about the customer project associated with the Engagement.
 	Project *EngagementCustomerProjectDetails
 
 	noSmithyDocumentSerde
@@ -396,27 +395,25 @@ type CustomerSummary struct {
 	noSmithyDocumentSerde
 }
 
-//	Provides detailed context information for an Engagement. This structure allows
-//
+// Provides detailed context information for an Engagement. This structure allows
 // for specifying the type of context and its associated payload.
 type EngagementContextDetails struct {
 
-	//  Specifies the type of Engagement context. Valid values are "CustomerProject"
-	// or "Document", indicating whether the context relates to a customer project or a
+	// Specifies the type of Engagement context. Valid values are "CustomerProject" or
+	// "Document", indicating whether the context relates to a customer project or a
 	// document respectively.
 	//
 	// This member is required.
 	Type EngagementContextType
 
-	//  Contains the specific details of the Engagement context. The structure of this
+	// Contains the specific details of the Engagement context. The structure of this
 	// payload varies depending on the Type field.
 	Payload EngagementContextPayload
 
 	noSmithyDocumentSerde
 }
 
-//	Represents the payload of an Engagement context. The structure of this payload
-//
+// Represents the payload of an Engagement context. The structure of this payload
 // varies based on the context type specified in the EngagementContextDetails.
 //
 // The following types satisfy this interface:
@@ -426,9 +423,8 @@ type EngagementContextPayload interface {
 	isEngagementContextPayload()
 }
 
-//	Contains detailed information about a customer project when the context type
-//
-// is "CustomerProject". This field is present only when the Type in
+// Contains detailed information about a customer project when the context type is
+// "CustomerProject". This field is present only when the Type in
 // EngagementContextDetails is set to "CustomerProject".
 type EngagementContextPayloadMemberCustomerProject struct {
 	Value CustomerProjectsContext
@@ -469,23 +465,22 @@ type EngagementCustomer struct {
 	noSmithyDocumentSerde
 }
 
-//	Provides comprehensive details about a customer project associated with an
-//
+// Provides comprehensive details about a customer project associated with an
 // Engagement. This may include information such as project goals, timelines, and
 // specific customer requirements.
 type EngagementCustomerProjectDetails struct {
 
-	//  A description of the business problem the project aims to solve.
+	// A description of the business problem the project aims to solve.
 	//
 	// This member is required.
 	BusinessProblem *string
 
-	//  The target completion date for the customer's project.
+	// The target completion date for the customer's project.
 	//
 	// This member is required.
 	TargetCompletionDate *string
 
-	//  The title of the project.
+	// The title of the project.
 	//
 	// This member is required.
 	Title *string
@@ -580,14 +575,14 @@ type EngagementInvitationSummary struct {
 // Engagement structure.
 type EngagementMember struct {
 
-	//  This is the unique identifier for the AWS account associated with the member
+	// This is the unique identifier for the AWS account associated with the member
 	// organization. It's used for AWS-related operations and identity verification.
 	AccountId *string
 
-	//  The official name of the member's company or organization.
+	// The official name of the member's company or organization.
 	CompanyName *string
 
-	//  The URL of the member company's website. This offers a way to find more
+	// The URL of the member company's website. This offers a way to find more
 	// information about the member organization and serves as an additional
 	// identifier.
 	WebsiteUrl *string
@@ -595,17 +590,16 @@ type EngagementMember struct {
 	noSmithyDocumentSerde
 }
 
-//	The EngagementMemberSummary provides a snapshot of essential information about
-//
+// The EngagementMemberSummary provides a snapshot of essential information about
 // participants in an AWS Partner Central Engagement. This compact data structure
 // encapsulates key details of each member, facilitating efficient collaboration
 // and management within the Engagement.
 type EngagementMemberSummary struct {
 
-	//  The official name of the member's company or organization.
+	// The official name of the member's company or organization.
 	CompanyName *string
 
-	//  The URL of the member company's website. This offers a way to find more
+	// The URL of the member company's website. This offers a way to find more
 	// information about the member organization and serves as an additional
 	// identifier.
 	WebsiteUrl *string
@@ -628,7 +622,8 @@ type EngagementResourceAssociationSummary struct {
 	// This member is required.
 	Catalog *string
 
-	//  The AWS account ID of the entity that created the association.
+	// The AWS account ID of the entity that owns the resource. Identifies the account
+	// responsible for or having primary control over the resource.
 	CreatedBy *string
 
 	//  A unique identifier for the engagement associated with the resource.
@@ -647,12 +642,12 @@ type EngagementResourceAssociationSummary struct {
 // Specifies the sorting parameters for listing Engagements.
 type EngagementSort struct {
 
-	//  The field by which to sort the results.
+	// The field by which to sort the results.
 	//
 	// This member is required.
 	SortBy EngagementSortName
 
-	//  The order in which to sort the results.
+	// The order in which to sort the results.
 	//
 	// This member is required.
 	SortOrder SortOrder
@@ -663,22 +658,22 @@ type EngagementSort struct {
 // An object that contains an Engagement 's subset of fields.
 type EngagementSummary struct {
 
-	//  The Amazon Resource Name (ARN) of the created engagement.
+	// The Amazon Resource Name (ARN) of the created Engagement.
 	Arn *string
 
-	//  The date and time when the engagement was created.
+	// The date and time when the Engagement was created.
 	CreatedAt *time.Time
 
-	//  The AWS account ID of the engagement creator.
+	// The AWS Account ID of the Engagement creator.
 	CreatedBy *string
 
-	//  The unique identifier for the engagement.
+	// The unique identifier for the Engagement.
 	Id *string
 
-	//  The number of members in the engagement.
+	// The number of members in the Engagement.
 	MemberCount *int32
 
-	//  The title of the engagement.
+	// The title of the Engagement.
 	Title *string
 
 	noSmithyDocumentSerde
@@ -715,7 +710,7 @@ type ExpectedCustomerSpend struct {
 	// This member is required.
 	TargetCompany *string
 
-	//  A URL providing additional information or context about the spend estimation.
+	// A URL providing additional information or context about the spend estimation.
 	EstimationUrl *string
 
 	noSmithyDocumentSerde
@@ -1112,8 +1107,7 @@ type ListEngagementFromOpportunityTaskSummary struct {
 	// field is populated when the task is completed successfully.
 	EngagementId *string
 
-	//  The unique identifier of the engagement identifier created as a result of the
-	// task. This field is populated when the task is completed successfully.
+	// The unique identifier of the Engagement Invitation.
 	EngagementInvitationId *string
 
 	//  A detailed message providing additional information about the task, especially
@@ -1748,9 +1742,7 @@ type ResourceSnapshotJobSummary struct {
 	//  The Amazon Resource Name (ARN) for the resource snapshot job.
 	Arn *string
 
-	//  The unique identifier for the engagement within the AWS Partner Central
-	// system. This ID is used for direct references to the engagement within the
-	// service.
+	// The unique identifier of the Engagement.
 	EngagementId *string
 
 	//  The unique identifier for the resource snapshot job within the AWS Partner
@@ -1758,7 +1750,13 @@ type ResourceSnapshotJobSummary struct {
 	// service.
 	Id *string
 
-	//  Represents the current status of the resource snapshot job.
+	// The current status of the snapshot job.
+	//
+	// Valid values:
+	//
+	//   - STOPPED: The job is not currently running.
+	//
+	//   - RUNNING: The job is actively executing.
 	Status ResourceSnapshotJobStatus
 
 	noSmithyDocumentSerde
@@ -1795,8 +1793,8 @@ type ResourceSnapshotSummary struct {
 	// identifier can be used for cross-service references and in IAM policies.
 	Arn *string
 
-	// The AWS account ID of the principal (user or role) who created the snapshot.
-	// This helps in tracking the origin of the snapshot.
+	// The AWS account ID of the entity that owns the resource from which the snapshot
+	// was created.
 	CreatedBy *string
 
 	// The identifier of the specific resource snapshotted. The format might vary
@@ -1809,7 +1807,7 @@ type ResourceSnapshotSummary struct {
 	// The type of resource snapshotted.
 	ResourceType ResourceType
 
-	//  The revision number of the snapshot. This integer value is incremented each
+	// The revision number of the snapshot. This integer value is incremented each
 	// time the snapshot is updated, allowing for version tracking of the resource
 	// snapshot.
 	Revision *int32
@@ -1946,6 +1944,22 @@ type SortObject struct {
 
 	//  Determines the order in which the sorted results are presented.
 	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// The key-value pair assigned to a specified resource.
+type Tag struct {
+
+	// The key in the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The value in the tag.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

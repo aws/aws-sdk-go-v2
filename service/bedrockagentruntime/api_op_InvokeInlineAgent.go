@@ -33,9 +33,6 @@ import (
 //     knowledge base, uses default prompts, has no action group, and user input is
 //     disabled.
 //
-// The CLI doesn't support streaming operations in Amazon Bedrock, including
-// InvokeInlineAgent .
-//
 // [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 func (c *Client) InvokeInlineAgent(ctx context.Context, params *InvokeInlineAgentInput, optFns ...func(*Options)) (*InvokeInlineAgentOutput, error) {
 	if params == nil {
@@ -131,6 +128,12 @@ type InvokeInlineAgentInput struct {
 	//  Configurations for advanced prompts used to override the default prompts to
 	// enhance the accuracy of the inline agent.
 	PromptOverrideConfiguration *types.PromptOverrideConfiguration
+
+	//  Specifies the configurations for streaming.
+	//
+	// To use agent streaming, you need permissions to perform the
+	// bedrock:InvokeModelWithResponseStream action.
+	StreamingConfigurations *types.StreamingConfigurations
 
 	noSmithyDocumentSerde
 }

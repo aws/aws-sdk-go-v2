@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This action allows users to retrieve a list of engagement records from Partner
-//
+// This action allows users to retrieve a list of Engagement records from Partner
 // Central. This action can be used to manage and track various engagements across
 // different stages of the partner selling process.
 func (c *Client) ListEngagements(ctx context.Context, params *ListEngagementsInput, optFns ...func(*Options)) (*ListEngagementsOutput, error) {
@@ -42,17 +41,17 @@ type ListEngagementsInput struct {
 	// by specific team members.
 	CreatedBy []string
 
-	//  An array of strings representing engagement identifiers to retrieve.
+	// An array of strings representing engagement identifiers to retrieve.
 	EngagementIdentifier []string
 
-	//  An array of strings representing AWS Account IDs. Use this to exclude
+	// An array of strings representing AWS Account IDs. Use this to exclude
 	// engagements created by specific users.
 	ExcludeCreatedBy []string
 
-	//  The maximum number of results to return in a single call.
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	//  The token for the next set of results. This value is returned from a previous
+	// The token for the next set of results. This value is returned from a previous
 	// call.
 	NextToken *string
 
@@ -64,13 +63,13 @@ type ListEngagementsInput struct {
 
 type ListEngagementsOutput struct {
 
-	//  An array of engagement summary objects.
+	// An array of engagement summary objects.
 	//
 	// This member is required.
 	EngagementSummaryList []types.EngagementSummary
 
-	//  The token to retrieve the next set of results. This field will be null if
-	// there are no more results.
+	// The token to retrieve the next set of results. This field will be null if there
+	// are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -181,7 +180,7 @@ func (c *Client) addOperationListEngagementsMiddlewares(stack *middleware.Stack,
 
 // ListEngagementsPaginatorOptions is the paginator options for ListEngagements
 type ListEngagementsPaginatorOptions struct {
-	//  The maximum number of results to return in a single call.
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

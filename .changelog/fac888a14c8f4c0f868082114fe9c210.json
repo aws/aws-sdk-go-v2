@@ -1,0 +1,8 @@
+{
+    "id": "fac888a1-4c8f-4c0f-8680-82114fe9c210",
+    "type": "feature",
+    "description": "corrects the dual-stack endpoint configuration",
+    "modules": [
+        "service/cognitoidentity"
+    ]
+}

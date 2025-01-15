@@ -257,6 +257,11 @@ type EnvironmentSummary struct {
 // Describes the maintenance window for a thin client device.
 type MaintenanceWindow struct {
 
+	// An option to select the default or custom maintenance window.
+	//
+	// This member is required.
+	Type MaintenanceWindowType
+
 	// The option to set the maintenance window during the device local time or
 	// Universal Coordinated Time (UTC).
 	ApplyTimeOf ApplyTimeOf
@@ -275,9 +280,6 @@ type MaintenanceWindow struct {
 
 	// The minutes past the hour for the maintenance window start ( 00 - 59 ).
 	StartTimeMinute *int32
-
-	// An option to select the default or custom maintenance window.
-	Type MaintenanceWindowType
 
 	noSmithyDocumentSerde
 }

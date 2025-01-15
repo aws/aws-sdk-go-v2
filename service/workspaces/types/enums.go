@@ -377,15 +377,17 @@ type Compute string
 
 // Enum values for Compute
 const (
-	ComputeValue           Compute = "VALUE"
-	ComputeStandard        Compute = "STANDARD"
-	ComputePerformance     Compute = "PERFORMANCE"
-	ComputePower           Compute = "POWER"
-	ComputeGraphics        Compute = "GRAPHICS"
-	ComputePowerpro        Compute = "POWERPRO"
-	ComputeGraphicspro     Compute = "GRAPHICSPRO"
-	ComputeGraphicsG4dn    Compute = "GRAPHICS_G4DN"
-	ComputeGraphicsproG4dn Compute = "GRAPHICSPRO_G4DN"
+	ComputeValue                 Compute = "VALUE"
+	ComputeStandard              Compute = "STANDARD"
+	ComputePerformance           Compute = "PERFORMANCE"
+	ComputePower                 Compute = "POWER"
+	ComputeGraphics              Compute = "GRAPHICS"
+	ComputePowerpro              Compute = "POWERPRO"
+	ComputeGeneralpurpose4xlarge Compute = "GENERALPURPOSE_4XLARGE"
+	ComputeGeneralpurpose8xlarge Compute = "GENERALPURPOSE_8XLARGE"
+	ComputeGraphicspro           Compute = "GRAPHICSPRO"
+	ComputeGraphicsG4dn          Compute = "GRAPHICS_G4DN"
+	ComputeGraphicsproG4dn       Compute = "GRAPHICSPRO_G4DN"
 )
 
 // Values returns all known values for Compute. Note that this can be expanded in
@@ -400,6 +402,8 @@ func (Compute) Values() []Compute {
 		"POWER",
 		"GRAPHICS",
 		"POWERPRO",
+		"GENERALPURPOSE_4XLARGE",
+		"GENERALPURPOSE_8XLARGE",
 		"GRAPHICSPRO",
 		"GRAPHICS_G4DN",
 		"GRAPHICSPRO_G4DN",

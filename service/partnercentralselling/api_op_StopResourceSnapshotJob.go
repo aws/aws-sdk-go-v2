@@ -28,12 +28,17 @@ func (c *Client) StopResourceSnapshotJob(ctx context.Context, params *StopResour
 
 type StopResourceSnapshotJobInput struct {
 
-	//  Specifies the catalog related to the request.
+	// Specifies the catalog related to the request. Valid values are:
+	//
+	//   - AWS: Stops the request from the production AWS environment.
+	//
+	//   - Sandbox: Stops the request from a sandbox environment used for testing or
+	//   development purposes.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  The identifier of the job to stop.
+	// The identifier of the job to stop.
 	//
 	// This member is required.
 	ResourceSnapshotJobIdentifier *string

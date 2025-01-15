@@ -37,7 +37,7 @@ type GetDomainNameInput struct {
 	// This member is required.
 	DomainName *string
 
-	//  The identifier for the domain name resource. Supported only for private custom
+	//  The identifier for the domain name resource. Required for private custom
 	// domain names.
 	DomainNameId *string
 

@@ -158,12 +158,6 @@ type GetOpportunityOutput struct {
 	//
 	//   - Cosell—Support for Public Tender/RFx: Opportunity related to the public
 	//   sector where the partner needs Amazon Web Services RFx support.
-	//
-	//   - Do Not Need Support from Amazon Web Services Sales Rep: Indicates that a
-	//   partner doesn't need support from an Amazon Web Services sales representative,
-	//   and the partner solely manages the opportunity. It's possible to request
-	//   coselling support on these opportunities at any stage during their lifecycle.
-	//   Also known as, for-visibility-only (FVO) opportunity.
 	PrimaryNeedsFromAws []types.PrimaryNeedFromAws
 
 	// An object that contains project details summary for the Opportunity .

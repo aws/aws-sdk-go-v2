@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Use this action to create a job to generate a snapshot of the specified
-//
+// Use this action to create a job to generate a snapshot of the specified
 // resource within an engagement. It initiates an asynchronous process to create a
 // resource snapshot. The job creates a new snapshot only if the resource state has
 // changed, adhering to the same access control and immutability rules as direct
@@ -34,50 +33,53 @@ func (c *Client) CreateResourceSnapshotJob(ctx context.Context, params *CreateRe
 
 type CreateResourceSnapshotJobInput struct {
 
-	//  Specifies the catalog in which to create the snapshot job. Valid values are AWS
+	// Specifies the catalog in which to create the snapshot job. Valid values are AWS
 	// and Sandbox .
 	//
 	// This member is required.
 	Catalog *string
 
-	//  Specifies a unique, client-generated UUID to ensure that the request is
-	// handled exactly once. This token helps prevent duplicate snapshot job creations.
+	// A client-generated UUID used for idempotency check. The token helps prevent
+	// duplicate job creations.
 	//
 	// This member is required.
 	ClientToken *string
 
-	//  Specifies the identifier of the engagement associated with the resource to be
+	// Specifies the identifier of the engagement associated with the resource to be
 	// snapshotted.
 	//
 	// This member is required.
 	EngagementIdentifier *string
 
-	//  Specifies the identifier of the specific resource to be snapshotted. The
-	// format depends on the ResourceType .
+	// Specifies the identifier of the specific resource to be snapshotted. The format
+	// depends on the ResourceType .
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	//  Specifies the name of the template that defines the schema for the snapshot.
+	// Specifies the name of the template that defines the schema for the snapshot.
 	//
 	// This member is required.
 	ResourceSnapshotTemplateIdentifier *string
 
-	//  The type of resource for which the snapshot job is being created. Must be one
-	// of the supported resource types Opportunity .
+	// The type of resource for which the snapshot job is being created. Must be one
+	// of the supported resource types i.e. Opportunity
 	//
 	// This member is required.
 	ResourceType types.ResourceType
+
+	// A list of objects specifying each tag name and value.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
 type CreateResourceSnapshotJobOutput struct {
 
-	//  The Amazon Resource Name (ARN) of the created snapshot job.
+	// The Amazon Resource Name (ARN) of the created snapshot job.
 	Arn *string
 
-	//  The unique identifier for the created snapshot job.
+	// The unique identifier for the created snapshot job.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

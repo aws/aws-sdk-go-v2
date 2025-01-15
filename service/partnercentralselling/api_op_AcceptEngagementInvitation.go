@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Use the AcceptEngagementInvitation action to accept an engagement invitation
-//
+// Use the AcceptEngagementInvitation action to accept an engagement invitation
 // shared by AWS. Accepting the invitation indicates your willingness to
 // participate in the engagement, granting you access to all engagement-related
 // data.
@@ -32,7 +31,7 @@ func (c *Client) AcceptEngagementInvitation(ctx context.Context, params *AcceptE
 
 type AcceptEngagementInvitationInput struct {
 
-	//  The CatalogType parameter specifies the catalog associated with the engagement
+	// The CatalogType parameter specifies the catalog associated with the engagement
 	// invitation. Accepted values are AWS and Sandbox , which determine the
 	// environment in which the engagement invitation is managed.
 	//

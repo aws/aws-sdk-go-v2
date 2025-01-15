@@ -12,9 +12,7 @@ import (
 	"time"
 )
 
-//	Use this action to retrieves information about a specific resource snapshot
-//
-// job.
+// Use this action to retrieves information about a specific resource snapshot job.
 func (c *Client) GetResourceSnapshotJob(ctx context.Context, params *GetResourceSnapshotJobInput, optFns ...func(*Options)) (*GetResourceSnapshotJobOutput, error) {
 	if params == nil {
 		params = &GetResourceSnapshotJobInput{}
@@ -32,7 +30,7 @@ func (c *Client) GetResourceSnapshotJob(ctx context.Context, params *GetResource
 
 type GetResourceSnapshotJobInput struct {
 
-	//  Specifies the catalog related to the request. Valid values are:
+	// Specifies the catalog related to the request. Valid values are:
 	//
 	//   - AWS: Retrieves the snapshot job from the production AWS environment.
 	//
@@ -42,7 +40,7 @@ type GetResourceSnapshotJobInput struct {
 	// This member is required.
 	Catalog *string
 
-	//  The unique identifier of the resource snapshot job to be retrieved. This
+	// The unique identifier of the resource snapshot job to be retrieved. This
 	// identifier is crucial for pinpointing the specific job you want to query.
 	//
 	// This member is required.
@@ -53,54 +51,54 @@ type GetResourceSnapshotJobInput struct {
 
 type GetResourceSnapshotJobOutput struct {
 
-	//  The catalog in which the snapshot job was created. This will match the catalog
+	// The catalog in which the snapshot job was created. This will match the Catalog
 	// specified in the request.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  he Amazon Resource Name (ARN) of the snapshot job. This globally unique
+	// The Amazon Resource Name (ARN) of the snapshot job. This globally unique
 	// identifier can be used for resource-specific operations across AWS services.
 	Arn *string
 
-	//  The date and time when the snapshot job was created, in ISO 8601 format (UTC).
+	// The date and time when the snapshot job was created in ISO 8601 format (UTC).
 	// Example: "2023-05-01T20:37:46Z"
 	CreatedAt *time.Time
 
-	//  The identifier of the engagement associated with this snapshot job. This links
+	// The identifier of the engagement associated with this snapshot job. This links
 	// the job to a specific engagement context.
 	EngagementId *string
 
-	//  The unique identifier of the snapshot job. This matches the
+	// The unique identifier of the snapshot job. This matches the
 	// ResourceSnapshotJobIdentifier provided in the request.
 	Id *string
 
-	//  If the job has encountered any failures, this field contains the error message
+	// If the job has encountered any failures, this field contains the error message
 	// from the most recent failure. This can be useful for troubleshooting issues with
 	// the job.
 	LastFailure *string
 
-	//  The date and time of the last successful execution of the job, in ISO 8601
+	// The date and time of the last successful execution of the job, in ISO 8601
 	// format (UTC). Example: "2023-05-01T20:37:46Z"
 	LastSuccessfulExecutionDate *time.Time
 
-	//  The Amazon Resource Name (ARN) of the resource being snapshotted. This
-	// provides a globally unique identifier for the resource across AWS.
+	// The Amazon Resource Name (ARN) of the resource being snapshotted. This provides
+	// a globally unique identifier for the resource across AWS.
 	ResourceArn *string
 
-	//  The identifier of the specific resource being snapshotted. The format may vary
-	// depending on the ResourceType .
+	// The identifier of the specific resource being snapshotted. The format might
+	// vary depending on the ResourceType.
 	ResourceId *string
 
-	//  The name of the template used for creating the snapshot. This is the same as
+	// The name of the template used for creating the snapshot. This is the same as
 	// the template name. It defines the structure and content of the snapshot.
 	ResourceSnapshotTemplateName *string
 
-	//  The type of resource being snapshotted. This would have Opportunity as a value
-	// as it is dependent on the supported resource type.
+	// The type of resource being snapshotted. This would have "Opportunity" as a
+	// value as it is dependent on the supported resource type.
 	ResourceType types.ResourceType
 
-	//  The current status of the snapshot job. Valid values:
+	// The current status of the snapshot job. Valid values:
 	//
 	//   - STOPPED: The job is not currently running.
 	//

@@ -12,9 +12,6 @@ import (
 	"sync"
 )
 
-// The CLI doesn't support streaming operations in Amazon Bedrock, including
-// InvokeAgent .
-//
 // Sends a prompt for the agent to process and respond to. Note the following
 // fields for the request:
 //
@@ -41,7 +38,10 @@ import (
 //     prompt or, if you configured an action group to return control, results from
 //     invocation of the action group.
 //
-// The response is returned in the bytes field of the chunk object.
+// The response contains both chunk and trace attributes.
+//
+// The final response is returned in the bytes field of the chunk object. The
+// InvokeAgent returns one chunk for the entire interaction.
 //
 //   - The attribution object contains citations for parts of the response.
 //

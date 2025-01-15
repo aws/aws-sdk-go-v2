@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Retrieves the details of member partners in an engagement. This operation can
-//
-// only be invoked by members of the engagement. The ListEngagementMembers
+// Retrieves the details of member partners in an Engagement. This operation can
+// only be invoked by members of the Engagement. The ListEngagementMembers
 // operation allows you to fetch information about the members of a specific
-// engagement. This action is restricted to members of the engagement being
+// Engagement. This action is restricted to members of the Engagement being
 // queried.
 func (c *Client) ListEngagementMembers(ctx context.Context, params *ListEngagementMembersInput, optFns ...func(*Options)) (*ListEngagementMembersOutput, error) {
 	if params == nil {
@@ -34,20 +33,20 @@ func (c *Client) ListEngagementMembers(ctx context.Context, params *ListEngageme
 
 type ListEngagementMembersInput struct {
 
-	//  The catalog related to the request.
+	// The catalog related to the request.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  Identifier of the engagement record to retrieve members from.
+	// Identifier of the Engagement record to retrieve members from.
 	//
 	// This member is required.
 	Identifier *string
 
-	//  The maximum number of results to return in a single call.
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	//  The token for the next set of results.
+	// The token for the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -60,7 +59,7 @@ type ListEngagementMembersOutput struct {
 	// This member is required.
 	EngagementMemberList []types.EngagementMember
 
-	//  A pagination token used to retrieve the next set of results. If there are more
+	// A pagination token used to retrieve the next set of results. If there are more
 	// results available than can be returned in a single response, this token will be
 	// present. Use this token in a subsequent request to retrieve the next page of
 	// results. If there are no more results, this value will be null.
@@ -175,7 +174,7 @@ func (c *Client) addOperationListEngagementMembersMiddlewares(stack *middleware.
 // ListEngagementMembersPaginatorOptions is the paginator options for
 // ListEngagementMembers
 type ListEngagementMembersPaginatorOptions struct {
-	//  The maximum number of results to return in a single call.
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

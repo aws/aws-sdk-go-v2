@@ -725,6 +725,13 @@ func awsRestjson1_serializeOpDocumentInvokeInlineAgentInput(v *InvokeInlineAgent
 		}
 	}
 
+	if v.StreamingConfigurations != nil {
+		ok := object.Key("streamingConfigurations")
+		if err := awsRestjson1_serializeDocumentStreamingConfigurations(v.StreamingConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

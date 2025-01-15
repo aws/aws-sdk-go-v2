@@ -11,7 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of resource view snapshots based on specified criteria.
+// Retrieves a list of resource view snapshots based on specified criteria. This
+// operation supports various use cases, including:
+//
+//   - Fetching all snapshots associated with an engagement.
+//
+//   - Retrieving snapshots of a specific resource type within an engagement.
+//
+//   - Obtaining snapshots for a particular resource using a specified template.
+//
+//   - Accessing the latest snapshot of a resource within an engagement.
+//
+//   - Filtering snapshots by resource owner.
 func (c *Client) ListResourceSnapshots(ctx context.Context, params *ListResourceSnapshotsInput, optFns ...func(*Options)) (*ListResourceSnapshotsOutput, error) {
 	if params == nil {
 		params = &ListResourceSnapshotsInput{}
@@ -39,7 +50,7 @@ type ListResourceSnapshotsInput struct {
 	// This member is required.
 	EngagementIdentifier *string
 
-	//  Filters the response to include only snapshots of resources created by the
+	// Filters the response to include only snapshots of resources owned by the
 	// specified AWS account.
 	CreatedBy *string
 
@@ -52,7 +63,7 @@ type ListResourceSnapshotsInput struct {
 	//  Filters the response to include only snapshots of the specified resource.
 	ResourceIdentifier *string
 
-	//  Filters the response to include only snapshots created using the specified
+	// Filters the response to include only snapshots created using the specified
 	// template.
 	ResourceSnapshotTemplateIdentifier *string
 

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Lists the associations between resources and engagements where the caller is a
-//
+// Lists the associations between resources and engagements where the caller is a
 // member and has at least one snapshot in the engagement.
 func (c *Client) ListEngagementResourceAssociations(ctx context.Context, params *ListEngagementResourceAssociationsInput, optFns ...func(*Options)) (*ListEngagementResourceAssociationsOutput, error) {
 	if params == nil {
@@ -31,30 +30,35 @@ func (c *Client) ListEngagementResourceAssociations(ctx context.Context, params 
 
 type ListEngagementResourceAssociationsInput struct {
 
-	//  Specifies the catalog in which to search for engagement-resource associations.
+	// Specifies the catalog in which to search for engagement-resource associations.
+	// Valid Values: "AWS" or "Sandbox"
+	//
+	//   - AWS for production environments.
+	//
+	//   - Sandbox for testing and development purposes.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  Filters the results to include only associations with resources owned by the
-	// specified AWS account. Use this when you want to find associations related to
+	// Filters the response to include only snapshots of resources owned by the
+	// specified AWS account ID. Use this when you want to find associations related to
 	// resources owned by a particular account.
 	CreatedBy *string
 
-	//  Filters the results to include only associations related to the specified
+	// Filters the results to include only associations related to the specified
 	// engagement. Use this when you want to find all resources associated with a
 	// specific engagement.
 	EngagementIdentifier *string
 
-	//  Limits the number of results returned in a single call. Use this to control
-	// the number of results returned, especially useful for pagination.
+	// Limits the number of results returned in a single call. Use this to control the
+	// number of results returned, especially useful for pagination.
 	MaxResults *int32
 
-	//  A token used for pagination of results. Include this token in subsequent
+	// A token used for pagination of results. Include this token in subsequent
 	// requests to retrieve the next set of results.
 	NextToken *string
 
-	//  Filters the results to include only associations with the specified resource.
+	// Filters the results to include only associations with the specified resource.
 	// Varies depending on the resource type. Use this when you want to find all
 	// engagements associated with a specific resource.
 	ResourceIdentifier *string
@@ -186,8 +190,8 @@ func (c *Client) addOperationListEngagementResourceAssociationsMiddlewares(stack
 // ListEngagementResourceAssociationsPaginatorOptions is the paginator options for
 // ListEngagementResourceAssociations
 type ListEngagementResourceAssociationsPaginatorOptions struct {
-	//  Limits the number of results returned in a single call. Use this to control
-	// the number of results returned, especially useful for pagination.
+	// Limits the number of results returned in a single call. Use this to control the
+	// number of results returned, especially useful for pagination.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

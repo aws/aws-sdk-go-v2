@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-//	Use this action to retrieve the engagement record for a given
-//
+// Use this action to retrieve the engagement record for a given
 // EngagementIdentifier .
 func (c *Client) GetEngagement(ctx context.Context, params *GetEngagementInput, optFns ...func(*Options)) (*GetEngagementOutput, error) {
 	if params == nil {
@@ -32,13 +31,13 @@ func (c *Client) GetEngagement(ctx context.Context, params *GetEngagementInput, 
 
 type GetEngagementInput struct {
 
-	//  Specifies the catalog related to the engagement request. Valid values are AWS
+	// Specifies the catalog related to the engagement request. Valid values are AWS
 	// and Sandbox .
 	//
 	// This member is required.
 	Catalog *string
 
-	//  Specifies the identifier of the Engagement record to retrieve.
+	// Specifies the identifier of the Engagement record to retrieve.
 	//
 	// This member is required.
 	Identifier *string
@@ -48,36 +47,36 @@ type GetEngagementInput struct {
 
 type GetEngagementOutput struct {
 
-	//  The Amazon Resource Name (ARN) of the engagement retrieved.
+	// The Amazon Resource Name (ARN) of the engagement retrieved.
 	Arn *string
 
-	//  A list of context objects associated with the engagement. Each context
-	// provides additional information related to the Engagement, such as customer
-	// projects or documents.
+	// A list of context objects associated with the engagement. Each context provides
+	// additional information related to the Engagement, such as customer projects or
+	// documents.
 	Contexts []types.EngagementContextDetails
 
-	//  The date and time when the Engagement was created, presented in ISO 8601
-	// format (UTC). For example: "2023-05-01T20:37:46Z". This timestamp helps track
-	// the lifecycle of the Engagement.
+	// The date and time when the Engagement was created, presented in ISO 8601 format
+	// (UTC). For example: "2023-05-01T20:37:46Z". This timestamp helps track the
+	// lifecycle of the Engagement.
 	CreatedAt *time.Time
 
-	//  The AWS account ID of the user who originally created the engagement. This
+	// The AWS account ID of the user who originally created the engagement. This
 	// field helps in tracking the origin of the engagement.
 	CreatedBy *string
 
-	//  A more detailed description of the engagement. This provides additional
-	// context or information about the engagement's purpose or scope.
+	// A more detailed description of the engagement. This provides additional context
+	// or information about the engagement's purpose or scope.
 	Description *string
 
-	//  The unique resource identifier of the engagement retrieved.
+	// The unique resource identifier of the engagement retrieved.
 	Id *string
 
-	//  Specifies the current count of members participating in the Engagement. This
+	// Specifies the current count of members participating in the Engagement. This
 	// count includes all active members regardless of their roles or permissions
 	// within the Engagement.
 	MemberCount *int32
 
-	//  The title of the engagement. It provides a brief, descriptive name for the
+	// The title of the engagement. It provides a brief, descriptive name for the
 	// engagement that is meaningful and easily recognizable.
 	Title *string
 
