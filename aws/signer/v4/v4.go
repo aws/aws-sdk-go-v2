@@ -52,10 +52,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	"github.com/aws/smithy-go/logging"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 )
 
 const (
@@ -493,11 +494,13 @@ func (s *httpSigner) buildCanonicalString(method, uri, query, signedHeaders, can
 }
 
 func (s *httpSigner) buildStringToSign(credentialScope, canonicalRequestString string) string {
+	h := sha256.Sum256([]byte(canonicalRequestString))
+
 	return strings.Join([]string{
 		signingAlgorithm,
 		s.Time.TimeFormat(),
 		credentialScope,
-		hex.EncodeToString(makeHash(sha256.New(), []byte(canonicalRequestString))),
+		hex.EncodeToString(h[:]),
 	}, "\n")
 }
 
