@@ -4,7 +4,6 @@
     "description": "Improve v4 Signer.SignHTTP & Signer.PresignHTTP performance",
     "collapse": false,
     "modules": [
-        "aws/signer/v4",
-        "aws/signer/internal/v4"
+        "."
     ]
 }
