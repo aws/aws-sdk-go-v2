@@ -36,7 +36,7 @@ func (c *dnsCache) GetAddr(host string) (string, bool) {
 	}
 
 	record := v.(*dnsCacheEntry)
-	if time.Now().After(record.expires) {
+	if timeNow().After(record.expires) {
 		return "", false
 	}
 

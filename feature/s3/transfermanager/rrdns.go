@@ -10,6 +10,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sync/singleflight"
 )
 
+var timeNow = time.Now
+
 // WithRoundRobinDNS configures an http.Transport to spread HTTP connections
 // across multiple IP addresses for a given host.
 //
@@ -51,12 +53,16 @@ type RoundRobinDNSOptions struct {
 	MaxHosts int
 }
 
+type resolver interface {
+	LookupHost(context.Context, string) ([]string, error)
+}
+
 type rrDNS struct {
 	sf    singleflight.Group
 	cache *dnsCache
 
 	expiry   time.Duration
-	resolver *net.Resolver
+	resolver resolver
 
 	dialContext func(ctx context.Context, network, addr string) (net.Conn, error)
 }
@@ -98,7 +104,7 @@ func (r *rrDNS) lookupHost(ctx context.Context, host string) (string, error) {
 		}
 
 		addrs := result.Val.([]string)
-		expires := time.Now().Add(r.expiry)
+		expires := timeNow().Add(r.expiry)
 		r.cache.PutAddrs(host, addrs, expires) // round-trip cache to "consume" the first IP
 		addr, _ := r.cache.GetAddr(host)
 		return addr, nil
