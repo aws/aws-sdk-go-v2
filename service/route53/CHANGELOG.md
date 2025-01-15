@@ -1,3 +1,7 @@
+# v1.48.1 (2025-01-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2025-01-14)
 
 * **Feature**: Amazon Route 53 now supports the Mexico (Central) Region (mx-central-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region

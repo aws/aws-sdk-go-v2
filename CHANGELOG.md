@@ -1,3 +1,35 @@
+# Release (2025-01-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.33.0
+  * **Feature**: S3 client behavior is updated to always calculate a checksum by default for operations that support it (such as PutObject or UploadPart), or require it (such as DeleteObjects). The checksum algorithm used by default now becomes CRC32. Checksum behavior can be configured using `when_supported` and `when_required` options - in code using RequestChecksumCalculation, in shared config using request_checksum_calculation, or as env variable using AWS_REQUEST_CHECKSUM_CALCULATION. The S3 client attempts to validate response checksums for all S3 API operations that support checksums. However, if the SDK has not implemented the specified checksum algorithm then this validation is skipped. Checksum validation behavior can be configured using `when_supported` and `when_required` options - in code using ResponseChecksumValidation, in shared config using response_checksum_validation, or as env variable using AWS_RESPONSE_CHECKSUM_VALIDATION.
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.29.0](config/CHANGELOG.md#v1290-2025-01-15)
+  * **Feature**: S3 client behavior is updated to always calculate a checksum by default for operations that support it (such as PutObject or UploadPart), or require it (such as DeleteObjects). The checksum algorithm used by default now becomes CRC32. Checksum behavior can be configured using `when_supported` and `when_required` options - in code using RequestChecksumCalculation, in shared config using request_checksum_calculation, or as env variable using AWS_REQUEST_CHECKSUM_CALCULATION. The S3 client attempts to validate response checksums for all S3 API operations that support checksums. However, if the SDK has not implemented the specified checksum algorithm then this validation is skipped. Checksum validation behavior can be configured using `when_supported` and `when_required` options - in code using ResponseChecksumValidation, in shared config using response_checksum_validation, or as env variable using AWS_RESPONSE_CHECKSUM_VALIDATION.
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.28.6](service/apigateway/CHANGELOG.md#v1286-2025-01-15)
+  * **Documentation**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.32.0](service/bedrockagentruntime/CHANGELOG.md#v1320-2025-01-15)
+  * **Feature**: Now supports streaming for inline agents.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.28.0](service/cognitoidentity/CHANGELOG.md#v1280-2025-01-15)
+  * **Feature**: corrects the dual-stack endpoint configuration
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.5.0](service/internal/checksum/CHANGELOG.md#v150-2025-01-15)
+  * **Feature**: S3 client behavior is updated to always calculate a checksum by default for operations that support it (such as PutObject or UploadPart), or require it (such as DeleteObjects). The checksum algorithm used by default now becomes CRC32. Checksum behavior can be configured using `when_supported` and `when_required` options - in code using RequestChecksumCalculation, in shared config using request_checksum_calculation, or as env variable using AWS_REQUEST_CHECKSUM_CALCULATION. The S3 client attempts to validate response checksums for all S3 API operations that support checksums. However, if the SDK has not implemented the specified checksum algorithm then this validation is skipped. Checksum validation behavior can be configured using `when_supported` and `when_required` options - in code using ResponseChecksumValidation, in shared config using response_checksum_validation, or as env variable using AWS_RESPONSE_CHECKSUM_VALIDATION.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.3.0](service/partnercentralselling/CHANGELOG.md#v130-2025-01-15)
+  * **Feature**: Add Tagging support for ResourceSnapshotJob resources
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.73.0](service/s3/CHANGELOG.md#v1730-2025-01-15)
+  * **Feature**: S3 client behavior is updated to always calculate a checksum by default for operations that support it (such as PutObject or UploadPart), or require it (such as DeleteObjects). The checksum algorithm used by default now becomes CRC32. Checksum behavior can be configured using `when_supported` and `when_required` options - in code using RequestChecksumCalculation, in shared config using request_checksum_calculation, or as env variable using AWS_REQUEST_CHECKSUM_CALCULATION. The S3 client attempts to validate response checksums for all S3 API operations that support checksums. However, if the SDK has not implemented the specified checksum algorithm then this validation is skipped. Checksum validation behavior can be configured using `when_supported` and `when_required` options - in code using ResponseChecksumValidation, in shared config using response_checksum_validation, or as env variable using AWS_RESPONSE_CHECKSUM_VALIDATION.
+  * **Feature**: This change enhances integrity protections for new SDK requests to S3. S3 SDKs now support the CRC64NVME checksum algorithm, full object checksums for multipart S3 objects, and new default integrity protections for S3 requests.
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.1.0](service/securityir/CHANGELOG.md#v110-2025-01-15)
+  * **Feature**: Increase minimum length of Threat Actor IP 'userAgent' to 1.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.41.0](service/sesv2/CHANGELOG.md#v1410-2025-01-15)
+  * **Feature**: This release introduces a new recommendation in Virtual Deliverability Manager Advisor, which detects elevated complaint rates for customer sending identities.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.52.0](service/workspaces/CHANGELOG.md#v1520-2025-01-15)
+  * **Feature**: Added GeneralPurpose.4xlarge & GeneralPurpose.8xlarge ComputeTypes.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.11.0](service/workspacesthinclient/CHANGELOG.md#v1110-2025-01-15)
+  * **Feature**: Mark type in MaintenanceWindow as required.
+
 # Release (2025-01-14)
 
 ## General Highlights

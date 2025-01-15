@@ -3,19 +3,19 @@ module github.com/aws/aws-sdk-go-v2/credentials
 go 1.21
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.32.8
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.23
-	github.com/aws/aws-sdk-go-v2/service/sso v1.24.9
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.8
-	github.com/aws/aws-sdk-go-v2/service/sts v1.33.7
+	github.com/aws/aws-sdk-go-v2 v1.33.0
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.24
+	github.com/aws/aws-sdk-go-v2/service/sso v1.24.10
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.9
+	github.com/aws/aws-sdk-go-v2/service/sts v1.33.8
 	github.com/aws/smithy-go v1.22.1
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.27 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.27 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.28 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.28 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.12.1 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.12.8 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.12.9 // indirect
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../

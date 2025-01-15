@@ -1,8 +1,0 @@
-{
-    "id": "8f0ba17f-a500-47a6-a77f-ce7c7ba15713",
-    "type": "feature",
-    "description": "This release introduces a new recommendation in Virtual Deliverability Manager Advisor, which detects elevated complaint rates for customer sending identities.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

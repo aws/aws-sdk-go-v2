@@ -1,3 +1,8 @@
+# v1.32.0 (2025-01-15)
+
+* **Feature**: Now supports streaming for inline agents.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.1 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

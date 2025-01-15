@@ -1,3 +1,8 @@
+# v1.52.0 (2025-01-15)
+
+* **Feature**: Added GeneralPurpose.4xlarge & GeneralPurpose.8xlarge ComputeTypes.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.1 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

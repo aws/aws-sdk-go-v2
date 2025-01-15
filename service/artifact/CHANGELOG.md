@@ -1,3 +1,7 @@
+# v1.8.1 (2025-01-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2025-01-13)
 
 * **Feature**: Support resolving regional API calls to partition's leader region endpoint.

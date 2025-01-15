@@ -1,8 +1,0 @@
-{
-    "id": "fd1fdb75-6b59-4711-a25e-0e3040eb24bb",
-    "type": "feature",
-    "description": "Increase minimum length of Threat Actor IP 'userAgent' to 1.",
-    "modules": [
-        "service/securityir"
-    ]
-}

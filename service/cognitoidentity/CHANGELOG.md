@@ -1,3 +1,8 @@
+# v1.28.0 (2025-01-15)
+
+* **Feature**: corrects the dual-stack endpoint configuration
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.10 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

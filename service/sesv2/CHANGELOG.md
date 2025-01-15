@@ -1,3 +1,8 @@
+# v1.41.0 (2025-01-15)
+
+* **Feature**: This release introduces a new recommendation in Virtual Deliverability Manager Advisor, which detects elevated complaint rates for customer sending identities.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.2 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

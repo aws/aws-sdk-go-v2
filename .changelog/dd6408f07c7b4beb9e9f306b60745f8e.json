@@ -1,8 +1,0 @@
-{
-    "id": "dd6408f0-7c7b-4beb-9e9f-306b60745f8e",
-    "type": "feature",
-    "description": "Mark type in MaintenanceWindow as required.",
-    "modules": [
-        "service/workspacesthinclient"
-    ]
-}

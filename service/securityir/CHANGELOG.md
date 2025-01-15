@@ -1,3 +1,8 @@
+# v1.1.0 (2025-01-15)
+
+* **Feature**: Increase minimum length of Threat Actor IP 'userAgent' to 1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.2 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

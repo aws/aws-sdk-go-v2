@@ -1,3 +1,8 @@
+# v1.11.0 (2025-01-15)
+
+* **Feature**: Mark type in MaintenanceWindow as required.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.9 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

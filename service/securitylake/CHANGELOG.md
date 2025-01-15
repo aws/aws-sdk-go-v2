@@ -1,3 +1,7 @@
+# v1.19.9 (2025-01-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.8 (2025-01-10)
 
 * **Documentation**: Doc only update for ServiceName that fixes several customer-reported issues

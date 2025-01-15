@@ -1,3 +1,8 @@
+# v1.3.0 (2025-01-15)
+
+* **Feature**: Add Tagging support for ResourceSnapshotJob resources
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.2 (2025-01-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

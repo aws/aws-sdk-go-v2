@@ -1,8 +1,0 @@
-{
-    "id": "8712a5ea-a522-40b7-b124-41e7f07480ed",
-    "type": "feature",
-    "description": "Now supports streaming for inline agents.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}
