@@ -1,0 +1,9 @@
+{
+  "id": "01946bc0-d790-783a-8908-e163a95c11d7",
+  "type": "bugfix",
+  "collapse": true,
+  "description": "Fix infinite pagination in cloudwatchlogs.NewGetLogEventsPaginator()",
+  "modules": [
+    "service/cloudwatchlogs"
+  ]
+}
