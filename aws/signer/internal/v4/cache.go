@@ -10,9 +10,9 @@ import (
 
 func lookupKey(service, region string) string {
 	var s strings.Builder
-	s.Grow(len(region) + len(service) + 3)
+	s.Grow(len(region) + 1 + len(service))
 	s.WriteString(region)
-	s.WriteRune('/')
+	s.WriteByte('/')
 	s.WriteString(service)
 	return s.String()
 }

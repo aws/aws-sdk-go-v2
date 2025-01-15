@@ -235,7 +235,7 @@ func buildAuthorizationHeader(credentialStr, signedHeadersStr, signingSignature 
 		len(signature) + len(signingSignature),
 	)
 	parts.WriteString(signingAlgorithm)
-	parts.WriteRune(' ')
+	parts.WriteByte(' ')
 	parts.WriteString(credential)
 	parts.WriteString(credentialStr)
 	parts.WriteString(commaSpace)
@@ -460,22 +460,22 @@ func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, he
 	for i := 0; i < n; i++ {
 		if headers[i] == hostHeader {
 			canonicalHeaders.WriteString(hostHeader)
-			canonicalHeaders.WriteRune(colon)
+			canonicalHeaders.WriteByte(colon)
 			canonicalHeaders.WriteString(v4Internal.StripExcessSpaces(host))
 		} else {
 			canonicalHeaders.WriteString(headers[i])
-			canonicalHeaders.WriteRune(colon)
+			canonicalHeaders.WriteByte(colon)
 			// Trim out leading, trailing, and dedup inner spaces from signed header values.
 			values := signed[headers[i]]
 			for j, v := range values {
 				cleanedValue := strings.TrimSpace(v4Internal.StripExcessSpaces(v))
 				canonicalHeaders.WriteString(cleanedValue)
 				if j < len(values)-1 {
-					canonicalHeaders.WriteRune(',')
+					canonicalHeaders.WriteByte(',')
 				}
 			}
 		}
-		canonicalHeaders.WriteRune('\n')
+		canonicalHeaders.WriteByte('\n')
 	}
 	canonicalHeadersStr = canonicalHeaders.String()
 
