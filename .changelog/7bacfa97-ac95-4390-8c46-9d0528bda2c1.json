@@ -1,0 +1,10 @@
+{
+    "id": "7bacfa97-ac95-4390-8c46-9d0528bda2c1",
+    "type": "feature",
+    "description": "Improve v4 Signer.SignHTTP & Signer.PresignHTTP performance",
+    "collapse": false,
+    "modules": [
+        "aws/signer/v4",
+        "aws/signer/internal/v4"
+    ]
+}
