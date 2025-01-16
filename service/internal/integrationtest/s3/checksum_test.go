@@ -541,6 +541,38 @@ func TestInteg_RequireChecksum(t *testing.T) {
 	}
 }
 
+func TestInteg_RequireChecksumWithoutRequestAlgorithmMember(t *testing.T) {
+	params := &s3.PutBucketOwnershipControlsInput{
+		Bucket: &setupMetadata.Buckets.Source.Name,
+		OwnershipControls: &types.OwnershipControls{
+			Rules: []types.OwnershipControlsRule{
+				{
+					ObjectOwnership: types.ObjectOwnershipBucketOwnerPreferred,
+				},
+			},
+		},
+	}
+
+	t.Logf("putting bucket ownership control: %q", *params.Bucket)
+	result, err := s3client.PutBucketOwnershipControls(context.Background(), params)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	computedChecksums, ok := s3.GetComputedInputChecksumsMetadata(result.ResultMetadata)
+	if !ok {
+		t.Fatalf("expect computed checksums metadata present, got %q", result)
+	}
+
+	expectComputedChecksums := s3.ComputedInputChecksumsMetadata{
+		ComputedChecksums: map[string]string{
+			"CRC32": "cK9COg==",
+		},
+	}
+	if diff := cmpDiff(expectComputedChecksums, computedChecksums); diff != "" {
+		t.Errorf("expect computed checksum metadata match: %s\n", diff)
+	}
+}
+
 func bufferLogger(t *testing.T) (logging.Logger, *bytes.Buffer) {
 	var logged bytes.Buffer
 
