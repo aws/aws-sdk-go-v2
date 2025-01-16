@@ -46,9 +46,11 @@ func (m *setupInputContext) HandleInitialize(
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if algorithm, ok := m.GetAlgorithm(in.Parameters); ok {
-		ctx = internalcontext.SetChecksumInputAlgorithm(ctx, algorithm)
-		return next.HandleInitialize(ctx, in)
+	if m.GetAlgorithm != nil {
+		if algorithm, ok := m.GetAlgorithm(in.Parameters); ok {
+			ctx = internalcontext.SetChecksumInputAlgorithm(ctx, algorithm)
+			return next.HandleInitialize(ctx, in)
+		}
 	}
 
 	if m.RequireChecksum || m.RequestChecksumCalculation == aws.RequestChecksumCalculationWhenSupported {
