@@ -613,11 +613,12 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 	} else {
 		var total int64
 		if d.in.Range == "" {
-			d.getChunk(ctx, 0, d.byteRange(), clientOptions...)
+			output = d.getChunk(ctx, 0, d.byteRange(), clientOptions...)
 			total = d.getTotalBytes()
 		} else {
 			d.pos, d.totalBytes = d.getDownloadRange()
 			total = d.totalBytes
+			output = &GetObjectOutput{}
 		}
 
 		ch := make(chan dlchunk, d.options.Concurrency)
