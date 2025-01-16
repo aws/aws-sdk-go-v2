@@ -1,7 +1,7 @@
 {
     "id": "2e03eae0-7dff-4beb-9496-3939b6549426",
     "type": "bugfix",
-    "description": "fix possible nil de-reference issue of latest flexible checksum behavior",
+    "description": "Fix nil dereference panic for operations that require checksums, but do not have an input setting for which algorithm to use.",
     "modules": [
         "service/internal/checksum"
     ]
