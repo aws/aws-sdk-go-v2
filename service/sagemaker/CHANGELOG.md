@@ -1,3 +1,7 @@
+# v1.173.0 (2025-01-16)
+
+* **Feature**: Added support for ml.trn1.32xlarge instance type in Reserved Capacity Offering
+
 # v1.172.3 (2025-01-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

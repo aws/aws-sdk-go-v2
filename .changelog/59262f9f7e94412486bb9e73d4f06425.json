@@ -1,8 +1,0 @@
-{
-    "id": "59262f9f-7e94-4124-86bb-9e73d4f06425",
-    "type": "feature",
-    "description": "Added support for ml.trn1.32xlarge instance type in Reserved Capacity Offering",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

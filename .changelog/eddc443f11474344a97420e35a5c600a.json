@@ -1,8 +1,0 @@
-{
-    "id": "eddc443f-1147-4344-a974-20e35a5c600a",
-    "type": "documentation",
-    "description": "The release addresses Amazon ECS documentation tickets.",
-    "modules": [
-        "service/ecs"
-    ]
-}

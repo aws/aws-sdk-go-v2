@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.33.0
 	github.com/aws/aws-sdk-go-v2/config v1.29.0
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.50
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.51
 	github.com/aws/aws-sdk-go-v2/service/acm v1.30.12
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.28.6
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.34.7
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.39.4
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.199.2
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.38.5
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.6
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.7
 	github.com/aws/aws-sdk-go-v2/service/efs v1.34.4
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.44.6
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.11
@@ -62,7 +62,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.48.1
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.34.7
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.73.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.73.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.52.5
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.34.12
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.32.10
@@ -93,7 +93,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.1 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.28 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.12.1 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.5.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.5.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.10.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.12.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.18.9 // indirect
