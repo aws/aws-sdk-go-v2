@@ -916,6 +916,41 @@ func GetComputedInputChecksumsMetadata(m middleware.Metadata) (ComputedInputChec
 
 }
 
+func addInputChecksumMiddleware(stack *middleware.Stack, options internalChecksum.InputMiddlewareOptions) (err error) {
+	err = stack.Initialize.Add(&internalChecksum.SetupInputContext{
+		GetAlgorithm:               options.GetAlgorithm,
+		RequireChecksum:            options.RequireChecksum,
+		RequestChecksumCalculation: options.RequestChecksumCalculation,
+	}, middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	stack.Build.Remove("ContentChecksum")
+
+	inputChecksum := &internalChecksum.ComputeInputPayloadChecksum{
+		EnableTrailingChecksum:           options.EnableTrailingChecksum,
+		EnableComputePayloadHash:         options.EnableComputeSHA256PayloadHash,
+		EnableDecodedContentLengthHeader: options.EnableDecodedContentLengthHeader,
+	}
+	if err := stack.Finalize.Insert(inputChecksum, "ResolveEndpointV2", middleware.After); err != nil {
+		return err
+	}
+
+	if options.EnableTrailingChecksum {
+		trailerMiddleware := &internalChecksum.AddInputChecksumTrailer{
+			EnableTrailingChecksum:           inputChecksum.EnableTrailingChecksum,
+			EnableComputePayloadHash:         inputChecksum.EnableComputePayloadHash,
+			EnableDecodedContentLengthHeader: inputChecksum.EnableDecodedContentLengthHeader,
+		}
+		if err := stack.Finalize.Insert(trailerMiddleware, inputChecksum.ID(), middleware.After); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ChecksumValidationMetadata contains metadata such as the checksum algorithm
 // used for data integrity validation.
 type ChecksumValidationMetadata struct {

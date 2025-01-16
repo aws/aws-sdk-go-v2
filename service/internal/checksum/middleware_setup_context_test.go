@@ -5,8 +5,9 @@ package checksum
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"github.com/aws/smithy-go/middleware"
@@ -93,7 +94,7 @@ func TestSetupInput(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			m := setupInputContext{
+			m := SetupInputContext{
 				GetAlgorithm:               c.getAlgorithm,
 				RequireChecksum:            c.RequireChecksum,
 				RequestChecksumCalculation: c.RequestChecksumCalculation,
