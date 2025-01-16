@@ -956,8 +956,8 @@ type ContainerDefinition struct {
 	// and VPC settings.
 	Links []string
 
-	// Linux-specific modifications that are applied to the container, such as Linux
-	// kernel capabilities. For more information see [KernelCapabilities].
+	// Linux-specific modifications that are applied to the default Docker container
+	// configuration, such as Linux kernel capabilities. For more information see [KernelCapabilities].
 	//
 	// This parameter is not supported for Windows containers.
 	//

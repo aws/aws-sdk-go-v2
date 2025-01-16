@@ -1,3 +1,7 @@
+# v1.53.7 (2025-01-16)
+
+* **Documentation**: The release addresses Amazon ECS documentation tickets.
+
 # v1.53.6 (2025-01-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

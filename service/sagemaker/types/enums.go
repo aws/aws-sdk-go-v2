@@ -6388,6 +6388,7 @@ const (
 	ReservedCapacityInstanceTypeMlP548xlarge   ReservedCapacityInstanceType = "ml.p5.48xlarge"
 	ReservedCapacityInstanceTypeMlP5e48xlarge  ReservedCapacityInstanceType = "ml.p5e.48xlarge"
 	ReservedCapacityInstanceTypeMlP5en48xlarge ReservedCapacityInstanceType = "ml.p5en.48xlarge"
+	ReservedCapacityInstanceTypeMlTrn132xlarge ReservedCapacityInstanceType = "ml.trn1.32xlarge"
 	ReservedCapacityInstanceTypeMlTrn248xlarge ReservedCapacityInstanceType = "ml.trn2.48xlarge"
 )
 
@@ -6402,6 +6403,7 @@ func (ReservedCapacityInstanceType) Values() []ReservedCapacityInstanceType {
 		"ml.p5.48xlarge",
 		"ml.p5e.48xlarge",
 		"ml.p5en.48xlarge",
+		"ml.trn1.32xlarge",
 		"ml.trn2.48xlarge",
 	}
 }

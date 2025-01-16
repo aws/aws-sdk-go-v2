@@ -1,3 +1,16 @@
+# Release (2025-01-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.53.7](service/ecs/CHANGELOG.md#v1537-2025-01-16)
+  * **Documentation**: The release addresses Amazon ECS documentation tickets.
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.5.1](service/internal/checksum/CHANGELOG.md#v151-2025-01-16)
+  * **Bug Fix**: Fix nil dereference panic for operations that require checksums, but do not have an input setting for which algorithm to use.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.173.0](service/sagemaker/CHANGELOG.md#v11730-2025-01-16)
+  * **Feature**: Added support for ml.trn1.32xlarge instance type in Reserved Capacity Offering
+
 # Release (2025-01-15)
 
 ## General Highlights
