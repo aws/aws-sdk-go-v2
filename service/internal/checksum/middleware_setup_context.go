@@ -46,7 +46,7 @@ func (m *setupInputContext) HandleInitialize(
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	// nil check here is for operations that require checksum but do not have algorithm setting
+	// nil check here is for operations that require checksum but do not have input algorithm setting
 	if m.GetAlgorithm != nil {
 		if algorithm, ok := m.GetAlgorithm(in.Parameters); ok {
 			ctx = internalcontext.SetChecksumInputAlgorithm(ctx, algorithm)
