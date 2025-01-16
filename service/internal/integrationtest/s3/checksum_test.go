@@ -560,7 +560,7 @@ func TestInteg_RequireChecksumWithoutRequestAlgorithmMember(t *testing.T) {
 	}
 	computedChecksums, ok := s3.GetComputedInputChecksumsMetadata(result.ResultMetadata)
 	if !ok {
-		t.Fatal("expect computed checksums metadata present, got nil")
+		t.Fatalf("expect computed checksums metadata present, got %q", computedChecksums)
 	}
 
 	expectComputedChecksums := s3.ComputedInputChecksumsMetadata{
@@ -569,7 +569,7 @@ func TestInteg_RequireChecksumWithoutRequestAlgorithmMember(t *testing.T) {
 		},
 	}
 	if diff := cmpDiff(expectComputedChecksums, computedChecksums); diff != "" {
-		t.Errorf("expect computed checksum metadata match\n%s", diff)
+		t.Errorf("expect computed checksum metadata match: %s\n", diff)
 	}
 }
 
