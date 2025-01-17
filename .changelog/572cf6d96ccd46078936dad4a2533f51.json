@@ -1,0 +1,8 @@
+{
+    "id": "572cf6d9-6ccd-4607-8936-dad4a2533f51",
+    "type": "feature",
+    "description": "Added support for Managed Notifications, integration with AWS Organization and added aggregation summaries for Aggregate Notifications",
+    "modules": [
+        "service/notifications"
+    ]
+}

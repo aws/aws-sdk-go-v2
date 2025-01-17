@@ -8006,9 +8006,11 @@ type InstanceRequirements struct {
 
 	// The accelerator types that must be on the instance type.
 	//
+	//   - For instance types with FPGA accelerators, specify fpga .
+	//
 	//   - For instance types with GPU accelerators, specify gpu .
 	//
-	//   - For instance types with FPGA accelerators, specify fpga .
+	//   - For instance types with Inference accelerators, specify inference .
 	//
 	// Default: Any accelerator type
 	AcceleratorTypes []AcceleratorType
@@ -8375,9 +8377,11 @@ type InstanceRequirementsRequest struct {
 
 	// The accelerator types that must be on the instance type.
 	//
-	//   - To include instance types with GPU hardware, specify gpu .
+	//   - For instance types with FPGA accelerators, specify fpga .
 	//
-	//   - To include instance types with FPGA hardware, specify fpga .
+	//   - For instance types with GPU accelerators, specify gpu .
+	//
+	//   - For instance types with Inference accelerators, specify inference .
 	//
 	// Default: Any accelerator type
 	AcceleratorTypes []AcceleratorType
@@ -10191,7 +10195,7 @@ type Ipv6PrefixSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the IPv4 prefix option for a network interface.
+// Describes the IPv6 prefix option for a network interface.
 type Ipv6PrefixSpecificationRequest struct {
 
 	// The IPv6 prefix.

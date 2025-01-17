@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing EventRule.
+// Updates an existing EventRule .
 func (c *Client) UpdateEventRule(ctx context.Context, params *UpdateEventRuleInput, optFns ...func(*Options)) (*UpdateEventRuleOutput, error) {
 	if params == nil {
 		params = &UpdateEventRuleInput{}
@@ -29,7 +29,7 @@ func (c *Client) UpdateEventRule(ctx context.Context, params *UpdateEventRuleInp
 
 type UpdateEventRuleInput struct {
 
-	// The Amazon Resource Name (ARN) to use to update the EventRule.
+	// The Amazon Resource Name (ARN) to use to update the EventRule .
 	//
 	// This member is required.
 	Arn *string
@@ -42,7 +42,7 @@ type UpdateEventRuleInput struct {
 	// [Amazon EventBridge event patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
 	EventPattern *string
 
-	// A list of AWS Regions that sends events to this EventRule.
+	// A list of Amazon Web Services Regions that sends events to this EventRule .
 	Regions []string
 
 	noSmithyDocumentSerde
@@ -50,12 +50,12 @@ type UpdateEventRuleInput struct {
 
 type UpdateEventRuleOutput struct {
 
-	// The Amazon Resource Name (ARN) to use to update the EventRule.
+	// The Amazon Resource Name (ARN) to use to update the EventRule .
 	//
 	// This member is required.
 	Arn *string
 
-	// The ARN of the NotificationConfiguration.
+	// The ARN of the NotificationConfiguration .
 	//
 	// This member is required.
 	NotificationConfigurationArn *string

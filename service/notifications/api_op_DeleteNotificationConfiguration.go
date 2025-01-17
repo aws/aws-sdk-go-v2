@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a NotificationConfiguration.
+// Deletes a NotificationConfiguration .
 func (c *Client) DeleteNotificationConfiguration(ctx context.Context, params *DeleteNotificationConfigurationInput, optFns ...func(*Options)) (*DeleteNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteNotificationConfigurationInput{}

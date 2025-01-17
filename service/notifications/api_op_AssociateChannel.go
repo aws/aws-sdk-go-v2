@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a delivery [Channel] with a particular NotificationConfiguration. Supported
-// Channels include AWS Chatbot, the AWS Console Mobile Application, and emails
+// Associates a delivery [Channel] with a particular NotificationConfiguration . Supported
+// Channels include Chatbot, the Console Mobile Application, and emails
 // (notifications-contacts).
 //
 // [Channel]: https://docs.aws.amazon.com/notifications/latest/userguide/managing-delivery-channels.html
@@ -33,9 +33,9 @@ func (c *Client) AssociateChannel(ctx context.Context, params *AssociateChannelI
 type AssociateChannelInput struct {
 
 	// The Amazon Resource Name (ARN) of the Channel to associate with the
-	// NotificationConfiguration.
+	// NotificationConfiguration .
 	//
-	// Supported ARNs include AWS Chatbot, the Console Mobile Application, and
+	// Supported ARNs include Chatbot, the Console Mobile Application, and
 	// notifications-contacts.
 	//
 	// This member is required.

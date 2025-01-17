@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a data source packages for the behavior graph.
+// Starts a data source package for the Detective behavior graph.
 func (c *Client) UpdateDatasourcePackages(ctx context.Context, params *UpdateDatasourcePackagesInput, optFns ...func(*Options)) (*UpdateDatasourcePackagesOutput, error) {
 	if params == nil {
 		params = &UpdateDatasourcePackagesInput{}
@@ -29,7 +29,7 @@ func (c *Client) UpdateDatasourcePackages(ctx context.Context, params *UpdateDat
 
 type UpdateDatasourcePackagesInput struct {
 
-	// The data source package start for the behavior graph.
+	// The data source package to start for the behavior graph.
 	//
 	// This member is required.
 	DatasourcePackages []types.DatasourcePackage

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns a specified EventRule.
+// Returns a specified EventRule .
 func (c *Client) GetEventRule(ctx context.Context, params *GetEventRuleInput, optFns ...func(*Options)) (*GetEventRuleOutput, error) {
 	if params == nil {
 		params = &GetEventRuleInput{}
@@ -63,46 +63,46 @@ type GetEventRuleOutput struct {
 	// The event type to match.
 	//
 	// Must match one of the valid Amazon EventBridge event types. For example, EC2
-	// Instance State-change Notification and AWS CloudWatch Alarm State Change. For
-	// more information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
+	// Instance State-change Notification and Amazon CloudWatch Alarm State Change. For
+	// more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
 	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	//
 	// This member is required.
 	EventType *string
 
-	// A list of managed rules from EventBridge that are are associated with this
-	// EventRule.
+	// A list of managed rules from EventBridge that are associated with this EventRule
+	// .
 	//
-	// These are created by AWS User Notifications within your account so this
-	// EventRule functions.
+	// These are created by User Notifications within your account so this EventRule
+	// functions.
 	//
 	// This member is required.
 	ManagedRules []string
 
-	// The ARN of a NotificationConfiguration.
+	// The ARN of a NotificationConfiguration .
 	//
 	// This member is required.
 	NotificationConfigurationArn *string
 
-	// A list of AWS Regions that send events to this EventRule.
+	// A list of Amazon Web Services Regions that send events to this EventRule .
 	//
 	// This member is required.
 	Regions []string
 
 	// The matched event source.
 	//
-	// Must match one of the valid EventBridge sources. Only AWS service sourced
-	// events are supported. For example, aws.ec2 and aws.cloudwatch . For more
-	// information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
+	// Must match one of the valid EventBridge sources. Only Amazon Web Services
+	// service sourced events are supported. For example, aws.ec2 and aws.cloudwatch .
+	// For more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
 	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	//
 	// This member is required.
 	Source *string
 
-	// A list of an EventRule's status by Region. Regions are mapped to
-	// EventRuleStatusSummary.
+	// A list of an EventRule 's status by Region. Regions are mapped to
+	// EventRuleStatusSummary .
 	//
 	// This member is required.
 	StatusSummaryByRegion map[string]types.EventRuleStatusSummary

@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// Describes one or more of your network interfaces.
+// Describes the specified network interfaces or all your network interfaces.
 //
 // If you have a large number of network interfaces, the operation fails unless
 // you use pagination or one of the following filters: group-id , mac-address ,

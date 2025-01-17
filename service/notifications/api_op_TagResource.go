@@ -12,11 +12,12 @@ import (
 
 // Tags the resource with a tag key and value.
 //
-// For more information, see [Tagging your AWS resources] in the Tagging AWS Resources User Guide.
+// For more information, see [Tagging your Amazon Web Services resources] in the Tagging Amazon Web Services Resources User
+// Guide.
 //
-// This is only supported for NotificationConfigurations.
+// This is only supported for NotificationConfigurations .
 //
-// [Tagging your AWS resources]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+// [Tagging your Amazon Web Services resources]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

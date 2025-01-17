@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a NotificationConfiguration.
+// Updates a NotificationConfiguration .
 func (c *Client) UpdateNotificationConfiguration(ctx context.Context, params *UpdateNotificationConfigurationInput, optFns ...func(*Options)) (*UpdateNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateNotificationConfigurationInput{}
@@ -29,43 +29,32 @@ func (c *Client) UpdateNotificationConfiguration(ctx context.Context, params *Up
 
 type UpdateNotificationConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) used to update the NotificationConfiguration.
+	// The Amazon Resource Name (ARN) used to update the NotificationConfiguration .
 	//
 	// This member is required.
 	Arn *string
 
-	// The status of this NotificationConfiguration.
-	//
-	// The status should always be INACTIVE when part of the
-	// CreateNotificationConfiguration response.
+	// The aggregation preference of the NotificationConfiguration .
 	//
 	//   - Values:
 	//
-	//   - ACTIVE
+	//   - LONG
 	//
-	//   - All EventRules are ACTIVE and any call can be run.
+	//   - Aggregate notifications for long periods of time (12 hours).
 	//
-	//   - PARTIALLY_ACTIVE
+	//   - SHORT
 	//
-	//   - Some EventRules are ACTIVE and some are INACTIVE . Any call can be run.
+	//   - Aggregate notifications for short periods of time (5 minutes).
 	//
-	//   - Any call can be run.
+	//   - NONE
 	//
-	//   - INACTIVE
-	//
-	//   - All EventRules are INACTIVE and any call can be run.
-	//
-	//   - DELETING
-	//
-	//   - This NotificationConfiguration is being deleted.
-	//
-	//   - Only GET and LIST calls can be run.
+	//   - Don't aggregate notifications.
 	AggregationDuration types.AggregationDuration
 
-	// The description of the NotificationConfiguration.
+	// The description of the NotificationConfiguration .
 	Description *string
 
-	// The name of the NotificationConfiguration.
+	// The name of the NotificationConfiguration .
 	Name *string
 
 	noSmithyDocumentSerde
@@ -73,7 +62,7 @@ type UpdateNotificationConfigurationInput struct {
 
 type UpdateNotificationConfigurationOutput struct {
 
-	// The ARN used to update the NotificationConfiguration.
+	// The ARN used to update the NotificationConfiguration .
 	//
 	// This member is required.
 	Arn *string

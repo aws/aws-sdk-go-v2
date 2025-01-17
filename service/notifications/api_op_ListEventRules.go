@@ -30,7 +30,7 @@ func (c *Client) ListEventRules(ctx context.Context, params *ListEventRulesInput
 
 type ListEventRulesInput struct {
 
-	// The Amazon Resource Name (ARN) of the NotificationConfiguration.
+	// The Amazon Resource Name (ARN) of the NotificationConfiguration .
 	//
 	// This member is required.
 	NotificationConfigurationArn *string
@@ -48,7 +48,7 @@ type ListEventRulesInput struct {
 
 type ListEventRulesOutput struct {
 
-	// A list of EventRules.
+	// A list of EventRules .
 	//
 	// This member is required.
 	EventRules []types.EventRuleStructure

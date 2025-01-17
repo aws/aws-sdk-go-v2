@@ -2,6 +2,54 @@
 
 package types
 
+type AccessStatus string
+
+// Enum values for AccessStatus
+const (
+	AccessStatusEnabled  AccessStatus = "ENABLED"
+	AccessStatusDisabled AccessStatus = "DISABLED"
+	AccessStatusPending  AccessStatus = "PENDING"
+)
+
+// Values returns all known values for AccessStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessStatus) Values() []AccessStatus {
+	return []AccessStatus{
+		"ENABLED",
+		"DISABLED",
+		"PENDING",
+	}
+}
+
+type AccountContactType string
+
+// Enum values for AccountContactType
+const (
+	// Primary Contact managed by AWS Account Management Service.
+	AccountContactTypeAccountPrimary AccountContactType = "ACCOUNT_PRIMARY"
+	// Alternate Billing Contact managed by AWS Account Management Service.
+	AccountContactTypeAccountAlternateBilling AccountContactType = "ACCOUNT_ALTERNATE_BILLING"
+	// Alternate Operations Contact managed by AWS Account Management Service.
+	AccountContactTypeAccountAlternateOperations AccountContactType = "ACCOUNT_ALTERNATE_OPERATIONS"
+	// Alternate Security Contact managed by AWS Account Management Service.
+	AccountContactTypeAccountAlternateSecurity AccountContactType = "ACCOUNT_ALTERNATE_SECURITY"
+)
+
+// Values returns all known values for AccountContactType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountContactType) Values() []AccountContactType {
+	return []AccountContactType{
+		"ACCOUNT_PRIMARY",
+		"ACCOUNT_ALTERNATE_BILLING",
+		"ACCOUNT_ALTERNATE_OPERATIONS",
+		"ACCOUNT_ALTERNATE_SECURITY",
+	}
+}
+
 type AggregationDuration string
 
 // Enum values for AggregationDuration
@@ -44,6 +92,59 @@ func (AggregationEventType) Values() []AggregationEventType {
 		"AGGREGATE",
 		"CHILD",
 		"NONE",
+	}
+}
+
+type ChannelAssociationOverrideOption string
+
+// Enum values for ChannelAssociationOverrideOption
+const (
+	// AWS User Notification service users can associate or disassociate a Channel
+	// with a notification configuration.
+	ChannelAssociationOverrideOptionEnabled ChannelAssociationOverrideOption = "ENABLED"
+	// AWS User Notification service users can not associate or disassociate a Channel
+	// with a notification configuration.
+	ChannelAssociationOverrideOptionDisabled ChannelAssociationOverrideOption = "DISABLED"
+)
+
+// Values returns all known values for ChannelAssociationOverrideOption. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelAssociationOverrideOption) Values() []ChannelAssociationOverrideOption {
+	return []ChannelAssociationOverrideOption{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ChannelType string
+
+// Enum values for ChannelType
+const (
+	// AWS Console Mobile App sends notifications to mobile devices.
+	// Link:https://aws.amazon.com/console/mobile/
+	ChannelTypeMobile ChannelType = "MOBILE"
+	// Chatbot sends notifications to group platforms, like Slack or Chime.
+	// Link:https://aws.amazon.com/chatbot/
+	ChannelTypeChatbot ChannelType = "CHATBOT"
+	// Email sends notifications to email addresses.
+	ChannelTypeEmail ChannelType = "EMAIL"
+	// User Notification Service sends notifications to Account Managed contacts.
+	ChannelTypeAccountContact ChannelType = "ACCOUNT_CONTACT"
+)
+
+// Values returns all known values for ChannelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelType) Values() []ChannelType {
+	return []ChannelType{
+		"MOBILE",
+		"CHATBOT",
+		"EMAIL",
+		"ACCOUNT_CONTACT",
 	}
 }
 

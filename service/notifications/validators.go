@@ -29,6 +29,46 @@ func (m *validateOpAssociateChannel) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateManagedNotificationAccountContact struct {
+}
+
+func (*validateOpAssociateManagedNotificationAccountContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateManagedNotificationAccountContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateManagedNotificationAccountContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateManagedNotificationAccountContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateManagedNotificationAdditionalChannel struct {
+}
+
+func (*validateOpAssociateManagedNotificationAdditionalChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateManagedNotificationAdditionalChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateManagedNotificationAdditionalChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateManagedNotificationAdditionalChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEventRule struct {
 }
 
@@ -149,6 +189,46 @@ func (m *validateOpDisassociateChannel) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateManagedNotificationAccountContact struct {
+}
+
+func (*validateOpDisassociateManagedNotificationAccountContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateManagedNotificationAccountContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateManagedNotificationAccountContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateManagedNotificationAccountContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateManagedNotificationAdditionalChannel struct {
+}
+
+func (*validateOpDisassociateManagedNotificationAdditionalChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateManagedNotificationAdditionalChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateManagedNotificationAdditionalChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateManagedNotificationAdditionalChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEventRule struct {
 }
 
@@ -164,6 +244,66 @@ func (m *validateOpGetEventRule) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEventRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetManagedNotificationChildEvent struct {
+}
+
+func (*validateOpGetManagedNotificationChildEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetManagedNotificationChildEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetManagedNotificationChildEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetManagedNotificationChildEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetManagedNotificationConfiguration struct {
+}
+
+func (*validateOpGetManagedNotificationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetManagedNotificationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetManagedNotificationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetManagedNotificationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetManagedNotificationEvent struct {
+}
+
+func (*validateOpGetManagedNotificationEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetManagedNotificationEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetManagedNotificationEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetManagedNotificationEventInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -244,6 +384,46 @@ func (m *validateOpListEventRules) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEventRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListManagedNotificationChannelAssociations struct {
+}
+
+func (*validateOpListManagedNotificationChannelAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListManagedNotificationChannelAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListManagedNotificationChannelAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListManagedNotificationChannelAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListManagedNotificationChildEvents struct {
+}
+
+func (*validateOpListManagedNotificationChildEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListManagedNotificationChildEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListManagedNotificationChildEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListManagedNotificationChildEventsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -373,6 +553,14 @@ func addOpAssociateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateChannel{}, middleware.After)
 }
 
+func addOpAssociateManagedNotificationAccountContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateManagedNotificationAccountContact{}, middleware.After)
+}
+
+func addOpAssociateManagedNotificationAdditionalChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateManagedNotificationAdditionalChannel{}, middleware.After)
+}
+
 func addOpCreateEventRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEventRule{}, middleware.After)
 }
@@ -397,8 +585,28 @@ func addOpDisassociateChannelValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDisassociateChannel{}, middleware.After)
 }
 
+func addOpDisassociateManagedNotificationAccountContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateManagedNotificationAccountContact{}, middleware.After)
+}
+
+func addOpDisassociateManagedNotificationAdditionalChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateManagedNotificationAdditionalChannel{}, middleware.After)
+}
+
 func addOpGetEventRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventRule{}, middleware.After)
+}
+
+func addOpGetManagedNotificationChildEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetManagedNotificationChildEvent{}, middleware.After)
+}
+
+func addOpGetManagedNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetManagedNotificationConfiguration{}, middleware.After)
+}
+
+func addOpGetManagedNotificationEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetManagedNotificationEvent{}, middleware.After)
 }
 
 func addOpGetNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -415,6 +623,14 @@ func addOpListChannelsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListEventRulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEventRules{}, middleware.After)
+}
+
+func addOpListManagedNotificationChannelAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListManagedNotificationChannelAssociations{}, middleware.After)
+}
+
+func addOpListManagedNotificationChildEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListManagedNotificationChildEvents{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -451,6 +667,42 @@ func validateOpAssociateChannelInput(v *AssociateChannelInput) error {
 	}
 	if v.NotificationConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotificationConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateManagedNotificationAccountContactInput(v *AssociateManagedNotificationAccountContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateManagedNotificationAccountContactInput"}
+	if len(v.ContactIdentifier) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactIdentifier"))
+	}
+	if v.ManagedNotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManagedNotificationConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateManagedNotificationAdditionalChannelInput(v *AssociateManagedNotificationAdditionalChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateManagedNotificationAdditionalChannelInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.ManagedNotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManagedNotificationConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -564,11 +816,92 @@ func validateOpDisassociateChannelInput(v *DisassociateChannelInput) error {
 	}
 }
 
+func validateOpDisassociateManagedNotificationAccountContactInput(v *DisassociateManagedNotificationAccountContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateManagedNotificationAccountContactInput"}
+	if len(v.ContactIdentifier) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactIdentifier"))
+	}
+	if v.ManagedNotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManagedNotificationConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateManagedNotificationAdditionalChannelInput(v *DisassociateManagedNotificationAdditionalChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateManagedNotificationAdditionalChannelInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.ManagedNotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManagedNotificationConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEventRuleInput(v *GetEventRuleInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetEventRuleInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetManagedNotificationChildEventInput(v *GetManagedNotificationChildEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetManagedNotificationChildEventInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetManagedNotificationConfigurationInput(v *GetManagedNotificationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetManagedNotificationConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetManagedNotificationEventInput(v *GetManagedNotificationEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetManagedNotificationEventInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -631,6 +964,36 @@ func validateOpListEventRulesInput(v *ListEventRulesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListEventRulesInput"}
 	if v.NotificationConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotificationConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListManagedNotificationChannelAssociationsInput(v *ListManagedNotificationChannelAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListManagedNotificationChannelAssociationsInput"}
+	if v.ManagedNotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManagedNotificationConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListManagedNotificationChildEventsInput(v *ListManagedNotificationChildEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListManagedNotificationChildEventsInput"}
+	if v.AggregateManagedNotificationEventArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregateManagedNotificationEventArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

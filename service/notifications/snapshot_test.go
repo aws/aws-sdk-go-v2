@@ -74,6 +74,30 @@ func TestCheckSnapshot_AssociateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateManagedNotificationAccountContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateManagedNotificationAccountContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateManagedNotificationAccountContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AssociateManagedNotificationAdditionalChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateManagedNotificationAdditionalChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateManagedNotificationAdditionalChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEventRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEventRule(context.Background(), nil, func(o *Options) {
@@ -134,6 +158,18 @@ func TestCheckSnapshot_DeregisterNotificationHub(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableNotificationsAccessForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableNotificationsAccessForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableNotificationsAccessForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateChannel(context.Background(), nil, func(o *Options) {
@@ -146,11 +182,83 @@ func TestCheckSnapshot_DisassociateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateManagedNotificationAccountContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateManagedNotificationAccountContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateManagedNotificationAccountContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateManagedNotificationAdditionalChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateManagedNotificationAdditionalChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateManagedNotificationAdditionalChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableNotificationsAccessForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableNotificationsAccessForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableNotificationsAccessForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEventRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEventRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetEventRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetManagedNotificationChildEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedNotificationChildEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetManagedNotificationChildEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetManagedNotificationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedNotificationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetManagedNotificationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetManagedNotificationEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedNotificationEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetManagedNotificationEvent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -182,6 +290,18 @@ func TestCheckSnapshot_GetNotificationEvent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetNotificationsAccessForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNotificationsAccessForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetNotificationsAccessForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListChannels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
@@ -199,6 +319,54 @@ func TestCheckSnapshot_ListEventRules(t *testing.T) {
 	_, err := svc.ListEventRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEventRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListManagedNotificationChannelAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedNotificationChannelAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListManagedNotificationChannelAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListManagedNotificationChildEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedNotificationChildEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListManagedNotificationChildEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListManagedNotificationConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedNotificationConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListManagedNotificationConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListManagedNotificationEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedNotificationEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListManagedNotificationEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -325,6 +493,30 @@ func TestUpdateSnapshot_AssociateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateManagedNotificationAccountContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateManagedNotificationAccountContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateManagedNotificationAccountContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateManagedNotificationAdditionalChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateManagedNotificationAdditionalChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateManagedNotificationAdditionalChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEventRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEventRule(context.Background(), nil, func(o *Options) {
@@ -385,6 +577,18 @@ func TestUpdateSnapshot_DeregisterNotificationHub(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableNotificationsAccessForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableNotificationsAccessForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableNotificationsAccessForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateChannel(context.Background(), nil, func(o *Options) {
@@ -397,11 +601,83 @@ func TestUpdateSnapshot_DisassociateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateManagedNotificationAccountContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateManagedNotificationAccountContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateManagedNotificationAccountContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateManagedNotificationAdditionalChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateManagedNotificationAdditionalChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateManagedNotificationAdditionalChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableNotificationsAccessForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableNotificationsAccessForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableNotificationsAccessForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetEventRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEventRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetEventRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetManagedNotificationChildEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedNotificationChildEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetManagedNotificationChildEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetManagedNotificationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedNotificationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetManagedNotificationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetManagedNotificationEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedNotificationEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetManagedNotificationEvent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,6 +709,18 @@ func TestUpdateSnapshot_GetNotificationEvent(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetNotificationsAccessForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNotificationsAccessForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetNotificationsAccessForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListChannels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
@@ -450,6 +738,54 @@ func TestUpdateSnapshot_ListEventRules(t *testing.T) {
 	_, err := svc.ListEventRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEventRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListManagedNotificationChannelAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedNotificationChannelAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListManagedNotificationChannelAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListManagedNotificationChildEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedNotificationChildEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListManagedNotificationChildEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListManagedNotificationConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedNotificationConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListManagedNotificationConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListManagedNotificationEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedNotificationEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListManagedNotificationEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

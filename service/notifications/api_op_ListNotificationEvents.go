@@ -21,7 +21,7 @@ import (
 // which the action is called. User Notifications doesn't backfill notifications to
 // new Regions selected as notification hubs. For this reason, we recommend that
 // you make calls in your oldest registered notification hub. For more information,
-// see [Notification hubs]in the AWS User Notifications User Guide.
+// see [Notification hubs]in the Amazon Web Services User Notifications User Guide.
 //
 // [Notification hubs]: https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html
 func (c *Client) ListNotificationEvents(ctx context.Context, params *ListNotificationEventsInput, optFns ...func(*Options)) (*ListNotificationEventsOutput, error) {
@@ -50,7 +50,7 @@ type ListNotificationEventsInput struct {
 	// Include aggregated child events in the result.
 	IncludeChildEvents *bool
 
-	// The locale code of the language used for the retrieved NotificationEvent. The
+	// The locale code of the language used for the retrieved NotificationEvent . The
 	// default locale is English (en_US) .
 	Locale types.LocaleCode
 
@@ -63,11 +63,11 @@ type ListNotificationEventsInput struct {
 
 	// The matched event source.
 	//
-	// Must match one of the valid EventBridge sources. Only AWS service sourced
-	// events are supported. For example, aws.ec2 and aws.cloudwatch . For more
-	// information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
+	// Must match one of the valid EventBridge sources. Only Amazon Web Services
+	// service sourced events are supported. For example, aws.ec2 and aws.cloudwatch .
+	// For more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
 	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	Source *string
 
 	// The earliest time of events to return from this call.

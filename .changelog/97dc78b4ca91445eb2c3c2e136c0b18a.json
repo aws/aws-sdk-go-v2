@@ -1,0 +1,8 @@
+{
+    "id": "97dc78b4-ca91-445e-b2c3-c2e136c0b18a",
+    "type": "documentation",
+    "description": "Doc only update for Detective documentation.",
+    "modules": [
+        "service/detective"
+    ]
+}

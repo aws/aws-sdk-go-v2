@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Channels for a NotificationConfiguration.
+// Returns a list of Channels for a NotificationConfiguration .
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
 		params = &ListChannelsInput{}
@@ -28,7 +28,7 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 
 type ListChannelsInput struct {
 
-	// The Amazon Resource Name (ARN) of the NotificationConfiguration.
+	// The Amazon Resource Name (ARN) of the NotificationConfiguration .
 	//
 	// This member is required.
 	NotificationConfigurationArn *string

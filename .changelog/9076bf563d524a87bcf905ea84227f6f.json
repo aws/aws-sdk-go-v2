@@ -1,0 +1,8 @@
+{
+    "id": "9076bf56-3d52-4a87-bcf9-05ea84227f6f",
+    "type": "feature",
+    "description": "Allow hyphens in tool name for Converse and ConverseStream APIs",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

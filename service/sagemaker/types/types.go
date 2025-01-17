@@ -11594,7 +11594,8 @@ type ModelPackage struct {
 // Describes the Docker container for the model package.
 type ModelPackageContainerDefinition struct {
 
-	// The Amazon EC2 Container Registry path where inference code is stored.
+	// The Amazon Elastic Container Registry (Amazon ECR) path where inference code is
+	// stored.
 	//
 	// If you are using your own custom algorithm instead of an algorithm provided by
 	// SageMaker, the inference code must meet SageMaker requirements. SageMaker

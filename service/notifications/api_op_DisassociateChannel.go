@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a Channel from a specified NotificationConfiguration. Supported
-// Channels include AWS Chatbot, the AWS Console Mobile Application, and emails
+// Disassociates a Channel from a specified NotificationConfiguration . Supported
+// Channels include Chatbot, the Console Mobile Application, and emails
 // (notifications-contacts).
 func (c *Client) DisassociateChannel(ctx context.Context, params *DisassociateChannelInput, optFns ...func(*Options)) (*DisassociateChannelOutput, error) {
 	if params == nil {
