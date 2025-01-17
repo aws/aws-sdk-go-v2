@@ -95,7 +95,14 @@ func (r *rrDNS) getAddr(ctx context.Context, host string) (string, error) {
 
 func (r *rrDNS) lookupHost(ctx context.Context, host string) (string, error) {
 	ch := r.sf.DoChan(host, func() (interface{}, error) {
-		return r.resolver.LookupHost(ctx, host)
+		addrs, err := r.resolver.LookupHost(ctx, host)
+		if err != nil {
+			return nil, err
+		}
+
+		expires := timeNow().Add(r.expiry)
+		r.cache.PutAddrs(host, addrs, expires)
+		return nil, nil
 	})
 
 	select {
@@ -104,9 +111,6 @@ func (r *rrDNS) lookupHost(ctx context.Context, host string) (string, error) {
 			return "", result.Err
 		}
 
-		addrs := result.Val.([]string)
-		expires := timeNow().Add(r.expiry)
-		r.cache.PutAddrs(host, addrs, expires) // round-trip cache to "consume" the first IP
 		addr, _ := r.cache.GetAddr(host)
 		return addr, nil
 	case <-ctx.Done():
