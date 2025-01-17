@@ -1,3 +1,7 @@
+# v1.28.7 (2025-01-17)
+
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+
 # v1.28.6 (2025-01-15)
 
 * **Documentation**: Documentation updates for Amazon API Gateway

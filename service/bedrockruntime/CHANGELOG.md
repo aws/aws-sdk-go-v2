@@ -1,3 +1,8 @@
+# v1.24.0 (2025-01-17)
+
+* **Feature**: Allow hyphens in tool name for Converse and ConverseStream APIs
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+
 # v1.23.3 (2025-01-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

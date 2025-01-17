@@ -1,8 +1,0 @@
-{
-    "id": "dac44b16-ae46-483d-a912-6a7088225e04",
-    "type": "bugfix",
-    "description": "Add s3 checksum integration test case where operations require checksum but do not have input algorithm setting",
-    "modules": [
-        "service/internal/integrationtest"
-    ]
-}

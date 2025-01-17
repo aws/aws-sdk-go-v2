@@ -1,3 +1,8 @@
+# v1.1.0 (2025-01-17)
+
+* **Feature**: Added support for Managed Notifications, integration with AWS Organization and added aggregation summaries for Aggregate Notifications
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+
 # v1.0.6 (2025-01-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

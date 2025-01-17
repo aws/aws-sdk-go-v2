@@ -1,3 +1,21 @@
+# Release (2025-01-17)
+
+## General Highlights
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.24.0](service/bedrockruntime/CHANGELOG.md#v1240-2025-01-17)
+  * **Feature**: Allow hyphens in tool name for Converse and ConverseStream APIs
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.31.11](service/detective/CHANGELOG.md#v13111-2025-01-17)
+  * **Documentation**: Doc only update for Detective documentation.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.200.0](service/ec2/CHANGELOG.md#v12000-2025-01-17)
+  * **Feature**: Release u7i-6tb.112xlarge, u7i-8tb.112xlarge, u7inh-32tb.480xlarge, p5e.48xlarge, p5en.48xlarge, f2.12xlarge, f2.48xlarge, trn2.48xlarge instance types.
+* `github.com/aws/aws-sdk-go-v2/service/notifications`: [v1.1.0](service/notifications/CHANGELOG.md#v110-2025-01-17)
+  * **Feature**: Added support for Managed Notifications, integration with AWS Organization and added aggregation summaries for Aggregate Notifications
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.173.1](service/sagemaker/CHANGELOG.md#v11731-2025-01-17)
+  * **Documentation**: Correction of docs for  "Added support for ml.trn1.32xlarge instance type in Reserved Capacity Offering"
+
 # Release (2025-01-16)
 
 ## General Highlights

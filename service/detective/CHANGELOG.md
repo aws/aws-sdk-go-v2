@@ -1,3 +1,8 @@
+# v1.31.11 (2025-01-17)
+
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+* **Documentation**: Doc only update for Detective documentation.
+
 # v1.31.10 (2025-01-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

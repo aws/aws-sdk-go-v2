@@ -1,3 +1,8 @@
+# v1.200.0 (2025-01-17)
+
+* **Feature**: Release u7i-6tb.112xlarge, u7i-8tb.112xlarge, u7inh-32tb.480xlarge, p5e.48xlarge, p5en.48xlarge, f2.12xlarge, f2.48xlarge, trn2.48xlarge instance types.
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+
 # v1.199.2 (2025-01-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

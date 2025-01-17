@@ -1,3 +1,8 @@
+# v1.173.1 (2025-01-17)
+
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+* **Documentation**: Correction of docs for  "Added support for ml.trn1.32xlarge instance type in Reserved Capacity Offering"
+
 # v1.173.0 (2025-01-16)
 
 * **Feature**: Added support for ml.trn1.32xlarge instance type in Reserved Capacity Offering
