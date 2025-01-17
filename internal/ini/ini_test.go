@@ -3,6 +3,7 @@ package ini
 import (
 	"encoding/json"
 	"fmt"
+	"io/fs"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -12,13 +13,13 @@ import (
 
 func TestValidDataFiles(t *testing.T) {
 	const expectedFileSuffix = "_expected"
-	err := filepath.Walk(filepath.Join("testdata", "valid"),
-		func(path string, info os.FileInfo, fnErr error) (err error) {
+	err := filepath.WalkDir(filepath.Join("testdata", "valid"),
+		func(path string, d fs.DirEntry, fnErr error) (err error) {
 			if strings.HasSuffix(path, expectedFileSuffix) {
 				return nil
 			}
 
-			if info.IsDir() {
+			if d.IsDir() {
 				return nil
 			}
 
