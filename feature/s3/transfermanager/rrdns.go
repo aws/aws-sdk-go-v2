@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/internal/sync/singleflight"
@@ -111,4 +112,45 @@ func (r *rrDNS) lookupHost(ctx context.Context, host string) (string, error) {
 	case <-ctx.Done():
 		return "", ctx.Err()
 	}
+}
+
+// WithRotoDialer configures an http.Transport to cycle through multiple local
+// network addresses when creating new HTTP connections.
+//
+// WithRotoDialer REPLACES the root DialContext hook on the underlying
+// Transport, thereby destroying any previously-applied wrappings around it. If
+// the caller needs to apply additional decorations to the DialContext hook,
+// they must do so after applying WithRotoDialer.
+func WithRotoDialer(addrs []net.Addr) func(*http.Transport) {
+	return func(t *http.Transport) {
+		var dialers []*net.Dialer
+		for _, addr := range addrs {
+			dialers = append(dialers, &net.Dialer{
+				LocalAddr: addr,
+			})
+		}
+
+		t.DialContext = (&rotoDialer{
+			dialers: dialers,
+		}).DialContext
+	}
+}
+
+type rotoDialer struct {
+	mu      sync.Mutex
+	dialers []*net.Dialer
+	index   int
+}
+
+func (r *rotoDialer) DialContext(ctx context.Context, network, addr string) (net.Conn, error) {
+	return r.next().DialContext(ctx, network, addr)
+}
+
+func (r *rotoDialer) next() *net.Dialer {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	d := r.dialers[r.index]
+	r.index = (r.index + 1) % len(r.dialers)
+	return d
 }
