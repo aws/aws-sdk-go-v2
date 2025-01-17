@@ -18,8 +18,8 @@ func TestAddInputMiddleware(t *testing.T) {
 		options          InputMiddlewareOptions
 		expectErr        string
 		expectMiddleware []string
-		expectInitialize *setupInputContext
-		expectFinalize   *computeInputPayloadChecksum
+		expectInitialize *SetupInputContext
+		expectFinalize   *ComputeInputPayloadChecksum
 	}{
 		"with trailing checksum": {
 			options: InputMiddlewareOptions{
@@ -46,12 +46,12 @@ func TestAddInputMiddleware(t *testing.T) {
 				"Signing",
 				"Deserialize stack step",
 			},
-			expectInitialize: &setupInputContext{
+			expectInitialize: &SetupInputContext{
 				GetAlgorithm: func(interface{}) (string, bool) {
 					return string(AlgorithmCRC32), true
 				},
 			},
-			expectFinalize: &computeInputPayloadChecksum{
+			expectFinalize: &ComputeInputPayloadChecksum{
 				EnableTrailingChecksum:           true,
 				EnableComputePayloadHash:         true,
 				EnableDecodedContentLengthHeader: true,
@@ -81,12 +81,12 @@ func TestAddInputMiddleware(t *testing.T) {
 				"Signing",
 				"Deserialize stack step",
 			},
-			expectInitialize: &setupInputContext{
+			expectInitialize: &SetupInputContext{
 				GetAlgorithm: func(interface{}) (string, bool) {
 					return string(AlgorithmCRC32), true
 				},
 			},
-			expectFinalize: &computeInputPayloadChecksum{
+			expectFinalize: &ComputeInputPayloadChecksum{
 				EnableTrailingChecksum: true,
 			},
 		},
@@ -111,12 +111,12 @@ func TestAddInputMiddleware(t *testing.T) {
 				"Signing",
 				"Deserialize stack step",
 			},
-			expectInitialize: &setupInputContext{
+			expectInitialize: &SetupInputContext{
 				GetAlgorithm: func(interface{}) (string, bool) {
 					return string(AlgorithmCRC32), true
 				},
 			},
-			expectFinalize: &computeInputPayloadChecksum{},
+			expectFinalize: &ComputeInputPayloadChecksum{},
 		},
 	}
 
@@ -140,12 +140,12 @@ func TestAddInputMiddleware(t *testing.T) {
 				t.Fatalf("expect stack list match:\n%s", diff)
 			}
 
-			initializeMiddleware, ok := stack.Initialize.Get((*setupInputContext)(nil).ID())
+			initializeMiddleware, ok := stack.Initialize.Get((*SetupInputContext)(nil).ID())
 			if e, a := (c.expectInitialize != nil), ok; e != a {
 				t.Errorf("expect initialize middleware %t, got %t", e, a)
 			}
 			if c.expectInitialize != nil && ok {
-				setupInput := initializeMiddleware.(*setupInputContext)
+				setupInput := initializeMiddleware.(*SetupInputContext)
 				if e, a := c.options.GetAlgorithm != nil, setupInput.GetAlgorithm != nil; e != a {
 					t.Fatalf("expect GetAlgorithm %t, got %t", e, a)
 				}
@@ -159,20 +159,20 @@ func TestAddInputMiddleware(t *testing.T) {
 				}
 			}
 
-			finalizeMW, ok := stack.Finalize.Get((*computeInputPayloadChecksum)(nil).ID())
+			finalizeMW, ok := stack.Finalize.Get((*ComputeInputPayloadChecksum)(nil).ID())
 			if e, a := (c.expectFinalize != nil), ok; e != a {
 				t.Errorf("expect build middleware %t, got %t", e, a)
 			}
-			var computeInput *computeInputPayloadChecksum
+			var ComputeInput *ComputeInputPayloadChecksum
 			if c.expectFinalize != nil && ok {
-				computeInput = finalizeMW.(*computeInputPayloadChecksum)
-				if e, a := c.expectFinalize.EnableTrailingChecksum, computeInput.EnableTrailingChecksum; e != a {
+				ComputeInput = finalizeMW.(*ComputeInputPayloadChecksum)
+				if e, a := c.expectFinalize.EnableTrailingChecksum, ComputeInput.EnableTrailingChecksum; e != a {
 					t.Errorf("expect %v enable trailing checksum, got %v", e, a)
 				}
-				if e, a := c.expectFinalize.EnableComputePayloadHash, computeInput.EnableComputePayloadHash; e != a {
+				if e, a := c.expectFinalize.EnableComputePayloadHash, ComputeInput.EnableComputePayloadHash; e != a {
 					t.Errorf("expect %v enable compute payload hash, got %v", e, a)
 				}
-				if e, a := c.expectFinalize.EnableDecodedContentLengthHeader, computeInput.EnableDecodedContentLengthHeader; e != a {
+				if e, a := c.expectFinalize.EnableDecodedContentLengthHeader, ComputeInput.EnableDecodedContentLengthHeader; e != a {
 					t.Errorf("expect %v enable decoded length header, got %v", e, a)
 				}
 			}

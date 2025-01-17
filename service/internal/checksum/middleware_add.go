@@ -52,32 +52,13 @@ type InputMiddlewareOptions struct {
 
 // AddInputMiddleware adds the middleware for performing checksum computing
 // of request payloads, and checksum validation of response payloads.
+//
+// Deprecated: This internal-only runtime API is frozen. Do not call or modify
+// it in new code. Checksum-enabled service operations now generate this
+// middleware setup code inline per #2507.
 func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions) (err error) {
-	// TODO ensure this works correctly with presigned URLs
-
-	// Middleware stack:
-	// * (OK)(Initialize) --none--
-	// * (OK)(Serialize) EndpointResolver
-	// * (OK)(Build) ComputeContentLength
-	// * (AD)(Build) Header ComputeInputPayloadChecksum
-	//    * SIGNED Payload - If HTTP && not support trailing checksum
-	//    * UNSIGNED Payload - If HTTPS && not support trailing checksum
-	// * (RM)(Build) ContentChecksum - OK to remove
-	// * (OK)(Build) ComputePayloadHash
-	//    * v4.dynamicPayloadSigningMiddleware
-	//    * v4.computePayloadSHA256
-	//    * v4.unsignedPayload
-	//   (OK)(Build) Set computedPayloadHash header
-	// * (OK)(Finalize) Retry
-	// * (AD)(Finalize) Trailer ComputeInputPayloadChecksum,
-	//    * Requires HTTPS && support trailing checksum
-	//    * UNSIGNED Payload
-	//    * Finalize run if HTTPS && support trailing checksum
-	// * (OK)(Finalize) Signing
-	// * (OK)(Deserialize) --none--
-
 	// Initial checksum configuration look up middleware
-	err = stack.Initialize.Add(&setupInputContext{
+	err = stack.Initialize.Add(&SetupInputContext{
 		GetAlgorithm:               options.GetAlgorithm,
 		RequireChecksum:            options.RequireChecksum,
 		RequestChecksumCalculation: options.RequestChecksumCalculation,
@@ -88,7 +69,7 @@ func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions)
 
 	stack.Build.Remove("ContentChecksum")
 
-	inputChecksum := &computeInputPayloadChecksum{
+	inputChecksum := &ComputeInputPayloadChecksum{
 		EnableTrailingChecksum:           options.EnableTrailingChecksum,
 		EnableComputePayloadHash:         options.EnableComputeSHA256PayloadHash,
 		EnableDecodedContentLengthHeader: options.EnableDecodedContentLengthHeader,
@@ -99,7 +80,7 @@ func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions)
 
 	// If trailing checksum is not supported no need for finalize handler to be added.
 	if options.EnableTrailingChecksum {
-		trailerMiddleware := &addInputChecksumTrailer{
+		trailerMiddleware := &AddInputChecksumTrailer{
 			EnableTrailingChecksum:           inputChecksum.EnableTrailingChecksum,
 			EnableComputePayloadHash:         inputChecksum.EnableComputePayloadHash,
 			EnableDecodedContentLengthHeader: inputChecksum.EnableDecodedContentLengthHeader,
@@ -115,10 +96,10 @@ func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions)
 // RemoveInputMiddleware Removes the compute input payload checksum middleware
 // handlers from the stack.
 func RemoveInputMiddleware(stack *middleware.Stack) {
-	id := (*setupInputContext)(nil).ID()
+	id := (*SetupInputContext)(nil).ID()
 	stack.Initialize.Remove(id)
 
-	id = (*computeInputPayloadChecksum)(nil).ID()
+	id = (*ComputeInputPayloadChecksum)(nil).ID()
 	stack.Finalize.Remove(id)
 }
 

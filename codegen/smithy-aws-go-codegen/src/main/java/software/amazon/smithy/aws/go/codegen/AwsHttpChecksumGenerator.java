@@ -160,6 +160,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
         if (supportsComputeInputChecksumsWorkflow) {
             goDelegator.useShapeWriter(service, writer -> {
                 generateInputComputedChecksumMetadataHelpers(writer, model, symbolProvider, service);
+                writePackageLevelAddInputChecksumMiddleware(writer);
             });
         }
 
@@ -257,7 +258,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
         writer.openBlock("func $L(stack *middleware.Stack, options Options) error {", "}",
                 getAddInputMiddlewareFuncName(operationName), () -> {
                     writer.write("""
-                                    return $T(stack, $T{
+                                    return addInputChecksumMiddleware(stack, $T{
                                         GetAlgorithm: $L,
                                         RequireChecksum: $L,
                                         RequestChecksumCalculation: options.RequestChecksumCalculation,
@@ -265,8 +266,6 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                                         EnableComputeSHA256PayloadHash: true,
                                         EnableDecodedContentLengthHeader: $L,
                                     })""",
-                            SymbolUtils.createValueSymbolBuilder("AddInputMiddleware",
-                                    AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
                             SymbolUtils.createValueSymbolBuilder("InputMiddlewareOptions",
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
                             hasRequestAlgorithmMember ?
@@ -277,6 +276,48 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                 }
         );
         writer.insertTrailingNewline();
+    }
+
+    // adapted (service/internal/checksum).AddInputMiddleware to give the service client control over its middleware stack,
+    // per #2507
+    private void writePackageLevelAddInputChecksumMiddleware(GoWriter writer) {
+        writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
+        writer.addUseImports(AwsGoDependency.SERVICE_INTERNAL_CHECKSUM);
+        writer.write("""
+                func addInputChecksumMiddleware(stack *middleware.Stack, options internalChecksum.InputMiddlewareOptions) (err error) {
+                    err = stack.Initialize.Add(&internalChecksum.SetupInputContext{
+                        GetAlgorithm:               options.GetAlgorithm,
+                        RequireChecksum:            options.RequireChecksum,
+                        RequestChecksumCalculation: options.RequestChecksumCalculation,
+                    }, middleware.Before)
+                    if err != nil {
+                        return err
+                    }
+
+                    stack.Build.Remove("ContentChecksum")
+
+                    inputChecksum := &internalChecksum.ComputeInputPayloadChecksum{
+                        EnableTrailingChecksum:           options.EnableTrailingChecksum,
+                        EnableComputePayloadHash:         options.EnableComputeSHA256PayloadHash,
+                        EnableDecodedContentLengthHeader: options.EnableDecodedContentLengthHeader,
+                    }
+                    if err := stack.Finalize.Insert(inputChecksum, "ResolveEndpointV2", middleware.After); err != nil {
+                        return err
+                    }
+
+                    if options.EnableTrailingChecksum {
+                        trailerMiddleware := &internalChecksum.AddInputChecksumTrailer{
+                            EnableTrailingChecksum:           inputChecksum.EnableTrailingChecksum,
+                            EnableComputePayloadHash:         inputChecksum.EnableComputePayloadHash,
+                            EnableDecodedContentLengthHeader: inputChecksum.EnableDecodedContentLengthHeader,
+                        }
+                        if err := stack.Finalize.Insert(trailerMiddleware, inputChecksum.ID(), middleware.After); err != nil {
+                            return err
+                        }
+                    }
+
+                    return nil
+                }""");
     }
 
     private void writeOutputMiddlewareHelper(
