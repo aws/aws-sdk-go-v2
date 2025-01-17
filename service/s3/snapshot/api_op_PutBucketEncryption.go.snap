@@ -30,6 +30,9 @@ PutBucketEncryption
 		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
+		spanRetryLoop
+		Retry
+		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
@@ -38,9 +41,6 @@ PutBucketEncryption
 		AWSChecksum:ComputeInputPayloadChecksum
 		ComputePayloadHash
 		SigV4ContentSHA256Header
-		spanRetryLoop
-		Retry
-		RetryMetricsHeader
 		setLegacyContextSigningOptions
 		Signing
 	Deserialize stack step

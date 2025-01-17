@@ -19,15 +19,15 @@ ListGlobalTables
 		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
+		spanRetryLoop
+		Retry
+		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
 		DiscoverEndpoint
 		ComputePayloadHash
-		spanRetryLoop
-		Retry
-		RetryMetricsHeader
 		setLegacyContextSigningOptions
 		Signing
 	Deserialize stack step

@@ -31,17 +31,17 @@ UploadPart
 		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
+		spanRetryLoop
+		Retry
+		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
 		AWSChecksum:ComputeInputPayloadChecksum
+		addInputChecksumTrailer
 		ComputePayloadHash
 		SigV4ContentSHA256Header
-		spanRetryLoop
-		Retry
-		addInputChecksumTrailer
-		RetryMetricsHeader
 		setLegacyContextSigningOptions
 		Signing
 	Deserialize stack step
