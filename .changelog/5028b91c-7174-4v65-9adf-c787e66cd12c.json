@@ -2,7 +2,7 @@
     "id": "5028b91c-7174-4v65-9adf-c787e66cd12c",
     "type": "bugfix",
     "collapse": false,
-    "description": "replaced '3manager' with 'manager' in the `manager` package (v2).",
+    "description": "Fix incorrect reference to old s3manager in comments.",
     "modules": [
         "feature/s3/manager"
     ]
