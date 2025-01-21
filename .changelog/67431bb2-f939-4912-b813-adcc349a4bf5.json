@@ -4,7 +4,6 @@
     "description": "Refactor filepath.Walk to filepath.WalkDir",
     "collapse": false,
     "modules": [
-        "internal/ini",
-        "internal/repotools/cmd/syncAPIModels"
+        "internal/ini"
     ]
 }
