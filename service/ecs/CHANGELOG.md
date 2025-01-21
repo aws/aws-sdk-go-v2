@@ -1,3 +1,7 @@
+# v1.53.8 (2025-01-17)
+
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+
 # v1.53.7 (2025-01-16)
 
 * **Documentation**: The release addresses Amazon ECS documentation tickets.

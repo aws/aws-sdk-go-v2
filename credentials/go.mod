@@ -5,9 +5,9 @@ go 1.21
 require (
 	github.com/aws/aws-sdk-go-v2 v1.33.0
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.24
-	github.com/aws/aws-sdk-go-v2/service/sso v1.24.10
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.9
-	github.com/aws/aws-sdk-go-v2/service/sts v1.33.8
+	github.com/aws/aws-sdk-go-v2/service/sso v1.24.11
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.10
+	github.com/aws/aws-sdk-go-v2/service/sts v1.33.9
 	github.com/aws/smithy-go v1.22.1
 )
 

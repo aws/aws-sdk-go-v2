@@ -75,5 +75,5 @@
 // of Detective, the administrator account manages the accounts in their behavior
 // graph.
 //
-// [Logging Detective API Calls with CloudTrail]: https://docs.aws.amazon.com/detective/latest/adminguide/logging-using-cloudtrail.html
+// [Logging Detective API Calls with CloudTrail]: https://docs.aws.amazon.com/detective/latest/userguide/logging-using-cloudtrail.html
 package detective

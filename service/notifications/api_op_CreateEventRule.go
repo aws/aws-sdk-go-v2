@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an [EventRule] that is associated with a specified Notification Configuration.
+// Creates an [EventRule]EventRule that is associated with a specified
+// NotificationConfiguration .
 //
 // [EventRule]: https://docs.aws.amazon.com/notifications/latest/userguide/glossary.html
 func (c *Client) CreateEventRule(ctx context.Context, params *CreateEventRuleInput, optFns ...func(*Options)) (*CreateEventRuleOutput, error) {
@@ -34,32 +35,32 @@ type CreateEventRuleInput struct {
 	// The event type to match.
 	//
 	// Must match one of the valid Amazon EventBridge event types. For example, EC2
-	// Instance State-change Notification and AWS CloudWatch Alarm State Change. For
-	// more information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
+	// Instance State-change Notification and Amazon CloudWatch Alarm State Change. For
+	// more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
 	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	//
 	// This member is required.
 	EventType *string
 
 	// The Amazon Resource Name (ARN) of the NotificationConfiguration associated with
-	// this EventRule.
+	// this EventRule .
 	//
 	// This member is required.
 	NotificationConfigurationArn *string
 
-	// A list of AWS Regions that send events to this EventRule.
+	// A list of Amazon Web Services Regions that send events to this EventRule .
 	//
 	// This member is required.
 	Regions []string
 
 	// The matched event source.
 	//
-	// Must match one of the valid EventBridge sources. Only AWS service sourced
-	// events are supported. For example, aws.ec2 and aws.cloudwatch . For more
-	// information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
+	// Must match one of the valid EventBridge sources. Only Amazon Web Services
+	// service sourced events are supported. For example, aws.ec2 and aws.cloudwatch .
+	// For more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
 	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	//
 	// This member is required.
 	Source *string
@@ -82,13 +83,13 @@ type CreateEventRuleOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The ARN of a NotificationConfiguration.
+	// The ARN of a NotificationConfiguration .
 	//
 	// This member is required.
 	NotificationConfigurationArn *string
 
-	// A list of an EventRule's status by Region. Regions are mapped to
-	// EventRuleStatusSummary.
+	// A list of an EventRule 's status by Region. Regions are mapped to
+	// EventRuleStatusSummary .
 	//
 	// This member is required.
 	StatusSummaryByRegion map[string]types.EventRuleStatusSummary

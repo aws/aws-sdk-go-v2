@@ -210,8 +210,7 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 								func(options *s3.Options) {
 									options.APIOptions = append(options.APIOptions,
 										func(stack *middleware.Stack) error {
-											stack.Serialize.Insert(&fm,
-												"OperationSerializer", middleware.After)
+											stack.Finalize.Add(&fm, middleware.After)
 											return nil
 										})
 								},
@@ -1463,7 +1462,7 @@ func runValidations(t *testing.T, c testCaseForEndpointCustomization, operation 
 	}
 
 	// build the captured request
-	req := serializedRequest.request.Build(ctx)
+	req := signedRequest.request.Build(ctx)
 	// verify the built request is as expected
 	if e, a := c.expectedReqURL, req.URL.String(); e != a {
 		t.Fatalf("expect url %s, got %s", e, a)
@@ -1478,10 +1477,9 @@ func runValidations(t *testing.T, c testCaseForEndpointCustomization, operation 
 	}
 
 	// fetch signed request
-	signedReq := signedRequest.request
 	// validate if expected headers are present in request
 	for key, ev := range c.expectedHeader {
-		av := signedReq.Header.Get(key)
+		av := req.Header.Get(key)
 		if len(av) == 0 {
 			t.Fatalf("expected header %v to be present in %v was not", key, req.Header)
 		}

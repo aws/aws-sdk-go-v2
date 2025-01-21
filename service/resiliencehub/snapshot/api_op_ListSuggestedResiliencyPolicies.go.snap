@@ -18,14 +18,14 @@ ListSuggestedResiliencyPolicies
 		RecursionDetection
 		spanBuildRequestEnd
 	Finalize stack step
+		spanRetryLoop
+		Retry
+		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
 		ComputePayloadHash
-		spanRetryLoop
-		Retry
-		RetryMetricsHeader
 		setLegacyContextSigningOptions
 		Signing
 	Deserialize stack step

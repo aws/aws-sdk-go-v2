@@ -12,9 +12,10 @@ import (
 
 // Untags a resource with a specified Amazon Resource Name (ARN).
 //
-// For more information, see [Tagging your AWS resources] in the Tagging AWS Resources User Guide.
+// For more information, see [Tagging your Amazon Web Services resources] in the Tagging Amazon Web Services Resources User
+// Guide.
 //
-// [Tagging your AWS resources]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+// [Tagging your Amazon Web Services resources]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

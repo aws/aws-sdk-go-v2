@@ -1,3 +1,7 @@
+# v1.52.1 (2025-01-17)
+
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+
 # v1.52.0 (2025-01-15)
 
 * **Feature**: Added GeneralPurpose.4xlarge & GeneralPurpose.8xlarge ComputeTypes.

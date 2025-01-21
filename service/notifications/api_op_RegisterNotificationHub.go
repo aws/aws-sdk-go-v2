@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Registers a NotificationHub in the specified Region.
+// Registers a NotificationConfiguration in the specified Region.
 //
-// There is a maximum of one NotificationHub per Region. You can have a maximum of
-// 3 NotificationHubs at a time.
+// There is a maximum of one NotificationConfiguration per Region. You can have a
+// maximum of 3 NotificationHub resources at a time.
 func (c *Client) RegisterNotificationHub(ctx context.Context, params *RegisterNotificationHubInput, optFns ...func(*Options)) (*RegisterNotificationHubOutput, error) {
 	if params == nil {
 		params = &RegisterNotificationHubInput{}
@@ -33,7 +33,7 @@ func (c *Client) RegisterNotificationHub(ctx context.Context, params *RegisterNo
 
 type RegisterNotificationHubInput struct {
 
-	// The Region of the NotificationHub.
+	// The Region of the NotificationHub .
 	//
 	// This member is required.
 	NotificationHubRegion *string
@@ -48,12 +48,13 @@ type RegisterNotificationHubOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The Region of the NotificationHub.
+	// The Region of the NotificationHub .
 	//
 	// This member is required.
 	NotificationHubRegion *string
 
-	// NotificationHub status information.
+	// Provides additional information about the current NotificationConfiguration
+	// status information.
 	//
 	// This member is required.
 	StatusSummary *types.NotificationHubStatusSummary

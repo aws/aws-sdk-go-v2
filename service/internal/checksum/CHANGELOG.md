@@ -1,3 +1,7 @@
+# v1.5.2 (2025-01-17)
+
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+
 # v1.5.1 (2025-01-16)
 
 * **Bug Fix**: Fix nil dereference panic for operations that require checksums, but do not have an input setting for which algorithm to use.

@@ -35,11 +35,11 @@ type ListNotificationConfigurationsInput struct {
 
 	// The matched event source.
 	//
-	// Must match one of the valid EventBridge sources. Only AWS service sourced
-	// events are supported. For example, aws.ec2 and aws.cloudwatch . For more
-	// information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
+	// Must match one of the valid EventBridge sources. Only Amazon Web Services
+	// service sourced events are supported. For example, aws.ec2 and aws.cloudwatch .
+	// For more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
 	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	EventRuleSource *string
 
 	// The maximum number of results to be returned in this call. Defaults to 20.

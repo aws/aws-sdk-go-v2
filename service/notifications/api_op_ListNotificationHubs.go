@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of NotificationHubs.
+// Returns a list of NotificationHubs .
 func (c *Client) ListNotificationHubs(ctx context.Context, params *ListNotificationHubsInput, optFns ...func(*Options)) (*ListNotificationHubsOutput, error) {
 	if params == nil {
 		params = &ListNotificationHubsInput{}

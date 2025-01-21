@@ -1,3 +1,7 @@
+# v1.41.1 (2025-01-17)
+
+* **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
+
 # v1.41.0 (2025-01-15)
 
 * **Feature**: This release introduces a new recommendation in Virtual Deliverability Manager Advisor, which detects elevated complaint rates for customer sending identities.

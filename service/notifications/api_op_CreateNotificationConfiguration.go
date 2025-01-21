@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new NotificationConfiguration.
+// Creates a new NotificationConfiguration .
 func (c *Client) CreateNotificationConfiguration(ctx context.Context, params *CreateNotificationConfigurationInput, optFns ...func(*Options)) (*CreateNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateNotificationConfigurationInput{}
@@ -29,18 +29,18 @@ func (c *Client) CreateNotificationConfiguration(ctx context.Context, params *Cr
 
 type CreateNotificationConfigurationInput struct {
 
-	// The description of the NotificationConfiguration.
+	// The description of the NotificationConfiguration .
 	//
 	// This member is required.
 	Description *string
 
-	// The name of the NotificationConfiguration. Supports RFC 3986's unreserved
+	// The name of the NotificationConfiguration . Supports RFC 3986's unreserved
 	// characters.
 	//
 	// This member is required.
 	Name *string
 
-	// The aggregation preference of the NotificationConfiguration.
+	// The aggregation preference of the NotificationConfiguration .
 	//
 	//   - Values:
 	//
@@ -55,8 +55,6 @@ type CreateNotificationConfigurationInput struct {
 	//   - NONE
 	//
 	//   - Don't aggregate notifications.
-	//
-	// No delay in delivery.
 	AggregationDuration types.AggregationDuration
 
 	// A map of tags assigned to a resource. A tag is a string-to-string map of
@@ -68,37 +66,12 @@ type CreateNotificationConfigurationInput struct {
 
 type CreateNotificationConfigurationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the the resource.
+	// The Amazon Resource Name (ARN) of the NotificationConfiguration .
 	//
 	// This member is required.
 	Arn *string
 
-	// The status of this NotificationConfiguration.
-	//
-	// The status should always be INACTIVE when part of the
-	// CreateNotificationConfiguration response.
-	//
-	//   - Values:
-	//
-	//   - ACTIVE
-	//
-	//   - All EventRules are ACTIVE and any call can be run.
-	//
-	//   - PARTIALLY_ACTIVE
-	//
-	//   - Some EventRules are ACTIVE and some are INACTIVE .
-	//
-	//   - Any call can be run.
-	//
-	//   - INACTIVE
-	//
-	//   - All EventRules are INACTIVE and any call can be run.
-	//
-	//   - DELETING
-	//
-	//   - This NotificationConfiguration is being deleted.
-	//
-	//   - Only GET and LIST calls can be run.
+	// The current status of this NotificationConfiguration .
 	//
 	// This member is required.
 	Status types.NotificationConfigurationStatus

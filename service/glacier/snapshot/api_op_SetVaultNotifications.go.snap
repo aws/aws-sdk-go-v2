@@ -22,14 +22,14 @@ SetVaultNotifications
 		spanBuildRequestEnd
 	Finalize stack step
 		Glacier:TreeHash
+		spanRetryLoop
+		Retry
+		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
 		ComputePayloadHash
-		spanRetryLoop
-		Retry
-		RetryMetricsHeader
 		setLegacyContextSigningOptions
 		Signing
 	Deserialize stack step

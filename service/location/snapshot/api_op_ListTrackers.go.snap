@@ -18,15 +18,15 @@ ListTrackers
 		RecursionDetection
 		spanBuildRequestEnd
 	Finalize stack step
+		spanRetryLoop
+		Retry
+		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
 		EndpointHostPrefix
 		ComputePayloadHash
-		spanRetryLoop
-		Retry
-		RetryMetricsHeader
 		setLegacyContextSigningOptions
 		Signing
 	Deserialize stack step

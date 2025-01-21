@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns a specified NotificationEvent.
+// Returns a specified NotificationEvent .
 //
 // User Notifications stores notifications in the individual Regions you register
 // as notification hubs and the Region of the source event rule.
@@ -20,7 +20,7 @@ import (
 // which the action is called. User Notifications doesn't backfill notifications to
 // new Regions selected as notification hubs. For this reason, we recommend that
 // you make calls in your oldest registered notification hub. For more information,
-// see [Notification hubs]in the AWS User Notifications User Guide.
+// see [Notification hubs]in the Amazon Web Services User Notifications User Guide.
 //
 // [Notification hubs]: https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html
 func (c *Client) GetNotificationEvent(ctx context.Context, params *GetNotificationEventInput, optFns ...func(*Options)) (*GetNotificationEventOutput, error) {
@@ -45,7 +45,7 @@ type GetNotificationEventInput struct {
 	// This member is required.
 	Arn *string
 
-	// The locale code of the language used for the retrieved NotificationEvent. The
+	// The locale code of the language used for the retrieved NotificationEvent . The
 	// default locale is English en_US .
 	Locale types.LocaleCode
 
@@ -59,17 +59,17 @@ type GetNotificationEventOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The content of the NotificationEvent.
+	// The content of the NotificationEvent .
 	//
 	// This member is required.
 	Content *types.NotificationEventSchema
 
-	// The creation time of the NotificationEvent.
+	// The creation time of the NotificationEvent .
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The ARN of the NotificationConfiguration.
+	// The ARN of the NotificationConfiguration .
 	//
 	// This member is required.
 	NotificationConfigurationArn *string

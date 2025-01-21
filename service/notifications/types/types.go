@@ -7,6 +7,65 @@ import (
 	"time"
 )
 
+// Provides detailed information about the dimensions used for aggregation.
+type AggregationDetail struct {
+
+	// Properties used to summarize aggregated events.
+	SummarizationDimensions []SummarizationDimensionDetail
+
+	noSmithyDocumentSerde
+}
+
+// Key-value collection that indicate how notifications are grouped.
+type AggregationKey struct {
+
+	// Indicates the type of aggregation key.
+	//
+	// This member is required.
+	Name *string
+
+	// Indicates the value associated with the aggregation key name.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides additional information about the aggregation key.
+type AggregationSummary struct {
+
+	// Indicates the Amazon Web Services accounts in the aggregation key.
+	//
+	// This member is required.
+	AggregatedAccounts *SummarizationDimensionOverview
+
+	// Indicates the criteria or rules by which notifications have been grouped
+	// together.
+	//
+	// This member is required.
+	AggregatedBy []AggregationKey
+
+	// Indicates the Amazon Web Services Regions in the aggregation key.
+	//
+	// This member is required.
+	AggregatedRegions *SummarizationDimensionOverview
+
+	// Indicates the number of events associated with the aggregation key.
+	//
+	// This member is required.
+	EventCount *int32
+
+	// List of additional dimensions used to group and summarize data.
+	AdditionalSummarizationDimensions []SummarizationDimensionOverview
+
+	// Indicates the collection of organizational units that are involved in the
+	// aggregation key.
+	AggregatedOrganizationalUnits *SummarizationDimensionOverview
+
+	noSmithyDocumentSerde
+}
+
 // The key-value pair of properties for an event.
 type Dimension struct {
 
@@ -23,15 +82,15 @@ type Dimension struct {
 	noSmithyDocumentSerde
 }
 
-// Describes EventRule status information.
+// Provides additional information about the current EventRule status.
 type EventRuleStatusSummary struct {
 
-	// A human-readable reason for EventRuleStatus.
+	// A human-readable reason for EventRuleStatus .
 	//
 	// This member is required.
 	Reason *string
 
-	// The status of the EventRule.
+	// The status of the EventRule .
 	//
 	//   - Values:
 	//
@@ -67,15 +126,16 @@ type EventRuleStatusSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains a complete list of fields related to an EventRule.
+// Contains a complete list of fields related to an EventRule .
 type EventRuleStructure struct {
 
-	// The Amazon Resource Name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the EventRule . CloudFormation stack generates
+	// this ARN and then uses this ARN to associate with the NotificationConfiguration .
 	//
 	// This member is required.
 	Arn *string
 
-	// The creation time of the resource.
+	// The creation time of the EventRule .
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -90,51 +150,569 @@ type EventRuleStructure struct {
 	// This member is required.
 	EventPattern *string
 
-	// The event type to match.
+	// The event type this rule should match with the EventBridge events. It must
+	// match with atleast one of the valid EventBridge event types. For example, Amazon
+	// EC2 Instance State change Notification and Amazon CloudWatch State Change. For
+	// more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
 	//
-	// Must match one of the valid Amazon EventBridge event types. For example, EC2
-	// Instance State-change Notification and AWS CloudWatch Alarm State Change. For
-	// more information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
-	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	//
 	// This member is required.
 	EventType *string
 
-	// A list of Amazon EventBridge Managed Rule ARNs associated with this EventRule.
+	// A list of Amazon EventBridge Managed Rule ARNs associated with this EventRule .
 	//
-	// These are created by AWS User Notifications within your account so your
-	// EventRules can function.
+	// These are created by User Notifications within your account so your EventRules
+	// can function.
 	//
 	// This member is required.
 	ManagedRules []string
 
-	// The ARN for the NotificationConfiguration associated with this EventRule.
+	// The ARN for the NotificationConfiguration associated with this EventRule .
 	//
 	// This member is required.
 	NotificationConfigurationArn *string
 
-	// A list of AWS Regions that send events to this EventRule.
+	// A list of Amazon Web Services Regions that send events to this EventRule .
 	//
 	// This member is required.
 	Regions []string
 
-	// The matched event source.
+	// The event source this rule should match with the EventBridge event sources. It
+	// must match with atleast one of the valid EventBridge event sources. Only Amazon
+	// Web Services service sourced events are supported. For example, aws.ec2 and
+	// aws.cloudwatch . For more information, see [Event delivery from Amazon Web Services services] in the Amazon EventBridge User
+	// Guide.
 	//
-	// Must match one of the valid EventBridge sources. Only AWS service sourced
-	// events are supported. For example, aws.ec2 and aws.cloudwatch . For more
-	// information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
-	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	//
 	// This member is required.
 	Source *string
 
-	// A list of an EventRule's status by Region. Regions are mapped to
-	// EventRuleStatusSummary.
+	// A list of an EventRule 's status by Region. Regions are mapped to
+	// EventRuleStatusSummary .
 	//
 	// This member is required.
 	StatusSummaryByRegion map[string]EventRuleStatusSummary
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of channel associations for a managed notification
+// configuration.
+type ManagedNotificationChannelAssociationSummary struct {
+
+	// The unique identifier for the notification channel.
+	//
+	// This member is required.
+	ChannelIdentifier *string
+
+	// The type of notification channel used for message delivery.
+	//
+	//   - Values:
+	//
+	//   - ACCOUNT_CONTACT
+	//
+	//   - Delivers notifications to Account Managed contacts through the User
+	//   Notification Service.
+	//
+	//   - MOBILE
+	//
+	//   - Delivers notifications through the Amazon Web Services Console Mobile
+	//   Application to mobile devices.
+	//
+	//   - CHATBOT
+	//
+	//   - Delivers notifications through Chatbot to collaboration platforms (Slack,
+	//   Chime).
+	//
+	//   - EMAIL
+	//
+	//   - Delivers notifications to email addresses.
+	//
+	// This member is required.
+	ChannelType ChannelType
+
+	// Controls whether users can modify channel associations for a notification
+	// configuration.
+	//
+	//   - Values:
+	//
+	//   - ENABLED
+	//
+	//   - Users can associate or disassociate channels with the notification
+	//   configuration.
+	//
+	//   - DISABLED
+	//
+	//   - Users cannot associate or disassociate channels with the notification
+	//   configuration.
+	OverrideOption ChannelAssociationOverrideOption
+
+	noSmithyDocumentSerde
+}
+
+// A ManagedNotificationChildEvent is a notification-focused representation of an
+// event. They contain semantic information used to create aggregated or
+// non-aggregated end-user notifications.
+type ManagedNotificationChildEvent struct {
+
+	// The Amazon Resource Name (ARN) of the ManagedNotificationEvent that is
+	// associated with this Managed Notification Child Event.
+	//
+	// This member is required.
+	AggregateManagedNotificationEventArn *string
+
+	// The unique identifier for a Managed Notification Child Event.
+	//
+	// This member is required.
+	Id *string
+
+	// Describes the components of a notification message.
+	//
+	// This member is required.
+	MessageComponents *MessageComponents
+
+	// The type of event causing the notification.
+	//
+	//   - Values:
+	//
+	//   - ALERT
+	//
+	//   - A notification about an event where something was triggered, initiated,
+	//   reopened, deployed, or a threshold was breached.
+	//
+	//   - WARNING
+	//
+	//   - A notification about an event where an issue is about to arise. For
+	//   example, something is approaching a threshold.
+	//
+	//   - ANNOUNCEMENT
+	//
+	//   - A notification about an important event. For example, a step in a workflow
+	//   or escalation path or that a workflow was updated.
+	//
+	//   - INFORMATIONAL
+	//
+	//   - A notification about informational messages. For example, recommendations,
+	//   service announcements, or reminders.
+	//
+	// This member is required.
+	NotificationType NotificationType
+
+	// The schema version of the Managed Notification Child Event.
+	//
+	// This member is required.
+	SchemaVersion SchemaVersion
+
+	// A list of text values.
+	//
+	// This member is required.
+	TextParts map[string]TextPartValue
+
+	// Provides detailed information about the dimensions used for event summarization
+	// and aggregation.
+	AggregationDetail *AggregationDetail
+
+	// The end time of the event.
+	EndTime *time.Time
+
+	// The assesed nature of the event.
+	//
+	//   - Values:
+	//
+	//   - HEALTHY
+	//
+	//   - All EventRules are ACTIVE .
+	//
+	//   - UNHEALTHY
+	//
+	//   - Some EventRules are ACTIVE and some are INACTIVE .
+	EventStatus EventStatus
+
+	// The Organizational Unit Id that an Amazon Web Services account belongs to.
+	OrganizationalUnitId *string
+
+	// The source event URL.
+	SourceEventDetailUrl *string
+
+	// The detailed URL for the source event.
+	SourceEventDetailUrlDisplayText *string
+
+	// The notification event start time.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes an overview and metadata for a ManagedNotificationChildEvent .
+type ManagedNotificationChildEventOverview struct {
+
+	// The Amazon Resource Name (ARN) of the ManagedNotificationEvent that is
+	// associated with this ManagedNotificationChildEvent .
+	//
+	// This member is required.
+	AggregateManagedNotificationEventArn *string
+
+	// The Amazon Resource Name (ARN) of the ManagedNotificationChildEvent .
+	//
+	// This member is required.
+	Arn *string
+
+	// The content of the ManagedNotificationChildEvent .
+	//
+	// This member is required.
+	ChildEvent *ManagedNotificationChildEventSummary
+
+	// The creation time of the ManagedNotificationChildEvent .
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the ManagedNotificationConfiguration .
+	//
+	// This member is required.
+	ManagedNotificationConfigurationArn *string
+
+	// The account that related to the ManagedNotificationChildEvent .
+	//
+	// This member is required.
+	RelatedAccount *string
+
+	// The Organizational Unit Id that an AWS account belongs to.
+	OrganizationalUnitId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a short summary and metadata for a ManagedNotificationChildEvent .
+type ManagedNotificationChildEventSummary struct {
+
+	// Provides detailed information about the dimensions used for event summarization
+	// and aggregation.
+	//
+	// This member is required.
+	AggregationDetail *AggregationDetail
+
+	// The perceived nature of the event.
+	//
+	//   - Values:
+	//
+	//   - HEALTHY
+	//
+	//   - All EventRules are ACTIVE and any call can be run.
+	//
+	//   - UNHEALTHY
+	//
+	//   - Some EventRules are ACTIVE and some are INACTIVE . Any call can be run.
+	//
+	// This member is required.
+	EventStatus EventStatus
+
+	// Contains the headline message component.
+	//
+	// This member is required.
+	MessageComponents *MessageComponentsSummary
+
+	// The Type of the event causing this notification.
+	//
+	//   - Values:
+	//
+	//   - ALERT
+	//
+	//   - A notification about an event where something was triggered, initiated,
+	//   reopened, deployed, or a threshold was breached.
+	//
+	//   - WARNING
+	//
+	//   - A notification about an event where an issue is about to arise. For
+	//   example, something is approaching a threshold.
+	//
+	//   - ANNOUNCEMENT
+	//
+	//   - A notification about an important event. For example, a step in a workflow
+	//   or escalation path or that a workflow was updated.
+	//
+	//   - INFORMATIONAL
+	//
+	//   - A notification about informational messages. For example, recommendations,
+	//   service announcements, or reminders.
+	//
+	// This member is required.
+	NotificationType NotificationType
+
+	// The schema version of the ManagedNotificationChildEvent .
+	//
+	// This member is required.
+	SchemaVersion SchemaVersion
+
+	// Contains all event metadata present identically across all NotificationEvents .
+	// All fields are present in Source Events via Eventbridge.
+	//
+	// This member is required.
+	SourceEventMetadata *ManagedSourceEventMetadataSummary
+
+	noSmithyDocumentSerde
+}
+
+// Describes the basic structure and properties of a
+// ManagedNotificationConfiguration .
+type ManagedNotificationConfigurationStructure struct {
+
+	// The Amazon Resource Name (ARN) of the ManagedNotificationConfiguration .
+	//
+	// This member is required.
+	Arn *string
+
+	// The description of the ManagedNotificationConfiguration .
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the ManagedNotificationConfiguration .
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A notification-focused representation of an event. They contain semantic
+// information used by AccountContacts or Additional Channels to create end-user
+// notifications.
+type ManagedNotificationEvent struct {
+
+	// Unique identifier for a ManagedNotificationEvent .
+	//
+	// This member is required.
+	Id *string
+
+	// Describes the components of a notification message.
+	//
+	// This member is required.
+	MessageComponents *MessageComponents
+
+	// The nature of the event causing this notification.
+	//
+	//   - Values:
+	//
+	//   - ALERT
+	//
+	//   - A notification about an event where something was triggered, initiated,
+	//   reopened, deployed, or a threshold was breached.
+	//
+	//   - WARNING
+	//
+	//   - A notification about an event where an issue is about to arise. For
+	//   example, something is approaching a threshold.
+	//
+	//   - ANNOUNCEMENT
+	//
+	//   - A notification about an important event. For example, a step in a workflow
+	//   or escalation path or that a workflow was updated.
+	//
+	//   - INFORMATIONAL
+	//
+	//   - A notification about informational messages. For example, recommendations,
+	//   service announcements, or reminders.
+	//
+	// This member is required.
+	NotificationType NotificationType
+
+	// Version of the ManagedNotificationEvent schema.
+	//
+	// This member is required.
+	SchemaVersion SchemaVersion
+
+	// A list of text values.
+	//
+	// This member is required.
+	TextParts map[string]TextPartValue
+
+	// The notifications aggregation type.
+	AggregationEventType AggregationEventType
+
+	// Provides additional information about the aggregation key.
+	AggregationSummary *AggregationSummary
+
+	// The end time of the notification event.
+	EndTime *time.Time
+
+	// The status of an event.
+	//
+	//   - Values:
+	//
+	//   - HEALTHY
+	//
+	//   - All EventRules are ACTIVE and any call can be run.
+	//
+	//   - UNHEALTHY
+	//
+	//   - Some EventRules are ACTIVE and some are INACTIVE . Any call can be run.
+	EventStatus EventStatus
+
+	// The Organizational Unit Id that an Amazon Web Services account belongs to.
+	OrganizationalUnitId *string
+
+	// URL defined by Source Service to be used by notification consumers to get
+	// additional information about event.
+	SourceEventDetailUrl *string
+
+	// Text that needs to be hyperlinked with the sourceEventDetailUrl. For example,
+	// the description of the sourceEventDetailUrl.
+	SourceEventDetailUrlDisplayText *string
+
+	// The earliest time of events to return from this call.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes an overview and metadata for a ManagedNotificationEvent.
+type ManagedNotificationEventOverview struct {
+
+	// The Amazon Resource Name (ARN) of the ManagedNotificationEvent.
+	//
+	// This member is required.
+	Arn *string
+
+	// The creation time of the ManagedNotificationEvent .
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the ManagedNotificationConfiguration .
+	//
+	// This member is required.
+	ManagedNotificationConfigurationArn *string
+
+	// A short summary of a ManagedNotificationEvent . This is only used when listing
+	// managed notification events.
+	//
+	// This member is required.
+	NotificationEvent *ManagedNotificationEventSummary
+
+	// The account that related to the ManagedNotificationEvent .
+	//
+	// This member is required.
+	RelatedAccount *string
+
+	// The list of the regions where the aggregated notifications in this
+	// NotificationEvent originated.
+	AggregatedNotificationRegions []string
+
+	// The notifications aggregation type.
+	//
+	//   - Values:
+	//
+	//   - AGGREGATE
+	//
+	//   - The notification event is an aggregate notification. Aggregate
+	//   notifications summarize grouped events over a specified time period.
+	//
+	//   - CHILD
+	//
+	//   - Some EventRules are ACTIVE and some are INACTIVE . Any call can be run.
+	//
+	//   - NONE
+	//
+	//   - The notification isn't aggregated.
+	AggregationEventType AggregationEventType
+
+	// Provides additional information about the aggregation key.
+	AggregationSummary *AggregationSummary
+
+	// The Organizational Unit Id that an Amazon Web Services account belongs to.
+	OrganizationalUnitId *string
+
+	noSmithyDocumentSerde
+}
+
+// A short summary of a ManagedNotificationEvent . This is only used when listing
+// managed notification events.
+type ManagedNotificationEventSummary struct {
+
+	// The managed notification event status.
+	//
+	//   - Values:
+	//
+	//   - HEALTHY
+	//
+	//   - All EventRules are ACTIVE .
+	//
+	//   - UNHEALTHY
+	//
+	//   - Some EventRules are ACTIVE and some are INACTIVE .
+	//
+	// This member is required.
+	EventStatus EventStatus
+
+	// Contains the headline message component.
+	//
+	// This member is required.
+	MessageComponents *MessageComponentsSummary
+
+	// The Type of event causing the notification.
+	//
+	//   - Values:
+	//
+	//   - ALERT
+	//
+	//   - A notification about an event where something was triggered, initiated,
+	//   reopened, deployed, or a threshold was breached.
+	//
+	//   - WARNING
+	//
+	//   - A notification about an event where an issue is about to arise. For
+	//   example, something is approaching a threshold.
+	//
+	//   - ANNOUNCEMENT
+	//
+	//   - A notification about an important event. For example, a step in a workflow
+	//   or escalation path or that a workflow was updated.
+	//
+	//   - INFORMATIONAL
+	//
+	//   - A notification about informational messages. For example, recommendations,
+	//   service announcements, or reminders.
+	//
+	// This member is required.
+	NotificationType NotificationType
+
+	// The schema version of the ManagedNotificationEvent .
+	//
+	// This member is required.
+	SchemaVersion SchemaVersion
+
+	// Contains metadata about the event that caused the ManagedNotificationEvent .
+	//
+	// This member is required.
+	SourceEventMetadata *ManagedSourceEventMetadataSummary
+
+	noSmithyDocumentSerde
+}
+
+// A short summary and metadata for a managed notification event.
+type ManagedSourceEventMetadataSummary struct {
+
+	// The event Type of the notification.
+	//
+	// This member is required.
+	EventType *string
+
+	// The source service of the notification.
+	//
+	// Must match one of the valid EventBridge sources. Only Amazon Web Services
+	// service sourced events are supported. For example, aws.ec2 and aws.cloudwatch .
+	// For more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
+	//
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	//
+	// This member is required.
+	Source *string
+
+	// The Region where the notification originated.
+	EventOriginRegion *string
 
 	noSmithyDocumentSerde
 }
@@ -157,7 +735,7 @@ type MediaElement struct {
 	// This member is required.
 	Type MediaElementType
 
-	// The url of the media.
+	// The URL of the media.
 	//
 	// This member is required.
 	Url *string
@@ -181,7 +759,7 @@ type MessageComponents struct {
 	// A sentence long summary. For example, titles or an email subject line.
 	Headline *string
 
-	// A paragraph long or multiple sentence summary. For example, AWS Chatbot
+	// A paragraph long or multiple sentence summary. For example, Chatbot
 	// notifications.
 	ParagraphSummary *string
 
@@ -202,59 +780,33 @@ type MessageComponentsSummary struct {
 // Contains the complete list of fields for a NotificationConfiguration.
 type NotificationConfigurationStructure struct {
 
-	// The Amazon Resource Name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the NotificationConfiguration resource.
 	//
 	// This member is required.
 	Arn *string
 
-	// The creation time of the resource.
+	// The creation time of the NotificationConfiguration .
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The description of the NotificationConfiguration.
+	// The description of the NotificationConfiguration .
 	//
 	// This member is required.
 	Description *string
 
-	// The name of the NotificationConfiguration. Supports RFC 3986's unreserved
+	// The name of the NotificationConfiguration . Supports RFC 3986's unreserved
 	// characters.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of this NotificationConfiguration.
-	//
-	// The status should always be INACTIVE when part of the
-	// CreateNotificationConfiguration response.
-	//
-	//   - Values:
-	//
-	//   - ACTIVE
-	//
-	//   - All EventRules are ACTIVE and any call can be run.
-	//
-	//   - PARTIALLY_ACTIVE
-	//
-	//   - Some EventRules are ACTIVE and some are INACTIVE .
-	//
-	//   - Any call can be run.
-	//
-	//   - INACTIVE
-	//
-	//   - All EventRules are INACTIVE and any call can be run.
-	//
-	//   - DELETING
-	//
-	//   - This NotificationConfiguration is being deleted. Only GET and LIST calls can
-	//   be run.
-	//
-	//   - Only GET and LIST calls can be run.
+	// The current status of the NotificationConfiguration .
 	//
 	// This member is required.
 	Status NotificationConfigurationStatus
 
-	// The aggregation preference of the NotificationConfiguration.
+	// The aggregation preference of the NotificationConfiguration .
 	//
 	//   - Values:
 	//
@@ -269,14 +821,12 @@ type NotificationConfigurationStructure struct {
 	//   - NONE
 	//
 	//   - Don't aggregate notifications.
-	//
-	// No delay in delivery.
 	AggregationDuration AggregationDuration
 
 	noSmithyDocumentSerde
 }
 
-// Describes a short summary of a NotificationEvent. This is only used when
+// Describes a short summary of a NotificationEvent . This is only used when
 // listing notification events.
 type NotificationEventOverview struct {
 
@@ -285,12 +835,12 @@ type NotificationEventOverview struct {
 	// This member is required.
 	Arn *string
 
-	// The creation time of the NotificationEvent.
+	// The creation time of the NotificationEvent .
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The ARN of the NotificationConfiguration.
+	// The ARN of the NotificationConfiguration .
 	//
 	// This member is required.
 	NotificationConfigurationArn *string
@@ -302,7 +852,7 @@ type NotificationEventOverview struct {
 	// This member is required.
 	NotificationEvent *NotificationEventSummary
 
-	// The account name containing the NotificationHub.
+	// The account name containing the NotificationHub .
 	//
 	// This member is required.
 	RelatedAccount *string
@@ -310,7 +860,7 @@ type NotificationEventOverview struct {
 	// The ARN of the aggregatedNotificationEventArn to match.
 	AggregateNotificationEventArn *string
 
-	// The NotificationConfiguration's aggregation type.
+	// The NotificationConfiguration 's aggregation type.
 	//
 	//   - Values:
 	//
@@ -328,6 +878,9 @@ type NotificationEventOverview struct {
 	//   - The notification isn't aggregated.
 	AggregationEventType AggregationEventType
 
+	// Provides an aggregated summary data for notification events.
+	AggregationSummary *AggregationSummary
+
 	noSmithyDocumentSerde
 }
 
@@ -335,7 +888,7 @@ type NotificationEventOverview struct {
 // contain semantic information used by Channels to create end-user notifications.
 type NotificationEventSchema struct {
 
-	// The unique identifier for a NotificationEvent.
+	// The unique identifier for a NotificationEvent .
 	//
 	// This member is required.
 	Id *string
@@ -398,7 +951,7 @@ type NotificationEventSchema struct {
 	// This is omitted if notification isn't aggregated.
 	AggregateNotificationEventArn *string
 
-	// The NotificationConfiguration's aggregation type.
+	// The aggregation type of the NotificationConfiguration .
 	//
 	//   - Values:
 	//
@@ -416,10 +969,13 @@ type NotificationEventSchema struct {
 	//   - The notification isn't aggregated.
 	AggregationEventType AggregationEventType
 
+	// Provides additional information about how multiple notifications are grouped.
+	AggregationSummary *AggregationSummary
+
 	// The end time of the event.
 	EndTime *time.Time
 
-	// The assesed nature of the event.
+	// The assessed nature of the event.
 	//
 	//   - Values:
 	//
@@ -444,20 +1000,21 @@ type NotificationEventSchema struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a short summary and metadata for a notification event.
+// Describes a short summary and metadata for a NotificationEvent .
 type NotificationEventSummary struct {
 
-	// The notification event status.
+	// Provides additional information about the current status of the
+	// NotificationEvent .
 	//
 	//   - Values:
 	//
 	//   - HEALTHY
 	//
-	//   - All EventRules are ACTIVE and any call can be run.
+	//   - All EventRules are ACTIVE .
 	//
 	//   - UNHEALTHY
 	//
-	//   - Some EventRules are ACTIVE and some are INACTIVE . Any call can be run.
+	//   - Some EventRules are ACTIVE and some are INACTIVE .
 	//
 	// This member is required.
 	EventStatus EventStatus
@@ -507,13 +1064,13 @@ type NotificationEventSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an overview of a NotificationHub.
+// Describes an overview of a NotificationHub .
 //
-// A NotificationHub is an account-level setting used to select the Regions where
-// you want to store, process and replicate your notifications.
+// A NotificationConfiguration is an account-level setting used to select the
+// Regions where you want to store, process and replicate your notifications.
 type NotificationHubOverview struct {
 
-	// The date and time the resource was created.
+	// The date and time the NotificationHubOverview was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -534,34 +1091,46 @@ type NotificationHubOverview struct {
 	noSmithyDocumentSerde
 }
 
-// NotificationHub status information.
+// Provides additional information about the current NotificationHub status.
 type NotificationHubStatusSummary struct {
 
-	// An Explanation for the current status.
+	// An explanation for the current status.
 	//
 	// This member is required.
 	Reason *string
 
-	// Status information about the NotificationHub.
+	// Status information about the NotificationHub .
 	//
 	//   - Values:
 	//
 	//   - ACTIVE
 	//
-	//   - Incoming NotificationEvents are replicated to this NotificationHub.
+	//   - Incoming NotificationEvents are replicated to this NotificationHub .
 	//
 	//   - REGISTERING
 	//
-	//   - The NotificationHub is initializing. A NotificationHub with this status
-	//   can't be deregistered.
+	//   - The NotificationConfiguration is initializing. A NotificationConfiguration
+	//   with this status can't be deregistered.
 	//
 	//   - DEREGISTERING
 	//
-	//   - The NotificationHub is being deleted. You can't register additional
-	//   NotificationHubs in the same Region as a NotificationHub with this status.
+	//   - The NotificationConfiguration is being deleted. You can't register
+	//   additional NotificationHubs in the same Region as a NotificationConfiguration
+	//   with this status.
 	//
 	// This member is required.
 	Status NotificationHubStatus
+
+	noSmithyDocumentSerde
+}
+
+// Orgs Service trust for User Notifications.
+type NotificationsAccessForOrganization struct {
+
+	// Access Status for the Orgs Service.
+	//
+	// This member is required.
+	AccessStatus AccessStatus
 
 	noSmithyDocumentSerde
 }
@@ -601,7 +1170,7 @@ type SourceEventMetadata struct {
 	// This member is required.
 	EventOccurrenceTime *time.Time
 
-	// The type of event. For example, an AWS CloudWatch state change.
+	// The type of event. For example, an Amazon CloudWatch state change.
 	//
 	// This member is required.
 	EventType *string
@@ -611,17 +1180,18 @@ type SourceEventMetadata struct {
 	// This member is required.
 	EventTypeVersion *string
 
-	// The Primary AWS account of Source Event
+	// The primary Amazon Web Services account of SourceEvent .
 	//
 	// This member is required.
 	RelatedAccount *string
 
-	// A list of resources related to this NotificationEvent.
+	// A list of resources related to this NotificationEvent .
 	//
 	// This member is required.
 	RelatedResources []Resource
 
-	// The AWS servvice the event originates from. For example aws.cloudwatch .
+	// The Amazon Web Services service the event originates from. For example
+	// aws.cloudwatch .
 	//
 	// This member is required.
 	Source *string
@@ -637,28 +1207,28 @@ type SourceEventMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Contains metadata about the event that caused the NotificationEvent. For other
-// specific values, see sourceEventMetadata.
+// Contains metadata about the event that caused the NotificationEvent . For other
+// specific values, see sourceEventMetadata .
 type SourceEventMetadataSummary struct {
 
 	// The event type to match.
 	//
 	// Must match one of the valid Amazon EventBridge event types. For example, EC2
-	// Instance State-change Notification and AWS CloudWatch Alarm State Change. For
-	// more information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
+	// Instance State-change Notification and Amazon CloudWatch Alarm State Change. For
+	// more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
 	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	//
 	// This member is required.
 	EventType *string
 
 	// The matched event source.
 	//
-	// Must match one of the valid EventBridge sources. Only AWS service sourced
-	// events are supported. For example, aws.ec2 and aws.cloudwatch . For more
-	// information, see [Event delivery from AWS services]in the Amazon EventBridge User Guide.
+	// Must match one of the valid EventBridge sources. Only Amazon Web Services
+	// service sourced events are supported. For example, aws.ec2 and aws.cloudwatch .
+	// For more information, see [Event delivery from Amazon Web Services services]in the Amazon EventBridge User Guide.
 	//
-	// [Event delivery from AWS services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
+	// [Event delivery from Amazon Web Services services]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level
 	//
 	// This member is required.
 	Source *string
@@ -667,6 +1237,42 @@ type SourceEventMetadataSummary struct {
 	//
 	// Unavailable for aggregated notifications.
 	EventOriginRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides detailed information about the dimensions used for event summarization
+// and aggregation.
+type SummarizationDimensionDetail struct {
+
+	// The name of the SummarizationDimensionDetail.
+	//
+	// This member is required.
+	Name *string
+
+	// Value of the property used to summarize aggregated events.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides an overview of how data is summarized across different dimensions.
+type SummarizationDimensionOverview struct {
+
+	// Total number of occurrences for this dimension.
+	//
+	// This member is required.
+	Count *int32
+
+	// Name of the summarization dimension.
+	//
+	// This member is required.
+	Name *string
+
+	// Indicates the sample values found within the dimension.
+	SampleValues []string
 
 	noSmithyDocumentSerde
 }
@@ -681,7 +1287,7 @@ type TextPartValue struct {
 	// This member is required.
 	Type TextPartType
 
-	// A short single line description of the link. Must be hyperlinked with the URL
+	// A short single line description of the link. Must be hyper-linked with the URL
 	// itself.
 	//
 	// Used for text parts with the type URL .

@@ -12,11 +12,12 @@ import (
 
 // Returns a list of tags for a specified Amazon Resource Name (ARN).
 //
-// For more information, see [Tagging your AWS resources] in the Tagging AWS Resources User Guide.
+// For more information, see [Tagging your Amazon Web Services resources] in the Tagging Amazon Web Services Resources User
+// Guide.
 //
-// This is only supported for NotificationConfigurations.
+// This is only supported for NotificationConfigurations .
 //
-// [Tagging your AWS resources]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+// [Tagging your Amazon Web Services resources]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

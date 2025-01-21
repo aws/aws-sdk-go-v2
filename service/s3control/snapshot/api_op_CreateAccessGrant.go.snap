@@ -26,6 +26,9 @@ CreateAccessGrant
 		RecursionDetection
 		spanBuildRequestEnd
 	Finalize stack step
+		spanRetryLoop
+		Retry
+		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
@@ -34,9 +37,6 @@ CreateAccessGrant
 		EndpointHostPrefix
 		ComputePayloadHash
 		SigV4ContentSHA256Header
-		spanRetryLoop
-		Retry
-		RetryMetricsHeader
 		setLegacyContextSigningOptions
 		Signing
 	Deserialize stack step

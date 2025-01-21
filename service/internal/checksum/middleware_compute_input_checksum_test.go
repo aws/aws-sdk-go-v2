@@ -27,7 +27,7 @@ import (
 
 func TestComputeInputPayloadChecksum(t *testing.T) {
 	cases := map[string]map[string]struct {
-		optionsFn   func(*computeInputPayloadChecksum)
+		optionsFn   func(*ComputeInputPayloadChecksum)
 		initContext func(context.Context) context.Context
 		buildInput  middleware.BuildInput
 
@@ -392,7 +392,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				initContext: func(ctx context.Context) context.Context {
 					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
-				optionsFn: func(o *computeInputPayloadChecksum) {
+				optionsFn: func(o *ComputeInputPayloadChecksum) {
 					o.EnableComputePayloadHash = false
 				},
 				buildInput: middleware.BuildInput{
@@ -414,7 +414,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				},
 			},
 			"https no trailing checksum": {
-				optionsFn: func(o *computeInputPayloadChecksum) {
+				optionsFn: func(o *ComputeInputPayloadChecksum) {
 					o.EnableTrailingChecksum = false
 				},
 				initContext: func(ctx context.Context) context.Context {
@@ -439,7 +439,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				},
 			},
 			"with content encoding set": {
-				optionsFn: func(o *computeInputPayloadChecksum) {
+				optionsFn: func(o *ComputeInputPayloadChecksum) {
 					o.EnableTrailingChecksum = false
 				},
 				initContext: func(ctx context.Context) context.Context {
@@ -550,7 +550,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				expectBuildErr: true,
 			},
 			"https no trailing unseekable stream": {
-				optionsFn: func(o *computeInputPayloadChecksum) {
+				optionsFn: func(o *ComputeInputPayloadChecksum) {
 					o.EnableTrailingChecksum = false
 				},
 				initContext: func(ctx context.Context) context.Context {
@@ -677,7 +677,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				initContext: func(ctx context.Context) context.Context {
 					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 				},
-				optionsFn: func(o *computeInputPayloadChecksum) {
+				optionsFn: func(o *ComputeInputPayloadChecksum) {
 					o.EnableComputePayloadHash = false
 				},
 				buildInput: middleware.BuildInput{
@@ -702,7 +702,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				},
 			},
 			"https no decode content length": {
-				optionsFn: func(o *computeInputPayloadChecksum) {
+				optionsFn: func(o *ComputeInputPayloadChecksum) {
 					o.EnableDecodedContentLengthHeader = false
 				},
 				initContext: func(ctx context.Context) context.Context {
@@ -763,7 +763,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			for name, c := range cs {
 				t.Run(name, func(t *testing.T) {
-					m := &computeInputPayloadChecksum{
+					m := &ComputeInputPayloadChecksum{
 						EnableTrailingChecksum:           true,
 						EnableComputePayloadHash:         true,
 						EnableDecodedContentLengthHeader: true,
@@ -772,7 +772,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					if c.optionsFn != nil {
 						c.optionsFn(m)
 					}
-					trailerMiddleware := &addInputChecksumTrailer{
+					trailerMiddleware := &AddInputChecksumTrailer{
 						EnableTrailingChecksum:           m.EnableTrailingChecksum,
 						EnableComputePayloadHash:         m.EnableComputePayloadHash,
 						EnableDecodedContentLengthHeader: m.EnableDecodedContentLengthHeader,

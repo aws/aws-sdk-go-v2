@@ -2,12 +2,9 @@ package customizations_test
 
 import (
 	"context"
-	"fmt"
+	"net/http"
 	"strings"
 	"testing"
-
-	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/transport/http"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -43,22 +40,19 @@ func TestSanitizeURLMiddleware(t *testing.T) {
 				Region: "mock-region",
 			}
 
-			fm := requestRetrieverMiddleware{}
+			captured := &captureRequest{}
 			svc := route53.NewFromConfig(cfg)
 			svc.DeleteReusableDelegationSet(context.Background(), &route53.DeleteReusableDelegationSetInput{
 				Id: &c.Given,
 			}, func(options *route53.Options) {
-				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					stack.Serialize.Insert(&fm, "OperationSerializer", middleware.After)
-					return nil
-				})
+				options.HTTPClient = captured
 			})
 
-			if fm.request == nil {
+			if captured.request == nil {
 				t.Fatalf("expected request to be serialized, got none")
 			}
 
-			if e, a := c.ExpectedURL, fm.request.URL.String(); !strings.EqualFold(e, a) {
+			if e, a := c.ExpectedURL, captured.request.URL.String(); !strings.EqualFold(e, a) {
 				t.Fatalf("Expected url to be serialized as %v, got %v", e, a)
 			}
 
@@ -66,21 +60,13 @@ func TestSanitizeURLMiddleware(t *testing.T) {
 	}
 }
 
-type requestRetrieverMiddleware struct {
+type captureRequest struct {
 	request *http.Request
 }
 
-func (*requestRetrieverMiddleware) ID() string { return "Route53:requestRetrieverMiddleware" }
-
-func (rm *requestRetrieverMiddleware) HandleSerialize(
-	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
-) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*http.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown request type %T", req)
-	}
-	rm.request = req
-	return next.HandleSerialize(ctx, in)
+func (c *captureRequest) Do(r *http.Request) (*http.Response, error) {
+	c.request = r
+	return &http.Response{
+		Body: http.NoBody,
+	}, nil
 }

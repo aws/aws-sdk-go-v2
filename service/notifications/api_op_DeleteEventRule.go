@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an EventRule.
+// Deletes an EventRule .
 func (c *Client) DeleteEventRule(ctx context.Context, params *DeleteEventRuleInput, optFns ...func(*Options)) (*DeleteEventRuleOutput, error) {
 	if params == nil {
 		params = &DeleteEventRuleInput{}
