@@ -24181,6 +24181,23 @@
                 "smithy.api#documentation": "<p>The configuration of destination parameter values.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
             }
         },
+        "com.amazonaws.quicksight#DigitGroupingStyle": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "LAKHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAKHS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#DimensionField": {
             "type": "structure",
             "members": {
@@ -39032,6 +39049,18 @@
                     "traits": {
                         "smithy.api#enumValue": "TRILLIONS"
                     }
+                },
+                "LAKHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAKHS"
+                    }
+                },
+                "CRORES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRORES"
+                    }
                 }
             }
         },
@@ -51628,7 +51657,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 100
+                    "max": 201
                 }
             }
         },
@@ -51971,11 +52000,23 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#TableUnaggregatedFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#UnaggregatedField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 201
+                }
+            }
+        },
         "com.amazonaws.quicksight#TableUnaggregatedFieldWells": {
             "type": "structure",
             "members": {
                 "Values": {
-                    "target": "com.amazonaws.quicksight#UnaggregatedFieldList",
+                    "target": "com.amazonaws.quicksight#TableUnaggregatedFieldList",
                     "traits": {
                         "smithy.api#documentation": "<p>The values field well for a pivot table. Values are unaggregated for an unaggregated table.</p>"
                     }
@@ -53199,6 +53240,12 @@
                     "target": "com.amazonaws.quicksight#Visibility",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines the visibility of the thousands separator.</p>"
+                    }
+                },
+                "GroupingStyle": {
+                    "target": "com.amazonaws.quicksight#DigitGroupingStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the way numbers are styled to accommodate different readability standards. The <code>DEFAULT</code> value uses the standard international grouping system and groups numbers by the thousands. The <code>LAKHS</code> value uses the Indian numbering system and groups numbers by lakhs and crores.</p>"
                     }
                 }
             },

@@ -1651,7 +1651,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 256
+                    "max": 4096
                 },
                 "smithy.api#pattern": ".*\\S.*",
                 "smithy.api#sensitive": {}

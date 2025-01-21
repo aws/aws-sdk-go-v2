@@ -4293,6 +4293,12 @@
         "com.amazonaws.iotsitewise#BatchPutAssetPropertyValueRequest": {
             "type": "structure",
             "members": {
+                "enablePartialEntryProcessing": {
+                    "target": "com.amazonaws.iotsitewise#BooleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This setting enables partial ingestion at entry-level. If set to <code>true</code>, we ingest all TQVs not resulting in an error. If set to \n      <code>false</code>, an invalid TQV fails ingestion of the entire entry that contains it.</p>"
+                    }
+                },
                 "entries": {
                     "target": "com.amazonaws.iotsitewise#PutAssetPropertyValueEntries",
                     "traits": {
@@ -4319,6 +4325,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.iotsitewise#BooleanValue": {
+            "type": "boolean"
         },
         "com.amazonaws.iotsitewise#Bucket": {
             "type": "string",
@@ -9183,6 +9192,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Set this period to specify how long your data is stored in the warm tier before it is deleted. You can set this only if cold tier is enabled.</p>"
                     }
+                },
+                "disallowIngestNullNaN": {
+                    "target": "com.amazonaws.iotsitewise#DisallowIngestNullNaN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration for ingesting NULL and NaN data. \n      By default the feature is allowed. The feature is disallowed if the value is <code>true</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9376,6 +9391,9 @@
             "member": {
                 "target": "com.amazonaws.iotsitewise#DetailedError"
             }
+        },
+        "com.amazonaws.iotsitewise#DisallowIngestNullNaN": {
+            "type": "boolean"
         },
         "com.amazonaws.iotsitewise#DisassociateAssets": {
             "type": "operation",
@@ -13454,12 +13472,7 @@
             "type": "boolean"
         },
         "com.amazonaws.iotsitewise#NumberOfDays": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 30
-                }
-            }
+            "type": "integer"
         },
         "com.amazonaws.iotsitewise#Offset": {
             "type": "string",
@@ -14009,6 +14022,21 @@
         "com.amazonaws.iotsitewise#PropertyValueIntegerValue": {
             "type": "integer"
         },
+        "com.amazonaws.iotsitewise#PropertyValueNullValue": {
+            "type": "structure",
+            "members": {
+                "valueType": {
+                    "target": "com.amazonaws.iotsitewise#RawValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of null asset property data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value type of null asset property data with BAD and UNCERTAIN qualities.</p>"
+            }
+        },
         "com.amazonaws.iotsitewise#PropertyValueStringValue": {
             "type": "string"
         },
@@ -14282,6 +14310,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Set this period to specify how long your data is stored in the warm tier before it is deleted. You can set this only if cold tier is enabled.</p>"
                     }
+                },
+                "disallowIngestNullNaN": {
+                    "target": "com.amazonaws.iotsitewise#DisallowIngestNullNaN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration for ingesting NULL and NaN data. \n      By default the feature is allowed. The feature is disallowed if the value is <code>true</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14329,6 +14363,12 @@
                     "target": "com.amazonaws.iotsitewise#WarmTierRetentionPeriod",
                     "traits": {
                         "smithy.api#documentation": "<p>Set this period to specify how long your data is stored in the warm tier before it is deleted. You can set this only if cold tier is enabled.</p>"
+                    }
+                },
+                "disallowIngestNullNaN": {
+                    "target": "com.amazonaws.iotsitewise#DisallowIngestNullNaN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration for ingesting NULL and NaN data. \n      By default the feature is allowed. The feature is disallowed if the value is <code>true</code>.</p>"
                     }
                 }
             },
@@ -14391,6 +14431,41 @@
                 "smithy.api#documentation": "<p>The query timed out.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.iotsitewise#RawValueType": {
+            "type": "enum",
+            "members": {
+                "DOUBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "D"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "B"
+                    }
+                },
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S"
+                    }
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "I"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "U"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#Reference": {
@@ -16455,7 +16530,7 @@
                 "stringValue": {
                     "target": "com.amazonaws.iotsitewise#PropertyValueStringValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Asset property data of type string (sequence of characters).</p>"
+                        "smithy.api#documentation": "<p>\n      Asset property data of type string (sequence of characters).\n      The allowed pattern: \"^$|[^\\u0000-\\u001F\\u007F]+\". The max length is 1024.\n    </p>"
                     }
                 },
                 "integerValue": {
@@ -16467,13 +16542,19 @@
                 "doubleValue": {
                     "target": "com.amazonaws.iotsitewise#PropertyValueDoubleValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Asset property data of type double (floating point number).</p>"
+                        "smithy.api#documentation": "<p>\n      Asset property data of type double (floating point number). The min value is -10^10. \n      The max value is 10^10. Double.NaN is allowed.\n    </p>"
                     }
                 },
                 "booleanValue": {
                     "target": "com.amazonaws.iotsitewise#PropertyValueBooleanValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Asset property data of type Boolean (true or false).</p>"
+                    }
+                },
+                "nullValue": {
+                    "target": "com.amazonaws.iotsitewise#PropertyValueNullValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of null asset property data with BAD and UNCERTAIN qualities.</p>"
                     }
                 }
             },

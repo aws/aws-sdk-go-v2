@@ -1058,6 +1058,9 @@
                     "target": "com.amazonaws.connect#DeleteContactFlowModule"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteContactFlowVersion"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteEmailAddress"
                 },
                 {
@@ -3734,7 +3737,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>>Associates a set of proficiencies with a user.</p>",
+                "smithy.api#documentation": "<p>Associates a set of proficiencies with a user.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/users/{InstanceId}/{UserId}/associate-proficiencies",
@@ -6463,6 +6466,12 @@
                     "traits": {
                         "smithy.api#enumValue": "QUEUE_TRANSFER"
                     }
+                },
+                "CAMPAIGN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAMPAIGN"
+                    }
                 }
             }
         },
@@ -7417,7 +7426,7 @@
                 "FlowContentSha256": {
                     "target": "com.amazonaws.connect#FlowContentSha256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the checksum value of the flow content.</p>"
+                        "smithy.api#documentation": "<p>Indicates the checksum value of the latest published flow content.</p>"
                     }
                 }
             },
@@ -7457,7 +7466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Publishes a new version of the flow provided. Versions are immutable and monotonically\n   increasing. If a version of the same flow content already exists, no new version is created and\n   instead the existing version number is returned. If the <code>FlowContentSha256</code> provided\n   is different from the <code>FlowContentSha256</code> of the <code>$LATEST</code> published flow\n   content, then an error is returned. This API only supports creating versions for flows of type\n    <code>Campaign</code>.</p>",
+                "smithy.api#documentation": "<p>Publishes a new version of the flow provided. Versions are immutable and monotonically\n   increasing. If the <code>FlowContentSha256</code> provided is different from the\n    <code>FlowContentSha256</code> of the <code>$LATEST</code> published flow content, then an error\n   is returned. This API only supports creating versions for flows of type\n   <code>Campaign</code>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}/version",
@@ -7494,6 +7503,12 @@
                     "target": "com.amazonaws.connect#FlowContentSha256",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the checksum value of the flow content.</p>"
+                    }
+                },
+                "ContactFlowVersion": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow version.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -11112,6 +11127,82 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#DeleteContactFlowVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteContactFlowVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteContactFlowVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the particular version specified in flow version identifier.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/contact-flows/{InstanceId}/{ContactFlowId}/version/{ContactFlowVersion}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteContactFlowVersionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowVersion": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteContactFlowVersionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#DeleteEmailAddress": {
             "type": "operation",
             "input": {
@@ -11695,7 +11786,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a queue. It isn't possible to delete a queue by using the Amazon Connect admin website.</p>",
+                "smithy.api#documentation": "<p>Deletes a queue.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/queues/{InstanceId}/{QueueId}",
@@ -12797,7 +12888,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. After a flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>\n         <p>In the response, <b>Status</b> indicates the flow status as either\n    <code>SAVED</code> or <code>PUBLISHED</code>. The <code>PUBLISHED</code> status will initiate\n   validation on the content. <code>SAVED</code> does not initiate validation of the content.\n    <code>SAVED</code> | <code>PUBLISHED</code>\n         </p>",
+                "smithy.api#documentation": "<p>Describes the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. After a flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>\n         <p>Use <code>arn:aws:.../contact-flow/{id}:{version}</code> to retrieve the content of a\n   specific flow version.</p>\n         <p>In the response, <b>Status</b> indicates the flow status as either\n    <code>SAVED</code> or <code>PUBLISHED</code>. The <code>PUBLISHED</code> status will initiate\n   validation on the content. <code>SAVED</code> does not initiate validation of the content.\n    <code>SAVED</code> | <code>PUBLISHED</code>\n         </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}",
