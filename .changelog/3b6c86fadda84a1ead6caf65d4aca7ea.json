@@ -1,0 +1,8 @@
+{
+    "id": "3b6c86fa-dda8-4a1e-ad6c-af65d4aca7ea",
+    "type": "feature",
+    "description": "Add a client config option to disable logging when output checksum validation is skipped due to an unsupported algorithm.",
+    "modules": [
+        "service/s3"
+    ]
+}
