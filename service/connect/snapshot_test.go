@@ -734,6 +734,18 @@ func TestCheckSnapshot_DeleteContactFlowModule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteContactFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContactFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteContactFlowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteEmailAddress(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEmailAddress(context.Background(), nil, func(o *Options) {
@@ -4086,6 +4098,18 @@ func TestUpdateSnapshot_DeleteContactFlowModule(t *testing.T) {
 	_, err := svc.DeleteContactFlowModule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteContactFlowModule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteContactFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContactFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteContactFlowVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -41,6 +41,10 @@ type PutStorageConfigurationInput struct {
 	// This member is required.
 	StorageType types.StorageType
 
+	// Describes the configuration for ingesting NULL and NaN data. By default the
+	// feature is allowed. The feature is disallowed if the value is true .
+	DisallowIngestNullNaN *bool
+
 	// Contains the storage configuration for time series (data streams) that aren't
 	// associated with asset properties. The disassociatedDataStorage can be one of
 	// the following values:
@@ -96,6 +100,10 @@ type PutStorageConfigurationOutput struct {
 	//
 	// This member is required.
 	StorageType types.StorageType
+
+	// Describes the configuration for ingesting NULL and NaN data. By default the
+	// feature is allowed. The feature is disallowed if the value is true .
+	DisallowIngestNullNaN *bool
 
 	// Contains the storage configuration for time series (data streams) that aren't
 	// associated with asset properties. The disassociatedDataStorage can be one of

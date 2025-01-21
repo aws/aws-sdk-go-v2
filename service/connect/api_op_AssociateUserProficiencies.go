@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// >Associates a set of proficiencies with a user.
+// Associates a set of proficiencies with a user.
 func (c *Client) AssociateUserProficiencies(ctx context.Context, params *AssociateUserProficienciesInput, optFns ...func(*Options)) (*AssociateUserProficienciesOutput, error) {
 	if params == nil {
 		params = &AssociateUserProficienciesInput{}

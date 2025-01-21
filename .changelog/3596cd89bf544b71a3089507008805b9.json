@@ -1,0 +1,8 @@
+{
+    "id": "3596cd89-bf54-4b71-a308-9507008805b9",
+    "type": "feature",
+    "description": "AWS IoT SiteWise now supports ingestion and querying of Null (all data types) and NaN (double type) values of bad or uncertain data quality. New partial error handling prevents data loss during ingestion. Enabled by default for new customers; existing customers can opt-in.",
+    "modules": [
+        "service/iotsitewise"
+    ]
+}

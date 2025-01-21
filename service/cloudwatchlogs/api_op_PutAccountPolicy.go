@@ -15,6 +15,21 @@ import (
 // field index policy that applies to all log groups or a subset of log groups in
 // the account.
 //
+// To use this operation, you must be signed on with the correct permissions
+// depending on the type of policy that you are creating.
+//
+//   - To create a data protection policy, you must have the
+//     logs:PutDataProtectionPolicy and logs:PutAccountPolicy permissions.
+//
+//   - To create a subscription filter policy, you must have the
+//     logs:PutSubscriptionFilter and logs:PutccountPolicy permissions.
+//
+//   - To create a transformer policy, you must have the logs:PutTransformer and
+//     logs:PutAccountPolicy permissions.
+//
+//   - To create a field index policy, you must have the logs:PutIndexPolicy and
+//     logs:PutAccountPolicy permissions.
+//
 // # Data protection policy
 //
 // A data protection policy can help safeguard sensitive data that's ingested by

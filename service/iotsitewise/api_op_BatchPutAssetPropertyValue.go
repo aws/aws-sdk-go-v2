@@ -61,6 +61,11 @@ type BatchPutAssetPropertyValueInput struct {
 	// This member is required.
 	Entries []types.PutAssetPropertyValueEntry
 
+	// This setting enables partial ingestion at entry-level. If set to true , we
+	// ingest all TQVs not resulting in an error. If set to false , an invalid TQV
+	// fails ingestion of the entire entry that contains it.
+	EnablePartialEntryProcessing *bool
+
 	noSmithyDocumentSerde
 }
 

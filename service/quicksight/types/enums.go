@@ -1780,6 +1780,25 @@ func (DefaultAggregation) Values() []DefaultAggregation {
 	}
 }
 
+type DigitGroupingStyle string
+
+// Enum values for DigitGroupingStyle
+const (
+	DigitGroupingStyleDefault DigitGroupingStyle = "DEFAULT"
+	DigitGroupingStyleLakhs   DigitGroupingStyle = "LAKHS"
+)
+
+// Values returns all known values for DigitGroupingStyle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DigitGroupingStyle) Values() []DigitGroupingStyle {
+	return []DigitGroupingStyle{
+		"DEFAULT",
+		"LAKHS",
+	}
+}
+
 type DisplayFormat string
 
 // Enum values for DisplayFormat
@@ -3325,6 +3344,8 @@ const (
 	NumberScaleMillions  NumberScale = "MILLIONS"
 	NumberScaleBillions  NumberScale = "BILLIONS"
 	NumberScaleTrillions NumberScale = "TRILLIONS"
+	NumberScaleLakhs     NumberScale = "LAKHS"
+	NumberScaleCrores    NumberScale = "CRORES"
 )
 
 // Values returns all known values for NumberScale. Note that this can be expanded
@@ -3339,6 +3360,8 @@ func (NumberScale) Values() []NumberScale {
 		"MILLIONS",
 		"BILLIONS",
 		"TRILLIONS",
+		"LAKHS",
+		"CRORES",
 	}
 }
 

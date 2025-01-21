@@ -1,0 +1,8 @@
+{
+    "id": "0a81c675-9ae0-4c1a-b942-aff324175e47",
+    "type": "documentation",
+    "description": "Documentation-only update: clarified the description of the shareDecaySeconds parameter of the FairsharePolicy data type, clarified the description of the priority parameter of the JobQueueDetail data type.",
+    "modules": [
+        "service/batch"
+    ]
+}

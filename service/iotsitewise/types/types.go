@@ -2641,6 +2641,17 @@ type PropertyType struct {
 	noSmithyDocumentSerde
 }
 
+// The value type of null asset property data with BAD and UNCERTAIN qualities.
+type PropertyValueNullValue struct {
+
+	// The type of null asset property data.
+	//
+	// This member is required.
+	ValueType RawValueType
+
+	noSmithyDocumentSerde
+}
+
 // Contains a list of value updates for an asset property in the list of asset
 // entries consumed by the [BatchPutAssetPropertyValue]API operation.
 //
@@ -3057,13 +3068,18 @@ type Variant struct {
 	// Asset property data of type Boolean (true or false).
 	BooleanValue *bool
 
-	// Asset property data of type double (floating point number).
+	//  Asset property data of type double (floating point number). The min value is
+	// -10^10. The max value is 10^10. Double.NaN is allowed.
 	DoubleValue *float64
 
 	// Asset property data of type integer (whole number).
 	IntegerValue *int32
 
-	// Asset property data of type string (sequence of characters).
+	// The type of null asset property data with BAD and UNCERTAIN qualities.
+	NullValue *PropertyValueNullValue
+
+	//  Asset property data of type string (sequence of characters). The allowed
+	// pattern: "^$|[^\u0000-\u001F\u007F]+". The max length is 1024.
 	StringValue *string
 
 	noSmithyDocumentSerde

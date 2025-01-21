@@ -1,0 +1,8 @@
+{
+    "id": "61f57d34-3523-4668-a31b-84dfb90add9b",
+    "type": "documentation",
+    "description": "Documentation-only update to address doc errors",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

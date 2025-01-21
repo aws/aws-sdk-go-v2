@@ -1,0 +1,8 @@
+{
+    "id": "013b6f56-17ff-455c-ac3d-0778a16bb7f4",
+    "type": "feature",
+    "description": "Added `DigitGroupingStyle` in ThousandsSeparator to allow grouping by `LAKH`( Indian Grouping system ) currency. Support LAKH and `CRORE` currency types in Column Formatting.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

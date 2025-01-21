@@ -368,6 +368,7 @@ const (
 	ContactFlowTypeOutboundWhisper ContactFlowType = "OUTBOUND_WHISPER"
 	ContactFlowTypeAgentTransfer   ContactFlowType = "AGENT_TRANSFER"
 	ContactFlowTypeQueueTransfer   ContactFlowType = "QUEUE_TRANSFER"
+	ContactFlowTypeCampaign        ContactFlowType = "CAMPAIGN"
 )
 
 // Values returns all known values for ContactFlowType. Note that this can be
@@ -385,6 +386,7 @@ func (ContactFlowType) Values() []ContactFlowType {
 		"OUTBOUND_WHISPER",
 		"AGENT_TRANSFER",
 		"QUEUE_TRANSFER",
+		"CAMPAIGN",
 	}
 }
 

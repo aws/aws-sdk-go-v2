@@ -1582,7 +1582,9 @@ type OpenSearchResourceConfig struct {
 	// for viewing the dashboards.
 	//
 	// In addition to specifying these users here, you must also grant them the
-	// CloudWatchOpenSearchDashboardsAccess IAM policy. For more information, see
+	// CloudWatchOpenSearchDashboardAccess IAM policy. For more information, see [IAM policies for users].
+	//
+	// [IAM policies for users]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/OpenSearch-Dashboards-UserRoles.html
 	//
 	// This member is required.
 	DashboardViewerPrincipals []string
@@ -1590,9 +1592,9 @@ type OpenSearchResourceConfig struct {
 	// Specify the ARN of an IAM role that CloudWatch Logs will use to create the
 	// integration. This role must have the permissions necessary to access the
 	// OpenSearch Service collection to be able to create the dashboards. For more
-	// information about the permissions needed, see [Create an IAM role to access the OpenSearch Service collection]in the CloudWatch Logs User Guide.
+	// information about the permissions needed, see [Permissions that the integration needs]in the CloudWatch Logs User Guide.
 	//
-	// [Create an IAM role to access the OpenSearch Service collection]: https://docs.aws.amazon.com/OpenSearch-Dashboards-CreateRole
+	// [Permissions that the integration needs]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/OpenSearch-Dashboards-CreateRole.html
 	//
 	// This member is required.
 	DataSourceRoleArn *string
@@ -2281,8 +2283,11 @@ type S3DeliveryConfiguration struct {
 
 	// This string allows re-configuring the S3 object prefix to contain either static
 	// or variable sections. The valid variables to use in the suffix path will vary by
-	// each log source. See ConfigurationTemplate$allowedSuffixPathFields for more
-	// info on what values are supported in the suffix path for each log source.
+	// each log source. To find the values supported for the suffix path for each log
+	// source, use the [DescribeConfigurationTemplates]operation and check the allowedSuffixPathFields field in the
+	// response.
+	//
+	// [DescribeConfigurationTemplates]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeConfigurationTemplates.html
 	SuffixPath *string
 
 	noSmithyDocumentSerde

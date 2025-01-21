@@ -365,7 +365,8 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// his exception is returned if an unknown error occurs during a Live Tail session.
+// This exception is returned if an unknown error occurs during a Live Tail
+// session.
 type SessionStreamingException struct {
 	Message *string
 

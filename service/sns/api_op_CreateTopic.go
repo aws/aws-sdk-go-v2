@@ -99,6 +99,19 @@ type CreateTopicInput struct {
 	// (Optional) To override the generated value, you can specify a value for the
 	//   MessageDeduplicationId parameter for the Publish action.
 	//
+	//   - FifoThroughputScope – Enables higher throughput for your FIFO topic by
+	//   adjusting the scope of deduplication. This attribute has two possible values:
+	//
+	//   - Topic – The scope of message deduplication is across the entire topic. This
+	//   is the default value and maintains existing behavior, with a maximum throughput
+	//   of 3000 messages per second or 20MB per second, whichever comes first.
+	//
+	//   - MessageGroup – The scope of deduplication is within each individual message
+	//   group, which enables higher throughput per topic subject to regional quotas. For
+	//   more information on quotas or to request an increase, see [Amazon SNS service quotas]in the Amazon Web
+	//   Services General Reference.
+	//
+	// [Amazon SNS service quotas]: https://docs.aws.amazon.com/general/latest/gr/sns.html
 	// [server-side encryption]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
 	// [Key Terms]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
 	// [KeyId]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters

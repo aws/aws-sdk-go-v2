@@ -19,6 +19,9 @@ import (
 // For example, arn:aws:.../contact-flow/{id}:$SAVED . After a flow is published,
 // $SAVED needs to be supplied to view saved content that has not been published.
 //
+// Use arn:aws:.../contact-flow/{id}:{version} to retrieve the content of a
+// specific flow version.
+//
 // In the response, Status indicates the flow status as either SAVED or PUBLISHED .
 // The PUBLISHED status will initiate validation on the content. SAVED does not
 // initiate validation of the content. SAVED | PUBLISHED

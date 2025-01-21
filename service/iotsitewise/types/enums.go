@@ -885,6 +885,31 @@ func (Quality) Values() []Quality {
 	}
 }
 
+type RawValueType string
+
+// Enum values for RawValueType
+const (
+	RawValueTypeDouble  RawValueType = "D"
+	RawValueTypeBoolean RawValueType = "B"
+	RawValueTypeString  RawValueType = "S"
+	RawValueTypeInteger RawValueType = "I"
+	RawValueTypeUnknown RawValueType = "U"
+)
+
+// Values returns all known values for RawValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RawValueType) Values() []RawValueType {
+	return []RawValueType{
+		"D",
+		"B",
+		"S",
+		"I",
+		"U",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType

@@ -42197,13 +42197,26 @@ func awsRestjson1_serializeDocumentTableStyleTargetList(v []types.TableStyleTarg
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTableUnaggregatedFieldList(v []types.UnaggregatedField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentUnaggregatedField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTableUnaggregatedFieldWells(v *types.TableUnaggregatedFieldWells, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	if v.Values != nil {
 		ok := object.Key("Values")
-		if err := awsRestjson1_serializeDocumentUnaggregatedFieldList(v.Values, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentTableUnaggregatedFieldList(v.Values, ok); err != nil {
 			return err
 		}
 	}
@@ -42608,6 +42621,11 @@ func awsRestjson1_serializeDocumentThemeConfiguration(v *types.ThemeConfiguratio
 func awsRestjson1_serializeDocumentThousandSeparatorOptions(v *types.ThousandSeparatorOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.GroupingStyle) > 0 {
+		ok := object.Key("GroupingStyle")
+		ok.String(string(v.GroupingStyle))
+	}
 
 	if len(v.Symbol) > 0 {
 		ok := object.Key("Symbol")

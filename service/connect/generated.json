@@ -64,6 +64,7 @@
         "api_op_DeleteContactEvaluation.go",
         "api_op_DeleteContactFlow.go",
         "api_op_DeleteContactFlowModule.go",
+        "api_op_DeleteContactFlowVersion.go",
         "api_op_DeleteEmailAddress.go",
         "api_op_DeleteEvaluationForm.go",
         "api_op_DeleteHoursOfOperation.go",

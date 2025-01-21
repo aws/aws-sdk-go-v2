@@ -15799,6 +15799,12 @@ type ThemeVersionSummary struct {
 // The options that determine the thousands separator configuration.
 type ThousandSeparatorOptions struct {
 
+	// Determines the way numbers are styled to accommodate different readability
+	// standards. The DEFAULT value uses the standard international grouping system
+	// and groups numbers by the thousands. The LAKHS value uses the Indian numbering
+	// system and groups numbers by lakhs and crores.
+	GroupingStyle DigitGroupingStyle
+
 	// Determines the thousands separator symbol.
 	Symbol NumericSeparatorSymbol
 
