@@ -1,8 +1,0 @@
-{
-    "id": "94b5395b-b69c-4caf-bb9d-916dd199f57c",
-    "type": "documentation",
-    "description": "This release adds support for the topic attribute FifoThroughputScope for SNS FIFO topics. For details, see the documentation history in the Amazon Simple Notification Service Developer Guide.",
-    "modules": [
-        "service/sns"
-    ]
-}

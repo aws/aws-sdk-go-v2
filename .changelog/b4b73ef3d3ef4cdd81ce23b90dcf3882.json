@@ -1,8 +1,0 @@
-{
-    "id": "b4b73ef3-d3ef-4cdd-81ce-23b90dcf3882",
-    "type": "feature",
-    "description": "corrects the dual-stack endpoint configuration for cognitoidp",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

@@ -1,3 +1,21 @@
+# Release (2025-01-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.49.7](service/batch/CHANGELOG.md#v1497-2025-01-21)
+  * **Documentation**: Documentation-only update: clarified the description of the shareDecaySeconds parameter of the FairsharePolicy data type, clarified the description of the priority parameter of the JobQueueDetail data type.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.45.7](service/cloudwatchlogs/CHANGELOG.md#v1457-2025-01-21)
+  * **Documentation**: Documentation-only update to address doc errors
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.49.0](service/cognitoidentityprovider/CHANGELOG.md#v1490-2025-01-21)
+  * **Feature**: corrects the dual-stack endpoint configuration for cognitoidp
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.124.0](service/connect/CHANGELOG.md#v11240-2025-01-21)
+  * **Feature**: Added DeleteContactFlowVersion API and the CAMPAIGN flow type
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.45.0](service/iotsitewise/CHANGELOG.md#v1450-2025-01-21)
+  * **Feature**: AWS IoT SiteWise now supports ingestion and querying of Null (all data types) and NaN (double type) values of bad or uncertain data quality. New partial error handling prevents data loss during ingestion. Enabled by default for new customers; existing customers can opt-in.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.83.0](service/quicksight/CHANGELOG.md#v1830-2025-01-21)
+  * **Feature**: Added `DigitGroupingStyle` in ThousandsSeparator to allow grouping by `LAKH`( Indian Grouping system ) currency. Support LAKH and `CRORE` currency types in Column Formatting.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.33.14](service/sns/CHANGELOG.md#v13314-2025-01-21)
+  * **Documentation**: This release adds support for the topic attribute FifoThroughputScope for SNS FIFO topics. For details, see the documentation history in the Amazon Simple Notification Service Developer Guide.
+
 # Release (2025-01-17)
 
 ## General Highlights

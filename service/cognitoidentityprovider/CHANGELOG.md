@@ -1,3 +1,7 @@
+# v1.49.0 (2025-01-21)
+
+* **Feature**: corrects the dual-stack endpoint configuration for cognitoidp
+
 # v1.48.6 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

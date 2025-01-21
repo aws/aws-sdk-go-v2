@@ -1,3 +1,7 @@
+# v1.34.6 (2025-01-21)
+
+* No change notes available for this release.
+
 # v1.34.5 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

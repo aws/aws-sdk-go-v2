@@ -1,8 +1,0 @@
-{
-    "id": "b66830ac-f8a0-4293-815e-bd51980b212f",
-    "type": "feature",
-    "description": "Increasing entryPoint in SparkSubmit to accept longer script paths. New limit is 4kb.",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

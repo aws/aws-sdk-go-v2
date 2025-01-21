@@ -1,8 +1,0 @@
-{
-    "id": "69a652e2-5712-4c8a-a338-1fbac89f9320",
-    "type": "feature",
-    "description": "Added DeleteContactFlowVersion API and the CAMPAIGN flow type",
-    "modules": [
-        "service/connect"
-    ]
-}
