@@ -15,9 +15,11 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoCodegenPlugin;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
+import software.amazon.smithy.go.codegen.GoUniverseTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -118,6 +120,18 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                             .useClientOptions()
                             .build())
                     .build());
+
+            var outputChecksumConfigs = RuntimeClientPlugin.builder()
+                    .servicePredicate(AwsHttpChecksumGenerator::hasOutputChecksumTrait)
+                    .addConfigField(
+                            ConfigField.builder()
+                                    .name("DisableLogOutputChecksumValidationSkipped")
+                                    .type(GoUniverseTypes.Bool)
+                                    .documentation("Disables logging when the client skips output checksum validation due to lack of algorithm support.")
+                                    .build()
+                    )
+                    .build();
+            runtimeClientPlugins.add(outputChecksumConfigs);
         }
     }
 
@@ -351,8 +365,8 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                                         ResponseChecksumValidation: options.ResponseChecksumValidation,
                                         ValidationAlgorithms: $L,
                                         IgnoreMultipartValidation: $L,
-                                        LogValidationSkipped: true,
-                                        LogMultipartValidationSkipped: true,
+                                        LogValidationSkipped: !options.DisableLogOutputChecksumValidationSkipped,
+                                        LogMultipartValidationSkipped: !options.DisableLogOutputChecksumValidationSkipped,
                                     })""",
                             SymbolUtils.createValueSymbolBuilder("AddOutputMiddleware",
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
