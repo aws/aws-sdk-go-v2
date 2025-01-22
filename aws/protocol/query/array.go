@@ -1,8 +1,8 @@
 package query
 
 import (
-	"fmt"
 	"net/url"
+	"strconv"
 )
 
 // Array represents the encoding of Query lists and sets. A Query array is a
@@ -35,6 +35,7 @@ func newArray(values url.Values, prefix string, flat bool, memberName string) *A
 	emptyValue.String("")
 
 	if !flat {
+		// This uses string concatenation in place of fmt.Sprintf as fmt.Sprintf has a much higher resource overhead
 		prefix = prefix + keySeparator + memberName
 	}
 
@@ -55,5 +56,6 @@ func (a *Array) Value() Value {
 	// Query lists start a 1, so adjust the size first
 	a.size++
 	// Lists can't have flat members
-	return newValue(a.values, fmt.Sprintf("%s.%d", a.prefix, a.size), false)
+	// This uses string concatenation in place of fmt.Sprintf as fmt.Sprintf has a much higher resource overhead
+	return newValue(a.values, a.prefix+keySeparator+strconv.FormatInt(int64(a.size), 10), false)
 }

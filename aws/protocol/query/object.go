@@ -53,6 +53,7 @@ func (o *Object) FlatKey(name string) Value {
 
 func (o *Object) key(name string, flatValue bool) Value {
 	if o.prefix != "" {
+		// This uses string concatenation in place of fmt.Sprintf as fmt.Sprintf has a much higher resource overhead
 		return newValue(o.values, o.prefix+keySeparator+name, flatValue)
 	}
 	return newValue(o.values, name, flatValue)
@@ -60,6 +61,7 @@ func (o *Object) key(name string, flatValue bool) Value {
 
 func (o *Object) keyWithValues(name string, flatValue bool) Value {
 	if o.prefix != "" {
+		// This uses string concatenation in place of fmt.Sprintf as fmt.Sprintf has a much higher resource overhead
 		return newAppendValue(o.values, o.prefix+keySeparator+name, flatValue)
 	}
 	return newAppendValue(o.values, name, flatValue)
