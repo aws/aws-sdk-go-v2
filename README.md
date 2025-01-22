@@ -134,10 +134,11 @@ The v2 SDK will use GitHub [Issues] to track feature requests and issues with th
 
 ## Resources
 
-[SDK Developer Guide](https://aws.github.io/aws-sdk-go-v2/docs/) - Use this document to learn how to get started and
+[SDK Developer Guide](https://docs.aws.amazon.com/sdk-for-go/v2/developer-guide/welcome.html) - Use this document to learn how to get started and
 use the AWS SDK for Go V2.
 
-[SDK Migration Guide](https://aws.github.io/aws-sdk-go-v2/docs/migrating/) - Use this document to learn how to migrate to V2 from the AWS SDK for Go.
+
+[SDK Migration Guide](https://docs.aws.amazon.com/sdk-for-go/v2/developer-guide/migrate-gosdk.html) - Use this document to learn how to migrate to V2 from the AWS SDK for Go.
 
 [SDK API Reference Documentation](https://pkg.go.dev/mod/github.com/aws/aws-sdk-go-v2) - Use this
 document to look up all API operation input and output parameters for AWS
