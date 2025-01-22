@@ -106,6 +106,24 @@ func ExampleFlowInputContent_outputUsage() {
 
 var _ document.Interface
 
+func ExampleFlowMultiTurnInputContent_outputUsage() {
+	var union types.FlowMultiTurnInputContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowMultiTurnInputContentMemberDocument:
+		_ = v.Value // Value is document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ document.Interface
+
 func ExampleFlowOutputContent_outputUsage() {
 	var union types.FlowOutputContent
 	// type switches can be used to check the union value
@@ -131,6 +149,9 @@ func ExampleFlowResponseStream_outputUsage() {
 	case *types.FlowResponseStreamMemberFlowCompletionEvent:
 		_ = v.Value // Value is types.FlowCompletionEvent
 
+	case *types.FlowResponseStreamMemberFlowMultiTurnInputRequestEvent:
+		_ = v.Value // Value is types.FlowMultiTurnInputRequestEvent
+
 	case *types.FlowResponseStreamMemberFlowOutputEvent:
 		_ = v.Value // Value is types.FlowOutputEvent
 
@@ -149,6 +170,7 @@ func ExampleFlowResponseStream_outputUsage() {
 var _ *types.FlowOutputEvent
 var _ *types.FlowTraceEvent
 var _ *types.FlowCompletionEvent
+var _ *types.FlowMultiTurnInputRequestEvent
 
 func ExampleFlowTrace_outputUsage() {
 	var union types.FlowTrace

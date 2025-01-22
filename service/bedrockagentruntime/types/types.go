@@ -777,9 +777,10 @@ type FlowInput struct {
 	// This member is required.
 	NodeName *string
 
+	// The name of the input from the flow input node.
+	NodeInputName *string
+
 	// The name of the output from the flow input node that begins the prompt flow.
-	//
-	// This member is required.
 	NodeOutputName *string
 
 	noSmithyDocumentSerde
@@ -802,6 +803,47 @@ type FlowInputContentMemberDocument struct {
 }
 
 func (*FlowInputContentMemberDocument) isFlowInputContent() {}
+
+// The content structure containing input information for multi-turn flow
+// interactions.
+//
+// The following types satisfy this interface:
+//
+//	FlowMultiTurnInputContentMemberDocument
+type FlowMultiTurnInputContent interface {
+	isFlowMultiTurnInputContent()
+}
+
+// The requested additional input to send back to the multi-turn flow node.
+type FlowMultiTurnInputContentMemberDocument struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowMultiTurnInputContentMemberDocument) isFlowMultiTurnInputContent() {}
+
+// Response object from the flow multi-turn node requesting additional information.
+type FlowMultiTurnInputRequestEvent struct {
+
+	// The content payload containing the input request details for the multi-turn
+	// interaction.
+	//
+	// This member is required.
+	Content FlowMultiTurnInputContent
+
+	// The name of the node in the flow that is requesting the input.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The type of the node in the flow that is requesting the input.
+	//
+	// This member is required.
+	NodeType NodeType
+
+	noSmithyDocumentSerde
+}
 
 // Contains information about the content in an output from prompt flow invocation.
 //
@@ -847,6 +889,7 @@ type FlowOutputEvent struct {
 // The following types satisfy this interface:
 //
 //	FlowResponseStreamMemberFlowCompletionEvent
+//	FlowResponseStreamMemberFlowMultiTurnInputRequestEvent
 //	FlowResponseStreamMemberFlowOutputEvent
 //	FlowResponseStreamMemberFlowTraceEvent
 type FlowResponseStream interface {
@@ -861,6 +904,16 @@ type FlowResponseStreamMemberFlowCompletionEvent struct {
 }
 
 func (*FlowResponseStreamMemberFlowCompletionEvent) isFlowResponseStream() {}
+
+// The event stream containing the multi-turn input request information from the
+// flow.
+type FlowResponseStreamMemberFlowMultiTurnInputRequestEvent struct {
+	Value FlowMultiTurnInputRequestEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowResponseStreamMemberFlowMultiTurnInputRequestEvent) isFlowResponseStream() {}
 
 // Contains information about an output from flow invocation.
 type FlowResponseStreamMemberFlowOutputEvent struct {
@@ -4214,6 +4267,7 @@ func (*UnknownUnionMember) isAPISchema()                                   {}
 func (*UnknownUnionMember) isCaller()                                      {}
 func (*UnknownUnionMember) isContentBlock()                                {}
 func (*UnknownUnionMember) isFlowInputContent()                            {}
+func (*UnknownUnionMember) isFlowMultiTurnInputContent()                   {}
 func (*UnknownUnionMember) isFlowOutputContent()                           {}
 func (*UnknownUnionMember) isFlowResponseStream()                          {}
 func (*UnknownUnionMember) isFlowTrace()                                   {}

@@ -545,6 +545,11 @@ func awsRestjson1_serializeOpDocumentInvokeFlowInput(v *InvokeFlowInput, value s
 		ok.Boolean(*v.EnableTrace)
 	}
 
+	if v.ExecutionId != nil {
+		ok := object.Key("executionId")
+		ok.String(*v.ExecutionId)
+	}
+
 	if v.Inputs != nil {
 		ok := object.Key("inputs")
 		if err := awsRestjson1_serializeDocumentFlowInputs(v.Inputs, ok); err != nil {
@@ -1772,6 +1777,11 @@ func awsRestjson1_serializeDocumentFlowInput(v *types.FlowInput, value smithyjso
 		if err := awsRestjson1_serializeDocumentFlowInputContent(v.Content, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.NodeInputName != nil {
+		ok := object.Key("nodeInputName")
+		ok.String(*v.NodeInputName)
 	}
 
 	if v.NodeName != nil {

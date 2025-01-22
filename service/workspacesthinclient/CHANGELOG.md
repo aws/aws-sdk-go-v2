@@ -1,3 +1,7 @@
+# v1.11.2 (2025-01-22)
+
+* **Documentation**: Rename WorkSpaces Web to WorkSpaces Secure Browser
+
 # v1.11.1 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

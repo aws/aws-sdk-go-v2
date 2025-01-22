@@ -681,6 +681,11 @@ func (m *awsRestjson1_deserializeOpInvokeFlow) HandleDeserialize(ctx context.Con
 	output := &InvokeFlowOutput{}
 	out.Result = output
 
+	err = awsRestjson1_deserializeOpHttpBindingsInvokeFlowOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
 	span.End()
 	return out, metadata, err
 }
@@ -761,6 +766,19 @@ func awsRestjson1_deserializeOpErrorInvokeFlow(response *smithyhttp.Response, me
 		return genericError
 
 	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsInvokeFlowOutput(v *InvokeFlowOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amz-bedrock-flow-execution-id"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ExecutionId = ptr.String(headerValues[0])
+	}
+
+	return nil
 }
 
 type awsRestjson1_deserializeOpInvokeInlineAgent struct {
@@ -9214,6 +9232,14 @@ func awsRestjson1_deserializeEventStreamFlowResponseStream(v *types.FlowResponse
 		*v = vv
 		return nil
 
+	case strings.EqualFold("flowMultiTurnInputRequestEvent", eventType.String()):
+		vv := &types.FlowResponseStreamMemberFlowMultiTurnInputRequestEvent{}
+		if err := awsRestjson1_deserializeEventMessageFlowMultiTurnInputRequestEvent(&vv.Value, msg); err != nil {
+			return err
+		}
+		*v = vv
+		return nil
+
 	case strings.EqualFold("flowOutputEvent", eventType.String()):
 		vv := &types.FlowResponseStreamMemberFlowOutputEvent{}
 		if err := awsRestjson1_deserializeEventMessageFlowOutputEvent(&vv.Value, msg); err != nil {
@@ -9420,6 +9446,44 @@ func awsRestjson1_deserializeEventMessageFlowTraceEvent(v *types.FlowTraceEvent,
 	return nil
 }
 
+func awsRestjson1_deserializeEventMessageFlowMultiTurnInputRequestEvent(v *types.FlowMultiTurnInputRequestEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	br := bytes.NewReader(msg.Payload)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(br, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	if err := awsRestjson1_deserializeDocumentFlowMultiTurnInputRequestEvent(&v, shape); err != nil {
+		if err != nil {
+			var snapshot bytes.Buffer
+			io.Copy(&snapshot, ringBuffer)
+			err = &smithy.DeserializationError{
+				Err:      fmt.Errorf("failed to decode response body, %w", err),
+				Snapshot: snapshot.Bytes(),
+			}
+			return err
+		}
+
+	}
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFlowCompletionEvent(v **types.FlowCompletionEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9449,6 +9513,98 @@ func awsRestjson1_deserializeDocumentFlowCompletionEvent(v **types.FlowCompletio
 					return fmt.Errorf("expected FlowCompletionReason to be of type string, got %T instead", value)
 				}
 				sv.CompletionReason = types.FlowCompletionReason(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFlowMultiTurnInputContent(v *types.FlowMultiTurnInputContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.FlowMultiTurnInputContent
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "document":
+			var mv document.Interface
+			if err := awsRestjson1_deserializeDocumentDocument(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.FlowMultiTurnInputContentMemberDocument{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFlowMultiTurnInputRequestEvent(v **types.FlowMultiTurnInputRequestEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FlowMultiTurnInputRequestEvent
+	if *v == nil {
+		sv = &types.FlowMultiTurnInputRequestEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "content":
+			if err := awsRestjson1_deserializeDocumentFlowMultiTurnInputContent(&sv.Content, value); err != nil {
+				return err
+			}
+
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		case "nodeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeType to be of type string, got %T instead", value)
+				}
+				sv.NodeType = types.NodeType(jtv)
 			}
 
 		default:

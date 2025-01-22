@@ -1,3 +1,7 @@
+# v1.105.4 (2025-01-22)
+
+* **Documentation**: Docs Update for timeout changes
+
 # v1.105.3 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

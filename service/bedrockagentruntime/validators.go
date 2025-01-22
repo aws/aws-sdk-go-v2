@@ -585,9 +585,6 @@ func validateFlowInput(v *types.FlowInput) error {
 	if v.NodeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeName"))
 	}
-	if v.NodeOutputName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeOutputName"))
-	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}

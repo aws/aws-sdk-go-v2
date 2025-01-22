@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.33.0
 	github.com/aws/aws-sdk-go-v2/config v1.29.1
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.52
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.53
 	github.com/aws/aws-sdk-go-v2/service/acm v1.30.13
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.34.8
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.35.6
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.39.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.26.12
-	github.com/aws/aws-sdk-go-v2/service/glue v1.105.3
+	github.com/aws/aws-sdk-go-v2/service/glue v1.105.4
 	github.com/aws/aws-sdk-go-v2/service/health v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/iam v1.38.7
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.25.11
@@ -62,7 +62,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.48.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.34.8
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.73.2
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.74.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.52.6
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.34.13
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.32.11
