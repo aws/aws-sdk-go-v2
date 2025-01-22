@@ -144,7 +144,7 @@
                 "desktopArn": {
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n                WorkSpaces Web, or AppStream 2.0.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n            WorkSpaces Secure Browser, or AppStream 2.0.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -894,7 +894,7 @@
                 "desktopArn": {
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n                WorkSpaces Web, or AppStream 2.0.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n            WorkSpaces Secure Browser, or AppStream 2.0.</p>"
                     }
                 },
                 "desktopEndpoint": {
@@ -1064,7 +1064,7 @@
                 "desktopArn": {
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n                WorkSpaces Web, or AppStream 2.0.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n            WorkSpaces Secure Browser, or AppStream 2.0.</p>"
                     }
                 },
                 "desktopEndpoint": {
@@ -3184,7 +3184,7 @@
                 "desktopArn": {
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n                WorkSpaces Web, or AppStream 2.0.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,\n            WorkSpaces Secure Browser, or AppStream 2.0.</p>"
                     }
                 },
                 "desktopEndpoint": {
