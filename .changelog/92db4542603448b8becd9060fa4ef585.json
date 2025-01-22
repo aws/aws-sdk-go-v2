@@ -1,8 +1,0 @@
-{
-    "id": "92db4542-6034-48b8-becd-9060fa4ef585",
-    "type": "documentation",
-    "description": "Rename WorkSpaces Web to WorkSpaces Secure Browser",
-    "modules": [
-        "service/workspacesthinclient"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "578c0d8e-42d6-4721-9d0c-e397be07d84d",
-    "type": "documentation",
-    "description": "Docs Update for timeout changes",
-    "modules": [
-        "service/glue"
-    ]
-}

@@ -1,3 +1,20 @@
+# Release (2025-01-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.33.0](service/bedrockagentruntime/CHANGELOG.md#v1330-2025-01-22)
+  * **Feature**: Adds multi-turn input support for an Agent node in an Amazon Bedrock Flow
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.105.4](service/glue/CHANGELOG.md#v11054-2025-01-22)
+  * **Documentation**: Docs Update for timeout changes
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.66.0](service/medialive/CHANGELOG.md#v1660-2025-01-22)
+  * **Feature**: AWS Elemental MediaLive adds a new feature, ID3 segment tagging, in CMAF Ingest output groups. It allows customers to insert ID3 tags into every output segment, controlled by a newly added channel schedule action Id3SegmentTagging.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.74.0](service/s3/CHANGELOG.md#v1740-2025-01-22)
+  * **Feature**: Add a client config option to disable logging when output checksum validation is skipped due to an unsupported algorithm.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.11.2](service/workspacesthinclient/CHANGELOG.md#v1112-2025-01-22)
+  * **Documentation**: Rename WorkSpaces Web to WorkSpaces Secure Browser
+
 # Release (2025-01-21)
 
 ## Module Highlights

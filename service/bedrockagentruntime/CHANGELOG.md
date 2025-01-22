@@ -1,3 +1,7 @@
+# v1.33.0 (2025-01-22)
+
+* **Feature**: Adds multi-turn input support for an Agent node in an Amazon Bedrock Flow
+
 # v1.32.1 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
