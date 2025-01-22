@@ -1,7 +1,7 @@
 {
     "id": "df93fff8-f662-441f-a12d-ac87614a5064",
     "type": "bugfix",
-    "description": "Add a setter to output checksum middleware cfg to enable request validation mode by default",
+    "description": "Enable request checksum validation mode by default",
     "modules": [
         "service/internal/checksum",
         "service/s3"
