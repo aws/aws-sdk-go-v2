@@ -818,6 +818,7 @@ func setGetObjectRequestValidationModeMember(input interface{}, mode string) {
 	in := input.(*GetObjectInput)
 	in.ChecksumMode = types.ChecksumMode(mode)
 }
+
 func addGetObjectOutputChecksumMiddlewares(stack *middleware.Stack, options Options) error {
 	return internalChecksum.AddOutputMiddleware(stack, internalChecksum.OutputMiddlewareOptions{
 		GetValidationMode:             getGetObjectRequestValidationModeMember,

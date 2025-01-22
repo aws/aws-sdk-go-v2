@@ -486,6 +486,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                         "inputType", symbolProvider.toSymbol(input).getName(),
                         "member", memberName
                 )));
+        writer.write("");
     }
 
     private void generateInputComputedChecksumMetadataHelpers(
