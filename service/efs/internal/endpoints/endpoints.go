@@ -581,6 +581,15 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-mx-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.mx-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "mx-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "fips-sa-east-1",
 			}: endpoints.Endpoint{
 				Hostname: "elasticfilesystem-fips.sa-east-1.amazonaws.com",
@@ -651,6 +660,15 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "elasticfilesystem-fips.me-south-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "mx-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "elasticfilesystem-fips.mx-central-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",

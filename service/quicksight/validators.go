@@ -18675,13 +18675,30 @@ func validateTableStyleTargetList(v []types.TableStyleTarget) error {
 	}
 }
 
+func validateTableUnaggregatedFieldList(v []types.UnaggregatedField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableUnaggregatedFieldList"}
+	for i := range v {
+		if err := validateUnaggregatedField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTableUnaggregatedFieldWells(v *types.TableUnaggregatedFieldWells) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TableUnaggregatedFieldWells"}
 	if v.Values != nil {
-		if err := validateUnaggregatedFieldList(v.Values); err != nil {
+		if err := validateTableUnaggregatedFieldList(v.Values); err != nil {
 			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
 		}
 	}

@@ -8312,6 +8312,15 @@ func awsRestjson1_deserializeOpDocumentDescribeStorageConfigurationOutput(v **De
 				return err
 			}
 
+		case "disallowIngestNullNaN":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected DisallowIngestNullNaN to be of type *bool, got %T instead", value)
+				}
+				sv.DisallowIngestNullNaN = ptr.Bool(jtv)
+			}
+
 		case "disassociatedDataStorage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13651,6 +13660,15 @@ func awsRestjson1_deserializeOpDocumentPutStorageConfigurationOutput(v **PutStor
 		case "configurationStatus":
 			if err := awsRestjson1_deserializeDocumentConfigurationStatus(&sv.ConfigurationStatus, value); err != nil {
 				return err
+			}
+
+		case "disallowIngestNullNaN":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected DisallowIngestNullNaN to be of type *bool, got %T instead", value)
+				}
+				sv.DisallowIngestNullNaN = ptr.Bool(jtv)
 			}
 
 		case "disassociatedDataStorage":
@@ -24827,6 +24845,46 @@ func awsRestjson1_deserializeDocumentPropertyType(v **types.PropertyType, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPropertyValueNullValue(v **types.PropertyValueNullValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PropertyValueNullValue
+	if *v == nil {
+		sv = &types.PropertyValueNullValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "valueType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RawValueType to be of type string, got %T instead", value)
+				}
+				sv.ValueType = types.RawValueType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentQueryTimeoutException(v **types.QueryTimeoutException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25975,6 +26033,11 @@ func awsRestjson1_deserializeDocumentVariant(v **types.Variant, value interface{
 					return err
 				}
 				sv.IntegerValue = ptr.Int32(int32(i64))
+			}
+
+		case "nullValue":
+			if err := awsRestjson1_deserializeDocumentPropertyValueNullValue(&sv.NullValue, value); err != nil {
+				return err
 			}
 
 		case "stringValue":

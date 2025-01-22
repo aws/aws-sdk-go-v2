@@ -1130,6 +1130,26 @@ func (m *validateOpDeleteContactFlowModule) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteContactFlowVersion struct {
+}
+
+func (*validateOpDeleteContactFlowVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContactFlowVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContactFlowVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContactFlowVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEmailAddress struct {
 }
 
@@ -5774,6 +5794,10 @@ func addOpDeleteContactFlowModuleValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeleteContactFlowModule{}, middleware.After)
 }
 
+func addOpDeleteContactFlowVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContactFlowVersion{}, middleware.After)
+}
+
 func addOpDeleteEmailAddressValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEmailAddress{}, middleware.After)
 }
@@ -9909,6 +9933,27 @@ func validateOpDeleteContactFlowModuleInput(v *DeleteContactFlowModuleInput) err
 	}
 	if v.ContactFlowModuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteContactFlowVersionInput(v *DeleteContactFlowVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContactFlowVersionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if v.ContactFlowVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -31,11 +31,16 @@ import (
 // same S3 bucket. To separate log data for each export task, specify a prefix to
 // be used as the Amazon S3 key prefix for all exported objects.
 //
+// We recommend that you don't regularly export to Amazon S3 as a way to
+// continuously archive your logs. For that use case, we instaed recommend that you
+// use subscriptions. For more information about subscriptions, see [Real-time processing of log data with subscriptions].
+//
 // Time-based sorting on chunks of log data inside an exported file is not
 // guaranteed. You can sort the exported log field data by using Linux utilities.
 //
 // [CancelExportTask]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html
 // [DescribeExportTasks]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html
+// [Real-time processing of log data with subscriptions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions.html
 func (c *Client) CreateExportTask(ctx context.Context, params *CreateExportTaskInput, optFns ...func(*Options)) (*CreateExportTaskOutput, error) {
 	if params == nil {
 		params = &CreateExportTaskInput{}

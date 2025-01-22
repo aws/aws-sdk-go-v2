@@ -1,3 +1,7 @@
+# v1.49.7 (2025-01-21)
+
+* **Documentation**: Documentation-only update: clarified the description of the shareDecaySeconds parameter of the FairsharePolicy data type, clarified the description of the priority parameter of the JobQueueDetail data type.
+
 # v1.49.6 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

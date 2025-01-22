@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.42.4
 	github.com/aws/aws-sdk-go-v2/service/athena v1.49.5
-	github.com/aws/aws-sdk-go-v2/service/batch v1.49.6
+	github.com/aws/aws-sdk-go-v2/service/batch v1.49.7
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.56.7
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.44.5
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.29.3
@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.11
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.13
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.38.4
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.48.6
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.7
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.11
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.45.6
@@ -32,7 +32,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.200.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.38.6
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.8
-	github.com/aws/aws-sdk-go-v2/service/efs v1.34.5
+	github.com/aws/aws-sdk-go-v2/service/efs v1.34.6
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.44.7
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.12
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.28.12
@@ -70,7 +70,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.34.7
 	github.com/aws/aws-sdk-go-v2/service/shield v1.29.11
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.30.13
-	github.com/aws/aws-sdk-go-v2/service/sns v1.33.13
+	github.com/aws/aws-sdk-go-v2/service/sns v1.33.14
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.37.9
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.56.7
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.9

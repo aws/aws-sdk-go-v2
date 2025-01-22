@@ -94208,6 +94208,40 @@ func awsRestjson1_deserializeDocumentTableStyleTargetList(v *[]types.TableStyleT
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTableUnaggregatedFieldList(v *[]types.UnaggregatedField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.UnaggregatedField
+	if *v == nil {
+		cv = []types.UnaggregatedField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.UnaggregatedField
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentUnaggregatedField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTableUnaggregatedFieldWells(v **types.TableUnaggregatedFieldWells, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -94231,7 +94265,7 @@ func awsRestjson1_deserializeDocumentTableUnaggregatedFieldWells(v **types.Table
 	for key, value := range shape {
 		switch key {
 		case "Values":
-			if err := awsRestjson1_deserializeDocumentUnaggregatedFieldList(&sv.Values, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentTableUnaggregatedFieldList(&sv.Values, value); err != nil {
 				return err
 			}
 
@@ -96171,6 +96205,15 @@ func awsRestjson1_deserializeDocumentThousandSeparatorOptions(v **types.Thousand
 
 	for key, value := range shape {
 		switch key {
+		case "GroupingStyle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DigitGroupingStyle to be of type string, got %T instead", value)
+				}
+				sv.GroupingStyle = types.DigitGroupingStyle(jtv)
+			}
+
 		case "Symbol":
 			if value != nil {
 				jtv, ok := value.(string)

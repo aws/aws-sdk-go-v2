@@ -1,3 +1,7 @@
+# v1.124.0 (2025-01-21)
+
+* **Feature**: Added DeleteContactFlowVersion API and the CAMPAIGN flow type
+
 # v1.123.4 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

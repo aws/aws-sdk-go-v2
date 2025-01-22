@@ -70,13 +70,25 @@ type PutDeliverySourceInput struct {
 	//
 	//   - For Amazon Bedrock, the valid value is APPLICATION_LOGS .
 	//
+	//   - For CloudFront, the valid value is ACCESS_LOGS .
+	//
 	//   - For Amazon CodeWhisperer, the valid value is EVENT_LOGS .
+	//
+	//   - For Elemental MediaPackage, the valid values are EGRESS_ACCESS_LOGS and
+	//   INGRESS_ACCESS_LOGS .
+	//
+	//   - For Elemental MediaTailor, the valid values are AD_DECISION_SERVER_LOGS ,
+	//   MANIFEST_SERVICE_LOGS , and TRANSCODE_LOGS .
 	//
 	//   - For IAM Identity Center, the valid value is ERROR_LOGS .
 	//
+	//   - For Amazon Q, the valid value is EVENT_LOGS .
+	//
+	//   - For Amazon SES mail manager, the valid value is APPLICATION_LOG .
+	//
 	//   - For Amazon WorkMail, the valid values are ACCESS_CONTROL_LOGS ,
-	//   AUTHENTICATION_LOGS , WORKMAIL_AVAILABILITY_PROVIDER_LOGS , and
-	//   WORKMAIL_MAILBOX_ACCESS_LOGS .
+	//   AUTHENTICATION_LOGS , WORKMAIL_AVAILABILITY_PROVIDER_LOGS ,
+	//   WORKMAIL_MAILBOX_ACCESS_LOGS , and WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS .
 	//
 	// This member is required.
 	LogType *string

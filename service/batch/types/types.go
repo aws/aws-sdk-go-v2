@@ -2607,10 +2607,15 @@ type FairsharePolicy struct {
 	ComputeReservation *int32
 
 	// The amount of time (in seconds) to use to calculate a fair share percentage for
-	// each fair share identifier in use. A value of zero (0) indicates that only
-	// current usage is measured. The decay allows for more recently run jobs to have
-	// more weight than jobs that ran earlier. The maximum supported value is 604800 (1
+	// each fair share identifier in use. A value of zero (0) indicates the default
+	// minimum time window (600 seconds). The maximum supported value is 604800 (1
 	// week).
+	//
+	// The decay allows for more recently run jobs to have more weight than jobs that
+	// ran earlier. Consider adjusting this number if you have jobs that (on average)
+	// run longer than ten minutes, or a large difference in job count or job run times
+	// between share identifiers, and the allocation of resources doesn’t meet your
+	// needs.
 	ShareDecaySeconds *int32
 
 	// An array of SharedIdentifier objects that contain the weights for the fair
@@ -2979,13 +2984,27 @@ type JobQueueDetail struct {
 	// This member is required.
 	JobQueueName *string
 
-	// The priority of the job queue. Job queues with a higher priority (or a higher
-	// integer value for the priority parameter) are evaluated first when associated
-	// with the same compute environment. Priority is determined in descending order.
-	// For example, a job queue with a priority value of 10 is given scheduling
-	// preference over a job queue with a priority value of 1 . All of the compute
-	// environments must be either Amazon EC2 ( EC2 or SPOT ) or Fargate ( FARGATE or
-	// FARGATE_SPOT ). Amazon EC2 and Fargate compute environments can't be mixed.
+	// The priority of the job queue. Job queue priority determines the order that job
+	// queues are evaluated when multiple queues dispatch jobs within a shared compute
+	// environment. A higher value for priority indicates a higher priority. Queues
+	// are evaluated in cycles, in descending order by priority. For example, a job
+	// queue with a priority value of 10 is evaluated before a queue with a priority
+	// value of 1 . All of the compute environments must be either Amazon EC2 ( EC2 or
+	// SPOT ) or Fargate ( FARGATE or FARGATE_SPOT ). Amazon EC2 and Fargate compute
+	// environments can't be mixed.
+	//
+	// Job queue priority doesn't guarantee that a particular job executes before a
+	// job in a lower priority queue. Jobs added to higher priority queues during the
+	// queue evaluation cycle might not be evaluated until the next cycle. A job is
+	// dispatched from a queue only if resources are available when the queue is
+	// evaluated. If there are insufficient resources available at that time, the cycle
+	// proceeds to the next queue. This means that jobs added to higher priority queues
+	// might have to wait for jobs in multiple lower priority queues to complete before
+	// they are dispatched. You can use job dependencies to control the order for jobs
+	// from queues with different priorities. For more information, see [Job Dependencies]in the Batch
+	// User Guide.
+	//
+	// [Job Dependencies]: https://docs.aws.amazon.com/batch/latest/userguide/job_dependencies.html
 	//
 	// This member is required.
 	Priority *int32
@@ -3244,7 +3263,7 @@ type LaunchTemplateSpecificationOverride struct {
 	// launchTemplateId as well.
 	LaunchTemplateName *string
 
-	// The instance type or family that this this override launch template should be
+	// The instance type or family that this override launch template should be
 	// applied to.
 	//
 	// This parameter is required when defining a launch template override.
@@ -4267,8 +4286,8 @@ type TaskContainerProperties struct {
 	// A list of containers that this container depends on.
 	DependsOn []TaskContainerDependency
 
-	// The environment variables to pass to a container. This parameter maps to Env
-	// inthe [Create a container]section of the [Docker Remote API] and the --env parameter to [docker run].
+	// The environment variables to pass to a container. This parameter maps to Env in
+	// the [Create a container]section of the [Docker Remote API] and the --env parameter to [docker run].
 	//
 	// We don't recommend using plaintext environment variables for sensitive
 	// information, such as credential data.

@@ -2105,6 +2105,10 @@ func validateAssetPropertyValue(v *types.AssetPropertyValue) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AssetPropertyValue"}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	} else if v.Value != nil {
+		if err := validateVariant(v.Value); err != nil {
+			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
@@ -2820,6 +2824,21 @@ func validatePropertyType(v *types.PropertyType) error {
 	}
 }
 
+func validatePropertyValueNullValue(v *types.PropertyValueNullValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PropertyValueNullValue"}
+	if len(v.ValueType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePutAssetPropertyValueEntries(v []types.PutAssetPropertyValueEntry) error {
 	if v == nil {
 		return nil
@@ -3012,6 +3031,23 @@ func validateUserIdentity(v *types.UserIdentity) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UserIdentity"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVariant(v *types.Variant) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Variant"}
+	if v.NullValue != nil {
+		if err := validatePropertyValueNullValue(v.NullValue); err != nil {
+			invalidParams.AddNested("NullValue", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

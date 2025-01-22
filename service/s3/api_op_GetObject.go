@@ -820,8 +820,8 @@ func addGetObjectOutputChecksumMiddlewares(stack *middleware.Stack, options Opti
 		ResponseChecksumValidation:    options.ResponseChecksumValidation,
 		ValidationAlgorithms:          []string{"CRC64NVME", "CRC32", "CRC32C", "SHA256", "SHA1"},
 		IgnoreMultipartValidation:     true,
-		LogValidationSkipped:          true,
-		LogMultipartValidationSkipped: true,
+		LogValidationSkipped:          !options.DisableLogOutputChecksumValidationSkipped,
+		LogMultipartValidationSkipped: !options.DisableLogOutputChecksumValidationSkipped,
 	})
 }
 

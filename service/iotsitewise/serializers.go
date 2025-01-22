@@ -767,6 +767,11 @@ func awsRestjson1_serializeOpDocumentBatchPutAssetPropertyValueInput(v *BatchPut
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnablePartialEntryProcessing != nil {
+		ok := object.Key("enablePartialEntryProcessing")
+		ok.Boolean(*v.EnablePartialEntryProcessing)
+	}
+
 	if v.Entries != nil {
 		ok := object.Key("entries")
 		if err := awsRestjson1_serializeDocumentPutAssetPropertyValueEntries(v.Entries, ok); err != nil {
@@ -6679,6 +6684,11 @@ func awsRestjson1_serializeOpDocumentPutStorageConfigurationInput(v *PutStorageC
 	object := value.Object()
 	defer object.Close()
 
+	if v.DisallowIngestNullNaN != nil {
+		ok := object.Key("disallowIngestNullNaN")
+		ok.Boolean(*v.DisallowIngestNullNaN)
+	}
+
 	if len(v.DisassociatedDataStorage) > 0 {
 		ok := object.Key("disassociatedDataStorage")
 		ok.String(string(v.DisassociatedDataStorage))
@@ -9372,6 +9382,18 @@ func awsRestjson1_serializeDocumentPropertyType(v *types.PropertyType, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPropertyValueNullValue(v *types.PropertyValueNullValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ValueType) > 0 {
+		ok := object.Key("valueType")
+		ok.String(string(v.ValueType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPutAssetPropertyValueEntries(v []types.PutAssetPropertyValueEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -9662,6 +9684,13 @@ func awsRestjson1_serializeDocumentVariant(v *types.Variant, value smithyjson.Va
 	if v.IntegerValue != nil {
 		ok := object.Key("integerValue")
 		ok.Integer(*v.IntegerValue)
+	}
+
+	if v.NullValue != nil {
+		ok := object.Key("nullValue")
+		if err := awsRestjson1_serializeDocumentPropertyValueNullValue(v.NullValue, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.StringValue != nil {

@@ -1,3 +1,7 @@
+# v1.33.14 (2025-01-21)
+
+* **Documentation**: This release adds support for the topic attribute FifoThroughputScope for SNS FIFO topics. For details, see the documentation history in the Amazon Simple Notification Service Developer Guide.
+
 # v1.33.13 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

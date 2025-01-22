@@ -12,11 +12,9 @@ import (
 )
 
 // Publishes a new version of the flow provided. Versions are immutable and
-// monotonically increasing. If a version of the same flow content already exists,
-// no new version is created and instead the existing version number is returned.
-// If the FlowContentSha256 provided is different from the FlowContentSha256 of
-// the $LATEST published flow content, then an error is returned. This API only
-// supports creating versions for flows of type Campaign .
+// monotonically increasing. If the FlowContentSha256 provided is different from
+// the FlowContentSha256 of the $LATEST published flow content, then an error is
+// returned. This API only supports creating versions for flows of type Campaign .
 func (c *Client) CreateContactFlowVersion(ctx context.Context, params *CreateContactFlowVersionInput, optFns ...func(*Options)) (*CreateContactFlowVersionOutput, error) {
 	if params == nil {
 		params = &CreateContactFlowVersionInput{}
@@ -43,6 +41,9 @@ type CreateContactFlowVersionInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	// The identifier of the flow version.
+	ContactFlowVersion *int64
 
 	// The description of the flow version.
 	Description *string

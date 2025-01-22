@@ -22,8 +22,9 @@ import (
 //   - Create a delivery source, which is a logical object that represents the
 //     resource that is actually sending the logs. For more information, see [PutDeliverySource].
 //
-//   - Use PutDeliveryDestination to create a delivery destination, which is a
-//     logical object that represents the actual delivery destination.
+//   - Use PutDeliveryDestination to create a delivery destination in the same
+//     account of the actual delivery destination. The delivery destination that you
+//     create is a logical object that represents the actual delivery destination.
 //
 //   - If you are delivering logs cross-account, you must use [PutDeliveryDestinationPolicy]in the destination
 //     account to assign an IAM policy to the destination. This policy allows delivery

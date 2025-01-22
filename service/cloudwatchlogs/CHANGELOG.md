@@ -1,3 +1,7 @@
+# v1.45.7 (2025-01-21)
+
+* **Documentation**: Documentation-only update to address doc errors
+
 # v1.45.6 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
