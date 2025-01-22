@@ -1,0 +1,9 @@
+{
+    "id": "df93fff8-f662-441f-a12d-ac87614a5064",
+    "type": "bugfix",
+    "description": "Add an output checksum middleware cfg function to enable request validation mode by default",
+    "modules": [
+        "service/internal/checksum",
+        "service/s3"
+    ]
+}
