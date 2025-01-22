@@ -38,7 +38,7 @@ type UpdateEnvironmentInput struct {
 	DesiredSoftwareSetId *string
 
 	// The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,
-	// WorkSpaces Web, or AppStream 2.0.
+	// WorkSpaces Secure Browser, or AppStream 2.0.
 	DesktopArn *string
 
 	// The URL for the identity provider login (only for environments that use

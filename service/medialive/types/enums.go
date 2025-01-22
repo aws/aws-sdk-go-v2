@@ -1161,6 +1161,25 @@ func (ClusterType) Values() []ClusterType {
 	}
 }
 
+type CmafId3Behavior string
+
+// Enum values for CmafId3Behavior
+const (
+	CmafId3BehaviorDisabled CmafId3Behavior = "DISABLED"
+	CmafId3BehaviorEnabled  CmafId3Behavior = "ENABLED"
+)
+
+// Values returns all known values for CmafId3Behavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CmafId3Behavior) Values() []CmafId3Behavior {
+	return []CmafId3Behavior{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type CmafIngestSegmentLengthUnits string
 
 // Enum values for CmafIngestSegmentLengthUnits

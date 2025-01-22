@@ -30206,6 +30206,24 @@ func awsRestjson1_deserializeDocumentCmafIngestGroupSettings(v **types.CmafInges
 				return err
 			}
 
+		case "id3Behavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafId3Behavior to be of type string, got %T instead", value)
+				}
+				sv.Id3Behavior = types.CmafId3Behavior(jtv)
+			}
+
+		case "id3NameModifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax100 to be of type string, got %T instead", value)
+				}
+				sv.Id3NameModifier = ptr.String(jtv)
+			}
+
 		case "klvBehavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -35853,6 +35871,55 @@ func awsRestjson1_deserializeDocumentHtmlMotionGraphicsSettings(v **types.HtmlMo
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentId3SegmentTaggingScheduleActionSettings(v **types.Id3SegmentTaggingScheduleActionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Id3SegmentTaggingScheduleActionSettings
+	if *v == nil {
+		sv = &types.Id3SegmentTaggingScheduleActionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id3":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Id3 = ptr.String(jtv)
+			}
+
+		case "tag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Tag = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -43630,6 +43697,11 @@ func awsRestjson1_deserializeDocumentScheduleActionSettings(v **types.ScheduleAc
 				return err
 			}
 
+		case "id3SegmentTaggingSettings":
+			if err := awsRestjson1_deserializeDocumentId3SegmentTaggingScheduleActionSettings(&sv.Id3SegmentTaggingSettings, value); err != nil {
+				return err
+			}
+
 		case "inputPrepareSettings":
 			if err := awsRestjson1_deserializeDocumentInputPrepareScheduleActionSettings(&sv.InputPrepareSettings, value); err != nil {
 				return err
@@ -43692,6 +43764,11 @@ func awsRestjson1_deserializeDocumentScheduleActionSettings(v **types.ScheduleAc
 
 		case "staticImageOutputDeactivateSettings":
 			if err := awsRestjson1_deserializeDocumentStaticImageOutputDeactivateScheduleActionSettings(&sv.StaticImageOutputDeactivateSettings, value); err != nil {
+				return err
+			}
+
+		case "timedMetadataSettings":
+			if err := awsRestjson1_deserializeDocumentTimedMetadataScheduleActionSettings(&sv.TimedMetadataSettings, value); err != nil {
 				return err
 			}
 
@@ -46118,6 +46195,46 @@ func awsRestjson1_deserializeDocumentTimecodeConfig(v **types.TimecodeConfig, va
 					return err
 				}
 				sv.SyncThreshold = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTimedMetadataScheduleActionSettings(v **types.TimedMetadataScheduleActionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimedMetadataScheduleActionSettings
+	if *v == nil {
+		sv = &types.TimedMetadataScheduleActionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id3":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Id3 = ptr.String(jtv)
 			}
 
 		default:

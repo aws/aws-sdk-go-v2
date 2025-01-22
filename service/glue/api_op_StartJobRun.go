@@ -138,6 +138,9 @@ type StartJobRunInput struct {
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
 	// a batch job, it will be stopped on the 7th day.
+	//
+	// For streaming jobs, if you have set up a maintenance window, it will be
+	// restarted during the maintenance window after 7 days.
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a

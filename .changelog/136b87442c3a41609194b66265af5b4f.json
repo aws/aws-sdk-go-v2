@@ -1,0 +1,8 @@
+{
+    "id": "136b8744-2c3a-4160-9194-b66265af5b4f",
+    "type": "feature",
+    "description": "Adds multi-turn input support for an Agent node in an Amazon Bedrock Flow",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

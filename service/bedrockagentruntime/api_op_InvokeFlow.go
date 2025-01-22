@@ -59,6 +59,10 @@ type InvokeFlowInput struct {
 	// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
 	EnableTrace *bool
 
+	// The unique identifier for the current flow execution. If you don't provide a
+	// value, Amazon Bedrock creates the identifier for you.
+	ExecutionId *string
+
 	// Model performance settings for the request.
 	ModelPerformanceConfiguration *types.ModelPerformanceConfiguration
 
@@ -66,6 +70,10 @@ type InvokeFlowInput struct {
 }
 
 type InvokeFlowOutput struct {
+
+	// The unique identifier for the current flow execution.
+	ExecutionId *string
+
 	eventStream *InvokeFlowEventStream
 
 	// Metadata pertaining to the operation's result.

@@ -219,7 +219,8 @@ type FlowCompletionReason string
 
 // Enum values for FlowCompletionReason
 const (
-	FlowCompletionReasonSuccess FlowCompletionReason = "SUCCESS"
+	FlowCompletionReasonSuccess       FlowCompletionReason = "SUCCESS"
+	FlowCompletionReasonInputRequired FlowCompletionReason = "INPUT_REQUIRED"
 )
 
 // Values returns all known values for FlowCompletionReason. Note that this can be
@@ -229,6 +230,7 @@ const (
 func (FlowCompletionReason) Values() []FlowCompletionReason {
 	return []FlowCompletionReason{
 		"SUCCESS",
+		"INPUT_REQUIRED",
 	}
 }
 

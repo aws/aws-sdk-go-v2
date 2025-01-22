@@ -4315,6 +4315,11 @@ func validateScheduleActionSettings(v *types.ScheduleActionSettings) error {
 			invalidParams.AddNested("StaticImageOutputDeactivateSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TimedMetadataSettings != nil {
+		if err := validateTimedMetadataScheduleActionSettings(v.TimedMetadataSettings); err != nil {
+			invalidParams.AddNested("TimedMetadataSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4663,6 +4668,21 @@ func validateTimecodeConfig(v *types.TimecodeConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TimecodeConfig"}
 	if len(v.Source) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimedMetadataScheduleActionSettings(v *types.TimedMetadataScheduleActionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimedMetadataScheduleActionSettings"}
+	if v.Id3 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id3"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

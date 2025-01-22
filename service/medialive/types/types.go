@@ -1541,6 +1541,18 @@ type CmafIngestGroupSettings struct {
 	// This member is required.
 	Destination *OutputLocationRef
 
+	// Set to ENABLED to enable ID3 metadata insertion. To include metadata, you
+	// configure other parameters in the output group, or you add an ID3 action to the
+	// channel schedule.
+	Id3Behavior CmafId3Behavior
+
+	// Change the modifier that MediaLive automatically adds to the Streams() name
+	// that identifies an ID3 track. The default is "id3", which means the default name
+	// will be Streams(id3.cmfm). Any string you enter here will replace the "id3"
+	// string.\nThe modifier can only contain: numbers, letters, plus (+), minus (-),
+	// underscore (_) and period (.) and has a maximum length of 100 characters.
+	Id3NameModifier *string
+
 	// If set to passthrough, passes any KLV data from the input source to this output.
 	KlvBehavior CmafKLVBehavior
 
@@ -3658,6 +3670,24 @@ type HlsWebdavSettings struct {
 
 // Html Motion Graphics Settings
 type HtmlMotionGraphicsSettings struct {
+	noSmithyDocumentSerde
+}
+
+// Settings for the action to insert ID3 metadata in every segment, in applicable
+// output groups.
+type Id3SegmentTaggingScheduleActionSettings struct {
+
+	// Complete this parameter if you want to specify the entire ID3 metadata. Enter a
+	// base64 string that contains one or more fully formed ID3 tags, according to the
+	// ID3 specification: http://id3.org/id3v2.4.0-structure
+	Id3 *string
+
+	// Complete this parameter if you want to specify only the metadata, not the
+	// entire frame. MediaLive will insert the metadata in a TXXX frame. Enter the
+	// value as plain text. You can include standard MediaLive variable data such as
+	// the current segment number.
+	Tag *string
+
 	noSmithyDocumentSerde
 }
 
@@ -6482,6 +6512,9 @@ type ScheduleActionSettings struct {
 	// Action to insert ID3 metadata once, in HLS output groups
 	HlsTimedMetadataSettings *HlsTimedMetadataScheduleActionSettings
 
+	// Action to insert ID3 metadata in every segment, in applicable output groups
+	Id3SegmentTaggingSettings *Id3SegmentTaggingScheduleActionSettings
+
 	// Action to prepare an input for a future immediate input switch
 	InputPrepareSettings *InputPrepareScheduleActionSettings
 
@@ -6520,6 +6553,9 @@ type ScheduleActionSettings struct {
 
 	// Action to deactivate a static image overlay in one or more specified outputs
 	StaticImageOutputDeactivateSettings *StaticImageOutputDeactivateScheduleActionSettings
+
+	// Action to insert ID3 metadata once, in applicable output groups
+	TimedMetadataSettings *TimedMetadataScheduleActionSettings
 
 	noSmithyDocumentSerde
 }
@@ -7361,6 +7397,19 @@ type TimecodeConfig struct {
 	// discontinuities in the output timecode. No timecode sync when this is not
 	// specified.
 	SyncThreshold *int32
+
+	noSmithyDocumentSerde
+}
+
+// Settings for the action to insert ID3 metadata (as a one-time action) in
+// applicable output groups.
+type TimedMetadataScheduleActionSettings struct {
+
+	// Enter a base64 string that contains one or more fully formed ID3 tags.See the
+	// ID3 specification: http://id3.org/id3v2.4.0-structure
+	//
+	// This member is required.
+	Id3 *string
 
 	noSmithyDocumentSerde
 }

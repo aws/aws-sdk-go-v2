@@ -12311,6 +12311,16 @@ func awsRestjson1_serializeDocumentCmafIngestGroupSettings(v *types.CmafIngestGr
 		}
 	}
 
+	if len(v.Id3Behavior) > 0 {
+		ok := object.Key("id3Behavior")
+		ok.String(string(v.Id3Behavior))
+	}
+
+	if v.Id3NameModifier != nil {
+		ok := object.Key("id3NameModifier")
+		ok.String(*v.Id3NameModifier)
+	}
+
 	if len(v.KlvBehavior) > 0 {
 		ok := object.Key("klvBehavior")
 		ok.String(string(v.KlvBehavior))
@@ -14486,6 +14496,23 @@ func awsRestjson1_serializeDocumentHlsWebdavSettings(v *types.HlsWebdavSettings,
 func awsRestjson1_serializeDocumentHtmlMotionGraphicsSettings(v *types.HtmlMotionGraphicsSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentId3SegmentTaggingScheduleActionSettings(v *types.Id3SegmentTaggingScheduleActionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id3 != nil {
+		ok := object.Key("id3")
+		ok.String(*v.Id3)
+	}
+
+	if v.Tag != nil {
+		ok := object.Key("tag")
+		ok.String(*v.Tag)
+	}
 
 	return nil
 }
@@ -17140,6 +17167,13 @@ func awsRestjson1_serializeDocumentScheduleActionSettings(v *types.ScheduleActio
 		}
 	}
 
+	if v.Id3SegmentTaggingSettings != nil {
+		ok := object.Key("id3SegmentTaggingSettings")
+		if err := awsRestjson1_serializeDocumentId3SegmentTaggingScheduleActionSettings(v.Id3SegmentTaggingSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputPrepareSettings != nil {
 		ok := object.Key("inputPrepareSettings")
 		if err := awsRestjson1_serializeDocumentInputPrepareScheduleActionSettings(v.InputPrepareSettings, ok); err != nil {
@@ -17227,6 +17261,13 @@ func awsRestjson1_serializeDocumentScheduleActionSettings(v *types.ScheduleActio
 	if v.StaticImageOutputDeactivateSettings != nil {
 		ok := object.Key("staticImageOutputDeactivateSettings")
 		if err := awsRestjson1_serializeDocumentStaticImageOutputDeactivateScheduleActionSettings(v.StaticImageOutputDeactivateSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimedMetadataSettings != nil {
+		ok := object.Key("timedMetadataSettings")
+		if err := awsRestjson1_serializeDocumentTimedMetadataScheduleActionSettings(v.TimedMetadataSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -18019,6 +18060,18 @@ func awsRestjson1_serializeDocumentTimecodeConfig(v *types.TimecodeConfig, value
 	if v.SyncThreshold != nil {
 		ok := object.Key("syncThreshold")
 		ok.Integer(*v.SyncThreshold)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTimedMetadataScheduleActionSettings(v *types.TimedMetadataScheduleActionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id3 != nil {
+		ok := object.Key("id3")
+		ok.String(*v.Id3)
 	}
 
 	return nil

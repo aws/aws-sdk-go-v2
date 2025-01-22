@@ -30,7 +30,7 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 type CreateEnvironmentInput struct {
 
 	// The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces,
-	// WorkSpaces Web, or AppStream 2.0.
+	// WorkSpaces Secure Browser, or AppStream 2.0.
 	//
 	// This member is required.
 	DesktopArn *string
