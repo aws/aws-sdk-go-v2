@@ -113,6 +113,9 @@ type OutputMiddlewareOptions struct {
 	// mode and true, or false if no mode is specified.
 	GetValidationMode func(interface{}) (string, bool)
 
+	// SetValidationMode is a function to set the checksum validation mode of input parameters
+	SetValidationMode func(interface{}, string)
+
 	// ResponseChecksumValidation is the user config to opt-in/out response checksum validation
 	ResponseChecksumValidation aws.ResponseChecksumValidation
 
@@ -141,6 +144,7 @@ type OutputMiddlewareOptions struct {
 func AddOutputMiddleware(stack *middleware.Stack, options OutputMiddlewareOptions) error {
 	err := stack.Initialize.Add(&setupOutputContext{
 		GetValidationMode:          options.GetValidationMode,
+		SetValidationMode:          options.SetValidationMode,
 		ResponseChecksumValidation: options.ResponseChecksumValidation,
 	}, middleware.Before)
 	if err != nil {

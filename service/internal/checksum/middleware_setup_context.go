@@ -70,6 +70,9 @@ type setupOutputContext struct {
 	// mode and true, or false if no mode is specified.
 	GetValidationMode func(interface{}) (string, bool)
 
+	// SetValidationMode is a function to set the checksum validation mode of input parameters
+	SetValidationMode func(interface{}, string)
+
 	// ResponseChecksumValidation states user config to opt-in/out checksum validation
 	ResponseChecksumValidation aws.ResponseChecksumValidation
 }
@@ -90,6 +93,7 @@ func (m *setupOutputContext) HandleInitialize(
 	mode, _ := m.GetValidationMode(in.Parameters)
 
 	if m.ResponseChecksumValidation == aws.ResponseChecksumValidationWhenSupported || mode == checksumValidationModeEnabled {
+		m.SetValidationMode(in.Parameters, checksumValidationModeEnabled)
 		ctx = setContextOutputValidationMode(ctx, checksumValidationModeEnabled)
 	}
 

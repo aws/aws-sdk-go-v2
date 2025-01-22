@@ -24,6 +24,7 @@ import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
+import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.aws.traits.HttpChecksumTrait;
@@ -50,6 +51,10 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
 
     private static String getRequestValidationModeAccessorFuncName(String operationName) {
         return String.format("get%s%s", operationName, "RequestValidationModeMember");
+    }
+
+    private static String setRequestValidationModeAccessorFuncName(String operationName) {
+        return String.format("set%s%s", operationName, "RequestValidationModeMember");
     }
 
     private static String getAddInputMiddlewareFuncName(String operationName) {
@@ -144,7 +149,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
 
             goDelegator.useShapeWriter(operation, writer -> {
                 // generate getter helper function to access input member value
-                writeGetInputMemberAccessorHelper(writer, model, symbolProvider, operation);
+                writeInputMemberAccessorHelper(writer, model, symbolProvider, operation);
 
                 // generate middleware helper function
                 if (generateComputeInputChecksums) {
@@ -198,7 +203,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
         return false;
     }
 
-        private static boolean hasOutputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
+    private static boolean hasOutputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
         if (!hasChecksumTrait(model, service, operation)) {
             return false;
         }
@@ -342,6 +347,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                     writer.write("""
                                     return $T(stack, $T{
                                         GetValidationMode: $L,
+                                        SetValidationMode: $L,
                                         ResponseChecksumValidation: options.ResponseChecksumValidation,
                                         ValidationAlgorithms: $L,
                                         IgnoreMultipartValidation: $L,
@@ -353,6 +359,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                             SymbolUtils.createValueSymbolBuilder("OutputMiddlewareOptions",
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
                             getRequestValidationModeAccessorFuncName(operationName),
+                            setRequestValidationModeAccessorFuncName(operationName),
                             convertToGoStringList(responseAlgorithms),
                             ignoreMultipartChecksumValidationMap.getOrDefault(
                                     service.toShapeId(), new HashSet<>()).contains(operation.toShapeId())
@@ -375,7 +382,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
         return sb.toString();
     }
 
-    private void writeGetInputMemberAccessorHelper(
+    private void writeInputMemberAccessorHelper(
             GoWriter writer,
             Model model,
             SymbolProvider symbolProvider,
@@ -424,6 +431,9 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                     String.format("%s gets the request checksum validation mode provided as input.", funcName));
             getInputTemplate(writer, symbolProvider, input, funcName, memberName);
             writer.insertTrailingNewline();
+            funcName = setRequestValidationModeAccessorFuncName(operationSymbol.getName());
+            setInputTemplate(writer, symbolProvider, input, funcName, memberName);
+            writer.insertTrailingNewline();
         }
     }
 
@@ -443,6 +453,25 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                     writer.write("return string(in.$L), true", memberName);
                 });
         writer.write("");
+    }
+
+    private void setInputTemplate(
+            GoWriter writer,
+            SymbolProvider symbolProvider,
+            StructureShape input,
+            String funcName,
+            String memberName
+    ) {
+        writer.write(GoWriter.goTemplate("""
+                func $fn:L(input interface{}, mode string) {
+                    in := input.(*$inputType:L)
+                    in.$member:L = types.$member:L(mode)
+                }""",
+                Map.of(
+                        "fn", funcName,
+                        "inputType", symbolProvider.toSymbol(input).getName(),
+                        "member", memberName
+                )));
     }
 
     private void generateInputComputedChecksumMetadataHelpers(
