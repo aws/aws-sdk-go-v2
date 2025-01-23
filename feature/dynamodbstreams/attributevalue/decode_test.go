@@ -1268,3 +1268,79 @@ func TestUnmarshalBinary(t *testing.T) {
 		t.Errorf("expected %v, got %v", expected, actual)
 	}
 }
+
+type testStringItem string
+
+func (t *testStringItem) UnmarshalDynamoDBStreasmAttributeValue(av types.AttributeValue) error {
+	v, ok := av.(*types.AttributeValueMemberS)
+	if !ok {
+		return fmt.Errorf("expecting string value")
+	}
+	*t = testStringItem(v.Value)
+	return nil
+}
+
+type testNumberItem float64
+
+func (t *testNumberItem) UnmarshalDynamoDBStreamsAttributeValue(av types.AttributeValue) error {
+	v, ok := av.(*types.AttributeValueMemberN)
+	if !ok {
+		return fmt.Errorf("expecting number value")
+	}
+	n, err := strconv.ParseFloat(v.Value, 64)
+	if err != nil {
+		return err
+	}
+	*t = testNumberItem(n)
+	return nil
+}
+
+type testBinaryItem []byte
+
+func (t *testBinaryItem) UnmarshalDynamoDBStreamsAttributeValue(av types.AttributeValue) error {
+	v, ok := av.(*types.AttributeValueMemberB)
+	if !ok {
+		return fmt.Errorf("expecting binary value")
+	}
+	*t = make([]byte, len(v.Value))
+	copy(*t, v.Value)
+	return nil
+}
+
+type testStringSetWithUnmarshaler struct {
+	Strings  []testStringItem `dynamodbav:",stringset"`
+	Numbers  []testNumberItem `dynamodbav:",numberset"`
+	Binaries []testBinaryItem `dynamodbav:",binaryset"`
+}
+
+func TestUnmarshalIndividualSetValues(t *testing.T) {
+	in := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"Strings": &types.AttributeValueMemberSS{
+				Value: []string{"a", "b"},
+			},
+			"Numbers": &types.AttributeValueMemberNS{
+				Value: []string{"1", "2"},
+			},
+			"Binaries": &types.AttributeValueMemberBS{
+				Value: [][]byte{{1, 2}, {3, 4}},
+			},
+		},
+	}
+	var actual testStringSetWithUnmarshaler
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.FixUnmarshalIndividualSetValues = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	expected := testStringSetWithUnmarshaler{
+		Strings:  []testStringItem{"a", "b"},
+		Numbers:  []testNumberItem{1, 2},
+		Binaries: []testBinaryItem{{1, 2}, {3, 4}},
+	}
+	if diff := cmpDiff(expected, actual); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+}
