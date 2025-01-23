@@ -3,6 +3,6 @@
   "type": "feature",
   "description": "Reduce allocations in query encoding.",
   "modules": [
-    "aws/protocol/query"
+    "."
   ]
 }
