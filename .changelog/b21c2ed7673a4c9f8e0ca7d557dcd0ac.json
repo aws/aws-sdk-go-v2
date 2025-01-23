@@ -1,0 +1,8 @@
+{
+    "id": "b21c2ed7-673a-4c9f-8e0c-a7d557dcd0ac",
+    "type": "feature",
+    "description": "Added \"future\" allocation type for future dated capacity reservation",
+    "modules": [
+        "service/ec2"
+    ]
+}
