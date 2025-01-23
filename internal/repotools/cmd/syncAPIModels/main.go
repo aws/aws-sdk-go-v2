@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"io/fs"
 	"log"
 	"os"
 	"path/filepath"
@@ -74,13 +75,13 @@ type SourceModel struct {
 func findSmithyModels(modelPath string) (map[string]SourceModel, error) {
 	models := map[string]SourceModel{}
 
-	err := filepath.Walk(modelPath,
-		func(path string, info os.FileInfo, err error) error {
-			if err != nil || info.IsDir() {
+	err := filepath.WalkDir(modelPath,
+		func(path string, d fs.DirEntry, err error) error {
+			if err != nil || d.IsDir() {
 				return err
 			}
 
-			if filepath.Ext(info.Name()) != ".json" {
+			if filepath.Ext(d.Name()) != ".json" {
 				return nil
 			}
 

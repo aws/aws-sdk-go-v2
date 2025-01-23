@@ -12,7 +12,9 @@ import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
 
 public class AwsWaiters2 extends Waiters2 {
     public static final List<ShapeId> PHASED_ROLLOUT_SERVICES = List.of(
-            ShapeId.from("com.amazonaws.ec2#AmazonEC2")
+            ShapeId.from("com.amazonaws.ec2#AmazonEC2"),
+            ShapeId.from("com.amazonaws.autoscaling#AutoScaling_2011_01_01"),
+            ShapeId.from("com.amazonaws.cloudwatch#GraniteServiceVersion20100801")
     );
 
     @Override
