@@ -1,0 +1,9 @@
+{
+    "id": "67431bb2-f939-4912-b813-adcc349a4bf5",
+    "type": "Announcement",
+    "description": "Refactor filepath.Walk to filepath.WalkDir",
+    "collapse": false,
+    "modules": [
+        "internal/ini"
+    ]
+}
