@@ -1,3 +1,9 @@
+# Release (2025-01-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.201.0](service/ec2/CHANGELOG.md#v12010-2025-01-23)
+  * **Feature**: Added "future" allocation type for future dated capacity reservation
+
 # Release (2025-01-22)
 
 ## General Highlights
