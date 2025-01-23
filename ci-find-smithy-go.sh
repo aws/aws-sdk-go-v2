@@ -12,6 +12,9 @@
 if [ -z "$SMITHY_GO_REPOSITORY" ]; then
     SMITHY_GO_REPOSITORY=aws/smithy-go
 fi
+if [ "$SMITHY_GO_REPOSITORY" == /smithy-go ]; then
+    SMITHY_GO_REPOSITORY=aws/smithy-go
+fi
 
 if [ -z "$RUNNER_TMPDIR" ]; then
     echo env RUNNER_TMPDIR is required
