@@ -1,9 +1,0 @@
-{
-    "id": "51679833-4aa1-4999-8c84-c0f9f62d13bb",
-    "type": "bugfix",
-    "description": "Switch to generated waiters, removing the dependency on go-jmespath and fixing broken waiters that used ordering comparators.",
-    "modules": [
-        "service/autoscaling",
-        "service/cloudwatch"
-    ]
-}

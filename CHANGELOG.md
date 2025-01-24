@@ -1,3 +1,43 @@
+# Release (2025-01-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.34.0
+  * **Feature**: Reduce allocations in query encoding.
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.29.2](config/CHANGELOG.md#v1292-2025-01-24)
+  * **Bug Fix**: Fix env config naming and usage of deprecated ioutil
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.16.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1160-2025-01-24)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.15.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v1150-2025-01-24)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.54](feature/s3/manager/CHANGELOG.md#v11754-2025-01-24)
+  * **Bug Fix**: Fix incorrect reference to old s3manager in comments.
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.8.2](internal/ini/CHANGELOG.md#v182-2025-01-24)
+  * **Bug Fix**: Refactor filepath.Walk to filepath.WalkDir
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.51.8](service/autoscaling/CHANGELOG.md#v1518-2025-01-24)
+  * **Bug Fix**: Switch to generated waiters, removing the dependency on go-jmespath and fixing broken waiters that used ordering comparators.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.47.0](service/cloudtrail/CHANGELOG.md#v1470-2025-01-24)
+  * **Feature**: This release introduces the SearchSampleQueries API that allows users to search for CloudTrail Lake sample queries.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.43.10](service/cloudwatch/CHANGELOG.md#v14310-2025-01-24)
+  * **Bug Fix**: Switch to generated waiters, removing the dependency on go-jmespath and fixing broken waiters that used ordering comparators.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.57.0](service/eks/CHANGELOG.md#v1570-2025-01-24)
+  * **Feature**: Adds support for UpdateStrategies in EKS Managed Node Groups.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.29.0](service/healthlake/CHANGELOG.md#v1290-2025-01-24)
+  * **Feature**: Added new authorization strategy value 'SMART_ON_FHIR' for CreateFHIRDatastore API to support Smart App 2.0
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.5.3](service/internal/checksum/CHANGELOG.md#v153-2025-01-24)
+  * **Bug Fix**: Enable request checksum validation mode by default
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.74.1](service/s3/CHANGELOG.md#v1741-2025-01-24)
+  * **Bug Fix**: Enable request checksum validation mode by default
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.56.8](service/ssm/CHANGELOG.md#v1568-2025-01-24)
+  * **Documentation**: Systems Manager doc-only update for January, 2025.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.28.11](service/ssooidc/CHANGELOG.md#v12811-2025-01-24)
+  * **Documentation**: Fixed typos in the descriptions.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.56.0](service/transfer/CHANGELOG.md#v1560-2025-01-24)
+  * **Feature**: Added CustomDirectories as a new directory option for storing inbound AS2 messages, MDN files and Status files.
+
 # Release (2025-01-23)
 
 ## Module Highlights

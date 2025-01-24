@@ -1,3 +1,8 @@
+# v1.201.1 (2025-01-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.201.0 (2025-01-23)
 
 * **Feature**: Added "future" allocation type for future dated capacity reservation

@@ -1,3 +1,8 @@
+# v1.33.1 (2025-01-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.33.0 (2025-01-22)
 
 * **Feature**: Adds multi-turn input support for an Agent node in an Amazon Bedrock Flow

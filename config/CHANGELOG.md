@@ -1,3 +1,9 @@
+# v1.29.2 (2025-01-24)
+
+* **Bug Fix**: Fix env config naming and usage of deprecated ioutil
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.29.1 (2025-01-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

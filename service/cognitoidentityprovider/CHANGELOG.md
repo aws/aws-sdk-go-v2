@@ -1,3 +1,8 @@
+# v1.49.1 (2025-01-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.49.0 (2025-01-21)
 
 * **Feature**: corrects the dual-stack endpoint configuration for cognitoidp

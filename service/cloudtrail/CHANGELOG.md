@@ -1,3 +1,9 @@
+# v1.47.0 (2025-01-24)
+
+* **Feature**: This release introduces the SearchSampleQueries API that allows users to search for CloudTrail Lake sample queries.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.46.9 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

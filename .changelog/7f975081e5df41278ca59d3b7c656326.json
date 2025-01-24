@@ -1,8 +1,0 @@
-{
-    "id": "7f975081-e5df-4127-8ca5-9d3b7c656326",
-    "type": "bugfix",
-    "description": "Fix env config naming and usage of deprecated ioutil",
-    "modules": [
-        "config"
-    ]
-}

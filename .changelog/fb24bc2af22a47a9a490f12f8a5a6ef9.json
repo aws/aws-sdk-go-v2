@@ -1,8 +1,0 @@
-{
-    "id": "fb24bc2a-f22a-47a9-a490-f12f8a5a6ef9",
-    "type": "feature",
-    "description": "Adds support for UpdateStrategies in EKS Managed Node Groups.",
-    "modules": [
-        "service/eks"
-    ]
-}

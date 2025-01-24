@@ -1,3 +1,8 @@
+# v1.11.3 (2025-01-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.11.2 (2025-01-22)
 
 * **Documentation**: Rename WorkSpaces Web to WorkSpaces Secure Browser

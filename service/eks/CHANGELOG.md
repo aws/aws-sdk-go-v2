@@ -1,3 +1,9 @@
+# v1.57.0 (2025-01-24)
+
+* **Feature**: Adds support for UpdateStrategies in EKS Managed Node Groups.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.56.5 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

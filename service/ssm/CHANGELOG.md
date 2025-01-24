@@ -1,3 +1,9 @@
+# v1.56.8 (2025-01-24)
+
+* **Documentation**: Systems Manager doc-only update for January, 2025.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.56.7 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.

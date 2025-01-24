@@ -1,3 +1,9 @@
+# v1.16.0 (2025-01-24)
+
+* **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.15.28 (2025-01-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

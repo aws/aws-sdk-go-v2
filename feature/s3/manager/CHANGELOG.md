@@ -1,3 +1,9 @@
+# v1.17.54 (2025-01-24)
+
+* **Bug Fix**: Fix incorrect reference to old s3manager in comments.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.17.53 (2025-01-22)
 
 * **Dependency Update**: Updated to the latest SDK module versions

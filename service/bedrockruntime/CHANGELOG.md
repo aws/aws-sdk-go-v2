@@ -1,3 +1,8 @@
+# v1.24.1 (2025-01-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.24.0 (2025-01-17)
 
 * **Feature**: Allow hyphens in tool name for Converse and ConverseStream APIs

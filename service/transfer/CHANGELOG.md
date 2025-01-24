@@ -1,3 +1,9 @@
+# v1.56.0 (2025-01-24)
+
+* **Feature**: Added CustomDirectories as a new directory option for storing inbound AS2 messages, MDN files and Status files.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.22.2.
+
 # v1.55.5 (2025-01-17)
 
 * **Bug Fix**: Fix bug where credentials weren't refreshed during retry loop.
