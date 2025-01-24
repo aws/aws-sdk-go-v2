@@ -170,6 +170,37 @@ type CopyStepDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains Amazon S3 locations for storing specific types of AS2 message files.
+type CustomDirectoriesType struct {
+
+	// Specifies a location to store failed AS2 message files.
+	//
+	// This member is required.
+	FailedFilesDirectory *string
+
+	// Specifies a location to store MDN files.
+	//
+	// This member is required.
+	MdnFilesDirectory *string
+
+	// Specifies a location to store the payload for AS2 message files.
+	//
+	// This member is required.
+	PayloadFilesDirectory *string
+
+	// Specifies a location to store AS2 status messages.
+	//
+	// This member is required.
+	StatusFilesDirectory *string
+
+	// Specifies a location to store temporary AS2 message files.
+	//
+	// This member is required.
+	TemporaryFilesDirectory *string
+
+	noSmithyDocumentSerde
+}
+
 // Each step type has its own StepDetails structure.
 type CustomStepDetails struct {
 
@@ -400,6 +431,21 @@ type DescribedAgreement struct {
 	// The landing directory (folder) for files that are transferred by using the AS2
 	// protocol.
 	BaseDirectory *string
+
+	// A CustomDirectoriesType structure. This structure specifies custom directories
+	// for storing various AS2 message files. You can specify directories for the
+	// following types of files.
+	//
+	//   - Failed files
+	//
+	//   - MDN files
+	//
+	//   - Payload files
+	//
+	//   - Status files
+	//
+	//   - Temporary files
+	CustomDirectories *CustomDirectoriesType
 
 	// The name or short description that's used to identify the agreement.
 	Description *string

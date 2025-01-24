@@ -590,6 +590,18 @@ func TestCheckSnapshot_RestoreEventDataStore(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchSampleQueries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchSampleQueries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchSampleQueries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartDashboardRefresh(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartDashboardRefresh(context.Background(), nil, func(o *Options) {
@@ -1254,6 +1266,18 @@ func TestUpdateSnapshot_RestoreEventDataStore(t *testing.T) {
 	_, err := svc.RestoreEventDataStore(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RestoreEventDataStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchSampleQueries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchSampleQueries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchSampleQueries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

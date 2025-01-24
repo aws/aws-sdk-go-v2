@@ -1271,7 +1271,7 @@ func TestUnmarshalBinary(t *testing.T) {
 
 type testStringItem string
 
-func (t *testStringItem) UnmarshalDynamoDBStreasmAttributeValue(av types.AttributeValue) error {
+func (t *testStringItem) UnmarshalDynamoDBStreamsAttributeValue(av types.AttributeValue) error {
 	v, ok := av.(*types.AttributeValueMemberS)
 	if !ok {
 		return fmt.Errorf("expecting string value")

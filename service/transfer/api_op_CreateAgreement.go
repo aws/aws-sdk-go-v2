@@ -19,6 +19,9 @@ import (
 //
 // The partner is identified with the PartnerProfileId , and the AS2 process is
 // identified with the LocalProfileId .
+//
+// Specify either BaseDirectory or CustomDirectories , but not both. Specifying
+// both causes the command to fail.
 func (c *Client) CreateAgreement(ctx context.Context, params *CreateAgreementInput, optFns ...func(*Options)) (*CreateAgreementOutput, error) {
 	if params == nil {
 		params = &CreateAgreementInput{}
@@ -69,13 +72,6 @@ type CreateAgreementInput struct {
 	// This member is required.
 	AccessRole *string
 
-	// The landing directory (folder) for files transferred by using the AS2 protocol.
-	//
-	// A BaseDirectory example is /amzn-s3-demo-bucket/home/mydirectory .
-	//
-	// This member is required.
-	BaseDirectory *string
-
 	// A unique identifier for the AS2 local profile.
 	//
 	// This member is required.
@@ -91,6 +87,26 @@ type CreateAgreementInput struct {
 	//
 	// This member is required.
 	ServerId *string
+
+	// The landing directory (folder) for files transferred by using the AS2 protocol.
+	//
+	// A BaseDirectory example is /amzn-s3-demo-bucket/home/mydirectory .
+	BaseDirectory *string
+
+	// A CustomDirectoriesType structure. This structure specifies custom directories
+	// for storing various AS2 message files. You can specify directories for the
+	// following types of files.
+	//
+	//   - Failed files
+	//
+	//   - MDN files
+	//
+	//   - Payload files
+	//
+	//   - Status files
+	//
+	//   - Temporary files
+	CustomDirectories *types.CustomDirectoriesType
 
 	// A name or short description to identify the agreement.
 	Description *string

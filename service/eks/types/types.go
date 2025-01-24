@@ -144,7 +144,7 @@ type Addon struct {
 	// An array of Pod Identity Assocations owned by the Addon. Each EKS Pod Identity
 	// association maps a role to a service account in a namespace in the cluster.
 	//
-	// For more information, see [Attach an IAM Role to an Amazon EKS add-on using Pod Identity] in the EKS User Guide.
+	// For more information, see [Attach an IAM Role to an Amazon EKS add-on using Pod Identity] in the Amazon EKS User Guide.
 	//
 	// [Attach an IAM Role to an Amazon EKS add-on using Pod Identity]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
 	PodIdentityAssociations []string
@@ -167,10 +167,12 @@ type Addon struct {
 	noSmithyDocumentSerde
 }
 
-// Contains compatibility information for an Amazon EKS add-on.
+// The summary information about the Amazon EKS add-on compatibility for the next
+// Kubernetes version for an insight check in the UPGRADE_READINESS category.
 type AddonCompatibilityDetail struct {
 
-	// A list of compatible add-on versions.
+	// The list of compatible Amazon EKS add-on versions for the next Kubernetes
+	// version.
 	CompatibleVersions []string
 
 	// The name of the Amazon EKS add-on.
@@ -233,7 +235,7 @@ type AddonIssue struct {
 // Each EKS Pod Identity Association maps a role to a service account in a
 // namespace in the cluster.
 //
-// For more information, see [Attach an IAM Role to an Amazon EKS add-on using Pod Identity] in the EKS User Guide.
+// For more information, see [Attach an IAM Role to an Amazon EKS add-on using Pod Identity] in the Amazon EKS User Guide.
 //
 // [Attach an IAM Role to an Amazon EKS add-on using Pod Identity]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
 type AddonPodIdentityAssociations struct {
@@ -320,7 +322,7 @@ type AutoScalingGroup struct {
 // Auto Mode cluster. For example, if the capability is enabled or disabled. If the
 // block storage capability is enabled, EKS Auto Mode will create and delete EBS
 // volumes in your Amazon Web Services account. For more information, see EKS Auto
-// Mode block storage capability in the EKS User Guide.
+// Mode block storage capability in the Amazon EKS User Guide.
 type BlockStorage struct {
 
 	// Indicates if the block storage capability is enabled on your EKS Auto Mode
@@ -377,7 +379,7 @@ type Cluster struct {
 	// Mode cluster. For example, if the capability is enabled or disabled. If the
 	// compute capability is enabled, EKS Auto Mode will create and delete EC2 Managed
 	// Instances in your Amazon Web Services account. For more information, see EKS
-	// Auto Mode compute capability in the EKS User Guide.
+	// Auto Mode compute capability in the Amazon EKS User Guide.
 	ComputeConfig *ComputeConfigResponse
 
 	// The configuration used to connect to a cluster for registration.
@@ -450,7 +452,7 @@ type Cluster struct {
 	// Auto Mode cluster. For example, if the capability is enabled or disabled. If the
 	// block storage capability is enabled, EKS Auto Mode will create and delete EBS
 	// volumes in your Amazon Web Services account. For more information, see EKS Auto
-	// Mode block storage capability in the EKS User Guide.
+	// Mode block storage capability in the Amazon EKS User Guide.
 	StorageConfig *StorageConfigResponse
 
 	// Metadata that assists with categorization and organization. Each tag consists
@@ -460,9 +462,9 @@ type Cluster struct {
 
 	// This value indicates if extended support is enabled or disabled for the cluster.
 	//
-	// [Learn more about EKS Extended Support in the EKS User Guide.]
+	// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]
 	//
-	// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+	// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
 	UpgradePolicy *UpgradePolicyResponse
 
 	// The Kubernetes server version for the cluster.
@@ -548,7 +550,7 @@ type Compatibility struct {
 
 // Request to update the configuration of the compute capability of your EKS Auto
 // Mode cluster. For example, enable the capability. For more information, see EKS
-// Auto Mode compute capability in the EKS User Guide.
+// Auto Mode compute capability in the Amazon EKS User Guide.
 type ComputeConfigRequest struct {
 
 	// Request to enable or disable the compute capability on your EKS Auto Mode
@@ -557,14 +559,14 @@ type ComputeConfigRequest struct {
 	Enabled *bool
 
 	// Configuration for node pools that defines the compute resources for your EKS
-	// Auto Mode cluster. For more information, see EKS Auto Mode Node Pools in the EKS
-	// User Guide.
+	// Auto Mode cluster. For more information, see EKS Auto Mode Node Pools in the
+	// Amazon EKS User Guide.
 	NodePools []string
 
 	// The ARN of the IAM Role EKS will assign to EC2 Managed Instances in your EKS
 	// Auto Mode cluster. This value cannot be changed after the compute capability of
-	// EKS Auto Mode is enabled. For more information, see the IAM Reference in the EKS
-	// User Guide.
+	// EKS Auto Mode is enabled. For more information, see the IAM Reference in the
+	// Amazon EKS User Guide.
 	NodeRoleArn *string
 
 	noSmithyDocumentSerde
@@ -580,8 +582,8 @@ type ComputeConfigResponse struct {
 	Enabled *bool
 
 	// Indicates the current configuration of node pools in your EKS Auto Mode
-	// cluster. For more information, see EKS Auto Mode Node Pools in the EKS User
-	// Guide.
+	// cluster. For more information, see EKS Auto Mode Node Pools in the Amazon EKS
+	// User Guide.
 	NodePools []string
 
 	// The ARN of the IAM Role EKS will assign to EC2 Managed Instances in your EKS
@@ -766,8 +768,8 @@ type EksAnywhereSubscriptionTerm struct {
 
 // Indicates the current configuration of the load balancing capability on your
 // EKS Auto Mode cluster. For example, if the capability is enabled or disabled.
-// For more information, see EKS Auto Mode load balancing capability in the EKS
-// User Guide.
+// For more information, see EKS Auto Mode load balancing capability in the Amazon
+// EKS User Guide.
 type ElasticLoadBalancing struct {
 
 	// Indicates if the load balancing capability is enabled on your EKS Auto Mode
@@ -1161,7 +1163,7 @@ type KubernetesNetworkConfigRequest struct {
 
 	// Request to enable or disable the load balancing capability on your EKS Auto
 	// Mode cluster. For more information, see EKS Auto Mode load balancing capability
-	// in the EKS User Guide.
+	// in the Amazon EKS User Guide.
 	ElasticLoadBalancing *ElasticLoadBalancing
 
 	// Specify which IP family is used to assign Kubernetes pod and service IP
@@ -1288,7 +1290,7 @@ type Logging struct {
 type LogSetup struct {
 
 	// If a log type is enabled, that log type exports its control plane logs to
-	// CloudWatch Logs. If a log type isn't enabled, that log type doesn't export its
+	// CloudWatch Logs . If a log type isn't enabled, that log type doesn't export its
 	// control plane logs. Each individual log type can be enabled or disabled
 	// independently.
 	Enabled *bool
@@ -1485,7 +1487,9 @@ type NodegroupScalingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The node group update configuration.
+// The node group update configuration. An Amazon EKS managed node group updates
+// by replacing nodes with new nodes of newer AMI versions in parallel. You choose
+// the maximum unavailable and the update strategy.
 type NodegroupUpdateConfig struct {
 
 	// The maximum number of nodes unavailable at once during a version update. Nodes
@@ -1497,6 +1501,23 @@ type NodegroupUpdateConfig struct {
 	// percentage of nodes are updated in parallel, up to 100 nodes at once. This value
 	// or maxUnavailable is required to have a value.
 	MaxUnavailablePercentage *int32
+
+	// The configuration for the behavior to follow during a node group version update
+	// of this managed node group. You choose between two possible strategies for
+	// replacing nodes during an [UpdateNodegroupVersion]action.
+	//
+	// An Amazon EKS managed node group updates by replacing nodes with new nodes of
+	// newer AMI versions in parallel. The update strategy changes the managed node
+	// update behavior of the managed node group for each quantity. The default
+	// strategy has guardrails to protect you from misconfiguration and launches the
+	// new instances first, before terminating the old instances. The minimal strategy
+	// removes the guardrails and terminates the old instances before launching the new
+	// instances. This minimal strategy is useful in scenarios where you are
+	// constrained to resources or costs (for example, with hardware accelerators such
+	// as GPUs).
+	//
+	// [UpdateNodegroupVersion]: https://docs.aws.amazon.com/latest/APIReference/API_UpdateNodegroupVersion.html
+	UpdateStrategy NodegroupUpdateStrategies
 
 	noSmithyDocumentSerde
 }
@@ -2034,7 +2055,7 @@ type RemotePodNetwork struct {
 
 // Request to update the configuration of the storage capability of your EKS Auto
 // Mode cluster. For example, enable the capability. For more information, see EKS
-// Auto Mode block storage capability in the EKS User Guide.
+// Auto Mode block storage capability in the Amazon EKS User Guide.
 type StorageConfigRequest struct {
 
 	// Request to configure EBS Block Storage settings for your EKS Auto Mode cluster.
@@ -2149,18 +2170,18 @@ type UpdateTaintsPayload struct {
 // have higher costs. The default value is EXTENDED . Use STANDARD to disable
 // extended support.
 //
-// [Learn more about EKS Extended Support in the EKS User Guide.]
+// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]
 //
-// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
 type UpgradePolicyRequest struct {
 
 	// If the cluster is set to EXTENDED , it will enter extended support at the end of
 	// standard support. If the cluster is set to STANDARD , it will be automatically
 	// upgraded at the end of standard support.
 	//
-	// [Learn more about EKS Extended Support in the EKS User Guide.]
+	// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]
 	//
-	// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+	// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
 	SupportType SupportType
 
 	noSmithyDocumentSerde
@@ -2168,18 +2189,18 @@ type UpgradePolicyRequest struct {
 
 // This value indicates if extended support is enabled or disabled for the cluster.
 //
-// [Learn more about EKS Extended Support in the EKS User Guide.]
+// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]
 //
-// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
 type UpgradePolicyResponse struct {
 
 	// If the cluster is set to EXTENDED , it will enter extended support at the end of
 	// standard support. If the cluster is set to STANDARD , it will be automatically
 	// upgraded at the end of standard support.
 	//
-	// [Learn more about EKS Extended Support in the EKS User Guide.]
+	// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]
 	//
-	// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+	// [Learn more about EKS Extended Support in the Amazon EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
 	SupportType SupportType
 
 	noSmithyDocumentSerde

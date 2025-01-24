@@ -16,7 +16,7 @@ import (
 // You cannot apply both event selectors and advanced event selectors to a trail.
 //
 // For information about configurable advanced event selector fields, see [AdvancedEventSelector] in the
-// CloudTrailUser Guide.
+// CloudTrail API Reference.
 //
 // [Logging network activity events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html
 // [AdvancedEventSelector]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
@@ -44,7 +44,11 @@ type AdvancedFieldSelector struct {
 	// items, Audit Manager evidence, or events outside of Amazon Web Services, the
 	// field is used only for selecting events as filtering is not supported.
 	//
-	// For more information, see [AdvancedFieldSelector] in the CloudTrailUser Guide.
+	// For more information, see [AdvancedFieldSelector] in the CloudTrail API Reference.
+	//
+	// Selectors don't support the use of wildcards like * . To match multiple values
+	// with a single condition, you may use StartsWith , EndsWith , NotStartsWith , or
+	// NotEndsWith to explicitly match the beginning or end of the event field.
 	//
 	// [AdvancedFieldSelector]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedFieldSelector.html
 	//
@@ -756,6 +760,25 @@ type S3ImportSource struct {
 	//
 	// This member is required.
 	S3LocationUri *string
+
+	noSmithyDocumentSerde
+}
+
+// A search result returned by the SearchSampleQueries operation.
+type SearchSampleQueriesSearchResult struct {
+
+	//  A longer description of a sample query.
+	Description *string
+
+	//  The name of a sample query.
+	Name *string
+
+	//  A value between 0 and 1 indicating the similarity between the search phrase
+	// and result.
+	Relevance float32
+
+	//  The SQL code of the sample query.
+	SQL *string
 
 	noSmithyDocumentSerde
 }

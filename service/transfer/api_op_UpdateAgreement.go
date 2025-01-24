@@ -14,6 +14,13 @@ import (
 // Updates some of the parameters for an existing agreement. Provide the
 // AgreementId and the ServerId for the agreement that you want to update, along
 // with the new values for the parameters to update.
+//
+// Specify either BaseDirectory or CustomDirectories , but not both. Specifying
+// both causes the command to fail.
+//
+// If you update an agreement from using base directory to custom directories, the
+// base directory is no longer used. Similarly, if you change from custom
+// directories to a base directory, the custom directories are no longer used.
 func (c *Client) UpdateAgreement(ctx context.Context, params *UpdateAgreementInput, optFns ...func(*Options)) (*UpdateAgreementOutput, error) {
 	if params == nil {
 		params = &UpdateAgreementInput{}
@@ -78,6 +85,21 @@ type UpdateAgreementInput struct {
 	// provide the bucket folder that you want to use; for example,
 	// /amzn-s3-demo-bucket/home/mydirectory .
 	BaseDirectory *string
+
+	// A CustomDirectoriesType structure. This structure specifies custom directories
+	// for storing various AS2 message files. You can specify directories for the
+	// following types of files.
+	//
+	//   - Failed files
+	//
+	//   - MDN files
+	//
+	//   - Payload files
+	//
+	//   - Status files
+	//
+	//   - Temporary files
+	CustomDirectories *types.CustomDirectoriesType
 
 	// To replace the existing description, provide a short description for the
 	// agreement.

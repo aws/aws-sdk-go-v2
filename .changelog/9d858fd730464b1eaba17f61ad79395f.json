@@ -1,0 +1,8 @@
+{
+    "id": "9d858fd7-3046-4b1e-aba1-7f61ad79395f",
+    "type": "feature",
+    "description": "This release introduces the SearchSampleQueries API that allows users to search for CloudTrail Lake sample queries.",
+    "modules": [
+        "service/cloudtrail"
+    ]
+}

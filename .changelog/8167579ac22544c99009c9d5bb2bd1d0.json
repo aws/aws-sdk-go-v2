@@ -1,0 +1,8 @@
+{
+    "id": "8167579a-c225-44c9-9009-c9d5bb2bd1d0",
+    "type": "documentation",
+    "description": "Fixed typos in the descriptions.",
+    "modules": [
+        "service/ssooidc"
+    ]
+}

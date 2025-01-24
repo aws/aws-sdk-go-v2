@@ -1498,6 +1498,33 @@ func addOpUpdateWebAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWebApp{}, middleware.After)
 }
 
+func validateCustomDirectoriesType(v *types.CustomDirectoriesType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomDirectoriesType"}
+	if v.FailedFilesDirectory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FailedFilesDirectory"))
+	}
+	if v.MdnFilesDirectory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MdnFilesDirectory"))
+	}
+	if v.PayloadFilesDirectory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PayloadFilesDirectory"))
+	}
+	if v.StatusFilesDirectory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatusFilesDirectory"))
+	}
+	if v.TemporaryFilesDirectory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemporaryFilesDirectory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDecryptStepDetails(v *types.DecryptStepDetails) error {
 	if v == nil {
 		return nil
@@ -1814,15 +1841,17 @@ func validateOpCreateAgreementInput(v *CreateAgreementInput) error {
 	if v.PartnerProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartnerProfileId"))
 	}
-	if v.BaseDirectory == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BaseDirectory"))
-	}
 	if v.AccessRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessRole"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomDirectories != nil {
+		if err := validateCustomDirectoriesType(v.CustomDirectories); err != nil {
+			invalidParams.AddNested("CustomDirectories", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2769,6 +2798,11 @@ func validateOpUpdateAgreementInput(v *UpdateAgreementInput) error {
 	}
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.CustomDirectories != nil {
+		if err := validateCustomDirectoriesType(v.CustomDirectories); err != nil {
+			invalidParams.AddNested("CustomDirectories", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

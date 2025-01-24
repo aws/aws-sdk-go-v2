@@ -4344,6 +4344,38 @@ func awsAwsjson11_serializeDocumentCopyStepDetails(v *types.CopyStepDetails, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCustomDirectoriesType(v *types.CustomDirectoriesType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailedFilesDirectory != nil {
+		ok := object.Key("FailedFilesDirectory")
+		ok.String(*v.FailedFilesDirectory)
+	}
+
+	if v.MdnFilesDirectory != nil {
+		ok := object.Key("MdnFilesDirectory")
+		ok.String(*v.MdnFilesDirectory)
+	}
+
+	if v.PayloadFilesDirectory != nil {
+		ok := object.Key("PayloadFilesDirectory")
+		ok.String(*v.PayloadFilesDirectory)
+	}
+
+	if v.StatusFilesDirectory != nil {
+		ok := object.Key("StatusFilesDirectory")
+		ok.String(*v.StatusFilesDirectory)
+	}
+
+	if v.TemporaryFilesDirectory != nil {
+		ok := object.Key("TemporaryFilesDirectory")
+		ok.String(*v.TemporaryFilesDirectory)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCustomStepDetails(v *types.CustomStepDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5106,6 +5138,13 @@ func awsAwsjson11_serializeOpDocumentCreateAgreementInput(v *CreateAgreementInpu
 	if v.BaseDirectory != nil {
 		ok := object.Key("BaseDirectory")
 		ok.String(*v.BaseDirectory)
+	}
+
+	if v.CustomDirectories != nil {
+		ok := object.Key("CustomDirectories")
+		if err := awsAwsjson11_serializeDocumentCustomDirectoriesType(v.CustomDirectories, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Description != nil {
@@ -6471,6 +6510,13 @@ func awsAwsjson11_serializeOpDocumentUpdateAgreementInput(v *UpdateAgreementInpu
 	if v.BaseDirectory != nil {
 		ok := object.Key("BaseDirectory")
 		ok.String(*v.BaseDirectory)
+	}
+
+	if v.CustomDirectories != nil {
+		ok := object.Key("CustomDirectories")
+		if err := awsAwsjson11_serializeDocumentCustomDirectoriesType(v.CustomDirectories, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Description != nil {

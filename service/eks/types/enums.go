@@ -692,6 +692,25 @@ func (NodegroupStatus) Values() []NodegroupStatus {
 	}
 }
 
+type NodegroupUpdateStrategies string
+
+// Enum values for NodegroupUpdateStrategies
+const (
+	NodegroupUpdateStrategiesDefault NodegroupUpdateStrategies = "DEFAULT"
+	NodegroupUpdateStrategiesMinimal NodegroupUpdateStrategies = "MINIMAL"
+)
+
+// Values returns all known values for NodegroupUpdateStrategies. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodegroupUpdateStrategies) Values() []NodegroupUpdateStrategies {
+	return []NodegroupUpdateStrategies{
+		"DEFAULT",
+		"MINIMAL",
+	}
+}
+
 type ResolveConflicts string
 
 // Enum values for ResolveConflicts
@@ -781,6 +800,7 @@ const (
 	UpdateParamTypeMaxUnavailable           UpdateParamType = "MaxUnavailable"
 	UpdateParamTypeMaxUnavailablePercentage UpdateParamType = "MaxUnavailablePercentage"
 	UpdateParamTypeNodeRepairEnabled        UpdateParamType = "NodeRepairEnabled"
+	UpdateParamTypeUpdateStrategy           UpdateParamType = "UpdateStrategy"
 	UpdateParamTypeConfigurationValues      UpdateParamType = "ConfigurationValues"
 	UpdateParamTypeSecurityGroups           UpdateParamType = "SecurityGroups"
 	UpdateParamTypeSubnets                  UpdateParamType = "Subnets"
@@ -823,6 +843,7 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"MaxUnavailable",
 		"MaxUnavailablePercentage",
 		"NodeRepairEnabled",
+		"UpdateStrategy",
 		"ConfigurationValues",
 		"SecurityGroups",
 		"Subnets",

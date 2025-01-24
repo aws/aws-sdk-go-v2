@@ -35,9 +35,9 @@ import (
 // logs management events. You can call GetEventDataStore on an event data store
 // to check whether the event data store logs management events.
 //
-// For more information, see [Logging CloudTrail Insights events] in the CloudTrail User Guide.
+// For more information, see [Working with CloudTrail Insights] in the CloudTrail User Guide.
 //
-// [Logging CloudTrail Insights events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
+// [Working with CloudTrail Insights]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
 func (c *Client) PutInsightSelectors(ctx context.Context, params *PutInsightSelectorsInput, optFns ...func(*Options)) (*PutInsightSelectorsOutput, error) {
 	if params == nil {
 		params = &PutInsightSelectorsInput{}

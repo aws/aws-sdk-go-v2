@@ -598,9 +598,6 @@ func validateOpStartFHIRExportJobInput(v *StartFHIRExportJobInput) error {
 	if v.DataAccessRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
 	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -628,9 +625,6 @@ func validateOpStartFHIRImportJobInput(v *StartFHIRImportJobInput) error {
 	}
 	if v.DataAccessRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
-	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

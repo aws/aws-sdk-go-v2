@@ -22,9 +22,9 @@ import (
 // an event data store, or the TrailName parameter to the get Insights event
 // selectors for a trail. You cannot specify these parameters together.
 //
-// For more information, see [Logging CloudTrail Insights events] in the CloudTrail User Guide.
+// For more information, see [Working with CloudTrail Insights] in the CloudTrail User Guide.
 //
-// [Logging CloudTrail Insights events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
+// [Working with CloudTrail Insights]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
 func (c *Client) GetInsightSelectors(ctx context.Context, params *GetInsightSelectorsInput, optFns ...func(*Options)) (*GetInsightSelectorsOutput, error) {
 	if params == nil {
 		params = &GetInsightSelectorsInput{}

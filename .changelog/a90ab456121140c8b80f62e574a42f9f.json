@@ -1,0 +1,8 @@
+{
+    "id": "a90ab456-1211-40c8-b80f-62e574a42f9f",
+    "type": "feature",
+    "description": "Added new authorization strategy value 'SMART_ON_FHIR' for CreateFHIRDatastore API to support Smart App 2.0",
+    "modules": [
+        "service/healthlake"
+    ]
+}

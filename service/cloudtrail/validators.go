@@ -710,6 +710,26 @@ func (m *validateOpRestoreEventDataStore) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchSampleQueries struct {
+}
+
+func (*validateOpSearchSampleQueries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchSampleQueries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchSampleQueriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchSampleQueriesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartDashboardRefresh struct {
 }
 
@@ -1068,6 +1088,10 @@ func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRestoreEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreEventDataStore{}, middleware.After)
+}
+
+func addOpSearchSampleQueriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchSampleQueries{}, middleware.After)
 }
 
 func addOpStartDashboardRefreshValidationMiddleware(stack *middleware.Stack) error {
@@ -1955,6 +1979,21 @@ func validateOpRestoreEventDataStoreInput(v *RestoreEventDataStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreEventDataStoreInput"}
 	if v.EventDataStore == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchSampleQueriesInput(v *SearchSampleQueriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchSampleQueriesInput"}
+	if v.SearchPhrase == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchPhrase"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

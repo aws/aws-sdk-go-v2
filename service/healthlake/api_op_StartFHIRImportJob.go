@@ -29,11 +29,6 @@ func (c *Client) StartFHIRImportJob(ctx context.Context, params *StartFHIRImport
 
 type StartFHIRImportJobInput struct {
 
-	// Optional user provided token used for ensuring idempotency.
-	//
-	// This member is required.
-	ClientToken *string
-
 	// The Amazon Resource Name (ARN) that gives AWS HealthLake access permission.
 	//
 	// This member is required.
@@ -53,6 +48,9 @@ type StartFHIRImportJobInput struct {
 	//
 	// This member is required.
 	JobOutputDataConfig types.OutputDataConfig
+
+	// Optional user provided token used for ensuring idempotency.
+	ClientToken *string
 
 	// The name of the FHIR Import job in the StartFHIRImport job request.
 	JobName *string

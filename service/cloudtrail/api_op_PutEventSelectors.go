@@ -33,7 +33,7 @@ import (
 // If you want your trail to log Insights events, be sure the event selector or
 // advanced event selector enables logging of the Insights event types you want
 // configured for your trail. For more information about logging Insights events,
-// see [Logging Insights events]in the CloudTrail User Guide. By default, trails created without specific
+// see [Working with CloudTrail Insights]in the CloudTrail User Guide. By default, trails created without specific
 // event selectors are configured to log all read and write management events, and
 // no data events or network activity events.
 //
@@ -68,8 +68,8 @@ import (
 // trail. For more information, see [Logging management events], [Logging data events], [Logging network activity events], and [Quotas in CloudTrail] in the CloudTrail User Guide.
 //
 // [Logging network activity events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html
-// [Logging Insights events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
 // [Logging management events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
+// [Working with CloudTrail Insights]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
 // [Quotas in CloudTrail]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
 // [Logging data events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
 func (c *Client) PutEventSelectors(ctx context.Context, params *PutEventSelectorsInput, optFns ...func(*Options)) (*PutEventSelectorsOutput, error) {

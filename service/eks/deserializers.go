@@ -14529,6 +14529,15 @@ func awsRestjson1_deserializeDocumentNodegroupUpdateConfig(v **types.NodegroupUp
 				sv.MaxUnavailablePercentage = ptr.Int32(int32(i64))
 			}
 
+		case "updateStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodegroupUpdateStrategies to be of type string, got %T instead", value)
+				}
+				sv.UpdateStrategy = types.NodegroupUpdateStrategies(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

@@ -6,8 +6,9 @@ type AuthorizationStrategy string
 
 // Enum values for AuthorizationStrategy
 const (
-	AuthorizationStrategySmartv1 AuthorizationStrategy = "SMART_ON_FHIR_V1"
-	AuthorizationStrategyAwsAuth AuthorizationStrategy = "AWS_AUTH"
+	AuthorizationStrategySmartv1     AuthorizationStrategy = "SMART_ON_FHIR_V1"
+	AuthorizationStrategySmartOnFhir AuthorizationStrategy = "SMART_ON_FHIR"
+	AuthorizationStrategyAwsAuth     AuthorizationStrategy = "AWS_AUTH"
 )
 
 // Values returns all known values for AuthorizationStrategy. Note that this can
@@ -17,6 +18,7 @@ const (
 func (AuthorizationStrategy) Values() []AuthorizationStrategy {
 	return []AuthorizationStrategy{
 		"SMART_ON_FHIR_V1",
+		"SMART_ON_FHIR",
 		"AWS_AUTH",
 	}
 }
@@ -106,6 +108,7 @@ type JobStatus string
 // Enum values for JobStatus
 const (
 	JobStatusSubmitted           JobStatus = "SUBMITTED"
+	JobStatusQueued              JobStatus = "QUEUED"
 	JobStatusInProgress          JobStatus = "IN_PROGRESS"
 	JobStatusCompletedWithErrors JobStatus = "COMPLETED_WITH_ERRORS"
 	JobStatusCompleted           JobStatus = "COMPLETED"
@@ -123,6 +126,7 @@ const (
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
+		"QUEUED",
 		"IN_PROGRESS",
 		"COMPLETED_WITH_ERRORS",
 		"COMPLETED",

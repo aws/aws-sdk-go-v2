@@ -1,0 +1,8 @@
+{
+    "id": "e3c4033f-93af-4049-a1f9-0d8d02f6abf3",
+    "type": "feature",
+    "description": "Added CustomDirectories as a new directory option for storing inbound AS2 messages, MDN files and Status files.",
+    "modules": [
+        "service/transfer"
+    ]
+}

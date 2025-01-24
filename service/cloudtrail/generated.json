@@ -52,6 +52,7 @@
         "api_op_RegisterOrganizationDelegatedAdmin.go",
         "api_op_RemoveTags.go",
         "api_op_RestoreEventDataStore.go",
+        "api_op_SearchSampleQueries.go",
         "api_op_StartDashboardRefresh.go",
         "api_op_StartEventDataStoreIngestion.go",
         "api_op_StartImport.go",

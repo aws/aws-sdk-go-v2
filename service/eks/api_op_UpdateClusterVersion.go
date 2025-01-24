@@ -22,7 +22,7 @@ import (
 // Successful ), the cluster status moves to Active .
 //
 // If your cluster has managed node groups attached to it, all of your node
-// groups’ Kubernetes versions must match the cluster’s Kubernetes version in order
+// groups' Kubernetes versions must match the cluster's Kubernetes version in order
 // to update the cluster to a new Kubernetes version.
 func (c *Client) UpdateClusterVersion(ctx context.Context, params *UpdateClusterVersionInput, optFns ...func(*Options)) (*UpdateClusterVersionOutput, error) {
 	if params == nil {

@@ -216,7 +216,7 @@ func TestSetupOutput(t *testing.T) {
 						if e, a := c.expectInputValue, in.Value; e != a {
 							t.Errorf("expect input checksum validation mode to be %v, got %v", e, a)
 						}
-						
+
 						return out, metadata, nil
 					},
 				))

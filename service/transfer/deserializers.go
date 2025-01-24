@@ -8921,6 +8921,82 @@ func awsAwsjson11_deserializeDocumentCopyStepDetails(v **types.CopyStepDetails, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCustomDirectoriesType(v **types.CustomDirectoriesType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomDirectoriesType
+	if *v == nil {
+		sv = &types.CustomDirectoriesType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FailedFilesDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HomeDirectory to be of type string, got %T instead", value)
+				}
+				sv.FailedFilesDirectory = ptr.String(jtv)
+			}
+
+		case "MdnFilesDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HomeDirectory to be of type string, got %T instead", value)
+				}
+				sv.MdnFilesDirectory = ptr.String(jtv)
+			}
+
+		case "PayloadFilesDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HomeDirectory to be of type string, got %T instead", value)
+				}
+				sv.PayloadFilesDirectory = ptr.String(jtv)
+			}
+
+		case "StatusFilesDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HomeDirectory to be of type string, got %T instead", value)
+				}
+				sv.StatusFilesDirectory = ptr.String(jtv)
+			}
+
+		case "TemporaryFilesDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HomeDirectory to be of type string, got %T instead", value)
+				}
+				sv.TemporaryFilesDirectory = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCustomStepDetails(v **types.CustomStepDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9255,6 +9331,11 @@ func awsAwsjson11_deserializeDocumentDescribedAgreement(v **types.DescribedAgree
 					return fmt.Errorf("expected HomeDirectory to be of type string, got %T instead", value)
 				}
 				sv.BaseDirectory = ptr.String(jtv)
+			}
+
+		case "CustomDirectories":
+			if err := awsAwsjson11_deserializeDocumentCustomDirectoriesType(&sv.CustomDirectories, value); err != nil {
+				return err
 			}
 
 		case "Description":

@@ -1,0 +1,8 @@
+{
+    "id": "cf11d832-0d37-4b0b-8195-f81968101c21",
+    "type": "documentation",
+    "description": "Systems Manager doc-only update for January, 2025.",
+    "modules": [
+        "service/ssm"
+    ]
+}

@@ -5963,6 +5963,11 @@ func awsRestjson1_serializeDocumentNodegroupUpdateConfig(v *types.NodegroupUpdat
 		ok.Integer(*v.MaxUnavailablePercentage)
 	}
 
+	if len(v.UpdateStrategy) > 0 {
+		ok := object.Key("updateStrategy")
+		ok.String(string(v.UpdateStrategy))
+	}
+
 	return nil
 }
 

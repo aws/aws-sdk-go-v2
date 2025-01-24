@@ -29,11 +29,6 @@ func (c *Client) StartFHIRExportJob(ctx context.Context, params *StartFHIRExport
 
 type StartFHIRExportJobInput struct {
 
-	// An optional user provided token used for ensuring idempotency.
-	//
-	// This member is required.
-	ClientToken *string
-
 	// The Amazon Resource Name used during the initiation of the job.
 	//
 	// This member is required.
@@ -49,6 +44,9 @@ type StartFHIRExportJobInput struct {
 	//
 	// This member is required.
 	OutputDataConfig types.OutputDataConfig
+
+	// An optional user provided token used for ensuring idempotency.
+	ClientToken *string
 
 	// The user generated name for an export job.
 	JobName *string
