@@ -131,43 +131,66 @@ func TestSetupOutput(t *testing.T) {
 		inputParams                interface{}
 		ResponseChecksumValidation aws.ResponseChecksumValidation
 		getValidationMode          func(interface{}) (string, bool)
-		expectValue                string
+		setValidationMode          func(interface{}, string)
+		expectCtxValue             string
+		expectInputValue           string
 	}{
 		"user config support checksum found empty": {
 			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenSupported,
-			inputParams:                Params{Value: ""},
+			inputParams:                &Params{Value: ""},
 			getValidationMode: func(v interface{}) (string, bool) {
-				vv := v.(Params)
+				vv := v.(*Params)
 				return vv.Value, true
 			},
-			expectValue: "ENABLED",
+			setValidationMode: func(v interface{}, m string) {
+				vv := v.(*Params)
+				vv.Value = m
+			},
+			expectCtxValue:   "ENABLED",
+			expectInputValue: "ENABLED",
 		},
 		"user config support checksum found invalid value": {
 			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenSupported,
-			inputParams:                Params{Value: "abc123"},
+			inputParams:                &Params{Value: "abc123"},
 			getValidationMode: func(v interface{}) (string, bool) {
-				vv := v.(Params)
+				vv := v.(*Params)
 				return vv.Value, true
+
 			},
-			expectValue: "ENABLED",
+			setValidationMode: func(v interface{}, m string) {
+				vv := v.(*Params)
+				vv.Value = m
+			},
+			expectCtxValue:   "ENABLED",
+			expectInputValue: "ENABLED",
 		},
 		"user config require checksum found invalid value": {
 			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenRequired,
-			inputParams:                Params{Value: "abc123"},
+			inputParams:                &Params{Value: "abc123"},
 			getValidationMode: func(v interface{}) (string, bool) {
-				vv := v.(Params)
+				vv := v.(*Params)
 				return vv.Value, true
 			},
-			expectValue: "",
+			setValidationMode: func(v interface{}, m string) {
+				vv := v.(*Params)
+				vv.Value = m
+			},
+			expectCtxValue:   "",
+			expectInputValue: "abc123",
 		},
 		"user config require checksum found valid value": {
 			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenRequired,
-			inputParams:                Params{Value: "ENABLED"},
+			inputParams:                &Params{Value: "ENABLED"},
 			getValidationMode: func(v interface{}) (string, bool) {
-				vv := v.(Params)
+				vv := v.(*Params)
 				return vv.Value, true
 			},
-			expectValue: "ENABLED",
+			setValidationMode: func(v interface{}, m string) {
+				vv := v.(*Params)
+				vv.Value = m
+			},
+			expectCtxValue:   "ENABLED",
+			expectInputValue: "ENABLED",
 		},
 	}
 
@@ -175,6 +198,7 @@ func TestSetupOutput(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			m := setupOutputContext{
 				GetValidationMode:          c.getValidationMode,
+				SetValidationMode:          c.setValidationMode,
 				ResponseChecksumValidation: c.ResponseChecksumValidation,
 			}
 
@@ -185,10 +209,14 @@ func TestSetupOutput(t *testing.T) {
 						out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 					) {
 						v := getContextOutputValidationMode(ctx)
-						if e, a := c.expectValue, v; e != a {
-							t.Errorf("expect value %v, got %v", e, a)
+						if e, a := c.expectCtxValue, v; e != a {
+							t.Errorf("expect ctx checksum validation mode to be %v, got %v", e, a)
 						}
-
+						in := input.Parameters.(*Params)
+						if e, a := c.expectInputValue, in.Value; e != a {
+							t.Errorf("expect input checksum validation mode to be %v, got %v", e, a)
+						}
+						
 						return out, metadata, nil
 					},
 				))
