@@ -714,7 +714,7 @@
                         "iam:PassRole"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates an agreement. An agreement is a bilateral trading partner agreement, or partnership,\n      between an Transfer Family server and an AS2 process. The agreement defines the file and message\n      transfer relationship between the server and the AS2 process. To define an agreement, Transfer Family\n      combines a server, local profile, partner profile, certificate, and other\n      attributes.</p>\n         <p>The partner is identified with the <code>PartnerProfileId</code>, and the AS2 process is identified with the <code>LocalProfileId</code>.</p>"
+                "smithy.api#documentation": "<p>Creates an agreement. An agreement is a bilateral trading partner agreement, or partnership,\n      between an Transfer Family server and an AS2 process. The agreement defines the file and message\n      transfer relationship between the server and the AS2 process. To define an agreement, Transfer Family\n      combines a server, local profile, partner profile, certificate, and other\n      attributes.</p>\n         <p>The partner is identified with the <code>PartnerProfileId</code>, and the AS2 process is identified with the <code>LocalProfileId</code>.</p>\n         <note>\n            <p>Specify <i>either</i>\n               <code>BaseDirectory</code> or <code>CustomDirectories</code>, but not both. Specifying both causes the command to fail.</p>\n         </note>"
             }
         },
         "com.amazonaws.transfer#CreateAgreementRequest": {
@@ -750,8 +750,7 @@
                 "BaseDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for files transferred by using the AS2 protocol.</p>\n         <p>A <code>BaseDirectory</code> example is\n      <code>/<i>amzn-s3-demo-bucket</i>/home/mydirectory</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The landing directory (folder) for files transferred by using the AS2 protocol.</p>\n         <p>A <code>BaseDirectory</code> example is\n      <code>/<i>amzn-s3-demo-bucket</i>/home/mydirectory</code>.</p>"
                     }
                 },
                 "AccessRole": {
@@ -783,6 +782,12 @@
                     "target": "com.amazonaws.transfer#EnforceMessageSigningType",
                     "traits": {
                         "smithy.api#documentation": "<p>\n     Determines whether or not unsigned messages from your trading partners will be accepted.\n  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code>: Transfer Family rejects unsigned messages from your trading partner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> (default value): Transfer Family accepts unsigned messages from your trading partner.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CustomDirectories": {
+                    "target": "com.amazonaws.transfer#CustomDirectoriesType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>CustomDirectoriesType</code> structure. This structure specifies custom directories for storing various AS2 message files. You can specify directories for the following types of files.</p>\n         <ul>\n            <li>\n               <p>Failed files</p>\n            </li>\n            <li>\n               <p>MDN files</p>\n            </li>\n            <li>\n               <p>Payload files</p>\n            </li>\n            <li>\n               <p>Status files</p>\n            </li>\n            <li>\n               <p>Temporary files</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1485,6 +1490,49 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.transfer#CustomDirectoriesType": {
+            "type": "structure",
+            "members": {
+                "FailedFilesDirectory": {
+                    "target": "com.amazonaws.transfer#HomeDirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a location to store failed AS2 message files.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MdnFilesDirectory": {
+                    "target": "com.amazonaws.transfer#HomeDirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a location to store MDN files.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PayloadFilesDirectory": {
+                    "target": "com.amazonaws.transfer#HomeDirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a location to store the payload for AS2 message files.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusFilesDirectory": {
+                    "target": "com.amazonaws.transfer#HomeDirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a location to store AS2 status messages.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemporaryFilesDirectory": {
+                    "target": "com.amazonaws.transfer#HomeDirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a location to store temporary AS2 message files.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains Amazon S3 locations for storing specific types of AS2 message files.</p>"
             }
         },
         "com.amazonaws.transfer#CustomStepDetails": {
@@ -3247,6 +3295,12 @@
                     "target": "com.amazonaws.transfer#EnforceMessageSigningType",
                     "traits": {
                         "smithy.api#documentation": "<p>\n     Determines whether or not unsigned messages from your trading partners will be accepted.\n  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code>: Transfer Family rejects unsigned messages from your trading partner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> (default value): Transfer Family accepts unsigned messages from your trading partner.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CustomDirectories": {
+                    "target": "com.amazonaws.transfer#CustomDirectoriesType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>CustomDirectoriesType</code> structure. This structure specifies custom directories for storing various AS2 message files. You can specify directories for the following types of files.</p>\n         <ul>\n            <li>\n               <p>Failed files</p>\n            </li>\n            <li>\n               <p>MDN files</p>\n            </li>\n            <li>\n               <p>Payload files</p>\n            </li>\n            <li>\n               <p>Status files</p>\n            </li>\n            <li>\n               <p>Temporary files</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -10014,7 +10068,7 @@
                         "iam:PassRole"
                     ]
                 },
-                "smithy.api#documentation": "<p>Updates some of the parameters for an existing agreement. Provide the\n        <code>AgreementId</code> and the <code>ServerId</code> for the agreement that you want to\n      update, along with the new values for the parameters to update.</p>"
+                "smithy.api#documentation": "<p>Updates some of the parameters for an existing agreement. Provide the\n        <code>AgreementId</code> and the <code>ServerId</code> for the agreement that you want to\n      update, along with the new values for the parameters to update.</p>\n         <note>\n            <p>Specify <i>either</i>\n               <code>BaseDirectory</code> or <code>CustomDirectories</code>, but not both. Specifying both causes the command to fail.</p>\n            <p>If you update an agreement from using base directory to custom directories, the base directory is no longer used. Similarly, if you change from custom directories to a base directory, the custom directories are no longer used.</p>\n         </note>"
             }
         },
         "com.amazonaws.transfer#UpdateAgreementRequest": {
@@ -10080,6 +10134,12 @@
                     "target": "com.amazonaws.transfer#EnforceMessageSigningType",
                     "traits": {
                         "smithy.api#documentation": "<p>\n     Determines whether or not unsigned messages from your trading partners will be accepted.\n  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code>: Transfer Family rejects unsigned messages from your trading partner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> (default value): Transfer Family accepts unsigned messages from your trading partner.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CustomDirectories": {
+                    "target": "com.amazonaws.transfer#CustomDirectoriesType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>CustomDirectoriesType</code> structure. This structure specifies custom directories for storing various AS2 message files. You can specify directories for the following types of files.</p>\n         <ul>\n            <li>\n               <p>Failed files</p>\n            </li>\n            <li>\n               <p>MDN files</p>\n            </li>\n            <li>\n               <p>Payload files</p>\n            </li>\n            <li>\n               <p>Status files</p>\n            </li>\n            <li>\n               <p>Temporary files</p>\n            </li>\n         </ul>"
                     }
                 }
             },

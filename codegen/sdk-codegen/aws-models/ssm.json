@@ -858,7 +858,7 @@
                     "name": "ssm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure\n   end-to-end management solution for hybrid cloud environments that enables safe and secure\n   operations at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about each of the capabilities that comprise Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html#systems-manager-capabilities\">Systems Manager capabilities</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For details about predefined runbooks for Automation, a capability of Amazon Web Services Systems Manager, see the\n       <i>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html\">Systems Manager Automation runbook reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a>\n                  </i>\n     and the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig\n       API Reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Systems Manager Incident Manager User\n       Guide</a>\n                  </i> and the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Systems Manager Incident Manager API\n     Reference</a>\n                  </i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure\n   end-to-end management solution for hybrid cloud environments that enables safe and secure\n   operations at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about each of the tools that comprise Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-tools.html\">Using\n      Systems Manager tools</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For details about predefined runbooks for Automation, a tool in Amazon Web Services Systems Manager, see the\n       <i>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html\">Systems Manager Automation runbook reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a tool in Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a>\n                  </i>\n     and the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig\n       API Reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a tool in Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Systems Manager Incident Manager User\n       Guide</a>\n                  </i> and the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Systems Manager Incident Manager API\n     Reference</a>\n                  </i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Simple Systems Manager (SSM)",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ssm.amazonaws.com/doc/2014-11-06/"
@@ -1936,7 +1936,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a related item to a Systems Manager OpsCenter OpsItem. For example, you can associate an\n   Incident Manager incident or analysis with an OpsItem. Incident Manager and OpsCenter are capabilities of\n   Amazon Web Services Systems Manager.</p>"
+                "smithy.api#documentation": "<p>Associates a related item to a Systems Manager OpsCenter OpsItem. For example, you can associate an\n   Incident Manager incident or analysis with an OpsItem. Incident Manager and OpsCenter are tools in\n   Amazon Web Services Systems Manager.</p>"
             }
         },
         "com.amazonaws.ssm#AssociateOpsItemRelatedItemRequest": {
@@ -2188,7 +2188,7 @@
                 "AutomationTargetParameterName": {
                     "target": "com.amazonaws.ssm#AutomationTargetParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choose the parameter that will define how your automation will branch out. This target is\n   required for associations that use an Automation runbook and target resources by using rate\n   controls. Automation is a capability of Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>Choose the parameter that will define how your automation will branch out. This target is\n   required for associations that use an Automation runbook and target resources by using rate\n   controls. Automation is a tool in Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "Parameters": {
@@ -2260,7 +2260,7 @@
                 "SyncCompliance": {
                     "target": "com.amazonaws.ssm#AssociationSyncCompliance",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or\n    <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association\n   execution to determine the compliance status. If the association execution runs successfully,\n   then the association is <code>COMPLIANT</code>. If the association execution doesn't run\n   successfully, the association is <code>NON-COMPLIANT</code>.</p>\n         <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter\n   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't\n   managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the\n    <a>PutComplianceItems</a> API operation.</p>\n         <p>By default, all associations use <code>AUTO</code> mode.</p>"
+                        "smithy.api#documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or\n    <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association\n   execution to determine the compliance status. If the association execution runs successfully,\n   then the association is <code>COMPLIANT</code>. If the association execution doesn't run\n   successfully, the association is <code>NON-COMPLIANT</code>.</p>\n         <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter\n   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't\n   managed by State Manager, a tool in Amazon Web Services Systems Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API operation.</p>\n         <p>By default, all associations use <code>AUTO</code> mode.</p>"
                     }
                 },
                 "ApplyOnlyAtCronInterval": {
@@ -3030,7 +3030,7 @@
                 "SyncCompliance": {
                     "target": "com.amazonaws.ssm#AssociationSyncCompliance",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or\n    <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association\n   execution to determine the compliance status. If the association execution runs successfully,\n   then the association is <code>COMPLIANT</code>. If the association execution doesn't run\n   successfully, the association is <code>NON-COMPLIANT</code>.</p>\n         <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter\n   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't\n   managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the\n    <a>PutComplianceItems</a> API operation.</p>\n         <p>By default, all associations use <code>AUTO</code> mode.</p>"
+                        "smithy.api#documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or\n    <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association\n   execution to determine the compliance status. If the association execution runs successfully,\n   then the association is <code>COMPLIANT</code>. If the association execution doesn't run\n   successfully, the association is <code>NON-COMPLIANT</code>.</p>\n         <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter\n   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't\n   managed by State Manager, a tool in Amazon Web Services Systems Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API operation.</p>\n         <p>By default, all associations use <code>AUTO</code> mode.</p>"
                     }
                 },
                 "ApplyOnlyAtCronInterval": {
@@ -4700,7 +4700,7 @@
                 "ServiceRole": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) service role that Run Command, a capability\n   of Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes.\n  </p>"
+                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) service role that Run Command, a tool in\n   Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes.\n  </p>"
                     }
                 },
                 "NotificationConfig": {
@@ -4909,7 +4909,7 @@
                 "ServiceRole": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) service role that Run Command, a capability\n   of Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes\n   on a per managed node basis.</p>"
+                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) service role that Run Command, a tool in\n   Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes on\n   a per managed node basis.</p>"
                     }
                 },
                 "NotificationConfig": {
@@ -5757,7 +5757,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an activation code and activation ID you can use to register your on-premises\n   servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with\n   Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and\n   ID when installing SSM Agent on machines in your hybrid environment. For more information about\n   requirements for managing on-premises machines using Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-hybrid-multicloud.html\">Using Amazon Web Services Systems Manager in\n    hybrid and multicloud environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are\n    configured for Systems Manager are all called <i>managed nodes</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Generates an activation code and activation ID you can use to register your on-premises\n   servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with\n   Systems Manager makes it possible to manage them using Systems Manager tools. You use the activation code and ID when\n   installing SSM Agent on machines in your hybrid environment. For more information about\n   requirements for managing on-premises machines using Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-hybrid-multicloud.html\">Using Amazon Web Services Systems Manager in\n    hybrid and multicloud environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are\n    configured for Systems Manager are all called <i>managed nodes</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#CreateActivationRequest": {
@@ -5881,7 +5881,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A State Manager association defines the state that you want to maintain on your managed\n   nodes. For example, an association can specify that anti-virus software must be installed and\n   running on your managed nodes, or that certain ports must be closed. For static targets, the\n   association specifies a schedule for when the configuration is reapplied. For dynamic targets,\n   such as an Amazon Web Services resource group or an Amazon Web Services autoscaling group, State Manager, a capability of\n   Amazon Web Services Systems Manager applies the configuration when new managed nodes are added to the group. The\n   association also specifies actions to take when applying the configuration. For example, an\n   association for anti-virus software might run once a day. If the software isn't installed, then\n   State Manager installs it. If the software is installed, but the service isn't running, then the\n   association might instruct State Manager to start the service. </p>"
+                "smithy.api#documentation": "<p>A State Manager association defines the state that you want to maintain on your managed\n   nodes. For example, an association can specify that anti-virus software must be installed and\n   running on your managed nodes, or that certain ports must be closed. For static targets, the\n   association specifies a schedule for when the configuration is reapplied. For dynamic targets,\n   such as an Amazon Web Services resource group or an Amazon Web Services autoscaling group, State Manager, a tool in Amazon Web Services Systems Manager\n   applies the configuration when new managed nodes are added to the group. The association also\n   specifies actions to take when applying the configuration. For example, an association for\n   anti-virus software might run once a day. If the software isn't installed, then State Manager\n   installs it. If the software is installed, but the service isn't running, then the association\n   might instruct State Manager to start the service. </p>"
             }
         },
         "com.amazonaws.ssm#CreateAssociationBatch": {
@@ -5988,7 +5988,7 @@
                 "AutomationTargetParameterName": {
                     "target": "com.amazonaws.ssm#AutomationTargetParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the target for the association. This target is required for associations that use an\n   Automation runbook and target resources by using rate controls. Automation is a capability of\n   Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>Specify the target for the association. This target is required for associations that use an\n   Automation runbook and target resources by using rate controls. Automation is a tool in\n   Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "DocumentVersion": {
@@ -6042,7 +6042,7 @@
                 "SyncCompliance": {
                     "target": "com.amazonaws.ssm#AssociationSyncCompliance",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or\n    <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association\n   execution to determine the compliance status. If the association execution runs successfully,\n   then the association is <code>COMPLIANT</code>. If the association execution doesn't run\n   successfully, the association is <code>NON-COMPLIANT</code>. </p>\n         <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter\n   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't\n   managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the\n    <a>PutComplianceItems</a> API operation.</p>\n         <p>By default, all associations use <code>AUTO</code> mode.</p>"
+                        "smithy.api#documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or\n    <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association\n   execution to determine the compliance status. If the association execution runs successfully,\n   then the association is <code>COMPLIANT</code>. If the association execution doesn't run\n   successfully, the association is <code>NON-COMPLIANT</code>. </p>\n         <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter\n   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't\n   managed by State Manager, a tool in Amazon Web Services Systems Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API operation.</p>\n         <p>By default, all associations use <code>AUTO</code> mode.</p>"
                     }
                 },
                 "ApplyOnlyAtCronInterval": {
@@ -6165,7 +6165,7 @@
                 "AutomationTargetParameterName": {
                     "target": "com.amazonaws.ssm#AutomationTargetParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choose the parameter that will define how your automation will branch out. This target is\n   required for associations that use an Automation runbook and target resources by using rate\n   controls. Automation is a capability of Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>Choose the parameter that will define how your automation will branch out. This target is\n   required for associations that use an Automation runbook and target resources by using rate\n   controls. Automation is a tool in Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "MaxErrors": {
@@ -10327,7 +10327,7 @@
                     "target": "com.amazonaws.ssm#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of managed nodes with <code>NotApplicable</code> patches beyond the supported\n   limit, which aren't reported by name to Inventory. Inventory is a capability of Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>The number of managed nodes with <code>NotApplicable</code> patches beyond the supported\n   limit, which aren't reported by name to Inventory. Inventory is a tool in Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "InstancesWithCriticalNonCompliantPatches": {
@@ -10619,7 +10619,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the association between an OpsItem and a related item. For example, this API\n   operation can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of\n   Amazon Web Services Systems Manager.</p>"
+                "smithy.api#documentation": "<p>Deletes the association between an OpsItem and a related item. For example, this API\n   operation can delete an Incident Manager incident from an OpsItem. Incident Manager is a tool in\n   Amazon Web Services Systems Manager.</p>"
             }
         },
         "com.amazonaws.ssm#DisassociateOpsItemRelatedItemRequest": {
@@ -12220,7 +12220,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the state of a Amazon Web Services Systems Manager change calendar at the current time or a specified time. If\n   you specify a time, <code>GetCalendarState</code> returns the state of the calendar at that\n   specific time, and returns the next time that the change calendar state will transition. If you\n   don't specify a time, <code>GetCalendarState</code> uses the current time. Change Calendar\n   entries have two possible states: <code>OPEN</code> or <code>CLOSED</code>.</p>\n         <p>If you specify more than one calendar in a request, the command returns the status of\n    <code>OPEN</code> only if all calendars in the request are open. If one or more calendars in the\n   request are closed, the status returned is <code>CLOSED</code>.</p>\n         <p>For more information about Change Calendar, a capability of Amazon Web Services Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html\">Amazon Web Services Systems Manager Change Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Gets the state of a Amazon Web Services Systems Manager change calendar at the current time or a specified time. If\n   you specify a time, <code>GetCalendarState</code> returns the state of the calendar at that\n   specific time, and returns the next time that the change calendar state will transition. If you\n   don't specify a time, <code>GetCalendarState</code> uses the current time. Change Calendar\n   entries have two possible states: <code>OPEN</code> or <code>CLOSED</code>.</p>\n         <p>If you specify more than one calendar in a request, the command returns the status of\n    <code>OPEN</code> only if all calendars in the request are open. If one or more calendars in the\n   request are closed, the status returned is <code>CLOSED</code>.</p>\n         <p>For more information about Change Calendar, a tool in Amazon Web Services Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html\">Amazon Web Services Systems Manager Change Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssm#GetCalendarStateRequest": {
@@ -12654,7 +12654,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current snapshot for the patch baseline the managed node uses. This API is\n   primarily used by the <code>AWS-RunPatchBaseline</code> Systems Manager document (SSM document).</p>\n         <note>\n            <p>If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid\n    this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of\n    Amazon Web Services Systems Manager, with an SSM document that enables you to target a managed node with a script or\n    command. For example, run the command using the <code>AWS-RunShellScript</code> document or the\n     <code>AWS-RunPowerShellScript</code> document.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves the current snapshot for the patch baseline the managed node uses. This API is\n   primarily used by the <code>AWS-RunPatchBaseline</code> Systems Manager document (SSM document).</p>\n         <note>\n            <p>If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid\n    this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a tool in Amazon Web Services Systems Manager,\n    with an SSM document that enables you to target a managed node with a script or command. For\n    example, run the command using the <code>AWS-RunShellScript</code> document or the\n     <code>AWS-RunPowerShellScript</code> document.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#GetDeployablePatchSnapshotForInstanceRequest": {
@@ -14199,7 +14199,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve information about one or more parameters in a specific hierarchy. </p>\n         <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code>\n   in the request, the response includes information up to the limit specified. The number of items\n   returned, however, can be between zero and the value of <code>MaxResults</code>. If the service\n   reaches an internal limit while processing the results, it stops the operation and returns the\n   matching values up to that point and a <code>NextToken</code>. You can specify the\n    <code>NextToken</code> in a subsequent call to get the next set of results.</p>",
+                "smithy.api#documentation": "<p>Retrieve information about one or more parameters under a specified level in a hierarchy. </p>\n         <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code>\n   in the request, the response includes information up to the limit specified. The number of items\n   returned, however, can be between zero and the value of <code>MaxResults</code>. If the service\n   reaches an internal limit while processing the results, it stops the operation and returns the\n   matching values up to that point and a <code>NextToken</code>. You can specify the\n    <code>NextToken</code> in a subsequent call to get the next set of results.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -15499,7 +15499,7 @@
                     "target": "com.amazonaws.ssm#PatchUnreportedNotApplicableCount",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of patches beyond the supported limit of <code>NotApplicableCount</code> that\n   aren't reported by name to Inventory. Inventory is a capability of Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>The number of patches beyond the supported limit of <code>NotApplicableCount</code> that\n   aren't reported by name to Inventory. Inventory is a tool in Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "NotApplicableCount": {
@@ -17900,7 +17900,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You\n   can limit the results to a specific State Manager association document or managed node by\n   specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.</p>",
+                "smithy.api#documentation": "<p>Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You\n   can limit the results to a specific State Manager association document or managed node by\n   specifying a filter. State Manager is a tool in Amazon Web Services Systems Manager.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -19021,7 +19021,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all related-item resources associated with a Systems Manager OpsCenter OpsItem. OpsCenter is a\n   capability of Amazon Web Services Systems Manager.</p>",
+                "smithy.api#documentation": "<p>Lists all related-item resources associated with a Systems Manager OpsCenter OpsItem. OpsCenter is a\n   tool in Amazon Web Services Systems Manager.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -23617,7 +23617,7 @@
                 "PolicyType": {
                     "target": "com.amazonaws.ssm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of policy. Parameter Store, a capability of Amazon Web Services Systems Manager, supports the following\n   policy types: Expiration, ExpirationNotification, and NoChangeNotification. </p>"
+                        "smithy.api#documentation": "<p>The type of policy. Parameter Store, a tool in Amazon Web Services Systems Manager, supports the following policy\n   types: Expiration, ExpirationNotification, and NoChangeNotification. </p>"
                     }
                 },
                 "PolicyStatus": {
@@ -25690,7 +25690,7 @@
                 "Value": {
                     "target": "com.amazonaws.ssm#PSParameterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter value that you want to add to the system. Standard parameters have a value\n   limit of 4 KB. Advanced parameters have a value limit of 8 KB.</p>\n         <note>\n            <p>Parameters can't be referenced or nested in the values of other parameters. You can't\n    include <code>{{}}</code> or <code>{{ssm:<i>parameter-name</i>}}</code> in a\n    parameter value.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The parameter value that you want to add to the system. Standard parameters have a value\n   limit of 4 KB. Advanced parameters have a value limit of 8 KB.</p>\n         <note>\n            <p>Parameters can't be referenced or nested in the values of other parameters. You can't\n    include values wrapped in double brackets <code>{{}}</code> or\n      <code>{{ssm:<i>parameter-name</i>}}</code> in a parameter value.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -25734,7 +25734,7 @@
                 "Policies": {
                     "target": "com.amazonaws.ssm#ParameterPolicies",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more policies to apply to a parameter. This operation takes a JSON array. Parameter\n   Store, a capability of Amazon Web Services Systems Manager supports the following policy types:</p>\n         <p>Expiration: This policy deletes the parameter after it expires. When you create the policy,\n   you specify the expiration date. You can update the expiration date and time by updating the\n   policy. Updating the <i>parameter</i> doesn't affect the expiration date and time.\n   When the expiration time is reached, Parameter Store deletes the parameter.</p>\n         <p>ExpirationNotification: This policy initiates an event in Amazon CloudWatch Events that\n   notifies you about the expiration. By using this policy, you can receive notification before or\n   after the expiration time is reached, in units of days or hours.</p>\n         <p>NoChangeNotification: This policy initiates a CloudWatch Events event if a parameter hasn't\n   been modified for a specified period of time. This policy type is useful when, for example, a\n   secret needs to be changed within a period of time, but it hasn't been changed.</p>\n         <p>All existing policies are preserved until you send new policies or an empty policy. For more\n   information about parameter policies, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html\">Assigning parameter\n    policies</a>. </p>"
+                        "smithy.api#documentation": "<p>One or more policies to apply to a parameter. This operation takes a JSON array. Parameter\n   Store, a tool in Amazon Web Services Systems Manager supports the following policy types:</p>\n         <p>Expiration: This policy deletes the parameter after it expires. When you create the policy,\n   you specify the expiration date. You can update the expiration date and time by updating the\n   policy. Updating the <i>parameter</i> doesn't affect the expiration date and time.\n   When the expiration time is reached, Parameter Store deletes the parameter.</p>\n         <p>ExpirationNotification: This policy initiates an event in Amazon CloudWatch Events that\n   notifies you about the expiration. By using this policy, you can receive notification before or\n   after the expiration time is reached, in units of days or hours.</p>\n         <p>NoChangeNotification: This policy initiates a CloudWatch Events event if a parameter hasn't\n   been modified for a specified period of time. This policy type is useful when, for example, a\n   secret needs to be changed within a period of time, but it hasn't been changed.</p>\n         <p>All existing policies are preserved until you send new policies or an empty policy. For more\n   information about parameter policies, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html\">Assigning parameter\n    policies</a>. </p>"
                     }
                 },
                 "DataType": {
@@ -27892,7 +27892,7 @@
                 "CloudWatchOutputConfig": {
                     "target": "com.amazonaws.ssm#CloudWatchOutputConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables Amazon Web Services Systems Manager to send Run Command output to Amazon CloudWatch Logs. Run Command is a\n   capability of Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>Enables Amazon Web Services Systems Manager to send Run Command output to Amazon CloudWatch Logs. Run Command is a\n   tool in Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "AlarmConfiguration": {
@@ -28659,7 +28659,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   an automation. Tags enable you to categorize a resource in different ways, such as by purpose,\n   owner, or environment. For example, you might want to tag an automation to identify an\n   environment or operating system. In this case, you could specify the following key-value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=environment,Value=test</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>To add tags to an existing automation, use the <a>AddTagsToResource</a>\n    operation.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   an automation. Tags enable you to categorize a resource in different ways, such as by purpose,\n   owner, or environment. For example, you might want to tag an automation to identify an\n   environment or operating system. In this case, you could specify the following key-value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=environment,Value=test</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Array Members</code> maximum value is reported as 1000. This number includes\n    capacity reserved for internal operations. When calling the\n     <code>StartAutomationExecution</code> action, you can specify a maximum of 5 tags. You can,\n    however, use the <a>AddTagsToResource</a> action to add up to a total of 50 tags to\n    an existing automation configuration.</p>\n         </note>"
                     }
                 },
                 "AlarmConfiguration": {
@@ -28785,7 +28785,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   a change request. Tags enable you to categorize a resource in different ways, such as by\n   purpose, owner, or environment. For example, you might want to tag a change request to identify\n   an environment or target Amazon Web Services Region. In this case, you could specify the following key-value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Region,Value=us-east-2</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   a change request. Tags enable you to categorize a resource in different ways, such as by\n   purpose, owner, or environment. For example, you might want to tag a change request to identify\n   an environment or target Amazon Web Services Region. In this case, you could specify the following key-value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Region,Value=us-east-2</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Array Members</code> maximum value is reported as 1000. This number includes\n    capacity reserved for internal operations. When calling the\n     <code>StartChangeRequestExecution</code> action, you can specify a maximum of 5 tags. You can,\n    however, use the <a>AddTagsToResource</a> action to add up to a total of 50 tags to\n    an existing change request configuration.</p>\n         </note>"
                     }
                 },
                 "ScheduledEndTime": {
@@ -28940,7 +28940,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.ssm#SessionManagerParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values you want to specify for the parameters defined in the Session\n   document.</p>"
+                        "smithy.api#documentation": "<p>The values you want to specify for the parameters defined in the Session document.\n   For more information about these parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/getting-started-create-preferences-cli.html\">Create a\n    Session Manager preferences document</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 }
             },
@@ -29474,7 +29474,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of search criteria that targets managed nodes using a key-value pair that you\n   specify.</p>\n         <note>\n            <p> One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n     Lambda, and Step Functions). For more information about running tasks\n    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Supported formats include the following.</p>\n         <p>\n            <b>For all Systems Manager capabilities:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>For Automation and Change Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ResourceGroup,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ParameterValues,Values=value-1,value-2,value-3</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=AWS::EC2::Instance,Values=*</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>For Run Command and Maintenance Windows:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=resource-groups:Name,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>Additionally, Maintenance Windows support targeting resource types:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>For State Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target managed nodes using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple managed nodes</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>An array of search criteria that targets managed nodes using a key-value pair that you\n   specify.</p>\n         <note>\n            <p> One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n     Lambda, and Step Functions). For more information about running tasks\n    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Supported formats include the following.</p>\n         <p>\n            <b>For all Systems Manager tools:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>For Automation and Change Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ResourceGroup,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ParameterValues,Values=value-1,value-2,value-3</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=AWS::EC2::Instance,Values=*</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>For Run Command and Maintenance Windows:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=resource-groups:Name,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>Additionally, Maintenance Windows support targeting resource types:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>For State Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target managed nodes using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple managed nodes</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssm#TargetCount": {
@@ -30141,7 +30141,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.ssm#Parameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters you want to update for the association. If you create a parameter using\n   Parameter Store, a capability of Amazon Web Services Systems Manager, you can reference the parameter using\n    <code>{{ssm:parameter-name}}</code>.</p>"
+                        "smithy.api#documentation": "<p>The parameters you want to update for the association. If you create a parameter using\n   Parameter Store, a tool in Amazon Web Services Systems Manager, you can reference the parameter using\n    <code>{{ssm:parameter-name}}</code>.</p>"
                     }
                 },
                 "DocumentVersion": {
@@ -30189,7 +30189,7 @@
                 "AutomationTargetParameterName": {
                     "target": "com.amazonaws.ssm#AutomationTargetParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choose the parameter that will define how your automation will branch out. This target is\n   required for associations that use an Automation runbook and target resources by using rate\n   controls. Automation is a capability of Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>Choose the parameter that will define how your automation will branch out. This target is\n   required for associations that use an Automation runbook and target resources by using rate\n   controls. Automation is a tool in Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "MaxErrors": {
@@ -30213,7 +30213,7 @@
                 "SyncCompliance": {
                     "target": "com.amazonaws.ssm#AssociationSyncCompliance",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or\n    <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association\n   execution to determine the compliance status. If the association execution runs successfully,\n   then the association is <code>COMPLIANT</code>. If the association execution doesn't run\n   successfully, the association is <code>NON-COMPLIANT</code>.</p>\n         <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter\n   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't\n   managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the\n    <a>PutComplianceItems</a> API operation.</p>\n         <p>By default, all associations use <code>AUTO</code> mode.</p>"
+                        "smithy.api#documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or\n    <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association\n   execution to determine the compliance status. If the association execution runs successfully,\n   then the association is <code>COMPLIANT</code>. If the association execution doesn't run\n   successfully, the association is <code>NON-COMPLIANT</code>.</p>\n         <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter\n   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't\n   managed by State Manager, a tool in Amazon Web Services Systems Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API operation.</p>\n         <p>By default, all associations use <code>AUTO</code> mode.</p>"
                     }
                 },
                 "ApplyOnlyAtCronInterval": {

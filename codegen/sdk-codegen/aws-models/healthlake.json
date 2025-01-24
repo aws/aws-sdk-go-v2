@@ -61,6 +61,12 @@
                         "smithy.api#enumValue": "SMART_ON_FHIR_V1"
                     }
                 },
+                "SMART_ON_FHIR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMART_ON_FHIR"
+                    }
+                },
                 "AWS_AUTH": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -1783,6 +1789,12 @@
                         "smithy.api#enumValue": "SUBMITTED"
                     }
                 },
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
                 "IN_PROGRESS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -2392,8 +2404,7 @@
                     "target": "com.amazonaws.healthlake#ClientTokenString",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional user provided token used for ensuring idempotency.</p>",
-                        "smithy.api#idempotencyToken": {},
-                        "smithy.api#required": {}
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -2498,8 +2509,7 @@
                     "target": "com.amazonaws.healthlake#ClientTokenString",
                     "traits": {
                         "smithy.api#documentation": "<p>Optional user provided token used for ensuring idempotency.</p>",
-                        "smithy.api#idempotencyToken": {},
-                        "smithy.api#required": {}
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },

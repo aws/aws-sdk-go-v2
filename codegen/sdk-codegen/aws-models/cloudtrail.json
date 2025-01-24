@@ -251,7 +251,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Advanced event selectors let you create fine-grained selectors for CloudTrail management, data, and network activity events. They help you control costs by logging only those\n         events that are important to you. For more information about configuring advanced event selectors, see\n            the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging data events</a>, <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html\">Logging network activity events</a>, and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Logging management events</a> topics in the <i>CloudTrail User Guide</i>.</p>\n         <p>You cannot apply both event selectors and advanced event selectors to a trail.</p>\n         <p>For information about configurable advanced event selector fields, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html\">AdvancedEventSelector</a> \n         in the <i>CloudTrailUser Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Advanced event selectors let you create fine-grained selectors for CloudTrail management, data, and network activity events. They help you control costs by logging only those\n         events that are important to you. For more information about configuring advanced event selectors, see\n            the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging data events</a>, <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html\">Logging network activity events</a>, and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Logging management events</a> topics in the <i>CloudTrail User Guide</i>.</p>\n         <p>You cannot apply both event selectors and advanced event selectors to a trail.</p>\n         <p>For information about configurable advanced event selector fields, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html\">AdvancedEventSelector</a> \n         in the <i>CloudTrail API Reference</i>.</p>"
             }
         },
         "com.amazonaws.cloudtrail#AdvancedEventSelectors": {
@@ -266,7 +266,7 @@
                 "Field": {
                     "target": "com.amazonaws.cloudtrail#SelectorField",
                     "traits": {
-                        "smithy.api#documentation": "<p> A field in a CloudTrail event record on which to filter events to be logged. For\n         event data stores for CloudTrail Insights events, Config configuration items, Audit Manager evidence, or events outside of Amazon Web Services, the field is used only for\n         selecting events as filtering is not supported.</p>\n         <p>For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedFieldSelector.html\">AdvancedFieldSelector</a> \n         in the <i>CloudTrailUser Guide</i>.</p>",
+                        "smithy.api#documentation": "<p> A field in a CloudTrail event record on which to filter events to be logged. For\n         event data stores for CloudTrail Insights events, Config configuration items, Audit Manager evidence, or events outside of Amazon Web Services, the field is used only for\n         selecting events as filtering is not supported.</p>\n         <p>For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedFieldSelector.html\">AdvancedFieldSelector</a> \n         in the <i>CloudTrail API Reference</i>.</p>\n         <note>\n            <p>Selectors don't support the use of wildcards like <code>*</code> . To match multiple values with a single condition, \n            you may use <code>StartsWith</code>, <code>EndsWith</code>, <code>NotStartsWith</code>, or <code>NotEndsWith</code> to explicitly match the beginning or end of the event field.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -809,6 +809,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#RestoreEventDataStore"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#SearchSampleQueries"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#StartDashboardRefresh"
@@ -4943,7 +4946,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the settings for the Insights event selectors that you configured for your\n         trail or event data store. <code>GetInsightSelectors</code> shows if CloudTrail Insights event logging\n         is enabled on the trail or event data store, and if it is, which Insights types are enabled. If you run\n            <code>GetInsightSelectors</code> on a trail or event data store that does not have Insights events enabled,\n         the operation throws the exception <code>InsightNotEnabledException</code>\n         </p>\n         <p>Specify either the <code>EventDataStore</code> parameter to get Insights event selectors for an event data store, \n         or the <code>TrailName</code> parameter to the get Insights event selectors for a trail. You cannot specify these parameters together.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html\">Logging CloudTrail Insights events</a> in the <i>CloudTrail User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the settings for the Insights event selectors that you configured for your\n         trail or event data store. <code>GetInsightSelectors</code> shows if CloudTrail Insights event logging\n         is enabled on the trail or event data store, and if it is, which Insights types are enabled. If you run\n            <code>GetInsightSelectors</code> on a trail or event data store that does not have Insights events enabled,\n         the operation throws the exception <code>InsightNotEnabledException</code>\n         </p>\n         <p>Specify either the <code>EventDataStore</code> parameter to get Insights event selectors for an event data store, \n         or the <code>TrailName</code> parameter to the get Insights event selectors for a trail. You cannot specify these parameters together.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html\">Working with CloudTrail Insights</a> in the <i>CloudTrail User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -8012,7 +8015,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures event selectors (also referred to as <i>basic event selectors</i>) or advanced event selectors for your trail. You can use\n         either <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If\n         you apply <code>AdvancedEventSelectors</code> to a trail, any existing\n         <code>EventSelectors</code> are overwritten.</p>\n         <p>You can use <code>AdvancedEventSelectors</code> to \n         log management events, data events for all resource types, and network activity events.</p>\n         <p>You can use <code>EventSelectors</code> to log management events and data events for the following resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS::DynamoDB::Table</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::Lambda::Function</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::S3::Object</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can't use <code>EventSelectors</code> to log network activity events.</p>\n         <p>If you want your trail to log Insights events, be sure the event selector or advanced event selector enables \n         logging of the Insights event types you want configured for your trail. For more information about logging Insights events, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html\">Logging Insights events</a> in the <i>CloudTrail User Guide</i>.\n         By default, trails created without specific event selectors are configured to\n         log all read and write management events, and no data events or network activity events.</p>\n         <p>When an event occurs in your account, CloudTrail evaluates the event selectors or\n         advanced event selectors in all trails. For each trail, if the event matches any event\n         selector, the trail processes and logs the event. If the event doesn't match any event\n         selector, the trail doesn't log the event.</p>\n         <p>Example</p>\n         <ol>\n            <li>\n               <p>You create an event selector for a trail and specify that you want to log write-only\n               events.</p>\n            </li>\n            <li>\n               <p>The EC2 <code>GetConsoleOutput</code> and <code>RunInstances</code> API operations\n               occur in your account.</p>\n            </li>\n            <li>\n               <p>CloudTrail evaluates whether the events match your event selectors.</p>\n            </li>\n            <li>\n               <p>The <code>RunInstances</code> is a write-only event and it matches your event\n               selector. The trail logs the event.</p>\n            </li>\n            <li>\n               <p>The <code>GetConsoleOutput</code> is a read-only event that doesn't match your\n               event selector. The trail doesn't log the event. </p>\n            </li>\n         </ol>\n         <p>The <code>PutEventSelectors</code> operation must be called from the Region in which the\n         trail was created; otherwise, an <code>InvalidHomeRegionException</code> exception is\n         thrown.</p>\n         <p>You can configure up to five event selectors for each trail.</p>\n         <p>You can add advanced event selectors, and conditions for your advanced event selectors,\n         up to a maximum of 500 values for all conditions and selectors on a trail. For more information, see\n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Logging management events</a>, <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging\n               data events</a>, <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html\">Logging\n                  network activity events</a>, and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Quotas in CloudTrail</a> in the <i>CloudTrail User\n                           Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Configures event selectors (also referred to as <i>basic event selectors</i>) or advanced event selectors for your trail. You can use\n         either <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If\n         you apply <code>AdvancedEventSelectors</code> to a trail, any existing\n         <code>EventSelectors</code> are overwritten.</p>\n         <p>You can use <code>AdvancedEventSelectors</code> to \n         log management events, data events for all resource types, and network activity events.</p>\n         <p>You can use <code>EventSelectors</code> to log management events and data events for the following resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS::DynamoDB::Table</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::Lambda::Function</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::S3::Object</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can't use <code>EventSelectors</code> to log network activity events.</p>\n         <p>If you want your trail to log Insights events, be sure the event selector or advanced event selector enables \n         logging of the Insights event types you want configured for your trail. For more information about logging Insights events, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html\">Working with CloudTrail Insights</a> in the <i>CloudTrail User Guide</i>.\n         By default, trails created without specific event selectors are configured to\n         log all read and write management events, and no data events or network activity events.</p>\n         <p>When an event occurs in your account, CloudTrail evaluates the event selectors or\n         advanced event selectors in all trails. For each trail, if the event matches any event\n         selector, the trail processes and logs the event. If the event doesn't match any event\n         selector, the trail doesn't log the event.</p>\n         <p>Example</p>\n         <ol>\n            <li>\n               <p>You create an event selector for a trail and specify that you want to log write-only\n               events.</p>\n            </li>\n            <li>\n               <p>The EC2 <code>GetConsoleOutput</code> and <code>RunInstances</code> API operations\n               occur in your account.</p>\n            </li>\n            <li>\n               <p>CloudTrail evaluates whether the events match your event selectors.</p>\n            </li>\n            <li>\n               <p>The <code>RunInstances</code> is a write-only event and it matches your event\n               selector. The trail logs the event.</p>\n            </li>\n            <li>\n               <p>The <code>GetConsoleOutput</code> is a read-only event that doesn't match your\n               event selector. The trail doesn't log the event. </p>\n            </li>\n         </ol>\n         <p>The <code>PutEventSelectors</code> operation must be called from the Region in which the\n         trail was created; otherwise, an <code>InvalidHomeRegionException</code> exception is\n         thrown.</p>\n         <p>You can configure up to five event selectors for each trail.</p>\n         <p>You can add advanced event selectors, and conditions for your advanced event selectors,\n         up to a maximum of 500 values for all conditions and selectors on a trail. For more information, see\n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Logging management events</a>, <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging\n               data events</a>, <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html\">Logging\n                  network activity events</a>, and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Quotas in CloudTrail</a> in the <i>CloudTrail User\n                           Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -8128,7 +8131,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lets you enable Insights event logging by specifying the Insights selectors that you\n         want to enable on an existing trail or event data store. You also use <code>PutInsightSelectors</code> to turn\n         off Insights event logging, by passing an empty list of Insights types. The valid Insights\n         event types are <code>ApiErrorRateInsight</code> and\n            <code>ApiCallRateInsight</code>.</p>\n         <p>To enable Insights on an event data store, you must specify the ARNs (or ID suffix of the ARNs) for the source event data store (<code>EventDataStore</code>) and the destination event data store (<code>InsightsDestination</code>). The source event data store logs management events and enables Insights. \n         The destination event data store logs Insights events based upon the management event activity of the source event data store. The source and destination event data stores must belong to the same Amazon Web Services account.</p>\n         <p>To log Insights events for a trail, you must specify the name (<code>TrailName</code>) of the CloudTrail trail for which you want to change or add Insights\n         selectors.</p>\n         <p>To log CloudTrail Insights events on API call volume, the trail or event data store\n         must log <code>write</code> management events. To log CloudTrail\n         Insights events on API error rate, the trail or event data store must log <code>read</code> or\n            <code>write</code> management events. You can call <code>GetEventSelectors</code> on a trail \n         to check whether the trail logs management events. You can call <code>GetEventDataStore</code> on an \n      event data store to check whether the event data store logs management events.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html\">Logging CloudTrail Insights events</a> in the <i>CloudTrail User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Lets you enable Insights event logging by specifying the Insights selectors that you\n         want to enable on an existing trail or event data store. You also use <code>PutInsightSelectors</code> to turn\n         off Insights event logging, by passing an empty list of Insights types. The valid Insights\n         event types are <code>ApiErrorRateInsight</code> and\n            <code>ApiCallRateInsight</code>.</p>\n         <p>To enable Insights on an event data store, you must specify the ARNs (or ID suffix of the ARNs) for the source event data store (<code>EventDataStore</code>) and the destination event data store (<code>InsightsDestination</code>). The source event data store logs management events and enables Insights. \n         The destination event data store logs Insights events based upon the management event activity of the source event data store. The source and destination event data stores must belong to the same Amazon Web Services account.</p>\n         <p>To log Insights events for a trail, you must specify the name (<code>TrailName</code>) of the CloudTrail trail for which you want to change or add Insights\n         selectors.</p>\n         <p>To log CloudTrail Insights events on API call volume, the trail or event data store\n         must log <code>write</code> management events. To log CloudTrail\n         Insights events on API error rate, the trail or event data store must log <code>read</code> or\n            <code>write</code> management events. You can call <code>GetEventSelectors</code> on a trail \n         to check whether the trail logs management events. You can call <code>GetEventDataStore</code> on an \n      event data store to check whether the event data store logs management events.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html\">Working with CloudTrail Insights</a> in the <i>CloudTrail User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -9239,6 +9242,150 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> The settings for the source S3 bucket. </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#SampleQueryDescription": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudtrail#SampleQueryName": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudtrail#SampleQueryRelevance": {
+            "type": "float",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.cloudtrail#SampleQuerySQL": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudtrail#SearchSampleQueries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#SearchSampleQueriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#SearchSampleQueriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Searches sample queries and returns a list of sample queries that are sorted by relevance. \n         To search for sample queries, provide a natural language <code>SearchPhrase</code> in English.\n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#SearchSampleQueriesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#SearchSampleQueriesRequest": {
+            "type": "structure",
+            "members": {
+                "SearchPhrase": {
+                    "target": "com.amazonaws.cloudtrail#SearchSampleQueriesSearchPhrase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The natural language phrase to use for the semantic search. The phrase must be in English. The length constraint is in characters, not words.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudtrail#SearchSampleQueriesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The maximum number of results to return on a single page. The default value is 10.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token you can use to get the next page of results. The length constraint is in characters, not words.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#SearchSampleQueriesResponse": {
+            "type": "structure",
+            "members": {
+                "SearchResults": {
+                    "target": "com.amazonaws.cloudtrail#SearchSampleQueriesSearchResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A list of objects containing the search results ordered from most relevant to least relevant.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token you can use to get the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#SearchSampleQueriesSearchPhrase": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[ -~\\n]*$"
+            }
+        },
+        "com.amazonaws.cloudtrail#SearchSampleQueriesSearchResult": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudtrail#SampleQueryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of a sample query.\n      </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.cloudtrail#SampleQueryDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A longer description of a sample query.\n      </p>"
+                    }
+                },
+                "SQL": {
+                    "target": "com.amazonaws.cloudtrail#SampleQuerySQL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The SQL code of the sample query.\n      </p>"
+                    }
+                },
+                "Relevance": {
+                    "target": "com.amazonaws.cloudtrail#SampleQueryRelevance",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         A value between 0 and 1 indicating the similarity between the search phrase and result.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A search result returned by the <code>SearchSampleQueries</code> operation.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#SearchSampleQueriesSearchResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#SearchSampleQueriesSearchResult"
             }
         },
         "com.amazonaws.cloudtrail#SelectorField": {
