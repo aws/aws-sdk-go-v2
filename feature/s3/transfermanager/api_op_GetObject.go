@@ -550,6 +550,7 @@ func (c *Client) DownloadObject(ctx context.Context, w io.WriterAt, input *GetOb
 type downloader struct {
 	options Options
 	in      *GetObjectInput
+	out     *GetObjectOutput
 	w       io.WriterAt
 	buf     []byte
 
