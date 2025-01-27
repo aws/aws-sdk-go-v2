@@ -1,8 +1,0 @@
-{
-    "id": "c4b5f0b9-224b-470b-a8dc-2ebc34a90ed0",
-    "type": "feature",
-    "description": "This release adds support for dynamic audio configuration and the ability to disable the deblocking filter for h265 encodes.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

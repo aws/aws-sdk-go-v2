@@ -1,3 +1,13 @@
+# Release (2025-01-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.34.0](service/bedrockagent/CHANGELOG.md#v1340-2025-01-27)
+  * **Feature**: Add support for the prompt caching feature for Bedrock Prompt Management
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.66.0](service/mediaconvert/CHANGELOG.md#v1660-2025-01-27)
+  * **Feature**: This release adds support for dynamic audio configuration and the ability to disable the deblocking filter for h265 encodes.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.53.0](service/s3control/CHANGELOG.md#v1530-2025-01-27)
+  * **Feature**: Minor fix to ARN validation for Lambda functions passed to S3 Batch Operations
+
 # Release (2025-01-24)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "b90d9bff-e85c-42a3-98b8-ca228dbe071b",
-    "type": "feature",
-    "description": "Raised the documentParameters size limit to 30 KB for AWS IoT Device Management - Jobs.",
-    "modules": [
-        "service/iot"
-    ]
-}

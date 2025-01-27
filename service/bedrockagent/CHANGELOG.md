@@ -1,3 +1,7 @@
+# v1.34.0 (2025-01-27)
+
+* **Feature**: Add support for the prompt caching feature for Bedrock Prompt Management
+
 # v1.33.4 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
