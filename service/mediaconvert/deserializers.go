@@ -6569,6 +6569,41 @@ func awsRestjson1_deserializeDocument__mapOfCaptionSelector(v *map[string]types.
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__mapOfDynamicAudioSelector(v *map[string]types.DynamicAudioSelector, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.DynamicAudioSelector
+	if *v == nil {
+		mv = map[string]types.DynamicAudioSelector{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.DynamicAudioSelector
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentDynamicAudioSelector(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11583,6 +11618,86 @@ func awsRestjson1_deserializeDocumentDvbTdtSettings(v **types.DvbTdtSettings, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDynamicAudioSelector(v **types.DynamicAudioSelector, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DynamicAudioSelector
+	if *v == nil {
+		sv = &types.DynamicAudioSelector{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioDurationCorrection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioDurationCorrection to be of type string, got %T instead", value)
+				}
+				sv.AudioDurationCorrection = types.AudioDurationCorrection(jtv)
+			}
+
+		case "externalAudioFileInput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3Https to be of type string, got %T instead", value)
+				}
+				sv.ExternalAudioFileInput = ptr.String(jtv)
+			}
+
+		case "languageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = types.LanguageCode(jtv)
+			}
+
+		case "offset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMinNegative2147483648Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Offset = ptr.Int32(int32(i64))
+			}
+
+		case "selectorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DynamicAudioSelectorType to be of type string, got %T instead", value)
+				}
+				sv.SelectorType = types.DynamicAudioSelectorType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13815,6 +13930,15 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				sv.CodecProfile = types.H265CodecProfile(jtv)
 			}
 
+		case "deblocking":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265Deblocking to be of type string, got %T instead", value)
+				}
+				sv.Deblocking = types.H265Deblocking(jtv)
+			}
+
 		case "dynamicSubGop":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15599,6 +15723,11 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				sv.DolbyVisionMetadataXml = ptr.String(jtv)
 			}
 
+		case "dynamicAudioSelectors":
+			if err := awsRestjson1_deserializeDocument__mapOfDynamicAudioSelector(&sv.DynamicAudioSelectors, value); err != nil {
+				return err
+			}
+
 		case "fileInput":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15920,6 +16049,11 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 					return fmt.Errorf("expected __stringMin14PatternS3XmlXMLHttpsXmlXML to be of type string, got %T instead", value)
 				}
 				sv.DolbyVisionMetadataXml = ptr.String(jtv)
+			}
+
+		case "dynamicAudioSelectors":
+			if err := awsRestjson1_deserializeDocument__mapOfDynamicAudioSelector(&sv.DynamicAudioSelectors, value); err != nil {
+				return err
 			}
 
 		case "filterEnable":

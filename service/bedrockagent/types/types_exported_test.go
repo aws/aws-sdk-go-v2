@@ -56,6 +56,9 @@ func ExampleContentBlock_outputUsage() {
 	var union types.ContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ContentBlockMemberCachePoint:
+		_ = v.Value // Value is types.CachePointBlock
+
 	case *types.ContentBlockMemberText:
 		_ = v.Value // Value is string
 
@@ -69,6 +72,7 @@ func ExampleContentBlock_outputUsage() {
 }
 
 var _ *string
+var _ *types.CachePointBlock
 
 func ExampleFlowConnectionConfiguration_outputUsage() {
 	var union types.FlowConnectionConfiguration
@@ -224,6 +228,12 @@ func ExampleFlowValidationDetails_outputUsage() {
 	case *types.FlowValidationDetailsMemberUnknownConnectionTargetInput:
 		_ = v.Value // Value is types.UnknownConnectionTargetInputFlowValidationDetails
 
+	case *types.FlowValidationDetailsMemberUnknownNodeInput:
+		_ = v.Value // Value is types.UnknownNodeInputFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnknownNodeOutput:
+		_ = v.Value // Value is types.UnknownNodeOutputFlowValidationDetails
+
 	case *types.FlowValidationDetailsMemberUnreachableNode:
 		_ = v.Value // Value is types.UnreachableNodeFlowValidationDetails
 
@@ -259,12 +269,14 @@ var _ *types.UnreachableNodeFlowValidationDetails
 var _ *types.MissingEndingNodesFlowValidationDetails
 var _ *types.MissingStartingNodesFlowValidationDetails
 var _ *types.UnknownConnectionSourceFlowValidationDetails
+var _ *types.UnknownNodeInputFlowValidationDetails
 var _ *types.UnknownConnectionTargetInputFlowValidationDetails
 var _ *types.MismatchedNodeOutputTypeFlowValidationDetails
 var _ *types.MissingNodeOutputFlowValidationDetails
 var _ *types.UnknownConnectionSourceOutputFlowValidationDetails
 var _ *types.UnspecifiedFlowValidationDetails
 var _ *types.IncompatibleConnectionDataTypeFlowValidationDetails
+var _ *types.UnknownNodeOutputFlowValidationDetails
 var _ *types.CyclicConnectionFlowValidationDetails
 var _ *types.MissingConnectionConfigurationFlowValidationDetails
 
@@ -424,6 +436,9 @@ func ExampleSystemContentBlock_outputUsage() {
 	var union types.SystemContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.SystemContentBlockMemberCachePoint:
+		_ = v.Value // Value is types.CachePointBlock
+
 	case *types.SystemContentBlockMemberText:
 		_ = v.Value // Value is string
 
@@ -437,11 +452,15 @@ func ExampleSystemContentBlock_outputUsage() {
 }
 
 var _ *string
+var _ *types.CachePointBlock
 
 func ExampleTool_outputUsage() {
 	var union types.Tool
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ToolMemberCachePoint:
+		_ = v.Value // Value is types.CachePointBlock
+
 	case *types.ToolMemberToolSpec:
 		_ = v.Value // Value is types.ToolSpecification
 
@@ -454,6 +473,7 @@ func ExampleTool_outputUsage() {
 	}
 }
 
+var _ *types.CachePointBlock
 var _ *types.ToolSpecification
 
 func ExampleToolChoice_outputUsage() {

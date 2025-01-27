@@ -1695,6 +1695,21 @@ func validateByteContentDoc(v *types.ByteContentDoc) error {
 	}
 }
 
+func validateCachePointBlock(v *types.CachePointBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CachePointBlock"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateChatPromptTemplateConfiguration(v *types.ChatPromptTemplateConfiguration) error {
 	if v == nil {
 		return nil
@@ -1705,6 +1720,11 @@ func validateChatPromptTemplateConfiguration(v *types.ChatPromptTemplateConfigur
 	} else if v.Messages != nil {
 		if err := validateMessages(v.Messages); err != nil {
 			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.System != nil {
+		if err := validateSystemContentBlocks(v.System); err != nil {
+			invalidParams.AddNested("System", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ToolConfiguration != nil {
@@ -1825,6 +1845,42 @@ func validateConfluenceSourceConfiguration(v *types.ConfluenceSourceConfiguratio
 	}
 	if v.CredentialsSecretArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CredentialsSecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentBlock(v types.ContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentBlock"}
+	switch uv := v.(type) {
+	case *types.ContentBlockMemberCachePoint:
+		if err := validateCachePointBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[cachePoint]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentBlocks(v []types.ContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentBlocks"}
+	for i := range v {
+		if err := validateContentBlock(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2829,6 +2885,10 @@ func validateMessage(v *types.Message) error {
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateContentBlocks(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4228,6 +4288,42 @@ func validateSupplementalDataStorageLocations(v []types.SupplementalDataStorageL
 	}
 }
 
+func validateSystemContentBlock(v types.SystemContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemContentBlock"}
+	switch uv := v.(type) {
+	case *types.SystemContentBlockMemberCachePoint:
+		if err := validateCachePointBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[cachePoint]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSystemContentBlocks(v []types.SystemContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemContentBlocks"}
+	for i := range v {
+		if err := validateSystemContentBlock(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTextContentDoc(v *types.TextContentDoc) error {
 	if v == nil {
 		return nil
@@ -4251,6 +4347,11 @@ func validateTextPromptTemplateConfiguration(v *types.TextPromptTemplateConfigur
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
+	if v.CachePoint != nil {
+		if err := validateCachePointBlock(v.CachePoint); err != nil {
+			invalidParams.AddNested("CachePoint", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4264,6 +4365,11 @@ func validateTool(v types.Tool) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tool"}
 	switch uv := v.(type) {
+	case *types.ToolMemberCachePoint:
+		if err := validateCachePointBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[cachePoint]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ToolMemberToolSpec:
 		if err := validateToolSpecification(&uv.Value); err != nil {
 			invalidParams.AddNested("[toolSpec]", err.(smithy.InvalidParamsError))

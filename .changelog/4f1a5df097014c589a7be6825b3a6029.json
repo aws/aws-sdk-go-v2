@@ -1,0 +1,8 @@
+{
+    "id": "4f1a5df0-9701-4c58-9a7b-e6825b3a6029",
+    "type": "feature",
+    "description": "Minor fix to ARN validation for Lambda functions passed to S3 Batch Operations",
+    "modules": [
+        "service/s3control"
+    ]
+}

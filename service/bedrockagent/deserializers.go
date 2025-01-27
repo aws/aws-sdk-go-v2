@@ -15628,6 +15628,46 @@ func awsRestjson1_deserializeDocumentBedrockFoundationModelConfiguration(v **typ
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCachePointBlock(v **types.CachePointBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CachePointBlock
+	if *v == nil {
+		sv = &types.CachePointBlock{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CachePointType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.CachePointType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentChatPromptTemplateConfiguration(v **types.ChatPromptTemplateConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16005,6 +16045,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "cachePoint":
+			var mv types.CachePointBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCachePointBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ContentBlockMemberCachePoint{Value: mv}
+			break loop
+
 		case "text":
 			var mv string
 			if value != nil {
@@ -18465,6 +18515,26 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.FlowValidationDetailsMemberUnknownConnectionTargetInput{Value: mv}
+			break loop
+
+		case "unknownNodeInput":
+			var mv types.UnknownNodeInputFlowValidationDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentUnknownNodeInputFlowValidationDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FlowValidationDetailsMemberUnknownNodeInput{Value: mv}
+			break loop
+
+		case "unknownNodeOutput":
+			var mv types.UnknownNodeOutputFlowValidationDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentUnknownNodeOutputFlowValidationDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FlowValidationDetailsMemberUnknownNodeOutput{Value: mv}
 			break loop
 
 		case "unreachableNode":
@@ -25146,6 +25216,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "cachePoint":
+			var mv types.CachePointBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCachePointBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SystemContentBlockMemberCachePoint{Value: mv}
+			break loop
+
 		case "text":
 			var mv string
 			if value != nil {
@@ -25258,6 +25338,11 @@ func awsRestjson1_deserializeDocumentTextPromptTemplateConfiguration(v **types.T
 
 	for key, value := range shape {
 		switch key {
+		case "cachePoint":
+			if err := awsRestjson1_deserializeDocumentCachePointBlock(&sv.CachePoint, value); err != nil {
+				return err
+			}
+
 		case "inputVariables":
 			if err := awsRestjson1_deserializeDocumentPromptInputVariablesList(&sv.InputVariables, value); err != nil {
 				return err
@@ -25341,6 +25426,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "cachePoint":
+			var mv types.CachePointBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCachePointBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ToolMemberCachePoint{Value: mv}
+			break loop
+
 		case "toolSpec":
 			var mv types.ToolSpecification
 			destAddr := &mv
@@ -25979,6 +26074,104 @@ func awsRestjson1_deserializeDocumentUnknownConnectionTargetInputFlowValidationD
 					return fmt.Errorf("expected FlowConnectionName to be of type string, got %T instead", value)
 				}
 				sv.Connection = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUnknownNodeInputFlowValidationDetails(v **types.UnknownNodeInputFlowValidationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnknownNodeInputFlowValidationDetails
+	if *v == nil {
+		sv = &types.UnknownNodeInputFlowValidationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "input":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeInputName to be of type string, got %T instead", value)
+				}
+				sv.Input = ptr.String(jtv)
+			}
+
+		case "node":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeName to be of type string, got %T instead", value)
+				}
+				sv.Node = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUnknownNodeOutputFlowValidationDetails(v **types.UnknownNodeOutputFlowValidationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnknownNodeOutputFlowValidationDetails
+	if *v == nil {
+		sv = &types.UnknownNodeOutputFlowValidationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "node":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeName to be of type string, got %T instead", value)
+				}
+				sv.Node = ptr.String(jtv)
+			}
+
+		case "output":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeOutputName to be of type string, got %T instead", value)
+				}
+				sv.Output = ptr.String(jtv)
 			}
 
 		default:

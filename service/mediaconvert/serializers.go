@@ -3133,6 +3133,20 @@ func awsRestjson1_serializeDocument__mapOfCaptionSelector(v map[string]types.Cap
 	return nil
 }
 
+func awsRestjson1_serializeDocument__mapOfDynamicAudioSelector(v map[string]types.DynamicAudioSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentDynamicAudioSelector(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAacSettings(v *types.AacSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5459,6 +5473,38 @@ func awsRestjson1_serializeDocumentDvbTdtSettings(v *types.DvbTdtSettings, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDynamicAudioSelector(v *types.DynamicAudioSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AudioDurationCorrection) > 0 {
+		ok := object.Key("audioDurationCorrection")
+		ok.String(string(v.AudioDurationCorrection))
+	}
+
+	if v.ExternalAudioFileInput != nil {
+		ok := object.Key("externalAudioFileInput")
+		ok.String(*v.ExternalAudioFileInput)
+	}
+
+	if len(v.LanguageCode) > 0 {
+		ok := object.Key("languageCode")
+		ok.String(string(v.LanguageCode))
+	}
+
+	if v.Offset != nil {
+		ok := object.Key("offset")
+		ok.Integer(*v.Offset)
+	}
+
+	if len(v.SelectorType) > 0 {
+		ok := object.Key("selectorType")
+		ok.String(string(v.SelectorType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEac3AtmosSettings(v *types.Eac3AtmosSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6391,6 +6437,11 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 		ok.String(string(v.CodecProfile))
 	}
 
+	if len(v.Deblocking) > 0 {
+		ok := object.Key("deblocking")
+		ok.String(string(v.Deblocking))
+	}
+
 	if len(v.DynamicSubGop) > 0 {
 		ok := object.Key("dynamicSubGop")
 		ok.String(string(v.DynamicSubGop))
@@ -7217,6 +7268,13 @@ func awsRestjson1_serializeDocumentInput(v *types.Input, value smithyjson.Value)
 		ok.String(*v.DolbyVisionMetadataXml)
 	}
 
+	if v.DynamicAudioSelectors != nil {
+		ok := object.Key("dynamicAudioSelectors")
+		if err := awsRestjson1_serializeDocument__mapOfDynamicAudioSelector(v.DynamicAudioSelectors, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FileInput != nil {
 		ok := object.Key("fileInput")
 		ok.String(*v.FileInput)
@@ -7410,6 +7468,13 @@ func awsRestjson1_serializeDocumentInputTemplate(v *types.InputTemplate, value s
 	if v.DolbyVisionMetadataXml != nil {
 		ok := object.Key("dolbyVisionMetadataXml")
 		ok.String(*v.DolbyVisionMetadataXml)
+	}
+
+	if v.DynamicAudioSelectors != nil {
+		ok := object.Key("dynamicAudioSelectors")
+		if err := awsRestjson1_serializeDocument__mapOfDynamicAudioSelector(v.DynamicAudioSelectors, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.FilterEnable) > 0 {

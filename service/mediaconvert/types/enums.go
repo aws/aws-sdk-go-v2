@@ -2989,6 +2989,25 @@ func (DvbSubtitlingType) Values() []DvbSubtitlingType {
 	}
 }
 
+type DynamicAudioSelectorType string
+
+// Enum values for DynamicAudioSelectorType
+const (
+	DynamicAudioSelectorTypeAllTracks    DynamicAudioSelectorType = "ALL_TRACKS"
+	DynamicAudioSelectorTypeLanguageCode DynamicAudioSelectorType = "LANGUAGE_CODE"
+)
+
+// Values returns all known values for DynamicAudioSelectorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DynamicAudioSelectorType) Values() []DynamicAudioSelectorType {
+	return []DynamicAudioSelectorType{
+		"ALL_TRACKS",
+		"LANGUAGE_CODE",
+	}
+}
+
 type Eac3AtmosBitstreamMode string
 
 // Enum values for Eac3AtmosBitstreamMode
@@ -4353,6 +4372,25 @@ func (H265CodecProfile) Values() []H265CodecProfile {
 		"MAIN_422_8BIT_HIGH",
 		"MAIN_422_10BIT_MAIN",
 		"MAIN_422_10BIT_HIGH",
+	}
+}
+
+type H265Deblocking string
+
+// Enum values for H265Deblocking
+const (
+	H265DeblockingEnabled  H265Deblocking = "ENABLED"
+	H265DeblockingDisabled H265Deblocking = "DISABLED"
+)
+
+// Values returns all known values for H265Deblocking. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265Deblocking) Values() []H265Deblocking {
+	return []H265Deblocking{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

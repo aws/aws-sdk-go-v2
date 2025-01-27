@@ -7275,6 +7275,18 @@ func awsRestjson1_serializeDocumentByteContentDoc(v *types.ByteContentDoc, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCachePointBlock(v *types.CachePointBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChatPromptTemplateConfiguration(v *types.ChatPromptTemplateConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7431,6 +7443,12 @@ func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smit
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ContentBlockMemberCachePoint:
+		av := object.Key("cachePoint")
+		if err := awsRestjson1_serializeDocumentCachePointBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ContentBlockMemberText:
 		av := object.Key("text")
 		av.String(uv.Value)
@@ -10426,6 +10444,12 @@ func awsRestjson1_serializeDocumentSystemContentBlock(v types.SystemContentBlock
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.SystemContentBlockMemberCachePoint:
+		av := object.Key("cachePoint")
+		if err := awsRestjson1_serializeDocumentCachePointBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.SystemContentBlockMemberText:
 		av := object.Key("text")
 		av.String(uv.Value)
@@ -10480,6 +10504,13 @@ func awsRestjson1_serializeDocumentTextPromptTemplateConfiguration(v *types.Text
 	object := value.Object()
 	defer object.Close()
 
+	if v.CachePoint != nil {
+		ok := object.Key("cachePoint")
+		if err := awsRestjson1_serializeDocumentCachePointBlock(v.CachePoint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputVariables != nil {
 		ok := object.Key("inputVariables")
 		if err := awsRestjson1_serializeDocumentPromptInputVariablesList(v.InputVariables, ok); err != nil {
@@ -10500,6 +10531,12 @@ func awsRestjson1_serializeDocumentTool(v types.Tool, value smithyjson.Value) er
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ToolMemberCachePoint:
+		av := object.Key("cachePoint")
+		if err := awsRestjson1_serializeDocumentCachePointBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ToolMemberToolSpec:
 		av := object.Key("toolSpec")
 		if err := awsRestjson1_serializeDocumentToolSpecification(&uv.Value, av); err != nil {

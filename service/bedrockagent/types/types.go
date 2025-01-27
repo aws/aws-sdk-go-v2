@@ -309,6 +309,8 @@ type AgentAlias struct {
 	//
 	//   - DELETING – The agent alias is being deleted.
 	//
+	//   - DISSOCIATED - The agent alias has no version associated with it.
+	//
 	// This member is required.
 	AgentAliasStatus AgentAliasStatus
 
@@ -948,6 +950,18 @@ type ByteContentDoc struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates where a cache checkpoint is located. All information before this
+// checkpoint is cached to be accessed on subsequent requests.
+type CachePointBlock struct {
+
+	// Indicates that the CachePointBlock is of the default type
+	//
+	// This member is required.
+	Type CachePointType
+
+	noSmithyDocumentSerde
+}
+
 // Contains configurations to use a prompt in a conversational format. For more
 // information, see [Create a prompt using Prompt management].
 //
@@ -1107,12 +1121,22 @@ type ConfluenceSourceConfiguration struct {
 //
 // The following types satisfy this interface:
 //
+//	ContentBlockMemberCachePoint
 //	ContentBlockMemberText
 //
 // [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
 type ContentBlock interface {
 	isContentBlock()
 }
+
+// Creates a cache checkpoint within a message.
+type ContentBlockMemberCachePoint struct {
+	Value CachePointBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberCachePoint) isContentBlock() {}
 
 // The text in the message.
 type ContentBlockMemberText struct {
@@ -2024,6 +2048,8 @@ type FlowValidation struct {
 //	FlowValidationDetailsMemberUnknownConnectionSourceOutput
 //	FlowValidationDetailsMemberUnknownConnectionTarget
 //	FlowValidationDetailsMemberUnknownConnectionTargetInput
+//	FlowValidationDetailsMemberUnknownNodeInput
+//	FlowValidationDetailsMemberUnknownNodeOutput
 //	FlowValidationDetailsMemberUnreachableNode
 //	FlowValidationDetailsMemberUnsatisfiedConnectionConditions
 //	FlowValidationDetailsMemberUnspecified
@@ -2228,6 +2254,24 @@ type FlowValidationDetailsMemberUnknownConnectionTargetInput struct {
 }
 
 func (*FlowValidationDetailsMemberUnknownConnectionTargetInput) isFlowValidationDetails() {}
+
+// Details about an unknown input for a node.
+type FlowValidationDetailsMemberUnknownNodeInput struct {
+	Value UnknownNodeInputFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnknownNodeInput) isFlowValidationDetails() {}
+
+// Details about an unknown output for a node.
+type FlowValidationDetailsMemberUnknownNodeOutput struct {
+	Value UnknownNodeOutputFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnknownNodeOutput) isFlowValidationDetails() {}
 
 // Details about an unreachable node in the flow.
 type FlowValidationDetailsMemberUnreachableNode struct {
@@ -4692,12 +4736,22 @@ type SupplementalDataStorageLocation struct {
 //
 // The following types satisfy this interface:
 //
+//	SystemContentBlockMemberCachePoint
 //	SystemContentBlockMemberText
 //
 // [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
 type SystemContentBlock interface {
 	isSystemContentBlock()
 }
+
+// Creates a cache checkpoint within a tool designation
+type SystemContentBlockMemberCachePoint struct {
+	Value CachePointBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*SystemContentBlockMemberCachePoint) isSystemContentBlock() {}
 
 // The text in the system prompt.
 type SystemContentBlockMemberText struct {
@@ -4728,6 +4782,9 @@ type TextPromptTemplateConfiguration struct {
 	// This member is required.
 	Text *string
 
+	// A cache checkpoint within a template configuration.
+	CachePoint *CachePointBlock
+
 	// An array of the variables in the prompt template.
 	InputVariables []PromptInputVariable
 
@@ -4739,12 +4796,22 @@ type TextPromptTemplateConfiguration struct {
 //
 // The following types satisfy this interface:
 //
+//	ToolMemberCachePoint
 //	ToolMemberToolSpec
 //
 // [Use a tool to complete an Amazon Bedrock model response]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type Tool interface {
 	isTool()
 }
+
+// Creates a cache checkpoint within a tool designation
+type ToolMemberCachePoint struct {
+	Value CachePointBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolMemberCachePoint) isTool() {}
 
 // The specification for the tool.
 type ToolMemberToolSpec struct {
@@ -4966,6 +5033,38 @@ type UnknownConnectionTargetInputFlowValidationDetails struct {
 	//
 	// This member is required.
 	Connection *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an unknown input for a node.
+type UnknownNodeInputFlowValidationDetails struct {
+
+	// The name of the node with the unknown input.
+	//
+	// This member is required.
+	Input *string
+
+	// The name of the unknown input.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an unknown output for a node.
+type UnknownNodeOutputFlowValidationDetails struct {
+
+	// The name of the node with the unknown output.
+	//
+	// This member is required.
+	Node *string
+
+	// The name of the unknown output.
+	//
+	// This member is required.
+	Output *string
 
 	noSmithyDocumentSerde
 }

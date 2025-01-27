@@ -1,0 +1,8 @@
+{
+    "id": "f752ec02-8d09-4183-8308-933593f5016e",
+    "type": "feature",
+    "description": "Add support for the prompt caching feature for Bedrock Prompt Management",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

@@ -44,11 +44,12 @@ type AgentAliasStatus string
 
 // Enum values for AgentAliasStatus
 const (
-	AgentAliasStatusCreating AgentAliasStatus = "CREATING"
-	AgentAliasStatusPrepared AgentAliasStatus = "PREPARED"
-	AgentAliasStatusFailed   AgentAliasStatus = "FAILED"
-	AgentAliasStatusUpdating AgentAliasStatus = "UPDATING"
-	AgentAliasStatusDeleting AgentAliasStatus = "DELETING"
+	AgentAliasStatusCreating    AgentAliasStatus = "CREATING"
+	AgentAliasStatusPrepared    AgentAliasStatus = "PREPARED"
+	AgentAliasStatusFailed      AgentAliasStatus = "FAILED"
+	AgentAliasStatusUpdating    AgentAliasStatus = "UPDATING"
+	AgentAliasStatusDeleting    AgentAliasStatus = "DELETING"
+	AgentAliasStatusDissociated AgentAliasStatus = "DISSOCIATED"
 )
 
 // Values returns all known values for AgentAliasStatus. Note that this can be
@@ -62,6 +63,7 @@ func (AgentAliasStatus) Values() []AgentAliasStatus {
 		"FAILED",
 		"UPDATING",
 		"DELETING",
+		"DISSOCIATED",
 	}
 }
 
@@ -114,6 +116,23 @@ func (AgentStatus) Values() []AgentStatus {
 		"FAILED",
 		"VERSIONING",
 		"UPDATING",
+	}
+}
+
+type CachePointType string
+
+// Enum values for CachePointType
+const (
+	CachePointTypeDefault CachePointType = "default"
+)
+
+// Values returns all known values for CachePointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CachePointType) Values() []CachePointType {
+	return []CachePointType{
+		"default",
 	}
 }
 
@@ -568,6 +587,8 @@ const (
 	FlowValidationTypeUnfulfilledNodeInput            FlowValidationType = "UnfulfilledNodeInput"
 	FlowValidationTypeUnsatisfiedConnectionConditions FlowValidationType = "UnsatisfiedConnectionConditions"
 	FlowValidationTypeUnspecified                     FlowValidationType = "Unspecified"
+	FlowValidationTypeUnknownNodeInput                FlowValidationType = "UnknownNodeInput"
+	FlowValidationTypeUnknownNodeOutput               FlowValidationType = "UnknownNodeOutput"
 )
 
 // Values returns all known values for FlowValidationType. Note that this can be
@@ -601,6 +622,8 @@ func (FlowValidationType) Values() []FlowValidationType {
 		"UnfulfilledNodeInput",
 		"UnsatisfiedConnectionConditions",
 		"Unspecified",
+		"UnknownNodeInput",
+		"UnknownNodeOutput",
 	}
 }
 

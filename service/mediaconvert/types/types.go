@@ -489,7 +489,7 @@ type AudioSelector struct {
 	// input audio. If you don't set a default, those outputs have no audio.
 	DefaultSelection AudioDefaultSelection
 
-	// Specifies audio data from an external file source.
+	// Specify the S3, HTTP, or HTTPS URL for your external audio file input.
 	ExternalAudioFileInput *string
 
 	// Settings specific to audio sources in an HLS alternate rendition group. Specify
@@ -502,10 +502,15 @@ type AudioSelector struct {
 	// alternative audio with DEFAULT=YES is chosen instead.
 	HlsRenditionGroupSettings *HlsRenditionGroupSettings
 
-	// Selects a specific language code from within an audio source.
+	// Specify the language to select from your audio input. In the MediaConvert
+	// console choose from a list of languages. In your JSON job settings choose from
+	// an ISO 639-2 three-letter code listed at
+	// https://www.loc.gov/standards/iso639-2/php/code_list.php
 	LanguageCode LanguageCode
 
-	// Specifies a time delta in milliseconds to offset the audio from the input video.
+	// Specify a time delta, in milliseconds, to offset the audio from the input
+	// video. To specify no offset: Keep the default value, 0. To specify an offset:
+	// Enter an integer from -2147483648 to 2147483647
 	Offset *int32
 
 	// Selects a specific PID from within an audio source (e.g. 257 selects PID 0x101).
@@ -2648,6 +2653,58 @@ type DvbTdtSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Use Dynamic audio selectors when you do not know the track layout of your
+// source when you submit your job, but want to select multiple audio tracks. When
+// you include an audio track in your output and specify this Dynamic audio
+// selector as the Audio source, MediaConvert creates an output audio track for
+// each dynamically selected track. Note that when you include a Dynamic audio
+// selector for two or more inputs, each input must have the same number of audio
+// tracks and audio channels.
+type DynamicAudioSelector struct {
+
+	// Apply audio timing corrections to help synchronize audio and video in your
+	// output. To apply timing corrections, your input must meet the following
+	// requirements: * Container: MP4, or MOV, with an accurate time-to-sample (STTS)
+	// table. * Audio track: AAC. Choose from the following audio timing correction
+	// settings: * Disabled (Default): Apply no correction. * Auto: Recommended for
+	// most inputs. MediaConvert analyzes the audio timing in your input and determines
+	// which correction setting to use, if needed. * Track: Adjust the duration of each
+	// audio frame by a constant amount to align the audio track length with STTS
+	// duration. Track-level correction does not affect pitch, and is recommended for
+	// tonal audio content such as music. * Frame: Adjust the duration of each audio
+	// frame by a variable amount to align audio frames with STTS timestamps. No
+	// corrections are made to already-aligned frames. Frame-level correction may
+	// affect the pitch of corrected frames, and is recommended for atonal audio
+	// content such as speech or percussion. * Force: Apply audio duration correction,
+	// either Track or Frame depending on your input, regardless of the accuracy of
+	// your input's STTS table. Your output audio and video may not be aligned or it
+	// may contain audio artifacts.
+	AudioDurationCorrection AudioDurationCorrection
+
+	// Specify the S3, HTTP, or HTTPS URL for your external audio file input.
+	ExternalAudioFileInput *string
+
+	// Specify the language to select from your audio input. In the MediaConvert
+	// console choose from a list of languages. In your JSON job settings choose from
+	// an ISO 639-2 three-letter code listed at
+	// https://www.loc.gov/standards/iso639-2/php/code_list.php
+	LanguageCode LanguageCode
+
+	// Specify a time delta, in milliseconds, to offset the audio from the input
+	// video. To specify no offset: Keep the default value, 0. To specify an offset:
+	// Enter an integer from -2147483648 to 2147483647
+	Offset *int32
+
+	// Specify which audio tracks to dynamically select from your source. To select
+	// all audio tracks: Keep the default value, All tracks. To select all audio tracks
+	// with a specific language code: Choose Language code. When you do, you must also
+	// specify a language code under the Language code setting. If there is no matching
+	// Language code in your source, then no track will be selected.
+	SelectorType DynamicAudioSelectorType
+
+	noSmithyDocumentSerde
+}
+
 // Required when you set Codec to the value EAC3_ATMOS.
 type Eac3AtmosSettings struct {
 
@@ -3710,6 +3767,14 @@ type H265Settings struct {
 	// High Tier. 4:2:2 profiles are only available with the HEVC 4:2:2 License.
 	CodecProfile H265CodecProfile
 
+	// Use Deblocking to improve the video quality of your output by smoothing the
+	// edges of macroblock artifacts created during video compression. To reduce
+	// blocking artifacts at block boundaries, and improve overall video quality: Keep
+	// the default value, Enabled. To not apply any deblocking: Choose Disabled.
+	// Visible block edge artifacts might appear in the output, especially at lower
+	// bitrates.
+	Deblocking H265Deblocking
+
 	// Specify whether to allow the number of B-frames in your output GOP structure to
 	// vary or not depending on your input video content. To improve the subjective
 	// video quality of your output that has high-motion content: Leave blank or keep
@@ -4630,6 +4695,15 @@ type Input struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
 	DolbyVisionMetadataXml *string
 
+	// Use Dynamic audio selectors when you do not know the track layout of your
+	// source when you submit your job, but want to select multiple audio tracks. When
+	// you include an audio track in your output and specify this Dynamic audio
+	// selector as the Audio source, MediaConvert creates an output audio track for
+	// each dynamically selected track. Note that when you include a Dynamic audio
+	// selector for two or more inputs, each input must have the same number of audio
+	// tracks and audio channels.
+	DynamicAudioSelectors map[string]DynamicAudioSelector
+
 	// Specify the source file for your transcoding job. You can use multiple inputs
 	// in a single job. The service concatenates these inputs, in the order that you
 	// specify them in the job, to create the outputs. If your input format is IMF,
@@ -4858,6 +4932,15 @@ type InputTemplate struct {
 	// MediaConvert read permissions to this file. For more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
 	DolbyVisionMetadataXml *string
+
+	// Use Dynamic audio selectors when you do not know the track layout of your
+	// source when you submit your job, but want to select multiple audio tracks. When
+	// you include an audio track in your output and specify this Dynamic audio
+	// selector as the Audio source, MediaConvert creates an output audio track for
+	// each dynamically selected track. Note that when you include a Dynamic audio
+	// selector for two or more inputs, each input must have the same number of audio
+	// tracks and audio channels.
+	DynamicAudioSelectors map[string]DynamicAudioSelector
 
 	// Specify whether to apply input filtering to improve the video quality of your
 	// input. To apply filtering depending on your input type and quality: Choose Auto.
