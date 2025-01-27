@@ -9902,7 +9902,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+                "smithy.api#pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
             }
         },
         "com.amazonaws.s3control#GeneratedManifestEncryption": {
@@ -13146,7 +13146,7 @@
                     "target": "com.amazonaws.s3control#ExpiredObjectDeleteMarker",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set\n         to true, the delete marker will be expired. If set to false, the policy takes no action.\n         This cannot be specified with Days or Date in a Lifecycle Expiration Policy.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set\n         to true, the delete marker will be expired. If set to false, the policy takes no action.\n         This cannot be specified with Days or Date in a Lifecycle Expiration Policy. To learn more about delete markers, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeleteMarker.html\">Working with delete markers</a>.</p>"
                     }
                 }
             },
@@ -17461,7 +17461,7 @@
                 "TargetResource": {
                     "target": "com.amazonaws.s3control#S3RegionalOrS3ExpressBucketArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the destination bucket\n         Amazon Resource Name\n         (ARN)\n         for the batch copy operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>General purpose buckets</b> - For example, to copy objects to a general purpose bucket named\n               <code>destinationBucket</code>, set the <code>TargetResource</code> property to\n               <code>arn:aws:s3:::destinationBucket</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Directory buckets</b> - For example, to copy objects to a directory bucket named\n               <code>destinationBucket</code> in the Availability Zone; identified by the AZ ID <code>usw2-az1</code>, set the <code>TargetResource</code> property to\n               <code>arn:aws:s3express:<i>region</i>:<i>account_id</i>:/bucket/<i>destination_bucket_base_name</i>--<i>usw2-az1</i>--x-s3</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the destination bucket\n         Amazon Resource Name\n         (ARN)\n         for the batch copy operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>General purpose buckets</b> - For example, to copy objects to a general purpose bucket named\n               <code>destinationBucket</code>, set the <code>TargetResource</code> property to\n               <code>arn:aws:s3:::destinationBucket</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Directory buckets</b> - For example, to copy objects to a directory bucket named\n               <code>destinationBucket</code> in the Availability Zone identified by the AZ ID <code>usw2-az1</code>, set the <code>TargetResource</code> property to\n               <code>arn:aws:s3express:<i>region</i>:<i>account_id</i>:/bucket/<i>destination_bucket_base_name</i>--<i>usw2-az1</i>--x-s3</code>. A directory bucket as a destination bucket can be in Availability Zone or Local Zone. </p>\n               <note>\n                  <p>Copying objects across different Amazon Web Services Regions isn't supported when the source or destination bucket is in Amazon Web Services Local Zones. The source and destination buckets must have the same parent Amazon Web Services Region. Otherwise, \n                  you get an HTTP <code>400 Bad Request</code> error with the error code <code>InvalidRequest</code>.</p>\n               </note>\n            </li>\n         </ul>"
                     }
                 },
                 "CannedAccessControlList": {

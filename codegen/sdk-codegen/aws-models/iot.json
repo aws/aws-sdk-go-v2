@@ -29380,7 +29380,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 512
+                    "max": 30720
                 },
                 "smithy.api#pattern": "^[^\\p{C}]+$"
             }

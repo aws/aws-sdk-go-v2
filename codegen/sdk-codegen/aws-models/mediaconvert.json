@@ -1716,7 +1716,7 @@
                 "ExternalAudioFileInput": {
                     "target": "com.amazonaws.mediaconvert#__stringPatternS3Https",
                     "traits": {
-                        "smithy.api#documentation": "Specifies audio data from an external file source.",
+                        "smithy.api#documentation": "Specify the S3, HTTP, or HTTPS URL for your external audio file input.",
                         "smithy.api#jsonName": "externalAudioFileInput"
                     }
                 },
@@ -1730,14 +1730,14 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.mediaconvert#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "Selects a specific language code from within an audio source.",
+                        "smithy.api#documentation": "Specify the language to select from your audio input. In the MediaConvert console choose from a list of languages. In your JSON job settings choose from an ISO 639-2 three-letter code listed at https://www.loc.gov/standards/iso639-2/php/code_list.php",
                         "smithy.api#jsonName": "languageCode"
                     }
                 },
                 "Offset": {
                     "target": "com.amazonaws.mediaconvert#__integerMinNegative2147483648Max2147483647",
                     "traits": {
-                        "smithy.api#documentation": "Specifies a time delta in milliseconds to offset the audio from the input video.",
+                        "smithy.api#documentation": "Specify a time delta, in milliseconds, to offset the audio from the input video.\nTo specify no offset: Keep the default value, 0.\nTo specify an offset: Enter an integer from -2147483648 to 2147483647",
                         "smithy.api#jsonName": "offset"
                     }
                 },
@@ -7728,6 +7728,69 @@
                 "smithy.api#documentation": "Specify how MediaConvert handles the display definition segment (DDS). To exclude the DDS from this set of captions: Keep the default, None. To include the DDS: Choose Specified. When you do, also specify the offset coordinates of the display window with DDS x-coordinate and DDS y-coordinate. To include the DDS, but not include display window data: Choose No display window. When you do, you can write position metadata to the page composition segment (PCS) with DDS x-coordinate and DDS y-coordinate. For video resolutions with a height of 576 pixels or less, MediaConvert doesn't include the DDS, regardless of the value you choose for DDS handling. All burn-in and DVB-Sub font settings must match."
             }
         },
+        "com.amazonaws.mediaconvert#DynamicAudioSelector": {
+            "type": "structure",
+            "members": {
+                "AudioDurationCorrection": {
+                    "target": "com.amazonaws.mediaconvert#AudioDurationCorrection",
+                    "traits": {
+                        "smithy.api#documentation": "Apply audio timing corrections to help synchronize audio and video in your output. To apply timing corrections, your input must meet the following requirements: * Container: MP4, or MOV, with an accurate time-to-sample (STTS) table. * Audio track: AAC. Choose from the following audio timing correction settings: * Disabled (Default): Apply no correction. * Auto: Recommended for most inputs. MediaConvert analyzes the audio timing in your input and determines which correction setting to use, if needed. * Track: Adjust the duration of each audio frame by a constant amount to align the audio track length with STTS duration. Track-level correction does not affect pitch, and is recommended for tonal audio content such as music. * Frame: Adjust the duration of each audio frame by a variable amount to align audio frames with STTS timestamps. No corrections are made to already-aligned frames. Frame-level correction may affect the pitch of corrected frames, and is recommended for atonal audio content such as speech or percussion. * Force: Apply audio duration correction, either Track or Frame depending on your input, regardless of the accuracy of your input's STTS table. Your output audio and video may not be aligned or it may contain audio artifacts.",
+                        "smithy.api#jsonName": "audioDurationCorrection"
+                    }
+                },
+                "ExternalAudioFileInput": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3Https",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the S3, HTTP, or HTTPS URL for your external audio file input.",
+                        "smithy.api#jsonName": "externalAudioFileInput"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.mediaconvert#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the language to select from your audio input. In the MediaConvert console choose from a list of languages. In your JSON job settings choose from an ISO 639-2 three-letter code listed at https://www.loc.gov/standards/iso639-2/php/code_list.php",
+                        "smithy.api#jsonName": "languageCode"
+                    }
+                },
+                "Offset": {
+                    "target": "com.amazonaws.mediaconvert#__integerMinNegative2147483648Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a time delta, in milliseconds, to offset the audio from the input video.\nTo specify no offset: Keep the default value, 0.\nTo specify an offset: Enter an integer from -2147483648 to 2147483647",
+                        "smithy.api#jsonName": "offset"
+                    }
+                },
+                "SelectorType": {
+                    "target": "com.amazonaws.mediaconvert#DynamicAudioSelectorType",
+                    "traits": {
+                        "smithy.api#documentation": "Specify which audio tracks to dynamically select from your source. To select all audio tracks: Keep the default value, All tracks. To select all audio tracks with a specific language code: Choose Language code. When you do, you must also specify a language code under the Language code setting. If there is no matching Language code in your source, then no track will be selected.",
+                        "smithy.api#jsonName": "selectorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Use Dynamic audio selectors when you do not know the track layout of your source when you submit your job, but want to select multiple audio tracks. When you include an audio track in your output and specify this Dynamic audio selector as the Audio source, MediaConvert creates an output audio track for each dynamically selected track. Note that when you include a Dynamic audio selector for two or more inputs, each input must have the same number of audio tracks and audio channels."
+            }
+        },
+        "com.amazonaws.mediaconvert#DynamicAudioSelectorType": {
+            "type": "enum",
+            "members": {
+                "ALL_TRACKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_TRACKS"
+                    }
+                },
+                "LANGUAGE_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LANGUAGE_CODE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify which audio tracks to dynamically select from your source. To select all audio tracks: Keep the default value, All tracks. To select all audio tracks with a specific language code: Choose Language code. When you do, you must also specify a language code under the Language code setting. If there is no matching Language code in your source, then no track will be selected."
+            }
+        },
         "com.amazonaws.mediaconvert#Eac3AtmosBitstreamMode": {
             "type": "enum",
             "members": {
@@ -10840,6 +10903,26 @@
                 "smithy.api#documentation": "Represents the Profile and Tier, per the HEVC (H.265) specification. Selections are grouped as [Profile] / [Tier], so \"Main/High\" represents Main Profile with High Tier. 4:2:2 profiles are only available with the HEVC 4:2:2 License."
             }
         },
+        "com.amazonaws.mediaconvert#H265Deblocking": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Use Deblocking to improve the video quality of your output by smoothing the edges of macroblock artifacts created during video compression. To reduce blocking artifacts at block boundaries, and improve overall video quality: Keep the default value, Enabled. To not apply any deblocking: Choose Disabled. Visible block edge artifacts might appear in the output, especially at lower bitrates."
+            }
+        },
         "com.amazonaws.mediaconvert#H265DynamicSubGop": {
             "type": "enum",
             "members": {
@@ -11246,6 +11329,13 @@
                     "traits": {
                         "smithy.api#documentation": "Represents the Profile and Tier, per the HEVC (H.265) specification. Selections are grouped as [Profile] / [Tier], so \"Main/High\" represents Main Profile with High Tier. 4:2:2 profiles are only available with the HEVC 4:2:2 License.",
                         "smithy.api#jsonName": "codecProfile"
+                    }
+                },
+                "Deblocking": {
+                    "target": "com.amazonaws.mediaconvert#H265Deblocking",
+                    "traits": {
+                        "smithy.api#documentation": "Use Deblocking to improve the video quality of your output by smoothing the edges of macroblock artifacts created during video compression. To reduce blocking artifacts at block boundaries, and improve overall video quality: Keep the default value, Enabled. To not apply any deblocking: Choose Disabled. Visible block edge artifacts might appear in the output, especially at lower bitrates.",
+                        "smithy.api#jsonName": "deblocking"
                     }
                 },
                 "DynamicSubGop": {
@@ -13079,6 +13169,13 @@
                         "smithy.api#jsonName": "dolbyVisionMetadataXml"
                     }
                 },
+                "DynamicAudioSelectors": {
+                    "target": "com.amazonaws.mediaconvert#__mapOfDynamicAudioSelector",
+                    "traits": {
+                        "smithy.api#documentation": "Use Dynamic audio selectors when you do not know the track layout of your source when you submit your job, but want to select multiple audio tracks. When you include an audio track in your output and specify this Dynamic audio selector as the Audio source, MediaConvert creates an output audio track for each dynamically selected track. Note that when you include a Dynamic audio selector for two or more inputs, each input must have the same number of audio tracks and audio channels.",
+                        "smithy.api#jsonName": "dynamicAudioSelectors"
+                    }
+                },
                 "FileInput": {
                     "target": "com.amazonaws.mediaconvert#__stringMax2048PatternS3Https",
                     "traits": {
@@ -13501,6 +13598,13 @@
                     "traits": {
                         "smithy.api#documentation": "Use this setting only when your video source has Dolby Vision studio mastering metadata that is carried in a separate XML file. Specify the Amazon S3 location for the metadata XML file. MediaConvert uses this file to provide global and frame-level metadata for Dolby Vision preprocessing. When you specify a file here and your input also has interleaved global and frame level metadata, MediaConvert ignores the interleaved metadata and uses only the the metadata from this external XML file. Note that your IAM service role must grant MediaConvert read permissions to this file. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.",
                         "smithy.api#jsonName": "dolbyVisionMetadataXml"
+                    }
+                },
+                "DynamicAudioSelectors": {
+                    "target": "com.amazonaws.mediaconvert#__mapOfDynamicAudioSelector",
+                    "traits": {
+                        "smithy.api#documentation": "Use Dynamic audio selectors when you do not know the track layout of your source when you submit your job, but want to select multiple audio tracks. When you include an audio track in your output and specify this Dynamic audio selector as the Audio source, MediaConvert creates an output audio track for each dynamically selected track. Note that when you include a Dynamic audio selector for two or more inputs, each input must have the same number of audio tracks and audio channels.",
+                        "smithy.api#jsonName": "dynamicAudioSelectors"
                     }
                 },
                 "FilterEnable": {
@@ -14088,7 +14192,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -14361,7 +14465,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -27536,6 +27640,15 @@
             },
             "value": {
                 "target": "com.amazonaws.mediaconvert#CaptionSelector"
+            }
+        },
+        "com.amazonaws.mediaconvert#__mapOfDynamicAudioSelector": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.mediaconvert#__string"
+            },
+            "value": {
+                "target": "com.amazonaws.mediaconvert#DynamicAudioSelector"
             }
         },
         "com.amazonaws.mediaconvert#__mapOf__string": {

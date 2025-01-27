@@ -482,7 +482,7 @@
                 "agentAliasStatus": {
                     "target": "com.amazonaws.bedrockagent#AgentAliasStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the alias of the agent and whether it is ready for use. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>CREATING – The agent alias is being created.</p>\n            </li>\n            <li>\n               <p>PREPARED – The agent alias is finished being created or updated and is ready to be invoked.</p>\n            </li>\n            <li>\n               <p>FAILED – The agent alias API operation failed.</p>\n            </li>\n            <li>\n               <p>UPDATING – The agent alias is being updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The agent alias is being deleted.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the alias of the agent and whether it is ready for use. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>CREATING – The agent alias is being created.</p>\n            </li>\n            <li>\n               <p>PREPARED – The agent alias is finished being created or updated and is ready to be invoked.</p>\n            </li>\n            <li>\n               <p>FAILED – The agent alias API operation failed.</p>\n            </li>\n            <li>\n               <p>UPDATING – The agent alias is being updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The agent alias is being deleted.</p>\n            </li>\n            <li>\n               <p>DISSOCIATED - The agent alias has no version associated with it.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -615,6 +615,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DISSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISSOCIATED"
                     }
                 }
             }
@@ -2525,6 +2531,32 @@
                 "smithy.api#documentation": "<p>Contains information about content defined inline in bytes.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#CachePointBlock": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#CachePointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that the CachePointBlock is of the default type</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates where a cache checkpoint is located. All information before this checkpoint is cached to be accessed on subsequent requests.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#CachePointType": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#ChatPromptTemplateConfiguration": {
             "type": "structure",
             "members": {
@@ -2791,6 +2823,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The text in the message.</p>"
+                    }
+                },
+                "cachePoint": {
+                    "target": "com.amazonaws.bedrockagent#CachePointBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creates a cache checkpoint within a message.</p>"
                     }
                 }
             },
@@ -7091,7 +7129,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "max": 20
+                    "max": 40
                 }
             }
         },
@@ -7425,6 +7463,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details about an unspecified validation.</p>"
                     }
+                },
+                "unknownNodeInput": {
+                    "target": "com.amazonaws.bedrockagent#UnknownNodeInputFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unknown input for a node.</p>"
+                    }
+                },
+                "unknownNodeOutput": {
+                    "target": "com.amazonaws.bedrockagent#UnknownNodeOutputFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unknown output for a node.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7599,6 +7649,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Unspecified"
+                    }
+                },
+                "UNKNOWN_NODE_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnknownNodeInput"
+                    }
+                },
+                "UNKNOWN_NODE_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnknownNodeOutput"
                     }
                 }
             }
@@ -11893,7 +11955,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 4096
+                    "max": 8192
                 }
             }
         },
@@ -13273,7 +13335,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "max": 5
+                    "max": 10
                 },
                 "smithy.api#sensitive": {}
             }
@@ -15372,6 +15434,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The text in the system prompt.</p>"
                     }
+                },
+                "cachePoint": {
+                    "target": "com.amazonaws.bedrockagent#CachePointBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creates a cache checkpoint within a tool designation</p>"
+                    }
                 }
             },
             "traits": {
@@ -15561,6 +15629,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "cachePoint": {
+                    "target": "com.amazonaws.bedrockagent#CachePointBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cache checkpoint within a template configuration.</p>"
+                    }
+                },
                 "inputVariables": {
                     "target": "com.amazonaws.bedrockagent#PromptInputVariablesList",
                     "traits": {
@@ -15593,6 +15667,12 @@
                     "target": "com.amazonaws.bedrockagent#ToolSpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>The specification for the tool.</p>"
+                    }
+                },
+                "cachePoint": {
+                    "target": "com.amazonaws.bedrockagent#CachePointBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creates a cache checkpoint within a tool designation</p>"
                     }
                 }
             },
@@ -15924,6 +16004,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about an unknown target input for a connection.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnknownNodeInputFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the unknown input.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "input": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeInputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node with the unknown input.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unknown input for a node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnknownNodeOutputFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node with the unknown output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "output": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeOutputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the unknown output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unknown output for a node.</p>"
             }
         },
         "com.amazonaws.bedrockagent#UnreachableNodeFlowValidationDetails": {
