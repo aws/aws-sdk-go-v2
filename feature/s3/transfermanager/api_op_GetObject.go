@@ -690,9 +690,11 @@ func (d *downloader) downloadPart(ctx context.Context, ch chan dlchunk, clientOp
 		if d.getErr() != nil {
 			continue
 		}
-
-		if _, err := d.downloadChunk(ctx, chunk, clientOptions...); err != nil {
+		out, err := d.downloadChunk(ctx, chunk, clientOptions...)
+		if err != nil {
 			d.setErr(err)
+		} else {
+			d.setOutput(out)
 		}
 	}
 }
@@ -835,6 +837,16 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 
 		d.totalBytes = total
 	}
+}
+
+func (d *downloader) setOutput(resp *s3.GetObjectOutput) {
+	d.m.Lock()
+	defer d.m.Unlock()
+
+	if d.out != nil {
+		return
+	}
+	d.out = resp
 }
 
 func (d *downloader) getDownloadRange() (int64, int64) {
