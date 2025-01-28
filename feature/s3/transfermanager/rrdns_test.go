@@ -79,8 +79,8 @@ func TestRoundRobinDNS_MultiIP(t *testing.T) {
 
 	r := &mockResolver{
 		addrs: map[string][]string{
-			"host1.com": []string{"0.0.0.1", "0.0.0.2", "0.0.0.3"},
-			"host2.com": []string{"1.0.0.1", "1.0.0.2", "1.0.0.3"},
+			"host1.com": {"0.0.0.1", "0.0.0.2", "0.0.0.3"},
+			"host2.com": {"1.0.0.1", "1.0.0.2", "1.0.0.3"},
 		},
 	}
 	dc := &mockDialContext{}
@@ -103,8 +103,8 @@ func TestRoundRobinDNS_MaxHosts(t *testing.T) {
 
 	r := &mockResolver{
 		addrs: map[string][]string{
-			"host1.com": []string{"0.0.0.1", "0.0.0.2", "0.0.0.3"},
-			"host2.com": []string{"0.0.0.1", "0.0.0.2", "0.0.0.3"},
+			"host1.com": {"0.0.0.1", "0.0.0.2", "0.0.0.3"},
+			"host2.com": {"0.0.0.1", "0.0.0.2", "0.0.0.3"},
 		},
 	}
 	dc := &mockDialContext{}
@@ -129,7 +129,7 @@ func TestRoundRobinDNS_Expires(t *testing.T) {
 
 	r := &mockResolver{
 		addrs: map[string][]string{
-			"host1.com": []string{"0.0.0.1", "0.0.0.2", "0.0.0.3"},
+			"host1.com": {"0.0.0.1", "0.0.0.2", "0.0.0.3"},
 		},
 	}
 	dc := &mockDialContext{}
