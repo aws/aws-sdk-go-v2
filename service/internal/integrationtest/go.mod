@@ -294,5 +294,3 @@ replace github.com/aws/aws-sdk-go-v2/service/wafregional => ../../../service/waf
 replace github.com/aws/aws-sdk-go-v2/service/wafv2 => ../../../service/wafv2/
 
 replace github.com/aws/aws-sdk-go-v2/service/workspaces => ../../../service/workspaces/
-
-replace github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager => ../../../feature/s3/transfermanager
