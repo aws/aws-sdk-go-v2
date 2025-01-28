@@ -645,10 +645,13 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 	}
 
 	if d.buf != nil {
-		output.Body = io.NopCloser(bytes.NewReader(d.buf))
+		d.out.Body = io.NopCloser(bytes.NewReader(d.buf))
 	}
 
-	return output, d.err
+	if d.err != nil {
+		return nil, d.err
+	}
+	return d.out, nil
 }
 
 func (d *downloader) init(ctx context.Context) error {
@@ -709,6 +712,8 @@ func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clien
 		d.setErr(err)
 		return output
 	}
+
+	d.setOutput(output)
 	d.pos += output.ContentLength
 	return output
 }
@@ -751,11 +756,12 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlchunk, clientOpt
 
 	d.incrWritten(n)
 
-	output := GetObjectOutput{}
+	var output *GetObjectOutput
 	if out != nil {
+		output = &GetObjectOutput{}
 		output.mapFromGetObjectOutput(out)
 	}
-	return &output, err
+	return output, err
 }
 
 func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlchunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, int64, error) {
@@ -839,7 +845,7 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 	}
 }
 
-func (d *downloader) setOutput(resp *s3.GetObjectOutput) {
+func (d *downloader) setOutput(resp *GetObjectOutput) {
 	d.m.Lock()
 	defer d.m.Unlock()
 
