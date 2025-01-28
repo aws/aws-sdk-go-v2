@@ -1,7 +1,7 @@
 //go:build integration
 // +build integration
 
-package s3transfermanager
+package transfermanager
 
 import (
 	"bytes"
