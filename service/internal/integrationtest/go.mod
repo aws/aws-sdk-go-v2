@@ -4,7 +4,6 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.32.3
 	github.com/aws/aws-sdk-go-v2/config v1.28.1
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.35
-	github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager v0.1.0
 	github.com/aws/aws-sdk-go-v2/service/acm v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.33.3
@@ -297,5 +296,3 @@ replace github.com/aws/aws-sdk-go-v2/service/wafregional => ../../../service/waf
 replace github.com/aws/aws-sdk-go-v2/service/wafv2 => ../../../service/wafv2/
 
 replace github.com/aws/aws-sdk-go-v2/service/workspaces => ../../../service/workspaces/
-
-replace github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager => ../../../feature/s3/transfermanager
