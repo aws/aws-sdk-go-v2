@@ -1398,7 +1398,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a transfer <i>location</i> for a Server Message Block (SMB) file\n      server. DataSync can use this location as a source or destination for\n      transferring data.</p>\n         <p>Before you begin, make sure that you understand how DataSync\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb\">accesses\n        SMB file servers</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a transfer <i>location</i> for a Server Message Block (SMB) file\n      server. DataSync can use this location as a source or destination for\n      transferring data.</p>\n         <p>Before you begin, make sure that you understand how DataSync accesses SMB\n      file servers. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">Providing DataSync access to SMB file servers</a>.</p>"
             }
         },
         "com.amazonaws.datasync#CreateLocationSmbRequest": {
@@ -1407,35 +1407,33 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#SmbSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the share exported by your SMB file server where DataSync\n      will read or write data. You can include a subdirectory in the share path (for example,\n        <code>/path/to/subdirectory</code>). Make sure that other SMB clients in your network can\n      also mount this path.</p>\n         <p>To copy all data in the subdirectory, DataSync must be able to mount the SMB\n      share and access all of its data. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>",
+                        "smithy.api#documentation": "<p>Specifies the name of the share exported by your SMB file server where DataSync\n      will read or write data. You can include a subdirectory in the share path (for example,\n        <code>/path/to/subdirectory</code>). Make sure that other SMB clients in your network can\n      also mount this path.</p>\n         <p>To copy all data in the subdirectory, DataSync must be able to mount the SMB\n      share and access all of its data. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">Providing DataSync access to SMB file servers</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServerHostname": {
                     "target": "com.amazonaws.datasync#ServerHostname",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Domain Name Service (DNS) name or IP address of the SMB file server that\n      your DataSync agent will mount.</p>\n         <note>\n            <p>You can't specify an IP version 6 (IPv6) address.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Specifies the domain name or IP address of the SMB file server that your DataSync agent will mount.</p>\n         <p>Remember the following when configuring this parameter:</p>\n         <ul>\n            <li>\n               <p>You can't specify an IP version 6 (IPv6) address.</p>\n            </li>\n            <li>\n               <p>If you're using Kerberos authentication, you must specify a domain name.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the user that can mount and access the files, folders, and file metadata in your\n      SMB file server.</p>\n         <p>For information about choosing a user with the right level of access for your transfer,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the user that can mount and access the files, folders, and file metadata in your\n      SMB file server. This parameter applies only if <code>AuthenticationType</code> is set to\n        <code>NTLM</code>.</p>\n         <p>For information about choosing a user with the right level of access for your transfer,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">Providing DataSync access to SMB file servers</a>.</p>"
                     }
                 },
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the Active Directory domain that your SMB file server belongs to. </p>\n         <p>If you have multiple Active Directory domains in your environment, configuring this\n      parameter makes sure that DataSync connects to the right file server.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Windows domain name that your SMB file server belongs to. This parameter\n      applies only if <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>\n         <p>If you have multiple domains in your environment, configuring this parameter makes sure\n      that DataSync connects to the right file server.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the password of the user who can mount your SMB file server and has permission\n      to access the files and folders involved in your transfer.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the password of the user who can mount your SMB file server and has permission\n      to access the files and folders involved in your transfer. This parameter applies only if\n        <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>"
                     }
                 },
                 "AgentArns": {
@@ -1455,6 +1453,36 @@
                     "target": "com.amazonaws.datasync#InputTagList",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies labels that help you categorize, filter, and search for your Amazon Web Services\n      resources. We recommend creating at least a name tag for your location.</p>"
+                    }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.datasync#SmbAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication protocol that DataSync uses to connect to your SMB\n      file server. DataSync supports <code>NTLM</code> (default) and <code>KERBEROS</code>\n      authentication.</p>"
+                    }
+                },
+                "DnsIpAddresses": {
+                    "target": "com.amazonaws.datasync#DnsIpList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IPv4 addresses for the DNS servers that your SMB file server belongs to.\n      This parameter applies only if <code>AuthenticationType</code> is set to\n      <code>KERBEROS</code>.</p>\n         <p>If you have multiple domains in your environment, configuring this parameter makes sure\n      that DataSync connects to the right SMB file server.</p>"
+                    }
+                },
+                "KerberosPrincipal": {
+                    "target": "com.amazonaws.datasync#KerberosPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a service principal name (SPN), which is an identity in your Kerberos realm that\n      has permission to access the files, folders, and file metadata in your SMB file server.</p>\n         <p>SPNs are case sensitive and must include a prepended <code>cifs/</code>. For example, an\n      SPN might look like <code>cifs/kerberosuser@EXAMPLE.COM</code>.</p>\n         <p>Your task execution will fail if the SPN that you provide for this parameter doesn’t match\n      what’s exactly in your keytab or <code>krb5.conf</code> files. </p>"
+                    }
+                },
+                "KerberosKeytab": {
+                    "target": "com.amazonaws.datasync#KerberosKeytabFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies your Kerberos key table (keytab) file, which includes mappings between your\n      service principal name (SPN) and encryption keys.</p>\n         <p>You can specify the keytab using a file path (for example,\n        <code>file://path/to/file.keytab</code>). The file must be base64 encoded. If you're using\n      the CLI, the encoding is done for you.</p>\n         <p>To avoid task execution errors, make sure that the SPN in the keytab file matches exactly\n      what you specify for <code>KerberosPrincipal</code> and in your <code>krb5.conf</code> file. </p>"
+                    }
+                },
+                "KerberosKrb5Conf": {
+                    "target": "com.amazonaws.datasync#KerberosKrb5ConfFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a Kerberos configuration file (<code>krb5.conf</code>) that defines your\n      Kerberos realm configuration.</p>\n         <p>You can specify the <code>krb5.conf</code> using a file path (for example,\n        <code>file://path/to/krb5.conf</code>). The file must be base64 encoded. If you're using the\nCLI, the encoding is done for you.</p>\n         <p>To avoid task execution errors, make sure that the service principal name (SPN) in the\n        <code>krb5.conf</code> file matches exactly what you specify for\n        <code>KerberosPrincipal</code> and in your keytab file.</p>"
                     }
                 }
             },
@@ -2810,25 +2838,43 @@
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user that can mount and access the files, folders, and file metadata in your SMB file\n      server.</p>"
+                        "smithy.api#documentation": "<p>The user that can mount and access the files, folders, and file metadata in your SMB file\n      server. This element applies only if <code>AuthenticationType</code> is set to\n        <code>NTLM</code>.</p>"
                     }
                 },
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Microsoft Active Directory domain that the SMB file server belongs\n      to.</p>"
+                        "smithy.api#documentation": "<p>The name of the Windows domain that the SMB file server belongs to. This element applies\n      only if <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>"
                     }
                 },
                 "MountOptions": {
                     "target": "com.amazonaws.datasync#SmbMountOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol that DataSync use to access your SMB file.</p>"
+                        "smithy.api#documentation": "<p>The SMB protocol version that DataSync uses to access your SMB file\n      server.</p>"
                     }
                 },
                 "CreationTime": {
                     "target": "com.amazonaws.datasync#Time",
                     "traits": {
                         "smithy.api#documentation": "<p>The time that the SMB location was created.</p>"
+                    }
+                },
+                "DnsIpAddresses": {
+                    "target": "com.amazonaws.datasync#DnsIpList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 addresses for the DNS servers that your SMB file server belongs to. This element\n      applies only if <code>AuthenticationType</code> is set to <code>KERBEROS</code>.</p>"
+                    }
+                },
+                "KerberosPrincipal": {
+                    "target": "com.amazonaws.datasync#KerberosPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kerberos service principal name (SPN) that has permission to access the files,\n      folders, and file metadata in your SMB file server.</p>"
+                    }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.datasync#SmbAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication protocol that DataSync uses to connect to your SMB file\n      server.</p>"
                     }
                 }
             },
@@ -3708,6 +3754,18 @@
         },
         "com.amazonaws.datasync#DiscoveryTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.datasync#DnsIpList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datasync#ServerIpAddress"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
         },
         "com.amazonaws.datasync#Duration": {
             "type": "long",
@@ -5270,7 +5328,7 @@
             "type": "structure",
             "members": {
                 "Domain": {
-                    "target": "com.amazonaws.datasync#FsxUpdateSmbDomain",
+                    "target": "com.amazonaws.datasync#UpdateSmbDomain",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the name of the Windows domain that your storage virtual machine (SVM) belongs to.</p>\n         <p>If you have multiple Active Directory domains in your environment, configuring this parameter makes sure that DataSync connects to the right SVM.</p>"
                     }
@@ -5293,16 +5351,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the Server Message Block (SMB) protocol configuration that DataSync uses to access your Amazon FSx for NetApp ONTAP file system's storage virtual machine (SVM). For more information, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access\">Providing DataSync access to FSx for ONTAP file systems</a>.</p>"
-            }
-        },
-        "com.amazonaws.datasync#FsxUpdateSmbDomain": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 253
-                },
-                "smithy.api#pattern": "^([A-Za-z0-9]((\\.|-+)?[A-Za-z0-9]){0,252})?$"
             }
         },
         "com.amazonaws.datasync#FsxWindowsSubdirectory": {
@@ -6924,7 +6972,7 @@
                     "min": 3,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\+\\.\\(\\)\\$\\p{Zs}]+$"
             }
         },
         "com.amazonaws.datasync#ObjectStorageCertificate": {
@@ -8009,6 +8057,33 @@
                 "smithy.api#pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"
             }
         },
+        "com.amazonaws.datasync#ServerIpAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z$"
+            }
+        },
+        "com.amazonaws.datasync#SmbAuthenticationType": {
+            "type": "enum",
+            "members": {
+                "NTLM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NTLM"
+                    }
+                },
+                "KERBEROS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KERBEROS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datasync#SmbDomain": {
             "type": "string",
             "traits": {
@@ -8084,7 +8159,7 @@
                     "min": 0,
                     "max": 104
                 },
-                "smithy.api#pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$"
+                "smithy.api#pattern": "^[^\\x22\\x5B\\x5D/\\\\:;|=,+*?\\x3C\\x3E]{1,104}$"
             }
         },
         "com.amazonaws.datasync#SmbVersion": {
@@ -9565,7 +9640,7 @@
                     }
                 },
                 "Domain": {
-                    "target": "com.amazonaws.datasync#FsxUpdateSmbDomain",
+                    "target": "com.amazonaws.datasync#UpdateSmbDomain",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the name of the Windows domain that your FSx for Windows File Server file system belongs to.</p>\n         <p>If you have multiple Active Directory domains in your environment, configuring this parameter makes sure that DataSync connects to the right file system.</p>"
                     }
@@ -9936,25 +10011,25 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#SmbSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the share exported by your SMB file server where DataSync\n      will read or write data. You can include a subdirectory in the share path (for example,\n      <code>/path/to/subdirectory</code>). Make sure that other SMB clients in your network can\n      also mount this path.</p>\n         <p>To copy all data in the specified subdirectory, DataSync must be able to mount\n      the SMB share and access all of its data. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the share exported by your SMB file server where DataSync\n      will read or write data. You can include a subdirectory in the share path (for example,\n      <code>/path/to/subdirectory</code>). Make sure that other SMB clients in your network can\n      also mount this path.</p>\n         <p>To copy all data in the specified subdirectory, DataSync must be able to mount\n      the SMB share and access all of its data. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">Providing DataSync access to SMB file servers</a>.</p>"
                     }
                 },
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the user name that can mount your SMB file server and has permission to access\n      the files and folders involved in your transfer.</p>\n         <p>For information about choosing a user with the right level of access for your transfer,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
+                        "smithy.api#documentation": "<p>Specifies the user name that can mount your SMB file server and has permission to access\n      the files and folders involved in your transfer. This parameter applies only if\n        <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>\n         <p>For information about choosing a user with the right level of access for your transfer,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">Providing DataSync access to SMB file servers</a>.</p>"
                     }
                 },
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Windows domain name that your SMB file server belongs to. </p>\n         <p>If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Windows domain name that your SMB file server belongs to. This parameter\n      applies only if <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>\n         <p>If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the password of the user who can mount your SMB file server and has permission\n      to access the files and folders involved in your transfer.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">required permissions</a> for SMB locations.</p>"
+                        "smithy.api#documentation": "<p>Specifies the password of the user who can mount your SMB file server and has permission\n      to access the files and folders involved in your transfer. This parameter applies only if\n        <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>"
                     }
                 },
                 "AgentArns": {
@@ -9965,6 +10040,36 @@
                 },
                 "MountOptions": {
                     "target": "com.amazonaws.datasync#SmbMountOptions"
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.datasync#SmbAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication protocol that DataSync uses to connect to your SMB\n      file server. DataSync supports <code>NTLM</code> (default) and <code>KERBEROS</code>\n      authentication.</p>"
+                    }
+                },
+                "DnsIpAddresses": {
+                    "target": "com.amazonaws.datasync#DnsIpList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IPv4 addresses for the DNS servers that your SMB file server belongs to.\n      This parameter applies only if <code>AuthenticationType</code> is set to\n      <code>KERBEROS</code>.</p>\n         <p>If you have multiple domains in your environment, configuring this parameter makes sure\n      that DataSync connects to the right SMB file server. </p>"
+                    }
+                },
+                "KerberosPrincipal": {
+                    "target": "com.amazonaws.datasync#KerberosPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a service principal name (SPN), which is an identity in your Kerberos realm that\n      has permission to access the files, folders, and file metadata in your SMB file server.</p>\n         <p>SPNs are case sensitive and must include a prepended <code>cifs/</code>. For example, an\n      SPN might look like <code>cifs/kerberosuser@EXAMPLE.COM</code>.</p>\n         <p>Your task execution will fail if the SPN that you provide for this parameter doesn’t match\n      what’s exactly in your keytab or <code>krb5.conf</code> files.</p>"
+                    }
+                },
+                "KerberosKeytab": {
+                    "target": "com.amazonaws.datasync#KerberosKeytabFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies your Kerberos key table (keytab) file, which includes mappings between your\n      service principal name (SPN) and encryption keys.</p>\n         <p>You can specify the keytab using a file path (for example,\n      <code>file://path/to/file.keytab</code>). The file must be base64 encoded. If you're using\n      the CLI, the encoding is done for you.</p>\n         <p>To avoid task execution errors, make sure that the SPN in the keytab file matches exactly\n      what you specify for <code>KerberosPrincipal</code> and in your <code>krb5.conf</code> file.</p>"
+                    }
+                },
+                "KerberosKrb5Conf": {
+                    "target": "com.amazonaws.datasync#KerberosKrb5ConfFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a Kerberos configuration file (<code>krb5.conf</code>) that defines your\n      Kerberos realm configuration.</p>\n         <p>You can specify the <code>krb5.conf</code> using a file path (for example,\n      <code>file://path/to/krb5.conf</code>). The file must be base64 encoded. If you're using the\n      CLI, the encoding is done for you.</p>\n         <p>To avoid task execution errors, make sure that the service principal name (SPN) in the\n      <code>krb5.conf</code> file matches exactly what you specify for\n      <code>KerberosPrincipal</code> and in your keytab file.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9976,6 +10081,16 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datasync#UpdateSmbDomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9]((\\.|-+)?[A-Za-z0-9]){0,252})?$"
             }
         },
         "com.amazonaws.datasync#UpdateStorageSystem": {

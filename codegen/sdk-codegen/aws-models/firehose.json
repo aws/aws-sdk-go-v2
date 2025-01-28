@@ -765,7 +765,7 @@
                 "WarehouseLocation": {
                     "target": "com.amazonaws.firehose#WarehouseLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The warehouse location for Apache Iceberg tables. You must configure this when schema\n         evolution and table creation is enabled.</p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
@@ -981,6 +981,12 @@
                         "smithy.api#documentation": "<p>The Firehose stream type. This parameter can be one of the following\n         values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the Firehose stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The Firehose stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "DirectPutSourceConfiguration": {
+                    "target": "com.amazonaws.firehose#DirectPutSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that configures parameters such as <code>ThroughputHintInMBs</code> for a\n         stream configured with Direct PUT as a source. </p>"
+                    }
+                },
                 "KinesisStreamSourceConfiguration": {
                     "target": "com.amazonaws.firehose#KinesisStreamSourceConfiguration",
                     "traits": {
@@ -1015,7 +1021,7 @@
                 "ElasticsearchDestinationConfiguration": {
                     "target": "com.amazonaws.firehose#ElasticsearchDestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination in Amazon ES. You can specify only one destination.</p>"
+                        "smithy.api#documentation": "<p>The destination in Amazon OpenSearch Service. You can specify only one destination.</p>"
                     }
                 },
                 "AmazonopensearchserviceDestinationConfiguration": {
@@ -1039,7 +1045,7 @@
                 "Tags": {
                     "target": "com.amazonaws.firehose#TagDeliveryStreamInputTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of tags to assign to the Firehose stream. A tag is a key-value pair that you can\n         define and assign to Amazon Web Services resources. Tags are metadata. For example, you can\n         add friendly names and descriptions or other types of information that can help you\n         distinguish the Firehose stream. For more information about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n            Cost Allocation Tags</a> in the Amazon Web Services Billing and Cost Management User\n         Guide.</p>\n         <p>You can specify up to 50 tags when creating a Firehose stream.</p>\n         <p>If you specify tags in the <code>CreateDeliveryStream</code> action, Amazon Data\n         Firehose performs an additional authorization on the\n            <code>firehose:TagDeliveryStream</code> action to verify if users have permissions to\n         create tags. If you do not provide this permission, requests to create new Firehose\n         Firehose streams with IAM resource tags will fail with an\n         <code>AccessDeniedException</code> such as following.</p>\n         <p>\n            <b>AccessDeniedException</b>\n         </p>\n         <p>User: arn:aws:sts::x:assumed-role/x/x is not authorized to perform: firehose:TagDeliveryStream on resource: arn:aws:firehose:us-east-1:x:deliverystream/x with an explicit deny in an identity-based policy.</p>\n         <p>For an example IAM policy, see <a href=\"https://docs.aws.amazon.com/firehose/latest/APIReference/API_CreateDeliveryStream.html#API_CreateDeliveryStream_Examples\">Tag example.</a>\n         </p>"
+                        "smithy.api#documentation": "<p>A set of tags to assign to the Firehose stream. A tag is a key-value pair that you can\n         define and assign to Amazon Web Services resources. Tags are metadata. For example, you can\n         add friendly names and descriptions or other types of information that can help you\n         distinguish the Firehose stream. For more information about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n            Cost Allocation Tags</a> in the Amazon Web Services Billing and Cost Management User\n         Guide.</p>\n         <p>You can specify up to 50 tags when creating a Firehose stream.</p>\n         <p>If you specify tags in the <code>CreateDeliveryStream</code> action, Amazon Data\n         Firehose performs an additional authorization on the\n            <code>firehose:TagDeliveryStream</code> action to verify if users have permissions to\n         create tags. If you do not provide this permission, requests to create new Firehose streams\n         with IAM resource tags will fail with an <code>AccessDeniedException</code> such as\n         following.</p>\n         <p>\n            <b>AccessDeniedException</b>\n         </p>\n         <p>User: arn:aws:sts::x:assumed-role/x/x is not authorized to perform: firehose:TagDeliveryStream on resource: arn:aws:firehose:us-east-1:x:deliverystream/x with an explicit deny in an identity-based policy.</p>\n         <p>For an example IAM policy, see <a href=\"https://docs.aws.amazon.com/firehose/latest/APIReference/API_CreateDeliveryStream.html#API_CreateDeliveryStream_Examples\">Tag example.</a>\n         </p>"
                     }
                 },
                 "AmazonOpenSearchServerlessDestinationConfiguration": {
@@ -1066,7 +1072,7 @@
                 "DatabaseSourceConfiguration": {
                     "target": "com.amazonaws.firehose#DatabaseSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The top level object for configuring streams with database as a source. \n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
@@ -1171,18 +1177,18 @@
                 "Include": {
                     "target": "com.amazonaws.firehose#DatabaseColumnIncludeOrExcludeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The list of column patterns in source database to be included for Firehose to read from.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "Exclude": {
                     "target": "com.amazonaws.firehose#DatabaseColumnIncludeOrExcludeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The list of column patterns in source database to be excluded for Firehose to read from.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>The structure used to configure the list of column patterns in source database\n         endpoint for Firehose to read from. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#DatabaseColumnName": {
@@ -1217,18 +1223,18 @@
                 "Include": {
                     "target": "com.amazonaws.firehose#DatabaseIncludeOrExcludeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The list of database patterns in source database endpoint to be included for Firehose\n         to read from. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "Exclude": {
                     "target": "com.amazonaws.firehose#DatabaseIncludeOrExcludeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The list of database patterns in source database endpoint to be excluded for Firehose\n         to read from. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>The structure used to configure the list of database patterns in source database\n         endpoint for Firehose to read from. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#DatabaseName": {
@@ -1256,35 +1262,35 @@
                 "Id": {
                     "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The identifier of the current snapshot of the table in source database endpoint.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Table": {
                     "target": "com.amazonaws.firehose#DatabaseTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The fully qualified name of the table in source database endpoint that Firehose reads.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RequestTimestamp": {
                     "target": "com.amazonaws.firehose#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The timestamp when the current snapshot is taken on the table.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RequestedBy": {
                     "target": "com.amazonaws.firehose#SnapshotRequestedBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The principal that sent the request to take the current snapshot on the table.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.firehose#SnapshotStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The status of the current snapshot of the table.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1293,7 +1299,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n            The structure that describes the snapshot information of a table in source database endpoint that Firehose reads.  \n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#DatabaseSnapshotInfoList": {
@@ -1313,7 +1319,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n            The structure to configure the authentication methods for Firehose to connect to source database endpoint.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#DatabaseSourceConfiguration": {
@@ -1322,80 +1328,80 @@
                 "Type": {
                     "target": "com.amazonaws.firehose#DatabaseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>The type of database engine. This can be one of the following values. </p>\n         <ul>\n            <li>\n               <p>MySQL</p>\n            </li>\n            <li>\n               <p>PostgreSQL</p>\n            </li>\n         </ul>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Endpoint": {
                     "target": "com.amazonaws.firehose#DatabaseEndpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The endpoint of the database server.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Port": {
                     "target": "com.amazonaws.firehose#DatabasePort",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>The port of the database. This can be one of the following values.</p>\n         <ul>\n            <li>\n               <p>3306 for MySQL database type</p>\n            </li>\n            <li>\n               <p>5432 for PostgreSQL database type</p>\n            </li>\n         </ul>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SSLMode": {
                     "target": "com.amazonaws.firehose#SSLMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The mode to enable or disable SSL when Firehose connects to the database endpoint.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "Databases": {
                     "target": "com.amazonaws.firehose#DatabaseList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The list of database patterns in source database endpoint for Firehose to read from.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tables": {
                     "target": "com.amazonaws.firehose#DatabaseTableList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The list of table patterns in source database endpoint for Firehose to read from.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Columns": {
                     "target": "com.amazonaws.firehose#DatabaseColumnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The list of column patterns in source database endpoint for Firehose to read from.  \n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "SurrogateKeys": {
                     "target": "com.amazonaws.firehose#DatabaseSurrogateKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The optional list of table and column names used as unique key columns when taking snapshot if the tables don’t have primary keys configured.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "SnapshotWatermarkTable": {
                     "target": "com.amazonaws.firehose#DatabaseTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The fully qualified name of the table in source database endpoint that Firehose uses to track snapshot progress.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DatabaseSourceAuthenticationConfiguration": {
                     "target": "com.amazonaws.firehose#DatabaseSourceAuthenticationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The structure to configure the authentication methods for Firehose to connect to source database endpoint.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DatabaseSourceVPCConfiguration": {
                     "target": "com.amazonaws.firehose#DatabaseSourceVPCConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The details of the VPC Endpoint Service which Firehose uses to create a PrivateLink to the database.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n            The top level object for configuring streams with database as a source. \n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#DatabaseSourceDescription": {
@@ -1404,78 +1410,78 @@
                 "Type": {
                     "target": "com.amazonaws.firehose#DatabaseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The type of database engine. This can be one of the following values. </p>\n         <ul>\n            <li>\n               <p>MySQL</p>\n            </li>\n            <li>\n               <p>PostgreSQL</p>\n            </li>\n         </ul>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "Endpoint": {
                     "target": "com.amazonaws.firehose#DatabaseEndpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The endpoint of the database server.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "Port": {
                     "target": "com.amazonaws.firehose#DatabasePort",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The port of the database. This can be one of the following values.</p>\n         <ul>\n            <li>\n               <p>3306 for MySQL database type</p>\n            </li>\n            <li>\n               <p>5432 for PostgreSQL database type</p>\n            </li>\n         </ul>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "SSLMode": {
                     "target": "com.amazonaws.firehose#SSLMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The mode to enable or disable SSL when Firehose connects to the database endpoint.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "Databases": {
                     "target": "com.amazonaws.firehose#DatabaseList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The list of database patterns in source database endpoint for Firehose to read from.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "Tables": {
                     "target": "com.amazonaws.firehose#DatabaseTableList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The list of table patterns in source database endpoint for Firehose to read from.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "Columns": {
                     "target": "com.amazonaws.firehose#DatabaseColumnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The list of column patterns in source database endpoint for Firehose to read from.  \n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "SurrogateKeys": {
                     "target": "com.amazonaws.firehose#DatabaseColumnIncludeOrExcludeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The optional list of table and column names used as unique key columns when taking snapshot if the tables don’t have primary keys configured.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "SnapshotWatermarkTable": {
                     "target": "com.amazonaws.firehose#DatabaseTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The fully qualified name of the table in source database endpoint that Firehose uses to track snapshot progress.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "SnapshotInfo": {
                     "target": "com.amazonaws.firehose#DatabaseSnapshotInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The structure that describes the snapshot information of a table in source database endpoint that Firehose reads.  \n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "DatabaseSourceAuthenticationConfiguration": {
                     "target": "com.amazonaws.firehose#DatabaseSourceAuthenticationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The structure to configure the authentication methods for Firehose to connect to source database endpoint.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "DatabaseSourceVPCConfiguration": {
                     "target": "com.amazonaws.firehose#DatabaseSourceVPCConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n            The details of the VPC Endpoint Service which Firehose uses to create a PrivateLink to the database.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n            The top level object for database source description.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#DatabaseSourceVPCConfiguration": {
@@ -1484,13 +1490,13 @@
                 "VpcEndpointServiceName": {
                     "target": "com.amazonaws.firehose#VpcEndpointServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n            The VPC endpoint service name which Firehose uses to create a PrivateLink to the database. The endpoint service must have the Firehose service principle <code>firehose.amazonaws.com</code> as an allowed principal on the VPC endpoint service. The VPC endpoint service name is a string that looks like <code>com.amazonaws.vpce.<region>.<vpc-endpoint-service-id></code>. \n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n            The structure for details of the VPC Endpoint Service which Firehose uses to create a PrivateLink to the database.\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#DatabaseSurrogateKeyList": {
@@ -1511,18 +1517,18 @@
                 "Include": {
                     "target": "com.amazonaws.firehose#DatabaseTableIncludeOrExcludeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The list of table patterns in source database endpoint to be included for Firehose to\n         read from. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "Exclude": {
                     "target": "com.amazonaws.firehose#DatabaseTableIncludeOrExcludeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The list of table patterns in source database endpoint to be excluded for Firehose to\n         read from. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>The structure used to configure the list of table patterns in source database endpoint\n         for Firehose to read from. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#DatabaseTableName": {
@@ -2127,7 +2133,7 @@
                 "ElasticsearchDestinationDescription": {
                     "target": "com.amazonaws.firehose#ElasticsearchDestinationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination in Amazon ES.</p>"
+                        "smithy.api#documentation": "<p>The destination in Amazon OpenSearch Service.</p>"
                     }
                 },
                 "AmazonopensearchserviceDestinationDescription": {
@@ -2213,7 +2219,7 @@
                 "PartitionSpec": {
                     "target": "com.amazonaws.firehose#PartitionSpec",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The partition spec configuration for a table that is used by automatic table\n         creation.</p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "S3ErrorOutputPrefix": {
@@ -2231,6 +2237,35 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.firehose#DestinationTableConfiguration"
+            }
+        },
+        "com.amazonaws.firehose#DirectPutSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "ThroughputHintInMBs": {
+                    "target": "com.amazonaws.firehose#ThroughputHintInMBs",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The value that you configure for this parameter is for information purpose only and\n         does not affect Firehose delivery throughput limit. You can use the <a href=\"https://support.console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase%26limitType=kinesis-firehose-limits\">Firehose Limits form</a> to request a throughput limit increase. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that configures parameters such as <code>ThroughputHintInMBs</code> for a stream configured with\n         Direct PUT as a source. </p>"
+            }
+        },
+        "com.amazonaws.firehose#DirectPutSourceDescription": {
+            "type": "structure",
+            "members": {
+                "ThroughputHintInMBs": {
+                    "target": "com.amazonaws.firehose#ThroughputHintInMBs",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The value that you configure for this parameter is for information purpose only and\n         does not affect Firehose delivery throughput limit. You can use the <a href=\"https://support.console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase%26limitType=kinesis-firehose-limits\">Firehose Limits form</a> to request a throughput limit increase. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that configures parameters such as <code>ThroughputHintInMBs</code> for a stream configured with\n         Direct PUT as a source. </p>"
             }
         },
         "com.amazonaws.firehose#DocumentIdOptions": {
@@ -2260,7 +2295,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.firehose#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that the dynamic partitioning is enabled for this Firehose\n         Firehose stream.</p>"
+                        "smithy.api#documentation": "<p>Specifies that the dynamic partitioning is enabled for this Firehose stream.</p>"
                     }
                 }
             },
@@ -2285,7 +2320,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the buffering to perform before delivering data to the Amazon ES\n         destination.</p>"
+                "smithy.api#documentation": "<p>Describes the buffering to perform before delivering data to the Amazon OpenSearch Service\n         destination.</p>"
             }
         },
         "com.amazonaws.firehose#ElasticsearchBufferingIntervalInSeconds": {
@@ -2322,14 +2357,14 @@
                 "RoleARN": {
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose\n         for calling the Amazon ES Configuration API and for indexing documents. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose\n         for calling the Amazon OpenSearch Service Configuration API and for indexing documents. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DomainARN": {
                     "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. The IAM role must have permissions\n            for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and\n            <code>DescribeDomainConfig</code> after assuming the role specified in <b>RoleARN</b>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon OpenSearch Service domain. The IAM role must have permissions\n            for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and\n            <code>DescribeDomainConfig</code> after assuming the role specified in <b>RoleARN</b>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
                     }
                 },
                 "ClusterEndpoint": {
@@ -2354,7 +2389,7 @@
                 "IndexRotationPeriod": {
                     "target": "com.amazonaws.firehose#ElasticsearchIndexRotationPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elasticsearch index rotation period. Index rotation appends a timestamp to the\n            <code>IndexName</code> to facilitate the expiration of old data. For more information,\n         see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation\">Index Rotation for the\n            Amazon ES Destination</a>. The default value is <code>OneDay</code>.</p>"
+                        "smithy.api#documentation": "<p>The Elasticsearch index rotation period. Index rotation appends a timestamp to the\n            <code>IndexName</code> to facilitate the expiration of old data. For more information,\n         see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation\">Index Rotation for the\n            Amazon OpenSearch Service Destination</a>. The default value is <code>OneDay</code>.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -2366,13 +2401,13 @@
                 "RetryOptions": {
                     "target": "com.amazonaws.firehose#ElasticsearchRetryOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retry behavior in case Firehose is unable to deliver documents to\n         Amazon ES. The default value is 300 (5 minutes).</p>"
+                        "smithy.api#documentation": "<p>The retry behavior in case Firehose is unable to deliver documents to\n         Amazon OpenSearch Service. The default value is 300 (5 minutes).</p>"
                     }
                 },
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#ElasticsearchS3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When it is set to\n            <code>FailedDocumentsOnly</code>, Firehose writes any documents that could\n         not be indexed to the configured Amazon S3 destination, with\n            <code>AmazonOpenSearchService-failed/</code> appended to the key prefix. When set to\n            <code>AllDocuments</code>, Firehose delivers all incoming records to Amazon\n         S3, and also writes failed documents with <code>AmazonOpenSearchService-failed/</code>\n         appended to the prefix. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup\">Amazon S3 Backup for the\n            Amazon ES Destination</a>. Default value is\n         <code>FailedDocumentsOnly</code>.</p>\n         <p>You can't change this backup mode after you create the Firehose stream. </p>"
+                        "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When it is set to\n            <code>FailedDocumentsOnly</code>, Firehose writes any documents that could\n         not be indexed to the configured Amazon S3 destination, with\n            <code>AmazonOpenSearchService-failed/</code> appended to the key prefix. When set to\n            <code>AllDocuments</code>, Firehose delivers all incoming records to Amazon\n         S3, and also writes failed documents with <code>AmazonOpenSearchService-failed/</code>\n         appended to the prefix. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup\">Amazon S3 Backup for the\n            Amazon OpenSearch Service Destination</a>. Default value is\n         <code>FailedDocumentsOnly</code>.</p>\n         <p>You can't change this backup mode after you create the Firehose stream. </p>"
                     }
                 },
                 "S3Configuration": {
@@ -2408,7 +2443,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration of a destination in Amazon ES.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration of a destination in Amazon OpenSearch Service.</p>"
             }
         },
         "com.amazonaws.firehose#ElasticsearchDestinationDescription": {
@@ -2423,13 +2458,13 @@
                 "DomainARN": {
                     "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>\n         <p>Firehose uses either <code>ClusterEndpoint</code> or <code>DomainARN</code>\n         to send data to Amazon ES.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon OpenSearch Service domain. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>\n         <p>Firehose uses either <code>ClusterEndpoint</code> or <code>DomainARN</code>\n         to send data to Amazon OpenSearch Service.</p>"
                     }
                 },
                 "ClusterEndpoint": {
                     "target": "com.amazonaws.firehose#ElasticsearchClusterEndpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint to use when communicating with the cluster. Firehose uses\n         either this <code>ClusterEndpoint</code> or the <code>DomainARN</code> field to send data\n         to Amazon ES.</p>"
+                        "smithy.api#documentation": "<p>The endpoint to use when communicating with the cluster. Firehose uses\n         either this <code>ClusterEndpoint</code> or the <code>DomainARN</code> field to send data\n         to Amazon OpenSearch Service.</p>"
                     }
                 },
                 "IndexName": {
@@ -2459,7 +2494,7 @@
                 "RetryOptions": {
                     "target": "com.amazonaws.firehose#ElasticsearchRetryOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon ES retry options.</p>"
+                        "smithy.api#documentation": "<p>The Amazon OpenSearch Service retry options.</p>"
                     }
                 },
                 "S3BackupMode": {
@@ -2500,7 +2535,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The destination description in Amazon ES.</p>"
+                "smithy.api#documentation": "<p>The destination description in Amazon OpenSearch Service.</p>"
             }
         },
         "com.amazonaws.firehose#ElasticsearchDestinationUpdate": {
@@ -2509,13 +2544,13 @@
                 "RoleARN": {
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose\n         for calling the Amazon ES Configuration API and for indexing documents. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose\n         for calling the Amazon OpenSearch Service Configuration API and for indexing documents. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>"
                     }
                 },
                 "DomainARN": {
                     "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. The IAM role must have permissions\n            for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and\n            <code>DescribeDomainConfig</code> after assuming the IAM role specified in\n            <code>RoleARN</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon OpenSearch Service domain. The IAM role must have permissions\n            for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and\n            <code>DescribeDomainConfig</code> after assuming the IAM role specified in\n            <code>RoleARN</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
                     }
                 },
                 "ClusterEndpoint": {
@@ -2539,7 +2574,7 @@
                 "IndexRotationPeriod": {
                     "target": "com.amazonaws.firehose#ElasticsearchIndexRotationPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elasticsearch index rotation period. Index rotation appends a timestamp to\n            <code>IndexName</code> to facilitate the expiration of old data. For more information,\n         see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation\">Index Rotation for the\n            Amazon ES Destination</a>. Default value is <code>OneDay</code>.</p>"
+                        "smithy.api#documentation": "<p>The Elasticsearch index rotation period. Index rotation appends a timestamp to\n            <code>IndexName</code> to facilitate the expiration of old data. For more information,\n         see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation\">Index Rotation for the\n            Amazon OpenSearch Service Destination</a>. Default value is <code>OneDay</code>.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -2551,7 +2586,7 @@
                 "RetryOptions": {
                     "target": "com.amazonaws.firehose#ElasticsearchRetryOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retry behavior in case Firehose is unable to deliver documents to\n         Amazon ES. The default value is 300 (5 minutes).</p>"
+                        "smithy.api#documentation": "<p>The retry behavior in case Firehose is unable to deliver documents to\n         Amazon OpenSearch Service. The default value is 300 (5 minutes).</p>"
                     }
                 },
                 "S3Update": {
@@ -2580,7 +2615,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an update for a destination in Amazon ES.</p>"
+                "smithy.api#documentation": "<p>Describes an update for a destination in Amazon OpenSearch Service.</p>"
             }
         },
         "com.amazonaws.firehose#ElasticsearchDomainARN": {
@@ -2653,12 +2688,12 @@
                 "DurationInSeconds": {
                     "target": "com.amazonaws.firehose#ElasticsearchRetryDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>After an initial failure to deliver to Amazon ES, the total amount of time during\n         which Firehose retries delivery (including the first attempt). After this time\n         has elapsed, the failed documents are written to Amazon S3. Default value is 300 seconds (5\n         minutes). A value of 0 (zero) results in no retries.</p>"
+                        "smithy.api#documentation": "<p>After an initial failure to deliver to Amazon OpenSearch Service, the total amount of time during\n         which Firehose retries delivery (including the first attempt). After this time\n         has elapsed, the failed documents are written to Amazon S3. Default value is 300 seconds (5\n         minutes). A value of 0 (zero) results in no retries.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures retry behavior in case Firehose is unable to deliver\n         documents to Amazon ES.</p>"
+                "smithy.api#documentation": "<p>Configures retry behavior in case Firehose is unable to deliver\n         documents to Amazon OpenSearch Service.</p>"
             }
         },
         "com.amazonaws.firehose#ElasticsearchS3BackupMode": {
@@ -4592,13 +4627,13 @@
                 "SchemaEvolutionConfiguration": {
                     "target": "com.amazonaws.firehose#SchemaEvolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The configuration to enable automatic schema evolution.</p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "TableCreationConfiguration": {
                     "target": "com.amazonaws.firehose#TableCreationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The configuration to enable automatic table creation.</p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -4624,6 +4659,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.\n      </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AppendOnly": {
+                    "target": "com.amazonaws.firehose#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Describes whether all incoming data for this delivery stream will be append only\n         (inserts only and not for updates and deletes) for Iceberg delivery. This feature is only\n         applicable for Apache Iceberg Tables.</p>\n         <p>The default value is false. If you set this value to true, Firehose automatically\n         increases the throughput limit of a stream based on the throttling levels of the stream. If\n         you set this parameter to true for a stream with updates and deletes, you will see out of\n         order delivery. </p>"
                     }
                 },
                 "CatalogConfiguration": {
@@ -4656,13 +4697,13 @@
                 "SchemaEvolutionConfiguration": {
                     "target": "com.amazonaws.firehose#SchemaEvolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>The description of automatic schema evolution configuration.</p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "TableCreationConfiguration": {
                     "target": "com.amazonaws.firehose#TableCreationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         The description of table creation configuration.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -4687,6 +4728,12 @@
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.\n      </p>"
+                    }
+                },
+                "AppendOnly": {
+                    "target": "com.amazonaws.firehose#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Describes whether all incoming data for this delivery stream will be append only\n         (inserts only and not for updates and deletes) for Iceberg delivery. This feature is only\n         applicable for Apache Iceberg Tables.</p>\n         <p>The default value is false. If you set this value to true, Firehose automatically\n         increases the throughput limit of a stream based on the throttling levels of the stream. If\n         you set this parameter to true for a stream with updates and deletes, you will see out of\n         order delivery.</p>\n         <p> </p>"
                     }
                 },
                 "CatalogConfiguration": {
@@ -4715,13 +4762,13 @@
                 "SchemaEvolutionConfiguration": {
                     "target": "com.amazonaws.firehose#SchemaEvolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         The configuration to enable automatic schema evolution.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "TableCreationConfiguration": {
                     "target": "com.amazonaws.firehose#TableCreationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         The configuration to enable automatic table creation.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -4746,6 +4793,12 @@
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.\n      </p>"
+                    }
+                },
+                "AppendOnly": {
+                    "target": "com.amazonaws.firehose#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Describes whether all incoming data for this delivery stream will be append only\n         (inserts only and not for updates and deletes) for Iceberg delivery. This feature is only\n         applicable for Apache Iceberg Tables. </p>\n         <p>The default value is false. If you set this value to true, Firehose automatically\n         increases the throughput limit of a stream based on the throttling levels of the stream. If\n         you set this parameter to true for a stream with updates and deletes, you will see out of\n         order delivery. </p>"
                     }
                 },
                 "CatalogConfiguration": {
@@ -4934,7 +4987,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about a Kinesis data stream used as the source for a Firehose\n         Firehose stream.</p>"
+                "smithy.api#documentation": "<p>Details about a Kinesis data stream used as the source for a Firehose\n         stream.</p>"
             }
         },
         "com.amazonaws.firehose#LimitExceededException": {
@@ -5226,7 +5279,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the Amazon MSK cluster used as the source for a Firehose\n         Firehose stream.</p>"
+                "smithy.api#documentation": "<p>Details about the Amazon MSK cluster used as the source for a Firehose stream.</p>"
             }
         },
         "com.amazonaws.firehose#NoEncryptionConfig": {
@@ -5530,13 +5583,13 @@
                 "SourceName": {
                     "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n         The column name to be configured in partition spec.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>Represents a single field in a <code>PartitionSpec</code>. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#PartitionFields": {
@@ -5551,12 +5604,12 @@
                 "Identity": {
                     "target": "com.amazonaws.firehose#PartitionFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p> List of identity <a href=\"https://iceberg.apache.org/spec/#partition-transforms\">transforms</a> that performs an identity transformation. The transform takes the\n         source value, and does not modify it. Result type is the source type.</p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>Represents how to produce partition data for a table. Partition data is produced by\n         transforming columns in a table. Each column transform is represented by a named\n            <code>PartitionField</code>. </p>\n         <p>Here is an example of the schema in JSON. </p>\n         <p>\n            <code>\"partitionSpec\": { \"identity\": [ {\"sourceName\": \"column1\"}, {\"sourceName\":\n            \"column2\"}, {\"sourceName\": \"column3\"} ] }</code>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#Password": {
@@ -6617,13 +6670,13 @@
                 "Enabled": {
                     "target": "com.amazonaws.firehose#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n         Specify whether you want to enable schema evolution.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>The configuration to enable schema evolution.</p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#SecretARN": {
@@ -6681,7 +6734,7 @@
                 "ParquetSerDe": {
                     "target": "com.amazonaws.firehose#ParquetSerDe",
                     "traits": {
-                        "smithy.api#documentation": "<p>A serializer to use for converting data to the Parquet format before storing it in\n         Amazon S3. For more information, see <a href=\"https://parquet.apache.org/documentation/latest/\">Apache Parquet</a>.</p>"
+                        "smithy.api#documentation": "<p>A serializer to use for converting data to the Parquet format before storing it in\n         Amazon S3. For more information, see <a href=\"https://parquet.apache.org/docs/contribution-guidelines/\">Apache Parquet</a>.</p>"
                     }
                 },
                 "OrcSerDe": {
@@ -6692,7 +6745,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The serializer that you want Firehose to use to convert data to the target\n         format before writing it to Amazon S3. Firehose supports two types of\n         serializers: the <a href=\"https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/orc/OrcSerde.html\">ORC SerDe</a> and the <a href=\"https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/parquet/serde/ParquetHiveSerDe.html\">Parquet SerDe</a>.</p>"
+                "smithy.api#documentation": "<p>The serializer that you want Firehose to use to convert data to the target\n         format before writing it to Amazon S3. Firehose supports two types of\n         serializers: the ORC SerDe and the Parquet SerDe.</p>"
             }
         },
         "com.amazonaws.firehose#ServiceUnavailableException": {
@@ -6916,13 +6969,13 @@
                 "MetaDataColumnName": {
                     "target": "com.amazonaws.firehose#SnowflakeMetaDataColumnName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the record metadata column</p>"
+                        "smithy.api#documentation": "<p>Specify a column name in the table, where the metadata information has to be loaded.\n         When you enable this field, you will see the following column in the snowflake table, which\n         differs based on the source type.</p>\n         <p>For Direct PUT as source </p>\n         <p>\n            <code>{ \"firehoseDeliveryStreamName\" : \"streamname\", \"IngestionTime\" : \"timestamp\"\n            }</code>\n         </p>\n         <p>For Kinesis Data Stream as source </p>\n         <p>\n            <code> \"kinesisStreamName\" : \"streamname\", \"kinesisShardId\" : \"Id\",\n            \"kinesisPartitionKey\" : \"key\", \"kinesisSequenceNumber\" : \"1234\", \"subsequenceNumber\" :\n            \"2334\", \"IngestionTime\" : \"timestamp\" }</code>\n         </p>"
                     }
                 },
                 "ContentColumnName": {
                     "target": "com.amazonaws.firehose#SnowflakeContentColumnName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the record content column</p>"
+                        "smithy.api#documentation": "<p>The name of the record content column.</p>"
                     }
                 },
                 "SnowflakeVpcConfiguration": {
@@ -7359,6 +7412,12 @@
         "com.amazonaws.firehose#SourceDescription": {
             "type": "structure",
             "members": {
+                "DirectPutSourceDescription": {
+                    "target": "com.amazonaws.firehose#DirectPutSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about Direct PUT used as the source for a Firehose stream.\n         </p>"
+                    }
+                },
                 "KinesisStreamSourceDescription": {
                     "target": "com.amazonaws.firehose#KinesisStreamSourceDescription",
                     "traits": {
@@ -7374,12 +7433,12 @@
                 "DatabaseSourceDescription": {
                     "target": "com.amazonaws.firehose#DatabaseSourceDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>Details about a database used as the source for a Firehose stream.</p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about a Kinesis data stream used as the source for a Firehose\n         Firehose stream.</p>"
+                "smithy.api#documentation": "<p>Details about a Kinesis data stream used as the source for a Firehose\n         stream.</p>"
             }
         },
         "com.amazonaws.firehose#SplunkBufferingHints": {
@@ -7818,13 +7877,13 @@
                 "Enabled": {
                     "target": "com.amazonaws.firehose#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n         Specify whether you want to enable automatic table creation.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>The configuration to enable automatic table creation.</p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#Tag": {
@@ -7945,6 +8004,15 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$"
+            }
+        },
+        "com.amazonaws.firehose#ThroughputHintInMBs": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.firehose#Timestamp": {
@@ -8087,7 +8155,7 @@
                 "ElasticsearchDestinationUpdate": {
                     "target": "com.amazonaws.firehose#ElasticsearchDestinationUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes an update for a destination in Amazon ES.</p>"
+                        "smithy.api#documentation": "<p>Describes an update for a destination in Amazon OpenSearch Service.</p>"
                     }
                 },
                 "AmazonopensearchserviceDestinationUpdate": {
@@ -8155,7 +8223,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.firehose#SubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the subnets that you want Firehose to use to create ENIs in the\n         VPC of the Amazon ES destination. Make sure that the routing tables and inbound and\n         outbound rules allow traffic to flow from the subnets whose IDs are specified here to the\n         subnets that have the destination Amazon ES endpoints. Firehose creates at\n         least one ENI in each of the subnets that are specified here. Do not delete or modify these\n         ENIs.</p>\n         <p>The number of ENIs that Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Firehose can create up to\n         three ENIs for this Firehose stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces\n         </a> in the Amazon VPC Quotas topic.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the subnets that you want Firehose to use to create ENIs in the\n         VPC of the Amazon OpenSearch Service destination. Make sure that the routing tables and inbound and\n         outbound rules allow traffic to flow from the subnets whose IDs are specified here to the\n         subnets that have the destination Amazon OpenSearch Service endpoints. Firehose creates at\n         least one ENI in each of the subnets that are specified here. Do not delete or modify these\n         ENIs.</p>\n         <p>The number of ENIs that Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Firehose can create up to\n         three ENIs for this Firehose stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces\n         </a> in the Amazon VPC Quotas topic.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8169,7 +8237,7 @@
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.firehose#SecurityGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the security groups that you want Firehose to use when it\n         creates ENIs in the VPC of the Amazon ES destination. You can use the same security group\n         that the Amazon ES domain uses or different ones. If you specify different security groups\n         here, ensure that they allow outbound HTTPS traffic to the Amazon ES domain's security\n         group. Also ensure that the Amazon ES domain's security group allows HTTPS traffic from the\n         security groups specified here. If you use the same security group for both your delivery\n         stream and the Amazon ES domain, make sure the security group inbound rule allows HTTPS\n         traffic. For more information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group\n            rules</a> in the Amazon VPC documentation.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the security groups that you want Firehose to use when it\n         creates ENIs in the VPC of the Amazon OpenSearch Service destination. You can use the same security group\n         that the Amazon OpenSearch Service domain uses or different ones. If you specify different security groups\n         here, ensure that they allow outbound HTTPS traffic to the Amazon OpenSearch Service domain's security\n         group. Also ensure that the Amazon OpenSearch Service domain's security group allows HTTPS traffic from the\n         security groups specified here. If you use the same security group for both your delivery\n         stream and the Amazon OpenSearch Service domain, make sure the security group inbound rule allows HTTPS\n         traffic. For more information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group\n            rules</a> in the Amazon VPC documentation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8184,7 +8252,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.firehose#SubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the subnets that Firehose uses to create ENIs in the VPC of the\n         Amazon ES destination. Make sure that the routing tables and inbound and outbound rules\n         allow traffic to flow from the subnets whose IDs are specified here to the subnets that\n         have the destination Amazon ES endpoints. Firehose creates at least one ENI in\n         each of the subnets that are specified here. Do not delete or modify these ENIs.</p>\n         <p>The number of ENIs that Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Firehose can create up to\n         three ENIs for this Firehose stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces\n         </a> in the Amazon VPC Quotas topic.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the subnets that Firehose uses to create ENIs in the VPC of the\n         Amazon OpenSearch Service destination. Make sure that the routing tables and inbound and outbound rules\n         allow traffic to flow from the subnets whose IDs are specified here to the subnets that\n         have the destination Amazon OpenSearch Service endpoints. Firehose creates at least one ENI in\n         each of the subnets that are specified here. Do not delete or modify these ENIs.</p>\n         <p>The number of ENIs that Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Firehose can create up to\n         three ENIs for this Firehose stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces\n         </a> in the Amazon VPC Quotas topic.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8198,20 +8266,20 @@
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.firehose#SecurityGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the security groups that Firehose uses when it creates ENIs in\n         the VPC of the Amazon ES destination. You can use the same security group that the Amazon\n         ES domain uses or different ones. If you specify different security groups, ensure that\n         they allow outbound HTTPS traffic to the Amazon ES domain's security group. Also ensure\n         that the Amazon ES domain's security group allows HTTPS traffic from the security groups\n         specified here. If you use the same security group for both your Firehose stream and the\n         Amazon ES domain, make sure the security group inbound rule allows HTTPS traffic. For more\n         information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group\n            rules</a> in the Amazon VPC documentation.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the security groups that Firehose uses when it creates ENIs in\n         the VPC of the Amazon OpenSearch Service destination. You can use the same security group that the Amazon\n         ES domain uses or different ones. If you specify different security groups, ensure that\n         they allow outbound HTTPS traffic to the Amazon OpenSearch Service domain's security group. Also ensure\n         that the Amazon OpenSearch Service domain's security group allows HTTPS traffic from the security groups\n         specified here. If you use the same security group for both your Firehose stream and the\n         Amazon OpenSearch Service domain, make sure the security group inbound rule allows HTTPS traffic. For more\n         information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group\n            rules</a> in the Amazon VPC documentation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "VpcId": {
                     "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon ES destination's VPC.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon OpenSearch Service destination's VPC.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
+                "smithy.api#documentation": "<p>The details of the VPC of the Amazon OpenSearch Service destination.</p>"
             }
         },
         "com.amazonaws.firehose#VpcEndpointServiceName": {
