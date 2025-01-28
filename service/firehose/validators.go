@@ -564,6 +564,21 @@ func validateDestinationTableConfigurationList(v []types.DestinationTableConfigu
 	}
 }
 
+func validateDirectPutSourceConfiguration(v *types.DirectPutSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DirectPutSourceConfiguration"}
+	if v.ThroughputHintInMBs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThroughputHintInMBs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDocumentIdOptions(v *types.DocumentIdOptions) error {
 	if v == nil {
 		return nil
@@ -1560,6 +1575,11 @@ func validateOpCreateDeliveryStreamInput(v *CreateDeliveryStreamInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDeliveryStreamInput"}
 	if v.DeliveryStreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeliveryStreamName"))
+	}
+	if v.DirectPutSourceConfiguration != nil {
+		if err := validateDirectPutSourceConfiguration(v.DirectPutSourceConfiguration); err != nil {
+			invalidParams.AddNested("DirectPutSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.KinesisStreamSourceConfiguration != nil {
 		if err := validateKinesisStreamSourceConfiguration(v.KinesisStreamSourceConfiguration); err != nil {

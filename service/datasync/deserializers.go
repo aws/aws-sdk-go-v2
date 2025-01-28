@@ -8049,6 +8049,42 @@ func awsAwsjson11_deserializeDocumentDiscoveryServerConfiguration(v **types.Disc
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDnsIpList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ServerIpAddress to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEc2Config(v **types.Ec2Config, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14128,6 +14164,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 				return err
 			}
 
+		case "AuthenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SmbAuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.SmbAuthenticationType(jtv)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14144,6 +14189,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 				}
 			}
 
+		case "DnsIpAddresses":
+			if err := awsAwsjson11_deserializeDocumentDnsIpList(&sv.DnsIpAddresses, value); err != nil {
+				return err
+			}
+
 		case "Domain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14151,6 +14201,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationSmbOutput(v **DescribeLoc
 					return fmt.Errorf("expected SmbDomain to be of type string, got %T instead", value)
 				}
 				sv.Domain = ptr.String(jtv)
+			}
+
+		case "KerberosPrincipal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KerberosPrincipal to be of type string, got %T instead", value)
+				}
+				sv.KerberosPrincipal = ptr.String(jtv)
 			}
 
 		case "LocationArn":

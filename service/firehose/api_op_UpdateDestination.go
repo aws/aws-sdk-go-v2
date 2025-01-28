@@ -85,7 +85,7 @@ type UpdateDestinationInput struct {
 	// Describes an update for a destination in Amazon OpenSearch Service.
 	AmazonopensearchserviceDestinationUpdate *types.AmazonopensearchserviceDestinationUpdate
 
-	// Describes an update for a destination in Amazon ES.
+	// Describes an update for a destination in Amazon OpenSearch Service.
 	ElasticsearchDestinationUpdate *types.ElasticsearchDestinationUpdate
 
 	// Describes an update for a destination in Amazon S3.

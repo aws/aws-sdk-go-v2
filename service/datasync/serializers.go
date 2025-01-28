@@ -4110,6 +4110,17 @@ func awsAwsjson11_serializeDocumentDiscoveryServerConfiguration(v *types.Discove
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDnsIpList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEc2Config(v *types.Ec2Config, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5445,9 +5456,36 @@ func awsAwsjson11_serializeOpDocumentCreateLocationSmbInput(v *CreateLocationSmb
 		}
 	}
 
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
+	if v.DnsIpAddresses != nil {
+		ok := object.Key("DnsIpAddresses")
+		if err := awsAwsjson11_serializeDocumentDnsIpList(v.DnsIpAddresses, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Domain != nil {
 		ok := object.Key("Domain")
 		ok.String(*v.Domain)
+	}
+
+	if v.KerberosKeytab != nil {
+		ok := object.Key("KerberosKeytab")
+		ok.Base64EncodeBytes(v.KerberosKeytab)
+	}
+
+	if v.KerberosKrb5Conf != nil {
+		ok := object.Key("KerberosKrb5Conf")
+		ok.Base64EncodeBytes(v.KerberosKrb5Conf)
+	}
+
+	if v.KerberosPrincipal != nil {
+		ok := object.Key("KerberosPrincipal")
+		ok.String(*v.KerberosPrincipal)
 	}
 
 	if v.MountOptions != nil {
@@ -6603,9 +6641,36 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationSmbInput(v *UpdateLocationSmb
 		}
 	}
 
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
+	if v.DnsIpAddresses != nil {
+		ok := object.Key("DnsIpAddresses")
+		if err := awsAwsjson11_serializeDocumentDnsIpList(v.DnsIpAddresses, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Domain != nil {
 		ok := object.Key("Domain")
 		ok.String(*v.Domain)
+	}
+
+	if v.KerberosKeytab != nil {
+		ok := object.Key("KerberosKeytab")
+		ok.Base64EncodeBytes(v.KerberosKeytab)
+	}
+
+	if v.KerberosKrb5Conf != nil {
+		ok := object.Key("KerberosKrb5Conf")
+		ok.Base64EncodeBytes(v.KerberosKrb5Conf)
+	}
+
+	if v.KerberosPrincipal != nil {
+		ok := object.Key("KerberosPrincipal")
+		ok.String(*v.KerberosPrincipal)
 	}
 
 	if v.LocationArn != nil {

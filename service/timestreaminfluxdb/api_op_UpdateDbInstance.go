@@ -34,6 +34,9 @@ type UpdateDbInstanceInput struct {
 	// This member is required.
 	Identifier *string
 
+	// The amount of storage to allocate for your DB storage type (in gibibytes).
+	AllocatedStorage *int32
+
 	// The Timestream for InfluxDB DB instance type to run InfluxDB on.
 	DbInstanceType types.DbInstanceType
 
@@ -41,6 +44,9 @@ type UpdateDbInstanceInput struct {
 	// groups specify how the database is configured. For example, DB parameter groups
 	// can specify the limit for query concurrency.
 	DbParameterGroupIdentifier *string
+
+	// The Timestream for InfluxDB DB storage type that InfluxDB stores data on.
+	DbStorageType types.DbStorageType
 
 	// Specifies whether the DB instance will be deployed as a standalone instance or
 	// with a Multi-AZ standby for high availability.

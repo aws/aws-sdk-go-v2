@@ -67,6 +67,18 @@ type UpdateJobInput struct {
 	// The maximum number of retries for a job.
 	MaxRetriesPerTask *int32
 
+	// The maximum number of worker hosts that can concurrently process a job. When
+	// the maxWorkerCount is reached, no more workers will be assigned to process the
+	// job, even if the fleets assigned to the job's queue has available workers.
+	//
+	// You can't set the maxWorkerCount to 0. If you set it to -1, there is no maximum
+	// number of workers.
+	//
+	// If you don't specify the maxWorkerCount , the default is -1.
+	//
+	// The maximum number of workers that can process tasks in the job.
+	MaxWorkerCount *int32
+
 	// The job priority to update.
 	Priority *int32
 

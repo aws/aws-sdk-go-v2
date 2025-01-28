@@ -1,8 +1,7 @@
-CreateFleet
+GetLimit
 	Initialize stack step
 		spanInitializeStart
 		RegisterServiceMetadata
-		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
@@ -27,6 +26,7 @@ CreateFleet
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
+		EndpointHostPrefix
 		ComputePayloadHash
 		setLegacyContextSigningOptions
 		Signing

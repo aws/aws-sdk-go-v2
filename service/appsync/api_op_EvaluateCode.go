@@ -72,6 +72,15 @@ type EvaluateCodeOutput struct {
 	// in the evaluated code.
 	Logs []string
 
+	// The list of runtime errors that are added to the GraphQL operation response.
+	OutErrors *string
+
+	// An object available inside each resolver and function handler. A single stash
+	// object lives through a single resolver run. Therefore, you can use the stash to
+	// pass arbitrary data across request and response handlers and across functions in
+	// a pipeline resolver.
+	Stash *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

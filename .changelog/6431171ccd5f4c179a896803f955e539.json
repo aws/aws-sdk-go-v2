@@ -1,0 +1,8 @@
+{
+    "id": "6431171c-cd5f-4c17-9a89-6803f955e539",
+    "type": "feature",
+    "description": "Add stash and outErrors to EvaluateCode/EvaluateMappingTemplate response",
+    "modules": [
+        "service/appsync"
+    ]
+}

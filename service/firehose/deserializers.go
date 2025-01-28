@@ -3606,6 +3606,50 @@ func awsAwsjson11_deserializeDocumentDestinationTableConfigurationList(v *[]type
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDirectPutSourceDescription(v **types.DirectPutSourceDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DirectPutSourceDescription
+	if *v == nil {
+		sv = &types.DirectPutSourceDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ThroughputHintInMBs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ThroughputHintInMBs to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThroughputHintInMBs = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDocumentIdOptions(v **types.DocumentIdOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4578,6 +4622,15 @@ func awsAwsjson11_deserializeDocumentIcebergDestinationDescription(v **types.Ice
 
 	for key, value := range shape {
 		switch key {
+		case "AppendOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.AppendOnly = ptr.Bool(jtv)
+			}
+
 		case "BufferingHints":
 			if err := awsAwsjson11_deserializeDocumentBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
@@ -6997,6 +7050,11 @@ func awsAwsjson11_deserializeDocumentSourceDescription(v **types.SourceDescripti
 		switch key {
 		case "DatabaseSourceDescription":
 			if err := awsAwsjson11_deserializeDocumentDatabaseSourceDescription(&sv.DatabaseSourceDescription, value); err != nil {
+				return err
+			}
+
+		case "DirectPutSourceDescription":
+			if err := awsAwsjson11_deserializeDocumentDirectPutSourceDescription(&sv.DirectPutSourceDescription, value); err != nil {
 				return err
 			}
 

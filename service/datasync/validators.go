@@ -2265,12 +2265,6 @@ func validateOpCreateLocationSmbInput(v *CreateLocationSmbInput) error {
 	if v.ServerHostname == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
 	}
-	if v.User == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("User"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
 	if v.AgentArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
 	}

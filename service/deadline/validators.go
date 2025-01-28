@@ -330,6 +330,26 @@ func (m *validateOpCreateLicenseEndpoint) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLimit struct {
+}
+
+func (*validateOpCreateLimit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLimit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLimitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMonitor struct {
 }
 
@@ -405,6 +425,26 @@ func (m *validateOpCreateQueue) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateQueueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateQueueLimitAssociation struct {
+}
+
+func (*validateOpCreateQueueLimitAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQueueLimitAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQueueLimitAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQueueLimitAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +570,26 @@ func (m *validateOpDeleteLicenseEndpoint) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteLimit struct {
+}
+
+func (*validateOpDeleteLimit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLimit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLimitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMeteredProduct struct {
 }
 
@@ -625,6 +685,26 @@ func (m *validateOpDeleteQueue) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteQueueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteQueueLimitAssociation struct {
+}
+
+func (*validateOpDeleteQueueLimitAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQueueLimitAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQueueLimitAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQueueLimitAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -850,6 +930,26 @@ func (m *validateOpGetLicenseEndpoint) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetLimit struct {
+}
+
+func (*validateOpGetLimit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLimit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLimitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMonitor struct {
 }
 
@@ -925,6 +1025,26 @@ func (m *validateOpGetQueue) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetQueueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQueueLimitAssociation struct {
+}
+
+func (*validateOpGetQueueLimitAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQueueLimitAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueueLimitAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueueLimitAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1230,6 +1350,26 @@ func (m *validateOpListJobs) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListLimits struct {
+}
+
+func (*validateOpListLimits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLimits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLimitsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLimitsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMeteredProducts struct {
 }
 
@@ -1285,6 +1425,26 @@ func (m *validateOpListQueueFleetAssociations) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListQueueFleetAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListQueueLimitAssociations struct {
+}
+
+func (*validateOpListQueueLimitAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQueueLimitAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQueueLimitAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQueueLimitAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1790,6 +1950,26 @@ func (m *validateOpUpdateJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLimit struct {
+}
+
+func (*validateOpUpdateLimit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLimit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLimitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMonitor struct {
 }
 
@@ -1865,6 +2045,26 @@ func (m *validateOpUpdateQueue) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateQueueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQueueLimitAssociation struct {
+}
+
+func (*validateOpUpdateQueueLimitAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueueLimitAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueueLimitAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueueLimitAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2054,6 +2254,10 @@ func addOpCreateLicenseEndpointValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateLicenseEndpoint{}, middleware.After)
 }
 
+func addOpCreateLimitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLimit{}, middleware.After)
+}
+
 func addOpCreateMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMonitor{}, middleware.After)
 }
@@ -2068,6 +2272,10 @@ func addOpCreateQueueFleetAssociationValidationMiddleware(stack *middleware.Stac
 
 func addOpCreateQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateQueue{}, middleware.After)
+}
+
+func addOpCreateQueueLimitAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQueueLimitAssociation{}, middleware.After)
 }
 
 func addOpCreateStorageProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -2094,6 +2302,10 @@ func addOpDeleteLicenseEndpointValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteLicenseEndpoint{}, middleware.After)
 }
 
+func addOpDeleteLimitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLimit{}, middleware.After)
+}
+
 func addOpDeleteMeteredProductValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMeteredProduct{}, middleware.After)
 }
@@ -2112,6 +2324,10 @@ func addOpDeleteQueueFleetAssociationValidationMiddleware(stack *middleware.Stac
 
 func addOpDeleteQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteQueue{}, middleware.After)
+}
+
+func addOpDeleteQueueLimitAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQueueLimitAssociation{}, middleware.After)
 }
 
 func addOpDeleteStorageProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -2158,6 +2374,10 @@ func addOpGetLicenseEndpointValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetLicenseEndpoint{}, middleware.After)
 }
 
+func addOpGetLimitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLimit{}, middleware.After)
+}
+
 func addOpGetMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMonitor{}, middleware.After)
 }
@@ -2172,6 +2392,10 @@ func addOpGetQueueFleetAssociationValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetQueue{}, middleware.After)
+}
+
+func addOpGetQueueLimitAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQueueLimitAssociation{}, middleware.After)
 }
 
 func addOpGetSessionActionValidationMiddleware(stack *middleware.Stack) error {
@@ -2234,6 +2458,10 @@ func addOpListJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListJobs{}, middleware.After)
 }
 
+func addOpListLimitsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLimits{}, middleware.After)
+}
+
 func addOpListMeteredProductsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMeteredProducts{}, middleware.After)
 }
@@ -2244,6 +2472,10 @@ func addOpListQueueEnvironmentsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpListQueueFleetAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListQueueFleetAssociations{}, middleware.After)
+}
+
+func addOpListQueueLimitAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQueueLimitAssociations{}, middleware.After)
 }
 
 func addOpListQueueMembersValidationMiddleware(stack *middleware.Stack) error {
@@ -2346,6 +2578,10 @@ func addOpUpdateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateJob{}, middleware.After)
 }
 
+func addOpUpdateLimitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLimit{}, middleware.After)
+}
+
 func addOpUpdateMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMonitor{}, middleware.After)
 }
@@ -2360,6 +2596,10 @@ func addOpUpdateQueueFleetAssociationValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateQueue{}, middleware.After)
+}
+
+func addOpUpdateQueueLimitAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueueLimitAssociation{}, middleware.After)
 }
 
 func addOpUpdateSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -3926,6 +4166,30 @@ func validateOpCreateLicenseEndpointInput(v *CreateLicenseEndpointInput) error {
 	}
 }
 
+func validateOpCreateLimitInput(v *CreateLimitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLimitInput"}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.AmountRequirementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AmountRequirementName"))
+	}
+	if v.MaxCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxCount"))
+	}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMonitorInput(v *CreateMonitorInput) error {
 	if v == nil {
 		return nil
@@ -4018,6 +4282,27 @@ func validateOpCreateQueueInput(v *CreateQueueInput) error {
 		if err := validateJobRunAsUser(v.JobRunAsUser); err != nil {
 			invalidParams.AddNested("JobRunAsUser", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateQueueLimitAssociationInput(v *CreateQueueLimitAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQueueLimitAssociationInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.LimitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4136,6 +4421,24 @@ func validateOpDeleteLicenseEndpointInput(v *DeleteLicenseEndpointInput) error {
 	}
 }
 
+func validateOpDeleteLimitInput(v *DeleteLimitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLimitInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.LimitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMeteredProductInput(v *DeleteMeteredProductInput) error {
 	if v == nil {
 		return nil
@@ -4221,6 +4524,27 @@ func validateOpDeleteQueueInput(v *DeleteQueueInput) error {
 	}
 	if v.QueueId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteQueueLimitAssociationInput(v *DeleteQueueLimitAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQueueLimitAssociationInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.LimitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4411,11 +4735,11 @@ func validateOpGetJobInput(v *GetJobInput) error {
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.QueueId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4431,6 +4755,24 @@ func validateOpGetLicenseEndpointInput(v *GetLicenseEndpointInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseEndpointInput"}
 	if v.LicenseEndpointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LicenseEndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLimitInput(v *GetLimitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLimitInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.LimitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4506,6 +4848,27 @@ func validateOpGetQueueInput(v *GetQueueInput) error {
 	}
 	if v.QueueId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQueueLimitAssociationInput(v *GetQueueLimitAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueueLimitAssociationInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.LimitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4814,6 +5177,21 @@ func validateOpListJobsInput(v *ListJobsInput) error {
 	}
 }
 
+func validateOpListLimitsInput(v *ListLimitsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLimitsInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListMeteredProductsInput(v *ListMeteredProductsInput) error {
 	if v == nil {
 		return nil
@@ -4852,6 +5230,21 @@ func validateOpListQueueFleetAssociationsInput(v *ListQueueFleetAssociationsInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListQueueFleetAssociationsInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQueueLimitAssociationsInput(v *ListQueueLimitAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQueueLimitAssociationsInput"}
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
@@ -5414,6 +5807,24 @@ func validateOpUpdateJobInput(v *UpdateJobInput) error {
 	}
 }
 
+func validateOpUpdateLimitInput(v *UpdateLimitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLimitInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.LimitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateMonitorInput(v *UpdateMonitorInput) error {
 	if v == nil {
 		return nil
@@ -5502,11 +5913,38 @@ func validateOpUpdateQueueInput(v *UpdateQueueInput) error {
 	}
 }
 
+func validateOpUpdateQueueLimitAssociationInput(v *UpdateQueueLimitAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueLimitAssociationInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.LimitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateSessionInput(v *UpdateSessionInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSessionInput"}
+	if len(v.TargetLifecycleStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetLifecycleStatus"))
+	}
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
@@ -5518,9 +5956,6 @@ func validateOpUpdateSessionInput(v *UpdateSessionInput) error {
 	}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
-	}
-	if len(v.TargetLifecycleStatus) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetLifecycleStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5534,6 +5969,9 @@ func validateOpUpdateStepInput(v *UpdateStepInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStepInput"}
+	if len(v.TargetTaskRunStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetTaskRunStatus"))
+	}
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
@@ -5545,9 +5983,6 @@ func validateOpUpdateStepInput(v *UpdateStepInput) error {
 	}
 	if v.StepId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StepId"))
-	}
-	if len(v.TargetTaskRunStatus) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetTaskRunStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5589,6 +6024,9 @@ func validateOpUpdateTaskInput(v *UpdateTaskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTaskInput"}
+	if len(v.TargetRunStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetRunStatus"))
+	}
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
@@ -5603,9 +6041,6 @@ func validateOpUpdateTaskInput(v *UpdateTaskInput) error {
 	}
 	if v.TaskId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
-	}
-	if len(v.TargetRunStatus) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetRunStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

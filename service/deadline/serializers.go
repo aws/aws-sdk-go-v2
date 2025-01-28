@@ -1655,6 +1655,11 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		ok.Integer(*v.MaxRetriesPerTask)
 	}
 
+	if v.MaxWorkerCount != nil {
+		ok := object.Key("maxWorkerCount")
+		ok.Integer(*v.MaxWorkerCount)
+	}
+
 	if v.Parameters != nil {
 		ok := object.Key("parameters")
 		if err := awsRestjson1_serializeDocumentJobParameters(v.Parameters, ok); err != nil {
@@ -1801,6 +1806,120 @@ func awsRestjson1_serializeOpDocumentCreateLicenseEndpointInput(v *CreateLicense
 	if v.VpcId != nil {
 		ok := object.Key("vpcId")
 		ok.String(*v.VpcId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateLimit struct {
+}
+
+func (*awsRestjson1_serializeOpCreateLimit) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLimitInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/limits")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateLimitInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateLimitInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateLimitInput(v *CreateLimitInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil {
+		locationName := "X-Amz-Client-Token"
+		encoder.SetHeader(locationName).String(*v.ClientToken)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateLimitInput(v *CreateLimitInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AmountRequirementName != nil {
+		ok := object.Key("amountRequirementName")
+		ok.String(*v.AmountRequirementName)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.DisplayName != nil {
+		ok := object.Key("displayName")
+		ok.String(*v.DisplayName)
+	}
+
+	if v.MaxCount != nil {
+		ok := object.Key("maxCount")
+		ok.Integer(*v.MaxCount)
 	}
 
 	return nil
@@ -2267,6 +2386,105 @@ func awsRestjson1_serializeOpDocumentCreateQueueFleetAssociationInput(v *CreateQ
 	if v.FleetId != nil {
 		ok := object.Key("fleetId")
 		ok.String(*v.FleetId)
+	}
+
+	if v.QueueId != nil {
+		ok := object.Key("queueId")
+		ok.String(*v.QueueId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateQueueLimitAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpCreateQueueLimitAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateQueueLimitAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateQueueLimitAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/queue-limit-associations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateQueueLimitAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateQueueLimitAssociationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateQueueLimitAssociationInput(v *CreateQueueLimitAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateQueueLimitAssociationInput(v *CreateQueueLimitAssociationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LimitId != nil {
+		ok := object.Key("limitId")
+		ok.String(*v.LimitId)
 	}
 
 	if v.QueueId != nil {
@@ -2805,6 +3023,86 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLicenseEndpointInput(v *DeleteLic
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteLimit struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteLimit) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLimitInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/limits/{limitId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteLimitInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteLimitInput(v *DeleteLimitInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	if v.LimitId == nil || len(*v.LimitId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member limitId must not be empty")}
+	}
+	if v.LimitId != nil {
+		if err := encoder.SetURI("limitId").String(*v.LimitId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteMeteredProduct struct {
 }
 
@@ -3198,6 +3496,95 @@ func awsRestjson1_serializeOpHttpBindingsDeleteQueueFleetAssociationInput(v *Del
 	}
 	if v.FleetId != nil {
 		if err := encoder.SetURI("fleetId").String(*v.FleetId); err != nil {
+			return err
+		}
+	}
+
+	if v.QueueId == nil || len(*v.QueueId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member queueId must not be empty")}
+	}
+	if v.QueueId != nil {
+		if err := encoder.SetURI("queueId").String(*v.QueueId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteQueueLimitAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteQueueLimitAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteQueueLimitAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteQueueLimitAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/queue-limit-associations/{queueId}/{limitId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteQueueLimitAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteQueueLimitAssociationInput(v *DeleteQueueLimitAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	if v.LimitId == nil || len(*v.LimitId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member limitId must not be empty")}
+	}
+	if v.LimitId != nil {
+		if err := encoder.SetURI("limitId").String(*v.LimitId); err != nil {
 			return err
 		}
 	}
@@ -4130,6 +4517,86 @@ func awsRestjson1_serializeOpHttpBindingsGetLicenseEndpointInput(v *GetLicenseEn
 	return nil
 }
 
+type awsRestjson1_serializeOpGetLimit struct {
+}
+
+func (*awsRestjson1_serializeOpGetLimit) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLimitInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/limits/{limitId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetLimitInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetLimitInput(v *GetLimitInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	if v.LimitId == nil || len(*v.LimitId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member limitId must not be empty")}
+	}
+	if v.LimitId != nil {
+		if err := encoder.SetURI("limitId").String(*v.LimitId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetMonitor struct {
 }
 
@@ -4443,6 +4910,95 @@ func awsRestjson1_serializeOpHttpBindingsGetQueueFleetAssociationInput(v *GetQue
 	}
 	if v.FleetId != nil {
 		if err := encoder.SetURI("fleetId").String(*v.FleetId); err != nil {
+			return err
+		}
+	}
+
+	if v.QueueId == nil || len(*v.QueueId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member queueId must not be empty")}
+	}
+	if v.QueueId != nil {
+		if err := encoder.SetURI("queueId").String(*v.QueueId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetQueueLimitAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpGetQueueLimitAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetQueueLimitAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetQueueLimitAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/queue-limit-associations/{queueId}/{limitId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetQueueLimitAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetQueueLimitAssociationInput(v *GetQueueLimitAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	if v.LimitId == nil || len(*v.LimitId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member limitId must not be empty")}
+	}
+	if v.LimitId != nil {
+		if err := encoder.SetURI("limitId").String(*v.LimitId); err != nil {
 			return err
 		}
 	}
@@ -6042,6 +6598,85 @@ func awsRestjson1_serializeOpHttpBindingsListLicenseEndpointsInput(v *ListLicens
 	return nil
 }
 
+type awsRestjson1_serializeOpListLimits struct {
+}
+
+func (*awsRestjson1_serializeOpListLimits) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListLimits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLimitsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/limits")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListLimitsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListLimitsInput(v *ListLimitsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListMeteredProducts struct {
 }
 
@@ -6349,6 +6984,93 @@ func awsRestjson1_serializeOpHttpBindingsListQueueFleetAssociationsInput(v *List
 
 	if v.FleetId != nil {
 		encoder.SetQuery("fleetId").String(*v.FleetId)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.QueueId != nil {
+		encoder.SetQuery("queueId").String(*v.QueueId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListQueueLimitAssociations struct {
+}
+
+func (*awsRestjson1_serializeOpListQueueLimitAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListQueueLimitAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListQueueLimitAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/queue-limit-associations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListQueueLimitAssociationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListQueueLimitAssociationsInput(v *ListQueueLimitAssociationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	if v.LimitId != nil {
+		encoder.SetQuery("limitId").String(*v.LimitId)
 	}
 
 	if v.MaxResults != nil {
@@ -8969,6 +9691,11 @@ func awsRestjson1_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smi
 		ok.Integer(*v.MaxRetriesPerTask)
 	}
 
+	if v.MaxWorkerCount != nil {
+		ok := object.Key("maxWorkerCount")
+		ok.Integer(*v.MaxWorkerCount)
+	}
+
 	if v.Priority != nil {
 		ok := object.Key("priority")
 		ok.Integer(*v.Priority)
@@ -8977,6 +9704,119 @@ func awsRestjson1_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smi
 	if len(v.TargetTaskRunStatus) > 0 {
 		ok := object.Key("targetTaskRunStatus")
 		ok.String(string(v.TargetTaskRunStatus))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateLimit struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateLimit) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateLimit) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLimitInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/limits/{limitId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateLimitInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateLimitInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateLimitInput(v *UpdateLimitInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	if v.LimitId == nil || len(*v.LimitId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member limitId must not be empty")}
+	}
+	if v.LimitId != nil {
+		if err := encoder.SetURI("limitId").String(*v.LimitId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateLimitInput(v *UpdateLimitInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.DisplayName != nil {
+		ok := object.Key("displayName")
+		ok.String(*v.DisplayName)
+	}
+
+	if v.MaxCount != nil {
+		ok := object.Key("maxCount")
+		ok.Integer(*v.MaxCount)
 	}
 
 	return nil
@@ -9479,6 +10319,118 @@ func awsRestjson1_serializeOpHttpBindingsUpdateQueueFleetAssociationInput(v *Upd
 }
 
 func awsRestjson1_serializeOpDocumentUpdateQueueFleetAssociationInput(v *UpdateQueueFleetAssociationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateQueueLimitAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateQueueLimitAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateQueueLimitAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateQueueLimitAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/queue-limit-associations/{queueId}/{limitId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateQueueLimitAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateQueueLimitAssociationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateQueueLimitAssociationInput(v *UpdateQueueLimitAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	if v.LimitId == nil || len(*v.LimitId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member limitId must not be empty")}
+	}
+	if v.LimitId != nil {
+		if err := encoder.SetURI("limitId").String(*v.LimitId); err != nil {
+			return err
+		}
+	}
+
+	if v.QueueId == nil || len(*v.QueueId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member queueId must not be empty")}
+	}
+	if v.QueueId != nil {
+		if err := encoder.SetURI("queueId").String(*v.QueueId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateQueueLimitAssociationInput(v *UpdateQueueLimitAssociationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

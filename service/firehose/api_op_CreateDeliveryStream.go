@@ -113,6 +113,8 @@ type CreateDeliveryStreamInput struct {
 	// destination.
 	AmazonopensearchserviceDestinationConfiguration *types.AmazonopensearchserviceDestinationConfiguration
 
+	//  The top level object for configuring streams with database as a source.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	DatabaseSourceConfiguration *types.DatabaseSourceConfiguration
 
@@ -128,7 +130,12 @@ type CreateDeliveryStreamInput struct {
 	//   source.
 	DeliveryStreamType types.DeliveryStreamType
 
-	// The destination in Amazon ES. You can specify only one destination.
+	// The structure that configures parameters such as ThroughputHintInMBs for a
+	// stream configured with Direct PUT as a source.
+	DirectPutSourceConfiguration *types.DirectPutSourceConfiguration
+
+	// The destination in Amazon OpenSearch Service. You can specify only one
+	// destination.
 	ElasticsearchDestinationConfiguration *types.ElasticsearchDestinationConfiguration
 
 	// The destination in Amazon S3. You can specify only one destination.
@@ -176,8 +183,8 @@ type CreateDeliveryStreamInput struct {
 	// If you specify tags in the CreateDeliveryStream action, Amazon Data Firehose
 	// performs an additional authorization on the firehose:TagDeliveryStream action
 	// to verify if users have permissions to create tags. If you do not provide this
-	// permission, requests to create new Firehose Firehose streams with IAM resource
-	// tags will fail with an AccessDeniedException such as following.
+	// permission, requests to create new Firehose streams with IAM resource tags will
+	// fail with an AccessDeniedException such as following.
 	//
 	// AccessDeniedException
 	//

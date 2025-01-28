@@ -43,26 +43,67 @@ type UpdateLocationSmbInput struct {
 	// server. You specify an agent by using its Amazon Resource Name (ARN).
 	AgentArns []string
 
-	// Specifies the Windows domain name that your SMB file server belongs to.
+	// Specifies the authentication protocol that DataSync uses to connect to your SMB
+	// file server. DataSync supports NTLM (default) and KERBEROS authentication.
+	AuthenticationType types.SmbAuthenticationType
+
+	// Specifies the IPv4 addresses for the DNS servers that your SMB file server
+	// belongs to. This parameter applies only if AuthenticationType is set to KERBEROS
+	// .
+	//
+	// If you have multiple domains in your environment, configuring this parameter
+	// makes sure that DataSync connects to the right SMB file server.
+	DnsIpAddresses []string
+
+	// Specifies the Windows domain name that your SMB file server belongs to. This
+	// parameter applies only if AuthenticationType is set to NTLM .
 	//
 	// If you have multiple domains in your environment, configuring this parameter
 	// makes sure that DataSync connects to the right file server.
-	//
-	// For more information, see [required permissions] for SMB locations.
-	//
-	// [required permissions]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
 	Domain *string
+
+	// Specifies your Kerberos key table (keytab) file, which includes mappings
+	// between your service principal name (SPN) and encryption keys.
+	//
+	// You can specify the keytab using a file path (for example,
+	// file://path/to/file.keytab ). The file must be base64 encoded. If you're using
+	// the CLI, the encoding is done for you.
+	//
+	// To avoid task execution errors, make sure that the SPN in the keytab file
+	// matches exactly what you specify for KerberosPrincipal and in your krb5.conf
+	// file.
+	KerberosKeytab []byte
+
+	// Specifies a Kerberos configuration file ( krb5.conf ) that defines your Kerberos
+	// realm configuration.
+	//
+	// You can specify the krb5.conf using a file path (for example,
+	// file://path/to/krb5.conf ). The file must be base64 encoded. If you're using the
+	// CLI, the encoding is done for you.
+	//
+	// To avoid task execution errors, make sure that the service principal name (SPN)
+	// in the krb5.conf file matches exactly what you specify for KerberosPrincipal
+	// and in your keytab file.
+	KerberosKrb5Conf []byte
+
+	// Specifies a service principal name (SPN), which is an identity in your Kerberos
+	// realm that has permission to access the files, folders, and file metadata in
+	// your SMB file server.
+	//
+	// SPNs are case sensitive and must include a prepended cifs/ . For example, an SPN
+	// might look like cifs/kerberosuser@EXAMPLE.COM .
+	//
+	// Your task execution will fail if the SPN that you provide for this parameter
+	// doesn’t match what’s exactly in your keytab or krb5.conf files.
+	KerberosPrincipal *string
 
 	// Specifies the version of the Server Message Block (SMB) protocol that DataSync
 	// uses to access an SMB file server.
 	MountOptions *types.SmbMountOptions
 
 	// Specifies the password of the user who can mount your SMB file server and has
-	// permission to access the files and folders involved in your transfer.
-	//
-	// For more information, see [required permissions] for SMB locations.
-	//
-	// [required permissions]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
+	// permission to access the files and folders involved in your transfer. This
+	// parameter applies only if AuthenticationType is set to NTLM .
 	Password *string
 
 	// Specifies the name of the share exported by your SMB file server where DataSync
@@ -71,19 +112,19 @@ type UpdateLocationSmbInput struct {
 	// network can also mount this path.
 	//
 	// To copy all data in the specified subdirectory, DataSync must be able to mount
-	// the SMB share and access all of its data. For more information, see [required permissions]for SMB
-	// locations.
+	// the SMB share and access all of its data. For more information, see [Providing DataSync access to SMB file servers].
 	//
-	// [required permissions]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
+	// [Providing DataSync access to SMB file servers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
 	Subdirectory *string
 
 	// Specifies the user name that can mount your SMB file server and has permission
-	// to access the files and folders involved in your transfer.
+	// to access the files and folders involved in your transfer. This parameter
+	// applies only if AuthenticationType is set to NTLM .
 	//
 	// For information about choosing a user with the right level of access for your
-	// transfer, see [required permissions]for SMB locations.
+	// transfer, see [Providing DataSync access to SMB file servers].
 	//
-	// [required permissions]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
+	// [Providing DataSync access to SMB file servers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
 	User *string
 
 	noSmithyDocumentSerde

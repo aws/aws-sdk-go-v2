@@ -8,55 +8,87 @@ import (
 	"time"
 )
 
-// Provides information about the GPU accelerators and drivers for the instance
-// types in a fleet. If you include the acceleratorCapabilities property in the [ServiceManagedEc2InstanceCapabilities]
-// object, all of the Amazon EC2 instances will have at least one accelerator.
-//
-// [ServiceManagedEc2InstanceCapabilities]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_ServiceManagedEc2InstanceCapabilities
+// Provides information about the GPU accelerators used for jobs processed by a
+// fleet.
 type AcceleratorCapabilities struct {
 
-	// A list of objects that contain the GPU name of the accelerator and driver for
-	// the instance types that support the accelerator.
+	// A list of accelerator capabilities requested for this fleet. Only Amazon
+	// Elastic Compute Cloud instances that provide these capabilities will be used.
+	// For example, if you specify both L4 and T4 chips, Deadline Cloud will use Amazon
+	// EC2 instances that have either the L4 or the T4 chip installed.
 	//
 	// This member is required.
 	Selections []AcceleratorSelection
 
-	// The number of GPUs on each worker. The default is 1.
+	// The number of GPU accelerators specified for worker hosts in this fleet.
 	Count *AcceleratorCountRange
 
 	noSmithyDocumentSerde
 }
 
-// The range for the GPU fleet acceleration.
+// Defines the maximum and minimum number of GPU accelerators required for a
+// worker instance..
 type AcceleratorCountRange struct {
 
-	// The minimum number of GPUs for the accelerator. If you set the value to 0, a
-	// worker will still have 1 GPU.
+	// The minimum number of GPU accelerators in the worker host.
 	//
 	// This member is required.
 	Min *int32
 
-	// The maximum number of GPUs for the accelerator.
+	// The maximum number of GPU accelerators in the worker host.
 	Max *int32
 
 	noSmithyDocumentSerde
 }
 
-// Values that you can use to select a particular Amazon EC2 instance type.
+// Describes a specific GPU accelerator required for an Amazon Elastic Compute
+// Cloud worker host.
 type AcceleratorSelection struct {
 
-	// The name of the GPU accelerator.
+	// The name of the chip used by the GPU accelerator.
+	//
+	// If you specify l4 as the name of the accelerator, you must specify latest or
+	// grid:r550 as the runtime.
+	//
+	// The available GPU accelerators are:
+	//
+	//   - t4 - NVIDIA T4 Tensor Core GPU
+	//
+	//   - a10g - NVIDIA A10G Tensor Core GPU
+	//
+	//   - l4 - NVIDIA L4 Tensor Core GPU
+	//
+	//   - l40s - NVIDIA L40S Tensor Core GPU
 	//
 	// This member is required.
 	Name AcceleratorName
 
-	// The driver version that the GPU accelerator uses.
+	// Specifies the runtime driver to use for the GPU accelerator. You must use the
+	// same runtime for all GPUs.
+	//
+	// You can choose from the following runtimes:
+	//
+	//   - latest - Use the latest runtime available for the chip. If you specify
+	//   latest and a new version of the runtime is released, the new version of the
+	//   runtime is used.
+	//
+	//   - grid:r550 - [NVIDIA vGPU software 17]
+	//
+	//   - grid:r535 - [NVIDIA vGPU software 16]
+	//
+	// If you don't specify a runtime, Deadline Cloud uses latest as the default.
+	// However, if you have multiple accelerators and specify latest for some and
+	// leave others blank, Deadline Cloud raises an exception.
+	//
+	// [NVIDIA vGPU software 16]: https://docs.nvidia.com/vgpu/16.0/index.html
+	// [NVIDIA vGPU software 17]: https://docs.nvidia.com/vgpu/17.0/index.html
 	Runtime *string
 
 	noSmithyDocumentSerde
 }
 
-// The range for memory, in MiB, to use for the accelerator.
+// Defines the maximum and minimum amount of memory, in MiB, to use for the
+// accelerator.
 type AcceleratorTotalMemoryMiBRange struct {
 
 	// The minimum amount of memory to use for the accelerator, measured in MiB.
@@ -66,6 +98,22 @@ type AcceleratorTotalMemoryMiBRange struct {
 
 	// The maximum amount of memory to use for the accelerator, measured in MiB.
 	Max *int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the number of resources used.
+type AcquiredLimit struct {
+
+	// The number of limit resources used.
+	//
+	// This member is required.
+	Count *int32
+
+	// The unique identifier of the limit.
+	//
+	// This member is required.
+	LimitId *string
 
 	noSmithyDocumentSerde
 }
@@ -1389,6 +1437,16 @@ type JobSearchSummary struct {
 	// The maximum number of retries for a job.
 	MaxRetriesPerTask *int32
 
+	// The maximum number of worker hosts that can concurrently process a job. When
+	// the maxWorkerCount is reached, no more workers will be assigned to process the
+	// job, even if the fleets assigned to the job's queue has available workers.
+	//
+	// You can't set the maxWorkerCount to 0. If you set it to -1, there is no maximum
+	// number of workers.
+	//
+	// If you don't specify the maxWorkerCount , the default is -1.
+	MaxWorkerCount *int32
+
 	// The job name.
 	Name *string
 
@@ -1484,6 +1542,16 @@ type JobSummary struct {
 	// The maximum number of retries for a job.
 	MaxRetriesPerTask *int32
 
+	// The maximum number of worker hosts that can concurrently process a job. When
+	// the maxWorkerCount is reached, no more workers will be assigned to process the
+	// job, even if the fleets assigned to the job's queue has available workers.
+	//
+	// You can't set the maxWorkerCount to 0. If you set it to -1, there is no maximum
+	// number of workers.
+	//
+	// If you don't specify the maxWorkerCount , the default is -1.
+	MaxWorkerCount *int32
+
 	// The job ID for the source job.
 	SourceJobId *string
 
@@ -1546,6 +1614,69 @@ type LicenseEndpointSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about a specific limit.
+type LimitSummary struct {
+
+	// The value that you specify as the name in the amounts field of the
+	// hostRequirements in a step of a job template to declare the limit requirement.
+	//
+	// This member is required.
+	AmountRequirementName *string
+
+	// The Unix timestamp of the date and time that the limit was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user identifier of the person that created the limit.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The number of resources from the limit that are being used by jobs. The result
+	// is delayed and may not be the count at the time that you called the operation.
+	//
+	// This member is required.
+	CurrentCount *int32
+
+	// The name of the limit used in lists to identify the limit.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
+	// This member is required.
+	DisplayName *string
+
+	// The unique identifier of the farm that contains the limit.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The unique identifier of the limit.
+	//
+	// This member is required.
+	LimitId *string
+
+	// The maximum number of resources constrained by this limit. When all of the
+	// resources are in use, steps that require the limit won't be scheduled until the
+	// resource is available.
+	//
+	// The maxValue must not be 0. If the value is -1, there is no restriction on the
+	// number of resources that can be acquired for this limit.
+	//
+	// This member is required.
+	MaxCount *int32
+
+	// The Unix timestamp of the date and time that the limit was last updated.
+	UpdatedAt *time.Time
+
+	// The user identifier of the person that last updated the limit.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
 // Log configuration details.
 type LogConfiguration struct {
 
@@ -1582,7 +1713,7 @@ type ManifestProperties struct {
 	// The file system location name.
 	FileSystemLocationName *string
 
-	// The has value of the file.
+	// The hash value of the file.
 	InputManifestHash *string
 
 	// The file path.
@@ -1851,6 +1982,53 @@ type QueueFleetAssociationSummary struct {
 	UpdatedAt *time.Time
 
 	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the association between a queue and a limit.
+type QueueLimitAssociationSummary struct {
+
+	// The Unix timestamp of the date and time that the association was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user identifier of the person that created the association.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The unique identifier of the limit in the association.
+	//
+	// This member is required.
+	LimitId *string
+
+	// The unique identifier of the queue in the association.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The status of task scheduling in the queue-limit association.
+	//
+	//   - ACTIVE - Association is active.
+	//
+	//   - STOP_LIMIT_USAGE_AND_COMPLETE_TASKS - Association has stopped scheduling new
+	//   tasks and is completing current tasks.
+	//
+	//   - STOP_LIMIT_USAGE_AND_CANCEL_TASKS - Association has stopped scheduling new
+	//   tasks and is canceling current tasks.
+	//
+	//   - STOPPED - Association has been stopped.
+	//
+	// This member is required.
+	Status QueueLimitAssociationStatus
+
+	// The Unix timestamp of the date and time that the association was last updated.
+	UpdatedAt *time.Time
+
+	// The user identifier of the person that updated the association.
 	UpdatedBy *string
 
 	noSmithyDocumentSerde
@@ -2150,11 +2328,8 @@ type ServiceManagedEc2InstanceCapabilities struct {
 	// This member is required.
 	VCpuCount *VCpuCountRange
 
-	// The GPU accelerator capabilities required for the Amazon EC2 instances. If you
-	// include the acceleratorCapabilities property in the [ServiceManagedEc2InstanceCapabilities] object, all of the Amazon
-	// EC2 instances will have at least one accelerator.
-	//
-	// [ServiceManagedEc2InstanceCapabilities]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_ServiceManagedEc2InstanceCapabilities
+	// Describes the GPU accelerator capabilities required for worker host instances
+	// in this fleet.
 	AcceleratorCapabilities *AcceleratorCapabilities
 
 	// The allowable Amazon EC2 instance types.

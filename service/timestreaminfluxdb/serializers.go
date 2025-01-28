@@ -1244,6 +1244,11 @@ func awsAwsjson10_serializeOpDocumentUpdateDbInstanceInput(v *UpdateDbInstanceIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllocatedStorage != nil {
+		ok := object.Key("allocatedStorage")
+		ok.Integer(*v.AllocatedStorage)
+	}
+
 	if len(v.DbInstanceType) > 0 {
 		ok := object.Key("dbInstanceType")
 		ok.String(string(v.DbInstanceType))
@@ -1252,6 +1257,11 @@ func awsAwsjson10_serializeOpDocumentUpdateDbInstanceInput(v *UpdateDbInstanceIn
 	if v.DbParameterGroupIdentifier != nil {
 		ok := object.Key("dbParameterGroupIdentifier")
 		ok.String(*v.DbParameterGroupIdentifier)
+	}
+
+	if len(v.DbStorageType) > 0 {
+		ok := object.Key("dbStorageType")
+		ok.String(string(v.DbStorageType))
 	}
 
 	if len(v.DeploymentType) > 0 {

@@ -108,6 +108,14 @@ type GetJobOutput struct {
 	// The maximum number of retries per failed tasks.
 	MaxRetriesPerTask *int32
 
+	// The maximum number of worker hosts that can concurrently process a job. When
+	// the maxWorkerCount is reached, no more workers will be assigned to process the
+	// job, even if the fleets assigned to the job's queue has available workers.
+	//
+	// If you don't set the maxWorkerCount when you create a job, this value is not
+	// returned in the response.
+	MaxWorkerCount *int32
+
 	// The parameters for the job.
 	Parameters map[string]types.JobParameter
 

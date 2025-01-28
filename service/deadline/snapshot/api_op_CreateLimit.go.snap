@@ -1,4 +1,4 @@
-CreateFleet
+CreateLimit
 	Initialize stack step
 		spanInitializeStart
 		RegisterServiceMetadata
@@ -27,6 +27,7 @@ CreateFleet
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
+		EndpointHostPrefix
 		ComputePayloadHash
 		setLegacyContextSigningOptions
 		Signing

@@ -3778,6 +3778,24 @@ func awsRestjson1_deserializeOpDocumentEvaluateCodeOutput(v **EvaluateCodeOutput
 				return err
 			}
 
+		case "outErrors":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutErrors to be of type string, got %T instead", value)
+				}
+				sv.OutErrors = ptr.String(jtv)
+			}
+
+		case "stash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Stash to be of type string, got %T instead", value)
+				}
+				sv.Stash = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3948,6 +3966,24 @@ func awsRestjson1_deserializeOpDocumentEvaluateMappingTemplateOutput(v **Evaluat
 		case "logs":
 			if err := awsRestjson1_deserializeDocumentLogs(&sv.Logs, value); err != nil {
 				return err
+			}
+
+		case "outErrors":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutErrors to be of type string, got %T instead", value)
+				}
+				sv.OutErrors = ptr.String(jtv)
+			}
+
+		case "stash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Stash to be of type string, got %T instead", value)
+				}
+				sv.Stash = ptr.String(jtv)
 			}
 
 		default:

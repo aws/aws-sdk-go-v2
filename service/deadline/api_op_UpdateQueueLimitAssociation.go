@@ -9,113 +9,74 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Gets a session action for the job.
-func (c *Client) GetSessionAction(ctx context.Context, params *GetSessionActionInput, optFns ...func(*Options)) (*GetSessionActionOutput, error) {
+// Updates the status of the queue. If you set the status to one of the
+// STOP_LIMIT_USAGE* values, there will be a delay before the status transitions to
+// the STOPPED state.
+func (c *Client) UpdateQueueLimitAssociation(ctx context.Context, params *UpdateQueueLimitAssociationInput, optFns ...func(*Options)) (*UpdateQueueLimitAssociationOutput, error) {
 	if params == nil {
-		params = &GetSessionActionInput{}
+		params = &UpdateQueueLimitAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSessionAction", params, optFns, c.addOperationGetSessionActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQueueLimitAssociation", params, optFns, c.addOperationUpdateQueueLimitAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetSessionActionOutput)
+	out := result.(*UpdateQueueLimitAssociationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetSessionActionInput struct {
+type UpdateQueueLimitAssociationInput struct {
 
-	// The farm ID for the session action.
+	// The unique identifier of the farm that contains the associated queues and
+	// limits.
 	//
 	// This member is required.
 	FarmId *string
 
-	// The job ID for the session.
+	// The unique identifier of the limit associated to the queue.
 	//
 	// This member is required.
-	JobId *string
+	LimitId *string
 
-	// The queue ID for the session action.
+	// The unique identifier of the queue associated to the limit.
 	//
 	// This member is required.
 	QueueId *string
 
-	// The session action ID for the session.
+	// Sets the status of the limit. You can mark the limit active, or you can stop
+	// usage of the limit and either complete existing tasks or cancel any existing
+	// tasks immediately.
 	//
 	// This member is required.
-	SessionActionId *string
+	Status types.UpdateQueueLimitAssociationStatus
 
 	noSmithyDocumentSerde
 }
 
-type GetSessionActionOutput struct {
-
-	// The session action definition.
-	//
-	// This member is required.
-	Definition types.SessionActionDefinition
-
-	// The session action ID.
-	//
-	// This member is required.
-	SessionActionId *string
-
-	// The session ID for the session action.
-	//
-	// This member is required.
-	SessionId *string
-
-	// The status of the session action.
-	//
-	// This member is required.
-	Status types.SessionActionStatus
-
-	// The limits and their amounts acquired during a session action. If no limits
-	// were acquired during the session, this field isn't returned.
-	AcquiredLimits []types.AcquiredLimit
-
-	// The date and time the resource ended running.
-	EndedAt *time.Time
-
-	// The exit code to exit the session.
-	ProcessExitCode *int32
-
-	// The message that communicates the progress of the session action.
-	ProgressMessage *string
-
-	// The percentage completed for a session action.
-	ProgressPercent *float32
-
-	// The date and time the resource started running.
-	StartedAt *time.Time
-
-	// The Linux timestamp of the date and time the session action was last updated.
-	WorkerUpdatedAt *time.Time
-
+type UpdateQueueLimitAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetSessionActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQueueLimitAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionAction{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueLimitAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSessionAction{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQueueLimitAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSessionAction"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQueueLimitAssociation"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -167,13 +128,13 @@ func (c *Client) addOperationGetSessionActionMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opGetSessionActionMiddleware(stack); err != nil {
+	if err = addEndpointPrefix_opUpdateQueueLimitAssociationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetSessionActionValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateQueueLimitAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSessionAction(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateQueueLimitAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -206,14 +167,14 @@ func (c *Client) addOperationGetSessionActionMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-type endpointPrefix_opGetSessionActionMiddleware struct {
+type endpointPrefix_opUpdateQueueLimitAssociationMiddleware struct {
 }
 
-func (*endpointPrefix_opGetSessionActionMiddleware) ID() string {
+func (*endpointPrefix_opUpdateQueueLimitAssociationMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opGetSessionActionMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+func (m *endpointPrefix_opUpdateQueueLimitAssociationMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
@@ -229,14 +190,14 @@ func (m *endpointPrefix_opGetSessionActionMiddleware) HandleFinalize(ctx context
 
 	return next.HandleFinalize(ctx, in)
 }
-func addEndpointPrefix_opGetSessionActionMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetSessionActionMiddleware{}, "ResolveEndpointV2", middleware.After)
+func addEndpointPrefix_opUpdateQueueLimitAssociationMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opUpdateQueueLimitAssociationMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
 
-func newServiceMetadataMiddleware_opGetSessionAction(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateQueueLimitAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetSessionAction",
+		OperationName: "UpdateQueueLimitAssociation",
 	}
 }

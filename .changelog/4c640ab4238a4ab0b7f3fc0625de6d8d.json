@@ -1,0 +1,8 @@
+{
+    "id": "4c640ab4-238a-4ab0-b7f3-fc0625de6d8d",
+    "type": "feature",
+    "description": "For AppendOnly streams, Firehose will automatically scale to match your throughput.",
+    "modules": [
+        "service/firehose"
+    ]
+}

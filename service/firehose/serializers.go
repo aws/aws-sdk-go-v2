@@ -1536,6 +1536,18 @@ func awsAwsjson11_serializeDocumentDestinationTableConfigurationList(v []types.D
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDirectPutSourceConfiguration(v *types.DirectPutSourceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ThroughputHintInMBs != nil {
+		ok := object.Key("ThroughputHintInMBs")
+		ok.Integer(*v.ThroughputHintInMBs)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDocumentIdOptions(v *types.DocumentIdOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2241,6 +2253,11 @@ func awsAwsjson11_serializeDocumentIcebergDestinationConfiguration(v *types.Iceb
 	object := value.Object()
 	defer object.Close()
 
+	if v.AppendOnly != nil {
+		ok := object.Key("AppendOnly")
+		ok.Boolean(*v.AppendOnly)
+	}
+
 	if v.BufferingHints != nil {
 		ok := object.Key("BufferingHints")
 		if err := awsAwsjson11_serializeDocumentBufferingHints(v.BufferingHints, ok); err != nil {
@@ -2320,6 +2337,11 @@ func awsAwsjson11_serializeDocumentIcebergDestinationConfiguration(v *types.Iceb
 func awsAwsjson11_serializeDocumentIcebergDestinationUpdate(v *types.IcebergDestinationUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AppendOnly != nil {
+		ok := object.Key("AppendOnly")
+		ok.Boolean(*v.AppendOnly)
+	}
 
 	if v.BufferingHints != nil {
 		ok := object.Key("BufferingHints")
@@ -3808,6 +3830,13 @@ func awsAwsjson11_serializeOpDocumentCreateDeliveryStreamInput(v *CreateDelivery
 	if len(v.DeliveryStreamType) > 0 {
 		ok := object.Key("DeliveryStreamType")
 		ok.String(string(v.DeliveryStreamType))
+	}
+
+	if v.DirectPutSourceConfiguration != nil {
+		ok := object.Key("DirectPutSourceConfiguration")
+		if err := awsAwsjson11_serializeDocumentDirectPutSourceConfiguration(v.DirectPutSourceConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ElasticsearchDestinationConfiguration != nil {

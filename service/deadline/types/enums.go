@@ -692,6 +692,29 @@ func (QueueFleetAssociationStatus) Values() []QueueFleetAssociationStatus {
 	}
 }
 
+type QueueLimitAssociationStatus string
+
+// Enum values for QueueLimitAssociationStatus
+const (
+	QueueLimitAssociationStatusActive                         QueueLimitAssociationStatus = "ACTIVE"
+	QueueLimitAssociationStatusStopLimitUsageAndCompleteTasks QueueLimitAssociationStatus = "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS"
+	QueueLimitAssociationStatusStopLimitUsageAndCancelTasks   QueueLimitAssociationStatus = "STOP_LIMIT_USAGE_AND_CANCEL_TASKS"
+	QueueLimitAssociationStatusStopped                        QueueLimitAssociationStatus = "STOPPED"
+)
+
+// Values returns all known values for QueueLimitAssociationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueueLimitAssociationStatus) Values() []QueueLimitAssociationStatus {
+	return []QueueLimitAssociationStatus{
+		"ACTIVE",
+		"STOP_LIMIT_USAGE_AND_COMPLETE_TASKS",
+		"STOP_LIMIT_USAGE_AND_CANCEL_TASKS",
+		"STOPPED",
+	}
+}
+
 type QueueStatus string
 
 // Enum values for QueueStatus
@@ -1113,6 +1136,28 @@ func (UpdateQueueFleetAssociationStatus) Values() []UpdateQueueFleetAssociationS
 		"ACTIVE",
 		"STOP_SCHEDULING_AND_COMPLETE_TASKS",
 		"STOP_SCHEDULING_AND_CANCEL_TASKS",
+	}
+}
+
+type UpdateQueueLimitAssociationStatus string
+
+// Enum values for UpdateQueueLimitAssociationStatus
+const (
+	UpdateQueueLimitAssociationStatusActive                         UpdateQueueLimitAssociationStatus = "ACTIVE"
+	UpdateQueueLimitAssociationStatusStopLimitUsageAndCompleteTasks UpdateQueueLimitAssociationStatus = "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS"
+	UpdateQueueLimitAssociationStatusStopLimitUsageAndCancelTasks   UpdateQueueLimitAssociationStatus = "STOP_LIMIT_USAGE_AND_CANCEL_TASKS"
+)
+
+// Values returns all known values for UpdateQueueLimitAssociationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateQueueLimitAssociationStatus) Values() []UpdateQueueLimitAssociationStatus {
+	return []UpdateQueueLimitAssociationStatus{
+		"ACTIVE",
+		"STOP_LIMIT_USAGE_AND_COMPLETE_TASKS",
+		"STOP_LIMIT_USAGE_AND_CANCEL_TASKS",
 	}
 }
 

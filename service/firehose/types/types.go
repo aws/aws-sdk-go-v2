@@ -113,7 +113,7 @@ type AmazonOpenSearchServerlessDestinationDescription struct {
 	// Describes a destination in Amazon S3.
 	S3DestinationDescription *S3DestinationDescription
 
-	// The details of the VPC of the Amazon ES destination.
+	// The details of the VPC of the Amazon OpenSearch Service destination.
 	VpcConfigurationDescription *VpcConfigurationDescription
 
 	noSmithyDocumentSerde
@@ -307,7 +307,7 @@ type AmazonopensearchserviceDestinationDescription struct {
 	// value for TypeName.
 	TypeName *string
 
-	// The details of the VPC of the Amazon ES destination.
+	// The details of the VPC of the Amazon OpenSearch Service destination.
 	VpcConfigurationDescription *VpcConfigurationDescription
 
 	noSmithyDocumentSerde
@@ -437,6 +437,9 @@ type CatalogConfiguration struct {
 	// arn:aws:glue:region:account-id:catalog .
 	CatalogARN *string
 
+	// The warehouse location for Apache Iceberg tables. You must configure this when
+	// schema evolution and table creation is enabled.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	WarehouseLocation *string
 
@@ -498,53 +501,87 @@ type CopyCommand struct {
 	noSmithyDocumentSerde
 }
 
+// The structure used to configure the list of column patterns in source database
+// endpoint for Firehose to read from.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type DatabaseColumnList struct {
 
+	//  The list of column patterns in source database to be excluded for Firehose to
+	// read from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Exclude []string
 
+	//  The list of column patterns in source database to be included for Firehose to
+	// read from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Include []string
 
 	noSmithyDocumentSerde
 }
 
+// The structure used to configure the list of database patterns in source
+// database endpoint for Firehose to read from.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type DatabaseList struct {
 
+	// The list of database patterns in source database endpoint to be excluded for
+	// Firehose to read from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Exclude []string
 
+	// The list of database patterns in source database endpoint to be included for
+	// Firehose to read from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Include []string
 
 	noSmithyDocumentSerde
 }
 
+//	The structure that describes the snapshot information of a table in source
+//
+// database endpoint that Firehose reads.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type DatabaseSnapshotInfo struct {
 
+	//  The identifier of the current snapshot of the table in source database
+	// endpoint.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	Id *string
 
+	//  The timestamp when the current snapshot is taken on the table.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	RequestTimestamp *time.Time
 
+	//  The principal that sent the request to take the current snapshot on the table.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	RequestedBy SnapshotRequestedBy
 
+	//  The status of the current snapshot of the table.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	Status SnapshotStatus
 
+	//  The fully qualified name of the table in source database endpoint that
+	// Firehose reads.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
@@ -557,6 +594,10 @@ type DatabaseSnapshotInfo struct {
 	noSmithyDocumentSerde
 }
 
+//	The structure to configure the authentication methods for Firehose to connect
+//
+// to source database endpoint.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type DatabaseSourceAuthenticationConfiguration struct {
 
@@ -568,106 +609,198 @@ type DatabaseSourceAuthenticationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+//	The top level object for configuring streams with database as a source.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type DatabaseSourceConfiguration struct {
 
+	//  The structure to configure the authentication methods for Firehose to connect
+	// to source database endpoint.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	DatabaseSourceAuthenticationConfiguration *DatabaseSourceAuthenticationConfiguration
 
+	//  The details of the VPC Endpoint Service which Firehose uses to create a
+	// PrivateLink to the database.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	DatabaseSourceVPCConfiguration *DatabaseSourceVPCConfiguration
 
+	//  The list of database patterns in source database endpoint for Firehose to read
+	// from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	Databases *DatabaseList
 
+	//  The endpoint of the database server.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	Endpoint *string
 
+	// The port of the database. This can be one of the following values.
+	//
+	//   - 3306 for MySQL database type
+	//
+	//   - 5432 for PostgreSQL database type
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	Port *int32
 
+	//  The fully qualified name of the table in source database endpoint that
+	// Firehose uses to track snapshot progress.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	SnapshotWatermarkTable *string
 
+	//  The list of table patterns in source database endpoint for Firehose to read
+	// from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	Tables *DatabaseTableList
 
+	// The type of database engine. This can be one of the following values.
+	//
+	//   - MySQL
+	//
+	//   - PostgreSQL
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	Type DatabaseType
 
+	//  The list of column patterns in source database endpoint for Firehose to read
+	// from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Columns *DatabaseColumnList
 
+	//  The mode to enable or disable SSL when Firehose connects to the database
+	// endpoint.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	SSLMode SSLMode
 
+	//  The optional list of table and column names used as unique key columns when
+	// taking snapshot if the tables don’t have primary keys configured.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	SurrogateKeys []string
 
 	noSmithyDocumentSerde
 }
 
+//	The top level object for database source description.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type DatabaseSourceDescription struct {
 
+	//  The list of column patterns in source database endpoint for Firehose to read
+	// from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Columns *DatabaseColumnList
 
+	//  The structure to configure the authentication methods for Firehose to connect
+	// to source database endpoint.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	DatabaseSourceAuthenticationConfiguration *DatabaseSourceAuthenticationConfiguration
 
+	//  The details of the VPC Endpoint Service which Firehose uses to create a
+	// PrivateLink to the database.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	DatabaseSourceVPCConfiguration *DatabaseSourceVPCConfiguration
 
+	//  The list of database patterns in source database endpoint for Firehose to read
+	// from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Databases *DatabaseList
 
+	//  The endpoint of the database server.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Endpoint *string
 
+	// The port of the database. This can be one of the following values.
+	//
+	//   - 3306 for MySQL database type
+	//
+	//   - 5432 for PostgreSQL database type
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Port *int32
 
+	//  The mode to enable or disable SSL when Firehose connects to the database
+	// endpoint.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	SSLMode SSLMode
 
+	//  The structure that describes the snapshot information of a table in source
+	// database endpoint that Firehose reads.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	SnapshotInfo []DatabaseSnapshotInfo
 
+	//  The fully qualified name of the table in source database endpoint that
+	// Firehose uses to track snapshot progress.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	SnapshotWatermarkTable *string
 
+	//  The optional list of table and column names used as unique key columns when
+	// taking snapshot if the tables don’t have primary keys configured.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	SurrogateKeys []string
 
+	//  The list of table patterns in source database endpoint for Firehose to read
+	// from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Tables *DatabaseTableList
 
+	// The type of database engine. This can be one of the following values.
+	//
+	//   - MySQL
+	//
+	//   - PostgreSQL
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Type DatabaseType
 
 	noSmithyDocumentSerde
 }
 
+//	The structure for details of the VPC Endpoint Service which Firehose uses to
+//
+// create a PrivateLink to the database.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type DatabaseSourceVPCConfiguration struct {
 
+	//  The VPC endpoint service name which Firehose uses to create a PrivateLink to
+	// the database. The endpoint service must have the Firehose service principle
+	// firehose.amazonaws.com as an allowed principal on the VPC endpoint service. The
+	// VPC endpoint service name is a string that looks like com.amazonaws.vpce.. .
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
@@ -676,12 +809,21 @@ type DatabaseSourceVPCConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The structure used to configure the list of table patterns in source database
+// endpoint for Firehose to read from.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type DatabaseTableList struct {
 
+	// The list of table patterns in source database endpoint to be excluded for
+	// Firehose to read from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Exclude []string
 
+	// The list of table patterns in source database endpoint to be included for
+	// Firehose to read from.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	Include []string
 
@@ -898,7 +1040,7 @@ type DestinationDescription struct {
 	// The destination in Amazon OpenSearch Service.
 	AmazonopensearchserviceDestinationDescription *AmazonopensearchserviceDestinationDescription
 
-	// The destination in Amazon ES.
+	// The destination in Amazon OpenSearch Service.
 	ElasticsearchDestinationDescription *ElasticsearchDestinationDescription
 
 	// The destination in Amazon S3.
@@ -938,6 +1080,9 @@ type DestinationTableConfiguration struct {
 	// This member is required.
 	DestinationTableName *string
 
+	// The partition spec configuration for a table that is used by automatic table
+	// creation.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	PartitionSpec *PartitionSpec
 
@@ -949,6 +1094,36 @@ type DestinationTableConfiguration struct {
 	// these for running Create, Update, or Delete operations on the given Iceberg
 	// table.
 	UniqueKeys []string
+
+	noSmithyDocumentSerde
+}
+
+// The structure that configures parameters such as ThroughputHintInMBs for a
+// stream configured with Direct PUT as a source.
+type DirectPutSourceConfiguration struct {
+
+	//  The value that you configure for this parameter is for information purpose
+	// only and does not affect Firehose delivery throughput limit. You can use the [Firehose Limits form]to
+	// request a throughput limit increase.
+	//
+	// [Firehose Limits form]: https://support.console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase%26limitType=kinesis-firehose-limits
+	//
+	// This member is required.
+	ThroughputHintInMBs *int32
+
+	noSmithyDocumentSerde
+}
+
+// The structure that configures parameters such as ThroughputHintInMBs for a
+// stream configured with Direct PUT as a source.
+type DirectPutSourceDescription struct {
+
+	//  The value that you configure for this parameter is for information purpose
+	// only and does not affect Firehose delivery throughput limit. You can use the [Firehose Limits form]to
+	// request a throughput limit increase.
+	//
+	// [Firehose Limits form]: https://support.console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase%26limitType=kinesis-firehose-limits
+	ThroughputHintInMBs *int32
 
 	noSmithyDocumentSerde
 }
@@ -982,8 +1157,7 @@ type DocumentIdOptions struct {
 // Currently, dynamic partitioning is only supported for Amazon S3 destinations.
 type DynamicPartitioningConfiguration struct {
 
-	// Specifies that the dynamic partitioning is enabled for this Firehose Firehose
-	// stream.
+	// Specifies that the dynamic partitioning is enabled for this Firehose stream.
 	Enabled *bool
 
 	// The retry behavior in case Firehose is unable to deliver data to an Amazon S3
@@ -993,8 +1167,8 @@ type DynamicPartitioningConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the buffering to perform before delivering data to the Amazon ES
-// destination.
+// Describes the buffering to perform before delivering data to the Amazon
+// OpenSearch Service destination.
 type ElasticsearchBufferingHints struct {
 
 	// Buffer incoming data for the specified period of time, in seconds, before
@@ -1012,7 +1186,7 @@ type ElasticsearchBufferingHints struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration of a destination in Amazon ES.
+// Describes the configuration of a destination in Amazon OpenSearch Service.
 type ElasticsearchDestinationConfiguration struct {
 
 	// The Elasticsearch index name.
@@ -1021,8 +1195,8 @@ type ElasticsearchDestinationConfiguration struct {
 	IndexName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for
-	// calling the Amazon ES Configuration API and for indexing documents. For more
-	// information, see [Grant Firehose Access to an Amazon S3 Destination]and [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	// calling the Amazon OpenSearch Service Configuration API and for indexing
+	// documents. For more information, see [Grant Firehose Access to an Amazon S3 Destination]and [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
 	//
 	// [Grant Firehose Access to an Amazon S3 Destination]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
 	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
@@ -1050,9 +1224,9 @@ type ElasticsearchDestinationConfiguration struct {
 	// Firehose generated document ID and OpenSearch Service generated document ID.
 	DocumentIdOptions *DocumentIdOptions
 
-	// The ARN of the Amazon ES domain. The IAM role must have permissions for
-	// DescribeDomain , DescribeDomains , and DescribeDomainConfig after assuming the
-	// role specified in RoleARN. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	// The ARN of the Amazon OpenSearch Service domain. The IAM role must have
+	// permissions for DescribeDomain , DescribeDomains , and DescribeDomainConfig
+	// after assuming the role specified in RoleARN. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
 	//
 	// Specify either ClusterEndpoint or DomainARN .
 	//
@@ -1061,16 +1235,16 @@ type ElasticsearchDestinationConfiguration struct {
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp to
 	// the IndexName to facilitate the expiration of old data. For more information,
-	// see [Index Rotation for the Amazon ES Destination]. The default value is OneDay .
+	// see [Index Rotation for the Amazon OpenSearch Service Destination]. The default value is OneDay .
 	//
-	// [Index Rotation for the Amazon ES Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
+	// [Index Rotation for the Amazon OpenSearch Service Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
 	IndexRotationPeriod ElasticsearchIndexRotationPeriod
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
 	// The retry behavior in case Firehose is unable to deliver documents to Amazon
-	// ES. The default value is 300 (5 minutes).
+	// OpenSearch Service. The default value is 300 (5 minutes).
 	RetryOptions *ElasticsearchRetryOptions
 
 	// Defines how documents should be delivered to Amazon S3. When it is set to
@@ -1079,11 +1253,11 @@ type ElasticsearchDestinationConfiguration struct {
 	// appended to the key prefix. When set to AllDocuments , Firehose delivers all
 	// incoming records to Amazon S3, and also writes failed documents with
 	// AmazonOpenSearchService-failed/ appended to the prefix. For more information,
-	// see [Amazon S3 Backup for the Amazon ES Destination]. Default value is FailedDocumentsOnly .
+	// see [Amazon S3 Backup for the Amazon OpenSearch Service Destination]. Default value is FailedDocumentsOnly .
 	//
 	// You can't change this backup mode after you create the Firehose stream.
 	//
-	// [Amazon S3 Backup for the Amazon ES Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
+	// [Amazon S3 Backup for the Amazon OpenSearch Service Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
 	S3BackupMode ElasticsearchS3BackupMode
 
 	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type
@@ -1099,7 +1273,7 @@ type ElasticsearchDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The destination description in Amazon ES.
+// The destination description in Amazon OpenSearch Service.
 type ElasticsearchDestinationDescription struct {
 
 	// The buffering options.
@@ -1109,16 +1283,18 @@ type ElasticsearchDestinationDescription struct {
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the cluster. Firehose uses either
-	// this ClusterEndpoint or the DomainARN field to send data to Amazon ES.
+	// this ClusterEndpoint or the DomainARN field to send data to Amazon OpenSearch
+	// Service.
 	ClusterEndpoint *string
 
 	// Indicates the method for setting up document ID. The supported methods are
 	// Firehose generated document ID and OpenSearch Service generated document ID.
 	DocumentIdOptions *DocumentIdOptions
 
-	// The ARN of the Amazon ES domain. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	// The ARN of the Amazon OpenSearch Service domain. For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
 	//
-	// Firehose uses either ClusterEndpoint or DomainARN to send data to Amazon ES.
+	// Firehose uses either ClusterEndpoint or DomainARN to send data to Amazon
+	// OpenSearch Service.
 	//
 	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	DomainARN *string
@@ -1132,7 +1308,7 @@ type ElasticsearchDestinationDescription struct {
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
-	// The Amazon ES retry options.
+	// The Amazon OpenSearch Service retry options.
 	RetryOptions *ElasticsearchRetryOptions
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
@@ -1159,7 +1335,7 @@ type ElasticsearchDestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an update for a destination in Amazon ES.
+// Describes an update for a destination in Amazon OpenSearch Service.
 type ElasticsearchDestinationUpdate struct {
 
 	// The buffering options. If no value is specified, ElasticsearchBufferingHints
@@ -1177,9 +1353,9 @@ type ElasticsearchDestinationUpdate struct {
 	// Firehose generated document ID and OpenSearch Service generated document ID.
 	DocumentIdOptions *DocumentIdOptions
 
-	// The ARN of the Amazon ES domain. The IAM role must have permissions for
-	// DescribeDomain , DescribeDomains , and DescribeDomainConfig after assuming the
-	// IAM role specified in RoleARN . For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	// The ARN of the Amazon OpenSearch Service domain. The IAM role must have
+	// permissions for DescribeDomain , DescribeDomains , and DescribeDomainConfig
+	// after assuming the IAM role specified in RoleARN . For more information, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
 	//
 	// Specify either ClusterEndpoint or DomainARN .
 	//
@@ -1190,22 +1366,22 @@ type ElasticsearchDestinationUpdate struct {
 	IndexName *string
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp to
-	// IndexName to facilitate the expiration of old data. For more information, see [Index Rotation for the Amazon ES Destination].
+	// IndexName to facilitate the expiration of old data. For more information, see [Index Rotation for the Amazon OpenSearch Service Destination].
 	// Default value is OneDay .
 	//
-	// [Index Rotation for the Amazon ES Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
+	// [Index Rotation for the Amazon OpenSearch Service Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation
 	IndexRotationPeriod ElasticsearchIndexRotationPeriod
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
 	// The retry behavior in case Firehose is unable to deliver documents to Amazon
-	// ES. The default value is 300 (5 minutes).
+	// OpenSearch Service. The default value is 300 (5 minutes).
 	RetryOptions *ElasticsearchRetryOptions
 
 	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for
-	// calling the Amazon ES Configuration API and for indexing documents. For more
-	// information, see [Grant Firehose Access to an Amazon S3 Destination]and [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	// calling the Amazon OpenSearch Service Configuration API and for indexing
+	// documents. For more information, see [Grant Firehose Access to an Amazon S3 Destination]and [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
 	//
 	// [Grant Firehose Access to an Amazon S3 Destination]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
 	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
@@ -1228,13 +1404,14 @@ type ElasticsearchDestinationUpdate struct {
 }
 
 // Configures retry behavior in case Firehose is unable to deliver documents to
-// Amazon ES.
+// Amazon OpenSearch Service.
 type ElasticsearchRetryOptions struct {
 
-	// After an initial failure to deliver to Amazon ES, the total amount of time
-	// during which Firehose retries delivery (including the first attempt). After this
-	// time has elapsed, the failed documents are written to Amazon S3. Default value
-	// is 300 seconds (5 minutes). A value of 0 (zero) results in no retries.
+	// After an initial failure to deliver to Amazon OpenSearch Service, the total
+	// amount of time during which Firehose retries delivery (including the first
+	// attempt). After this time has elapsed, the failed documents are written to
+	// Amazon S3. Default value is 300 seconds (5 minutes). A value of 0 (zero) results
+	// in no retries.
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -1781,6 +1958,16 @@ type IcebergDestinationConfiguration struct {
 	// This member is required.
 	S3Configuration *S3DestinationConfiguration
 
+	//  Describes whether all incoming data for this delivery stream will be append
+	// only (inserts only and not for updates and deletes) for Iceberg delivery. This
+	// feature is only applicable for Apache Iceberg Tables.
+	//
+	// The default value is false. If you set this value to true, Firehose
+	// automatically increases the throughput limit of a stream based on the throttling
+	// levels of the stream. If you set this parameter to true for a stream with
+	// updates and deletes, you will see out of order delivery.
+	AppendOnly *bool
+
 	// Describes hints for the buffering to perform before delivering data to the
 	// destination. These options are treated as hints, and therefore Firehose might
 	// choose to use different values when it is optimal. The SizeInMBs and
@@ -1806,9 +1993,13 @@ type IcebergDestinationConfiguration struct {
 	// FailedDataOnly .
 	S3BackupMode IcebergS3BackupMode
 
+	// The configuration to enable automatic schema evolution.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	SchemaEvolutionConfiguration *SchemaEvolutionConfiguration
 
+	// The configuration to enable automatic table creation.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	TableCreationConfiguration *TableCreationConfiguration
 
@@ -1817,6 +2008,16 @@ type IcebergDestinationConfiguration struct {
 
 // Describes a destination in Apache Iceberg Tables.
 type IcebergDestinationDescription struct {
+
+	//  Describes whether all incoming data for this delivery stream will be append
+	// only (inserts only and not for updates and deletes) for Iceberg delivery. This
+	// feature is only applicable for Apache Iceberg Tables.
+	//
+	// The default value is false. If you set this value to true, Firehose
+	// automatically increases the throughput limit of a stream based on the throttling
+	// levels of the stream. If you set this parameter to true for a stream with
+	// updates and deletes, you will see out of order delivery.
+	AppendOnly *bool
 
 	// Describes hints for the buffering to perform before delivering data to the
 	// destination. These options are treated as hints, and therefore Firehose might
@@ -1853,9 +2054,13 @@ type IcebergDestinationDescription struct {
 	// Describes a destination in Amazon S3.
 	S3DestinationDescription *S3DestinationDescription
 
+	// The description of automatic schema evolution configuration.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	SchemaEvolutionConfiguration *SchemaEvolutionConfiguration
 
+	//  The description of table creation configuration.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	TableCreationConfiguration *TableCreationConfiguration
 
@@ -1864,6 +2069,16 @@ type IcebergDestinationDescription struct {
 
 // Describes an update for a destination in Apache Iceberg Tables.
 type IcebergDestinationUpdate struct {
+
+	//  Describes whether all incoming data for this delivery stream will be append
+	// only (inserts only and not for updates and deletes) for Iceberg delivery. This
+	// feature is only applicable for Apache Iceberg Tables.
+	//
+	// The default value is false. If you set this value to true, Firehose
+	// automatically increases the throughput limit of a stream based on the throttling
+	// levels of the stream. If you set this parameter to true for a stream with
+	// updates and deletes, you will see out of order delivery.
+	AppendOnly *bool
 
 	// Describes hints for the buffering to perform before delivering data to the
 	// destination. These options are treated as hints, and therefore Firehose might
@@ -1900,9 +2115,13 @@ type IcebergDestinationUpdate struct {
 	// Describes the configuration of a destination in Amazon S3.
 	S3Configuration *S3DestinationConfiguration
 
+	//  The configuration to enable automatic schema evolution.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	SchemaEvolutionConfiguration *SchemaEvolutionConfiguration
 
+	//  The configuration to enable automatic table creation.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	TableCreationConfiguration *TableCreationConfiguration
 
@@ -1943,8 +2162,7 @@ type KinesisStreamSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a Kinesis data stream used as the source for a Firehose Firehose
-// stream.
+// Details about a Kinesis data stream used as the source for a Firehose stream.
 type KinesisStreamSourceDescription struct {
 
 	// Firehose starts retrieving records from the Kinesis data stream starting with
@@ -2012,8 +2230,7 @@ type MSKSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the Amazon MSK cluster used as the source for a Firehose Firehose
-// stream.
+// Details about the Amazon MSK cluster used as the source for a Firehose stream.
 type MSKSourceDescription struct {
 
 	// The authentication configuration of the Amazon MSK cluster.
@@ -2183,9 +2400,13 @@ type ParquetSerDe struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a single field in a PartitionSpec .
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type PartitionField struct {
 
+	//  The column name to be configured in partition spec.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
@@ -2194,10 +2415,24 @@ type PartitionField struct {
 	noSmithyDocumentSerde
 }
 
+// Represents how to produce partition data for a table. Partition data is
+// produced by transforming columns in a table. Each column transform is
+// represented by a named PartitionField .
+//
+// Here is an example of the schema in JSON.
+//
+//	"partitionSpec": { "identity": [ {"sourceName": "column1"}, {"sourceName":
+//	"column2"}, {"sourceName": "column3"} ] }
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type PartitionSpec struct {
 
+	//  List of identity [transforms] that performs an identity transformation. The transform
+	// takes the source value, and does not modify it. Result type is the source type.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// [transforms]: https://iceberg.apache.org/spec/#partition-transforms
 	Identity []PartitionField
 
 	noSmithyDocumentSerde
@@ -2671,9 +2906,13 @@ type SchemaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration to enable schema evolution.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type SchemaEvolutionConfiguration struct {
 
+	//  Specify whether you want to enable schema evolution.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
@@ -2711,10 +2950,7 @@ type SecretsManagerConfiguration struct {
 
 // The serializer that you want Firehose to use to convert data to the target
 // format before writing it to Amazon S3. Firehose supports two types of
-// serializers: the [ORC SerDe]and the [Parquet SerDe].
-//
-// [Parquet SerDe]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/parquet/serde/ParquetHiveSerDe.html
-// [ORC SerDe]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/orc/OrcSerde.html
+// serializers: the ORC SerDe and the Parquet SerDe.
 type Serializer struct {
 
 	// A serializer to use for converting data to the ORC format before storing it in
@@ -2726,7 +2962,7 @@ type Serializer struct {
 	// A serializer to use for converting data to the Parquet format before storing it
 	// in Amazon S3. For more information, see [Apache Parquet].
 	//
-	// [Apache Parquet]: https://parquet.apache.org/documentation/latest/
+	// [Apache Parquet]: https://parquet.apache.org/docs/contribution-guidelines/
 	ParquetSerDe *ParquetSerDe
 
 	noSmithyDocumentSerde
@@ -2793,7 +3029,7 @@ type SnowflakeDestinationConfiguration struct {
 	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
-	// The name of the record content column
+	// The name of the record content column.
 	ContentColumnName *string
 
 	// Choose to load JSON keys mapped to table column names or choose to split the
@@ -2807,7 +3043,19 @@ type SnowflakeDestinationConfiguration struct {
 	// [Using Key Pair Authentication & Key Rotation]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
 	KeyPassphrase *string
 
-	// The name of the record metadata column
+	// Specify a column name in the table, where the metadata information has to be
+	// loaded. When you enable this field, you will see the following column in the
+	// snowflake table, which differs based on the source type.
+	//
+	// For Direct PUT as source
+	//
+	//     { "firehoseDeliveryStreamName" : "streamname", "IngestionTime" : "timestamp" }
+	//
+	// For Kinesis Data Stream as source
+	//
+	//     "kinesisStreamName" : "streamname", "kinesisShardId" : "Id",
+	//     "kinesisPartitionKey" : "key", "kinesisSequenceNumber" : "1234",
+	//     "subsequenceNumber" : "2334", "IngestionTime" : "timestamp" }
 	MetaDataColumnName *string
 
 	// The private key used to encrypt your Snowflake client. For information, see [Using Key Pair Authentication & Key Rotation].
@@ -3070,12 +3318,16 @@ type SnowflakeVpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a Kinesis data stream used as the source for a Firehose Firehose
-// stream.
+// Details about a Kinesis data stream used as the source for a Firehose stream.
 type SourceDescription struct {
 
+	// Details about a database used as the source for a Firehose stream.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	DatabaseSourceDescription *DatabaseSourceDescription
+
+	// Details about Direct PUT used as the source for a Firehose stream.
+	DirectPutSourceDescription *DirectPutSourceDescription
 
 	// The KinesisStreamSourceDescription value for the source Kinesis data stream.
 	KinesisStreamSourceDescription *KinesisStreamSourceDescription
@@ -3270,9 +3522,13 @@ type SplunkRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration to enable automatic table creation.
+//
 // Amazon Data Firehose is in preview release and is subject to change.
 type TableCreationConfiguration struct {
 
+	//  Specify whether you want to enable automatic table creation.
+	//
 	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
@@ -3335,12 +3591,13 @@ type VpcConfiguration struct {
 	RoleARN *string
 
 	// The IDs of the security groups that you want Firehose to use when it creates
-	// ENIs in the VPC of the Amazon ES destination. You can use the same security
-	// group that the Amazon ES domain uses or different ones. If you specify different
-	// security groups here, ensure that they allow outbound HTTPS traffic to the
-	// Amazon ES domain's security group. Also ensure that the Amazon ES domain's
-	// security group allows HTTPS traffic from the security groups specified here. If
-	// you use the same security group for both your delivery stream and the Amazon ES
+	// ENIs in the VPC of the Amazon OpenSearch Service destination. You can use the
+	// same security group that the Amazon OpenSearch Service domain uses or different
+	// ones. If you specify different security groups here, ensure that they allow
+	// outbound HTTPS traffic to the Amazon OpenSearch Service domain's security group.
+	// Also ensure that the Amazon OpenSearch Service domain's security group allows
+	// HTTPS traffic from the security groups specified here. If you use the same
+	// security group for both your delivery stream and the Amazon OpenSearch Service
 	// domain, make sure the security group inbound rule allows HTTPS traffic. For more
 	// information about security group rules, see [Security group rules]in the Amazon VPC documentation.
 	//
@@ -3350,11 +3607,11 @@ type VpcConfiguration struct {
 	SecurityGroupIds []string
 
 	// The IDs of the subnets that you want Firehose to use to create ENIs in the VPC
-	// of the Amazon ES destination. Make sure that the routing tables and inbound and
-	// outbound rules allow traffic to flow from the subnets whose IDs are specified
-	// here to the subnets that have the destination Amazon ES endpoints. Firehose
-	// creates at least one ENI in each of the subnets that are specified here. Do not
-	// delete or modify these ENIs.
+	// of the Amazon OpenSearch Service destination. Make sure that the routing tables
+	// and inbound and outbound rules allow traffic to flow from the subnets whose IDs
+	// are specified here to the subnets that have the destination Amazon OpenSearch
+	// Service endpoints. Firehose creates at least one ENI in each of the subnets that
+	// are specified here. Do not delete or modify these ENIs.
 	//
 	// The number of ENIs that Firehose creates in the subnets specified here scales
 	// up and down automatically based on throughput. To enable Firehose to scale up
@@ -3371,7 +3628,7 @@ type VpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The details of the VPC of the Amazon ES destination.
+// The details of the VPC of the Amazon OpenSearch Service destination.
 type VpcConfigurationDescription struct {
 
 	// The ARN of the IAM role that the Firehose stream uses to create endpoints in
@@ -3403,14 +3660,15 @@ type VpcConfigurationDescription struct {
 	RoleARN *string
 
 	// The IDs of the security groups that Firehose uses when it creates ENIs in the
-	// VPC of the Amazon ES destination. You can use the same security group that the
-	// Amazon ES domain uses or different ones. If you specify different security
-	// groups, ensure that they allow outbound HTTPS traffic to the Amazon ES domain's
-	// security group. Also ensure that the Amazon ES domain's security group allows
-	// HTTPS traffic from the security groups specified here. If you use the same
-	// security group for both your Firehose stream and the Amazon ES domain, make sure
-	// the security group inbound rule allows HTTPS traffic. For more information about
-	// security group rules, see [Security group rules]in the Amazon VPC documentation.
+	// VPC of the Amazon OpenSearch Service destination. You can use the same security
+	// group that the Amazon ES domain uses or different ones. If you specify different
+	// security groups, ensure that they allow outbound HTTPS traffic to the Amazon
+	// OpenSearch Service domain's security group. Also ensure that the Amazon
+	// OpenSearch Service domain's security group allows HTTPS traffic from the
+	// security groups specified here. If you use the same security group for both your
+	// Firehose stream and the Amazon OpenSearch Service domain, make sure the security
+	// group inbound rule allows HTTPS traffic. For more information about security
+	// group rules, see [Security group rules]in the Amazon VPC documentation.
 	//
 	// [Security group rules]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules
 	//
@@ -3418,11 +3676,11 @@ type VpcConfigurationDescription struct {
 	SecurityGroupIds []string
 
 	// The IDs of the subnets that Firehose uses to create ENIs in the VPC of the
-	// Amazon ES destination. Make sure that the routing tables and inbound and
-	// outbound rules allow traffic to flow from the subnets whose IDs are specified
-	// here to the subnets that have the destination Amazon ES endpoints. Firehose
-	// creates at least one ENI in each of the subnets that are specified here. Do not
-	// delete or modify these ENIs.
+	// Amazon OpenSearch Service destination. Make sure that the routing tables and
+	// inbound and outbound rules allow traffic to flow from the subnets whose IDs are
+	// specified here to the subnets that have the destination Amazon OpenSearch
+	// Service endpoints. Firehose creates at least one ENI in each of the subnets that
+	// are specified here. Do not delete or modify these ENIs.
 	//
 	// The number of ENIs that Firehose creates in the subnets specified here scales
 	// up and down automatically based on throughput. To enable Firehose to scale up
@@ -3436,7 +3694,7 @@ type VpcConfigurationDescription struct {
 	// This member is required.
 	SubnetIds []string
 
-	// The ID of the Amazon ES destination's VPC.
+	// The ID of the Amazon OpenSearch Service destination's VPC.
 	//
 	// This member is required.
 	VpcId *string

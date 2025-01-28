@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job. A job is a set of instructions that AWS Deadline Cloud uses to
+// Creates a job. A job is a set of instructions that Deadline Cloud uses to
 // schedule and run work on available workers. For more information, see [Deadline Cloud jobs].
 //
 // [Deadline Cloud jobs]: https://docs.aws.amazon.com/deadline-cloud/latest/userguide/deadline-cloud-jobs.html
@@ -62,6 +62,17 @@ type CreateJobInput struct {
 
 	// The maximum number of retries for each task.
 	MaxRetriesPerTask *int32
+
+	// The maximum number of worker hosts that can concurrently process a job. When
+	// the maxWorkerCount is reached, no more workers will be assigned to process the
+	// job, even if the fleets assigned to the job's queue has available workers.
+	//
+	// You can't set the maxWorkerCount to 0. If you set it to -1, there is no maximum
+	// number of workers.
+	//
+	// If you don't specify the maxWorkerCount , Deadline Cloud won't throttle the
+	// number of workers used to process the job.
+	MaxWorkerCount *int32
 
 	// The parameters for the job.
 	Parameters map[string]types.JobParameter

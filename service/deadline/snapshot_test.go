@@ -254,6 +254,18 @@ func TestCheckSnapshot_CreateLicenseEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateMonitor(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMonitor(context.Background(), nil, func(o *Options) {
@@ -295,6 +307,18 @@ func TestCheckSnapshot_CreateQueueFleetAssociation(t *testing.T) {
 	_, err := svc.CreateQueueFleetAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateQueueFleetAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateQueueLimitAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQueueLimitAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateQueueLimitAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -374,6 +398,18 @@ func TestCheckSnapshot_DeleteLicenseEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteMeteredProduct(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMeteredProduct(context.Background(), nil, func(o *Options) {
@@ -427,6 +463,18 @@ func TestCheckSnapshot_DeleteQueueFleetAssociation(t *testing.T) {
 	_, err := svc.DeleteQueueFleetAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteQueueFleetAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteQueueLimitAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQueueLimitAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteQueueLimitAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -566,6 +614,18 @@ func TestCheckSnapshot_GetLicenseEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMonitor(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMonitor(context.Background(), nil, func(o *Options) {
@@ -607,6 +667,18 @@ func TestCheckSnapshot_GetQueueFleetAssociation(t *testing.T) {
 	_, err := svc.GetQueueFleetAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetQueueFleetAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetQueueLimitAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQueueLimitAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQueueLimitAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -830,6 +902,18 @@ func TestCheckSnapshot_ListLicenseEndpoints(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListMeteredProducts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMeteredProducts(context.Background(), nil, func(o *Options) {
@@ -871,6 +955,18 @@ func TestCheckSnapshot_ListQueueFleetAssociations(t *testing.T) {
 	_, err := svc.ListQueueFleetAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListQueueFleetAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListQueueLimitAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQueueLimitAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListQueueLimitAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1178,6 +1274,18 @@ func TestCheckSnapshot_UpdateJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMonitor(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMonitor(context.Background(), nil, func(o *Options) {
@@ -1219,6 +1327,18 @@ func TestCheckSnapshot_UpdateQueueFleetAssociation(t *testing.T) {
 	_, err := svc.UpdateQueueFleetAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateQueueFleetAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateQueueLimitAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQueueLimitAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQueueLimitAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1489,6 +1609,18 @@ func TestUpdateSnapshot_CreateLicenseEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateMonitor(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMonitor(context.Background(), nil, func(o *Options) {
@@ -1530,6 +1662,18 @@ func TestUpdateSnapshot_CreateQueueFleetAssociation(t *testing.T) {
 	_, err := svc.CreateQueueFleetAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateQueueFleetAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateQueueLimitAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQueueLimitAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateQueueLimitAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1609,6 +1753,18 @@ func TestUpdateSnapshot_DeleteLicenseEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteMeteredProduct(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMeteredProduct(context.Background(), nil, func(o *Options) {
@@ -1662,6 +1818,18 @@ func TestUpdateSnapshot_DeleteQueueFleetAssociation(t *testing.T) {
 	_, err := svc.DeleteQueueFleetAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteQueueFleetAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteQueueLimitAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQueueLimitAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteQueueLimitAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1801,6 +1969,18 @@ func TestUpdateSnapshot_GetLicenseEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMonitor(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMonitor(context.Background(), nil, func(o *Options) {
@@ -1842,6 +2022,18 @@ func TestUpdateSnapshot_GetQueueFleetAssociation(t *testing.T) {
 	_, err := svc.GetQueueFleetAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetQueueFleetAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetQueueLimitAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQueueLimitAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQueueLimitAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2065,6 +2257,18 @@ func TestUpdateSnapshot_ListLicenseEndpoints(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListMeteredProducts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMeteredProducts(context.Background(), nil, func(o *Options) {
@@ -2106,6 +2310,18 @@ func TestUpdateSnapshot_ListQueueFleetAssociations(t *testing.T) {
 	_, err := svc.ListQueueFleetAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListQueueFleetAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListQueueLimitAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQueueLimitAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListQueueLimitAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2413,6 +2629,18 @@ func TestUpdateSnapshot_UpdateJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateMonitor(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMonitor(context.Background(), nil, func(o *Options) {
@@ -2454,6 +2682,18 @@ func TestUpdateSnapshot_UpdateQueueFleetAssociation(t *testing.T) {
 	_, err := svc.UpdateQueueFleetAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateQueueFleetAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateQueueLimitAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQueueLimitAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQueueLimitAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

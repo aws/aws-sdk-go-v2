@@ -1,0 +1,8 @@
+{
+    "id": "ea896a98-d760-47e8-ae3b-959f6d175c5c",
+    "type": "feature",
+    "description": "feature: Deadline: Add support for limiting the concurrent usage of external resources, like floating licenses, using limits and the ability to constrain the maximum number of workers that work on a job",
+    "modules": [
+        "service/deadline"
+    ]
+}

@@ -6,116 +6,87 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Gets a session action for the job.
-func (c *Client) GetSessionAction(ctx context.Context, params *GetSessionActionInput, optFns ...func(*Options)) (*GetSessionActionOutput, error) {
+// Updates the properties of the specified limit.
+func (c *Client) UpdateLimit(ctx context.Context, params *UpdateLimitInput, optFns ...func(*Options)) (*UpdateLimitOutput, error) {
 	if params == nil {
-		params = &GetSessionActionInput{}
+		params = &UpdateLimitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSessionAction", params, optFns, c.addOperationGetSessionActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLimit", params, optFns, c.addOperationUpdateLimitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetSessionActionOutput)
+	out := result.(*UpdateLimitOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetSessionActionInput struct {
+type UpdateLimitInput struct {
 
-	// The farm ID for the session action.
+	// The unique identifier of the farm that contains the limit.
 	//
 	// This member is required.
 	FarmId *string
 
-	// The job ID for the session.
+	// The unique identifier of the limit to update.
 	//
 	// This member is required.
-	JobId *string
+	LimitId *string
 
-	// The queue ID for the session action.
+	// The new description of the limit.
 	//
-	// This member is required.
-	QueueId *string
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	Description *string
 
-	// The session action ID for the session.
+	// The new display name of the limit.
 	//
-	// This member is required.
-	SessionActionId *string
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	DisplayName *string
+
+	// The maximum number of resources constrained by this limit. When all of the
+	// resources are in use, steps that require the limit won't be scheduled until the
+	// resource is available.
+	//
+	// If more than the new maximum number is currently in use, running jobs finish
+	// but no new jobs are started until the number of resources in use is below the
+	// new maximum number.
+	//
+	// The maxCount must not be 0. If the value is -1, there is no restriction on the
+	// number of resources that can be acquired for this limit.
+	MaxCount *int32
 
 	noSmithyDocumentSerde
 }
 
-type GetSessionActionOutput struct {
-
-	// The session action definition.
-	//
-	// This member is required.
-	Definition types.SessionActionDefinition
-
-	// The session action ID.
-	//
-	// This member is required.
-	SessionActionId *string
-
-	// The session ID for the session action.
-	//
-	// This member is required.
-	SessionId *string
-
-	// The status of the session action.
-	//
-	// This member is required.
-	Status types.SessionActionStatus
-
-	// The limits and their amounts acquired during a session action. If no limits
-	// were acquired during the session, this field isn't returned.
-	AcquiredLimits []types.AcquiredLimit
-
-	// The date and time the resource ended running.
-	EndedAt *time.Time
-
-	// The exit code to exit the session.
-	ProcessExitCode *int32
-
-	// The message that communicates the progress of the session action.
-	ProgressMessage *string
-
-	// The percentage completed for a session action.
-	ProgressPercent *float32
-
-	// The date and time the resource started running.
-	StartedAt *time.Time
-
-	// The Linux timestamp of the date and time the session action was last updated.
-	WorkerUpdatedAt *time.Time
-
+type UpdateLimitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetSessionActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionAction{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLimit{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSessionAction{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLimit{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSessionAction"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLimit"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -167,13 +138,13 @@ func (c *Client) addOperationGetSessionActionMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opGetSessionActionMiddleware(stack); err != nil {
+	if err = addEndpointPrefix_opUpdateLimitMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetSessionActionValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateLimitValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSessionAction(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLimit(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -206,14 +177,14 @@ func (c *Client) addOperationGetSessionActionMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-type endpointPrefix_opGetSessionActionMiddleware struct {
+type endpointPrefix_opUpdateLimitMiddleware struct {
 }
 
-func (*endpointPrefix_opGetSessionActionMiddleware) ID() string {
+func (*endpointPrefix_opUpdateLimitMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opGetSessionActionMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+func (m *endpointPrefix_opUpdateLimitMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
@@ -229,14 +200,14 @@ func (m *endpointPrefix_opGetSessionActionMiddleware) HandleFinalize(ctx context
 
 	return next.HandleFinalize(ctx, in)
 }
-func addEndpointPrefix_opGetSessionActionMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetSessionActionMiddleware{}, "ResolveEndpointV2", middleware.After)
+func addEndpointPrefix_opUpdateLimitMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opUpdateLimitMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
 
-func newServiceMetadataMiddleware_opGetSessionAction(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateLimit(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetSessionAction",
+		OperationName: "UpdateLimit",
 	}
 }
