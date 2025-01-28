@@ -1,3 +1,7 @@
+# v1.45.0 (2025-01-28)
+
+* **Feature**: AWS DataSync now supports the Kerberos authentication protocol for SMB locations.
+
 # v1.44.7 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

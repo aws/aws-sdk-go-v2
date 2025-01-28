@@ -1,8 +1,0 @@
-{
-    "id": "2d8cf1a0-1035-490d-9237-3010b9296a1e",
-    "type": "feature",
-    "description": "This release changes the CreateFleet CLI and SDK's such that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.",
-    "modules": [
-        "service/ec2"
-    ]
-}

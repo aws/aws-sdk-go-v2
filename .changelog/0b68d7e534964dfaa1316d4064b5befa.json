@@ -1,8 +1,0 @@
-{
-    "id": "0b68d7e5-3496-4dfa-a131-6d4064b5befa",
-    "type": "feature",
-    "description": "AWS DataSync now supports the Kerberos authentication protocol for SMB locations.",
-    "modules": [
-        "service/datasync"
-    ]
-}

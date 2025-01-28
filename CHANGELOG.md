@@ -1,3 +1,19 @@
+# Release (2025-01-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.42.0](service/appsync/CHANGELOG.md#v1420-2025-01-28)
+  * **Feature**: Add stash and outErrors to EvaluateCode/EvaluateMappingTemplate response
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.45.0](service/datasync/CHANGELOG.md#v1450-2025-01-28)
+  * **Feature**: AWS DataSync now supports the Kerberos authentication protocol for SMB locations.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.8.0](service/deadline/CHANGELOG.md#v180-2025-01-28)
+  * **Feature**: feature: Deadline: Add support for limiting the concurrent usage of external resources, like floating licenses, using limits and the ability to constrain the maximum number of workers that work on a job
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.202.0](service/ec2/CHANGELOG.md#v12020-2025-01-28)
+  * **Feature**: This release changes the CreateFleet CLI and SDK's such that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.36.0](service/firehose/CHANGELOG.md#v1360-2025-01-28)
+  * **Feature**: For AppendOnly streams, Firehose will automatically scale to match your throughput.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.8.0](service/timestreaminfluxdb/CHANGELOG.md#v180-2025-01-28)
+  * **Feature**: Adds 'allocatedStorage' parameter to UpdateDbInstance API that allows increasing the database instance storage size and 'dbStorageType' parameter to UpdateDbInstance API that allows changing the storage type of the database instance
+
 # Release (2025-01-27)
 
 ## Module Highlights
