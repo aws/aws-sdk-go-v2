@@ -220,6 +220,8 @@ type putObjectTestData struct {
 
 // UniqueID returns a unique UUID-like identifier for use in generating
 // resources for integration tests.
+//
+// TODO: duped from service/internal/integrationtest, remove after beta.
 func UniqueID() string {
 	uuid := make([]byte, 16)
 	io.ReadFull(rand.Reader, uuid)
@@ -267,20 +269,28 @@ func testPutObject(t *testing.T, bucket string, testData putObjectTestData, opts
 	}
 }
 
+// TODO: duped from service/internal/integrationtest, remove after beta.
 const expressAZID = "usw2-az3"
 
+// TODO: duped from service/internal/integrationtest, remove after beta.
 const expressSuffix = "--usw2-az3--x-s3"
 
 // BucketPrefix is the root prefix of integration test buckets.
+//
+// TODO: duped from service/internal/integrationtest, remove after beta.
 const BucketPrefix = "aws-sdk-go-v2-integration"
 
 // GenerateBucketName returns a unique bucket name.
+//
+// TODO: duped from service/internal/integrationtest, remove after beta.
 func GenerateBucketName() string {
 	return fmt.Sprintf("%s-%s",
 		BucketPrefix, UniqueID())
 }
 
 // GenerateBucketName returns a unique express-formatted bucket name.
+//
+// TODO: duped from service/internal/integrationtest, remove after beta.
 func GenerateExpressBucketName() string {
 	return fmt.Sprintf(
 		"%s-%s%s",
@@ -291,6 +301,8 @@ func GenerateExpressBucketName() string {
 }
 
 // SetupBucket returns a test bucket created for the integration tests.
+//
+// TODO: duped from service/internal/integrationtest, remove after beta.
 func SetupBucket(ctx context.Context, svc *s3.Client, bucketName string) (err error) {
 	fmt.Println("Setup: Creating test bucket,", bucketName)
 	_, err = svc.CreateBucket(ctx, &s3.CreateBucketInput{
@@ -331,6 +343,8 @@ pt:
 // CleanupBucket deletes the contents of a S3 bucket, before deleting the bucket
 // it self.
 // TODO: list and delete methods should use paginators
+//
+// TODO: duped from service/internal/integrationtest, remove after beta.
 func CleanupBucket(ctx context.Context, svc *s3.Client, bucketName string) (err error) {
 	var errs = make([]error, 0)
 
@@ -389,6 +403,8 @@ func CleanupBucket(ctx context.Context, svc *s3.Client, bucketName string) (err 
 }
 
 // SetupExpressBucket returns an express bucket for testing.
+//
+// TODO: duped from service/internal/integrationtest, remove after beta.
 func SetupExpressBucket(ctx context.Context, svc *s3.Client, bucketName string) error {
 	if !strings.HasSuffix(bucketName, expressSuffix) {
 		return fmt.Errorf("bucket name %s is missing required suffix %s", bucketName, expressSuffix)
