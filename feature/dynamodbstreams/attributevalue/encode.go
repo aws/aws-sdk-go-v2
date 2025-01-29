@@ -499,6 +499,9 @@ func (e *Encoder) encodeStruct(v reflect.Value, fieldTag tag) (types.AttributeVa
 	if v.Type().ConvertibleTo(timeType) {
 		var t time.Time
 		t = v.Convert(timeType).Interface().(time.Time)
+		if fieldTag.OmitEmpty {
+			return nil, nil
+		}
 		if fieldTag.AsUnixTime {
 			return UnixTime(t).MarshalDynamoDBStreamsAttributeValue()
 		}

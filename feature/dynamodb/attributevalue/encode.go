@@ -492,13 +492,15 @@ func (e *Encoder) encode(v reflect.Value, fieldTag tag) (types.AttributeValue, e
 		return e.encodeScalar(v, fieldTag)
 	}
 }
-
 func (e *Encoder) encodeStruct(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {
 	// Time structs have no public members, and instead are converted to
 	// RFC3339Nano formatted string, unix time seconds number if struct tag is set.
 	if v.Type().ConvertibleTo(timeType) {
 		var t time.Time
 		t = v.Convert(timeType).Interface().(time.Time)
+		if fieldTag.OmitEmpty {
+			return nil, nil
+		}
 		if fieldTag.AsUnixTime {
 			return UnixTime(t).MarshalDynamoDBAttributeValue()
 		}
