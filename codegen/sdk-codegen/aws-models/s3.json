@@ -29784,7 +29784,7 @@
             "type": "integer"
         },
         "com.amazonaws.s3#MpuObjectSize": {
-            "type": "string"
+            "type": "long"
         },
         "com.amazonaws.s3#MultipartUpload": {
             "type": "structure",
