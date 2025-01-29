@@ -1,0 +1,8 @@
+{
+    "id": "2e4dd529-d612-4aae-8249-25eae8503164",
+    "type": "feature",
+    "description": "This release adds support for AWS HealthScribe Streaming APIs within Amazon Transcribe.",
+    "modules": [
+        "service/transcribestreaming"
+    ]
+}

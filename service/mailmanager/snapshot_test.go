@@ -86,6 +86,30 @@ func TestCheckSnapshot_CreateAddonSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAddressListImportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAddressListImportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAddressListImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateArchive(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateArchive(context.Background(), nil, func(o *Options) {
@@ -170,6 +194,18 @@ func TestCheckSnapshot_DeleteAddonSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteArchive(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteArchive(context.Background(), nil, func(o *Options) {
@@ -230,6 +266,18 @@ func TestCheckSnapshot_DeleteTrafficPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeregisterMemberFromAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterMemberFromAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeregisterMemberFromAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAddonInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAddonInstance(context.Background(), nil, func(o *Options) {
@@ -247,6 +295,30 @@ func TestCheckSnapshot_GetAddonSubscription(t *testing.T) {
 	_, err := svc.GetAddonSubscription(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAddonSubscription")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAddressListImportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAddressListImportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAddressListImportJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -338,6 +410,18 @@ func TestCheckSnapshot_GetIngressPoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMemberOfAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMemberOfAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMemberOfAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRelay(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRelay(context.Background(), nil, func(o *Options) {
@@ -398,6 +482,30 @@ func TestCheckSnapshot_ListAddonSubscriptions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAddressListImportJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAddressListImportJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAddressListImportJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAddressLists(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAddressLists(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAddressLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListArchiveExports(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListArchiveExports(context.Background(), nil, func(o *Options) {
@@ -439,6 +547,18 @@ func TestCheckSnapshot_ListIngressPoints(t *testing.T) {
 	_, err := svc.ListIngressPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListIngressPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListMembersOfAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMembersOfAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMembersOfAddressList")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -494,6 +614,30 @@ func TestCheckSnapshot_ListTrafficPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RegisterMemberToAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterMemberToAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterMemberToAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartAddressListImportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAddressListImportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAddressListImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartArchiveExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartArchiveExport(context.Background(), nil, func(o *Options) {
@@ -511,6 +655,18 @@ func TestCheckSnapshot_StartArchiveSearch(t *testing.T) {
 	_, err := svc.StartArchiveSearch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartArchiveSearch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopAddressListImportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAddressListImportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopAddressListImportJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -649,6 +805,30 @@ func TestUpdateSnapshot_CreateAddonSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAddressListImportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAddressListImportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAddressListImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateArchive(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateArchive(context.Background(), nil, func(o *Options) {
@@ -733,6 +913,18 @@ func TestUpdateSnapshot_DeleteAddonSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteArchive(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteArchive(context.Background(), nil, func(o *Options) {
@@ -793,6 +985,18 @@ func TestUpdateSnapshot_DeleteTrafficPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeregisterMemberFromAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterMemberFromAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeregisterMemberFromAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAddonInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAddonInstance(context.Background(), nil, func(o *Options) {
@@ -810,6 +1014,30 @@ func TestUpdateSnapshot_GetAddonSubscription(t *testing.T) {
 	_, err := svc.GetAddonSubscription(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAddonSubscription")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAddressListImportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAddressListImportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAddressListImportJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -901,6 +1129,18 @@ func TestUpdateSnapshot_GetIngressPoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMemberOfAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMemberOfAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMemberOfAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRelay(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRelay(context.Background(), nil, func(o *Options) {
@@ -961,6 +1201,30 @@ func TestUpdateSnapshot_ListAddonSubscriptions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAddressListImportJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAddressListImportJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAddressListImportJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAddressLists(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAddressLists(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAddressLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListArchiveExports(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListArchiveExports(context.Background(), nil, func(o *Options) {
@@ -1002,6 +1266,18 @@ func TestUpdateSnapshot_ListIngressPoints(t *testing.T) {
 	_, err := svc.ListIngressPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIngressPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListMembersOfAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMembersOfAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMembersOfAddressList")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1057,6 +1333,30 @@ func TestUpdateSnapshot_ListTrafficPolicies(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RegisterMemberToAddressList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterMemberToAddressList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterMemberToAddressList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAddressListImportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAddressListImportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAddressListImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartArchiveExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartArchiveExport(context.Background(), nil, func(o *Options) {
@@ -1074,6 +1374,18 @@ func TestUpdateSnapshot_StartArchiveSearch(t *testing.T) {
 	_, err := svc.StartArchiveSearch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartArchiveSearch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopAddressListImportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAddressListImportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopAddressListImportJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

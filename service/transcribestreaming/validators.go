@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpGetMedicalScribeStream struct {
+}
+
+func (*validateOpGetMedicalScribeStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMedicalScribeStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMedicalScribeStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMedicalScribeStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartCallAnalyticsStreamTranscription struct {
 }
 
@@ -25,6 +45,26 @@ func (m *validateOpStartCallAnalyticsStreamTranscription) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartCallAnalyticsStreamTranscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartMedicalScribeStream struct {
+}
+
+func (*validateOpStartMedicalScribeStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMedicalScribeStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMedicalScribeStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMedicalScribeStreamInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -70,8 +110,16 @@ func (m *validateOpStartStreamTranscription) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpGetMedicalScribeStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMedicalScribeStream{}, middleware.After)
+}
+
 func addOpStartCallAnalyticsStreamTranscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCallAnalyticsStreamTranscription{}, middleware.After)
+}
+
+func addOpStartMedicalScribeStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMedicalScribeStream{}, middleware.After)
 }
 
 func addOpStartMedicalStreamTranscriptionValidationMiddleware(stack *middleware.Stack) error {
@@ -133,6 +181,21 @@ func validateChannelDefinitions(v []types.ChannelDefinition) error {
 	}
 }
 
+func validateClinicalNoteGenerationSettings(v *types.ClinicalNoteGenerationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClinicalNoteGenerationSettings"}
+	if v.OutputBucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputBucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConfigurationEvent(v *types.ConfigurationEvent) error {
 	if v == nil {
 		return nil
@@ -147,6 +210,163 @@ func validateConfigurationEvent(v *types.ConfigurationEvent) error {
 		if err := validatePostCallAnalyticsSettings(v.PostCallAnalyticsSettings); err != nil {
 			invalidParams.AddNested("PostCallAnalyticsSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribeAudioEvent(v *types.MedicalScribeAudioEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeAudioEvent"}
+	if v.AudioChunk == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AudioChunk"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribeChannelDefinition(v *types.MedicalScribeChannelDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeChannelDefinition"}
+	if len(v.ParticipantRole) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribeChannelDefinitions(v []types.MedicalScribeChannelDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeChannelDefinitions"}
+	for i := range v {
+		if err := validateMedicalScribeChannelDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribeConfigurationEvent(v *types.MedicalScribeConfigurationEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeConfigurationEvent"}
+	if v.ResourceAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceAccessRoleArn"))
+	}
+	if v.ChannelDefinitions != nil {
+		if err := validateMedicalScribeChannelDefinitions(v.ChannelDefinitions); err != nil {
+			invalidParams.AddNested("ChannelDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionSettings != nil {
+		if err := validateMedicalScribeEncryptionSettings(v.EncryptionSettings); err != nil {
+			invalidParams.AddNested("EncryptionSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PostStreamAnalyticsSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostStreamAnalyticsSettings"))
+	} else if v.PostStreamAnalyticsSettings != nil {
+		if err := validateMedicalScribePostStreamAnalyticsSettings(v.PostStreamAnalyticsSettings); err != nil {
+			invalidParams.AddNested("PostStreamAnalyticsSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribeEncryptionSettings(v *types.MedicalScribeEncryptionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeEncryptionSettings"}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribeInputStream(v types.MedicalScribeInputStream) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeInputStream"}
+	switch uv := v.(type) {
+	case *types.MedicalScribeInputStreamMemberAudioEvent:
+		if err := validateMedicalScribeAudioEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[AudioEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.MedicalScribeInputStreamMemberConfigurationEvent:
+		if err := validateMedicalScribeConfigurationEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[ConfigurationEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.MedicalScribeInputStreamMemberSessionControlEvent:
+		if err := validateMedicalScribeSessionControlEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[SessionControlEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribePostStreamAnalyticsSettings(v *types.MedicalScribePostStreamAnalyticsSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribePostStreamAnalyticsSettings"}
+	if v.ClinicalNoteGenerationSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClinicalNoteGenerationSettings"))
+	} else if v.ClinicalNoteGenerationSettings != nil {
+		if err := validateClinicalNoteGenerationSettings(v.ClinicalNoteGenerationSettings); err != nil {
+			invalidParams.AddNested("ClinicalNoteGenerationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalScribeSessionControlEvent(v *types.MedicalScribeSessionControlEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeSessionControlEvent"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -173,11 +393,47 @@ func validatePostCallAnalyticsSettings(v *types.PostCallAnalyticsSettings) error
 	}
 }
 
+func validateOpGetMedicalScribeStreamInput(v *GetMedicalScribeStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMedicalScribeStreamInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartCallAnalyticsStreamTranscriptionInput(v *StartCallAnalyticsStreamTranscriptionInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartCallAnalyticsStreamTranscriptionInput"}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if v.MediaSampleRateHertz == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaSampleRateHertz"))
+	}
+	if len(v.MediaEncoding) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaEncoding"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMedicalScribeStreamInput(v *StartMedicalScribeStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMedicalScribeStreamInput"}
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}

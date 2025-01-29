@@ -66,6 +66,47 @@ type AddonSubscription struct {
 	noSmithyDocumentSerde
 }
 
+// Filtering options for ListMembersOfAddressList operation.
+type AddressFilter struct {
+
+	// Filter to limit the results to addresses having the provided prefix.
+	AddressPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// An address list contains a list of emails and domains that are used in
+// MailManager Ingress endpoints and Rules for email management.
+type AddressList struct {
+
+	// The Amazon Resource Name (ARN) of the address list.
+	//
+	// This member is required.
+	AddressListArn *string
+
+	// The identifier of the address list.
+	//
+	// This member is required.
+	AddressListId *string
+
+	// The user-friendly name of the address list.
+	//
+	// This member is required.
+	AddressListName *string
+
+	// The timestamp of when the address list was created.
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The timestamp of when the address list was last updated.
+	//
+	// This member is required.
+	LastUpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The result of an analysis can be used in conditions to trigger actions.
 // Analyses can inspect the email content and report a certain aspect of the email.
 type Analysis struct {
@@ -384,6 +425,77 @@ type ExportSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The import data format contains the specifications of the input file that would
+// be passed to the address list import job.
+type ImportDataFormat struct {
+
+	// The type of file that would be passed as an input for the address list import
+	// job.
+	//
+	// This member is required.
+	ImportDataType ImportDataType
+
+	noSmithyDocumentSerde
+}
+
+// Details about an import job.
+type ImportJob struct {
+
+	// The unique identifier of the address list the import job was created for.
+	//
+	// This member is required.
+	AddressListId *string
+
+	// The timestamp of when the import job was created.
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The format of the input for the import job.
+	//
+	// This member is required.
+	ImportDataFormat *ImportDataFormat
+
+	// The identifier of the import job.
+	//
+	// This member is required.
+	JobId *string
+
+	// A user-friendly name for the import job.
+	//
+	// This member is required.
+	Name *string
+
+	// The pre-signed URL target for uploading the input file.
+	//
+	// This member is required.
+	PreSignedUrl *string
+
+	// The status of the import job.
+	//
+	// This member is required.
+	Status ImportJobStatus
+
+	// The timestamp of when the import job was completed.
+	CompletedTimestamp *time.Time
+
+	// The reason for failure of an import job.
+	Error *string
+
+	// The number of addresses in the input that failed to get imported into address
+	// list.
+	FailedItemsCount *int32
+
+	// The number of addresses in the input that were successfully imported into the
+	// address list.
+	ImportedItemsCount *int32
+
+	// The timestamp of when the import job was started.
+	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The Add On ARN and its returned value that is evaluated in a policy statement's
 // conditional expression to either deny or block the incoming email.
 type IngressAnalysis struct {
@@ -423,6 +535,7 @@ type IngressBooleanExpression struct {
 // The following types satisfy this interface:
 //
 //	IngressBooleanToEvaluateMemberAnalysis
+//	IngressBooleanToEvaluateMemberIsInAddressList
 type IngressBooleanToEvaluate interface {
 	isIngressBooleanToEvaluate()
 }
@@ -436,6 +549,16 @@ type IngressBooleanToEvaluateMemberAnalysis struct {
 }
 
 func (*IngressBooleanToEvaluateMemberAnalysis) isIngressBooleanToEvaluate() {}
+
+// The structure type for a boolean condition that provides the address lists to
+// evaluate incoming traffic on.
+type IngressBooleanToEvaluateMemberIsInAddressList struct {
+	Value IngressIsInAddressList
+
+	noSmithyDocumentSerde
+}
+
+func (*IngressBooleanToEvaluateMemberIsInAddressList) isIngressBooleanToEvaluate() {}
 
 // The structure for an IP based condition matching on the incoming mail.
 //
@@ -473,6 +596,24 @@ type IngressIpv4Expression struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The address lists and the address list attribute value that is evaluated in a
+// policy statement's conditional expression to either deny or block the incoming
+// email.
+type IngressIsInAddressList struct {
+
+	// The address lists that will be used for evaluation.
+	//
+	// This member is required.
+	AddressLists []string
+
+	// The email attribute that needs to be evaluated against the address list.
+	//
+	// This member is required.
+	Attribute IngressAddressListEmailAttribute
 
 	noSmithyDocumentSerde
 }
@@ -1065,6 +1206,7 @@ type RuleBooleanExpression struct {
 // The following types satisfy this interface:
 //
 //	RuleBooleanToEvaluateMemberAttribute
+//	RuleBooleanToEvaluateMemberIsInAddressList
 type RuleBooleanToEvaluate interface {
 	isRuleBooleanToEvaluate()
 }
@@ -1077,6 +1219,16 @@ type RuleBooleanToEvaluateMemberAttribute struct {
 }
 
 func (*RuleBooleanToEvaluateMemberAttribute) isRuleBooleanToEvaluate() {}
+
+// The structure representing the address lists and address list attribute that
+// will be used in evaluation of boolean expression.
+type RuleBooleanToEvaluateMemberIsInAddressList struct {
+	Value RuleIsInAddressList
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleBooleanToEvaluateMemberIsInAddressList) isRuleBooleanToEvaluate() {}
 
 // The conditional expression used to evaluate an email for determining if a rule
 // action should be taken.
@@ -1213,6 +1365,23 @@ type RuleIpToEvaluateMemberAttribute struct {
 }
 
 func (*RuleIpToEvaluateMemberAttribute) isRuleIpToEvaluate() {}
+
+// The structure type for a boolean condition that provides the address lists and
+// address list attribute to evaluate.
+type RuleIsInAddressList struct {
+
+	// The address lists that will be used for evaluation.
+	//
+	// This member is required.
+	AddressLists []string
+
+	// The email attribute that needs to be evaluated against the address list.
+	//
+	// This member is required.
+	Attribute RuleAddressListEmailAttribute
+
+	noSmithyDocumentSerde
+}
 
 // A number expression to match numeric conditions with integers from the incoming
 // email.
@@ -1412,6 +1581,22 @@ type S3ExportDestinationConfiguration struct {
 
 	// The S3 location to deliver the exported email data.
 	S3Location *string
+
+	noSmithyDocumentSerde
+}
+
+// An address that is a member of an address list.
+type SavedAddress struct {
+
+	// The email or domain that constitutes the address.
+	//
+	// This member is required.
+	Address *string
+
+	// The timestamp of when the address was added to the address list.
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }

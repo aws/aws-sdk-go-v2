@@ -29,10 +29,10 @@ func (c *Client) ListWorkloadEstimates(ctx context.Context, params *ListWorkload
 
 type ListWorkloadEstimatesInput struct {
 
-	//  Filter workload estimates based on their creation date.
+	//  Filter workload estimates based on the creation date.
 	CreatedAtFilter *types.FilterTimestamp
 
-	//  Filter workload estimates based on their expiration date.
+	//  Filter workload estimates based on the expiration date.
 	ExpiresAtFilter *types.FilterTimestamp
 
 	//  Filters to apply to the list of workload estimates.

@@ -302,7 +302,7 @@ type CompleteMultipartUploadInput struct {
 	//  The expected total object size of the multipart upload request. If there’s a
 	// mismatch between the specified object size value and the actual object size
 	// value, it results in an HTTP 400 InvalidRequest error.
-	MpuObjectSize *string
+	MpuObjectSize *int64
 
 	// The container for the multipart upload request information.
 	MultipartUpload *types.CompletedMultipartUpload

@@ -1,0 +1,42 @@
+StartMedicalScribeStream
+	Initialize stack step
+		spanInitializeStart
+		RegisterServiceMetadata
+		legacyEndpointContextSetter
+		SetLogger
+		OperationInputValidation
+		spanInitializeEnd
+	Serialize stack step
+		spanBuildRequestStart
+		setOperationInput
+		ResolveEndpoint
+		OperationSerializer
+	Build stack step
+		ClientRequestID
+		UserAgent
+		AddTimeOffsetMiddleware
+		RecursionDetection
+		spanBuildRequestEnd
+	Finalize stack step
+		ComputePayloadHash
+		SigV4ContentSHA256Header
+		spanRetryLoop
+		Retry
+		RetryMetricsHeader
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		setLegacyContextSigningOptions
+		Signing
+		InitializeStreamWriter
+	Deserialize stack step
+		AddRawResponseToMetadata
+		OperationEventStreamDeserializer
+		RequireMinimumProtocol
+		ResponseErrorWrapper
+		RequestIDRetriever
+		OperationDeserializer
+		AddTimeOffsetMiddleware
+		RecordResponseTiming
+		RequestResponseLogger

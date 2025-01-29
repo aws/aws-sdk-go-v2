@@ -524,6 +524,9 @@ func awsAwsjson10_deserializeOpErrorBatchDeleteBillScenarioCommitmentModificatio
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("DataUnavailableException", errorCode):
 		return awsAwsjson10_deserializeErrorDataUnavailableException(response, errorBody)
 
@@ -649,6 +652,9 @@ func awsAwsjson10_deserializeOpErrorBatchDeleteBillScenarioUsageModification(res
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("DataUnavailableException", errorCode):
 		return awsAwsjson10_deserializeErrorDataUnavailableException(response, errorBody)
@@ -908,6 +914,9 @@ func awsAwsjson10_deserializeOpErrorBatchUpdateBillScenarioCommitmentModificatio
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("DataUnavailableException", errorCode):
 		return awsAwsjson10_deserializeErrorDataUnavailableException(response, errorBody)
 
@@ -1033,6 +1042,9 @@ func awsAwsjson10_deserializeOpErrorBatchUpdateBillScenarioUsageModification(res
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("DataUnavailableException", errorCode):
 		return awsAwsjson10_deserializeErrorDataUnavailableException(response, errorBody)
@@ -1804,6 +1816,9 @@ func awsAwsjson10_deserializeOpErrorDeleteBillScenario(response *smithyhttp.Resp
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("DataUnavailableException", errorCode):
 		return awsAwsjson10_deserializeErrorDataUnavailableException(response, errorBody)

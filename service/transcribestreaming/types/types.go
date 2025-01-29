@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // A list of possible alternative transcriptions for the input audio. Each
@@ -31,8 +32,22 @@ type Alternative struct {
 // [Event stream encoding]: https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html
 type AudioEvent struct {
 
-	// An audio blob that contains the next part of the audio that you want to
-	// transcribe. The maximum audio chunk size is 32 KB.
+	//  An audio blob containing the next segment of audio from your application, with
+	// a maximum duration of 1 second. The maximum size in bytes varies based on audio
+	// properties.
+	//
+	// Find recommended size in [Transcribing streaming best practices].
+	//
+	// Size calculation: Duration (s) * Sample Rate (Hz) * Number of Channels * 2
+	// (Bytes per Sample)
+	//
+	// For example, a 1-second chunk of 16 kHz, 2-channel, 16-bit audio would be 1 *
+	// 16000 * 2 * 2 = 64000 bytes .
+	//
+	// For 8 kHz, 1-channel, 16-bit audio, a 1-second chunk would be 1 * 8000 * 1 * 2
+	// = 16000 bytes .
+	//
+	// [Transcribing streaming best practices]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#best-practices
 	AudioChunk []byte
 
 	noSmithyDocumentSerde
@@ -233,6 +248,64 @@ type CharacterOffsets struct {
 	// For example, the last character associated with an issue or a category match in
 	// a segment transcript.
 	End *int32
+
+	noSmithyDocumentSerde
+}
+
+// The details for clinical note generation, including status, and output
+// locations for clinical note and aggregated transcript if the analytics
+// completed, or failure reason if the analytics failed.
+type ClinicalNoteGenerationResult struct {
+
+	// Holds the Amazon S3 URI for the output Clinical Note.
+	ClinicalNoteOutputLocation *string
+
+	// If ClinicalNoteGenerationResult is FAILED , information about why it failed.
+	FailureReason *string
+
+	// The status of the clinical note generation.
+	//
+	// Possible Values:
+	//
+	//   - IN_PROGRESS
+	//
+	//   - FAILED
+	//
+	//   - COMPLETED
+	//
+	// After audio streaming finishes, and you send a MedicalScribeSessionControlEvent
+	// event (with END_OF_SESSION as the Type), the status is set to IN_PROGRESS . If
+	// the status is COMPLETED , the analytics completed successfully, and you can find
+	// the results at the locations specified in ClinicalNoteOutputLocation and
+	// TranscriptOutputLocation . If the status is FAILED , FailureReason provides
+	// details about the failure.
+	Status ClinicalNoteGenerationStatus
+
+	// Holds the Amazon S3 URI for the output Transcript.
+	TranscriptOutputLocation *string
+
+	noSmithyDocumentSerde
+}
+
+// The output configuration for aggregated transcript and clinical note generation.
+type ClinicalNoteGenerationSettings struct {
+
+	// The name of the Amazon S3 bucket where you want the output of Amazon Web
+	// Services HealthScribe post-stream analytics stored. Don't include the S3://
+	// prefix of the specified bucket.
+	//
+	// HealthScribe outputs transcript and clinical note files under the prefix:
+	// S3://$output-bucket-name/healthscribe-streaming/session-id/post-stream-analytics/clinical-notes
+	//
+	// The role ResourceAccessRoleArn specified in the MedicalScribeConfigurationEvent
+	// must have permission to use the specified location. You can change Amazon S3
+	// permissions using the [Amazon Web Services Management Console]. See also [Permissions Required for IAM User Roles] .
+	//
+	// [Amazon Web Services Management Console]: https://console.aws.amazon.com/s3
+	// [Permissions Required for IAM User Roles]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
+	//
+	// This member is required.
+	OutputBucketName *string
 
 	noSmithyDocumentSerde
 }
@@ -461,6 +534,441 @@ type MedicalResult struct {
 
 	// The start time, in milliseconds, of the Result .
 	StartTime float64
+
+	noSmithyDocumentSerde
+}
+
+// A wrapper for your audio chunks
+//
+// For more information, see [Event stream encoding].
+//
+// [Event stream encoding]: https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html
+type MedicalScribeAudioEvent struct {
+
+	//  An audio blob containing the next segment of audio from your application, with
+	// a maximum duration of 1 second. The maximum size in bytes varies based on audio
+	// properties.
+	//
+	// Find recommended size in [Transcribing streaming best practices].
+	//
+	// Size calculation: Duration (s) * Sample Rate (Hz) * Number of Channels * 2
+	// (Bytes per Sample)
+	//
+	// For example, a 1-second chunk of 16 kHz, 2-channel, 16-bit audio would be 1 *
+	// 16000 * 2 * 2 = 64000 bytes .
+	//
+	// For 8 kHz, 1-channel, 16-bit audio, a 1-second chunk would be 1 * 8000 * 1 * 2
+	// = 16000 bytes .
+	//
+	// [Transcribing streaming best practices]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#best-practices
+	//
+	// This member is required.
+	AudioChunk []byte
+
+	noSmithyDocumentSerde
+}
+
+// Makes it possible to specify which speaker is on which channel. For example, if
+// the clinician is the first participant to speak, you would set the ChannelId of
+// the first ChannelDefinition in the list to 0 (to indicate the first channel)
+// and ParticipantRole to CLINICIAN (to indicate that it's the clinician
+// speaking). Then you would set the ChannelId of the second ChannelDefinition in
+// the list to 1 (to indicate the second channel) and ParticipantRole to PATIENT
+// (to indicate that it's the patient speaking).
+//
+// If you don't specify a channel definition, HealthScribe will diarize the
+// transcription and identify speaker roles for each speaker.
+type MedicalScribeChannelDefinition struct {
+
+	// Specify the audio channel you want to define.
+	//
+	// This member is required.
+	ChannelId int32
+
+	// Specify the participant that you want to flag. The allowed options are CLINICIAN
+	// and PATIENT .
+	//
+	// This member is required.
+	ParticipantRole MedicalScribeParticipantRole
+
+	noSmithyDocumentSerde
+}
+
+// Specify details to configure the streaming session, including channel
+// definitions, encryption settings, post-stream analytics settings, resource
+// access role ARN and vocabulary settings.
+//
+// Whether you are starting a new session or resuming an existing session, your
+// first event must be a MedicalScribeConfigurationEvent . If you are resuming a
+// session, then this event must have the same configurations that you provided to
+// start the session.
+type MedicalScribeConfigurationEvent struct {
+
+	// Specify settings for post-stream analytics.
+	//
+	// This member is required.
+	PostStreamAnalyticsSettings *MedicalScribePostStreamAnalyticsSettings
+
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
+	// the Amazon S3 output bucket you specified, and use your KMS key if supplied. If
+	// the role that you specify doesn’t have the appropriate permissions, your request
+	// fails.
+	//
+	// IAM role ARNs have the format
+	// arn:partition:iam::account:role/role-name-with-path . For example:
+	// arn:aws:iam::111122223333:role/Admin .
+	//
+	// For more information, see [Amazon Web Services HealthScribe].
+	//
+	// [Amazon Web Services HealthScribe]: https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe-streaming.html
+	//
+	// This member is required.
+	ResourceAccessRoleArn *string
+
+	// Specify which speaker is on which audio channel.
+	ChannelDefinitions []MedicalScribeChannelDefinition
+
+	// Specify the encryption settings for your streaming session.
+	EncryptionSettings *MedicalScribeEncryptionSettings
+
+	// Specify how you want your custom vocabulary filter applied to the streaming
+	// session.
+	//
+	// To replace words with *** , specify mask .
+	//
+	// To delete words, specify remove .
+	//
+	// To flag words without changing them, specify tag .
+	VocabularyFilterMethod MedicalScribeVocabularyFilterMethod
+
+	// Specify the name of the custom vocabulary filter you want to include in your
+	// streaming session. Custom vocabulary filter names are case-sensitive.
+	//
+	// If you include VocabularyFilterName in the MedicalScribeConfigurationEvent , you
+	// must also include VocabularyFilterMethod .
+	VocabularyFilterName *string
+
+	// Specify the name of the custom vocabulary you want to use for your streaming
+	// session. Custom vocabulary names are case-sensitive.
+	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains encryption related settings to be used for data encryption with Key
+// Management Service, including KmsEncryptionContext and KmsKeyId. The KmsKeyId is
+// required, while KmsEncryptionContext is optional for additional layer of
+// security.
+//
+// By default, Amazon Web Services HealthScribe provides encryption at rest to
+// protect sensitive customer data using Amazon S3-managed keys. HealthScribe uses
+// the KMS key you specify as a second layer of encryption.
+//
+// Your ResourceAccessRoleArn must permission to use your KMS key. For more
+// information, see [Data Encryption at rest for Amazon Web Services HealthScribe].
+//
+// [Data Encryption at rest for Amazon Web Services HealthScribe]: https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe-encryption.html
+type MedicalScribeEncryptionSettings struct {
+
+	// The ID of the KMS key you want to use for your streaming session. You can
+	// specify its KMS key ID, key Amazon Resource Name (ARN), alias name, or alias
+	// ARN. When using an alias name, prefix it with "alias/" . To specify a KMS key in
+	// a different Amazon Web Services account, you must use the key ARN or alias ARN.
+	//
+	// For example:
+	//
+	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//   - Key ARN:
+	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//   - Alias name: alias/ExampleAlias
+	//
+	//   - Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key ARN for a KMS key, use the [ListKeys] or [DescribeKey] KMS API operations.
+	// To get the alias name and alias ARN, use [ListKeys]API operation.
+	//
+	// [DescribeKey]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html
+	// [ListKeys]: https://docs.aws.amazon.com/kms/latest/APIReference/API_ListAliases.html
+	//
+	// This member is required.
+	KmsKeyId *string
+
+	// A map of plain text, non-secret key:value pairs, known as encryption context
+	// pairs, that provide an added layer of security for your data. For more
+	// information, see [KMSencryption context]and [Asymmetric keys in KMS].
+	//
+	// [Asymmetric keys in KMS]: https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html
+	// [KMSencryption context]: https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context
+	KmsEncryptionContext map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An encoded stream of events. The stream is encoded as HTTP/2 data frames.
+//
+// An input stream consists of the following types of events. The first element of
+// the input stream must be the MedicalScribeConfigurationEvent event type.
+//
+//   - MedicalScribeConfigurationEvent
+//
+//   - MedicalScribeAudioEvent
+//
+//   - MedicalScribeSessionControlEvent
+//
+// The following types satisfy this interface:
+//
+//	MedicalScribeInputStreamMemberAudioEvent
+//	MedicalScribeInputStreamMemberConfigurationEvent
+//	MedicalScribeInputStreamMemberSessionControlEvent
+type MedicalScribeInputStream interface {
+	isMedicalScribeInputStream()
+}
+
+// A wrapper for your audio chunks
+//
+// For more information, see [Event stream encoding].
+//
+// [Event stream encoding]: https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html
+type MedicalScribeInputStreamMemberAudioEvent struct {
+	Value MedicalScribeAudioEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*MedicalScribeInputStreamMemberAudioEvent) isMedicalScribeInputStream() {}
+
+// Specify additional streaming session configurations beyond those provided in
+// your initial start request headers. For example, specify channel definitions,
+// encryption settings, and post-stream analytics settings.
+//
+// Whether you are starting a new session or resuming an existing session, your
+// first event must be a MedicalScribeConfigurationEvent .
+type MedicalScribeInputStreamMemberConfigurationEvent struct {
+	Value MedicalScribeConfigurationEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*MedicalScribeInputStreamMemberConfigurationEvent) isMedicalScribeInputStream() {}
+
+// Specify the lifecycle of your streaming session, such as ending the session.
+type MedicalScribeInputStreamMemberSessionControlEvent struct {
+	Value MedicalScribeSessionControlEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*MedicalScribeInputStreamMemberSessionControlEvent) isMedicalScribeInputStream() {}
+
+// Contains details for the result of post-stream analytics.
+type MedicalScribePostStreamAnalyticsResult struct {
+
+	// Provides the Clinical Note Generation result for post-stream analytics.
+	ClinicalNoteGenerationResult *ClinicalNoteGenerationResult
+
+	noSmithyDocumentSerde
+}
+
+// The settings for post-stream analytics.
+type MedicalScribePostStreamAnalyticsSettings struct {
+
+	// Specify settings for the post-stream clinical note generation.
+	//
+	// This member is required.
+	ClinicalNoteGenerationSettings *ClinicalNoteGenerationSettings
+
+	noSmithyDocumentSerde
+}
+
+// Result stream where you will receive the output events. The details are
+// provided in the MedicalScribeTranscriptEvent object.
+//
+// The following types satisfy this interface:
+//
+//	MedicalScribeResultStreamMemberTranscriptEvent
+type MedicalScribeResultStream interface {
+	isMedicalScribeResultStream()
+}
+
+// The transcript event that contains real-time transcription results.
+type MedicalScribeResultStreamMemberTranscriptEvent struct {
+	Value MedicalScribeTranscriptEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*MedicalScribeResultStreamMemberTranscriptEvent) isMedicalScribeResultStream() {}
+
+// Specify the lifecycle of your streaming session.
+type MedicalScribeSessionControlEvent struct {
+
+	// The type of MedicalScribeSessionControlEvent .
+	//
+	// Possible Values:
+	//
+	//   - END_OF_SESSION - Indicates the audio streaming is complete. After you send
+	//   an END_OF_SESSION event, Amazon Web Services HealthScribe starts the post-stream
+	//   analytics. The session can't be resumed after this event is sent. After Amazon
+	//   Web Services HealthScribe processes the event, the real-time StreamStatus is
+	//   COMPLETED . You get the StreamStatus and other stream details with the [GetMedicalScribeStream]API
+	//   operation. For more information about different streaming statuses, see the
+	//   StreamStatus description in the [MedicalScribeStreamDetails].
+	//
+	// [GetMedicalScribeStream]: https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_GetMedicalScribeStream.html
+	// [MedicalScribeStreamDetails]: https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_MedicalScribeStreamDetails.html
+	//
+	// This member is required.
+	Type MedicalScribeSessionControlEventType
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a Amazon Web Services HealthScribe streaming session.
+type MedicalScribeStreamDetails struct {
+
+	// The Channel Definitions of the HealthScribe streaming session.
+	ChannelDefinitions []MedicalScribeChannelDefinition
+
+	// The Encryption Settings of the HealthScribe streaming session.
+	EncryptionSettings *MedicalScribeEncryptionSettings
+
+	// The Language Code of the HealthScribe streaming session.
+	LanguageCode MedicalScribeLanguageCode
+
+	// The Media Encoding of the HealthScribe streaming session.
+	MediaEncoding MedicalScribeMediaEncoding
+
+	// The sample rate (in hertz) of the HealthScribe streaming session.
+	MediaSampleRateHertz *int32
+
+	// The result of post-stream analytics for the HealthScribe streaming session.
+	PostStreamAnalyticsResult *MedicalScribePostStreamAnalyticsResult
+
+	// The post-stream analytics settings of the HealthScribe streaming session.
+	PostStreamAnalyticsSettings *MedicalScribePostStreamAnalyticsSettings
+
+	// The Amazon Resource Name (ARN) of the role used in the HealthScribe streaming
+	// session.
+	ResourceAccessRoleArn *string
+
+	// The identifier of the HealthScribe streaming session.
+	SessionId *string
+
+	// The date and time when the HealthScribe streaming session was created.
+	StreamCreatedAt *time.Time
+
+	// The date and time when the HealthScribe streaming session was ended.
+	StreamEndedAt *time.Time
+
+	// The streaming status of the HealthScribe streaming session.
+	//
+	// Possible Values:
+	//
+	//   - IN_PROGRESS
+	//
+	//   - PAUSED
+	//
+	//   - FAILED
+	//
+	//   - COMPLETED
+	//
+	// This status is specific to real-time streaming. A COMPLETED status doesn't mean
+	// that the post-stream analytics is complete. To get status of an analytics
+	// result, check the Status field for the analytics result within the
+	// MedicalScribePostStreamAnalyticsResult . For example, you can view the status of
+	// the ClinicalNoteGenerationResult .
+	StreamStatus MedicalScribeStreamStatus
+
+	// The method of the vocabulary filter for the HealthScribe streaming session.
+	VocabularyFilterMethod MedicalScribeVocabularyFilterMethod
+
+	// The name of the vocabulary filter used for the HealthScribe streaming session .
+	VocabularyFilterName *string
+
+	// The vocabulary name of the HealthScribe streaming session.
+	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
+// The event associated with MedicalScribeResultStream .
+//
+// Contains MedicalScribeTranscriptSegment , which contains segment related
+// information.
+type MedicalScribeTranscriptEvent struct {
+
+	// The TranscriptSegment associated with a MedicalScribeTranscriptEvent .
+	TranscriptSegment *MedicalScribeTranscriptSegment
+
+	noSmithyDocumentSerde
+}
+
+// A word, phrase, or punctuation mark in your transcription output, along with
+// various associated attributes, such as confidence score, type, and start and end
+// times.
+type MedicalScribeTranscriptItem struct {
+
+	// The start time, in milliseconds, of the transcribed item.
+	BeginAudioTime float64
+
+	// The confidence score associated with a word or phrase in your transcript.
+	//
+	// Confidence scores are values between 0 and 1. A larger value indicates a higher
+	// probability that the identified item correctly matches the item spoken in your
+	// media.
+	Confidence *float64
+
+	// The word, phrase or punctuation mark that was transcribed.
+	Content *string
+
+	// The end time, in milliseconds, of the transcribed item.
+	EndAudioTime float64
+
+	// The type of item identified. Options are: PRONUNCIATION (spoken words) and
+	// PUNCTUATION .
+	Type MedicalScribeTranscriptItemType
+
+	// Indicates whether the specified item matches a word in the vocabulary filter
+	// included in your configuration event. If true , there is a vocabulary filter
+	// match.
+	VocabularyFilterMatch *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains a set of transcription results, along with additional information of
+// the segment.
+type MedicalScribeTranscriptSegment struct {
+
+	// The start time, in milliseconds, of the segment.
+	BeginAudioTime float64
+
+	// Indicates which audio channel is associated with the
+	// MedicalScribeTranscriptSegment .
+	//
+	// If MedicalScribeChannelDefinition is not provided in the
+	// MedicalScribeConfigurationEvent , then this field will not be included.
+	ChannelId *string
+
+	// Contains transcribed text of the segment.
+	Content *string
+
+	// The end time, in milliseconds, of the segment.
+	EndAudioTime float64
+
+	// Indicates if the segment is complete.
+	//
+	// If IsPartial is true , the segment is not complete. If IsPartial is false , the
+	// segment is complete.
+	IsPartial bool
+
+	// Contains words, phrases, or punctuation marks in your segment.
+	Items []MedicalScribeTranscriptItem
+
+	// The identifier of the segment.
+	SegmentId *string
 
 	noSmithyDocumentSerde
 }
@@ -782,5 +1290,7 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAudioStream()                         {}
 func (*UnknownUnionMember) isCallAnalyticsTranscriptResultStream() {}
+func (*UnknownUnionMember) isMedicalScribeInputStream()            {}
+func (*UnknownUnionMember) isMedicalScribeResultStream()           {}
 func (*UnknownUnionMember) isMedicalTranscriptResultStream()       {}
 func (*UnknownUnionMember) isTranscriptResultStream()              {}

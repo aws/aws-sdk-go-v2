@@ -31,12 +31,32 @@ type AudioStreamWriter interface {
 	Err() error
 }
 
+// MedicalScribeInputStreamWriter provides the interface for writing events to a
+// stream.
+//
+// The writer's Close method must allow multiple concurrent calls.
+type MedicalScribeInputStreamWriter interface {
+	Send(context.Context, types.MedicalScribeInputStream) error
+	Close() error
+	Err() error
+}
+
 // CallAnalyticsTranscriptResultStreamReader provides the interface for reading
 // events from a stream.
 //
 // The writer's Close method must allow multiple concurrent calls.
 type CallAnalyticsTranscriptResultStreamReader interface {
 	Events() <-chan types.CallAnalyticsTranscriptResultStream
+	Close() error
+	Err() error
+}
+
+// MedicalScribeResultStreamReader provides the interface for reading events from
+// a stream.
+//
+// The writer's Close method must allow multiple concurrent calls.
+type MedicalScribeResultStreamReader interface {
+	Events() <-chan types.MedicalScribeResultStream
 	Close() error
 	Err() error
 }
@@ -63,6 +83,213 @@ type TranscriptResultStreamReader interface {
 
 type eventStreamSigner interface {
 	GetSignature(ctx context.Context, headers, payload []byte, signingTime time.Time, optFns ...func(*v4.StreamSignerOptions)) ([]byte, error)
+}
+
+type asyncMedicalScribeInputStream struct {
+	Event  types.MedicalScribeInputStream
+	Result chan<- error
+}
+
+func (e asyncMedicalScribeInputStream) ReportResult(cancel <-chan struct{}, err error) bool {
+	select {
+	case e.Result <- err:
+		return true
+
+	case <-cancel:
+		return false
+
+	}
+}
+
+type medicalScribeInputStreamWriter struct {
+	encoder             *eventstream.Encoder
+	signer              eventStreamSigner
+	stream              chan asyncMedicalScribeInputStream
+	serializationBuffer *bytes.Buffer
+	signingBuffer       *bytes.Buffer
+	eventStream         io.WriteCloser
+	done                chan struct{}
+	closeOnce           sync.Once
+	err                 *smithysync.OnceErr
+}
+
+func newMedicalScribeInputStreamWriter(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *medicalScribeInputStreamWriter {
+	w := &medicalScribeInputStreamWriter{
+		encoder:             encoder,
+		signer:              signer,
+		stream:              make(chan asyncMedicalScribeInputStream),
+		eventStream:         stream,
+		done:                make(chan struct{}),
+		err:                 smithysync.NewOnceErr(),
+		serializationBuffer: bytes.NewBuffer(nil),
+		signingBuffer:       bytes.NewBuffer(nil),
+	}
+
+	go w.writeStream()
+
+	return w
+
+}
+
+func (w *medicalScribeInputStreamWriter) Send(ctx context.Context, event types.MedicalScribeInputStream) error {
+	return w.send(ctx, event)
+}
+
+func (w *medicalScribeInputStreamWriter) send(ctx context.Context, event types.MedicalScribeInputStream) error {
+	if err := w.err.Err(); err != nil {
+		return err
+	}
+
+	resultCh := make(chan error)
+
+	wrapped := asyncMedicalScribeInputStream{
+		Event:  event,
+		Result: resultCh,
+	}
+
+	select {
+	case w.stream <- wrapped:
+	case <-ctx.Done():
+		return ctx.Err()
+	case <-w.done:
+		return fmt.Errorf("stream closed, unable to send event")
+
+	}
+
+	select {
+	case err := <-resultCh:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	case <-w.done:
+		return fmt.Errorf("stream closed, unable to send event")
+
+	}
+
+}
+
+func (w *medicalScribeInputStreamWriter) writeStream() {
+	defer w.Close()
+
+	for {
+		select {
+		case wrapper := <-w.stream:
+			err := w.writeEvent(wrapper.Event)
+			wrapper.ReportResult(w.done, err)
+			if err != nil {
+				w.err.SetError(err)
+				return
+			}
+
+		case <-w.done:
+			if err := w.closeStream(); err != nil {
+				w.err.SetError(err)
+			}
+			return
+
+		}
+	}
+}
+
+func (w *medicalScribeInputStreamWriter) writeEvent(event types.MedicalScribeInputStream) error {
+	// serializedEvent returned bytes refers to an underlying byte buffer and must not
+	// escape this writeEvent scope without first copying. Any previous bytes stored in
+	// the buffer are cleared by this call.
+	serializedEvent, err := w.serializeEvent(event)
+	if err != nil {
+		return err
+	}
+
+	// signedEvent returned bytes refers to an underlying byte buffer and must not
+	// escape this writeEvent scope without first copying. Any previous bytes stored in
+	// the buffer are cleared by this call.
+	signedEvent, err := w.signEvent(serializedEvent)
+	if err != nil {
+		return err
+	}
+
+	// bytes are now copied to the underlying stream writer
+	_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))
+	return err
+}
+
+func (w *medicalScribeInputStreamWriter) serializeEvent(event types.MedicalScribeInputStream) ([]byte, error) {
+	w.serializationBuffer.Reset()
+
+	eventMessage := eventstream.Message{}
+
+	if err := awsRestjson1_serializeEventStreamMedicalScribeInputStream(event, &eventMessage); err != nil {
+		return nil, err
+	}
+
+	if err := w.encoder.Encode(w.serializationBuffer, eventMessage); err != nil {
+		return nil, err
+	}
+
+	return w.serializationBuffer.Bytes(), nil
+}
+
+func (w *medicalScribeInputStreamWriter) signEvent(payload []byte) ([]byte, error) {
+	w.signingBuffer.Reset()
+
+	date := time.Now().UTC()
+
+	var msg eventstream.Message
+	msg.Headers.Set(eventstreamapi.DateHeader, eventstream.TimestampValue(date))
+	msg.Payload = payload
+
+	var headers bytes.Buffer
+	if err := eventstream.EncodeHeaders(&headers, msg.Headers); err != nil {
+		return nil, err
+	}
+
+	sig, err := w.signer.GetSignature(context.Background(), headers.Bytes(), msg.Payload, date)
+	if err != nil {
+		return nil, err
+	}
+
+	msg.Headers.Set(eventstreamapi.ChunkSignatureHeader, eventstream.BytesValue(sig))
+
+	if err := w.encoder.Encode(w.signingBuffer, msg); err != nil {
+		return nil, err
+	}
+
+	return w.signingBuffer.Bytes(), nil
+}
+
+func (w *medicalScribeInputStreamWriter) closeStream() (err error) {
+	defer func() {
+		if cErr := w.eventStream.Close(); cErr != nil && err == nil {
+			err = cErr
+		}
+	}()
+
+	// Per the protocol, a signed empty message is used to indicate the end of the stream,
+	// and that no subsequent events will be sent.
+	signedEvent, err := w.signEvent([]byte{})
+	if err != nil {
+		return err
+	}
+
+	_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))
+	return err
+}
+
+func (w *medicalScribeInputStreamWriter) ErrorSet() <-chan struct{} {
+	return w.err.ErrorSet()
+}
+
+func (w *medicalScribeInputStreamWriter) Close() error {
+	w.closeOnce.Do(w.safeClose)
+	return w.Err()
+}
+
+func (w *medicalScribeInputStreamWriter) safeClose() {
+	close(w.done)
+}
+
+func (w *medicalScribeInputStreamWriter) Err() error {
+	return w.err.Err()
 }
 
 type asyncAudioStream struct {
@@ -270,6 +497,134 @@ func (w *audioStreamWriter) safeClose() {
 
 func (w *audioStreamWriter) Err() error {
 	return w.err.Err()
+}
+
+type medicalScribeResultStreamReader struct {
+	stream      chan types.MedicalScribeResultStream
+	decoder     *eventstream.Decoder
+	eventStream io.ReadCloser
+	err         *smithysync.OnceErr
+	payloadBuf  []byte
+	done        chan struct{}
+	closeOnce   sync.Once
+}
+
+func newMedicalScribeResultStreamReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *medicalScribeResultStreamReader {
+	w := &medicalScribeResultStreamReader{
+		stream:      make(chan types.MedicalScribeResultStream),
+		decoder:     decoder,
+		eventStream: readCloser,
+		err:         smithysync.NewOnceErr(),
+		done:        make(chan struct{}),
+		payloadBuf:  make([]byte, 10*1024),
+	}
+
+	go w.readEventStream()
+
+	return w
+}
+
+func (r *medicalScribeResultStreamReader) Events() <-chan types.MedicalScribeResultStream {
+	return r.stream
+}
+
+func (r *medicalScribeResultStreamReader) readEventStream() {
+	defer r.Close()
+	defer close(r.stream)
+
+	for {
+		r.payloadBuf = r.payloadBuf[0:0]
+		decodedMessage, err := r.decoder.Decode(r.eventStream, r.payloadBuf)
+		if err != nil {
+			if err == io.EOF {
+				return
+			}
+			select {
+			case <-r.done:
+				return
+			default:
+				r.err.SetError(err)
+				return
+			}
+		}
+
+		event, err := r.deserializeEventMessage(&decodedMessage)
+		if err != nil {
+			r.err.SetError(err)
+			return
+		}
+
+		select {
+		case r.stream <- event:
+		case <-r.done:
+			return
+		}
+
+	}
+}
+
+func (r *medicalScribeResultStreamReader) deserializeEventMessage(msg *eventstream.Message) (types.MedicalScribeResultStream, error) {
+	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
+	if messageType == nil {
+		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
+	}
+
+	switch messageType.String() {
+	case eventstreamapi.EventMessageType:
+		var v types.MedicalScribeResultStream
+		if err := awsRestjson1_deserializeEventStreamMedicalScribeResultStream(&v, msg); err != nil {
+			return nil, err
+		}
+		return v, nil
+
+	case eventstreamapi.ExceptionMessageType:
+		return nil, awsRestjson1_deserializeEventStreamExceptionMedicalScribeResultStream(msg)
+
+	case eventstreamapi.ErrorMessageType:
+		errorCode := "UnknownError"
+		errorMessage := errorCode
+		if header := msg.Headers.Get(eventstreamapi.ErrorCodeHeader); header != nil {
+			errorCode = header.String()
+		}
+		if header := msg.Headers.Get(eventstreamapi.ErrorMessageHeader); header != nil {
+			errorMessage = header.String()
+		}
+		return nil, &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+
+	default:
+		mc := msg.Clone()
+		return nil, &UnknownEventMessageError{
+			Type:    messageType.String(),
+			Message: &mc,
+		}
+
+	}
+}
+
+func (r *medicalScribeResultStreamReader) ErrorSet() <-chan struct{} {
+	return r.err.ErrorSet()
+}
+
+func (r *medicalScribeResultStreamReader) Close() error {
+	r.closeOnce.Do(r.safeClose)
+	return r.Err()
+}
+
+func (r *medicalScribeResultStreamReader) safeClose() {
+	close(r.done)
+	r.eventStream.Close()
+
+}
+
+func (r *medicalScribeResultStreamReader) Err() error {
+	return r.err.Err()
+}
+
+func (r *medicalScribeResultStreamReader) Closed() <-chan struct{} {
+	return r.done
 }
 
 type callAnalyticsTranscriptResultStreamReader struct {
@@ -797,6 +1152,147 @@ func addEventStreamStartCallAnalyticsStreamTranscriptionMiddleware(stack *middle
 
 }
 
+type awsRestjson1_deserializeOpEventStreamStartMedicalScribeStream struct {
+	LogEventStreamWrites bool
+	LogEventStreamReads  bool
+}
+
+func (*awsRestjson1_deserializeOpEventStreamStartMedicalScribeStream) ID() string {
+	return "OperationEventStreamDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpEventStreamStartMedicalScribeStream) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	defer func() {
+		if err == nil {
+			return
+		}
+		m.closeResponseBody(out)
+	}()
+
+	logger := middleware.GetLogger(ctx)
+
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type: %T", in.Request)
+	}
+	_ = request
+
+	if err := eventstreamapi.ApplyHTTPTransportFixes(request); err != nil {
+		return out, metadata, err
+	}
+
+	requestSignature, err := v4.GetSignedRequestSignature(request.Request)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to get event stream seed signature: %v", err)
+	}
+
+	identity := getIdentity(ctx)
+	if identity == nil {
+		return out, metadata, fmt.Errorf("no identity")
+	}
+
+	creds, ok := identity.(*internalauthsmithy.CredentialsAdapter)
+	if !ok {
+		return out, metadata, fmt.Errorf("identity is not sigv4 credentials")
+	}
+
+	rscheme := getResolvedAuthScheme(ctx)
+	if rscheme == nil {
+		return out, metadata, fmt.Errorf("no resolved auth scheme")
+	}
+
+	name, ok := smithyhttp.GetSigV4SigningName(&rscheme.SignerProperties)
+	if !ok {
+		return out, metadata, fmt.Errorf("no sigv4 signing name")
+	}
+
+	region, ok := smithyhttp.GetSigV4SigningRegion(&rscheme.SignerProperties)
+	if !ok {
+		return out, metadata, fmt.Errorf("no sigv4 signing region")
+	}
+
+	signer := v4.NewStreamSigner(creds.Credentials, name, region, requestSignature)
+
+	eventWriter := newMedicalScribeInputStreamWriter(
+		eventstreamapi.GetInputStreamWriter(ctx),
+		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
+			options.Logger = logger
+			options.LogMessages = m.LogEventStreamWrites
+
+		}),
+		signer,
+	)
+	defer func() {
+		if err == nil {
+			return
+		}
+		_ = eventWriter.Close()
+	}()
+
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	deserializeOutput, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type: %T", out.RawResponse)
+	}
+	_ = deserializeOutput
+
+	output, ok := out.Result.(*StartMedicalScribeStreamOutput)
+	if out.Result != nil && !ok {
+		return out, metadata, fmt.Errorf("unexpected output result type: %T", out.Result)
+	} else if out.Result == nil {
+		output = &StartMedicalScribeStreamOutput{}
+		out.Result = output
+	}
+
+	eventReader := newMedicalScribeResultStreamReader(
+		deserializeOutput.Body,
+		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
+			options.Logger = logger
+			options.LogMessages = m.LogEventStreamReads
+
+		}),
+	)
+	defer func() {
+		if err == nil {
+			return
+		}
+		_ = eventReader.Close()
+	}()
+
+	output.eventStream = NewStartMedicalScribeStreamEventStream(func(stream *StartMedicalScribeStreamEventStream) {
+		stream.Writer = eventWriter
+		stream.Reader = eventReader
+	})
+
+	go output.eventStream.waitStreamClose()
+
+	return out, metadata, nil
+}
+
+func (*awsRestjson1_deserializeOpEventStreamStartMedicalScribeStream) closeResponseBody(out middleware.DeserializeOutput) {
+	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
+		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_ = resp.Body.Close()
+	}
+}
+
+func addEventStreamStartMedicalScribeStreamMiddleware(stack *middleware.Stack, options Options) error {
+	if err := stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamStartMedicalScribeStream{
+		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
+		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
+	}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
+	return nil
+
+}
+
 type awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription struct {
 	LogEventStreamWrites bool
 	LogEventStreamReads  bool
@@ -1094,6 +1590,10 @@ func (e *UnknownEventMessageError) Error() string {
 func setSafeEventStreamClientLogMode(o *Options, operation string) {
 	switch operation {
 	case "StartCallAnalyticsStreamTranscription":
+		toggleEventStreamClientLogMode(o, true, true)
+		return
+
+	case "StartMedicalScribeStream":
 		toggleEventStreamClientLogMode(o, true, true)
 		return
 

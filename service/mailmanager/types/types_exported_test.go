@@ -108,6 +108,9 @@ func ExampleIngressBooleanToEvaluate_outputUsage() {
 	case *types.IngressBooleanToEvaluateMemberAnalysis:
 		_ = v.Value // Value is types.IngressAnalysis
 
+	case *types.IngressBooleanToEvaluateMemberIsInAddressList:
+		_ = v.Value // Value is types.IngressIsInAddressList
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -118,6 +121,7 @@ func ExampleIngressBooleanToEvaluate_outputUsage() {
 }
 
 var _ *types.IngressAnalysis
+var _ *types.IngressIsInAddressList
 
 func ExampleIngressIpToEvaluate_outputUsage() {
 	var union types.IngressIpToEvaluate
@@ -304,6 +308,9 @@ func ExampleRuleBooleanToEvaluate_outputUsage() {
 	case *types.RuleBooleanToEvaluateMemberAttribute:
 		_ = v.Value // Value is types.RuleBooleanEmailAttribute
 
+	case *types.RuleBooleanToEvaluateMemberIsInAddressList:
+		_ = v.Value // Value is types.RuleIsInAddressList
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -314,6 +321,7 @@ func ExampleRuleBooleanToEvaluate_outputUsage() {
 }
 
 var _ types.RuleBooleanEmailAttribute
+var _ *types.RuleIsInAddressList
 
 func ExampleRuleCondition_outputUsage() {
 	var union types.RuleCondition

@@ -14,6 +14,11 @@ import (
 //	Create Amazon Web Services service usage that you want to model in a Workload
 //
 // Estimate.
+//
+// The BatchCreateWorkloadEstimateUsage operation doesn't have its own IAM
+// permission. To authorize this operation for Amazon Web Services principals,
+// include the permission bcm-pricing-calculator:CreateWorkloadEstimateUsage in
+// your policies.
 func (c *Client) BatchCreateWorkloadEstimateUsage(ctx context.Context, params *BatchCreateWorkloadEstimateUsageInput, optFns ...func(*Options)) (*BatchCreateWorkloadEstimateUsageOutput, error) {
 	if params == nil {
 		params = &BatchCreateWorkloadEstimateUsageInput{}
