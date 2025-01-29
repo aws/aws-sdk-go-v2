@@ -671,7 +671,7 @@ func (d *downloader) init(ctx context.Context) error {
 
 func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*s3.Options)) (*GetObjectOutput, error) {
 	chunk := dlchunk{w: d.w, size: 1} // size set to 1 to enable chunk.Write()
-
+	d.in.PartNumber = 0
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
 		return output, err
@@ -908,9 +908,9 @@ type dlchunk struct {
 }
 
 func (c *dlchunk) Write(p []byte) (int, error) {
-	if c.cur >= c.size && len(c.withRange) == 0 {
-		return 0, io.EOF
-	}
+	//if c.cur >= c.size && len(c.withRange) == 0 {
+	//	return 0, io.EOF
+	//}
 
 	n, err := c.w.WriteAt(p, c.start+c.cur)
 	c.cur += int64(n)
