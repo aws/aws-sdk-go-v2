@@ -1,8 +1,0 @@
-{
-    "id": "9a2c6034-2de5-4dd2-95a0-9296c9d86098",
-    "type": "feature",
-    "description": "Add support for Dualstack and Dualstack-with-FIPS Endpoints",
-    "modules": [
-        "service/ecr"
-    ]
-}

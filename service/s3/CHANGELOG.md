@@ -1,3 +1,7 @@
+# v1.75.0 (2025-01-29)
+
+* **Feature**: Change the type of MpuObjectSize in CompleteMultipartUploadRequest from int to long.
+
 # v1.74.1 (2025-01-24)
 
 * **Bug Fix**: Enable request checksum validation mode by default

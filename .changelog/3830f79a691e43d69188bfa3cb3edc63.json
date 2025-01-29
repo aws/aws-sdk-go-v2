@@ -1,8 +1,0 @@
-{
-    "id": "3830f79a-691e-43d6-9188-bfa3cb3edc63",
-    "type": "feature",
-    "description": "Change the type of MpuObjectSize in CompleteMultipartUploadRequest from int to long.",
-    "modules": [
-        "service/s3"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "d6fbd7f4-860b-4ea0-91c9-0868ce81e0ff",
-    "type": "feature",
-    "description": "Added ConflictException error type in DeleteBillScenario, BatchDeleteBillScenarioCommitmentModification, BatchDeleteBillScenarioUsageModification, BatchUpdateBillScenarioUsageModification, and BatchUpdateBillScenarioCommitmentModification API operations.",
-    "modules": [
-        "service/bcmpricingcalculator"
-    ]
-}

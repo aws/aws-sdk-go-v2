@@ -1,3 +1,24 @@
+# Release (2025-01-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.55](feature/s3/manager/CHANGELOG.md#v11755-2025-01-29)
+  * **Bug Fix**: Fix incorrect reference to old s3manager in comments.
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.2.0](service/bcmpricingcalculator/CHANGELOG.md#v120-2025-01-29)
+  * **Feature**: Added ConflictException error type in DeleteBillScenario, BatchDeleteBillScenarioCommitmentModification, BatchDeleteBillScenarioUsageModification, BatchUpdateBillScenarioUsageModification, and BatchUpdateBillScenarioCommitmentModification API operations.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.39.0](service/ecr/CHANGELOG.md#v1390-2025-01-29)
+  * **Feature**: Add support for Dualstack and Dualstack-with-FIPS Endpoints
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.30.0](service/ecrpublic/CHANGELOG.md#v1300-2025-01-29)
+  * **Feature**: Add support for Dualstack Endpoints
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.8.0](service/mailmanager/CHANGELOG.md#v180-2025-01-29)
+  * **Feature**: This release includes a new feature for Amazon SES Mail Manager which allows customers to specify known addresses and domains and make use of those in traffic policies and rules actions to distinguish between known and unknown entries.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.75.0](service/s3/CHANGELOG.md#v1750-2025-01-29)
+  * **Feature**: Change the type of MpuObjectSize in CompleteMultipartUploadRequest from int to long.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.23.0](service/transcribestreaming/CHANGELOG.md#v1230-2025-01-29)
+  * **Feature**: This release adds support for AWS HealthScribe Streaming APIs within Amazon Transcribe.
+
 # Release (2025-01-28)
 
 ## Module Highlights

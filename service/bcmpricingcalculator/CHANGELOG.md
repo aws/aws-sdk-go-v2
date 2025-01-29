@@ -1,3 +1,7 @@
+# v1.2.0 (2025-01-29)
+
+* **Feature**: Added ConflictException error type in DeleteBillScenario, BatchDeleteBillScenarioCommitmentModification, BatchDeleteBillScenarioUsageModification, BatchUpdateBillScenarioUsageModification, and BatchUpdateBillScenarioCommitmentModification API operations.
+
 # v1.1.4 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.23.0 (2025-01-29)
+
+* **Feature**: This release adds support for AWS HealthScribe Streaming APIs within Amazon Transcribe.
+
 # v1.22.10 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
