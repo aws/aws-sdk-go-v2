@@ -57,6 +57,11 @@ func TestDeriveECDSAKeyPairFromSecret(t *testing.T) {
 func TestSignHTTP(t *testing.T) {
 	req := buildRequest("dynamodb", "us-east-1")
 
+	// test ignored headers
+	req.Header.Set("User-Agent", "foo")
+	req.Header.Set("X-Amzn-Trace-Id", "bar")
+	req.Header.Set("Transfer-Encoding", "qux")
+
 	signer, credProvider := buildSigner(t, true)
 
 	key, err := credProvider.RetrievePrivateKey(context.Background())
