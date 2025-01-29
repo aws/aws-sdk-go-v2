@@ -1,6 +1,7 @@
 package attributevalue
 
 import (
+	"encoding/base64"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -1343,4 +1344,98 @@ func TestUnmarshalIndividualSetValues(t *testing.T) {
 	if diff := cmpDiff(expected, actual); diff != "" {
 		t.Errorf("expect value match\n%s", diff)
 	}
+}
+
+func TestUnmarshalDynamoDBJSON(t *testing.T) {
+	msg1 := "Dynamo"
+	msg2 := "DynamoDB"
+
+	bin1 := make([]byte, base64.StdEncoding.EncodedLen(len(msg1)))
+	bin2 := make([]byte, base64.StdEncoding.EncodedLen(len(msg2)))
+
+	base64.StdEncoding.Encode(bin1, []byte(msg1))
+	base64.StdEncoding.Encode(bin2, []byte(msg2))
+
+	actual, err := UnmarshalDynamoDBFromJSON(
+		[]byte(fmt.Sprintf(`{
+		"Name": {"S": "Alice"},
+		"Age": {"N": "30"},
+		"IsActive": {"BOOL": true},
+		"Metadata": {"M": {"Key": {"S": "Value"}}},
+		"Tags": {"L": [{"S": "tag1"}, {"S": "tag2"}]},
+		"StringSet": {"SS": ["one", "two", "three"]},
+		"NumberSet": {"NS": ["10", "20", "30"]},
+		"Binary": {"B": "%s"},
+		"BinarySet": {"BS": ["%s", "%s"]}
+	}`, bin1, bin1, bin2),
+		))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if diff := cmpDiff(
+		&types.AttributeValueMemberS{Value: "Alice"},
+		actual["Name"]); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+
+	if diff := cmpDiff(
+		&types.AttributeValueMemberN{Value: "30"},
+		actual["Age"]); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+
+	if diff := cmpDiff(
+		&types.AttributeValueMemberBOOL{Value: true},
+		actual["IsActive"]); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+
+	if diff := cmpDiff(
+		&types.AttributeValueMemberM{
+			Value: map[string]types.AttributeValue{
+				"Key": &types.AttributeValueMemberS{Value: "Value"},
+			},
+		},
+		actual["Metadata"]); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+
+	if diff := cmpDiff(
+		&types.AttributeValueMemberL{Value: []types.AttributeValue{
+			&types.AttributeValueMemberS{Value: "tag1"},
+			&types.AttributeValueMemberS{Value: "tag2"},
+		},
+		},
+		actual["Tags"]); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+
+	if diff := cmpDiff(
+		&types.AttributeValueMemberSS{Value: []string{"one", "two", "three"}},
+		actual["StringSet"]); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+	if diff := cmpDiff(
+		&types.AttributeValueMemberNS{Value: []string{"10", "20", "30"}},
+		actual["NumberSet"]); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+
+	if diff := cmpDiff(
+		&types.AttributeValueMemberB{Value: []byte(msg1)},
+		actual["Binary"]); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+
+	if diff := cmpDiff(
+		&types.AttributeValueMemberBS{Value: [][]byte{
+			[]byte(msg1),
+			[]byte(msg2),
+		},
+		},
+		actual["BinarySet"]); diff != "" {
+		t.Errorf("expect value match\n%s", diff)
+	}
+
 }

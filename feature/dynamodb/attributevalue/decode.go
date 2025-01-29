@@ -2,6 +2,8 @@ package attributevalue
 
 import (
 	"encoding"
+	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -1048,4 +1050,118 @@ func defaultDecodeTimeS(v string) (time.Time, error) {
 
 func defaultDecodeTimeN(v string) (time.Time, error) {
 	return decodeUnixTime(v)
+}
+
+func parseAttributeValue(raw map[string]json.RawMessage) (types.AttributeValue, error) {
+	for k, v := range raw {
+		switch k {
+		case "SS":
+			var ss []string
+			if err := json.Unmarshal(v, &ss); err != nil {
+				return nil, err
+			}
+			return &types.AttributeValueMemberSS{Value: ss}, nil
+		case "NS":
+			var ns []string
+			if err := json.Unmarshal(v, &ns); err != nil {
+				return nil, err
+			}
+			return &types.AttributeValueMemberNS{Value: ns}, nil
+		case "B":
+			var b64 string
+			if err := json.Unmarshal(v, &b64); err != nil {
+				return nil, err
+			}
+			decoded, err := base64.StdEncoding.DecodeString(b64)
+			if err != nil {
+				return nil, fmt.Errorf("failed to decode base64 for B: %w", err)
+			}
+			return &types.AttributeValueMemberB{Value: decoded}, nil
+		case "BS":
+			var bs []string
+			if err := json.Unmarshal(v, &bs); err != nil {
+				return nil, err
+			}
+
+			decodedBS := make([][]byte, len(bs))
+			for i, b64 := range bs {
+				decoded, err := base64.StdEncoding.DecodeString(b64)
+				if err != nil {
+					return nil, fmt.Errorf("failed to decode base64 for BS: %w", err)
+				}
+				decodedBS[i] = decoded
+			}
+			return &types.AttributeValueMemberBS{Value: decodedBS}, nil
+		case "S":
+			var s string
+			if err := json.Unmarshal(v, &s); err != nil {
+				return nil, err
+			}
+			return &types.AttributeValueMemberS{Value: s}, nil
+		case "N":
+			var n string
+			if err := json.Unmarshal(v, &n); err != nil {
+				return nil, err
+			}
+			return &types.AttributeValueMemberN{Value: n}, nil
+		case "BOOL":
+			var b bool
+			if err := json.Unmarshal(v, &b); err != nil {
+				return nil, err
+			}
+			return &types.AttributeValueMemberBOOL{Value: b}, nil
+		case "NULL":
+			return &types.AttributeValueMemberNULL{Value: true}, nil
+		case "L":
+			var list []map[string]json.RawMessage
+			if err := json.Unmarshal(v, &list); err != nil {
+				return nil, err
+			}
+			var attrList []types.AttributeValue
+			for _, item := range list {
+				attr, err := parseAttributeValue(item)
+				if err != nil {
+					return nil, err
+				}
+				attrList = append(attrList, attr)
+			}
+			return &types.AttributeValueMemberL{Value: attrList}, nil
+		case "M":
+			var m map[string]map[string]json.RawMessage
+			if err := json.Unmarshal(v, &m); err != nil {
+				return nil, err
+			}
+			attrMap := make(map[string]types.AttributeValue)
+			for mk, mv := range m {
+				attr, err := parseAttributeValue(mv)
+				if err != nil {
+					return nil, err
+				}
+				attrMap[mk] = attr
+			}
+			return &types.AttributeValueMemberM{Value: attrMap}, nil
+		default:
+			return nil, fmt.Errorf("unsupported type: %s", k)
+		}
+	}
+	return nil, fmt.Errorf("empty attribute value")
+}
+
+func UnmarshalDynamoDBFromJSON(jsonStr []byte) (map[string]types.AttributeValue, error) {
+	var raw map[string]map[string]json.RawMessage
+	err := json.Unmarshal(jsonStr, &raw)
+	if err != nil {
+		return nil, err
+	}
+
+	result := make(map[string]types.AttributeValue)
+	for key, value := range raw {
+		attr, err := parseAttributeValue(value)
+		if err != nil {
+			return nil, fmt.Errorf("failed to parse key %s: %w", key, err)
+		}
+		result[key] = attr
+	}
+
+	return result, nil
 }
