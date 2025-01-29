@@ -20,7 +20,11 @@ EACHMODULE_FAILFAST_FLAG=-fail-fast=${EACHMODULE_FAILFAST}
 EACHMODULE_CONCURRENCY ?= 1
 EACHMODULE_CONCURRENCY_FLAG=-c ${EACHMODULE_CONCURRENCY}
 
-EACHMODULE_SKIP ?=
+# TODO: github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager is in beta
+# avoid running any codegen operations / tests on it until then
+# path is evaluated relatively by the tool, the right one will vary by the
+# command context
+EACHMODULE_SKIP ?= feature/s3/transfermanager:s3/transfermanager:transfermanager
 EACHMODULE_SKIP_FLAG=-skip="${EACHMODULE_SKIP}"
 
 EACHMODULE_FLAGS=${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG}

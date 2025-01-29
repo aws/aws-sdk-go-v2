@@ -346,8 +346,8 @@ func testWriteToObject(t *testing.T, bucket string, testData writeToObjectTestDa
 		}
 
 	} else {
-		if len(testData.ExpectError) != 0 {
-			t.Fatalf("expected error: %v, got none", err)
+		if e := testData.ExpectError; len(e) != 0 {
+			t.Fatalf("expected error: %v, got none", e)
 		}
 	}
 
