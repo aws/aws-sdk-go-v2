@@ -11,7 +11,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -369,52 +368,31 @@ func (w *SignalMapCreatedWaiter) WaitForOutput(ctx context.Context, params *GetS
 func signalMapCreatedStateRetryable(ctx context.Context, input *GetSignalMapInput, output *GetSignalMapOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "CREATE_COMPLETE"
-		value, ok := pathValue.(types.SignalMapStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "CREATE_IN_PROGRESS"
-		value, ok := pathValue.(types.SignalMapStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(types.SignalMapStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -587,52 +565,46 @@ func (w *SignalMapMonitorDeletedWaiter) WaitForOutput(ctx context.Context, param
 func signalMapMonitorDeletedStateRetryable(ctx context.Context, input *GetSignalMapInput, output *GetSignalMapOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("MonitorDeployment.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.MonitorDeployment
+		var v2 types.SignalMapMonitorDeploymentStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DELETE_COMPLETE"
-		value, ok := pathValue.(types.SignalMapMonitorDeploymentStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapMonitorDeploymentStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("MonitorDeployment.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.MonitorDeployment
+		var v2 types.SignalMapMonitorDeploymentStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DELETE_IN_PROGRESS"
-		value, ok := pathValue.(types.SignalMapMonitorDeploymentStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapMonitorDeploymentStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("MonitorDeployment.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.MonitorDeployment
+		var v2 types.SignalMapMonitorDeploymentStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DELETE_FAILED"
-		value, ok := pathValue.(types.SignalMapMonitorDeploymentStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapMonitorDeploymentStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -805,103 +777,91 @@ func (w *SignalMapMonitorDeployedWaiter) WaitForOutput(ctx context.Context, para
 func signalMapMonitorDeployedStateRetryable(ctx context.Context, input *GetSignalMapInput, output *GetSignalMapOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("MonitorDeployment.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.MonitorDeployment
+		var v2 types.SignalMapMonitorDeploymentStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DRY_RUN_DEPLOYMENT_COMPLETE"
-		value, ok := pathValue.(types.SignalMapMonitorDeploymentStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapMonitorDeploymentStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("MonitorDeployment.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.MonitorDeployment
+		var v2 types.SignalMapMonitorDeploymentStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DEPLOYMENT_COMPLETE"
-		value, ok := pathValue.(types.SignalMapMonitorDeploymentStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapMonitorDeploymentStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("MonitorDeployment.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.MonitorDeployment
+		var v2 types.SignalMapMonitorDeploymentStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DRY_RUN_DEPLOYMENT_IN_PROGRESS"
-		value, ok := pathValue.(types.SignalMapMonitorDeploymentStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapMonitorDeploymentStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("MonitorDeployment.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.MonitorDeployment
+		var v2 types.SignalMapMonitorDeploymentStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DEPLOYMENT_IN_PROGRESS"
-		value, ok := pathValue.(types.SignalMapMonitorDeploymentStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapMonitorDeploymentStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("MonitorDeployment.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.MonitorDeployment
+		var v2 types.SignalMapMonitorDeploymentStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DRY_RUN_DEPLOYMENT_FAILED"
-		value, ok := pathValue.(types.SignalMapMonitorDeploymentStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapMonitorDeploymentStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("MonitorDeployment.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.MonitorDeployment
+		var v2 types.SignalMapMonitorDeploymentStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DEPLOYMENT_FAILED"
-		value, ok := pathValue.(types.SignalMapMonitorDeploymentStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapMonitorDeploymentStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -1072,69 +1032,41 @@ func (w *SignalMapUpdatedWaiter) WaitForOutput(ctx context.Context, params *GetS
 func signalMapUpdatedStateRetryable(ctx context.Context, input *GetSignalMapInput, output *GetSignalMapOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "UPDATE_COMPLETE"
-		value, ok := pathValue.(types.SignalMapStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "UPDATE_IN_PROGRESS"
-		value, ok := pathValue.(types.SignalMapStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "UPDATE_FAILED"
-		value, ok := pathValue.(types.SignalMapStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "UPDATE_REVERTED"
-		value, ok := pathValue.(types.SignalMapStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.SignalMapStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -349,52 +348,46 @@ func (w *FunctionActiveV2Waiter) WaitForOutput(ctx context.Context, params *GetF
 func functionActiveV2StateRetryable(ctx context.Context, input *GetFunctionInput, output *GetFunctionOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Configuration.State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Configuration
+		var v2 types.State
+		if v1 != nil {
+			v3 := v1.State
+			v2 = v3
 		}
-
 		expectedValue := "Active"
-		value, ok := pathValue.(types.State)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Configuration.State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Configuration
+		var v2 types.State
+		if v1 != nil {
+			v3 := v1.State
+			v2 = v3
 		}
-
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.State)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Configuration.State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Configuration
+		var v2 types.State
+		if v1 != nil {
+			v3 := v1.State
+			v2 = v3
 		}
-
 		expectedValue := "Pending"
-		value, ok := pathValue.(types.State)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -741,52 +734,46 @@ func (w *FunctionUpdatedV2Waiter) WaitForOutput(ctx context.Context, params *Get
 func functionUpdatedV2StateRetryable(ctx context.Context, input *GetFunctionInput, output *GetFunctionOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Configuration.LastUpdateStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Configuration
+		var v2 types.LastUpdateStatus
+		if v1 != nil {
+			v3 := v1.LastUpdateStatus
+			v2 = v3
 		}
-
 		expectedValue := "Successful"
-		value, ok := pathValue.(types.LastUpdateStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.LastUpdateStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Configuration.LastUpdateStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Configuration
+		var v2 types.LastUpdateStatus
+		if v1 != nil {
+			v3 := v1.LastUpdateStatus
+			v2 = v3
 		}
-
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.LastUpdateStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.LastUpdateStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Configuration.LastUpdateStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Configuration
+		var v2 types.LastUpdateStatus
+		if v1 != nil {
+			v3 := v1.LastUpdateStatus
+			v2 = v3
 		}
-
 		expectedValue := "InProgress"
-		value, ok := pathValue.(types.LastUpdateStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.LastUpdateStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}

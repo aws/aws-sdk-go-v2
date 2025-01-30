@@ -13,7 +13,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -339,35 +338,21 @@ func (w *AuditReportCreatedWaiter) WaitForOutput(ctx context.Context, params *De
 func auditReportCreatedStateRetryable(ctx context.Context, input *DescribeCertificateAuthorityAuditReportInput, output *DescribeCertificateAuthorityAuditReportOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("AuditReportStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.AuditReportStatus
 		expectedValue := "SUCCESS"
-		value, ok := pathValue.(types.AuditReportStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.AuditReportStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("AuditReportStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.AuditReportStatus
 		expectedValue := "FAILED"
-		value, ok := pathValue.(types.AuditReportStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.AuditReportStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -386,69 +385,41 @@ func (w *AnnotationStoreVersionCreatedWaiter) WaitForOutput(ctx context.Context,
 func annotationStoreVersionCreatedStateRetryable(ctx context.Context, input *GetAnnotationStoreVersionInput, output *GetAnnotationStoreVersionOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(types.VersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "CREATING"
-		value, ok := pathValue.(types.VersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "UPDATING"
-		value, ok := pathValue.(types.VersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "FAILED"
-		value, ok := pathValue.(types.VersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -624,18 +595,11 @@ func (w *AnnotationStoreVersionDeletedWaiter) WaitForOutput(ctx context.Context,
 func annotationStoreVersionDeletedStateRetryable(ctx context.Context, input *GetAnnotationStoreVersionInput, output *GetAnnotationStoreVersionOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "DELETED"
-		value, ok := pathValue.(types.VersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
@@ -648,18 +612,11 @@ func annotationStoreVersionDeletedStateRetryable(ctx context.Context, input *Get
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "DELETING"
-		value, ok := pathValue.(types.VersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}

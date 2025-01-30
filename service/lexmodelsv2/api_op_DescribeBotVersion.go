@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -360,52 +359,31 @@ func (w *BotVersionAvailableWaiter) WaitForOutput(ctx context.Context, params *D
 func botVersionAvailableStateRetryable(ctx context.Context, input *DescribeBotVersionInput, output *DescribeBotVersionOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotStatus
 		expectedValue := "Available"
-		value, ok := pathValue.(types.BotStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotStatus
 		expectedValue := "Deleting"
-		value, ok := pathValue.(types.BotStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.BotStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

@@ -11,7 +11,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -412,103 +411,61 @@ func (w *JobCreateCompleteWaiter) WaitForOutput(ctx context.Context, params *Get
 func jobCreateCompleteStateRetryable(ctx context.Context, input *GetJobInput, output *GetJobOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("lifecycleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.LifecycleStatus
 		expectedValue := "CREATE_COMPLETE"
-		value, ok := pathValue.(types.JobLifecycleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.JobLifecycleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("lifecycleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.LifecycleStatus
 		expectedValue := "UPDATE_IN_PROGRESS"
-		value, ok := pathValue.(types.JobLifecycleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.JobLifecycleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("lifecycleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.LifecycleStatus
 		expectedValue := "UPDATE_FAILED"
-		value, ok := pathValue.(types.JobLifecycleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.JobLifecycleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("lifecycleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.LifecycleStatus
 		expectedValue := "UPDATE_SUCCEEDED"
-		value, ok := pathValue.(types.JobLifecycleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.JobLifecycleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("lifecycleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.LifecycleStatus
 		expectedValue := "UPLOAD_FAILED"
-		value, ok := pathValue.(types.JobLifecycleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.JobLifecycleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("lifecycleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.LifecycleStatus
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(types.JobLifecycleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.JobLifecycleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

@@ -11,7 +11,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -323,18 +322,18 @@ func (w *InvalidationCompletedWaiter) WaitForOutput(ctx context.Context, params 
 func invalidationCompletedStateRetryable(ctx context.Context, input *GetInvalidationInput, output *GetInvalidationOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Invalidation.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Invalidation
+		var v2 *string
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "Completed"
-		value, ok := pathValue.(*string)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+		var pathValue string
+		if v2 != nil {
+			pathValue = string(*v2)
 		}
-
-		if string(*value) == expectedValue {
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}

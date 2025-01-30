@@ -11,7 +11,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -330,52 +329,46 @@ func (w *ServiceTemplateVersionRegisteredWaiter) WaitForOutput(ctx context.Conte
 func serviceTemplateVersionRegisteredStateRetryable(ctx context.Context, input *GetServiceTemplateVersionInput, output *GetServiceTemplateVersionOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("serviceTemplateVersion.status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ServiceTemplateVersion
+		var v2 types.TemplateVersionStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DRAFT"
-		value, ok := pathValue.(types.TemplateVersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.TemplateVersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("serviceTemplateVersion.status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ServiceTemplateVersion
+		var v2 types.TemplateVersionStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "PUBLISHED"
-		value, ok := pathValue.(types.TemplateVersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.TemplateVersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("serviceTemplateVersion.status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ServiceTemplateVersion
+		var v2 types.TemplateVersionStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "REGISTRATION_FAILED"
-		value, ok := pathValue.(types.TemplateVersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.TemplateVersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
