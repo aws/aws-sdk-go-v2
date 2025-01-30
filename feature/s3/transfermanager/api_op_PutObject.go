@@ -432,7 +432,7 @@ func (i PutObjectInput) mapSingleUploadInput(body io.Reader, checksumAlgorithm t
 	return input
 }
 
-func (i PutObjectInput) mapCreateMultipartUploadInput() *s3.CreateMultipartUploadInput {
+func (i PutObjectInput) mapCreateMultipartUploadInput(checksumAlgorithm types.ChecksumAlgorithm) *s3.CreateMultipartUploadInput {
 	input := &s3.CreateMultipartUploadInput{
 		Bucket: aws.String(i.Bucket),
 		Key:    aws.String(i.Key),
@@ -443,7 +443,7 @@ func (i PutObjectInput) mapCreateMultipartUploadInput() *s3.CreateMultipartUploa
 	if i.ChecksumAlgorithm != "" {
 		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(i.ChecksumAlgorithm)
 	} else {
-		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(i.ChecksumAlgorithm)
+		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(checksumAlgorithm)
 	}
 	if i.ObjectLockLegalHoldStatus != "" {
 		input.ObjectLockLegalHoldStatus = s3types.ObjectLockLegalHoldStatus(i.ObjectLockLegalHoldStatus)
@@ -505,7 +505,7 @@ func (i PutObjectInput) mapCompleteMultipartUploadInput(uploadID *string, comple
 	return input
 }
 
-func (i PutObjectInput) mapUploadPartInput(body io.Reader, partNum *int32, uploadID *string) *s3.UploadPartInput {
+func (i PutObjectInput) mapUploadPartInput(body io.Reader, partNum *int32, uploadID *string, checksumAlgorithm types.ChecksumAlgorithm) *s3.UploadPartInput {
 	input := &s3.UploadPartInput{
 		Bucket:     aws.String(i.Bucket),
 		Key:        aws.String(i.Key),
@@ -515,7 +515,10 @@ func (i PutObjectInput) mapUploadPartInput(body io.Reader, partNum *int32, uploa
 	}
 	if i.ChecksumAlgorithm != "" {
 		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(i.ChecksumAlgorithm)
+	} else {
+		input.ChecksumAlgorithm = s3types.ChecksumAlgorithm(checksumAlgorithm)
 	}
+
 	if i.RequestPayer != "" {
 		input.RequestPayer = s3types.RequestPayer(i.RequestPayer)
 	}
@@ -802,7 +805,7 @@ func (cp completedParts) Swap(i, j int) {
 // upload will perform a multipart upload using the firstBuf buffer containing
 // the first chunk of data.
 func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, cleanup func(), clientOptions ...func(*s3.Options)) (*PutObjectOutput, error) {
-	params := u.uploader.in.mapCreateMultipartUploadInput()
+	params := u.uploader.in.mapCreateMultipartUploadInput(u.options.ChecksumAlgorithm)
 
 	// Create a multipart
 	resp, err := u.uploader.options.S3.CreateMultipartUpload(ctx, params, clientOptions...)
@@ -902,7 +905,7 @@ func (u *multiUploader) readChunk(ctx context.Context, ch chan ulChunk, clientOp
 // send performs an UploadPart request and keeps track of the completed
 // part information.
 func (u *multiUploader) send(ctx context.Context, c ulChunk, clientOptions ...func(*s3.Options)) error {
-	params := u.in.mapUploadPartInput(c.buf, c.partNum, u.uploadID)
+	params := u.in.mapUploadPartInput(c.buf, c.partNum, u.uploadID, u.options.ChecksumAlgorithm)
 	resp, err := u.options.S3.UploadPart(ctx, params, clientOptions...)
 	if err != nil {
 		return err
