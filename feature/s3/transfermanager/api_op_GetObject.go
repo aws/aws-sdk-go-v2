@@ -246,9 +246,6 @@ func (i GetObjectInput) mapGetObjectInput() *s3.GetObjectInput {
 	if i.ChecksumMode != "" {
 		input.ChecksumMode = s3types.ChecksumMode(i.ChecksumMode)
 	}
-	// if i.PartNumber > 0 && i.PartNumber < 10001 {
-	//	input.PartNumber = aws.Int32(i.PartNumber)
-	// }
 	if i.RequestPayer != "" {
 		input.RequestPayer = s3types.RequestPayer(i.RequestPayer)
 	}
@@ -258,7 +255,6 @@ func (i GetObjectInput) mapGetObjectInput() *s3.GetObjectInput {
 	input.IfNoneMatch = nzstring(i.IfNoneMatch)
 	input.IfModifiedSince = nztime(i.IfModifiedSince)
 	input.IfUnmodifiedSince = nztime(i.IfUnmodifiedSince)
-	// input.Range = nzstring(i.Range)
 	input.ResponseCacheControl = nzstring(i.ResponseCacheControl)
 	input.ResponseContentDisposition = nzstring(i.ResponseContentDisposition)
 	input.ResponseContentEncoding = nzstring(i.ResponseContentEncoding)
@@ -557,6 +553,7 @@ type downloader struct {
 	wg sync.WaitGroup
 	m  sync.Mutex
 
+	offset     int64
 	pos        int64
 	totalBytes int64
 	written    int64
@@ -604,7 +601,7 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 					break
 				}
 
-				ch <- dlchunk{w: d.w, start: d.pos, size: partSize, part: i}
+				ch <- dlchunk{w: d.w, start: d.pos - d.offset, part: i}
 				d.pos += partSize
 			}
 
@@ -618,6 +615,7 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 			total = d.getTotalBytes()
 		} else {
 			d.pos, d.totalBytes = d.getDownloadRange()
+			d.offset = d.pos
 			total = d.totalBytes
 			output = &GetObjectOutput{}
 		}
@@ -635,7 +633,7 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 			}
 
 			// Queue the next range of bytes to read.
-			ch <- dlchunk{w: d.w, start: d.pos, size: d.options.PartSizeBytes, withRange: d.byteRange()}
+			ch <- dlchunk{w: d.w, start: d.pos - d.offset, withRange: d.byteRange()}
 			d.pos += d.options.PartSizeBytes
 		}
 
@@ -644,13 +642,15 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 		d.wg.Wait()
 	}
 
-	if d.buf != nil {
-		d.out.Body = io.NopCloser(bytes.NewReader(d.buf))
-	}
-
 	if d.err != nil {
 		return nil, d.err
 	}
+
+	if d.buf != nil {
+		d.out.Body = io.NopCloser(bytes.NewReader(d.buf))
+	}
+	d.out.ContentLength = d.written
+	d.out.ContentRange = fmt.Sprintf("bytes=%d-%d", d.offset, d.totalBytes-1)
 	return d.out, nil
 }
 
@@ -670,7 +670,7 @@ func (d *downloader) init(ctx context.Context) error {
 }
 
 func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*s3.Options)) (*GetObjectOutput, error) {
-	chunk := dlchunk{w: d.w, size: 1} // size set to 1 to enable chunk.Write()
+	chunk := dlchunk{w: d.w}
 	d.in.PartNumber = 0
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
@@ -705,7 +705,7 @@ func (d *downloader) downloadPart(ctx context.Context, ch chan dlchunk, clientOp
 // getChunk grabs a chunk of data from the body.
 // Not thread safe. Should only used when grabbing data on a single thread.
 func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clientOptions ...func(*s3.Options)) *GetObjectOutput {
-	chunk := dlchunk{w: d.w, start: d.pos, size: d.options.PartSizeBytes, part: part, withRange: rng}
+	chunk := dlchunk{w: d.w, start: d.pos - d.offset, part: part, withRange: rng}
 
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
@@ -900,7 +900,6 @@ type dlchunk struct {
 	w io.WriterAt
 
 	start int64
-	size  int64
 	cur   int64
 
 	part      int32
@@ -908,10 +907,6 @@ type dlchunk struct {
 }
 
 func (c *dlchunk) Write(p []byte) (int, error) {
-	//if c.cur >= c.size && len(c.withRange) == 0 {
-	//	return 0, io.EOF
-	//}
-
 	n, err := c.w.WriteAt(p, c.start+c.cur)
 	c.cur += int64(n)
 
