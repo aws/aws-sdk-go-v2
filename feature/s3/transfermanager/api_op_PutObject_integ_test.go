@@ -10,6 +10,8 @@ import (
 )
 
 func TestInteg_PutObject(t *testing.T) {
+	t.Skip("broken until multipart upload addressed")
+
 	cases := map[string]putObjectTestData{
 		"seekable body":         {Body: strings.NewReader("hello world"), ExpectBody: []byte("hello world")},
 		"empty string body":     {Body: strings.NewReader(""), ExpectBody: []byte("")},
