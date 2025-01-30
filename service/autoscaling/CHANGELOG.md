@@ -1,3 +1,7 @@
+# v1.51.9 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.8 (2025-01-24)
 
 * **Bug Fix**: Switch to generated waiters, removing the dependency on go-jmespath and fixing broken waiters that used ordering comparators.

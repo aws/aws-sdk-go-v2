@@ -1,3 +1,8 @@
+# v1.3.30 (2025-01-30)
+
+* **Bug Fix**: Do not sign Transfer-Encoding header in Sigv4[a]. Fixes a signer mismatch issue with S3 Accelerate.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.29 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

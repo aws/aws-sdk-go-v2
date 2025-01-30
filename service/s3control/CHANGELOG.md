@@ -1,3 +1,7 @@
+# v1.53.1 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2025-01-27)
 
 * **Feature**: Minor fix to ARN validation for Lambda functions passed to S3 Batch Operations

@@ -1,3 +1,7 @@
+# v1.42.1 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2025-01-28)
 
 * **Feature**: Add stash and outErrors to EvaluateCode/EvaluateMappingTemplate response

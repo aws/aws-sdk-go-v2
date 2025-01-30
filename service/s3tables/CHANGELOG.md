@@ -1,3 +1,8 @@
+# v1.1.0 (2025-01-30)
+
+* **Feature**: You can now use the CreateTable API operation to create tables with schemas by adding an optional metadata argument.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.5 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

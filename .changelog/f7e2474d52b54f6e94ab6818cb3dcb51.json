@@ -1,8 +1,0 @@
-{
-    "id": "f7e2474d-52b5-4f6e-94ab-6818cb3dcb51",
-    "type": "feature",
-    "description": "You can now use the CreateTable API operation to create tables with schemas by adding an optional metadata argument.",
-    "modules": [
-        "service/s3tables"
-    ]
-}

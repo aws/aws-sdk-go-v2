@@ -1,3 +1,7 @@
+# v1.5.4 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.3 (2025-01-24)
 
 * **Bug Fix**: Enable request checksum validation mode by default

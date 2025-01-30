@@ -1,3 +1,8 @@
+# v1.43.0 (2025-01-30)
+
+* **Feature**: Adds options for configuring how MediaTailor conditions ads before inserting them into the content stream. Based on the new settings, MediaTailor will either transcode ads to match the content stream as it has in the past, or it will insert ads without first transcoding them.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.12 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

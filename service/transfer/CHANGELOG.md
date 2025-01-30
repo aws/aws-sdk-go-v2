@@ -1,3 +1,7 @@
+# v1.56.1 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2025-01-24)
 
 * **Feature**: Added CustomDirectories as a new directory option for storing inbound AS2 messages, MDN files and Status files.

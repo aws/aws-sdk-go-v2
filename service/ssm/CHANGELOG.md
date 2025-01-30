@@ -1,3 +1,7 @@
+# v1.56.9 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.8 (2025-01-24)
 
 * **Documentation**: Systems Manager doc-only update for January, 2025.

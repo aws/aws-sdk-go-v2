@@ -1,3 +1,7 @@
+# v1.29.1 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2025-01-24)
 
 * **Feature**: Added new authorization strategy value 'SMART_ON_FHIR' for CreateFHIRDatastore API to support Smart App 2.0

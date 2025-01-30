@@ -1,3 +1,8 @@
+# v1.21.0 (2025-01-30)
+
+* **Feature**: Adds Cedar JSON format support for entities and context data in authorization requests
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.8 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

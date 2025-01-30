@@ -1,9 +1,0 @@
-{
-    "id": "39bec3d6-24bb-499b-af58-012de54829f1",
-    "type": "bugfix",
-    "description": "Do not sign Transfer-Encoding header in Sigv4[a]. Fixes a signer mismatch issue with S3 Accelerate.",
-    "modules": [
-        ".",
-        "internal/v4a"
-    ]
-}

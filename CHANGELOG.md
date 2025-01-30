@@ -1,3 +1,37 @@
+# Release (2025-01-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.35.0
+  * **Feature**: Reduce allocations in query encoding.
+  * **Bug Fix**: Do not sign Transfer-Encoding header in Sigv4[a]. Fixes a signer mismatch issue with S3 Accelerate.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.17.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1170-2025-01-30)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.16.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v1160-2025-01-30)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.56](feature/s3/manager/CHANGELOG.md#v11756-2025-01-30)
+  * **Bug Fix**: Fix incorrect reference to old s3manager in comments.
+* `github.com/aws/aws-sdk-go-v2/internal/v4a`: [v1.3.30](internal/v4a/CHANGELOG.md#v1330-2025-01-30)
+  * **Bug Fix**: Do not sign Transfer-Encoding header in Sigv4[a]. Fixes a signer mismatch issue with S3 Accelerate.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.43.0](service/appstream/CHANGELOG.md#v1430-2025-01-30)
+  * **Feature**: Add support for managing admin consent requirement on selected domains for OneDrive Storage Connectors in AppStream2.0.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.34.0](service/bedrockagentruntime/CHANGELOG.md#v1340-2025-01-30)
+  * **Feature**: Add a 'reason' field to InternalServerException
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.40.0](service/ecr/CHANGELOG.md#v1400-2025-01-30)
+  * **Feature**: Temporarily updating dualstack endpoint support
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.31.0](service/ecrpublic/CHANGELOG.md#v1310-2025-01-30)
+  * **Feature**: Temporarily updating dualstack endpoint support
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.43.0](service/mediatailor/CHANGELOG.md#v1430-2025-01-30)
+  * **Feature**: Adds options for configuring how MediaTailor conditions ads before inserting them into the content stream. Based on the new settings, MediaTailor will either transcode ads to match the content stream as it has in the past, or it will insert ads without first transcoding them.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.20.0](service/qbusiness/CHANGELOG.md#v1200-2025-01-30)
+  * **Feature**: Added APIs to manage QBusiness user subscriptions
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.1.0](service/s3tables/CHANGELOG.md#v110-2025-01-30)
+  * **Feature**: You can now use the CreateTable API operation to create tables with schemas by adding an optional metadata argument.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.21.0](service/verifiedpermissions/CHANGELOG.md#v1210-2025-01-30)
+  * **Feature**: Adds Cedar JSON format support for entities and context data in authorization requests
+
 # Release (2025-01-29)
 
 ## General Highlights

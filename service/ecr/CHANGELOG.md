@@ -1,3 +1,8 @@
+# v1.40.0 (2025-01-30)
+
+* **Feature**: Temporarily updating dualstack endpoint support
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2025-01-29)
 
 * **Feature**: Add support for Dualstack and Dualstack-with-FIPS Endpoints

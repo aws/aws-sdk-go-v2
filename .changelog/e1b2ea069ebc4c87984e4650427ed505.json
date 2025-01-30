@@ -1,8 +1,0 @@
-{
-    "id": "e1b2ea06-9ebc-4c87-984e-4650427ed505",
-    "type": "feature",
-    "description": "Adds options for configuring how MediaTailor conditions ads before inserting them into the content stream. Based on the new settings, MediaTailor will either transcode ads to match the content stream as it has in the past, or it will insert ads without first transcoding them.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

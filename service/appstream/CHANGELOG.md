@@ -1,3 +1,8 @@
+# v1.43.0 (2025-01-30)
+
+* **Feature**: Add support for managing admin consent requirement on selected domains for OneDrive Storage Connectors in AppStream2.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.5 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
