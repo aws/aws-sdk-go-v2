@@ -9228,6 +9228,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The names of the domains for the account.</p>"
                     }
+                },
+                "DomainsRequireAdminConsent": {
+                    "target": "com.amazonaws.appstream#DomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OneDrive for Business domains where you require admin consent when users try to link their OneDrive account to AppStream 2.0. The attribute can only be specified when ConnectorType=ONE_DRIVE.</p>"
+                    }
                 }
             },
             "traits": {
