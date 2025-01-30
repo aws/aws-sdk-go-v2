@@ -21,8 +21,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/types"
+	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
@@ -218,6 +219,12 @@ type putObjectTestData struct {
 	ExpectError string
 }
 
+type getObjectTestData struct {
+	Body        io.Reader
+	ExpectBody  []byte
+	ExpectError string
+}
+
 // UniqueID returns a unique UUID-like identifier for use in generating
 // resources for integration tests.
 //
@@ -269,6 +276,86 @@ func testPutObject(t *testing.T, bucket string, testData putObjectTestData, opts
 	}
 }
 
+func testGetObject(t *testing.T, bucket string, testData getObjectTestData, opts ...func(options *Options)) {
+	key := UniqueID()
+
+	_, err := s3Client.PutObject(context.Background(),
+		&s3.PutObjectInput{
+			Bucket: aws.String(bucket),
+			Key:    aws.String(key),
+			Body:   testData.Body,
+		})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	resp, err := s3TransferManagerClient.GetObject(context.Background(),
+		&GetObjectInput{
+			Bucket: bucket,
+			Key:    key,
+		}, opts...)
+	if err != nil {
+		if len(testData.ExpectError) == 0 {
+			t.Fatalf("expect no error, got %v", err)
+		}
+		if e, a := testData.ExpectError, err.Error(); !strings.Contains(a, e) {
+			t.Fatalf("expect error to contain %v, got %v", e, a)
+		}
+	} else {
+		if e := testData.ExpectError; len(e) != 0 {
+			t.Fatalf("expect error: %v, got none", e)
+		}
+	}
+	if len(testData.ExpectError) != 0 {
+		return
+	}
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	if e, a := testData.ExpectBody, b; !bytes.EqualFold(e, a) {
+		t.Errorf("expect %s, got %s", e, a)
+	}
+}
+
+func testDownloadObject(t *testing.T, bucket string, testData getObjectTestData, opts ...func(options *Options)) {
+	key := UniqueID()
+
+	_, err := s3Client.PutObject(context.Background(),
+		&s3.PutObjectInput{
+			Bucket: aws.String(bucket),
+			Key:    aws.String(key),
+			Body:   testData.Body,
+		})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	w := types.NewWriteAtBuffer(make([]byte, 0))
+	_, err = s3TransferManagerClient.DownloadObject(context.Background(), w,
+		&GetObjectInput{
+			Bucket: bucket,
+			Key:    key,
+		}, opts...)
+	if err != nil {
+		if len(testData.ExpectError) == 0 {
+			t.Fatalf("expect no error, got %v", err)
+		}
+		if e, a := testData.ExpectError, err.Error(); !strings.Contains(a, e) {
+			t.Fatalf("expect error to contain %v, got %v", e, a)
+		}
+	} else {
+		if e := testData.ExpectError; len(e) != 0 {
+			t.Fatalf("expect error: %v, got none", e)
+		}
+	}
+	if len(testData.ExpectError) != 0 {
+		return
+	}
+
+	if e, a := testData.ExpectBody, w.Bytes(); !bytes.EqualFold(e, a) {
+		t.Errorf("expect %s, got %s", e, a)
+	}
+}
+
 // TODO: duped from service/internal/integrationtest, remove after beta.
 const expressAZID = "usw2-az3"
 
@@ -307,7 +394,7 @@ func SetupBucket(ctx context.Context, svc *s3.Client, bucketName string) (err er
 	fmt.Println("Setup: Creating test bucket,", bucketName)
 	_, err = svc.CreateBucket(ctx, &s3.CreateBucketInput{
 		Bucket: &bucketName,
-		CreateBucketConfiguration: &types.CreateBucketConfiguration{
+		CreateBucketConfiguration: &s3types.CreateBucketConfiguration{
 			LocationConstraint: "us-west-2",
 		},
 	})
@@ -413,14 +500,14 @@ func SetupExpressBucket(ctx context.Context, svc *s3.Client, bucketName string) 
 	fmt.Println("Setup: Creating test express bucket,", bucketName)
 	_, err := svc.CreateBucket(ctx, &s3.CreateBucketInput{
 		Bucket: &bucketName,
-		CreateBucketConfiguration: &types.CreateBucketConfiguration{
-			Location: &types.LocationInfo{
+		CreateBucketConfiguration: &s3types.CreateBucketConfiguration{
+			Location: &s3types.LocationInfo{
 				Name: aws.String(expressAZID),
-				Type: types.LocationTypeAvailabilityZone,
+				Type: s3types.LocationTypeAvailabilityZone,
 			},
-			Bucket: &types.BucketInfo{
-				DataRedundancy: types.DataRedundancySingleAvailabilityZone,
-				Type:           types.BucketTypeDirectory,
+			Bucket: &s3types.BucketInfo{
+				DataRedundancy: s3types.DataRedundancySingleAvailabilityZone,
+				Type:           s3types.BucketTypeDirectory,
 			},
 		},
 	})
