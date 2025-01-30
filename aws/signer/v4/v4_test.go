@@ -162,6 +162,11 @@ func TestPresignBodyWithArrayRequest(t *testing.T) {
 
 func TestSignRequest(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
+	// test ignored headers
+	req.Header.Set("User-Agent", "foo")
+	req.Header.Set("X-Amzn-Trace-Id", "bar")
+	req.Header.Set("Expect", "baz")
+	req.Header.Set("Transfer-Encoding", "qux")
 	signer := NewSigner()
 	err := signer.SignHTTP(context.Background(), testCredentials, req, body, "dynamodb", "us-east-1", time.Unix(0, 0))
 	if err != nil {
