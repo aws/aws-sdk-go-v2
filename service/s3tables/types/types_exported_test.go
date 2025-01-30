@@ -46,3 +46,21 @@ func ExampleTableMaintenanceSettings_outputUsage() {
 
 var _ *types.IcebergSnapshotManagementSettings
 var _ *types.IcebergCompactionSettings
+
+func ExampleTableMetadata_outputUsage() {
+	var union types.TableMetadata
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TableMetadataMemberIceberg:
+		_ = v.Value // Value is types.IcebergMetadata
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.IcebergMetadata

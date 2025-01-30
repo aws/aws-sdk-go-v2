@@ -10,7 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a namespace.
+// Deletes a namespace. For more information, see [Delete a namespace] in the Amazon Simple Storage
+// Service User Guide.
+//
+// Permissions You must have the s3tables:DeleteNamespace permission to use this
+// operation.
+//
+// [Delete a namespace]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace-delete.html
 func (c *Client) DeleteNamespace(ctx context.Context, params *DeleteNamespaceInput, optFns ...func(*Options)) (*DeleteNamespaceOutput, error) {
 	if params == nil {
 		params = &DeleteNamespaceInput{}

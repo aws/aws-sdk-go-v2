@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates a permission policy for a Q Business application, allowing
-// cross-account access for an ISV. This operation creates a new policy statement
-// for the specified Q Business application. The policy statement defines the IAM
-// actions that the ISV is allowed to perform on the Q Business application's
-// resources.
+// Adds or updates a permission policy for a Amazon Q Business application,
+// allowing cross-account access for an ISV. This operation creates a new policy
+// statement for the specified Amazon Q Business application. The policy statement
+// defines the IAM actions that the ISV is allowed to perform on the Amazon Q
+// Business application's resources.
 func (c *Client) AssociatePermission(ctx context.Context, params *AssociatePermissionInput, optFns ...func(*Options)) (*AssociatePermissionOutput, error) {
 	if params == nil {
 		params = &AssociatePermissionInput{}
@@ -32,18 +32,18 @@ func (c *Client) AssociatePermission(ctx context.Context, params *AssociatePermi
 
 type AssociatePermissionInput struct {
 
-	// The list of Q Business actions that the ISV is allowed to perform.
+	// The list of Amazon Q Business actions that the ISV is allowed to perform.
 	//
 	// This member is required.
 	Actions []string
 
-	// The unique identifier of the Q Business application.
+	// The unique identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The Amazon Resource Name (ARN) of the IAM role for the ISV that is being
-	// granted permission.
+	// The Amazon Resource Name of the IAM role for the ISV that is being granted
+	// permission.
 	//
 	// This member is required.
 	Principal *string

@@ -70,6 +70,26 @@ func (m *validateOpBatchPutDocument) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelSubscription struct {
+}
+
+func (*validateOpCancelSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpChat struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpCreateRetriever) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateRetrieverInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSubscription struct {
+}
+
+func (*validateOpCreateSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1050,26 @@ func (m *validateOpListRetrievers) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSubscriptions struct {
+}
+
+func (*validateOpListSubscriptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSubscriptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSubscriptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSubscriptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1330,6 +1390,26 @@ func (m *validateOpUpdateRetriever) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSubscription struct {
+}
+
+func (*validateOpUpdateSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUser struct {
 }
 
@@ -1382,6 +1462,10 @@ func addOpBatchPutDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchPutDocument{}, middleware.After)
 }
 
+func addOpCancelSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelSubscription{}, middleware.After)
+}
+
 func addOpChatValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpChat{}, middleware.After)
 }
@@ -1412,6 +1496,10 @@ func addOpCreatePluginValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateRetrieverValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRetriever{}, middleware.After)
+}
+
+func addOpCreateSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSubscription{}, middleware.After)
 }
 
 func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
@@ -1570,6 +1658,10 @@ func addOpListRetrieversValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRetrievers{}, middleware.After)
 }
 
+func addOpListSubscriptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSubscriptions{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -1632,6 +1724,10 @@ func addOpUpdatePluginValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateRetrieverValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRetriever{}, middleware.After)
+}
+
+func addOpUpdateSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSubscription{}, middleware.After)
 }
 
 func addOpUpdateUserValidationMiddleware(stack *middleware.Stack) error {
@@ -3395,6 +3491,24 @@ func validateOpBatchPutDocumentInput(v *BatchPutDocumentInput) error {
 	}
 }
 
+func validateOpCancelSubscriptionInput(v *CancelSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelSubscriptionInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.SubscriptionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpChatInput(v *ChatInput) error {
 	if v == nil {
 		return nil
@@ -3653,6 +3767,27 @@ func validateOpCreateRetrieverInput(v *CreateRetrieverInput) error {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSubscriptionInput(v *CreateSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSubscriptionInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4368,6 +4503,21 @@ func validateOpListRetrieversInput(v *ListRetrieversInput) error {
 	}
 }
 
+func validateOpListSubscriptionsInput(v *ListSubscriptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSubscriptionsInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -4754,6 +4904,27 @@ func validateOpUpdateRetrieverInput(v *UpdateRetrieverInput) error {
 		if err := validateRetrieverConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSubscriptionInput(v *UpdateSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSubscriptionInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.SubscriptionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionId"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

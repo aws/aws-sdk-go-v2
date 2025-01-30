@@ -42,7 +42,7 @@ type AccessControl struct {
 // Specifies an allowed action and its associated filter configuration.
 type ActionConfiguration struct {
 
-	// The Q Business action that is allowed.
+	// The Amazon Q Business action that is allowed.
 	//
 	// This member is required.
 	Action *string
@@ -1009,7 +1009,7 @@ type DataAccessor struct {
 	// The friendly name of the data accessor.
 	DisplayName *string
 
-	// The Amazon Resource Name (ARN) of the associated AWS IAM Identity Center
+	// The Amazon Resource Name (ARN) of the associated IAM Identity Center
 	// application.
 	IdcApplicationArn *string
 
@@ -2613,6 +2613,78 @@ type StringListAttributeBoostingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an Amazon Q Business subscription.
+//
+// Subscriptions are used to provide access for an IAM Identity Center user or a
+// group to an Amazon Q Business application.
+//
+// Amazon Q Business offers two subscription tiers: Q_LITE and Q_BUSINESS .
+// Subscription tier determines feature access for the user. For more information
+// on subscriptions and pricing tiers, see [Amazon Q Business pricing].
+//
+// [Amazon Q Business pricing]: https://aws.amazon.com/q/business/pricing/
+type Subscription struct {
+
+	// The type of your current Amazon Q Business subscription.
+	CurrentSubscription *SubscriptionDetails
+
+	// The type of the Amazon Q Business subscription for the next month.
+	NextSubscription *SubscriptionDetails
+
+	// The IAM Identity Center UserId or GroupId of a user or group in the IAM
+	// Identity Center instance connected to the Amazon Q Business application.
+	Principal SubscriptionPrincipal
+
+	// The Amazon Resource Name (ARN) of the Amazon Q Business subscription that was
+	// updated.
+	SubscriptionArn *string
+
+	// The identifier of the Amazon Q Business subscription to be updated.
+	SubscriptionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of an Amazon Q Business subscription.
+type SubscriptionDetails struct {
+
+	//  The type of an Amazon Q Business subscription.
+	Type SubscriptionType
+
+	noSmithyDocumentSerde
+}
+
+// A user or group in the IAM Identity Center instance connected to the Amazon Q
+// Business application.
+//
+// The following types satisfy this interface:
+//
+//	SubscriptionPrincipalMemberGroup
+//	SubscriptionPrincipalMemberUser
+type SubscriptionPrincipal interface {
+	isSubscriptionPrincipal()
+}
+
+// The identifier of a group in the IAM Identity Center instance connected to the
+// Amazon Q Business application.
+type SubscriptionPrincipalMemberGroup struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscriptionPrincipalMemberGroup) isSubscriptionPrincipal() {}
+
+// The identifier of a user in the IAM Identity Center instance connected to the
+// Amazon Q Business application.
+type SubscriptionPrincipalMemberUser struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscriptionPrincipalMemberUser) isSubscriptionPrincipal() {}
+
 // A list of key/value pairs that identify an index, FAQ, or data source. Tag keys
 // and values can consist of Unicode letters, digits, white space, and any of the
 // following symbols: _ . : / = + - @.
@@ -2842,4 +2914,5 @@ func (*UnknownUnionMember) isPluginAuthConfiguration()                {}
 func (*UnknownUnionMember) isPrincipal()                              {}
 func (*UnknownUnionMember) isRetrieverConfiguration()                 {}
 func (*UnknownUnionMember) isRuleConfiguration()                      {}
+func (*UnknownUnionMember) isSubscriptionPrincipal()                  {}
 func (*UnknownUnionMember) isWebExperienceAuthConfiguration()         {}

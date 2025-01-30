@@ -272,6 +272,26 @@ func (ScheduleEntryType) Values() []ScheduleEntryType {
 	}
 }
 
+type StreamingMediaFileConditioning string
+
+// Enum values for StreamingMediaFileConditioning
+const (
+	StreamingMediaFileConditioningTranscode StreamingMediaFileConditioning = "TRANSCODE"
+	StreamingMediaFileConditioningNone      StreamingMediaFileConditioning = "NONE"
+)
+
+// Values returns all known values for StreamingMediaFileConditioning. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamingMediaFileConditioning) Values() []StreamingMediaFileConditioning {
+	return []StreamingMediaFileConditioning{
+		"TRANSCODE",
+		"NONE",
+	}
+}
+
 type Tier string
 
 // Enum values for Tier

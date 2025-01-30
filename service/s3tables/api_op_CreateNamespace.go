@@ -11,9 +11,13 @@ import (
 )
 
 // Creates a namespace. A namespace is a logical grouping of tables within your
-// table bucket, which you can use to organize tables. For more information, see [Table namespaces].
+// table bucket, which you can use to organize tables. For more information, see [Create a namespace]
+// in the Amazon Simple Storage Service User Guide.
 //
-// [Table namespaces]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html
+// Permissions You must have the s3tables:CreateNamespace permission to use this
+// operation.
+//
+// [Create a namespace]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace-create.html
 func (c *Client) CreateNamespace(ctx context.Context, params *CreateNamespaceInput, optFns ...func(*Options)) (*CreateNamespaceOutput, error) {
 	if params == nil {
 		params = &CreateNamespaceInput{}

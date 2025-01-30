@@ -1289,6 +1289,11 @@ type StorageConnector struct {
 	// The names of the domains for the account.
 	Domains []string
 
+	// The OneDrive for Business domains where you require admin consent when users
+	// try to link their OneDrive account to AppStream 2.0. The attribute can only be
+	// specified when ConnectorType=ONE_DRIVE.
+	DomainsRequireAdminConsent []string
+
 	// The ARN of the storage connector.
 	ResourceIdentifier *string
 

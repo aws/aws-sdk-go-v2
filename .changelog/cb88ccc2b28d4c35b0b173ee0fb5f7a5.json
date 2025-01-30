@@ -1,0 +1,8 @@
+{
+    "id": "cb88ccc2-b28d-4c35-b0b1-73ee0fb5f7a5",
+    "type": "feature",
+    "description": "Add a 'reason' field to InternalServerException",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

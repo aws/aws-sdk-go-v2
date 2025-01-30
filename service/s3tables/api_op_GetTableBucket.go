@@ -11,7 +11,13 @@ import (
 	"time"
 )
 
-// Gets details on a table bucket.
+// Gets details on a table bucket. For more information, see [Viewing details about an Amazon S3 table bucket] in the Amazon Simple
+// Storage Service User Guide.
+//
+// Permissions You must have the s3tables:GetTableBucket permission to use this
+// operation.
+//
+// [Viewing details about an Amazon S3 table bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-details.html
 func (c *Client) GetTableBucket(ctx context.Context, params *GetTableBucketInput, optFns ...func(*Options)) (*GetTableBucketOutput, error) {
 	if params == nil {
 		params = &GetTableBucketInput{}

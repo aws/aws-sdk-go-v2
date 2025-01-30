@@ -1096,6 +1096,21 @@ func validateAdBreakMetadataList(v []types.KeyValuePair) error {
 	}
 }
 
+func validateAdConditioningConfiguration(v *types.AdConditioningConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdConditioningConfiguration"}
+	if len(v.StreamingMediaFileConditioning) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamingMediaFileConditioning"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAlternateMedia(v *types.AlternateMedia) error {
 	if v == nil {
 		return nil
@@ -1925,6 +1940,11 @@ func validateOpPutPlaybackConfigurationInput(v *PutPlaybackConfigurationInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "PutPlaybackConfigurationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AdConditioningConfiguration != nil {
+		if err := validateAdConditioningConfiguration(v.AdConditioningConfiguration); err != nil {
+			invalidParams.AddNested("AdConditioningConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

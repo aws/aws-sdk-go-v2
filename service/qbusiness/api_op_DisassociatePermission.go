@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a permission policy from a Q Business application, revoking the
+// Removes a permission policy from a Amazon Q Business application, revoking the
 // cross-account access that was previously granted to an ISV. This operation
 // deletes the specified policy statement from the application's permission policy.
 func (c *Client) DisassociatePermission(ctx context.Context, params *DisassociatePermissionInput, optFns ...func(*Options)) (*DisassociatePermissionOutput, error) {
@@ -30,7 +30,7 @@ func (c *Client) DisassociatePermission(ctx context.Context, params *Disassociat
 
 type DisassociatePermissionInput struct {
 
-	// The unique identifier of the Q Business application.
+	// The unique identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string

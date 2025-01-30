@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new data accessor for an ISV to access data from a Q Business
+// Creates a new data accessor for an ISV to access data from a Amazon Q Business
 // application. The data accessor is an entity that represents the ISV's access to
-// the Q Business application's data. It includes the IAM role ARN for the ISV, a
-// friendly name, and a set of action configurations that define the specific
-// actions the ISV is allowed to perform and any associated data filters. When the
-// data accessor is created, an AWS IAM Identity Center application is also created
-// to manage the ISV's identity and authentication for accessing the Q Business
-// application.
+// the Amazon Q Business application's data. It includes the IAM role ARN for the
+// ISV, a friendly name, and a set of action configurations that define the
+// specific actions the ISV is allowed to perform and any associated data filters.
+// When the data accessor is created, an IAM Identity Center application is also
+// created to manage the ISV's identity and authentication for accessing the Amazon
+// Q Business application.
 func (c *Client) CreateDataAccessor(ctx context.Context, params *CreateDataAccessorInput, optFns ...func(*Options)) (*CreateDataAccessorOutput, error) {
 	if params == nil {
 		params = &CreateDataAccessorInput{}
@@ -42,7 +42,7 @@ type CreateDataAccessorInput struct {
 	// This member is required.
 	ActionConfigurations []types.ActionConfiguration
 
-	// The unique identifier of the Q Business application.
+	// The unique identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -80,8 +80,8 @@ type CreateDataAccessorOutput struct {
 	// This member is required.
 	DataAccessorId *string
 
-	// The Amazon Resource Name (ARN) of the AWS IAM Identity Center application
-	// created for this data accessor.
+	// The Amazon Resource Name (ARN) of the IAM Identity Center application created
+	// for this data accessor.
 	//
 	// This member is required.
 	IdcApplicationArn *string

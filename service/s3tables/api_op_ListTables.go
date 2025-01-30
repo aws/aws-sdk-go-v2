@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List tables in the given table bucket.
+// List tables in the given table bucket. For more information, see [S3 Tables] in the Amazon
+// Simple Storage Service User Guide.
+//
+// Permissions You must have the s3tables:ListTables permission to use this
+// operation.
+//
+// [S3 Tables]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html
 func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns ...func(*Options)) (*ListTablesOutput, error) {
 	if params == nil {
 		params = &ListTablesInput{}
@@ -29,7 +35,7 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 
 type ListTablesInput struct {
 
-	// The Amazon resource Number (ARN) of the table bucket.
+	// The Amazon resource Name (ARN) of the table bucket.
 	//
 	// This member is required.
 	TableBucketARN *string

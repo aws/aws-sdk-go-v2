@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists table buckets for your account.
+// Lists table buckets for your account. For more information, see [S3 Table buckets] in the Amazon
+// Simple Storage Service User Guide.
+//
+// Permissions You must have the s3tables:ListTableBuckets permission to use this
+// operation.
+//
+// [S3 Table buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html
 func (c *Client) ListTableBuckets(ctx context.Context, params *ListTableBucketsInput, optFns ...func(*Options)) (*ListTableBucketsOutput, error) {
 	if params == nil {
 		params = &ListTableBucketsInput{}

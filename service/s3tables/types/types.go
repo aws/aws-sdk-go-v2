@@ -16,6 +16,28 @@ type IcebergCompactionSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the metadata for an Iceberg table.
+type IcebergMetadata struct {
+
+	// The schema for an Iceberg table.
+	//
+	// This member is required.
+	Schema *IcebergSchema
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the schema for an Iceberg table.
+type IcebergSchema struct {
+
+	// The schema fields for the table
+	//
+	// This member is required.
+	Fields []SchemaField
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the snapshot management settings for an Iceberg table.
 // The oldest snapshot expires when its age exceeds the maxSnapshotAgeHours and
 // the total number of snapshots exceeds the value for the minimum number of
@@ -71,6 +93,30 @@ type NamespaceSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about a schema field.
+type SchemaField struct {
+
+	// The name of the field.
+	//
+	// This member is required.
+	Name *string
+
+	// The field type. S3 Tables supports all Apache Iceberg primitive types. For more
+	// information, see the [Apache Iceberg documentation].
+	//
+	// [Apache Iceberg documentation]: https://iceberg.apache.org/spec/#primitive-types
+	//
+	// This member is required.
+	Type *string
+
+	// A Boolean value that specifies whether values are required for each row in this
+	// field. By default, this is false and null values are allowed in the field. If
+	// this is true the field does not allow null values.
+	Required bool
+
+	noSmithyDocumentSerde
+}
+
 // Details about the values that define the maintenance configuration for a table
 // bucket.
 type TableBucketMaintenanceConfigurationValue struct {
@@ -106,7 +152,7 @@ func (*TableBucketMaintenanceSettingsMemberIcebergUnreferencedFileRemoval) isTab
 // Contains details about a table bucket.
 type TableBucketSummary struct {
 
-	// The Amazon Resource Number (ARN) of the table bucket.
+	// The Amazon Resource Name (ARN) of the table bucket.
 	//
 	// This member is required.
 	Arn *string
@@ -186,6 +232,24 @@ type TableMaintenanceSettingsMemberIcebergSnapshotManagement struct {
 
 func (*TableMaintenanceSettingsMemberIcebergSnapshotManagement) isTableMaintenanceSettings() {}
 
+// Contains details about the table metadata.
+//
+// The following types satisfy this interface:
+//
+//	TableMetadataMemberIceberg
+type TableMetadata interface {
+	isTableMetadata()
+}
+
+// Contains details about the metadata of an Iceberg table.
+type TableMetadataMemberIceberg struct {
+	Value IcebergMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*TableMetadataMemberIceberg) isTableMetadata() {}
+
 // Contains details about a table.
 type TableSummary struct {
 
@@ -209,7 +273,7 @@ type TableSummary struct {
 	// This member is required.
 	Namespace []string
 
-	// The Amazon Resource Number (ARN) of the table.
+	// The Amazon Resource Name (ARN) of the table.
 	//
 	// This member is required.
 	TableARN *string
@@ -235,3 +299,4 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isTableBucketMaintenanceSettings() {}
 func (*UnknownUnionMember) isTableMaintenanceSettings()       {}
+func (*UnknownUnionMember) isTableMetadata()                  {}

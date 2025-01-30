@@ -19,6 +19,12 @@ import (
 // teams. Only users who work in research and engineering, and therefore belong in
 // the intellectual property group, can see top-secret company documents in their
 // Amazon Q Business chat results.
+//
+// There are two options for creating groups, either passing group members inline
+// or using an S3 file via the S3PathForGroupMembers field. For inline groups,
+// there is a limit of 1000 members per group and for provided S3 files there is a
+// limit of 100 thousand members. When creating a group using an S3 file, you
+// provide both an S3 file and a RoleArn for Amazon Q Buisness to access the file.
 func (c *Client) PutGroup(ctx context.Context, params *PutGroupInput, optFns ...func(*Options)) (*PutGroupOutput, error) {
 	if params == nil {
 		params = &PutGroupInput{}
@@ -74,9 +80,7 @@ type PutGroupInput struct {
 	DataSourceId *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that has access to the S3 file
-	// that contains your list of users that belong to a group.The Amazon Resource Name
-	// (ARN) of an IAM role that has access to the S3 file that contains your list of
-	// users that belong to a group.
+	// that contains your list of users that belong to a group.
 	RoleArn *string
 
 	noSmithyDocumentSerde

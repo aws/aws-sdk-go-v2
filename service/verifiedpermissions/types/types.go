@@ -695,11 +695,16 @@ func (*ConfigurationItemMemberOpenIdConnectConfiguration) isConfigurationItem() 
 //
 // This data type is used as a request parameter for the [IsAuthorized], [BatchIsAuthorized], and [IsAuthorizedWithToken] operations.
 //
+// If you're passing context as part of the request, exactly one instance of
+// context must be passed. If you don't want to pass context, omit the context
+// parameter from your request rather than sending context {} .
+//
 // Example:
 // "context":{"contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}}
 //
 // The following types satisfy this interface:
 //
+//	ContextDefinitionMemberCedarJson
 //	ContextDefinitionMemberContextMap
 //
 // [BatchIsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
@@ -708,6 +713,18 @@ func (*ConfigurationItemMemberOpenIdConnectConfiguration) isConfigurationItem() 
 type ContextDefinition interface {
 	isContextDefinition()
 }
+
+// A Cedar JSON string representation of the context needed to successfully
+// evaluate an authorization request.
+//
+// Example: {"cedarJson":"{\"<KeyName1>\": true, \"<KeyName2>\": 1234}" }
+type ContextDefinitionMemberCedarJson struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ContextDefinitionMemberCedarJson) isContextDefinition() {}
 
 // An list of attributes that are needed to successfully evaluate an authorization
 // request. Each attribute in this array must include a map of a data type and its
@@ -754,6 +771,7 @@ type DeterminingPolicyItem struct {
 //
 // The following types satisfy this interface:
 //
+//	EntitiesDefinitionMemberCedarJson
 //	EntitiesDefinitionMemberEntityList
 //
 // [IsAuthorizedWithToken]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
@@ -762,9 +780,25 @@ type EntitiesDefinition interface {
 	isEntitiesDefinition()
 }
 
+// A Cedar JSON string representation of the entities needed to successfully
+// evaluate an authorization request.
+//
+// Example: {"cedarJson":
+// "[{\"uid\":{\"type\":\"Photo\",\"id\":\"VacationPhoto94.jpg\"},\"attrs\":{\"accessLevel\":\"public\"},\"parents\":[]}]"}
+type EntitiesDefinitionMemberCedarJson struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*EntitiesDefinitionMemberCedarJson) isEntitiesDefinition() {}
+
 // An array of entities that are needed to successfully evaluate an authorization
 // request. Each entity in this array must include an identifier for the entity,
 // the attributes of the entity, and a list of any parent entities.
+//
+// If you include multiple entities with the same identifier , only the last one is
+// processed in the request.
 type EntitiesDefinitionMemberEntityList struct {
 	Value []EntityItem
 

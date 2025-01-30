@@ -5154,6 +5154,15 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

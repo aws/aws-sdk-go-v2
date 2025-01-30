@@ -5190,6 +5190,13 @@ func awsAwsjson11_serializeDocumentStorageConnector(v *types.StorageConnector, v
 		}
 	}
 
+	if v.DomainsRequireAdminConsent != nil {
+		ok := object.Key("DomainsRequireAdminConsent")
+		if err := awsAwsjson11_serializeDocumentDomainList(v.DomainsRequireAdminConsent, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceIdentifier != nil {
 		ok := object.Key("ResourceIdentifier")
 		ok.String(*v.ResourceIdentifier)

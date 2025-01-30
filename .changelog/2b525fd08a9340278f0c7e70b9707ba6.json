@@ -1,0 +1,8 @@
+{
+    "id": "2b525fd0-8a93-4027-8f0c-7e70b9707ba6",
+    "type": "feature",
+    "description": "Temporarily updating dualstack endpoint support",
+    "modules": [
+        "service/ecrpublic"
+    ]
+}

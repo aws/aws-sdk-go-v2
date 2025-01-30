@@ -11,7 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new table associated with the given namespace in a table bucket.
+// Creates a new table associated with the given namespace in a table bucket. For
+// more information, see [Creating an Amazon S3 table]in the Amazon Simple Storage Service User Guide.
+//
+// Permissions You must have the s3tables:CreateTable permission to use this
+// operation.
+//
+// Additionally, you must have the s3tables:PutTableData permission to use this
+// operation with the optional metadata request parameter.
+//
+// [Creating an Amazon S3 table]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html
 func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optFns ...func(*Options)) (*CreateTableOutput, error) {
 	if params == nil {
 		params = &CreateTableInput{}
@@ -48,6 +57,9 @@ type CreateTableInput struct {
 	//
 	// This member is required.
 	TableBucketARN *string
+
+	// The metadata for the table.
+	Metadata types.TableMetadata
 
 	noSmithyDocumentSerde
 }

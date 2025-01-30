@@ -1,0 +1,8 @@
+{
+    "id": "619a6e9b-6a79-468c-b78d-669cb86e16ef",
+    "type": "feature",
+    "description": "Added APIs to manage QBusiness user subscriptions",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

@@ -124,6 +124,8 @@ type InternalServerException struct {
 
 	ErrorCodeOverride *string
 
+	Reason *string
+
 	noSmithyDocumentSerde
 }
 

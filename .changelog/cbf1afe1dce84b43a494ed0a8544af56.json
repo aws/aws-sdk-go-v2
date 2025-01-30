@@ -1,0 +1,8 @@
+{
+    "id": "cbf1afe1-dce8-4b43-a494-ed0a8544af56",
+    "type": "feature",
+    "description": "Adds Cedar JSON format support for entities and context data in authorization requests",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

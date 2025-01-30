@@ -1,0 +1,8 @@
+{
+    "id": "355afaca-142b-43d3-9b0c-d7b6cb210101",
+    "type": "feature",
+    "description": "Add support for managing admin consent requirement on selected domains for OneDrive Storage Connectors in AppStream2.0.",
+    "modules": [
+        "service/appstream"
+    ]
+}

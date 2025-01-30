@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a specified data accessor. This operation permanently removes the data
-// accessor and its associated AWS IAM Identity Center application. Any access
-// granted to the ISV through this data accessor will be revoked
+// accessor and its associated IAM Identity Center application. Any access granted
+// to the ISV through this data accessor will be revoked.
 func (c *Client) DeleteDataAccessor(ctx context.Context, params *DeleteDataAccessorInput, optFns ...func(*Options)) (*DeleteDataAccessorOutput, error) {
 	if params == nil {
 		params = &DeleteDataAccessorInput{}
@@ -30,7 +30,7 @@ func (c *Client) DeleteDataAccessor(ctx context.Context, params *DeleteDataAcces
 
 type DeleteDataAccessorInput struct {
 
-	// The unique identifier of the Q Business application.
+	// The unique identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string

@@ -11,7 +11,13 @@ import (
 	"time"
 )
 
-// Gets details about a namespace.
+// Gets details about a namespace. For more information, see [Table namespaces] in the Amazon Simple
+// Storage Service User Guide.
+//
+// Permissions You must have the s3tables:GetNamespace permission to use this
+// operation.
+//
+// [Table namespaces]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html
 func (c *Client) GetNamespace(ctx context.Context, params *GetNamespaceInput, optFns ...func(*Options)) (*GetNamespaceOutput, error) {
 	if params == nil {
 		params = &GetNamespaceInput{}

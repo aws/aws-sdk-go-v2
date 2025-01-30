@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the status of a maintenance job for a table.
+// Gets the status of a maintenance job for a table. For more information, see [S3 Tables maintenance] in
+// the Amazon Simple Storage Service User Guide.
+//
+// Permissions You must have the s3tables:GetTableMaintenanceJobStatus permission
+// to use this operation.
+//
+// [S3 Tables maintenance]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html
 func (c *Client) GetTableMaintenanceJobStatus(ctx context.Context, params *GetTableMaintenanceJobStatusInput, optFns ...func(*Options)) (*GetTableMaintenanceJobStatusOutput, error) {
 	if params == nil {
 		params = &GetTableMaintenanceJobStatusInput{}
