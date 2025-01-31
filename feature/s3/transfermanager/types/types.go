@@ -363,6 +363,8 @@ const (
 	ChecksumModeEnabled ChecksumMode = "ENABLED"
 )
 
+// ReplicationStatus indicates if your request involves a bucket that's either a
+// source or destination in a replication rule
 type ReplicationStatus string
 
 // Enum values for ReplicationStatus
