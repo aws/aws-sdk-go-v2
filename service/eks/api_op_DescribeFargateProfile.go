@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -320,35 +319,31 @@ func (w *FargateProfileActiveWaiter) WaitForOutput(ctx context.Context, params *
 func fargateProfileActiveStateRetryable(ctx context.Context, input *DescribeFargateProfileInput, output *DescribeFargateProfileOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("fargateProfile.status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.FargateProfile
+		var v2 types.FargateProfileStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(types.FargateProfileStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.FargateProfileStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("fargateProfile.status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.FargateProfile
+		var v2 types.FargateProfileStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(types.FargateProfileStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.FargateProfileStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
@@ -521,18 +516,16 @@ func (w *FargateProfileDeletedWaiter) WaitForOutput(ctx context.Context, params 
 func fargateProfileDeletedStateRetryable(ctx context.Context, input *DescribeFargateProfileInput, output *DescribeFargateProfileOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("fargateProfile.status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.FargateProfile
+		var v2 types.FargateProfileStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DELETE_FAILED"
-		value, ok := pathValue.(types.FargateProfileStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.FargateProfileStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

@@ -8,7 +8,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.30
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.30
 	github.com/aws/smithy-go v1.22.2
-	github.com/jmespath/go-jmespath v0.4.0
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../

@@ -13,7 +13,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -399,52 +398,31 @@ func (w *ProcessingJobCompletedOrStoppedWaiter) WaitForOutput(ctx context.Contex
 func processingJobCompletedOrStoppedStateRetryable(ctx context.Context, input *DescribeProcessingJobInput, output *DescribeProcessingJobOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ProcessingJobStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.ProcessingJobStatus
 		expectedValue := "Completed"
-		value, ok := pathValue.(types.ProcessingJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ProcessingJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ProcessingJobStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.ProcessingJobStatus
 		expectedValue := "Stopped"
-		value, ok := pathValue.(types.ProcessingJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ProcessingJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ProcessingJobStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.ProcessingJobStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.ProcessingJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ProcessingJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

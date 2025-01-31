@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -345,35 +344,21 @@ func (w *ChannelPlacementGroupAssignedWaiter) WaitForOutput(ctx context.Context,
 func channelPlacementGroupAssignedStateRetryable(ctx context.Context, input *DescribeChannelPlacementGroupInput, output *DescribeChannelPlacementGroupOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "ASSIGNED"
-		value, ok := pathValue.(types.ChannelPlacementGroupState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelPlacementGroupState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "ASSIGNING"
-		value, ok := pathValue.(types.ChannelPlacementGroupState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelPlacementGroupState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -555,35 +540,21 @@ func (w *ChannelPlacementGroupDeletedWaiter) WaitForOutput(ctx context.Context, 
 func channelPlacementGroupDeletedStateRetryable(ctx context.Context, input *DescribeChannelPlacementGroupInput, output *DescribeChannelPlacementGroupOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DELETED"
-		value, ok := pathValue.(types.ChannelPlacementGroupState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelPlacementGroupState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DELETING"
-		value, ok := pathValue.(types.ChannelPlacementGroupState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelPlacementGroupState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -766,35 +737,21 @@ func (w *ChannelPlacementGroupUnassignedWaiter) WaitForOutput(ctx context.Contex
 func channelPlacementGroupUnassignedStateRetryable(ctx context.Context, input *DescribeChannelPlacementGroupInput, output *DescribeChannelPlacementGroupOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "UNASSIGNED"
-		value, ok := pathValue.(types.ChannelPlacementGroupState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelPlacementGroupState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "UNASSIGNING"
-		value, ok := pathValue.(types.ChannelPlacementGroupState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelPlacementGroupState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}

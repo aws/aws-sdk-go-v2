@@ -13,7 +13,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -429,18 +428,11 @@ func notebookInstanceDeletedStateRetryable(ctx context.Context, input *DescribeN
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("NotebookInstanceStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.NotebookInstanceStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.NotebookInstanceStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NotebookInstanceStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -614,35 +606,21 @@ func (w *NotebookInstanceInServiceWaiter) WaitForOutput(ctx context.Context, par
 func notebookInstanceInServiceStateRetryable(ctx context.Context, input *DescribeNotebookInstanceInput, output *DescribeNotebookInstanceOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("NotebookInstanceStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.NotebookInstanceStatus
 		expectedValue := "InService"
-		value, ok := pathValue.(types.NotebookInstanceStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NotebookInstanceStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("NotebookInstanceStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.NotebookInstanceStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.NotebookInstanceStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NotebookInstanceStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -815,35 +793,21 @@ func (w *NotebookInstanceStoppedWaiter) WaitForOutput(ctx context.Context, param
 func notebookInstanceStoppedStateRetryable(ctx context.Context, input *DescribeNotebookInstanceInput, output *DescribeNotebookInstanceOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("NotebookInstanceStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.NotebookInstanceStatus
 		expectedValue := "Stopped"
-		value, ok := pathValue.(types.NotebookInstanceStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NotebookInstanceStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("NotebookInstanceStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.NotebookInstanceStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.NotebookInstanceStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NotebookInstanceStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

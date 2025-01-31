@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -400,18 +399,16 @@ func (w *PortalActiveWaiter) WaitForOutput(ctx context.Context, params *Describe
 func portalActiveStateRetryable(ctx context.Context, input *DescribePortalInput, output *DescribePortalOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("portalStatus.state", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.PortalStatus
+		var v2 types.PortalState
+		if v1 != nil {
+			v3 := v1.State
+			v2 = v3
 		}
-
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(types.PortalState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.PortalState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}

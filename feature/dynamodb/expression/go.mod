@@ -15,7 +15,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.12.2 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.10.11 // indirect
 	github.com/aws/smithy-go v1.22.2 // indirect
-	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../

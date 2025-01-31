@@ -11,7 +11,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -318,35 +317,31 @@ func (w *ServerOfflineWaiter) WaitForOutput(ctx context.Context, params *Describ
 func serverOfflineStateRetryable(ctx context.Context, input *DescribeServerInput, output *DescribeServerOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Server.State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Server
+		var v2 types.State
+		if v1 != nil {
+			v3 := v1.State
+			v2 = v3
 		}
-
 		expectedValue := "OFFLINE"
-		value, ok := pathValue.(types.State)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Server.State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Server
+		var v2 types.State
+		if v1 != nil {
+			v3 := v1.State
+			v2 = v3
 		}
-
 		expectedValue := "STOP_FAILED"
-		value, ok := pathValue.(types.State)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -516,35 +511,31 @@ func (w *ServerOnlineWaiter) WaitForOutput(ctx context.Context, params *Describe
 func serverOnlineStateRetryable(ctx context.Context, input *DescribeServerInput, output *DescribeServerOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Server.State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Server
+		var v2 types.State
+		if v1 != nil {
+			v3 := v1.State
+			v2 = v3
 		}
-
 		expectedValue := "ONLINE"
-		value, ok := pathValue.(types.State)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Server.State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Server
+		var v2 types.State
+		if v1 != nil {
+			v3 := v1.State
+			v2 = v3
 		}
-
 		expectedValue := "START_FAILED"
-		value, ok := pathValue.(types.State)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

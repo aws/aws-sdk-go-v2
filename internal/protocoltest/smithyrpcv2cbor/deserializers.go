@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithytime "github.com/aws/smithy-go/time"
+	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"io/ioutil"
@@ -36,6 +37,10 @@ func (*smithyRpcv2cbor_deserializeOpEmptyInputOutput) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpEmptyInputOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -79,6 +84,10 @@ func (*smithyRpcv2cbor_deserializeOpFloat16) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpFloat16) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -138,6 +147,10 @@ func (*smithyRpcv2cbor_deserializeOpFractionalSeconds) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpFractionalSeconds) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -197,6 +210,10 @@ func (*smithyRpcv2cbor_deserializeOpGreetingWithErrors) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpGreetingWithErrors) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -256,6 +273,10 @@ func (*smithyRpcv2cbor_deserializeOpNoInputOutput) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpNoInputOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -299,6 +320,10 @@ func (*smithyRpcv2cbor_deserializeOpOperationWithDefaults) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpOperationWithDefaults) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -358,6 +383,10 @@ func (*smithyRpcv2cbor_deserializeOpOptionalInputOutput) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpOptionalInputOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -417,6 +446,10 @@ func (*smithyRpcv2cbor_deserializeOpRecursiveShapes) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpRecursiveShapes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -476,6 +509,10 @@ func (*smithyRpcv2cbor_deserializeOpRpcV2CborDenseMaps) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpRpcV2CborDenseMaps) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -535,6 +572,10 @@ func (*smithyRpcv2cbor_deserializeOpRpcV2CborLists) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpRpcV2CborLists) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -594,6 +635,10 @@ func (*smithyRpcv2cbor_deserializeOpRpcV2CborSparseMaps) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpRpcV2CborSparseMaps) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -653,6 +698,10 @@ func (*smithyRpcv2cbor_deserializeOpSimpleScalarProperties) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err
@@ -712,6 +761,10 @@ func (*smithyRpcv2cbor_deserializeOpSparseNullsOperation) ID() string {
 func (m *smithyRpcv2cbor_deserializeOpSparseNullsOperation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 	out, metadata, err = next.HandleDeserialize(ctx, in)
 	if err != nil {
 		return out, metadata, err

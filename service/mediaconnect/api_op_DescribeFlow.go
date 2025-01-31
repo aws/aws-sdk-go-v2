@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -317,52 +316,46 @@ func (w *FlowActiveWaiter) WaitForOutput(ctx context.Context, params *DescribeFl
 func flowActiveStateRetryable(ctx context.Context, input *DescribeFlowInput, output *DescribeFlowOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Flow.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Flow.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "STARTING"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Flow.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "UPDATING"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -382,18 +375,16 @@ func flowActiveStateRetryable(ctx context.Context, input *DescribeFlowInput, out
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Flow.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "ERROR"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -570,18 +561,16 @@ func flowDeletedStateRetryable(ctx context.Context, input *DescribeFlowInput, ou
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Flow.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DELETING"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -601,18 +590,16 @@ func flowDeletedStateRetryable(ctx context.Context, input *DescribeFlowInput, ou
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Flow.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "ERROR"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -782,35 +769,31 @@ func (w *FlowStandbyWaiter) WaitForOutput(ctx context.Context, params *DescribeF
 func flowStandbyStateRetryable(ctx context.Context, input *DescribeFlowInput, output *DescribeFlowOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Flow.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "STANDBY"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Flow.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "STOPPING"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -830,18 +813,16 @@ func flowStandbyStateRetryable(ctx context.Context, input *DescribeFlowInput, ou
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Flow.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Flow
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "ERROR"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

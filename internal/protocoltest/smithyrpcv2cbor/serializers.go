@@ -10,6 +10,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"time"
@@ -25,6 +26,10 @@ func (*smithyRpcv2cbor_serializeOpEmptyInputOutput) ID() string {
 func (m *smithyRpcv2cbor_serializeOpEmptyInputOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*EmptyInputOutputInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -68,6 +73,10 @@ func (*smithyRpcv2cbor_serializeOpFloat16) ID() string {
 func (m *smithyRpcv2cbor_serializeOpFloat16) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*Float16Input)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -98,6 +107,10 @@ func (*smithyRpcv2cbor_serializeOpFractionalSeconds) ID() string {
 func (m *smithyRpcv2cbor_serializeOpFractionalSeconds) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*FractionalSecondsInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -128,6 +141,10 @@ func (*smithyRpcv2cbor_serializeOpGreetingWithErrors) ID() string {
 func (m *smithyRpcv2cbor_serializeOpGreetingWithErrors) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*GreetingWithErrorsInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -158,6 +175,10 @@ func (*smithyRpcv2cbor_serializeOpNoInputOutput) ID() string {
 func (m *smithyRpcv2cbor_serializeOpNoInputOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*NoInputOutputInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -188,6 +209,10 @@ func (*smithyRpcv2cbor_serializeOpOperationWithDefaults) ID() string {
 func (m *smithyRpcv2cbor_serializeOpOperationWithDefaults) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*OperationWithDefaultsInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -231,6 +256,10 @@ func (*smithyRpcv2cbor_serializeOpOptionalInputOutput) ID() string {
 func (m *smithyRpcv2cbor_serializeOpOptionalInputOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*OptionalInputOutputInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -274,6 +303,10 @@ func (*smithyRpcv2cbor_serializeOpRecursiveShapes) ID() string {
 func (m *smithyRpcv2cbor_serializeOpRecursiveShapes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*RecursiveShapesInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -317,6 +350,10 @@ func (*smithyRpcv2cbor_serializeOpRpcV2CborDenseMaps) ID() string {
 func (m *smithyRpcv2cbor_serializeOpRpcV2CborDenseMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*RpcV2CborDenseMapsInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -360,6 +397,10 @@ func (*smithyRpcv2cbor_serializeOpRpcV2CborLists) ID() string {
 func (m *smithyRpcv2cbor_serializeOpRpcV2CborLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*RpcV2CborListsInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -403,6 +444,10 @@ func (*smithyRpcv2cbor_serializeOpRpcV2CborSparseMaps) ID() string {
 func (m *smithyRpcv2cbor_serializeOpRpcV2CborSparseMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*RpcV2CborSparseMapsInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -446,6 +491,10 @@ func (*smithyRpcv2cbor_serializeOpSimpleScalarProperties) ID() string {
 func (m *smithyRpcv2cbor_serializeOpSimpleScalarProperties) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*SimpleScalarPropertiesInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
@@ -489,6 +538,10 @@ func (*smithyRpcv2cbor_serializeOpSparseNullsOperation) ID() string {
 func (m *smithyRpcv2cbor_serializeOpSparseNullsOperation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	input, ok := in.Parameters.(*SparseNullsOperationInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)

@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -380,35 +379,21 @@ func (w *InputAttachedWaiter) WaitForOutput(ctx context.Context, params *Describ
 func inputAttachedStateRetryable(ctx context.Context, input *DescribeInputInput, output *DescribeInputOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "ATTACHED"
-		value, ok := pathValue.(types.InputState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DETACHED"
-		value, ok := pathValue.(types.InputState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -585,35 +570,21 @@ func (w *InputDeletedWaiter) WaitForOutput(ctx context.Context, params *Describe
 func inputDeletedStateRetryable(ctx context.Context, input *DescribeInputInput, output *DescribeInputOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DELETED"
-		value, ok := pathValue.(types.InputState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DELETING"
-		value, ok := pathValue.(types.InputState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -791,52 +762,31 @@ func (w *InputDetachedWaiter) WaitForOutput(ctx context.Context, params *Describ
 func inputDetachedStateRetryable(ctx context.Context, input *DescribeInputInput, output *DescribeInputOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DETACHED"
-		value, ok := pathValue.(types.InputState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "CREATING"
-		value, ok := pathValue.(types.InputState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "ATTACHED"
-		value, ok := pathValue.(types.InputState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
