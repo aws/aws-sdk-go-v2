@@ -537,7 +537,7 @@ func (i *PutObjectInput) mapAbortMultipartUploadInput(uploadID *string) *s3.Abor
 	return input
 }
 
-// PutObjectOutput represents a response from the Upload() call. It contains common fields
+// PutObjectOutput represents a response from the PutObject() call. It contains common fields
 // of s3 PutObject and CompleteMultipartUpload output
 type PutObjectOutput struct {
 	// The ID for a multipart upload to S3. In the case of an error the error

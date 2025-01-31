@@ -33,6 +33,8 @@ func (e *errReadingBody) Unwrap() error {
 	return e.err
 }
 
+// GetObjectInput represents a request to the GetObject() or DownloadObject() call. It contains common fields
+// of s3 GetObject input
 type GetObjectInput struct {
 	// Bucket the object is downloaded from
 	Bucket string
@@ -234,7 +236,7 @@ type GetObjectInput struct {
 	// For more information about versioning, see [PutBucketVersioning].
 	//
 	// [PutBucketVersioning]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html
-	VersionId string
+	VersionID string
 }
 
 func (i GetObjectInput) mapGetObjectInput(enableChecksumValidation bool) *s3.GetObjectInput {
@@ -267,11 +269,13 @@ func (i GetObjectInput) mapGetObjectInput(enableChecksumValidation bool) *s3.Get
 	input.SSECustomerAlgorithm = nzstring(i.SSECustomerAlgorithm)
 	input.SSECustomerKey = nzstring(i.SSECustomerKey)
 	input.SSECustomerKeyMD5 = nzstring(i.SSECustomerKeyMD5)
-	input.VersionId = nzstring(i.VersionId)
+	input.VersionId = nzstring(i.VersionID)
 
 	return input
 }
 
+// GetObjectOutput represents a response from GetObject() or DownloadObject() call. It contains common fields
+// of s3 GetObject output
 type GetObjectOutput struct {
 	// Indicates that a range of bytes was specified in the request.
 	AcceptRanges string
@@ -450,7 +454,7 @@ type GetObjectOutput struct {
 	SSECustomerKeyMD5 string
 
 	// If present, indicates the ID of the KMS key that was used for object encryption.
-	SSEKMSKeyId string
+	SSEKMSKeyID string
 
 	// The server-side encryption algorithm used when you store this object in Amazon
 	// S3.
@@ -476,7 +480,7 @@ type GetObjectOutput struct {
 	// Version ID of the object.
 	//
 	// This functionality is not supported for directory buckets.
-	VersionId string
+	VersionID string
 
 	// If the bucket is configured as a website, redirects requests for this object to
 	// another object in the same bucket or to an external URL. Amazon S3 stores the
@@ -508,8 +512,8 @@ func (o *GetObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput, checks
 	o.Restore = aws.ToString(out.Restore)
 	o.SSECustomerAlgorithm = aws.ToString(out.SSECustomerAlgorithm)
 	o.SSECustomerKeyMD5 = aws.ToString(out.SSECustomerKeyMD5)
-	o.SSEKMSKeyId = aws.ToString(out.SSEKMSKeyId)
-	o.VersionId = aws.ToString(out.VersionId)
+	o.SSEKMSKeyID = aws.ToString(out.SSEKMSKeyId)
+	o.VersionID = aws.ToString(out.VersionId)
 	o.WebsiteRedirectLocation = aws.ToString(out.WebsiteRedirectLocation)
 	o.BucketKeyEnabled = aws.ToBool(out.BucketKeyEnabled)
 	o.DeleteMarker = aws.ToBool(out.DeleteMarker)
@@ -531,6 +535,13 @@ func (o *GetObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput, checks
 	o.ResultMetadata = out.ResultMetadata.Clone()
 }
 
+// GetObject downloads an object from S3, intelligently splitting large
+// files into smaller parts/ranges according to config and getting them in sequence.
+// You can configure the download type and chunk size through the Options parameters.
+//
+// Additional functional options can be provided to configure the individual
+// download. These options are copies of the original Options instance, the client of which GetObject is called from.
+// Modifying the options will not impact the original Client and Options instance.
 func (c *Client) GetObject(ctx context.Context, input *GetObjectInput, opts ...func(*Options)) (*GetObjectOutput, error) {
 	i := downloader{in: input, options: c.options.Copy()}
 	for _, opt := range opts {
@@ -541,6 +552,14 @@ func (c *Client) GetObject(ctx context.Context, input *GetObjectInput, opts ...f
 	return i.download(ctx)
 }
 
+// DownloadObject downloads an object from S3, intelligently splitting large
+// files into smaller parts/ranges according to config and getting them in parallel across
+// multiple goroutines. You can configure the download type, chunk size and concurrency
+// through the Options parameters.
+//
+// Additional functional options can be provided to configure the individual
+// download. These options are copies of the original Options instance, the client of which DownloadObject is called from.
+// Modifying the options will not impact the original Client and Options instance.
 func (c *Client) DownloadObject(ctx context.Context, w io.WriterAt, input *GetObjectInput, opts ...func(*Options)) (*GetObjectOutput, error) {
 	i := downloader{in: input, options: c.options.Copy(), w: w}
 	for _, opt := range opts {
