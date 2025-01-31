@@ -1,3 +1,7 @@
+# v1.20.1 (2025-01-31)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2025-01-30)
 
 * **Feature**: Added APIs to manage QBusiness user subscriptions

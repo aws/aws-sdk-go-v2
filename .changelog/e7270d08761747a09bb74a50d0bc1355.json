@@ -1,8 +1,0 @@
-{
-    "id": "e7270d08-7617-47a0-9bb7-4a50d0bc1355",
-    "type": "feature",
-    "description": "Add support for sending metrics to cross account and CMCK AMP workspaces through RoleConfiguration on Create/Update Scraper.",
-    "modules": [
-        "service/amp"
-    ]
-}

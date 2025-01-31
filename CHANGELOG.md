@@ -1,3 +1,32 @@
+# Release (2025-01-31)
+
+## General Highlights
+* **Dependency Update**: Switch to code-generated waiter matchers, removing the dependency on go-jmespath.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.36.0
+  * **Feature**: Reduce allocations in query encoding.
+  * **Dependency Update**: Remove root dependency on go-jmespath, which is no longer used.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.18.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1180-2025-01-31)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.17.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v1170-2025-01-31)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.57](feature/s3/manager/CHANGELOG.md#v11757-2025-01-31)
+  * **Bug Fix**: Fix incorrect reference to old s3manager in comments.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.31.0](service/amp/CHANGELOG.md#v1310-2025-01-31)
+  * **Feature**: Add support for sending metrics to cross account and CMCK AMP workspaces through RoleConfiguration on Create/Update Scraper.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.35.0](service/bedrockagentruntime/CHANGELOG.md#v1350-2025-01-31)
+  * **Feature**: This change is to deprecate the existing citation field under RetrieveAndGenerateStream API response in lieu of GeneratedResponsePart and RetrievedReferences
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.51.0](service/codebuild/CHANGELOG.md#v1510-2025-01-31)
+  * **Feature**: Added support for CodeBuild self-hosted Buildkite runner builds
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.1.0](service/georoutes/CHANGELOG.md#v110-2025-01-31)
+  * **Feature**: The OptimizeWaypoints API now supports 50 waypoints per request (20 with constraints like AccessHours or AppointmentTime). It adds waypoint clustering via Clustering and ClusteringIndex for better optimization. Also, total distance validation is removed for greater flexibility.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.93.10](service/rds/CHANGELOG.md#v19310-2025-01-31)
+  * **Documentation**: Updates to Aurora MySQL and Aurora PostgreSQL API pages with instance log type in the create and modify DB Cluster.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.174.0](service/sagemaker/CHANGELOG.md#v11740-2025-01-31)
+  * **Feature**: This release introduces a new valid value in InstanceType parameter: p5en.48xlarge, in ProductionVariant.
+
 # Release (2025-01-30)
 
 ## General Highlights

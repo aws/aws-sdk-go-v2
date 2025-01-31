@@ -1,3 +1,7 @@
+# v1.202.2 (2025-01-31)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.202.1 (2025-01-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

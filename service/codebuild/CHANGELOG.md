@@ -1,3 +1,8 @@
+# v1.51.0 (2025-01-31)
+
+* **Feature**: Added support for CodeBuild self-hosted Buildkite runner builds
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.4 (2025-01-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

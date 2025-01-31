@@ -1,3 +1,9 @@
+# v1.31.0 (2025-01-31)
+
+* **Feature**: Add support for sending metrics to cross account and CMCK AMP workspaces through RoleConfiguration on Create/Update Scraper.
+* **Dependency Update**: Switch to code-generated waiter matchers, removing the dependency on go-jmespath.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.11 (2025-01-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

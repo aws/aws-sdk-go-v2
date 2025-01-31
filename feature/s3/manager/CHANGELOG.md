@@ -1,3 +1,8 @@
+# v1.17.57 (2025-01-31)
+
+* **Bug Fix**: Fix incorrect reference to old s3manager in comments.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.56 (2025-01-30)
 
 * **Bug Fix**: Fix incorrect reference to old s3manager in comments.
