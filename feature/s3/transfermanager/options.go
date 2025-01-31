@@ -19,7 +19,7 @@ type Options struct {
 	MultipartUploadThreshold int64
 
 	// Option to disable checksum validation for download
-	DisableChecksum bool
+	DisableChecksumValidation bool
 
 	// Checksum algorithm to use for upload
 	ChecksumAlgorithm types.ChecksumAlgorithm
