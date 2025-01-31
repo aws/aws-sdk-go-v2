@@ -113,19 +113,19 @@
                 "Allow": {
                     "target": "com.amazonaws.georoutes#IsolineAllowOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Features that are allowed while calculating. a route</p>"
+                        "smithy.api#documentation": "<p>Features that are allowed while calculating an isoline.</p>"
                     }
                 },
                 "ArrivalTime": {
                     "target": "com.amazonaws.georoutes#TimestampWithTimezoneOffset",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time of arrival at the destination.</p>\n         <p>Time format: <code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>\n         </p>\n         <p>Examples:</p>\n         <p>\n            <code>2020-04-22T17:57:24Z</code>\n         </p>\n         <p>\n            <code>2020-04-22T17:57:24+02:00</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Time of arrival at the destination.</p>\n         <p>Time format: <code>YYYY-MM-DDThh:mm:ss.sssZ |\n         YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>\n         </p>\n         <p>Examples:</p>\n         <p>\n            <code>2020-04-22T17:57:24Z</code>\n         </p>\n         <p>\n            <code>2020-04-22T17:57:24+02:00</code>\n         </p>"
                     }
                 },
                 "Avoid": {
                     "target": "com.amazonaws.georoutes#IsolineAvoidanceOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an\n         avoidance can't be satisfied for a particular case, it violates the avoidance and the\n         returned response produces a notice for the violation.</p>"
+                        "smithy.api#documentation": "<p>Features that are avoided while calculating a route. Avoidance is on a best-case basis.\n         If an avoidance can't be satisfied for a particular case, it violates the avoidance and the\n         returned response produces a notice for the violation.</p>"
                     }
                 },
                 "DepartNow": {
@@ -143,7 +143,7 @@
                 "Destination": {
                     "target": "com.amazonaws.georoutes#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The final position for the route. In the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>"
+                        "smithy.api#documentation": "<p>The final position for the route. In the World Geodetic System (WGS 84) format:\n            <code>[longitude, latitude]</code>.</p>"
                     }
                 },
                 "DestinationOptions": {
@@ -161,7 +161,7 @@
                 "IsolineGranularity": {
                     "target": "com.amazonaws.georoutes#IsolineGranularityOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the granularity of the returned Isoline</p>"
+                        "smithy.api#documentation": "<p>Defines the granularity of the returned Isoline.</p>"
                     }
                 },
                 "Key": {
@@ -174,7 +174,7 @@
                 "OptimizeIsolineFor": {
                     "target": "com.amazonaws.georoutes#IsolineOptimizationObjective",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the optimization criteria for when calculating an isoline. AccurateCalculation generates an isoline of higher granularity that is more precise.  \nFastCalculation generates an isoline faster by reducing the granularity, and in turn the quality of the isoline. BalancedCalculation generates an isoline by balancing between quality and performance. \n</p>\n         <p>Default Value: <code>BalancedCalculation</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the optimization criteria for when calculating an isoline. AccurateCalculation\n         generates an isoline of higher granularity that is more precise. FastCalculation generates\n         an isoline faster by reducing the granularity, and in turn the quality of the isoline.\n         BalancedCalculation generates an isoline by balancing between quality and performance. </p>\n         <p>Default Value: <code>BalancedCalculation</code>\n         </p>"
                     }
                 },
                 "OptimizeRoutingFor": {
@@ -198,7 +198,7 @@
                 "Thresholds": {
                     "target": "com.amazonaws.georoutes#IsolineThresholds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Threshold to be used for the isoline calculation. Up to \n      3 thresholds per provided type can be requested.</p>",
+                        "smithy.api#documentation": "<p>Threshold to be used for the isoline calculation. Up to 3 thresholds per provided type\n         can be requested.</p>\n         <p> You incur a calculation charge for each threshold. Using a large amount of thresholds in a\n          request can lead you to incur unexpected charges. See\n          <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`\">\n              Amazon Location's pricing page</a> for more information.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -211,7 +211,7 @@
                 "TravelMode": {
                     "target": "com.amazonaws.georoutes#IsolineTravelMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. \n      Used in estimating the speed of travel and road compatibility.</p>\n         <note>\n            <p> The mode <code>Scooter</code> also applies to motorcycles, set to <code>Scooter</code> when wanted to calculate options for motorcycles.</p>\n         </note>\n         <p>Default Value: <code>Car</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. Used in estimating the speed\n         of travel and road compatibility.</p>\n         <note>\n            <p> The mode <code>Scooter</code> also applies to motorcycles, set to\n               <code>Scooter</code> when wanted to calculate options for motorcycles.</p>\n         </note>\n         <p>Default Value: <code>Car</code>\n         </p>"
                     }
                 },
                 "TravelModeOptions": {
@@ -231,7 +231,7 @@
                 "ArrivalTime": {
                     "target": "com.amazonaws.georoutes#TimestampWithTimezoneOffset",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time of arrival at the destination. This parameter is returned only if the Destination parameters was provided in the request.  </p>\n         <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>\n         </p>\n         <p>Examples:</p>\n         <p>\n            <code>2020-04-22T17:57:24Z</code>\n         </p>\n         <p>\n            <code>2020-04-22T17:57:24+02:00</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Time of arrival at the destination. This parameter is returned only if the Destination\n         parameters was provided in the request. </p>\n         <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>\n         </p>\n         <p>Examples:</p>\n         <p>\n            <code>2020-04-22T17:57:24Z</code>\n         </p>\n         <p>\n            <code>2020-04-22T17:57:24+02:00</code>\n         </p>"
                     }
                 },
                 "DepartureTime": {
@@ -303,7 +303,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Calculates route matrix containing the results for all pairs of \n      Origins to Destinations. Each row corresponds to one entry in Origins. \n      Each entry in the row corresponds to the route from that entry in Origins to an entry in Destinations positions.</p>",
+                "smithy.api#documentation": "<p> Use <code>CalculateRouteMatrix</code> to compute results for all pairs of Origins to\n         Destinations. Each row corresponds to one entry in Origins. Each entry in the row\n         corresponds to the route from that entry in Origins to an entry in Destinations\n         positions.</p>",
                 "smithy.api#http": {
                     "uri": "/route-matrix",
                     "method": "POST"
@@ -350,13 +350,13 @@
                 "Allow": {
                     "target": "com.amazonaws.georoutes#RouteMatrixAllowOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Features that are allowed while calculating. a route</p>"
+                        "smithy.api#documentation": "<p>Features that are allowed while calculating a route.</p>"
                     }
                 },
                 "Avoid": {
                     "target": "com.amazonaws.georoutes#RouteMatrixAvoidanceOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an\n         avoidance can't be satisfied for a particular case, it violates the avoidance and the\n         returned response produces a notice for the violation.</p>"
+                        "smithy.api#documentation": "<p>Features that are avoided while calculating a route. Avoidance is on a best-case basis.\n         If an avoidance can't be satisfied for a particular case, it violates the avoidance and the\n         returned response produces a notice for the violation.</p>"
                     }
                 },
                 "DepartNow": {
@@ -374,7 +374,7 @@
                 "Destinations": {
                     "target": "com.amazonaws.georoutes#RouteMatrixDestinationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of destinations for the route.</p>",
+                        "smithy.api#documentation": "<p>List of destinations for the route.</p>\n         <note>\n            <p>Route calculations are billed for each origin and destination pair. If you use a large matrix of origins and destinations, your costs will increase accordingly. See\n            <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`\">\n                Amazon Location's pricing page</a> for more information.</p>\n         </note>",
                         "smithy.api#length": {
                             "min": 1
                         },
@@ -403,7 +403,7 @@
                 "Origins": {
                     "target": "com.amazonaws.georoutes#RouteMatrixOriginList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in longitude and latitude for the origin.</p>",
+                        "smithy.api#documentation": "<p>The position in longitude and latitude for the origin.</p>\n         <note>\n            <p>Route calculations are billed for each origin and destination pair. Using a large amount of Origins in a\n            request can lead you to incur unexpected charges. See\n            <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`\">\n                Amazon Location's pricing page</a> for more information.</p>\n         </note>",
                         "smithy.api#length": {
                             "min": 1
                         },
@@ -413,7 +413,7 @@
                 "RoutingBoundary": {
                     "target": "com.amazonaws.georoutes#RouteMatrixBoundary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boundary within which the matrix is to be calculated. \n      All data, origins and destinations outside the boundary are considered invalid.</p>\n         <note>\n            <p>When request routing boundary was set as AutoCircle, the response routing boundary will return Circle derived from the AutoCircle settings.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Boundary within which the matrix is to be calculated. All data, origins and destinations\n         outside the boundary are considered invalid.</p>\n         <note>\n            <p>When request routing boundary was set as AutoCircle, the response routing boundary\n            will return Circle derived from the AutoCircle settings.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -426,7 +426,7 @@
                 "TravelMode": {
                     "target": "com.amazonaws.georoutes#RouteMatrixTravelMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. \n      Used in estimating the speed of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. Used in estimating the speed\n         of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>"
                     }
                 },
                 "TravelModeOptions": {
@@ -446,7 +446,7 @@
                 "ErrorCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The count of error results in the route matrix. If this number is 0, all routes were calculated successfully.</p>",
+                        "smithy.api#documentation": "<p>The count of error results in the route matrix. If this number is 0, all routes were\n         calculated successfully.</p>",
                         "smithy.api#range": {
                             "min": 0
                         },
@@ -464,14 +464,14 @@
                 "RouteMatrix": {
                     "target": "com.amazonaws.georoutes#RouteMatrix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The calculated route matrix containing the results for all pairs of Origins to Destination positions. Each row corresponds to one entry in Origins. Each entry in the row corresponds to the route from that entry in Origins to an entry in Destination positions.</p>",
+                        "smithy.api#documentation": "<p>The calculated route matrix containing the results for all pairs of Origins to\n         Destination positions. Each row corresponds to one entry in Origins. Each entry in the row\n         corresponds to the route from that entry in Origins to an entry in Destination\n         positions.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RoutingBoundary": {
                     "target": "com.amazonaws.georoutes#RouteMatrixBoundary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid.</p>\n         <note>\n            <p>When request routing boundary was set as AutoCircle, the response routing boundary will return Circle derived from the AutoCircle settings.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Boundary within which the matrix is to be calculated. All data, origins and destinations\n         outside the boundary are considered invalid.</p>\n         <note>\n            <p>When request routing boundary was set as AutoCircle, the response routing boundary\n            will return Circle derived from the AutoCircle settings.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -504,7 +504,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Calculates a route given the following required parameters: \n      <code>Origin</code> and <code>Destination</code>.</p>",
+                "smithy.api#documentation": "<p>\n            <code>CalculateRoutes</code> computes routes given the following required parameters:\n            <code>Origin</code> and <code>Destination</code>.</p>",
                 "smithy.api#http": {
                     "uri": "/routes",
                     "method": "POST"
@@ -540,7 +540,7 @@
                 "Allow": {
                     "target": "com.amazonaws.georoutes#RouteAllowOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Features that are allowed while calculating. a route</p>"
+                        "smithy.api#documentation": "<p>Features that are allowed while calculating a route.</p>"
                     }
                 },
                 "ArrivalTime": {
@@ -552,7 +552,7 @@
                 "Avoid": {
                     "target": "com.amazonaws.georoutes#RouteAvoidanceOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an\n         avoidance can't be satisfied for a particular case, it violates the avoidance and the\n         returned response produces a notice for the violation.</p>"
+                        "smithy.api#documentation": "<p>Features that are avoided while calculating a route. Avoidance is on a best-case basis.\n         If an avoidance can't be satisfied for a particular case, it violates the avoidance and the\n         returned response produces a notice for the violation.</p>"
                     }
                 },
                 "DepartNow": {
@@ -570,7 +570,7 @@
                 "Destination": {
                     "target": "com.amazonaws.georoutes#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The final position for the route. In the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>",
+                        "smithy.api#documentation": "<p>The final position for the route. In the World Geodetic System (WGS 84) format:\n            <code>[longitude, latitude]</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -608,7 +608,7 @@
                 "Languages": {
                     "target": "com.amazonaws.georoutes#LanguageTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of languages for instructions within steps in the response.</p>\n         <note>\n            <p>Instructions in the requested language are returned only if they are available.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>List of languages for instructions within steps in the response.</p>\n         <note>\n            <p>Instructions in the requested language are returned only if they are\n            available.</p>\n         </note>",
                         "smithy.api#length": {
                             "max": 10
                         }
@@ -617,19 +617,19 @@
                 "LegAdditionalFeatures": {
                     "target": "com.amazonaws.georoutes#RouteLegAdditionalFeatureList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of optional additional parameters such as timezone that can be requested for each result.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Elevation</code>: Retrieves the elevation information for each location.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Incidents</code>: Provides information on traffic incidents along the route.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PassThroughWaypoints</code>: Indicates waypoints that are passed through without stopping.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Summary</code>: Returns a summary of the route, including distance and duration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Tolls</code>: Supplies toll cost information along the route.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TravelStepInstructions</code>: Provides step-by-step instructions for travel along the route.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TruckRoadTypes</code>: Returns information about road types suitable for trucks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypicalDuration</code>: Gives typical travel duration based on historical data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Zones</code>: Specifies the time zone information for each waypoint.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of optional additional parameters such as timezone that can be requested for each\n         result.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Elevation</code>: Retrieves the elevation information for each\n               location.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Incidents</code>: Provides information on traffic incidents along the\n               route.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PassThroughWaypoints</code>: Indicates waypoints that are passed through\n               without stopping.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Summary</code>: Returns a summary of the route, including distance and\n               duration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Tolls</code>: Supplies toll cost information along the route.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TravelStepInstructions</code>: Provides step-by-step instructions for travel\n               along the route.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TruckRoadTypes</code>: Returns information about road types suitable for\n               trucks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypicalDuration</code>: Gives typical travel duration based on historical\n               data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Zones</code>: Specifies the time zone information for each waypoint.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "LegGeometryFormat": {
                     "target": "com.amazonaws.georoutes#GeometryFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of the geometry returned for each leg of the route. You can \n      choose between two different geometry encoding formats.</p>\n         <p>\n            <code>FlexiblePolyline</code>: A compact and precise encoding format for the \n    leg geometry. For more information on the format, see the GitHub repository for  <a href=\"https://github.com/heremaps/flexible-polyline\">\n               <code>FlexiblePolyline</code>\n            </a>.</p>\n         <p>\n            <code>Simple</code>: A less compact encoding,\n     which is easier to decode but may be less precise and result in larger payloads.</p>"
+                        "smithy.api#documentation": "<p>Specifies the format of the geometry returned for each leg of the route. You can choose\n         between two different geometry encoding formats.</p>\n         <p>\n            <code>FlexiblePolyline</code>: A compact and precise encoding format for the leg\n         geometry. For more information on the format, see the GitHub repository for <a href=\"https://github.com/heremaps/flexible-polyline\">\n               <code>FlexiblePolyline</code>\n            </a>.</p>\n         <p>\n            <code>Simple</code>: A less compact encoding, which is easier to decode but may be less\n         precise and result in larger payloads.</p>"
                     }
                 },
                 "MaxAlternatives": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of alternative routes to be provided in the response, if available.</p>",
+                        "smithy.api#documentation": "<p>Maximum number of alternative routes to be provided in the response, if\n         available.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 5
@@ -658,7 +658,7 @@
                 "SpanAdditionalFeatures": {
                     "target": "com.amazonaws.georoutes#RouteSpanAdditionalFeatureList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of optional features such as SpeedLimit that can be requested for a Span. A span is a section of a Leg for which the requested features have the same values.</p>"
+                        "smithy.api#documentation": "<p>A list of optional features such as SpeedLimit that can be requested for a Span. A span\n         is a section of a Leg for which the requested features have the same values.</p>"
                     }
                 },
                 "Tolls": {
@@ -676,7 +676,7 @@
                 "TravelMode": {
                     "target": "com.amazonaws.georoutes#RouteTravelMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. \n      Used in estimating the speed of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. Used in estimating the speed\n         of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>"
                     }
                 },
                 "TravelModeOptions": {
@@ -688,7 +688,7 @@
                 "TravelStepType": {
                     "target": "com.amazonaws.georoutes#RouteTravelStepType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of step returned by the response.\nDefault provides basic steps intended for web based applications.\nTurnByTurn provides detailed instructions with more granularity intended for a turn based naviagtion system.</p>"
+                        "smithy.api#documentation": "<p>Type of step returned by the response. Default provides basic steps intended for web\n         based applications. TurnByTurn provides detailed instructions with more granularity\n         intended for a turn based navigation system.</p>"
                     }
                 },
                 "Waypoints": {
@@ -715,7 +715,7 @@
                 "Notices": {
                     "target": "com.amazonaws.georoutes#RouteResponseNoticeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>",
+                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -745,7 +745,7 @@
                 "Center": {
                     "target": "com.amazonaws.georoutes#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>Center of the Circle defined in longitude and latitude coordinates.</p>\n         <p>Example: <code>[-123.1174, 49.2847]</code> represents the position with longitude <code>-123.1174</code> and latitude <code>49.2847</code>. </p>",
+                        "smithy.api#documentation": "<p>Center of the Circle defined in longitude and latitude coordinates.</p>\n         <p>Example: <code>[-123.1174, 49.2847]</code> represents the position with longitude\n            <code>-123.1174</code> and latitude <code>49.2847</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -758,8 +758,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Geometry defined as a circle. When request routing boundary was set as <code>AutoCircle</code>, the response routing boundary will return <code>Circle</code> derived from the <code>AutoCircle</code> settings.</p>",
+                "smithy.api#documentation": "<p>Geometry defined as a circle. When request routing boundary was set as\n            <code>AutoCircle</code>, the response routing boundary will return <code>Circle</code>\n         derived from the <code>AutoCircle</code> settings.</p>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.georoutes#ClusterIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.georoutes#Corridor": {
@@ -781,7 +789,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Geometry defined as a corridor - a LineString with a radius that defines the width of the corridor.</p>",
+                "smithy.api#documentation": "<p>Geometry defined as a corridor - a LineString with a radius that defines the width of\n         the corridor.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -954,7 +962,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure.</p>",
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or\n         failure.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
@@ -966,7 +974,7 @@
                 "Connections": {
                     "target": "com.amazonaws.georoutes#IsolineConnectionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Isolines may contain multiple components, if these components are connected by ferry links. These components are returned as separate polygons while the ferry links are returned as connections.</p>",
+                        "smithy.api#documentation": "<p>Isolines may contain multiple components, if these components are connected by ferry\n         links. These components are returned as separate polygons while the ferry links are\n         returned as connections.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1002,18 +1010,18 @@
                 "Hot": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allow Hot (High Occupancy Toll) lanes while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Allow Hot (High Occupancy Toll) lanes while calculating an isoline.</p>\n         <p>Default value: <code>false</code>\n         </p>"
                     }
                 },
                 "Hov": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Allow Hov (High Occupancy vehicle) lanes while calculating an isoline.</p>\n         <p>Default value: <code>false</code>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Features that are allowed while calculating. a route</p>"
+                "smithy.api#documentation": "<p>Features that are allowed while calculating an isoline.</p>"
             }
         },
         "com.amazonaws.georoutes#IsolineAvoidanceArea": {
@@ -1022,7 +1030,7 @@
                 "Except": {
                     "target": "com.amazonaws.georoutes#IsolineAvoidanceAreaGeometryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Exceptions to the provided avoidance geometry, to be included while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Exceptions to the provided avoidance geometry, to be included while calculating an\n         isoline.</p>"
                     }
                 },
                 "Geometry": {
@@ -1049,13 +1057,13 @@
                 "Corridor": {
                     "target": "com.amazonaws.georoutes#Corridor",
                     "traits": {
-                        "smithy.api#documentation": "<p>Geometry defined as a corridor - a LineString with a radius that defines the width of the corridor.</p>"
+                        "smithy.api#documentation": "<p>Geometry defined as a corridor - a LineString with a radius that defines the width of\n         the corridor.</p>"
                     }
                 },
                 "Polygon": {
                     "target": "com.amazonaws.georoutes#LinearRings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Polygon will be excluded for calculating isolines, the list can only contain 1 polygon.</p>",
+                        "smithy.api#documentation": "<p>A list of Polygon will be excluded for calculating isolines, the list can only contain 1\n         polygon.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1
@@ -1065,13 +1073,13 @@
                 "PolylineCorridor": {
                     "target": "com.amazonaws.georoutes#PolylineCorridor",
                     "traits": {
-                        "smithy.api#documentation": "<p>Geometry defined as an encoded corridor – a polyline with a radius that defines the width of the corridor. For more information on polyline \nencoding, see <a href=\"https://github.com/heremaps/flexiblepolyline/blob/master/README.md\">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>"
+                        "smithy.api#documentation": "<p>Geometry defined as an encoded corridor – a polyline with a radius that defines the\n         width of the corridor. For more information on polyline encoding, see <a href=\"https://github.com/heremaps/flexiblepolyline/blob/master/README.md\">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>"
                     }
                 },
                 "PolylinePolygon": {
                     "target": "com.amazonaws.georoutes#PolylineRingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of PolylinePolygon's that are excluded for calculating isolines, the list can only contain 1 polygon. For more information on polyline encoding, see <a href=\"https://github.com/heremaps/flexiblepolyline/blob/master/README.md\">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.  \n</p>",
+                        "smithy.api#documentation": "<p>A list of PolylinePolygon's that are excluded for calculating isolines, the list can\n         only contain 1 polygon. For more information on polyline encoding, see <a href=\"https://github.com/heremaps/flexiblepolyline/blob/master/README.md\">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>. </p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1
@@ -1080,7 +1088,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The  avoidance geometry, to be included while calculating the route.</p>"
+                "smithy.api#documentation": "<p>The avoidance geometry, to be included while calculating an isoline.</p>"
             }
         },
         "com.amazonaws.georoutes#IsolineAvoidanceAreaGeometryList": {
@@ -1107,31 +1115,31 @@
                 "CarShuttleTrains": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Avoid car-shuttle-trains while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Avoid car-shuttle-trains while calculating an isoline.</p>"
                     }
                 },
                 "ControlledAccessHighways": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Avoid controlled access highways while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Avoid controlled access highways while calculating an isoline.</p>"
                     }
                 },
                 "DirtRoads": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Avoid dirt roads while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Avoid dirt roads while calculating an isoline.</p>"
                     }
                 },
                 "Ferries": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Avoid ferries while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Avoid ferries while calculating an isoline.</p>"
                     }
                 },
                 "SeasonalClosure": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Avoid roads that have seasonal closure while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Avoid roads that have seasonal closure while calculating an isoline.</p>"
                     }
                 },
                 "TollRoads": {
@@ -1149,13 +1157,13 @@
                 "TruckRoadTypes": {
                     "target": "com.amazonaws.georoutes#TruckRoadTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. \n<code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to\n         Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
                     }
                 },
                 "Tunnels": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Avoid tunnels while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Avoid tunnels while calculating an isoline.</p>"
                     }
                 },
                 "UTurns": {
@@ -1172,7 +1180,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an\n         avoidance can't be satisfied for a particular case, it violates the avoidance and the\n         returned response produces a notice for the violation.</p>"
+                "smithy.api#documentation": "<p>Features that are avoided while calculating isolines. Avoidance is on a best-case basis.\n         If an avoidance can't be satisfied for a particular case, it violates the avoidance and the\n         returned response produces a notice for the violation.</p>"
             }
         },
         "com.amazonaws.georoutes#IsolineAvoidanceZoneCategory": {
@@ -1239,7 +1247,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options for vehicles.</p>"
+                "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is <code>Car</code>.</p>"
             }
         },
         "com.amazonaws.georoutes#IsolineConnection": {
@@ -1248,7 +1256,7 @@
                 "FromPolygonIndex": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Index of the polygon corresponding to the \"from\" component of the connection. The polygon is available from <code>Isoline[].Geometries</code>.</p>",
+                        "smithy.api#documentation": "<p>Index of the polygon corresponding to the \"from\" component of the connection.\n         The polygon is available from <code>Isoline[].Geometries</code>.</p>",
                         "smithy.api#range": {
                             "min": 0
                         },
@@ -1265,7 +1273,7 @@
                 "ToPolygonIndex": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Index of the polygon corresponding to the \"to\" component of the connection. The polygon is available from <code>Isoline[].Geometries</code>.</p>",
+                        "smithy.api#documentation": "<p>Index of the polygon corresponding to the \"to\" component of the connection.\n         The polygon is available from <code>Isoline[].Geometries</code>.</p>",
                         "smithy.api#range": {
                             "min": 0
                         },
@@ -1274,7 +1282,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Isolines may contain multiple components, if these components are connected by ferry links. These components are returned as separate polygons while the ferry links are returned as connections.</p>"
+                "smithy.api#documentation": "<p>Isolines may contain multiple components, if these components are connected by ferry\n         links. These components are returned as separate polygons while the ferry links are\n         returned as connections.</p>"
             }
         },
         "com.amazonaws.georoutes#IsolineConnectionGeometry": {
@@ -1289,12 +1297,12 @@
                 "Polyline": {
                     "target": "com.amazonaws.georoutes#Polyline",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p>\n         <note>\n            <p>LineString and Polyline are mutually exclusive properties.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An ordered list of positions used to plot a route on a map in a lossy compression\n         format.</p>\n         <note>\n            <p>LineString and Polyline are mutually exclusive properties.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Geometry of the connection between different Isoline components.</p>"
+                "smithy.api#documentation": "<p>Geometry of the connection between different isoline components.</p>"
             }
         },
         "com.amazonaws.georoutes#IsolineConnectionList": {
@@ -1310,7 +1318,7 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>"
+                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in\n         moving vehicles who may not have sufficient time to make an action at an origin or a\n         destination.</p>"
                     }
                 },
                 "Heading": {
@@ -1373,7 +1381,7 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Maximum resolution of the returned isoline.</p>\n         <p>\n            <b>Unit</b>: <code>centimeters</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Maximum resolution of the returned isoline.</p>\n         <p>\n            <b>Unit</b>: <code>meters</code>\n         </p>"
                     }
                 }
             },
@@ -1469,20 +1477,20 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint will be snapped to the highway/bridge/tunnel/sliproad.</p>\n         <p>\n            <b>Unit</b>: <code>meters</code>\n         </p>"
+                        "smithy.api#documentation": "<p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint\n         will be snapped to the highway/bridge/tunnel/sliproad.</p>\n         <p>\n            <b>Unit</b>: <code>meters</code>\n         </p>"
                     }
                 },
                 "Radius": {
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Considers all roads within the provided radius to match the provided destination to. The roads that are considered are determined by the provided Strategy.</p>\n         <p>\n            <b>Unit</b>: <code>Meters</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Considers all roads within the provided radius to match the provided destination to. The\n         roads that are considered are determined by the provided Strategy.</p>\n         <p>\n            <b>Unit</b>: <code>Meters</code>\n         </p>"
                     }
                 },
                 "Strategy": {
                     "target": "com.amazonaws.georoutes#MatchingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Strategy that defines matching of the position onto the road network. MatchAny considers all roads possible, whereas MatchMostSignificantRoad matches to the most significant road.</p>"
+                        "smithy.api#documentation": "<p>Strategy that defines matching of the position onto the road network. MatchAny considers\n         all roads possible, whereas MatchMostSignificantRoad matches to the most significant\n         road.</p>"
                     }
                 }
             },
@@ -1516,7 +1524,7 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>"
+                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in\n         moving vehicles who may not have sufficient time to make an action at an origin or a\n         destination.</p>"
                     }
                 },
                 "Heading": {
@@ -1540,7 +1548,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options for the property.</p>"
+                "smithy.api#documentation": "<p>Origin related options.</p>"
             }
         },
         "com.amazonaws.georoutes#IsolineScooterOptions": {
@@ -1581,7 +1589,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options for the property.</p>"
+                "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is <code>Scooter</code>\n         </p>"
             }
         },
         "com.amazonaws.georoutes#IsolineShapeGeometry": {
@@ -1590,13 +1598,13 @@
                 "Polygon": {
                     "target": "com.amazonaws.georoutes#LinearRings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Isoline Polygons, for each isoline polygon, it contains polygons of the first linear ring (the outer ring) and from 2nd item to the last item (the inner rings).</p>"
+                        "smithy.api#documentation": "<p>A list of Isoline Polygons, for each isoline polygon, it contains polygons of the first\n         linear ring (the outer ring) and from 2nd item to the last item (the inner rings).</p>"
                     }
                 },
                 "PolylinePolygon": {
                     "target": "com.amazonaws.georoutes#PolylineRingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains PolylinePolygon \n      of the first linear ring (the outer ring) and from 2nd item to the last item (the inner rings). \n      For more information on polyline encoding, see <a href=\"https://github.com/heremaps/flexiblepolyline/blob/master/README.md\">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains\n         PolylinePolygon of the first linear ring (the outer ring) and from 2nd item to the last\n         item (the inner rings). For more information on polyline encoding, see <a href=\"https://github.com/heremaps/flexiblepolyline/blob/master/README.md\">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>"
                     }
                 }
             },
@@ -1623,7 +1631,7 @@
                 "UseWith": {
                     "target": "com.amazonaws.georoutes#SideOfStreetMatchingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Strategy that defines when the side of street position should be used. AnyStreet will always use the provided position.</p>\n         <p>Default Value: <code>DividedStreetOnly</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Strategy that defines when the side of street position should be used. AnyStreet will\n         always use the provided position.</p>\n         <p>Default Value: <code>DividedStreetOnly</code>\n         </p>"
                     }
                 }
             },
@@ -1648,7 +1656,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Threshold to be used for the isoline calculation. Up to 3 thresholds per provided type\n         can be requested.</p>"
+                "smithy.api#documentation": "<p>Threshold to be used for the isoline calculation. Up to 5 thresholds per provided type\n         can be requested.</p>"
             }
         },
         "com.amazonaws.georoutes#IsolineTrafficOptions": {
@@ -1658,7 +1666,7 @@
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Duration for which flow traffic is considered valid. For this period, the flow traffic is used over historical traffic data. Flow traffic refers to congestion, which changes very quickly. Duration in seconds for which flow traffic event would be considered valid. While flow traffic event is valid it will be used over the historical traffic data. </p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Duration for which flow traffic is considered valid. For this period, the flow traffic\n         is used over historical traffic data. Flow traffic refers to congestion, which changes very\n         quickly. Duration in seconds for which flow traffic event would be considered valid. While\n         flow traffic event is valid it will be used over the historical traffic data. </p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
                     }
                 },
                 "Usage": {
@@ -1736,7 +1744,7 @@
                 "Scooter": {
                     "target": "com.amazonaws.georoutes#IsolineScooterOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is \"Scooter\"</p>"
+                        "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is <code>Scooter</code>\n         </p>\n         <note>\n            <p>When travel mode is set to <code>Scooter</code>, then the avoidance option\n               <code>ControlledAccessHighways</code> defaults to <code>true</code>.</p>\n         </note>"
                     }
                 },
                 "Truck": {
@@ -1883,20 +1891,20 @@
                 "TunnelRestrictionCode": {
                     "target": "com.amazonaws.georoutes#TunnelRestrictionCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. \n         They relate to the types of dangerous goods that can be transported through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels\n         in Great Britain. They relate to the types of dangerous goods that can be transported\n         through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "WeightPerAxle": {
                     "target": "com.amazonaws.georoutes#WeightKilograms",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for usage in countries where the differences in axle types or axle groups are not distinguished.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for\n         usage in countries where the differences in axle types or axle groups are not\n         distinguished.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
                     }
                 },
                 "WeightPerAxleGroup": {
                     "target": "com.amazonaws.georoutes#WeightPerAxleGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the total weight for the specified axle group. Meant for usage in countries that have different regulations based on the axle group type.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the total weight for the specified axle group. Meant for usage in countries\n         that have different regulations based on the axle group type.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
                     }
                 },
                 "Width": {
@@ -2106,7 +2114,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Calculates the optimal order to travel between a set of waypoints to minimize either the\n         travel time or the distance travelled during the journey, based on road network\n         restrictions and the traffic pattern data.</p>",
+                "smithy.api#documentation": "<p>\n            <code>OptimizeWaypoints</code> calculates the optimal order to travel between a set of\n         waypoints to minimize either the travel time or the distance travelled during the journey,\n         based on road network restrictions and the traffic pattern data.</p>",
                 "smithy.api#http": {
                     "uri": "/optimize-waypoints",
                     "method": "POST"
@@ -2142,7 +2150,13 @@
                 "Avoid": {
                     "target": "com.amazonaws.georoutes#WaypointOptimizationAvoidanceOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an\n         avoidance can't be satisfied for a particular case, this setting is ignored.</p>"
+                        "smithy.api#documentation": "<p>Features that are avoided. Avoidance is on a best-case basis. If an avoidance can't be\n         satisfied for a particular case, this setting is ignored.</p>"
+                    }
+                },
+                "Clustering": {
+                    "target": "com.amazonaws.georoutes#WaypointOptimizationClusteringOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Clustering allows you to specify how nearby waypoints can be clustered to improve the\n         optimized sequence.</p>"
                     }
                 },
                 "DepartureTime": {
@@ -2210,7 +2224,7 @@
                 "TravelMode": {
                     "target": "com.amazonaws.georoutes#WaypointOptimizationTravelMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. \n      Used in estimating the speed of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. Used in estimating the speed\n         of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>"
                     }
                 },
                 "TravelModeOptions": {
@@ -2236,7 +2250,7 @@
                 "Connections": {
                     "target": "com.amazonaws.georoutes#WaypointOptimizationConnectionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the connection from one waypoint to the next, within the optimized sequence.</p>",
+                        "smithy.api#documentation": "<p>Details about the connection from one waypoint to the next, within the optimized\n         sequence.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2259,7 +2273,7 @@
                 "ImpedingWaypoints": {
                     "target": "com.amazonaws.georoutes#WaypointOptimizationImpedingWaypointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns waypoints that caused the optimization problem to fail, and the constraints that were unsatisfied leading to the failure.</p>",
+                        "smithy.api#documentation": "<p>Returns waypoints that caused the optimization problem to fail, and the constraints that\n         were unsatisfied leading to the failure.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2308,14 +2322,14 @@
                 "Polyline": {
                     "target": "com.amazonaws.georoutes#Polyline",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p>\n         <note>\n            <p>LineString and Polyline are mutually exclusive properties.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>An ordered list of positions used to plot a route on a map in a lossy compression\n         format.</p>\n         <note>\n            <p>LineString and Polyline are mutually exclusive properties.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "Radius": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Considers all roads within the provided radius to match the provided destination to. The roads that are considered are determined by the provided Strategy.</p>\n         <p>\n            <b>Unit</b>: <code>Meters</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Considers all roads within the provided radius to match the provided destination to. The\n         roads that are considered are determined by the provided Strategy.</p>\n         <p>\n            <b>Unit</b>: <code>Meters</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2489,7 +2503,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Notices provide information around factors that may have influenced snapping in a manner atypical to the standard use cases.</p>"
+                "smithy.api#documentation": "<p>Notices provide information around factors that may have influenced snapping in a manner\n         atypical to the standard use cases.</p>"
             }
         },
         "com.amazonaws.georoutes#RoadSnapNoticeCode": {
@@ -2545,7 +2559,7 @@
                 "Polyline": {
                     "target": "com.amazonaws.georoutes#Polyline",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p>\n         <note>\n            <p>LineString and Polyline are mutually exclusive properties.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An ordered list of positions used to plot a route on a map in a lossy compression\n         format.</p>\n         <note>\n            <p>LineString and Polyline are mutually exclusive properties.</p>\n         </note>"
                     }
                 }
             },
@@ -2577,7 +2591,7 @@
                 "SnappedPosition": {
                     "target": "com.amazonaws.georoutes#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>Snapped position of the TracePoint provided within the request, at the same index. </p>",
+                        "smithy.api#documentation": "<p>Snapped position of the TracePoint provided within the request, at the same index.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2747,7 +2761,7 @@
                 "TunnelRestrictionCode": {
                     "target": "com.amazonaws.georoutes#TunnelRestrictionCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. \n         They relate to the types of dangerous goods that can be transported through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels\n         in Great Britain. They relate to the types of dangerous goods that can be transported\n         through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "Width": {
@@ -2782,14 +2796,14 @@
                 "Legs": {
                     "target": "com.amazonaws.georoutes#RouteLegList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A leg is a section of a route from one waypoint to the next. A leg could be of type Vehicle, Pedestrian or Ferry.\nLegs of different types could occur together within a single route. For example, a car employing the use of a Ferry will contain Vehicle legs corresponding to journey on land, and Ferry legs corresponding to the journey via Ferry.</p>",
+                        "smithy.api#documentation": "<p>A leg is a section of a route from one waypoint to the next. A leg could be of type\n         Vehicle, Pedestrian or Ferry. Legs of different types could occur together within a single\n         route. For example, a car employing the use of a Ferry will contain Vehicle legs\n         corresponding to journey on land, and Ferry legs corresponding to the journey via\n         Ferry.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MajorRoadLabels": {
                     "target": "com.amazonaws.georoutes#RouteMajorRoadLabelList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Important labels including names and route numbers that differentiate the current route from the alternatives presented.</p>",
+                        "smithy.api#documentation": "<p>Important labels including names and route numbers that differentiate the current route\n         from the alternatives presented.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 2
@@ -2814,18 +2828,18 @@
                 "Hot": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allow Hot (High Occupancy Toll) lanes while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Allow Hot (High Occupancy Toll) lanes while calculating the route.</p>\n         <p>Default value: <code>false</code>\n         </p>"
                     }
                 },
                 "Hov": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p>\n         <p>Default value: <code>false</code>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Features that are allowed while calculating. a route</p>"
+                "smithy.api#documentation": "<p>Features that are allowed while calculating a route.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteAvoidanceArea": {
@@ -2834,7 +2848,7 @@
                 "Except": {
                     "target": "com.amazonaws.georoutes#RouteAvoidanceAreaGeometryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Exceptions to the provided avoidance geometry, to be included while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Exceptions to the provided avoidance geometry, to be included while calculating the\n         route.</p>"
                     }
                 },
                 "Geometry": {
@@ -2854,7 +2868,7 @@
                 "Corridor": {
                     "target": "com.amazonaws.georoutes#Corridor",
                     "traits": {
-                        "smithy.api#documentation": "<p>Geometry defined as a corridor - a LineString with a radius that defines the width of the corridor.</p>"
+                        "smithy.api#documentation": "<p>Geometry defined as a corridor - a LineString with a radius that defines the width of\n         the corridor.</p>"
                     }
                 },
                 "BoundingBox": {
@@ -2882,7 +2896,7 @@
                 "PolylinePolygon": {
                     "target": "com.amazonaws.georoutes#PolylineRingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains PolylinePolygon \n      of the first linear ring (the outer ring) and from 2nd item to the last item (the inner rings). \n      For more information on polyline encoding, see <a href=\"https://github.com/heremaps/flexiblepolyline/blob/master/README.md\">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>",
+                        "smithy.api#documentation": "<p>A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it contains\n         PolylinePolygon of the first linear ring (the outer ring) and from 2nd item to the last\n         item (the inner rings). For more information on polyline encoding, see <a href=\"https://github.com/heremaps/flexiblepolyline/blob/master/README.md\">https://github.com/heremaps/flexiblepolyline/blob/master/README.md</a>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1
@@ -2960,7 +2974,7 @@
                 "TruckRoadTypes": {
                     "target": "com.amazonaws.georoutes#TruckRoadTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. \n         <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to\n         Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
                     }
                 },
                 "Tunnels": {
@@ -2983,7 +2997,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options related to areas to be avoided.</p>"
+                "smithy.api#documentation": "<p>Specifies options for areas to avoid when calculating the route. This is a best-effort\n         avoidance setting, meaning the router will try to honor the avoidance preferences but may\n         still include restricted areas if no feasible alternative route exists. If avoidance\n         options are not followed, the response will indicate that the avoidance criteria were\n         violated.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteAvoidanceZoneCategory": {
@@ -3050,7 +3064,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is \"Car\"</p>"
+                "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is <code>Car</code>.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteContinueHighwayStepDetails": {
@@ -3109,7 +3123,7 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>",
+                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in\n         moving vehicles who may not have sufficient time to make an action at an origin or a\n         destination.</p>",
                         "smithy.api#range": {
                             "max": 2000
                         }
@@ -3210,7 +3224,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Interval of the driver work-rest schedule. \n      Stops are added to fulfil the provided rest schedule.</p>"
+                "smithy.api#documentation": "<p>Interval of the driver work-rest schedule. Stops are added to fulfil the provided rest\n         schedule.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteDriverScheduleIntervalList": {
@@ -3225,19 +3239,19 @@
                 "Co2EmissionClass": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CO 2  emission classes.</p>"
+                        "smithy.api#documentation": "<p>The CO 2 emission classes.</p>"
                     }
                 },
                 "Type": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of the emission.</p>\n         <p>\n            <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Type of the emission.</p>\n         <p>\n            <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5,\n            Euro6, EuroEev</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Type of the emission.</p>\n         <p>\n            <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev</code>\n         </p>"
+                "smithy.api#documentation": "<p>Type of the emission.</p>\n         <p>\n            <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5,\n            Euro6, EuroEev</code>\n         </p>"
             }
         },
         "com.amazonaws.georoutes#RouteEngineType": {
@@ -3299,13 +3313,13 @@
                 "Countries": {
                     "target": "com.amazonaws.georoutes#CountryCodeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of countries to be avoided defined by two-letter or three-letter country codes.</p>",
+                        "smithy.api#documentation": "<p>List of countries to be avoided defined by two-letter or three-letter country\n         codes.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Exclusion options for the route.</p>"
+                "smithy.api#documentation": "<p>Specifies strict exclusion options for the route calculation. This setting mandates that\n         the router will avoid any routes that include the specified options, rather than merely\n         attempting to minimize them.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteExitStepDetails": {
@@ -3521,14 +3535,14 @@
                 "Notices": {
                     "target": "com.amazonaws.georoutes#RouteFerryNoticeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>",
+                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PassThroughWaypoints": {
                     "target": "com.amazonaws.georoutes#RoutePassThroughWaypointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Waypoints that were passed through during the leg. This includes the waypoints that were configured with the PassThrough option.</p>",
+                        "smithy.api#documentation": "<p>Waypoints that were passed through during the leg. This includes the waypoints that were\n         configured with the PassThrough option.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3576,12 +3590,12 @@
                 "Impact": {
                     "target": "com.amazonaws.georoutes#RouteNoticeImpact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>"
+                        "smithy.api#documentation": "<p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High\n         impact notices must be evaluated further to determine the impact.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>"
+                "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteFerryNoticeCode": {
@@ -3607,6 +3621,10 @@
                     {
                         "name": "VIOLATED_AVOID_RAIL_FERRY",
                         "value": "ViolatedAvoidRailFerry"
+                    },
+                    {
+                        "name": "SEASONAL_CLOSURE",
+                        "value": "SeasonalClosure"
                     }
                 ]
             }
@@ -3690,14 +3708,14 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Distance of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p>"
+                        "smithy.api#documentation": "<p>Distance of the computed span. This feature doesn't split a span, but is always computed\n         on a span split by other properties.</p>\n         <p>\n            <b>Unit</b>: <code>meters</code>\n         </p>"
                     }
                 },
                 "Duration": {
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Duration of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Duration of the computed span. This feature doesn't split a span, but is always computed\n         on a span split by other properties.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
                     }
                 },
                 "GeometryOffset": {
@@ -3718,7 +3736,7 @@
                 "Region": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>2-3 letter Region code corresponding to the Span. This is either a province or a state.</p>",
+                        "smithy.api#documentation": "<p>2-3 letter Region code corresponding to the Span. This is either a province or a\n         state.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 3
@@ -3727,7 +3745,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Span  computed for the requested SpanAdditionalFeatures.</p>"
+                "smithy.api#documentation": "<p>Span computed for the requested SpanAdditionalFeatures.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteFerrySpanList": {
@@ -3742,18 +3760,18 @@
                 "Overview": {
                     "target": "com.amazonaws.georoutes#RouteFerryOverviewSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summarized details for the leg including before travel, travel and after travel steps.</p>"
+                        "smithy.api#documentation": "<p>Summarized details for the leg including before travel, travel and after travel\n         steps.</p>"
                     }
                 },
                 "TravelOnly": {
                     "target": "com.amazonaws.georoutes#RouteFerryTravelOnlySummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is in meters</p>"
+                        "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel\n         only portion of the journey is in meters</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is the same as the Distance within the Overview summary.</p>"
+                "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel\n         only portion of the journey is the same as the Distance within the Overview summary.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteFerryTravelOnlySummary": {
@@ -3763,13 +3781,13 @@
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Total duration in free flowing traffic, which is the best case or shortest duration possible to cover the leg.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Total duration in free flowing traffic, which is the best case or shortest duration\n         possible to cover the leg.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is the same as the Distance within the Overview summary.</p>"
+                "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel\n         only portion of the journey is the same as the Distance within the Overview summary.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteFerryTravelStep": {
@@ -3970,7 +3988,7 @@
                 "TravelMode": {
                     "target": "com.amazonaws.georoutes#RouteLegTravelMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. \n      Used in estimating the speed of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. Used in estimating the speed\n         of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3989,7 +4007,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A leg is a section of a route from one waypoint to the next. A leg could be of type Vehicle, Pedestrian or Ferry.\nLegs of different types could occur together within a single route. For example, a car employing the use of a Ferry will contain Vehicle legs corresponding to journey on land, and Ferry legs corresponding to the journey via Ferry.</p>"
+                "smithy.api#documentation": "<p>A leg is a section of a route from one waypoint to the next. A leg could be of type\n         Vehicle, Pedestrian or Ferry. Legs of different types could occur together within a single\n         route. For example, a car employing the use of a Ferry will contain Vehicle legs\n         corresponding to journey on land, and Ferry legs corresponding to the journey via\n         Ferry.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteLegAdditionalFeature": {
@@ -4059,7 +4077,7 @@
                 "Polyline": {
                     "target": "com.amazonaws.georoutes#Polyline",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ordered list of positions used to plot a route on a map in a lossy compression format.</p>\n         <note>\n            <p>LineString and Polyline are mutually exclusive properties.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An ordered list of positions used to plot a route on a map in a lossy compression\n         format.</p>\n         <note>\n            <p>LineString and Polyline are mutually exclusive properties.</p>\n         </note>"
                     }
                 }
             },
@@ -4096,6 +4114,10 @@
                     {
                         "name": "TRUCK",
                         "value": "Truck"
+                    },
+                    {
+                        "name": "CAR_SHUTTLE_TRAIN",
+                        "value": "CarShuttleTrain"
                     }
                 ]
             }
@@ -4142,7 +4164,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Important labels including names and route numbers that differentiate the current route from the alternatives presented.</p>"
+                "smithy.api#documentation": "<p>Important labels including names and route numbers that differentiate the current route\n         from the alternatives presented.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteMajorRoadLabelList": {
@@ -4167,20 +4189,20 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint will be snapped to the highway/bridge/tunnel/sliproad.</p>\n         <p>\n            <b>Unit</b>: <code>meters</code>\n         </p>"
+                        "smithy.api#documentation": "<p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint\n         will be snapped to the highway/bridge/tunnel/sliproad.</p>\n         <p>\n            <b>Unit</b>: <code>meters</code>\n         </p>"
                     }
                 },
                 "Radius": {
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Considers all roads within the provided radius to match the provided destination to. The roads that are considered are determined by the provided Strategy.</p>\n         <p>\n            <b>Unit</b>: <code>Meters</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Considers all roads within the provided radius to match the provided destination to. The\n         roads that are considered are determined by the provided Strategy.</p>\n         <p>\n            <b>Unit</b>: <code>Meters</code>\n         </p>"
                     }
                 },
                 "Strategy": {
                     "target": "com.amazonaws.georoutes#MatchingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Strategy that defines matching of the position onto the road network. MatchAny considers all roads possible, whereas MatchMostSignificantRoad matches to the most significant road.</p>"
+                        "smithy.api#documentation": "<p>Strategy that defines matching of the position onto the road network. MatchAny considers\n         all roads possible, whereas MatchMostSignificantRoad matches to the most significant\n         road.</p>"
                     }
                 }
             },
@@ -4200,13 +4222,13 @@
                 "Hot": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allow Hot (High Occupancy Toll) lanes while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Allow Hot (High Occupancy Toll) lanes while calculating the route.</p>\n         <p>Default value: <code>false</code>\n         </p>"
                     }
                 },
                 "Hov": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p>"
+                        "smithy.api#documentation": "<p>Allow Hov (High Occupancy vehicle) lanes while calculating the route.</p>\n         <p>Default value: <code>false</code>\n         </p>"
                     }
                 }
             },
@@ -4350,7 +4372,7 @@
                 "TruckRoadTypes": {
                     "target": "com.amazonaws.georoutes#TruckRoadTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. \n         <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to\n         Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
                     }
                 },
                 "Tunnels": {
@@ -4373,7 +4395,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options related to the route matrix.</p>"
+                "smithy.api#documentation": "<p>Specifies options for areas to avoid when calculating the route. This is a best-effort\n         avoidance setting, meaning the router will try to honor the avoidance preferences but may\n         still include restricted areas if no feasible alternative route exists. If avoidance\n         options are not followed, the response will indicate that the avoidance criteria were\n         violated.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteMatrixAvoidanceZoneCategory": {
@@ -4414,12 +4436,12 @@
                 "Unbounded": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>No restrictions in terms of a routing boundary, and is typically used for longer routes.</p>"
+                        "smithy.api#documentation": "<p>No restrictions in terms of a routing boundary, and is typically used for longer\n         routes.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid.</p>"
+                "smithy.api#documentation": "<p>Boundary within which the matrix is to be calculated. All data, origins and destinations\n         outside the boundary are considered invalid.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteMatrixBoundaryGeometry": {
@@ -4434,7 +4456,7 @@
                 "Circle": {
                     "target": "com.amazonaws.georoutes#Circle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Geometry defined as a circle. When request routing boundary was set as <code>AutoCircle</code>, the response routing boundary will return <code>Circle</code> derived from the <code>AutoCircle</code> settings.</p>"
+                        "smithy.api#documentation": "<p>Geometry defined as a circle. When request routing boundary was set as\n            <code>AutoCircle</code>, the response routing boundary will return <code>Circle</code>\n         derived from the <code>AutoCircle</code> settings.</p>"
                     }
                 },
                 "BoundingBox": {
@@ -4490,7 +4512,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options related to the car.</p>"
+                "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is <code>Car</code>.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteMatrixDestination": {
@@ -4527,7 +4549,7 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>",
+                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in\n         moving vehicles who may not have sufficient time to make an action at an origin or a\n         destination.</p>",
                         "smithy.api#range": {
                             "min": 0
                         }
@@ -4584,7 +4606,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The calculated route matrix containing the results for all pairs of Origins to Destination positions. Each row corresponds to one entry in Origins. Each entry in the row corresponds to the route from that entry in Origins to an entry in Destination positions.</p>"
+                "smithy.api#documentation": "<p>The calculated route matrix containing the results for all pairs of Origins to\n         Destination positions. Each row corresponds to one entry in Origins. Each entry in the row\n         corresponds to the route from that entry in Origins to an entry in Destination\n         positions.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteMatrixErrorCode": {
@@ -4636,13 +4658,13 @@
                 "Countries": {
                     "target": "com.amazonaws.georoutes#CountryCodeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of countries to be avoided defined by two-letter or three-letter country codes.</p>",
+                        "smithy.api#documentation": "<p>List of countries to be avoided defined by two-letter or three-letter country\n         codes.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Exclusion options.</p>"
+                "smithy.api#documentation": "<p>Specifies strict exclusion options for the route calculation. This setting mandates that\n         the router will avoid any routes that include the specified options, rather than merely\n         attempting to minimize them.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteMatrixHazardousCargoType": {
@@ -4721,7 +4743,7 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint will be snapped to the highway/bridge/tunnel/sliproad.</p>\n         <p>\n            <b>Unit</b>: <code>meters</code>\n         </p>",
+                        "smithy.api#documentation": "<p>If the distance to a highway/bridge/tunnel/sliproad is within threshold, the waypoint\n         will be snapped to the highway/bridge/tunnel/sliproad.</p>\n         <p>\n            <b>Unit</b>: <code>meters</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 0
                         }
@@ -4731,13 +4753,13 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Considers all roads within the provided radius to match the provided destination to. The roads that are considered are determined by the provided Strategy.</p>\n         <p>\n            <b>Unit</b>: <code>Meters</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Considers all roads within the provided radius to match the provided destination to. The\n         roads that are considered are determined by the provided Strategy.</p>\n         <p>\n            <b>Unit</b>: <code>Meters</code>\n         </p>"
                     }
                 },
                 "Strategy": {
                     "target": "com.amazonaws.georoutes#MatchingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Strategy that defines matching of the position onto the road network. MatchAny considers all roads possible, whereas MatchMostSignificantRoad matches to the most significant road.</p>"
+                        "smithy.api#documentation": "<p>Strategy that defines matching of the position onto the road network. MatchAny considers\n         all roads possible, whereas MatchMostSignificantRoad matches to the most significant\n         road.</p>"
                     }
                 }
             },
@@ -4779,7 +4801,7 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>",
+                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in\n         moving vehicles who may not have sufficient time to make an action at an origin or a\n         destination.</p>",
                         "smithy.api#range": {
                             "min": 0
                         }
@@ -4847,7 +4869,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is \"Scooter\"</p>"
+                "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is <code>Scooter</code>\n         </p>"
             }
         },
         "com.amazonaws.georoutes#RouteMatrixSideOfStreetOptions": {
@@ -4863,7 +4885,7 @@
                 "UseWith": {
                     "target": "com.amazonaws.georoutes#SideOfStreetMatchingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Strategy that defines when the side of street position should be used. AnyStreet will always use the provided position.</p>\n         <p>Default Value: <code>DividedStreetOnly</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Strategy that defines when the side of street position should be used. AnyStreet will\n         always use the provided position.</p>\n         <p>Default Value: <code>DividedStreetOnly</code>\n         </p>"
                     }
                 }
             },
@@ -4878,7 +4900,7 @@
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Duration for which flow traffic is considered valid. \n      For this period, the flow traffic is used over historical traffic data. \n      Flow traffic refers to congestion, which changes very quickly. \n      Duration in seconds for which flow traffic event would be considered valid. \n      While flow traffic event is valid it will be used over the historical traffic data. </p>"
+                        "smithy.api#documentation": "<p>Duration for which flow traffic is considered valid. For this period, the flow traffic\n         is used over historical traffic data. Flow traffic refers to congestion, which changes very\n         quickly. Duration in seconds for which flow traffic event would be considered valid. While\n         flow traffic event is valid it will be used over the historical traffic data. </p>"
                     }
                 },
                 "Usage": {
@@ -4945,7 +4967,7 @@
                 "Scooter": {
                     "target": "com.amazonaws.georoutes#RouteMatrixScooterOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is \"Scooter\"</p>"
+                        "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is <code>Scooter</code>\n         </p>\n         <note>\n            <p>When travel mode is set to <code>Scooter</code>, then the avoidance option\n               <code>ControlledAccessHighways</code> defaults to <code>true</code>.</p>\n         </note>"
                     }
                 },
                 "Truck": {
@@ -5064,20 +5086,20 @@
                 "TunnelRestrictionCode": {
                     "target": "com.amazonaws.georoutes#TunnelRestrictionCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. \n         They relate to the types of dangerous goods that can be transported through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels\n         in Great Britain. They relate to the types of dangerous goods that can be transported\n         through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "WeightPerAxle": {
                     "target": "com.amazonaws.georoutes#WeightKilograms",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for usage in countries where the differences in axle types or axle groups are not distinguished.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for\n         usage in countries where the differences in axle types or axle groups are not\n         distinguished.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
                     }
                 },
                 "WeightPerAxleGroup": {
                     "target": "com.amazonaws.georoutes#WeightPerAxleGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the total weight for the specified axle group. Meant for usage in countries that have different regulations based on the axle group type.</p>"
+                        "smithy.api#documentation": "<p>Specifies the total weight for the specified axle group. Meant for usage in countries\n         that have different regulations based on the axle group type.</p>"
                     }
                 },
                 "Width": {
@@ -5233,7 +5255,7 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>",
+                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in\n         moving vehicles who may not have sufficient time to make an action at an origin or a\n         destination.</p>",
                         "smithy.api#range": {
                             "max": 2000
                         }
@@ -5320,7 +5342,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>If the waypoint should be treated as a stop. If yes, the route is split up into different legs around the stop.</p>"
+                "smithy.api#documentation": "<p>If the waypoint should be treated as a stop. If yes, the route is split up into\n         different legs around the stop.</p>"
             }
         },
         "com.amazonaws.georoutes#RoutePassThroughWaypointList": {
@@ -5391,14 +5413,14 @@
                 "Notices": {
                     "target": "com.amazonaws.georoutes#RoutePedestrianNoticeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>",
+                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PassThroughWaypoints": {
                     "target": "com.amazonaws.georoutes#RoutePassThroughWaypointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Waypoints that were passed through during the leg. This includes the waypoints that were configured with the PassThrough option.</p>",
+                        "smithy.api#documentation": "<p>Waypoints that were passed through during the leg. This includes the waypoints that were\n         configured with the PassThrough option.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5440,12 +5462,12 @@
                 "Impact": {
                     "target": "com.amazonaws.georoutes#RouteNoticeImpact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>"
+                        "smithy.api#documentation": "<p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High\n         impact notices must be evaluated further to determine the impact.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>"
+                "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>"
             }
         },
         "com.amazonaws.georoutes#RoutePedestrianNoticeCode": {
@@ -5586,14 +5608,14 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Distance of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p>"
+                        "smithy.api#documentation": "<p>Distance of the computed span. This feature doesn't split a span, but is always computed\n         on a span split by other properties.</p>"
                     }
                 },
                 "Duration": {
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Duration of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Duration of the computed span. This feature doesn't split a span, but is always computed\n         on a span split by other properties.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
                     }
                 },
                 "DynamicSpeed": {
@@ -5624,7 +5646,7 @@
                 "Incidents": {
                     "target": "com.amazonaws.georoutes#IndexList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Incidents corresponding to the span. These index into the Incidents in the parent Leg.</p>"
+                        "smithy.api#documentation": "<p>Incidents corresponding to the span. These index into the Incidents in the parent\n         Leg.</p>"
                     }
                 },
                 "Names": {
@@ -5642,7 +5664,7 @@
                 "Region": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>2-3 letter Region code corresponding to the Span. This is either a province or a state.</p>",
+                        "smithy.api#documentation": "<p>2-3 letter Region code corresponding to the Span. This is either a province or a\n         state.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 3
@@ -5691,18 +5713,18 @@
                 "Overview": {
                     "target": "com.amazonaws.georoutes#RoutePedestrianOverviewSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summarized details for the leg including before travel, travel and after travel steps.</p>"
+                        "smithy.api#documentation": "<p>Summarized details for the leg including before travel, travel and after travel\n         steps.</p>"
                     }
                 },
                 "TravelOnly": {
                     "target": "com.amazonaws.georoutes#RoutePedestrianTravelOnlySummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is in meters</p>"
+                        "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel\n         only portion of the journey is in meters</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summarized details for the leg including before travel, travel and after travel steps.</p>"
+                "smithy.api#documentation": "<p>Summarized details for the leg including before travel, travel and after travel\n         steps.</p>"
             }
         },
         "com.amazonaws.georoutes#RoutePedestrianTravelOnlySummary": {
@@ -5805,7 +5827,7 @@
                 "Signpost": {
                     "target": "com.amazonaws.georoutes#RouteSignpost",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sign post information of the action, applicable only for TurnByTurn steps. See RouteSignpost for details of sub-attributes.</p>"
+                        "smithy.api#documentation": "<p>Sign post information of the action, applicable only for TurnByTurn steps. See\n         RouteSignpost for details of sub-attributes.</p>"
                     }
                 },
                 "TurnStepDetails": {
@@ -5930,12 +5952,12 @@
                 "Impact": {
                     "target": "com.amazonaws.georoutes#RouteNoticeImpact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>"
+                        "smithy.api#documentation": "<p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High\n         impact notices must be evaluated further to determine the impact.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>"
+                "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteResponseNoticeCode": {
@@ -6162,7 +6184,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is \"Scooter\"</p>"
+                "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is <code>Scooter</code>\n         </p>"
             }
         },
         "com.amazonaws.georoutes#RouteSideOfStreet": {
@@ -6213,7 +6235,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sign post information of the action, applicable only for TurnByTurn steps. See RouteSignpost for details of sub-attributes.</p>"
+                "smithy.api#documentation": "<p>Sign post information of the action, applicable only for TurnByTurn steps. See\n         RouteSignpost for details of sub-attributes.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteSignpostLabel": {
@@ -6688,7 +6710,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is the same as the Distance within the Overview summary.</p>"
+                "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel\n         only portion of the journey is the same as the Distance within the Overview summary.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteToll": {
@@ -6723,7 +6745,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides details about toll information along a route, including the payment sites, applicable toll rates, toll systems, and the country associated with the toll collection.</p>"
+                "smithy.api#documentation": "<p>Provides details about toll information along a route, including the payment sites,\n         applicable toll rates, toll systems, and the country associated with the toll\n         collection.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteTollList": {
@@ -6744,19 +6766,19 @@
                 "AllVignettes": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies if the user has valid vignettes with access for all toll roads. If a user has a vignette for a toll road, then toll cost for that road is omitted since no further payment is necessary.</p>"
+                        "smithy.api#documentation": "<p>Specifies if the user has valid vignettes with access for all toll roads. If a user has\n         a vignette for a toll road, then toll cost for that road is omitted since no further\n         payment is necessary.</p>"
                     }
                 },
                 "Currency": {
                     "target": "com.amazonaws.georoutes#CurrencyCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Currency code corresponding to the price. This is the same as Currency specified in the request.</p>"
+                        "smithy.api#documentation": "<p>Currency code corresponding to the price. This is the same as Currency specified in the\n         request.</p>"
                     }
                 },
                 "EmissionType": {
                     "target": "com.amazonaws.georoutes#RouteEmissionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Emission type of the vehicle for toll cost calculation.</p>\n         <p>\n            <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Emission type of the vehicle for toll cost calculation.</p>\n         <p>\n            <b>Valid values</b>: <code>Euro1, Euro2, Euro3, Euro4, Euro5,\n            Euro6, EuroEev</code>\n         </p>"
                     }
                 },
                 "VehicleCategory": {
@@ -6949,7 +6971,7 @@
                 "Currency": {
                     "target": "com.amazonaws.georoutes#CurrencyCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Currency code corresponding to the price. This is the same as Currency specified in the request.</p>",
+                        "smithy.api#documentation": "<p>Currency code corresponding to the price. This is the same as Currency specified in the\n         request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6970,7 +6992,7 @@
                 "Range": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the price is a range or an exact value. If any of the toll fares making up the route is a range, the overall price is also a range.</p>",
+                        "smithy.api#documentation": "<p>If the price is a range or an exact value. If any of the toll fares making up the route\n         is a range, the overall price is also a range.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7001,7 +7023,7 @@
                 "Currency": {
                     "target": "com.amazonaws.georoutes#CurrencyCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Currency code corresponding to the price. This is the same as Currency specified in the request.</p>",
+                        "smithy.api#documentation": "<p>Currency code corresponding to the price. This is the same as Currency specified in the\n         request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7015,7 +7037,7 @@
                 "Range": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the price is a range or an exact value. If any of the toll fares making up the route is a range, the overall price is also a range.</p>",
+                        "smithy.api#documentation": "<p>If the price is a range or an exact value. If any of the toll fares making up the route\n         is a range, the overall price is also a range.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7187,7 +7209,7 @@
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Duration for which flow \n      traffic is considered valid. \n      For this period, the flow traffic is used over historical traffic data. \n      Flow traffic refers to congestion, which changes very quickly. \n      Duration in seconds for which flow traffic event would be considered valid. \n      While flow traffic event is valid it will be used over the historical traffic data. </p>"
+                        "smithy.api#documentation": "<p>Duration for which flow traffic is considered valid. For this period, the flow traffic\n         is used over historical traffic data. Flow traffic refers to congestion, which changes very\n         quickly. Duration in seconds for which flow traffic event would be considered valid. While\n         flow traffic event is valid it will be used over the historical traffic data. </p>"
                     }
                 },
                 "Usage": {
@@ -7291,7 +7313,7 @@
                 "Scooter": {
                     "target": "com.amazonaws.georoutes#RouteScooterOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is \"Scooter\"</p>"
+                        "smithy.api#documentation": "<p>Travel mode options when the provided travel mode is <code>Scooter</code>\n         </p>\n         <note>\n            <p>When travel mode is set to <code>Scooter</code>, then the avoidance option\n               <code>ControlledAccessHighways</code> defaults to <code>true</code>.</p>\n         </note>"
                     }
                 },
                 "Truck": {
@@ -7453,7 +7475,7 @@
                 "TunnelRestrictionCode": {
                     "target": "com.amazonaws.georoutes#TunnelRestrictionCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. \n         They relate to the types of dangerous goods that can be transported through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels\n         in Great Britain. They relate to the types of dangerous goods that can be transported\n         through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#length": {
                             "max": 20
                         }
@@ -7463,13 +7485,13 @@
                     "target": "com.amazonaws.georoutes#WeightKilograms",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for usage in countries where the differences in axle types or axle groups are not distinguished.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for\n         usage in countries where the differences in axle types or axle groups are not\n         distinguished.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
                     }
                 },
                 "WeightPerAxleGroup": {
                     "target": "com.amazonaws.georoutes#WeightPerAxleGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the total weight for the specified axle group. Meant for usage in countries that have different regulations based on the axle group type.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the total weight for the specified axle group. Meant for usage in countries\n         that have different regulations based on the axle group type.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
                     }
                 },
                 "Width": {
@@ -7654,7 +7676,7 @@
                 "Severity": {
                     "target": "com.amazonaws.georoutes#RouteVehicleIncidentSeverity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Severity of the incident\nCritical - The part of the route the incident affects is unusable.\nMajor- Major impact on the leg duration, for example stop and go\nMinor- Minor impact on the leg duration, for example traffic jam\nLow - Low on duration, for example slightly increased traffic</p>"
+                        "smithy.api#documentation": "<p>Severity of the incident Critical - The part of the route the incident affects is\n         unusable. Major- Major impact on the leg duration, for example stop and go Minor- Minor\n         impact on the leg duration, for example traffic jam Low - Low on duration, for example\n         slightly increased traffic</p>"
                     }
                 },
                 "StartTime": {
@@ -7781,14 +7803,14 @@
                 "Notices": {
                     "target": "com.amazonaws.georoutes#RouteVehicleNoticeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>",
+                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PassThroughWaypoints": {
                     "target": "com.amazonaws.georoutes#RoutePassThroughWaypointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Waypoints that were passed through during the leg. This includes the waypoints that were configured with the PassThrough option.</p>",
+                        "smithy.api#documentation": "<p>Waypoints that were passed through during the leg. This includes the waypoints that were\n         configured with the PassThrough option.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7829,7 +7851,7 @@
                 "TruckRoadTypes": {
                     "target": "com.amazonaws.georoutes#TruckRoadTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. \n         <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to\n         Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7883,12 +7905,12 @@
                 "Impact": {
                     "target": "com.amazonaws.georoutes#RouteNoticeImpact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High impact notices must be evaluated further to determine the impact.</p>"
+                        "smithy.api#documentation": "<p>Impact corresponding to the issue. While Low impact notices can be safely ignored, High\n         impact notices must be evaluated further to determine the impact.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>"
+                "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteVehicleNoticeCode": {
@@ -8045,7 +8067,7 @@
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Total duration in free flowing traffic, which is the best case or shortest duration possible to cover the leg.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Total duration in free flowing traffic, which is the best case or shortest duration\n         possible to cover the leg.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
                     }
                 },
                 "Distance": {
@@ -8144,14 +8166,14 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Distance of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p>"
+                        "smithy.api#documentation": "<p>Distance of the computed span. This feature doesn't split a span, but is always computed\n         on a span split by other properties.</p>"
                     }
                 },
                 "Duration": {
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Duration of the computed span. This feature doesn't split a span, but is always computed on a span split by other properties.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Duration of the computed span. This feature doesn't split a span, but is always computed\n         on a span split by other properties.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
                     }
                 },
                 "DynamicSpeed": {
@@ -8173,7 +8195,7 @@
                 "Gate": {
                     "target": "com.amazonaws.georoutes#RouteSpanGateAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Attributes corresponding to a gate. The gate is present at the end of the returned span.</p>"
+                        "smithy.api#documentation": "<p>Attributes corresponding to a gate. The gate is present at the end of the returned\n         span.</p>"
                     }
                 },
                 "GeometryOffset": {
@@ -8188,7 +8210,7 @@
                 "Incidents": {
                     "target": "com.amazonaws.georoutes#IndexList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Incidents corresponding to the span. These index into the Incidents in the parent Leg.</p>"
+                        "smithy.api#documentation": "<p>Incidents corresponding to the span. These index into the Incidents in the parent\n         Leg.</p>"
                     }
                 },
                 "Names": {
@@ -8200,19 +8222,19 @@
                 "Notices": {
                     "target": "com.amazonaws.georoutes#IndexList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>"
+                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>"
                     }
                 },
                 "RailwayCrossing": {
                     "target": "com.amazonaws.georoutes#RouteSpanRailwayCrossingAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Attributes corresponding to a railway crossing. The gate is present at the end of the returned span.</p>"
+                        "smithy.api#documentation": "<p>Attributes corresponding to a railway crossing. The gate is present at the end of the\n         returned span.</p>"
                     }
                 },
                 "Region": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>2-3 letter Region code corresponding to the Span. This is either a province or a state.</p>",
+                        "smithy.api#documentation": "<p>2-3 letter Region code corresponding to the Span. This is either a province or a\n         state.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 3
@@ -8258,7 +8280,7 @@
                 "TruckRoadTypes": {
                     "target": "com.amazonaws.georoutes#IndexList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. \n         <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to\n         Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
                     }
                 },
                 "TypicalDuration": {
@@ -8291,13 +8313,13 @@
                 "Overview": {
                     "target": "com.amazonaws.georoutes#RouteVehicleOverviewSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summarized details for the leg including before travel, travel and after travel steps.</p>"
+                        "smithy.api#documentation": "<p>Summarized details for the leg including before travel, travel and after travel\n         steps.</p>"
                     }
                 },
                 "TravelOnly": {
                     "target": "com.amazonaws.georoutes#RouteVehicleTravelOnlySummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel only portion of the journey is in meters</p>"
+                        "smithy.api#documentation": "<p>Summarized details for the leg including travel steps only. The Distance for the travel\n         only portion of the journey is in meters</p>"
                     }
                 }
             },
@@ -8312,7 +8334,7 @@
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Total duration in free flowing traffic, which is the best case or shortest duration possible to cover the leg.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Total duration in free flowing traffic, which is the best case or shortest duration\n         possible to cover the leg.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
                     }
                 },
                 "Duration": {
@@ -8443,7 +8465,7 @@
                 "Signpost": {
                     "target": "com.amazonaws.georoutes#RouteSignpost",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sign post information of the action, applicable only for TurnByTurn steps. See RouteSignpost for details of sub-attributes.</p>"
+                        "smithy.api#documentation": "<p>Sign post information of the action, applicable only for TurnByTurn steps. See\n         RouteSignpost for details of sub-attributes.</p>"
                     }
                 },
                 "TurnStepDetails": {
@@ -8541,7 +8563,7 @@
                 "AllHazardsRestricted": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This restriction applies to truck cargo, where the resulting route excludes roads on which hazardous materials are prohibited from being transported.</p>"
+                        "smithy.api#documentation": "<p>This restriction applies to truck cargo, where the resulting route excludes roads on\n         which hazardous materials are prohibited from being transported.</p>"
                     }
                 },
                 "AxleCount": {
@@ -8644,7 +8666,7 @@
                 "TruckRoadType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to Sweden. \n         <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Truck road type identifiers. <code>BK1</code> through <code>BK4</code> apply only to\n         Sweden. <code>A2,A4,B2,B4,C,D,ET2,ET4</code> apply only to Mexico.</p>\n         <note>\n            <p>There are currently no other supported values as of 26th April 2024.</p>\n         </note>"
                     }
                 },
                 "TruckType": {
@@ -8656,12 +8678,12 @@
                 "TunnelRestrictionCode": {
                     "target": "com.amazonaws.georoutes#TunnelRestrictionCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. \n         They relate to the types of dangerous goods that can be transported through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels\n         in Great Britain. They relate to the types of dangerous goods that can be transported\n         through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This property contains a \n      summary of violated constraints.</p>"
+                "smithy.api#documentation": "<p>This property contains a summary of violated constraints.</p>"
             }
         },
         "com.amazonaws.georoutes#RouteWaypoint": {
@@ -8671,7 +8693,7 @@
                     "target": "com.amazonaws.georoutes#DistanceMeters",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in moving vehicles who may not have sufficient time to make an action at an origin or a destination.</p>",
+                        "smithy.api#documentation": "<p>Avoids actions for the provided distance. This is typically to consider for users in\n         moving vehicles who may not have sufficient time to make an action at an origin or a\n         destination.</p>",
                         "smithy.api#range": {
                             "max": 2000
                         }
@@ -8699,7 +8721,7 @@
                 "PassThrough": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the waypoint should not be treated as a stop. If yes, the waypoint is passed through and doesn't split the route into different legs.</p>"
+                        "smithy.api#documentation": "<p>If the waypoint should not be treated as a stop. If yes, the waypoint is passed through\n         and doesn't split the route into different legs.</p>"
                     }
                 },
                 "Position": {
@@ -8889,7 +8911,7 @@
                         "content-type"
                     ]
                 },
-                "smithy.api#documentation": "<p>With the Amazon Location Routes API you can calculate\n       routes and estimate travel time based on up-to-date road network and live \n       traffic information.</p>\n         <p>Calculate optimal travel routes and estimate travel times using up-to-date road network and traffic data. Key features include:</p>\n         <ul>\n            <li>\n               <p>Point-to-point routing with estimated travel time, distance, and turn-by-turn directions</p>\n            </li>\n            <li>\n               <p>Multi-point route optimization to minimize travel time or distance</p>\n            </li>\n            <li>\n               <p>Route matrices for efficient multi-destination planning</p>\n            </li>\n            <li>\n               <p>Isoline calculations to determine reachable areas within specified time or distance thresholds</p>\n            </li>\n            <li>\n               <p>Map-matching to align GPS traces with the road network</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>With the Amazon Location Routes API you can calculate routes and estimate travel time\n         based on up-to-date road network and live traffic information.</p>\n         <p>Calculate optimal travel routes and estimate travel times using up-to-date road network\n         and traffic data. Key features include:</p>\n         <ul>\n            <li>\n               <p>Point-to-point routing with estimated travel time, distance, and turn-by-turn\n               directions</p>\n            </li>\n            <li>\n               <p>Multi-point route optimization to minimize travel time or distance</p>\n            </li>\n            <li>\n               <p>Route matrices for efficient multi-destination planning</p>\n            </li>\n            <li>\n               <p>Isoline calculations to determine reachable areas within specified time or\n               distance thresholds</p>\n            </li>\n            <li>\n               <p>Map-matching to align GPS traces with the road network</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Location Service Routes V2",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -10033,7 +10055,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>The SnapToRoads action matches GPS trace to roads most likely traveled on.</p>",
+                "smithy.api#documentation": "<p>\n            <code>SnapToRoads</code> matches GPS trace to roads most likely traveled on.</p>",
                 "smithy.api#http": {
                     "uri": "/snap-to-roads",
                     "method": "POST"
@@ -10110,7 +10132,7 @@
                 "TravelMode": {
                     "target": "com.amazonaws.georoutes#RoadSnapTravelMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. \n      Used in estimating the speed of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. Used in estimating the speed\n         of travel and road compatibility.</p>\n         <p>Default Value: <code>Car</code>\n         </p>"
                     }
                 },
                 "TravelModeOptions": {
@@ -10130,7 +10152,7 @@
                 "Notices": {
                     "target": "com.amazonaws.georoutes#RoadSnapNoticeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during route calculation.</p>",
+                        "smithy.api#documentation": "<p>Notices are additional information returned that indicate issues that occurred during\n         route calculation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10334,7 +10356,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the Amazon Location service.</p>"
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the Amazon Location\n         service.</p>"
             }
         },
         "com.amazonaws.georoutes#ValidationExceptionFieldList": {
@@ -10530,7 +10552,43 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options for WaypointOptimizationAvoidance.</p>"
+                "smithy.api#documentation": "<p>Specifies options for areas to avoid. This is a best-effort avoidance setting, meaning\n         the router will try to honor the avoidance preferences but may still include restricted\n         areas if no feasible alternative route exists. If avoidance options are not followed, the\n         response will indicate that the avoidance criteria were violated.</p>"
+            }
+        },
+        "com.amazonaws.georoutes#WaypointOptimizationClusteringAlgorithm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "DRIVING_DISTANCE",
+                        "value": "DrivingDistance"
+                    },
+                    {
+                        "name": "TOPOLOGY_SEGMENT",
+                        "value": "TopologySegment"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.georoutes#WaypointOptimizationClusteringOptions": {
+            "type": "structure",
+            "members": {
+                "Algorithm": {
+                    "target": "com.amazonaws.georoutes#WaypointOptimizationClusteringAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm to be used. <code>DrivingDistance</code> assigns all the waypoints that\n         are within driving distance of each other into a single cluster.\n            <code>TopologySegment</code> assigns all the waypoints that are within the same topology\n         segment into a single cluster. A Topology segment is a linear stretch of road between two\n         junctions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DrivingDistanceOptions": {
+                    "target": "com.amazonaws.georoutes#WaypointOptimizationDrivingDistanceOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Driving distance options to be used when the clustering algorithm is\n         DrivingDistance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options for WaypointOptimizationClustering.</p>"
             }
         },
         "com.amazonaws.georoutes#WaypointOptimizationConnection": {
@@ -10584,7 +10642,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This contains information such as distance and duration from one waypoint to the next waypoint in the sequence.</p>"
+                "smithy.api#documentation": "<p>This contains information such as distance and duration from one waypoint to the next\n         waypoint in the sequence.</p>"
             }
         },
         "com.amazonaws.georoutes#WaypointOptimizationConnectionList": {
@@ -10656,7 +10714,7 @@
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Service time spent at the destination. At an appointment, the service time should be the appointment duration.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Service time spent at the destination. At an appointment, the service time should be the\n         appointment duration.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
                     }
                 },
                 "SideOfStreet": {
@@ -10676,7 +10734,7 @@
                 "RestCycles": {
                     "target": "com.amazonaws.georoutes#WaypointOptimizationRestCycles",
                     "traits": {
-                        "smithy.api#documentation": "<p>Driver work-rest schedules defined by a short and long cycle. A rest needs to be taken after the short work duration. The short cycle can be repeated until you hit the long work duration, at which point the long rest duration should be taken before restarting.</p>"
+                        "smithy.api#documentation": "<p>Driver work-rest schedules defined by a short and long cycle. A rest needs to be taken\n         after the short work duration. The short cycle can be repeated until you hit the long work\n         duration, at which point the long rest duration should be taken before restarting.</p>"
                     }
                 },
                 "RestProfile": {
@@ -10688,12 +10746,28 @@
                 "TreatServiceTimeAs": {
                     "target": "com.amazonaws.georoutes#WaypointOptimizationServiceTimeTreatment",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the service time provided at a waypoint/destination should be considered as rest or work. This contributes to the total time breakdown returned within the response.</p>"
+                        "smithy.api#documentation": "<p>If the service time provided at a waypoint/destination should be considered as rest or\n         work. This contributes to the total time breakdown returned within the response.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Driver related options.</p>"
+            }
+        },
+        "com.amazonaws.georoutes#WaypointOptimizationDrivingDistanceOptions": {
+            "type": "structure",
+            "members": {
+                "DrivingDistance": {
+                    "target": "com.amazonaws.georoutes#DistanceMeters",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>DrivingDistance assigns all the waypoints that are within driving distance of each other\n         into a single cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Driving distance related options.</p>"
             }
         },
         "com.amazonaws.georoutes#WaypointOptimizationExclusionOptions": {
@@ -10702,13 +10776,13 @@
                 "Countries": {
                     "target": "com.amazonaws.georoutes#CountryCodeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of countries to be avoided defined by two-letter or three-letter country codes.</p>",
+                        "smithy.api#documentation": "<p>List of countries to be avoided defined by two-letter or three-letter country\n         codes.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Exclusion options.</p>"
+                "smithy.api#documentation": "<p>Specifies strict exclusion options for the route calculation. This setting mandates that\n         the router will avoid any routes that include the specified options, rather than merely\n         attempting to minimize them.</p>"
             }
         },
         "com.amazonaws.georoutes#WaypointOptimizationFailedConstraint": {
@@ -10841,6 +10915,12 @@
                         "smithy.api#documentation": "<p>Estimated time of arrival at the destination.</p>\n         <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code>\n         </p>\n         <p>Examples:</p>\n         <p>\n            <code>2020-04-22T17:57:24Z</code>\n         </p>\n         <p>\n            <code>2020-04-22T17:57:24+02:00</code>\n         </p>"
                     }
                 },
+                "ClusterIndex": {
+                    "target": "com.amazonaws.georoutes#ClusterIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Index of the cluster the waypoint is associated with. The index is included in the response only if clustering was performed while processing the request.</p>"
+                    }
+                },
                 "DepartureTime": {
                     "target": "com.amazonaws.georoutes#TimestampWithTimezoneOffset",
                     "traits": {
@@ -10884,7 +10964,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options related to the origin.</p>"
+                "smithy.api#documentation": "<p>Origin related options.</p>"
             }
         },
         "com.amazonaws.georoutes#WaypointOptimizationPedestrianOptions": {
@@ -10927,7 +11007,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Driver work-rest schedules defined by a short and long cycle. A rest needs to be taken after the short work duration. The short cycle can be repeated until you hit the long work duration, at which point the long rest duration should be taken before restarting.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
+                "smithy.api#documentation": "<p>Driver work-rest schedules defined by a short and long cycle. A rest needs to be taken\n         after the short work duration. The short cycle can be repeated until you hit the long work\n         duration, at which point the long rest duration should be taken before restarting.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
             }
         },
         "com.amazonaws.georoutes#WaypointOptimizationRestCycles": {
@@ -11014,7 +11094,7 @@
                 "UseWith": {
                     "target": "com.amazonaws.georoutes#SideOfStreetMatchingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Strategy that defines when the side of street position should be used. AnyStreet will always use the provided position.</p>\n         <p>Default Value: <code>DividedStreetOnly</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Strategy that defines when the side of street position should be used. AnyStreet will\n         always use the provided position.</p>\n         <p>Default Value: <code>DividedStreetOnly</code>\n         </p>"
                     }
                 }
             },
@@ -11037,7 +11117,7 @@
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Service time spent at the destination. At an appointment, the service time should be the appointment duration.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Service time spent at the destination. At an appointment, the service time should be the\n         appointment duration.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11190,14 +11270,14 @@
                 "TunnelRestrictionCode": {
                     "target": "com.amazonaws.georoutes#TunnelRestrictionCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels in Great Britain. \n         They relate to the types of dangerous goods that can be transported through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The tunnel restriction code.</p>\n         <p>Tunnel categories in this list indicate the restrictions which apply to certain tunnels\n         in Great Britain. They relate to the types of dangerous goods that can be transported\n         through them.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Tunnel Category B</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Limited risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Few restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category C</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Medium risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Some restrictions</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category D</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: High risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Many restrictions occur</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Tunnel Category E</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Risk Level</i>: Very high risk</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Restrictions</i>: Restricted tunnel</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "WeightPerAxle": {
                     "target": "com.amazonaws.georoutes#WeightKilograms",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for usage in countries where the differences in axle types or axle groups are not distinguished.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Heaviest weight per axle irrespective of the axle type or the axle group. Meant for\n         usage in countries where the differences in axle types or axle groups are not\n         distinguished.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
                     }
                 },
                 "Width": {
@@ -11276,7 +11356,7 @@
                     "target": "com.amazonaws.georoutes#DurationSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Service time spent at the waypoint. At an appointment, the service time should be the appointment duration.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Service time spent at the waypoint. At an appointment, the service time should be the\n         appointment duration.</p>\n         <p>\n            <b>Unit</b>: <code>seconds</code>\n         </p>"
                     }
                 },
                 "SideOfStreet": {
@@ -11346,7 +11426,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the total weight for the specified axle group. Meant for usage in countries that have different regulations based on the axle group type.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
+                "smithy.api#documentation": "<p>Specifies the total weight for the specified axle group. Meant for usage in countries\n         that have different regulations based on the axle group type.</p>\n         <p>\n            <b>Unit</b>: <code>Kilograms</code>\n         </p>"
             }
         }
     }

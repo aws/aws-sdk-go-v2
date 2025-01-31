@@ -1567,7 +1567,23 @@
                 "citation": {
                     "target": "com.amazonaws.bedrockagentruntime#Citation",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "2024-12-17",
+                            "message": "Citation is deprecated. Please use GeneratedResponsePart and RetrievedReferences for citation event."
+                        },
                         "smithy.api#documentation": "<p>The citation.</p>"
+                    }
+                },
+                "generatedResponsePart": {
+                    "target": "com.amazonaws.bedrockagentruntime#GeneratedResponsePart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated response to the citation event.</p>"
+                    }
+                },
+                "retrievedReferences": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievedReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retrieved references of the citation event.</p>"
                     }
                 }
             },
