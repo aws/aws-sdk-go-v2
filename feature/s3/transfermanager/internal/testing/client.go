@@ -203,6 +203,7 @@ func (c *TransferManagerLoggingClient) AbortMultipartUpload(ctx context.Context,
 	return &s3.AbortMultipartUploadOutput{}, nil
 }
 
+// GetObject is the S3 GetObject API.
 func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 	c.m.Lock()
 	defer c.m.Unlock()
@@ -232,6 +233,7 @@ func NewUploadLoggingClient(ignoredOps []string) (*TransferManagerLoggingClient,
 	return c, &c.UploadInvocations, &c.Params
 }
 
+// NewDownloadClient returns a new TransferManagerLoggingClient for download testing
 func NewDownloadClient() (*TransferManagerLoggingClient, *int, *[]int32, *[]string) {
 	c := &TransferManagerLoggingClient{}
 
@@ -247,6 +249,7 @@ func parseRange(rangeValue string) (start, fin int64) {
 	return start, fin
 }
 
+// RangeGetObjectFn mocks getobject behavior of s3 client to return object in ranges
 var RangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	start, fin := parseRange(aws.ToString(params.Range))
 	fin++
@@ -264,6 +267,7 @@ var RangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjec
 	}, nil
 }
 
+// ErrRangeGetObjectFn mocks getobject behavior of s3 client to return service error when certain number of range get is called from s3 client
 var ErrRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	out, err := RangeGetObjectFn(c, params)
 	c.index++
@@ -273,6 +277,7 @@ var ErrRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetOb
 	return out, err
 }
 
+// NonRangeGetObjectFn mocks getobject behavior of s3 client to return the whole object
 var NonRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	return &s3.GetObjectOutput{
 		Body:          ioutil.NopCloser(bytes.NewReader(c.Data[:])),
@@ -280,6 +285,7 @@ var NonRangeGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetOb
 	}, nil
 }
 
+// ErrReaderFn mocks getobject behavior of s3 client to return object parts triggering different readerror
 var ErrReaderFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	r := c.ErrReaders[c.index]
 	out := &s3.GetObjectOutput{
@@ -292,6 +298,7 @@ var ErrReaderFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInpu
 	return out, nil
 }
 
+// PartGetObjectFn mocks getobject behavior of s3 client to return object parts and total parts count
 var PartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	return &s3.GetObjectOutput{
 		Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
@@ -300,6 +307,7 @@ var PartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObject
 	}, nil
 }
 
+// ErrPartGetObjectFn mocks getobject behavior of s3 client to return service error when certain number of part get is called from s3 client
 var ErrPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	out, err := PartGetObjectFn(c, params)
 	c.index++
@@ -309,6 +317,7 @@ var ErrPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObj
 	return out, err
 }
 
+// TestErrReader mocks response's object body triggering specified error when read
 type TestErrReader struct {
 	Buf []byte
 	Err error
@@ -317,6 +326,7 @@ type TestErrReader struct {
 	off int
 }
 
+// Read implements io.Reader.Read()
 func (r *TestErrReader) Read(p []byte) (int, error) {
 	to := len(r.Buf) - r.off
 
