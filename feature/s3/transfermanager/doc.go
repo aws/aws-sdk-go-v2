@@ -19,7 +19,7 @@
 // Package transfermanager implements a high-level S3 client with support for the
 // following:
 //   - [Client.PutObject] - enhanced object write support w/ automatic
-//     multipard upload for large objects
+//     multipart upload for large objects
 //
 // The package also exposes several opt-in hooks that configure an
 // http.Transport that may convey performance/reliability enhancements in
