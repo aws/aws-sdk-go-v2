@@ -1,0 +1,8 @@
+{
+    "id": "e6cd28a9-d305-4a35-b446-c18f16e52570",
+    "type": "feature",
+    "description": "This release introduces a new valid value in InstanceType parameter: p5en.48xlarge, in ProductionVariant.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

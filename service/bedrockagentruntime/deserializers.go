@@ -9133,6 +9133,16 @@ func awsRestjson1_deserializeDocumentCitationEvent(v **types.CitationEvent, valu
 				return err
 			}
 
+		case "generatedResponsePart":
+			if err := awsRestjson1_deserializeDocumentGeneratedResponsePart(&sv.GeneratedResponsePart, value); err != nil {
+				return err
+			}
+
+		case "retrievedReferences":
+			if err := awsRestjson1_deserializeDocumentRetrievedReferences(&sv.RetrievedReferences, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

@@ -1,0 +1,8 @@
+{
+    "id": "8f2c372d-97bb-48dd-9bd8-255add86f344",
+    "type": "feature",
+    "description": "Added support for CodeBuild self-hosted Buildkite runner builds",
+    "modules": [
+        "service/codebuild"
+    ]
+}

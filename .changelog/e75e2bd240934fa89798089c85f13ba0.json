@@ -1,0 +1,8 @@
+{
+    "id": "e75e2bd2-4093-4fa8-9798-089c85f13ba0",
+    "type": "feature",
+    "description": "This change is to deprecate the existing citation field under RetrieveAndGenerateStream API response in lieu of GeneratedResponsePart and RetrievedReferences",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

@@ -989,6 +989,26 @@ func validateWaypointOptimizationAvoidanceOptions(v *types.WaypointOptimizationA
 	}
 }
 
+func validateWaypointOptimizationClusteringOptions(v *types.WaypointOptimizationClusteringOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WaypointOptimizationClusteringOptions"}
+	if len(v.Algorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Algorithm"))
+	}
+	if v.DrivingDistanceOptions != nil {
+		if err := validateWaypointOptimizationDrivingDistanceOptions(v.DrivingDistanceOptions); err != nil {
+			invalidParams.AddNested("DrivingDistanceOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWaypointOptimizationDestinationOptions(v *types.WaypointOptimizationDestinationOptions) error {
 	if v == nil {
 		return nil
@@ -1026,6 +1046,18 @@ func validateWaypointOptimizationDriverOptions(v *types.WaypointOptimizationDriv
 			invalidParams.AddNested("RestProfile", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWaypointOptimizationDrivingDistanceOptions(v *types.WaypointOptimizationDrivingDistanceOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WaypointOptimizationDrivingDistanceOptions"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1292,6 +1324,11 @@ func validateOpOptimizeWaypointsInput(v *OptimizeWaypointsInput) error {
 	if v.Avoid != nil {
 		if err := validateWaypointOptimizationAvoidanceOptions(v.Avoid); err != nil {
 			invalidParams.AddNested("Avoid", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Clustering != nil {
+		if err := validateWaypointOptimizationClusteringOptions(v.Clustering); err != nil {
+			invalidParams.AddNested("Clustering", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DestinationOptions != nil {

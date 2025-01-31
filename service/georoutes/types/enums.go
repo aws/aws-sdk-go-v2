@@ -411,6 +411,7 @@ const (
 	RouteFerryNoticeCodeOther                       RouteFerryNoticeCode = "Other"
 	RouteFerryNoticeCodeViolatedAvoidFerry          RouteFerryNoticeCode = "ViolatedAvoidFerry"
 	RouteFerryNoticeCodeViolatedAvoidRailFerry      RouteFerryNoticeCode = "ViolatedAvoidRailFerry"
+	RouteFerryNoticeCodeSeasonalClosure             RouteFerryNoticeCode = "SeasonalClosure"
 )
 
 // Values returns all known values for RouteFerryNoticeCode. Note that this can be
@@ -424,6 +425,7 @@ func (RouteFerryNoticeCode) Values() []RouteFerryNoticeCode {
 		"Other",
 		"ViolatedAvoidFerry",
 		"ViolatedAvoidRailFerry",
+		"SeasonalClosure",
 	}
 }
 
@@ -522,11 +524,12 @@ type RouteLegTravelMode string
 
 // Enum values for RouteLegTravelMode
 const (
-	RouteLegTravelModeCar        RouteLegTravelMode = "Car"
-	RouteLegTravelModeFerry      RouteLegTravelMode = "Ferry"
-	RouteLegTravelModePedestrian RouteLegTravelMode = "Pedestrian"
-	RouteLegTravelModeScooter    RouteLegTravelMode = "Scooter"
-	RouteLegTravelModeTruck      RouteLegTravelMode = "Truck"
+	RouteLegTravelModeCar             RouteLegTravelMode = "Car"
+	RouteLegTravelModeFerry           RouteLegTravelMode = "Ferry"
+	RouteLegTravelModePedestrian      RouteLegTravelMode = "Pedestrian"
+	RouteLegTravelModeScooter         RouteLegTravelMode = "Scooter"
+	RouteLegTravelModeTruck           RouteLegTravelMode = "Truck"
+	RouteLegTravelModeCarShuttleTrain RouteLegTravelMode = "CarShuttleTrain"
 )
 
 // Values returns all known values for RouteLegTravelMode. Note that this can be
@@ -540,6 +543,7 @@ func (RouteLegTravelMode) Values() []RouteLegTravelMode {
 		"Pedestrian",
 		"Scooter",
 		"Truck",
+		"CarShuttleTrain",
 	}
 }
 
@@ -1561,6 +1565,26 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"FieldValidationFailed",
 		"Other",
 		"UnknownField",
+	}
+}
+
+type WaypointOptimizationClusteringAlgorithm string
+
+// Enum values for WaypointOptimizationClusteringAlgorithm
+const (
+	WaypointOptimizationClusteringAlgorithmDrivingDistance WaypointOptimizationClusteringAlgorithm = "DrivingDistance"
+	WaypointOptimizationClusteringAlgorithmTopologySegment WaypointOptimizationClusteringAlgorithm = "TopologySegment"
+)
+
+// Values returns all known values for WaypointOptimizationClusteringAlgorithm.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WaypointOptimizationClusteringAlgorithm) Values() []WaypointOptimizationClusteringAlgorithm {
+	return []WaypointOptimizationClusteringAlgorithm{
+		"DrivingDistance",
+		"TopologySegment",
 	}
 }
 

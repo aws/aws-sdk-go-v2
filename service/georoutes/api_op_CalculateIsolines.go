@@ -33,10 +33,16 @@ type CalculateIsolinesInput struct {
 	// Threshold to be used for the isoline calculation. Up to 3 thresholds per
 	// provided type can be requested.
 	//
+	// You incur a calculation charge for each threshold. Using a large amount of
+	// thresholds in a request can lead you to incur unexpected charges. See [Amazon Location's pricing page]for more
+	// information.
+	//
+	// [Amazon Location's pricing page]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
+	//
 	// This member is required.
 	Thresholds *types.IsolineThresholds
 
-	// Features that are allowed while calculating. a route
+	// Features that are allowed while calculating an isoline.
 	Allow *types.IsolineAllowOptions
 
 	// Time of arrival at the destination.
@@ -82,7 +88,7 @@ type CalculateIsolinesInput struct {
 	// Default Value: FlexiblePolyline
 	IsolineGeometryFormat types.GeometryFormat
 
-	// Defines the granularity of the returned Isoline
+	// Defines the granularity of the returned Isoline.
 	IsolineGranularity *types.IsolineGranularityOptions
 
 	// Optional: The API key to be used for authorization. Either an API key or valid

@@ -259,9 +259,9 @@ type CreateDBClusterInput struct {
 	//
 	// The following values are valid for each DB engine:
 	//
-	//   - Aurora MySQL - audit | error | general | slowquery
+	//   - Aurora MySQL - audit | error | general | instance | slowquery
 	//
-	//   - Aurora PostgreSQL - postgresql
+	//   - Aurora PostgreSQL - instance | postgresql
 	//
 	//   - RDS for MySQL - error | general | slowquery
 	//

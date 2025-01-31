@@ -1,0 +1,8 @@
+{
+    "id": "e828a078-fae0-49cd-992d-4eb56bf10533",
+    "type": "documentation",
+    "description": "Updates to Aurora MySQL and Aurora PostgreSQL API pages with instance log type in the create and modify DB Cluster.",
+    "modules": [
+        "service/rds"
+    ]
+}
