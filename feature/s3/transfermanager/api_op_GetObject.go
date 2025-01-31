@@ -237,7 +237,7 @@ type GetObjectInput struct {
 	VersionId string
 }
 
-func (i GetObjectInput) mapGetObjectInput() *s3.GetObjectInput {
+func (i GetObjectInput) mapGetObjectInput(enableChecksumValidation bool) *s3.GetObjectInput {
 	input := &s3.GetObjectInput{
 		Bucket: aws.String(i.Bucket),
 		Key:    aws.String(i.Key),
@@ -245,7 +245,10 @@ func (i GetObjectInput) mapGetObjectInput() *s3.GetObjectInput {
 
 	if i.ChecksumMode != "" {
 		input.ChecksumMode = s3types.ChecksumMode(i.ChecksumMode)
+	} else if enableChecksumValidation {
+		input.ChecksumMode = s3types.ChecksumModeEnabled
 	}
+
 	if i.RequestPayer != "" {
 		input.RequestPayer = s3types.RequestPayer(i.RequestPayer)
 	}
@@ -282,6 +285,9 @@ type GetObjectOutput struct {
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl string
+
+	// Specifies if the response checksum validation is enabled
+	ChecksumMode types.ChecksumMode
 
 	// The base64-encoded, 32-bit CRC-32 checksum of the object. This will only be
 	// present if it was uploaded with the object. For more information, see [Checking object integrity]in the
@@ -483,9 +489,10 @@ type GetObjectOutput struct {
 	ResultMetadata smithymiddleware.Metadata
 }
 
-func (o *GetObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput) {
+func (o *GetObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput, checksumMode s3types.ChecksumMode) {
 	o.AcceptRanges = aws.ToString(out.AcceptRanges)
 	o.CacheControl = aws.ToString(out.CacheControl)
+	o.ChecksumMode = types.ChecksumMode(checksumMode)
 	o.ChecksumCRC32 = aws.ToString(out.ChecksumCRC32)
 	o.ChecksumCRC32C = aws.ToString(out.ChecksumCRC32C)
 	o.ChecksumSHA1 = aws.ToString(out.ChecksumSHA1)
@@ -720,7 +727,7 @@ func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clien
 
 // downloadChunk downloads the chunk from s3
 func (d *downloader) downloadChunk(ctx context.Context, chunk dlchunk, clientOptions ...func(*s3.Options)) (*GetObjectOutput, error) {
-	params := d.in.mapGetObjectInput()
+	params := d.in.mapGetObjectInput(!d.options.DisableChecksumValidation)
 	if chunk.part != 0 {
 		params.PartNumber = aws.Int32(chunk.part)
 	}
@@ -759,7 +766,7 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlchunk, clientOpt
 	var output *GetObjectOutput
 	if out != nil {
 		output = &GetObjectOutput{}
-		output.mapFromGetObjectOutput(out)
+		output.mapFromGetObjectOutput(out, params.ChecksumMode)
 	}
 	return output, err
 }
