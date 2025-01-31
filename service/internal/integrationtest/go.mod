@@ -192,8 +192,6 @@ replace github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 => ../../../
 
 replace github.com/aws/aws-sdk-go-v2/service/elasticsearchservice => ../../../service/elasticsearchservice/
 
-replace github.com/aws/aws-sdk-go-v2/service/elastictranscoder => ../../../service/elastictranscoder/
-
 replace github.com/aws/aws-sdk-go-v2/service/emr => ../../../service/emr/
 
 replace github.com/aws/aws-sdk-go-v2/service/eventbridge => ../../../service/eventbridge/
