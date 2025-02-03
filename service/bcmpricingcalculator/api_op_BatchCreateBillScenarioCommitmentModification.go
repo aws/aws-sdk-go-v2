@@ -14,6 +14,11 @@ import (
 //	Create Compute Savings Plans, EC2 Instance Savings Plans, or EC2 Reserved
 //
 // Instances commitments that you want to model in a Bill Scenario.
+//
+// The BatchCreateBillScenarioCommitmentModification operation doesn't have its
+// own IAM permission. To authorize this operation for Amazon Web Services
+// principals, include the permission
+// bcm-pricing-calculator:CreateBillScenarioCommitmentModification in your policies.
 func (c *Client) BatchCreateBillScenarioCommitmentModification(ctx context.Context, params *BatchCreateBillScenarioCommitmentModificationInput, optFns ...func(*Options)) (*BatchCreateBillScenarioCommitmentModificationOutput, error) {
 	if params == nil {
 		params = &BatchCreateBillScenarioCommitmentModificationInput{}

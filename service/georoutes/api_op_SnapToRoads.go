@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The SnapToRoads action matches GPS trace to roads most likely traveled on.
+// SnapToRoads matches GPS trace to roads most likely traveled on.
 func (c *Client) SnapToRoads(ctx context.Context, params *SnapToRoadsInput, optFns ...func(*Options)) (*SnapToRoadsOutput, error) {
 	if params == nil {
 		params = &SnapToRoadsInput{}

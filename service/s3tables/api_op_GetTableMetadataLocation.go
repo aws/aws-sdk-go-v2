@@ -11,6 +11,9 @@ import (
 )
 
 // Gets the location of the table metadata.
+//
+// Permissions You must have the s3tables:GetTableMetadataLocation permission to
+// use this operation.
 func (c *Client) GetTableMetadataLocation(ctx context.Context, params *GetTableMetadataLocationInput, optFns ...func(*Options)) (*GetTableMetadataLocationOutput, error) {
 	if params == nil {
 		params = &GetTableMetadataLocationInput{}

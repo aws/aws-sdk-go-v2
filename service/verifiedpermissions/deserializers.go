@@ -4814,6 +4814,18 @@ loop:
 			continue
 		}
 		switch key {
+		case "cedarJson":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CedarJson to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.ContextDefinitionMemberCedarJson{Value: mv}
+			break loop
+
 		case "contextMap":
 			var mv map[string]types.AttributeValue
 			if err := awsAwsjson10_deserializeDocumentContextMap(&mv, value); err != nil {

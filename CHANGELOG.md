@@ -1,3 +1,87 @@
+# Release (2025-01-31)
+
+## General Highlights
+* **Dependency Update**: Switch to code-generated waiter matchers, removing the dependency on go-jmespath.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.36.0
+  * **Feature**: Reduce allocations in query encoding.
+  * **Dependency Update**: Remove root dependency on go-jmespath, which is no longer used.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.18.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1180-2025-01-31)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.17.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v1170-2025-01-31)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.57](feature/s3/manager/CHANGELOG.md#v11757-2025-01-31)
+  * **Bug Fix**: Fix incorrect reference to old s3manager in comments.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.31.0](service/amp/CHANGELOG.md#v1310-2025-01-31)
+  * **Feature**: Add support for sending metrics to cross account and CMCK AMP workspaces through RoleConfiguration on Create/Update Scraper.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.35.0](service/bedrockagentruntime/CHANGELOG.md#v1350-2025-01-31)
+  * **Feature**: This change is to deprecate the existing citation field under RetrieveAndGenerateStream API response in lieu of GeneratedResponsePart and RetrievedReferences
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.51.0](service/codebuild/CHANGELOG.md#v1510-2025-01-31)
+  * **Feature**: Added support for CodeBuild self-hosted Buildkite runner builds
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.1.0](service/georoutes/CHANGELOG.md#v110-2025-01-31)
+  * **Feature**: The OptimizeWaypoints API now supports 50 waypoints per request (20 with constraints like AccessHours or AppointmentTime). It adds waypoint clustering via Clustering and ClusteringIndex for better optimization. Also, total distance validation is removed for greater flexibility.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.93.10](service/rds/CHANGELOG.md#v19310-2025-01-31)
+  * **Documentation**: Updates to Aurora MySQL and Aurora PostgreSQL API pages with instance log type in the create and modify DB Cluster.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.174.0](service/sagemaker/CHANGELOG.md#v11740-2025-01-31)
+  * **Feature**: This release introduces a new valid value in InstanceType parameter: p5en.48xlarge, in ProductionVariant.
+
+# Release (2025-01-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.35.0
+  * **Feature**: Reduce allocations in query encoding.
+  * **Bug Fix**: Do not sign Transfer-Encoding header in Sigv4[a]. Fixes a signer mismatch issue with S3 Accelerate.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.17.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1170-2025-01-30)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.16.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v1160-2025-01-30)
+  * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.56](feature/s3/manager/CHANGELOG.md#v11756-2025-01-30)
+  * **Bug Fix**: Fix incorrect reference to old s3manager in comments.
+* `github.com/aws/aws-sdk-go-v2/internal/v4a`: [v1.3.30](internal/v4a/CHANGELOG.md#v1330-2025-01-30)
+  * **Bug Fix**: Do not sign Transfer-Encoding header in Sigv4[a]. Fixes a signer mismatch issue with S3 Accelerate.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.43.0](service/appstream/CHANGELOG.md#v1430-2025-01-30)
+  * **Feature**: Add support for managing admin consent requirement on selected domains for OneDrive Storage Connectors in AppStream2.0.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.34.0](service/bedrockagentruntime/CHANGELOG.md#v1340-2025-01-30)
+  * **Feature**: Add a 'reason' field to InternalServerException
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.40.0](service/ecr/CHANGELOG.md#v1400-2025-01-30)
+  * **Feature**: Temporarily updating dualstack endpoint support
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.31.0](service/ecrpublic/CHANGELOG.md#v1310-2025-01-30)
+  * **Feature**: Temporarily updating dualstack endpoint support
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.43.0](service/mediatailor/CHANGELOG.md#v1430-2025-01-30)
+  * **Feature**: Adds options for configuring how MediaTailor conditions ads before inserting them into the content stream. Based on the new settings, MediaTailor will either transcode ads to match the content stream as it has in the past, or it will insert ads without first transcoding them.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.20.0](service/qbusiness/CHANGELOG.md#v1200-2025-01-30)
+  * **Feature**: Added APIs to manage QBusiness user subscriptions
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.1.0](service/s3tables/CHANGELOG.md#v110-2025-01-30)
+  * **Feature**: You can now use the CreateTable API operation to create tables with schemas by adding an optional metadata argument.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.21.0](service/verifiedpermissions/CHANGELOG.md#v1210-2025-01-30)
+  * **Feature**: Adds Cedar JSON format support for entities and context data in authorization requests
+
+# Release (2025-01-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.55](feature/s3/manager/CHANGELOG.md#v11755-2025-01-29)
+  * **Bug Fix**: Fix incorrect reference to old s3manager in comments.
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.2.0](service/bcmpricingcalculator/CHANGELOG.md#v120-2025-01-29)
+  * **Feature**: Added ConflictException error type in DeleteBillScenario, BatchDeleteBillScenarioCommitmentModification, BatchDeleteBillScenarioUsageModification, BatchUpdateBillScenarioUsageModification, and BatchUpdateBillScenarioCommitmentModification API operations.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.39.0](service/ecr/CHANGELOG.md#v1390-2025-01-29)
+  * **Feature**: Add support for Dualstack and Dualstack-with-FIPS Endpoints
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.30.0](service/ecrpublic/CHANGELOG.md#v1300-2025-01-29)
+  * **Feature**: Add support for Dualstack Endpoints
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.8.0](service/mailmanager/CHANGELOG.md#v180-2025-01-29)
+  * **Feature**: This release includes a new feature for Amazon SES Mail Manager which allows customers to specify known addresses and domains and make use of those in traffic policies and rules actions to distinguish between known and unknown entries.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.75.0](service/s3/CHANGELOG.md#v1750-2025-01-29)
+  * **Feature**: Change the type of MpuObjectSize in CompleteMultipartUploadRequest from int to long.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.23.0](service/transcribestreaming/CHANGELOG.md#v1230-2025-01-29)
+  * **Feature**: This release adds support for AWS HealthScribe Streaming APIs within Amazon Transcribe.
+
 # Release (2025-01-28)
 
 ## Module Highlights

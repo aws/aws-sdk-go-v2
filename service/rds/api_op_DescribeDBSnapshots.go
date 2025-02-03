@@ -13,7 +13,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"strconv"
 	"time"
 )
@@ -427,29 +426,20 @@ func (w *DBSnapshotAvailableWaiter) WaitForOutput(ctx context.Context, params *D
 func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSnapshotsInput, output *DescribeDBSnapshotsOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
-		expectedValue := "available"
-		var match = true
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
-		}
-
-		if len(listOfValues) == 0 {
-			match = false
-		}
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
 			}
-
-			if string(*value) != expectedValue {
+		}
+		expectedValue := "available"
+		match := len(v2) > 0
+		for _, v := range v2 {
+			if string(v) != expectedValue {
 				match = false
+				break
 			}
 		}
 
@@ -459,122 +449,117 @@ func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSna
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "deleted"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "deleting"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "failed"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "incompatible-restore"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "incompatible-parameters"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
@@ -744,22 +729,16 @@ func (w *DBSnapshotDeletedWaiter) WaitForOutput(ctx context.Context, params *Des
 func dBSnapshotDeletedStateRetryable(ctx context.Context, input *DescribeDBSnapshotsInput, output *DescribeDBSnapshotsOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("length(DBSnapshots) == `0`", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.DBSnapshots
+		v2 := len(v1)
+		v3 := 0
+		v4 := int64(v2) == int64(v3)
 		expectedValue := "true"
 		bv, err := strconv.ParseBool(expectedValue)
 		if err != nil {
 			return false, fmt.Errorf("error parsing boolean from string %w", err)
 		}
-		value, ok := pathValue.(bool)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected bool value got %T", pathValue)
-		}
-
-		if value == bv {
+		if v4 == bv {
 			return false, nil
 		}
 	}
@@ -777,98 +756,94 @@ func dBSnapshotDeletedStateRetryable(ctx context.Context, input *DescribeDBSnaps
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "creating"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "modifying"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "rebooting"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("DBSnapshots[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.DBSnapshots
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "resetting-master-credentials"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 

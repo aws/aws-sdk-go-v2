@@ -5843,6 +5843,7 @@ const (
 	ProductionVariantInstanceTypeMlInf248xlarge  ProductionVariantInstanceType = "ml.inf2.48xlarge"
 	ProductionVariantInstanceTypeMlP548xlarge    ProductionVariantInstanceType = "ml.p5.48xlarge"
 	ProductionVariantInstanceTypeMlP5e48xlarge   ProductionVariantInstanceType = "ml.p5e.48xlarge"
+	ProductionVariantInstanceTypeMlP5en48xlarge  ProductionVariantInstanceType = "ml.p5en.48xlarge"
 	ProductionVariantInstanceTypeMlM7iLarge      ProductionVariantInstanceType = "ml.m7i.large"
 	ProductionVariantInstanceTypeMlM7iXlarge     ProductionVariantInstanceType = "ml.m7i.xlarge"
 	ProductionVariantInstanceTypeMlM7i2xlarge    ProductionVariantInstanceType = "ml.m7i.2xlarge"
@@ -6065,6 +6066,7 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.inf2.48xlarge",
 		"ml.p5.48xlarge",
 		"ml.p5e.48xlarge",
+		"ml.p5en.48xlarge",
 		"ml.m7i.large",
 		"ml.m7i.xlarge",
 		"ml.m7i.2xlarge",

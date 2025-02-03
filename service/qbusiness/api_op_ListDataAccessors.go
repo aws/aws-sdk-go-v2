@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the data accessors for a Q Business application. This operation returns a
-// paginated list of data accessor summaries, including the friendly name, unique
-// identifier, ARN, associated IAM role, and creation/update timestamps for each
-// data accessor.
+// Lists the data accessors for a Amazon Q Business application. This operation
+// returns a paginated list of data accessor summaries, including the friendly
+// name, unique identifier, ARN, associated IAM role, and creation/update
+// timestamps for each data accessor.
 func (c *Client) ListDataAccessors(ctx context.Context, params *ListDataAccessorsInput, optFns ...func(*Options)) (*ListDataAccessorsOutput, error) {
 	if params == nil {
 		params = &ListDataAccessorsInput{}
@@ -32,7 +32,7 @@ func (c *Client) ListDataAccessors(ctx context.Context, params *ListDataAccessor
 
 type ListDataAccessorsInput struct {
 
-	// The unique identifier of the Q Business application.
+	// The unique identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string

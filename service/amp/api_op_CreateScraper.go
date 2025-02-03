@@ -76,6 +76,9 @@ type CreateScraperInput struct {
 	// the idempotency of the request.
 	ClientToken *string
 
+	// The scraper role configuration for the workspace.
+	RoleConfiguration *types.RoleConfiguration
+
 	// (Optional) The list of tag keys and values to associate with the scraper.
 	Tags map[string]string
 

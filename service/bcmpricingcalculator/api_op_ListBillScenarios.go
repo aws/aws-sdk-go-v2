@@ -29,10 +29,10 @@ func (c *Client) ListBillScenarios(ctx context.Context, params *ListBillScenario
 
 type ListBillScenariosInput struct {
 
-	//  Filter bill scenarios based on their creation date.
+	//  Filter bill scenarios based on the creation date.
 	CreatedAtFilter *types.FilterTimestamp
 
-	//  Filter bill scenarios based on their expiration date.
+	//  Filter bill scenarios based on the expiration date.
 	ExpiresAtFilter *types.FilterTimestamp
 
 	//  Filters to apply to the list of bill scenarios.

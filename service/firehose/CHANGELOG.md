@@ -1,3 +1,11 @@
+# v1.36.2 (2025-01-31)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.36.1 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-01-28)
 
 * **Feature**: For AppendOnly streams, Firehose will automatically scale to match your throughput.

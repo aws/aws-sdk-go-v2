@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the namespaces within a table bucket.
+// Lists the namespaces within a table bucket. For more information, see [Table namespaces] in the
+// Amazon Simple Storage Service User Guide.
+//
+// Permissions You must have the s3tables:ListNamespaces permission to use this
+// operation.
+//
+// [Table namespaces]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html
 func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput, optFns ...func(*Options)) (*ListNamespacesOutput, error) {
 	if params == nil {
 		params = &ListNamespacesInput{}

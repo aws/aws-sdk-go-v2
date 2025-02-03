@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -320,35 +319,31 @@ func (w *RoutingControlCreatedWaiter) WaitForOutput(ctx context.Context, params 
 func routingControlCreatedStateRetryable(ctx context.Context, input *DescribeRoutingControlInput, output *DescribeRoutingControlOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("RoutingControl.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.RoutingControl
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "DEPLOYED"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("RoutingControl.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.RoutingControl
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "PENDING"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -535,18 +530,16 @@ func routingControlDeletedStateRetryable(ctx context.Context, input *DescribeRou
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("RoutingControl.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.RoutingControl
+		var v2 types.Status
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "PENDING_DELETION"
-		value, ok := pathValue.(types.Status)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.Status value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}

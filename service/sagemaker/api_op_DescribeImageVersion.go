@@ -13,7 +13,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -390,35 +389,21 @@ func (w *ImageVersionCreatedWaiter) WaitForOutput(ctx context.Context, params *D
 func imageVersionCreatedStateRetryable(ctx context.Context, input *DescribeImageVersionInput, output *DescribeImageVersionOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ImageVersionStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.ImageVersionStatus
 		expectedValue := "CREATED"
-		value, ok := pathValue.(types.ImageVersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ImageVersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ImageVersionStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.ImageVersionStatus
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(types.ImageVersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ImageVersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -615,18 +600,11 @@ func imageVersionDeletedStateRetryable(ctx context.Context, input *DescribeImage
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ImageVersionStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.ImageVersionStatus
 		expectedValue := "DELETE_FAILED"
-		value, ok := pathValue.(types.ImageVersionStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ImageVersionStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

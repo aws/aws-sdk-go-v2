@@ -1,3 +1,13 @@
+# v1.35.0 (2025-01-31)
+
+* **Feature**: This change is to deprecate the existing citation field under RetrieveAndGenerateStream API response in lieu of GeneratedResponsePart and RetrievedReferences
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.0 (2025-01-30)
+
+* **Feature**: Add a 'reason' field to InternalServerException
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.1 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

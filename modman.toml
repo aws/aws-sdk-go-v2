@@ -2,7 +2,6 @@
 [dependencies]
   "github.com/aws/aws-sdk-go" = "v1.44.28"
   "github.com/aws/smithy-go" = "v1.22.2"
-  "github.com/jmespath/go-jmespath" = "v0.4.0"
 
 [modules]
 
@@ -25,6 +24,9 @@
     no_tag = true
 
   [modules."feature/ec2/imds/internal/configtesting"]
+    no_tag = true
+
+  [modules."feature/s3/transfermanager"]
     no_tag = true
 
   [modules."internal/codegen"]

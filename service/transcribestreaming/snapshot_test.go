@@ -62,11 +62,35 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_GetMedicalScribeStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMedicalScribeStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMedicalScribeStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartCallAnalyticsStreamTranscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartCallAnalyticsStreamTranscription(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartCallAnalyticsStreamTranscription")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartMedicalScribeStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMedicalScribeStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMedicalScribeStream")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -97,11 +121,35 @@ func TestCheckSnapshot_StartStreamTranscription(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_GetMedicalScribeStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMedicalScribeStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMedicalScribeStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartCallAnalyticsStreamTranscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartCallAnalyticsStreamTranscription(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartCallAnalyticsStreamTranscription")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartMedicalScribeStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMedicalScribeStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMedicalScribeStream")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

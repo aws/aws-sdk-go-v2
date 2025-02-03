@@ -211,6 +211,13 @@ func awsRestjson1_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 		ok.String(string(v.Format))
 	}
 
+	if v.Metadata != nil {
+		ok := object.Key("metadata")
+		if err := awsRestjson1_serializeDocumentTableMetadata(v.Metadata, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -2371,6 +2378,34 @@ func awsRestjson1_serializeDocumentIcebergCompactionSettings(v *types.IcebergCom
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIcebergMetadata(v *types.IcebergMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Schema != nil {
+		ok := object.Key("schema")
+		if err := awsRestjson1_serializeDocumentIcebergSchema(v.Schema, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIcebergSchema(v *types.IcebergSchema, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentSchemaFieldList(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIcebergSnapshotManagementSettings(v *types.IcebergSnapshotManagementSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2412,6 +2447,41 @@ func awsRestjson1_serializeDocumentNamespaceList(v []string, value smithyjson.Va
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchemaField(v *types.SchemaField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Required {
+		ok := object.Key("required")
+		ok.Boolean(v.Required)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchemaFieldList(v []types.SchemaField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSchemaField(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -2486,6 +2556,24 @@ func awsRestjson1_serializeDocumentTableMaintenanceSettings(v types.TableMainten
 	case *types.TableMaintenanceSettingsMemberIcebergSnapshotManagement:
 		av := object.Key("icebergSnapshotManagement")
 		if err := awsRestjson1_serializeDocumentIcebergSnapshotManagementSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTableMetadata(v types.TableMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.TableMetadataMemberIceberg:
+		av := object.Key("iceberg")
+		if err := awsRestjson1_serializeDocumentIcebergMetadata(&uv.Value, av); err != nil {
 			return err
 		}
 

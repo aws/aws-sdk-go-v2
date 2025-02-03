@@ -13,7 +13,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -364,29 +363,20 @@ func (w *CacheClusterAvailableWaiter) WaitForOutput(ctx context.Context, params 
 func cacheClusterAvailableStateRetryable(ctx context.Context, input *DescribeCacheClustersInput, output *DescribeCacheClustersOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
-		expectedValue := "available"
-		var match = true
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
-		}
-
-		if len(listOfValues) == 0 {
-			match = false
-		}
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
 			}
-
-			if string(*value) != expectedValue {
+		}
+		expectedValue := "available"
+		match := len(v2) > 0
+		for _, v := range v2 {
+			if string(v) != expectedValue {
 				match = false
+				break
 			}
 		}
 
@@ -396,98 +386,94 @@ func cacheClusterAvailableStateRetryable(ctx context.Context, input *DescribeCac
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "deleted"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "deleting"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "incompatible-network"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "restore-failed"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
@@ -659,29 +645,20 @@ func (w *CacheClusterDeletedWaiter) WaitForOutput(ctx context.Context, params *D
 func cacheClusterDeletedStateRetryable(ctx context.Context, input *DescribeCacheClustersInput, output *DescribeCacheClustersOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
-		expectedValue := "deleted"
-		var match = true
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
-		}
-
-		if len(listOfValues) == 0 {
-			match = false
-		}
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
 			}
-
-			if string(*value) != expectedValue {
+		}
+		expectedValue := "deleted"
+		match := len(v2) > 0
+		for _, v := range v2 {
+			if string(v) != expectedValue {
 				match = false
+				break
 			}
 		}
 
@@ -703,146 +680,140 @@ func cacheClusterDeletedStateRetryable(ctx context.Context, input *DescribeCache
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "available"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "creating"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "incompatible-network"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "modifying"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "restore-failed"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("CacheClusters[].CacheClusterStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.CacheClusters
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.CacheClusterStatus
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "snapshotting"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 

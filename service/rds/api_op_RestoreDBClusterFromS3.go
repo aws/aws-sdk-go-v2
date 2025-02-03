@@ -190,7 +190,14 @@ type RestoreDBClusterFromS3Input struct {
 	//
 	// Aurora MySQL
 	//
-	// Possible values are audit , error , general , and slowquery .
+	// Possible values are audit , error , general , instance , and slowquery .
+	//
+	// Aurora PostgreSQL
+	//
+	// Possible value are instance and postgresql .
+	//
+	// For more information about exporting CloudWatch Logs for Amazon RDS, see [Publishing Database Logs to Amazon CloudWatch Logs] in
+	// the Amazon RDS User Guide.
 	//
 	// For more information about exporting CloudWatch Logs for Amazon Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs] in
 	// the Amazon Aurora User Guide.

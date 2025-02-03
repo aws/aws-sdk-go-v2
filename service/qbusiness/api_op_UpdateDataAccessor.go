@@ -38,7 +38,7 @@ type UpdateDataAccessorInput struct {
 	// This member is required.
 	ActionConfigurations []types.ActionConfiguration
 
-	// The unique identifier of the Q Business application.
+	// The unique identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string

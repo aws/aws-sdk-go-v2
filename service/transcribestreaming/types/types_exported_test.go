@@ -51,6 +51,50 @@ func ExampleCallAnalyticsTranscriptResultStream_outputUsage() {
 var _ *types.CategoryEvent
 var _ *types.UtteranceEvent
 
+func ExampleMedicalScribeInputStream_outputUsage() {
+	var union types.MedicalScribeInputStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MedicalScribeInputStreamMemberAudioEvent:
+		_ = v.Value // Value is types.MedicalScribeAudioEvent
+
+	case *types.MedicalScribeInputStreamMemberConfigurationEvent:
+		_ = v.Value // Value is types.MedicalScribeConfigurationEvent
+
+	case *types.MedicalScribeInputStreamMemberSessionControlEvent:
+		_ = v.Value // Value is types.MedicalScribeSessionControlEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MedicalScribeSessionControlEvent
+var _ *types.MedicalScribeAudioEvent
+var _ *types.MedicalScribeConfigurationEvent
+
+func ExampleMedicalScribeResultStream_outputUsage() {
+	var union types.MedicalScribeResultStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MedicalScribeResultStreamMemberTranscriptEvent:
+		_ = v.Value // Value is types.MedicalScribeTranscriptEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MedicalScribeTranscriptEvent
+
 func ExampleMedicalTranscriptResultStream_outputUsage() {
 	var union types.MedicalTranscriptResultStream
 	// type switches can be used to check the union value

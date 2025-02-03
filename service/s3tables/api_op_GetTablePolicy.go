@@ -10,7 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets details about a table policy.
+// Gets details about a table policy. For more information, see [Viewing a table policy] in the Amazon
+// Simple Storage Service User Guide.
+//
+// Permissions You must have the s3tables:GetTablePolicy permission to use this
+// operation.
+//
+// [Viewing a table policy]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-get
 func (c *Client) GetTablePolicy(ctx context.Context, params *GetTablePolicyInput, optFns ...func(*Options)) (*GetTablePolicyOutput, error) {
 	if params == nil {
 		params = &GetTablePolicyInput{}
@@ -38,7 +44,7 @@ type GetTablePolicyInput struct {
 	// This member is required.
 	Namespace *string
 
-	// The Amazon Resource Number (ARN) of the table bucket that contains the table.
+	// The Amazon Resource Name (ARN) of the table bucket that contains the table.
 	//
 	// This member is required.
 	TableBucketARN *string
@@ -48,7 +54,7 @@ type GetTablePolicyInput struct {
 
 type GetTablePolicyOutput struct {
 
-	// The name of the resource policy.
+	// The JSON that defines the policy.
 	//
 	// This member is required.
 	ResourcePolicy *string

@@ -3,4 +3,4 @@
 package lexmodelsv2
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.49.13"
+const goModuleVersion = "1.49.15"

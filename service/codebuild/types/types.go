@@ -2802,6 +2802,9 @@ type WebhookFilter struct {
 	//
 	// Works with WORKFLOW_JOB_QUEUED events only.
 	//
+	// For CodeBuild-hosted Buildkite runner builds, WORKFLOW_NAME filters will filter
+	//   by pipeline name.
+	//
 	// This member is required.
 	Type WebhookFilterType
 

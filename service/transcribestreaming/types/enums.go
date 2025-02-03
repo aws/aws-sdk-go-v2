@@ -35,6 +35,28 @@ func (CallAnalyticsLanguageCode) Values() []CallAnalyticsLanguageCode {
 	}
 }
 
+type ClinicalNoteGenerationStatus string
+
+// Enum values for ClinicalNoteGenerationStatus
+const (
+	ClinicalNoteGenerationStatusInProgress ClinicalNoteGenerationStatus = "IN_PROGRESS"
+	ClinicalNoteGenerationStatusFailed     ClinicalNoteGenerationStatus = "FAILED"
+	ClinicalNoteGenerationStatusCompleted  ClinicalNoteGenerationStatus = "COMPLETED"
+)
+
+// Values returns all known values for ClinicalNoteGenerationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClinicalNoteGenerationStatus) Values() []ClinicalNoteGenerationStatus {
+	return []ClinicalNoteGenerationStatus{
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
 type ContentIdentificationType string
 
 // Enum values for ContentIdentificationType
@@ -266,6 +288,147 @@ const (
 func (MedicalContentIdentificationType) Values() []MedicalContentIdentificationType {
 	return []MedicalContentIdentificationType{
 		"PHI",
+	}
+}
+
+type MedicalScribeLanguageCode string
+
+// Enum values for MedicalScribeLanguageCode
+const (
+	MedicalScribeLanguageCodeEnUs MedicalScribeLanguageCode = "en-US"
+)
+
+// Values returns all known values for MedicalScribeLanguageCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeLanguageCode) Values() []MedicalScribeLanguageCode {
+	return []MedicalScribeLanguageCode{
+		"en-US",
+	}
+}
+
+type MedicalScribeMediaEncoding string
+
+// Enum values for MedicalScribeMediaEncoding
+const (
+	MedicalScribeMediaEncodingPcm     MedicalScribeMediaEncoding = "pcm"
+	MedicalScribeMediaEncodingOggOpus MedicalScribeMediaEncoding = "ogg-opus"
+	MedicalScribeMediaEncodingFlac    MedicalScribeMediaEncoding = "flac"
+)
+
+// Values returns all known values for MedicalScribeMediaEncoding. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeMediaEncoding) Values() []MedicalScribeMediaEncoding {
+	return []MedicalScribeMediaEncoding{
+		"pcm",
+		"ogg-opus",
+		"flac",
+	}
+}
+
+type MedicalScribeParticipantRole string
+
+// Enum values for MedicalScribeParticipantRole
+const (
+	MedicalScribeParticipantRolePatient   MedicalScribeParticipantRole = "PATIENT"
+	MedicalScribeParticipantRoleClinician MedicalScribeParticipantRole = "CLINICIAN"
+)
+
+// Values returns all known values for MedicalScribeParticipantRole. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeParticipantRole) Values() []MedicalScribeParticipantRole {
+	return []MedicalScribeParticipantRole{
+		"PATIENT",
+		"CLINICIAN",
+	}
+}
+
+type MedicalScribeSessionControlEventType string
+
+// Enum values for MedicalScribeSessionControlEventType
+const (
+	MedicalScribeSessionControlEventTypeEndOfSession MedicalScribeSessionControlEventType = "END_OF_SESSION"
+)
+
+// Values returns all known values for MedicalScribeSessionControlEventType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeSessionControlEventType) Values() []MedicalScribeSessionControlEventType {
+	return []MedicalScribeSessionControlEventType{
+		"END_OF_SESSION",
+	}
+}
+
+type MedicalScribeStreamStatus string
+
+// Enum values for MedicalScribeStreamStatus
+const (
+	MedicalScribeStreamStatusInProgress MedicalScribeStreamStatus = "IN_PROGRESS"
+	MedicalScribeStreamStatusPaused     MedicalScribeStreamStatus = "PAUSED"
+	MedicalScribeStreamStatusFailed     MedicalScribeStreamStatus = "FAILED"
+	MedicalScribeStreamStatusCompleted  MedicalScribeStreamStatus = "COMPLETED"
+)
+
+// Values returns all known values for MedicalScribeStreamStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeStreamStatus) Values() []MedicalScribeStreamStatus {
+	return []MedicalScribeStreamStatus{
+		"IN_PROGRESS",
+		"PAUSED",
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
+type MedicalScribeTranscriptItemType string
+
+// Enum values for MedicalScribeTranscriptItemType
+const (
+	MedicalScribeTranscriptItemTypePronunciation MedicalScribeTranscriptItemType = "pronunciation"
+	MedicalScribeTranscriptItemTypePunctuation   MedicalScribeTranscriptItemType = "punctuation"
+)
+
+// Values returns all known values for MedicalScribeTranscriptItemType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeTranscriptItemType) Values() []MedicalScribeTranscriptItemType {
+	return []MedicalScribeTranscriptItemType{
+		"pronunciation",
+		"punctuation",
+	}
+}
+
+type MedicalScribeVocabularyFilterMethod string
+
+// Enum values for MedicalScribeVocabularyFilterMethod
+const (
+	MedicalScribeVocabularyFilterMethodRemove MedicalScribeVocabularyFilterMethod = "remove"
+	MedicalScribeVocabularyFilterMethodMask   MedicalScribeVocabularyFilterMethod = "mask"
+	MedicalScribeVocabularyFilterMethodTag    MedicalScribeVocabularyFilterMethod = "tag"
+)
+
+// Values returns all known values for MedicalScribeVocabularyFilterMethod. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeVocabularyFilterMethod) Values() []MedicalScribeVocabularyFilterMethod {
+	return []MedicalScribeVocabularyFilterMethod{
+		"remove",
+		"mask",
+		"tag",
 	}
 }
 

@@ -13,7 +13,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -423,18 +422,11 @@ func endpointDeletedStateRetryable(ctx context.Context, input *DescribeEndpointI
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("EndpointStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.EndpointStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.EndpointStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.EndpointStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -605,35 +597,21 @@ func (w *EndpointInServiceWaiter) WaitForOutput(ctx context.Context, params *Des
 func endpointInServiceStateRetryable(ctx context.Context, input *DescribeEndpointInput, output *DescribeEndpointOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("EndpointStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.EndpointStatus
 		expectedValue := "InService"
-		value, ok := pathValue.(types.EndpointStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.EndpointStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("EndpointStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.EndpointStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.EndpointStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.EndpointStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

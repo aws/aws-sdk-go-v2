@@ -502,7 +502,16 @@ type Citation struct {
 type CitationEvent struct {
 
 	// The citation.
+	//
+	// Deprecated: Citation is deprecated. Please use GeneratedResponsePart and
+	// RetrievedReferences for citation event.
 	Citation *Citation
+
+	// The generated response to the citation event.
+	GeneratedResponsePart *GeneratedResponsePart
+
+	// The retrieved references of the citation event.
+	RetrievedReferences []RetrievedReference
 
 	noSmithyDocumentSerde
 }

@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"strconv"
 	"time"
 )
@@ -365,69 +364,41 @@ func (w *ExportTaskSuccessfulWaiter) WaitForOutput(ctx context.Context, params *
 func exportTaskSuccessfulStateRetryable(ctx context.Context, input *GetExportTaskInput, output *GetExportTaskOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "CANCELLING"
-		value, ok := pathValue.(types.ExportTaskStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ExportTaskStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "CANCELLED"
-		value, ok := pathValue.(types.ExportTaskStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ExportTaskStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "FAILED"
-		value, ok := pathValue.(types.ExportTaskStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ExportTaskStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "SUCCEEDED"
-		value, ok := pathValue.(types.ExportTaskStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ExportTaskStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
@@ -600,39 +571,29 @@ func (w *ExportTaskCancelledWaiter) WaitForOutput(ctx context.Context, params *G
 func exportTaskCancelledStateRetryable(ctx context.Context, input *GetExportTaskInput, output *GetExportTaskOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status != 'CANCELLING' && status != 'CANCELLED'", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
+		v2 := "CANCELLING"
+		v3 := string(v1) != string(v2)
+		v4 := output.Status
+		v5 := "CANCELLED"
+		v6 := string(v4) != string(v5)
+		v7 := v3 && v6
 		expectedValue := "true"
 		bv, err := strconv.ParseBool(expectedValue)
 		if err != nil {
 			return false, fmt.Errorf("error parsing boolean from string %w", err)
 		}
-		value, ok := pathValue.(bool)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected bool value got %T", pathValue)
-		}
-
-		if value == bv {
+		if v7 == bv {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "CANCELLED"
-		value, ok := pathValue.(types.ExportTaskStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ExportTaskStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}

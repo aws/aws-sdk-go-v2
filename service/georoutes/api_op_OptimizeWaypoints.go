@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Calculates the optimal order to travel between a set of waypoints to minimize
-// either the travel time or the distance travelled during the journey, based on
-// road network restrictions and the traffic pattern data.
+// OptimizeWaypoints calculates the optimal order to travel between a set of
+// waypoints to minimize either the travel time or the distance travelled during
+// the journey, based on road network restrictions and the traffic pattern data.
 func (c *Client) OptimizeWaypoints(ctx context.Context, params *OptimizeWaypointsInput, optFns ...func(*Options)) (*OptimizeWaypointsOutput, error) {
 	if params == nil {
 		params = &OptimizeWaypointsInput{}
@@ -36,10 +36,13 @@ type OptimizeWaypointsInput struct {
 	// This member is required.
 	Origin []float64
 
-	// Features that are avoided while calculating a route. Avoidance is on a
-	// best-case basis. If an avoidance can't be satisfied for a particular case, this
-	// setting is ignored.
+	// Features that are avoided. Avoidance is on a best-case basis. If an avoidance
+	// can't be satisfied for a particular case, this setting is ignored.
 	Avoid *types.WaypointOptimizationAvoidanceOptions
+
+	// Clustering allows you to specify how nearby waypoints can be clustered to
+	// improve the optimized sequence.
+	Clustering *types.WaypointOptimizationClusteringOptions
 
 	// Departure time from the waypoint.
 	//

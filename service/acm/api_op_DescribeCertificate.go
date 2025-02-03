@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -326,29 +325,23 @@ func (w *CertificateValidatedWaiter) WaitForOutput(ctx context.Context, params *
 func certificateValidatedStateRetryable(ctx context.Context, input *DescribeCertificateInput, output *DescribeCertificateOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Certificate.DomainValidationOptions[].ValidationStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Certificate
+		var v2 []types.DomainValidation
+		if v1 != nil {
+			v3 := v1.DomainValidationOptions
+			v2 = v3
 		}
-
+		var v4 []types.DomainStatus
+		for _, v := range v2 {
+			v5 := v.ValidationStatus
+			v4 = append(v4, v5)
+		}
 		expectedValue := "SUCCESS"
-		var match = true
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
-		}
-
-		if len(listOfValues) == 0 {
-			match = false
-		}
-		for _, v := range listOfValues {
-			value, ok := v.(types.DomainStatus)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected types.DomainStatus value, got %T", pathValue)
-			}
-
-			if string(value) != expectedValue {
+		match := len(v4) > 0
+		for _, v := range v4 {
+			if string(v) != expectedValue {
 				match = false
+				break
 			}
 		}
 
@@ -358,42 +351,42 @@ func certificateValidatedStateRetryable(ctx context.Context, input *DescribeCert
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Certificate.DomainValidationOptions[].ValidationStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Certificate
+		var v2 []types.DomainValidation
+		if v1 != nil {
+			v3 := v1.DomainValidationOptions
+			v2 = v3
 		}
-
+		var v4 []types.DomainStatus
+		for _, v := range v2 {
+			v5 := v.ValidationStatus
+			v4 = append(v4, v5)
+		}
 		expectedValue := "PENDING_VALIDATION"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v4 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(types.DomainStatus)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected types.DomainStatus value, got %T", pathValue)
-			}
-
-			if string(value) == expectedValue {
-				return true, nil
-			}
+		if match {
+			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("Certificate.Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.Certificate
+		var v2 types.CertificateStatus
+		if v1 != nil {
+			v3 := v1.Status
+			v2 = v3
 		}
-
 		expectedValue := "FAILED"
-		value, ok := pathValue.(types.CertificateStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.CertificateStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v2)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

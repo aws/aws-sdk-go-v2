@@ -10,7 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a table bucket.
+// Deletes a table bucket. For more information, see [Deleting a table bucket] in the Amazon Simple Storage
+// Service User Guide.
+//
+// Permissions You must have the s3tables:DeleteTableBucket permission to use this
+// operation.
+//
+// [Deleting a table bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-delete.html
 func (c *Client) DeleteTableBucket(ctx context.Context, params *DeleteTableBucketInput, optFns ...func(*Options)) (*DeleteTableBucketOutput, error) {
 	if params == nil {
 		params = &DeleteTableBucketInput{}

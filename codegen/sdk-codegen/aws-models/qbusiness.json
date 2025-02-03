@@ -102,7 +102,7 @@
                 "action": {
                     "target": "com.amazonaws.qbusiness#QIamAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Q Business action that is allowed.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Q Business action that is allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -733,7 +733,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates a permission policy for a Q Business application, allowing cross-account access for an ISV. \n         This operation creates a new policy statement for the specified Q Business application. \n         The policy statement defines the IAM actions that the ISV is allowed to perform on the Q Business application's resources.</p>",
+                "smithy.api#documentation": "<p>Adds or updates a permission policy for a Amazon Q Business application, allowing cross-account access for an ISV. \n         This operation creates a new policy statement for the specified Amazon Q Business application. \n         The policy statement defines the IAM actions that the ISV is allowed to perform on the Amazon Q Business application's resources.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/policy",
                     "method": "POST"
@@ -746,7 +746,7 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -761,14 +761,14 @@
                 "actions": {
                     "target": "com.amazonaws.qbusiness#QIamActions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Q Business actions that the ISV is allowed to perform.</p>",
+                        "smithy.api#documentation": "<p>The list of Amazon Q Business actions that the ISV is allowed to perform.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "principal": {
                     "target": "com.amazonaws.qbusiness#PrincipalRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for the ISV that is being granted permission.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the IAM role for the ISV that is being granted permission.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1580,6 +1580,90 @@
                     "max": 2
                 },
                 "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.qbusiness#CancelSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#CancelSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#CancelSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Unsubscribes a user or a group from their pricing tier in an Amazon Q Business\n            application. An unsubscribed user or group loses all Amazon Q Business feature access at the\n            start of next month. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/applications/{applicationId}/subscriptions/{subscriptionId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qbusiness#CancelSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business application for which the subscription is being\n            cancelled.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "subscriptionId": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business subscription being cancelled.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#CancelSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscriptionArn": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q Business subscription being\n            cancelled.</p>"
+                    }
+                },
+                "currentSubscription": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of your current Amazon Q Business subscription.</p>"
+                    }
+                },
+                "nextSubscription": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Amazon Q Business subscription for the next month.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qbusiness#Chat": {
@@ -2513,7 +2597,7 @@
                     "qbusiness:TagResource",
                     "qbusiness:ListTagsForResource"
                 ],
-                "smithy.api#documentation": "<p>Creates a new data accessor for an ISV to access data from a Q Business application. \n    The data accessor is an entity that represents the ISV's access to the Q Business application's data. \n    It includes the IAM role ARN for the ISV, a friendly name, and a set of action configurations that define the \n    specific actions the ISV is allowed to perform and any associated data filters. When the data accessor is created, \n    an AWS IAM Identity Center application is also created to manage the ISV's identity and authentication for \n    accessing the Q Business application.</p>",
+                "smithy.api#documentation": "<p>Creates a new data accessor for an ISV to access data from a Amazon Q Business application. \n        The data accessor is an entity that represents the ISV's access to the Amazon Q Business application's data. \n    It includes the IAM role ARN for the ISV, a friendly name, and a set of action configurations that define the \n    specific actions the ISV is allowed to perform and any associated data filters. When the data accessor is created, \n    an IAM Identity Center application is also created to manage the ISV's identity and authentication for \n    accessing the Amazon Q Business application.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/dataaccessors",
                     "method": "POST"
@@ -2527,7 +2611,7 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2585,7 +2669,7 @@
                 "idcApplicationArn": {
                     "target": "com.amazonaws.qbusiness#IdcApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS IAM Identity Center application created for this data accessor.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center application created for this data accessor.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3145,6 +3229,112 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qbusiness#CreateSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#CreateSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#CreateSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Subscribes an IAM Identity Center user or a group to a pricing tier for an\n            Amazon Q Business application.</p>\n         <p>Amazon Q Business offers two subscription tiers: <code>Q_LITE</code> and\n                <code>Q_BUSINESS</code>. Subscription tier determines feature access for the user.\n            For more information on subscriptions and pricing tiers, see <a href=\"https://aws.amazon.com/q/business/pricing/\">Amazon Q Business\n            pricing</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/applications/{applicationId}/subscriptions"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qbusiness#CreateSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business application the subscription should be added\n            to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center <code>UserId</code> or <code>GroupId</code> of a user or group\n            in the IAM Identity Center instance connected to the Amazon Q Business application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Q Business subscription you want to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qbusiness#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you provide to identify the request to create a subscription for your\n            Amazon Q Business application.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#CreateSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscriptionId": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business subscription created.</p>"
+                    }
+                },
+                "subscriptionArn": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q Business subscription created.</p>"
+                    }
+                },
+                "currentSubscription": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of your current Amazon Q Business subscription.</p>"
+                    }
+                },
+                "nextSubscription": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Amazon Q Business subscription for the next month.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qbusiness#CreateUser": {
             "type": "operation",
             "input": {
@@ -3514,7 +3704,7 @@
                 "idcApplicationArn": {
                     "target": "com.amazonaws.qbusiness#IdcApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the associated AWS IAM Identity Center application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the associated IAM Identity Center application.</p>"
                     }
                 },
                 "principal": {
@@ -4205,7 +4395,7 @@
                 "aws.iam#requiredActions": [
                     "qbusiness:GetDataAccessor"
                 ],
-                "smithy.api#documentation": "<p>Deletes a specified data accessor. This operation permanently removes the data accessor \n        and its associated AWS IAM Identity Center application. Any access granted to the ISV through this data accessor will be revoked</p>",
+                "smithy.api#documentation": "<p>Deletes a specified data accessor. This operation permanently removes the data accessor \n        and its associated IAM Identity Center application. Any access granted to the ISV through this data accessor will be revoked.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/dataaccessors/{dataAccessorId}",
                     "method": "DELETE"
@@ -4219,7 +4409,7 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4818,7 +5008,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a permission policy from a Q Business application, revoking the cross-account access that was \n        previously granted to an ISV. This operation deletes the specified policy statement from the application's permission policy.</p>",
+                "smithy.api#documentation": "<p>Removes a permission policy from a Amazon Q Business application, revoking the cross-account access that was \n        previously granted to an ISV. This operation deletes the specified policy statement from the application's permission policy.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/policy/{statementId}",
                     "method": "DELETE"
@@ -4832,7 +5022,7 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5581,10 +5771,16 @@
                     "target": "com.amazonaws.qbusiness#BatchPutDocument"
                 },
                 {
+                    "target": "com.amazonaws.qbusiness#CancelSubscription"
+                },
+                {
                     "target": "com.amazonaws.qbusiness#Chat"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#ChatSync"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#CreateSubscription"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#CreateUser"
@@ -5647,6 +5843,9 @@
                     "target": "com.amazonaws.qbusiness#ListPluginTypeMetadata"
                 },
                 {
+                    "target": "com.amazonaws.qbusiness#ListSubscriptions"
+                },
+                {
                     "target": "com.amazonaws.qbusiness#ListTagsForResource"
                 },
                 {
@@ -5672,6 +5871,9 @@
                 },
                 {
                     "target": "com.amazonaws.qbusiness#UpdateChatControlsConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#UpdateSubscription"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#UpdateUser"
@@ -6484,7 +6686,7 @@
                 "aws.iam#requiredActions": [
                     "qbusiness:ListTagsForResource"
                 ],
-                "smithy.api#documentation": "<p>Retrieves information about a specified data accessor. This operation returns details about the \n        data accessor, including its display name, unique identifier, Amazon Resource Name (ARN), the associated \n        Q Business application and AWS IAM Identity Center application, the IAM role for the ISV, the \n        action configurations, and the timestamps for when the data accessor was created and last updated.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a specified data accessor. This operation returns details about the \n        data accessor, including its display name, unique identifier, Amazon Resource Name (ARN), the associated \n        Amazon Q Business application and IAM Identity Center application, the IAM role for the ISV, the \n        action configurations, and the timestamps for when the data accessor was created and last updated.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/dataaccessors/{dataAccessorId}",
                     "method": "GET"
@@ -6498,7 +6700,7 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6540,13 +6742,13 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application associated with this data accessor.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application associated with this data accessor.</p>"
                     }
                 },
                 "idcApplicationArn": {
                     "target": "com.amazonaws.qbusiness#IdcApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS IAM Identity Center application associated with this data accessor.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center application associated with this data accessor.</p>"
                     }
                 },
                 "principal": {
@@ -7263,7 +7465,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current permission policy for a Q Business application. The policy is \n        returned as a JSON-formatted string and defines the IAM actions that are allowed or denied for the application's resources.</p>",
+                "smithy.api#documentation": "<p>Retrieves the current permission policy for a Amazon Q Business application. The policy is \n        returned as a JSON-formatted string and defines the IAM actions that are allowed or denied for the application's resources.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/policy",
                     "method": "GET"
@@ -7277,7 +7479,7 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7681,6 +7883,16 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qbusiness#GroupIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 47
+                },
+                "smithy.api#pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
             }
         },
         "com.amazonaws.qbusiness#GroupMembers": {
@@ -8626,7 +8838,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the data accessors for a Q Business application. This operation returns a paginated \n        list of data accessor summaries, including the friendly name, unique identifier, ARN, \n        associated IAM role, and creation/update timestamps for each data accessor.</p>",
+                "smithy.api#documentation": "<p>Lists the data accessors for a Amazon Q Business application. This operation returns a paginated \n        list of data accessor summaries, including the friendly name, unique identifier, ARN, \n        associated IAM role, and creation/update timestamps for each data accessor.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/dataaccessors",
                     "method": "GET"
@@ -8646,7 +8858,7 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9787,6 +9999,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qbusiness#ListSubscriptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#ListSubscriptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#ListSubscriptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Lists all subscriptions created in an Amazon Q Business application. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{applicationId}/subscriptions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "subscriptions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qbusiness#ListSubscriptionsRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business application linked to the subscription.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qbusiness#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the <code>maxResults</code> response was incomplete because there is more data to\n            retrieve, Amazon Q Business returns a pagination token in the response. You can use this\n            pagination token to retrieve the next set of Amazon Q Business subscriptions.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qbusiness#MaxResultsIntegerForListSubscriptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Amazon Q Business subscriptions to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#ListSubscriptionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.qbusiness#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Q Business returns this token. You can use this token\n            in a subsequent request to retrieve the next set of subscriptions.</p>"
+                    }
+                },
+                "subscriptions": {
+                    "target": "com.amazonaws.qbusiness#Subscriptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of summary information on the subscriptions configured for an Amazon Q Business\n            application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qbusiness#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -10098,6 +10403,15 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#MaxResultsIntegerForListSubscriptions": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -11318,7 +11632,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create, or updates, a mapping of users—who have access to a document—to\n            groups.</p>\n         <p>You can also map sub groups to groups. For example, the group \"Company Intellectual\n            Property Teams\" includes sub groups \"Research\" and \"Engineering\". These sub groups\n            include their own list of users or people who work in these teams. Only users who work\n            in research and engineering, and therefore belong in the intellectual property group,\n            can see top-secret company documents in their Amazon Q Business chat results.</p>",
+                "smithy.api#documentation": "<p>Create, or updates, a mapping of users—who have access to a document—to\n            groups.</p>\n         <p>You can also map sub groups to groups. For example, the group \"Company Intellectual\n            Property Teams\" includes sub groups \"Research\" and \"Engineering\". These sub groups\n            include their own list of users or people who work in these teams. Only users who work\n            in research and engineering, and therefore belong in the intellectual property group,\n            can see top-secret company documents in their Amazon Q Business chat results.</p>\n         <p>There are two options for creating groups, either passing group members inline or using an S3 file via the\n            S3PathForGroupMembers field. For inline groups, there is a limit of 1000 members per group and for provided S3 files\n            there is a limit of 100 thousand members. When creating a group using an S3 file, you provide both\n            an S3 file and a <code>RoleArn</code> for Amazon Q Buisness to access the file.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/applications/{applicationId}/indices/{indexId}/groups"
@@ -11374,7 +11688,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.qbusiness#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that has access to the S3 file that contains \n            your list of users that belong to a group.The Amazon Resource Name (ARN) of an IAM role that \n            has access to the S3 file that contains your list of users that belong to a group.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that has access to the S3 file that contains \n            your list of users that belong to a group.</p>"
                     }
                 }
             },
@@ -12038,7 +12352,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for relevant content in a Q Business application based on a query. This operation takes a \n        search query text, the Q Business application identifier, and optional filters \n        (such as content source and maximum results) as input. It returns a list of \n        relevant content items, where each item includes the content text, the unique document identifier, \n        the document title, the document URI, any relevant document attributes, and score attributes \n        indicating the confidence level of the relevance.</p>",
+                "smithy.api#documentation": "<p>Searches for relevant content in a Amazon Q Business application based on a query. This operation takes a \n        search query text, the Amazon Q Business application identifier, and optional filters \n        (such as content source and maximum results) as input. It returns a list of \n        relevant content items, where each item includes the content text, the unique document identifier, \n        the document title, the document URI, any relevant document attributes, and score attributes \n        indicating the confidence level of the relevance.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/relevant-content",
                     "method": "POST"
@@ -12057,7 +12371,7 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application to search.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application to search.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12551,6 +12865,97 @@
                 "target": "com.amazonaws.qbusiness#SubnetId"
             }
         },
+        "com.amazonaws.qbusiness#Subscription": {
+            "type": "structure",
+            "members": {
+                "subscriptionId": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business subscription to be updated.</p>"
+                    }
+                },
+                "subscriptionArn": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q Business subscription that was\n            updated.</p>"
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center <code>UserId</code> or <code>GroupId</code> of a user or group\n            in the IAM Identity Center instance connected to the Amazon Q Business application.</p>"
+                    }
+                },
+                "currentSubscription": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of your current Amazon Q Business subscription.</p>"
+                    }
+                },
+                "nextSubscription": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Amazon Q Business subscription for the next month.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Amazon Q Business subscription.</p>\n         <p>Subscriptions are used to provide access for an IAM Identity Center user or a group to\n            an Amazon Q Business application.</p>\n         <p>Amazon Q Business offers two subscription tiers: <code>Q_LITE</code> and\n                <code>Q_BUSINESS</code>. Subscription tier determines feature access for the user.\n            For more information on subscriptions and pricing tiers, see <a href=\"https://aws.amazon.com/q/business/pricing/\">Amazon Q Business\n            pricing</a>.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#SubscriptionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
+            }
+        },
+        "com.amazonaws.qbusiness#SubscriptionDetails": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of an Amazon Q Business subscription. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The details of an Amazon Q Business subscription. </p>"
+            }
+        },
+        "com.amazonaws.qbusiness#SubscriptionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1224
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#SubscriptionPrincipal": {
+            "type": "union",
+            "members": {
+                "user": {
+                    "target": "com.amazonaws.qbusiness#UserIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a user in the IAM Identity Center instance connected to the\n            Amazon Q Business application.</p>"
+                    }
+                },
+                "group": {
+                    "target": "com.amazonaws.qbusiness#GroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a group in the IAM Identity Center instance connected to the\n            Amazon Q Business application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A user or group in the IAM Identity Center instance connected to the Amazon Q Business\n            application.</p>"
+            }
+        },
         "com.amazonaws.qbusiness#SubscriptionType": {
             "type": "enum",
             "members": {
@@ -12566,6 +12971,12 @@
                         "smithy.api#enumValue": "Q_BUSINESS"
                     }
                 }
+            }
+        },
+        "com.amazonaws.qbusiness#Subscriptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qbusiness#Subscription"
             }
         },
         "com.amazonaws.qbusiness#SyncSchedule": {
@@ -13274,7 +13685,7 @@
                 "applicationId": {
                     "target": "com.amazonaws.qbusiness#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Q Business application.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13736,6 +14147,100 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qbusiness#UpdateSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#UpdateSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#UpdateSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the pricing tier for an Amazon Q Business subscription. Upgrades are instant.\n            Downgrades apply at the start of the next month. Subscription tier determines feature\n            access for the user. For more information on subscriptions and pricing tiers, see <a href=\"https://aws.amazon.com/q/business/pricing/\">Amazon Q Business\n            pricing</a>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/applications/{applicationId}/subscriptions/{subscriptionId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qbusiness#UpdateSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business application where the subscription update should\n            take effect.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "subscriptionId": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q Business subscription to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Amazon Q Business subscription to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#UpdateSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscriptionArn": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q Business subscription that was\n            updated.</p>"
+                    }
+                },
+                "currentSubscription": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of your current Amazon Q Business subscription.</p>"
+                    }
+                },
+                "nextSubscription": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Amazon Q Business subscription for the next month.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qbusiness#UpdateUser": {
             "type": "operation",
             "input": {
@@ -14032,6 +14537,16 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.qbusiness#UserIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 47
+                },
+                "smithy.api#pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
             }
         },
         "com.amazonaws.qbusiness#UserIds": {

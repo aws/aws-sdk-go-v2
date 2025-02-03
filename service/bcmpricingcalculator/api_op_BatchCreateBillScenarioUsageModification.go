@@ -14,6 +14,11 @@ import (
 //	Create Amazon Web Services service usage that you want to model in a Bill
 //
 // Scenario.
+//
+// The BatchCreateBillScenarioUsageModification operation doesn't have its own IAM
+// permission. To authorize this operation for Amazon Web Services principals,
+// include the permission
+// bcm-pricing-calculator:CreateBillScenarioUsageModification in your policies.
 func (c *Client) BatchCreateBillScenarioUsageModification(ctx context.Context, params *BatchCreateBillScenarioUsageModificationInput, optFns ...func(*Options)) (*BatchCreateBillScenarioUsageModificationOutput, error) {
 	if params == nil {
 		params = &BatchCreateBillScenarioUsageModificationInput{}

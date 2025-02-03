@@ -1103,7 +1103,8 @@ type CreateDBInstanceInput struct {
 	// instances is managed by the DB cluster.
 	StorageEncrypted *bool
 
-	// The storage throughput value for the DB instance.
+	// The storage throughput value, in mebibyte per second (MiBps), for the DB
+	// instance.
 	//
 	// This setting applies only to the gp3 storage type.
 	//

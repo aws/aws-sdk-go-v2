@@ -1,3 +1,11 @@
+# v1.202.2 (2025-01-31)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.202.1 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.202.0 (2025-01-28)
 
 * **Feature**: This release changes the CreateFleet CLI and SDK's such that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.

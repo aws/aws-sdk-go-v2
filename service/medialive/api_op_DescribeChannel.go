@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -375,35 +374,21 @@ func (w *ChannelCreatedWaiter) WaitForOutput(ctx context.Context, params *Descri
 func channelCreatedStateRetryable(ctx context.Context, input *DescribeChannelInput, output *DescribeChannelOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "IDLE"
-		value, ok := pathValue.(types.ChannelState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "CREATING"
-		value, ok := pathValue.(types.ChannelState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -416,18 +401,11 @@ func channelCreatedStateRetryable(ctx context.Context, input *DescribeChannelInp
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(types.ChannelState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -598,35 +576,21 @@ func (w *ChannelDeletedWaiter) WaitForOutput(ctx context.Context, params *Descri
 func channelDeletedStateRetryable(ctx context.Context, input *DescribeChannelInput, output *DescribeChannelOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DELETED"
-		value, ok := pathValue.(types.ChannelState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DELETING"
-		value, ok := pathValue.(types.ChannelState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -804,35 +768,21 @@ func (w *ChannelRunningWaiter) WaitForOutput(ctx context.Context, params *Descri
 func channelRunningStateRetryable(ctx context.Context, input *DescribeChannelInput, output *DescribeChannelOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "RUNNING"
-		value, ok := pathValue.(types.ChannelState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "STARTING"
-		value, ok := pathValue.(types.ChannelState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -1010,35 +960,21 @@ func (w *ChannelStoppedWaiter) WaitForOutput(ctx context.Context, params *Descri
 func channelStoppedStateRetryable(ctx context.Context, input *DescribeChannelInput, output *DescribeChannelOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "IDLE"
-		value, ok := pathValue.(types.ChannelState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "STOPPING"
-		value, ok := pathValue.(types.ChannelState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}

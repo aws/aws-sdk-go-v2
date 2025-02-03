@@ -1220,6 +1220,12 @@ type AppDetails struct {
 
 	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
 	// the instance type that the version runs on.
+	//
+	// When both SageMakerImageVersionArn and SageMakerImageArn are passed,
+	// SageMakerImageVersionArn is used. Any updates to SageMakerImageArn will not
+	// take effect if SageMakerImageVersionArn already exists in the ResourceSpec
+	// because SageMakerImageVersionArn always takes precedence. To clear the value
+	// set for SageMakerImageVersionArn , pass None as the value.
 	ResourceSpec *ResourceSpec
 
 	// The name of the space.
@@ -3696,6 +3702,12 @@ type CodeEditorAppSettings struct {
 
 	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
 	// the instance type that the version runs on.
+	//
+	// When both SageMakerImageVersionArn and SageMakerImageArn are passed,
+	// SageMakerImageVersionArn is used. Any updates to SageMakerImageArn will not
+	// take effect if SageMakerImageVersionArn already exists in the ResourceSpec
+	// because SageMakerImageVersionArn always takes precedence. To clear the value
+	// set for SageMakerImageVersionArn , pass None as the value.
 	DefaultResourceSpec *ResourceSpec
 
 	// The Amazon Resource Name (ARN) of the Code Editor application lifecycle
@@ -9964,6 +9976,12 @@ type JupyterLabAppSettings struct {
 
 	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
 	// the instance type that the version runs on.
+	//
+	// When both SageMakerImageVersionArn and SageMakerImageArn are passed,
+	// SageMakerImageVersionArn is used. Any updates to SageMakerImageArn will not
+	// take effect if SageMakerImageVersionArn already exists in the ResourceSpec
+	// because SageMakerImageVersionArn always takes precedence. To clear the value
+	// set for SageMakerImageVersionArn , pass None as the value.
 	DefaultResourceSpec *ResourceSpec
 
 	// The configuration parameters that specify the IAM roles assumed by the
@@ -16203,6 +16221,12 @@ type ResourceSharingConfig struct {
 
 // Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
 // the instance type that the version runs on.
+//
+// When both SageMakerImageVersionArn and SageMakerImageArn are passed,
+// SageMakerImageVersionArn is used. Any updates to SageMakerImageArn will not
+// take effect if SageMakerImageVersionArn already exists in the ResourceSpec
+// because SageMakerImageVersionArn always takes precedence. To clear the value
+// set for SageMakerImageVersionArn , pass None as the value.
 type ResourceSpec struct {
 
 	// The instance type that the image version runs on.
@@ -16224,7 +16248,8 @@ type ResourceSpec struct {
 	// SemVer 2.0.0 versioning format.
 	SageMakerImageVersionAlias *string
 
-	// The ARN of the image version created on the instance.
+	// The ARN of the image version created on the instance. To clear the value set
+	// for SageMakerImageVersionArn , pass None as the value.
 	SageMakerImageVersionArn *string
 
 	noSmithyDocumentSerde
@@ -16296,6 +16321,12 @@ type RSessionAppSettings struct {
 
 	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
 	// the instance type that the version runs on.
+	//
+	// When both SageMakerImageVersionArn and SageMakerImageArn are passed,
+	// SageMakerImageVersionArn is used. Any updates to SageMakerImageArn will not
+	// take effect if SageMakerImageVersionArn already exists in the ResourceSpec
+	// because SageMakerImageVersionArn always takes precedence. To clear the value
+	// set for SageMakerImageVersionArn , pass None as the value.
 	DefaultResourceSpec *ResourceSpec
 
 	noSmithyDocumentSerde
@@ -16326,6 +16357,12 @@ type RStudioServerProDomainSettings struct {
 
 	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
 	// the instance type that the version runs on.
+	//
+	// When both SageMakerImageVersionArn and SageMakerImageArn are passed,
+	// SageMakerImageVersionArn is used. Any updates to SageMakerImageArn will not
+	// take effect if SageMakerImageVersionArn already exists in the ResourceSpec
+	// because SageMakerImageVersionArn always takes precedence. To clear the value
+	// set for SageMakerImageVersionArn , pass None as the value.
 	DefaultResourceSpec *ResourceSpec
 
 	// A URL pointing to an RStudio Connect server.
@@ -16348,6 +16385,12 @@ type RStudioServerProDomainSettingsForUpdate struct {
 
 	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
 	// the instance type that the version runs on.
+	//
+	// When both SageMakerImageVersionArn and SageMakerImageArn are passed,
+	// SageMakerImageVersionArn is used. Any updates to SageMakerImageArn will not
+	// take effect if SageMakerImageVersionArn already exists in the ResourceSpec
+	// because SageMakerImageVersionArn always takes precedence. To clear the value
+	// set for SageMakerImageVersionArn , pass None as the value.
 	DefaultResourceSpec *ResourceSpec
 
 	// A URL pointing to an RStudio Connect server.
@@ -17249,6 +17292,12 @@ type SpaceCodeEditorAppSettings struct {
 
 	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
 	// the instance type that the version runs on.
+	//
+	// When both SageMakerImageVersionArn and SageMakerImageArn are passed,
+	// SageMakerImageVersionArn is used. Any updates to SageMakerImageArn will not
+	// take effect if SageMakerImageVersionArn already exists in the ResourceSpec
+	// because SageMakerImageVersionArn always takes precedence. To clear the value
+	// set for SageMakerImageVersionArn , pass None as the value.
 	DefaultResourceSpec *ResourceSpec
 
 	noSmithyDocumentSerde
@@ -17310,6 +17359,12 @@ type SpaceJupyterLabAppSettings struct {
 
 	// Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and
 	// the instance type that the version runs on.
+	//
+	// When both SageMakerImageVersionArn and SageMakerImageArn are passed,
+	// SageMakerImageVersionArn is used. Any updates to SageMakerImageArn will not
+	// take effect if SageMakerImageVersionArn already exists in the ResourceSpec
+	// because SageMakerImageVersionArn always takes precedence. To clear the value
+	// set for SageMakerImageVersionArn , pass None as the value.
 	DefaultResourceSpec *ResourceSpec
 
 	noSmithyDocumentSerde

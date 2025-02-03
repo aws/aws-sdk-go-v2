@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the current permission policy for a Q Business application. The
-// policy is returned as a JSON-formatted string and defines the IAM actions that
-// are allowed or denied for the application's resources.
+// Retrieves the current permission policy for a Amazon Q Business application.
+// The policy is returned as a JSON-formatted string and defines the IAM actions
+// that are allowed or denied for the application's resources.
 func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns ...func(*Options)) (*GetPolicyOutput, error) {
 	if params == nil {
 		params = &GetPolicyInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns .
 
 type GetPolicyInput struct {
 
-	// The unique identifier of the Q Business application.
+	// The unique identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string

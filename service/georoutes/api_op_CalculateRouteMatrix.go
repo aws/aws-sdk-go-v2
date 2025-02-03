@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Calculates route matrix containing the results for all pairs of Origins to
+//	Use CalculateRouteMatrix to compute results for all pairs of Origins to
+//
 // Destinations. Each row corresponds to one entry in Origins. Each entry in the
 // row corresponds to the route from that entry in Origins to an entry in
 // Destinations positions.
@@ -34,10 +35,22 @@ type CalculateRouteMatrixInput struct {
 
 	// List of destinations for the route.
 	//
+	// Route calculations are billed for each origin and destination pair. If you use
+	// a large matrix of origins and destinations, your costs will increase
+	// accordingly. See [Amazon Location's pricing page]for more information.
+	//
+	// [Amazon Location's pricing page]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
+	//
 	// This member is required.
 	Destinations []types.RouteMatrixDestination
 
 	// The position in longitude and latitude for the origin.
+	//
+	// Route calculations are billed for each origin and destination pair. Using a
+	// large amount of Origins in a request can lead you to incur unexpected charges.
+	// See [Amazon Location's pricing page]for more information.
+	//
+	// [Amazon Location's pricing page]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
 	//
 	// This member is required.
 	Origins []types.RouteMatrixOrigin
@@ -51,7 +64,7 @@ type CalculateRouteMatrixInput struct {
 	// This member is required.
 	RoutingBoundary *types.RouteMatrixBoundary
 
-	// Features that are allowed while calculating. a route
+	// Features that are allowed while calculating a route.
 	Allow *types.RouteMatrixAllowOptions
 
 	// Features that are avoided while calculating a route. Avoidance is on a

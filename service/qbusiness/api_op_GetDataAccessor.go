@@ -14,7 +14,7 @@ import (
 
 // Retrieves information about a specified data accessor. This operation returns
 // details about the data accessor, including its display name, unique identifier,
-// Amazon Resource Name (ARN), the associated Q Business application and AWS IAM
+// Amazon Resource Name (ARN), the associated Amazon Q Business application and IAM
 // Identity Center application, the IAM role for the ISV, the action
 // configurations, and the timestamps for when the data accessor was created and
 // last updated.
@@ -35,7 +35,7 @@ func (c *Client) GetDataAccessor(ctx context.Context, params *GetDataAccessorInp
 
 type GetDataAccessorInput struct {
 
-	// The unique identifier of the Q Business application.
+	// The unique identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -54,8 +54,8 @@ type GetDataAccessorOutput struct {
 	// associated filters.
 	ActionConfigurations []types.ActionConfiguration
 
-	// The unique identifier of the Q Business application associated with this data
-	// accessor.
+	// The unique identifier of the Amazon Q Business application associated with this
+	// data accessor.
 	ApplicationId *string
 
 	// The timestamp when the data accessor was created.
@@ -70,7 +70,7 @@ type GetDataAccessorOutput struct {
 	// The friendly name of the data accessor.
 	DisplayName *string
 
-	// The Amazon Resource Name (ARN) of the AWS IAM Identity Center application
+	// The Amazon Resource Name (ARN) of the IAM Identity Center application
 	// associated with this data accessor.
 	IdcApplicationArn *string
 

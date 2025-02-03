@@ -1,3 +1,13 @@
+# v1.93.10 (2025-01-31)
+
+* **Documentation**: Updates to Aurora MySQL and Aurora PostgreSQL API pages with instance log type in the create and modify DB Cluster.
+* **Dependency Update**: Switch to code-generated waiter matchers, removing the dependency on go-jmespath.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.93.9 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.93.8 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -56915,6 +56915,12 @@
                         "smithy.api#enumValue": "ml.p5e.48xlarge"
                     }
                 },
+                "ML_P5EN_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5en.48xlarge"
+                    }
+                },
                 "ML_M7I_LARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -60202,7 +60208,7 @@
                 "SageMakerImageVersionArn": {
                     "target": "com.amazonaws.sagemaker#ImageVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the image version created on the instance.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the image version created on the instance. To clear the value set for <code>SageMakerImageVersionArn</code>, pass <code>None</code> as the value.</p>"
                     }
                 },
                 "SageMakerImageVersionAlias": {
@@ -60225,7 +60231,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and the instance type that\n         the version runs on.</p>"
+                "smithy.api#documentation": "<p>Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and the instance type that\n         the version runs on.</p>\n         <note>\n            <p>When both <code>SageMakerImageVersionArn</code> and <code>SageMakerImageArn</code> are passed, <code>SageMakerImageVersionArn</code> is used. Any updates to <code>SageMakerImageArn</code> will not take effect if <code>SageMakerImageVersionArn</code> already exists in the <code>ResourceSpec</code> because <code>SageMakerImageVersionArn</code> always takes precedence. To clear the value set for <code>SageMakerImageVersionArn</code>, pass <code>None</code> as the value.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#ResourceType": {

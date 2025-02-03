@@ -14228,6 +14228,11 @@ func awsAwsjson11_deserializeDocumentStorageConnector(v **types.StorageConnector
 				return err
 			}
 
+		case "DomainsRequireAdminConsent":
+			if err := awsAwsjson11_deserializeDocumentDomainList(&sv.DomainsRequireAdminConsent, value); err != nil {
+				return err
+			}
+
 		case "ResourceIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)

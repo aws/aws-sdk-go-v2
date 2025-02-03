@@ -167,6 +167,68 @@ func (ExportState) Values() []ExportState {
 	}
 }
 
+type ImportDataType string
+
+// Enum values for ImportDataType
+const (
+	ImportDataTypeCsv  ImportDataType = "CSV"
+	ImportDataTypeJson ImportDataType = "JSON"
+)
+
+// Values returns all known values for ImportDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImportDataType) Values() []ImportDataType {
+	return []ImportDataType{
+		"CSV",
+		"JSON",
+	}
+}
+
+type ImportJobStatus string
+
+// Enum values for ImportJobStatus
+const (
+	ImportJobStatusCreated    ImportJobStatus = "CREATED"
+	ImportJobStatusProcessing ImportJobStatus = "PROCESSING"
+	ImportJobStatusCompleted  ImportJobStatus = "COMPLETED"
+	ImportJobStatusFailed     ImportJobStatus = "FAILED"
+	ImportJobStatusStopped    ImportJobStatus = "STOPPED"
+)
+
+// Values returns all known values for ImportJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImportJobStatus) Values() []ImportJobStatus {
+	return []ImportJobStatus{
+		"CREATED",
+		"PROCESSING",
+		"COMPLETED",
+		"FAILED",
+		"STOPPED",
+	}
+}
+
+type IngressAddressListEmailAttribute string
+
+// Enum values for IngressAddressListEmailAttribute
+const (
+	IngressAddressListEmailAttributeRecipient IngressAddressListEmailAttribute = "RECIPIENT"
+)
+
+// Values returns all known values for IngressAddressListEmailAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IngressAddressListEmailAttribute) Values() []IngressAddressListEmailAttribute {
+	return []IngressAddressListEmailAttribute{
+		"RECIPIENT",
+	}
+}
+
 type IngressBooleanOperator string
 
 // Enum values for IngressBooleanOperator
@@ -447,6 +509,34 @@ func (RetentionPeriod) Values() []RetentionPeriod {
 		"NINE_YEARS",
 		"TEN_YEARS",
 		"PERMANENT",
+	}
+}
+
+type RuleAddressListEmailAttribute string
+
+// Enum values for RuleAddressListEmailAttribute
+const (
+	RuleAddressListEmailAttributeRecipient RuleAddressListEmailAttribute = "RECIPIENT"
+	RuleAddressListEmailAttributeMailFrom  RuleAddressListEmailAttribute = "MAIL_FROM"
+	RuleAddressListEmailAttributeSender    RuleAddressListEmailAttribute = "SENDER"
+	RuleAddressListEmailAttributeFrom      RuleAddressListEmailAttribute = "FROM"
+	RuleAddressListEmailAttributeTo        RuleAddressListEmailAttribute = "TO"
+	RuleAddressListEmailAttributeCc        RuleAddressListEmailAttribute = "CC"
+)
+
+// Values returns all known values for RuleAddressListEmailAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleAddressListEmailAttribute) Values() []RuleAddressListEmailAttribute {
+	return []RuleAddressListEmailAttribute{
+		"RECIPIENT",
+		"MAIL_FROM",
+		"SENDER",
+		"FROM",
+		"TO",
+		"CC",
 	}
 }
 

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon CloudWatch log settings for a playback configuration.
+// Defines where AWS Elemental MediaTailor sends logs for the playback
+// configuration.
 func (c *Client) ConfigureLogsForPlaybackConfiguration(ctx context.Context, params *ConfigureLogsForPlaybackConfigurationInput, optFns ...func(*Options)) (*ConfigureLogsForPlaybackConfigurationOutput, error) {
 	if params == nil {
 		params = &ConfigureLogsForPlaybackConfigurationInput{}
@@ -29,7 +30,7 @@ func (c *Client) ConfigureLogsForPlaybackConfiguration(ctx context.Context, para
 // Configures Amazon CloudWatch log settings for a playback configuration.
 type ConfigureLogsForPlaybackConfigurationInput struct {
 
-	// The percentage of session logs that MediaTailor sends to your Cloudwatch Logs
+	// The percentage of session logs that MediaTailor sends to your CloudWatch Logs
 	// account. For example, if your playback configuration has 1000 sessions and
 	// percentEnabled is set to 60 , MediaTailor sends logs for 600 of the sessions to
 	// CloudWatch Logs. MediaTailor decides at random which of the playback

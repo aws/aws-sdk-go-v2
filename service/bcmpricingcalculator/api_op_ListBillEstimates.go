@@ -29,10 +29,10 @@ func (c *Client) ListBillEstimates(ctx context.Context, params *ListBillEstimate
 
 type ListBillEstimatesInput struct {
 
-	//  Filter bill estimates based on their creation date.
+	//  Filter bill estimates based on the creation date.
 	CreatedAtFilter *types.FilterTimestamp
 
-	//  Filter bill estimates based on their expiration date.
+	//  Filter bill estimates based on the expiration date.
 	ExpiresAtFilter *types.FilterTimestamp
 
 	//  Filters to apply to the list of bill estimates.

@@ -1937,6 +1937,10 @@ func awsAwsjson10_serializeDocumentContextDefinition(v types.ContextDefinition, 
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ContextDefinitionMemberCedarJson:
+		av := object.Key("cedarJson")
+		av.String(uv.Value)
+
 	case *types.ContextDefinitionMemberContextMap:
 		av := object.Key("contextMap")
 		if err := awsAwsjson10_serializeDocumentContextMap(uv.Value, av); err != nil {
@@ -1971,6 +1975,10 @@ func awsAwsjson10_serializeDocumentEntitiesDefinition(v types.EntitiesDefinition
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.EntitiesDefinitionMemberCedarJson:
+		av := object.Key("cedarJson")
+		av.String(uv.Value)
+
 	case *types.EntitiesDefinitionMemberEntityList:
 		av := object.Key("entityList")
 		if err := awsAwsjson10_serializeDocumentEntityList(uv.Value, av); err != nil {

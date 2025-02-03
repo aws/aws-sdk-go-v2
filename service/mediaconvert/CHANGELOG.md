@@ -1,3 +1,11 @@
+# v1.66.2 (2025-01-31)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.66.1 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.66.0 (2025-01-27)
 
 * **Feature**: This release adds support for dynamic audio configuration and the ability to disable the deblocking filter for h265 encodes.

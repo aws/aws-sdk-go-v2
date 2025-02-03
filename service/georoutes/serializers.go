@@ -687,6 +687,13 @@ func awsRestjson1_serializeOpDocumentOptimizeWaypointsInput(v *OptimizeWaypoints
 		}
 	}
 
+	if v.Clustering != nil {
+		ok := object.Key("Clustering")
+		if err := awsRestjson1_serializeDocumentWaypointOptimizationClusteringOptions(v.Clustering, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DepartureTime != nil {
 		ok := object.Key("DepartureTime")
 		ok.String(*v.DepartureTime)
@@ -3670,6 +3677,25 @@ func awsRestjson1_serializeDocumentWaypointOptimizationAvoidanceOptions(v *types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentWaypointOptimizationClusteringOptions(v *types.WaypointOptimizationClusteringOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Algorithm) > 0 {
+		ok := object.Key("Algorithm")
+		ok.String(string(v.Algorithm))
+	}
+
+	if v.DrivingDistanceOptions != nil {
+		ok := object.Key("DrivingDistanceOptions")
+		if err := awsRestjson1_serializeDocumentWaypointOptimizationDrivingDistanceOptions(v.DrivingDistanceOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentWaypointOptimizationDestinationOptions(v *types.WaypointOptimizationDestinationOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3745,6 +3771,18 @@ func awsRestjson1_serializeDocumentWaypointOptimizationDriverOptions(v *types.Wa
 	if len(v.TreatServiceTimeAs) > 0 {
 		ok := object.Key("TreatServiceTimeAs")
 		ok.String(string(v.TreatServiceTimeAs))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWaypointOptimizationDrivingDistanceOptions(v *types.WaypointOptimizationDrivingDistanceOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("DrivingDistance")
+		ok.Long(v.DrivingDistance)
 	}
 
 	return nil

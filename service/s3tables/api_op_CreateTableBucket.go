@@ -10,7 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a table bucket.
+// Creates a table bucket. For more information, see [Creating a table bucket] in the Amazon Simple Storage
+// Service User Guide.
+//
+// Permissions You must have the s3tables:CreateTableBucket permission to use this
+// operation.
+//
+// [Creating a table bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html
 func (c *Client) CreateTableBucket(ctx context.Context, params *CreateTableBucketInput, optFns ...func(*Options)) (*CreateTableBucketOutput, error) {
 	if params == nil {
 		params = &CreateTableBucketInput{}

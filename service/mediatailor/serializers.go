@@ -3002,6 +3002,13 @@ func awsRestjson1_serializeOpDocumentPutPlaybackConfigurationInput(v *PutPlaybac
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdConditioningConfiguration != nil {
+		ok := object.Key("AdConditioningConfiguration")
+		if err := awsRestjson1_serializeDocumentAdConditioningConfiguration(v.AdConditioningConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AdDecisionServerUrl != nil {
 		ok := object.Key("AdDecisionServerUrl")
 		ok.String(*v.AdDecisionServerUrl)
@@ -4124,6 +4131,18 @@ func awsRestjson1_serializeDocumentAdBreakMetadataList(v []types.KeyValuePair, v
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdConditioningConfiguration(v *types.AdConditioningConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.StreamingMediaFileConditioning) > 0 {
+		ok := object.Key("StreamingMediaFileConditioning")
+		ok.String(string(v.StreamingMediaFileConditioning))
+	}
+
 	return nil
 }
 

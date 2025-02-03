@@ -12,7 +12,13 @@ import (
 	"time"
 )
 
-// Gets details about a table.
+// Gets details about a table. For more information, see [S3 Tables] in the Amazon Simple
+// Storage Service User Guide.
+//
+// Permissions You must have the s3tables:GetTable permission to use this
+// operation.
+//
+// [S3 Tables]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html
 func (c *Client) GetTable(ctx context.Context, params *GetTableInput, optFns ...func(*Options)) (*GetTableOutput, error) {
 	if params == nil {
 		params = &GetTableInput{}

@@ -17,6 +17,8 @@ import (
 //
 // The CLI doesn't support streaming operations in Amazon Bedrock, including
 // InvokeModelWithResponseStream .
+//
+// This operation requires permission for the  bedrock:RetrieveAndGenerate action.
 func (c *Client) RetrieveAndGenerateStream(ctx context.Context, params *RetrieveAndGenerateStreamInput, optFns ...func(*Options)) (*RetrieveAndGenerateStreamOutput, error) {
 	if params == nil {
 		params = &RetrieveAndGenerateStreamInput{}

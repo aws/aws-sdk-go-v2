@@ -3,4 +3,4 @@
 package chimesdkidentity
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.22.12"
+const goModuleVersion = "1.22.14"

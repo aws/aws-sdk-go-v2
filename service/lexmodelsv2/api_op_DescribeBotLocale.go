@@ -11,7 +11,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -379,69 +378,41 @@ func (w *BotLocaleBuiltWaiter) WaitForOutput(ctx context.Context, params *Descri
 func botLocaleBuiltStateRetryable(ctx context.Context, input *DescribeBotLocaleInput, output *DescribeBotLocaleOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "Built"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "Deleting"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "NotBuilt"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -612,86 +583,51 @@ func (w *BotLocaleCreatedWaiter) WaitForOutput(ctx context.Context, params *Desc
 func botLocaleCreatedStateRetryable(ctx context.Context, input *DescribeBotLocaleInput, output *DescribeBotLocaleOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "Built"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "ReadyExpressTesting"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "NotBuilt"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "Deleting"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -867,86 +803,51 @@ func (w *BotLocaleExpressTestingAvailableWaiter) WaitForOutput(ctx context.Conte
 func botLocaleExpressTestingAvailableStateRetryable(ctx context.Context, input *DescribeBotLocaleInput, output *DescribeBotLocaleOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "Built"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "ReadyExpressTesting"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "Deleting"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("botLocaleStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.BotLocaleStatus
 		expectedValue := "NotBuilt"
-		value, ok := pathValue.(types.BotLocaleStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.BotLocaleStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

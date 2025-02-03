@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Calculates a route given the following required parameters: Origin and
-// Destination .
+// CalculateRoutes computes routes given the following required parameters: Origin
+// and Destination .
 func (c *Client) CalculateRoutes(ctx context.Context, params *CalculateRoutesInput, optFns ...func(*Options)) (*CalculateRoutesOutput, error) {
 	if params == nil {
 		params = &CalculateRoutesInput{}
@@ -41,7 +41,7 @@ type CalculateRoutesInput struct {
 	// This member is required.
 	Origin []float64
 
-	// Features that are allowed while calculating. a route
+	// Features that are allowed while calculating a route.
 	Allow *types.RouteAllowOptions
 
 	// Time of arrival at the destination.
@@ -167,7 +167,7 @@ type CalculateRoutesInput struct {
 
 	// Type of step returned by the response. Default provides basic steps intended
 	// for web based applications. TurnByTurn provides detailed instructions with more
-	// granularity intended for a turn based naviagtion system.
+	// granularity intended for a turn based navigation system.
 	TravelStepType types.RouteTravelStepType
 
 	// List of waypoints between the Origin and Destination.

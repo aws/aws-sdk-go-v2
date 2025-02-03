@@ -10,7 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a table.
+// Deletes a table. For more information, see [Deleting an Amazon S3 table] in the Amazon Simple Storage
+// Service User Guide.
+//
+// Permissions You must have the s3tables:DeleteTable permission to use this
+// operation.
+//
+// [Deleting an Amazon S3 table]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-delete.html
 func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optFns ...func(*Options)) (*DeleteTableOutput, error) {
 	if params == nil {
 		params = &DeleteTableInput{}

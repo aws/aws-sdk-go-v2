@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -351,52 +350,31 @@ func (w *NodeDeregisteredWaiter) WaitForOutput(ctx context.Context, params *Desc
 func nodeDeregisteredStateRetryable(ctx context.Context, input *DescribeNodeInput, output *DescribeNodeOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DEREGISTERED"
-		value, ok := pathValue.(types.NodeState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NodeState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DEREGISTERING"
-		value, ok := pathValue.(types.NodeState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NodeState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "DRAINING"
-		value, ok := pathValue.(types.NodeState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NodeState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -574,35 +552,21 @@ func (w *NodeRegisteredWaiter) WaitForOutput(ctx context.Context, params *Descri
 func nodeRegisteredStateRetryable(ctx context.Context, input *DescribeNodeInput, output *DescribeNodeOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(types.NodeState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NodeState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "REGISTERING"
-		value, ok := pathValue.(types.NodeState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NodeState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
@@ -615,18 +579,11 @@ func nodeRegisteredStateRetryable(ctx context.Context, input *DescribeNodeInput,
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("State", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.State
 		expectedValue := "REGISTRATION_FAILED"
-		value, ok := pathValue.(types.NodeState)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.NodeState value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

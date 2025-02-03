@@ -12,7 +12,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -341,122 +340,117 @@ func (w *ReplicationTaskDeletedWaiter) WaitForOutput(ctx context.Context, params
 func replicationTaskDeletedStateRetryable(ctx context.Context, input *DescribeReplicationTasksInput, output *DescribeReplicationTasksOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "ready"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "creating"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "stopped"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "running"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "failed"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
@@ -635,29 +629,20 @@ func (w *ReplicationTaskReadyWaiter) WaitForOutput(ctx context.Context, params *
 func replicationTaskReadyStateRetryable(ctx context.Context, input *DescribeReplicationTasksInput, output *DescribeReplicationTasksOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
-		expectedValue := "ready"
-		var match = true
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
-		}
-
-		if len(listOfValues) == 0 {
-			match = false
-		}
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
 			}
-
-			if string(*value) != expectedValue {
+		}
+		expectedValue := "ready"
+		match := len(v2) > 0
+		for _, v := range v2 {
+			if string(v) != expectedValue {
 				match = false
+				break
 			}
 		}
 
@@ -667,194 +652,186 @@ func replicationTaskReadyStateRetryable(ctx context.Context, input *DescribeRepl
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "starting"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "running"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "stopping"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "stopped"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "failed"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "modifying"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "testing"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "deleting"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
@@ -1026,29 +1003,20 @@ func (w *ReplicationTaskRunningWaiter) WaitForOutput(ctx context.Context, params
 func replicationTaskRunningStateRetryable(ctx context.Context, input *DescribeReplicationTasksInput, output *DescribeReplicationTasksOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
-		expectedValue := "running"
-		var match = true
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
-		}
-
-		if len(listOfValues) == 0 {
-			match = false
-		}
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
 			}
-
-			if string(*value) != expectedValue {
+		}
+		expectedValue := "running"
+		match := len(v2) > 0
+		for _, v := range v2 {
+			if string(v) != expectedValue {
 				match = false
+				break
 			}
 		}
 
@@ -1058,194 +1026,186 @@ func replicationTaskRunningStateRetryable(ctx context.Context, input *DescribeRe
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "ready"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "creating"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "stopping"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "stopped"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "failed"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "modifying"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "testing"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "deleting"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
@@ -1417,29 +1377,20 @@ func (w *ReplicationTaskStoppedWaiter) WaitForOutput(ctx context.Context, params
 func replicationTaskStoppedStateRetryable(ctx context.Context, input *DescribeReplicationTasksInput, output *DescribeReplicationTasksOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
-		expectedValue := "stopped"
-		var match = true
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
-		}
-
-		if len(listOfValues) == 0 {
-			match = false
-		}
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
 			}
-
-			if string(*value) != expectedValue {
+		}
+		expectedValue := "stopped"
+		match := len(v2) > 0
+		for _, v := range v2 {
+			if string(v) != expectedValue {
 				match = false
+				break
 			}
 		}
 
@@ -1449,170 +1400,163 @@ func replicationTaskStoppedStateRetryable(ctx context.Context, input *DescribeRe
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "ready"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "creating"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "starting"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "failed"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "modifying"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "testing"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		v1 := output.ReplicationTasks
+		var v2 []string
+		for _, v := range v1 {
+			v3 := v.Status
+			if v3 != nil {
+				v2 = append(v2, *v3)
+			}
 		}
-
 		expectedValue := "deleting"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		var match bool
+		for _, v := range v2 {
+			if string(v) == expectedValue {
+				match = true
+				break
+			}
 		}
 
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
+		if match {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 

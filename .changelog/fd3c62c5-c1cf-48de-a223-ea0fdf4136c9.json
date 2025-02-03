@@ -1,8 +1,0 @@
-{
-  "id": "fd3c62c5-c1cf-48de-a223-ea0fdf4136c9",
-  "type": "feature",
-  "description": "Reduce allocations in query encoding.",
-  "modules": [
-    "."
-  ]
-}

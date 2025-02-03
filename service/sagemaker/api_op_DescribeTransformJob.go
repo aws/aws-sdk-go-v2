@@ -13,7 +13,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -432,52 +431,31 @@ func (w *TransformJobCompletedOrStoppedWaiter) WaitForOutput(ctx context.Context
 func transformJobCompletedOrStoppedStateRetryable(ctx context.Context, input *DescribeTransformJobInput, output *DescribeTransformJobOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("TransformJobStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.TransformJobStatus
 		expectedValue := "Completed"
-		value, ok := pathValue.(types.TransformJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.TransformJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("TransformJobStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.TransformJobStatus
 		expectedValue := "Stopped"
-		value, ok := pathValue.(types.TransformJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.TransformJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("TransformJobStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.TransformJobStatus
 		expectedValue := "Failed"
-		value, ok := pathValue.(types.TransformJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.TransformJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

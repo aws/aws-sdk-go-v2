@@ -10,7 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a table policy.
+// Deletes a table policy. For more information, see [Deleting a table policy] in the Amazon Simple Storage
+// Service User Guide.
+//
+// Permissions You must have the s3tables:DeleteTablePolicy permission to use this
+// operation.
+//
+// [Deleting a table policy]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-delete
 func (c *Client) DeleteTablePolicy(ctx context.Context, params *DeleteTablePolicyInput, optFns ...func(*Options)) (*DeleteTablePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteTablePolicyInput{}
@@ -38,7 +44,7 @@ type DeleteTablePolicyInput struct {
 	// This member is required.
 	Namespace *string
 
-	// The Amazon Resource Number (ARN) of the table bucket that contains the table.
+	// The Amazon Resource Name (ARN) of the table bucket that contains the table.
 	//
 	// This member is required.
 	TableBucketARN *string

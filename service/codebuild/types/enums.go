@@ -1047,8 +1047,9 @@ type WebhookBuildType string
 
 // Enum values for WebhookBuildType
 const (
-	WebhookBuildTypeBuild      WebhookBuildType = "BUILD"
-	WebhookBuildTypeBuildBatch WebhookBuildType = "BUILD_BATCH"
+	WebhookBuildTypeBuild                WebhookBuildType = "BUILD"
+	WebhookBuildTypeBuildBatch           WebhookBuildType = "BUILD_BATCH"
+	WebhookBuildTypeRunnerBuildkiteBuild WebhookBuildType = "RUNNER_BUILDKITE_BUILD"
 )
 
 // Values returns all known values for WebhookBuildType. Note that this can be
@@ -1059,6 +1060,7 @@ func (WebhookBuildType) Values() []WebhookBuildType {
 	return []WebhookBuildType{
 		"BUILD",
 		"BUILD_BATCH",
+		"RUNNER_BUILDKITE_BUILD",
 	}
 }
 

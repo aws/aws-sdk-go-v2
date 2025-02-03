@@ -11,7 +11,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -356,120 +355,71 @@ func (w *ReadSetImportJobCompletedWaiter) WaitForOutput(ctx context.Context, par
 func readSetImportJobCompletedStateRetryable(ctx context.Context, input *GetReadSetImportJobInput, output *GetReadSetImportJobOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "COMPLETED"
-		value, ok := pathValue.(types.ReadSetImportJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ReadSetImportJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "SUBMITTED"
-		value, ok := pathValue.(types.ReadSetImportJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ReadSetImportJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "IN_PROGRESS"
-		value, ok := pathValue.(types.ReadSetImportJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ReadSetImportJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "CANCELLING"
-		value, ok := pathValue.(types.ReadSetImportJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ReadSetImportJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return true, nil
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "CANCELLED"
-		value, ok := pathValue.(types.ReadSetImportJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ReadSetImportJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "FAILED"
-		value, ok := pathValue.(types.ReadSetImportJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ReadSetImportJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
+		v1 := output.Status
 		expectedValue := "COMPLETED_WITH_FAILURES"
-		value, ok := pathValue.(types.ReadSetImportJobStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.ReadSetImportJobStatus value, got %T", pathValue)
-		}
-
-		if string(value) == expectedValue {
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

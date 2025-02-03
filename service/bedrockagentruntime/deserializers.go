@@ -5154,6 +5154,15 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9121,6 +9130,16 @@ func awsRestjson1_deserializeDocumentCitationEvent(v **types.CitationEvent, valu
 		switch key {
 		case "citation":
 			if err := awsRestjson1_deserializeDocumentCitation(&sv.Citation, value); err != nil {
+				return err
+			}
+
+		case "generatedResponsePart":
+			if err := awsRestjson1_deserializeDocumentGeneratedResponsePart(&sv.GeneratedResponsePart, value); err != nil {
+				return err
+			}
+
+		case "retrievedReferences":
+			if err := awsRestjson1_deserializeDocumentRetrievedReferences(&sv.RetrievedReferences, value); err != nil {
 				return err
 			}
 

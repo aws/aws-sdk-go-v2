@@ -9,7 +9,9 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_GetMedicalScribeStream.go",
         "api_op_StartCallAnalyticsStreamTranscription.go",
+        "api_op_StartMedicalScribeStream.go",
         "api_op_StartMedicalStreamTranscription.go",
         "api_op_StartStreamTranscription.go",
         "auth.go",

@@ -79,7 +79,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a namespace. A namespace is a logical grouping of tables within your table bucket, which you can use to organize tables. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html\">Table namespaces</a>. </p>",
+                "smithy.api#documentation": "<p>Creates a namespace. A namespace is a logical grouping of tables within your table bucket, which you can use to organize tables. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace-create.html\">Create a namespace</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:CreateNamespace</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/namespaces/{tableBucketARN}",
                     "method": "PUT",
@@ -165,7 +165,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new table associated with the given namespace in a table bucket.</p>",
+                "smithy.api#documentation": "<p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html\">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p>\n               <note>\n                  <p>Additionally, you must have the <code>s3tables:PutTableData</code> permission to use this operation with the optional <code>metadata</code> request parameter. </p>\n               </note>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}",
                     "method": "PUT",
@@ -202,7 +202,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a table bucket.</p>",
+                "smithy.api#documentation": "<p>Creates a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html\">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets",
                     "method": "PUT",
@@ -272,6 +272,12 @@
                         "smithy.api#documentation": "<p>The format for the table.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.s3tables#TableMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the table.</p>"
+                    }
                 }
             },
             "traits": {
@@ -329,7 +335,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a namespace.</p>",
+                "smithy.api#documentation": "<p>Deletes a namespace. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace-delete.html\">Delete a namespace</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:DeleteNamespace</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/namespaces/{tableBucketARN}/{namespace}",
                     "method": "DELETE",
@@ -391,7 +397,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a table.</p>",
+                "smithy.api#documentation": "<p>Deletes a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-delete.html\">Deleting an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:DeleteTable</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}",
                     "method": "DELETE",
@@ -429,7 +435,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a table bucket.</p>",
+                "smithy.api#documentation": "<p>Deletes a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-delete.html\">Deleting a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:DeleteTableBucket</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets/{tableBucketARN}",
                     "method": "DELETE",
@@ -467,7 +473,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a table bucket policy.</p>",
+                "smithy.api#documentation": "<p>Deletes a table bucket policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-delete\">Deleting a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:DeleteTableBucketPolicy</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets/{tableBucketARN}/policy",
                     "method": "DELETE",
@@ -482,7 +488,7 @@
                 "tableBucketARN": {
                     "target": "com.amazonaws.s3tables#TableBucketARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the table bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -537,7 +543,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a table policy.</p>",
+                "smithy.api#documentation": "<p>Deletes a table policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-delete\">Deleting a table policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:DeleteTablePolicy</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/policy",
                     "method": "DELETE",
@@ -552,7 +558,7 @@
                 "tableBucketARN": {
                     "target": "com.amazonaws.s3tables#TableBucketARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the table bucket that contains the table.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket that contains the table.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -665,7 +671,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets details about a namespace.</p>",
+                "smithy.api#documentation": "<p>Gets details about a namespace. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html\">Table namespaces</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetNamespace</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/namespaces/{tableBucketARN}/{namespace}",
                     "method": "GET"
@@ -784,7 +790,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets details about a table.</p>",
+                "smithy.api#documentation": "<p>Gets details about a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html\">S3 Tables</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTable</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}",
                     "method": "GET"
@@ -843,7 +849,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets details on a table bucket.</p>",
+                "smithy.api#documentation": "<p>Gets details on a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-details.html\">Viewing details about an Amazon S3 table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTableBucket</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets/{tableBucketARN}",
                     "method": "GET"
@@ -897,7 +903,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets details about a maintenance configuration for a given table bucket.</p>",
+                "smithy.api#documentation": "<p>Gets details about a maintenance configuration for a given table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-table-buckets-maintenance.html\">Amazon S3 table bucket maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTableBucketMaintenanceConfiguration</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets/{tableBucketARN}/maintenance",
                     "method": "GET"
@@ -972,7 +978,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets details about a table bucket policy.</p>",
+                "smithy.api#documentation": "<p>Gets details about a table bucket policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-get\">Viewing a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTableBucketPolicy</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets/{tableBucketARN}/policy",
                     "method": "GET"
@@ -986,7 +992,7 @@
                 "tableBucketARN": {
                     "target": "com.amazonaws.s3tables#TableBucketARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the table bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1002,7 +1008,7 @@
                 "resourcePolicy": {
                     "target": "com.amazonaws.s3tables#ResourcePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the resource policy.</p>",
+                        "smithy.api#documentation": "<p>The <code>JSON</code> that defines the policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1093,7 +1099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets details about the maintenance configuration of a table.</p>",
+                "smithy.api#documentation": "<p>Gets details about the maintenance configuration of a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html\">S3 Tables maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTableMaintenanceConfiguration</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/maintenance",
                     "method": "GET"
@@ -1184,7 +1190,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the status of a maintenance job for a table.</p>",
+                "smithy.api#documentation": "<p>Gets the status of a maintenance job for a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html\">S3 Tables maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTableMaintenanceJobStatus</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/maintenance-job-status",
                     "method": "GET"
@@ -1275,7 +1281,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the location of the table metadata.</p>",
+                "smithy.api#documentation": "<p>Gets the location of the table metadata.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTableMetadataLocation</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/metadata-location",
                     "method": "GET"
@@ -1372,7 +1378,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets details about a table policy.</p>",
+                "smithy.api#documentation": "<p>Gets details about a table policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-get\">Viewing a table policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:GetTablePolicy</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/policy",
                     "method": "GET"
@@ -1386,7 +1392,7 @@
                 "tableBucketARN": {
                     "target": "com.amazonaws.s3tables#TableBucketARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the table bucket that contains the table.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket that contains the table.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1418,7 +1424,7 @@
                 "resourcePolicy": {
                     "target": "com.amazonaws.s3tables#ResourcePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the resource policy.</p>",
+                        "smithy.api#documentation": "<p>The <code>JSON</code> that defines the policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1579,6 +1585,36 @@
                 "smithy.api#documentation": "<p>Contains details about the compaction settings for an Iceberg table.      \n    </p>"
             }
         },
+        "com.amazonaws.s3tables#IcebergMetadata": {
+            "type": "structure",
+            "members": {
+                "schema": {
+                    "target": "com.amazonaws.s3tables#IcebergSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema for an Iceberg table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the metadata for an Iceberg table.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#IcebergSchema": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.s3tables#SchemaFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema fields for the table</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the schema for an Iceberg table.</p>"
+            }
+        },
         "com.amazonaws.s3tables#IcebergSnapshotManagementSettings": {
             "type": "structure",
             "members": {
@@ -1693,7 +1729,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the namespaces within a table bucket.</p>",
+                "smithy.api#documentation": "<p>Lists the namespaces within a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html\">Table namespaces</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:ListNamespaces</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/namespaces/{tableBucketARN}",
                     "method": "GET"
@@ -1827,7 +1863,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists table buckets for your account.</p>",
+                "smithy.api#documentation": "<p>Lists table buckets for your account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html\">S3 Table buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:ListTableBuckets</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets",
                     "method": "GET"
@@ -1946,7 +1982,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List tables in the given table bucket.</p>",
+                "smithy.api#documentation": "<p>List tables in the given table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html\">S3 Tables</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:ListTables</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}",
                     "method": "GET"
@@ -1960,7 +1996,7 @@
                 "smithy.api#readonly": {},
                 "smithy.test#smokeTests": [
                     {
-                        "id": "GetTable_AccessDeniedException",
+                        "id": "ListTables_AccessDeniedException",
                         "params": {
                             "tableBucketARN": "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
                         },
@@ -1992,7 +2028,7 @@
                 "tableBucketARN": {
                     "target": "com.amazonaws.s3tables#TableBucketARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon resource Number (ARN) of the table bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon resource Name (ARN) of the table bucket.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2228,7 +2264,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing maintenance configuration\n      for a table bucket.</p>",
+                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing maintenance configuration\n      for a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-table-buckets-maintenance.html\">Amazon S3 table bucket maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:PutTableBucketMaintenanceConfiguration</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets/{tableBucketARN}/maintenance/{type}",
                     "method": "PUT",
@@ -2296,7 +2332,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing table bucket policy for a\n      table bucket. </p>",
+                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing table bucket policy for a\n      table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-add\">Adding a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:PutTableBucketPolicy</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets/{tableBucketARN}/policy",
                     "method": "PUT",
@@ -2311,7 +2347,7 @@
                 "tableBucketARN": {
                     "target": "com.amazonaws.s3tables#TableBucketARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the table bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2319,7 +2355,7 @@
                 "resourcePolicy": {
                     "target": "com.amazonaws.s3tables#ResourcePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the resource policy.</p>",
+                        "smithy.api#documentation": "<p>The <code>JSON</code> that defines the policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2357,7 +2393,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing maintenance configuration\n      for a table.</p>",
+                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing maintenance configuration\n      for a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html\">S3 Tables maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:PutTableMaintenanceConfiguration</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/maintenance/{type}",
                     "method": "PUT",
@@ -2441,7 +2477,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing table policy for a table.\n    </p>",
+                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing table policy for a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-add\">Adding a table policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.\n    </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:PutTablePolicy</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/policy",
                     "method": "PUT",
@@ -2456,7 +2492,7 @@
                 "tableBucketARN": {
                     "target": "com.amazonaws.s3tables#TableBucketARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the table bucket that contains the table.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket that contains the table.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2480,7 +2516,7 @@
                 "resourcePolicy": {
                     "target": "com.amazonaws.s3tables#ResourcePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the resource policy.</p>",
+                        "smithy.api#documentation": "<p>The <code>JSON</code> that defines the policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2518,7 +2554,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Renames a table or a namespace.</p>",
+                "smithy.api#documentation": "<p>Renames a table or a namespace. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html\">S3 Tables</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:RenameTable</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/rename",
                     "method": "PUT",
@@ -3284,6 +3320,41 @@
                 }
             }
         },
+        "com.amazonaws.s3tables#SchemaField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field type. S3 Tables supports all Apache Iceberg primitive types. For more information, see the <a href=\"https://iceberg.apache.org/spec/#primitive-types\">Apache Iceberg documentation</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether values are required for each row in this field. By default, this is <code>false</code> and null values are allowed in the field. If this is <code>true</code> the field does not allow null values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a schema field.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#SchemaFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3tables#SchemaField"
+            }
+        },
         "com.amazonaws.s3tables#TableARN": {
             "type": "string",
             "traits": {
@@ -3419,7 +3490,7 @@
                 "arn": {
                     "target": "com.amazonaws.s3tables#TableBucketARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the table bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3582,6 +3653,20 @@
                 }
             }
         },
+        "com.amazonaws.s3tables#TableMetadata": {
+            "type": "union",
+            "members": {
+                "iceberg": {
+                    "target": "com.amazonaws.s3tables#IcebergMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the metadata of an Iceberg table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the table metadata.</p>"
+            }
+        },
         "com.amazonaws.s3tables#TableName": {
             "type": "string",
             "traits": {
@@ -3674,7 +3759,7 @@
                 "tableARN": {
                     "target": "com.amazonaws.s3tables#TableARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the table.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3764,7 +3849,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the metadata location for a table.</p>",
+                "smithy.api#documentation": "<p>Updates the metadata location for a table.  The metadata location of a table must be an S3 URI that begins with the table's warehouse location. The metadata location for an Apache Iceberg table must end with <code>.metadata.json</code>, or if the metadata file is Gzip-compressed, <code>.metadata.json.gz</code>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:UpdateTableMetadataLocation</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/metadata-location",
                     "method": "PUT"
@@ -3830,7 +3915,7 @@
                 "tableARN": {
                     "target": "com.amazonaws.s3tables#TableARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the table.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
                         "smithy.api#required": {}
                     }
                 },

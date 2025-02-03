@@ -1567,7 +1567,23 @@
                 "citation": {
                     "target": "com.amazonaws.bedrockagentruntime#Citation",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "2024-12-17",
+                            "message": "Citation is deprecated. Please use GeneratedResponsePart and RetrievedReferences for citation event."
+                        },
                         "smithy.api#documentation": "<p>The citation.</p>"
+                    }
+                },
+                "generatedResponsePart": {
+                    "target": "com.amazonaws.bedrockagentruntime#GeneratedResponsePart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated response to the citation event.</p>"
+                    }
+                },
+                "retrievedReferences": {
+                    "target": "com.amazonaws.bedrockagentruntime#RetrievedReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retrieved references of the citation event.</p>"
                     }
                 }
             },
@@ -4547,6 +4563,12 @@
             "members": {
                 "message": {
                     "target": "com.amazonaws.bedrockagentruntime#NonBlankString"
+                },
+                "reason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the exception. If the reason is <code>BEDROCK_MODEL_INVOCATION_SERVICE_UNAVAILABLE</code>, the model invocation service is unavailable. Retry your request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8285,7 +8307,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Queries a knowledge base and generates responses based on the retrieved results, with output in streaming format.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeModelWithResponseStream</code>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Queries a knowledge base and generates responses based on the retrieved results, with output in streaming format.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeModelWithResponseStream</code>.</p>\n         </note>\n         <p>This operation requires permission for the <code> bedrock:RetrieveAndGenerate</code> action.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",

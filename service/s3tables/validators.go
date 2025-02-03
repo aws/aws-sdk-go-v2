@@ -5,6 +5,7 @@ package s3tables
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -609,6 +610,98 @@ func addOpUpdateTableMetadataLocationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpUpdateTableMetadataLocation{}, middleware.After)
 }
 
+func validateIcebergMetadata(v *types.IcebergMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergMetadata"}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	} else if v.Schema != nil {
+		if err := validateIcebergSchema(v.Schema); err != nil {
+			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergSchema(v *types.IcebergSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergSchema"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateSchemaFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchemaField(v *types.SchemaField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchemaField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchemaFieldList(v []types.SchemaField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchemaFieldList"}
+	for i := range v {
+		if err := validateSchemaField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableMetadata(v types.TableMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableMetadata"}
+	switch uv := v.(type) {
+	case *types.TableMetadataMemberIceberg:
+		if err := validateIcebergMetadata(&uv.Value); err != nil {
+			invalidParams.AddNested("[iceberg]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateNamespaceInput(v *CreateNamespaceInput) error {
 	if v == nil {
 		return nil
@@ -658,6 +751,11 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Metadata != nil {
+		if err := validateTableMetadata(v.Metadata); err != nil {
+			invalidParams.AddNested("Metadata", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

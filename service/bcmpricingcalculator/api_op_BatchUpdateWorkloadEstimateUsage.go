@@ -14,6 +14,11 @@ import (
 //	Update a newly added or existing usage lines. You can update the usage amounts
 //
 // and usage group based on a usage ID and a Workload estimate ID.
+//
+// The BatchUpdateWorkloadEstimateUsage operation doesn't have its own IAM
+// permission. To authorize this operation for Amazon Web Services principals,
+// include the permission bcm-pricing-calculator:UpdateWorkloadEstimateUsage in
+// your policies.
 func (c *Client) BatchUpdateWorkloadEstimateUsage(ctx context.Context, params *BatchUpdateWorkloadEstimateUsageInput, optFns ...func(*Options)) (*BatchUpdateWorkloadEstimateUsageOutput, error) {
 	if params == nil {
 		params = &BatchUpdateWorkloadEstimateUsageInput{}

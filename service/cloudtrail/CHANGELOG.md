@@ -1,3 +1,11 @@
+# v1.47.2 (2025-01-31)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.1 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2025-01-24)
 
 * **Feature**: This release introduces the SearchSampleQueries API that allows users to search for CloudTrail Lake sample queries.

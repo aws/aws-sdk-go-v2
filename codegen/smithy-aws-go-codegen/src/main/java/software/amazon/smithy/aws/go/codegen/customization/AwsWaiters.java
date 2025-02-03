@@ -22,9 +22,7 @@ import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoCodegenContext;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.integration.Waiters;
-import software.amazon.smithy.model.Model;
-import software.amazon.smithy.model.shapes.ShapeId;
+import software.amazon.smithy.go.codegen.integration.Waiters2;
 
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
@@ -32,22 +30,16 @@ import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
 /**
  * Extends the base smithy Waiters integration to track in the User-Agent string.
  */
-public class AwsWaiters extends Waiters {
+public class AwsWaiters extends Waiters2 {
     @Override
     public Set<Symbol> getAdditionalClientOptions() {
         return Set.of(buildPackageSymbol("addIsWaiterUserAgent"));
     }
 
     @Override
-    public boolean enabledForService(Model model, ShapeId service) {
-        return !AwsWaiters2.PHASED_ROLLOUT_SERVICES.contains(service);
-    }
-
-    @Override
     public void writeAdditionalFiles(GoCodegenContext ctx) {
         super.writeAdditionalFiles(ctx);
 
-        // happens regardless of enabledForService() == true - so AwsWaiters2 can use it
         ctx.writerDelegator().useFileWriter("api_client.go", ctx.settings().getModuleName(), goTemplate("""
                 func addIsWaiterUserAgent(o *Options) {
                     o.APIOptions = append(o.APIOptions, func(stack $stack:P) error {

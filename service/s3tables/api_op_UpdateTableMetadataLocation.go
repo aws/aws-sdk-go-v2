@@ -10,7 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the metadata location for a table.
+// Updates the metadata location for a table. The metadata location of a table
+// must be an S3 URI that begins with the table's warehouse location. The metadata
+// location for an Apache Iceberg table must end with .metadata.json , or if the
+// metadata file is Gzip-compressed, .metadata.json.gz .
+//
+// Permissions You must have the s3tables:UpdateTableMetadataLocation permission
+// to use this operation.
 func (c *Client) UpdateTableMetadataLocation(ctx context.Context, params *UpdateTableMetadataLocationInput, optFns ...func(*Options)) (*UpdateTableMetadataLocationOutput, error) {
 	if params == nil {
 		params = &UpdateTableMetadataLocationInput{}
@@ -73,7 +79,7 @@ type UpdateTableMetadataLocationOutput struct {
 	// This member is required.
 	Namespace []string
 
-	// The Amazon Resource Number (ARN) of the table.
+	// The Amazon Resource Name (ARN) of the table.
 	//
 	// This member is required.
 	TableARN *string

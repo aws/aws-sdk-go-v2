@@ -1,3 +1,13 @@
+# v1.174.0 (2025-01-31)
+
+* **Feature**: This release introduces a new valid value in InstanceType parameter: p5en.48xlarge, in ProductionVariant.
+* **Dependency Update**: Switch to code-generated waiter matchers, removing the dependency on go-jmespath.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.173.3 (2025-01-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.173.2 (2025-01-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

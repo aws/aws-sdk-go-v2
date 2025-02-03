@@ -125,6 +125,25 @@ type AdBreakOpportunity struct {
 	noSmithyDocumentSerde
 }
 
+// The setting that indicates what conditioning MediaTailor will perform on ads
+// that the ad decision server (ADS) returns.
+type AdConditioningConfiguration struct {
+
+	// For ads that have media files with streaming delivery, indicates what
+	// transcoding action MediaTailor it first receives these ads from the ADS.
+	// TRANSCODE indicates that MediaTailor must transcode the ads. NONE indicates
+	// that you have already transcoded the ads outside of MediaTailor and don't need
+	// them transcoded as part of the ad insertion workflow. For more information about
+	// ad conditioning see [https://docs.aws.amazon.com/precondition-ads.html].
+	//
+	// [https://docs.aws.amazon.com/precondition-ads.html]: https://docs.aws.amazon.com/precondition-ads.html
+	//
+	// This member is required.
+	StreamingMediaFileConditioning StreamingMediaFileConditioning
+
+	noSmithyDocumentSerde
+}
+
 // For HLS, when set to true , MediaTailor passes through EXT-X-CUE-IN ,
 // EXT-X-CUE-OUT , and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin
 // manifest to the MediaTailor personalized manifest.
@@ -635,11 +654,12 @@ type LiveSource struct {
 	noSmithyDocumentSerde
 }
 
-// Returns Amazon CloudWatch log settings for a playback configuration.
+// Defines where AWS Elemental MediaTailor sends logs for the playback
+// configuration.
 type LogConfiguration struct {
 
-	// The percentage of session logs that MediaTailor sends to your Cloudwatch Logs
-	// account. For example, if your playback configuration has 1000 sessions and
+	// The percentage of session logs that MediaTailor sends to your configured log
+	// destination. For example, if your playback configuration has 1000 sessions and
 	// percentEnabled is set to 60 , MediaTailor sends logs for 600 of the sessions to
 	// CloudWatch Logs. MediaTailor decides at random which of the playback
 	// configuration sessions to send logs for. If you want to view logs for a specific
@@ -686,6 +706,10 @@ type ManifestProcessingRules struct {
 // [Working with configurations in AWS Elemental MediaTailor]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
 type PlaybackConfiguration struct {
 
+	// The setting that indicates what conditioning MediaTailor will perform on ads
+	// that the ad decision server (ADS) returns.
+	AdConditioningConfiguration *AdConditioningConfiguration
+
 	// The URL for the ad decision server (ADS). This includes the specification of
 	// static parameters and placeholders for dynamic parameters. AWS Elemental
 	// MediaTailor substitutes player-specific and session-specific parameters as
@@ -713,7 +737,7 @@ type PlaybackConfiguration struct {
 	// The player parameters and aliases used as dynamic variables during session
 	// initialization. For more information, see [Domain Variables].
 	//
-	// [Domain Variables]: https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html
+	// [Domain Variables]: https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domains.html
 	ConfigurationAliases map[string]map[string]string
 
 	// The configuration for a DASH source.
@@ -732,7 +756,8 @@ type PlaybackConfiguration struct {
 	// The configuration for pre-roll ad insertion.
 	LivePreRollConfiguration *LivePreRollConfiguration
 
-	// The Amazon CloudWatch log settings for a playback configuration.
+	// Defines where AWS Elemental MediaTailor sends logs for the playback
+	// configuration.
 	LogConfiguration *LogConfiguration
 
 	// The configuration for manifest processing rules. Manifest processing rules
@@ -811,7 +836,7 @@ type PrefetchConsumption struct {
 
 	// The time when prefetched ads are considered for use in an ad break. If you
 	// don't specify StartTime , the prefetched ads are available after MediaTailor
-	// retrives them from the ad decision server.
+	// retrieves them from the ad decision server.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde

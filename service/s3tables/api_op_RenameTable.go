@@ -10,7 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Renames a table or a namespace.
+// Renames a table or a namespace. For more information, see [S3 Tables] in the Amazon Simple
+// Storage Service User Guide.
+//
+// Permissions You must have the s3tables:RenameTable permission to use this
+// operation.
+//
+// [S3 Tables]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html
 func (c *Client) RenameTable(ctx context.Context, params *RenameTableInput, optFns ...func(*Options)) (*RenameTableOutput, error) {
 	if params == nil {
 		params = &RenameTableInput{}
