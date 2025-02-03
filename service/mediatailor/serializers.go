@@ -177,6 +177,13 @@ func awsRestjson1_serializeOpDocumentConfigureLogsForPlaybackConfigurationInput(
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnabledLoggingStrategies != nil {
+		ok := object.Key("EnabledLoggingStrategies")
+		if err := awsRestjson1_serializeDocument__listOfLoggingStrategies(v.EnabledLoggingStrategies, ok); err != nil {
+			return err
+		}
+	}
+
 	{
 		ok := object.Key("PercentEnabled")
 		ok.Integer(v.PercentEnabled)
@@ -4029,6 +4036,17 @@ func awsRestjson1_serializeDocument__listOfAvailMatchingCriteria(v []types.Avail
 		if err := awsRestjson1_serializeDocumentAvailMatchingCriteria(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfLoggingStrategies(v []types.LoggingStrategy, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

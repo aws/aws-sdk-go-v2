@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +50,19 @@ type ConfigureLogsForPlaybackConfigurationInput struct {
 	// This member is required.
 	PlaybackConfigurationName *string
 
+	// The method used for collecting logs from AWS Elemental MediaTailor. To
+	// configure MediaTailor to send logs directly to Amazon CloudWatch Logs, choose
+	// LEGACY_CLOUDWATCH . To configure MediaTailor to send logs to CloudWatch, which
+	// then vends the logs to your destination of choice, choose VENDED_LOGS .
+	// Supported destinations are CloudWatch Logs log group, Amazon S3 bucket, and
+	// Amazon Data Firehose stream.
+	//
+	// To use vended logs, you must configure the delivery destination in Amazon
+	// CloudWatch, as described in [Enable logging from AWS services, Logging that requires additional permissions [V2]].
+	//
+	// [Enable logging from AWS services, Logging that requires additional permissions [V2]]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions-V2
+	EnabledLoggingStrategies []types.LoggingStrategy
+
 	noSmithyDocumentSerde
 }
 
@@ -59,6 +73,14 @@ type ConfigureLogsForPlaybackConfigurationOutput struct {
 	//
 	// This member is required.
 	PercentEnabled int32
+
+	// The method used for collecting logs from AWS Elemental MediaTailor.
+	// LEGACY_CLOUDWATCH indicates that MediaTailor is sending logs directly to Amazon
+	// CloudWatch Logs. VENDED_LOGS indicates that MediaTailor is sending logs to
+	// CloudWatch, which then vends the logs to your destination of choice. Supported
+	// destinations are CloudWatch Logs log group, Amazon S3 bucket, and Amazon Data
+	// Firehose stream.
+	EnabledLoggingStrategies []types.LoggingStrategy
 
 	// The name of the playback configuration.
 	PlaybackConfigurationName *string

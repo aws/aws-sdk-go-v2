@@ -1,0 +1,8 @@
+{
+    "id": "2aa49038-2a44-438a-8c27-84d9a15e7556",
+    "type": "feature",
+    "description": "Add support for CloudWatch Vended Logs which allows for delivery of customer logs to CloudWatch Logs, S3, or Firehose.",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

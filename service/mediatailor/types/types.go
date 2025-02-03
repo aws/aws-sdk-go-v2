@@ -129,12 +129,12 @@ type AdBreakOpportunity struct {
 // that the ad decision server (ADS) returns.
 type AdConditioningConfiguration struct {
 
-	// For ads that have media files with streaming delivery, indicates what
-	// transcoding action MediaTailor it first receives these ads from the ADS.
-	// TRANSCODE indicates that MediaTailor must transcode the ads. NONE indicates
-	// that you have already transcoded the ads outside of MediaTailor and don't need
-	// them transcoded as part of the ad insertion workflow. For more information about
-	// ad conditioning see [https://docs.aws.amazon.com/precondition-ads.html].
+	// For ads that have media files with streaming delivery and supported file
+	// extensions, indicates what transcoding action MediaTailor takes when it first
+	// receives these ads from the ADS. TRANSCODE indicates that MediaTailor must
+	// transcode the ads. NONE indicates that you have already transcoded the ads
+	// outside of MediaTailor and don't need them transcoded as part of the ad
+	// insertion workflow. For more information about ad conditioning see [https://docs.aws.amazon.com/precondition-ads.html].
 	//
 	// [https://docs.aws.amazon.com/precondition-ads.html]: https://docs.aws.amazon.com/precondition-ads.html
 	//
@@ -672,6 +672,14 @@ type LogConfiguration struct {
 	// This member is required.
 	PercentEnabled int32
 
+	// The method used for collecting logs from AWS Elemental MediaTailor.
+	// LEGACY_CLOUDWATCH indicates that MediaTailor is sending logs directly to Amazon
+	// CloudWatch Logs. VENDED_LOGS indicates that MediaTailor is sending logs to
+	// CloudWatch, which then vends the logs to your destination of choice. Supported
+	// destinations are CloudWatch Logs log group, Amazon S3 bucket, and Amazon Data
+	// Firehose stream.
+	EnabledLoggingStrategies []LoggingStrategy
+
 	noSmithyDocumentSerde
 }
 
@@ -707,7 +715,8 @@ type ManifestProcessingRules struct {
 type PlaybackConfiguration struct {
 
 	// The setting that indicates what conditioning MediaTailor will perform on ads
-	// that the ad decision server (ADS) returns.
+	// that the ad decision server (ADS) returns, and what priority MediaTailor uses
+	// when inserting ads.
 	AdConditioningConfiguration *AdConditioningConfiguration
 
 	// The URL for the ad decision server (ADS). This includes the specification of

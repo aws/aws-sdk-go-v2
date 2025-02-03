@@ -323,6 +323,11 @@ func awsRestjson1_deserializeOpDocumentConfigureLogsForPlaybackConfigurationOutp
 
 	for key, value := range shape {
 		switch key {
+		case "EnabledLoggingStrategies":
+			if err := awsRestjson1_deserializeDocument__listOfLoggingStrategies(&sv.EnabledLoggingStrategies, value); err != nil {
+				return err
+			}
+
 		case "PercentEnabled":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7779,6 +7784,42 @@ func awsRestjson1_deserializeDocument__listOfLiveSource(v *[]types.LiveSource, v
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfLoggingStrategies(v *[]types.LoggingStrategy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LoggingStrategy
+	if *v == nil {
+		cv = []types.LoggingStrategy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LoggingStrategy
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LoggingStrategy to be of type string, got %T instead", value)
+			}
+			col = types.LoggingStrategy(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfPlaybackConfiguration(v *[]types.PlaybackConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9757,6 +9798,11 @@ func awsRestjson1_deserializeDocumentLogConfiguration(v **types.LogConfiguration
 
 	for key, value := range shape {
 		switch key {
+		case "EnabledLoggingStrategies":
+			if err := awsRestjson1_deserializeDocument__listOfLoggingStrategies(&sv.EnabledLoggingStrategies, value); err != nil {
+				return err
+			}
+
 		case "PercentEnabled":
 			if value != nil {
 				jtv, ok := value.(json.Number)

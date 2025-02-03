@@ -120,6 +120,25 @@ func (InsertionMode) Values() []InsertionMode {
 	}
 }
 
+type LoggingStrategy string
+
+// Enum values for LoggingStrategy
+const (
+	LoggingStrategyVendedLogs       LoggingStrategy = "VENDED_LOGS"
+	LoggingStrategyLegacyCloudwatch LoggingStrategy = "LEGACY_CLOUDWATCH"
+)
+
+// Values returns all known values for LoggingStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LoggingStrategy) Values() []LoggingStrategy {
+	return []LoggingStrategy{
+		"VENDED_LOGS",
+		"LEGACY_CLOUDWATCH",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType

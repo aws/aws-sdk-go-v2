@@ -43,7 +43,8 @@ type GetPlaybackConfigurationInput struct {
 type GetPlaybackConfigurationOutput struct {
 
 	// The setting that indicates what conditioning MediaTailor will perform on ads
-	// that the ad decision server (ADS) returns.
+	// that the ad decision server (ADS) returns, and what priority MediaTailor uses
+	// when inserting ads.
 	AdConditioningConfiguration *types.AdConditioningConfiguration
 
 	// The URL for the ad decision server (ADS). This includes the specification of
