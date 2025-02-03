@@ -29,14 +29,10 @@ func (e *errReadingBody) Error() string {
 	return fmt.Sprintf("failed to read part body: %v", e.err)
 }
 
-func (e *errReadingBody) Unwrap() error {
-	return e.err
-}
-
 // GetObjectInput represents a request to the GetObject() or DownloadObject() call. It contains common fields
 // of s3 GetObject input
 type GetObjectInput struct {
-	// Bucket the object is downloaded from
+	// Bucket where the object is downloaded from
 	Bucket string
 
 	// Key of the object to get.
@@ -768,7 +764,7 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlchunk, clientOpt
 		// If this occurs we unwrap the err to set the underlying error
 		// and attempt any remaining retries.
 		if bodyErr, ok := err.(*errReadingBody); ok {
-			err = bodyErr.Unwrap()
+			err = bodyErr
 		} else {
 			return nil, err
 		}
@@ -848,23 +844,14 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 	if resp.ContentRange == nil {
 		// ContentRange is nil when the full file contents is provided, and
 		// is not chunked. Use ContentLength instead.
-		if aws.ToInt64(resp.ContentLength) > 0 {
-			d.totalBytes = aws.ToInt64(resp.ContentLength)
-			return
-		}
+		d.totalBytes = aws.ToInt64(resp.ContentLength)
 	} else {
 		parts := strings.Split(*resp.ContentRange, "/")
-
-		total := int64(-1)
-		var err error
 		totalStr := parts[len(parts)-1]
-
-		if totalStr != "*" {
-			total, err = strconv.ParseInt(totalStr, 10, 64)
-			if err != nil {
-				d.err = err
-				return
-			}
+		total, err := strconv.ParseInt(totalStr, 10, 64)
+		if err != nil {
+			d.err = err
+			return
 		}
 
 		d.totalBytes = total
