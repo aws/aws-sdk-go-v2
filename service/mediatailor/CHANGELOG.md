@@ -1,3 +1,7 @@
+# v1.44.0 (2025-02-03)
+
+* **Feature**: Add support for CloudWatch Vended Logs which allows for delivery of customer logs to CloudWatch Logs, S3, or Firehose.
+
 # v1.43.1 (2025-01-31)
 
 * **Dependency Update**: Updated to the latest SDK module versions

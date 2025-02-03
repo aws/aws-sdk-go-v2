@@ -1,3 +1,9 @@
+# Release (2025-02-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.44.0](service/mediatailor/CHANGELOG.md#v1440-2025-02-03)
+  * **Feature**: Add support for CloudWatch Vended Logs which allows for delivery of customer logs to CloudWatch Logs, S3, or Firehose.
+
 # Release (2025-01-31)
 
 ## General Highlights
