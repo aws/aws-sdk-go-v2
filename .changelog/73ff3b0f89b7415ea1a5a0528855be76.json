@@ -1,8 +1,0 @@
-{
-    "id": "73ff3b0f-89b7-415e-a1a5-a0528855be76",
-    "type": "feature",
-    "description": "Introduces TargetDataSettings with the TablePreparationMode option available for data migrations.",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

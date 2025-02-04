@@ -1,3 +1,22 @@
+# Release (2025-02-04)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.46.0](service/databasemigrationservice/CHANGELOG.md#v1460-2025-02-04)
+  * **Feature**: Introduces TargetDataSettings with the TablePreparationMode option available for data migrations.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.45.3](service/datasync/CHANGELOG.md#v1453-2025-02-04)
+  * **Documentation**: Doc-only update to provide more information on using Kerberos authentication with SMB locations.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.39.0](service/iam/CHANGELOG.md#v1390-2025-02-04)
+  * **Feature**: This release adds support for accepting encrypted SAML assertions. Customers can now configure their identity provider to encrypt the SAML assertions it sends to IAM.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.16.0](service/neptunegraph/CHANGELOG.md#v1160-2025-02-04)
+  * **Feature**: Added argument to `list-export` to filter by graph ID
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.21.0](service/qbusiness/CHANGELOG.md#v1210-2025-02-04)
+  * **Feature**: Adds functionality to enable/disable a new Q Business Chat orchestration feature. If enabled, Q Business can orchestrate over datasources and plugins without the need for customers to select specific chat modes.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.174.1](service/sagemaker/CHANGELOG.md#v11741-2025-02-04)
+  * **Documentation**: IPv6 support for Hyperpod clusters
+
 # Release (2025-02-03)
 
 ## Module Highlights

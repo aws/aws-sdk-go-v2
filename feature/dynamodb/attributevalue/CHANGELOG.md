@@ -1,3 +1,7 @@
+# v1.18.1 (2025-02-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2025-01-31)
 
 * **Feature**: Add FixUnmarshalIndividualSetValues option to DecoderOptions to fix unmarshalling of individual values of StringSet, NumberSet, and BinarySet attributes.

@@ -1,3 +1,7 @@
+# v1.46.0 (2025-02-04)
+
+* **Feature**: Introduces TargetDataSettings with the TablePreparationMode option available for data migrations.
+
 # v1.45.9 (2025-01-31)
 
 * **Dependency Update**: Switch to code-generated waiter matchers, removing the dependency on go-jmespath.

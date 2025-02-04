@@ -1,3 +1,7 @@
+# v1.174.1 (2025-02-04)
+
+* **Documentation**: IPv6 support for Hyperpod clusters
+
 # v1.174.0 (2025-01-31)
 
 * **Feature**: This release introduces a new valid value in InstanceType parameter: p5en.48xlarge, in ProductionVariant.

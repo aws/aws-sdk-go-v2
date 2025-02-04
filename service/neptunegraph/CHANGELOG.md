@@ -1,3 +1,7 @@
+# v1.16.0 (2025-02-04)
+
+* **Feature**: Added argument to `list-export` to filter by graph ID
+
 # v1.15.9 (2025-01-31)
 
 * **Dependency Update**: Switch to code-generated waiter matchers, removing the dependency on go-jmespath.

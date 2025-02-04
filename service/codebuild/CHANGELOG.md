@@ -1,3 +1,7 @@
+# v1.51.1 (2025-02-04)
+
+* No change notes available for this release.
+
 # v1.51.0 (2025-01-31)
 
 * **Feature**: Added support for CodeBuild self-hosted Buildkite runner builds

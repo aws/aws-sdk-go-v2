@@ -1,3 +1,7 @@
+# v1.43.11 (2025-02-04)
+
+* No change notes available for this release.
+
 # v1.43.10 (2025-01-31)
 
 * **Dependency Update**: Switch to code-generated waiter matchers, removing the dependency on go-jmespath.
