@@ -146,6 +146,9 @@ func (c *Client) addOperationImportTableMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opImportTableMiddleware(stack, options); err != nil {
 		return err
 	}

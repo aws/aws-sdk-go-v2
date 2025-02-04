@@ -132,6 +132,9 @@ func (c *Client) addOperationListTagsOfResourceMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTagsOfResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
