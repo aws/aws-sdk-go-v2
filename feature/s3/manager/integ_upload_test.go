@@ -15,6 +15,7 @@ import (
 	"fmt"
 	"hash"
 	"hash/crc32"
+	"hash/crc64"
 	"io"
 	"log"
 	"reflect"
@@ -28,6 +29,8 @@ import (
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/middleware"
 )
+
+const crc64NVME = 0x9a6c_9329_ac4b_c9b5
 
 var integBuf12MB = make([]byte, 1024*1024*12)
 var integMD512MB = fmt.Sprintf("%x", md5.Sum(integBuf12MB))
@@ -124,6 +127,7 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 	singlePartBytes := integBuf12MB[0:manager.DefaultUploadPartSize]
 	singlePartCRC32 := base64Sum(crc32.NewIEEE(), singlePartBytes)
 	singlePartCRC32C := base64Sum(crc32.New(crc32.MakeTable(crc32.Castagnoli)), singlePartBytes)
+	singlePartCRC64NVME := base64Sum(crc64.New(crc64.MakeTable(crc64NVME)), singlePartBytes)
 	singlePartSHA1 := base64Sum(sha1.New(), singlePartBytes)
 	singlePartSHA256 := base64Sum(sha256.New(), singlePartBytes)
 	singlePartMD5 := base64Sum(md5.New(), singlePartBytes)
@@ -132,6 +136,7 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 	multiPartTailBytes := integBuf12MB[manager.DefaultUploadPartSize*2:]
 	multiPartTailCRC32 := base64Sum(crc32.NewIEEE(), multiPartTailBytes)
 	multiPartTailCRC32C := base64Sum(crc32.New(crc32.MakeTable(crc32.Castagnoli)), multiPartTailBytes)
+	multiPartTailCRC64NVME := base64Sum(crc64.New(crc64.MakeTable(crc64NVME)), multiPartTailBytes)
 	multiPartTailSHA1 := base64Sum(sha1.New(), multiPartTailBytes)
 	multiPartTailSHA256 := base64Sum(sha256.New(), multiPartTailBytes)
 	multiPartTailETag := fmt.Sprintf("%q", hexSum(md5.New(), multiPartTailBytes))
@@ -143,20 +148,25 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 	multiPartSHA256 := base64SumOfSums(sha256.New(), []string{singlePartSHA256, singlePartSHA256, multiPartTailSHA256})
 	multiPartETag := `"4e982d58b6c2ce178ae042c23f9bca6e-3"` // Not obvious how this is computed
 
+	// s3 wants running checksum for crc64nvme
+	multiPartCRC64NVME := base64Sum(crc64.New(crc64.MakeTable(crc64NVME)), integBuf12MB)
+
 	cases := map[string]map[string]struct {
-		algorithm            s3types.ChecksumAlgorithm
-		payload              io.Reader
-		checksumCRC32        string
-		checksumCRC32C       string
-		checksumSHA1         string
-		checksumSHA256       string
-		contentMD5           string
-		expectParts          []s3types.CompletedPart
-		expectChecksumCRC32  string
-		expectChecksumCRC32C string
-		expectChecksumSHA1   string
-		expectChecksumSHA256 string
-		expectETag           string
+		algorithm               s3types.ChecksumAlgorithm
+		payload                 io.Reader
+		checksumCRC32           string
+		checksumCRC32C          string
+		checksumCRC64NVME       string
+		checksumSHA1            string
+		checksumSHA256          string
+		contentMD5              string
+		expectParts             []s3types.CompletedPart
+		expectChecksumCRC32     string
+		expectChecksumCRC32C    string
+		expectChecksumCRC64NVME string
+		expectChecksumSHA1      string
+		expectChecksumSHA256    string
+		expectETag              string
 	}{
 		"auto single part": {
 			"no checksum algorithm passed": {
@@ -175,6 +185,12 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 				payload:              bytes.NewReader(singlePartBytes),
 				expectChecksumCRC32C: singlePartCRC32C,
 				expectETag:           singlePartETag,
+			},
+			"CRC64NVME": {
+				algorithm:               s3types.ChecksumAlgorithmCrc64nvme,
+				payload:                 bytes.NewReader(singlePartBytes),
+				expectChecksumCRC64NVME: singlePartCRC64NVME,
+				expectETag:              singlePartETag,
 			},
 			"SHA1": {
 				algorithm:          s3types.ChecksumAlgorithmSha1,
@@ -201,6 +217,12 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 				checksumCRC32C:       singlePartCRC32C,
 				expectChecksumCRC32C: singlePartCRC32C,
 				expectETag:           singlePartETag,
+			},
+			"CRC64NVME": {
+				payload:                 bytes.NewReader(singlePartBytes),
+				checksumCRC64NVME:       singlePartCRC64NVME,
+				expectChecksumCRC64NVME: singlePartCRC64NVME,
+				expectETag:              singlePartETag,
 			},
 			"SHA1": {
 				payload:            bytes.NewReader(singlePartBytes),
@@ -289,6 +311,29 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 				},
 				expectChecksumCRC32C: multiPartCRC32C,
 				expectETag:           multiPartETag,
+			},
+			"CRC64NVME": {
+				algorithm: s3types.ChecksumAlgorithmCrc64nvme,
+				payload:   bytes.NewReader(multiPartBytes),
+				expectParts: []s3types.CompletedPart{
+					{
+						ChecksumCRC64NVME: aws.String(singlePartCRC64NVME),
+						ETag:              aws.String(singlePartETag),
+						PartNumber:        aws.Int32(1),
+					},
+					{
+						ChecksumCRC64NVME: aws.String(singlePartCRC64NVME),
+						ETag:              aws.String(singlePartETag),
+						PartNumber:        aws.Int32(2),
+					},
+					{
+						ChecksumCRC64NVME: aws.String(multiPartTailCRC64NVME),
+						ETag:              aws.String(multiPartTailETag),
+						PartNumber:        aws.Int32(3),
+					},
+				},
+				expectChecksumCRC64NVME: multiPartCRC64NVME,
+				expectETag:              multiPartETag,
 			},
 			"SHA1": {
 				algorithm: s3types.ChecksumAlgorithmSha1,
@@ -386,6 +431,30 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 				expectChecksumCRC32C: multiPartCRC32C,
 				expectETag:           multiPartETag,
 			},
+			"CRC64NVME": {
+				algorithm:         s3types.ChecksumAlgorithmCrc64nvme,
+				payload:           bytes.NewReader(multiPartBytes),
+				checksumCRC64NVME: multiPartCRC64NVME,
+				expectParts: []s3types.CompletedPart{
+					{
+						ChecksumCRC64NVME: aws.String(singlePartCRC64NVME),
+						ETag:              aws.String(singlePartETag),
+						PartNumber:        aws.Int32(1),
+					},
+					{
+						ChecksumCRC64NVME: aws.String(singlePartCRC64NVME),
+						ETag:              aws.String(singlePartETag),
+						PartNumber:        aws.Int32(2),
+					},
+					{
+						ChecksumCRC64NVME: aws.String(multiPartTailCRC64NVME),
+						ETag:              aws.String(multiPartTailETag),
+						PartNumber:        aws.Int32(3),
+					},
+				},
+				expectChecksumCRC64NVME: multiPartCRC64NVME,
+				expectETag:              multiPartETag,
+			},
 			"SHA1": {
 				algorithm:    s3types.ChecksumAlgorithmSha1,
 				payload:      bytes.NewReader(multiPartBytes),
@@ -449,6 +518,7 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 						ChecksumAlgorithm: c.algorithm,
 						ChecksumCRC32:     toStringPtr(c.checksumCRC32),
 						ChecksumCRC32C:    toStringPtr(c.checksumCRC32C),
+						ChecksumCRC64NVME: toStringPtr(c.checksumCRC64NVME),
 						ChecksumSHA1:      toStringPtr(c.checksumSHA1),
 						ChecksumSHA256:    toStringPtr(c.checksumSHA256),
 						ContentMD5:        toStringPtr(c.contentMD5),
@@ -466,6 +536,9 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 					}
 					if e, a := c.expectChecksumCRC32C, aws.ToString(out.ChecksumCRC32C); e != a {
 						t.Errorf("expect %v CRC32C checksum, got %v", e, a)
+					}
+					if e, a := c.expectChecksumCRC64NVME, aws.ToString(out.ChecksumCRC64NVME); e != a {
+						t.Errorf("expect %v CRC64NVME checksum, got %v", e, a)
 					}
 					if e, a := c.expectChecksumSHA1, aws.ToString(out.ChecksumSHA1); e != a {
 						t.Errorf("expect %v SHA1 checksum, got %v", e, a)
