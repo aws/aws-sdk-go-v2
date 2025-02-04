@@ -2176,7 +2176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified IAM role to the specified instance profile. An instance profile\n            can contain only one role, and this quota cannot be increased. You can remove the\n            existing role and then add a different role to an instance profile. You must then wait\n            for the change to appear across all of Amazon Web Services because of <a href=\"https://en.wikipedia.org/wiki/Eventual_consistency\">eventual\n                consistency</a>. To force the change, you must <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html\">disassociate the instance profile</a> and then <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html\">associate the\n                instance profile</a>, or you can stop your instance and then restart it.</p>\n         <note>\n            <p>The caller of this operation must be granted the <code>PassRole</code> permission\n                on the IAM role by a permissions policy.</p>\n         </note>\n         <p> For more information about roles, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the\n                <i>IAM User Guide</i>. For more information about instance profiles,\n            see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html\">Using\n                instance profiles</a> in the <i>IAM User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Adds the specified IAM role to the specified instance profile. An instance profile\n            can contain only one role, and this quota cannot be increased. You can remove the\n            existing role and then add a different role to an instance profile. You must then wait\n            for the change to appear across all of Amazon Web Services because of <a href=\"https://en.wikipedia.org/wiki/Eventual_consistency\">eventual\n                consistency</a>. To force the change, you must <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html\">disassociate the instance profile</a> and then <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html\">associate the\n                instance profile</a>, or you can stop your instance and then restart it.</p>\n         <note>\n            <p>The caller of this operation must be granted the <code>PassRole</code> permission\n                on the IAM role by a permissions policy.</p>\n         </note>\n         <important>\n            <p>When using the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#available-keys-for-iam\">iam:AssociatedResourceArn</a> condition in a policy to restrict the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">PassRole</a> IAM action, special considerations apply if the policy is\n                intended to define access for the <code>AddRoleToInstanceProfile</code> action. In\n                this case, you cannot specify a Region or instance ID in the EC2 instance ARN. The\n                ARN value must be <code>arn:aws:ec2:*:CallerAccountId:instance/*</code>. Using any\n                other ARN value may lead to unexpected evaluation results.</p>\n         </important>\n         <p> For more information about roles, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the\n                <i>IAM User Guide</i>. For more information about instance profiles,\n            see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html\">Using\n                instance profiles</a> in the <i>IAM User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To add a role to an instance profile",
@@ -3585,6 +3585,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags that you want to attach to the new IAM SAML provider.\n      Each tag consists of a key name and an associated value. For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>\n         <note>\n            <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request \n   fails and the resource is not created.</p>\n         </note>"
                     }
+                },
+                "AssertionEncryptionMode": {
+                    "target": "com.amazonaws.iam#assertionEncryptionModeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the encryption setting for the SAML provider.</p>"
+                    }
+                },
+                "AddPrivateKey": {
+                    "target": "com.amazonaws.iam#privateKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private key generated from your external identity provider. The private key must\n            be a .pem file that uses AES-GCM or AES-CBC encryption algorithm to decrypt SAML\n            assertions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3920,7 +3932,7 @@
                     "code": "ReportExpired",
                     "httpResponseCode": 410
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the most recent credential report has expired. To\n      generate a new credential report, use <a>GenerateCredentialReport</a>. For more\n      information about credential report expiration, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting credential reports</a> in the\n        <i>IAM User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because the most recent credential report has expired. To\n      generate a new credential report, use <a>GenerateCredentialReport</a>. For more\n      information about credential report expiration, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting credential reports</a> in the\n      <i>IAM User Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 410
             }
@@ -5332,7 +5344,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables the management of privileged root user credentials across member accounts in\n            your organization. When you disable this feature, the management account and the\n            delegated admininstrator for IAM can no longer manage root user credentials for member\n            accounts in your organization.</p>",
+                "smithy.api#documentation": "<p>Disables the management of privileged root user credentials across member accounts in\n            your organization. When you disable this feature, the management account and the\n            delegated administrator for IAM can no longer manage root user credentials for member\n            accounts in your organization.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To disable the RootCredentialsManagement feature in your organization",
@@ -5397,7 +5409,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables root user sessions for privileged tasks across member accounts in your\n            organization. When you disable this feature, the management account and the delegated\n            admininstrator for IAM can no longer perform privileged tasks on member accounts in\n            your organization.</p>",
+                "smithy.api#documentation": "<p>Disables root user sessions for privileged tasks across member accounts in your\n            organization. When you disable this feature, the management account and the delegated\n            administrator for IAM can no longer perform privileged tasks on member accounts in\n            your organization.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To disable the RootSessions feature in your organization",
@@ -5570,7 +5582,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the management of privileged root user credentials across member accounts in your\n            organization. When you enable root credentials management for <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management\">centralized root access</a>, the management account and the delegated\n            admininstrator for IAM can manage root user credentials for member accounts in your\n            organization.</p>\n         <p>Before you enable centralized root access, you must have an account configured with\n            the following settings:</p>\n         <ul>\n            <li>\n               <p>You must manage your Amazon Web Services accounts in <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">Organizations</a>.</p>\n            </li>\n            <li>\n               <p>Enable trusted access for Identity and Access Management in Organizations. For details, see\n                        <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-ra.html\">IAM and Organizations</a> in the <i>Organizations User\n                        Guide</i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Enables the management of privileged root user credentials across member accounts in your\n            organization. When you enable root credentials management for <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management\">centralized root access</a>, the management account and the delegated\n            administrator for IAM can manage root user credentials for member accounts in your\n            organization.</p>\n         <p>Before you enable centralized root access, you must have an account configured with\n            the following settings:</p>\n         <ul>\n            <li>\n               <p>You must manage your Amazon Web Services accounts in <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">Organizations</a>.</p>\n            </li>\n            <li>\n               <p>Enable trusted access for Identity and Access Management in Organizations. For details, see\n                        <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-iam.html\">IAM and Organizations</a> in the <i>Organizations User\n                        Guide</i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
                         "title": "To enable the RootCredentialsManagement feature in your organization",
@@ -7498,6 +7510,12 @@
         "com.amazonaws.iam#GetSAMLProviderResponse": {
             "type": "structure",
             "members": {
+                "SAMLProviderUUID": {
+                    "target": "com.amazonaws.iam#privateKeyIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the SAML provider.</p>"
+                    }
+                },
                 "SAMLMetadataDocument": {
                     "target": "com.amazonaws.iam#SAMLMetadataDocumentType",
                     "traits": {
@@ -7520,6 +7538,18 @@
                     "target": "com.amazonaws.iam#tagListType",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags that are attached to the specified IAM SAML provider. The returned list of tags is sorted by tag key.\n      For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>"
+                    }
+                },
+                "AssertionEncryptionMode": {
+                    "target": "com.amazonaws.iam#assertionEncryptionModeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the encryption setting for the SAML provider.</p>"
+                    }
+                },
+                "PrivateKeyList": {
+                    "target": "com.amazonaws.iam#privateKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private key metadata for the SAML provider.</p>"
                     }
                 }
             },
@@ -8553,7 +8583,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the account alias associated with the Amazon Web Services account (Note: you can have only\n            one). For information about using an Amazon Web Services account alias, see <a href=\"https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html\">Creating,\n                deleting, and listing an Amazon Web Services account alias</a> in the <i>Amazon Web Services Sign-In\n                User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Lists the account alias associated with the Amazon Web Services account (Note: you can have only\n            one). For information about using an Amazon Web Services account alias, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#CreateAccountAlias\">Creating,\n                deleting, and listing an Amazon Web Services account alias</a> in the\n                <i>IAM User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list account aliases",
@@ -11757,7 +11787,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request was rejected because your organization does not have All features enabled. For\n      more information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set\">Available feature sets</a> in the <i>Organizations User\n      Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because your organization does not have All features enabled. For\n      more information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set\">Available feature sets</a> in the <i>Organizations User\n          Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -13163,7 +13193,7 @@
                 "RoleLastUsed": {
                     "target": "com.amazonaws.iam#RoleLastUsed",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about the last time that an IAM role was used. This includes the\n         date and time and the Region in which the role was last used. Activity is only reported for\n         the trailing 400 days. This period can be shorter if your Region began supporting these\n         features within the last year. The role might have been used more than 400 days ago. For\n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period\">Regions where data is tracked</a> in the <i>IAM User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Contains information about the last time that an IAM role was used. This includes the\n         date and time and the Region in which the role was last used. Activity is only reported for\n         the trailing 400 days. This period can be shorter if your Region began supporting these\n         features within the last year. The role might have been used more than 400 days ago. For\n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period\">Regions where data is tracked</a> in the\n         <i>IAM User Guide</i>.</p>"
                     }
                 }
             },
@@ -13224,6 +13254,26 @@
                     "min": 1000,
                     "max": 10000000
                 }
+            }
+        },
+        "com.amazonaws.iam#SAMLPrivateKey": {
+            "type": "structure",
+            "members": {
+                "KeyId": {
+                    "target": "com.amazonaws.iam#privateKeyIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the SAML private key.</p>"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.iam#dateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n         </a> format, when the private key was uploaded.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the private keys for the SAML provider.</p>\n         <p>This data type is used as a response element in the <a>GetSAMLProvider</a> operation.</p>"
             }
         },
         "com.amazonaws.iam#SAMLProviderListEntry": {
@@ -13509,7 +13559,7 @@
                 "TotalAuthenticatedEntities": {
                     "target": "com.amazonaws.iam#integerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of authenticated principals (root user, IAM users, or IAM roles)\n         that have attempted to access the service.</p>\n         <p>This field is null if no principals attempted to access the service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
+                        "smithy.api#documentation": "<p>The total number of authenticated principals (root user, IAM users, or IAM roles) that\n         have attempted to access the service.</p>\n         <p>This field is null if no principals attempted to access the service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 },
                 "TrackedActionsLastAccessed": {
@@ -15552,7 +15602,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the metadata document for an existing SAML provider resource object.</p>\n         <note>\n            <p>This operation requires <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the metadata document, SAML encryption settings, and private keys for an\n            existing SAML provider. To rotate private keys, add your new private key and then remove\n            the old key in a separate request.</p>"
             }
         },
         "com.amazonaws.iam#UpdateSAMLProviderRequest": {
@@ -15561,8 +15611,7 @@
                 "SAMLMetadataDocument": {
                     "target": "com.amazonaws.iam#SAMLMetadataDocumentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>An XML document generated by an identity provider (IdP) that supports SAML 2.0. The\n            document includes the issuer's name, expiration information, and keys that can be used\n            to validate the SAML authentication response (assertions) that are received from the\n            IdP. You must generate the metadata document using the identity management software that\n            is used as your organization's IdP.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An XML document generated by an identity provider (IdP) that supports SAML 2.0. The\n            document includes the issuer's name, expiration information, and keys that can be used\n            to validate the SAML authentication response (assertions) that are received from the\n            IdP. You must generate the metadata document using the identity management software that\n            is used as your IdP.</p>"
                     }
                 },
                 "SAMLProviderArn": {
@@ -15570,6 +15619,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SAML provider to update.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AssertionEncryptionMode": {
+                    "target": "com.amazonaws.iam#assertionEncryptionModeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the encryption setting for the SAML provider.</p>"
+                    }
+                },
+                "AddPrivateKey": {
+                    "target": "com.amazonaws.iam#privateKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the new private key from your external identity provider. The\n            private key must be a .pem file that uses AES-GCM or AES-CBC encryption algorithm to\n            decrypt SAML assertions.</p>"
+                    }
+                },
+                "RemovePrivateKey": {
+                    "target": "com.amazonaws.iam#privateKeyIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Key ID of the private key to remove.</p>"
                     }
                 }
             },
@@ -16374,6 +16441,23 @@
                 }
             }
         },
+        "com.amazonaws.iam#assertionEncryptionModeType": {
+            "type": "enum",
+            "members": {
+                "Required": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Required"
+                    }
+                },
+                "Allowed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Allowed"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iam#assignmentStatusType": {
             "type": "enum",
             "members": {
@@ -16966,6 +17050,28 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^v[1-9][0-9]*(\\.[A-Za-z0-9-]*)?$"
+            }
+        },
+        "com.amazonaws.iam#privateKeyIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 22,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.iam#privateKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#SAMLPrivateKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.iam#privateKeyType": {

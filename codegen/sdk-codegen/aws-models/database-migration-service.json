@@ -2430,6 +2430,12 @@
                         "smithy.api#documentation": "<p>Specifies information about the source data provider.</p>"
                     }
                 },
+                "TargetDataSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#TargetDataSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies information about the target data provider.</p>"
+                    }
+                },
                 "NumberOfJobs": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
@@ -4168,6 +4174,12 @@
                     "target": "com.amazonaws.databasemigrationservice#SourceDataSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies information about the data migration's source data provider.</p>"
+                    }
+                },
+                "TargetDataSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#TargetDataSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies information about the data migration's target data provider.</p>"
                     }
                 },
                 "DataMigrationStatistics": {
@@ -11767,24 +11779,24 @@
                 "KeyCacheSecretId": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the secret ID of the key cache for the replication instance.</p>"
+                        "smithy.api#documentation": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication.</p>"
                     }
                 },
                 "KeyCacheSecretIamArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the IAM role that grants Amazon Web Services DMS access to the secret containing key cache file for the replication instance.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the IAM role that grants Amazon Web Services DMS access to the secret containing key cache file for the kerberos authentication.</p>"
                     }
                 },
                 "Krb5FileContents": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication of the replication instance.</p>"
+                        "smithy.api#documentation": "<p>Specifies the contents of krb5 configuration file required for kerberos authentication.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies using Kerberos authentication settings for use with DMS.</p>"
+                "smithy.api#documentation": "<p>Specifies the settings required for kerberos authentication when creating the replication instance.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#KeyList": {
@@ -12183,7 +12195,7 @@
                 "AuthenticationMethod": {
                     "target": "com.amazonaws.databasemigrationservice#SqlServerAuthenticationMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies using Kerberos authentication with Microsoft SQL Server.</p>"
+                        "smithy.api#documentation": "<p>Specifies the authentication method to be used with Microsoft SQL Server.</p>"
                     }
                 }
             },
@@ -12459,6 +12471,12 @@
                     "target": "com.amazonaws.databasemigrationservice#SourceDataSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The new information about the source data provider for the data migration.</p>"
+                    }
+                },
+                "TargetDataSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#TargetDataSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new information about the target data provider for the data migration.</p>"
                     }
                 },
                 "NumberOfJobs": {
@@ -14585,7 +14603,7 @@
                 "AuthenticationMethod": {
                     "target": "com.amazonaws.databasemigrationservice#OracleAuthenticationMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies using Kerberos authentication with Oracle.</p>"
+                        "smithy.api#documentation": "<p>Specifies the authentication method to be used with Oracle.</p>"
                     }
                 }
             },
@@ -19326,6 +19344,29 @@
                 "target": "com.amazonaws.databasemigrationservice#TableToReload"
             }
         },
+        "com.amazonaws.databasemigrationservice#TablePreparationMode": {
+            "type": "enum",
+            "members": {
+                "DO_NOTHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "do-nothing"
+                    }
+                },
+                "TRUNCATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "truncate"
+                    }
+                },
+                "DROP_TABLES_ON_TARGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "drop-tables-on-target"
+                    }
+                }
+            }
+        },
         "com.amazonaws.databasemigrationservice#TableStatistics": {
             "type": "structure",
             "members": {
@@ -19543,6 +19584,26 @@
                 "traits": {
                     "smithy.api#xmlName": "Tag"
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#TargetDataSetting": {
+            "type": "structure",
+            "members": {
+                "TablePreparationMode": {
+                    "target": "com.amazonaws.databasemigrationservice#TablePreparationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This setting determines how DMS handles the target tables before starting a data migration,\n      either by leaving them untouched, dropping and recreating them,\n      or truncating the existing data in the target tables.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines settings for a target data provider for a data migration.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#TargetDataSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#TargetDataSetting"
             }
         },
         "com.amazonaws.databasemigrationservice#TargetDbType": {

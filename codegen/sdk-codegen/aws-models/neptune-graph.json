@@ -2305,7 +2305,7 @@
                 "maxProvisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 1024,\n       or the approved upper limit for your account.</p>\n         <p> If both the minimum and maximum values are specified, the max of the\n    <code>min-provisioned-memory</code> and <code>max-provisioned memory</code> is\n      used to create the graph. If neither value is specified 128 m-NCUs are used.</p>"
+                        "smithy.api#documentation": "<p>The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 1024,\n       or the approved upper limit for your account.</p>\n         <p> If both the minimum and maximum values are specified, the final\n    <code>provisioned-memory</code> will be chosen per the actual size of your imported data. If neither value is specified, \n     128 m-NCUs are used.</p>"
                     }
                 },
                 "minProvisionedMemory": {
@@ -5220,6 +5220,13 @@
         "com.amazonaws.neptunegraph#ListExportTasksInput": {
             "type": "structure",
             "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Neptune Analytics graph.</p>",
+                        "smithy.api#httpQuery": "graphIdentifier"
+                    }
+                },
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {

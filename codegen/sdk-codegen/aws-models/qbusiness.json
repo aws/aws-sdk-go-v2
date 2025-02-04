@@ -701,6 +701,21 @@
                 "smithy.api#documentation": "<p>The creator mode specific admin controls configured for an Amazon Q Business application.\n            Determines whether an end user can generate LLM-only responses when they use the web\n            experience.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html\">Admin controls and guardrails</a> and <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope\">Conversation settings</a>.</p>"
             }
         },
+        "com.amazonaws.qbusiness#AppliedOrchestrationConfiguration": {
+            "type": "structure",
+            "members": {
+                "control": {
+                    "target": "com.amazonaws.qbusiness#OrchestrationControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Information about whether chat orchestration is enabled or disabled for an\n            Amazon Q Business application. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The chat orchestration specific admin controls configured for an Amazon Q Business\n            application. Determines whether Amazon Q Business automatically routes chat requests across\n            configured plugins and data sources in your Amazon Q Business application.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails-global-controls.html#guardrails-global-orchestration\">Chat orchestration settings</a>.</p>"
+            }
+        },
         "com.amazonaws.qbusiness#AssociatePermission": {
             "type": "operation",
             "input": {
@@ -6574,7 +6589,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about an chat controls configured for an existing Amazon Q Business\n            application.</p>",
+                "smithy.api#documentation": "<p>Gets information about chat controls configured for an existing Amazon Q Business\n            application.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/chatcontrols",
                     "method": "GET",
@@ -6626,6 +6641,12 @@
                     "target": "com.amazonaws.qbusiness#ResponseScope",
                     "traits": {
                         "smithy.api#documentation": "<p>The response scope configured for a Amazon Q Business application. This determines whether\n            your application uses its retrieval augmented generation (RAG) system to generate\n            answers only from your enterprise data, or also uses the large language models (LLM)\n            knowledge to respons to end user questions in chat.</p>"
+                    }
+                },
+                "orchestrationConfiguration": {
+                    "target": "com.amazonaws.qbusiness#AppliedOrchestrationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The chat response orchestration settings for your application.</p>\n         <note>\n            <p>Chat orchestration is optimized to work for English language content. For more\n                details on language support in Amazon Q Business, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/supported-languages.html\">Supported languages</a>.</p>\n         </note>"
                     }
                 },
                 "blockedPhrases": {
@@ -10967,6 +10988,38 @@
                 "smithy.api#documentation": "<p>Information about the OIDC-compliant identity provider (IdP) used to authenticate end\n            users of an Amazon Q Business web experience.</p>"
             }
         },
+        "com.amazonaws.qbusiness#OrchestrationConfiguration": {
+            "type": "structure",
+            "members": {
+                "control": {
+                    "target": "com.amazonaws.qbusiness#OrchestrationControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Status information about whether chat orchestration is activated or deactivated for\n            your Amazon Q Business application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information required to enable chat orchestration for your Amazon Q Business\n            application.</p>\n         <note>\n            <p>Chat orchestration is optimized to work for English language content. For more\n                details on language support in Amazon Q Business, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/supported-languages.html\">Supported languages</a>.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.qbusiness#OrchestrationControl": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.qbusiness#Origin": {
             "type": "string",
             "traits": {
@@ -13567,7 +13620,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an set of chat controls configured for an existing Amazon Q Business\n            application.</p>",
+                "smithy.api#documentation": "<p>Updates a set of chat controls configured for an existing Amazon Q Business\n            application.</p>",
                 "smithy.api#http": {
                     "uri": "/applications/{applicationId}/chatcontrols",
                     "method": "PATCH",
@@ -13598,6 +13651,12 @@
                     "target": "com.amazonaws.qbusiness#ResponseScope",
                     "traits": {
                         "smithy.api#documentation": "<p>The response scope configured for your application. This determines whether your\n            application uses its retrieval augmented generation (RAG) system to generate answers\n            only from your enterprise data, or also uses the large language models (LLM) knowledge\n            to respons to end user questions in chat.</p>"
+                    }
+                },
+                "orchestrationConfiguration": {
+                    "target": "com.amazonaws.qbusiness#OrchestrationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The chat response orchestration settings for your application.</p>"
                     }
                 },
                 "blockedPhrasesConfigurationUpdate": {
