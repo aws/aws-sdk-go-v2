@@ -1,0 +1,8 @@
+{
+    "id": "58d61e37-25ad-44db-86eb-140142d9ea9c",
+    "type": "feature",
+    "description": "Adds functionality to enable/disable a new Q Business Chat orchestration feature. If enabled, Q Business can orchestrate over datasources and plugins without the need for customers to select specific chat modes.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

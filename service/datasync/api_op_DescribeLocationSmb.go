@@ -62,8 +62,8 @@ type DescribeLocationSmbOutput struct {
 	// element applies only if AuthenticationType is set to NTLM .
 	Domain *string
 
-	// The Kerberos service principal name (SPN) that has permission to access the
-	// files, folders, and file metadata in your SMB file server.
+	// The Kerberos principal that has permission to access the files, folders, and
+	// file metadata in your SMB file server.
 	KerberosPrincipal *string
 
 	// The ARN of the SMB location.

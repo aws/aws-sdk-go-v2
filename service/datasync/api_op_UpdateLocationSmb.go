@@ -63,38 +63,32 @@ type UpdateLocationSmbInput struct {
 	Domain *string
 
 	// Specifies your Kerberos key table (keytab) file, which includes mappings
-	// between your service principal name (SPN) and encryption keys.
+	// between your Kerberos principal and encryption keys.
 	//
-	// You can specify the keytab using a file path (for example,
-	// file://path/to/file.keytab ). The file must be base64 encoded. If you're using
-	// the CLI, the encoding is done for you.
+	// The file must be base64 encoded. If you're using the CLI, the encoding is done
+	// for you.
 	//
-	// To avoid task execution errors, make sure that the SPN in the keytab file
-	// matches exactly what you specify for KerberosPrincipal and in your krb5.conf
-	// file.
+	// To avoid task execution errors, make sure that the Kerberos principal that you
+	// use to create the keytab file matches exactly what you specify for
+	// KerberosPrincipal .
 	KerberosKeytab []byte
 
 	// Specifies a Kerberos configuration file ( krb5.conf ) that defines your Kerberos
 	// realm configuration.
 	//
-	// You can specify the krb5.conf using a file path (for example,
-	// file://path/to/krb5.conf ). The file must be base64 encoded. If you're using the
-	// CLI, the encoding is done for you.
-	//
-	// To avoid task execution errors, make sure that the service principal name (SPN)
-	// in the krb5.conf file matches exactly what you specify for KerberosPrincipal
-	// and in your keytab file.
+	// The file must be base64 encoded. If you're using the CLI, the encoding is done
+	// for you.
 	KerberosKrb5Conf []byte
 
-	// Specifies a service principal name (SPN), which is an identity in your Kerberos
-	// realm that has permission to access the files, folders, and file metadata in
-	// your SMB file server.
+	// Specifies a Kerberos prinicpal, which is an identity in your Kerberos realm
+	// that has permission to access the files, folders, and file metadata in your SMB
+	// file server.
 	//
-	// SPNs are case sensitive and must include a prepended cifs/ . For example, an SPN
-	// might look like cifs/kerberosuser@EXAMPLE.COM .
+	// A Kerberos principal might look like HOST/kerberosuser@EXAMPLE.COM .
 	//
-	// Your task execution will fail if the SPN that you provide for this parameter
-	// doesn’t match what’s exactly in your keytab or krb5.conf files.
+	// Principal names are case sensitive. Your DataSync task execution will fail if
+	// the principal that you specify for this parameter doesn’t exactly match the
+	// principal that you use to create the keytab file.
 	KerberosPrincipal *string
 
 	// Specifies the version of the Server Message Block (SMB) protocol that DataSync

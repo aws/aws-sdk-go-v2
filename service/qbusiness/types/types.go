@@ -351,6 +351,25 @@ type AppliedCreatorModeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The chat orchestration specific admin controls configured for an Amazon Q
+// Business application. Determines whether Amazon Q Business automatically routes
+// chat requests across configured plugins and data sources in your Amazon Q
+// Business application.
+//
+// For more information, see [Chat orchestration settings].
+//
+// [Chat orchestration settings]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails-global-controls.html#guardrails-global-orchestration
+type AppliedOrchestrationConfiguration struct {
+
+	//  Information about whether chat orchestration is enabled or disabled for an
+	// Amazon Q Business application.
+	//
+	// This member is required.
+	Control OrchestrationControl
+
+	noSmithyDocumentSerde
+}
+
 // An attachment in an Amazon Q Business conversation.
 type Attachment struct {
 
@@ -2094,6 +2113,24 @@ type OpenIDConnectProviderConfiguration struct {
 	//
 	// This member is required.
 	SecretsRole *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information required to enable chat orchestration for your Amazon
+// Q Business application.
+//
+// Chat orchestration is optimized to work for English language content. For more
+// details on language support in Amazon Q Business, see [Supported languages].
+//
+// [Supported languages]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/supported-languages.html
+type OrchestrationConfiguration struct {
+
+	//  Status information about whether chat orchestration is activated or
+	// deactivated for your Amazon Q Business application.
+	//
+	// This member is required.
+	Control OrchestrationControl
 
 	noSmithyDocumentSerde
 }

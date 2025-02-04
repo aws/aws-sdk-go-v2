@@ -9203,6 +9203,31 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTargetDataSetting(v *types.TargetDataSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.TablePreparationMode) > 0 {
+		ok := object.Key("TablePreparationMode")
+		ok.String(string(v.TablePreparationMode))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetDataSettings(v []types.TargetDataSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentTargetDataSetting(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTimestreamSettings(v *types.TimestreamSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9362,6 +9387,13 @@ func awsAwsjson11_serializeOpDocumentCreateDataMigrationInput(v *CreateDataMigra
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetDataSettings != nil {
+		ok := object.Key("TargetDataSettings")
+		if err := awsAwsjson11_serializeDocumentTargetDataSettings(v.TargetDataSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -11496,6 +11528,13 @@ func awsAwsjson11_serializeOpDocumentModifyDataMigrationInput(v *ModifyDataMigra
 	if v.SourceDataSettings != nil {
 		ok := object.Key("SourceDataSettings")
 		if err := awsAwsjson11_serializeDocumentSourceDataSettings(v.SourceDataSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetDataSettings != nil {
+		ok := object.Key("TargetDataSettings")
+		if err := awsAwsjson11_serializeDocumentTargetDataSettings(v.TargetDataSettings, ok); err != nil {
 			return err
 		}
 	}

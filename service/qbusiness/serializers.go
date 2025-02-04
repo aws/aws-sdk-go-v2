@@ -6272,6 +6272,13 @@ func awsRestjson1_serializeOpDocumentUpdateChatControlsConfigurationInput(v *Upd
 		}
 	}
 
+	if v.OrchestrationConfiguration != nil {
+		ok := object.Key("orchestrationConfiguration")
+		if err := awsRestjson1_serializeDocumentOrchestrationConfiguration(v.OrchestrationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ResponseScope) > 0 {
 		ok := object.Key("responseScope")
 		ok.String(string(v.ResponseScope))
@@ -8962,6 +8969,18 @@ func awsRestjson1_serializeDocumentOpenIDConnectProviderConfiguration(v *types.O
 	if v.SecretsRole != nil {
 		ok := object.Key("secretsRole")
 		ok.String(*v.SecretsRole)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrchestrationConfiguration(v *types.OrchestrationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Control) > 0 {
+		ok := object.Key("control")
+		ok.String(string(v.Control))
 	}
 
 	return nil

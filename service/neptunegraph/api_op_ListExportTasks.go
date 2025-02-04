@@ -30,6 +30,9 @@ func (c *Client) ListExportTasks(ctx context.Context, params *ListExportTasksInp
 
 type ListExportTasksInput struct {
 
+	// The unique identifier of the Neptune Analytics graph.
+	GraphIdentifier *string
+
 	// The maximum number of export tasks to return.
 	MaxResults *int32
 

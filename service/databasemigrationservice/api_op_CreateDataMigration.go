@@ -74,6 +74,9 @@ type CreateDataMigrationInput struct {
 	// One or more tags to be assigned to the data migration.
 	Tags []types.Tag
 
+	// Specifies information about the target data provider.
+	TargetDataSettings []types.TargetDataSetting
+
 	noSmithyDocumentSerde
 }
 

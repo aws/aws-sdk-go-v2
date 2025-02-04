@@ -4366,6 +4366,11 @@ func awsRestjson1_deserializeOpDocumentGetChatControlsConfigurationOutput(v **Ge
 				sv.NextToken = ptr.String(jtv)
 			}
 
+		case "orchestrationConfiguration":
+			if err := awsRestjson1_deserializeDocumentAppliedOrchestrationConfiguration(&sv.OrchestrationConfiguration, value); err != nil {
+				return err
+			}
+
 		case "responseScope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14246,6 +14251,46 @@ func awsRestjson1_deserializeDocumentAppliedCreatorModeConfiguration(v **types.A
 					return fmt.Errorf("expected CreatorModeControl to be of type string, got %T instead", value)
 				}
 				sv.CreatorModeControl = types.CreatorModeControl(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAppliedOrchestrationConfiguration(v **types.AppliedOrchestrationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AppliedOrchestrationConfiguration
+	if *v == nil {
+		sv = &types.AppliedOrchestrationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "control":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrchestrationControl to be of type string, got %T instead", value)
+				}
+				sv.Control = types.OrchestrationControl(jtv)
 			}
 
 		default:

@@ -640,6 +640,26 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoF,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-isof-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isof-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "lambda.us-isof-east-1.api.aws.hci.ic.gov",
+			},
+			endpoints.EndpointKey{
+				Region: "us-isof-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isof-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "lambda.us-isof-south-1.api.aws.hci.ic.gov",
+			},
+		},
 	},
 	{
 		ID: "aws-us-gov",

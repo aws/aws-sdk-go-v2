@@ -2962,6 +2962,21 @@ func validateOpenIDConnectProviderConfiguration(v *types.OpenIDConnectProviderCo
 	}
 }
 
+func validateOrchestrationConfiguration(v *types.OrchestrationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrchestrationConfiguration"}
+	if len(v.Control) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Control"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePersonalizationConfiguration(v *types.PersonalizationConfiguration) error {
 	if v == nil {
 		return nil
@@ -4759,6 +4774,11 @@ func validateOpUpdateChatControlsConfigurationInput(v *UpdateChatControlsConfigu
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChatControlsConfigurationInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.OrchestrationConfiguration != nil {
+		if err := validateOrchestrationConfiguration(v.OrchestrationConfiguration); err != nil {
+			invalidParams.AddNested("OrchestrationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.TopicConfigurationsToCreateOrUpdate != nil {
 		if err := validateTopicConfigurations(v.TopicConfigurationsToCreateOrUpdate); err != nil {

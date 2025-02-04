@@ -562,6 +562,71 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoF,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "dms",
+			}: endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isof-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region:  "dms",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "dms.us-isof-east-1.csp.hci.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isof-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "dms-fips",
+			}: endpoints.Endpoint{
+				Hostname: "dms.us-isof-east-1.csp.hci.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isof-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-isof-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isof-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "dms.us-isof-east-1.csp.hci.ic.gov",
+			},
+			endpoints.EndpointKey{
+				Region: "us-isof-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "dms.us-isof-east-1.csp.hci.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isof-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-isof-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isof-south-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "dms.us-isof-south-1.csp.hci.ic.gov",
+			},
+			endpoints.EndpointKey{
+				Region: "us-isof-south-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "dms.us-isof-south-1.csp.hci.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isof-south-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+		},
 	},
 	{
 		ID: "aws-us-gov",

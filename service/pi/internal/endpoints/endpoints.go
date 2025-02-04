@@ -807,6 +807,18 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoF,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-isof-east-1",
+			}: endpoints.Endpoint{
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region: "us-isof-south-1",
+			}: endpoints.Endpoint{
+				Protocols: []string{"https"},
+			},
+		},
 	},
 	{
 		ID: "aws-us-gov",

@@ -420,6 +420,9 @@ type DataMigration struct {
 	// The reason the data migration last stopped.
 	StopReason *string
 
+	// Specifies information about the data migration's target data provider.
+	TargetDataSettings []TargetDataSetting
+
 	noSmithyDocumentSerde
 }
 
@@ -1576,19 +1579,21 @@ type KafkaSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies using Kerberos authentication settings for use with DMS.
+// Specifies the settings required for kerberos authentication when creating the
+// replication instance.
 type KerberosAuthenticationSettings struct {
 
 	// Specifies the Amazon Resource Name (ARN) of the IAM role that grants Amazon Web
-	// Services DMS access to the secret containing key cache file for the replication
-	// instance.
+	// Services DMS access to the secret containing key cache file for the kerberos
+	// authentication.
 	KeyCacheSecretIamArn *string
 
-	// Specifies the secret ID of the key cache for the replication instance.
+	// Specifies the ID of the secret that stores the key cache file required for
+	// kerberos authentication.
 	KeyCacheSecretId *string
 
-	// Specifies the ID of the secret that stores the key cache file required for
-	// kerberos authentication of the replication instance.
+	// Specifies the contents of krb5 configuration file required for kerberos
+	// authentication.
 	Krb5FileContents *string
 
 	noSmithyDocumentSerde
@@ -1738,7 +1743,7 @@ type MicrosoftSqlServerDataProviderSettings struct {
 // Provides information that defines a Microsoft SQL Server endpoint.
 type MicrosoftSQLServerSettings struct {
 
-	// Specifies using Kerberos authentication with Microsoft SQL Server.
+	// Specifies the authentication method to be used with Microsoft SQL Server.
 	AuthenticationMethod SqlServerAuthenticationMethod
 
 	// The maximum size of the packets (in bytes) used to transfer data using BCP.
@@ -2319,7 +2324,7 @@ type OracleSettings struct {
 	// [Configuration for change data capture (CDC) on an Oracle source database]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration
 	AsmUser *string
 
-	// Specifies using Kerberos authentication with Oracle.
+	// Specifies the authentication method to be used with Oracle.
 	AuthenticationMethod OracleAuthenticationMethod
 
 	// Specifies whether the length of a character column is in bytes or in
@@ -5021,6 +5026,17 @@ type Tag struct {
 	// '/', '=', '+', '-' (Java regular expressions:
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines settings for a target data provider for a data migration.
+type TargetDataSetting struct {
+
+	// This setting determines how DMS handles the target tables before starting a
+	// data migration, either by leaving them untouched, dropping and recreating them,
+	// or truncating the existing data in the target tables.
+	TablePreparationMode TablePreparationMode
 
 	noSmithyDocumentSerde
 }

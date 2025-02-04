@@ -57,6 +57,9 @@ type ModifyDataMigrationInput struct {
 	// The new information about the source data provider for the data migration.
 	SourceDataSettings []types.SourceDataSetting
 
+	// The new information about the target data provider for the data migration.
+	TargetDataSettings []types.TargetDataSetting
+
 	noSmithyDocumentSerde
 }
 

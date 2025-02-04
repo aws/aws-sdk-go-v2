@@ -1,0 +1,8 @@
+{
+    "id": "e6f1928c-9207-4e77-9eb0-4d0cb8b263ae",
+    "type": "documentation",
+    "description": "Doc-only update to provide more information on using Kerberos authentication with SMB locations.",
+    "modules": [
+        "service/datasync"
+    ]
+}

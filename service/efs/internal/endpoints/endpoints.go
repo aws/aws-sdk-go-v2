@@ -931,6 +931,44 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoF,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "fips-us-isof-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.us-isof-east-1.csp.hci.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isof-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-isof-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.us-isof-south-1.csp.hci.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isof-south-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-isof-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isof-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "elasticfilesystem-fips.us-isof-east-1.csp.hci.ic.gov",
+			},
+			endpoints.EndpointKey{
+				Region: "us-isof-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isof-south-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "elasticfilesystem-fips.us-isof-south-1.csp.hci.ic.gov",
+			},
+		},
 	},
 	{
 		ID: "aws-us-gov",

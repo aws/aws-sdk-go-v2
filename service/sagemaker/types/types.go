@@ -3289,11 +3289,8 @@ type ClusterInstanceGroupDetails struct {
 	// cluster instance group is created or updated.
 	OnStartDeepHealthChecks []DeepHealthCheckType
 
-	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
-	// hosted models, and compute resources have access to. You can control access to
-	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
-	//
-	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	// The customized VPC configuration at the instance group level that overrides the
+	// default VPC configuration of the SageMaker HyperPod cluster.
 	OverrideVpcConfig *VpcConfig
 
 	// The current status of the cluster instance group.
@@ -3378,11 +3375,23 @@ type ClusterInstanceGroupSpecification struct {
 	// cluster instance group is created or updated.
 	OnStartDeepHealthChecks []DeepHealthCheckType
 
-	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
-	// hosted models, and compute resources have access to. You can control access to
-	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	// To configure multi-AZ deployments, customize the VPC configuration at the
+	// instance group level. You can specify different subnets and security groups
+	// across different AZs in the instance group specification to override a SageMaker
+	// HyperPod cluster's default VPC configuration. For more information about
+	// deploying a cluster in multiple AZs, see [Setting up SageMaker HyperPod clusters across multiple AZs].
 	//
-	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	// If you configure your VPC with IPv6 support and specify subnets with IPv6
+	// addressing enabled in your instance group VPC configuration, the nodes
+	// automatically use IPv6 addressing for network communication.
+	//
+	// For information about adding IPv6 support for your VPC, see [IPv6 support for your VPC].
+	//
+	// For information about creating a new VPC for use with IPv6, see [Create a VPC].
+	//
+	// [Setting up SageMaker HyperPod clusters across multiple AZs]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-multiple-availability-zones
+	// [Create a VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html
+	// [IPv6 support for your VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html
 	OverrideVpcConfig *VpcConfig
 
 	// Specifies the value for Threads per core. For instance types that support
@@ -3510,11 +3519,8 @@ type ClusterNodeDetails struct {
 	// The LifeCycle configuration applied to the instance.
 	LifeCycleConfig *ClusterLifeCycleConfig
 
-	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
-	// hosted models, and compute resources have access to. You can control access to
-	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
-	//
-	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	// The customized VPC configuration at the instance group level that overrides the
+	// default VPC configuration of the SageMaker HyperPod cluster.
 	OverrideVpcConfig *VpcConfig
 
 	// The placement details of the SageMaker HyperPod cluster node.
@@ -3526,7 +3532,10 @@ type ClusterNodeDetails struct {
 	// The private primary IP address of the SageMaker HyperPod cluster node.
 	PrivatePrimaryIp *string
 
-	// The private primary IPv6 address of the SageMaker HyperPod cluster node.
+	// The private primary IPv6 address of the SageMaker HyperPod cluster node when
+	// configured with an Amazon VPC that supports IPv6 and includes subnets with IPv6
+	// addressing enabled in either the cluster VPC configuration or the instance group
+	// VPC configuration.
 	PrivatePrimaryIpv6 *string
 
 	// The number of threads per CPU core you specified under CreateCluster .

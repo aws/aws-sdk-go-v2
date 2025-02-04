@@ -63,11 +63,21 @@ type CreateClusterInput struct {
 	// [Tagging Amazon Web Services Resources User Guide]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 	Tags []types.Tag
 
-	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
-	// hosted models, and compute resources have access to. You can control access to
-	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	// Specifies the Amazon Virtual Private Cloud (VPC) that is associated with the
+	// Amazon SageMaker HyperPod cluster. You can control access to and from your
+	// resources by configuring your VPC. For more information, see [Give SageMaker access to resources in your Amazon VPC].
 	//
-	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	// If you configure your VPC with IPv6 support and specify subnets with IPv6
+	// addressing enabled in your VPC configuration, the cluster automatically uses
+	// IPv6 addressing for network communication.
+	//
+	// For information about adding IPv6 support for your VPC, see [IPv6 support for your VPC].
+	//
+	// For information about creating a new VPC for use with IPv6, see [Create a VPC].
+	//
+	// [Give SageMaker access to resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	// [Create a VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html
+	// [IPv6 support for your VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

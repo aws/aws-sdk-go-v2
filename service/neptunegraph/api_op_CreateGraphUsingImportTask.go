@@ -94,9 +94,9 @@ type CreateGraphUsingImportTaskInput struct {
 	// The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use
 	// for the graph. Default: 1024, or the approved upper limit for your account.
 	//
-	// If both the minimum and maximum values are specified, the max of the
-	// min-provisioned-memory and max-provisioned memory is used to create the graph.
-	// If neither value is specified 128 m-NCUs are used.
+	// If both the minimum and maximum values are specified, the final
+	// provisioned-memory will be chosen per the actual size of your imported data. If
+	// neither value is specified, 128 m-NCUs are used.
 	MaxProvisionedMemory *int32
 
 	// The minimum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use

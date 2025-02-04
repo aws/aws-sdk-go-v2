@@ -267,6 +267,16 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoF,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-isof-south-1",
+			}: endpoints.Endpoint{
+				Hostname: "cost-optimization-hub.us-isof-south-1.csp.hci.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isof-south-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-us-gov",

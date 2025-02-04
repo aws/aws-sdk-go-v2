@@ -284,8 +284,19 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.AwsIsoF,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.AwsIsoF,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-iso-f-global",
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "aws-iso-f-global",
+			}: endpoints.Endpoint{
+				Hostname: "savingsplans.csp.hci.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isof-south-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-us-gov",

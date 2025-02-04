@@ -765,6 +765,27 @@ func (StartReplicationTaskTypeValue) Values() []StartReplicationTaskTypeValue {
 	}
 }
 
+type TablePreparationMode string
+
+// Enum values for TablePreparationMode
+const (
+	TablePreparationModeDoNothing          TablePreparationMode = "do-nothing"
+	TablePreparationModeTruncate           TablePreparationMode = "truncate"
+	TablePreparationModeDropTablesOnTarget TablePreparationMode = "drop-tables-on-target"
+)
+
+// Values returns all known values for TablePreparationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TablePreparationMode) Values() []TablePreparationMode {
+	return []TablePreparationMode{
+		"do-nothing",
+		"truncate",
+		"drop-tables-on-target",
+	}
+}
+
 type TargetDbType string
 
 // Enum values for TargetDbType

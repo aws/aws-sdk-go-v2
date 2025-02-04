@@ -698,6 +698,25 @@ func (NumberAttributeBoostingType) Values() []NumberAttributeBoostingType {
 	}
 }
 
+type OrchestrationControl string
+
+// Enum values for OrchestrationControl
+const (
+	OrchestrationControlEnabled  OrchestrationControl = "ENABLED"
+	OrchestrationControlDisabled OrchestrationControl = "DISABLED"
+)
+
+// Values returns all known values for OrchestrationControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrchestrationControl) Values() []OrchestrationControl {
+	return []OrchestrationControl{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type PersonalizationControlMode string
 
 // Enum values for PersonalizationControlMode

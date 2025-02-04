@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about an chat controls configured for an existing Amazon Q
+// Gets information about chat controls configured for an existing Amazon Q
 // Business application.
 func (c *Client) GetChatControlsConfiguration(ctx context.Context, params *GetChatControlsConfigurationInput, optFns ...func(*Options)) (*GetChatControlsConfigurationOutput, error) {
 	if params == nil {
@@ -60,6 +60,14 @@ type GetChatControlsConfigurationOutput struct {
 	// use this pagination token to retrieve the next set of Amazon Q Business chat
 	// controls configured.
 	NextToken *string
+
+	//  The chat response orchestration settings for your application.
+	//
+	// Chat orchestration is optimized to work for English language content. For more
+	// details on language support in Amazon Q Business, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/supported-languages.html
+	OrchestrationConfiguration *types.AppliedOrchestrationConfiguration
 
 	// The response scope configured for a Amazon Q Business application. This
 	// determines whether your application uses its retrieval augmented generation

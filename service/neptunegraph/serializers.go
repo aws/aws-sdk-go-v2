@@ -1631,6 +1631,10 @@ func awsRestjson1_serializeOpHttpBindingsListExportTasksInput(v *ListExportTasks
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GraphIdentifier != nil {
+		encoder.SetQuery("graphIdentifier").String(*v.GraphIdentifier)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}

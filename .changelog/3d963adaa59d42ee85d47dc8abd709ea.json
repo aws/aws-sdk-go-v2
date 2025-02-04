@@ -1,0 +1,8 @@
+{
+    "id": "3d963ada-a59d-42ee-85d4-7dc8abd709ea",
+    "type": "documentation",
+    "description": "IPv6 support for Hyperpod clusters",
+    "modules": [
+        "service/sagemaker"
+    ]
+}
