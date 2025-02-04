@@ -153,6 +153,9 @@ func (c *Client) addOperationTransactGetItemsMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTransactGetItemsValidationMiddleware(stack); err != nil {
 		return err
 	}

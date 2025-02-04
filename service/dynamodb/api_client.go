@@ -887,6 +887,23 @@ func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
 	return nil
 }
 
+func addUserAgentAccountIDEndpointMode(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	switch options.AccountIDEndpointMode {
+	case aws.AccountIDEndpointModePreferred:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureAccountIDModePreferred)
+	case aws.AccountIDEndpointModeRequired:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureAccountIDModeRequired)
+	case aws.AccountIDEndpointModeDisabled:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureAccountIDModeDisabled)
+	}
+	return nil
+}
+
 func resolveTracerProvider(options *Options) {
 	if options.TracerProvider == nil {
 		options.TracerProvider = &tracing.NopTracerProvider{}

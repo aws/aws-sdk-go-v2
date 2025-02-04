@@ -135,6 +135,9 @@ func (c *Client) addOperationDisableKinesisStreamingDestinationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableKinesisStreamingDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}
