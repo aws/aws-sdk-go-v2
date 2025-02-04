@@ -1,0 +1,9 @@
+{
+    "id": "3BE795A2-340F-4D5A-B237-8CE604BCB8E9",
+    "type": "bugfix",
+    "description": "typo in connect.go error message",
+    "collapse": false,
+    "modules": [
+        "feature/rds/auth"
+    ]
+}
