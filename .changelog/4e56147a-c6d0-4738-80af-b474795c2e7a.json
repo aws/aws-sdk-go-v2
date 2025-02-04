@@ -1,0 +1,7 @@
+{
+  "id": "4e56147a-c6d0-4738-80af-b474795c2e7a",
+  "type": "feature",
+  "description": "Crc64nvme checksum type support",
+  "collapse": false,
+  "modules": ["service/internal/checksum"]
+}

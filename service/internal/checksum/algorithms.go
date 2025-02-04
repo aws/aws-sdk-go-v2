@@ -9,7 +9,9 @@ import (
 	"fmt"
 	"hash"
 	"hash/crc32"
+	"hash/crc64"
 	"io"
+	"math/bits"
 	"strings"
 	"sync"
 )
@@ -40,6 +42,7 @@ var supportedAlgorithms = []Algorithm{
 	AlgorithmCRC32,
 	AlgorithmSHA1,
 	AlgorithmSHA256,
+	AlgorithmCRC64NVME,
 }
 
 func (a Algorithm) String() string { return string(a) }
@@ -92,6 +95,8 @@ func NewAlgorithmHash(v Algorithm) (hash.Hash, error) {
 		return crc32.NewIEEE(), nil
 	case AlgorithmCRC32C:
 		return crc32.New(crc32.MakeTable(crc32.Castagnoli)), nil
+	case AlgorithmCRC64NVME:
+		return crc64.New(crc64.MakeTable(bits.Reverse64(0xad93d23594c93659))), nil
 	default:
 		return nil, fmt.Errorf("unknown checksum algorithm, %v", v)
 	}
@@ -109,6 +114,8 @@ func AlgorithmChecksumLength(v Algorithm) (int, error) {
 		return crc32.Size, nil
 	case AlgorithmCRC32C:
 		return crc32.Size, nil
+	case AlgorithmCRC64NVME:
+		return crc64.Size, nil
 	default:
 		return 0, fmt.Errorf("unknown checksum algorithm, %v", v)
 	}

@@ -10,6 +10,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"hash/crc32"
+	"hash/crc64"
 	"io"
 	"io/ioutil"
 	"strings"
@@ -68,6 +69,13 @@ func TestComputeChecksumReader(t *testing.T) {
 			ExpectChecksumLen: base64.StdEncoding.EncodedLen(sha256.Size),
 			ExpectRead:        "hello world",
 			ExpectChecksum:    "uU0nuZNNPgilLlLX2n2r+sSE7+N6U4DukIj3rOLvzek=",
+		},
+		"crc64nvme": {
+			Input:             strings.NewReader("hello world"),
+			Algorithm:         AlgorithmCRC64NVME,
+			ExpectChecksumLen: base64.StdEncoding.EncodedLen(crc64.Size),
+			ExpectRead:        "hello world",
+			ExpectChecksum:    "jSnVw/bqjr4=",
 		},
 	}
 
@@ -320,6 +328,14 @@ func TestParseAlgorithm(t *testing.T) {
 			Value:           "SHA256",
 			expectAlgorithm: AlgorithmSHA256,
 		},
+		"crc64nvme": {
+			Value:           "crc64nvme",
+			expectAlgorithm: AlgorithmCRC64NVME,
+		},
+		"CRC64NVME": {
+			Value:           "CRC64NVME",
+			expectAlgorithm: AlgorithmCRC64NVME,
+		},
 		"empty": {
 			Value:     "",
 			expectErr: "unknown checksum algorithm",
@@ -383,21 +399,23 @@ func TestFilterSupportedAlgorithms(t *testing.T) {
 			},
 		},
 		"preserve order 2": {
-			values: []string{"sha256", "crc32", "sha1", "crc32c"},
+			values: []string{"sha256", "crc64nvme", "crc32", "sha1", "crc32c"},
 			expectAlgorithms: []Algorithm{
 				AlgorithmSHA256,
+				AlgorithmCRC64NVME,
 				AlgorithmCRC32,
 				AlgorithmSHA1,
 				AlgorithmCRC32C,
 			},
 		},
 		"mixed case": {
-			values: []string{"Crc32", "cRc32c", "shA1", "sHA256"},
+			values: []string{"Crc32", "cRc32c", "shA1", "sHA256", "cRc64nVme"},
 			expectAlgorithms: []Algorithm{
 				AlgorithmCRC32,
 				AlgorithmCRC32C,
 				AlgorithmSHA1,
 				AlgorithmSHA256,
+				AlgorithmCRC64NVME,
 			},
 		},
 	}
@@ -441,6 +459,10 @@ func TestAlgorithmChecksumLength(t *testing.T) {
 		"sha256": {
 			algorithm:    AlgorithmSHA256,
 			expectLength: sha256.Size,
+		},
+		"crc64nvme": {
+			algorithm:    AlgorithmCRC64NVME,
+			expectLength: crc64.Size,
 		},
 	}
 
