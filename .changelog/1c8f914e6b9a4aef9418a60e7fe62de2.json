@@ -1,0 +1,8 @@
+{
+    "id": "1c8f914e-6b9a-4aef-9418-a60e7fe62de2",
+    "type": "feature",
+    "description": "Track AccountID endpoint mode in user-agent.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}
