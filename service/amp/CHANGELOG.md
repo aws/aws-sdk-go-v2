@@ -1,3 +1,7 @@
+# v1.31.1 (2025-02-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2025-01-31)
 
 * **Feature**: Add support for sending metrics to cross account and CMCK AMP workspaces through RoleConfiguration on Create/Update Scraper.

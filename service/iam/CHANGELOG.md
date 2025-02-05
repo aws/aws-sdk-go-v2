@@ -1,3 +1,7 @@
+# v1.39.1 (2025-02-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2025-02-04)
 
 * **Feature**: This release adds support for accepting encrypted SAML assertions. Customers can now configure their identity provider to encrypt the SAML assertions it sends to IAM.

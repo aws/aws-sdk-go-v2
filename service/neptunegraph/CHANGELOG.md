@@ -1,3 +1,7 @@
+# v1.16.1 (2025-02-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2025-02-04)
 
 * **Feature**: Added argument to `list-export` to filter by graph ID

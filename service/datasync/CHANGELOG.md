@@ -1,3 +1,7 @@
+# v1.45.4 (2025-02-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.3 (2025-02-04)
 
 * **Documentation**: Doc-only update to provide more information on using Kerberos authentication with SMB locations.

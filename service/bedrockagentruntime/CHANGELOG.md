@@ -1,3 +1,7 @@
+# v1.35.1 (2025-02-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2025-01-31)
 
 * **Feature**: This change is to deprecate the existing citation field under RetrieveAndGenerateStream API response in lieu of GeneratedResponsePart and RetrievedReferences

@@ -1,3 +1,14 @@
+# Release (2025-02-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.40.0](service/dynamodb/CHANGELOG.md#v1400-2025-02-05)
+  * **Feature**: Track AccountID endpoint mode in user-agent.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.93.12](service/rds/CHANGELOG.md#v19312-2025-02-05)
+  * **Documentation**: Documentation updates to clarify the description for the parameter AllocatedStorage for the DB cluster data type, the description for the parameter DeleteAutomatedBackups for the DeleteDBCluster API operation, and removing an outdated note for the CreateDBParameterGroup API operation.
+
 # Release (2025-02-04)
 
 ## General Highlights

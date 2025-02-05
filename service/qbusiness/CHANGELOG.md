@@ -1,3 +1,7 @@
+# v1.21.1 (2025-02-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2025-02-04)
 
 * **Feature**: Adds functionality to enable/disable a new Q Business Chat orchestration feature. If enabled, Q Business can orchestrate over datasources and plugins without the need for customers to select specific chat modes.

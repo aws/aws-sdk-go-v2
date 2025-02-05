@@ -1,8 +1,0 @@
-{
-    "id": "48deeeb0-3fe2-4ad3-b78f-c9d1ccfafe37",
-    "type": "documentation",
-    "description": "Documentation updates to clarify the description for the parameter AllocatedStorage for the DB cluster data type, the description for the parameter DeleteAutomatedBackups for the DeleteDBCluster API operation, and removing an outdated note for the CreateDBParameterGroup API operation.",
-    "modules": [
-        "service/rds"
-    ]
-}

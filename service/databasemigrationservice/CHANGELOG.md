@@ -1,3 +1,7 @@
+# v1.46.1 (2025-02-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.0 (2025-02-04)
 
 * **Feature**: Introduces TargetDataSettings with the TablePreparationMode option available for data migrations.

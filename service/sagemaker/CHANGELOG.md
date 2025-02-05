@@ -1,3 +1,7 @@
+# v1.174.2 (2025-02-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.174.1 (2025-02-04)
 
 * **Documentation**: IPv6 support for Hyperpod clusters

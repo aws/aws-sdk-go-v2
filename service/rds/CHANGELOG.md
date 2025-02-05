@@ -1,3 +1,8 @@
+# v1.93.12 (2025-02-05)
+
+* **Documentation**: Documentation updates to clarify the description for the parameter AllocatedStorage for the DB cluster data type, the description for the parameter DeleteAutomatedBackups for the DeleteDBCluster API operation, and removing an outdated note for the CreateDBParameterGroup API operation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.93.11 (2025-02-04)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.0.9 (2025-02-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.8 (2025-01-31)
 
 * **Dependency Update**: Switch to code-generated waiter matchers, removing the dependency on go-jmespath.
