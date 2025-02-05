@@ -46,6 +46,8 @@ type ModifyDBProxyTargetGroupInput struct {
 	// The new name for the modified DBProxyTarget . An identifier must begin with a
 	// letter and must contain only ASCII letters, digits, and hyphens; it can't end
 	// with a hyphen or contain two consecutive hyphens.
+	//
+	// You can't rename the default target group.
 	NewName *string
 
 	noSmithyDocumentSerde

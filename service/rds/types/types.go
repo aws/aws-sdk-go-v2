@@ -582,10 +582,9 @@ type DBCluster struct {
 	// The status of the database activity stream.
 	ActivityStreamStatus ActivityStreamStatus
 
-	// For all database engines except Amazon Aurora, AllocatedStorage specifies the
-	// allocated storage size in gibibytes (GiB). For Aurora, AllocatedStorage always
-	// returns 1, because Aurora DB cluster storage size isn't fixed, but instead
-	// automatically adjusts as needed.
+	// AllocatedStorage specifies the allocated storage size in gibibytes (GiB). For
+	// Aurora, AllocatedStorage can vary because Aurora DB cluster storage size
+	// adjusts as needed.
 	AllocatedStorage *int32
 
 	// A list of the Amazon Web Services Identity and Access Management (IAM) roles

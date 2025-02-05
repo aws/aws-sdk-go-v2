@@ -54,7 +54,8 @@ type DeleteDBClusterInput struct {
 
 	// Specifies whether to remove automated backups immediately after the DB cluster
 	// is deleted. This parameter isn't case-sensitive. The default is to remove
-	// automated backups immediately after the DB cluster is deleted.
+	// automated backups immediately after the DB cluster is deleted, unless the Amazon
+	// Web Services Backup policy specifies a point-in-time restore rule.
 	DeleteAutomatedBackups *bool
 
 	// The DB cluster snapshot identifier of the new DB cluster snapshot created when
