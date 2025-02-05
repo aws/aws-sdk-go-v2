@@ -502,6 +502,15 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 						}
 					}
 
+					// S3 claims that it will compute crc64 by default if you
+					// don't send a checksum. Anecdotally we're seeing that NOT
+					// be the case on certain accounts, making the checksum
+					// verification logic below unstable. Disable round-trip
+					// testing on non-default checksums for now.
+					if c.requestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired {
+						return
+					}
+
 					getResult, err := s3client.GetObject(ctx, &s3.GetObjectInput{
 						Bucket: c.params.Bucket,
 						Key:    c.params.Key,
