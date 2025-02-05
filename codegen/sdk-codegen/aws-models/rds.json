@@ -5782,7 +5782,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new DB parameter group.</p>\n         <p>A DB parameter group is initially created with the default parameters for the\n            database engine used by the DB instance. To provide custom values for any of the\n            parameters, you must modify the group after creating it using\n            <code>ModifyDBParameterGroup</code>. Once you've created a DB parameter group, you need to\n            associate it with your DB instance using <code>ModifyDBInstance</code>. When you associate\n            a new DB parameter group with a running DB instance, you need to reboot the DB\n            instance without failover for the new DB parameter group and associated settings to take effect.</p>\n         <p>This command doesn't apply to RDS Custom.</p>\n         <important>\n            <p>After you create a DB parameter group, you should wait at least 5 minutes\n                before creating your first DB instance that uses that DB parameter group as the default parameter \n                group. This allows Amazon RDS to fully complete the create action before the parameter \n                group is used as the default for a new DB instance. This is especially important for parameters \n                that are critical when creating the default database for a DB instance, such as the character set \n                for the default database defined by the <code>character_set_database</code> parameter. You can use the \n                <i>Parameter Groups</i> option of the <a href=\"https://console.aws.amazon.com/rds/\">Amazon RDS console</a> or the \n                <i>DescribeDBParameters</i> command to verify \n                that your DB parameter group has been created or modified.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Creates a new DB parameter group.</p>\n         <p>A DB parameter group is initially created with the default parameters for the\n            database engine used by the DB instance. To provide custom values for any of the\n            parameters, you must modify the group after creating it using\n            <code>ModifyDBParameterGroup</code>. Once you've created a DB parameter group, you need to\n            associate it with your DB instance using <code>ModifyDBInstance</code>. When you associate\n            a new DB parameter group with a running DB instance, you need to reboot the DB\n            instance without failover for the new DB parameter group and associated settings to take effect.</p>\n         <p>This command doesn't apply to RDS Custom.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a DB parameter group",
@@ -6802,7 +6802,7 @@
                 "DataFilter": {
                     "target": "com.amazonaws.rds#DataFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data filtering options for the integration. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html\">Data filtering for Aurora zero-ETL integrations with Amazon Redshift</a>.\n        </p>\n         <p>Valid for: Integrations with Aurora MySQL source DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Data filtering options for the integration. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html\">Data filtering for Aurora zero-ETL integrations with Amazon Redshift</a>\n            or\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/zero-etl.filtering.html\">Data filtering for Amazon RDS zero-ETL integrations with Amazon Redshift</a>.\n        </p>"
                     }
                 },
                 "Description": {
@@ -7156,7 +7156,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>For all database engines except Amazon Aurora, <code>AllocatedStorage</code> specifies the allocated storage size in gibibytes (GiB). \n          For Aurora, <code>AllocatedStorage</code> always returns 1, because Aurora DB cluster storage size isn't fixed, but instead automatically\n      adjusts as needed.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>AllocatedStorage</code> specifies the allocated storage size in gibibytes (GiB). \n          For Aurora, <code>AllocatedStorage</code> can vary because Aurora DB cluster storage size adjusts as needed.</p>"
                     }
                 },
                 "AvailabilityZones": {
@@ -12311,7 +12311,7 @@
                 "DeleteAutomatedBackups": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to remove automated backups immediately after the DB\n            cluster is deleted. This parameter isn't case-sensitive. The default is to remove \n            automated backups immediately after the DB cluster is deleted.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to remove automated backups immediately after the DB\n            cluster is deleted. This parameter isn't case-sensitive. The default is to remove \n            automated backups immediately after the DB cluster is deleted, unless the Amazon Web Services Backup \n            policy specifies a point-in-time restore rule.</p>"
                     }
                 }
             },
@@ -22944,7 +22944,7 @@
                 "NewName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new name for the modified <code>DBProxyTarget</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>"
+                        "smithy.api#documentation": "<p>The new name for the modified <code>DBProxyTarget</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>\n         <p>You can't rename the <code>default</code> target group.</p>"
                     }
                 }
             },
@@ -23641,7 +23641,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies a zero-ETL integration with Amazon Redshift.</p>\n         <note>\n            <p>Currently, you can only modify integrations that have Aurora MySQL source DB clusters. Integrations with Aurora PostgreSQL and RDS sources currently don't support modifying the integration.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Modifies a zero-ETL integration with Amazon Redshift.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To modify a zero-ETL integration",
@@ -23685,7 +23685,7 @@
                 "DataFilter": {
                     "target": "com.amazonaws.rds#DataFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>A new data filter for the integration. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html\">Data filtering for Aurora zero-ETL integrations with Amazon Redshift</a>.</p>"
+                        "smithy.api#documentation": "<p>A new data filter for the integration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html\">Data filtering\n                for Aurora zero-ETL integrations with Amazon Redshift</a> or <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/zero-etl.filtering.html\">Data\n                filtering for Amazon RDS zero-ETL integrations with Amazon Redshift</a>.</p>"
                     }
                 },
                 "Description": {
