@@ -95,7 +95,9 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 				},
 				requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
 				expectPayload:              []byte("abc123"),
-				expectLogged:               "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -237,7 +239,9 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 				},
 				requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
 				expectPayload:              []byte("abc123"),
-				expectLogged:               "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -340,7 +344,9 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 			"no checksum calculation": {
 				params:                     &s3.PutObjectInput{},
 				requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
-				expectLogged:               "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -403,7 +409,9 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 					Body: bytes.NewBuffer([]byte{}),
 				},
 				requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
-				expectLogged:               "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -500,15 +508,6 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 						if diff := cmpDiff(*c.expectComputedChecksums, computedChecksums); diff != "" {
 							t.Errorf("expect computed checksum metadata match\n%s", diff)
 						}
-					}
-
-					// S3 claims that it will compute crc64 by default if you
-					// don't send a checksum. Anecdotally we're seeing that NOT
-					// be the case on certain accounts, making the checksum
-					// verification logic below unstable. Disable round-trip
-					// testing on non-default checksums for now.
-					if c.requestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired {
-						return
 					}
 
 					getResult, err := s3client.GetObject(ctx, &s3.GetObjectInput{
