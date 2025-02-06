@@ -44,7 +44,7 @@ type CreateStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of one or more Amazon Web Services
+	// [Self-managed permissions] The account IDs of one or more Amazon Web Services
 	// accounts that you want to create stack instances in the specified Region(s) for.
 	//
 	// You can specify Accounts or DeploymentTargets , but not both.

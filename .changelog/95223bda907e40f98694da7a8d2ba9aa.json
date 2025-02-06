@@ -1,0 +1,8 @@
+{
+    "id": "95223bda-907e-40f9-8694-da7a8d2ba9aa",
+    "type": "feature",
+    "description": "This release adds the ability to conditionally require fields on a template. Check public documentation for more information.",
+    "modules": [
+        "service/connectcases"
+    ]
+}

@@ -16,6 +16,21 @@ import (
 // requiredFields , and status . At least one of these attributes must not be null.
 // If a null value is provided for a given attribute, that attribute is ignored and
 // its current value is preserved.
+//
+// Other template APIs are:
+//
+// [CreateTemplate]
+//
+// [DeleteTemplate]
+//
+// [GetTemplate]
+//
+// [ListTemplates]
+//
+// [DeleteTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_DeleteTemplate.html
+// [CreateTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateTemplate.html
+// [ListTemplates]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_ListTemplates.html
+// [GetTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetTemplate.html
 func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput, optFns ...func(*Options)) (*UpdateTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateTemplateInput{}
@@ -55,6 +70,11 @@ type UpdateTemplateInput struct {
 	// A list of fields that must contain a value for a case to be successfully
 	// created with this template.
 	RequiredFields []types.RequiredField
+
+	// A list of case rules (also known as [case field conditions]) on a template.
+	//
+	// [case field conditions]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+	Rules []types.TemplateRule
 
 	// The status of the template.
 	Status types.TemplateStatus

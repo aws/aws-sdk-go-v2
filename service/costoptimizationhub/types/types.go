@@ -141,11 +141,24 @@ type Ec2AutoScalingGroup struct {
 	noSmithyDocumentSerde
 }
 
-// The EC2 auto scaling group configuration used for recommendations.
+// The EC2 Auto Scaling group configuration used for recommendations.
 type Ec2AutoScalingGroupConfiguration struct {
 
-	// Details about the instance.
+	// The strategy used for allocating instances, based on a predefined priority
+	// order or based on the lowest available price.
+	AllocationStrategy AllocationStrategy
+
+	// Details about the instance for the EC2 Auto Scaling group with a single
+	// instance type.
 	Instance *InstanceConfiguration
+
+	// A list of instance types for an EC2 Auto Scaling group with mixed instance
+	// types.
+	MixedInstances []MixedInstanceConfiguration
+
+	// The type of EC2 Auto Scaling group, showing whether it consists of a single
+	// instance type or mixed instance types.
+	Type Ec2AutoScalingGroupType
 
 	noSmithyDocumentSerde
 }
@@ -413,10 +426,10 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// The Instance configuration used for recommendations.
+// The instance configuration used for recommendations.
 type InstanceConfiguration struct {
 
-	// Details about the type.
+	// The instance type of the configuration.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -439,6 +452,15 @@ type LambdaFunctionConfiguration struct {
 
 	// Details about the compute configuration.
 	Compute *ComputeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the EC2 Auto Scaling group with mixed instance types.
+type MixedInstanceConfiguration struct {
+
+	// The instance type of the configuration.
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -969,7 +991,7 @@ type ResourceDetailsMemberRedshiftReservedInstances struct {
 
 func (*ResourceDetailsMemberRedshiftReservedInstances) isResourceDetails() {}
 
-// The SageMaker Savings Plans recommendation details.
+// The SageMaker AI Savings Plans recommendation details.
 type ResourceDetailsMemberSageMakerSavingsPlans struct {
 	Value SageMakerSavingsPlans
 

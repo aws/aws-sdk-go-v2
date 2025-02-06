@@ -13,6 +13,7 @@ const (
 	ActionTypePurchaseReservedInstances ActionType = "PurchaseReservedInstances"
 	ActionTypeMigrateToGraviton         ActionType = "MigrateToGraviton"
 	ActionTypeDelete                    ActionType = "Delete"
+	ActionTypeScaleIn                   ActionType = "ScaleIn"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -28,6 +29,45 @@ func (ActionType) Values() []ActionType {
 		"PurchaseReservedInstances",
 		"MigrateToGraviton",
 		"Delete",
+		"ScaleIn",
+	}
+}
+
+type AllocationStrategy string
+
+// Enum values for AllocationStrategy
+const (
+	AllocationStrategyPrioritized AllocationStrategy = "Prioritized"
+	AllocationStrategyLowestPrice AllocationStrategy = "LowestPrice"
+)
+
+// Values returns all known values for AllocationStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AllocationStrategy) Values() []AllocationStrategy {
+	return []AllocationStrategy{
+		"Prioritized",
+		"LowestPrice",
+	}
+}
+
+type Ec2AutoScalingGroupType string
+
+// Enum values for Ec2AutoScalingGroupType
+const (
+	Ec2AutoScalingGroupTypeSingleInstanceType Ec2AutoScalingGroupType = "SingleInstanceType"
+	Ec2AutoScalingGroupTypeMixedInstanceTypes Ec2AutoScalingGroupType = "MixedInstanceTypes"
+)
+
+// Values returns all known values for Ec2AutoScalingGroupType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Ec2AutoScalingGroupType) Values() []Ec2AutoScalingGroupType {
+	return []Ec2AutoScalingGroupType{
+		"SingleInstanceType",
+		"MixedInstanceTypes",
 	}
 }
 

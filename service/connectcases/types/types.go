@@ -149,6 +149,63 @@ type BasicLayout struct {
 	noSmithyDocumentSerde
 }
 
+// Boolean condition for a rule. In the Amazon Connect admin website, case rules
+// are known as case field conditions. For more information about case field
+// conditions, see [Add case field conditions to a case template].
+//
+// The following types satisfy this interface:
+//
+//	BooleanConditionMemberEqualTo
+//	BooleanConditionMemberNotEqualTo
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type BooleanCondition interface {
+	isBooleanCondition()
+}
+
+// Tests that operandOne is equal to operandTwo.
+type BooleanConditionMemberEqualTo struct {
+	Value BooleanOperands
+
+	noSmithyDocumentSerde
+}
+
+func (*BooleanConditionMemberEqualTo) isBooleanCondition() {}
+
+// Tests that operandOne is not equal to operandTwo.
+type BooleanConditionMemberNotEqualTo struct {
+	Value BooleanOperands
+
+	noSmithyDocumentSerde
+}
+
+func (*BooleanConditionMemberNotEqualTo) isBooleanCondition() {}
+
+// Boolean operands for a condition. In the Amazon Connect admin website, case
+// rules are known as case field conditions. For more information about case field
+// conditions, see [Add case field conditions to a case template].
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type BooleanOperands struct {
+
+	// Represents the left hand operand in the condition.
+	//
+	// This member is required.
+	OperandOne OperandOne
+
+	// Represents the right hand operand in the condition.
+	//
+	// This member is required.
+	OperandTwo OperandTwo
+
+	// The value of the outer rule if the condition evaluates to true.
+	//
+	// This member is required.
+	Result *bool
+
+	noSmithyDocumentSerde
+}
+
 // Details of what case data is published through the case event stream.
 type CaseEventIncludedData struct {
 
@@ -207,6 +264,95 @@ type CaseFilterMemberOrAll struct {
 }
 
 func (*CaseFilterMemberOrAll) isCaseFilter() {}
+
+// Represents what rule type should take place, under what conditions. In the
+// Amazon Connect admin website, case rules are known as case field conditions. For
+// more information about case field conditions, see [Add case field conditions to a case template].
+//
+// The following types satisfy this interface:
+//
+//	CaseRuleDetailsMemberRequired
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type CaseRuleDetails interface {
+	isCaseRuleDetails()
+}
+
+// Required rule type, used to indicate whether a field is required.
+type CaseRuleDetailsMemberRequired struct {
+	Value RequiredCaseRule
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseRuleDetailsMemberRequired) isCaseRuleDetails() {}
+
+// Error for batch describe case rules API failure. In the Amazon Connect admin
+// website, case rules are known as case field conditions. For more information
+// about case field conditions, see [Add case field conditions to a case template].
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type CaseRuleError struct {
+
+	// Error code from getting a case rule.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The case rule identifier that caused the error.
+	//
+	// This member is required.
+	Id *string
+
+	// Error message from getting a case rule.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Object containing case rule identifier information.
+type CaseRuleIdentifier struct {
+
+	// Unique identifier of a case rule.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information of this case rule. In the Amazon Connect admin website,
+// case rules are known as case field conditions. For more information about case
+// field conditions, see [Add case field conditions to a case template].
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type CaseRuleSummary struct {
+
+	// The Amazon Resource Name (ARN) of the case rule.
+	//
+	// This member is required.
+	CaseRuleArn *string
+
+	// Unique identifier of a case rule.
+	//
+	// This member is required.
+	CaseRuleId *string
+
+	// Name of the case rule.
+	//
+	// This member is required.
+	Name *string
+
+	// Possible types for a rule.
+	//
+	// This member is required.
+	RuleType RuleType
+
+	// Description of a case rule.
+	Description *string
+
+	noSmithyDocumentSerde
+}
 
 // Case summary information.
 type CaseSummary struct {
@@ -317,6 +463,15 @@ type DomainSummary struct {
 // This structure will never have any data members. It signifies an empty value on
 // a case field.
 type EmptyFieldValue struct {
+	noSmithyDocumentSerde
+}
+
+// Represents an empty operand value. In the Amazon Connect admin website, case
+// rules are known as case field conditions. For more information about case field
+// conditions, see [Add case field conditions to a case template].
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type EmptyOperandValue struct {
 	noSmithyDocumentSerde
 }
 
@@ -564,7 +719,7 @@ type FieldValue struct {
 
 // Object to store union of Field values.
 //
-// The Summary system field accepts 1500 characters while all other fields accept
+// The Summary system field accepts 3000 characters while all other fields accept
 // 500 characters.
 //
 // The following types satisfy this interface:
@@ -641,6 +796,52 @@ type FileFilter struct {
 
 	// The Amazon Resource Name (ARN) of the file.
 	FileArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed case rule information. In the Amazon Connect admin website, case rules
+// are known as case field conditions. For more information about case field
+// conditions, see [Add case field conditions to a case template].
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type GetCaseRuleResponse struct {
+
+	// The Amazon Resource Name (ARN) of the case rule.
+	//
+	// This member is required.
+	CaseRuleArn *string
+
+	// Unique identifier of a case rule.
+	//
+	// This member is required.
+	CaseRuleId *string
+
+	// Name of the case rule.
+	//
+	// This member is required.
+	Name *string
+
+	// Represents what rule type should take place, under what conditions.
+	//
+	// This member is required.
+	Rule CaseRuleDetails
+
+	// Timestamp when the resource was created.
+	CreatedTime *time.Time
+
+	// Indicates whether the resource has been deleted.
+	Deleted bool
+
+	// Description of a case rule.
+	Description *string
+
+	// Timestamp when the resource was created or last modified.
+	LastModifiedTime *time.Time
+
+	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// organize, track, or control access for this resource.
+	Tags map[string]*string
 
 	noSmithyDocumentSerde
 }
@@ -750,6 +951,80 @@ type LayoutSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// Represents the left hand operand in the condition. In the Amazon Connect admin
+// website, case rules are known as case field conditions. For more information
+// about case field conditions, see [Add case field conditions to a case template].
+//
+// The following types satisfy this interface:
+//
+//	OperandOneMemberFieldId
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type OperandOne interface {
+	isOperandOne()
+}
+
+// The field ID that this operand should take the value of.
+type OperandOneMemberFieldId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*OperandOneMemberFieldId) isOperandOne() {}
+
+// Represents the right hand operand in the condition. In the Amazon Connect admin
+// website, case rules are known as case field conditions. For more information
+// about case field conditions, see [Add case field conditions to a case template].
+//
+// The following types satisfy this interface:
+//
+//	OperandTwoMemberBooleanValue
+//	OperandTwoMemberDoubleValue
+//	OperandTwoMemberEmptyValue
+//	OperandTwoMemberStringValue
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type OperandTwo interface {
+	isOperandTwo()
+}
+
+// Boolean value type.
+type OperandTwoMemberBooleanValue struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*OperandTwoMemberBooleanValue) isOperandTwo() {}
+
+// Double value type.
+type OperandTwoMemberDoubleValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*OperandTwoMemberDoubleValue) isOperandTwo() {}
+
+// Empty value type.
+type OperandTwoMemberEmptyValue struct {
+	Value EmptyOperandValue
+
+	noSmithyDocumentSerde
+}
+
+func (*OperandTwoMemberEmptyValue) isOperandTwo() {}
+
+// String value type.
+type OperandTwoMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*OperandTwoMemberStringValue) isOperandTwo() {}
 
 // Represents the content of a particular type of related item.
 //
@@ -876,6 +1151,28 @@ type RelatedItemTypeFilterMemberFile struct {
 
 func (*RelatedItemTypeFilterMemberFile) isRelatedItemTypeFilter() {}
 
+// Required rule type, used to indicate whether a field is required. In the Amazon
+// Connect admin website, case rules are known as case field conditions. For more
+// information about case field conditions, see [Add case field conditions to a case template].
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type RequiredCaseRule struct {
+
+	// List of conditions for the required rule; the first condition to evaluate to
+	// true dictates the value of the rule.
+	//
+	// This member is required.
+	Conditions []BooleanCondition
+
+	// The value of the rule (that is, whether the field is required) should none of
+	// the conditions evaluate to true.
+	//
+	// This member is required.
+	DefaultValue *bool
+
+	noSmithyDocumentSerde
+}
+
 // List of fields that must have a value provided to create a case.
 type RequiredField struct {
 
@@ -979,6 +1276,26 @@ type Sort struct {
 	noSmithyDocumentSerde
 }
 
+// An association representing a case rule acting upon a field. In the Amazon
+// Connect admin website, case rules are known as case field conditions. For more
+// information about case field conditions, see [Add case field conditions to a case template].
+//
+// [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+type TemplateRule struct {
+
+	// Unique identifier of a case rule.
+	//
+	// This member is required.
+	CaseRuleId *string
+
+	// Unique identifier of a field.
+	//
+	// This member is required.
+	FieldId *string
+
+	noSmithyDocumentSerde
+}
+
 // Template summary information.
 type TemplateSummary struct {
 
@@ -1035,10 +1352,14 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAuditEventFieldValueUnion() {}
+func (*UnknownUnionMember) isBooleanCondition()          {}
 func (*UnknownUnionMember) isCaseFilter()                {}
+func (*UnknownUnionMember) isCaseRuleDetails()           {}
 func (*UnknownUnionMember) isFieldFilter()               {}
 func (*UnknownUnionMember) isFieldValueUnion()           {}
 func (*UnknownUnionMember) isLayoutContent()             {}
+func (*UnknownUnionMember) isOperandOne()                {}
+func (*UnknownUnionMember) isOperandTwo()                {}
 func (*UnknownUnionMember) isRelatedItemContent()        {}
 func (*UnknownUnionMember) isRelatedItemInputContent()   {}
 func (*UnknownUnionMember) isRelatedItemTypeFilter()     {}

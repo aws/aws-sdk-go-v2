@@ -19,9 +19,9 @@ import (
 // operation in that account and Region, and sets the stack set operation result
 // status for that account and Region to FAILED .
 //
-// For more information, see [Configuring a target account gate].
+// For more information, see [Configuring a target account gate in StackSets] in the CloudFormation User Guide.
 //
-// [Configuring a target account gate]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html
+// [Configuring a target account gate in StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html
 type AccountGateResult struct {
 
 	// The status of the account gate function.
@@ -124,8 +124,8 @@ type BatchDescribeTypeConfigurationsError struct {
 // execute the change set.
 type Change struct {
 
-	// Is either null , if no hooks invoke for the resource, or contains the number of
-	// hooks that will invoke for the resource.
+	// Is either null , if no Hooks invoke for the resource, or contains the number of
+	// Hooks that will invoke for the resource.
 	HookInvocationCount *int32
 
 	// A ResourceChange structure that describes the resource and action that
@@ -187,7 +187,7 @@ type ChangeSetHook struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies RESOURCE type target details for activated hooks.
+// Specifies RESOURCE type target details for activated Hooks.
 type ChangeSetHookResourceTargetDetails struct {
 
 	// The resource's logical ID, which is defined in the stack's template.
@@ -254,7 +254,7 @@ type ChangeSetSummary struct {
 	// The name of the stack with which the change set is associated.
 	StackName *string
 
-	// The state of the change set, such as CREATE_IN_PROGRESS , CREATE_COMPLETE , or
+	// The state of the change set, such as CREATE_PENDING , CREATE_COMPLETE , or
 	// FAILED .
 	Status ChangeSetStatus
 
@@ -295,15 +295,17 @@ type DeploymentTargets struct {
 	//   - NONE : Deploys to all the accounts in specified organizational units (OU).
 	AccountFilterType AccountFilterType
 
-	// The names of one or more Amazon Web Services accounts for which you want to
-	// deploy stack set updates.
+	// The account IDs of the Amazon Web Services accounts. If you have many account
+	// numbers, you can provide those accounts using the AccountsUrl property instead.
 	Accounts []string
 
-	// Returns the value of the AccountsUrl property.
+	// The Amazon S3 URL path to a file that contains a list of Amazon Web Services
+	// account IDs. The file format must be either .csv or .txt , and the data can be
+	// comma-separated or new-line-separated. There is currently a 10MB limit for the
+	// data (approximately 800,000 accounts).
 	AccountsUrl *string
 
-	// The organization root ID or organizational unit (OU) IDs to which StackSets
-	// deploys.
+	// The organization root ID or organizational unit (OU) IDs.
 	OrganizationalUnitIds []string
 
 	noSmithyDocumentSerde
@@ -478,9 +480,9 @@ type Parameter struct {
 
 	// Read-only. The value that corresponds to a Systems Manager parameter key. This
 	// field is returned only for Systems Manager parameter types in the template. For
-	// more information, see [Use CloudFormation-supplied parameter types]in the CloudFormation User Guide.
+	// more information, see [Specify existing resources at runtime with CloudFormation-supplied parameter types]in the CloudFormation User Guide.
 	//
-	// [Use CloudFormation-supplied parameter types]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-supplied-parameter-types.html
+	// [Specify existing resources at runtime with CloudFormation-supplied parameter types]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-supplied-parameter-types.html
 	ResolvedValue *string
 
 	// During a stack update, use the existing parameter value that the stack is using
@@ -859,6 +861,41 @@ type ResourceIdentifierSummary struct {
 
 	// The template resource type of the target resources, such as AWS::S3::Bucket .
 	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// The location of the resource in a stack template.
+type ResourceLocation struct {
+
+	// The logical name of the resource specified in the template.
+	//
+	// This member is required.
+	LogicalResourceId *string
+
+	// The name associated with the stack.
+	//
+	// This member is required.
+	StackName *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the current source of the resource and the destination of where it
+// will be moved to.
+type ResourceMapping struct {
+
+	// The destination stack StackName and LogicalResourceId for the resource being
+	// refactored.
+	//
+	// This member is required.
+	Destination *ResourceLocation
+
+	// The source stack StackName and LogicalResourceId for the resource being
+	// refactored.
+	//
+	// This member is required.
+	Source *ResourceLocation
 
 	noSmithyDocumentSerde
 }
@@ -1248,6 +1285,21 @@ type Stack struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the stack and the template used by the stack.
+type StackDefinition struct {
+
+	// The name associated with the stack.
+	StackName *string
+
+	// The file path for the stack template file.
+	TemplateBody *string
+
+	// The desired final state of the stack template.
+	TemplateURL *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about whether the stack's actual configuration differs, or
 // has drifted, from its expected configuration, as defined in the stack template
 // and any values specified as template parameters. A stack is considered to have
@@ -1369,7 +1421,7 @@ type StackEvent struct {
 	//   - WARN Allows provisioning to continue with a warning message.
 	HookFailureMode HookFailureMode
 
-	// Invocation points are points in provisioning logic where hooks are initiated.
+	// Invocation points are points in provisioning logic where Hooks are initiated.
 	HookInvocationPoint HookInvocationPoint
 
 	// Provides the status of the change set hook.
@@ -1687,6 +1739,79 @@ type StackInstanceSummary struct {
 	Status StackInstanceStatus
 
 	// The explanation for the specific status code assigned to this stack instance.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the stack and the action that CloudFormation will perform on it if
+// you execute the stack refactor.
+type StackRefactorAction struct {
+
+	// The action that CloudFormation takes on the stack.
+	Action StackRefactorActionType
+
+	// A description to help you identify the refactor.
+	Description *string
+
+	// The detection type is one of the following:
+	//
+	//   - Auto: CloudFormation figured out the mapping on its own.
+	//
+	//   - Manual: The customer provided the mapping in the ResourceMapping parameter.
+	Detection StackRefactorDetection
+
+	// The description of the detection type.
+	DetectionReason *string
+
+	// The type that will be evaluated in the StackRefactorAction . The following are
+	// potential Entity types:
+	//
+	//   - Stack
+	//
+	//   - Resource
+	Entity StackRefactorActionEntity
+
+	// The name or unique identifier associated with the physical instance of the
+	// resource.
+	PhysicalResourceId *string
+
+	// A key-value pair that identifies the target resource. The key is an identifier
+	// property (for example, BucketName for AWS::S3::Bucket resources) and the value
+	// is the actual property value (for example, MyS3Bucket ).
+	ResourceIdentifier *string
+
+	// The mapping for the stack resource Source and stack resource Destination .
+	ResourceMapping *ResourceMapping
+
+	// Assigns one or more tags to specified resources.
+	TagResources []Tag
+
+	// Removes one or more tags to specified resources.
+	UntagResources []string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a stack refactor operation.
+type StackRefactorSummary struct {
+
+	// A description to help you identify the refactor.
+	Description *string
+
+	// The operation status that's provided after calling the ExecuteStackRefactor action.
+	ExecutionStatus StackRefactorExecutionStatus
+
+	// A detailed explanation for the stack refactor ExecutionStatus .
+	ExecutionStatusReason *string
+
+	// The ID associated with the stack refactor created from the CreateStackRefactor action.
+	StackRefactorId *string
+
+	// The stack refactor operation status that's provided after calling the CreateStackRefactor action.
+	Status StackRefactorStatus
+
+	// A detailed explanation for the stack refactor Status .
 	StatusReason *string
 
 	noSmithyDocumentSerde
@@ -2026,9 +2151,9 @@ type StackSet struct {
 	//
 	// Use customized administrator roles to control which users or groups can manage
 	// specific stack sets within the same administrator account. For more information,
-	// see [Prerequisites: Granting Permissions for Stack Set Operations]in the CloudFormation User Guide.
+	// see [Prerequisites for using CloudFormation StackSets]in the CloudFormation User Guide.
 	//
-	// [Prerequisites: Granting Permissions for Stack Set Operations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+	// [Prerequisites for using CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
 	AdministrationRoleARN *string
 
 	// [Service-managed permissions] Describes whether StackSets automatically deploys
@@ -2041,7 +2166,7 @@ type StackSet struct {
 	// account—for example, by creating new Identity and Access Management (IAM) users.
 	// For more information, see [Acknowledging IAM resources in CloudFormation templates].
 	//
-	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
+	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
 	Capabilities []Capability
 
 	// A description of the stack set that you specify when the stack set is created
@@ -2071,14 +2196,14 @@ type StackSet struct {
 	//
 	//   - With self-managed permissions, you must create the administrator and
 	//   execution roles required to deploy to target accounts. For more information, see
-	//   [Grant Self-Managed Stack Set Permissions].
+	//   [Grant self-managed permissions].
 	//
 	//   - With service-managed permissions, StackSets automatically creates the IAM
 	//   roles required to deploy to accounts managed by Organizations. For more
-	//   information, see [Grant Service-Managed Stack Set Permissions].
+	//   information, see [Activate trusted access for stack sets with Organizations].
 	//
-	// [Grant Self-Managed Stack Set Permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
-	// [Grant Service-Managed Stack Set Permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+	// [Activate trusted access for stack sets with Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
+	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
 	PermissionModel PermissionModels
 
 	// Returns a list of all Amazon Web Services Regions the given StackSet has stack
@@ -2140,9 +2265,9 @@ type StackSetAutoDeploymentTargetSummary struct {
 // For stack set operations, includes information about drift operations currently
 // being performed on the stack set.
 //
-// For more information, see [Detecting unmanaged changes in stack sets] in the CloudFormation User Guide.
+// For more information, see [Performing drift detection on CloudFormation StackSets] in the CloudFormation User Guide.
 //
-// [Detecting unmanaged changes in stack sets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
+// [Performing drift detection on CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
 type StackSetDriftDetectionDetails struct {
 
 	// The status of the stack set drift detection operation.
@@ -2228,9 +2353,9 @@ type StackSetOperation struct {
 	//
 	// Use customized administrator roles to control which users or groups can manage
 	// specific stack sets within the same administrator account. For more information,
-	// see [Define Permissions for Multiple Administrators]in the CloudFormation User Guide.
+	// see [Grant self-managed permissions]in the CloudFormation User Guide.
 	//
-	// [Define Permissions for Multiple Administrators]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
 	AdministrationRoleARN *string
 
 	// The time at which the operation was initiated. Note that the creation times for
@@ -2273,9 +2398,9 @@ type StackSetOperation struct {
 	// This information will only be present for stack set operations whose Action
 	// type is DETECT_DRIFT .
 	//
-	// For more information, see [Detect stack set drift] in the CloudFormation User Guide.
+	// For more information, see [Performing drift detection on CloudFormation StackSets] in the CloudFormation User Guide.
 	//
-	// [Detect stack set drift]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
+	// [Performing drift detection on CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
 	StackSetDriftDetectionDetails *StackSetDriftDetectionDetails
 
 	// The ID of the stack set.
@@ -2293,7 +2418,7 @@ type StackSetOperation struct {
 	//
 	//   - QUEUED : [Service-managed permissions] For automatic deployments that
 	//   require a sequence of operations, the operation is queued to be performed. For
-	//   more information, see the [stack set operation status codes]in the CloudFormation User Guide.
+	//   more information, see the [StackSets status codes]in the CloudFormation User Guide.
 	//
 	//   - RUNNING : The operation is currently being performed.
 	//
@@ -2304,7 +2429,7 @@ type StackSetOperation struct {
 	//   - SUCCEEDED : The operation completed creating or updating all the specified
 	//   stacks without exceeding the failure tolerance for the operation.
 	//
-	// [stack set operation status codes]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-status-codes
+	// [StackSets status codes]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-status-codes
 	Status StackSetOperationStatus
 
 	// Detailed information about the StackSet operation.
@@ -2580,14 +2705,14 @@ type StackSetSummary struct {
 	//
 	//   - With self-managed permissions, you must create the administrator and
 	//   execution roles required to deploy to target accounts. For more information, see
-	//   [Grant Self-Managed Stack Set Permissions].
+	//   [Grant self-managed permissions].
 	//
 	//   - With service-managed permissions, StackSets automatically creates the IAM
 	//   roles required to deploy to accounts managed by Organizations. For more
-	//   information, see [Grant Service-Managed Stack Set Permissions].
+	//   information, see [Activate trusted access for stack sets with Organizations].
 	//
-	// [Grant Self-Managed Stack Set Permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
-	// [Grant Service-Managed Stack Set Permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+	// [Activate trusted access for stack sets with Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
+	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
 	PermissionModel PermissionModels
 
 	// The ID of the stack set.

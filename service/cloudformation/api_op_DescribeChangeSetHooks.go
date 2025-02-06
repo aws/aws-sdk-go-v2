@@ -36,7 +36,7 @@ type DescribeChangeSetHooksInput struct {
 	// This member is required.
 	ChangeSetName *string
 
-	// If specified, lists only the hooks related to the specified LogicalResourceId .
+	// If specified, lists only the Hooks related to the specified LogicalResourceId .
 	LogicalResourceId *string
 
 	// A string, provided by the DescribeChangeSetHooks response output, that

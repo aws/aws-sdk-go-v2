@@ -152,8 +152,8 @@ type DescribeChangeSetOutput struct {
 	// The name of the stack that's associated with the change set.
 	StackName *string
 
-	// The current status of the change set, such as CREATE_IN_PROGRESS ,
-	// CREATE_COMPLETE , or FAILED .
+	// The current status of the change set, such as CREATE_PENDING , CREATE_COMPLETE ,
+	// or FAILED .
 	Status types.ChangeSetStatus
 
 	// A description of the change set's status. For example, if your attempt to

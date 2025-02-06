@@ -83,7 +83,7 @@ type RegisterTypeInput struct {
 	//
 	//   - For modules, company_or_organization::service::type::MODULE .
 	//
-	//   - For hooks, MyCompany::Testing::MyTestHook .
+	//   - For Hooks, MyCompany::Testing::MyTestHook .
 	//
 	// The following organization namespaces are reserved and can't be used in your
 	// extension names:

@@ -52,8 +52,8 @@ type DeleteStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of the Amazon Web Services accounts that
-	// you want to delete stack instances for.
+	// [Self-managed permissions] The account IDs of the Amazon Web Services accounts
+	// that you want to delete stack instances for.
 	//
 	// You can specify Accounts or DeploymentTargets , but not both.
 	Accounts []string

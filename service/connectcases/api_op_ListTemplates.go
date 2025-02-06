@@ -13,6 +13,21 @@ import (
 
 // Lists all of the templates in a Cases domain. Each list item is a condensed
 // summary object of the template.
+//
+// Other template APIs are:
+//
+// [CreateTemplate]
+//
+// [DeleteTemplate]
+//
+// [GetTemplate]
+//
+// [UpdateTemplate]
+//
+// [DeleteTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_DeleteTemplate.html
+// [CreateTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateTemplate.html
+// [UpdateTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_UpdateTemplate.html
+// [GetTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetTemplate.html
 func (c *Client) ListTemplates(ctx context.Context, params *ListTemplatesInput, optFns ...func(*Options)) (*ListTemplatesOutput, error) {
 	if params == nil {
 		params = &ListTemplatesInput{}

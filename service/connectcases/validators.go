@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchGetCaseRule struct {
+}
+
+func (*validateOpBatchGetCaseRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetCaseRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetCaseRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetCaseRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetField struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCreateCase) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCaseRule struct {
+}
+
+func (*validateOpCreateCaseRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCaseRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCaseRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCaseRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -165,6 +205,26 @@ func (m *validateOpCreateTemplate) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCaseRule struct {
+}
+
+func (*validateOpDeleteCaseRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCaseRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCaseRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCaseRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -365,6 +425,26 @@ func (m *validateOpGetTemplate) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCaseRules struct {
+}
+
+func (*validateOpListCaseRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCaseRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCaseRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCaseRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +690,26 @@ func (m *validateOpUpdateCase) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCaseRule struct {
+}
+
+func (*validateOpUpdateCaseRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCaseRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCaseRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCaseRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateField struct {
 }
 
@@ -670,6 +770,10 @@ func (m *validateOpUpdateTemplate) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchGetCaseRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetCaseRule{}, middleware.After)
+}
+
 func addOpBatchGetFieldValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetField{}, middleware.After)
 }
@@ -680,6 +784,10 @@ func addOpBatchPutFieldOptionsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpCreateCaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCase{}, middleware.After)
+}
+
+func addOpCreateCaseRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCaseRule{}, middleware.After)
 }
 
 func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -700,6 +808,10 @@ func addOpCreateRelatedItemValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTemplate{}, middleware.After)
+}
+
+func addOpDeleteCaseRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCaseRule{}, middleware.After)
 }
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -740,6 +852,10 @@ func addOpGetLayoutValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTemplate{}, middleware.After)
+}
+
+func addOpListCaseRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCaseRules{}, middleware.After)
 }
 
 func addOpListCasesForContactValidationMiddleware(stack *middleware.Stack) error {
@@ -790,6 +906,10 @@ func addOpUpdateCaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCase{}, middleware.After)
 }
 
+func addOpUpdateCaseRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCaseRule{}, middleware.After)
+}
+
 func addOpUpdateFieldValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateField{}, middleware.After)
 }
@@ -833,6 +953,68 @@ func validateBatchGetFieldIdentifierList(v []types.FieldIdentifier) error {
 		if err := validateFieldIdentifier(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBooleanCondition(v types.BooleanCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BooleanCondition"}
+	switch uv := v.(type) {
+	case *types.BooleanConditionMemberEqualTo:
+		if err := validateBooleanOperands(&uv.Value); err != nil {
+			invalidParams.AddNested("[equalTo]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BooleanConditionMemberNotEqualTo:
+		if err := validateBooleanOperands(&uv.Value); err != nil {
+			invalidParams.AddNested("[notEqualTo]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBooleanConditionList(v []types.BooleanCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BooleanConditionList"}
+	for i := range v {
+		if err := validateBooleanCondition(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBooleanOperands(v *types.BooleanOperands) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BooleanOperands"}
+	if v.OperandOne == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperandOne"))
+	}
+	if v.OperandTwo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperandTwo"))
+	}
+	if v.Result == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Result"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -901,6 +1083,57 @@ func validateCaseFilterList(v []types.CaseFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CaseFilterList"}
 	for i := range v {
 		if err := validateCaseFilter(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCaseRuleDetails(v types.CaseRuleDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CaseRuleDetails"}
+	switch uv := v.(type) {
+	case *types.CaseRuleDetailsMemberRequired:
+		if err := validateRequiredCaseRule(&uv.Value); err != nil {
+			invalidParams.AddNested("[required]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCaseRuleIdentifier(v *types.CaseRuleIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CaseRuleIdentifier"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCaseRuleIdentifierList(v []types.CaseRuleIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CaseRuleIdentifierList"}
+	for i := range v {
+		if err := validateCaseRuleIdentifier(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1281,6 +1514,28 @@ func validateRelatedItemInputContent(v types.RelatedItemInputContent) error {
 	}
 }
 
+func validateRequiredCaseRule(v *types.RequiredCaseRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequiredCaseRule"}
+	if v.DefaultValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultValue"))
+	}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validateBooleanConditionList(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRequiredField(v *types.RequiredField) error {
 	if v == nil {
 		return nil
@@ -1384,6 +1639,63 @@ func validateSortList(v []types.Sort) error {
 	}
 }
 
+func validateTemplateCaseRuleList(v []types.TemplateRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TemplateCaseRuleList"}
+	for i := range v {
+		if err := validateTemplateRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTemplateRule(v *types.TemplateRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TemplateRule"}
+	if v.CaseRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseRuleId"))
+	}
+	if v.FieldId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetCaseRuleInput(v *BatchGetCaseRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCaseRuleInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseRules"))
+	} else if v.CaseRules != nil {
+		if err := validateCaseRuleIdentifierList(v.CaseRules); err != nil {
+			invalidParams.AddNested("CaseRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetFieldInput(v *BatchGetFieldInput) error {
 	if v == nil {
 		return nil
@@ -1447,6 +1759,31 @@ func validateOpCreateCaseInput(v *CreateCaseInput) error {
 	} else if v.Fields != nil {
 		if err := validateFieldValueList(v.Fields); err != nil {
 			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCaseRuleInput(v *CreateCaseRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCaseRuleInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Rule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
+	} else if v.Rule != nil {
+		if err := validateCaseRuleDetails(v.Rule); err != nil {
+			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1560,6 +1897,29 @@ func validateOpCreateTemplateInput(v *CreateTemplateInput) error {
 		if err := validateRequiredFieldList(v.RequiredFields); err != nil {
 			invalidParams.AddNested("RequiredFields", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Rules != nil {
+		if err := validateTemplateCaseRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCaseRuleInput(v *DeleteCaseRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCaseRuleInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseRuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1738,6 +2098,21 @@ func validateOpGetTemplateInput(v *GetTemplateInput) error {
 	}
 	if v.TemplateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCaseRulesInput(v *ListCaseRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCaseRulesInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1973,6 +2348,29 @@ func validateOpUpdateCaseInput(v *UpdateCaseInput) error {
 	}
 }
 
+func validateOpUpdateCaseRuleInput(v *UpdateCaseRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCaseRuleInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseRuleId"))
+	}
+	if v.Rule != nil {
+		if err := validateCaseRuleDetails(v.Rule); err != nil {
+			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFieldInput(v *UpdateFieldInput) error {
 	if v == nil {
 		return nil
@@ -2028,6 +2426,11 @@ func validateOpUpdateTemplateInput(v *UpdateTemplateInput) error {
 	if v.RequiredFields != nil {
 		if err := validateRequiredFieldList(v.RequiredFields); err != nil {
 			invalidParams.AddNested("RequiredFields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Rules != nil {
+		if err := validateTemplateCaseRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

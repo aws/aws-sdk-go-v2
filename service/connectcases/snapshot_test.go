@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchGetCaseRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCaseRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetCaseRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetField(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetField(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,18 @@ func TestCheckSnapshot_CreateCase(t *testing.T) {
 	_, err := svc.CreateCase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateCase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCaseRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCaseRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCaseRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -151,6 +175,18 @@ func TestCheckSnapshot_CreateTemplate(t *testing.T) {
 	_, err := svc.CreateTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCaseRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCaseRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCaseRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -271,6 +307,18 @@ func TestCheckSnapshot_GetTemplate(t *testing.T) {
 	_, err := svc.GetTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCaseRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCaseRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCaseRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -434,6 +482,18 @@ func TestCheckSnapshot_UpdateCase(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCaseRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCaseRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCaseRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateField(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateField(context.Background(), nil, func(o *Options) {
@@ -469,6 +529,18 @@ func TestCheckSnapshot_UpdateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchGetCaseRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCaseRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetCaseRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetField(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetField(context.Background(), nil, func(o *Options) {
@@ -498,6 +570,18 @@ func TestUpdateSnapshot_CreateCase(t *testing.T) {
 	_, err := svc.CreateCase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCaseRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCaseRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCaseRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -558,6 +642,18 @@ func TestUpdateSnapshot_CreateTemplate(t *testing.T) {
 	_, err := svc.CreateTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCaseRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCaseRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCaseRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -678,6 +774,18 @@ func TestUpdateSnapshot_GetTemplate(t *testing.T) {
 	_, err := svc.GetTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCaseRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCaseRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCaseRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -834,6 +942,18 @@ func TestUpdateSnapshot_UpdateCase(t *testing.T) {
 	_, err := svc.UpdateCase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCaseRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCaseRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCaseRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

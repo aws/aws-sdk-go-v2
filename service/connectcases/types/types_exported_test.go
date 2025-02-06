@@ -40,6 +40,27 @@ var _ *string
 var _ *bool
 var _ *float64
 
+func ExampleBooleanCondition_outputUsage() {
+	var union types.BooleanCondition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.BooleanConditionMemberEqualTo:
+		_ = v.Value // Value is types.BooleanOperands
+
+	case *types.BooleanConditionMemberNotEqualTo:
+		_ = v.Value // Value is types.BooleanOperands
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BooleanOperands
+
 func ExampleCaseFilter_outputUsage() {
 	var union types.CaseFilter
 	// type switches can be used to check the union value
@@ -68,6 +89,24 @@ func ExampleCaseFilter_outputUsage() {
 var _ []types.CaseFilter
 var _ types.CaseFilter
 var _ types.FieldFilter
+
+func ExampleCaseRuleDetails_outputUsage() {
+	var union types.CaseRuleDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CaseRuleDetailsMemberRequired:
+		_ = v.Value // Value is types.RequiredCaseRule
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RequiredCaseRule
 
 func ExampleFieldFilter_outputUsage() {
 	var union types.FieldFilter
@@ -152,6 +191,54 @@ func ExampleLayoutContent_outputUsage() {
 }
 
 var _ *types.BasicLayout
+
+func ExampleOperandOne_outputUsage() {
+	var union types.OperandOne
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OperandOneMemberFieldId:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleOperandTwo_outputUsage() {
+	var union types.OperandTwo
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OperandTwoMemberBooleanValue:
+		_ = v.Value // Value is bool
+
+	case *types.OperandTwoMemberDoubleValue:
+		_ = v.Value // Value is float64
+
+	case *types.OperandTwoMemberEmptyValue:
+		_ = v.Value // Value is types.EmptyOperandValue
+
+	case *types.OperandTwoMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *bool
+var _ *float64
+var _ *types.EmptyOperandValue
 
 func ExampleRelatedItemContent_outputUsage() {
 	var union types.RelatedItemContent

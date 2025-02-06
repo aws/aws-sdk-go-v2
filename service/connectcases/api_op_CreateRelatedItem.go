@@ -22,6 +22,8 @@ import (
 //   - If you provide a value for performedBy.userArn you must also have [DescribeUser]
 //     permission on the ARN of the user that you provide.
 //
+//   - The type field is reserved for internal use only.
+//
 // [DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
 func (c *Client) CreateRelatedItem(ctx context.Context, params *CreateRelatedItemInput, optFns ...func(*Options)) (*CreateRelatedItemOutput, error) {
 	if params == nil {

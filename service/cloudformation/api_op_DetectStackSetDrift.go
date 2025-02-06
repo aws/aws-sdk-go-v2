@@ -13,7 +13,7 @@ import (
 
 // Detect drift on a stack set. When CloudFormation performs drift detection on a
 // stack set, it performs drift detection on the stack associated with each stack
-// instance in the stack set. For more information, see [How CloudFormation performs drift detection on a stack set].
+// instance in the stack set. For more information, see [Performing drift detection on CloudFormation StackSets].
 //
 // DetectStackSetDrift returns the OperationId of the stack set drift detection
 // operation. Use this operation id with DescribeStackSetOperationto monitor the progress of the drift
@@ -34,16 +34,12 @@ import (
 //   - Use DescribeStackInstanceto return detailed information about a specific stack instance,
 //     including its drift status and last drift time checked.
 //
-// For more information about performing a drift detection operation on a stack
-// set, see [Detecting unmanaged changes in stack sets].
-//
 // You can only run a single drift detection operation on a given stack set at one
 // time.
 //
 // To stop a drift detection stack set operation, use StopStackSetOperation.
 //
-// [Detecting unmanaged changes in stack sets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
-// [How CloudFormation performs drift detection on a stack set]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
+// [Performing drift detection on CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
 func (c *Client) DetectStackSetDrift(ctx context.Context, params *DetectStackSetDriftInput, optFns ...func(*Options)) (*DetectStackSetDriftOutput, error) {
 	if params == nil {
 		params = &DetectStackSetDriftInput{}

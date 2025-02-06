@@ -61,14 +61,14 @@ type UpdateStackSetInput struct {
 	//
 	// Specify an IAM role only if you are using customized administrator roles to
 	// control which users or groups can manage specific stack sets within the same
-	// administrator account. For more information, see [Granting Permissions for Stack Set Operations]in the CloudFormation User
+	// administrator account. For more information, see [Prerequisites for using CloudFormation StackSets]in the CloudFormation User
 	// Guide.
 	//
 	// If you specified a customized administrator role when you created the stack
 	// set, you must specify a customized administrator role, even if it is the same
 	// customized administrator role used with this stack set previously.
 	//
-	// [Granting Permissions for Stack Set Operations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+	// [Prerequisites for using CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
 	AdministrationRoleARN *string
 
 	// [Service-managed permissions] Describes whether StackSets automatically deploys
@@ -144,7 +144,7 @@ type UpdateStackSetInput struct {
 	//   more macros, you must update the stack set directly from the processed template,
 	//   without first reviewing the resulting changes in a change set. To update the
 	//   stack set directly, you must acknowledge this capability. For more information,
-	//   see [Using CloudFormation Macros to Perform Custom Processing on Templates].
+	//   see [Perform custom processing on CloudFormation templates with template macros].
 	//
 	// Stack sets with service-managed permissions do not currently support the use of
 	//   macros in templates. (This includes the [AWS::Include]and [AWS::Serverless]transforms, which are macros
@@ -153,15 +153,15 @@ type UpdateStackSetInput struct {
 	//   stack set operation will fail.
 	//
 	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
-	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
 	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
 	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
+	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
+	// [Perform custom processing on CloudFormation templates with template macros]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
 	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
 	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
 	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
 	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-	// [Using CloudFormation Macros to Perform Custom Processing on Templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
 	// [AWS::Serverless]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
 	Capabilities []types.Capability
 
@@ -228,14 +228,14 @@ type UpdateStackSetInput struct {
 	//
 	//   - With self-managed permissions, you must create the administrator and
 	//   execution roles required to deploy to target accounts. For more information, see
-	//   [Grant Self-Managed Stack Set Permissions].
+	//   [Grant self-managed permissions].
 	//
 	//   - With service-managed permissions, StackSets automatically creates the IAM
 	//   roles required to deploy to accounts managed by Organizations. For more
-	//   information, see [Grant Service-Managed Stack Set Permissions].
+	//   information, see [Activate trusted access for stack sets with Organizations].
 	//
-	// [Grant Self-Managed Stack Set Permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
-	// [Grant Service-Managed Stack Set Permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+	// [Activate trusted access for stack sets with Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
+	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
 	PermissionModel types.PermissionModels
 
 	// The Amazon Web Services Regions in which to update associated stack instances.
@@ -290,9 +290,10 @@ type UpdateStackSetInput struct {
 	// or TemplateURL —or set UsePreviousTemplate to true.
 	TemplateBody *string
 
-	// The location of the file that contains the template body. The URL must point to
-	// a template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket
-	// or a Systems Manager document.
+	// The URL of a file that contains the template body. The URL must point to a
+	// template (maximum size: 1 MB) that is located in an Amazon S3 bucket or a
+	// Systems Manager document. The location for an Amazon S3 bucket must start with
+	// https:// .
 	//
 	// Conditional: You must specify only one of the following parameters: TemplateBody
 	// or TemplateURL —or set UsePreviousTemplate to true.

@@ -615,6 +615,32 @@ func (e *StackNotFoundException) ErrorCode() string {
 }
 func (e *StackNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified stack refactor can't be found.
+type StackRefactorNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *StackRefactorNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *StackRefactorNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *StackRefactorNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "StackRefactorNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *StackRefactorNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You can't yet delete this stack set, because it still contains one or more
 // stack instances. Delete all stack instances from the stack set before deleting
 // the stack set.

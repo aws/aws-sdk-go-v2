@@ -18,6 +18,21 @@ import (
 // same IDs are not allowed within the same Template. A template can be either
 // Active or Inactive, as indicated by its status. Inactive templates cannot be
 // used to create cases.
+//
+// Other template APIs are:
+//
+// [DeleteTemplate]
+//
+// [GetTemplate]
+//
+// [ListTemplates]
+//
+// [UpdateTemplate]
+//
+// [DeleteTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_DeleteTemplate.html
+// [ListTemplates]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_ListTemplates.html
+// [UpdateTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_UpdateTemplate.html
+// [GetTemplate]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetTemplate.html
 func (c *Client) CreateTemplate(ctx context.Context, params *CreateTemplateInput, optFns ...func(*Options)) (*CreateTemplateOutput, error) {
 	if params == nil {
 		params = &CreateTemplateInput{}
@@ -54,6 +69,11 @@ type CreateTemplateInput struct {
 	// A list of fields that must contain a value for a case to be successfully
 	// created with this template.
 	RequiredFields []types.RequiredField
+
+	// A list of case rules (also known as [case field conditions]) on a template.
+	//
+	// [case field conditions]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+	Rules []types.TemplateRule
 
 	// The status of the template.
 	Status types.TemplateStatus

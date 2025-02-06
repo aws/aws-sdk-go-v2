@@ -1,0 +1,8 @@
+{
+    "id": "0b171a23-59ff-4ee9-ad0b-3fe84dad50b0",
+    "type": "feature",
+    "description": "This release enables AWS Cost Optimization Hub to show cost optimization recommendations for Amazon Auto Scaling Groups, including those with single and mixed instance types.",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

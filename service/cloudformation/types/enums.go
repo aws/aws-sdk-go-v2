@@ -1064,6 +1064,12 @@ const (
 	ResourceStatusImportRollbackInProgress ResourceStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
 	ResourceStatusImportRollbackFailed     ResourceStatus = "IMPORT_ROLLBACK_FAILED"
 	ResourceStatusImportRollbackComplete   ResourceStatus = "IMPORT_ROLLBACK_COMPLETE"
+	ResourceStatusExportFailed             ResourceStatus = "EXPORT_FAILED"
+	ResourceStatusExportComplete           ResourceStatus = "EXPORT_COMPLETE"
+	ResourceStatusExportInProgress         ResourceStatus = "EXPORT_IN_PROGRESS"
+	ResourceStatusExportRollbackInProgress ResourceStatus = "EXPORT_ROLLBACK_IN_PROGRESS"
+	ResourceStatusExportRollbackFailed     ResourceStatus = "EXPORT_ROLLBACK_FAILED"
+	ResourceStatusExportRollbackComplete   ResourceStatus = "EXPORT_ROLLBACK_COMPLETE"
 	ResourceStatusUpdateRollbackInProgress ResourceStatus = "UPDATE_ROLLBACK_IN_PROGRESS"
 	ResourceStatusUpdateRollbackComplete   ResourceStatus = "UPDATE_ROLLBACK_COMPLETE"
 	ResourceStatusUpdateRollbackFailed     ResourceStatus = "UPDATE_ROLLBACK_FAILED"
@@ -1094,6 +1100,12 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"IMPORT_ROLLBACK_IN_PROGRESS",
 		"IMPORT_ROLLBACK_FAILED",
 		"IMPORT_ROLLBACK_COMPLETE",
+		"EXPORT_FAILED",
+		"EXPORT_COMPLETE",
+		"EXPORT_IN_PROGRESS",
+		"EXPORT_ROLLBACK_IN_PROGRESS",
+		"EXPORT_ROLLBACK_FAILED",
+		"EXPORT_ROLLBACK_COMPLETE",
 		"UPDATE_ROLLBACK_IN_PROGRESS",
 		"UPDATE_ROLLBACK_COMPLETE",
 		"UPDATE_ROLLBACK_FAILED",
@@ -1217,6 +1229,124 @@ func (StackInstanceStatus) Values() []StackInstanceStatus {
 		"CURRENT",
 		"OUTDATED",
 		"INOPERABLE",
+	}
+}
+
+type StackRefactorActionEntity string
+
+// Enum values for StackRefactorActionEntity
+const (
+	StackRefactorActionEntityResource StackRefactorActionEntity = "RESOURCE"
+	StackRefactorActionEntityStack    StackRefactorActionEntity = "STACK"
+)
+
+// Values returns all known values for StackRefactorActionEntity. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StackRefactorActionEntity) Values() []StackRefactorActionEntity {
+	return []StackRefactorActionEntity{
+		"RESOURCE",
+		"STACK",
+	}
+}
+
+type StackRefactorActionType string
+
+// Enum values for StackRefactorActionType
+const (
+	StackRefactorActionTypeMove   StackRefactorActionType = "MOVE"
+	StackRefactorActionTypeCreate StackRefactorActionType = "CREATE"
+)
+
+// Values returns all known values for StackRefactorActionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StackRefactorActionType) Values() []StackRefactorActionType {
+	return []StackRefactorActionType{
+		"MOVE",
+		"CREATE",
+	}
+}
+
+type StackRefactorDetection string
+
+// Enum values for StackRefactorDetection
+const (
+	StackRefactorDetectionAuto   StackRefactorDetection = "AUTO"
+	StackRefactorDetectionManual StackRefactorDetection = "MANUAL"
+)
+
+// Values returns all known values for StackRefactorDetection. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StackRefactorDetection) Values() []StackRefactorDetection {
+	return []StackRefactorDetection{
+		"AUTO",
+		"MANUAL",
+	}
+}
+
+type StackRefactorExecutionStatus string
+
+// Enum values for StackRefactorExecutionStatus
+const (
+	StackRefactorExecutionStatusUnavailable        StackRefactorExecutionStatus = "UNAVAILABLE"
+	StackRefactorExecutionStatusAvailable          StackRefactorExecutionStatus = "AVAILABLE"
+	StackRefactorExecutionStatusObsolete           StackRefactorExecutionStatus = "OBSOLETE"
+	StackRefactorExecutionStatusExecuteInProgress  StackRefactorExecutionStatus = "EXECUTE_IN_PROGRESS"
+	StackRefactorExecutionStatusExecuteComplete    StackRefactorExecutionStatus = "EXECUTE_COMPLETE"
+	StackRefactorExecutionStatusExecuteFailed      StackRefactorExecutionStatus = "EXECUTE_FAILED"
+	StackRefactorExecutionStatusRollbackInProgress StackRefactorExecutionStatus = "ROLLBACK_IN_PROGRESS"
+	StackRefactorExecutionStatusRollbackComplete   StackRefactorExecutionStatus = "ROLLBACK_COMPLETE"
+	StackRefactorExecutionStatusRollbackFailed     StackRefactorExecutionStatus = "ROLLBACK_FAILED"
+)
+
+// Values returns all known values for StackRefactorExecutionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StackRefactorExecutionStatus) Values() []StackRefactorExecutionStatus {
+	return []StackRefactorExecutionStatus{
+		"UNAVAILABLE",
+		"AVAILABLE",
+		"OBSOLETE",
+		"EXECUTE_IN_PROGRESS",
+		"EXECUTE_COMPLETE",
+		"EXECUTE_FAILED",
+		"ROLLBACK_IN_PROGRESS",
+		"ROLLBACK_COMPLETE",
+		"ROLLBACK_FAILED",
+	}
+}
+
+type StackRefactorStatus string
+
+// Enum values for StackRefactorStatus
+const (
+	StackRefactorStatusCreateInProgress StackRefactorStatus = "CREATE_IN_PROGRESS"
+	StackRefactorStatusCreateComplete   StackRefactorStatus = "CREATE_COMPLETE"
+	StackRefactorStatusCreateFailed     StackRefactorStatus = "CREATE_FAILED"
+	StackRefactorStatusDeleteInProgress StackRefactorStatus = "DELETE_IN_PROGRESS"
+	StackRefactorStatusDeleteComplete   StackRefactorStatus = "DELETE_COMPLETE"
+	StackRefactorStatusDeleteFailed     StackRefactorStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for StackRefactorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StackRefactorStatus) Values() []StackRefactorStatus {
+	return []StackRefactorStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_COMPLETE",
+		"CREATE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_COMPLETE",
+		"DELETE_FAILED",
 	}
 }
 

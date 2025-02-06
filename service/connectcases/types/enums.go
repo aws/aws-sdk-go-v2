@@ -149,6 +149,23 @@ func (RelatedItemType) Values() []RelatedItemType {
 	}
 }
 
+type RuleType string
+
+// Enum values for RuleType
+const (
+	RuleTypeRequired RuleType = "Required"
+)
+
+// Values returns all known values for RuleType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleType) Values() []RuleType {
+	return []RuleType{
+		"Required",
+	}
+}
+
 type TemplateStatus string
 
 // Enum values for TemplateStatus

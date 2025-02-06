@@ -1,0 +1,8 @@
+{
+    "id": "f09a4407-5fc5-4eb2-8ac5-afa7e284d661",
+    "type": "feature",
+    "description": "We added 5 new stack refactoring APIs: CreateStackRefactor, ExecuteStackRefactor, ListStackRefactors, DescribeStackRefactor, ListStackRefactorActions.",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

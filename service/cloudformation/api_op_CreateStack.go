@@ -77,6 +77,8 @@ type CreateStackInput struct {
 	//
 	// [AWS::IAM::InstanceProfile]
 	//
+	// [AWS::IAM::ManagedPolicy]
+	//
 	// [AWS::IAM::Policy]
 	//
 	// [AWS::IAM::Role]
@@ -114,11 +116,12 @@ type CreateStackInput struct {
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
+	// [AWS::IAM::ManagedPolicy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-managedpolicy.html
 	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
-	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
 	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
 	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
+	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
 	// [Perform custom processing on CloudFormation templates with template macros]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
 	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
 	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
@@ -198,7 +201,7 @@ type CreateStackInput struct {
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [Control access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+	// [Control access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html
 	ResourceTypes []string
 
 	// When set to true , newly created resources are deleted when the operation rolls
@@ -249,8 +252,8 @@ type CreateStackInput struct {
 	// parameter, but not both.
 	TemplateBody *string
 
-	// Location of file containing the template body. The URL must point to a template
-	// (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems
+	// The URL of a file containing the template body. The URL must point to a
+	// template (max size: 1 MB) that's located in an Amazon S3 bucket or a Systems
 	// Manager document. The location for an Amazon S3 bucket must start with https:// .
 	//
 	// Conditional: You must specify either the TemplateBody or the TemplateURL

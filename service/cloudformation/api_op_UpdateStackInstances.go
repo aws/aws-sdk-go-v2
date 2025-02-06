@@ -61,7 +61,7 @@ type UpdateStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of one or more Amazon Web Services
+	// [Self-managed permissions] The account IDs of one or more Amazon Web Services
 	// accounts for which you want to update parameter values for stack instances. The
 	// overridden parameter values will be applied to all stack instances in the
 	// specified accounts and Amazon Web Services Regions.
