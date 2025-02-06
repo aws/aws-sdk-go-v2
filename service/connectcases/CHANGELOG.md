@@ -1,3 +1,7 @@
+# v1.22.0 (2025-02-06)
+
+* **Feature**: This release adds the ability to conditionally require fields on a template. Check public documentation for more information.
+
 # v1.21.15 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

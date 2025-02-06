@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.29.6
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.75.4
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.76.0
 )
 
 require (

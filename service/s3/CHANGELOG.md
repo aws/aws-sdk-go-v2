@@ -1,3 +1,7 @@
+# v1.76.0 (2025-02-06)
+
+* **Feature**: Updated list of the valid AWS Region values for the LocationConstraint parameter for general purpose buckets.
+
 # v1.75.4 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

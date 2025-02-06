@@ -1,3 +1,18 @@
+# Release (2025-02-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.57.0](service/cloudformation/CHANGELOG.md#v1570-2025-02-06)
+  * **Feature**: We added 5 new stack refactoring APIs: CreateStackRefactor, ExecuteStackRefactor, ListStackRefactors, DescribeStackRefactor, ListStackRefactorActions.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.22.0](service/connectcases/CHANGELOG.md#v1220-2025-02-06)
+  * **Feature**: This release adds the ability to conditionally require fields on a template. Check public documentation for more information.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.12.0](service/costoptimizationhub/CHANGELOG.md#v1120-2025-02-06)
+  * **Feature**: This release enables AWS Cost Optimization Hub to show cost optimization recommendations for Amazon Auto Scaling Groups, including those with single and mixed instance types.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.76.0](service/s3/CHANGELOG.md#v1760-2025-02-06)
+  * **Feature**: Updated list of the valid AWS Region values for the LocationConstraint parameter for general purpose buckets.
+
 # Release (2025-02-05)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.57.0 (2025-02-06)
+
+* **Feature**: We added 5 new stack refactoring APIs: CreateStackRefactor, ExecuteStackRefactor, ListStackRefactors, DescribeStackRefactor, ListStackRefactorActions.
+
 # v1.56.12 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

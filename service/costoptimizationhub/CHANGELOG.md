@@ -1,3 +1,7 @@
+# v1.12.0 (2025-02-06)
+
+* **Feature**: This release enables AWS Cost Optimization Hub to show cost optimization recommendations for Amazon Auto Scaling Groups, including those with single and mixed instance types.
+
 # v1.11.10 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions
