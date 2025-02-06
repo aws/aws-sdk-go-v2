@@ -830,3 +830,39 @@ func TestMarshalMap_keyTypes(t *testing.T) {
 		})
 	}
 }
+
+func TestEncodeEmptyTime(t *testing.T) {
+	type A struct {
+		Created time.Time `dynamodbav:"created,omitempty"`
+	}
+
+	a := A{Created: time.Time{}}
+
+	actual, err := MarshalWithOptions(a, func(o *EncoderOptions) {
+		o.OmitEmptyTime = true
+	})
+	if err != nil {
+		t.Errorf("expect nil, got %v", err)
+	}
+
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{},
+	}
+
+	if e, a := expect, actual; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+
+	actual2, err := MarshalMapWithOptions(a, func(o *EncoderOptions) {
+		o.OmitEmptyTime = true
+	})
+	if err != nil {
+		t.Errorf("expect nil, got %v", err)
+	}
+
+	expect2 := map[string]types.AttributeValue{}
+
+	if e, a := expect2, actual2; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}

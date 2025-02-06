@@ -1,0 +1,10 @@
+{
+  "id": "adfe779a-b5b4-44bd-8e23-5cdb4db5aef8",
+  "type": "bugfix",
+  "collapse": false,
+  "description": "DynamoDB AttributeValue's MarshallMap() Does Not Support time.Time Correctly #2383",
+  "modules": [
+    "feature/dynamodb",
+    "feature/dynamodbstreams"
+  ]
+}

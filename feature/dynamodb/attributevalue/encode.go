@@ -399,6 +399,9 @@ type EncoderOptions struct {
 	// NULL attribute values returned from the standard marshaling routine will
 	// always respect omitempty regardless of this setting.
 	OmitNullAttributeValues bool
+
+	// When enabled, the encoder will omit empty time attribute values
+	OmitEmptyTime bool
 }
 
 // An Encoder provides marshaling Go value types to AttributeValues.
@@ -499,6 +502,11 @@ func (e *Encoder) encodeStruct(v reflect.Value, fieldTag tag) (types.AttributeVa
 	if v.Type().ConvertibleTo(timeType) {
 		var t time.Time
 		t = v.Convert(timeType).Interface().(time.Time)
+
+		if e.options.OmitEmptyTime && fieldTag.OmitEmpty && t.IsZero() {
+			return nil, nil
+		}
+
 		if fieldTag.AsUnixTime {
 			return UnixTime(t).MarshalDynamoDBAttributeValue()
 		}
