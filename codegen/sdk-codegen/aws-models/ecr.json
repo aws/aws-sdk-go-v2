@@ -7360,6 +7360,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FINDINGS_UNAVAILABLE"
                     }
+                },
+                "LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED"
+                    }
                 }
             }
         },
@@ -7650,7 +7656,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an image vulnerability scan. An image scan can only be started once per 24\n            hours on an individual image. This limit includes if an image was scanned on initial\n            push. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html\">Image scanning</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts a basic image vulnerability scan.</p>\n         <p> A basic image scan can only be started once per 24\n            hours on an individual image. This limit includes if an image was scanned on initial\n            push. You can start up to 100,000 basic scans per 24 hours. This limit includes both scans on initial push\n            and scans initiated by the StartImageScan API. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning-basic.html\">Basic scanning</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#StartImageScanRequest": {

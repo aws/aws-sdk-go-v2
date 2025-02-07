@@ -457,6 +457,12 @@
                         "smithy.api#documentation": "<p>The name of the Amazon S3 bucket where you want the output of Amazon Web Services HealthScribe post-stream analytics stored. Don't include the <code>S3://</code> prefix of the specified bucket. </p>\n         <p>HealthScribe outputs transcript and clinical note files under the prefix:\n        <code>S3://$output-bucket-name/healthscribe-streaming/session-id/post-stream-analytics/clinical-notes</code>\n         </p>\n         <p>The role <code>ResourceAccessRoleArn</code> specified in the <code>MedicalScribeConfigurationEvent</code> must have\n      permission to use the specified location. You can change Amazon S3 permissions using the <a href=\"https://console.aws.amazon.com/s3\">\n        Amazon Web Services Management Console\n      </a>. See also <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user\">Permissions Required for IAM User Roles </a> . </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "NoteTemplate": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalScribeNoteTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify one of the following templates to use for the clinical note summary. The default is <code>HISTORY_AND_PHYSICAL</code>.</p>\n         <ul>\n            <li>\n               <p>HISTORY_AND_PHYSICAL: Provides summaries for key sections of the clinical documentation. Sections include Chief Complaint, \n        History of Present Illness, Review of Systems, Past Medical History, Assessment, and Plan.</p>\n            </li>\n            <li>\n               <p>GIRPP: Provides summaries based on the patients progress toward goals. Sections include Goal, Intervention, Response, Progress, and Plan.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -1651,6 +1657,23 @@
                 "smithy.api#range": {
                     "min": 16000,
                     "max": 48000
+                }
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalScribeNoteTemplate": {
+            "type": "enum",
+            "members": {
+                "HISTORY_AND_PHYSICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HISTORY_AND_PHYSICAL"
+                    }
+                },
+                "GIRPP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GIRPP"
+                    }
                 }
             }
         },
