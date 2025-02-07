@@ -1,3 +1,7 @@
+# v1.58.0 (2025-02-07)
+
+* **Feature**: Introduce versionStatus field to take place of status field in EKS DescribeClusterVersions API
+
 # v1.57.4 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

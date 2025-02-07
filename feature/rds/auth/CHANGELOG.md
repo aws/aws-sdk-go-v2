@@ -1,3 +1,7 @@
+# v1.5.9 (2025-02-07)
+
+* **Bug Fix**: typo in connect.go error message
+
 # v1.5.8 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

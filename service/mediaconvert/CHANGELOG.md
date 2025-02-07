@@ -1,3 +1,7 @@
+# v1.67.0 (2025-02-07)
+
+* **Feature**: This release adds support for Animated GIF output, forced chroma sample positioning metadata, and Extensible Wave Container format
+
 # v1.66.3 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

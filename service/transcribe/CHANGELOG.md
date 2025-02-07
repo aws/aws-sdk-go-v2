@@ -1,3 +1,7 @@
+# v1.43.0 (2025-02-07)
+
+* **Feature**: This release adds support for the Clinical Note Template Customization feature for the AWS HealthScribe APIs within Amazon Transcribe.
+
 # v1.42.7 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

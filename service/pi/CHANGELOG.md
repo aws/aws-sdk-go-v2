@@ -1,3 +1,7 @@
+# v1.30.0 (2025-02-07)
+
+* **Feature**: Adds documentation for dimension groups and dimensions to analyze locks for Database Insights.
+
 # v1.29.18 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

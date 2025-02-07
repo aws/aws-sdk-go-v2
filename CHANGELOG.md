@@ -1,3 +1,21 @@
+# Release (2025-02-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/rds/auth`: [v1.5.9](feature/rds/auth/CHANGELOG.md#v159-2025-02-07)
+  * **Bug Fix**: typo in connect.go error message
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.41.0](service/ecr/CHANGELOG.md#v1410-2025-02-07)
+  * **Feature**: Adds support to handle the new basic scanning daily quota.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.58.0](service/eks/CHANGELOG.md#v1580-2025-02-07)
+  * **Feature**: Introduce versionStatus field to take place of status field in EKS DescribeClusterVersions API
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.67.0](service/mediaconvert/CHANGELOG.md#v1670-2025-02-07)
+  * **Feature**: This release adds support for Animated GIF output, forced chroma sample positioning metadata, and Extensible Wave Container format
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.30.0](service/pi/CHANGELOG.md#v1300-2025-02-07)
+  * **Feature**: Adds documentation for dimension groups and dimensions to analyze locks for Database Insights.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.43.0](service/transcribe/CHANGELOG.md#v1430-2025-02-07)
+  * **Feature**: This release adds support for the Clinical Note Template Customization feature for the AWS HealthScribe APIs within Amazon Transcribe.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.24.0](service/transcribestreaming/CHANGELOG.md#v1240-2025-02-07)
+  * **Feature**: This release adds support for the Clinical Note Template Customization feature for the AWS HealthScribe Streaming APIs within Amazon Transcribe.
+
 # Release (2025-02-06)
 
 ## General Highlights

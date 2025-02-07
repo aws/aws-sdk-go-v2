@@ -1,8 +1,0 @@
-{
-    "id": "1b79fce0-7311-49be-b7e9-60c9b32666cf",
-    "type": "feature",
-    "description": "Adds documentation for dimension groups and dimensions to analyze locks for Database Insights.",
-    "modules": [
-        "service/pi"
-    ]
-}

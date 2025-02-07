@@ -1,3 +1,7 @@
+# v1.41.0 (2025-02-07)
+
+* **Feature**: Adds support to handle the new basic scanning daily quota.
+
 # v1.40.3 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "33345977-176a-4a9e-a8bf-b42d238e2f69",
-    "type": "feature",
-    "description": "This release adds support for Animated GIF output, forced chroma sample positioning metadata, and Extensible Wave Container format",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}
