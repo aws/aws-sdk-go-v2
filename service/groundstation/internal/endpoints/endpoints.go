@@ -143,23 +143,51 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "af-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "af-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-southeast-1",
+				Variant: endpoints.DualStackVariant,
+			}: {},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "eu-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {},
+			endpoints.EndpointKey{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "eu-north-1",
+				Variant: endpoints.DualStackVariant,
+			}: {},
+			endpoints.EndpointKey{
 				Region: "eu-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {},
 			endpoints.EndpointKey{
 				Region: "fips-us-east-1",
 			}: endpoints.Endpoint{
@@ -191,11 +219,23 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "me-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "me-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "sa-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {},
+			endpoints.EndpointKey{
 				Region: "us-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {},
 			endpoints.EndpointKey{
 				Region:  "us-east-1",
 				Variant: endpoints.FIPSVariant,
@@ -203,8 +243,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "groundstation-fips.us-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "groundstation-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.DualStackVariant,
+			}: {},
 			endpoints.EndpointKey{
 				Region:  "us-east-2",
 				Variant: endpoints.FIPSVariant,
@@ -212,13 +262,29 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "groundstation-fips.us-east-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "groundstation-fips.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.DualStackVariant,
+			}: {},
 			endpoints.EndpointKey{
 				Region:  "us-west-2",
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "groundstation-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "groundstation-fips.us-west-2.api.aws",
 			},
 		},
 	},

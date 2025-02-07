@@ -47,8 +47,16 @@ type DescribeClusterVersionsInput struct {
 	// Pagination token for the next set of results.
 	NextToken *string
 
+	// This field is deprecated. Use versionStatus instead, as that field matches for
+	// input and output of this action.
+	//
 	// Filter versions by their current status.
+	//
+	// Deprecated: status has been replaced by versionStatus
 	Status types.ClusterVersionStatus
+
+	// Filter versions by their current status.
+	VersionStatus types.VersionStatus
 
 	noSmithyDocumentSerde
 }

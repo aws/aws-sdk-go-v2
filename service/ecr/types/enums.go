@@ -309,6 +309,7 @@ const (
 	ScanStatusPending                ScanStatus = "PENDING"
 	ScanStatusScanEligibilityExpired ScanStatus = "SCAN_ELIGIBILITY_EXPIRED"
 	ScanStatusFindingsUnavailable    ScanStatus = "FINDINGS_UNAVAILABLE"
+	ScanStatusLimitExceeded          ScanStatus = "LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for ScanStatus. Note that this can be expanded
@@ -325,6 +326,7 @@ func (ScanStatus) Values() []ScanStatus {
 		"PENDING",
 		"SCAN_ELIGIBILITY_EXPIRED",
 		"FINDINGS_UNAVAILABLE",
+		"LIMIT_EXCEEDED",
 	}
 }
 

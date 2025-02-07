@@ -1,0 +1,8 @@
+{
+    "id": "38847eca-7d8e-44f9-b5b6-c7ff0fc67b84",
+    "type": "feature",
+    "description": "This release adds support for the Clinical Note Template Customization feature for the AWS HealthScribe Streaming APIs within Amazon Transcribe.",
+    "modules": [
+        "service/transcribestreaming"
+    ]
+}

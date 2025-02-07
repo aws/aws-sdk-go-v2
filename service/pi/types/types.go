@@ -153,7 +153,16 @@ type DimensionGroup struct {
 	//
 	//   - Amazon DocumentDB
 	//
+	//   - db.blocking_sql - The SQL queries blocking the most DB load.
+	//
+	//   - db.blocking_session - The sessions blocking the most DB load.
+	//
+	//   - db.blocking_object - The object resources acquired by other sessions that
+	//   are blocking the most DB load.
+	//
 	//   - db.host - The host name of the connected client (all engines).
+	//
+	//   - db.plans - The execution plans for the query (only Aurora PostgreSQL).
 	//
 	//   - db.query - The query that is currently running (only Amazon DocumentDB).
 	//
@@ -196,6 +205,24 @@ type DimensionGroup struct {
 	//   - Amazon RDS PostgreSQL
 	//
 	//   - Amazon DocumentDB
+	//
+	//   - db.blocking_sql.id - The ID for each of the SQL queries blocking the most DB
+	//   load.
+	//
+	//   - db.blocking_sql.sql - The SQL text for each of the SQL queries blocking the
+	//   most DB load.
+	//
+	//   - db.blocking_session.id - The ID for each of the sessions blocking the most
+	//   DB load.
+	//
+	//   - db.blocking_object.id - The ID for each of the object resources acquired by
+	//   other sessions that are blocking the most DB load.
+	//
+	//   - db.blocking_object.type - The object type for each of the object resources
+	//   acquired by other sessions that are blocking the most DB load.
+	//
+	//   - db.blocking_object.value - The value for each of the object resources
+	//   acquired by other sessions that are blocking the most DB load.
 	//
 	//   - db.host.id - The host ID of the connected client (all engines).
 	//
@@ -519,6 +546,9 @@ type PerformanceInsightsMetric struct {
 
 	// The Performance Insights metric name.
 	DisplayName *string
+
+	// The filter for the Performance Insights metric.
+	Filter map[string]string
 
 	// The Performance Insights metric.
 	Metric *string

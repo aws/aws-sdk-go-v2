@@ -1,0 +1,8 @@
+{
+    "id": "33883e81-ac4d-461f-ae0b-b0dd0a92e0b5",
+    "type": "feature",
+    "description": "Adds support to handle the new basic scanning daily quota.",
+    "modules": [
+        "service/ecr"
+    ]
+}

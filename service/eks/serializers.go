@@ -2433,6 +2433,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeClusterVersionsInput(v *Describ
 		encoder.SetQuery("status").String(string(v.Status))
 	}
 
+	if len(v.VersionStatus) > 0 {
+		encoder.SetQuery("versionStatus").String(string(v.VersionStatus))
+	}
+
 	return nil
 }
 

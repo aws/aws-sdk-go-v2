@@ -15,7 +15,8 @@ import (
 // source. For example, if you specify a SQL ID, GetDimensionKeyDetails retrieves
 // the full text of the dimension db.sql.statement associated with this ID. This
 // operation is useful because GetResourceMetrics and DescribeDimensionKeys don't
-// support retrieval of large SQL statement text.
+// support retrieval of large SQL statement text, lock snapshots, and execution
+// plans.
 func (c *Client) GetDimensionKeyDetails(ctx context.Context, params *GetDimensionKeyDetailsInput, optFns ...func(*Options)) (*GetDimensionKeyDetailsOutput, error) {
 	if params == nil {
 		params = &GetDimensionKeyDetailsInput{}
@@ -36,6 +37,8 @@ type GetDimensionKeyDetailsInput struct {
 	// The name of the dimension group. Performance Insights searches the specified
 	// group for the dimension group ID. The following group name values are valid:
 	//
+	//   - db.lock_snapshot (Aurora only)
+	//
 	//   - db.query (Amazon DocumentDB only)
 	//
 	//   - db.sql (Amazon RDS and Aurora only)
@@ -50,6 +53,11 @@ type GetDimensionKeyDetailsInput struct {
 	//   - db.sql.id for dimension group db.sql (Aurora and RDS only)
 	//
 	//   - db.query.id for dimension group db.query (DocumentDB only)
+	//
+	//   - For the dimension group db.lock_snapshot , the GroupIdentifier is the epoch
+	//   timestamp when Performance Insights captured the snapshot, in seconds. You can
+	//   retrieve this value with the GetResourceMetrics operation for a 1 second
+	//   period.
 	//
 	// This member is required.
 	GroupIdentifier *string
@@ -72,6 +80,8 @@ type GetDimensionKeyDetailsInput struct {
 	// group. If you don't specify this parameter, Performance Insights returns all
 	// dimension data within the specified dimension group. Specify dimension names for
 	// the following dimension groups:
+	//
+	//   - db.lock_trees - Specify the dimension name db.lock_trees . (Aurora only)
 	//
 	//   - db.sql - Specify either the full dimension name db.sql.statement or the
 	//   short dimension name statement (Aurora and RDS only).

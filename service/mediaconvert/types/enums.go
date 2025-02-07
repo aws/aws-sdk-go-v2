@@ -903,9 +903,10 @@ type Av1FramerateConversionAlgorithm string
 
 // Enum values for Av1FramerateConversionAlgorithm
 const (
-	Av1FramerateConversionAlgorithmDuplicateDrop Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Av1FramerateConversionAlgorithmInterpolate   Av1FramerateConversionAlgorithm = "INTERPOLATE"
-	Av1FramerateConversionAlgorithmFrameformer   Av1FramerateConversionAlgorithm = "FRAMEFORMER"
+	Av1FramerateConversionAlgorithmDuplicateDrop      Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Av1FramerateConversionAlgorithmInterpolate        Av1FramerateConversionAlgorithm = "INTERPOLATE"
+	Av1FramerateConversionAlgorithmFrameformer        Av1FramerateConversionAlgorithm = "FRAMEFORMER"
+	Av1FramerateConversionAlgorithmMaintainFrameCount Av1FramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for Av1FramerateConversionAlgorithm. Note that
@@ -918,6 +919,7 @@ func (Av1FramerateConversionAlgorithm) Values() []Av1FramerateConversionAlgorith
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -1004,9 +1006,10 @@ type AvcIntraFramerateConversionAlgorithm string
 
 // Enum values for AvcIntraFramerateConversionAlgorithm
 const (
-	AvcIntraFramerateConversionAlgorithmDuplicateDrop AvcIntraFramerateConversionAlgorithm = "DUPLICATE_DROP"
-	AvcIntraFramerateConversionAlgorithmInterpolate   AvcIntraFramerateConversionAlgorithm = "INTERPOLATE"
-	AvcIntraFramerateConversionAlgorithmFrameformer   AvcIntraFramerateConversionAlgorithm = "FRAMEFORMER"
+	AvcIntraFramerateConversionAlgorithmDuplicateDrop      AvcIntraFramerateConversionAlgorithm = "DUPLICATE_DROP"
+	AvcIntraFramerateConversionAlgorithmInterpolate        AvcIntraFramerateConversionAlgorithm = "INTERPOLATE"
+	AvcIntraFramerateConversionAlgorithmFrameformer        AvcIntraFramerateConversionAlgorithm = "FRAMEFORMER"
+	AvcIntraFramerateConversionAlgorithmMaintainFrameCount AvcIntraFramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for AvcIntraFramerateConversionAlgorithm. Note
@@ -1019,6 +1022,7 @@ func (AvcIntraFramerateConversionAlgorithm) Values() []AvcIntraFramerateConversi
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -1531,6 +1535,27 @@ func (CaptionSourceType) Values() []CaptionSourceType {
 		"NULL_SOURCE",
 		"IMSC",
 		"WEBVTT",
+	}
+}
+
+type ChromaPositionMode string
+
+// Enum values for ChromaPositionMode
+const (
+	ChromaPositionModeAuto         ChromaPositionMode = "AUTO"
+	ChromaPositionModeForceCenter  ChromaPositionMode = "FORCE_CENTER"
+	ChromaPositionModeForceTopLeft ChromaPositionMode = "FORCE_TOP_LEFT"
+)
+
+// Values returns all known values for ChromaPositionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChromaPositionMode) Values() []ChromaPositionMode {
+	return []ChromaPositionMode{
+		"AUTO",
+		"FORCE_CENTER",
+		"FORCE_TOP_LEFT",
 	}
 }
 
@@ -2241,6 +2266,7 @@ type ContainerType string
 // Enum values for ContainerType
 const (
 	ContainerTypeF4v  ContainerType = "F4V"
+	ContainerTypeGif  ContainerType = "GIF"
 	ContainerTypeIsmv ContainerType = "ISMV"
 	ContainerTypeM2ts ContainerType = "M2TS"
 	ContainerTypeM3u8 ContainerType = "M3U8"
@@ -2262,6 +2288,7 @@ const (
 func (ContainerType) Values() []ContainerType {
 	return []ContainerType{
 		"F4V",
+		"GIF",
 		"ISMV",
 		"M2TS",
 		"M3U8",
@@ -3667,6 +3694,45 @@ func (FontScript) Values() []FontScript {
 	}
 }
 
+type GifFramerateControl string
+
+// Enum values for GifFramerateControl
+const (
+	GifFramerateControlInitializeFromSource GifFramerateControl = "INITIALIZE_FROM_SOURCE"
+	GifFramerateControlSpecified            GifFramerateControl = "SPECIFIED"
+)
+
+// Values returns all known values for GifFramerateControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GifFramerateControl) Values() []GifFramerateControl {
+	return []GifFramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
+
+type GifFramerateConversionAlgorithm string
+
+// Enum values for GifFramerateConversionAlgorithm
+const (
+	GifFramerateConversionAlgorithmDuplicateDrop GifFramerateConversionAlgorithm = "DUPLICATE_DROP"
+	GifFramerateConversionAlgorithmInterpolate   GifFramerateConversionAlgorithm = "INTERPOLATE"
+)
+
+// Values returns all known values for GifFramerateConversionAlgorithm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GifFramerateConversionAlgorithm) Values() []GifFramerateConversionAlgorithm {
+	return []GifFramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+	}
+}
+
 type H264AdaptiveQuantization string
 
 // Enum values for H264AdaptiveQuantization
@@ -3893,9 +3959,10 @@ type H264FramerateConversionAlgorithm string
 
 // Enum values for H264FramerateConversionAlgorithm
 const (
-	H264FramerateConversionAlgorithmDuplicateDrop H264FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	H264FramerateConversionAlgorithmInterpolate   H264FramerateConversionAlgorithm = "INTERPOLATE"
-	H264FramerateConversionAlgorithmFrameformer   H264FramerateConversionAlgorithm = "FRAMEFORMER"
+	H264FramerateConversionAlgorithmDuplicateDrop      H264FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	H264FramerateConversionAlgorithmInterpolate        H264FramerateConversionAlgorithm = "INTERPOLATE"
+	H264FramerateConversionAlgorithmFrameformer        H264FramerateConversionAlgorithm = "FRAMEFORMER"
+	H264FramerateConversionAlgorithmMaintainFrameCount H264FramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for H264FramerateConversionAlgorithm. Note that
@@ -3908,6 +3975,7 @@ func (H264FramerateConversionAlgorithm) Values() []H264FramerateConversionAlgori
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -4475,9 +4543,10 @@ type H265FramerateConversionAlgorithm string
 
 // Enum values for H265FramerateConversionAlgorithm
 const (
-	H265FramerateConversionAlgorithmDuplicateDrop H265FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	H265FramerateConversionAlgorithmInterpolate   H265FramerateConversionAlgorithm = "INTERPOLATE"
-	H265FramerateConversionAlgorithmFrameformer   H265FramerateConversionAlgorithm = "FRAMEFORMER"
+	H265FramerateConversionAlgorithmDuplicateDrop      H265FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	H265FramerateConversionAlgorithmInterpolate        H265FramerateConversionAlgorithm = "INTERPOLATE"
+	H265FramerateConversionAlgorithmFrameformer        H265FramerateConversionAlgorithm = "FRAMEFORMER"
+	H265FramerateConversionAlgorithmMaintainFrameCount H265FramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for H265FramerateConversionAlgorithm. Note that
@@ -4490,6 +4559,7 @@ func (H265FramerateConversionAlgorithm) Values() []H265FramerateConversionAlgori
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -6971,9 +7041,10 @@ type Mpeg2FramerateConversionAlgorithm string
 
 // Enum values for Mpeg2FramerateConversionAlgorithm
 const (
-	Mpeg2FramerateConversionAlgorithmDuplicateDrop Mpeg2FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Mpeg2FramerateConversionAlgorithmInterpolate   Mpeg2FramerateConversionAlgorithm = "INTERPOLATE"
-	Mpeg2FramerateConversionAlgorithmFrameformer   Mpeg2FramerateConversionAlgorithm = "FRAMEFORMER"
+	Mpeg2FramerateConversionAlgorithmDuplicateDrop      Mpeg2FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Mpeg2FramerateConversionAlgorithmInterpolate        Mpeg2FramerateConversionAlgorithm = "INTERPOLATE"
+	Mpeg2FramerateConversionAlgorithmFrameformer        Mpeg2FramerateConversionAlgorithm = "FRAMEFORMER"
+	Mpeg2FramerateConversionAlgorithmMaintainFrameCount Mpeg2FramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for Mpeg2FramerateConversionAlgorithm. Note
@@ -6986,6 +7057,7 @@ func (Mpeg2FramerateConversionAlgorithm) Values() []Mpeg2FramerateConversionAlgo
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -7765,9 +7837,10 @@ type ProresFramerateConversionAlgorithm string
 
 // Enum values for ProresFramerateConversionAlgorithm
 const (
-	ProresFramerateConversionAlgorithmDuplicateDrop ProresFramerateConversionAlgorithm = "DUPLICATE_DROP"
-	ProresFramerateConversionAlgorithmInterpolate   ProresFramerateConversionAlgorithm = "INTERPOLATE"
-	ProresFramerateConversionAlgorithmFrameformer   ProresFramerateConversionAlgorithm = "FRAMEFORMER"
+	ProresFramerateConversionAlgorithmDuplicateDrop      ProresFramerateConversionAlgorithm = "DUPLICATE_DROP"
+	ProresFramerateConversionAlgorithmInterpolate        ProresFramerateConversionAlgorithm = "INTERPOLATE"
+	ProresFramerateConversionAlgorithmFrameformer        ProresFramerateConversionAlgorithm = "FRAMEFORMER"
+	ProresFramerateConversionAlgorithmMaintainFrameCount ProresFramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for ProresFramerateConversionAlgorithm. Note
@@ -7780,6 +7853,7 @@ func (ProresFramerateConversionAlgorithm) Values() []ProresFramerateConversionAl
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -8487,9 +8561,10 @@ type UncompressedFramerateConversionAlgorithm string
 
 // Enum values for UncompressedFramerateConversionAlgorithm
 const (
-	UncompressedFramerateConversionAlgorithmDuplicateDrop UncompressedFramerateConversionAlgorithm = "DUPLICATE_DROP"
-	UncompressedFramerateConversionAlgorithmInterpolate   UncompressedFramerateConversionAlgorithm = "INTERPOLATE"
-	UncompressedFramerateConversionAlgorithmFrameformer   UncompressedFramerateConversionAlgorithm = "FRAMEFORMER"
+	UncompressedFramerateConversionAlgorithmDuplicateDrop      UncompressedFramerateConversionAlgorithm = "DUPLICATE_DROP"
+	UncompressedFramerateConversionAlgorithmInterpolate        UncompressedFramerateConversionAlgorithm = "INTERPOLATE"
+	UncompressedFramerateConversionAlgorithmFrameformer        UncompressedFramerateConversionAlgorithm = "FRAMEFORMER"
+	UncompressedFramerateConversionAlgorithmMaintainFrameCount UncompressedFramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for UncompressedFramerateConversionAlgorithm.
@@ -8502,6 +8577,7 @@ func (UncompressedFramerateConversionAlgorithm) Values() []UncompressedFramerate
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -8626,9 +8702,10 @@ type Vc3FramerateConversionAlgorithm string
 
 // Enum values for Vc3FramerateConversionAlgorithm
 const (
-	Vc3FramerateConversionAlgorithmDuplicateDrop Vc3FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Vc3FramerateConversionAlgorithmInterpolate   Vc3FramerateConversionAlgorithm = "INTERPOLATE"
-	Vc3FramerateConversionAlgorithmFrameformer   Vc3FramerateConversionAlgorithm = "FRAMEFORMER"
+	Vc3FramerateConversionAlgorithmDuplicateDrop      Vc3FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Vc3FramerateConversionAlgorithmInterpolate        Vc3FramerateConversionAlgorithm = "INTERPOLATE"
+	Vc3FramerateConversionAlgorithmFrameformer        Vc3FramerateConversionAlgorithm = "FRAMEFORMER"
+	Vc3FramerateConversionAlgorithmMaintainFrameCount Vc3FramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for Vc3FramerateConversionAlgorithm. Note that
@@ -8641,6 +8718,7 @@ func (Vc3FramerateConversionAlgorithm) Values() []Vc3FramerateConversionAlgorith
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -8746,6 +8824,7 @@ const (
 	VideoCodecAv1          VideoCodec = "AV1"
 	VideoCodecAvcIntra     VideoCodec = "AVC_INTRA"
 	VideoCodecFrameCapture VideoCodec = "FRAME_CAPTURE"
+	VideoCodecGif          VideoCodec = "GIF"
 	VideoCodecH264         VideoCodec = "H_264"
 	VideoCodecH265         VideoCodec = "H_265"
 	VideoCodecMpeg2        VideoCodec = "MPEG2"
@@ -8767,6 +8846,7 @@ func (VideoCodec) Values() []VideoCodec {
 		"AV1",
 		"AVC_INTRA",
 		"FRAME_CAPTURE",
+		"GIF",
 		"H_264",
 		"H_265",
 		"MPEG2",
@@ -8860,9 +8940,10 @@ type Vp8FramerateConversionAlgorithm string
 
 // Enum values for Vp8FramerateConversionAlgorithm
 const (
-	Vp8FramerateConversionAlgorithmDuplicateDrop Vp8FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Vp8FramerateConversionAlgorithmInterpolate   Vp8FramerateConversionAlgorithm = "INTERPOLATE"
-	Vp8FramerateConversionAlgorithmFrameformer   Vp8FramerateConversionAlgorithm = "FRAMEFORMER"
+	Vp8FramerateConversionAlgorithmDuplicateDrop      Vp8FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Vp8FramerateConversionAlgorithmInterpolate        Vp8FramerateConversionAlgorithm = "INTERPOLATE"
+	Vp8FramerateConversionAlgorithmFrameformer        Vp8FramerateConversionAlgorithm = "FRAMEFORMER"
+	Vp8FramerateConversionAlgorithmMaintainFrameCount Vp8FramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for Vp8FramerateConversionAlgorithm. Note that
@@ -8875,6 +8956,7 @@ func (Vp8FramerateConversionAlgorithm) Values() []Vp8FramerateConversionAlgorith
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -8956,9 +9038,10 @@ type Vp9FramerateConversionAlgorithm string
 
 // Enum values for Vp9FramerateConversionAlgorithm
 const (
-	Vp9FramerateConversionAlgorithmDuplicateDrop Vp9FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Vp9FramerateConversionAlgorithmInterpolate   Vp9FramerateConversionAlgorithm = "INTERPOLATE"
-	Vp9FramerateConversionAlgorithmFrameformer   Vp9FramerateConversionAlgorithm = "FRAMEFORMER"
+	Vp9FramerateConversionAlgorithmDuplicateDrop      Vp9FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Vp9FramerateConversionAlgorithmInterpolate        Vp9FramerateConversionAlgorithm = "INTERPOLATE"
+	Vp9FramerateConversionAlgorithmFrameformer        Vp9FramerateConversionAlgorithm = "FRAMEFORMER"
+	Vp9FramerateConversionAlgorithmMaintainFrameCount Vp9FramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for Vp9FramerateConversionAlgorithm. Note that
@@ -8971,6 +9054,7 @@ func (Vp9FramerateConversionAlgorithm) Values() []Vp9FramerateConversionAlgorith
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 
@@ -9058,8 +9142,9 @@ type WavFormat string
 
 // Enum values for WavFormat
 const (
-	WavFormatRiff WavFormat = "RIFF"
-	WavFormatRf64 WavFormat = "RF64"
+	WavFormatRiff       WavFormat = "RIFF"
+	WavFormatRf64       WavFormat = "RF64"
+	WavFormatExtensible WavFormat = "EXTENSIBLE"
 )
 
 // Values returns all known values for WavFormat. Note that this can be expanded
@@ -9070,6 +9155,7 @@ func (WavFormat) Values() []WavFormat {
 	return []WavFormat{
 		"RIFF",
 		"RF64",
+		"EXTENSIBLE",
 	}
 }
 
@@ -9099,6 +9185,7 @@ const (
 	WebvttStylePassthroughEnabled  WebvttStylePassthrough = "ENABLED"
 	WebvttStylePassthroughDisabled WebvttStylePassthrough = "DISABLED"
 	WebvttStylePassthroughStrict   WebvttStylePassthrough = "STRICT"
+	WebvttStylePassthroughMerge    WebvttStylePassthrough = "MERGE"
 )
 
 // Values returns all known values for WebvttStylePassthrough. Note that this can
@@ -9110,6 +9197,7 @@ func (WebvttStylePassthrough) Values() []WebvttStylePassthrough {
 		"ENABLED",
 		"DISABLED",
 		"STRICT",
+		"MERGE",
 	}
 }
 
@@ -9310,9 +9398,10 @@ type XavcFramerateConversionAlgorithm string
 
 // Enum values for XavcFramerateConversionAlgorithm
 const (
-	XavcFramerateConversionAlgorithmDuplicateDrop XavcFramerateConversionAlgorithm = "DUPLICATE_DROP"
-	XavcFramerateConversionAlgorithmInterpolate   XavcFramerateConversionAlgorithm = "INTERPOLATE"
-	XavcFramerateConversionAlgorithmFrameformer   XavcFramerateConversionAlgorithm = "FRAMEFORMER"
+	XavcFramerateConversionAlgorithmDuplicateDrop      XavcFramerateConversionAlgorithm = "DUPLICATE_DROP"
+	XavcFramerateConversionAlgorithmInterpolate        XavcFramerateConversionAlgorithm = "INTERPOLATE"
+	XavcFramerateConversionAlgorithmFrameformer        XavcFramerateConversionAlgorithm = "FRAMEFORMER"
+	XavcFramerateConversionAlgorithmMaintainFrameCount XavcFramerateConversionAlgorithm = "MAINTAIN_FRAME_COUNT"
 )
 
 // Values returns all known values for XavcFramerateConversionAlgorithm. Note that
@@ -9325,6 +9414,7 @@ func (XavcFramerateConversionAlgorithm) Values() []XavcFramerateConversionAlgori
 		"DUPLICATE_DROP",
 		"INTERPOLATE",
 		"FRAMEFORMER",
+		"MAINTAIN_FRAME_COUNT",
 	}
 }
 

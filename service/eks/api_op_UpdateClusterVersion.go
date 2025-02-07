@@ -13,8 +13,8 @@ import (
 
 // Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster
 // continues to function during the update. The response output includes an update
-// ID that you can use to track the status of your cluster update with the DescribeUpdateAPI
-// operation.
+// ID that you can use to track the status of your cluster update with the [DescribeUpdate]
+// DescribeUpdate API operation.
 //
 // Cluster updates are asynchronous, and they should finish within a few minutes.
 // During an update, the cluster status moves to UPDATING (this status transition
@@ -24,6 +24,8 @@ import (
 // If your cluster has managed node groups attached to it, all of your node
 // groups' Kubernetes versions must match the cluster's Kubernetes version in order
 // to update the cluster to a new Kubernetes version.
+//
+// [DescribeUpdate]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeUpdate.html
 func (c *Client) UpdateClusterVersion(ctx context.Context, params *UpdateClusterVersionInput, optFns ...func(*Options)) (*UpdateClusterVersionOutput, error) {
 	if params == nil {
 		params = &UpdateClusterVersionInput{}

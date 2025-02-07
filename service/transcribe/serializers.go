@@ -2750,6 +2750,18 @@ func awsAwsjson11_serializeDocumentChannelDefinitions(v []types.ChannelDefinitio
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClinicalNoteGenerationSettings(v *types.ClinicalNoteGenerationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.NoteTemplate) > 0 {
+		ok := object.Key("NoteTemplate")
+		ok.String(string(v.NoteTemplate))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentContentRedaction(v *types.ContentRedaction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2961,6 +2973,13 @@ func awsAwsjson11_serializeDocumentMedicalScribeSettings(v *types.MedicalScribeS
 	if v.ChannelIdentification != nil {
 		ok := object.Key("ChannelIdentification")
 		ok.Boolean(*v.ChannelIdentification)
+	}
+
+	if v.ClinicalNoteGenerationSettings != nil {
+		ok := object.Key("ClinicalNoteGenerationSettings")
+		if err := awsAwsjson11_serializeDocumentClinicalNoteGenerationSettings(v.ClinicalNoteGenerationSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxSpeakerLabels != nil {

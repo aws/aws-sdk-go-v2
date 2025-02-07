@@ -87,9 +87,7 @@ type GetResourceMetricsInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The maximum number of items to return in the response. If more items exist than
-	// the specified MaxRecords value, a pagination token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of items to return in the response.
 	MaxResults *int32
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -259,9 +257,7 @@ func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Sta
 // GetResourceMetricsPaginatorOptions is the paginator options for
 // GetResourceMetrics
 type GetResourceMetricsPaginatorOptions struct {
-	// The maximum number of items to return in the response. If more items exist than
-	// the specified MaxRecords value, a pagination token is included in the response
-	// so that the remaining results can be retrieved.
+	// The maximum number of items to return in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

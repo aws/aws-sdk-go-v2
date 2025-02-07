@@ -4896,6 +4896,15 @@ func awsRestjson1_deserializeDocumentClinicalNoteGenerationSettings(v **types.Cl
 
 	for key, value := range shape {
 		switch key {
+		case "NoteTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MedicalScribeNoteTemplate to be of type string, got %T instead", value)
+				}
+				sv.NoteTemplate = types.MedicalScribeNoteTemplate(jtv)
+			}
+
 		case "OutputBucketName":
 			if value != nil {
 				jtv, ok := value.(string)

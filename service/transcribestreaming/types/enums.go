@@ -329,6 +329,25 @@ func (MedicalScribeMediaEncoding) Values() []MedicalScribeMediaEncoding {
 	}
 }
 
+type MedicalScribeNoteTemplate string
+
+// Enum values for MedicalScribeNoteTemplate
+const (
+	MedicalScribeNoteTemplateHistoryAndPhysical MedicalScribeNoteTemplate = "HISTORY_AND_PHYSICAL"
+	MedicalScribeNoteTemplateGirpp              MedicalScribeNoteTemplate = "GIRPP"
+)
+
+// Values returns all known values for MedicalScribeNoteTemplate. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MedicalScribeNoteTemplate) Values() []MedicalScribeNoteTemplate {
+	return []MedicalScribeNoteTemplate{
+		"HISTORY_AND_PHYSICAL",
+		"GIRPP",
+	}
+}
+
 type MedicalScribeParticipantRole string
 
 // Enum values for MedicalScribeParticipantRole

@@ -1,0 +1,8 @@
+{
+    "id": "35651d25-d9c0-4c8c-9752-05784afa5624",
+    "type": "feature",
+    "description": "Introduce versionStatus field to take place of status field in EKS DescribeClusterVersions API",
+    "modules": [
+        "service/eks"
+    ]
+}

@@ -6099,6 +6099,46 @@ func awsAwsjson11_deserializeDocumentChannelDefinitions(v *[]types.ChannelDefini
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClinicalNoteGenerationSettings(v **types.ClinicalNoteGenerationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClinicalNoteGenerationSettings
+	if *v == nil {
+		sv = &types.ClinicalNoteGenerationSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NoteTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MedicalScribeNoteTemplate to be of type string, got %T instead", value)
+				}
+				sv.NoteTemplate = types.MedicalScribeNoteTemplate(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7323,6 +7363,11 @@ func awsAwsjson11_deserializeDocumentMedicalScribeSettings(v **types.MedicalScri
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.ChannelIdentification = ptr.Bool(jtv)
+			}
+
+		case "ClinicalNoteGenerationSettings":
+			if err := awsAwsjson11_deserializeDocumentClinicalNoteGenerationSettings(&sv.ClinicalNoteGenerationSettings, value); err != nil {
+				return err
 			}
 
 		case "MaxSpeakerLabels":

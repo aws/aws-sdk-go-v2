@@ -6082,6 +6082,33 @@ func awsRestjson1_serializeDocumentFrameCaptureSettings(v *types.FrameCaptureSet
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGifSettings(v *types.GifSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FramerateControl) > 0 {
+		ok := object.Key("framerateControl")
+		ok.String(string(v.FramerateControl))
+	}
+
+	if len(v.FramerateConversionAlgorithm) > 0 {
+		ok := object.Key("framerateConversionAlgorithm")
+		ok.String(string(v.FramerateConversionAlgorithm))
+	}
+
+	if v.FramerateDenominator != nil {
+		ok := object.Key("framerateDenominator")
+		ok.Integer(*v.FramerateDenominator)
+	}
+
+	if v.FramerateNumerator != nil {
+		ok := object.Key("framerateNumerator")
+		ok.Integer(*v.FramerateNumerator)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentH264QvbrSettings(v *types.H264QvbrSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10003,6 +10030,13 @@ func awsRestjson1_serializeDocumentVideoCodecSettings(v *types.VideoCodecSetting
 		}
 	}
 
+	if v.GifSettings != nil {
+		ok := object.Key("gifSettings")
+		if err := awsRestjson1_serializeDocumentGifSettings(v.GifSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.H264Settings != nil {
 		ok := object.Key("h264Settings")
 		if err := awsRestjson1_serializeDocumentH264Settings(v.H264Settings, ok); err != nil {
@@ -10081,6 +10115,11 @@ func awsRestjson1_serializeDocumentVideoDescription(v *types.VideoDescription, v
 	if len(v.AntiAlias) > 0 {
 		ok := object.Key("antiAlias")
 		ok.String(string(v.AntiAlias))
+	}
+
+	if len(v.ChromaPositionMode) > 0 {
+		ok := object.Key("chromaPositionMode")
+		ok.String(string(v.ChromaPositionMode))
 	}
 
 	if v.CodecSettings != nil {

@@ -104,6 +104,8 @@ type DescribeDimensionKeysInput struct {
 	// group in the GroupBy parameter is db.sql_tokenized , you can specify per-SQL
 	// metrics to get the values for the top N SQL digests. The response syntax is as
 	// follows: "AdditionalMetrics" : { "string" : "string" } .
+	//
+	// The only supported statistic function is .avg .
 	AdditionalMetrics []string
 
 	// One or more filters to apply in the request. Restrictions:

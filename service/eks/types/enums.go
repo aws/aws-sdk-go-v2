@@ -920,3 +920,24 @@ func (UpdateType) Values() []UpdateType {
 		"AutoModeUpdate",
 	}
 }
+
+type VersionStatus string
+
+// Enum values for VersionStatus
+const (
+	VersionStatusUnsupported     VersionStatus = "UNSUPPORTED"
+	VersionStatusStandardSupport VersionStatus = "STANDARD_SUPPORT"
+	VersionStatusExtendedSupport VersionStatus = "EXTENDED_SUPPORT"
+)
+
+// Values returns all known values for VersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VersionStatus) Values() []VersionStatus {
+	return []VersionStatus{
+		"UNSUPPORTED",
+		"STANDARD_SUPPORT",
+		"EXTENDED_SUPPORT",
+	}
+}

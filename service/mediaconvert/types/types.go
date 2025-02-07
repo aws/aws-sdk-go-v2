@@ -731,16 +731,21 @@ type Av1Settings struct {
 	FramerateControl Av1FramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm Av1FramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -847,16 +852,21 @@ type AvcIntraSettings struct {
 	FramerateControl AvcIntraFramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm AvcIntraFramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -3274,6 +3284,47 @@ type FrameCaptureSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
+// value GIF
+type GifSettings struct {
+
+	// If you are using the console, use the Framerate setting to specify the frame
+	// rate for this output. If you want to keep the same frame rate as the input
+	// video, choose Follow source. If you want to do frame rate conversion, choose a
+	// frame rate from the dropdown list or choose Custom. The framerates shown in the
+	// dropdown list are decimal approximations of fractions. If you choose Custom,
+	// specify your frame rate as a fraction. If you are creating your transcoding job
+	// specification as a JSON file without the console, use FramerateControl to
+	// specify which value the service uses for the frame rate for this output. Choose
+	// INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the
+	// input. Choose SPECIFIED if you want the service to use the frame rate you
+	// specify in the settings FramerateNumerator and FramerateDenominator.
+	FramerateControl GifFramerateControl
+
+	// Optional. Specify how the transcoder performs framerate conversion. The default
+	// behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose
+	// Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.
+	FramerateConversionAlgorithm GifFramerateConversionAlgorithm
+
+	// When you use the API for transcode jobs that use frame rate conversion, specify
+	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
+	// FramerateDenominator to specify the denominator of this fraction. In this
+	// example, use 1001 for the value of FramerateDenominator. When you use the
+	// console for transcode jobs that use frame rate conversion, provide the value as
+	// a decimal number for Framerate. In this example, specify 23.976.
+	FramerateDenominator *int32
+
+	// When you use the API for transcode jobs that use frame rate conversion, specify
+	// the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use
+	// FramerateNumerator to specify the numerator of this fraction. In this example,
+	// use 24000 for the value of FramerateNumerator. When you use the console for
+	// transcode jobs that use frame rate conversion, provide the value as a decimal
+	// number for Framerate. In this example, specify 23.976.
+	FramerateNumerator *int32
+
+	noSmithyDocumentSerde
+}
+
 // Settings for quality-defined variable bitrate encoding with the H.264 codec.
 // Use these settings only when you set QVBR for Rate control mode.
 type H264QvbrSettings struct {
@@ -3397,16 +3448,21 @@ type H264Settings struct {
 	FramerateControl H264FramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm H264FramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -3808,16 +3864,21 @@ type H265Settings struct {
 	FramerateControl H265FramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm H265FramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -6362,16 +6423,21 @@ type Mpeg2Settings struct {
 	FramerateControl Mpeg2FramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm Mpeg2FramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -6968,8 +7034,9 @@ type Output struct {
 	// Use Extension to specify the file extension for outputs in File output groups.
 	// If you do not specify a value, the service will use default extensions by
 	// container type as follows * MPEG-2 transport stream, m2ts * Quicktime, mov * MXF
-	// container, mxf * MPEG-4 container, mp4 * WebM container, webm * No Container,
-	// the service will use codec extensions (e.g. AAC, H265, H265, AC3)
+	// container, mxf * MPEG-4 container, mp4 * WebM container, webm * Animated GIF
+	// container, gif * No Container, the service will use codec extensions (e.g. AAC,
+	// H265, H265, AC3)
 	Extension *string
 
 	// Use Name modifier to have the service add a string to the end of each output
@@ -7211,16 +7278,21 @@ type ProresSettings struct {
 	FramerateControl ProresFramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm ProresFramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -7920,16 +7992,21 @@ type UncompressedSettings struct {
 	FramerateControl UncompressedFramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm UncompressedFramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -7995,16 +8072,21 @@ type Vc3Settings struct {
 	FramerateControl Vc3FramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm Vc3FramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -8073,9 +8155,9 @@ type Vc3Settings struct {
 // codec. For each codec enum that you choose, define the corresponding settings
 // object. The following lists the codec enum, settings object pairs. * AV1,
 // Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings
-// * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES,
-// ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3, Vc3Settings * VP8,
-// Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings
+// * GIF, GifSettings * H_264, H264Settings * H_265, H265Settings * MPEG2,
+// Mpeg2Settings * PRORES, ProresSettings * UNCOMPRESSED, UncompressedSettings *
+// VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings
 type VideoCodecSettings struct {
 
 	// Required when you set Codec, under VideoDescription>CodecSettings to the value
@@ -8099,6 +8181,10 @@ type VideoCodecSettings struct {
 
 	// Required when you set Codec to the value FRAME_CAPTURE.
 	FrameCaptureSettings *FrameCaptureSettings
+
+	// Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
+	// value GIF
+	GifSettings *GifSettings
 
 	// Required when you set Codec to the value H_264.
 	H264Settings *H264Settings
@@ -8148,14 +8234,20 @@ type VideoDescription struct {
 	// job, the service will ignore the setting.
 	AntiAlias AntiAlias
 
+	// Specify the chroma sample positioning metadata for your H.264 or H.265 output.
+	// To have MediaConvert automatically determine chroma positioning: We recommend
+	// that you keep the default value, Auto. To specify center positioning: Choose
+	// Force center. To specify top left positioning: Choose Force top left.
+	ChromaPositionMode ChromaPositionMode
+
 	// Video codec settings contains the group of settings related to video encoding.
 	// The settings in this group vary depending on the value that you choose for Video
 	// codec. For each codec enum that you choose, define the corresponding settings
 	// object. The following lists the codec enum, settings object pairs. * AV1,
 	// Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings
-	// * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES,
-	// ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3, Vc3Settings * VP8,
-	// Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings
+	// * GIF, GifSettings * H_264, H264Settings * H_265, H265Settings * MPEG2,
+	// Mpeg2Settings * PRORES, ProresSettings * UNCOMPRESSED, UncompressedSettings *
+	// VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings
 	CodecSettings *VideoCodecSettings
 
 	// Choose Insert for this setting to include color metadata in this output. Choose
@@ -8623,16 +8715,21 @@ type Vp8Settings struct {
 	FramerateControl Vp8FramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm Vp8FramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -8713,16 +8810,21 @@ type Vp9Settings struct {
 	FramerateControl Vp9FramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm Vp9FramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify
@@ -8814,9 +8916,11 @@ type WavSettings struct {
 	// and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
 	Channels *int32
 
-	// The service defaults to using RIFF for WAV outputs. If your output audio is
-	// likely to exceed 4 GB in file size, or if you otherwise need the extended
-	// support of the RF64 format, set your output WAV file format to RF64.
+	// Specify the file format for your wave audio output. To use a RIFF wave format:
+	// Keep the default value, RIFF. If your output audio is likely to exceed 4GB in
+	// file size, or if you otherwise need the extended support of the RF64 format:
+	// Choose RF64. If your player only supports the extensible wave format: Choose
+	// Extensible.
 	Format WavFormat
 
 	// Sample rate in Hz.
@@ -8845,15 +8949,19 @@ type WebvttDestinationSettings struct {
 	// for this track: .
 	Accessibility WebvttAccessibilitySubs
 
-	// To use the available style, color, and position information from your input
-	// captions: Set Style passthrough to Enabled. MediaConvert uses default settings
-	// when style and position information is missing from your input captions. To
-	// recreate the input captions exactly: Set Style passthrough to Strict.
-	// MediaConvert automatically applies timing adjustments, including adjustments for
-	// frame rate conversion, ad avails, and input clipping. Your input captions format
-	// must be WebVTT. To ignore the style and position information from your input
-	// captions and use simplified output captions: Set Style passthrough to Disabled,
-	// or leave blank.
+	// Specify how MediaConvert writes style information in your output WebVTT
+	// captions. To use the available style, color, and position information from your
+	// input captions: Choose Enabled. MediaConvert uses default settings when style
+	// and position information is missing from your input captions. To recreate the
+	// input captions exactly: Choose Strict. MediaConvert automatically applies timing
+	// adjustments, including adjustments for frame rate conversion, ad avails, and
+	// input clipping. Your input captions format must be WebVTT. To ignore the style
+	// and position information from your input captions and use simplified output
+	// captions: Keep the default value, Disabled. Or leave blank. To use the available
+	// style, color, and position information from your input captions, while merging
+	// cues with identical time ranges: Choose merge. This setting can help prevent
+	// positioning overlaps for certain players that expect a single single cue for any
+	// given time range.
 	StylePassthrough WebvttStylePassthrough
 
 	noSmithyDocumentSerde
@@ -9071,16 +9179,21 @@ type XavcSettings struct {
 	FramerateControl XavcFramerateControl
 
 	// Choose the method that you want MediaConvert to use when increasing or
-	// decreasing the frame rate. For numerically simple conversions, such as 60 fps to
-	// 30 fps: We recommend that you keep the default value, Drop duplicate. For
-	// numerically complex conversions, to avoid stutter: Choose Interpolate. This
+	// decreasing your video's frame rate. For numerically simple conversions, such as
+	// 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate.
+	// For numerically complex conversions, to avoid stutter: Choose Interpolate. This
 	// results in a smooth picture, but might introduce undesirable video artifacts.
 	// For complex frame rate conversions, especially if your source video has already
 	// been converted from its original cadence: Choose FrameFormer to do
 	// motion-compensated interpolation. FrameFormer uses the best conversion method
 	// frame by frame. Note that using FrameFormer increases the transcoding time and
 	// incurs a significant add-on cost. When you choose FrameFormer, your input video
-	// resolution must be at least 128x96.
+	// resolution must be at least 128x96. To create an output with the same number of
+	// frames as your input: Choose Maintain frame count. When you do, MediaConvert
+	// will not drop, interpolate, add, or otherwise change the frame count from your
+	// input to your output. Note that since the frame count is maintained, the
+	// duration of your output will become shorter at higher frame rates and longer at
+	// lower frame rates.
 	FramerateConversionAlgorithm XavcFramerateConversionAlgorithm
 
 	// When you use the API for transcode jobs that use frame rate conversion, specify

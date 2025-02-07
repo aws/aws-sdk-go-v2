@@ -11683,6 +11683,15 @@ func awsRestjson1_deserializeDocumentClusterVersionInformation(v **types.Cluster
 				sv.Status = types.ClusterVersionStatus(jtv)
 			}
 
+		case "versionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionStatus to be of type string, got %T instead", value)
+				}
+				sv.VersionStatus = types.VersionStatus(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

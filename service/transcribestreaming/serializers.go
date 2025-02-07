@@ -663,6 +663,11 @@ func awsRestjson1_serializeDocumentClinicalNoteGenerationSettings(v *types.Clini
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.NoteTemplate) > 0 {
+		ok := object.Key("NoteTemplate")
+		ok.String(string(v.NoteTemplate))
+	}
+
 	if v.OutputBucketName != nil {
 		ok := object.Key("OutputBucketName")
 		ok.String(*v.OutputBucketName)

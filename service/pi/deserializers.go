@@ -3197,6 +3197,11 @@ func awsAwsjson11_deserializeDocumentPerformanceInsightsMetric(v **types.Perform
 				sv.DisplayName = ptr.String(jtv)
 			}
 
+		case "Filter":
+			if err := awsAwsjson11_deserializeDocumentDescriptiveMap(&sv.Filter, value); err != nil {
+				return err
+			}
+
 		case "Metric":
 			if value != nil {
 				jtv, ok := value.(string)

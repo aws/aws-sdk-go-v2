@@ -13159,6 +13159,81 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGifSettings(v **types.GifSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GifSettings
+	if *v == nil {
+		sv = &types.GifSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "framerateControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GifFramerateControl to be of type string, got %T instead", value)
+				}
+				sv.FramerateControl = types.GifFramerateControl(jtv)
+			}
+
+		case "framerateConversionAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GifFramerateConversionAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.FramerateConversionAlgorithm = types.GifFramerateConversionAlgorithm(jtv)
+			}
+
+		case "framerateDenominator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateDenominator = ptr.Int32(int32(i64))
+			}
+
+		case "framerateNumerator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateNumerator = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentH264QvbrSettings(v **types.H264QvbrSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22903,6 +22978,11 @@ func awsRestjson1_deserializeDocumentVideoCodecSettings(v **types.VideoCodecSett
 				return err
 			}
 
+		case "gifSettings":
+			if err := awsRestjson1_deserializeDocumentGifSettings(&sv.GifSettings, value); err != nil {
+				return err
+			}
+
 		case "h264Settings":
 			if err := awsRestjson1_deserializeDocumentH264Settings(&sv.H264Settings, value); err != nil {
 				return err
@@ -22995,6 +23075,15 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 					return fmt.Errorf("expected AntiAlias to be of type string, got %T instead", value)
 				}
 				sv.AntiAlias = types.AntiAlias(jtv)
+			}
+
+		case "chromaPositionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChromaPositionMode to be of type string, got %T instead", value)
+				}
+				sv.ChromaPositionMode = types.ChromaPositionMode(jtv)
 			}
 
 		case "codecSettings":

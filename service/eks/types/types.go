@@ -527,8 +527,14 @@ type ClusterVersionInformation struct {
 	// The release date of this cluster version.
 	ReleaseDate *time.Time
 
+	// This field is deprecated. Use versionStatus instead, as that field matches for
+	// input and output of this action.
+	//
 	// Current status of this cluster version.
 	Status ClusterVersionStatus
+
+	// Current status of this cluster version.
+	VersionStatus VersionStatus
 
 	noSmithyDocumentSerde
 }
@@ -1504,7 +1510,7 @@ type NodegroupUpdateConfig struct {
 
 	// The configuration for the behavior to follow during a node group version update
 	// of this managed node group. You choose between two possible strategies for
-	// replacing nodes during an [UpdateNodegroupVersion]action.
+	// replacing nodes during an [UpdateNodegroupVersion]UpdateNodegroupVersion action.
 	//
 	// An Amazon EKS managed node group updates by replacing nodes with new nodes of
 	// newer AMI versions in parallel. The update strategy changes the managed node
@@ -1516,7 +1522,7 @@ type NodegroupUpdateConfig struct {
 	// constrained to resources or costs (for example, with hardware accelerators such
 	// as GPUs).
 	//
-	// [UpdateNodegroupVersion]: https://docs.aws.amazon.com/latest/APIReference/API_UpdateNodegroupVersion.html
+	// [UpdateNodegroupVersion]: https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateNodegroupVersion.html
 	UpdateStrategy NodegroupUpdateStrategies
 
 	noSmithyDocumentSerde
@@ -1791,7 +1797,8 @@ type PodIdentityAssociation struct {
 
 // The summarized description of the association.
 //
-// Each summary is simplified by removing these fields compared to the full PodIdentityAssociation:
+// Each summary is simplified by removing these fields compared to the full [PodIdentityAssociation]
+// PodIdentityAssociation :
 //
 //   - The IAM role: roleArn
 //
@@ -1800,6 +1807,8 @@ type PodIdentityAssociation struct {
 //   - The most recent timestamp that the association was modified at:. modifiedAt
 //
 //   - The tags on the association: tags
+//
+// [PodIdentityAssociation]: https://docs.aws.amazon.com/eks/latest/APIReference/API_PodIdentityAssociation.html
 type PodIdentityAssociationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the association.
