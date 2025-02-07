@@ -57,7 +57,7 @@ func BuildAuthToken(ctx context.Context, endpoint, region, dbUser string, creds 
 	}
 
 	if creds == nil {
-		return "", fmt.Errorf("credetials provider must not ne nil")
+		return "", fmt.Errorf("credentials provider must not be nil")
 	}
 
 	// the scheme is arbitrary and is only needed because validation of the URL requires one.
