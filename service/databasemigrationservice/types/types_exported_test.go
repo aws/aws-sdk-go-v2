@@ -14,6 +14,12 @@ func ExampleDataProviderSettings_outputUsage() {
 	case *types.DataProviderSettingsMemberDocDbSettings:
 		_ = v.Value // Value is types.DocDbDataProviderSettings
 
+	case *types.DataProviderSettingsMemberIbmDb2LuwSettings:
+		_ = v.Value // Value is types.IbmDb2LuwDataProviderSettings
+
+	case *types.DataProviderSettingsMemberIbmDb2zOsSettings:
+		_ = v.Value // Value is types.IbmDb2zOsDataProviderSettings
+
 	case *types.DataProviderSettingsMemberMariaDbSettings:
 		_ = v.Value // Value is types.MariaDbDataProviderSettings
 
@@ -46,10 +52,12 @@ func ExampleDataProviderSettings_outputUsage() {
 
 var _ *types.OracleDataProviderSettings
 var _ *types.DocDbDataProviderSettings
+var _ *types.IbmDb2LuwDataProviderSettings
 var _ *types.MariaDbDataProviderSettings
 var _ *types.PostgreSqlDataProviderSettings
 var _ *types.MongoDbDataProviderSettings
 var _ *types.MicrosoftSqlServerDataProviderSettings
+var _ *types.IbmDb2zOsDataProviderSettings
 var _ *types.RedshiftDataProviderSettings
 var _ *types.MySqlDataProviderSettings
 

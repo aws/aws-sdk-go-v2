@@ -75,8 +75,10 @@ type CreateSecurityProfileInput struct {
 	Permissions []string
 
 	// The list of resources that a security profile applies tag restrictions to in
-	// Amazon Connect. Following are acceptable ResourceNames: User | SecurityProfile
-	// | Queue | RoutingProfile
+	// Amazon Connect. For a list of Amazon Connect resources that you can tag, see [Add tags to resources in Amazon Connect]in
+	// the Amazon Connect Administrator Guide.
+	//
+	// [Add tags to resources in Amazon Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html
 	TagRestrictedResources []string
 
 	// The tags used to organize, track, or control access for this resource. For

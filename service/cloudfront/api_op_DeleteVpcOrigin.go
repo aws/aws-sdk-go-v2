@@ -34,7 +34,8 @@ type DeleteVpcOriginInput struct {
 	// This member is required.
 	Id *string
 
-	// The VPC origin to delete, if a match occurs.
+	// The version identifier of the VPC origin to delete. This is the ETag value
+	// returned in the response to GetVpcOrigin.
 	//
 	// This member is required.
 	IfMatch *string

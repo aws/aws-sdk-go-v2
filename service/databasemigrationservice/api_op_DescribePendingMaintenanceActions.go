@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For internal use only
+// Returns a list of upcoming maintenance events for replication instances in your
+// account in the current Region.
 func (c *Client) DescribePendingMaintenanceActions(ctx context.Context, params *DescribePendingMaintenanceActionsInput, optFns ...func(*Options)) (*DescribePendingMaintenanceActionsOutput, error) {
 	if params == nil {
 		params = &DescribePendingMaintenanceActionsInput{}

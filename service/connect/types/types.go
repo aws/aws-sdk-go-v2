@@ -3966,7 +3966,9 @@ type NewSessionDetails struct {
 // The type of notification recipient.
 type NotificationRecipientType struct {
 
-	// A list of user IDs.
+	// A list of user IDs. Supports variable injection of
+	// $.ContactLens.ContactEvaluation.Agent.AgentId for OnContactEvaluationSubmit
+	// event source.
 	UserIds []string
 
 	// The tags used to organize, track, or control access for this resource. For

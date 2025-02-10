@@ -1,0 +1,8 @@
+{
+    "id": "f31fc60c-4319-4f10-9506-82adc6c83ed7",
+    "type": "feature",
+    "description": "New vendors for DMS Data Providers: DB2 LUW and DB2 for z/OS",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

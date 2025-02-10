@@ -158,7 +158,10 @@ type AllowedMethods struct {
 	noSmithyDocumentSerde
 }
 
-// An Anycast static IP list.
+// An Anycast static IP list. For more information, see [Request Anycast static IPs to use for allowlisting] in the Amazon CloudFront
+// Developer Guide.
+//
+// [Request Anycast static IPs to use for allowlisting]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/request-static-ips.html
 type AnycastIpList struct {
 
 	// The static IP addresses that are allocated to the Anycast static IP list.
@@ -5842,12 +5845,14 @@ type VpcOriginEndpointConfig struct {
 	// This member is required.
 	Arn *string
 
-	// The HTTP port for the CloudFront VPC origin endpoint configuration.
+	// The HTTP port for the CloudFront VPC origin endpoint configuration. The default
+	// value is 80 .
 	//
 	// This member is required.
 	HTTPPort *int32
 
-	// The HTTPS port of the CloudFront VPC origin endpoint configuration.
+	// The HTTPS port of the CloudFront VPC origin endpoint configuration. The default
+	// value is 443 .
 	//
 	// This member is required.
 	HTTPSPort *int32

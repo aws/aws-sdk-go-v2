@@ -44,25 +44,29 @@ type SearchResourceTagsInput struct {
 
 	// The list of resource types to be used to search tags from. If not provided or
 	// if any empty list is provided, this API will search from all supported resource
-	// types.
+	// types. Note that lowercase and - are required.
 	//
 	// Supported resource types
 	//
-	//   - AGENT
+	//   - agent
 	//
-	//   - ROUTING_PROFILE
+	//   - agent-state
 	//
-	//   - STANDARD_QUEUE
+	//   - routing-profile
 	//
-	//   - SECURITY_PROFILE
+	//   - standard-queue
 	//
-	//   - OPERATING_HOURS
+	//   - security-profile
 	//
-	//   - PROMPT
+	//   - operating-hours
 	//
-	//   - CONTACT_FLOW
+	//   - prompt
 	//
-	//   - FLOW_MODULE
+	//   - contact-flow
+	//
+	//   - flow- module
+	//
+	//   - transfer-destination (also known as quick connect)
 	ResourceTypes []string
 
 	// The search criteria to be used to return tags.

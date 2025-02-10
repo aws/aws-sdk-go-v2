@@ -500,8 +500,8 @@ type DataProvider struct {
 
 	// The type of database engine for the data provider. Valid values include "aurora"
 	// , "aurora-postgresql" , "mysql" , "oracle" , "postgres" , "sqlserver" , redshift
-	// , mariadb , mongodb , and docdb . A value of "aurora" represents Amazon Aurora
-	// MySQL-Compatible Edition.
+	// , mariadb , mongodb , db2 , db2-zos and docdb . A value of "aurora" represents
+	// Amazon Aurora MySQL-Compatible Edition.
 	Engine *string
 
 	// The settings in JSON format for a data provider.
@@ -552,6 +552,8 @@ type DataProviderDescriptorDefinition struct {
 // The following types satisfy this interface:
 //
 //	DataProviderSettingsMemberDocDbSettings
+//	DataProviderSettingsMemberIbmDb2LuwSettings
+//	DataProviderSettingsMemberIbmDb2zOsSettings
 //	DataProviderSettingsMemberMariaDbSettings
 //	DataProviderSettingsMemberMicrosoftSqlServerSettings
 //	DataProviderSettingsMemberMongoDbSettings
@@ -571,6 +573,24 @@ type DataProviderSettingsMemberDocDbSettings struct {
 }
 
 func (*DataProviderSettingsMemberDocDbSettings) isDataProviderSettings() {}
+
+// Provides information that defines an IBM DB2 LUW data provider.
+type DataProviderSettingsMemberIbmDb2LuwSettings struct {
+	Value IbmDb2LuwDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberIbmDb2LuwSettings) isDataProviderSettings() {}
+
+// Provides information that defines an IBM DB2 for z/OS data provider.
+type DataProviderSettingsMemberIbmDb2zOsSettings struct {
+	Value IbmDb2zOsDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberIbmDb2zOsSettings) isDataProviderSettings() {}
 
 // Provides information that defines a MariaDB data provider.
 type DataProviderSettingsMemberMariaDbSettings struct {
@@ -1330,6 +1350,28 @@ type GcpMySQLSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about an IBM DB2 LUW data provider.
+type IbmDb2LuwDataProviderSettings struct {
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The database name on the DB2 LUW data provider.
+	DatabaseName *string
+
+	// The port value for the DB2 LUW data provider.
+	Port *int32
+
+	// The name of the DB2 LUW server.
+	ServerName *string
+
+	// The SSL mode used to connect to the DB2 LUW data provider. The default value is
+	// none . Valid Values: none and verify-ca .
+	SslMode DmsSslModeValue
+
+	noSmithyDocumentSerde
+}
+
 // Provides information that defines an IBM Db2 LUW endpoint.
 type IBMDb2Settings struct {
 
@@ -1396,6 +1438,28 @@ type IBMDb2Settings struct {
 	// files on the local disk on the DMS replication instance. The default value is
 	// 1024 (1 MB).
 	WriteBufferSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an IBM DB2 for z/OS data provider.
+type IbmDb2zOsDataProviderSettings struct {
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The database name on the DB2 for z/OS data provider.
+	DatabaseName *string
+
+	// The port value for the DB2 for z/OS data provider.
+	Port *int32
+
+	// The name of the DB2 for z/OS server.
+	ServerName *string
+
+	// The SSL mode used to connect to the DB2 for z/OS data provider. The default
+	// value is none . Valid Values: none and verify-ca .
+	SslMode DmsSslModeValue
 
 	noSmithyDocumentSerde
 }
@@ -3508,8 +3572,8 @@ type ReplicationInstance struct {
 	// The time the replication instance was created.
 	InstanceCreateTime *time.Time
 
-	// Specifies the ID of the secret that stores the key cache file required for
-	// kerberos authentication, when replicating an instance.
+	// Specifies the settings required for kerberos authentication when replicating an
+	// instance.
 	KerberosAuthenticationSettings *KerberosAuthenticationSettings
 
 	// An KMS key identifier that is used to encrypt the data on the replication

@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new contact.
+// Only the EMAIL channel is supported. The supported initiation methods are:
+// OUTBOUND, AGENT_REPLY, and FLOW.
+//
+// Creates a new EMAIL contact.
 func (c *Client) CreateContact(ctx context.Context, params *CreateContactInput, optFns ...func(*Options)) (*CreateContactOutput, error) {
 	if params == nil {
 		params = &CreateContactInput{}
@@ -31,10 +34,18 @@ type CreateContactInput struct {
 
 	// The channel for the contact
 	//
+	// CreateContact only supports the EMAIL channel. The following information that
+	// states other channels are supported is incorrect. We are working to update this
+	// topic.
+	//
 	// This member is required.
 	Channel types.Channel
 
 	// Indicates how the contact was initiated.
+	//
+	// CreateContact only supports the following initiation methods: OUTBOUND,
+	// AGENT_REPLY, and FLOW. The following information that states other initiation
+	// methods are supported is incorrect. We are working to update this topic.
 	//
 	// This member is required.
 	InitiationMethod types.ContactInitiationMethod

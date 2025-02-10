@@ -6966,6 +6966,18 @@ func awsAwsjson11_serializeDocumentDataProviderSettings(v types.DataProviderSett
 			return err
 		}
 
+	case *types.DataProviderSettingsMemberIbmDb2LuwSettings:
+		av := object.Key("IbmDb2LuwSettings")
+		if err := awsAwsjson11_serializeDocumentIbmDb2LuwDataProviderSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DataProviderSettingsMemberIbmDb2zOsSettings:
+		av := object.Key("IbmDb2zOsSettings")
+		if err := awsAwsjson11_serializeDocumentIbmDb2zOsDataProviderSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.DataProviderSettingsMemberMariaDbSettings:
 		av := object.Key("MariaDbSettings")
 		if err := awsAwsjson11_serializeDocumentMariaDbDataProviderSettings(&uv.Value, av); err != nil {
@@ -7322,6 +7334,38 @@ func awsAwsjson11_serializeDocumentGcpMySQLSettings(v *types.GcpMySQLSettings, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIbmDb2LuwDataProviderSettings(v *types.IbmDb2LuwDataProviderSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if len(v.SslMode) > 0 {
+		ok := object.Key("SslMode")
+		ok.String(string(v.SslMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIBMDb2Settings(v *types.IBMDb2Settings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7394,6 +7438,38 @@ func awsAwsjson11_serializeDocumentIBMDb2Settings(v *types.IBMDb2Settings, value
 	if v.WriteBufferSize != nil {
 		ok := object.Key("WriteBufferSize")
 		ok.Integer(*v.WriteBufferSize)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIbmDb2zOsDataProviderSettings(v *types.IbmDb2zOsDataProviderSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if len(v.SslMode) > 0 {
+		ok := object.Key("SslMode")
+		ok.String(string(v.SslMode))
 	}
 
 	return nil

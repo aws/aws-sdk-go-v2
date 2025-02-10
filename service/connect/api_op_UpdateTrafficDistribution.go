@@ -13,6 +13,11 @@ import (
 
 // Updates the traffic distribution for a given traffic distribution group.
 //
+// When you shift telephony traffic, also shift agents and/or agent sign-ins to
+// ensure they can handle the calls in the other Region. If you don't shift the
+// agents, voice calls will go to the shifted Region but there won't be any agents
+// available to receive the calls.
+//
 // The SignInConfig distribution is available only on a default
 // TrafficDistributionGroup (see the IsDefault parameter in the [TrafficDistributionGroup] data type). If
 // you call UpdateTrafficDistribution with a modified SignInConfig and a

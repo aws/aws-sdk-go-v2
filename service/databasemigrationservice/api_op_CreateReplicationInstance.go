@@ -99,8 +99,8 @@ type CreateReplicationInstanceInput struct {
 	// created, the default is the latest engine version available.
 	EngineVersion *string
 
-	// Specifies the ID of the secret that stores the key cache file required for
-	// kerberos authentication, when creating a replication instance.
+	// Specifies the settings required for kerberos authentication when creating the
+	// replication instance.
 	KerberosAuthenticationSettings *types.KerberosAuthenticationSettings
 
 	// An KMS key identifier that is used to encrypt the data on the replication
