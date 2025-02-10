@@ -74,13 +74,30 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 					AlgorithmsUsed: []string{"CRC32"},
 				},
 			},
+			"calculate crc64nvme": {
+				params: &s3.PutObjectInput{
+					Body:              strings.NewReader("abc123"),
+					ChecksumAlgorithm: types.ChecksumAlgorithmCrc64nvme,
+				},
+				expectPayload: []byte("abc123"),
+				expectComputedChecksums: &s3.ComputedInputChecksumsMetadata{
+					ComputedChecksums: map[string]string{
+						"CRC64NVME": "gwCmMgdcSIQ=",
+					},
+				},
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
+			},
 			"no checksum calculation": {
 				params: &s3.PutObjectInput{
 					Body: strings.NewReader("abc123"),
 				},
 				requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
 				expectPayload:              []byte("abc123"),
-				expectLogged:               "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -98,7 +115,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 					AlgorithmsUsed: []string{"CRC32C"},
 				},
 			},
-			"preset crc64 checksum": {
+			"preset crc64nvme checksum": {
 				params: &s3.PutObjectInput{
 					Body:              strings.NewReader("Hello, precomputed checksum!"),
 					ChecksumCRC64NVME: aws.String("uxBNEklueLQ="),
@@ -109,7 +126,9 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 						"CRC64NVME": "uxBNEklueLQ=",
 					},
 				},
-				expectLogged: "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"wrong preset checksum": {
 				params: &s3.PutObjectInput{
@@ -199,13 +218,30 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 					AlgorithmsUsed: []string{"CRC32"},
 				},
 			},
+			"calculate crc64nvme": {
+				params: &s3.PutObjectInput{
+					Body:              bytes.NewBuffer([]byte("abc123")),
+					ChecksumAlgorithm: types.ChecksumAlgorithmCrc64nvme,
+				},
+				expectPayload: []byte("abc123"),
+				expectComputedChecksums: &s3.ComputedInputChecksumsMetadata{
+					ComputedChecksums: map[string]string{
+						"CRC64NVME": "gwCmMgdcSIQ=",
+					},
+				},
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
+			},
 			"no checksum calculation": {
 				params: &s3.PutObjectInput{
 					Body: bytes.NewBuffer([]byte("abc123")),
 				},
 				requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
 				expectPayload:              []byte("abc123"),
-				expectLogged:               "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -223,7 +259,7 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 					AlgorithmsUsed: []string{"CRC32C"},
 				},
 			},
-			"preset crc64 checksum": {
+			"preset crc64nvme checksum": {
 				params: &s3.PutObjectInput{
 					Body:              bytes.NewBuffer([]byte("Hello, precomputed checksum!")),
 					ChecksumCRC64NVME: aws.String("uxBNEklueLQ="),
@@ -234,7 +270,9 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 						"CRC64NVME": "uxBNEklueLQ=",
 					},
 				},
-				expectLogged: "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"wrong preset checksum": {
 				params: &s3.PutObjectInput{
@@ -306,7 +344,9 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 			"no checksum calculation": {
 				params:                     &s3.PutObjectInput{},
 				requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
-				expectLogged:               "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{
@@ -369,7 +409,9 @@ func TestInteg_ObjectChecksums(t *testing.T) {
 					Body: bytes.NewBuffer([]byte{}),
 				},
 				requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
-				expectLogged:               "Response has no supported checksum",
+				expectAlgorithmsUsed: &s3.ChecksumValidationMetadata{
+					AlgorithmsUsed: []string{"CRC64NVME"},
+				},
 			},
 			"preset checksum": {
 				params: &s3.PutObjectInput{

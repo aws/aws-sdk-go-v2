@@ -438,6 +438,32 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					"CRC32": "DUoRhQ==",
 				},
 			},
+			"https no trailing checksum crc64nvme": {
+				optionsFn: func(o *ComputeInputPayloadChecksum) {
+					o.EnableTrailingChecksum = false
+				},
+				initContext: func(ctx context.Context) context.Context {
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC64NVME))
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("https://example.aws")
+						r.ContentLength = 11
+						r = requestMust(r.SetStream(bytes.NewReader([]byte("hello world"))))
+						return r
+					}(),
+				},
+				expectHeader: http.Header{
+					"X-Amz-Checksum-Crc64nvme": []string{"jSnVw/bqjr4="},
+				},
+				expectContentLength: 11,
+				expectPayload:       []byte("hello world"),
+				expectChecksumMetadata: map[string]string{
+					"CRC64NVME": "jSnVw/bqjr4=",
+				},
+			},
+
 			"with content encoding set": {
 				optionsFn: func(o *ComputeInputPayloadChecksum) {
 					o.EnableTrailingChecksum = false
@@ -471,21 +497,6 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 			"unknown algorithm": {
 				initContext: func(ctx context.Context) context.Context {
 					return internalcontext.SetChecksumInputAlgorithm(ctx, "unknown")
-				},
-				buildInput: middleware.BuildInput{
-					Request: func() *smithyhttp.Request {
-						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-						r.URL, _ = url.Parse("http://example.aws")
-						r = requestMust(r.SetStream(bytes.NewBuffer([]byte("hello world"))))
-						return r
-					}(),
-				},
-				expectErr:      "failed to parse algorithm",
-				expectBuildErr: true,
-			},
-			"unsupported algorithm": {
-				initContext: func(ctx context.Context) context.Context {
-					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC64NVME))
 				},
 				buildInput: middleware.BuildInput{
 					Request: func() *smithyhttp.Request {
@@ -596,6 +607,33 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					"CRC32": "DUoRhQ==",
 				},
 			},
+			"https unseekable crc64nvme": {
+				initContext: func(ctx context.Context) context.Context {
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC64NVME))
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("https://example.aws")
+						r.ContentLength = 11
+						r = requestMust(r.SetStream(bytes.NewBuffer([]byte("hello world"))))
+						return r
+					}(),
+				},
+				expectHeader: http.Header{
+					"Content-Encoding":             []string{"aws-chunked"},
+					"X-Amz-Decoded-Content-Length": []string{"11"},
+					"X-Amz-Trailer":                []string{"x-amz-checksum-crc64nvme"},
+				},
+				expectContentLength:   60,
+				expectPayload:         []byte("b\r\nhello world\r\n0\r\nx-amz-checksum-crc64nvme:jSnVw/bqjr4=\r\n\r\n"),
+				expectPayloadHash:     "STREAMING-UNSIGNED-PAYLOAD-TRAILER",
+				expectDeferToFinalize: true,
+				expectChecksumMetadata: map[string]string{
+					"CRC64NVME": "jSnVw/bqjr4=",
+				},
+			},
+
 			"https unseekable unknown length": {
 				initContext: func(ctx context.Context) context.Context {
 					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
