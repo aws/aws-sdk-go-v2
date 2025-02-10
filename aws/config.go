@@ -31,6 +31,9 @@ type Config struct {
 	// sources, and resolve credentials using the SDK's default credential chain.
 	Credentials CredentialsProvider
 
+	// Stores which source(s) were used to get the credentials.
+	CredentialChain []CredentialSource
+
 	// The Bearer Authentication token provider to use for authenticating API
 	// operation calls with a Bearer Authentication token. The API clients and
 	// operation must support Bearer Authentication scheme in order for the
@@ -236,3 +239,22 @@ const (
 	// discovery if supported for the operation.
 	EndpointDiscoveryEnabled
 )
+
+// AddCredentialSource is called to keep a list of where the credentials have been sourced
+// when building a config object.
+func (c *Config) AddCredentialSource(source CredentialSource) {
+	if c.CredentialChain == nil {
+		c.CredentialChain = []CredentialSource{source}
+	}
+	// Ignore multiple occurrences of the same source.
+	// This is never expected to be n>3, so no need for a set
+	for _, existing := range c.CredentialChain {
+		if existing == source {
+			return
+		}
+	}
+
+	// if we have a role arn, but we also have a named provider, we don't want to count
+	// as "role arn"
+	c.CredentialChain = append(c.CredentialChain, source)
+}

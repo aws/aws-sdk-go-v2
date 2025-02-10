@@ -98,6 +98,9 @@ type Options struct {
 	//
 	// Will override AuthorizationToken if configured
 	AuthorizationTokenProvider AuthTokenProvider
+
+	// The chain of providers that was used to create this provider
+	CredentialChain []aws.CredentialSource
 }
 
 // AuthTokenProvider defines an interface to dynamically load a value to be passed
@@ -190,4 +193,12 @@ func (p *Provider) resolveAuthToken() (string, error) {
 	}
 
 	return authToken, nil
+}
+
+// CredentialChain returns the credential chain that was used to construct this provider
+func (p *Provider) CredentialChain() []aws.CredentialSource {
+	if p.options.CredentialChain == nil {
+		return []aws.CredentialSource{aws.CredentialsProcess}
+	}
+	return p.options.CredentialChain
 }

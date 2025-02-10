@@ -70,6 +70,56 @@ func (AnonymousCredentials) Retrieve(context.Context) (Credentials, error) {
 		fmt.Errorf("the AnonymousCredentials is not a valid credential provider, and cannot be used to sign AWS requests with")
 }
 
+// CredentialSource is the source of the credential provider.
+// A provider can have multiple credential sources: For example, a provider that reads a profile, calls ECS to
+// get credentials and then assumes a role using STS will have all these as part of its provider chain.
+type CredentialSource int
+
+const (
+	// CredentialsUndefined is the sentinel zero value
+	CredentialsUndefined CredentialSource = iota
+	// CredentialsCode credentials resolved from code, cli parameters, session object, or client instance
+	CredentialsCode
+	// CredentialsEnvVars credentials resolved from environment variables
+	CredentialsEnvVars
+	// CredentialsEnvVarsStsWebIDToken credentials resolved from environment variables for assuming a role with STS using a web identity token
+	CredentialsEnvVarsStsWebIDToken
+	// CredentialsStsAssumeRole credentials resolved from STS using AssumeRole
+	CredentialsStsAssumeRole
+	// CredentialsStsAssumeRoleSaml credentials resolved from STS using assume role with SAML
+	CredentialsStsAssumeRoleSaml
+	// CredentialsStsAssumeRoleWebID credentials resolved from STS using assume role with web identity
+	CredentialsStsAssumeRoleWebID
+	// CredentialsStsFederationToken credentials resolved from STS using a federation token
+	CredentialsStsFederationToken
+	// CredentialsStsSessionToken credentials resolved from STS using a session token 	S
+	CredentialsStsSessionToken
+	// CredentialsProfile  credentials resolved from a config file(s) profile with static credentials
+	CredentialsProfile
+	// CredentialsProfileSourceProfile credentials resolved from a source profile in a config file(s) profile
+	CredentialsProfileSourceProfile
+	// CredentialsProfileNamedProvider credentials resolved from a named provider in a config file(s) profile (like EcsContainer)
+	CredentialsProfileNamedProvider
+	// CredentialsProfileStsWebIDToken  credentials resolved from configuration for assuming a role with STS using web identity token in a config file(s) profile
+	CredentialsProfileStsWebIDToken
+	// CredentialsProfileSso credentials resolved from an SSO session in a config file(s) profile
+	CredentialsProfileSso
+	// CredentialsSso credentials resolved from an SSO session
+	CredentialsSso
+	// CredentialsProfileSsoLegacy credentials resolved from an SSO session in a config file(s) profile using legacy format
+	CredentialsProfileSsoLegacy
+	// CredentialsSsoLegacy credentials resolved from an SSO session using legacy format
+	CredentialsSsoLegacy
+	// CredentialsProfileProcess credentials resolved from a process in a config file(s) profile
+	CredentialsProfileProcess
+	// CredentialsProcess credentials resolved from a process
+	CredentialsProcess
+	// CredentialsHTTP credentials resolved from an HTTP endpoint
+	CredentialsHTTP
+	// CredentialsIMDS credentials resolved from the instance metadata service (IMDS)
+	CredentialsIMDS
+)
+
 // A Credentials is the AWS credentials value for individual credential fields.
 type Credentials struct {
 	// AWS Access key ID
@@ -123,6 +173,13 @@ type CredentialsProvider interface {
 	// Retrieve returns nil if it successfully retrieved the value.
 	// Error is returned if the value were not obtainable, or empty.
 	Retrieve(ctx context.Context) (Credentials, error)
+}
+
+// CredentialProviderChain allows any credential provider to track
+// the chain where they were sourced. For example, if the credentials came from a
+// call to a role specified in the profile, this method will give the whole precedence chain
+type CredentialProviderChain interface {
+	CredentialChain() []CredentialSource
 }
 
 // CredentialsProviderFunc provides a helper wrapping a function value to

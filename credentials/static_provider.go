@@ -21,7 +21,16 @@ func (*StaticCredentialsEmptyError) Error() string {
 // A StaticCredentialsProvider is a set of credentials which are set, and will
 // never expire.
 type StaticCredentialsProvider struct {
-	Value aws.Credentials
+	Value  aws.Credentials
+	Source []aws.CredentialSource
+}
+
+// CredentialChain returns the credential chain that was used to construct this provider
+func (s StaticCredentialsProvider) CredentialChain() []aws.CredentialSource {
+	if s.Source == nil {
+		return []aws.CredentialSource{aws.CredentialsCode} // If no source has been set, assume this is used directly which means hardcoded creds
+	}
+	return s.Source
 }
 
 // NewStaticCredentialsProvider return a StaticCredentialsProvider initialized with the AWS
