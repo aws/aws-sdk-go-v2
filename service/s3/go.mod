@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.32
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.32
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.12.2
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.5.6
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.6.0
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.12.13
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.18.13
 	github.com/aws/smithy-go v1.22.2

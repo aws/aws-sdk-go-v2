@@ -1,3 +1,7 @@
+# v1.124.5 (2025-02-10)
+
+* **Documentation**: Updated the CreateContact API documentation to indicate that it only applies to EMAIL contacts.
+
 # v1.124.4 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

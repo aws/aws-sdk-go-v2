@@ -1,8 +1,0 @@
-{
-    "id": "b9310cb8-012b-4e4b-8187-1a325c2df06f",
-    "type": "documentation",
-    "description": "Updated the CreateContact API documentation to indicate that it only applies to EMAIL contacts.",
-    "modules": [
-        "service/connect"
-    ]
-}

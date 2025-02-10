@@ -1,3 +1,20 @@
+# Release (2025-02-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.25.0](service/apigatewayv2/CHANGELOG.md#v1250-2025-02-10)
+  * **Feature**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.44.10](service/cloudfront/CHANGELOG.md#v14410-2025-02-10)
+  * **Documentation**: Doc-only update that adds defaults for CloudFront VpcOriginEndpointConfig values.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.124.5](service/connect/CHANGELOG.md#v11245-2025-02-10)
+  * **Documentation**: Updated the CreateContact API documentation to indicate that it only applies to EMAIL contacts.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.47.0](service/databasemigrationservice/CHANGELOG.md#v1470-2025-02-10)
+  * **Feature**: New vendors for DMS Data Providers: DB2 LUW and DB2 for z/OS
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.6.0](service/internal/checksum/CHANGELOG.md#v160-2025-02-10)
+  * **Feature**: Support CRC64NVME flex checksums.
+
 # Release (2025-02-07)
 
 ## Module Highlights

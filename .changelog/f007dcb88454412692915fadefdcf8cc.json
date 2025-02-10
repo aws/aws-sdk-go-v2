@@ -1,9 +1,0 @@
-{
-    "id": "f007dcb8-8454-4126-9291-5fadefdcf8cc",
-    "type": "feature",
-    "description": "Support CRC64NVME flex checksums.",
-    "modules": [
-        "service/internal/checksum",
-        "service/internal/integrationtest"
-    ]
-}

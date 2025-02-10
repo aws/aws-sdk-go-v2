@@ -1,3 +1,7 @@
+# v1.47.0 (2025-02-10)
+
+* **Feature**: New vendors for DMS Data Providers: DB2 LUW and DB2 for z/OS
+
 # v1.46.1 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.44.10 (2025-02-10)
+
+* **Documentation**: Doc-only update that adds defaults for CloudFront VpcOriginEndpointConfig values.
+
 # v1.44.9 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions
