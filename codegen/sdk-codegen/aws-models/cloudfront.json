@@ -244,7 +244,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Anycast static IP list.</p>"
+                "smithy.api#documentation": "<p>An Anycast static IP list. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/request-static-ips.html\">Request Anycast static IPs to use for allowlisting</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.cloudfront#AnycastIpListCollection": {
@@ -6781,7 +6781,7 @@
                 "IfMatch": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC origin to delete, if a match occurs.</p>",
+                        "smithy.api#documentation": "<p>The version identifier of the VPC origin to delete. This is the <code>ETag</code> value returned in the response to <a>GetVpcOrigin</a>.</p>",
                         "smithy.api#httpHeader": "If-Match",
                         "smithy.api#required": {}
                     }
@@ -20515,14 +20515,14 @@
                 "HTTPPort": {
                     "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTTP port for the CloudFront VPC origin endpoint configuration.</p>",
+                        "smithy.api#documentation": "<p>The HTTP port for the CloudFront VPC origin endpoint configuration. The default value is <code>80</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "HTTPSPort": {
                     "target": "com.amazonaws.cloudfront#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTTPS port of the CloudFront VPC origin endpoint configuration.</p>",
+                        "smithy.api#documentation": "<p>The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is <code>443</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },

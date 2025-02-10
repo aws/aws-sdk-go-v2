@@ -1619,7 +1619,7 @@
                 "ApplyAction": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>\n         <p>Valid values: <code>os-upgrade</code>, <code>system-update</code>, <code>db-upgrade</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>\n         <p>Valid values: <code>os-upgrade</code>, <code>system-update</code>, <code>db-upgrade</code>, <code>os-patch</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2558,7 +2558,7 @@
                 "Engine": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
+                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3790,7 +3790,7 @@
                 "KerberosAuthenticationSettings": {
                     "target": "com.amazonaws.databasemigrationservice#KerberosAuthenticationSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication, when creating a replication instance.</p>"
+                        "smithy.api#documentation": "<p>Specifies the settings required for kerberos authentication when creating the replication instance.</p>"
                     }
                 }
             },
@@ -4360,7 +4360,7 @@
                 "Engine": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
+                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
                     }
                 },
                 "Settings": {
@@ -4479,6 +4479,18 @@
                     "target": "com.amazonaws.databasemigrationservice#MariaDbDataProviderSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides information that defines a MariaDB data provider.</p>"
+                    }
+                },
+                "IbmDb2LuwSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#IbmDb2LuwDataProviderSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information that defines an IBM DB2 LUW data provider.</p>"
+                    }
+                },
+                "IbmDb2zOsSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#IbmDb2zOsDataProviderSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information that defines an IBM DB2 for z/OS data provider.</p>"
                     }
                 },
                 "MongoDbSettings": {
@@ -8223,7 +8235,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>For internal use only</p>",
+                "smithy.api#documentation": "<p>Returns a list of upcoming maintenance events for replication instances in your account in the current Region.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -11207,6 +11219,82 @@
                 "smithy.api#documentation": "<p>Provides information that defines an IBM Db2 LUW endpoint.</p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#IbmDb2LuwDataProviderSettings": {
+            "type": "structure",
+            "members": {
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DB2 LUW server.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port value for the DB2 LUW data provider.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database name on the DB2 LUW data provider.</p>"
+                    }
+                },
+                "SslMode": {
+                    "target": "com.amazonaws.databasemigrationservice#DmsSslModeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSL mode used to connect to the DB2 LUW data provider.\n         The default value is <code>none</code>. Valid Values: <code>none</code> and <code>verify-ca</code>.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an IBM DB2 LUW data provider.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#IbmDb2zOsDataProviderSettings": {
+            "type": "structure",
+            "members": {
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DB2 for z/OS server.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port value for the DB2 for z/OS data provider.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database name on the DB2 for z/OS data provider.</p>"
+                    }
+                },
+                "SslMode": {
+                    "target": "com.amazonaws.databasemigrationservice#DmsSslModeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSL mode used to connect to the DB2 for z/OS data provider.\n         The default value is <code>none</code>. Valid Values: <code>none</code> and <code>verify-ca</code>.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an IBM DB2 for z/OS data provider.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#ImportCertificate": {
             "type": "operation",
             "input": {
@@ -12597,7 +12685,7 @@
                 "Engine": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
+                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
                     }
                 },
                 "ExactSettings": {
@@ -13609,7 +13697,7 @@
                 "KerberosAuthenticationSettings": {
                     "target": "com.amazonaws.databasemigrationservice#KerberosAuthenticationSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication, when modifying a replication instance.</p>"
+                        "smithy.api#documentation": "<p>Specifies the settings required for kerberos authentication when modifying a replication instance.</p>"
                     }
                 }
             },
@@ -16381,7 +16469,7 @@
                 "KerberosAuthenticationSettings": {
                     "target": "com.amazonaws.databasemigrationservice#KerberosAuthenticationSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication, when replicating an instance.</p>"
+                        "smithy.api#documentation": "<p>Specifies the settings required for kerberos authentication when replicating an instance.</p>"
                     }
                 }
             },

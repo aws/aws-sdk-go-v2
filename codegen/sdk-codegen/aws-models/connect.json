@@ -7184,7 +7184,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new contact.</p>",
+                "smithy.api#documentation": "<important>\n            <p>Only the EMAIL channel is supported. The supported initiation\n   methods are: OUTBOUND, AGENT_REPLY, and FLOW.</p>\n         </important>\n         <p>Creates a new EMAIL contact. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/create-contact",
@@ -7586,14 +7586,14 @@
                 "Channel": {
                     "target": "com.amazonaws.connect#Channel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel for the contact</p>",
+                        "smithy.api#documentation": "<p>The channel for the contact</p>\n         <important>\n            <p>CreateContact only supports the EMAIL channel. The following information that states other\n    channels are supported is incorrect. We are working to update this topic.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "InitiationMethod": {
                     "target": "com.amazonaws.connect#ContactInitiationMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how the contact was initiated.</p>",
+                        "smithy.api#documentation": "<p>Indicates how the contact was initiated. </p>\n         <important>\n            <p>CreateContact only supports the following initiation methods: OUTBOUND, AGENT_REPLY, and\n    FLOW. The following information that states other initiation methods are supported is incorrect. We are\n    working to update this topic.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9342,7 +9342,7 @@
                 "TagRestrictedResources": {
                     "target": "com.amazonaws.connect#TagRestrictedResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code> |\n    <code>SecurityProfile</code> | <code>Queue</code> | <code>RoutingProfile</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect. For a list of Amazon Connect resources that you can tag, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html\">Add tags to resources\n    in Amazon Connect</a> in the <i>Amazon Connect Administrator\n   Guide</i>. </p>"
                     }
                 },
                 "Applications": {
@@ -27449,7 +27449,7 @@
                 "UserIds": {
                     "target": "com.amazonaws.connect#UserIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of user IDs.</p>"
+                        "smithy.api#documentation": "<p>A list of user IDs. Supports variable injection of\n    <code>$.ContactLens.ContactEvaluation.Agent.AgentId</code> for\n    <code>OnContactEvaluationSubmit</code> event source. </p>"
                     }
                 }
             },
@@ -35185,7 +35185,7 @@
                 "ResourceTypes": {
                     "target": "com.amazonaws.connect#ResourceTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of resource types to be used to search tags from. If not provided or if any empty\n   list is provided, this API will search from all supported resource types.</p>\n         <p class=\"title\">\n            <b>Supported resource types</b>\n         </p>\n         <ul>\n            <li>\n               <p>AGENT</p>\n            </li>\n            <li>\n               <p>ROUTING_PROFILE</p>\n            </li>\n            <li>\n               <p>STANDARD_QUEUE</p>\n            </li>\n            <li>\n               <p>SECURITY_PROFILE</p>\n            </li>\n            <li>\n               <p>OPERATING_HOURS</p>\n            </li>\n            <li>\n               <p>PROMPT</p>\n            </li>\n            <li>\n               <p>CONTACT_FLOW</p>\n            </li>\n            <li>\n               <p>FLOW_MODULE</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The list of resource types to be used to search tags from. If not provided or if any empty\n   list is provided, this API will search from all supported resource types. Note that lowercase and\n   - are required.</p>\n         <p class=\"title\">\n            <b>Supported resource types</b>\n         </p>\n         <ul>\n            <li>\n               <p>agent</p>\n            </li>\n            <li>\n               <p>agent-state</p>\n            </li>\n            <li>\n               <p>routing-profile</p>\n            </li>\n            <li>\n               <p>standard-queue</p>\n            </li>\n            <li>\n               <p>security-profile</p>\n            </li>\n            <li>\n               <p>operating-hours</p>\n            </li>\n            <li>\n               <p>prompt</p>\n            </li>\n            <li>\n               <p>contact-flow</p>\n            </li>\n            <li>\n               <p>flow- module</p>\n            </li>\n            <li>\n               <p>transfer-destination (also known as quick connect)</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -35614,7 +35614,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>\n         <note>\n            <p>InstanceID is a required field. The \"Required: No\" below is incorrect.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -40686,7 +40686,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.connect#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Connect attributes. These attributes can be accessed in flows just like any\n   other contact attributes.</p>\n         <p>You can have up to 32,768 UTF-8 bytes across all attributes for a contact. Attribute keys\n   can include only alphanumeric, dash, and underscore characters.</p>\n         <p>When the attributes for a contact exceed 32 KB, the contact is routed down the Error branch\n   of the flow. As a mitigation, consider the following options:</p>\n         <ul>\n            <li>\n               <p>Remove unnecessary attributes by setting their values to empty.</p>\n            </li>\n            <li>\n               <p>If the attributes are only used in one flow and don't need to be referred to outside of\n     that flow (for example, by a Lambda or another flow), then use flow attributes. This way you\n     aren't needlessly persisting the 32 KB of information from one flow to another. For more\n     information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-contact-attributes.html\">Flow block: Set contact\n      attributes</a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Connect attributes. These attributes can be accessed in flows just like any\n   other contact attributes.</p>\n         <p>You can have up to 32,768 UTF-8 bytes across all attributes for a contact. Attribute keys\n   can include only alphanumeric, dash, and underscore characters.</p>\n         <p>In the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-contact-attributes.html\">Set contact attributes</a>\n   block, when the attributes for a contact exceed 32 KB, the contact is routed down the Error\n   branch of the flow. As a mitigation, consider the following options:</p>\n         <ul>\n            <li>\n               <p>Remove unnecessary attributes by setting their values to empty.</p>\n            </li>\n            <li>\n               <p>If the attributes are only used in one flow and don't need to be referred to outside of\n     that flow (for example, by a Lambda or another flow), then use flow attributes. This way you\n     aren't needlessly persisting the 32 KB of information from one flow to another. For more\n     information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-contact-attributes.html\">Flow block: Set contact\n      attributes</a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -43806,7 +43806,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n         <note>\n            <p>The <code>SignInConfig</code> distribution is available only on a \ndefault <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the \n<a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html\">TrafficDistributionGroup</a>\n data type). If you call\n    <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,\n    an <code>InvalidRequestException</code> is returned.</p>\n         </note>\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony\n    traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n         <important>\n            <p>When you shift telephony traffic, also shift agents and/or agent sign-ins to ensure they\n    can handle the calls in the other Region. If you don't shift the agents, voice calls will go to\n    the shifted Region but there won't be any agents available to receive the calls.</p>\n         </important>\n         <note>\n            <p>The <code>SignInConfig</code> distribution is available only on a \ndefault <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the \n<a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html\">TrafficDistributionGroup</a>\n data type). If you call\n    <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,\n    an <code>InvalidRequestException</code> is returned.</p>\n         </note>\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony\n    traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/traffic-distribution/{Id}",

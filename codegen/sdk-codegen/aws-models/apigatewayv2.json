@@ -425,6 +425,9 @@
                     "name": "apigateway"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
                 "smithy.api#documentation": "<p>Amazon API Gateway V2</p>",
                 "smithy.api#title": "AmazonApiGatewayV2",
                 "smithy.rules#endpointRuleSet": {
@@ -2606,7 +2609,7 @@
                 "PayloadFormatVersion": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And64",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>",
+                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html\">Working with AWS Lambda proxy integrations for HTTP APIs</a>.</p>",
                         "smithy.api#jsonName": "payloadFormatVersion"
                     }
                 },
@@ -2898,7 +2901,7 @@
                 "PayloadFormatVersion": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And64",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>",
+                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html\">Working with AWS Lambda proxy integrations for HTTP APIs</a>.</p>",
                         "smithy.api#jsonName": "payloadFormatVersion"
                     }
                 },
@@ -6236,7 +6239,7 @@
                 "PayloadFormatVersion": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And64",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>",
+                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html\">Working with AWS Lambda proxy integrations for HTTP APIs</a>.</p>",
                         "smithy.api#jsonName": "payloadFormatVersion"
                     }
                 },
@@ -7821,7 +7824,7 @@
                 "PayloadFormatVersion": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And64",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>",
+                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html\">Working with AWS Lambda proxy integrations for HTTP APIs</a>.</p>",
                         "smithy.api#jsonName": "payloadFormatVersion"
                     }
                 },
@@ -10012,7 +10015,7 @@
                 "PayloadFormatVersion": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And64",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>",
+                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html\">Working with AWS Lambda proxy integrations for HTTP APIs</a>.</p>",
                         "smithy.api#jsonName": "payloadFormatVersion"
                     }
                 },
@@ -10310,7 +10313,7 @@
                 "PayloadFormatVersion": {
                     "target": "com.amazonaws.apigatewayv2#StringWithLengthBetween1And64",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs.</p>",
+                        "smithy.api#documentation": "<p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html\">Working with AWS Lambda proxy integrations for HTTP APIs</a>.</p>",
                         "smithy.api#jsonName": "payloadFormatVersion"
                     }
                 },
