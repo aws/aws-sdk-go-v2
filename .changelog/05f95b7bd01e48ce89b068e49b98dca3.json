@@ -1,0 +1,8 @@
+{
+    "id": "05f95b7b-d01e-48ce-89b0-68e49b98dca3",
+    "type": "feature",
+    "description": "Add support for operation level caching",
+    "modules": [
+        "service/appsync"
+    ]
+}

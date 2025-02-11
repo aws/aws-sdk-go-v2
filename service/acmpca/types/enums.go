@@ -152,6 +152,25 @@ func (CertificateAuthorityUsageMode) Values() []CertificateAuthorityUsageMode {
 	}
 }
 
+type CrlType string
+
+// Enum values for CrlType
+const (
+	CrlTypeComplete    CrlType = "COMPLETE"
+	CrlTypePartitioned CrlType = "PARTITIONED"
+)
+
+// Values returns all known values for CrlType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CrlType) Values() []CrlType {
+	return []CrlType{
+		"COMPLETE",
+		"PARTITIONED",
+	}
+}
+
 type ExtendedKeyUsageType string
 
 // Enum values for ExtendedKeyUsageType

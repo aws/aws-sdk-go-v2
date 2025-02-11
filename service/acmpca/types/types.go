@@ -353,6 +353,30 @@ type CrlConfiguration struct {
 	// the default CRL URL.
 	CrlDistributionPointExtensionConfiguration *CrlDistributionPointExtensionConfiguration
 
+	// Choose whether to use a partitioned or complete CRL. Your choice determines the
+	// maximum number of certificates that the certificate authority can issue and
+	// revoke, as described in the [Amazon Web Services Private CA quotas].
+	//
+	//   - PARTITIONED - The default setting. Partitioned CRLs are an especially good
+	//   option for devices that have limited processing power or storage capacity, such
+	//   as certain IoT devices. Compared to complete CRLs, partitioned CRLs dramatically
+	//   increase the number of certificates your private CA can issue. Each certificate
+	//   that Amazon Web Services Private CA issues is bound to a specific CRL partition
+	//   through the CRL distribution point (CDP) defined in [RFC 5280].
+	//
+	// To make sure that your client fetches the CRL from a valid endpoint, we
+	//   recommend that you programmatically validate that the CRL's issuing distribution
+	//   point (IDP) URI matches the certificate's CDP URI. Amazon Web Services Private
+	//   CA marks the IDP extension as critical, which your client must be able to
+	//   process.
+	//
+	//   - COMPLETE - Amazon Web Services Private CA maintains a single CRL file for
+	//   all unexpired certificates issued by a CA that have been revoked for any reason.
+	//
+	// [RFC 5280]: https://datatracker.ietf.org/doc/html/rfc5280
+	// [Amazon Web Services Private CA quotas]: https://docs.aws.amazon.com/general/latest/gr/pca.html#limits_pca-connector-ad
+	CrlType CrlType
+
 	// Name inserted into the certificate CRL Distribution Points extension that
 	// enables the use of an alias for the CRL distribution point. Use this value if
 	// you don't want the name of your S3 bucket to be public.
@@ -363,6 +387,11 @@ type CrlConfiguration struct {
 	//
 	// [RFC2396]: https://www.ietf.org/rfc/rfc2396.txt
 	CustomCname *string
+
+	// Designates a custom file path in S3 for CRL(s). For example,
+	// http://<CustomName>/<CustomPath>/<CrlPartition_GUID>.crl . You can change the
+	// custom path up to five times.
+	CustomPath *string
 
 	// Validity period of the CRL in days.
 	ExpirationInDays *int32

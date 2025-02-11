@@ -3982,6 +3982,15 @@ func awsAwsjson11_deserializeDocumentCrlConfiguration(v **types.CrlConfiguration
 				return err
 			}
 
+		case "CrlType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CrlType to be of type string, got %T instead", value)
+				}
+				sv.CrlType = types.CrlType(jtv)
+			}
+
 		case "CustomCname":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3989,6 +3998,15 @@ func awsAwsjson11_deserializeDocumentCrlConfiguration(v **types.CrlConfiguration
 					return fmt.Errorf("expected CnameString to be of type string, got %T instead", value)
 				}
 				sv.CustomCname = ptr.String(jtv)
+			}
+
+		case "CustomPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CrlPathString to be of type string, got %T instead", value)
+				}
+				sv.CustomPath = ptr.String(jtv)
 			}
 
 		case "Enabled":

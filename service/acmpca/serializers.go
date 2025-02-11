@@ -1640,9 +1640,19 @@ func awsAwsjson11_serializeDocumentCrlConfiguration(v *types.CrlConfiguration, v
 		}
 	}
 
+	if len(v.CrlType) > 0 {
+		ok := object.Key("CrlType")
+		ok.String(string(v.CrlType))
+	}
+
 	if v.CustomCname != nil {
 		ok := object.Key("CustomCname")
 		ok.String(*v.CustomCname)
+	}
+
+	if v.CustomPath != nil {
+		ok := object.Key("CustomPath")
+		ok.String(*v.CustomPath)
 	}
 
 	if v.Enabled != nil {

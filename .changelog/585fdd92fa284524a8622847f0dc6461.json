@@ -1,0 +1,8 @@
+{
+    "id": "585fdd92-fa28-4524-a862-2847f0dc6461",
+    "type": "feature",
+    "description": "Private Certificate Authority service now supports Partitioned CRL as a revocation configuration option.",
+    "modules": [
+        "service/acmpca"
+    ]
+}
