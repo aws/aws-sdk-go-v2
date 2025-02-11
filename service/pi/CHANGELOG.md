@@ -1,3 +1,7 @@
+# v1.30.1 (2025-02-11)
+
+* **Documentation**: Documentation only update for RDS Performance Insights dimensions for execution plans and locking analysis.
+
 # v1.30.0 (2025-02-07)
 
 * **Feature**: Adds documentation for dimension groups and dimensions to analyze locks for Database Insights.

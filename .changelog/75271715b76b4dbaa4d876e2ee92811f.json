@@ -1,8 +1,0 @@
-{
-    "id": "75271715-b76b-4dba-a4d8-76e2ee92811f",
-    "type": "feature",
-    "description": "Adding support for the new fullSnapshotSizeInBytes field in the response of the EC2 EBS DescribeSnapshots API. This field represents the size of all the blocks that were written to the source volume at the time the snapshot was created.",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "701d22cb-ce3f-4aef-abc3-31fea9a30f37",
-    "type": "documentation",
-    "description": "Documentation only update for RDS Performance Insights dimensions for execution plans and locking analysis.",
-    "modules": [
-        "service/pi"
-    ]
-}

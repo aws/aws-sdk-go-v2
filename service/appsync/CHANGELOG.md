@@ -1,3 +1,7 @@
+# v1.43.0 (2025-02-11)
+
+* **Feature**: Add support for operation level caching
+
 # v1.42.3 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

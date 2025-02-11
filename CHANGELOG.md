@@ -1,3 +1,18 @@
+# Release (2025-02-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.38.0](service/acmpca/CHANGELOG.md#v1380-2025-02-11)
+  * **Feature**: Private Certificate Authority service now supports Partitioned CRL as a revocation configuration option.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.43.0](service/appsync/CHANGELOG.md#v1430-2025-02-11)
+  * **Feature**: Add support for operation level caching
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.203.0](service/ec2/CHANGELOG.md#v12030-2025-02-11)
+  * **Feature**: Adding support for the new fullSnapshotSizeInBytes field in the response of the EC2 EBS DescribeSnapshots API. This field represents the size of all the blocks that were written to the source volume at the time the snapshot was created.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.30.1](service/pi/CHANGELOG.md#v1301-2025-02-11)
+  * **Documentation**: Documentation only update for RDS Performance Insights dimensions for execution plans and locking analysis.
+
 # Release (2025-02-10)
 
 ## General Highlights
