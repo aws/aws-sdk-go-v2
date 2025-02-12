@@ -1,3 +1,7 @@
+# v1.67.0 (2025-02-12)
+
+* **Feature**: Adds a RequestId parameter to all MediaLive Workflow Monitor create operations.  The RequestId parameter allows idempotent operations.
+
 # v1.66.4 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.36.0 (2025-02-12)
+
+* **Feature**: This releases adds the additionalModelRequestFields field to the InvokeInlineAgent operation. Use additionalModelRequestFields to specify  additional inference parameters for a model beyond the base inference parameters.
+
 # v1.35.1 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,21 @@
+# Release (2025-02-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.35.0](service/bedrockagent/CHANGELOG.md#v1350-2025-02-12)
+  * **Feature**: This releases adds the additionalModelRequestFields field to the CreateAgent and UpdateAgent operations. Use additionalModelRequestFields to specify  additional inference parameters for a model beyond the base inference parameters.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.36.0](service/bedrockagentruntime/CHANGELOG.md#v1360-2025-02-12)
+  * **Feature**: This releases adds the additionalModelRequestFields field to the InvokeInlineAgent operation. Use additionalModelRequestFields to specify  additional inference parameters for a model beyond the base inference parameters.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.51.3](service/codebuild/CHANGELOG.md#v1513-2025-02-12)
+  * **Documentation**: Add note for the RUNNER_BUILDKITE_BUILD buildType.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.52.0](service/fsx/CHANGELOG.md#v1520-2025-02-12)
+  * **Feature**: Support for in-place Lustre version upgrades
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.67.0](service/medialive/CHANGELOG.md#v1670-2025-02-12)
+  * **Feature**: Adds a RequestId parameter to all MediaLive Workflow Monitor create operations.  The RequestId parameter allows idempotent operations.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.18.0](service/opensearchserverless/CHANGELOG.md#v1180-2025-02-12)
+  * **Feature**: Custom OpenSearchServerless Entity ID for SAML Config.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.46.0](service/polly/CHANGELOG.md#v1460-2025-02-12)
+  * **Feature**: Added support for the new voice - Jasmine (en-SG). Jasmine is available as a Neural voice only.
+
 # Release (2025-02-11)
 
 ## General Highlights

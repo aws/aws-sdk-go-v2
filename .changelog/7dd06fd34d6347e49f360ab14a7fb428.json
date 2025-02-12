@@ -1,8 +1,0 @@
-{
-    "id": "7dd06fd3-4d63-47e4-9f36-0ab14a7fb428",
-    "type": "feature",
-    "description": "Allow spaces in the following fields in the Partnership resource: ISA 06 - Sender ID, ISA 08 - Receiver ID, GS 02 - Application Sender Code, GS 03 - Application Receiver Code",
-    "modules": [
-        "service/b2bi"
-    ]
-}

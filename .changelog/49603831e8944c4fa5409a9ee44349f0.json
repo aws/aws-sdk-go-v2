@@ -1,8 +1,0 @@
-{
-    "id": "49603831-e894-4c4f-a540-9a9ee44349f0",
-    "type": "feature",
-    "description": "Added support for the new voice - Jasmine (en-SG). Jasmine is available as a Neural voice only.",
-    "modules": [
-        "service/polly"
-    ]
-}

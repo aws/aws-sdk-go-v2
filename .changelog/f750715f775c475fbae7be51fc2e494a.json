@@ -1,8 +1,0 @@
-{
-    "id": "f750715f-775c-475f-bae7-be51fc2e494a",
-    "type": "feature",
-    "description": "Support for in-place Lustre version upgrades",
-    "modules": [
-        "service/fsx"
-    ]
-}

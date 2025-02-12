@@ -1,8 +1,0 @@
-{
-    "id": "50c85c05-3eb8-44d7-97d0-fef7b2dcf85e",
-    "type": "documentation",
-    "description": "Add note for the RUNNER_BUILDKITE_BUILD buildType.",
-    "modules": [
-        "service/codebuild"
-    ]
-}
