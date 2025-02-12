@@ -12,10 +12,10 @@ import (
 )
 
 // Deletes documents from a data source and syncs the changes to the knowledge
-// base that is connected to it. For more information, see [Ingest documents into a knowledge base in real-time]in the Amazon Bedrock
+// base that is connected to it. For more information, see [Ingest changes directly into a knowledge base]in the Amazon Bedrock
 // User Guide.
 //
-// [Ingest documents into a knowledge base in real-time]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html
+// [Ingest changes directly into a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html
 func (c *Client) DeleteKnowledgeBaseDocuments(ctx context.Context, params *DeleteKnowledgeBaseDocumentsInput, optFns ...func(*Options)) (*DeleteKnowledgeBaseDocumentsOutput, error) {
 	if params == nil {
 		params = &DeleteKnowledgeBaseDocumentsInput{}

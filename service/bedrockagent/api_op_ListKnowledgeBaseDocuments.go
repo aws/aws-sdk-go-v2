@@ -12,9 +12,9 @@ import (
 )
 
 // Retrieves all the documents contained in a data source that is connected to a
-// knowledge base. For more information, see [Ingest documents into a knowledge base in real-time]in the Amazon Bedrock User Guide.
+// knowledge base. For more information, see [Ingest changes directly into a knowledge base]in the Amazon Bedrock User Guide.
 //
-// [Ingest documents into a knowledge base in real-time]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html
+// [Ingest changes directly into a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html
 func (c *Client) ListKnowledgeBaseDocuments(ctx context.Context, params *ListKnowledgeBaseDocumentsInput, optFns ...func(*Options)) (*ListKnowledgeBaseDocumentsOutput, error) {
 	if params == nil {
 		params = &ListKnowledgeBaseDocumentsInput{}

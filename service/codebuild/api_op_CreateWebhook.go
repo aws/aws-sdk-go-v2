@@ -54,6 +54,12 @@ type CreateWebhookInput struct {
 	BranchFilter *string
 
 	// Specifies the type of build this webhook will trigger.
+	//
+	// RUNNER_BUILDKITE_BUILD is only available for NO_SOURCE source type projects
+	// configured for Buildkite runner builds. For more information about
+	// CodeBuild-hosted Buildkite runner builds, see [Tutorial: Configure a CodeBuild-hosted Buildkite runner]in the CodeBuild user guide.
+	//
+	// [Tutorial: Configure a CodeBuild-hosted Buildkite runner]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html
 	BuildType types.WebhookBuildType
 
 	// An array of arrays of WebhookFilter objects used to determine which webhooks

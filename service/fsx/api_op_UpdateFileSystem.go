@@ -45,6 +45,8 @@ import (
 //
 //   - DataCompressionType
 //
+//   - FileSystemTypeVersion
+//
 //   - LogConfiguration
 //
 //   - LustreRootSquashConfiguration
@@ -131,6 +133,11 @@ type UpdateFileSystemInput struct {
 	// updates. This string is automatically filled on your behalf when you use the
 	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
+
+	// The Lustre version you are updating an FSx for Lustre file system to. Valid
+	// values are 2.12 and 2.15 . The value you choose must be newer than the file
+	// system's current Lustre version.
+	FileSystemTypeVersion *string
 
 	// The configuration object for Amazon FSx for Lustre file systems used in the
 	// UpdateFileSystem operation.

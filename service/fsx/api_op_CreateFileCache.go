@@ -21,7 +21,7 @@ import (
 // IncompatibleParameterError . If a file cache with the specified client request
 // token doesn't exist, CreateFileCache does the following:
 //
-//   - Creates a new, empty Amazon File Cache resourcewith an assigned ID, and an
+//   - Creates a new, empty Amazon File Cache resource with an assigned ID, and an
 //     initial lifecycle state of CREATING .
 //
 //   - Returns the description of the cache in JSON format.

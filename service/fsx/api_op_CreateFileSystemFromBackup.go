@@ -88,10 +88,9 @@ type CreateFileSystemFromBackupInput struct {
 	// Sets the version for the Amazon FSx for Lustre file system that you're creating
 	// from a backup. Valid values are 2.10 , 2.12 , and 2.15 .
 	//
-	// You don't need to specify FileSystemTypeVersion because it will be applied
-	// using the backup's FileSystemTypeVersion setting. If you choose to specify
-	// FileSystemTypeVersion when creating from backup, the value must match the
-	// backup's FileSystemTypeVersion setting.
+	// You can enter a Lustre version that is newer than the backup's
+	// FileSystemTypeVersion setting. If you don't enter a newer Lustre version, it
+	// defaults to the backup's setting.
 	FileSystemTypeVersion *string
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
@@ -145,7 +144,7 @@ type CreateFileSystemFromBackupInput struct {
 	//
 	// If used to create a file system other than OpenZFS, you must provide a value
 	// that matches the backup's StorageCapacity value. If you provide any other
-	// value, Amazon FSx responds with with an HTTP status code 400 Bad Request.
+	// value, Amazon FSx responds with an HTTP status code 400 Bad Request.
 	StorageCapacity *int32
 
 	// Sets the storage type for the Windows or OpenZFS file system that you're

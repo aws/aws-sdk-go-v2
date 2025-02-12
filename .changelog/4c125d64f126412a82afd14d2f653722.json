@@ -1,0 +1,8 @@
+{
+    "id": "4c125d64-f126-412a-82af-d14d2f653722",
+    "type": "feature",
+    "description": "Adds a RequestId parameter to all MediaLive Workflow Monitor create operations.  The RequestId parameter allows idempotent operations.",
+    "modules": [
+        "service/medialive"
+    ]
+}

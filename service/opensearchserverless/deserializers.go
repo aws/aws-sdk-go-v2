@@ -6569,6 +6569,15 @@ func awsAwsjson10_deserializeDocumentSamlConfigOptions(v **types.SamlConfigOptio
 				sv.Metadata = ptr.String(jtv)
 			}
 
+		case "openSearchServerlessEntityId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected openSearchServerlessEntityId to be of type string, got %T instead", value)
+				}
+				sv.OpenSearchServerlessEntityId = ptr.String(jtv)
+			}
+
 		case "sessionTimeout":
 			if value != nil {
 				jtv, ok := value.(json.Number)

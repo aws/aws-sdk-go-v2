@@ -40,6 +40,10 @@ type CreateCloudWatchAlarmTemplateGroupInput struct {
 	// A resource's optional description.
 	Description *string
 
+	// An ID that you assign to a create request. This ID ensures idempotency when
+	// creating resources.
+	RequestId *string
+
 	// Represents the tags associated with a resource.
 	Tags map[string]string
 
@@ -142,6 +146,9 @@ func (c *Client) addOperationCreateCloudWatchAlarmTemplateGroupMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateCloudWatchAlarmTemplateGroupMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateCloudWatchAlarmTemplateGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -176,6 +183,39 @@ func (c *Client) addOperationCreateCloudWatchAlarmTemplateGroupMiddlewares(stack
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateCloudWatchAlarmTemplateGroup struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateCloudWatchAlarmTemplateGroup) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateCloudWatchAlarmTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateCloudWatchAlarmTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateCloudWatchAlarmTemplateGroupInput ")
+	}
+
+	if input.RequestId == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.RequestId = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateCloudWatchAlarmTemplateGroupMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCloudWatchAlarmTemplateGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateCloudWatchAlarmTemplateGroup(region string) *awsmiddleware.RegisterServiceMetadata {

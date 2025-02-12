@@ -1,0 +1,8 @@
+{
+    "id": "0c8507ea-1ec2-4e23-afd7-b584d5ac5be4",
+    "type": "feature",
+    "description": "Custom OpenSearchServerless Entity ID for SAML Config.",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

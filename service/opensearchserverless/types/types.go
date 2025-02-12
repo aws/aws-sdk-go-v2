@@ -502,6 +502,10 @@ type SamlConfigOptions struct {
 	// The group attribute for this SAML integration.
 	GroupAttribute *string
 
+	// Custom entity id attribute to override default entity id for this saml
+	// integration.
+	OpenSearchServerlessEntityId *string
+
 	// The session timeout, in minutes. Default is 60 minutes (12 hours).
 	SessionTimeout *int32
 

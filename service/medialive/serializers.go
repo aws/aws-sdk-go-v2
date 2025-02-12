@@ -1033,6 +1033,11 @@ func awsRestjson1_serializeOpDocumentCreateCloudWatchAlarmTemplateInput(v *Creat
 		ok.Integer(*v.Period)
 	}
 
+	if v.RequestId != nil {
+		ok := object.Key("requestId")
+		ok.String(*v.RequestId)
+	}
+
 	if len(v.Statistic) > 0 {
 		ok := object.Key("statistic")
 		ok.String(string(v.Statistic))
@@ -1157,6 +1162,11 @@ func awsRestjson1_serializeOpDocumentCreateCloudWatchAlarmTemplateGroupInput(v *
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.RequestId != nil {
+		ok := object.Key("requestId")
+		ok.String(*v.RequestId)
 	}
 
 	if v.Tags != nil {
@@ -1379,6 +1389,11 @@ func awsRestjson1_serializeOpDocumentCreateEventBridgeRuleTemplateInput(v *Creat
 		ok.String(*v.Name)
 	}
 
+	if v.RequestId != nil {
+		ok := object.Key("requestId")
+		ok.String(*v.RequestId)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -1470,6 +1485,11 @@ func awsRestjson1_serializeOpDocumentCreateEventBridgeRuleTemplateGroupInput(v *
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.RequestId != nil {
+		ok := object.Key("requestId")
+		ok.String(*v.RequestId)
 	}
 
 	if v.Tags != nil {
@@ -2491,6 +2511,11 @@ func awsRestjson1_serializeOpDocumentCreateSignalMapInput(v *CreateSignalMapInpu
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.RequestId != nil {
+		ok := object.Key("requestId")
+		ok.String(*v.RequestId)
 	}
 
 	if v.Tags != nil {
@@ -7654,6 +7679,11 @@ func awsRestjson1_serializeOpDocumentStartMonitorDeploymentInput(v *StartMonitor
 	if v.DryRun != nil {
 		ok := object.Key("dryRun")
 		ok.Boolean(*v.DryRun)
+	}
+
+	if v.RequestId != nil {
+		ok := object.Key("requestId")
+		ok.String(*v.RequestId)
 	}
 
 	return nil

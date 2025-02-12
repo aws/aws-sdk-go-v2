@@ -14,9 +14,9 @@ import (
 // Ingests documents directly into the knowledge base that is connected to the
 // data source. The dataSourceType specified in the content for each document must
 // match the type of the data source that you specify in the header. For more
-// information, see [Ingest documents into a knowledge base in real-time]in the Amazon Bedrock User Guide.
+// information, see [Ingest changes directly into a knowledge base]in the Amazon Bedrock User Guide.
 //
-// [Ingest documents into a knowledge base in real-time]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html
+// [Ingest changes directly into a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html
 func (c *Client) IngestKnowledgeBaseDocuments(ctx context.Context, params *IngestKnowledgeBaseDocumentsInput, optFns ...func(*Options)) (*IngestKnowledgeBaseDocumentsOutput, error) {
 	if params == nil {
 		params = &IngestKnowledgeBaseDocumentsInput{}

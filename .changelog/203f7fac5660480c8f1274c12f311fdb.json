@@ -1,0 +1,8 @@
+{
+    "id": "203f7fac-5660-480c-8f12-74c12f311fdb",
+    "type": "feature",
+    "description": "This releases adds the additionalModelRequestFields field to the InvokeInlineAgent operation. Use additionalModelRequestFields to specify  additional inference parameters for a model beyond the base inference parameters.",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}
