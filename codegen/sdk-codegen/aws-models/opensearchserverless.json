@@ -3877,6 +3877,12 @@
                         "smithy.api#documentation": "<p>The group attribute for this SAML integration.</p>"
                     }
                 },
+                "openSearchServerlessEntityId": {
+                    "target": "com.amazonaws.opensearchserverless#openSearchServerlessEntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom entity id attribute to override default entity id for this saml integration.</p>"
+                    }
+                },
                 "sessionTimeout": {
                     "target": "smithy.api#Integer",
                     "traits": {
@@ -5322,7 +5328,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -5403,6 +5410,16 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^vpc-[0-9a-z]*$"
+            }
+        },
+        "com.amazonaws.opensearchserverless#openSearchServerlessEntityId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^aws:opensearch:[0-9]{12}:*"
             }
         },
         "com.amazonaws.opensearchserverless#samlGroupAttribute": {

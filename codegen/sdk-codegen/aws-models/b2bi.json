@@ -6311,7 +6311,7 @@
                     "min": 2,
                     "max": 15
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9 ]*$"
             }
         },
         "com.amazonaws.b2bi#X12ApplicationSenderCode": {
@@ -6321,7 +6321,7 @@
                     "min": 2,
                     "max": 15
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9 ]*$"
             }
         },
         "com.amazonaws.b2bi#X12ComponentSeparator": {
@@ -6529,7 +6529,7 @@
                     "min": 15,
                     "max": 15
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9 ]*$"
             }
         },
         "com.amazonaws.b2bi#X12RepetitionSeparator": {
@@ -6568,7 +6568,7 @@
                     "min": 15,
                     "max": 15
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9 ]*$"
             }
         },
         "com.amazonaws.b2bi#X12TransactionSet": {

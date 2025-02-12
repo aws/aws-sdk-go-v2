@@ -5646,7 +5646,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes documents from a data source and syncs the changes to the knowledge base that is connected to it. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html\">Ingest documents into a knowledge base in real-time</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Deletes documents from a data source and syncs the changes to the knowledge base that is connected to it. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html\">Ingest changes directly into a knowledge base</a> in the Amazon Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -8932,7 +8932,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves specific documents from a data source that is connected to a knowledge base. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html\">Ingest documents into a knowledge base in real-time</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Retrieves specific documents from a data source that is connected to a knowledge base. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html\">Ingest changes directly into a knowledge base</a> in the Amazon Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -9357,7 +9357,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Ingests documents directly into the knowledge base that is connected to the data source. The <code>dataSourceType</code> specified in the content for each document must match the type of the data source that you specify in the header. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html\">Ingest documents into a knowledge base in real-time</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Ingests documents directly into the knowledge base that is connected to the data source. The <code>dataSourceType</code> specified in the content for each document must match the type of the data source that you specify in the header. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html\">Ingest changes directly into a knowledge base</a> in the Amazon Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -11559,7 +11559,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves all the documents contained in a data source that is connected to a knowledge base. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html\">Ingest documents into a knowledge base in real-time</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Retrieves all the documents contained in a data source that is connected to a knowledge base. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html\">Ingest changes directly into a knowledge base</a> in the Amazon Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -13143,6 +13143,12 @@
                     "target": "com.amazonaws.bedrockagent#ModelIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The agent's foundation model.</p>"
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the Converse or ConverseStream operations support the model,\n                <code>additionalModelRequestFields</code> contains additional inference parameters,\n            beyond the base set of inference parameters in the <code>inferenceConfiguration</code>\n            field. </p>\n         <p>For more information, see <i>Inference request parameters and\n                response fields for foundation models</i> in the Amazon Bedrock user\n            guide.</p>"
                     }
                 }
             },

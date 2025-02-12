@@ -5227,6 +5227,14 @@
                     "traits": {
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.medialive#__stringMin1Max256PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "An ID that you assign to a create request. This ID ensures idempotency when creating resources.",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "requestId"
+                    }
                 }
             },
             "traits": {
@@ -5396,6 +5404,14 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#jsonName": "treatMissingData",
                         "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.medialive#__stringMin1Max256PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "An ID that you assign to a create request. This ID ensures idempotency when creating resources.",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "requestId"
                     }
                 }
             },
@@ -5779,6 +5795,14 @@
                     "traits": {
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.medialive#__stringMin1Max256PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "An ID that you assign to a create request. This ID ensures idempotency when creating resources.",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "requestId"
+                    }
                 }
             },
             "traits": {
@@ -5887,6 +5911,14 @@
                     "target": "com.amazonaws.medialive#TagMap",
                     "traits": {
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.medialive#__stringMin1Max256PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "An ID that you assign to a create request. This ID ensures idempotency when creating resources.",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "requestId"
                     }
                 }
             },
@@ -7006,6 +7038,14 @@
                     "target": "com.amazonaws.medialive#TagMap",
                     "traits": {
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.medialive#__stringMin1Max256PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "An ID that you assign to a create request. This ID ensures idempotency when creating resources.",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "requestId"
                     }
                 }
             },
@@ -31755,6 +31795,14 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.medialive#__stringMin1Max256PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "An ID that you assign to a create request. This ID ensures idempotency when creating resources.",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "requestId"
+                    }
                 }
             },
             "traits": {
@@ -38363,6 +38411,17 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.medialive#__stringMin1Max256PatternS": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max256PatternS",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.medialive#__stringMin1Max35": {
