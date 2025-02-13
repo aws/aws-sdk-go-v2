@@ -19,7 +19,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func TestGetObject(t *testing.T) {
+func TestDownloadObject(t *testing.T) {
 	cases := map[string]struct {
 		data              []byte
 		errReaders        []s3testing.TestErrReader
@@ -32,14 +32,14 @@ func TestGetObject(t *testing.T) {
 		partsCount        int32
 		expectParts       []int32
 		expectErr         string
-		dataValidationFn  func(*testing.T, []byte)
+		dataValidationFn  func(*testing.T, *types.WriteAtBuffer)
 	}{
 		"range download in order": {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
 				Concurrency:           1,
+				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 3,
 			expectRanges:      []string{"bytes=0-8388607", "bytes=8388608-16777215", "bytes=16777216-20971519"},
@@ -57,9 +57,9 @@ func TestGetObject(t *testing.T) {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
+				Concurrency:           1,
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 				PartSizeBytes:         10 * 1024 * 1024,
-				Concurrency:           1,
 			},
 			expectInvocations: 2,
 			expectRanges:      []string{"bytes=0-10485759", "bytes=10485760-20971519"},
@@ -68,6 +68,7 @@ func TestGetObject(t *testing.T) {
 			data:        buf20MB,
 			getObjectFn: s3testing.ErrRangeGetObjectFn,
 			options: Options{
+				Concurrency:           1,
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 2,
@@ -81,9 +82,9 @@ func TestGetObject(t *testing.T) {
 			},
 			expectInvocations: 1,
 			expectRanges:      []string{"bytes=0-8388607"},
-			dataValidationFn: func(t *testing.T, bytes []byte) {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
 				count := 0
-				for _, b := range bytes {
+				for _, b := range w.Bytes() {
 					count += int(b)
 				}
 				if count != 0 {
@@ -95,13 +96,14 @@ func TestGetObject(t *testing.T) {
 			data:        buf2MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
+				Concurrency:           1,
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 1,
 			expectRanges:      []string{"bytes=0-8388607"},
-			dataValidationFn: func(t *testing.T, bytes []byte) {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
 				count := 0
-				for _, b := range bytes {
+				for _, b := range w.Bytes() {
 					count += int(b)
 				}
 				if count != 0 {
@@ -116,11 +118,12 @@ func TestGetObject(t *testing.T) {
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
 			options: Options{
+				Concurrency:           1,
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 2,
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "123", string(bytes); e != a {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "123", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
 				}
 			},
@@ -131,11 +134,12 @@ func TestGetObject(t *testing.T) {
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
 			options: Options{
+				Concurrency:           1,
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 1,
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "123", string(bytes); e != a {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "123", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
 				}
 			},
@@ -146,13 +150,14 @@ func TestGetObject(t *testing.T) {
 				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
 			},
 			options: Options{
+				Concurrency:           1,
 				PartBodyMaxRetries:    1,
 				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			expectInvocations: 1,
 			expectErr:         "unexpected EOF",
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "ab", string(bytes); e != a {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "ab", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
 				}
 			},
@@ -161,8 +166,8 @@ func TestGetObject(t *testing.T) {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
-				MultipartDownloadType: types.MultipartDownloadTypeRange,
 				Concurrency:           1,
+				MultipartDownloadType: types.MultipartDownloadTypeRange,
 			},
 			downloadRange:     "bytes=0-10485759",
 			expectInvocations: 2,
@@ -187,9 +192,11 @@ func TestGetObject(t *testing.T) {
 			expectParts:       []int32{1},
 		},
 		"part download with s3 error": {
-			data:              buf2MB,
-			getObjectFn:       s3testing.ErrPartGetObjectFn,
-			options:           Options{},
+			data:        buf2MB,
+			getObjectFn: s3testing.ErrPartGetObjectFn,
+			options: Options{
+				Concurrency: 1,
+			},
 			partsCount:        3,
 			expectInvocations: 2,
 			expectErr:         "s3 service error",
@@ -201,8 +208,8 @@ func TestGetObject(t *testing.T) {
 			partsCount:        1,
 			expectInvocations: 1,
 			expectParts:       []int32{1},
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "123", string(bytes); e != a {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "123", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
 				}
 			},
@@ -213,12 +220,14 @@ func TestGetObject(t *testing.T) {
 				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
-			options:           Options{},
+			options: Options{
+				Concurrency: 1,
+			},
 			partsCount:        1,
 			expectInvocations: 2,
 			expectParts:       []int32{1, 1},
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "123", string(bytes); e != a {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "123", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
 				}
 			},
@@ -228,12 +237,14 @@ func TestGetObject(t *testing.T) {
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("ab"), Len: 3, Err: io.EOF},
 			},
-			options:           Options{},
+			options: Options{
+				Concurrency: 1,
+			},
 			partsCount:        1,
 			expectInvocations: 1,
 			expectParts:       []int32{1},
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "ab", string(bytes); e != a {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "ab", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
 				}
 			},
@@ -244,12 +255,13 @@ func TestGetObject(t *testing.T) {
 				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
 			},
 			options: Options{
+				Concurrency:        1,
 				PartBodyMaxRetries: 1,
 			},
 			expectInvocations: 1,
 			expectErr:         "unexpected EOF",
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "ab", string(bytes); e != a {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "ab", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
 				}
 			},
@@ -261,8 +273,8 @@ func TestGetObject(t *testing.T) {
 			downloadRange:     "bytes=0-100",
 			partsCount:        3,
 			expectInvocations: 1,
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "123", string(bytes); e != a {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "123", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
 				}
 			},
@@ -274,8 +286,8 @@ func TestGetObject(t *testing.T) {
 			partsCount:        3,
 			partNumber:        5,
 			expectInvocations: 1,
-			dataValidationFn: func(t *testing.T, bytes []byte) {
-				if e, a := "ab", string(bytes); e != a {
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				if e, a := "ab", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
 				}
 			},
@@ -290,15 +302,17 @@ func TestGetObject(t *testing.T) {
 			s3Client.ErrReaders = c.errReaders
 			s3Client.PartsCount = c.partsCount
 			mgr := New(s3Client, c.options)
+			w := types.NewWriteAtBuffer(make([]byte, 0))
 
-			input := &GetObjectInput{
-				Bucket: "bucket",
-				Key:    "key",
+			input := &DownloadObjectInput{
+				Bucket:     "bucket",
+				Key:        "key",
+				WriterAt:   w,
+				Range:      c.downloadRange,
+				PartNumber: c.partNumber,
 			}
-			input.Range = c.downloadRange
-			input.PartNumber = c.partNumber
 
-			out, err := mgr.GetObject(context.Background(), input)
+			_, err := mgr.DownloadObject(context.Background(), input)
 			if err != nil {
 				if c.expectErr == "" {
 					t.Fatalf("expect no error, got %q", err)
@@ -331,17 +345,13 @@ func TestGetObject(t *testing.T) {
 			}
 
 			if c.dataValidationFn != nil {
-				body, err := io.ReadAll(out.Body)
-				if err != nil {
-					t.Fatalf("error when reading response body: %q", err)
-				}
-				c.dataValidationFn(t, body)
+				c.dataValidationFn(t, w)
 			}
 		})
 	}
 }
 
-func TestGetAsyncWithFailure(t *testing.T) {
+func TestDownloadAsyncWithFailure(t *testing.T) {
 	cases := map[string]struct {
 		downloadType types.MultipartDownloadType
 	}{
@@ -382,15 +392,18 @@ func TestGetAsyncWithFailure(t *testing.T) {
 				return out, err
 			}
 
-			g := New(s3Client, Options{
+			d := New(s3Client, Options{
 				Concurrency:           2,
 				MultipartDownloadType: c.downloadType,
 			})
 
+			w := types.NewWriteAtBuffer(make([]byte, 0))
+
 			// Expect this request to exit quickly after failure
-			_, err := g.GetObject(context.Background(), &GetObjectInput{
-				Bucket: "Bucket",
-				Key:    "Key",
+			_, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
+				Bucket:   "Bucket",
+				Key:      "Key",
+				WriterAt: w,
 			})
 			if err == nil {
 				t.Fatal("expect error, got none")
@@ -405,7 +418,7 @@ func TestGetAsyncWithFailure(t *testing.T) {
 	}
 }
 
-func TestGetObjectWithContextCanceled(t *testing.T) {
+func TestDownloadObjectWithContextCanceled(t *testing.T) {
 	cases := map[string]struct {
 		downloadType types.MultipartDownloadType
 	}{
@@ -417,7 +430,7 @@ func TestGetObjectWithContextCanceled(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			g := New(s3.New(s3.Options{
+			d := New(s3.New(s3.Options{
 				Region: "mock-region",
 			}), Options{
 				MultipartDownloadType: c.downloadType,
@@ -427,9 +440,12 @@ func TestGetObjectWithContextCanceled(t *testing.T) {
 			ctx.Error = fmt.Errorf("context canceled")
 			close(ctx.DoneCh)
 
-			_, err := g.GetObject(ctx, &GetObjectInput{
-				Bucket: "bucket",
-				Key:    "Key",
+			w := types.NewWriteAtBuffer(make([]byte, 0))
+
+			_, err := d.DownloadObject(ctx, &DownloadObjectInput{
+				Bucket:   "bucket",
+				Key:      "Key",
+				WriterAt: w,
 			})
 			if err == nil {
 				t.Fatalf("expected error, did not get one")

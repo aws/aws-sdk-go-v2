@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestInteg_GetObject(t *testing.T) {
+func TestInteg_DownloadObject(t *testing.T) {
 	cases := map[string]getObjectTestData{
 		"seekable body":           {Body: strings.NewReader("hello world"), ExpectBody: []byte("hello world")},
 		"empty string body":       {Body: strings.NewReader(""), ExpectBody: []byte("")},
@@ -18,7 +18,7 @@ func TestInteg_GetObject(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			testGetObject(t, setupMetadata.Buckets.Source.Name, c)
+			testDownloadObject(t, setupMetadata.Buckets.Source.Name, c)
 		})
 	}
 }
