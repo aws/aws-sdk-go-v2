@@ -1,0 +1,8 @@
+{
+    "id": "5a7cda55-3612-4a66-a26c-fea3443c78cf",
+    "type": "feature",
+    "description": "This release adds support for generating cache reports on S3 File Gateways for files that fail to upload.",
+    "modules": [
+        "service/storagegateway"
+    ]
+}

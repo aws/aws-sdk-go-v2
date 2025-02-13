@@ -190,6 +190,26 @@ func (m *validateOpCancelArchival) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelCacheReport struct {
+}
+
+func (*validateOpCancelCacheReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelCacheReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelCacheReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelCacheReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelRetrieval struct {
 }
 
@@ -425,6 +445,26 @@ func (m *validateOpDeleteBandwidthRateLimit) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBandwidthRateLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCacheReport struct {
+}
+
+func (*validateOpDeleteCacheReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCacheReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCacheReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCacheReportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -685,6 +725,26 @@ func (m *validateOpDescribeCache) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCacheInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCacheReport struct {
+}
+
+func (*validateOpDescribeCacheReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCacheReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCacheReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCacheReportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1330,6 +1390,26 @@ func (m *validateOpStartAvailabilityMonitorTest) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCacheReport struct {
+}
+
+func (*validateOpStartCacheReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCacheReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCacheReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCacheReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartGateway struct {
 }
 
@@ -1686,6 +1766,10 @@ func addOpCancelArchivalValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelArchival{}, middleware.After)
 }
 
+func addOpCancelCacheReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelCacheReport{}, middleware.After)
+}
+
 func addOpCancelRetrievalValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelRetrieval{}, middleware.After)
 }
@@ -1732,6 +1816,10 @@ func addOpDeleteAutomaticTapeCreationPolicyValidationMiddleware(stack *middlewar
 
 func addOpDeleteBandwidthRateLimitValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBandwidthRateLimit{}, middleware.After)
+}
+
+func addOpDeleteCacheReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCacheReport{}, middleware.After)
 }
 
 func addOpDeleteChapCredentialsValidationMiddleware(stack *middleware.Stack) error {
@@ -1784,6 +1872,10 @@ func addOpDescribeCachediSCSIVolumesValidationMiddleware(stack *middleware.Stack
 
 func addOpDescribeCacheValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCache{}, middleware.After)
+}
+
+func addOpDescribeCacheReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCacheReport{}, middleware.After)
 }
 
 func addOpDescribeChapCredentialsValidationMiddleware(stack *middleware.Stack) error {
@@ -1912,6 +2004,10 @@ func addOpShutdownGatewayValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartAvailabilityMonitorTestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAvailabilityMonitorTest{}, middleware.After)
+}
+
+func addOpStartCacheReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCacheReport{}, middleware.After)
 }
 
 func addOpStartGatewayValidationMiddleware(stack *middleware.Stack) error {
@@ -2053,6 +2149,41 @@ func validateBandwidthRateLimitIntervals(v []types.BandwidthRateLimitInterval) e
 	invalidParams := smithy.InvalidParamsError{Context: "BandwidthRateLimitIntervals"}
 	for i := range v {
 		if err := validateBandwidthRateLimitInterval(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCacheReportFilter(v *types.CacheReportFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CacheReportFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCacheReportFilterList(v []types.CacheReportFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CacheReportFilterList"}
+	for i := range v {
+		if err := validateCacheReportFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2284,6 +2415,21 @@ func validateOpCancelArchivalInput(v *CancelArchivalInput) error {
 	}
 	if v.TapeARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TapeARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelCacheReportInput(v *CancelCacheReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelCacheReportInput"}
+	if v.CacheReportARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CacheReportARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2586,6 +2732,21 @@ func validateOpDeleteBandwidthRateLimitInput(v *DeleteBandwidthRateLimitInput) e
 	}
 }
 
+func validateOpDeleteCacheReportInput(v *DeleteCacheReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCacheReportInput"}
+	if v.CacheReportARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CacheReportARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteChapCredentialsInput(v *DeleteChapCredentialsInput) error {
 	if v == nil {
 		return nil
@@ -2779,6 +2940,21 @@ func validateOpDescribeCacheInput(v *DescribeCacheInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCacheInput"}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCacheReportInput(v *DescribeCacheReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCacheReportInput"}
+	if v.CacheReportARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CacheReportARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3283,6 +3459,48 @@ func validateOpStartAvailabilityMonitorTestInput(v *StartAvailabilityMonitorTest
 	invalidParams := smithy.InvalidParamsError{Context: "StartAvailabilityMonitorTestInput"}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCacheReportInput(v *StartCacheReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCacheReportInput"}
+	if v.FileShareARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileShareARN"))
+	}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.LocationARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationARN"))
+	}
+	if v.BucketRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketRegion"))
+	}
+	if v.InclusionFilters != nil {
+		if err := validateCacheReportFilterList(v.InclusionFilters); err != nil {
+			invalidParams.AddNested("InclusionFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExclusionFilters != nil {
+		if err := validateCacheReportFilterList(v.ExclusionFilters); err != nil {
+			invalidParams.AddNested("ExclusionFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

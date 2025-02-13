@@ -47,7 +47,7 @@ func (c *Client) StopTask(ctx context.Context, params *StopTaskInput, optFns ...
 
 type StopTaskInput struct {
 
-	// The task ID of the task to stop.
+	// Thefull Amazon Resource Name (ARN) of the task.
 	//
 	// This member is required.
 	Task *string

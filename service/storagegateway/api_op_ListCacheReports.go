@@ -6,57 +6,50 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends you notification through Amazon EventBridge when all files written to
-// your file share have been uploaded to Amazon S3.
-//
-// Storage Gateway can send a notification through Amazon EventBridge when all
-// files written to your file share up to that point in time have been uploaded to
-// Amazon S3. These files include files written to the file share up to the time
-// that you make a request for notification. When the upload is done, Storage
-// Gateway sends you notification through EventBridge. You can configure
-// EventBridge to send the notification through event targets such as Amazon SNS or
-// Lambda function. This operation is only supported for S3 File Gateways.
-//
-// For more information, see [Getting file upload notification] in the Amazon S3 File Gateway User Guide.
-//
-// [Getting file upload notification]: https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification
-func (c *Client) NotifyWhenUploaded(ctx context.Context, params *NotifyWhenUploadedInput, optFns ...func(*Options)) (*NotifyWhenUploadedOutput, error) {
+// Returns a list of existing cache reports for all file shares associated with
+// your Amazon Web Services account. This list includes all information provided by
+// the DescribeCacheReport action, such as report name, status, completion
+// progress, start time, end time, filters, and tags.
+func (c *Client) ListCacheReports(ctx context.Context, params *ListCacheReportsInput, optFns ...func(*Options)) (*ListCacheReportsOutput, error) {
 	if params == nil {
-		params = &NotifyWhenUploadedInput{}
+		params = &ListCacheReportsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NotifyWhenUploaded", params, optFns, c.addOperationNotifyWhenUploadedMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCacheReports", params, optFns, c.addOperationListCacheReportsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*NotifyWhenUploadedOutput)
+	out := result.(*ListCacheReportsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type NotifyWhenUploadedInput struct {
+type ListCacheReportsInput struct {
 
-	// The Amazon Resource Name (ARN) of the file share.
-	//
-	// This member is required.
-	FileShareARN *string
+	// Opaque pagination token returned from a previous ListCacheReports operation. If
+	// present, Marker specifies where to continue the list from after a previous call
+	// to ListCacheReports . Optional.
+	Marker *string
 
 	noSmithyDocumentSerde
 }
 
-type NotifyWhenUploadedOutput struct {
+type ListCacheReportsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the file share.
-	FileShareARN *string
+	// A list of existing cache reports for all file shares associated with your
+	// Amazon Web Services account. This list includes all information provided by the
+	// DescribeCacheReport action, such as report status, completion progress, start
+	// time, end time, filters, and tags.
+	CacheReportList []types.CacheReportInfo
 
-	// The randomly generated ID of the notification that was sent. This ID is in UUID
-	// format.
-	NotificationId *string
+	// If the request includes Marker , the response returns that value in this field.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,19 +57,19 @@ type NotifyWhenUploadedOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationNotifyWhenUploadedMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCacheReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyWhenUploaded{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCacheReports{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpNotifyWhenUploaded{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCacheReports{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "NotifyWhenUploaded"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCacheReports"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -128,10 +121,7 @@ func (c *Client) addOperationNotifyWhenUploadedMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpNotifyWhenUploadedValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opNotifyWhenUploaded(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCacheReports(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -164,10 +154,10 @@ func (c *Client) addOperationNotifyWhenUploadedMiddlewares(stack *middleware.Sta
 	return nil
 }
 
-func newServiceMetadataMiddleware_opNotifyWhenUploaded(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListCacheReports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "NotifyWhenUploaded",
+		OperationName: "ListCacheReports",
 	}
 }

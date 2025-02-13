@@ -350,6 +350,26 @@ func (m *validateOpGetFindingRecommendation) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFindingsStatistics struct {
+}
+
+func (*validateOpGetFindingsStatistics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFindingsStatistics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFindingsStatisticsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFindingsStatisticsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFindingV2 struct {
 }
 
@@ -756,6 +776,10 @@ func addOpGetFindingValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetFindingRecommendationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFindingRecommendation{}, middleware.After)
+}
+
+func addOpGetFindingsStatisticsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFindingsStatistics{}, middleware.After)
 }
 
 func addOpGetFindingV2ValidationMiddleware(stack *middleware.Stack) error {
@@ -1490,6 +1514,21 @@ func validateOpGetFindingRecommendationInput(v *GetFindingRecommendationInput) e
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFindingsStatisticsInput(v *GetFindingsStatisticsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFindingsStatisticsInput"}
+	if v.AnalyzerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyzerArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

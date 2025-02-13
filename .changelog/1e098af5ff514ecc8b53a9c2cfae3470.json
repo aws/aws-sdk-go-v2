@@ -1,0 +1,8 @@
+{
+    "id": "1e098af5-ff51-4ecc-8b53-a9c2cfae3470",
+    "type": "feature",
+    "description": "Adds additional values to the InferenceAmiVersion parameter in the ProductionVariant data type.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

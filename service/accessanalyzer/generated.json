@@ -26,6 +26,7 @@
         "api_op_GetFinding.go",
         "api_op_GetFindingRecommendation.go",
         "api_op_GetFindingV2.go",
+        "api_op_GetFindingsStatistics.go",
         "api_op_GetGeneratedPolicy.go",
         "api_op_ListAccessPreviewFindings.go",
         "api_op_ListAccessPreviews.go",
