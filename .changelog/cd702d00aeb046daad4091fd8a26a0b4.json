@@ -1,0 +1,8 @@
+{
+    "id": "cd702d00-aeb0-46da-ad40-91fd8a26a0b4",
+    "type": "bugfix",
+    "description": "Remove max limit on event stream messages",
+    "modules": [
+        "aws/protocol/eventstream"
+    ]
+}
