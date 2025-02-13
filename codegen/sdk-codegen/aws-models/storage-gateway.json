@@ -973,6 +973,199 @@
                 "smithy.api#documentation": "<p>The refresh cache information for the file share or FSx file systems.</p>"
             }
         },
+        "com.amazonaws.storagegateway#CacheReportARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 50,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#CacheReportFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.storagegateway#CacheReportFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name for a filter that determines which files are included or excluded\n         from a cache report.</p>\n         <p>\n            <b>Valid Names:</b>\n         </p>\n         <p>UploadFailureReason | UploadState</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.storagegateway#CacheReportFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter value for a filter that determines which files are included or excluded\n         from a cache report.</p>\n         <p>\n            <b>Valid <code>UploadFailureReason</code> Values:</b>\n         </p>\n         <p>\n            <code>InaccessibleStorageClass</code> | <code>InvalidObjectState</code> |\n            <code>ObjectMissing</code> | <code>S3AccessDenied</code>\n         </p>\n         <p>\n            <b>Valid <code>UploadState</code> Values:</b>\n         </p>\n         <p>\n            <code>FailingUpload</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of filter parameters and associated values that determine which files are\n         included or excluded from a cache report created by a <code>StartCacheReport</code>\n         request. Multiple instances of the same filter parameter are combined with an OR operation,\n         while different parameters are combined with an AND operation.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#CacheReportFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.storagegateway#CacheReportFilter"
+            }
+        },
+        "com.amazonaws.storagegateway#CacheReportFilterName": {
+            "type": "enum",
+            "members": {
+                "UploadState": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UploadState"
+                    }
+                },
+                "UploadFailureReason": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UploadFailureReason"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#CacheReportFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#CacheReportFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.storagegateway#CacheReportFilterValue"
+            }
+        },
+        "com.amazonaws.storagegateway#CacheReportInfo": {
+            "type": "structure",
+            "members": {
+                "CacheReportARN": {
+                    "target": "com.amazonaws.storagegateway#CacheReportARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cache report you want to describe.</p>"
+                    }
+                },
+                "CacheReportStatus": {
+                    "target": "com.amazonaws.storagegateway#CacheReportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the specified cache report.</p>"
+                    }
+                },
+                "ReportCompletionPercent": {
+                    "target": "com.amazonaws.storagegateway#ReportCompletionPercent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of the report generation process that has been completed at time of\n         inquiry.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.storagegateway#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the gateway stopped generating the cache report.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.storagegateway#Role"
+                },
+                "FileShareARN": {
+                    "target": "com.amazonaws.storagegateway#FileShareARN"
+                },
+                "LocationARN": {
+                    "target": "com.amazonaws.storagegateway#LocationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon S3 bucket location where the cache report is saved.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.storagegateway#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the gateway started generating the cache report.</p>"
+                    }
+                },
+                "InclusionFilters": {
+                    "target": "com.amazonaws.storagegateway#CacheReportFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of filters and parameters that determine which files are included in the\n         report.</p>"
+                    }
+                },
+                "ExclusionFilters": {
+                    "target": "com.amazonaws.storagegateway#CacheReportFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of filters and parameters that determine which files are excluded from the\n         report.</p>"
+                    }
+                },
+                "ReportName": {
+                    "target": "com.amazonaws.storagegateway#CacheReportName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file name of the completed cache report object stored in Amazon S3.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.storagegateway#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key/value tags associated with the report.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains all informational fields associated with a cache report. Includes name, ARN,\n         tags, status, progress, filters, start time, and end time.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#CacheReportList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.storagegateway#CacheReportInfo"
+            }
+        },
+        "com.amazonaws.storagegateway#CacheReportName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#CacheReportStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            }
+        },
         "com.amazonaws.storagegateway#CacheStaleTimeoutInSeconds": {
             "type": "integer"
         },
@@ -1133,6 +1326,55 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>CancelArchivalOutput</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.storagegateway#CancelCacheReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#CancelCacheReportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#CancelCacheReportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels generation of a specified cache report. You can use this operation to manually\n         cancel an IN-PROGRESS report for any reason. This action changes the report status from\n         IN-PROGRESS to CANCELLED. You can only cancel in-progress reports. If the the report you\n         attempt to cancel is in FAILED, ERROR, or COMPLETED state, the cancel operation returns an\n         error.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#CancelCacheReportInput": {
+            "type": "structure",
+            "members": {
+                "CacheReportARN": {
+                    "target": "com.amazonaws.storagegateway#CacheReportARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cache report you want to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.storagegateway#CancelCacheReportOutput": {
+            "type": "structure",
+            "members": {
+                "CacheReportARN": {
+                    "target": "com.amazonaws.storagegateway#CacheReportARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cache report you want to cancel.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -2599,6 +2841,55 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.storagegateway#DeleteCacheReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#DeleteCacheReportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#DeleteCacheReportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified cache report and any associated tags from the Storage Gateway database. You can only delete completed reports. If the status of the\n         report you attempt to delete still IN-PROGRESS, the delete operation returns an error. You\n         can use <code>CancelCacheReport</code> to cancel an IN-PROGRESS report.</p>\n         <note>\n            <p>\n               <code>DeleteCacheReport</code> does not delete the report object from your Amazon S3 bucket.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.storagegateway#DeleteCacheReportInput": {
+            "type": "structure",
+            "members": {
+                "CacheReportARN": {
+                    "target": "com.amazonaws.storagegateway#CacheReportARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cache report you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.storagegateway#DeleteCacheReportOutput": {
+            "type": "structure",
+            "members": {
+                "CacheReportARN": {
+                    "target": "com.amazonaws.storagegateway#CacheReportARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cache report you want to delete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.storagegateway#DeleteChapCredentials": {
             "type": "operation",
             "input": {
@@ -3412,6 +3703,55 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.storagegateway#DescribeCacheReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#DescribeCacheReportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#DescribeCacheReportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the specified cache report, including completion status and\n         generation progress.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#DescribeCacheReportInput": {
+            "type": "structure",
+            "members": {
+                "CacheReportARN": {
+                    "target": "com.amazonaws.storagegateway#CacheReportARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cache report you want to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.storagegateway#DescribeCacheReportOutput": {
+            "type": "structure",
+            "members": {
+                "CacheReportInfo": {
+                    "target": "com.amazonaws.storagegateway#CacheReportInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains all informational fields associated with a cache report. Includes name, ARN,\n         tags, status, progress, filters, start time, and end time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.storagegateway#DescribeCachediSCSIVolumes": {
             "type": "operation",
             "input": {
@@ -4057,7 +4397,7 @@
                 "ActiveDirectoryStatus": {
                     "target": "com.amazonaws.storagegateway#ActiveDirectoryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the status of a gateway that is a member of the Active Directory\n         domain.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to an authentication error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETACHED</code>: Indicates that gateway is not joined to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINED</code>: Indicates that the gateway has successfully joined a\n               domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINING</code>: Indicates that a <code>JoinDomain</code> operation is in\n               progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_ERROR</code>: Indicates that <code>JoinDomain</code> operation\n               failed due to a network or connectivity error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code>: Indicates that the <code>JoinDomain</code> operation failed\n               because the operation didn't complete within the allotted time.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN_ERROR</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to another type of error.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the status of a gateway that is a member of the Active Directory\n         domain.</p>\n         <note>\n            <p>This field is only used as part of a <code>JoinDomain</code> request. It is not\n            affected by Active Directory connectivity changes that occur after the\n               <code>JoinDomain</code> request succeeds.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to an authentication error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETACHED</code>: Indicates that gateway is not joined to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINED</code>: Indicates that the gateway has successfully joined a\n               domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINING</code>: Indicates that a <code>JoinDomain</code> operation is in\n               progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_ERROR</code>: Indicates that <code>JoinDomain</code> operation\n               failed due to a network or connectivity error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code>: Indicates that the <code>JoinDomain</code> operation failed\n               because the operation didn't complete within the allotted time.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN_ERROR</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to another type of error.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SMBGuestPasswordSet": {
@@ -6379,7 +6719,7 @@
                 "ActiveDirectoryStatus": {
                     "target": "com.amazonaws.storagegateway#ActiveDirectoryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the status of the gateway as a member of the Active Directory domain.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to an authentication error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETACHED</code>: Indicates that gateway is not joined to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINED</code>: Indicates that the gateway has successfully joined a\n               domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINING</code>: Indicates that a <code>JoinDomain</code> operation is in\n               progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_ERROR</code>: Indicates that <code>JoinDomain</code> operation\n               failed due to a network or connectivity error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code>: Indicates that the <code>JoinDomain</code> operation failed\n               because the operation didn't complete within the allotted time.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN_ERROR</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to another type of error.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the status of the gateway as a member of the Active Directory domain.</p>\n         <note>\n            <p>This field is only used as part of a <code>JoinDomain</code> request. It is not\n            affected by Active Directory connectivity changes that occur after the\n               <code>JoinDomain</code> request succeeds.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to an authentication error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETACHED</code>: Indicates that gateway is not joined to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINED</code>: Indicates that the gateway has successfully joined a\n               domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JOINING</code>: Indicates that a <code>JoinDomain</code> operation is in\n               progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_ERROR</code>: Indicates that <code>JoinDomain</code> operation\n               failed due to a network or connectivity error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code>: Indicates that the <code>JoinDomain</code> operation failed\n               because the operation didn't complete within the allotted time.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNKNOWN_ERROR</code>: Indicates that the <code>JoinDomain</code> operation\n               failed due to another type of error.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6446,6 +6786,60 @@
                     "target": "com.amazonaws.storagegateway#AutomaticTapeCreationPolicyInfos",
                     "traits": {
                         "smithy.api#documentation": "<p>Gets a listing of information about the gateway's automatic tape creation policies,\n         including the automatic tape creation rules and the gateway that is using the\n         policies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.storagegateway#ListCacheReports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#ListCacheReportsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#ListCacheReportsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of existing cache reports for all file shares associated with your\n            Amazon Web Services account. This list includes all information provided by the\n            <code>DescribeCacheReport</code> action, such as report name, status, completion\n         progress, start time, end time, filters, and tags.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#ListCacheReportsInput": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.storagegateway#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Opaque pagination token returned from a previous <code>ListCacheReports</code>\n         operation. If present, <code>Marker</code> specifies where to continue the list from after\n         a previous call to <code>ListCacheReports</code>. Optional.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.storagegateway#ListCacheReportsOutput": {
+            "type": "structure",
+            "members": {
+                "CacheReportList": {
+                    "target": "com.amazonaws.storagegateway#CacheReportList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of existing cache reports for all file shares associated with your Amazon Web Services account. This list includes all information provided by the\n            <code>DescribeCacheReport</code> action, such as report status, completion progress,\n         start time, end time, filters, and tags.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.storagegateway#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request includes <code>Marker</code>, the response returns that value in this\n         field.</p>"
                     }
                 }
             },
@@ -7549,7 +7943,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends you notification through CloudWatch Events when all files written to your file\n         share have been uploaded to Amazon S3.</p>\n         <p>Storage Gateway can send a notification through Amazon CloudWatch Events when all\n         files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you\n         make a request for notification. When the upload is done, Storage Gateway sends you\n         notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to\n         send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification\">Getting\n            file upload notification</a> in the <i>Amazon S3 File Gateway User\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Sends you notification through Amazon EventBridge when all files written to your file\n         share have been uploaded to Amazon S3.</p>\n         <p>Storage Gateway can send a notification through Amazon EventBridge when all\n         files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you\n         make a request for notification. When the upload is done, Storage Gateway sends you\n         notification through EventBridge. You can configure EventBridge to send the\n         notification through event targets such as Amazon SNS or Lambda\n         function. This operation is only supported for S3 File Gateways.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification\">Getting\n            file upload notification</a> in the <i>Amazon S3 File Gateway User\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.storagegateway#NotifyWhenUploadedInput": {
@@ -7935,6 +8329,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>RemoveTagsFromResourceOutput</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.storagegateway#ReportCompletionPercent": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.storagegateway#ResetCache": {
@@ -8709,6 +9112,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.storagegateway#StartCacheReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#StartCacheReportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#StartCacheReportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts generating a report of the file metadata currently cached by an S3 File Gateway for a specific file share. You can use this report to identify and resolve\n         issues if you have files failing upload from your gateway to Amazon S3. The report\n         is a CSV file containing a list of files which match the set of filter parameters you\n         specify in the request.</p>\n         <note>\n            <p>The <b>Files Failing Upload</b> flag is reset every 24\n            hours and during gateway reboot. If this report captures the files after the reset, but\n            before they become flagged again, they will not be reported as <b>Files Failing Upload</b>.</p>\n         </note>\n         <p>The following requirements must be met to successfully generate a cache report:</p>\n         <ul>\n            <li>\n               <p>You must have permissions to list the entire Amazon S3 bucket associated\n               with the specified file share.</p>\n            </li>\n            <li>\n               <p>No other cache reports can currently be in-progress for the specified file\n               share.</p>\n            </li>\n            <li>\n               <p>There must be fewer than 10 existing cache reports for the specified file\n               share.</p>\n            </li>\n            <li>\n               <p>The gateway must be online and connected to Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>The root disk must have at least 20GB of free space when report generation\n               starts.</p>\n            </li>\n            <li>\n               <p>You must specify at least one value for <code>InclusionFilters</code> or\n                  <code>ExclusionFilters</code> in the request.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.storagegateway#StartCacheReportInput": {
+            "type": "structure",
+            "members": {
+                "FileShareARN": {
+                    "target": "com.amazonaws.storagegateway#FileShareARN",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.storagegateway#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role used when saving the cache report to Amazon S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationARN": {
+                    "target": "com.amazonaws.storagegateway#LocationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon S3 bucket where the cache report will be saved.</p>\n         <note>\n            <p>We do not recommend saving the cache report to the same Amazon S3 bucket for\n            which you are generating the report.</p>\n            <p>This field does not accept access point ARNs.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BucketRegion": {
+                    "target": "com.amazonaws.storagegateway#RegionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the Amazon S3 bucket associated with the file\n         share for which you want to generate the cache report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VPCEndpointDNSName": {
+                    "target": "com.amazonaws.storagegateway#DNSHostName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS name of the VPC endpoint associated with the Amazon S3 where you want to\n         save the cache report. Optional.</p>"
+                    }
+                },
+                "InclusionFilters": {
+                    "target": "com.amazonaws.storagegateway#CacheReportFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of filters and parameters that determine which files are included in the\n         report. You must specify at least one value for <code>InclusionFilters</code> or\n            <code>ExclusionFilters</code> in a <code>StartCacheReport</code> request.</p>"
+                    }
+                },
+                "ExclusionFilters": {
+                    "target": "com.amazonaws.storagegateway#CacheReportFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of filters and parameters that determine which files are excluded from the\n         report. You must specify at least one value for <code>InclusionFilters</code> or\n            <code>ExclusionFilters</code> in a <code>StartCacheReport</code> request.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.storagegateway#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that you use to ensure idempotent report generation if you need to\n         retry an unsuccessful <code>StartCacheReport</code> request. If you retry a request, use\n         the same <code>ClientToken</code> you specified in the initial request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.storagegateway#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 50 key/value tags that you can assign to the cache report. Using tags\n         can help you categorize your reports and more easily locate them in search results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.storagegateway#StartCacheReportOutput": {
+            "type": "structure",
+            "members": {
+                "CacheReportARN": {
+                    "target": "com.amazonaws.storagegateway#CacheReportARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cache report generated by the\n            <code>StartCacheReport</code> request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.storagegateway#StartGateway": {
             "type": "operation",
             "input": {
@@ -8830,6 +9333,9 @@
                     "target": "com.amazonaws.storagegateway#CancelArchival"
                 },
                 {
+                    "target": "com.amazonaws.storagegateway#CancelCacheReport"
+                },
+                {
                     "target": "com.amazonaws.storagegateway#CancelRetrieval"
                 },
                 {
@@ -8864,6 +9370,9 @@
                 },
                 {
                     "target": "com.amazonaws.storagegateway#DeleteBandwidthRateLimit"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#DeleteCacheReport"
                 },
                 {
                     "target": "com.amazonaws.storagegateway#DeleteChapCredentials"
@@ -8903,6 +9412,9 @@
                 },
                 {
                     "target": "com.amazonaws.storagegateway#DescribeCachediSCSIVolumes"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#DescribeCacheReport"
                 },
                 {
                     "target": "com.amazonaws.storagegateway#DescribeChapCredentials"
@@ -8965,6 +9477,9 @@
                     "target": "com.amazonaws.storagegateway#ListAutomaticTapeCreationPolicies"
                 },
                 {
+                    "target": "com.amazonaws.storagegateway#ListCacheReports"
+                },
+                {
                     "target": "com.amazonaws.storagegateway#ListFileShares"
                 },
                 {
@@ -9023,6 +9538,9 @@
                 },
                 {
                     "target": "com.amazonaws.storagegateway#StartAvailabilityMonitorTest"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#StartCacheReport"
                 },
                 {
                     "target": "com.amazonaws.storagegateway#StartGateway"

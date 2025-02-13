@@ -68,6 +68,9 @@
                     "target": "com.amazonaws.accessanalyzer#GetFindingRecommendation"
                 },
                 {
+                    "target": "com.amazonaws.accessanalyzer#GetFindingsStatistics"
+                },
+                {
                     "target": "com.amazonaws.accessanalyzer#GetFindingV2"
                 },
                 {
@@ -1552,6 +1555,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.accessanalyzer#AccessPreviewSummary"
+            }
+        },
+        "com.amazonaws.accessanalyzer#AccountAggregations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.accessanalyzer#FindingAggregationAccountDetails"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.accessanalyzer#AccountIdsList": {
@@ -3337,6 +3352,38 @@
                 "smithy.api#documentation": "<p>Contains information about an external access finding.</p>"
             }
         },
+        "com.amazonaws.accessanalyzer#ExternalAccessFindingsStatistics": {
+            "type": "structure",
+            "members": {
+                "resourceTypeStatistics": {
+                    "target": "com.amazonaws.accessanalyzer#ResourceTypeStatisticsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of active cross-account and public findings for each resource type of\n         the specified external access analyzer.</p>"
+                    }
+                },
+                "totalActiveFindings": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active findings for the specified external access analyzer.</p>"
+                    }
+                },
+                "totalArchivedFindings": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of archived findings for the specified external access analyzer.</p>"
+                    }
+                },
+                "totalResolvedFindings": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of resolved findings for the specified external access analyzer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides aggregate statistics about the findings for the specified external access\n         analyzer.</p>"
+            }
+        },
         "com.amazonaws.accessanalyzer#FilterCriteriaMap": {
             "type": "map",
             "key": {
@@ -3450,6 +3497,41 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a finding.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#FindingAggregationAccountDetails": {
+            "type": "structure",
+            "members": {
+                "account": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account for which unused access finding details are provided.</p>"
+                    }
+                },
+                "numberOfActiveFindings": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active unused access findings for the specified Amazon Web Services account.</p>"
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.accessanalyzer#FindingAggregationAccountDetailsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the number of active findings for each type of unused access for the specified\n         Amazon Web Services account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the findings for an Amazon Web Services account in an organization unused\n         access analyzer.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#FindingAggregationAccountDetailsMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#Integer"
             }
         },
         "com.amazonaws.accessanalyzer#FindingChangeType": {
@@ -3846,6 +3928,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.accessanalyzer#FindingSummaryV2"
+            }
+        },
+        "com.amazonaws.accessanalyzer#FindingsStatistics": {
+            "type": "union",
+            "members": {
+                "externalAccessFindingsStatistics": {
+                    "target": "com.amazonaws.accessanalyzer#ExternalAccessFindingsStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregate statistics for an external access analyzer.</p>"
+                    }
+                },
+                "unusedAccessFindingsStatistics": {
+                    "target": "com.amazonaws.accessanalyzer#UnusedAccessFindingsStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregate statistics for an unused access analyzer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the aggregate statistics for an external or unused access\n         analyzer. Only one parameter can be used in a <code>FindingsStatistics</code>\n         object.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#FindingsStatisticsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.accessanalyzer#FindingsStatistics"
             }
         },
         "com.amazonaws.accessanalyzer#GenerateFindingRecommendation": {
@@ -4739,6 +4847,79 @@
                     "target": "com.amazonaws.accessanalyzer#FindingType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the finding. For external access analyzers, the type is\n            <code>ExternalAccess</code>. For unused access analyzers, the type can be\n            <code>UnusedIAMRole</code>, <code>UnusedIAMUserAccessKey</code>,\n            <code>UnusedIAMUserPassword</code>, or <code>UnusedPermission</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accessanalyzer#GetFindingsStatistics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accessanalyzer#GetFindingsStatisticsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accessanalyzer#GetFindingsStatisticsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of aggregated finding statistics for an external access or unused\n         access analyzer.</p>",
+                "smithy.api#http": {
+                    "uri": "/analyzer/findings/statistics",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#suppress": [
+                    "HttpMethodSemantics"
+                ]
+            }
+        },
+        "com.amazonaws.accessanalyzer#GetFindingsStatisticsRequest": {
+            "type": "structure",
+            "members": {
+                "analyzerArn": {
+                    "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources\">ARN of\n            the analyzer</a> used to generate the statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accessanalyzer#GetFindingsStatisticsResponse": {
+            "type": "structure",
+            "members": {
+                "findingsStatistics": {
+                    "target": "com.amazonaws.accessanalyzer#FindingsStatisticsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A group of external access or unused access findings statistics.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.accessanalyzer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the retrieval of the findings statistics was last updated. If the\n         findings statistics have not been previously retrieved for the specified analyzer, this\n         field will not be populated.</p>"
                     }
                 }
             },
@@ -6691,6 +6872,35 @@
                 ]
             }
         },
+        "com.amazonaws.accessanalyzer#ResourceTypeDetails": {
+            "type": "structure",
+            "members": {
+                "totalActivePublic": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of active public findings for the resource type.</p>"
+                    }
+                },
+                "totalActiveCrossAccount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of active cross-account findings for the resource type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the total number of active cross-account and public findings\n         for a resource type of an external access analyzer.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#ResourceTypeStatisticsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.accessanalyzer#ResourceType"
+            },
+            "value": {
+                "target": "com.amazonaws.accessanalyzer#ResourceTypeDetails"
+            }
+        },
         "com.amazonaws.accessanalyzer#ResourcesList": {
             "type": "list",
             "member": {
@@ -7485,6 +7695,70 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about an unused access analyzer.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#UnusedAccessFindingsStatistics": {
+            "type": "structure",
+            "members": {
+                "unusedAccessTypeStatistics": {
+                    "target": "com.amazonaws.accessanalyzer#UnusedAccessTypeStatisticsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of details about the total number of findings for each type of unused access for\n         the analyzer. </p>"
+                    }
+                },
+                "topAccounts": {
+                    "target": "com.amazonaws.accessanalyzer#AccountAggregations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of one to ten Amazon Web Services accounts that have the most active findings for the unused\n         access analyzer.</p>"
+                    }
+                },
+                "totalActiveFindings": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of active findings for the unused access analyzer.</p>"
+                    }
+                },
+                "totalArchivedFindings": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of archived findings for the unused access analyzer.</p>"
+                    }
+                },
+                "totalResolvedFindings": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of resolved findings for the unused access analyzer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides aggregate statistics about the findings for the specified unused access\n         analyzer.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#UnusedAccessTypeStatistics": {
+            "type": "structure",
+            "members": {
+                "unusedAccessType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of unused access.</p>"
+                    }
+                },
+                "total": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of findings for the specified unused access type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the total number of findings for a type of unused\n         access.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#UnusedAccessTypeStatisticsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.accessanalyzer#UnusedAccessTypeStatistics"
             }
         },
         "com.amazonaws.accessanalyzer#UnusedAction": {

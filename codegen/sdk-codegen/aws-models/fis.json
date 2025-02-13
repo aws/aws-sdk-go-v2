@@ -1447,7 +1447,7 @@
                     }
                 },
                 "prefix": {
-                    "target": "com.amazonaws.fis#S3ObjectKey",
+                    "target": "com.amazonaws.fis#ReportConfigurationS3OutputPrefix",
                     "traits": {
                         "smithy.api#documentation": "<p>The prefix of the S3 bucket where the experiment report will be stored.</p>"
                     }
@@ -3922,6 +3922,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "actions",
                     "pageSize": "maxResults"
                 }
             }
@@ -4003,6 +4004,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "resolvedTargets",
                     "pageSize": "maxResults"
                 }
             }
@@ -4164,6 +4166,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "experimentTemplates",
                     "pageSize": "maxResults"
                 }
             }
@@ -4242,6 +4245,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "experiments",
                     "pageSize": "maxResults"
                 }
             }
@@ -4377,6 +4381,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "targetAccountConfigurations",
                     "pageSize": "maxResults"
                 }
             }
@@ -4463,6 +4468,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "targetResourceTypes",
                     "pageSize": "maxResults"
                 }
             }
@@ -4581,7 +4587,7 @@
                     }
                 },
                 "prefix": {
-                    "target": "com.amazonaws.fis#S3ObjectKey",
+                    "target": "com.amazonaws.fis#ReportConfigurationS3OutputPrefix",
                     "traits": {
                         "smithy.api#documentation": "<p>The prefix of the S3 bucket where the experiment report will be stored.</p>"
                     }
@@ -4601,7 +4607,7 @@
                     }
                 },
                 "prefix": {
-                    "target": "com.amazonaws.fis#S3ObjectKey",
+                    "target": "com.amazonaws.fis#ReportConfigurationS3OutputPrefix",
                     "traits": {
                         "smithy.api#documentation": "<p>The prefix of the S3 bucket where the experiment report will be stored.</p>"
                     }
@@ -4609,6 +4615,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the S3 destination for the experiment report.</p>"
+            }
+        },
+        "com.amazonaws.fis#ReportConfigurationS3OutputPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ResolvedTarget": {
@@ -4707,7 +4723,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 700
                 },
                 "smithy.api#pattern": "^[\\s\\S]+$"
             }
