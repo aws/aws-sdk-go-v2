@@ -131,6 +131,9 @@ func (c *Client) addOperationGetFlowTemplateRevisionsMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFlowTemplateRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}

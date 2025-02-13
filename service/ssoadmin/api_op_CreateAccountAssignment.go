@@ -157,6 +157,9 @@ func (c *Client) addOperationCreateAccountAssignmentMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateAccountAssignmentValidationMiddleware(stack); err != nil {
 		return err
 	}

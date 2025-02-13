@@ -105,6 +105,9 @@ func (c *Client) addOperationMalformedTimestampPathHttpDateMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpMalformedTimestampPathHttpDateValidationMiddleware(stack); err != nil {
 		return err
 	}

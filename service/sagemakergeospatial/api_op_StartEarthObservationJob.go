@@ -178,6 +178,9 @@ func (c *Client) addOperationStartEarthObservationJobMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartEarthObservationJobMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -139,6 +139,9 @@ func (c *Client) addOperationCreateIpAccessSettingsMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateIpAccessSettingsMiddleware(stack, options); err != nil {
 		return err
 	}

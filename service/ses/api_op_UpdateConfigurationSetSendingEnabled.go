@@ -122,6 +122,9 @@ func (c *Client) addOperationUpdateConfigurationSetSendingEnabledMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateConfigurationSetSendingEnabledValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -130,6 +130,9 @@ func (c *Client) addOperationUpdateMlflowTrackingServerMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateMlflowTrackingServerValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -129,6 +129,9 @@ func (c *Client) addOperationAssociateResourceToProfileMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateResourceToProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

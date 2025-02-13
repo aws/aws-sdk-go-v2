@@ -117,6 +117,9 @@ func (c *Client) addOperationStopResourceSnapshotJobMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopResourceSnapshotJobValidationMiddleware(stack); err != nil {
 		return err
 	}

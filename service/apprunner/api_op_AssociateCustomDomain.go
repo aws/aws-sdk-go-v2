@@ -155,6 +155,9 @@ func (c *Client) addOperationAssociateCustomDomainMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateCustomDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

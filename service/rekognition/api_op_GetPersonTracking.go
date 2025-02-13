@@ -192,6 +192,9 @@ func (c *Client) addOperationGetPersonTrackingMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPersonTrackingValidationMiddleware(stack); err != nil {
 		return err
 	}

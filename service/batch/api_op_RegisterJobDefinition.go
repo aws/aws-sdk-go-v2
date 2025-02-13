@@ -227,6 +227,9 @@ func (c *Client) addOperationRegisterJobDefinitionMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRegisterJobDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

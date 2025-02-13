@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteLakeFormationOptInMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteLakeFormationOptInValidationMiddleware(stack); err != nil {
 		return err
 	}

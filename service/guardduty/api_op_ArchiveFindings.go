@@ -121,6 +121,9 @@ func (c *Client) addOperationArchiveFindingsMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpArchiveFindingsValidationMiddleware(stack); err != nil {
 		return err
 	}

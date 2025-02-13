@@ -163,6 +163,9 @@ func (c *Client) addOperationUpdateManagedLoginBrandingMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateManagedLoginBrandingValidationMiddleware(stack); err != nil {
 		return err
 	}

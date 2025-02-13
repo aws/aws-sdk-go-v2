@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteReplicationConfigurationTemplateMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteReplicationConfigurationTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

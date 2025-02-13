@@ -116,6 +116,9 @@ func (c *Client) addOperationGetResolverQueryLogConfigAssociationMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetResolverQueryLogConfigAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

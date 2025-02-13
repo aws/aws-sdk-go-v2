@@ -392,6 +392,9 @@ func (c *Client) addOperationModifyCacheClusterMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyCacheClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

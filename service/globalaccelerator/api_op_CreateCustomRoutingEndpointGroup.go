@@ -133,6 +133,9 @@ func (c *Client) addOperationCreateCustomRoutingEndpointGroupMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCustomRoutingEndpointGroupMiddleware(stack, options); err != nil {
 		return err
 	}

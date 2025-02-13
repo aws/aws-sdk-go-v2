@@ -364,6 +364,9 @@ func (c *Client) addOperationCreateCustomDBEngineVersionMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateCustomDBEngineVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

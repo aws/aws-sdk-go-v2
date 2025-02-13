@@ -174,6 +174,9 @@ func (c *Client) addOperationDeleteBucketLifecycleConfigurationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteBucketLifecycleConfigurationMiddleware(stack); err != nil {
 		return err
 	}

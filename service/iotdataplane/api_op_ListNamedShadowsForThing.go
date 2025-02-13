@@ -128,6 +128,9 @@ func (c *Client) addOperationListNamedShadowsForThingMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListNamedShadowsForThingValidationMiddleware(stack); err != nil {
 		return err
 	}

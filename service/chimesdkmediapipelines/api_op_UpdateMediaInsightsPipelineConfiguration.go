@@ -127,6 +127,9 @@ func (c *Client) addOperationUpdateMediaInsightsPipelineConfigurationMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateMediaInsightsPipelineConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

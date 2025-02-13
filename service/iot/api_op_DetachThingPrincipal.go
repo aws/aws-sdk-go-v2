@@ -125,6 +125,9 @@ func (c *Client) addOperationDetachThingPrincipalMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetachThingPrincipalValidationMiddleware(stack); err != nil {
 		return err
 	}

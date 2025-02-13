@@ -194,6 +194,9 @@ func (c *Client) addOperationCreateSubscriptionRequestMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateSubscriptionRequestMiddleware(stack, options); err != nil {
 		return err
 	}

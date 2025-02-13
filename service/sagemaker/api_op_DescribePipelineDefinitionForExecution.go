@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribePipelineDefinitionForExecutionMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribePipelineDefinitionForExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

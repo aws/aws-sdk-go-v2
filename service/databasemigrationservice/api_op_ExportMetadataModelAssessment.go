@@ -128,6 +128,9 @@ func (c *Client) addOperationExportMetadataModelAssessmentMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportMetadataModelAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}

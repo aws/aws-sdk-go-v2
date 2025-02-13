@@ -143,6 +143,9 @@ func (c *Client) addOperationListAllowedRepositoriesForGroupMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAllowedRepositoriesForGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

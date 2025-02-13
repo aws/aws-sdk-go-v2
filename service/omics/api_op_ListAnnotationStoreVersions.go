@@ -127,6 +127,9 @@ func (c *Client) addOperationListAnnotationStoreVersionsMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAnnotationStoreVersionsMiddleware(stack); err != nil {
 		return err
 	}

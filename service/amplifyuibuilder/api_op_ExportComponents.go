@@ -126,6 +126,9 @@ func (c *Client) addOperationExportComponentsMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportComponentsValidationMiddleware(stack); err != nil {
 		return err
 	}

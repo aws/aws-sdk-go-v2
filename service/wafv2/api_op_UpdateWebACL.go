@@ -267,6 +267,9 @@ func (c *Client) addOperationUpdateWebACLMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateWebACLValidationMiddleware(stack); err != nil {
 		return err
 	}

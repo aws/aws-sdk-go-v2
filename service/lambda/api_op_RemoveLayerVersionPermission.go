@@ -124,6 +124,9 @@ func (c *Client) addOperationRemoveLayerVersionPermissionMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveLayerVersionPermissionValidationMiddleware(stack); err != nil {
 		return err
 	}

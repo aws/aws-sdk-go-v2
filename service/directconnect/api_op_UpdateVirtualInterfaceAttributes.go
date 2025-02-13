@@ -244,6 +244,9 @@ func (c *Client) addOperationUpdateVirtualInterfaceAttributesMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateVirtualInterfaceAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

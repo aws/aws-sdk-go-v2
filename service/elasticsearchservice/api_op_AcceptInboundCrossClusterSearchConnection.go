@@ -115,6 +115,9 @@ func (c *Client) addOperationAcceptInboundCrossClusterSearchConnectionMiddleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAcceptInboundCrossClusterSearchConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

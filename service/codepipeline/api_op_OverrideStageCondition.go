@@ -124,6 +124,9 @@ func (c *Client) addOperationOverrideStageConditionMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpOverrideStageConditionValidationMiddleware(stack); err != nil {
 		return err
 	}

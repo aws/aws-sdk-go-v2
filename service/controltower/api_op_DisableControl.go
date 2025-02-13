@@ -131,6 +131,9 @@ func (c *Client) addOperationDisableControlMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableControlValidationMiddleware(stack); err != nil {
 		return err
 	}

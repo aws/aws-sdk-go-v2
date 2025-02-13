@@ -158,6 +158,9 @@ func (c *Client) addOperationCreateWhatIfAnalysisMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateWhatIfAnalysisValidationMiddleware(stack); err != nil {
 		return err
 	}

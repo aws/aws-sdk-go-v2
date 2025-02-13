@@ -234,6 +234,9 @@ func (c *Client) addOperationGetTrainedModelInferenceJobMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTrainedModelInferenceJobValidationMiddleware(stack); err != nil {
 		return err
 	}

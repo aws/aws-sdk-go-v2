@@ -176,6 +176,9 @@ func (c *Client) addOperationCreateImageRecipeMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateImageRecipeMiddleware(stack, options); err != nil {
 		return err
 	}

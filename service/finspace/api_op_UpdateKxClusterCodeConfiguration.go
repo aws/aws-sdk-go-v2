@@ -144,6 +144,9 @@ func (c *Client) addOperationUpdateKxClusterCodeConfigurationMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateKxClusterCodeConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -176,6 +176,9 @@ func (c *Client) addOperationGetSessionEmbedUrlMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSessionEmbedUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

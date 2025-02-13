@@ -169,6 +169,9 @@ func (c *Client) addOperationPostCommentForPullRequestMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opPostCommentForPullRequestMiddleware(stack, options); err != nil {
 		return err
 	}

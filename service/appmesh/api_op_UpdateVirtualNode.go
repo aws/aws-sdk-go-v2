@@ -135,6 +135,9 @@ func (c *Client) addOperationUpdateVirtualNodeMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateVirtualNodeMiddleware(stack, options); err != nil {
 		return err
 	}

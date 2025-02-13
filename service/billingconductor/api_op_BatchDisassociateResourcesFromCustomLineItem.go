@@ -125,6 +125,9 @@ func (c *Client) addOperationBatchDisassociateResourcesFromCustomLineItemMiddlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDisassociateResourcesFromCustomLineItemValidationMiddleware(stack); err != nil {
 		return err
 	}

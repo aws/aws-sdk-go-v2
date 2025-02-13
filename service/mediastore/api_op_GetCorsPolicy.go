@@ -119,6 +119,9 @@ func (c *Client) addOperationGetCorsPolicyMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCorsPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

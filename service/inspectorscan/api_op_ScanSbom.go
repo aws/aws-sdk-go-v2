@@ -119,6 +119,9 @@ func (c *Client) addOperationScanSbomMiddlewares(stack *middleware.Stack, option
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpScanSbomValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -122,6 +122,9 @@ func (c *Client) addOperationStartFlywheelIterationMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartFlywheelIterationValidationMiddleware(stack); err != nil {
 		return err
 	}

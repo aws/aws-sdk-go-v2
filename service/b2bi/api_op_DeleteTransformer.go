@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteTransformerMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteTransformerValidationMiddleware(stack); err != nil {
 		return err
 	}

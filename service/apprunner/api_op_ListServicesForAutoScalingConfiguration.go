@@ -138,6 +138,9 @@ func (c *Client) addOperationListServicesForAutoScalingConfigurationMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListServicesForAutoScalingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

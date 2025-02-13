@@ -133,6 +133,9 @@ func (c *Client) addOperationDescribePendingMaintenanceActionsMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribePendingMaintenanceActionsValidationMiddleware(stack); err != nil {
 		return err
 	}

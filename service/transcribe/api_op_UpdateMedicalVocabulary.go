@@ -146,6 +146,9 @@ func (c *Client) addOperationUpdateMedicalVocabularyMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateMedicalVocabularyValidationMiddleware(stack); err != nil {
 		return err
 	}

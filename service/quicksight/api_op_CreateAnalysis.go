@@ -182,6 +182,9 @@ func (c *Client) addOperationCreateAnalysisMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateAnalysisValidationMiddleware(stack); err != nil {
 		return err
 	}

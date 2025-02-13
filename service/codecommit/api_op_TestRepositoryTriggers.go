@@ -126,6 +126,9 @@ func (c *Client) addOperationTestRepositoryTriggersMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTestRepositoryTriggersValidationMiddleware(stack); err != nil {
 		return err
 	}

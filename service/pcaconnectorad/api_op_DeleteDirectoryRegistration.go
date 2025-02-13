@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteDirectoryRegistrationMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDirectoryRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}

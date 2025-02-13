@@ -147,6 +147,9 @@ func (c *Client) addOperationCreateWorldTemplateMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateWorldTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

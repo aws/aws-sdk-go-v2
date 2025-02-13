@@ -112,6 +112,9 @@ func (c *Client) addOperationDescribeRefreshSchemasStatusMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRefreshSchemasStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

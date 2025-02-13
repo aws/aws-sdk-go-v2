@@ -129,6 +129,9 @@ func (c *Client) addOperationGetPrincipalTagAttributeMapMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPrincipalTagAttributeMapValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -308,6 +308,9 @@ func (c *Client) addOperationCreateRelationalDatabaseMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRelationalDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateTestSetDiscrepancyReportMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateTestSetDiscrepancyReportValidationMiddleware(stack); err != nil {
 		return err
 	}

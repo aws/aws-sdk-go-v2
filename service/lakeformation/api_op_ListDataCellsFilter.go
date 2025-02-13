@@ -119,6 +119,9 @@ func (c *Client) addOperationListDataCellsFilterMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataCellsFilterValidationMiddleware(stack); err != nil {
 		return err
 	}
