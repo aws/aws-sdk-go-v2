@@ -330,10 +330,11 @@ func testDownloadObject(t *testing.T, bucket string, testData getObjectTestData,
 	}
 
 	w := types.NewWriteAtBuffer(make([]byte, 0))
-	_, err = s3TransferManagerClient.DownloadObject(context.Background(), w,
-		&GetObjectInput{
-			Bucket: bucket,
-			Key:    key,
+	_, err = s3TransferManagerClient.DownloadObject(context.Background(),
+		&DownloadObjectInput{
+			Bucket:   bucket,
+			Key:      key,
+			WriterAt: w,
 		}, opts...)
 	if err != nil {
 		if len(testData.ExpectError) == 0 {
