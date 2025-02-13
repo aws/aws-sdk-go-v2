@@ -1,3 +1,19 @@
+# Release (2025-02-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.37.0](service/accessanalyzer/CHANGELOG.md#v1370-2025-02-13)
+  * **Feature**: This release introduces the getFindingsStatistics API, enabling users to retrieve aggregated finding statistics for IAM Access Analyzer's external access and unused access analysis features. Updated service API and documentation.
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.38.1](service/acmpca/CHANGELOG.md#v1381-2025-02-13)
+  * **Documentation**: Private Certificate Authority (PCA) documentation updates
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.53.14](service/ecs/CHANGELOG.md#v15314-2025-02-13)
+  * **Documentation**: This is a documentation only release to support migrating Amazon ECS service ARNs to the long ARN format.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.32.0](service/fis/CHANGELOG.md#v1320-2025-02-13)
+  * **Feature**: Adds auto-pagination for the following operations: ListActions, ListExperimentTemplates, ListTargetAccountConfigurations, ListExperiments, ListExperimentResolvedTargets, ListTargetResourceTypes. Reduces length constraints of prefixes for logConfiguration and experimentReportConfiguration.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.175.0](service/sagemaker/CHANGELOG.md#v11750-2025-02-13)
+  * **Feature**: Adds additional values to the InferenceAmiVersion parameter in the ProductionVariant data type.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.35.0](service/storagegateway/CHANGELOG.md#v1350-2025-02-13)
+  * **Feature**: This release adds support for generating cache reports on S3 File Gateways for files that fail to upload.
+
 # Release (2025-02-12)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.38.1 (2025-02-13)
+
+* **Documentation**: Private Certificate Authority (PCA) documentation updates
+
 # v1.38.0 (2025-02-11)
 
 * **Feature**: Private Certificate Authority service now supports Partitioned CRL as a revocation configuration option.

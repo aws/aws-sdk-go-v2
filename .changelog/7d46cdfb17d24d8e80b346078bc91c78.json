@@ -1,8 +1,0 @@
-{
-    "id": "7d46cdfb-17d2-4d8e-80b3-46078bc91c78",
-    "type": "documentation",
-    "description": "Private Certificate Authority (PCA) documentation updates",
-    "modules": [
-        "service/acmpca"
-    ]
-}

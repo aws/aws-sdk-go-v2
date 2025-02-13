@@ -1,8 +1,0 @@
-{
-    "id": "00027ae6-546e-48c7-a256-9657f40d0a89",
-    "type": "feature",
-    "description": "Adds auto-pagination for the following operations: ListActions, ListExperimentTemplates, ListTargetAccountConfigurations, ListExperiments, ListExperimentResolvedTargets, ListTargetResourceTypes. Reduces length constraints of prefixes for logConfiguration and experimentReportConfiguration.",
-    "modules": [
-        "service/fis"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "d092873b-7cc0-40f6-87ef-6ecc0099f3fe",
-    "type": "documentation",
-    "description": "This is a documentation only release to support migrating Amazon ECS service ARNs to the long ARN format.",
-    "modules": [
-        "service/ecs"
-    ]
-}
