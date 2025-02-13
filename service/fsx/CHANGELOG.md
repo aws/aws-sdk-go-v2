@@ -1,3 +1,7 @@
+# v1.52.0 (2025-02-12)
+
+* **Feature**: Support for in-place Lustre version upgrades
+
 # v1.51.10 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1277,7 +1277,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an AppSync API. You can use <code>Api</code> for an AppSync\n         API with your preferred configuration, such as an Event API that provides real-time message\n         publishing and message subscriptions over WebSockets.</p>"
+                "smithy.api#documentation": "<p>Describes an AppSync API. You can use <code>Api</code> for an AppSync API with your preferred configuration, such as an Event API that provides\n         real-time message publishing and message subscriptions over WebSockets.</p>"
             }
         },
         "com.amazonaws.appsync#ApiAssociation": {
@@ -1325,7 +1325,7 @@
                 "apiCachingBehavior": {
                     "target": "com.amazonaws.appsync#ApiCachingBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Caching behavior.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FULL_REQUEST_CACHING</b>: All requests are fully\n               cached.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PER_RESOLVER_CACHING</b>: Individual resolvers\n               that you specify are cached.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Caching behavior.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FULL_REQUEST_CACHING</b>: All requests from the\n               same user are cached. Individual resolvers are automatically cached. All API calls\n               will try to return responses from the cache.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PER_RESOLVER_CACHING</b>: Individual resolvers\n               that you specify are cached.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OPERATION_LEVEL_CACHING</b>: Full requests are cached together and returned without executing resolvers.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "transitEncryptionEnabled": {
@@ -1508,6 +1508,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PER_RESOLVER_CACHING"
+                    }
+                },
+                "OPERATION_LEVEL_CACHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATION_LEVEL_CACHING"
                     }
                 }
             }
@@ -2203,7 +2209,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a channel namespace associated with an <code>Api</code>. The <code>ChannelNamespace</code> contains the definitions for code handlers for the <code>Api</code>.</p>"
+                "smithy.api#documentation": "<p>Describes a channel namespace associated with an <code>Api</code>. The\n            <code>ChannelNamespace</code> contains the definitions for code handlers for the\n            <code>Api</code>.</p>"
             }
         },
         "com.amazonaws.appsync#ChannelNamespaces": {
@@ -2394,7 +2400,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A conflict with a previous successful update is detected. This typically\n         occurs when the previous update did not have time to propagate before the next update was\n         made. A retry (with appropriate backoff logic) is the recommended response to this\n         exception.</p>",
+                "smithy.api#documentation": "<p>A conflict with a previous successful update is detected. This typically occurs when the\n         previous update did not have time to propagate before the next update was made. A retry\n         (with appropriate backoff logic) is the recommended response to this exception.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -2542,7 +2548,7 @@
                 "apiCachingBehavior": {
                     "target": "com.amazonaws.appsync#ApiCachingBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Caching behavior.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FULL_REQUEST_CACHING</b>: All requests are fully\n               cached.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PER_RESOLVER_CACHING</b>: Individual resolvers\n               that you specify are cached.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Caching behavior.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FULL_REQUEST_CACHING</b>: All requests from the\n               same user are cached. Individual resolvers are automatically cached. All API calls\n               will try to return responses from the cache.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PER_RESOLVER_CACHING</b>: Individual resolvers\n               that you specify are cached.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OPERATION_LEVEL_CACHING</b>: Full requests are cached together and returned without executing resolvers.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3545,7 +3551,7 @@
                 "type": {
                     "target": "com.amazonaws.appsync#DataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the data source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AWS_LAMBDA</b>: The data source is an Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_ELASTICSEARCH</b>: The data source is an\n                  Amazon OpenSearch Service domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_OPENSEARCH_SERVICE</b>: The data source is\n               an Amazon OpenSearch Service domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_EVENTBRIDGE</b>: The data source is an\n                  Amazon EventBridge configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_BEDROCK_RUNTIME</b>: The data source is the Amazon Bedrock runtime.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NONE</b>: There is no data source. Use this type\n               when you want to invoke a GraphQL operation without connecting to a data source, such\n               as when you're performing data transformation with resolvers or invoking a\n               subscription from a mutation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTP</b>: The data source is an HTTP\n               endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <b>RELATIONAL_DATABASE</b>: The data source is a\n               relational database.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of the data source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AWS_LAMBDA</b>: The data source is an Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_ELASTICSEARCH</b>: The data source is an\n                  Amazon OpenSearch Service domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_OPENSEARCH_SERVICE</b>: The data source is\n               an Amazon OpenSearch Service domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_EVENTBRIDGE</b>: The data source is an\n                  Amazon EventBridge configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_BEDROCK_RUNTIME</b>: The data source is the\n                  Amazon Bedrock runtime.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NONE</b>: There is no data source. Use this type\n               when you want to invoke a GraphQL operation without connecting to a data source, such\n               as when you're performing data transformation with resolvers or invoking a\n               subscription from a mutation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTP</b>: The data source is an HTTP\n               endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <b>RELATIONAL_DATABASE</b>: The data source is a\n               relational database.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "serviceRoleArn": {
@@ -7069,7 +7075,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the channel namespaces for a specified <code>Api</code>.</p>\n         <p>\n            <code>ListChannelNamespaces</code> returns only high level details for the channel\n            namespace. To retrieve code handlers, use\n         <code>GetChannelNamespace</code>.</p>",
+                "smithy.api#documentation": "<p>Lists the channel namespaces for a specified <code>Api</code>.</p>\n         <p>\n            <code>ListChannelNamespaces</code> returns only high level details for the channel\n         namespace. To retrieve code handlers, use <code>GetChannelNamespace</code>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/apis/{apiId}/channelNamespaces",
@@ -9573,7 +9579,7 @@
                 "apiCachingBehavior": {
                     "target": "com.amazonaws.appsync#ApiCachingBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Caching behavior.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FULL_REQUEST_CACHING</b>: All requests are fully\n               cached.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PER_RESOLVER_CACHING</b>: Individual resolvers\n               that you specify are cached.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Caching behavior.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FULL_REQUEST_CACHING</b>: All requests from the\n               same user are cached. Individual resolvers are automatically cached. All API calls\n               will try to return responses from the cache.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PER_RESOLVER_CACHING</b>: Individual resolvers\n               that you specify are cached.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OPERATION_LEVEL_CACHING</b>: Full requests are cached together and returned without executing resolvers.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },

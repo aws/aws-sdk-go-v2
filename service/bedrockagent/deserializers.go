@@ -21820,6 +21820,11 @@ func awsRestjson1_deserializeDocumentPromptConfiguration(v **types.PromptConfigu
 
 	for key, value := range shape {
 		switch key {
+		case "additionalModelRequestFields":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.AdditionalModelRequestFields, value); err != nil {
+				return err
+			}
+
 		case "basePromptTemplate":
 			if value != nil {
 				jtv, ok := value.(string)

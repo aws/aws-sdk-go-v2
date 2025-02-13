@@ -39,6 +39,10 @@ type StartMonitorDeploymentInput struct {
 	// Placeholder documentation for __boolean
 	DryRun *bool
 
+	// An ID that you assign to a create request. This ID ensures idempotency when
+	// creating resources.
+	RequestId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -176,6 +180,9 @@ func (c *Client) addOperationStartMonitorDeploymentMiddlewares(stack *middleware
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opStartMonitorDeploymentMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartMonitorDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -210,6 +217,39 @@ func (c *Client) addOperationStartMonitorDeploymentMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpStartMonitorDeployment struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpStartMonitorDeployment) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpStartMonitorDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*StartMonitorDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartMonitorDeploymentInput ")
+	}
+
+	if input.RequestId == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.RequestId = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opStartMonitorDeploymentMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpStartMonitorDeployment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opStartMonitorDeployment(region string) *awsmiddleware.RegisterServiceMetadata {

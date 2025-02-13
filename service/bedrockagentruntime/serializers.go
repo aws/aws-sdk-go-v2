@@ -2594,6 +2594,13 @@ func awsRestjson1_serializeDocumentPromptConfiguration(v *types.PromptConfigurat
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalModelRequestFields != nil {
+		ok := object.Key("additionalModelRequestFields")
+		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalModelRequestFields, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BasePromptTemplate != nil {
 		ok := object.Key("basePromptTemplate")
 		ok.String(*v.BasePromptTemplate)

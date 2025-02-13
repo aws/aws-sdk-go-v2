@@ -37,6 +37,8 @@ type GetDimensionKeyDetailsInput struct {
 	// The name of the dimension group. Performance Insights searches the specified
 	// group for the dimension group ID. The following group name values are valid:
 	//
+	//   - db.execution_plan (Amazon RDS and Aurora only)
+	//
 	//   - db.lock_snapshot (Aurora only)
 	//
 	//   - db.query (Amazon DocumentDB only)
@@ -49,6 +51,9 @@ type GetDimensionKeyDetailsInput struct {
 	// The ID of the dimension group from which to retrieve dimension details. For
 	// dimension group db.sql , the group ID is db.sql.id . The following group ID
 	// values are valid:
+	//
+	//   - db.execution_plan.id for dimension group db.execution_plan (Aurora and RDS
+	//   only)
 	//
 	//   - db.sql.id for dimension group db.sql (Aurora and RDS only)
 	//
@@ -81,7 +86,11 @@ type GetDimensionKeyDetailsInput struct {
 	// dimension data within the specified dimension group. Specify dimension names for
 	// the following dimension groups:
 	//
-	//   - db.lock_trees - Specify the dimension name db.lock_trees . (Aurora only)
+	//   - db.execution_plan - Specify the dimension name db.execution_plan.raw_plan or
+	//   the short dimension name raw_plan (Amazon RDS and Aurora only)
+	//
+	//   - db.lock_snapshot - Specify the dimension name db.lock_snapshot.lock_trees or
+	//   the short dimension name lock_trees . (Aurora only)
 	//
 	//   - db.sql - Specify either the full dimension name db.sql.statement or the
 	//   short dimension name statement (Aurora and RDS only).

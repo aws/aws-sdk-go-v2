@@ -1,3 +1,7 @@
+# v1.51.3 (2025-02-12)
+
+* **Documentation**: Add note for the RUNNER_BUILDKITE_BUILD buildType.
+
 # v1.51.2 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

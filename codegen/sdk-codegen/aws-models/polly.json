@@ -776,6 +776,12 @@
                     "traits": {
                         "smithy.api#enumValue": "de-CH"
                     }
+                },
+                "en_SG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-SG"
+                    }
                 }
             }
         },
@@ -3546,6 +3552,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Sabrina"
+                    }
+                },
+                "Jasmine": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Jasmine"
                     }
                 }
             }

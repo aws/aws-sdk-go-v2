@@ -6251,6 +6251,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFileSystemInput(v *UpdateFileSystemIn
 		ok.String(*v.FileSystemId)
 	}
 
+	if v.FileSystemTypeVersion != nil {
+		ok := object.Key("FileSystemTypeVersion")
+		ok.String(*v.FileSystemTypeVersion)
+	}
+
 	if v.LustreConfiguration != nil {
 		ok := object.Key("LustreConfiguration")
 		if err := awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v.LustreConfiguration, ok); err != nil {

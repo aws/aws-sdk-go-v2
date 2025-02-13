@@ -3580,6 +3580,14 @@ type PromptAgentResource struct {
 // [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 type PromptConfiguration struct {
 
+	// If the Converse or ConverseStream operations support the model,
+	// additionalModelRequestFields contains additional inference parameters, beyond
+	// the base set of inference parameters in the inferenceConfiguration field.
+	//
+	// For more information, see Inference request parameters and response fields for
+	// foundation models in the Amazon Bedrock user guide.
+	AdditionalModelRequestFields document.Interface
+
 	// Defines the prompt template with which to replace the default prompt template.
 	// You can use placeholder variables in the base prompt template to customize the
 	// prompt. For more information, see [Prompt template placeholder variables]. For more information, see [Configure the prompt templates].

@@ -6673,6 +6673,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to override the default parser Lambda function when parsing the raw foundation model output in the part of the agent sequence defined by the <code>promptType</code>. If you set the field as <code>OVERRIDEN</code>, the <code>overrideLambda</code> field in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html\">PromptOverrideConfiguration</a> must be specified with the ARN of a Lambda function.</p>"
                     }
+                },
+                "additionalModelRequestFields": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the Converse or ConverseStream operations support the model,\n            <code>additionalModelRequestFields</code> contains additional inference parameters,\n            beyond the base set of inference parameters in the <code>inferenceConfiguration</code>\n            field. </p>\n         <p>For more information, see <i>Inference request parameters and\n            response fields for foundation models</i> in the Amazon Bedrock user\n            guide.</p>"
+                    }
                 }
             },
             "traits": {

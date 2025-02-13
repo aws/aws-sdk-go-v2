@@ -41,6 +41,10 @@ type CreateEventBridgeRuleTemplateGroupInput struct {
 	// A resource's optional description.
 	Description *string
 
+	// An ID that you assign to a create request. This ID ensures idempotency when
+	// creating resources.
+	RequestId *string
+
 	// Represents the tags associated with a resource.
 	Tags map[string]string
 
@@ -146,6 +150,9 @@ func (c *Client) addOperationCreateEventBridgeRuleTemplateGroupMiddlewares(stack
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateEventBridgeRuleTemplateGroupMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateEventBridgeRuleTemplateGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -180,6 +187,39 @@ func (c *Client) addOperationCreateEventBridgeRuleTemplateGroupMiddlewares(stack
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateEventBridgeRuleTemplateGroup struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateEventBridgeRuleTemplateGroup) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateEventBridgeRuleTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateEventBridgeRuleTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateEventBridgeRuleTemplateGroupInput ")
+	}
+
+	if input.RequestId == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.RequestId = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateEventBridgeRuleTemplateGroupMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateEventBridgeRuleTemplateGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateEventBridgeRuleTemplateGroup(region string) *awsmiddleware.RegisterServiceMetadata {

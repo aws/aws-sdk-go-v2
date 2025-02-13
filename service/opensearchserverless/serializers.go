@@ -2446,6 +2446,11 @@ func awsAwsjson10_serializeDocumentSamlConfigOptions(v *types.SamlConfigOptions,
 		ok.String(*v.Metadata)
 	}
 
+	if v.OpenSearchServerlessEntityId != nil {
+		ok := object.Key("openSearchServerlessEntityId")
+		ok.String(*v.OpenSearchServerlessEntityId)
+	}
+
 	if v.SessionTimeout != nil {
 		ok := object.Key("sessionTimeout")
 		ok.Integer(*v.SessionTimeout)

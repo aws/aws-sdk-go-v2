@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.29.7
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.47.4
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.43.14
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.51.2
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.51.3
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.15
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.18
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.38.9
@@ -28,8 +28,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.30.12
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.17
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.40.10
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.40.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.202.4
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.40.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.203.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.13
 	github.com/aws/aws-sdk-go-v2/service/efs v1.34.11
@@ -55,7 +55,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.24.15
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.35.17
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.23.15
-	github.com/aws/aws-sdk-go-v2/service/polly v1.45.16
+	github.com/aws/aws-sdk-go-v2/service/polly v1.46.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.93.12
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.53.12
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.18

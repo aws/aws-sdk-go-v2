@@ -76,8 +76,9 @@ type ApiCachingBehavior string
 
 // Enum values for ApiCachingBehavior
 const (
-	ApiCachingBehaviorFullRequestCaching ApiCachingBehavior = "FULL_REQUEST_CACHING"
-	ApiCachingBehaviorPerResolverCaching ApiCachingBehavior = "PER_RESOLVER_CACHING"
+	ApiCachingBehaviorFullRequestCaching    ApiCachingBehavior = "FULL_REQUEST_CACHING"
+	ApiCachingBehaviorPerResolverCaching    ApiCachingBehavior = "PER_RESOLVER_CACHING"
+	ApiCachingBehaviorOperationLevelCaching ApiCachingBehavior = "OPERATION_LEVEL_CACHING"
 )
 
 // Values returns all known values for ApiCachingBehavior. Note that this can be
@@ -88,6 +89,7 @@ func (ApiCachingBehavior) Values() []ApiCachingBehavior {
 	return []ApiCachingBehavior{
 		"FULL_REQUEST_CACHING",
 		"PER_RESOLVER_CACHING",
+		"OPERATION_LEVEL_CACHING",
 	}
 }
 

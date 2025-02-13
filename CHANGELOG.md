@@ -1,3 +1,36 @@
+# Release (2025-02-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.35.0](service/bedrockagent/CHANGELOG.md#v1350-2025-02-12)
+  * **Feature**: This releases adds the additionalModelRequestFields field to the CreateAgent and UpdateAgent operations. Use additionalModelRequestFields to specify  additional inference parameters for a model beyond the base inference parameters.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.36.0](service/bedrockagentruntime/CHANGELOG.md#v1360-2025-02-12)
+  * **Feature**: This releases adds the additionalModelRequestFields field to the InvokeInlineAgent operation. Use additionalModelRequestFields to specify  additional inference parameters for a model beyond the base inference parameters.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.51.3](service/codebuild/CHANGELOG.md#v1513-2025-02-12)
+  * **Documentation**: Add note for the RUNNER_BUILDKITE_BUILD buildType.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.52.0](service/fsx/CHANGELOG.md#v1520-2025-02-12)
+  * **Feature**: Support for in-place Lustre version upgrades
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.67.0](service/medialive/CHANGELOG.md#v1670-2025-02-12)
+  * **Feature**: Adds a RequestId parameter to all MediaLive Workflow Monitor create operations.  The RequestId parameter allows idempotent operations.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.18.0](service/opensearchserverless/CHANGELOG.md#v1180-2025-02-12)
+  * **Feature**: Custom OpenSearchServerless Entity ID for SAML Config.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.46.0](service/polly/CHANGELOG.md#v1460-2025-02-12)
+  * **Feature**: Added support for the new voice - Jasmine (en-SG). Jasmine is available as a Neural voice only.
+
+# Release (2025-02-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.38.0](service/acmpca/CHANGELOG.md#v1380-2025-02-11)
+  * **Feature**: Private Certificate Authority service now supports Partitioned CRL as a revocation configuration option.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.43.0](service/appsync/CHANGELOG.md#v1430-2025-02-11)
+  * **Feature**: Add support for operation level caching
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.203.0](service/ec2/CHANGELOG.md#v12030-2025-02-11)
+  * **Feature**: Adding support for the new fullSnapshotSizeInBytes field in the response of the EC2 EBS DescribeSnapshots API. This field represents the size of all the blocks that were written to the source volume at the time the snapshot was created.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.30.1](service/pi/CHANGELOG.md#v1301-2025-02-11)
+  * **Documentation**: Documentation only update for RDS Performance Insights dimensions for execution plans and locking analysis.
+
 # Release (2025-02-10)
 
 ## General Highlights

@@ -1419,7 +1419,7 @@ type CreateOpenZFSVolumeConfiguration struct {
 
 	// Specifies the suggested block size for a volume in a ZFS dataset, in kibibytes
 	// (KiB). For file systems using the Intelligent-Tiering storage class, valid
-	// values are 128, 256, 512, 1024, 2048, or 4096 KiB, with a default of 2048 KiB.
+	// values are 128, 256, 512, 1024, 2048, or 4096 KiB, with a default of 1024 KiB.
 	// For all other file systems, valid values are 4, 8, 16, 32, 64, 128, 256, 512, or
 	// 1024 KiB, with a default of 128 KiB. We recommend using the default setting for
 	// the majority of use cases. Generally, workloads that write in fixed small or
@@ -1936,7 +1936,7 @@ type DataRepositoryTaskFailureDetails struct {
 }
 
 // (Optional) An array of filter objects you can use to filter the response of
-// data repository tasks you will see in the the response. You can filter the tasks
+// data repository tasks you will see in the response. You can filter the tasks
 // returned in the response by one or more file system IDs, task lifecycles, and by
 // task type. A filter object consists of a filter Name , and one or more Values
 // for the filter.
@@ -3589,7 +3589,7 @@ type OpenZFSVolumeConfiguration struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	SourceSnapshotARN *string
 
-	// The maximum amount of storage in gibibtyes (GiB) that the volume can use from
+	// The maximum amount of storage in gibibytes (GiB) that the volume can use from
 	// its parent. You can specify a quota larger than the storage on the parent
 	// volume.
 	StorageCapacityQuotaGiB *int32
@@ -4353,9 +4353,9 @@ type UpdateFileSystemOntapConfiguration struct {
 
 	// Update the password for the fsxadmin user by entering a new password. You use
 	// the fsxadmin user to access the NetApp ONTAP CLI and REST API to manage your
-	// file system resources. For more information, see [Managing resources using NetApp Applicaton].
+	// file system resources. For more information, see [Managing resources using NetApp Application].
 	//
-	// [Managing resources using NetApp Applicaton]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-resources-ontap-apps.html
+	// [Managing resources using NetApp Application]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-resources-ontap-apps.html
 	FsxAdminPassword *string
 
 	// Use to update the number of high-availability (HA) pairs for a

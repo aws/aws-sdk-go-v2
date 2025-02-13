@@ -1,3 +1,7 @@
+# v1.46.0 (2025-02-12)
+
+* **Feature**: Added support for the new voice - Jasmine (en-SG). Jasmine is available as a Neural voice only.
+
 # v1.45.16 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

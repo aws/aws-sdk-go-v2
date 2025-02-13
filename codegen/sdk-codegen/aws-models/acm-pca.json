@@ -1208,7 +1208,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 20480
+                    "max": 81920
                 },
                 "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
             }
@@ -2004,6 +2004,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configures the behavior of the CRL Distribution Point extension for certificates issued by your certificate authority. If this field is not provided, then the CRl Distribution Point Extension will be present and contain the default CRL URL.</p>"
                     }
+                },
+                "CrlType": {
+                    "target": "com.amazonaws.acmpca#CrlType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Choose whether to use a partitioned or complete CRL. Your choice determines the maximum number of certificates that the certificate authority can issue and revoke, as described in the <a href=\"https://docs.aws.amazon.com/general/latest/gr/pca.html#limits_pca-connector-ad\">Amazon Web Services Private CA quotas</a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARTITIONED</code> - The default setting. Partitioned CRLs are an especially good option for devices that have limited processing power or storage capacity, such as certain IoT devices. Compared to complete CRLs, partitioned CRLs dramatically increase the number of certificates your private CA can issue. Each certificate that Amazon Web Services Private CA issues is bound to a specific CRL partition through the CRL distribution point (CDP) defined in <a href=\"https://datatracker.ietf.org/doc/html/rfc5280\">RFC 5280</a>.</p>\n               <important>\n                  <p>To make sure that your client fetches the CRL from a valid endpoint, we recommend that you programmatically validate that the CRL's issuing distribution point (IDP) URI matches the certificate's CDP URI. Amazon Web Services Private CA marks the IDP extension as critical, which your client must be able to process.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETE</code> - Amazon Web Services Private CA maintains a single CRL file for all unexpired certificates issued by a CA that have been revoked for any reason.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CustomPath": {
+                    "target": "com.amazonaws.acmpca#CrlPathString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Designates a custom file path in S3 for CRL(s). For example, <code>http://&lt;CustomName&gt;/&lt;CustomPath&gt;/&lt;CrlPartition_GUID&gt;.crl</code>. You can change the custom path up to five times.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2024,6 +2036,33 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains configuration information for the default behavior of the CRL Distribution Point (CDP) extension in certificates issued by your CA. This extension \n\t\t\tcontains a link to download the CRL, so you can check whether a certificate has been revoked. To choose whether you want this extension\n\t\t\tomitted or not in certificates issued by your CA, you can set the <b>OmitExtension</b> parameter.</p>"
+            }
+        },
+        "com.amazonaws.acmpca#CrlPathString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)*$"
+            }
+        },
+        "com.amazonaws.acmpca#CrlType": {
+            "type": "enum",
+            "members": {
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "PARTITIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTITIONED"
+                    }
+                }
             }
         },
         "com.amazonaws.acmpca#CsrBlob": {

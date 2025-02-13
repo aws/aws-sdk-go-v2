@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/aws/aws-sdk-go v1.44.28
 	github.com/aws/aws-sdk-go-v2 v1.36.1
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.40.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.40.1
 	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.24.15
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.76.1
 	github.com/aws/aws-sdk-go-v2/service/schemas v1.28.17

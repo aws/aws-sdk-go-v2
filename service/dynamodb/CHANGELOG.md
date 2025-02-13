@@ -1,3 +1,7 @@
+# v1.40.1 (2025-02-11)
+
+* No change notes available for this release.
+
 # v1.40.0 (2025-02-05)
 
 * **Feature**: Track AccountID endpoint mode in user-agent.
