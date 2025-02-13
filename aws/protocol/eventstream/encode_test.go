@@ -3,6 +3,7 @@ package eventstream
 import (
 	"bytes"
 	"encoding/hex"
+	"io"
 	"reflect"
 	"testing"
 )
@@ -46,5 +47,29 @@ func BenchmarkEncode(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+	}
+}
+
+func TestEncoder_Limits(t *testing.T) {
+	l := 25 * 1024 * 1024 // Previously we failed if message was set to >16 MB
+	payload := make([]byte, l)
+	encoder := NewEncoder()
+	err := encoder.Encode(io.Discard, Message{Payload: payload})
+	if err != nil {
+		t.Fatalf("Expected encoder being able to encode %d size, failed with %v", l, err)
+	}
+
+	h := Header{
+		Name: "event-id", Value: Int16Value(123),
+	}
+
+	headers := make(Headers, 0, 10_000) // Previously we failed if headers size was above a certain size
+	for i := 0; i < 10_000; i++ {
+		headers = append(headers, h)
+	}
+
+	err = encoder.Encode(io.Discard, Message{Headers: headers})
+	if err != nil {
+		t.Fatalf("Expected encoder being able to encode %d size, failed with %v", l, err)
 	}
 }
