@@ -121,6 +121,9 @@ func (c *Client) addOperationGetInlinePolicyForPermissionSetMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetInlinePolicyForPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -143,6 +143,9 @@ func (c *Client) addOperationListModelCardVersionsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListModelCardVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

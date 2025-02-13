@@ -128,6 +128,9 @@ func (c *Client) addOperationListReceivedGrantsForOrganizationMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListReceivedGrantsForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}

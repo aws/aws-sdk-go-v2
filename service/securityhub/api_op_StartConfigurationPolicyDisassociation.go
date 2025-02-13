@@ -121,6 +121,9 @@ func (c *Client) addOperationStartConfigurationPolicyDisassociationMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartConfigurationPolicyDisassociationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -126,6 +126,9 @@ func (c *Client) addOperationGetVoiceConnectorLoggingConfigurationMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetVoiceConnectorLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -159,6 +159,9 @@ func (c *Client) addOperationStartContentModerationMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartContentModerationValidationMiddleware(stack); err != nil {
 		return err
 	}

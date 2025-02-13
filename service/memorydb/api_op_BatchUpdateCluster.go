@@ -121,6 +121,9 @@ func (c *Client) addOperationBatchUpdateClusterMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchUpdateClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationDisassociateWorkspaceApplicationMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateWorkspaceApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

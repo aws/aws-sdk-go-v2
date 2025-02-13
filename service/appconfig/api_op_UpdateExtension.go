@@ -148,6 +148,9 @@ func (c *Client) addOperationUpdateExtensionMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateExtensionValidationMiddleware(stack); err != nil {
 		return err
 	}

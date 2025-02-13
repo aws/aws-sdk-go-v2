@@ -126,6 +126,9 @@ func (c *Client) addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetMapStyleDescriptorMiddleware(stack); err != nil {
 		return err
 	}

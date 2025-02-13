@@ -133,6 +133,9 @@ func (c *Client) addOperationCreateAddressListImportJobMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAddressListImportJobMiddleware(stack, options); err != nil {
 		return err
 	}

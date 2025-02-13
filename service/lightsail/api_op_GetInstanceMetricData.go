@@ -273,6 +273,9 @@ func (c *Client) addOperationGetInstanceMetricDataMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetInstanceMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}

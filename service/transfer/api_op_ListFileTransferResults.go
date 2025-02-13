@@ -155,6 +155,9 @@ func (c *Client) addOperationListFileTransferResultsMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFileTransferResultsValidationMiddleware(stack); err != nil {
 		return err
 	}

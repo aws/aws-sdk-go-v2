@@ -143,6 +143,9 @@ func (c *Client) addOperationGetComponentVersionArtifactMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetComponentVersionArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteVoiceProfileMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVoiceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

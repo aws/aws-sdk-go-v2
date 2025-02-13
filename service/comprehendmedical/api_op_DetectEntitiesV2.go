@@ -143,6 +143,9 @@ func (c *Client) addOperationDetectEntitiesV2Middlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetectEntitiesV2ValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,6 +118,9 @@ func (c *Client) addOperationDeleteSlackUserIdentityMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteSlackUserIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}

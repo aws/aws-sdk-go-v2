@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteWirelessDeviceImportTaskMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteWirelessDeviceImportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

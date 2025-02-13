@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeConditionalForwardersMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeConditionalForwardersValidationMiddleware(stack); err != nil {
 		return err
 	}

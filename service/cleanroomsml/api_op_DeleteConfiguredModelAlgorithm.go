@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteConfiguredModelAlgorithmMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfiguredModelAlgorithmValidationMiddleware(stack); err != nil {
 		return err
 	}

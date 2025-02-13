@@ -107,6 +107,9 @@ func (c *Client) addOperationCancelAnnotationImportJobMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCancelAnnotationImportJobMiddleware(stack); err != nil {
 		return err
 	}

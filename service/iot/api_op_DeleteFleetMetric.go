@@ -115,6 +115,9 @@ func (c *Client) addOperationDeleteFleetMetricMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteFleetMetricValidationMiddleware(stack); err != nil {
 		return err
 	}

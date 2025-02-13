@@ -136,6 +136,9 @@ func (c *Client) addOperationListHoursOfOperationOverridesMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListHoursOfOperationOverridesValidationMiddleware(stack); err != nil {
 		return err
 	}

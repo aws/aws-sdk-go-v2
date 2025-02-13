@@ -159,6 +159,9 @@ func (c *Client) addOperationCreateResourceGatewayMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateResourceGatewayMiddleware(stack, options); err != nil {
 		return err
 	}

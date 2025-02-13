@@ -116,6 +116,9 @@ func (c *Client) addOperationGetSolutionMetricsMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSolutionMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

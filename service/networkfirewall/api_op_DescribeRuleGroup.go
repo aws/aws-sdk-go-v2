@@ -160,6 +160,9 @@ func (c *Client) addOperationDescribeRuleGroupMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRuleGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -116,6 +116,9 @@ func (c *Client) addOperationDisassociateApprovalRuleTemplateFromRepositoryMiddl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateApprovalRuleTemplateFromRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}

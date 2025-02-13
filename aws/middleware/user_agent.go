@@ -109,7 +109,56 @@ const (
 	UserAgentFeatureRequestChecksumWhenRequired   = "a"
 	UserAgentFeatureResponseChecksumWhenSupported = "b"
 	UserAgentFeatureResponseChecksumWhenRequired  = "c"
+
+	UserAgentFeatureDynamoDBUserAgent = "d" // not yet implemented
+
+	UserAgentFeatureCredentialsCode                 = "e"
+	UserAgentFeatureCredentialsJvmSystemProperties  = "f" // n/a (this is not a JVM sdk)
+	UserAgentFeatureCredentialsEnvVars              = "g"
+	UserAgentFeatureCredentialsEnvVarsStsWebIDToken = "h"
+	UserAgentFeatureCredentialsStsAssumeRole        = "i"
+	UserAgentFeatureCredentialsStsAssumeRoleSaml    = "j" // not yet implemented
+	UserAgentFeatureCredentialsStsAssumeRoleWebID   = "k"
+	UserAgentFeatureCredentialsStsFederationToken   = "l" // not yet implemented
+	UserAgentFeatureCredentialsStsSessionToken      = "m" // not yet implemented
+	UserAgentFeatureCredentialsProfile              = "n"
+	UserAgentFeatureCredentialsProfileSourceProfile = "o"
+	UserAgentFeatureCredentialsProfileNamedProvider = "p"
+	UserAgentFeatureCredentialsProfileStsWebIDToken = "q"
+	UserAgentFeatureCredentialsProfileSso           = "r"
+	UserAgentFeatureCredentialsSso                  = "s"
+	UserAgentFeatureCredentialsProfileSsoLegacy     = "t"
+	UserAgentFeatureCredentialsSsoLegacy            = "u"
+	UserAgentFeatureCredentialsProfileProcess       = "v"
+	UserAgentFeatureCredentialsProcess              = "w"
+	UserAgentFeatureCredentialsBoto2ConfigFile      = "x" // n/a (this is not boto/Python)
+	UserAgentFeatureCredentialsAwsSdkStore          = "y" // n/a (this is used by .NET based sdk)
+	UserAgentFeatureCredentialsHTTP                 = "z"
+	UserAgentFeatureCredentialsIMDS                 = "0"
 )
+
+var credentialSourceToFeature = map[aws.CredentialSource]UserAgentFeature{
+	aws.CredentialsCode:                 UserAgentFeatureCredentialsCode,
+	aws.CredentialsEnvVars:              UserAgentFeatureCredentialsEnvVars,
+	aws.CredentialsEnvVarsStsWebIDToken: UserAgentFeatureCredentialsEnvVarsStsWebIDToken,
+	aws.CredentialsStsAssumeRole:        UserAgentFeatureCredentialsStsAssumeRole,
+	aws.CredentialsStsAssumeRoleSaml:    UserAgentFeatureCredentialsStsAssumeRoleSaml,
+	aws.CredentialsStsAssumeRoleWebID:   UserAgentFeatureCredentialsStsAssumeRoleWebID,
+	aws.CredentialsStsFederationToken:   UserAgentFeatureCredentialsStsFederationToken,
+	aws.CredentialsStsSessionToken:      UserAgentFeatureCredentialsStsSessionToken,
+	aws.CredentialsProfile:              UserAgentFeatureCredentialsProfile,
+	aws.CredentialsProfileSourceProfile: UserAgentFeatureCredentialsProfileSourceProfile,
+	aws.CredentialsProfileNamedProvider: UserAgentFeatureCredentialsProfileNamedProvider,
+	aws.CredentialsProfileStsWebIDToken: UserAgentFeatureCredentialsProfileStsWebIDToken,
+	aws.CredentialsProfileSso:           UserAgentFeatureCredentialsProfileSso,
+	aws.CredentialsSso:                  UserAgentFeatureCredentialsSso,
+	aws.CredentialsProfileSsoLegacy:     UserAgentFeatureCredentialsProfileSsoLegacy,
+	aws.CredentialsSsoLegacy:            UserAgentFeatureCredentialsSsoLegacy,
+	aws.CredentialsProfileProcess:       UserAgentFeatureCredentialsProfileProcess,
+	aws.CredentialsProcess:              UserAgentFeatureCredentialsProcess,
+	aws.CredentialsHTTP:                 UserAgentFeatureCredentialsHTTP,
+	aws.CredentialsIMDS:                 UserAgentFeatureCredentialsIMDS,
+}
 
 // RequestUserAgent is a build middleware that set the User-Agent for the request.
 type RequestUserAgent struct {
@@ -261,6 +310,14 @@ func (u *RequestUserAgent) AddSDKAgentKey(keyType SDKAgentKeyType, key string) {
 func (u *RequestUserAgent) AddSDKAgentKeyValue(keyType SDKAgentKeyType, key, value string) {
 	// TODO: should target sdkAgent
 	u.userAgent.AddKeyValue(keyType.string(), strings.Map(rules, key)+"#"+strings.Map(rules, value))
+}
+
+// AddCredentialsSource adds the credential source as a feature on the User-Agent string
+func (u *RequestUserAgent) AddCredentialsSource(source aws.CredentialSource) {
+	x, ok := credentialSourceToFeature[source]
+	if ok {
+		u.AddUserAgentFeature(x)
+	}
 }
 
 // ID the name of the middleware.

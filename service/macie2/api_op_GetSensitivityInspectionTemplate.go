@@ -126,6 +126,9 @@ func (c *Client) addOperationGetSensitivityInspectionTemplateMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSensitivityInspectionTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

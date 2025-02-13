@@ -113,6 +113,9 @@ func (c *Client) addOperationSetTagsForResourceMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetTagsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

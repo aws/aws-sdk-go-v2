@@ -139,6 +139,9 @@ func (c *Client) addOperationGetEntitlementsMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEntitlementsValidationMiddleware(stack); err != nil {
 		return err
 	}

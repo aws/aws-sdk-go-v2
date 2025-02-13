@@ -127,6 +127,9 @@ func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSubmitFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}

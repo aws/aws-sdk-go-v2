@@ -128,6 +128,9 @@ func (c *Client) addOperationCreateMonitoringScheduleMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateMonitoringScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}

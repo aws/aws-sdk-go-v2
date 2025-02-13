@@ -124,6 +124,9 @@ func (c *Client) addOperationGetAutoshiftObserverNotificationStatusMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAutoshiftObserverNotificationStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}

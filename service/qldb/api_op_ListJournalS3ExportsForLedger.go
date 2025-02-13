@@ -139,6 +139,9 @@ func (c *Client) addOperationListJournalS3ExportsForLedgerMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListJournalS3ExportsForLedgerValidationMiddleware(stack); err != nil {
 		return err
 	}

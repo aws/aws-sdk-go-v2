@@ -143,6 +143,9 @@ func (c *Client) addOperationListGroupsOlderThanOrderingIdMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListGroupsOlderThanOrderingIdValidationMiddleware(stack); err != nil {
 		return err
 	}

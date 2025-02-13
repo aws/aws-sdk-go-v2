@@ -127,6 +127,9 @@ func (c *Client) addOperationGetClusterSessionCredentialsMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetClusterSessionCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

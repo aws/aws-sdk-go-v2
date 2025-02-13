@@ -139,6 +139,9 @@ func (c *Client) addOperationGetAgreementTermsMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAgreementTermsValidationMiddleware(stack); err != nil {
 		return err
 	}

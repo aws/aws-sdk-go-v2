@@ -115,6 +115,9 @@ func (c *Client) addOperationGetLandingZoneOperationMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLandingZoneOperationValidationMiddleware(stack); err != nil {
 		return err
 	}

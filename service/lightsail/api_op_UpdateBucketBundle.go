@@ -140,6 +140,9 @@ func (c *Client) addOperationUpdateBucketBundleMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateBucketBundleValidationMiddleware(stack); err != nil {
 		return err
 	}

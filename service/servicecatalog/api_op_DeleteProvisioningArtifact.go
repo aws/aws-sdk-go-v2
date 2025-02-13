@@ -124,6 +124,9 @@ func (c *Client) addOperationDeleteProvisioningArtifactMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteProvisioningArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}

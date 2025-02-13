@@ -130,6 +130,9 @@ func (c *Client) addOperationUpdateChannelNamespaceMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateChannelNamespaceValidationMiddleware(stack); err != nil {
 		return err
 	}

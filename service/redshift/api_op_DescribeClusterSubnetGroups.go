@@ -163,6 +163,9 @@ func (c *Client) addOperationDescribeClusterSubnetGroupsMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterSubnetGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}

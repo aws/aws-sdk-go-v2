@@ -139,6 +139,9 @@ func (c *Client) addOperationCreateStarterMappingTemplateMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateStarterMappingTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

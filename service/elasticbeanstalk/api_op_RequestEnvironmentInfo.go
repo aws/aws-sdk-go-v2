@@ -144,6 +144,9 @@ func (c *Client) addOperationRequestEnvironmentInfoMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRequestEnvironmentInfoValidationMiddleware(stack); err != nil {
 		return err
 	}

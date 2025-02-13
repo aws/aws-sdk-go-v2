@@ -124,6 +124,9 @@ func (c *Client) addOperationPutSipMediaApplicationAlexaSkillConfigurationMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutSipMediaApplicationAlexaSkillConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

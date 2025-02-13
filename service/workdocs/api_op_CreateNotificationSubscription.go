@@ -134,6 +134,9 @@ func (c *Client) addOperationCreateNotificationSubscriptionMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateNotificationSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -137,6 +137,9 @@ func (c *Client) addOperationResumeGameServerGroupMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpResumeGameServerGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

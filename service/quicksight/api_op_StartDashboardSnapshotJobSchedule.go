@@ -136,6 +136,9 @@ func (c *Client) addOperationStartDashboardSnapshotJobScheduleMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartDashboardSnapshotJobScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}

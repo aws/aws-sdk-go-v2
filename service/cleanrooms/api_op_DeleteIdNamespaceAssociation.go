@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteIdNamespaceAssociationMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteIdNamespaceAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

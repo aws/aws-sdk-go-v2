@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteIntentVersionMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteIntentVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

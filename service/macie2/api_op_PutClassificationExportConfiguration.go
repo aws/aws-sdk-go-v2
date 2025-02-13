@@ -115,6 +115,9 @@ func (c *Client) addOperationPutClassificationExportConfigurationMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutClassificationExportConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -192,6 +192,9 @@ func (c *Client) addOperationGetFaceSearchMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFaceSearchValidationMiddleware(stack); err != nil {
 		return err
 	}

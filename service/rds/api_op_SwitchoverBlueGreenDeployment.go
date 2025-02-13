@@ -138,6 +138,9 @@ func (c *Client) addOperationSwitchoverBlueGreenDeploymentMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSwitchoverBlueGreenDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}

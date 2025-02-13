@@ -119,6 +119,9 @@ func (c *Client) addOperationAssociateSourceNetworkStackMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateSourceNetworkStackValidationMiddleware(stack); err != nil {
 		return err
 	}

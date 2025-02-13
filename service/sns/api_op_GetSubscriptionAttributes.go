@@ -172,6 +172,9 @@ func (c *Client) addOperationGetSubscriptionAttributesMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSubscriptionAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

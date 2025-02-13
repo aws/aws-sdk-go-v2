@@ -136,6 +136,9 @@ func (c *Client) addOperationUpdateTrafficDistributionMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateTrafficDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}

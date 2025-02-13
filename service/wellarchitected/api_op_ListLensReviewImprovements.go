@@ -181,6 +181,9 @@ func (c *Client) addOperationListLensReviewImprovementsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLensReviewImprovementsValidationMiddleware(stack); err != nil {
 		return err
 	}

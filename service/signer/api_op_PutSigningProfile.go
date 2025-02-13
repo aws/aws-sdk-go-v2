@@ -144,6 +144,9 @@ func (c *Client) addOperationPutSigningProfileMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutSigningProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

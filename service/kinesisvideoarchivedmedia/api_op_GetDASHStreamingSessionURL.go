@@ -355,6 +355,9 @@ func (c *Client) addOperationGetDASHStreamingSessionURLMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDASHStreamingSessionURL(options.Region), middleware.Before); err != nil {
 		return err
 	}

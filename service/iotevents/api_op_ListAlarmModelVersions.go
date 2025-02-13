@@ -123,6 +123,9 @@ func (c *Client) addOperationListAlarmModelVersionsMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAlarmModelVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -191,6 +191,9 @@ func (c *Client) addOperationUpdateAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateAssetModelCompositeModelMiddleware(stack); err != nil {
 		return err
 	}

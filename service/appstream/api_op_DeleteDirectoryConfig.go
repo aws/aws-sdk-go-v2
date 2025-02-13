@@ -109,6 +109,9 @@ func (c *Client) addOperationDeleteDirectoryConfigMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDirectoryConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

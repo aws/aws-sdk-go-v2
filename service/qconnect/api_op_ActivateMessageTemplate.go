@@ -138,6 +138,9 @@ func (c *Client) addOperationActivateMessageTemplateMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpActivateMessageTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

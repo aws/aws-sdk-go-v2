@@ -134,6 +134,9 @@ func (c *Client) addOperationUpdatePullThroughCacheRuleMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdatePullThroughCacheRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

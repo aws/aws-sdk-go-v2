@@ -120,6 +120,9 @@ func (c *Client) addOperationUpdateUserHierarchyGroupNameMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateUserHierarchyGroupNameValidationMiddleware(stack); err != nil {
 		return err
 	}

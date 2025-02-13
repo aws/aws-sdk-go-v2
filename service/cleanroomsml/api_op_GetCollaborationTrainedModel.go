@@ -190,6 +190,9 @@ func (c *Client) addOperationGetCollaborationTrainedModelMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCollaborationTrainedModelValidationMiddleware(stack); err != nil {
 		return err
 	}

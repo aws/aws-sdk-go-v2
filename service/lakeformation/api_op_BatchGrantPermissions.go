@@ -119,6 +119,9 @@ func (c *Client) addOperationBatchGrantPermissionsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGrantPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -155,6 +155,9 @@ func (c *Client) addOperationSubmitRegistrationVersionMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSubmitRegistrationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

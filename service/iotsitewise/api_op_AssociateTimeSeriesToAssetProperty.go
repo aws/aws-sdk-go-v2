@@ -130,6 +130,9 @@ func (c *Client) addOperationAssociateTimeSeriesToAssetPropertyMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opAssociateTimeSeriesToAssetPropertyMiddleware(stack); err != nil {
 		return err
 	}

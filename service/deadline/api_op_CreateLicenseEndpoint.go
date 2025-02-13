@@ -131,6 +131,9 @@ func (c *Client) addOperationCreateLicenseEndpointMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateLicenseEndpointMiddleware(stack); err != nil {
 		return err
 	}

@@ -127,6 +127,9 @@ func (c *Client) addOperationUpdateDomainEndpointOptionsMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDomainEndpointOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

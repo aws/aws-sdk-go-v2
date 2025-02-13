@@ -128,6 +128,9 @@ func (c *Client) addOperationDeleteChapCredentialsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteChapCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

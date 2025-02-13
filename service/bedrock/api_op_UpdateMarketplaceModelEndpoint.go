@@ -128,6 +128,9 @@ func (c *Client) addOperationUpdateMarketplaceModelEndpointMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateMarketplaceModelEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

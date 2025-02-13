@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteUserHierarchyGroupMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteUserHierarchyGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -137,6 +137,9 @@ func (c *Client) addOperationStartResourceGroupingRecommendationTaskMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartResourceGroupingRecommendationTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

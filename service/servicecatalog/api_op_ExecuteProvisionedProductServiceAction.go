@@ -137,6 +137,9 @@ func (c *Client) addOperationExecuteProvisionedProductServiceActionMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opExecuteProvisionedProductServiceActionMiddleware(stack, options); err != nil {
 		return err
 	}

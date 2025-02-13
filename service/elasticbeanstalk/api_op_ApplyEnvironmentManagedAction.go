@@ -131,6 +131,9 @@ func (c *Client) addOperationApplyEnvironmentManagedActionMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpApplyEnvironmentManagedActionValidationMiddleware(stack); err != nil {
 		return err
 	}

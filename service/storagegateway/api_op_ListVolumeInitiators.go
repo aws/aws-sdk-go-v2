@@ -117,6 +117,9 @@ func (c *Client) addOperationListVolumeInitiatorsMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListVolumeInitiatorsValidationMiddleware(stack); err != nil {
 		return err
 	}

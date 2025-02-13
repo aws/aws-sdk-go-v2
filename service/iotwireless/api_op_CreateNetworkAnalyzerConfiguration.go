@@ -148,6 +148,9 @@ func (c *Client) addOperationCreateNetworkAnalyzerConfigurationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateNetworkAnalyzerConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}

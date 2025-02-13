@@ -117,6 +117,9 @@ func (c *Client) addOperationDeleteOutboundConnectionMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteOutboundConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

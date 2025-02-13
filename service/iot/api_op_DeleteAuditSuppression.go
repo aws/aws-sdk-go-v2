@@ -120,6 +120,9 @@ func (c *Client) addOperationDeleteAuditSuppressionMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteAuditSuppressionValidationMiddleware(stack); err != nil {
 		return err
 	}

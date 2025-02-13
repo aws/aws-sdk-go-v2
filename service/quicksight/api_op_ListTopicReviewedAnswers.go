@@ -134,6 +134,9 @@ func (c *Client) addOperationListTopicReviewedAnswersMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTopicReviewedAnswersValidationMiddleware(stack); err != nil {
 		return err
 	}

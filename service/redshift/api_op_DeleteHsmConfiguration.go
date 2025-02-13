@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteHsmConfigurationMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteHsmConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

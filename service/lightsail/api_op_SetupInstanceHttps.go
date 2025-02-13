@@ -133,6 +133,9 @@ func (c *Client) addOperationSetupInstanceHttpsMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetupInstanceHttpsValidationMiddleware(stack); err != nil {
 		return err
 	}

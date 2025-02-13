@@ -117,6 +117,9 @@ func (c *Client) addOperationGetContinuousDeploymentPolicyConfigMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetContinuousDeploymentPolicyConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

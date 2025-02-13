@@ -299,6 +299,9 @@ func (c *Client) addOperationCreateAssociationMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

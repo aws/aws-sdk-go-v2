@@ -143,6 +143,9 @@ func (c *Client) addOperationListModelExplainabilityJobDefinitionsMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelExplainabilityJobDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -111,6 +111,9 @@ func (c *Client) addOperationGetRawMessageContentMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRawMessageContentValidationMiddleware(stack); err != nil {
 		return err
 	}

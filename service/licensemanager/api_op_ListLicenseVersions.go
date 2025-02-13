@@ -121,6 +121,9 @@ func (c *Client) addOperationListLicenseVersionsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLicenseVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -136,6 +136,9 @@ func (c *Client) addOperationCreateLakeFormationIdentityCenterConfigurationMiddl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateLakeFormationIdentityCenterConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -174,6 +174,9 @@ func (c *Client) addOperationDescribeResourceCollectionHealthMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeResourceCollectionHealthValidationMiddleware(stack); err != nil {
 		return err
 	}

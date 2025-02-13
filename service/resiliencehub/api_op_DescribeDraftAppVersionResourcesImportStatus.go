@@ -151,6 +151,9 @@ func (c *Client) addOperationDescribeDraftAppVersionResourcesImportStatusMiddlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDraftAppVersionResourcesImportStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

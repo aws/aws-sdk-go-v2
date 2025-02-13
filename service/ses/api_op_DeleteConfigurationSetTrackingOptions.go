@@ -121,6 +121,9 @@ func (c *Client) addOperationDeleteConfigurationSetTrackingOptionsMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfigurationSetTrackingOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

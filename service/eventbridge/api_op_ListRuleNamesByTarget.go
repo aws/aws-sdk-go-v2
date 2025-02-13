@@ -141,6 +141,9 @@ func (c *Client) addOperationListRuleNamesByTargetMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRuleNamesByTargetValidationMiddleware(stack); err != nil {
 		return err
 	}

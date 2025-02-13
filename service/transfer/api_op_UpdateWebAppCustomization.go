@@ -123,6 +123,9 @@ func (c *Client) addOperationUpdateWebAppCustomizationMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateWebAppCustomizationValidationMiddleware(stack); err != nil {
 		return err
 	}

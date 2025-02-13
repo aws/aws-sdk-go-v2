@@ -155,6 +155,9 @@ func (c *Client) addOperationCreateQuantumTaskMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateQuantumTaskMiddleware(stack, options); err != nil {
 		return err
 	}

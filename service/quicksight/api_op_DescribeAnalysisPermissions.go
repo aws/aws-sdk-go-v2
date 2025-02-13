@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeAnalysisPermissionsMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAnalysisPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

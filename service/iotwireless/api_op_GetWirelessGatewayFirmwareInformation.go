@@ -112,6 +112,9 @@ func (c *Client) addOperationGetWirelessGatewayFirmwareInformationMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetWirelessGatewayFirmwareInformationValidationMiddleware(stack); err != nil {
 		return err
 	}

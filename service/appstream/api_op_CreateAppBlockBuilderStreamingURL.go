@@ -119,6 +119,9 @@ func (c *Client) addOperationCreateAppBlockBuilderStreamingURLMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateAppBlockBuilderStreamingURLValidationMiddleware(stack); err != nil {
 		return err
 	}

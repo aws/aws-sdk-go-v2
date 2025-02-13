@@ -122,6 +122,9 @@ func (c *Client) addOperationBatchGetTokenBalanceMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetTokenBalanceValidationMiddleware(stack); err != nil {
 		return err
 	}

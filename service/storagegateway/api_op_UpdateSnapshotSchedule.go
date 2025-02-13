@@ -158,6 +158,9 @@ func (c *Client) addOperationUpdateSnapshotScheduleMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateSnapshotScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}

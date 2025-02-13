@@ -117,6 +117,9 @@ func (c *Client) addOperationGetLinkedWhatsAppBusinessAccountMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLinkedWhatsAppBusinessAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

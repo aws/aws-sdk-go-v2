@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteSubnetGroupMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

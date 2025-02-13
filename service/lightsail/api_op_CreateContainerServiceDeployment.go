@@ -132,6 +132,9 @@ func (c *Client) addOperationCreateContainerServiceDeploymentMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateContainerServiceDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}

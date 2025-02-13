@@ -122,6 +122,9 @@ func (c *Client) addOperationDetachDiskMiddlewares(stack *middleware.Stack, opti
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetachDiskValidationMiddleware(stack); err != nil {
 		return err
 	}

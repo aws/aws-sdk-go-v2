@@ -143,6 +143,9 @@ func (c *Client) addOperationStopInferenceExperimentMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopInferenceExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}

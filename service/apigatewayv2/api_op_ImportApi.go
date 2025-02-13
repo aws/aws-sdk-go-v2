@@ -186,6 +186,9 @@ func (c *Client) addOperationImportApiMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpImportApiValidationMiddleware(stack); err != nil {
 		return err
 	}

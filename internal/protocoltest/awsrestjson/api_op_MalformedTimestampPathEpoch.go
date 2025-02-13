@@ -105,6 +105,9 @@ func (c *Client) addOperationMalformedTimestampPathEpochMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpMalformedTimestampPathEpochValidationMiddleware(stack); err != nil {
 		return err
 	}

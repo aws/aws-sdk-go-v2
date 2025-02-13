@@ -129,6 +129,9 @@ func (c *Client) addOperationGetRestoreTestingInferredMetadataMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRestoreTestingInferredMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

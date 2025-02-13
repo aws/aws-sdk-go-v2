@@ -137,6 +137,9 @@ func (c *Client) addOperationListHostedConfigurationVersionsMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListHostedConfigurationVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

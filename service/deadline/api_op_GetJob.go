@@ -212,6 +212,9 @@ func (c *Client) addOperationGetJobMiddlewares(stack *middleware.Stack, options 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetJobMiddleware(stack); err != nil {
 		return err
 	}

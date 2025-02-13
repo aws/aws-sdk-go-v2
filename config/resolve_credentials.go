@@ -114,8 +114,10 @@ func resolveCredentialChain(ctx context.Context, cfg *aws.Config, configs config
 	case sharedProfileSet:
 		err = resolveCredsFromProfile(ctx, cfg, envConfig, sharedConfig, other)
 	case envConfig.Credentials.HasKeys():
-		cfg.Credentials = credentials.StaticCredentialsProvider{Value: envConfig.Credentials}
+		cfg.AddCredentialSource(aws.CredentialsEnvVars)
+		cfg.Credentials = credentials.StaticCredentialsProvider{Value: envConfig.Credentials, Source: cfg.CredentialChain}
 	case len(envConfig.WebIdentityTokenFilePath) > 0:
+		cfg.AddCredentialSource(aws.CredentialsEnvVarsStsWebIDToken)
 		err = assumeWebIdentity(ctx, cfg, envConfig.WebIdentityTokenFilePath, envConfig.RoleARN, envConfig.RoleSessionName, configs)
 	default:
 		err = resolveCredsFromProfile(ctx, cfg, envConfig, sharedConfig, other)
@@ -134,19 +136,22 @@ func resolveCredentialChain(ctx context.Context, cfg *aws.Config, configs config
 }
 
 func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *EnvConfig, sharedConfig *SharedConfig, configs configs) (err error) {
-
 	switch {
 	case sharedConfig.Source != nil:
+		cfg.AddCredentialSource(aws.CredentialsProfileSourceProfile)
 		// Assume IAM role with credentials source from a different profile.
 		err = resolveCredsFromProfile(ctx, cfg, envConfig, sharedConfig.Source, configs)
 
 	case sharedConfig.Credentials.HasKeys():
 		// Static Credentials from Shared Config/Credentials file.
+		cfg.AddCredentialSource(aws.CredentialsProfile)
 		cfg.Credentials = credentials.StaticCredentialsProvider{
-			Value: sharedConfig.Credentials,
+			Value:  sharedConfig.Credentials,
+			Source: cfg.CredentialChain,
 		}
 
 	case len(sharedConfig.CredentialSource) != 0:
+		cfg.AddCredentialSource(aws.CredentialsProfileNamedProvider)
 		err = resolveCredsFromSource(ctx, cfg, envConfig, sharedConfig, configs)
 
 	case len(sharedConfig.WebIdentityTokenFile) != 0:
@@ -156,19 +161,33 @@ func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *En
 		return assumeWebIdentity(ctx, cfg, sharedConfig.WebIdentityTokenFile, sharedConfig.RoleARN, sharedConfig.RoleSessionName, configs)
 
 	case sharedConfig.hasSSOConfiguration():
+		if sharedConfig.hasLegacySSOConfiguration() {
+			cfg.AddCredentialSource(aws.CredentialsProfileSsoLegacy)
+			cfg.AddCredentialSource(aws.CredentialsSsoLegacy)
+		} else {
+			cfg.AddCredentialSource(aws.CredentialsSso)
+		}
+		if sharedConfig.SSOSession != nil {
+			cfg.AddCredentialSource(aws.CredentialsProfileSso)
+		}
 		err = resolveSSOCredentials(ctx, cfg, sharedConfig, configs)
 
 	case len(sharedConfig.CredentialProcess) != 0:
 		// Get credentials from CredentialProcess
+		cfg.AddCredentialSource(aws.CredentialsProfileProcess)
+		cfg.AddCredentialSource(aws.CredentialsProcess)
 		err = processCredentials(ctx, cfg, sharedConfig, configs)
 
 	case len(envConfig.ContainerCredentialsRelativePath) != 0:
+		cfg.AddCredentialSource(aws.CredentialsHTTP)
 		err = resolveHTTPCredProvider(ctx, cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, configs)
 
 	case len(envConfig.ContainerCredentialsEndpoint) != 0:
+		cfg.AddCredentialSource(aws.CredentialsHTTP)
 		err = resolveLocalHTTPCredProvider(ctx, cfg, envConfig.ContainerCredentialsEndpoint, envConfig.ContainerAuthorizationToken, configs)
 
 	default:
+		cfg.AddCredentialSource(aws.CredentialsIMDS)
 		err = resolveEC2RoleCredentials(ctx, cfg, configs)
 	}
 	if err != nil {
@@ -197,6 +216,10 @@ func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *S
 	}
 
 	cfgCopy := cfg.Copy()
+
+	options = append(options, func(o *ssocreds.Options) {
+		o.CredentialChain = cfg.CredentialChain
+	})
 
 	if sharedConfig.SSOSession != nil {
 		ssoTokenProviderOptionsFn, found, err := getSSOTokenProviderOptions(ctx, configs)
@@ -241,6 +264,10 @@ func processCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *Shar
 	if found {
 		opts = append(opts, options)
 	}
+
+	opts = append(opts, func(o *processcreds.Options) {
+		o.CredentialChain = cfg.CredentialChain
+	})
 
 	cfg.Credentials = processcreds.NewProvider(sharedConfig.CredentialProcess, opts...)
 
@@ -323,6 +350,7 @@ func resolveHTTPCredProvider(ctx context.Context, cfg *aws.Config, url, authToke
 			if cfg.Retryer != nil {
 				options.Retryer = cfg.Retryer()
 			}
+			options.CredentialChain = cfg.CredentialChain
 		},
 	}
 
@@ -349,12 +377,15 @@ func resolveHTTPCredProvider(ctx context.Context, cfg *aws.Config, url, authToke
 func resolveCredsFromSource(ctx context.Context, cfg *aws.Config, envConfig *EnvConfig, sharedCfg *SharedConfig, configs configs) (err error) {
 	switch sharedCfg.CredentialSource {
 	case credSourceEc2Metadata:
+		cfg.AddCredentialSource(aws.CredentialsIMDS)
 		return resolveEC2RoleCredentials(ctx, cfg, configs)
 
 	case credSourceEnvironment:
-		cfg.Credentials = credentials.StaticCredentialsProvider{Value: envConfig.Credentials}
+		cfg.AddCredentialSource(aws.CredentialsHTTP)
+		cfg.Credentials = credentials.StaticCredentialsProvider{Value: envConfig.Credentials, Source: cfg.CredentialChain}
 
 	case credSourceECSContainer:
+		cfg.AddCredentialSource(aws.CredentialsHTTP)
 		if len(envConfig.ContainerCredentialsRelativePath) != 0 {
 			return resolveHTTPCredProvider(ctx, cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, configs)
 		}
@@ -386,6 +417,7 @@ func resolveEC2RoleCredentials(ctx context.Context, cfg *aws.Config, configs con
 		if o.Client == nil {
 			o.Client = imds.NewFromConfig(*cfg)
 		}
+		o.Source = cfg.CredentialChain
 	})
 
 	provider := ec2rolecreds.New(optFns...)
@@ -394,7 +426,6 @@ func resolveEC2RoleCredentials(ctx context.Context, cfg *aws.Config, configs con
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 
@@ -473,6 +504,10 @@ func assumeWebIdentity(ctx context.Context, cfg *aws.Config, filepath string, ro
 		RoleARN: roleARN,
 	}
 
+	optFns = append(optFns, func(options *stscreds.WebIdentityRoleOptions) {
+		options.CredentialChain = cfg.CredentialChain
+	})
+
 	for _, fn := range optFns {
 		fn(&opts)
 	}
@@ -511,6 +546,9 @@ func credsFromAssumeRole(ctx context.Context, cfg *aws.Config, sharedCfg *Shared
 			if len(sharedCfg.MFASerial) != 0 {
 				options.SerialNumber = aws.String(sharedCfg.MFASerial)
 			}
+
+			// add existing credential chain
+			options.CredentialChain = cfg.CredentialChain
 		},
 	}
 
@@ -533,7 +571,6 @@ func credsFromAssumeRole(ctx context.Context, cfg *aws.Config, sharedCfg *Shared
 			return AssumeRoleTokenProviderNotSetError{}
 		}
 	}
-
 	cfg.Credentials = stscreds.NewAssumeRoleProvider(sts.NewFromConfig(*cfg), sharedCfg.RoleARN, optFns...)
 
 	return nil

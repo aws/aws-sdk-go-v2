@@ -172,6 +172,9 @@ func (c *Client) addOperationCreateQuerySuggestionsBlockListMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateQuerySuggestionsBlockListMiddleware(stack, options); err != nil {
 		return err
 	}

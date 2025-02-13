@@ -129,6 +129,9 @@ func (c *Client) addOperationGetAppInstanceRetentionSettingsMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAppInstanceRetentionSettingsMiddleware(stack); err != nil {
 		return err
 	}

@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeDashboardMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDashboardValidationMiddleware(stack); err != nil {
 		return err
 	}

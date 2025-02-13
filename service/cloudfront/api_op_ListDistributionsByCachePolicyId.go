@@ -128,6 +128,9 @@ func (c *Client) addOperationListDistributionsByCachePolicyIdMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDistributionsByCachePolicyIdValidationMiddleware(stack); err != nil {
 		return err
 	}

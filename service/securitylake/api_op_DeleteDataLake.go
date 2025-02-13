@@ -118,6 +118,9 @@ func (c *Client) addOperationDeleteDataLakeMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDataLakeValidationMiddleware(stack); err != nil {
 		return err
 	}

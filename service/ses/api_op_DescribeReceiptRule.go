@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribeReceiptRuleMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReceiptRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

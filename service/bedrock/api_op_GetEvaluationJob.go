@@ -177,6 +177,9 @@ func (c *Client) addOperationGetEvaluationJobMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEvaluationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

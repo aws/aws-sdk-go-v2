@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteWorkteamMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteWorkteamValidationMiddleware(stack); err != nil {
 		return err
 	}

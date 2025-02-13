@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteConditionalForwarderMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteConditionalForwarderValidationMiddleware(stack); err != nil {
 		return err
 	}

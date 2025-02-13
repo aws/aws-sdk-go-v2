@@ -223,6 +223,9 @@ func (c *Client) addOperationStartDeploymentMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}

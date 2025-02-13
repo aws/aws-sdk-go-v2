@@ -122,6 +122,9 @@ func (c *Client) addOperationGetMedicalTranscriptionJobMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMedicalTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

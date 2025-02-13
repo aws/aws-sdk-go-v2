@@ -128,6 +128,9 @@ func (c *Client) addOperationCreateDistributionWithTagsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDistributionWithTagsValidationMiddleware(stack); err != nil {
 		return err
 	}

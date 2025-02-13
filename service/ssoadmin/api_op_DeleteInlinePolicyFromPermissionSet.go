@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteInlinePolicyFromPermissionSetMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteInlinePolicyFromPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -132,6 +132,9 @@ func (c *Client) addOperationGetJourneyExecutionMetricsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetJourneyExecutionMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

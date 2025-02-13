@@ -142,6 +142,9 @@ func (c *Client) addOperationGetProtectConfigurationCountryRuleSetMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetProtectConfigurationCountryRuleSetValidationMiddleware(stack); err != nil {
 		return err
 	}

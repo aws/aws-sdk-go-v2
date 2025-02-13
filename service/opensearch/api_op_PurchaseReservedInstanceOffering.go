@@ -125,6 +125,9 @@ func (c *Client) addOperationPurchaseReservedInstanceOfferingMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPurchaseReservedInstanceOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}

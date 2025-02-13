@@ -157,6 +157,9 @@ func (c *Client) addOperationGetJourneyDateRangeKpiMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetJourneyDateRangeKpiValidationMiddleware(stack); err != nil {
 		return err
 	}

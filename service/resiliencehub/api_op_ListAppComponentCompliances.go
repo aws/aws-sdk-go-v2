@@ -131,6 +131,9 @@ func (c *Client) addOperationListAppComponentCompliancesMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAppComponentCompliancesValidationMiddleware(stack); err != nil {
 		return err
 	}

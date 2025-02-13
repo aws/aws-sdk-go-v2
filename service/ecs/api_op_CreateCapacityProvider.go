@@ -155,6 +155,9 @@ func (c *Client) addOperationCreateCapacityProviderMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateCapacityProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,6 +114,9 @@ func (c *Client) addOperationGetManagedViewMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetManagedViewValidationMiddleware(stack); err != nil {
 		return err
 	}

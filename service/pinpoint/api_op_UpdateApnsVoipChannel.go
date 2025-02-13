@@ -123,6 +123,9 @@ func (c *Client) addOperationUpdateApnsVoipChannelMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateApnsVoipChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

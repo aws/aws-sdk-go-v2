@@ -513,6 +513,9 @@ func (c *Client) addOperationRestoreDBClusterFromS3Middlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRestoreDBClusterFromS3ValidationMiddleware(stack); err != nil {
 		return err
 	}

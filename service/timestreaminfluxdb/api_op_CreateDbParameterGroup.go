@@ -142,6 +142,9 @@ func (c *Client) addOperationCreateDbParameterGroupMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDbParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

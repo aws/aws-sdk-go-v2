@@ -148,6 +148,9 @@ func (c *Client) addOperationBatchImportEvidenceToAssessmentControlMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchImportEvidenceToAssessmentControlValidationMiddleware(stack); err != nil {
 		return err
 	}

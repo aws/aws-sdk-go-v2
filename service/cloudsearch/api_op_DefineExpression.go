@@ -132,6 +132,9 @@ func (c *Client) addOperationDefineExpressionMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDefineExpressionValidationMiddleware(stack); err != nil {
 		return err
 	}

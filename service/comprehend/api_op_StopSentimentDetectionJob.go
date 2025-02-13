@@ -128,6 +128,9 @@ func (c *Client) addOperationStopSentimentDetectionJobMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopSentimentDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

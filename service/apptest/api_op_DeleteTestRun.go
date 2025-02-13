@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteTestRunMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteTestRunValidationMiddleware(stack); err != nil {
 		return err
 	}

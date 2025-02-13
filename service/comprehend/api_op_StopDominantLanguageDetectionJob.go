@@ -128,6 +128,9 @@ func (c *Client) addOperationStopDominantLanguageDetectionJobMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopDominantLanguageDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

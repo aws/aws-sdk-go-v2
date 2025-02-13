@@ -64,6 +64,9 @@ type WebIdentityRoleOptions struct {
 	// want to use as managed session policies.  The policies must exist in the
 	// same account as the role.
 	PolicyARNs []types.PolicyDescriptorType
+
+	// The chain of providers that was used to create this provider
+	CredentialChain []aws.CredentialSource
 }
 
 // IdentityTokenRetriever is an interface for retrieving a JWT
@@ -166,4 +169,12 @@ func getAccountID(u *types.AssumedRoleUser) string {
 		return ""
 	}
 	return parts[4]
+}
+
+// CredentialChain returns the credential chain that was used to construct this provider
+func (p *WebIdentityRoleProvider) CredentialChain() []aws.CredentialSource {
+	if p.options.CredentialChain == nil {
+		return []aws.CredentialSource{aws.CredentialsStsAssumeRoleWebID}
+	}
+	return p.options.CredentialChain
 }

@@ -118,6 +118,9 @@ func (c *Client) addOperationResetPersonalPINMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpResetPersonalPINValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -136,6 +136,9 @@ func (c *Client) addOperationGetGroupMembershipIdMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetGroupMembershipIdValidationMiddleware(stack); err != nil {
 		return err
 	}

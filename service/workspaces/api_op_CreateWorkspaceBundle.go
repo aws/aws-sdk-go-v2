@@ -145,6 +145,9 @@ func (c *Client) addOperationCreateWorkspaceBundleMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateWorkspaceBundleValidationMiddleware(stack); err != nil {
 		return err
 	}

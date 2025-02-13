@@ -122,6 +122,9 @@ func (c *Client) addOperationGetCisScanReportMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCisScanReportValidationMiddleware(stack); err != nil {
 		return err
 	}

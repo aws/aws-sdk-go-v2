@@ -127,6 +127,9 @@ func (c *Client) addOperationGetChangeLogsMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetChangeLogsValidationMiddleware(stack); err != nil {
 		return err
 	}

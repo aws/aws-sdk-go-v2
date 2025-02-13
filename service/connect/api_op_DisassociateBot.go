@@ -120,6 +120,9 @@ func (c *Client) addOperationDisassociateBotMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateBotValidationMiddleware(stack); err != nil {
 		return err
 	}

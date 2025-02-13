@@ -150,6 +150,9 @@ func (c *Client) addOperationCreateRestoreTestingPlanMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRestoreTestingPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -121,6 +121,9 @@ func (c *Client) addOperationAssociateRoutingProfileQueuesMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateRoutingProfileQueuesValidationMiddleware(stack); err != nil {
 		return err
 	}

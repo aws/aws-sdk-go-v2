@@ -154,6 +154,9 @@ func (c *Client) addOperationGetEntityRecordsMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEntityRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}

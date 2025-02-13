@@ -152,6 +152,9 @@ func (c *Client) addOperationListRequestedServiceQuotaChangeHistoryByQuotaMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRequestedServiceQuotaChangeHistoryByQuotaValidationMiddleware(stack); err != nil {
 		return err
 	}

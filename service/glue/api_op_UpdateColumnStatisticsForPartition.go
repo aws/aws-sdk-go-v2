@@ -134,6 +134,9 @@ func (c *Client) addOperationUpdateColumnStatisticsForPartitionMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateColumnStatisticsForPartitionValidationMiddleware(stack); err != nil {
 		return err
 	}

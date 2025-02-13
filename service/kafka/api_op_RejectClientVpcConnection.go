@@ -112,6 +112,9 @@ func (c *Client) addOperationRejectClientVpcConnectionMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRejectClientVpcConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

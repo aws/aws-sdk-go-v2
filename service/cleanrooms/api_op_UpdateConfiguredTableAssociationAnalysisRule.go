@@ -132,6 +132,9 @@ func (c *Client) addOperationUpdateConfiguredTableAssociationAnalysisRuleMiddlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateConfiguredTableAssociationAnalysisRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

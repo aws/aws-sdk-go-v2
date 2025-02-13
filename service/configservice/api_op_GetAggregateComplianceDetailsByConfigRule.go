@@ -153,6 +153,9 @@ func (c *Client) addOperationGetAggregateComplianceDetailsByConfigRuleMiddleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAggregateComplianceDetailsByConfigRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

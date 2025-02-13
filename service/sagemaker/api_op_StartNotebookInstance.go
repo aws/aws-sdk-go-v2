@@ -111,6 +111,9 @@ func (c *Client) addOperationStartNotebookInstanceMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartNotebookInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

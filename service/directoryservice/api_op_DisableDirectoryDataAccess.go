@@ -108,6 +108,9 @@ func (c *Client) addOperationDisableDirectoryDataAccessMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableDirectoryDataAccessValidationMiddleware(stack); err != nil {
 		return err
 	}

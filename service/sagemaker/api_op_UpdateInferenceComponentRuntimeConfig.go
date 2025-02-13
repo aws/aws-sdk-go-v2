@@ -119,6 +119,9 @@ func (c *Client) addOperationUpdateInferenceComponentRuntimeConfigMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateInferenceComponentRuntimeConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

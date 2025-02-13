@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteStoredQueryMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteStoredQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

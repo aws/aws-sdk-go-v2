@@ -107,6 +107,9 @@ func (c *Client) addOperationDisassociateDataProtectionSettingsMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateDataProtectionSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

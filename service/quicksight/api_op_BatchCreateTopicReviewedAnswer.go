@@ -140,6 +140,9 @@ func (c *Client) addOperationBatchCreateTopicReviewedAnswerMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchCreateTopicReviewedAnswerValidationMiddleware(stack); err != nil {
 		return err
 	}

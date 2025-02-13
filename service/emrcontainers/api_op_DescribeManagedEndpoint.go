@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeManagedEndpointMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeManagedEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

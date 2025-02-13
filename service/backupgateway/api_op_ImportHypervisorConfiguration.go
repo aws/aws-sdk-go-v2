@@ -130,6 +130,9 @@ func (c *Client) addOperationImportHypervisorConfigurationMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpImportHypervisorConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
