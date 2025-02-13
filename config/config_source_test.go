@@ -324,7 +324,8 @@ func TestUserAgentCredentials(t *testing.T) {
 			client := sts.NewFromConfig(cfg)
 			// doesn't matter, we're just making a call to record user agent
 			in := "test"
-			client.DecodeAuthorizationMessage(context.TODO(), &sts.DecodeAuthorizationMessageInput{EncodedMessage: &in})
+			_, err = client.DecodeAuthorizationMessage(context.TODO(), &sts.DecodeAuthorizationMessageInput{EncodedMessage: &in})
+			fmt.Println(err)
 			compareFeatures(t, c.Expect, ua.features)
 			if c.ExpectIntermediateSts != nil {
 				compareFeatures(t, c.ExpectIntermediateSts, ua.intermediateFeatures)

@@ -249,7 +249,7 @@ type AssumeRoleOptions struct {
 	TransitiveTagKeys []string
 
 	// The chain of providers that was used to create this provider
-	CredentialChain []aws.CredentialSource
+	CredentialSources []aws.CredentialSource
 }
 
 // NewAssumeRoleProvider constructs and returns a credentials provider that
@@ -328,10 +328,10 @@ func (p *AssumeRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, err
 	}, nil
 }
 
-// CredentialChain returns the credential chain that was used to construct this provider
-func (p *AssumeRoleProvider) CredentialChain() []aws.CredentialSource {
-	if p.options.CredentialChain == nil {
+// ProviderSources returns the credential chain that was used to construct this provider
+func (p *AssumeRoleProvider) ProviderSources() []aws.CredentialSource {
+	if p.options.CredentialSources == nil {
 		return []aws.CredentialSource{aws.CredentialsStsAssumeRole}
 	} // If no source has been set, assume this is used directly which means just call to assume role
-	return append(p.options.CredentialChain, aws.CredentialsStsAssumeRole)
+	return append(p.options.CredentialSources, aws.CredentialsStsAssumeRole)
 }

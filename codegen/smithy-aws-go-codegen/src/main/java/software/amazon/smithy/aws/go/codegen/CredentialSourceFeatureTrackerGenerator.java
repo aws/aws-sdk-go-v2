@@ -42,22 +42,22 @@ public class CredentialSourceFeatureTrackerGenerator implements GoIntegration {
         ctx.writerDelegator().useFileWriter("api_client.go", ctx.settings().getModuleName(), goTemplate("""
                 $aws:D $awsMiddleware:D
 
-                type SetCredentialSourceMiddleware struct {
+                type setCredentialSourceMiddleware struct {
                        ua *awsmiddleware.RequestUserAgent
                        options Options
                 }
 
-                func (m SetCredentialSourceMiddleware) ID() string { return "SetCredentialSourceMiddleware" }
+                func (m setCredentialSourceMiddleware) ID() string { return "SetCredentialSourceMiddleware" }
 
-                func (m SetCredentialSourceMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+                func (m setCredentialSourceMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
                        out middleware.BuildOutput, metadata middleware.Metadata, err error,
                 ) {
-                       asChain, ok := m.options.Credentials.(aws.CredentialProviderChain)
+                       asProviderSource, ok := m.options.Credentials.(aws.CredentialProviderSource)
                        if !ok {
                                return next.HandleBuild(ctx, in)
                        }
-                       credChain := asChain.CredentialChain()
-                       for _, source := range credChain {
+                       providerSources := asProviderSource.ProviderSources()
+                       for _, source := range providerSources {
                                m.ua.AddCredentialsSource(source)
                        }
                        return next.HandleBuild(ctx, in)
@@ -69,7 +69,7 @@ public class CredentialSourceFeatureTrackerGenerator implements GoIntegration {
                                return err
                        }
 
-                       mw := SetCredentialSourceMiddleware{ua: ua, options: options}
+                       mw := setCredentialSourceMiddleware{ua: ua, options: options}
                        return stack.Build.Insert(&mw, "UserAgent", middleware.Before)
                 }
                 """,

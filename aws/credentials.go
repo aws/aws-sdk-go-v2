@@ -100,10 +100,10 @@ const (
 	CredentialsProfileSourceProfile
 	// CredentialsProfileNamedProvider credentials resolved from a named provider in a config file(s) profile (like EcsContainer)
 	CredentialsProfileNamedProvider
-	// CredentialsProfileStsWebIDToken  credentials resolved from configuration for assuming a role with STS using web identity token in a config file(s) profile
-	CredentialsProfileStsWebIDToken
-	// CredentialsProfileSso credentials resolved from an SSO session in a config file(s) profile
-	CredentialsProfileSso
+	// CredentialsProfileSTSWebIDToken  credentials resolved from configuration for assuming a role with STS using web identity token in a config file(s) profile
+	CredentialsProfileSTSWebIDToken
+	// CredentialsProfileSSO credentials resolved from an SSO session in a config file(s) profile
+	CredentialsProfileSSO
 	// CredentialsSso credentials resolved from an SSO session
 	CredentialsSso
 	// CredentialsProfileSsoLegacy credentials resolved from an SSO session in a config file(s) profile using legacy format
@@ -175,11 +175,11 @@ type CredentialsProvider interface {
 	Retrieve(ctx context.Context) (Credentials, error)
 }
 
-// CredentialProviderChain allows any credential provider to track
-// the chain where they were sourced. For example, if the credentials came from a
-// call to a role specified in the profile, this method will give the whole precedence chain
-type CredentialProviderChain interface {
-	CredentialChain() []CredentialSource
+// CredentialProviderSource allows any credential provider to track
+// all providers where a credential provider were sourced. For example, if the credentials came from a
+// call to a role specified in the profile, this method will give the whole breadcrumb trail
+type CredentialProviderSource interface {
+	ProviderSources() []CredentialSource
 }
 
 // CredentialsProviderFunc provides a helper wrapping a function value to

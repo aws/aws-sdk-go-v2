@@ -25,8 +25,8 @@ type StaticCredentialsProvider struct {
 	Source []aws.CredentialSource
 }
 
-// CredentialChain returns the credential chain that was used to construct this provider
-func (s StaticCredentialsProvider) CredentialChain() []aws.CredentialSource {
+// ProviderSources returns the credential chain that was used to construct this provider
+func (s StaticCredentialsProvider) ProviderSources() []aws.CredentialSource {
 	if s.Source == nil {
 		return []aws.CredentialSource{aws.CredentialsCode} // If no source has been set, assume this is used directly which means hardcoded creds
 	}

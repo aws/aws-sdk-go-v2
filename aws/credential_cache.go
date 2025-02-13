@@ -172,15 +172,15 @@ func (p *CredentialsCache) getCreds() (Credentials, bool) {
 	return *c, true
 }
 
-// CredentialChain returns a list of where the underlying credential provider
+// ProviderSources returns a list of where the underlying credential provider
 // has been sourced, if available. Returns empty if the provider doesn't implement
 // the interface
-func (p *CredentialsCache) CredentialChain() []CredentialSource {
-	asSource, ok := p.provider.(CredentialProviderChain)
+func (p *CredentialsCache) ProviderSources() []CredentialSource {
+	asSource, ok := p.provider.(CredentialProviderSource)
 	if !ok {
 		return []CredentialSource{}
 	}
-	return asSource.CredentialChain()
+	return asSource.ProviderSources()
 }
 
 // Invalidate will invalidate the cached credentials. The next call to Retrieve

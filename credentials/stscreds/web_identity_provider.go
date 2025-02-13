@@ -66,7 +66,7 @@ type WebIdentityRoleOptions struct {
 	PolicyARNs []types.PolicyDescriptorType
 
 	// The chain of providers that was used to create this provider
-	CredentialChain []aws.CredentialSource
+	CredentialSources []aws.CredentialSource
 }
 
 // IdentityTokenRetriever is an interface for retrieving a JWT
@@ -171,10 +171,10 @@ func getAccountID(u *types.AssumedRoleUser) string {
 	return parts[4]
 }
 
-// CredentialChain returns the credential chain that was used to construct this provider
-func (p *WebIdentityRoleProvider) CredentialChain() []aws.CredentialSource {
-	if p.options.CredentialChain == nil {
+// ProviderSources returns the credential chain that was used to construct this provider
+func (p *WebIdentityRoleProvider) ProviderSources() []aws.CredentialSource {
+	if p.options.CredentialSources == nil {
 		return []aws.CredentialSource{aws.CredentialsStsAssumeRoleWebID}
 	}
-	return p.options.CredentialChain
+	return p.options.CredentialSources
 }

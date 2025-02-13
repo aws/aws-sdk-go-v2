@@ -58,7 +58,7 @@ type Options struct {
 	// Timeout limits the time a process can run.
 	Timeout time.Duration
 	// The chain of providers that was used to create this provider
-	CredentialChain []aws.CredentialSource
+	CredentialSources []aws.CredentialSource
 }
 
 // NewCommandBuilder provides the interface for specifying how command will be
@@ -276,12 +276,12 @@ func (p *Provider) executeCredentialProcess(ctx context.Context) ([]byte, error)
 	return out, nil
 }
 
-// CredentialChain returns the credential chain that was used to construct this provider
-func (p *Provider) CredentialChain() []aws.CredentialSource {
-	if p.options.CredentialChain == nil {
+// ProviderSources returns the credential chain that was used to construct this provider
+func (p *Provider) ProviderSources() []aws.CredentialSource {
+	if p.options.CredentialSources == nil {
 		return []aws.CredentialSource{aws.CredentialsProcess}
 	}
-	return p.options.CredentialChain
+	return p.options.CredentialSources
 }
 
 func executeCommand(cmd *exec.Cmd, exec chan error) {
