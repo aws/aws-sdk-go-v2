@@ -20,6 +20,7 @@ GetBucketReplication
 		stashOperationInput
 		ClientRequestID
 		ComputeContentLength
+		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
