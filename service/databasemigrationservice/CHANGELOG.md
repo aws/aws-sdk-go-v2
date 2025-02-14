@@ -1,3 +1,7 @@
+# v1.48.0 (2025-02-14)
+
+* **Feature**: Introduces premigration assessment feature to DMS Serverless API for start-replication and describe-replications
+
 # v1.47.0 (2025-02-10)
 
 * **Feature**: New vendors for DMS Data Providers: DB2 LUW and DB2 for z/OS

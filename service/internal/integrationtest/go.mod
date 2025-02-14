@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.36.1
 	github.com/aws/aws-sdk-go-v2/config v1.29.6
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.61
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.62
 	github.com/aws/aws-sdk-go-v2/service/acm v1.30.18
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.28.11
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.34.13
@@ -16,14 +16,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.29.7
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.47.4
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.43.14
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.51.3
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.52.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.15
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.18
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.38.9
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.49.4
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.12
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.15
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.47.0
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.28.15
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.30.12
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.17
@@ -48,9 +48,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.39.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.25.15
 	github.com/aws/aws-sdk-go-v2/service/iot v1.62.8
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.32.18
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.32.19
 	github.com/aws/aws-sdk-go-v2/service/kms v1.37.18
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.69.12
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.69.13
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.42.15
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.24.15
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.35.17
@@ -62,7 +62,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.48.7
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.28.9
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.34.13
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.76.1
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.77.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.53.4
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.34.18
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.32.15
@@ -76,16 +76,16 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.14
 	github.com/aws/aws-sdk-go-v2/service/support v1.26.15
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.29.16
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.24.0
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/waf v1.25.15
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.25.15
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.55.14
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.56.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.52.5
 	github.com/aws/smithy-go v1.22.2
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.8 // indirect
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.9 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.59 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.28 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.32 // indirect

@@ -1,8 +1,0 @@
-{
-    "id": "de398a08-5779-4b5c-9e9b-e7f65612f009",
-    "type": "feature",
-    "description": "Update Environment and Device name field definitions",
-    "modules": [
-        "service/workspacesthinclient"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.52.0 (2025-02-14)
+
+* **Feature**: Added test suite names to test case metadata
+
 # v1.51.3 (2025-02-12)
 
 * **Documentation**: Add note for the RUNNER_BUILDKITE_BUILD buildType.

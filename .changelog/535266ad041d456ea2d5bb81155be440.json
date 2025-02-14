@@ -1,8 +1,0 @@
-{
-    "id": "535266ad-041d-456e-a2d5-bb81155be440",
-    "type": "feature",
-    "description": "Introduces premigration assessment feature to DMS Serverless API for start-replication and describe-replications",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

@@ -1,3 +1,24 @@
+# Release (2025-02-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream`: [v1.6.9](aws/protocol/eventstream/CHANGELOG.md#v169-2025-02-14)
+  * **Bug Fix**: Remove max limit on event stream messages
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.52.0](service/codebuild/CHANGELOG.md#v1520-2025-02-14)
+  * **Feature**: Added test suite names to test case metadata
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.125.0](service/connect/CHANGELOG.md#v11250-2025-02-14)
+  * **Feature**: Release Notes: 1) Analytics API enhancements: Added new ListAnalyticsDataLakeDataSets API. 2)  Onboarding API Idempotency: Adds ClientToken to instance creation and management APIs to support idempotency.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.48.0](service/databasemigrationservice/CHANGELOG.md#v1480-2025-02-14)
+  * **Feature**: Introduces premigration assessment feature to DMS Serverless API for start-replication and describe-replications
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.27.0](service/rdsdata/CHANGELOG.md#v1270-2025-02-14)
+  * **Feature**: Add support for Stop DB feature.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.77.0](service/s3/CHANGELOG.md#v1770-2025-02-14)
+  * **Feature**: Added support for Content-Range header in HeadObject response.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.56.0](service/wafv2/CHANGELOG.md#v1560-2025-02-14)
+  * **Feature**: The WAFv2 API now supports configuring data protection in webACLs.
+
 # Release (2025-02-13)
 
 ## Module Highlights

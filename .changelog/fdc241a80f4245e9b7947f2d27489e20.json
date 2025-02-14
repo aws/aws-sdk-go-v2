@@ -1,8 +1,0 @@
-{
-    "id": "fdc241a8-0f42-45e9-b794-7f2d27489e20",
-    "type": "feature",
-    "description": "Added test suite names to test case metadata",
-    "modules": [
-        "service/codebuild"
-    ]
-}

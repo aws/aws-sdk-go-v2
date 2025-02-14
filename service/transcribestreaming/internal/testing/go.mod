@@ -4,9 +4,9 @@ go 1.21
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.36.1
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.8
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.5.20
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.24.0
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.9
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.5.21
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.24.1
 	github.com/aws/smithy-go v1.22.2
 )
 
