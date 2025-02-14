@@ -101,7 +101,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.14 // indirect
 )
 
-go 1.21
+go 1.22
 
 replace github.com/aws/aws-sdk-go-v2/service/codestar => ../../../service/codestar/
 
