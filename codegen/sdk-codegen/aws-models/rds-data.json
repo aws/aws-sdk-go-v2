@@ -129,6 +129,9 @@
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#InvalidResourceStateException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#InvalidSecretException"
                 },
                 {
@@ -255,6 +258,9 @@
                 },
                 {
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#InvalidResourceStateException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#InvalidSecretException"
@@ -497,6 +503,9 @@
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#InvalidResourceStateException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#InvalidSecretException"
                 },
                 {
@@ -601,7 +610,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request was canceled because the Aurora Serverless v2 DB instance was in a paused state.\n      The Data API request automatically causes the DB instance to begin resuming. Wait a few seconds and\n      try again.</p>",
+                "smithy.api#documentation": "<p>A request was cancelled because the Aurora Serverless v2 DB instance was paused.\n         The Data API request automatically resumes the DB instance. Wait a few seconds and\n         try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -778,6 +787,9 @@
                 },
                 {
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#InvalidResourceStateException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#InvalidSecretException"
@@ -1034,6 +1046,19 @@
                 "smithy.api#documentation": "<p>An internal error occurred.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.rdsdata#InvalidResourceStateException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rdsdata#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource is in an invalid state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.rdsdata#InvalidSecretException": {
@@ -1903,6 +1928,9 @@
                 },
                 {
                     "target": "com.amazonaws.rdsdata#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#InvalidResourceStateException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#InvalidSecretException"

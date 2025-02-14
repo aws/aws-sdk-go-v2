@@ -19193,31 +19193,31 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC-64NVME</code> checksum of the object. This checksum is present\n         if the object was uploaded with the <code>CRC-64NVME</code> checksum algorithm, or if the object was uploaded without a\n         checksum (and Amazon S3 added the default checksum, <code>CRC-64NVME</code>, to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC64NVME</code> checksum of the object. This checksum is present\n         if the object was uploaded with the <code>CRC64NVME</code> checksum algorithm, or if the object was uploaded without a\n         checksum (and Amazon S3 added the default checksum, <code>CRC64NVME</code>, to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumType": {
@@ -19424,31 +19424,31 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n            <code>CRC-64NVME</code> checksum of the object. The <code>CRC-64NVME</code> checksum is\n         always a full object checksum. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>. </p>"
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n            <code>CRC64NVME</code> checksum of the object. The <code>CRC64NVME</code> checksum is\n         always a full object checksum. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>. </p>"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumType": {
@@ -19541,35 +19541,35 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC-32</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC32</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32c"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n            <code>CRC-64NVME</code> checksum of the object. The <code>CRC-64NVME</code> checksum is\n         always a full object checksum. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n            <code>CRC64NVME</code> checksum of the object. The <code>CRC64NVME</code> checksum is\n         always a full object checksum. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 160-bit <code>SHA1</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha1"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 256-bit <code>SHA256</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha256"
                     }
                 },
@@ -19668,31 +19668,31 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC-32</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC32</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC-32C</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC32C</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC-64NVME</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC-64NVME</code> checksum algorithm to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC64NVME</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC64NVME</code> checksum algorithm to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>SHA-1</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>SHA1</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>SHA-256</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>SHA256</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "PartNumber": {
@@ -20244,31 +20244,31 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32</code> checksum of the object. This checksum is only present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32</code> checksum of the object. This checksum is only present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC-64NVME</code> checksum of the object. This checksum is present\n         if the object being copied was uploaded with the <code>CRC-64NVME</code> checksum algorithm, or if the object was uploaded without a\n         checksum (and Amazon S3 added the default checksum, <code>CRC-64NVME</code>, to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC64NVME</code> checksum of the object. This checksum is present\n         if the object being copied was uploaded with the <code>CRC64NVME</code> checksum algorithm, or if the object was uploaded without a\n         checksum (and Amazon S3 added the default checksum, <code>CRC64NVME</code>, to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
             },
@@ -20294,31 +20294,31 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n         This header specifies the Base64 encoded, 32-bit <code>CRC-32</code> checksum of the part. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n         <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n         This header specifies the Base64 encoded, 32-bit <code>CRC32</code> checksum of the part. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n         <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n         This header specifies the Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the part. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n         <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n         This header specifies the Base64 encoded, 32-bit <code>CRC32C</code> checksum of the part. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n         <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC-64NVME</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC-64NVME</code> checksum algorithm to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC64NVME</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC64NVME</code> checksum algorithm to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n         This header specifies the Base64 encoded, 160-bit <code>SHA-1</code> checksum of the part. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n         <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n         This header specifies the Base64 encoded, 160-bit <code>SHA1</code> checksum of the part. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n         <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n         This header specifies the Base64 encoded, 256-bit <code>SHA-256</code> checksum of the part. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n         <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n         This header specifies the Base64 encoded, 256-bit <code>SHA256</code> checksum of the part. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n         <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
             },
@@ -22451,7 +22451,7 @@
                 "ChecksumAlgorithm": {
                     "target": "com.amazonaws.s3#ChecksumAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the algorithm used to create the checksum for the object when you use the SDK. This header will not provide any\n    additional functionality if you don't use the SDK. When you send this header, there must be a corresponding <code>x-amz-checksum-<i>algorithm</i>\n            </code> or\n    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>.</p>\n         <p>For the <code>x-amz-checksum-<i>algorithm</i>\n            </code> header, replace <code>\n               <i>algorithm</i>\n            </code> with the supported algorithm from the following list: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CRC-32</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC-32C</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC-64NVME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA-256</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more\n    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in\n    the <i>Amazon S3 User Guide</i>.</p>\n         <p>If the individual checksum value you provide through <code>x-amz-checksum-<i>algorithm</i>\n            </code> doesn't match the checksum algorithm you set through <code>x-amz-sdk-checksum-algorithm</code>, Amazon S3 fails the request with a <code>BadDigest</code> error.</p>\n         <p>If you provide an individual checksum, Amazon S3 ignores any provided\n            <code>ChecksumAlgorithm</code> parameter.</p>",
+                        "smithy.api#documentation": "<p>Indicates the algorithm used to create the checksum for the object when you use the SDK. This header will not provide any\n    additional functionality if you don't use the SDK. When you send this header, there must be a corresponding <code>x-amz-checksum-<i>algorithm</i>\n            </code> or\n    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>.</p>\n         <p>For the <code>x-amz-checksum-<i>algorithm</i>\n            </code> header, replace <code>\n               <i>algorithm</i>\n            </code> with the supported algorithm from the following list: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CRC32</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC32C</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC64NVME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA256</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more\n    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in\n    the <i>Amazon S3 User Guide</i>.</p>\n         <p>If the individual checksum value you provide through <code>x-amz-checksum-<i>algorithm</i>\n            </code> doesn't match the checksum algorithm you set through <code>x-amz-sdk-checksum-algorithm</code>, Amazon S3 fails the request with a <code>BadDigest</code> error.</p>\n         <p>If you provide an individual checksum, Amazon S3 ignores any provided\n            <code>ChecksumAlgorithm</code> parameter.</p>",
                         "smithy.api#httpHeader": "x-amz-sdk-checksum-algorithm"
                     }
                 }
@@ -25342,35 +25342,35 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32</code> checksum of the object. This checksum is only present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32</code> checksum of the object. This checksum is only present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32c"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC-64NVME</code> checksum of the object. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC64NVME</code> checksum of the object. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha1"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha256"
                     }
                 },
@@ -26432,35 +26432,35 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32c"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC-64NVME</code> checksum of the object. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC64NVME</code> checksum of the object. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha1"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha256"
                     }
                 },
@@ -26525,6 +26525,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A standard MIME type describing the format of the object data.</p>",
                         "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "ContentRange": {
+                    "target": "com.amazonaws.s3#ContentRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portion of the object returned in the response for a <code>GET</code> request.</p>",
+                        "smithy.api#httpHeader": "Content-Range"
                     }
                 },
                 "Expires": {
@@ -30458,31 +30465,31 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC-32</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC32</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC-32C</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC32C</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC-64NVME</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC-64NVME</code> checksum algorithm, or if the object was uploaded without a\n         checksum (and Amazon S3 added the default checksum, <code>CRC-64NVME</code>, to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC64NVME</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC64NVME</code> checksum algorithm, or if the object was uploaded without a\n         checksum (and Amazon S3 added the default checksum, <code>CRC64NVME</code>, to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>SHA-1</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>SHA1</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>SHA-256</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>SHA256</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
             },
@@ -30821,31 +30828,31 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32</code> checksum of the part. This checksum is present\n         if the object was uploaded with the <code>CRC-32</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32</code> checksum of the part. This checksum is present\n         if the object was uploaded with the <code>CRC32</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the part. This checksum is present\n         if the object was uploaded with the <code>CRC-32C</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the part. This checksum is present\n         if the object was uploaded with the <code>CRC32C</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC-64NVME</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC-64NVME</code> checksum algorithm, or if the object was uploaded without a\n         checksum (and Amazon S3 added the default checksum, <code>CRC-64NVME</code>, to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC64NVME</code> checksum of the part. This checksum is present\n         if the multipart upload request was created with the <code>CRC64NVME</code> checksum algorithm, or if the object was uploaded without a\n         checksum (and Amazon S3 added the default checksum, <code>CRC64NVME</code>, to the uploaded object). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> checksum of the part. This checksum is present\n         if the object was uploaded with the <code>SHA-1</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> checksum of the part. This checksum is present\n         if the object was uploaded with the <code>SHA1</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> checksum of the part. This checksum is present\n         if the object was uploaded with the <code>SHA-256</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> checksum of the part. This checksum is present\n         if the object was uploaded with the <code>SHA256</code> checksum algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
             },
@@ -32141,7 +32148,7 @@
                 "ChecksumAlgorithm": {
                     "target": "com.amazonaws.s3#ChecksumAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the algorithm used to create the checksum for the request when you use the SDK. This header will not provide any\n    additional functionality if you don't use the SDK. When you send this header, there must be a corresponding <code>x-amz-checksum-<i>algorithm</i>\n            </code> or\n    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>.</p>\n         <p>For the <code>x-amz-checksum-<i>algorithm</i>\n            </code> header, replace <code>\n               <i>algorithm</i>\n            </code> with the supported algorithm from the following list: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CRC-32</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC-32C</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC-64NVME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA-256</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more\n    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in\n    the <i>Amazon S3 User Guide</i>.</p>\n         <p>If the individual checksum value you provide through <code>x-amz-checksum-<i>algorithm</i>\n            </code> doesn't match the checksum algorithm you set through <code>x-amz-sdk-checksum-algorithm</code>, Amazon S3 fails the request with a <code>BadDigest</code> error.</p>\n         <note>\n            <p>For directory buckets, when you use Amazon Web Services SDKs, <code>CRC32</code> is the default checksum algorithm that's used for performance.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Indicates the algorithm used to create the checksum for the request when you use the SDK. This header will not provide any\n    additional functionality if you don't use the SDK. When you send this header, there must be a corresponding <code>x-amz-checksum-<i>algorithm</i>\n            </code> or\n    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>.</p>\n         <p>For the <code>x-amz-checksum-<i>algorithm</i>\n            </code> header, replace <code>\n               <i>algorithm</i>\n            </code> with the supported algorithm from the following list: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CRC32</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC32C</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC64NVME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA256</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more\n    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in\n    the <i>Amazon S3 User Guide</i>.</p>\n         <p>If the individual checksum value you provide through <code>x-amz-checksum-<i>algorithm</i>\n            </code> doesn't match the checksum algorithm you set through <code>x-amz-sdk-checksum-algorithm</code>, Amazon S3 fails the request with a <code>BadDigest</code> error.</p>\n         <note>\n            <p>For directory buckets, when you use Amazon Web Services SDKs, <code>CRC32</code> is the default checksum algorithm that's used for performance.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-sdk-checksum-algorithm"
                     }
                 },
@@ -33173,35 +33180,35 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32c"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC-64NVME</code> checksum of the object. This header\n         is present if the object was uploaded with the <code>CRC-64NVME</code> checksum algorithm, or if it\n         was uploaded without a checksum (and Amazon S3 added the default checksum,\n            <code>CRC-64NVME</code>, to the uploaded object). For more information about how\n         checksums are calculated with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 64-bit <code>CRC64NVME</code> checksum of the object. This header\n         is present if the object was uploaded with the <code>CRC64NVME</code> checksum algorithm, or if it\n         was uploaded without a checksum (and Amazon S3 added the default checksum,\n            <code>CRC64NVME</code>, to the uploaded object). For more information about how\n         checksums are calculated with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha1"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha256"
                     }
                 },
@@ -33360,42 +33367,42 @@
                 "ChecksumAlgorithm": {
                     "target": "com.amazonaws.s3#ChecksumAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the algorithm used to create the checksum for the object when you use the SDK. This header will not provide any\n    additional functionality if you don't use the SDK. When you send this header, there must be a corresponding <code>x-amz-checksum-<i>algorithm</i>\n            </code> or\n    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>.</p>\n         <p>For the <code>x-amz-checksum-<i>algorithm</i>\n            </code> header, replace <code>\n               <i>algorithm</i>\n            </code> with the supported algorithm from the following list: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CRC-32</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC-32C</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC-64NVME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA-256</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more\n    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in\n    the <i>Amazon S3 User Guide</i>.</p>\n         <p>If the individual checksum value you provide through <code>x-amz-checksum-<i>algorithm</i>\n            </code> doesn't match the checksum algorithm you set through <code>x-amz-sdk-checksum-algorithm</code>, Amazon S3 fails the request with a <code>BadDigest</code> error.</p>\n         <note>\n            <p>The <code>Content-MD5</code> or <code>x-amz-sdk-checksum-algorithm</code> header is\n            required for any request to upload an object with a retention period configured using\n            Amazon S3 Object Lock. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html#object-lock-put-object\">Uploading objects to an Object Lock enabled bucket </a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>\n         <p>For directory buckets, when you use Amazon Web Services SDKs, <code>CRC32</code> is the default checksum algorithm that's used for performance.</p>",
+                        "smithy.api#documentation": "<p>Indicates the algorithm used to create the checksum for the object when you use the SDK. This header will not provide any\n    additional functionality if you don't use the SDK. When you send this header, there must be a corresponding <code>x-amz-checksum-<i>algorithm</i>\n            </code> or\n    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>.</p>\n         <p>For the <code>x-amz-checksum-<i>algorithm</i>\n            </code> header, replace <code>\n               <i>algorithm</i>\n            </code> with the supported algorithm from the following list: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CRC32</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC32C</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CRC64NVME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SHA256</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more\n    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in\n    the <i>Amazon S3 User Guide</i>.</p>\n         <p>If the individual checksum value you provide through <code>x-amz-checksum-<i>algorithm</i>\n            </code> doesn't match the checksum algorithm you set through <code>x-amz-sdk-checksum-algorithm</code>, Amazon S3 fails the request with a <code>BadDigest</code> error.</p>\n         <note>\n            <p>The <code>Content-MD5</code> or <code>x-amz-sdk-checksum-algorithm</code> header is\n            required for any request to upload an object with a retention period configured using\n            Amazon S3 Object Lock. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html#object-lock-put-object\">Uploading objects to an Object Lock enabled bucket </a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>\n         <p>For directory buckets, when you use Amazon Web Services SDKs, <code>CRC32</code> is the default checksum algorithm that's used for performance.</p>",
                         "smithy.api#httpHeader": "x-amz-sdk-checksum-algorithm"
                     }
                 },
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC-32</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC32</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32c"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n            <code>CRC-64NVME</code> checksum of the object. The <code>CRC-64NVME</code> checksum is\n         always a full object checksum. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n            <code>CRC64NVME</code> checksum of the object. The <code>CRC64NVME</code> checksum is\n         always a full object checksum. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity\n            in the Amazon S3 User Guide</a>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 160-bit <code>SHA1</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha1"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 256-bit <code>SHA256</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha256"
                     }
                 },
@@ -36153,35 +36160,35 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32 checksum</code> of the object. This checksum is only be present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32c"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n         <code>CRC-64NVME</code> checksum of the part. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n         <code>CRC64NVME</code> checksum of the part. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 160-bit <code>SHA1</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha1"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 256-bit <code>SHA256</code> digest of the object. This will only be present if the object was uploaded\n    with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated\n    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha256"
                     }
                 },
@@ -36270,35 +36277,35 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC-32</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC32</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC-32C</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 32-bit <code>CRC32C</code> checksum of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32c"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n         <code>CRC-64NVME</code> checksum of the part. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n         <code>CRC64NVME</code> checksum of the part. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc64nvme"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 160-bit <code>SHA-1</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 160-bit <code>SHA1</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha1"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 256-bit <code>SHA-256</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.\n    This header specifies the Base64 encoded, 256-bit <code>SHA256</code> digest of the object. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the\n    <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-sha256"
                     }
                 },
@@ -36579,35 +36586,35 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This specifies the Base64 encoded, 32-bit <code>CRC-32</code>\n         checksum of the object returned by the Object Lambda function. This may not match the\n         checksum for the object stored in Amazon S3. Amazon S3 will perform validation of the checksum values\n         only when the original <code>GetObject</code> request required checksum validation. For\n         more information about checksums, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Only one checksum header can be specified at a time. If you supply multiple checksum\n         headers, this request will fail.</p>\n         <p></p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This specifies the Base64 encoded, 32-bit <code>CRC32</code>\n         checksum of the object returned by the Object Lambda function. This may not match the\n         checksum for the object stored in Amazon S3. Amazon S3 will perform validation of the checksum values\n         only when the original <code>GetObject</code> request required checksum validation. For\n         more information about checksums, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Only one checksum header can be specified at a time. If you supply multiple checksum\n         headers, this request will fail.</p>\n         <p></p>",
                         "smithy.api#httpHeader": "x-amz-fwd-header-x-amz-checksum-crc32"
                     }
                 },
                 "ChecksumCRC32C": {
                     "target": "com.amazonaws.s3#ChecksumCRC32C",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This specifies the Base64 encoded, 32-bit <code>CRC-32C</code>\n         checksum of the object returned by the Object Lambda function. This may not match the\n         checksum for the object stored in Amazon S3. Amazon S3 will perform validation of the checksum values\n         only when the original <code>GetObject</code> request required checksum validation. For\n         more information about checksums, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Only one checksum header can be specified at a time. If you supply multiple checksum\n         headers, this request will fail.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This specifies the Base64 encoded, 32-bit <code>CRC32C</code>\n         checksum of the object returned by the Object Lambda function. This may not match the\n         checksum for the object stored in Amazon S3. Amazon S3 will perform validation of the checksum values\n         only when the original <code>GetObject</code> request required checksum validation. For\n         more information about checksums, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Only one checksum header can be specified at a time. If you supply multiple checksum\n         headers, this request will fail.</p>",
                         "smithy.api#httpHeader": "x-amz-fwd-header-x-amz-checksum-crc32c"
                     }
                 },
                 "ChecksumCRC64NVME": {
                     "target": "com.amazonaws.s3#ChecksumCRC64NVME",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n         <code>CRC-64NVME</code> checksum of the part. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This header specifies the Base64 encoded, 64-bit\n         <code>CRC64NVME</code> checksum of the part. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-fwd-header-x-amz-checksum-crc64nvme"
                     }
                 },
                 "ChecksumSHA1": {
                     "target": "com.amazonaws.s3#ChecksumSHA1",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This specifies the Base64 encoded, 160-bit <code>SHA-1</code>\n         digest of the object returned by the Object Lambda function. This may not match the\n         checksum for the object stored in Amazon S3. Amazon S3 will perform validation of the checksum values\n         only when the original <code>GetObject</code> request required checksum validation. For\n         more information about checksums, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Only one checksum header can be specified at a time. If you supply multiple checksum\n         headers, this request will fail.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This specifies the Base64 encoded, 160-bit <code>SHA1</code>\n         digest of the object returned by the Object Lambda function. This may not match the\n         checksum for the object stored in Amazon S3. Amazon S3 will perform validation of the checksum values\n         only when the original <code>GetObject</code> request required checksum validation. For\n         more information about checksums, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Only one checksum header can be specified at a time. If you supply multiple checksum\n         headers, this request will fail.</p>",
                         "smithy.api#httpHeader": "x-amz-fwd-header-x-amz-checksum-sha1"
                     }
                 },
                 "ChecksumSHA256": {
                     "target": "com.amazonaws.s3#ChecksumSHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This specifies the Base64 encoded, 256-bit <code>SHA-256</code>\n         digest of the object returned by the Object Lambda function. This may not match the\n         checksum for the object stored in Amazon S3. Amazon S3 will perform validation of the checksum values\n         only when the original <code>GetObject</code> request required checksum validation. For\n         more information about checksums, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Only one checksum header can be specified at a time. If you supply multiple checksum\n         headers, this request will fail.</p>",
+                        "smithy.api#documentation": "<p>This header can be used as a data integrity check to verify that the data received is\n         the same data that was originally sent. This specifies the Base64 encoded, 256-bit <code>SHA256</code>\n         digest of the object returned by the Object Lambda function. This may not match the\n         checksum for the object stored in Amazon S3. Amazon S3 will perform validation of the checksum values\n         only when the original <code>GetObject</code> request required checksum validation. For\n         more information about checksums, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>Only one checksum header can be specified at a time. If you supply multiple checksum\n         headers, this request will fail.</p>",
                         "smithy.api#httpHeader": "x-amz-fwd-header-x-amz-checksum-sha256"
                     }
                 },
