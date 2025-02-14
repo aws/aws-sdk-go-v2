@@ -1,0 +1,8 @@
+{
+    "id": "117ac414-31ec-4cf8-b627-a7da6574446d",
+    "type": "feature",
+    "description": "Added support for Content-Range header in HeadObject response.",
+    "modules": [
+        "service/s3"
+    ]
+}

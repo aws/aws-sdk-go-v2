@@ -153,6 +153,9 @@ func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateInstanceMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -187,6 +190,39 @@ func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateInstance struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateInstance) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateInstanceInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateInstanceMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateInstance{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateInstance(region string) *awsmiddleware.RegisterServiceMetadata {

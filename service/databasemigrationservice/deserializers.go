@@ -22409,6 +22409,169 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPremigrationAssessmentStatus(v **types.PremigrationAssessmentStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PremigrationAssessmentStatus
+	if *v == nil {
+		sv = &types.PremigrationAssessmentStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssessmentProgress":
+			if err := awsAwsjson11_deserializeDocumentReplicationTaskAssessmentRunProgress(&sv.AssessmentProgress, value); err != nil {
+				return err
+			}
+
+		case "FailOnAssessmentFailure":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.FailOnAssessmentFailure = jtv
+			}
+
+		case "LastFailureMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LastFailureMessage = ptr.String(jtv)
+			}
+
+		case "PremigrationAssessmentRunArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PremigrationAssessmentRunArn = ptr.String(jtv)
+			}
+
+		case "PremigrationAssessmentRunCreationDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.PremigrationAssessmentRunCreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ResultEncryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResultEncryptionMode = ptr.String(jtv)
+			}
+
+		case "ResultKmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResultKmsKeyArn = ptr.String(jtv)
+			}
+
+		case "ResultLocationBucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResultLocationBucket = ptr.String(jtv)
+			}
+
+		case "ResultLocationFolder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResultLocationFolder = ptr.String(jtv)
+			}
+
+		case "ResultStatistic":
+			if err := awsAwsjson11_deserializeDocumentReplicationTaskAssessmentRunResultStatistic(&sv.ResultStatistic, value); err != nil {
+				return err
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPremigrationAssessmentStatusList(v *[]types.PremigrationAssessmentStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PremigrationAssessmentStatus
+	if *v == nil {
+		cv = []types.PremigrationAssessmentStatus{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PremigrationAssessmentStatus
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPremigrationAssessmentStatus(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentProvisionData(v **types.ProvisionData, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23751,6 +23914,11 @@ func awsAwsjson11_deserializeDocumentReplication(v **types.Replication, value in
 
 		case "FailureMessages":
 			if err := awsAwsjson11_deserializeDocumentStringList(&sv.FailureMessages, value); err != nil {
+				return err
+			}
+
+		case "PremigrationAssessmentStatuses":
+			if err := awsAwsjson11_deserializeDocumentPremigrationAssessmentStatusList(&sv.PremigrationAssessmentStatuses, value); err != nil {
 				return err
 			}
 

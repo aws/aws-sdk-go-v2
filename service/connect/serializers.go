@@ -305,6 +305,11 @@ func awsRestjson1_serializeOpDocumentAssociateApprovedOriginInput(v *AssociateAp
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.Origin != nil {
 		ok := object.Key("Origin")
 		ok.String(*v.Origin)
@@ -398,6 +403,11 @@ func awsRestjson1_serializeOpHttpBindingsAssociateBotInput(v *AssociateBotInput,
 func awsRestjson1_serializeOpDocumentAssociateBotInput(v *AssociateBotInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.LexBot != nil {
 		ok := object.Key("LexBot")
@@ -709,6 +719,11 @@ func awsRestjson1_serializeOpDocumentAssociateInstanceStorageConfigInput(v *Asso
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if len(v.ResourceType) > 0 {
 		ok := object.Key("ResourceType")
 		ok.String(string(v.ResourceType))
@@ -810,6 +825,11 @@ func awsRestjson1_serializeOpDocumentAssociateLambdaFunctionInput(v *AssociateLa
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.FunctionArn != nil {
 		ok := object.Key("FunctionArn")
 		ok.String(*v.FunctionArn)
@@ -903,6 +923,11 @@ func awsRestjson1_serializeOpHttpBindingsAssociateLexBotInput(v *AssociateLexBot
 func awsRestjson1_serializeOpDocumentAssociateLexBotInput(v *AssociateLexBotInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.LexBot != nil {
 		ok := object.Key("LexBot")
@@ -1308,6 +1333,11 @@ func awsRestjson1_serializeOpHttpBindingsAssociateSecurityKeyInput(v *AssociateS
 func awsRestjson1_serializeOpDocumentAssociateSecurityKeyInput(v *AssociateSecurityKeyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.Key != nil {
 		ok := object.Key("Key")
@@ -6597,6 +6627,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteInstanceInput(v *DeleteInstanceIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
 	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
 	}
@@ -10281,6 +10315,10 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateApprovedOriginInput(v *Disa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
 	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
 	}
@@ -10382,6 +10420,11 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateBotInput(v *DisassociateBot
 func awsRestjson1_serializeOpDocumentDisassociateBotInput(v *DisassociateBotInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.LexBot != nil {
 		ok := object.Key("LexBot")
@@ -10557,6 +10600,10 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateInstanceStorageConfigInput(
 		}
 	}
 
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
 	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
 	}
@@ -10630,6 +10677,10 @@ func (m *awsRestjson1_serializeOpDisassociateLambdaFunction) HandleSerialize(ctx
 func awsRestjson1_serializeOpHttpBindingsDisassociateLambdaFunctionInput(v *DisassociateLambdaFunctionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
 	}
 
 	if v.FunctionArn != nil {
@@ -10709,6 +10760,10 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateLexBotInput(v *Disassociate
 
 	if v.BotName != nil {
 		encoder.SetQuery("botName").String(*v.BotName)
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
 	}
 
 	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
@@ -11078,6 +11133,10 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateSecurityKeyInput(v *Disasso
 		if err := encoder.SetURI("AssociationId").String(*v.AssociationId); err != nil {
 			return err
 		}
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
 	}
 
 	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
@@ -12771,6 +12830,85 @@ func awsRestjson1_serializeOpHttpBindingsListAnalyticsDataAssociationsInput(v *L
 
 	if v.DataSetId != nil {
 		encoder.SetQuery("DataSetId").String(*v.DataSetId)
+	}
+
+	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
+	}
+	if v.InstanceId != nil {
+		if err := encoder.SetURI("InstanceId").String(*v.InstanceId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListAnalyticsDataLakeDataSets struct {
+}
+
+func (*awsRestjson1_serializeOpListAnalyticsDataLakeDataSets) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAnalyticsDataLakeDataSets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAnalyticsDataLakeDataSetsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/analytics-data/instance/{InstanceId}/datasets")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListAnalyticsDataLakeDataSetsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAnalyticsDataLakeDataSetsInput(v *ListAnalyticsDataLakeDataSetsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
@@ -23917,6 +24055,11 @@ func awsRestjson1_serializeOpDocumentUpdateInstanceAttributeInput(v *UpdateInsta
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.Value != nil {
 		ok := object.Key("Value")
 		ok.String(*v.Value)
@@ -24023,6 +24166,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateInstanceStorageConfigInput(v *Upd
 func awsRestjson1_serializeOpDocumentUpdateInstanceStorageConfigInput(v *UpdateInstanceStorageConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.StorageConfig != nil {
 		ok := object.Key("StorageConfig")

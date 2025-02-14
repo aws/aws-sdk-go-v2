@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves an array of the Amazon Resource Names (ARNs) for the regional
-// resources that are associated with the specified web ACL.
+// Retrieves an array of the Amazon Resource Names (ARNs) for the resources that
+// are associated with the specified web ACL.
 //
 // For Amazon CloudFront, don't use this call. Instead, use the CloudFront call
 // ListDistributionsByWebACLId . For information, see [ListDistributionsByWebACLId] in the Amazon CloudFront
@@ -47,15 +47,18 @@ type ListResourcesForWebACLInput struct {
 	// This member is required.
 	WebACLArn *string
 
-	// Used for web ACLs that are scoped for regional applications. A regional
-	// application can be an Application Load Balancer (ALB), an Amazon API Gateway
-	// REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
-	// service, or an Amazon Web Services Verified Access instance.
+	// Retrieves the web ACLs that are used by the specified resource type.
+	//
+	// For Amazon CloudFront, don't use this call. Instead, use the CloudFront call
+	// ListDistributionsByWebACLId . For information, see [ListDistributionsByWebACLId] in the Amazon CloudFront
+	// API Reference.
 	//
 	// If you don't provide a resource type, the call uses the resource type
 	// APPLICATION_LOAD_BALANCER .
 	//
 	// Default: APPLICATION_LOAD_BALANCER
+	//
+	// [ListDistributionsByWebACLId]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html
 	ResourceType types.ResourceType
 
 	noSmithyDocumentSerde

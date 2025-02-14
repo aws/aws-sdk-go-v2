@@ -617,6 +617,25 @@ func (CountryCode) Values() []CountryCode {
 	}
 }
 
+type DataProtectionAction string
+
+// Enum values for DataProtectionAction
+const (
+	DataProtectionActionSubstitution DataProtectionAction = "SUBSTITUTION"
+	DataProtectionActionHash         DataProtectionAction = "HASH"
+)
+
+// Values returns all known values for DataProtectionAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataProtectionAction) Values() []DataProtectionAction {
+	return []DataProtectionAction{
+		"SUBSTITUTION",
+		"HASH",
+	}
+}
+
 type FailureReason string
 
 // Enum values for FailureReason
@@ -656,6 +675,31 @@ func (FallbackBehavior) Values() []FallbackBehavior {
 	return []FallbackBehavior{
 		"MATCH",
 		"NO_MATCH",
+	}
+}
+
+type FieldToProtectType string
+
+// Enum values for FieldToProtectType
+const (
+	FieldToProtectTypeSingleHeader        FieldToProtectType = "SINGLE_HEADER"
+	FieldToProtectTypeSingleCookie        FieldToProtectType = "SINGLE_COOKIE"
+	FieldToProtectTypeSingleQueryArgument FieldToProtectType = "SINGLE_QUERY_ARGUMENT"
+	FieldToProtectTypeQueryString         FieldToProtectType = "QUERY_STRING"
+	FieldToProtectTypeBody                FieldToProtectType = "BODY"
+)
+
+// Values returns all known values for FieldToProtectType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FieldToProtectType) Values() []FieldToProtectType {
+	return []FieldToProtectType{
+		"SINGLE_HEADER",
+		"SINGLE_COOKIE",
+		"SINGLE_QUERY_ARGUMENT",
+		"QUERY_STRING",
+		"BODY",
 	}
 }
 
@@ -948,6 +992,7 @@ const (
 	ParameterExceptionFieldScopeDown                      ParameterExceptionField = "SCOPE_DOWN"
 	ParameterExceptionFieldCustomKeys                     ParameterExceptionField = "CUSTOM_KEYS"
 	ParameterExceptionFieldAcpRuleSetResponseInspection   ParameterExceptionField = "ACP_RULE_SET_RESPONSE_INSPECTION"
+	ParameterExceptionFieldDataProtectionConfig           ParameterExceptionField = "DATA_PROTECTION_CONFIG"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -1026,6 +1071,7 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"SCOPE_DOWN",
 		"CUSTOM_KEYS",
 		"ACP_RULE_SET_RESPONSE_INSPECTION",
+		"DATA_PROTECTION_CONFIG",
 	}
 }
 

@@ -2710,6 +2710,26 @@ func (m *validateOpListAnalyticsDataAssociations) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAnalyticsDataLakeDataSets struct {
+}
+
+func (*validateOpListAnalyticsDataLakeDataSets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAnalyticsDataLakeDataSets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAnalyticsDataLakeDataSetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAnalyticsDataLakeDataSetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListApprovedOrigins struct {
 }
 
@@ -6108,6 +6128,10 @@ func addOpListAgentStatusesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListAnalyticsDataAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAnalyticsDataAssociations{}, middleware.After)
+}
+
+func addOpListAnalyticsDataLakeDataSetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAnalyticsDataLakeDataSets{}, middleware.After)
 }
 
 func addOpListApprovedOriginsValidationMiddleware(stack *middleware.Stack) error {
@@ -11411,6 +11435,21 @@ func validateOpListAnalyticsDataAssociationsInput(v *ListAnalyticsDataAssociatio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAnalyticsDataAssociationsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAnalyticsDataLakeDataSetsInput(v *ListAnalyticsDataLakeDataSetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAnalyticsDataLakeDataSetsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}

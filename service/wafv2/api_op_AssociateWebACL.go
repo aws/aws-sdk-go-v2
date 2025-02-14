@@ -10,15 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a web ACL with a regional application resource, to protect the
-// resource. A regional application can be an Application Load Balancer (ALB), an
-// Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user
-// pool, an App Runner service, or an Amazon Web Services Verified Access instance.
+// Associates a web ACL with a resource, to protect the resource.
 //
-// For Amazon CloudFront, don't use this call. Instead, use your CloudFront
-// distribution configuration. To associate a web ACL, in the CloudFront call
-// UpdateDistribution , set the web ACL ID to the Amazon Resource Name (ARN) of the
-// web ACL. For information, see [UpdateDistribution]in the Amazon CloudFront Developer Guide.
+// Use this for all resource types except for Amazon CloudFront distributions. For
+// Amazon CloudFront, call UpdateDistribution for the distribution and provide the
+// Amazon Resource Name (ARN) of the web ACL in the web ACL ID. For information,
+// see [UpdateDistribution]in the Amazon CloudFront Developer Guide.
 //
 // # Required permissions for customer-managed IAM policies
 //

@@ -112,9 +112,9 @@ func (e *DatabaseNotFoundException) ErrorCode() string {
 }
 func (e *DatabaseNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A request was canceled because the Aurora Serverless v2 DB instance was in a
-// paused state. The Data API request automatically causes the DB instance to begin
-// resuming. Wait a few seconds and try again.
+// A request was cancelled because the Aurora Serverless v2 DB instance was
+// paused. The Data API request automatically resumes the DB instance. Wait a few
+// seconds and try again.
 type DatabaseResumingException struct {
 	Message *string
 
@@ -243,6 +243,32 @@ func (e *InternalServerErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The resource is in an invalid state.
+type InvalidResourceStateException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidResourceStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidResourceStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidResourceStateException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidResourceStateException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Secrets Manager secret used with the request isn't valid.
 type InvalidSecretException struct {

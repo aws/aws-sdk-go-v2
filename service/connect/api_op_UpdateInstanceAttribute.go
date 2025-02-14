@@ -34,7 +34,7 @@ type UpdateInstanceAttributeInput struct {
 	// The type of attribute.
 	//
 	// Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this
-	// feature, contact Amazon Web Services Support for allowlisting.
+	// feature, contact Amazon Web ServicesSupport for allowlisting.
 	//
 	// This member is required.
 	AttributeType types.InstanceAttributeType
@@ -51,6 +51,13 @@ type UpdateInstanceAttributeInput struct {
 	//
 	// This member is required.
 	Value *string
+
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+	ClientToken *string
 
 	noSmithyDocumentSerde
 }
@@ -126,6 +133,9 @@ func (c *Client) addOperationUpdateInstanceAttributeMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateInstanceAttributeMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateInstanceAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,6 +170,39 @@ func (c *Client) addOperationUpdateInstanceAttributeMiddlewares(stack *middlewar
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpUpdateInstanceAttribute struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateInstanceAttribute) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateInstanceAttribute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdateInstanceAttributeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateInstanceAttributeInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateInstanceAttributeMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateInstanceAttribute{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateInstanceAttribute(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -1,0 +1,8 @@
+{
+    "id": "9ff5107b-0c13-4f72-8d0c-5e498924cd63",
+    "type": "feature",
+    "description": "Add support for Stop DB feature.",
+    "modules": [
+        "service/rdsdata"
+    ]
+}

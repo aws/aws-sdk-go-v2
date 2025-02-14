@@ -12519,6 +12519,11 @@ func awsAwsjson11_serializeOpDocumentStartReplicationInput(v *StartReplicationIn
 		ok.String(*v.CdcStopPosition)
 	}
 
+	if v.PremigrationAssessmentSettings != nil {
+		ok := object.Key("PremigrationAssessmentSettings")
+		ok.String(*v.PremigrationAssessmentSettings)
+	}
+
 	if v.ReplicationConfigArn != nil {
 		ok := object.Key("ReplicationConfigArn")
 		ok.String(*v.ReplicationConfigArn)

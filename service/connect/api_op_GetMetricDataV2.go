@@ -86,13 +86,14 @@ type GetMetricDataV2Input struct {
 	//   ANSWERING_MACHINE_DETECTION_STATUS | BOT_ID | BOT_ALIAS | BOT_VERSION |
 	//   BOT_LOCALE | BOT_INTENT_NAME | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
 	//   CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
-	//   contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON | FEATURE |
-	//   FLOW_ACTION_ID | FLOW_TYPE | FLOWS_MODULE_RESOURCE_ID | FLOWS_NEXT_RESOURCE_ID
-	//   | FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID |
-	//   INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP |
-	//   INVOKING_RESOURCE_TYPE | PARENT_FLOWS_RESOURCE_ID |
-	//   RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
-	//   QUEUE | Q_CONNECT_ENABLED |
+	//   contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON |
+	//   EVALUATION_FORM | EVALUATION_SECTION | EVALUATION_QUESTION | EVALUATION_SOURCE
+	//   | FEATURE | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_MODULE_RESOURCE_ID |
+	//   FLOWS_NEXT_RESOURCE_ID | FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE |
+	//   FLOWS_RESOURCE_ID | FORM_VERSION | INITIATION_METHOD |
+	//   INVOKING_RESOURCE_PUBLISHED_TIMESTAMP | INVOKING_RESOURCE_TYPE |
+	//   PARENT_FLOWS_RESOURCE_ID | RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE |
+	//   ROUTING_STEP_EXPRESSION | QUEUE | Q_CONNECT_ENABLED |
 	//
 	//   - Filter values: A maximum of 100 filter values are supported in a single
 	//   request. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter
@@ -313,6 +314,14 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average dials per minute]
 	//
+	// AVG_EVALUATION_SCORE Unit: Percent
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel, Evaluation Form
+	// ID, Evaluation Section ID, Evaluation Question ID, Evaluation Source, Form
+	// Version, Queue, Routing Profile
+	//
+	// UI name: [Average agent evaluation score]
+	//
 	// AVG_FLOW_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Channel,
@@ -470,6 +479,14 @@ type GetMetricDataV2Input struct {
 	// Valid groupings and filters: Campaign
 	//
 	// UI name: [Average wait time after customer connection]
+	//
+	// AVG_WEIGHTED_EVALUATION_SCORE Unit: Percent
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel, Evaluation Form
+	// Id, Evaluation Section ID, Evaluation Question ID, Evaluation Source, Form
+	// Version, Queue, Routing Profile
+	//
+	// UI name: [Average weighted agent evaluation score]
 	//
 	// BOT_CONVERSATIONS_COMPLETED Unit: Count
 	//
@@ -723,6 +740,13 @@ type GetMetricDataV2Input struct {
 	// Detection Status and Disconnect Reason are only available for agent assisted
 	// voice and automated voice delivery modes.
 	//
+	// EVALUATIONS_PERFORMED Unit: Count
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel, Evaluation Form
+	// ID, Evaluation Source, Form Version, Queue, Routing Profile
+	//
+	// UI name: [Evaluations performed]
+	//
 	// FLOWS_OUTCOME Unit: Count
 	//
 	// Valid groupings and filters: Channel,
@@ -774,6 +798,13 @@ type GetMetricDataV2Input struct {
 	// resource ID, Initiation method, Resource published timestamp
 	//
 	// UI name: [Minimum flow time]
+	//
+	// PERCENT_AUTOMATIC_FAILS Unit: Percent
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel, Evaluation Form
+	// ID, Evaluation Source, Form Version, Queue, Routing Profile
+	//
+	// UI name: [Automatic fails percent]
 	//
 	// PERCENT_BOT_CONVERSATIONS_OUTCOME Unit: Percent
 	//
@@ -1086,6 +1117,7 @@ type GetMetricDataV2Input struct {
 	// [Contacts transferred out internal]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical
 	// [Agent non-response]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-non-response
 	// [Agent answer rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-answer-rate-historical
+	// [Evaluations performed]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#evaluations-performed-historical
 	// [Average agent pause time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-pause-time-historical
 	// [Campaign contacts abandoned after X rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#campaign-contacts-abandoned-rate-historical
 	// [Average queue abandon time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-abandon-time-historical
@@ -1108,6 +1140,7 @@ type GetMetricDataV2Input struct {
 	// [Average agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-time-historical
 	// [Agent on contact time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-on-contact-time-historical
 	// [Average non-talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##average-non-talk-time-historical
+	// [Average agent evaluation score]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-evaluation-score-historical
 	// [Flows started]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-started-historical
 	// [Average contacts per case]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contacts-case-historical
 	// [Agent talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
@@ -1122,6 +1155,7 @@ type GetMetricDataV2Input struct {
 	// [Delivery attempt disposition rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#delivery-attempt-disposition-rate-historical
 	// [Contact disconnected]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical
 	// [Contacts handled (connected to agent timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
+	// [Average weighted agent evaluation score]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-weighted-agent-evaluation-score-historical
 	// [Contacts resolved in X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
 	// [Cases resolved on first contact]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
 	// [Contact abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
@@ -1138,6 +1172,7 @@ type GetMetricDataV2Input struct {
 	// [Agent interaction and hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-hold-time-historical
 	// [Delivery attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#delivery-attempts-historical
 	// [Contacts put on hold]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
+	// [Automatic fails percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#percent-evaluation-automatic-failures-historical
 	// [Callback attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#callback-attempts-historical
 	// [Forecasting, capacity planning, and scheduling]: https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region
 	//
@@ -1172,11 +1207,19 @@ type GetMetricDataV2Input struct {
 	// ANSWERING_MACHINE_DETECTION_STATUS | BOT_ID | BOT_ALIAS | BOT_VERSION |
 	// BOT_LOCALE | BOT_INTENT_NAME | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
 	// CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
-	// contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON |
+	// contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON | EVALUATION_FORM
+	// | EVALUATION_SECTION | EVALUATION_QUESTION | EVALUATION_SOURCE |
 	// FLOWS_RESOURCE_ID | FLOWS_MODULE_RESOURCE_ID | FLOW_ACTION_ID | FLOW_TYPE |
-	// FLOWS_OUTCOME_TYPE | INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP
-	// | INVOKING_RESOURCE_TYPE | PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE
-	// | RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION
+	// FLOWS_OUTCOME_TYPE | FORM_VERSION | INITIATION_METHOD |
+	// INVOKING_RESOURCE_PUBLISHED_TIMESTAMP | INVOKING_RESOURCE_TYPE |
+	// PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
+	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION
+	//
+	// Type: Array of strings
+	//
+	// Array Members: Maximum number of 4 items
+	//
+	// Required: No
 	Groupings []string
 
 	// The interval period and timezone to apply to returned metrics.

@@ -298,8 +298,24 @@ type AnalyticsDataAssociationResult struct {
 	// The Resource Access Manager share ID.
 	ResourceShareId *string
 
+	// The Amazon Web Services Resource Access Manager status of association.
+	ResourceShareStatus *string
+
 	// The identifier of the target account.
 	TargetAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about datasets that are available to associate with: DataSetId ,
+// DataSetName .
+type AnalyticsDataSetsResult struct {
+
+	// The identifier of the dataset.
+	DataSetId *string
+
+	// The name of the dataset.
+	DataSetName *string
 
 	noSmithyDocumentSerde
 }
@@ -553,7 +569,7 @@ type AudioQualityMetricsInfo struct {
 }
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web Services Support.
+// request access to this API, contact Amazon Web ServicesSupport.
 //
 // Information about an authentication profile. An authentication profile is a
 // resource that stores the authentication settings for users in your contact
@@ -624,7 +640,7 @@ type AuthenticationProfile struct {
 }
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web Services Support.
+// request access to this API, contact Amazon Web ServicesSupport.
 //
 // A summary of a given authentication profile.
 type AuthenticationProfileSummary struct {

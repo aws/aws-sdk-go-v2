@@ -43,6 +43,13 @@ type AssociateApprovedOriginInput struct {
 	// This member is required.
 	Origin *string
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -117,6 +124,9 @@ func (c *Client) addOperationAssociateApprovedOriginMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opAssociateApprovedOriginMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateApprovedOriginValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,6 +161,39 @@ func (c *Client) addOperationAssociateApprovedOriginMiddlewares(stack *middlewar
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpAssociateApprovedOrigin struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpAssociateApprovedOrigin) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpAssociateApprovedOrigin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*AssociateApprovedOriginInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *AssociateApprovedOriginInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opAssociateApprovedOriginMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateApprovedOrigin{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opAssociateApprovedOrigin(region string) *awsmiddleware.RegisterServiceMetadata {

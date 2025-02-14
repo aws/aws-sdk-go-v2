@@ -143,6 +143,7 @@
         "api_op_ImportPhoneNumber.go",
         "api_op_ListAgentStatuses.go",
         "api_op_ListAnalyticsDataAssociations.go",
+        "api_op_ListAnalyticsDataLakeDataSets.go",
         "api_op_ListApprovedOrigins.go",
         "api_op_ListAssociatedContacts.go",
         "api_op_ListAuthenticationProfiles.go",

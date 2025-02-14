@@ -1682,6 +1682,18 @@ func TestCheckSnapshot_ListAnalyticsDataAssociations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAnalyticsDataLakeDataSets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnalyticsDataLakeDataSets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAnalyticsDataLakeDataSets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListApprovedOrigins(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListApprovedOrigins(context.Background(), nil, func(o *Options) {
@@ -5046,6 +5058,18 @@ func TestUpdateSnapshot_ListAnalyticsDataAssociations(t *testing.T) {
 	_, err := svc.ListAnalyticsDataAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAnalyticsDataAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAnalyticsDataLakeDataSets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnalyticsDataLakeDataSets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAnalyticsDataLakeDataSets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

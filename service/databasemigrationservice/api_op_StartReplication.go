@@ -75,6 +75,36 @@ type StartReplicationInput struct {
 	// value can be either server time or commit time.
 	CdcStopPosition *string
 
+	// User-defined settings for the premigration assessment. The possible values are:
+	//
+	//   - ResultLocationFinder : The folder within an Amazon Amazon S3 bucket where
+	//   you want DMS to store the results of this assessment run.
+	//
+	//   - ResultEncryptionMode : The supported values are SSE_KMS and SSE_S3 . If
+	//   these values are not provided, then the files are not encrypted at rest. For
+	//   more information, see [Creating Amazon Web Services KMS keys to encrypt Amazon Amazon S3 target objects].
+	//
+	//   - ResultKmsKeyArn : The ARN of a customer KMS encryption key that you specify
+	//   when you set ResultEncryptionMode to SSE_KMS .
+	//
+	//   - IncludeOnly : A space-separated list of names for specific individual
+	//   assessments that you want to include. These names come from the default list of
+	//   individual assessments that Database Migration Service supports for the
+	//   associated migration.
+	//
+	//   - Exclude : A space-separated list of names for specific individual
+	//   assessments that you want to exclude. These names come from the default list of
+	//   individual assessments that Database Migration Service supports for the
+	//   associated migration.
+	//
+	//   - FailOnAssessmentFailure : A configurable setting you can set to true (the
+	//   default setting) or false . Use this setting to to stop the replication from
+	//   starting automatically if the assessment fails. This can help you evaluate the
+	//   issue that is preventing the replication from running successfully.
+	//
+	// [Creating Amazon Web Services KMS keys to encrypt Amazon Amazon S3 target objects]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.KMSKeys
+	PremigrationAssessmentSettings *string
+
 	noSmithyDocumentSerde
 }
 

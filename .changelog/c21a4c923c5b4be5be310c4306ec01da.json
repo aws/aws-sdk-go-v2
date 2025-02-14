@@ -1,0 +1,8 @@
+{
+    "id": "c21a4c92-3c5b-4be5-be31-0c4306ec01da",
+    "type": "feature",
+    "description": "The WAFv2 API now supports configuring data protection in webACLs.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

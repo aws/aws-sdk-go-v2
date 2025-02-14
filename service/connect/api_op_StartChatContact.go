@@ -28,7 +28,7 @@ import (
 //
 // If you use the ChatDurationInMinutes parameter and receive a 400 error, your
 // account may not support the ability to configure custom chat durations. For more
-// information, contact Amazon Web Services Support.
+// information, contact Amazon Web ServicesSupport.
 //
 // For more information about chat, see the following topics in the Amazon Connect
 // Administrator Guide:
