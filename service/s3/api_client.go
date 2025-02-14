@@ -871,22 +871,22 @@ func addResponseChecksumMetricsTracking(stack *middleware.Stack, options Options
 	}, "UserAgent", middleware.Before)
 }
 
-type SetCredentialSourceMiddleware struct {
+type setCredentialSourceMiddleware struct {
 	ua      *awsmiddleware.RequestUserAgent
 	options Options
 }
 
-func (m SetCredentialSourceMiddleware) ID() string { return "SetCredentialSourceMiddleware" }
+func (m setCredentialSourceMiddleware) ID() string { return "SetCredentialSourceMiddleware" }
 
-func (m SetCredentialSourceMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+func (m setCredentialSourceMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
-	asChain, ok := m.options.Credentials.(aws.CredentialProviderChain)
+	asProviderSource, ok := m.options.Credentials.(aws.CredentialProviderSource)
 	if !ok {
 		return next.HandleBuild(ctx, in)
 	}
-	credChain := asChain.CredentialChain()
-	for _, source := range credChain {
+	providerSources := asProviderSource.ProviderSources()
+	for _, source := range providerSources {
 		m.ua.AddCredentialsSource(source)
 	}
 	return next.HandleBuild(ctx, in)
@@ -898,7 +898,7 @@ func addCredentialSource(stack *middleware.Stack, options Options) error {
 		return err
 	}
 
-	mw := SetCredentialSourceMiddleware{ua: ua, options: options}
+	mw := setCredentialSourceMiddleware{ua: ua, options: options}
 	return stack.Build.Insert(&mw, "UserAgent", middleware.Before)
 }
 
