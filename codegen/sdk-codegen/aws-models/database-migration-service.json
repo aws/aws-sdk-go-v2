@@ -5851,6 +5851,12 @@
                         "smithy.api#documentation": "<p>ARN of a replication instance on which you want to base the default list of individual\n         assessments.</p>"
                     }
                 },
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of a serverless replication on which you want to base the default\n         list of individual assessments.</p>"
+                    }
+                },
                 "SourceEngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
