@@ -249,6 +249,7 @@ type AssumeRoleOptions struct {
 	TransitiveTagKeys []string
 
 	// The chain of providers that was used to create this provider
+	// These values are for reporting purposes and are not meant to be set up directly
 	CredentialSources []aws.CredentialSource
 }
 

@@ -50,7 +50,8 @@ type Options struct {
 	// profile is used in the shared config
 	SSOTokenProvider *SSOTokenProvider
 
-	// The chain of providers that was used to create this provider
+	// The chain of providers that was used to create this provider.
+	// These values are for reporting purposes and are not meant to be set up directly
 	CredentialSources []aws.CredentialSource
 }
 

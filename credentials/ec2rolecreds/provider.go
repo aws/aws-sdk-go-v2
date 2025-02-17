@@ -46,7 +46,10 @@ type Options struct {
 	// calls to EC2 IMDS.
 	//
 	// If nil, the provider will default to the EC2 IMDS client.
-	Client            GetMetadataAPIClient
+	Client GetMetadataAPIClient
+
+	// The chain of providers that was used to create this provider
+	// These values are for reporting purposes and are not meant to be set up directly
 	CredentialSources []aws.CredentialSource
 }
 

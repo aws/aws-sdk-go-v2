@@ -21,7 +21,8 @@ func (*StaticCredentialsEmptyError) Error() string {
 // A StaticCredentialsProvider is a set of credentials which are set, and will
 // never expire.
 type StaticCredentialsProvider struct {
-	Value  aws.Credentials
+	Value aws.Credentials
+	// These values are for reporting purposes and are not meant to be set up directly
 	Source []aws.CredentialSource
 }
 
