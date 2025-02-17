@@ -192,11 +192,6 @@ type Config struct {
 	// This variable is sourced from environment variable AWS_RESPONSE_CHECKSUM_VALIDATION or
 	// the shared config profile attribute "response_checksum_validation".
 	ResponseChecksumValidation ResponseChecksumValidation
-
-	// Stores which source(s) were used to get the credentials.
-	// This is an internal variable populated when credentials are resolved, and users shouldn't
-	// modify this variable directly
-	CredentialSources []CredentialSource
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder
@@ -241,22 +236,3 @@ const (
 	// discovery if supported for the operation.
 	EndpointDiscoveryEnabled
 )
-
-// AddCredentialSource is called to keep a list of where the credentials have been sourced
-// when building a config object.
-func (c *Config) AddCredentialSource(source CredentialSource) {
-	if c.CredentialSources == nil {
-		c.CredentialSources = []CredentialSource{source}
-	}
-	// Ignore multiple occurrences of the same source.
-	// This is never expected to be n>3, so no need for a set
-	for _, existing := range c.CredentialSources {
-		if existing == source {
-			return
-		}
-	}
-
-	// if we have a role arn, but we also have a named provider, we don't want to count
-	// as "role arn"
-	c.CredentialSources = append(c.CredentialSources, source)
-}
