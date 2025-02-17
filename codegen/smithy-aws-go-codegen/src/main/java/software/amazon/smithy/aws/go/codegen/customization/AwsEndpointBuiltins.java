@@ -41,6 +41,8 @@ public class AwsEndpointBuiltins implements GoIntegration {
             goTemplate("$T(options.DisableMultiRegionAccessPoints)", SdkGoTypes.Aws.Bool);
     private static final GoWriter.Writable BindAccountID =
             goTemplate("resolveAccountID(getIdentity(ctx), options.AccountIDEndpointMode)");
+    private static final GoWriter.Writable BindAccountIDEndpointMode =
+            goTemplate("$T(string(options.AccountIDEndpointMode))", SdkGoTypes.Aws.String);
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
@@ -55,6 +57,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
                 .addEndpointBuiltinBinding("AWS::S3::DisableMultiRegionAccessPoints", BindAwsS3DisableMultiRegionAccessPoints)
                 .addEndpointBuiltinBinding("AWS::S3Control::UseArnRegion", BindAwsS3UseArnRegion)
                 .addEndpointBuiltinBinding("AWS::Auth::AccountId", BindAccountID)
+                .addEndpointBuiltinBinding("AWS::Auth::AccountIdEndpointMode", BindAccountIDEndpointMode)
                 .build());
     }
 
