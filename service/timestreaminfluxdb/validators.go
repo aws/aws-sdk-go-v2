@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateDbCluster struct {
+}
+
+func (*validateOpCreateDbCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDbCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDbClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDbClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDbInstance struct {
 }
 
@@ -50,6 +70,26 @@ func (m *validateOpCreateDbParameterGroup) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDbCluster struct {
+}
+
+func (*validateOpDeleteDbCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDbCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDbClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDbClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDbInstance struct {
 }
 
@@ -65,6 +105,26 @@ func (m *validateOpDeleteDbInstance) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDbInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDbCluster struct {
+}
+
+func (*validateOpGetDbCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDbCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDbClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDbClusterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -105,6 +165,26 @@ func (m *validateOpGetDbParameterGroup) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDbParameterGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDbInstancesForCluster struct {
+}
+
+func (*validateOpListDbInstancesForCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDbInstancesForCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDbInstancesForClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDbInstancesForClusterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +250,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDbCluster struct {
+}
+
+func (*validateOpUpdateDbCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDbCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDbClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDbClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDbInstance struct {
 }
 
@@ -190,6 +290,10 @@ func (m *validateOpUpdateDbInstance) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateDbClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDbCluster{}, middleware.After)
+}
+
 func addOpCreateDbInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDbInstance{}, middleware.After)
 }
@@ -198,8 +302,16 @@ func addOpCreateDbParameterGroupValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateDbParameterGroup{}, middleware.After)
 }
 
+func addOpDeleteDbClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDbCluster{}, middleware.After)
+}
+
 func addOpDeleteDbInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDbInstance{}, middleware.After)
+}
+
+func addOpGetDbClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDbCluster{}, middleware.After)
 }
 
 func addOpGetDbInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -208,6 +320,10 @@ func addOpGetDbInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDbParameterGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDbParameterGroup{}, middleware.After)
+}
+
+func addOpListDbInstancesForClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDbInstancesForCluster{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -220,6 +336,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateDbClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDbCluster{}, middleware.After)
 }
 
 func addOpUpdateDbInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -352,6 +472,44 @@ func validateS3Configuration(v *types.S3Configuration) error {
 	}
 }
 
+func validateOpCreateDbClusterInput(v *CreateDbClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDbClusterInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if len(v.DbInstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DbInstanceType"))
+	}
+	if v.AllocatedStorage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllocatedStorage"))
+	}
+	if v.VpcSubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcSubnetIds"))
+	}
+	if v.VpcSecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcSecurityGroupIds"))
+	}
+	if len(v.DeploymentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentType"))
+	}
+	if v.LogDeliveryConfiguration != nil {
+		if err := validateLogDeliveryConfiguration(v.LogDeliveryConfiguration); err != nil {
+			invalidParams.AddNested("LogDeliveryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDbInstanceInput(v *CreateDbInstanceInput) error {
 	if v == nil {
 		return nil
@@ -407,6 +565,21 @@ func validateOpCreateDbParameterGroupInput(v *CreateDbParameterGroupInput) error
 	}
 }
 
+func validateOpDeleteDbClusterInput(v *DeleteDbClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDbClusterInput"}
+	if v.DbClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDbInstanceInput(v *DeleteDbInstanceInput) error {
 	if v == nil {
 		return nil
@@ -414,6 +587,21 @@ func validateOpDeleteDbInstanceInput(v *DeleteDbInstanceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDbInstanceInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDbClusterInput(v *GetDbClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDbClusterInput"}
+	if v.DbClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbClusterId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -444,6 +632,21 @@ func validateOpGetDbParameterGroupInput(v *GetDbParameterGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDbParameterGroupInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDbInstancesForClusterInput(v *ListDbInstancesForClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDbInstancesForClusterInput"}
+	if v.DbClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbClusterId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -495,6 +698,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDbClusterInput(v *UpdateDbClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDbClusterInput"}
+	if v.DbClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbClusterId"))
+	}
+	if v.LogDeliveryConfiguration != nil {
+		if err := validateLogDeliveryConfiguration(v.LogDeliveryConfiguration); err != nil {
+			invalidParams.AddNested("LogDeliveryConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

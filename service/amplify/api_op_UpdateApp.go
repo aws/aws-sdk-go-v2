@@ -67,6 +67,14 @@ type UpdateAppInput struct {
 	// The cache configuration for the Amplify app.
 	CacheConfig *types.CacheConfig
 
+	// The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app. The SSR
+	// Compute role allows the Amplify Hosting compute service to securely access
+	// specific Amazon Web Services resources based on the role's permissions. For more
+	// information about the SSR Compute role, see [Adding an SSR Compute role]in the Amplify User Guide.
+	//
+	// [Adding an SSR Compute role]: https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html
+	ComputeRoleArn *string
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string
 
@@ -92,7 +100,7 @@ type UpdateAppInput struct {
 	// The environment variables for an Amplify app.
 	EnvironmentVariables map[string]string
 
-	// The AWS Identity and Access Management (IAM) service role for an Amplify app.
+	// The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
 	IamServiceRoleArn *string
 
 	// The name for an Amplify app.

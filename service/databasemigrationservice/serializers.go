@@ -10398,6 +10398,11 @@ func awsAwsjson11_serializeOpDocumentDescribeApplicableIndividualAssessmentsInpu
 		ok.String(string(v.MigrationType))
 	}
 
+	if v.ReplicationConfigArn != nil {
+		ok := object.Key("ReplicationConfigArn")
+		ok.String(*v.ReplicationConfigArn)
+	}
+
 	if v.ReplicationInstanceArn != nil {
 		ok := object.Key("ReplicationInstanceArn")
 		ok.String(*v.ReplicationInstanceArn)

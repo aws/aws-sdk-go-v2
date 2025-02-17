@@ -2,6 +2,50 @@
 
 package types
 
+type ClusterDeploymentType string
+
+// Enum values for ClusterDeploymentType
+const (
+	ClusterDeploymentTypeMultiNodeReadReplicas ClusterDeploymentType = "MULTI_NODE_READ_REPLICAS"
+)
+
+// Values returns all known values for ClusterDeploymentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterDeploymentType) Values() []ClusterDeploymentType {
+	return []ClusterDeploymentType{
+		"MULTI_NODE_READ_REPLICAS",
+	}
+}
+
+type ClusterStatus string
+
+// Enum values for ClusterStatus
+const (
+	ClusterStatusCreating  ClusterStatus = "CREATING"
+	ClusterStatusUpdating  ClusterStatus = "UPDATING"
+	ClusterStatusDeleting  ClusterStatus = "DELETING"
+	ClusterStatusAvailable ClusterStatus = "AVAILABLE"
+	ClusterStatusFailed    ClusterStatus = "FAILED"
+	ClusterStatusDeleted   ClusterStatus = "DELETED"
+)
+
+// Values returns all known values for ClusterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterStatus) Values() []ClusterStatus {
+	return []ClusterStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"AVAILABLE",
+		"FAILED",
+		"DELETED",
+	}
+}
+
 type DbInstanceType string
 
 // Enum values for DbInstanceType
@@ -93,6 +137,46 @@ func (DurationType) Values() []DurationType {
 		"minutes",
 		"seconds",
 		"milliseconds",
+	}
+}
+
+type FailoverMode string
+
+// Enum values for FailoverMode
+const (
+	FailoverModeAutomatic  FailoverMode = "AUTOMATIC"
+	FailoverModeNoFailover FailoverMode = "NO_FAILOVER"
+)
+
+// Values returns all known values for FailoverMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FailoverMode) Values() []FailoverMode {
+	return []FailoverMode{
+		"AUTOMATIC",
+		"NO_FAILOVER",
+	}
+}
+
+type InstanceMode string
+
+// Enum values for InstanceMode
+const (
+	InstanceModePrimary InstanceMode = "PRIMARY"
+	InstanceModeStandby InstanceMode = "STANDBY"
+	InstanceModeReplica InstanceMode = "REPLICA"
+)
+
+// Values returns all known values for InstanceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceMode) Values() []InstanceMode {
+	return []InstanceMode{
+		"PRIMARY",
+		"STANDBY",
+		"REPLICA",
 	}
 }
 

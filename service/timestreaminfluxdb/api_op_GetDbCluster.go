@@ -11,79 +11,70 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a Timestream for InfluxDB DB instance.
-func (c *Client) GetDbInstance(ctx context.Context, params *GetDbInstanceInput, optFns ...func(*Options)) (*GetDbInstanceOutput, error) {
+// Retrieves information about a Timestream for InfluxDB cluster.
+func (c *Client) GetDbCluster(ctx context.Context, params *GetDbClusterInput, optFns ...func(*Options)) (*GetDbClusterOutput, error) {
 	if params == nil {
-		params = &GetDbInstanceInput{}
+		params = &GetDbClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDbInstance", params, optFns, c.addOperationGetDbInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDbCluster", params, optFns, c.addOperationGetDbClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetDbInstanceOutput)
+	out := result.(*GetDbClusterOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetDbInstanceInput struct {
+type GetDbClusterInput struct {
 
-	// The id of the DB instance.
+	// Service-generated unique identifier of the DB cluster to retrieve.
 	//
 	// This member is required.
-	Identifier *string
+	DbClusterId *string
 
 	noSmithyDocumentSerde
 }
 
-type GetDbInstanceOutput struct {
+type GetDbClusterOutput struct {
 
-	// The Amazon Resource Name (ARN) of the DB instance.
+	// The Amazon Resource Name (ARN) of the DB cluster.
 	//
 	// This member is required.
 	Arn *string
 
-	// A service-generated unique identifier.
+	// Service-generated unique identifier of the DB cluster to retrieve.
 	//
 	// This member is required.
 	Id *string
 
-	// The customer-supplied name that uniquely identifies the DB instance when
-	// interacting with the Amazon Timestream for InfluxDB API and CLI commands.
+	// Customer-supplied name of the Timestream for InfluxDB cluster.
 	//
 	// This member is required.
 	Name *string
 
-	// A list of VPC subnet IDs associated with the DB instance.
-	//
-	// This member is required.
-	VpcSubnetIds []string
-
 	// The amount of storage allocated for your DB storage type (in gibibytes).
 	AllocatedStorage *int32
-
-	// The Availability Zone in which the DB instance resides.
-	AvailabilityZone *string
-
-	// Specifies the DbCluster to which this DbInstance belongs to.
-	DbClusterId *string
 
 	// The Timestream for InfluxDB instance type that InfluxDB runs on.
 	DbInstanceType types.DbInstanceType
 
-	// The id of the DB parameter group assigned to your DB instance.
+	// The ID of the DB parameter group assigned to your DB cluster.
 	DbParameterGroupIdentifier *string
 
 	// The Timestream for InfluxDB DB storage type that InfluxDB stores data on.
 	DbStorageType types.DbStorageType
 
-	// Specifies whether the Timestream for InfluxDB is deployed as Single-AZ or with
-	// a MultiAZ Standby for High availability.
-	DeploymentType types.DeploymentType
+	// Deployment type of the DB cluster.
+	DeploymentType types.ClusterDeploymentType
 
-	// The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.
+	// The endpoint used to connect to the Timestream for InfluxDB cluster for write
+	// and read operations.
 	Endpoint *string
+
+	// The configured failover mode for the DB cluster.
+	FailoverMode types.FailoverMode
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
 	// secret containing the initial InfluxDB authorization parameters. The secret
@@ -91,32 +82,33 @@ type GetDbInstanceOutput struct {
 	// organization, bucket, username, and password.
 	InfluxAuthParametersSecretArn *string
 
-	// Specifies the DbInstance's role in the cluster.
-	InstanceMode types.InstanceMode
-
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
 
-	// Specifies whether the networkType of the Timestream for InfluxDB instance is
-	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can
+	// Specifies whether the network type of the Timestream for InfluxDB cluster is
+	// IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
 	// communicate over both IPv4 and IPv6 protocols.
 	NetworkType types.NetworkType
 
 	// The port number on which InfluxDB accepts connections.
 	Port *int32
 
-	// Indicates if the DB instance has a public IP to facilitate access.
+	// Indicates if the DB cluster has a public IP to facilitate access from outside
+	// the VPC.
 	PubliclyAccessible *bool
 
-	// The Availability Zone in which the standby instance is located when deploying
-	// with a MultiAZ standby instance.
-	SecondaryAvailabilityZone *string
+	// The endpoint used to connect to the Timestream for InfluxDB cluster for
+	// read-only operations.
+	ReaderEndpoint *string
 
-	// The status of the DB instance.
-	Status types.Status
+	// The status of the DB cluster.
+	Status types.ClusterStatus
 
-	// A list of VPC security group IDs associated with the DB instance.
+	// A list of VPC security group IDs associated with the DB cluster.
 	VpcSecurityGroupIds []string
+
+	// A list of VPC subnet IDs associated with the DB cluster.
+	VpcSubnetIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -124,19 +116,19 @@ type GetDbInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDbClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDbInstance{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDbCluster{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDbInstance{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDbCluster{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDbInstance"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDbCluster"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -188,10 +180,10 @@ func (c *Client) addOperationGetDbInstanceMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetDbInstanceValidationMiddleware(stack); err != nil {
+	if err = addOpGetDbClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDbInstance(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDbCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -224,10 +216,10 @@ func (c *Client) addOperationGetDbInstanceMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetDbInstance(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetDbCluster(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetDbInstance",
+		OperationName: "GetDbCluster",
 	}
 }

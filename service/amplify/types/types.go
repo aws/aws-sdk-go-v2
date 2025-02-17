@@ -101,6 +101,14 @@ type App struct {
 	// configuration type , Amplify uses the default AMPLIFY_MANAGED setting.
 	CacheConfig *CacheConfig
 
+	// The Amazon Resource Name (ARN) of the IAM role for an SSR app. The Compute role
+	// allows the Amplify Hosting compute service to securely access specific Amazon
+	// Web Services resources based on the role's permissions. For more information
+	// about the SSR Compute role, see [Adding an SSR Compute role]in the Amplify User Guide.
+	//
+	// [Adding an SSR Compute role]: https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html
+	ComputeRoleArn *string
+
 	// Describes the custom HTTP headers for the Amplify app.
 	CustomHeaders *string
 
@@ -114,8 +122,7 @@ type App struct {
 	// branch from your Git repository.
 	EnableBranchAutoDeletion *bool
 
-	// The AWS Identity and Access Management (IAM) service role for the Amazon
-	// Resource Name (ARN) of the Amplify app.
+	// The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
 	IamServiceRoleArn *string
 
 	// Describes the information about a production branch of the Amplify app.
@@ -364,6 +371,14 @@ type Branch struct {
 
 	//  The build specification (build spec) content for the branch of an Amplify app.
 	BuildSpec *string
+
+	// The Amazon Resource Name (ARN) of the IAM role for a branch of an SSR app. The
+	// Compute role allows the Amplify Hosting compute service to securely access
+	// specific Amazon Web Services resources based on the role's permissions. For more
+	// information about the SSR Compute role, see [Adding an SSR Compute role]in the Amplify User Guide.
+	//
+	// [Adding an SSR Compute role]: https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html
+	ComputeRoleArn *string
 
 	//  The destination branch if the branch is a pull request branch.
 	DestinationBranch *string

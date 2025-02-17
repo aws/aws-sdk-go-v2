@@ -1,0 +1,8 @@
+{
+    "id": "fa2070c3-8ce8-4993-9f57-17e5dcb5d201",
+    "type": "feature",
+    "description": "Support replicationConfigArn in DMS DescribeApplicableIndividualAssessments API.",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}
