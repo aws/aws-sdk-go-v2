@@ -1,3 +1,13 @@
+# Release (2025-02-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.29.0](service/amplify/CHANGELOG.md#v1290-2025-02-17)
+  * **Feature**: Add ComputeRoleArn to CreateApp, UpdateApp, CreateBranch, and UpdateBranch, allowing caller to specify a role to be assumed by Amplify Hosting for server-side rendered applications.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.49.0](service/databasemigrationservice/CHANGELOG.md#v1490-2025-02-17)
+  * **Feature**: Support replicationConfigArn in DMS DescribeApplicableIndividualAssessments API.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.9.0](service/timestreaminfluxdb/CHANGELOG.md#v190-2025-02-17)
+  * **Feature**: This release introduces APIs to manage DbClusters and adds support for read replicas
+
 # Release (2025-02-14)
 
 ## General Highlights

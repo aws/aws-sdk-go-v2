@@ -1,8 +1,0 @@
-{
-    "id": "7315b170-9e34-41a9-9580-86aaf322d2e2",
-    "type": "feature",
-    "description": "This release introduces APIs to manage DbClusters and adds support for read replicas",
-    "modules": [
-        "service/timestreaminfluxdb"
-    ]
-}

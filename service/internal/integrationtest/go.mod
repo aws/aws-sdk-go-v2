@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.49.4
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.12
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.15
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.48.0
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.28.15
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.30.12
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.17

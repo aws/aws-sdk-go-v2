@@ -1,3 +1,7 @@
+# v1.35.1 (2025-02-17)
+
+* No change notes available for this release.
+
 # v1.35.0 (2025-02-13)
 
 * **Feature**: This release adds support for generating cache reports on S3 File Gateways for files that fail to upload.

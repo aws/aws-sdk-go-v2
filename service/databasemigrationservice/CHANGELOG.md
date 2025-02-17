@@ -1,3 +1,7 @@
+# v1.49.0 (2025-02-17)
+
+* **Feature**: Support replicationConfigArn in DMS DescribeApplicableIndividualAssessments API.
+
 # v1.48.0 (2025-02-14)
 
 * **Feature**: Introduces premigration assessment feature to DMS Serverless API for start-replication and describe-replications
