@@ -176,9 +176,6 @@ func (c *Client) addOperationStartMonitorDeploymentMiddlewares(stack *middleware
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opStartMonitorDeploymentMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartMonitorDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
