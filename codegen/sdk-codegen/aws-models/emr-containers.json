@@ -39,6 +39,23 @@
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):acm:.+:(\\d{12}):certificate/.+$"
             }
         },
+        "com.amazonaws.emrcontainers#AllowAWSToRetainLogs": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.emrcontainers#AuthorizationConfiguration": {
             "type": "structure",
             "members": {
@@ -3748,6 +3765,26 @@
                 "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
             }
         },
+        "com.amazonaws.emrcontainers#ManagedLogs": {
+            "type": "structure",
+            "members": {
+                "allowAWSToRetainLogs": {
+                    "target": "com.amazonaws.emrcontainers#AllowAWSToRetainLogs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether Amazon Web Services can retain logs.</p>"
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.emrcontainers#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the encryption key for logs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The entity that provides configuration control over managed logs.</p>"
+            }
+        },
         "com.amazonaws.emrcontainers#MaxFilesToKeep": {
             "type": "integer",
             "traits": {
@@ -3760,6 +3797,12 @@
         "com.amazonaws.emrcontainers#MonitoringConfiguration": {
             "type": "structure",
             "members": {
+                "managedLogs": {
+                    "target": "com.amazonaws.emrcontainers#ManagedLogs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that controls configuration for managed logs.</p>"
+                    }
+                },
                 "persistentAppUI": {
                     "target": "com.amazonaws.emrcontainers#PersistentAppUI",
                     "traits": {
