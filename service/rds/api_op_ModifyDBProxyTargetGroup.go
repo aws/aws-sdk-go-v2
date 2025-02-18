@@ -128,6 +128,9 @@ func (c *Client) addOperationModifyDBProxyTargetGroupMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyDBProxyTargetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

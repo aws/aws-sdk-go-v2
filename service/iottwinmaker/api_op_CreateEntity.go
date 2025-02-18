@@ -156,6 +156,9 @@ func (c *Client) addOperationCreateEntityMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateEntityMiddleware(stack); err != nil {
 		return err
 	}

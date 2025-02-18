@@ -153,6 +153,9 @@ func (c *Client) addOperationCreateXssMatchSetMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateXssMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,6 +123,9 @@ func (c *Client) addOperationDeleteStateMachineVersionMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteStateMachineVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

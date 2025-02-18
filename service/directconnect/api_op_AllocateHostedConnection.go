@@ -245,6 +245,9 @@ func (c *Client) addOperationAllocateHostedConnectionMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAllocateHostedConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

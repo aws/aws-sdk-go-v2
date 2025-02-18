@@ -117,6 +117,9 @@ func (c *Client) addOperationUpdateElasticIpMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateElasticIpValidationMiddleware(stack); err != nil {
 		return err
 	}

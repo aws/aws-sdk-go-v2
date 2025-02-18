@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeDeviceEc2InstancesMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDeviceEc2InstancesValidationMiddleware(stack); err != nil {
 		return err
 	}

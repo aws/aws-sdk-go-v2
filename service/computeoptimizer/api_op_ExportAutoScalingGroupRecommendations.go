@@ -194,6 +194,9 @@ func (c *Client) addOperationExportAutoScalingGroupRecommendationsMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportAutoScalingGroupRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}

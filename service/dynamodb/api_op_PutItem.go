@@ -350,6 +350,9 @@ func (c *Client) addOperationPutItemMiddlewares(stack *middleware.Stack, options
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutItemValidationMiddleware(stack); err != nil {
 		return err
 	}

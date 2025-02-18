@@ -154,6 +154,9 @@ func (c *Client) addOperationCreateMobileDeviceAccessRuleMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateMobileDeviceAccessRuleMiddleware(stack, options); err != nil {
 		return err
 	}

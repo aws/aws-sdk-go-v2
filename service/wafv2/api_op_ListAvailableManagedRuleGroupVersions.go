@@ -154,6 +154,9 @@ func (c *Client) addOperationListAvailableManagedRuleGroupVersionsMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAvailableManagedRuleGroupVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

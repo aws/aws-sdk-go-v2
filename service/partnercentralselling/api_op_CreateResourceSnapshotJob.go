@@ -152,6 +152,9 @@ func (c *Client) addOperationCreateResourceSnapshotJobMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateResourceSnapshotJobMiddleware(stack, options); err != nil {
 		return err
 	}

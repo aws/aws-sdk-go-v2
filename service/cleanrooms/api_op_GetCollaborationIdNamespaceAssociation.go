@@ -120,6 +120,9 @@ func (c *Client) addOperationGetCollaborationIdNamespaceAssociationMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCollaborationIdNamespaceAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -151,6 +151,9 @@ func (c *Client) addOperationAddApplicationVpcConfigurationMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAddApplicationVpcConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

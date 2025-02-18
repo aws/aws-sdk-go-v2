@@ -130,6 +130,9 @@ func (c *Client) addOperationBatchGetDeploymentInstancesMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetDeploymentInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}

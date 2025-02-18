@@ -119,6 +119,9 @@ func (c *Client) addOperationDeleteAppInstanceStreamingConfigurationsMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteAppInstanceStreamingConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}

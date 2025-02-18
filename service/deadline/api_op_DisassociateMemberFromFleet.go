@@ -117,6 +117,9 @@ func (c *Client) addOperationDisassociateMemberFromFleetMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDisassociateMemberFromFleetMiddleware(stack); err != nil {
 		return err
 	}

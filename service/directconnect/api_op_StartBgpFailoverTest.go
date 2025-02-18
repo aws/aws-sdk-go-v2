@@ -133,6 +133,9 @@ func (c *Client) addOperationStartBgpFailoverTestMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartBgpFailoverTestValidationMiddleware(stack); err != nil {
 		return err
 	}

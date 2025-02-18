@@ -164,6 +164,9 @@ func (c *Client) addOperationCreatePresignedUrlMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreatePresignedUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

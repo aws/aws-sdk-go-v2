@@ -163,6 +163,9 @@ func (c *Client) addOperationPutConformancePackMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutConformancePackValidationMiddleware(stack); err != nil {
 		return err
 	}

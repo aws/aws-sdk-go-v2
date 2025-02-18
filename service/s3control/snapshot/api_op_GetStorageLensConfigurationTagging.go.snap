@@ -20,6 +20,7 @@ GetStorageLensConfigurationTagging
 		stashOperationInput
 		ClientRequestID
 		ComputeContentLength
+		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

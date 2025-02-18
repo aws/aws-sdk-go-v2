@@ -178,6 +178,9 @@ func (c *Client) addOperationUpdateRateBasedRuleMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateRateBasedRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

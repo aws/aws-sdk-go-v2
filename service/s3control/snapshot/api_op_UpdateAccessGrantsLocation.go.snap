@@ -21,6 +21,7 @@ UpdateAccessGrantsLocation
 		ContentChecksum
 		ClientRequestID
 		ComputeContentLength
+		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

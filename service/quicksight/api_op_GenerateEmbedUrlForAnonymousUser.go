@@ -206,6 +206,9 @@ func (c *Client) addOperationGenerateEmbedUrlForAnonymousUserMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGenerateEmbedUrlForAnonymousUserValidationMiddleware(stack); err != nil {
 		return err
 	}

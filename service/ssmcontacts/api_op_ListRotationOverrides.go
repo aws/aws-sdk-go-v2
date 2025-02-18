@@ -134,6 +134,9 @@ func (c *Client) addOperationListRotationOverridesMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRotationOverridesValidationMiddleware(stack); err != nil {
 		return err
 	}

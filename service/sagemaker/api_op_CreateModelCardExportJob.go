@@ -129,6 +129,9 @@ func (c *Client) addOperationCreateModelCardExportJobMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateModelCardExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

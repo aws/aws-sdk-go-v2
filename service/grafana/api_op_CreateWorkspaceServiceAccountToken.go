@@ -155,6 +155,9 @@ func (c *Client) addOperationCreateWorkspaceServiceAccountTokenMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateWorkspaceServiceAccountTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

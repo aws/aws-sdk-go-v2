@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteMapMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteMapMiddleware(stack); err != nil {
 		return err
 	}

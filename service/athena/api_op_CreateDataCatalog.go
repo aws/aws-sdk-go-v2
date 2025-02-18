@@ -211,6 +211,9 @@ func (c *Client) addOperationCreateDataCatalogMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDataCatalogValidationMiddleware(stack); err != nil {
 		return err
 	}

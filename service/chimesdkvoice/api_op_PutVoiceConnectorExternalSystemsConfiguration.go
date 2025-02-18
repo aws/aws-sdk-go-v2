@@ -120,6 +120,9 @@ func (c *Client) addOperationPutVoiceConnectorExternalSystemsConfigurationMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutVoiceConnectorExternalSystemsConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

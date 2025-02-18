@@ -182,6 +182,9 @@ func (c *Client) addOperationGetBucketMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetBucketMiddleware(stack); err != nil {
 		return err
 	}

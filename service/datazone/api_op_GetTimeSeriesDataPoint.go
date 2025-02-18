@@ -148,6 +148,9 @@ func (c *Client) addOperationGetTimeSeriesDataPointMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTimeSeriesDataPointValidationMiddleware(stack); err != nil {
 		return err
 	}

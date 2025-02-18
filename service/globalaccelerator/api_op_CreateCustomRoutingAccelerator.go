@@ -175,6 +175,9 @@ func (c *Client) addOperationCreateCustomRoutingAcceleratorMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCustomRoutingAcceleratorMiddleware(stack, options); err != nil {
 		return err
 	}

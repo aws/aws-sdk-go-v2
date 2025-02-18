@@ -131,6 +131,9 @@ func (c *Client) addOperationListHITsForQualificationTypeMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListHITsForQualificationTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

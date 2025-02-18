@@ -151,6 +151,9 @@ func (c *Client) addOperationPutRemediationConfigurationsMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutRemediationConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -137,6 +137,9 @@ func (c *Client) addOperationGetFlowAssociationMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFlowAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

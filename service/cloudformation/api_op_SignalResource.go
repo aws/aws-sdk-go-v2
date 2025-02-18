@@ -135,6 +135,9 @@ func (c *Client) addOperationSignalResourceMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSignalResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

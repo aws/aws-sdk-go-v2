@@ -116,6 +116,9 @@ func (c *Client) addOperationCreateCliTokenMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateCliTokenMiddleware(stack); err != nil {
 		return err
 	}

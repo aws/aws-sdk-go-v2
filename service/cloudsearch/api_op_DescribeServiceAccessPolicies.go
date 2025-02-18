@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeServiceAccessPoliciesMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeServiceAccessPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}

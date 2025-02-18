@@ -198,6 +198,9 @@ func (c *Client) addOperationCreateFunctionUrlConfigMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateFunctionUrlConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

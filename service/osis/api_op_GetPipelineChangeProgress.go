@@ -118,6 +118,9 @@ func (c *Client) addOperationGetPipelineChangeProgressMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPipelineChangeProgressValidationMiddleware(stack); err != nil {
 		return err
 	}

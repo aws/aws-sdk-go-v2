@@ -146,6 +146,9 @@ func (c *Client) addOperationGetDataIntegrationMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDataIntegrationValidationMiddleware(stack); err != nil {
 		return err
 	}

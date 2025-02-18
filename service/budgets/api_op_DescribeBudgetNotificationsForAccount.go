@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeBudgetNotificationsForAccountMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBudgetNotificationsForAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

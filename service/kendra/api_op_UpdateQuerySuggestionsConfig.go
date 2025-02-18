@@ -179,6 +179,9 @@ func (c *Client) addOperationUpdateQuerySuggestionsConfigMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateQuerySuggestionsConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -191,6 +191,9 @@ func (c *Client) addOperationStartUpdateSignalMapMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartUpdateSignalMapValidationMiddleware(stack); err != nil {
 		return err
 	}

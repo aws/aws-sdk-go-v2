@@ -123,6 +123,9 @@ func (c *Client) addOperationListIdentityProvidersMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIdentityProvidersValidationMiddleware(stack); err != nil {
 		return err
 	}

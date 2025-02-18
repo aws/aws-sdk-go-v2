@@ -166,6 +166,9 @@ func (c *Client) addOperationPutTraceSegmentsMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutTraceSegmentsValidationMiddleware(stack); err != nil {
 		return err
 	}

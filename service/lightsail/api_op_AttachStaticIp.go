@@ -119,6 +119,9 @@ func (c *Client) addOperationAttachStaticIpMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAttachStaticIpValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -146,6 +146,9 @@ func (c *Client) addOperationStartEngagementMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartEngagementMiddleware(stack, options); err != nil {
 		return err
 	}

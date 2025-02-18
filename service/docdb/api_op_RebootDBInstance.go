@@ -130,6 +130,9 @@ func (c *Client) addOperationRebootDBInstanceMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRebootDBInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

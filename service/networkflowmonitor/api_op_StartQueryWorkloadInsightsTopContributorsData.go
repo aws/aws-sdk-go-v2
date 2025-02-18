@@ -170,6 +170,9 @@ func (c *Client) addOperationStartQueryWorkloadInsightsTopContributorsDataMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartQueryWorkloadInsightsTopContributorsDataValidationMiddleware(stack); err != nil {
 		return err
 	}

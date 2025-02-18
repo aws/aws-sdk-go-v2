@@ -132,6 +132,9 @@ func (c *Client) addOperationImportHostKeyMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpImportHostKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

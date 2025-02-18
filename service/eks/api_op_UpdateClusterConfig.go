@@ -204,6 +204,9 @@ func (c *Client) addOperationUpdateClusterConfigMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateClusterConfigMiddleware(stack, options); err != nil {
 		return err
 	}

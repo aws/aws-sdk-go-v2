@@ -124,6 +124,9 @@ func (c *Client) addOperationCreateSegmentEstimateMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateSegmentEstimateValidationMiddleware(stack); err != nil {
 		return err
 	}

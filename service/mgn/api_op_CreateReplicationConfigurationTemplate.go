@@ -230,6 +230,9 @@ func (c *Client) addOperationCreateReplicationConfigurationTemplateMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateReplicationConfigurationTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

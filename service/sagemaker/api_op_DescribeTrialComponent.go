@@ -172,6 +172,9 @@ func (c *Client) addOperationDescribeTrialComponentMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTrialComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteRedshiftIdcApplicationMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteRedshiftIdcApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

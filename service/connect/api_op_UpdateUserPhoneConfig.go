@@ -121,6 +121,9 @@ func (c *Client) addOperationUpdateUserPhoneConfigMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateUserPhoneConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

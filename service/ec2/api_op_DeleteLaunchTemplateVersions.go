@@ -147,6 +147,9 @@ func (c *Client) addOperationDeleteLaunchTemplateVersionsMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteLaunchTemplateVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

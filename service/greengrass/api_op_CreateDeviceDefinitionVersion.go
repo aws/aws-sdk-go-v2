@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateDeviceDefinitionVersionMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDeviceDefinitionVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

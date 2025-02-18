@@ -127,6 +127,9 @@ func (c *Client) addOperationListCollaborationConfiguredAudienceModelAssociation
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCollaborationConfiguredAudienceModelAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

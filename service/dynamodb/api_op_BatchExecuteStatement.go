@@ -151,6 +151,9 @@ func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchExecuteStatementValidationMiddleware(stack); err != nil {
 		return err
 	}

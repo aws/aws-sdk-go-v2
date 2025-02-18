@@ -121,6 +121,9 @@ func (c *Client) addOperationAcceptEnvironmentAccountConnectionMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAcceptEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

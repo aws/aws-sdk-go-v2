@@ -118,6 +118,9 @@ func (c *Client) addOperationBatchGetMemberEc2DeepInspectionStatusMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetMemberEc2DeepInspectionStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -133,6 +133,9 @@ func (c *Client) addOperationRollbackApplicationMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRollbackApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

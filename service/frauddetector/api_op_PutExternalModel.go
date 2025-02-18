@@ -138,6 +138,9 @@ func (c *Client) addOperationPutExternalModelMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutExternalModelValidationMiddleware(stack); err != nil {
 		return err
 	}

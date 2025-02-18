@@ -117,6 +117,9 @@ func (c *Client) addOperationDeleteApplicationFromEnvironmentMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationFromEnvironmentValidationMiddleware(stack); err != nil {
 		return err
 	}

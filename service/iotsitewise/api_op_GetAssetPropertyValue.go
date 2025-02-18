@@ -132,6 +132,9 @@ func (c *Client) addOperationGetAssetPropertyValueMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAssetPropertyValueMiddleware(stack); err != nil {
 		return err
 	}

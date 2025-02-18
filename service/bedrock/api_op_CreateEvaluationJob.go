@@ -168,6 +168,9 @@ func (c *Client) addOperationCreateEvaluationJobMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEvaluationJobMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeLoadBasedAutoScalingMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeLoadBasedAutoScalingValidationMiddleware(stack); err != nil {
 		return err
 	}

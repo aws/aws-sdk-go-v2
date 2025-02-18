@@ -115,6 +115,9 @@ func (c *Client) addOperationCreateProgressUpdateStreamMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateProgressUpdateStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

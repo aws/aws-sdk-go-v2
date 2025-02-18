@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeDataMigrationsMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDataMigrationsValidationMiddleware(stack); err != nil {
 		return err
 	}

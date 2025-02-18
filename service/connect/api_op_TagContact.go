@@ -126,6 +126,9 @@ func (c *Client) addOperationTagContactMiddlewares(stack *middleware.Stack, opti
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTagContactValidationMiddleware(stack); err != nil {
 		return err
 	}

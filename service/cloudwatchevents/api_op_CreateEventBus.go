@@ -128,6 +128,9 @@ func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateEventBusValidationMiddleware(stack); err != nil {
 		return err
 	}

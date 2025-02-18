@@ -162,6 +162,9 @@ func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartSigningJobMiddleware(stack, options); err != nil {
 		return err
 	}

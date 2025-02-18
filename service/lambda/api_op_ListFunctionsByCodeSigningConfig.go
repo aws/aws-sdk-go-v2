@@ -123,6 +123,9 @@ func (c *Client) addOperationListFunctionsByCodeSigningConfigMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFunctionsByCodeSigningConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

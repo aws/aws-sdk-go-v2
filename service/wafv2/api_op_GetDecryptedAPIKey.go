@@ -138,6 +138,9 @@ func (c *Client) addOperationGetDecryptedAPIKeyMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDecryptedAPIKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

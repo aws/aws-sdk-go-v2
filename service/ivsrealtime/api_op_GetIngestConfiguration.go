@@ -112,6 +112,9 @@ func (c *Client) addOperationGetIngestConfigurationMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetIngestConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -163,6 +163,9 @@ func (c *Client) addOperationEnableLoggingMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpEnableLoggingValidationMiddleware(stack); err != nil {
 		return err
 	}

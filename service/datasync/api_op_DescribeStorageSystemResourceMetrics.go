@@ -149,6 +149,9 @@ func (c *Client) addOperationDescribeStorageSystemResourceMetricsMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware(stack); err != nil {
 		return err
 	}

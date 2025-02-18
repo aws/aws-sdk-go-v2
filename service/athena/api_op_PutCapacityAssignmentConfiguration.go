@@ -116,6 +116,9 @@ func (c *Client) addOperationPutCapacityAssignmentConfigurationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutCapacityAssignmentConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

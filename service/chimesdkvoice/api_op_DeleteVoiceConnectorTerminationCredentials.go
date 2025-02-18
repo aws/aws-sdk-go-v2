@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteVoiceConnectorTerminationCredentialsMiddlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVoiceConnectorTerminationCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

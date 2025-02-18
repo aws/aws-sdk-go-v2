@@ -141,6 +141,9 @@ func (c *Client) addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTapeRecoveryPointsValidationMiddleware(stack); err != nil {
 		return err
 	}

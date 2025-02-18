@@ -122,6 +122,9 @@ func (c *Client) addOperationSendCisSessionTelemetryMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSendCisSessionTelemetryValidationMiddleware(stack); err != nil {
 		return err
 	}

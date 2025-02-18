@@ -157,6 +157,9 @@ func (c *Client) addOperationPutGeofenceMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutGeofenceMiddleware(stack); err != nil {
 		return err
 	}

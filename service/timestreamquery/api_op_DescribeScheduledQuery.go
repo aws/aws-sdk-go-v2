@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeScheduledQueryMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeScheduledQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -108,6 +108,9 @@ func (c *Client) addOperationCancelTransactionMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelTransactionValidationMiddleware(stack); err != nil {
 		return err
 	}

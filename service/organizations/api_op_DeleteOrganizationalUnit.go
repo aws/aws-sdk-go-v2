@@ -118,6 +118,9 @@ func (c *Client) addOperationDeleteOrganizationalUnitMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteOrganizationalUnitValidationMiddleware(stack); err != nil {
 		return err
 	}

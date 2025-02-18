@@ -138,6 +138,9 @@ func (c *Client) addOperationCreateVirtualClusterMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateVirtualClusterMiddleware(stack, options); err != nil {
 		return err
 	}

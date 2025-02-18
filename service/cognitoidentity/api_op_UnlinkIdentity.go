@@ -119,6 +119,9 @@ func (c *Client) addOperationUnlinkIdentityMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUnlinkIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -156,6 +156,9 @@ func (c *Client) addOperationCreateRobotApplicationVersionMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRobotApplicationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

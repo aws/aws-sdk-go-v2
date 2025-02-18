@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteGlossaryTermMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteGlossaryTermValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,6 +116,9 @@ func (c *Client) addOperationCancelSimulationJobBatchMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelSimulationJobBatchValidationMiddleware(stack); err != nil {
 		return err
 	}

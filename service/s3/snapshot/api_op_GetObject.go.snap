@@ -24,6 +24,7 @@ GetObject
 		ClientRequestID
 		ComputeContentLength
 		AWSChecksum:ResponseMetricsTracking
+		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

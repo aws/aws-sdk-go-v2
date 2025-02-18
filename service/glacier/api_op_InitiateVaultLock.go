@@ -158,6 +158,9 @@ func (c *Client) addOperationInitiateVaultLockMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpInitiateVaultLockValidationMiddleware(stack); err != nil {
 		return err
 	}

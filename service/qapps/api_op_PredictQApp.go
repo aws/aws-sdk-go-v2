@@ -125,6 +125,9 @@ func (c *Client) addOperationPredictQAppMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPredictQAppValidationMiddleware(stack); err != nil {
 		return err
 	}

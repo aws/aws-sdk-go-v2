@@ -130,6 +130,9 @@ func (c *Client) addOperationBatchUpdateBillScenarioCommitmentModificationMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchUpdateBillScenarioCommitmentModificationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -136,6 +136,9 @@ func (c *Client) addOperationGetMLModelTransformJobMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMLModelTransformJobValidationMiddleware(stack); err != nil {
 		return err
 	}

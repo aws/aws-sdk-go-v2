@@ -115,6 +115,9 @@ func (c *Client) addOperationAcceptAttachmentMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAcceptAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}

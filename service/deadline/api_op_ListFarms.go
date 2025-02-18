@@ -127,6 +127,9 @@ func (c *Client) addOperationListFarmsMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListFarmsMiddleware(stack); err != nil {
 		return err
 	}

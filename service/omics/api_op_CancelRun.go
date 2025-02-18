@@ -107,6 +107,9 @@ func (c *Client) addOperationCancelRunMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCancelRunMiddleware(stack); err != nil {
 		return err
 	}

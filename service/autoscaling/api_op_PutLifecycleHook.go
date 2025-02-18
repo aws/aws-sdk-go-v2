@@ -205,6 +205,9 @@ func (c *Client) addOperationPutLifecycleHookMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutLifecycleHookValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteJobQueueMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteJobQueueValidationMiddleware(stack); err != nil {
 		return err
 	}

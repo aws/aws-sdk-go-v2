@@ -124,6 +124,9 @@ func (c *Client) addOperationCreateLongTermPricingMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateLongTermPricingValidationMiddleware(stack); err != nil {
 		return err
 	}

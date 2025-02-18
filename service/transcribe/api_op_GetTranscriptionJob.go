@@ -125,6 +125,9 @@ func (c *Client) addOperationGetTranscriptionJobMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

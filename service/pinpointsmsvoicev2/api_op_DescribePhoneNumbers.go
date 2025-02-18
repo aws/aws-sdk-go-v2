@@ -143,6 +143,9 @@ func (c *Client) addOperationDescribePhoneNumbersMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribePhoneNumbersValidationMiddleware(stack); err != nil {
 		return err
 	}

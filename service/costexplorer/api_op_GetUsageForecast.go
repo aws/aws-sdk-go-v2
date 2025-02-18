@@ -205,6 +205,9 @@ func (c *Client) addOperationGetUsageForecastMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetUsageForecastValidationMiddleware(stack); err != nil {
 		return err
 	}

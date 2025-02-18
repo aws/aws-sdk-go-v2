@@ -109,6 +109,9 @@ func (c *Client) addOperationDeregisterJobDefinitionMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterJobDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

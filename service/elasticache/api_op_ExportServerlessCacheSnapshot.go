@@ -122,6 +122,9 @@ func (c *Client) addOperationExportServerlessCacheSnapshotMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportServerlessCacheSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

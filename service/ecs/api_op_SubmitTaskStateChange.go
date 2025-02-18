@@ -142,6 +142,9 @@ func (c *Client) addOperationSubmitTaskStateChangeMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSubmitTaskStateChangeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,6 +112,9 @@ func (c *Client) addOperationUpdateSamplingRuleMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateSamplingRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,6 +120,9 @@ func (c *Client) addOperationGetContainerImagesMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetContainerImagesValidationMiddleware(stack); err != nil {
 		return err
 	}

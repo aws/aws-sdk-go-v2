@@ -195,6 +195,9 @@ func (c *Client) addOperationVerifyAuthRequestCryptogramMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpVerifyAuthRequestCryptogramValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -124,6 +124,9 @@ func (c *Client) addOperationDisassociateApprovedOriginMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDisassociateApprovedOriginMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -114,6 +114,9 @@ func (c *Client) addOperationGetTestExecutionArtifactsUrlMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTestExecutionArtifactsUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

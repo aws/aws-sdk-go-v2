@@ -123,6 +123,9 @@ func (c *Client) addOperationUpdateRoutingProfileAgentAvailabilityTimerMiddlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateRoutingProfileAgentAvailabilityTimerValidationMiddleware(stack); err != nil {
 		return err
 	}

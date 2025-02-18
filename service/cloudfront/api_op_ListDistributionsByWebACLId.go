@@ -136,6 +136,9 @@ func (c *Client) addOperationListDistributionsByWebACLIdMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDistributionsByWebACLIdValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -147,6 +147,9 @@ func (c *Client) addOperationCountPendingDecisionTasksMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCountPendingDecisionTasksValidationMiddleware(stack); err != nil {
 		return err
 	}

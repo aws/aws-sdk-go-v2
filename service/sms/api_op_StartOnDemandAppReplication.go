@@ -110,6 +110,9 @@ func (c *Client) addOperationStartOnDemandAppReplicationMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartOnDemandAppReplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

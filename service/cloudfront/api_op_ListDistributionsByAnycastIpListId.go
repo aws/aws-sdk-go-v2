@@ -122,6 +122,9 @@ func (c *Client) addOperationListDistributionsByAnycastIpListIdMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDistributionsByAnycastIpListIdValidationMiddleware(stack); err != nil {
 		return err
 	}

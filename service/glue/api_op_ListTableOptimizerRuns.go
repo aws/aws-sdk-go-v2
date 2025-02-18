@@ -146,6 +146,9 @@ func (c *Client) addOperationListTableOptimizerRunsMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTableOptimizerRunsValidationMiddleware(stack); err != nil {
 		return err
 	}

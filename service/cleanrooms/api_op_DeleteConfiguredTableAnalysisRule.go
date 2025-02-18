@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteConfiguredTableAnalysisRuleMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfiguredTableAnalysisRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

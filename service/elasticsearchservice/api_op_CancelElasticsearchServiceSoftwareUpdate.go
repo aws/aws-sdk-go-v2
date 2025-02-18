@@ -119,6 +119,9 @@ func (c *Client) addOperationCancelElasticsearchServiceSoftwareUpdateMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelElasticsearchServiceSoftwareUpdateValidationMiddleware(stack); err != nil {
 		return err
 	}

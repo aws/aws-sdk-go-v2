@@ -136,6 +136,9 @@ func (c *Client) addOperationCreateAttributeGroupMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAttributeGroupMiddleware(stack, options); err != nil {
 		return err
 	}

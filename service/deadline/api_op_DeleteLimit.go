@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteLimitMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteLimitMiddleware(stack); err != nil {
 		return err
 	}

@@ -130,6 +130,9 @@ func (c *Client) addOperationUpdateRepositoryEncryptionKeyMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateRepositoryEncryptionKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

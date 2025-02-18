@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeAppImageConfigMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAppImageConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

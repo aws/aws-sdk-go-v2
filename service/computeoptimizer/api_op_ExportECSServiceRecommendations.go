@@ -187,6 +187,9 @@ func (c *Client) addOperationExportECSServiceRecommendationsMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportECSServiceRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}

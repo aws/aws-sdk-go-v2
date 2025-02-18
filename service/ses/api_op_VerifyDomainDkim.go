@@ -161,6 +161,9 @@ func (c *Client) addOperationVerifyDomainDkimMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpVerifyDomainDkimValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -124,6 +124,9 @@ func (c *Client) addOperationRebalanceSlotsInGlobalReplicationGroupMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRebalanceSlotsInGlobalReplicationGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

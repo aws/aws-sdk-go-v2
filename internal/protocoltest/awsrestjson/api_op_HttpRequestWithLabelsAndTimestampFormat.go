@@ -125,6 +125,9 @@ func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack); err != nil {
 		return err
 	}

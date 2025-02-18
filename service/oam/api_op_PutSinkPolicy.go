@@ -147,6 +147,9 @@ func (c *Client) addOperationPutSinkPolicyMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutSinkPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

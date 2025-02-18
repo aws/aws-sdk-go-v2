@@ -238,6 +238,9 @@ func (c *Client) addOperationCreateRuleGroupMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRuleGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

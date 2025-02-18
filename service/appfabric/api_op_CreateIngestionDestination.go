@@ -150,6 +150,9 @@ func (c *Client) addOperationCreateIngestionDestinationMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateIngestionDestinationMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -149,6 +149,9 @@ func (c *Client) addOperationImportFirewallDomainsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpImportFirewallDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}

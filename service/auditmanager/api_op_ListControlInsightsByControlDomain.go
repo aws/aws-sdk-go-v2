@@ -135,6 +135,9 @@ func (c *Client) addOperationListControlInsightsByControlDomainMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListControlInsightsByControlDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

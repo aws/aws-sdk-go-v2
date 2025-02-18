@@ -169,6 +169,9 @@ func (c *Client) addOperationStreamJournalToKinesisMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStreamJournalToKinesisValidationMiddleware(stack); err != nil {
 		return err
 	}

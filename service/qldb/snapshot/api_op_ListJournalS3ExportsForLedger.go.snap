@@ -14,6 +14,7 @@ ListJournalS3ExportsForLedger
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
+		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

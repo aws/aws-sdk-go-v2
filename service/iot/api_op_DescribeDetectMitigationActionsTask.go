@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeDetectMitigationActionsTaskMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDetectMitigationActionsTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

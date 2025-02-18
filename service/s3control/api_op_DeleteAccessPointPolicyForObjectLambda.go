@@ -138,6 +138,9 @@ func (c *Client) addOperationDeleteAccessPointPolicyForObjectLambdaMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAccessPointPolicyForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}

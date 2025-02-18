@@ -120,6 +120,9 @@ func (c *Client) addOperationUpdateUserSecurityProfilesMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateUserSecurityProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}

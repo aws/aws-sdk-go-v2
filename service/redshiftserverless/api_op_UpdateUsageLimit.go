@@ -122,6 +122,9 @@ func (c *Client) addOperationUpdateUsageLimitMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateUsageLimitValidationMiddleware(stack); err != nil {
 		return err
 	}

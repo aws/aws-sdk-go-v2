@@ -221,6 +221,9 @@ func (c *Client) addOperationGetPlaybackConfigurationMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPlaybackConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

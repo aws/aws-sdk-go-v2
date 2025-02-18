@@ -198,6 +198,9 @@ func (c *Client) addOperationUpdateGuardrailMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateGuardrailValidationMiddleware(stack); err != nil {
 		return err
 	}

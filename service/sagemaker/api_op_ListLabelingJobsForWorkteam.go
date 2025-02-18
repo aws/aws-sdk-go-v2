@@ -146,6 +146,9 @@ func (c *Client) addOperationListLabelingJobsForWorkteamMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLabelingJobsForWorkteamValidationMiddleware(stack); err != nil {
 		return err
 	}

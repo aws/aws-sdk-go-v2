@@ -130,6 +130,9 @@ func (c *Client) addOperationDeleteFolderMembershipMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteFolderMembershipValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -134,6 +134,9 @@ func (c *Client) addOperationListResourcesAssociatedToCustomLineItemMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListResourcesAssociatedToCustomLineItemValidationMiddleware(stack); err != nil {
 		return err
 	}

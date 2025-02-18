@@ -120,6 +120,9 @@ func (c *Client) addOperationBatchPutPropertyValuesMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchPutPropertyValuesMiddleware(stack); err != nil {
 		return err
 	}

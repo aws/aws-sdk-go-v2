@@ -169,6 +169,9 @@ func (c *Client) addOperationUpdateEvaluationFormMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateEvaluationFormMiddleware(stack, options); err != nil {
 		return err
 	}

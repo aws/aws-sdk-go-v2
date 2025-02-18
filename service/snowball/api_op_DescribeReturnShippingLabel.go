@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeReturnShippingLabelMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReturnShippingLabelValidationMiddleware(stack); err != nil {
 		return err
 	}

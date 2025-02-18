@@ -191,6 +191,9 @@ func (c *Client) addOperationUpdateIndexTypeMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateIndexTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

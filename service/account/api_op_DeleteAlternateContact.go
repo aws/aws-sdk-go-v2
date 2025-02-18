@@ -143,6 +143,9 @@ func (c *Client) addOperationDeleteAlternateContactMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteAlternateContactValidationMiddleware(stack); err != nil {
 		return err
 	}

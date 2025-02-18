@@ -181,6 +181,9 @@ func (c *Client) addOperationStartAttachedFileUploadMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartAttachedFileUploadMiddleware(stack, options); err != nil {
 		return err
 	}

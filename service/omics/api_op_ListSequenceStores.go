@@ -122,6 +122,9 @@ func (c *Client) addOperationListSequenceStoresMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListSequenceStoresMiddleware(stack); err != nil {
 		return err
 	}

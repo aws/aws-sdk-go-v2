@@ -146,6 +146,9 @@ func (c *Client) addOperationCreateDimensionMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDimensionMiddleware(stack, options); err != nil {
 		return err
 	}

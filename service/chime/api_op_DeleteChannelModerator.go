@@ -130,6 +130,9 @@ func (c *Client) addOperationDeleteChannelModeratorMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteChannelModeratorMiddleware(stack); err != nil {
 		return err
 	}

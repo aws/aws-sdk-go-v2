@@ -118,6 +118,9 @@ func (c *Client) addOperationAssociateApprovalRuleTemplateWithRepositoryMiddlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateApprovalRuleTemplateWithRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}

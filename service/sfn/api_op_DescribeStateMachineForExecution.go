@@ -186,6 +186,9 @@ func (c *Client) addOperationDescribeStateMachineForExecutionMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeStateMachineForExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

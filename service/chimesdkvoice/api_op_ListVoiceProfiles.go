@@ -121,6 +121,9 @@ func (c *Client) addOperationListVoiceProfilesMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListVoiceProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteModelExplainabilityJobDefinitionMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteModelExplainabilityJobDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

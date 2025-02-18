@@ -146,6 +146,9 @@ func (c *Client) addOperationGetBulkPublishDetailsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBulkPublishDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

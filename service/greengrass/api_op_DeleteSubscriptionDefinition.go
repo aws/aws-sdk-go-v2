@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteSubscriptionDefinitionMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteSubscriptionDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

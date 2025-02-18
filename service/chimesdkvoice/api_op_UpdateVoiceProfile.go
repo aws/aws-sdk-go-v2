@@ -130,6 +130,9 @@ func (c *Client) addOperationUpdateVoiceProfileMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateVoiceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

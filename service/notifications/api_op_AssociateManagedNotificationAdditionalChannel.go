@@ -121,6 +121,9 @@ func (c *Client) addOperationAssociateManagedNotificationAdditionalChannelMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateManagedNotificationAdditionalChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -164,6 +164,9 @@ func (c *Client) addOperationUpdateRecoveryPointIndexSettingsMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateRecoveryPointIndexSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

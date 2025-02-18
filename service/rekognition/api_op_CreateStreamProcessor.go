@@ -219,6 +219,9 @@ func (c *Client) addOperationCreateStreamProcessorMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateStreamProcessorValidationMiddleware(stack); err != nil {
 		return err
 	}

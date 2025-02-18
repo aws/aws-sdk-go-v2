@@ -131,6 +131,9 @@ func (c *Client) addOperationModifyClusterMaintenanceMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyClusterMaintenanceValidationMiddleware(stack); err != nil {
 		return err
 	}

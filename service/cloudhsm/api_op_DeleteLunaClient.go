@@ -127,6 +127,9 @@ func (c *Client) addOperationDeleteLunaClientMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteLunaClientValidationMiddleware(stack); err != nil {
 		return err
 	}

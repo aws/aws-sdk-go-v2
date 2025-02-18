@@ -159,6 +159,9 @@ func (c *Client) addOperationDownloadDBLogFilePortionMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDownloadDBLogFilePortionValidationMiddleware(stack); err != nil {
 		return err
 	}

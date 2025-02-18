@@ -120,6 +120,9 @@ func (c *Client) addOperationProvideAnomalyFeedbackMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpProvideAnomalyFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}

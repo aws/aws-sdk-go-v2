@@ -137,6 +137,9 @@ func (c *Client) addOperationGetPercentilesMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPercentilesValidationMiddleware(stack); err != nil {
 		return err
 	}

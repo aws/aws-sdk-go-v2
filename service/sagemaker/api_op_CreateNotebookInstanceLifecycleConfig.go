@@ -140,6 +140,9 @@ func (c *Client) addOperationCreateNotebookInstanceLifecycleConfigMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateNotebookInstanceLifecycleConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -148,6 +148,9 @@ func (c *Client) addOperationDeleteStreamingDistributionMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteStreamingDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}

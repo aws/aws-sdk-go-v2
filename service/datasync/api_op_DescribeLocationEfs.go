@@ -149,6 +149,9 @@ func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeLocationEfsValidationMiddleware(stack); err != nil {
 		return err
 	}

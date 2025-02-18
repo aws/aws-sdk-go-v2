@@ -114,6 +114,9 @@ func (c *Client) addOperationExportBackupPlanTemplateMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportBackupPlanTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

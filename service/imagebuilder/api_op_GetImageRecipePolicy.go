@@ -115,6 +115,9 @@ func (c *Client) addOperationGetImageRecipePolicyMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetImageRecipePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

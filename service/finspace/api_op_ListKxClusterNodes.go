@@ -129,6 +129,9 @@ func (c *Client) addOperationListKxClusterNodesMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListKxClusterNodesValidationMiddleware(stack); err != nil {
 		return err
 	}

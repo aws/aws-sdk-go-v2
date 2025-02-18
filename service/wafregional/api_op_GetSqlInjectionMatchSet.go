@@ -137,6 +137,9 @@ func (c *Client) addOperationGetSqlInjectionMatchSetMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSqlInjectionMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

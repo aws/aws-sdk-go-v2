@@ -121,6 +121,9 @@ func (c *Client) addOperationUpdateConfigurationSetReputationMetricsEnabledMiddl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateConfigurationSetReputationMetricsEnabledValidationMiddleware(stack); err != nil {
 		return err
 	}

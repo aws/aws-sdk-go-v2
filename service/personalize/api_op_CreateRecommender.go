@@ -200,6 +200,9 @@ func (c *Client) addOperationCreateRecommenderMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRecommenderValidationMiddleware(stack); err != nil {
 		return err
 	}

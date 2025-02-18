@@ -133,6 +133,9 @@ func (c *Client) addOperationPutResolverQueryLogConfigPolicyMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutResolverQueryLogConfigPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

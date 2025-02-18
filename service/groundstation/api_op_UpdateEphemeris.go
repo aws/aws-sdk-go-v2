@@ -130,6 +130,9 @@ func (c *Client) addOperationUpdateEphemerisMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateEphemerisValidationMiddleware(stack); err != nil {
 		return err
 	}

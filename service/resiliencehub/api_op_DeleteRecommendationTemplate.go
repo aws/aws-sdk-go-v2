@@ -125,6 +125,9 @@ func (c *Client) addOperationDeleteRecommendationTemplateMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteRecommendationTemplateMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -124,6 +124,9 @@ func (c *Client) addOperationRevokeTokenMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRevokeTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

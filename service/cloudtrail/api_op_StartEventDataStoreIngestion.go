@@ -111,6 +111,9 @@ func (c *Client) addOperationStartEventDataStoreIngestionMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartEventDataStoreIngestionValidationMiddleware(stack); err != nil {
 		return err
 	}

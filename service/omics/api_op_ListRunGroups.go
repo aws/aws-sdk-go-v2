@@ -120,6 +120,9 @@ func (c *Client) addOperationListRunGroupsMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListRunGroupsMiddleware(stack); err != nil {
 		return err
 	}

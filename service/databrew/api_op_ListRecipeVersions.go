@@ -124,6 +124,9 @@ func (c *Client) addOperationListRecipeVersionsMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRecipeVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

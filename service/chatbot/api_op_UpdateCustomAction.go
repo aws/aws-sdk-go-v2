@@ -127,6 +127,9 @@ func (c *Client) addOperationUpdateCustomActionMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCustomActionValidationMiddleware(stack); err != nil {
 		return err
 	}

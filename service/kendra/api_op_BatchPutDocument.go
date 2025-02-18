@@ -166,6 +166,9 @@ func (c *Client) addOperationBatchPutDocumentMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchPutDocumentValidationMiddleware(stack); err != nil {
 		return err
 	}

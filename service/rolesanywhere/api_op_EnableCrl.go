@@ -118,6 +118,9 @@ func (c *Client) addOperationEnableCrlMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpEnableCrlValidationMiddleware(stack); err != nil {
 		return err
 	}

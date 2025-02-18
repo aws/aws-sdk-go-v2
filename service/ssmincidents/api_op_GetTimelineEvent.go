@@ -120,6 +120,9 @@ func (c *Client) addOperationGetTimelineEventMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTimelineEventValidationMiddleware(stack); err != nil {
 		return err
 	}

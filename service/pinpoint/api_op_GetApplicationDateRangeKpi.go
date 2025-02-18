@@ -151,6 +151,9 @@ func (c *Client) addOperationGetApplicationDateRangeKpiMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetApplicationDateRangeKpiValidationMiddleware(stack); err != nil {
 		return err
 	}
