@@ -1,8 +1,0 @@
-{
-    "id": "c93e86f5-bf08-41c9-b181-1d0aad9e4038",
-    "type": "feature",
-    "description": "EMR on EKS StartJobRun Api will be supporting the configuration of log storage in AWS by using \"managedLogs\" under \"MonitoringConfiguration\".",
-    "modules": [
-        "service/emrcontainers"
-    ]
-}

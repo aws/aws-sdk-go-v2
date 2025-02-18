@@ -1,3 +1,8 @@
+# v1.24.2 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.1 (2025-02-14)
 
 * **Dependency Update**: Updated to the latest SDK module versions

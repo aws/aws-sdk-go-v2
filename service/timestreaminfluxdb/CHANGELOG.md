@@ -1,3 +1,8 @@
+# v1.9.1 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2025-02-17)
 
 * **Feature**: This release introduces APIs to manage DbClusters and adds support for read replicas

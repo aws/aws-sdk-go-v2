@@ -1,3 +1,19 @@
+# Release (2025-02-18)
+
+## General Highlights
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.49.13](service/batch/CHANGELOG.md#v14913-2025-02-18)
+  * **Documentation**: This documentation-only update corrects some typos.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.40.2](service/dynamodb/CHANGELOG.md#v1402-2025-02-18)
+  * **Bug Fix**: Add missing AccountIDEndpointMode binding to endpoint resolution.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.34.0](service/emrcontainers/CHANGELOG.md#v1340-2025-02-18)
+  * **Feature**: EMR on EKS StartJobRun Api will be supporting the configuration of log storage in AWS by using "managedLogs" under "MonitoringConfiguration".
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.68.0](service/medialive/CHANGELOG.md#v1680-2025-02-18)
+  * **Feature**: Adds support for creating CloudWatchAlarmTemplates for AWS Elemental MediaTailor Playback Configuration resources.
+
 # Release (2025-02-17)
 
 ## Module Highlights

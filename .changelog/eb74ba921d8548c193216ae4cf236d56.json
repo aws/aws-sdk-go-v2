@@ -1,8 +1,0 @@
-{
-    "id": "eb74ba92-1d85-48c1-9321-6ae4cf236d56",
-    "type": "documentation",
-    "description": "This documentation-only update corrects some typos.",
-    "modules": [
-        "service/batch"
-    ]
-}

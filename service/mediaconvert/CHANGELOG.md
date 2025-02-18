@@ -1,3 +1,8 @@
+# v1.67.1 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2025-02-07)
 
 * **Feature**: This release adds support for Animated GIF output, forced chroma sample positioning metadata, and Extensible Wave Container format

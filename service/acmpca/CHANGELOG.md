@@ -1,3 +1,8 @@
+# v1.38.2 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.1 (2025-02-13)
 
 * **Documentation**: Private Certificate Authority (PCA) documentation updates

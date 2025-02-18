@@ -1,3 +1,8 @@
+# v1.53.15 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.14 (2025-02-13)
 
 * **Documentation**: This is a documentation only release to support migrating Amazon ECS service ARNs to the long ARN format.
