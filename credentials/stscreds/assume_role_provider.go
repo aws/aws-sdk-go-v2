@@ -332,7 +332,7 @@ func (p *AssumeRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, err
 // ProviderSources returns the credential chain that was used to construct this provider
 func (p *AssumeRoleProvider) ProviderSources() []aws.CredentialSource {
 	if p.options.CredentialSources == nil {
-		return []aws.CredentialSource{aws.CredentialsStsAssumeRole}
+		return []aws.CredentialSource{aws.CredentialSourceSTSAssumeRole}
 	} // If no source has been set, assume this is used directly which means just call to assume role
-	return append(p.options.CredentialSources, aws.CredentialsStsAssumeRole)
+	return append(p.options.CredentialSources, aws.CredentialSourceSTSAssumeRole)
 }

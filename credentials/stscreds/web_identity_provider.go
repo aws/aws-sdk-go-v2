@@ -175,7 +175,7 @@ func getAccountID(u *types.AssumedRoleUser) string {
 // ProviderSources returns the credential chain that was used to construct this provider
 func (p *WebIdentityRoleProvider) ProviderSources() []aws.CredentialSource {
 	if p.options.CredentialSources == nil {
-		return []aws.CredentialSource{aws.CredentialsStsAssumeRoleWebID}
+		return []aws.CredentialSource{aws.CredentialSourceSTSAssumeRoleWebID}
 	}
 	return p.options.CredentialSources
 }

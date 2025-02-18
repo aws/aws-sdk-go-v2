@@ -140,7 +140,7 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 // ProviderSources returns the credential chain that was used to construct this provider
 func (p *Provider) ProviderSources() []aws.CredentialSource {
 	if p.options.CredentialSources == nil {
-		return []aws.CredentialSource{aws.CredentialsSso}
+		return []aws.CredentialSource{aws.CredentialSourceSSO}
 	}
 	return p.options.CredentialSources
 }

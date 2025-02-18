@@ -280,7 +280,7 @@ func (p *Provider) executeCredentialProcess(ctx context.Context) ([]byte, error)
 // ProviderSources returns the credential chain that was used to construct this provider
 func (p *Provider) ProviderSources() []aws.CredentialSource {
 	if p.options.CredentialSources == nil {
-		return []aws.CredentialSource{aws.CredentialsProcess}
+		return []aws.CredentialSource{aws.CredentialSourceProcess}
 	}
 	return p.options.CredentialSources
 }

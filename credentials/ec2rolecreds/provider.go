@@ -235,7 +235,7 @@ func requestCred(ctx context.Context, client GetMetadataAPIClient, credsName str
 // ProviderSources returns the credential chain that was used to construct this provider
 func (p *Provider) ProviderSources() []aws.CredentialSource {
 	if p.options.CredentialSources == nil {
-		return []aws.CredentialSource{aws.CredentialsIMDS}
+		return []aws.CredentialSource{aws.CredentialSourceIMDS}
 	} // If no source has been set, assume this is used directly which means just call to assume role
 	return p.options.CredentialSources
 }

@@ -114,10 +114,10 @@ func resolveCredentialChain(ctx context.Context, cfg *aws.Config, configs config
 	case sharedProfileSet:
 		ctx, err = resolveCredsFromProfile(ctx, cfg, envConfig, sharedConfig, other)
 	case envConfig.Credentials.HasKeys():
-		ctx = addCredentialSource(ctx, aws.CredentialsEnvVars)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceEnvVars)
 		cfg.Credentials = credentials.StaticCredentialsProvider{Value: envConfig.Credentials, Source: getCredentialSources(ctx)}
 	case len(envConfig.WebIdentityTokenFilePath) > 0:
-		ctx = addCredentialSource(ctx, aws.CredentialsEnvVarsStsWebIDToken)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceEnvVarsSTSWebIDToken)
 		err = assumeWebIdentity(ctx, cfg, envConfig.WebIdentityTokenFilePath, envConfig.RoleARN, envConfig.RoleSessionName, configs)
 	default:
 		ctx, err = resolveCredsFromProfile(ctx, cfg, envConfig, sharedConfig, other)
@@ -138,57 +138,57 @@ func resolveCredentialChain(ctx context.Context, cfg *aws.Config, configs config
 func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *EnvConfig, sharedConfig *SharedConfig, configs configs) (ctx2 context.Context, err error) {
 	switch {
 	case sharedConfig.Source != nil:
-		ctx = addCredentialSource(ctx, aws.CredentialsProfileSourceProfile)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceProfileSourceProfile)
 		// Assume IAM role with credentials source from a different profile.
 		ctx, err = resolveCredsFromProfile(ctx, cfg, envConfig, sharedConfig.Source, configs)
 
 	case sharedConfig.Credentials.HasKeys():
 		// Static Credentials from Shared Config/Credentials file.
-		ctx = addCredentialSource(ctx, aws.CredentialsProfile)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceProfile)
 		cfg.Credentials = credentials.StaticCredentialsProvider{
 			Value:  sharedConfig.Credentials,
 			Source: getCredentialSources(ctx),
 		}
 
 	case len(sharedConfig.CredentialSource) != 0:
-		ctx = addCredentialSource(ctx, aws.CredentialsProfileNamedProvider)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceProfileNamedProvider)
 		ctx, err = resolveCredsFromSource(ctx, cfg, envConfig, sharedConfig, configs)
 
 	case len(sharedConfig.WebIdentityTokenFile) != 0:
 		// Credentials from Assume Web Identity token require an IAM Role, and
 		// that roll will be assumed. May be wrapped with another assume role
 		// via SourceProfile.
-		ctx = addCredentialSource(ctx, aws.CredentialsProfileSTSWebIDToken)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceProfileSTSWebIDToken)
 		return ctx, assumeWebIdentity(ctx, cfg, sharedConfig.WebIdentityTokenFile, sharedConfig.RoleARN, sharedConfig.RoleSessionName, configs)
 
 	case sharedConfig.hasSSOConfiguration():
 		if sharedConfig.hasLegacySSOConfiguration() {
-			ctx = addCredentialSource(ctx, aws.CredentialsProfileSsoLegacy)
-			ctx = addCredentialSource(ctx, aws.CredentialsSsoLegacy)
+			ctx = addCredentialSource(ctx, aws.CredentialSourceProfileSSOLegacy)
+			ctx = addCredentialSource(ctx, aws.CredentialSourceSSOLegacy)
 		} else {
-			ctx = addCredentialSource(ctx, aws.CredentialsSso)
+			ctx = addCredentialSource(ctx, aws.CredentialSourceSSO)
 		}
 		if sharedConfig.SSOSession != nil {
-			ctx = addCredentialSource(ctx, aws.CredentialsProfileSSO)
+			ctx = addCredentialSource(ctx, aws.CredentialSourceProfileSSO)
 		}
 		err = resolveSSOCredentials(ctx, cfg, sharedConfig, configs)
 
 	case len(sharedConfig.CredentialProcess) != 0:
 		// Get credentials from CredentialProcess
-		ctx = addCredentialSource(ctx, aws.CredentialsProfileProcess)
-		ctx = addCredentialSource(ctx, aws.CredentialsProcess)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceProfileProcess)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceProcess)
 		err = processCredentials(ctx, cfg, sharedConfig, configs)
 
 	case len(envConfig.ContainerCredentialsRelativePath) != 0:
-		ctx = addCredentialSource(ctx, aws.CredentialsHTTP)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceHTTP)
 		err = resolveHTTPCredProvider(ctx, cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, configs)
 
 	case len(envConfig.ContainerCredentialsEndpoint) != 0:
-		ctx = addCredentialSource(ctx, aws.CredentialsHTTP)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceHTTP)
 		err = resolveLocalHTTPCredProvider(ctx, cfg, envConfig.ContainerCredentialsEndpoint, envConfig.ContainerAuthorizationToken, configs)
 
 	default:
-		ctx = addCredentialSource(ctx, aws.CredentialsIMDS)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceIMDS)
 		err = resolveEC2RoleCredentials(ctx, cfg, configs)
 	}
 	if err != nil {
@@ -378,15 +378,15 @@ func resolveHTTPCredProvider(ctx context.Context, cfg *aws.Config, url, authToke
 func resolveCredsFromSource(ctx context.Context, cfg *aws.Config, envConfig *EnvConfig, sharedCfg *SharedConfig, configs configs) (context.Context, error) {
 	switch sharedCfg.CredentialSource {
 	case credSourceEc2Metadata:
-		ctx = addCredentialSource(ctx, aws.CredentialsIMDS)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceIMDS)
 		return ctx, resolveEC2RoleCredentials(ctx, cfg, configs)
 
 	case credSourceEnvironment:
-		ctx = addCredentialSource(ctx, aws.CredentialsHTTP)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceHTTP)
 		cfg.Credentials = credentials.StaticCredentialsProvider{Value: envConfig.Credentials, Source: getCredentialSources(ctx)}
 
 	case credSourceECSContainer:
-		ctx = addCredentialSource(ctx, aws.CredentialsHTTP)
+		ctx = addCredentialSource(ctx, aws.CredentialSourceHTTP)
 		if len(envConfig.ContainerCredentialsRelativePath) != 0 {
 			return ctx, resolveHTTPCredProvider(ctx, cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, configs)
 		}

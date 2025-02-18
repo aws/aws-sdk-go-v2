@@ -201,7 +201,7 @@ var _ aws.CredentialProviderSource = (*Provider)(nil)
 // ProviderSources returns the credential chain that was used to construct this provider
 func (p *Provider) ProviderSources() []aws.CredentialSource {
 	if p.options.CredentialSources == nil {
-		return []aws.CredentialSource{aws.CredentialsHTTP}
+		return []aws.CredentialSource{aws.CredentialSourceHTTP}
 	}
 	return p.options.CredentialSources
 }
