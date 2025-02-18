@@ -192,13 +192,13 @@ func TestUserAgentCredentials(t *testing.T) {
 		},
 		"credentials profile": {
 			ExtraLoadFunctions: []func(*LoadOptions) error{
-				WithSharedCredentialsFiles([]string{"testdata/config_file"}),
+				WithSharedCredentialsFiles([]string{"testdata/config_ua_credential_provider"}),
 			},
 			Expect: []middleware.UserAgentFeature{middleware.UserAgentFeatureCredentialsProfile},
 		},
 		"assume role with source profile": {
 			ExtraLoadFunctions: []func(*LoadOptions) error{
-				WithSharedConfigFiles([]string{"testdata/config_file"}),
+				WithSharedConfigFiles([]string{"testdata/config_ua_credential_provider"}),
 				WithSharedConfigProfile("A"),
 			},
 			Expect: []middleware.UserAgentFeature{
@@ -213,7 +213,7 @@ func TestUserAgentCredentials(t *testing.T) {
 		},
 		"named credentials profile http": {
 			ExtraLoadFunctions: []func(*LoadOptions) error{
-				WithSharedConfigFiles([]string{"testdata/config_file"}),
+				WithSharedConfigFiles([]string{"testdata/config_ua_credential_provider"}),
 				WithSharedConfigProfile("ecscontainer"),
 			},
 			Init: func(t *testing.T) {
@@ -247,7 +247,7 @@ func TestUserAgentCredentials(t *testing.T) {
 				middleware.UserAgentFeatureCredentialsSso,
 			},
 			ExtraLoadFunctions: []func(*LoadOptions) error{
-				WithSharedConfigFiles([]string{"testdata/config_file"}),
+				WithSharedConfigFiles([]string{"testdata/config_ua_credential_provider"}),
 				WithSharedConfigProfile("sso-token"),
 			},
 		},
@@ -264,7 +264,7 @@ func TestUserAgentCredentials(t *testing.T) {
 				middleware.UserAgentFeatureCredentialsSsoLegacy,
 			},
 			ExtraLoadFunctions: []func(*LoadOptions) error{
-				WithSharedConfigFiles([]string{"testdata/config_file"}),
+				WithSharedConfigFiles([]string{"testdata/config_ua_credential_provider"}),
 				WithSharedConfigProfile("sso_creds"),
 			},
 		},
@@ -274,7 +274,14 @@ func TestUserAgentCredentials(t *testing.T) {
 				middleware.UserAgentFeatureCredentialsProcess,
 			},
 			ExtraLoadFunctions: []func(*LoadOptions) error{
-				WithSharedConfigFiles([]string{"testdata/config_file"}),
+				func(options *LoadOptions) error {
+					if runtime.GOOS == "windows" {
+						options.SharedConfigFiles = []string{"testdata/config_ua_credential_provider_windows"}
+					} else {
+						options.SharedConfigFiles = []string{"testdata/config_ua_credential_provider"}
+					}
+					return nil
+				},
 				WithSharedConfigProfile("process"),
 			},
 		},
