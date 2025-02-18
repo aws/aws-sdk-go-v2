@@ -1,3 +1,8 @@
+# v1.56.1 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2025-02-14)
 
 * **Feature**: The WAFv2 API now supports configuring data protection in webACLs.

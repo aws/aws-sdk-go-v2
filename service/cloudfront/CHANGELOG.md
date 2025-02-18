@@ -1,3 +1,8 @@
+# v1.44.11 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.10 (2025-02-10)
 
 * **Documentation**: Doc-only update that adds defaults for CloudFront VpcOriginEndpointConfig values.

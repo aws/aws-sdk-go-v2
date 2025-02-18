@@ -1,3 +1,8 @@
+# v1.58.1 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2025-02-07)
 
 * **Feature**: Introduce versionStatus field to take place of status field in EKS DescribeClusterVersions API

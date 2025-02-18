@@ -406,6 +406,18 @@ type LakeFormationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The entity that provides configuration control over managed logs.
+type ManagedLogs struct {
+
+	// Determines whether Amazon Web Services can retain logs.
+	AllowAWSToRetainLogs AllowAWSToRetainLogs
+
+	// The Amazon resource name (ARN) of the encryption key for logs.
+	EncryptionKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration setting for monitoring.
 type MonitoringConfiguration struct {
 
@@ -414,6 +426,9 @@ type MonitoringConfiguration struct {
 
 	// Enable or disable container log rotation.
 	ContainerLogRotationConfiguration *ContainerLogRotationConfiguration
+
+	// The entity that controls configuration for managed logs.
+	ManagedLogs *ManagedLogs
 
 	// Monitoring configurations for the persistent application UI.
 	PersistentAppUI PersistentAppUI

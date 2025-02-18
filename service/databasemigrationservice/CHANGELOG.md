@@ -1,3 +1,8 @@
+# v1.49.1 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2025-02-17)
 
 * **Feature**: Support replicationConfigArn in DMS DescribeApplicableIndividualAssessments API.

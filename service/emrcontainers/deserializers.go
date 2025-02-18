@@ -5350,6 +5350,55 @@ func awsRestjson1_deserializeDocumentLakeFormationConfiguration(v **types.LakeFo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentManagedLogs(v **types.ManagedLogs, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedLogs
+	if *v == nil {
+		sv = &types.ManagedLogs{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowAWSToRetainLogs":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AllowAWSToRetainLogs to be of type string, got %T instead", value)
+				}
+				sv.AllowAWSToRetainLogs = types.AllowAWSToRetainLogs(jtv)
+			}
+
+		case "encryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMonitoringConfiguration(v **types.MonitoringConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5379,6 +5428,11 @@ func awsRestjson1_deserializeDocumentMonitoringConfiguration(v **types.Monitorin
 
 		case "containerLogRotationConfiguration":
 			if err := awsRestjson1_deserializeDocumentContainerLogRotationConfiguration(&sv.ContainerLogRotationConfiguration, value); err != nil {
+				return err
+			}
+
+		case "managedLogs":
+			if err := awsRestjson1_deserializeDocumentManagedLogs(&sv.ManagedLogs, value); err != nil {
 				return err
 			}
 

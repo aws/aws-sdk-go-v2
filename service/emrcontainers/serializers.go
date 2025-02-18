@@ -2396,6 +2396,23 @@ func awsRestjson1_serializeDocumentLakeFormationConfiguration(v *types.LakeForma
 	return nil
 }
 
+func awsRestjson1_serializeDocumentManagedLogs(v *types.ManagedLogs, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AllowAWSToRetainLogs) > 0 {
+		ok := object.Key("allowAWSToRetainLogs")
+		ok.String(string(v.AllowAWSToRetainLogs))
+	}
+
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("encryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMonitoringConfiguration(v *types.MonitoringConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2410,6 +2427,13 @@ func awsRestjson1_serializeDocumentMonitoringConfiguration(v *types.MonitoringCo
 	if v.ContainerLogRotationConfiguration != nil {
 		ok := object.Key("containerLogRotationConfiguration")
 		if err := awsRestjson1_serializeDocumentContainerLogRotationConfiguration(v.ContainerLogRotationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ManagedLogs != nil {
+		ok := object.Key("managedLogs")
+		if err := awsRestjson1_serializeDocumentManagedLogs(v.ManagedLogs, ok); err != nil {
 			return err
 		}
 	}

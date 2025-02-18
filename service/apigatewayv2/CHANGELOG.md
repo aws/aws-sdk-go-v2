@@ -1,3 +1,8 @@
+# v1.25.1 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2025-02-10)
 
 * **Feature**: Documentation updates for Amazon API Gateway

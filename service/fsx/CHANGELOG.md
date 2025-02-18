@@ -1,3 +1,8 @@
+# v1.52.1 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2025-02-12)
 
 * **Feature**: Support for in-place Lustre version upgrades

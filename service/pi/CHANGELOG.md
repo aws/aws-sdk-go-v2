@@ -1,3 +1,8 @@
+# v1.30.2 (2025-02-18)
+
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.1 (2025-02-11)
 
 * **Documentation**: Documentation only update for RDS Performance Insights dimensions for execution plans and locking analysis.

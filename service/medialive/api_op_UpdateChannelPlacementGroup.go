@@ -72,7 +72,7 @@ type UpdateChannelPlacementGroupOutput struct {
 	// The name that you specified for the ChannelPlacementGroup.
 	Name *string
 
-	// An array with one item, which is the signle Node that is associated with the
+	// An array with one item, which is the single Node that is associated with the
 	// ChannelPlacementGroup.
 	Nodes []string
 

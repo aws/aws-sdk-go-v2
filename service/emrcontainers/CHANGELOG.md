@@ -1,3 +1,9 @@
+# v1.34.0 (2025-02-18)
+
+* **Feature**: EMR on EKS StartJobRun Api will be supporting the configuration of log storage in AWS by using "managedLogs" under "MonitoringConfiguration".
+* **Bug Fix**: Bump go version to 1.22
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.16 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

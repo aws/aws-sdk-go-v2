@@ -4328,6 +4328,12 @@
                     "traits": {
                         "smithy.api#enumValue": "S3_BUCKET"
                     }
+                },
+                "MEDIATAILOR_PLAYBACK_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIATAILOR_PLAYBACK_CONFIGURATION"
+                    }
                 }
             },
             "traits": {
@@ -4970,7 +4976,7 @@
                 "Nodes": {
                     "target": "com.amazonaws.medialive#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "An array with one item, which is the signle Node that is associated with the ChannelPlacementGroup.",
+                        "smithy.api#documentation": "An array with one item, which is the single Node that is associated with the ChannelPlacementGroup.",
                         "smithy.api#jsonName": "nodes"
                     }
                 },
@@ -7531,7 +7537,7 @@
                 "Nodes": {
                     "target": "com.amazonaws.medialive#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "An array with one item, which is the signle Node that is associated with the ChannelPlacementGroup.",
+                        "smithy.api#documentation": "An array with one item, which is the single Node that is associated with the ChannelPlacementGroup.",
                         "smithy.api#jsonName": "nodes"
                     }
                 },
@@ -9543,7 +9549,7 @@
                 "Nodes": {
                     "target": "com.amazonaws.medialive#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "An array with one item, which is the signle Node that is associated with the ChannelPlacementGroup.",
+                        "smithy.api#documentation": "An array with one item, which is the single Node that is associated with the ChannelPlacementGroup.",
                         "smithy.api#jsonName": "nodes"
                     }
                 },
@@ -9601,7 +9607,7 @@
                 "Nodes": {
                     "target": "com.amazonaws.medialive#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "An array with one item, which is the signle Node that is associated with the ChannelPlacementGroup.",
+                        "smithy.api#documentation": "An array with one item, which is the single Node that is associated with the ChannelPlacementGroup.",
                         "smithy.api#jsonName": "nodes"
                     }
                 },
@@ -31795,14 +31801,6 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
-                },
-                "RequestId": {
-                    "target": "com.amazonaws.medialive#__stringMin1Max256PatternS",
-                    "traits": {
-                        "smithy.api#documentation": "An ID that you assign to a create request. This ID ensures idempotency when creating resources.",
-                        "smithy.api#idempotencyToken": {},
-                        "smithy.api#jsonName": "requestId"
-                    }
                 }
             },
             "traits": {
@@ -34171,7 +34169,7 @@
                 "Nodes": {
                     "target": "com.amazonaws.medialive#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "An array with one item, which is the signle Node that is associated with the ChannelPlacementGroup.",
+                        "smithy.api#documentation": "An array with one item, which is the single Node that is associated with the ChannelPlacementGroup.",
                         "smithy.api#jsonName": "nodes"
                     }
                 },
