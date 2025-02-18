@@ -1,0 +1,8 @@
+{
+    "id": "52a51160-8764-40f6-9943-ea133e09bb35",
+    "type": "feature",
+    "description": "Adds support for creating CloudWatchAlarmTemplates for AWS Elemental MediaTailor Playback Configuration resources.",
+    "modules": [
+        "service/medialive"
+    ]
+}

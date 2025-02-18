@@ -7681,11 +7681,6 @@ func awsRestjson1_serializeOpDocumentStartMonitorDeploymentInput(v *StartMonitor
 		ok.Boolean(*v.DryRun)
 	}
 
-	if v.RequestId != nil {
-		ok := object.Key("requestId")
-		ok.String(*v.RequestId)
-	}
-
 	return nil
 }
 

@@ -30,14 +30,14 @@ func (c *Client) CreateSchedulingPolicy(ctx context.Context, params *CreateSched
 // Contains the parameters for CreateSchedulingPolicy .
 type CreateSchedulingPolicyInput struct {
 
-	// The name of the scheduling policy. It can be up to 128 letters long. It can
-	// contain uppercase and lowercase letters, numbers, hyphens (-), and underscores
-	// (_).
+	// The name of the fair-share scheduling policy. It can be up to 128 letters long.
+	// It can contain uppercase and lowercase letters, numbers, hyphens (-), and
+	// underscores (_).
 	//
 	// This member is required.
 	Name *string
 
-	// The fair share policy of the scheduling policy.
+	// The fair-share scheduling policy details.
 	FairsharePolicy *types.FairsharePolicy
 
 	// The tags that you apply to the scheduling policy to help you categorize and

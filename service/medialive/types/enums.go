@@ -1065,14 +1065,15 @@ type CloudWatchAlarmTemplateTargetResourceType string
 
 // Enum values for CloudWatchAlarmTemplateTargetResourceType
 const (
-	CloudWatchAlarmTemplateTargetResourceTypeCloudfrontDistribution     CloudWatchAlarmTemplateTargetResourceType = "CLOUDFRONT_DISTRIBUTION"
-	CloudWatchAlarmTemplateTargetResourceTypeMedialiveMultiplex         CloudWatchAlarmTemplateTargetResourceType = "MEDIALIVE_MULTIPLEX"
-	CloudWatchAlarmTemplateTargetResourceTypeMedialiveChannel           CloudWatchAlarmTemplateTargetResourceType = "MEDIALIVE_CHANNEL"
-	CloudWatchAlarmTemplateTargetResourceTypeMedialiveInputDevice       CloudWatchAlarmTemplateTargetResourceType = "MEDIALIVE_INPUT_DEVICE"
-	CloudWatchAlarmTemplateTargetResourceTypeMediapackageChannel        CloudWatchAlarmTemplateTargetResourceType = "MEDIAPACKAGE_CHANNEL"
-	CloudWatchAlarmTemplateTargetResourceTypeMediapackageOriginEndpoint CloudWatchAlarmTemplateTargetResourceType = "MEDIAPACKAGE_ORIGIN_ENDPOINT"
-	CloudWatchAlarmTemplateTargetResourceTypeMediaconnectFlow           CloudWatchAlarmTemplateTargetResourceType = "MEDIACONNECT_FLOW"
-	CloudWatchAlarmTemplateTargetResourceTypeS3Bucket                   CloudWatchAlarmTemplateTargetResourceType = "S3_BUCKET"
+	CloudWatchAlarmTemplateTargetResourceTypeCloudfrontDistribution           CloudWatchAlarmTemplateTargetResourceType = "CLOUDFRONT_DISTRIBUTION"
+	CloudWatchAlarmTemplateTargetResourceTypeMedialiveMultiplex               CloudWatchAlarmTemplateTargetResourceType = "MEDIALIVE_MULTIPLEX"
+	CloudWatchAlarmTemplateTargetResourceTypeMedialiveChannel                 CloudWatchAlarmTemplateTargetResourceType = "MEDIALIVE_CHANNEL"
+	CloudWatchAlarmTemplateTargetResourceTypeMedialiveInputDevice             CloudWatchAlarmTemplateTargetResourceType = "MEDIALIVE_INPUT_DEVICE"
+	CloudWatchAlarmTemplateTargetResourceTypeMediapackageChannel              CloudWatchAlarmTemplateTargetResourceType = "MEDIAPACKAGE_CHANNEL"
+	CloudWatchAlarmTemplateTargetResourceTypeMediapackageOriginEndpoint       CloudWatchAlarmTemplateTargetResourceType = "MEDIAPACKAGE_ORIGIN_ENDPOINT"
+	CloudWatchAlarmTemplateTargetResourceTypeMediaconnectFlow                 CloudWatchAlarmTemplateTargetResourceType = "MEDIACONNECT_FLOW"
+	CloudWatchAlarmTemplateTargetResourceTypeS3Bucket                         CloudWatchAlarmTemplateTargetResourceType = "S3_BUCKET"
+	CloudWatchAlarmTemplateTargetResourceTypeMediatailorPlaybackConfiguration CloudWatchAlarmTemplateTargetResourceType = "MEDIATAILOR_PLAYBACK_CONFIGURATION"
 )
 
 // Values returns all known values for CloudWatchAlarmTemplateTargetResourceType.
@@ -1090,6 +1091,7 @@ func (CloudWatchAlarmTemplateTargetResourceType) Values() []CloudWatchAlarmTempl
 		"MEDIAPACKAGE_ORIGIN_ENDPOINT",
 		"MEDIACONNECT_FLOW",
 		"S3_BUCKET",
+		"MEDIATAILOR_PLAYBACK_CONFIGURATION",
 	}
 }
 
