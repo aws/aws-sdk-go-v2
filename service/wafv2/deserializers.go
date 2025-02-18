@@ -8927,6 +8927,139 @@ func awsAwsjson11_deserializeDocumentCustomResponseBody(v **types.CustomResponse
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDataProtection(v **types.DataProtection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataProtection
+	if *v == nil {
+		sv = &types.DataProtection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataProtectionAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.DataProtectionAction(jtv)
+			}
+
+		case "ExcludeRateBasedDetails":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ExcludeRateBasedDetails = jtv
+			}
+
+		case "ExcludeRuleMatchDetails":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ExcludeRuleMatchDetails = jtv
+			}
+
+		case "Field":
+			if err := awsAwsjson11_deserializeDocumentFieldToProtect(&sv.Field, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDataProtectionConfig(v **types.DataProtectionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataProtectionConfig
+	if *v == nil {
+		sv = &types.DataProtectionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataProtections":
+			if err := awsAwsjson11_deserializeDocumentDataProtections(&sv.DataProtections, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDataProtections(v *[]types.DataProtection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DataProtection
+	if *v == nil {
+		cv = []types.DataProtection{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DataProtection
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDataProtection(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDefaultAction(v **types.DefaultAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9170,6 +9303,87 @@ func awsAwsjson11_deserializeDocumentFieldToMatch(v **types.FieldToMatch, value 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFieldToProtect(v **types.FieldToProtect, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FieldToProtect
+	if *v == nil {
+		sv = &types.FieldToProtect{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldKeys":
+			if err := awsAwsjson11_deserializeDocumentFieldToProtectKeys(&sv.FieldKeys, value); err != nil {
+				return err
+			}
+
+		case "FieldType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldToProtectType to be of type string, got %T instead", value)
+				}
+				sv.FieldType = types.FieldToProtectType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFieldToProtectKeys(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FieldToProtectKeyName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -16306,6 +16520,11 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 
 		case "CustomResponseBodies":
 			if err := awsAwsjson11_deserializeDocumentCustomResponseBodies(&sv.CustomResponseBodies, value); err != nil {
+				return err
+			}
+
+		case "DataProtectionConfig":
+			if err := awsAwsjson11_deserializeDocumentDataProtectionConfig(&sv.DataProtectionConfig, value); err != nil {
 				return err
 			}
 

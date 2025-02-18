@@ -6329,6 +6329,15 @@ func awsRestjson1_deserializeDocumentApp(v **types.App, value interface{}) error
 				return err
 			}
 
+		case "computeRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputeRoleArn to be of type string, got %T instead", value)
+				}
+				sv.ComputeRoleArn = ptr.String(jtv)
+			}
+
 		case "createTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7158,6 +7167,15 @@ func awsRestjson1_deserializeDocumentBranch(v **types.Branch, value interface{})
 					return fmt.Errorf("expected BuildSpec to be of type string, got %T instead", value)
 				}
 				sv.BuildSpec = ptr.String(jtv)
+			}
+
+		case "computeRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputeRoleArn to be of type string, got %T instead", value)
+				}
+				sv.ComputeRoleArn = ptr.String(jtv)
 			}
 
 		case "createTime":

@@ -375,7 +375,7 @@
                     "name": "wafv2"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>WAF</fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. WAF Classic support will end on September 30, 2025. </p>\n            <p>For information about WAF, including how to migrate your WAF Classic resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to an Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync\n      GraphQL API, Amazon Cognito user pool, App Runner service, or Amazon Web Services Verified Access instance. WAF also lets you control access to your content,\n      to protect the Amazon Web Services resource that WAF is monitoring. Based on conditions that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the protected resource responds to requests with either the requested content, an HTTP 403 status code\n         (Forbidden), or with a custom response. </p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and guidance for configuring and using \n         WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional applications, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront applications, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>",
+                "smithy.api#documentation": "<fullname>WAF </fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. WAF Classic support will end on September 30, 2025. </p>\n            <p>For information about WAF, including how to migrate your WAF Classic resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to a protected resource. Protected resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync\n      GraphQL API, Amazon Cognito user pool, App Runner service, and Amazon Web Services Verified Access instance. WAF also lets you control access to your content,\n      to protect the Amazon Web Services resource that WAF is monitoring. Based on conditions that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the protected resource responds to requests with either the requested content, an HTTP 403 status code\n         (Forbidden), or with a custom response. </p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and guidance for configuring and using \n         WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional resources, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>",
                 "smithy.api#title": "AWS WAFV2",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://waf.amazonaws.com/doc/2019-07-29/"
@@ -1757,7 +1757,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a web ACL with a regional application resource, to protect the resource.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         associate a web ACL, in the CloudFront call <code>UpdateDistribution</code>, set the web ACL ID\n         to the Amazon Resource Name (ARN) of the web ACL. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a> in the <i>Amazon CloudFront Developer Guide</i>. </p>\n         <p>\n            <b>Required permissions for customer-managed IAM policies</b>\n         </p>\n         <p>This call requires permissions that are specific to the protected resource type. \n    For details, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-AssociateWebACL\">Permissions for AssociateWebACL</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>\n            <b>Temporary inconsistencies during updates</b>\n         </p>\n         <p>When you create or change a web ACL or other WAF resources, the changes take a small amount of time to propagate to all areas where the resources are stored. The propagation time can be from a few seconds to a number of minutes. </p>\n         <p>The following are examples of the temporary inconsistencies that you might notice during change propagation: </p>\n         <ul>\n            <li>\n               <p>After you create a web ACL, if you try to associate it with a resource, you might get an exception indicating that the web ACL is unavailable. </p>\n            </li>\n            <li>\n               <p>After you add a rule group to a web ACL, the new rule group rules might be in effect in one area where the web ACL is used and not in another.</p>\n            </li>\n            <li>\n               <p>After you change a rule action setting, you might see the old action in some places and the new action in others. </p>\n            </li>\n            <li>\n               <p>After you add an IP address to an IP set that is in use in a blocking rule, the new address might be blocked in one area while still allowed in another.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Associates a web ACL with a resource, to protect the resource. </p>\n         <p>Use this for all resource types except for Amazon CloudFront distributions. For Amazon CloudFront, call <code>UpdateDistribution</code> for the distribution and provide the Amazon Resource Name (ARN) of the web ACL in the web ACL ID. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a> in the <i>Amazon CloudFront Developer Guide</i>. </p>\n         <p>\n            <b>Required permissions for customer-managed IAM policies</b>\n         </p>\n         <p>This call requires permissions that are specific to the protected resource type. \n    For details, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-AssociateWebACL\">Permissions for AssociateWebACL</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>\n            <b>Temporary inconsistencies during updates</b>\n         </p>\n         <p>When you create or change a web ACL or other WAF resources, the changes take a small amount of time to propagate to all areas where the resources are stored. The propagation time can be from a few seconds to a number of minutes. </p>\n         <p>The following are examples of the temporary inconsistencies that you might notice during change propagation: </p>\n         <ul>\n            <li>\n               <p>After you create a web ACL, if you try to associate it with a resource, you might get an exception indicating that the web ACL is unavailable. </p>\n            </li>\n            <li>\n               <p>After you add a rule group to a web ACL, the new rule group rules might be in effect in one area where the web ACL is used and not in another.</p>\n            </li>\n            <li>\n               <p>After you change a rule action setting, you might see the old action in some places and the new action in others. </p>\n            </li>\n            <li>\n               <p>After you add an IP address to an IP set that is in use in a blocking rule, the new address might be blocked in one area while still allowed in another.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.wafv2#AssociateWebACLRequest": {
@@ -2094,7 +2094,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3838,7 +3838,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3919,7 +3919,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4019,7 +4019,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4121,7 +4121,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4235,7 +4235,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <a>WebACL</a> per the specifications provided.</p>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>"
+                "smithy.api#documentation": "<p>Creates a <a>WebACL</a> per the specifications provided.</p>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, and Amazon Web Services Verified Access instance.  </p>"
             }
         },
         "com.amazonaws.wafv2#CreateWebACLRequest": {
@@ -4251,7 +4251,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4279,6 +4279,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Defines and enables Amazon CloudWatch metrics and web request sample collection.  </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DataProtectionConfig": {
+                    "target": "com.amazonaws.wafv2#DataProtectionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies data protection to apply to the web request data that WAF stores for the web ACL. This is a web ACL level data protection option. </p>\n         <p>The data protection that you configure for the web ACL alters the data that's available for any other data collection activity, \n  including WAF logging, web ACL request sampling, Amazon Web Services Managed Rules, and Amazon Security Lake data collection and management. Your other option for data protection is in the logging configuration, which only affects logging. </p>"
                     }
                 },
                 "Tags": {
@@ -4477,6 +4483,86 @@
                 "smithy.api#documentation": "<p>The response body to use in a custom response to a web request. This is referenced by\n         key from <a>CustomResponse</a>\n            <code>CustomResponseBodyKey</code>.</p>"
             }
         },
+        "com.amazonaws.wafv2#DataProtection": {
+            "type": "structure",
+            "members": {
+                "Field": {
+                    "target": "com.amazonaws.wafv2#FieldToProtect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the field type and optional keys to apply the protection behavior to. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.wafv2#DataProtectionAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how to protect the field. WAF can apply a one-way hash to the field or hard code a string substitution. </p>\n         <ul>\n            <li>\n               <p>One-way hash example: <code>ade099751dEXAMPLEHASH2ea9f3393f80dd5d3bEXAMPLEHASH966ae0d3cd5a1e</code>\n               </p>\n            </li>\n            <li>\n               <p>Substitution example: <code>REDACTED</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExcludeRuleMatchDetails": {
+                    "target": "com.amazonaws.wafv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to also protect any rule match details from the web ACL logs when applying data protection this field type and keys. WAF logs these details for non-terminating \n           matching rules and for the terminating matching rule. For additional information, see \n            <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields for web ACL traffic</a> in the\n            <i>WAF Developer Guide</i>.</p>\n         <p>Default: <code>FALSE</code>\n         </p>"
+                    }
+                },
+                "ExcludeRateBasedDetails": {
+                    "target": "com.amazonaws.wafv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to also protect any rate-based rule details from the web ACL logs when applying data protection for this field type and keys. \n           For additional information, see the log field <code>rateBasedRuleList</code> at \n            <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields for web ACL traffic</a> in the\n            <i>WAF Developer Guide</i>.</p>\n         <p>Default: <code>FALSE</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the protection behavior for a field type. This is part of the data protection configuration for a web ACL. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#DataProtectionAction": {
+            "type": "enum",
+            "members": {
+                "SUBSTITUTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBSTITUTION"
+                    }
+                },
+                "HASH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HASH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wafv2#DataProtectionConfig": {
+            "type": "structure",
+            "members": {
+                "DataProtections": {
+                    "target": "com.amazonaws.wafv2#DataProtections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of data protection configurations for specific web request field types. This is defined for each \n           web ACL. WAF applies the specified protection to all web requests that the web ACL inspects.  </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies data protection to apply to the web request data that WAF stores for the web ACL. This is a web ACL level data protection option. </p>\n         <p>The data protection that you configure for the web ACL alters the data that's available for any other data collection activity, \n  including WAF logging, web ACL request sampling, Amazon Web Services Managed Rules, and Amazon Security Lake data collection and management. Your other option for data protection is in the logging configuration, which only affects logging. </p>\n         <p>This is part of the data protection configuration for a web ACL. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#DataProtections": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#DataProtection"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 26
+                }
+            }
+        },
         "com.amazonaws.wafv2#DefaultAction": {
             "type": "structure",
             "members": {
@@ -4532,7 +4618,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4671,7 +4757,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4860,7 +4946,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4941,7 +5027,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5006,7 +5092,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified <a>WebACL</a>. </p>\n         <p>You can only use this if <code>ManagedByFirewallManager</code> is false in the web ACL. </p>\n         <note>\n            <p>Before deleting any web ACL, first disassociate it from all resources.</p>\n            <ul>\n               <li>\n                  <p>To retrieve a list of the resources that are associated with a web ACL, use the\n                  following calls:</p>\n                  <ul>\n                     <li>\n                        <p>For regional resources, call <a>ListResourcesForWebACL</a>.</p>\n                     </li>\n                     <li>\n                        <p>For Amazon CloudFront distributions, use the CloudFront call\n                           <code>ListDistributionsByWebACLId</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html\">ListDistributionsByWebACLId</a> \n                               in the <i>Amazon CloudFront API Reference</i>. </p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>To disassociate a resource from a web ACL, use the following calls:</p>\n                  <ul>\n                     <li>\n                        <p>For regional resources, call <a>DisassociateWebACL</a>.</p>\n                     </li>\n                     <li>\n                        <p>For Amazon CloudFront distributions, provide an empty web ACL ID in the CloudFront call\n                           <code>UpdateDistribution</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>\n                               in the <i>Amazon CloudFront API Reference</i>. </p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the specified <a>WebACL</a>. </p>\n         <p>You can only use this if <code>ManagedByFirewallManager</code> is false in the web ACL. </p>\n         <note>\n            <p>Before deleting any web ACL, first disassociate it from all resources.</p>\n            <ul>\n               <li>\n                  <p>To retrieve a list of the resources that are associated with a web ACL, use the\n                  following calls:</p>\n                  <ul>\n                     <li>\n                        <p>For Amazon CloudFront distributions, use the CloudFront call\n                           <code>ListDistributionsByWebACLId</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html\">ListDistributionsByWebACLId</a> \n                               in the <i>Amazon CloudFront API Reference</i>. </p>\n                     </li>\n                     <li>\n                        <p>For all other resources, call <a>ListResourcesForWebACL</a>.</p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>To disassociate a resource from a web ACL, use the following calls:</p>\n                  <ul>\n                     <li>\n                        <p>For Amazon CloudFront distributions, provide an empty web ACL ID in the CloudFront call\n                           <code>UpdateDistribution</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>\n                               in the <i>Amazon CloudFront API Reference</i>. </p>\n                     </li>\n                     <li>\n                        <p>For all other resources, call <a>DisassociateWebACL</a>.</p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#DeleteWebACLRequest": {
@@ -5022,7 +5108,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5081,7 +5167,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5140,7 +5226,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5215,7 +5301,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5303,7 +5389,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates the specified regional application resource from any existing web ACL\n         association. A resource can have at most one web ACL association. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         disassociate a web ACL, provide an empty web ACL ID in the CloudFront call\n            <code>UpdateDistribution</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a> in the <i>Amazon CloudFront API Reference</i>. </p>\n         <p>\n            <b>Required permissions for customer-managed IAM policies</b>\n         </p>\n         <p>This call requires permissions that are specific to the protected resource type. \n    For details, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-DisassociateWebACL\">Permissions for DisassociateWebACL</a> in the <i>WAF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Disassociates the specified resource from its web ACL\n         association, if it has one. </p>\n         <p>Use this for all resource types except for Amazon CloudFront distributions. For Amazon CloudFront, call <code>UpdateDistribution</code> for the distribution and provide an empty web ACL ID. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a> in the <i>Amazon CloudFront API Reference</i>. </p>\n         <p>\n            <b>Required permissions for customer-managed IAM policies</b>\n         </p>\n         <p>This call requires permissions that are specific to the protected resource type. \n    For details, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-DisassociateWebACL\">Permissions for DisassociateWebACL</a> in the <i>WAF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.wafv2#DisassociateWebACLRequest": {
@@ -5571,7 +5657,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a web request component to be used in a rule match statement or in a logging configuration. </p>\n         <ul>\n            <li>\n               <p>In a rule statement, this is the part of the web request that you want WAF to inspect. Include the single\n                    <code>FieldToMatch</code> type that you want to inspect, with additional specifications\n                 as needed, according to the type. You specify a single request component in\n                    <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than\n                 one component of the web request, create a separate rule statement for each\n                 component.</p>\n               <p>Example JSON for a <code>QueryString</code> field to match: </p>\n               <p>\n                  <code> \"FieldToMatch\": { \"QueryString\": {} }</code>\n               </p>\n               <p>Example JSON for a <code>Method</code> field to match specification:</p>\n               <p>\n                  <code> \"FieldToMatch\": { \"Method\": { \"Name\": \"DELETE\" } }</code>\n               </p>\n            </li>\n            <li>\n               <p>In a logging configuration, this is used in the <code>RedactedFields</code> property to specify a field to \n              redact from the logging records. For this use case, note the following: </p>\n               <ul>\n                  <li>\n                     <p>Even though all <code>FieldToMatch</code> settings \n                  are available, the only valid settings for field redaction are <code>UriPath</code>, <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n                  </li>\n                  <li>\n                     <p>In this documentation, the descriptions of the individual fields talk about specifying the web request component to inspect, \n                      but for field redaction, you are specifying the component type to redact from the logs. </p>\n                  </li>\n                  <li>\n                     <p>If you have request sampling enabled, the redacted fields configuration for logging has no impact on sampling. \n                  The only way to exclude fields from request sampling is by disabling sampling in the web ACL visibility configuration. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Specifies a web request component to be used in a rule match statement or in a logging configuration. </p>\n         <ul>\n            <li>\n               <p>In a rule statement, this is the part of the web request that you want WAF to inspect. Include the single\n                    <code>FieldToMatch</code> type that you want to inspect, with additional specifications\n                 as needed, according to the type. You specify a single request component in\n                    <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than\n                 one component of the web request, create a separate rule statement for each\n                 component.</p>\n               <p>Example JSON for a <code>QueryString</code> field to match: </p>\n               <p>\n                  <code> \"FieldToMatch\": { \"QueryString\": {} }</code>\n               </p>\n               <p>Example JSON for a <code>Method</code> field to match specification:</p>\n               <p>\n                  <code> \"FieldToMatch\": { \"Method\": { \"Name\": \"DELETE\" } }</code>\n               </p>\n            </li>\n            <li>\n               <p>In a logging configuration, this is used in the <code>RedactedFields</code> property to specify a field to \n              redact from the logging records. For this use case, note the following: </p>\n               <ul>\n                  <li>\n                     <p>Even though all <code>FieldToMatch</code> settings \n                  are available, the only valid settings for field redaction are <code>UriPath</code>, <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n                  </li>\n                  <li>\n                     <p>In this documentation, the descriptions of the individual fields talk about specifying the web request component to inspect, \n                      but for field redaction, you are specifying the component type to redact from the logs. </p>\n                  </li>\n                  <li>\n                     <p>If you have request sampling enabled, the redacted fields configuration for logging has no impact on sampling. \n                        You can only exclude fields from request sampling by disabling sampling in the web ACL visibility configuration \n                      or by configuring data protection for the web ACL.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.wafv2#FieldToMatchData": {
@@ -5582,6 +5668,84 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.wafv2#FieldToProtect": {
+            "type": "structure",
+            "members": {
+                "FieldType": {
+                    "target": "com.amazonaws.wafv2#FieldToProtectType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the web request component type to protect.  </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FieldKeys": {
+                    "target": "com.amazonaws.wafv2#FieldToProtectKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the keys to protect for the specified field type. If you don't specify any key, then all keys for the field type are protected.  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a field type and keys to protect in stored web request data. This is part of the data protection configuration for a web ACL. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#FieldToProtectKeyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.wafv2#FieldToProtectKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#FieldToProtectKeyName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wafv2#FieldToProtectType": {
+            "type": "enum",
+            "members": {
+                "SINGLE_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_HEADER"
+                    }
+                },
+                "SINGLE_COOKIE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_COOKIE"
+                    }
+                },
+                "SINGLE_QUERY_ARGUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_QUERY_ARGUMENT"
+                    }
+                },
+                "QUERY_STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_STRING"
+                    }
+                },
+                "BODY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BODY"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#Filter": {
@@ -5900,7 +6064,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5975,7 +6139,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6117,7 +6281,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6302,7 +6466,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6397,7 +6561,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6471,7 +6635,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Id": {
@@ -6554,7 +6718,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6701,7 +6865,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7388,7 +7552,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7481,7 +7645,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7557,7 +7721,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7627,7 +7791,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7697,7 +7861,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7773,7 +7937,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7922,7 +8086,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7986,7 +8150,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves an array of the Amazon Resource Names (ARNs) for the regional resources that\n      are associated with the specified web ACL. </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use the CloudFront call\n          <code>ListDistributionsByWebACLId</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html\">ListDistributionsByWebACLId</a>\n          in the <i>Amazon CloudFront API Reference</i>. </p>\n         <p>\n            <b>Required permissions for customer-managed IAM policies</b>\n         </p>\n         <p>This call requires permissions that are specific to the protected resource type. \n    For details, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL\">Permissions for ListResourcesForWebACL</a> in the <i>WAF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Retrieves an array of the Amazon Resource Names (ARNs) for the resources that\n      are associated with the specified web ACL. </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use the CloudFront call\n          <code>ListDistributionsByWebACLId</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html\">ListDistributionsByWebACLId</a>\n          in the <i>Amazon CloudFront API Reference</i>. </p>\n         <p>\n            <b>Required permissions for customer-managed IAM policies</b>\n         </p>\n         <p>This call requires permissions that are specific to the protected resource type. \n    For details, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL\">Permissions for ListResourcesForWebACL</a> in the <i>WAF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.wafv2#ListResourcesForWebACLRequest": {
@@ -8002,7 +8166,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.wafv2#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used for web ACLs that are scoped for regional applications.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance. </p>\n         <note>\n            <p>If you don't provide a resource type, the call uses the resource type <code>APPLICATION_LOAD_BALANCER</code>. </p>\n         </note>\n         <p>Default: <code>APPLICATION_LOAD_BALANCER</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Retrieves the web ACLs that are used by the specified resource type. </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use the CloudFront call\n          <code>ListDistributionsByWebACLId</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html\">ListDistributionsByWebACLId</a>\n          in the <i>Amazon CloudFront API Reference</i>. </p>\n         <note>\n            <p>If you don't provide a resource type, the call uses the resource type <code>APPLICATION_LOAD_BALANCER</code>. </p>\n         </note>\n         <p>Default: <code>APPLICATION_LOAD_BALANCER</code>\n         </p>"
                     }
                 }
             },
@@ -8053,7 +8217,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8218,7 +8382,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8329,7 +8493,7 @@
                 "RedactedFields": {
                     "target": "com.amazonaws.wafv2#RedactedFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs.</p>\n         <p>For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>REDACTED</code> for all rules that use the <code>SingleHeader</code>\n            <code>FieldToMatch</code> setting. </p>\n         <p>Redaction applies only to the component that's specified in the rule's <code>FieldToMatch</code> setting, so the <code>SingleHeader</code> redaction \n         doesn't apply to rules that use the <code>Headers</code>\n            <code>FieldToMatch</code>.</p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n         <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n         </note>\n         <note>\n            <p>This setting has no impact on request sampling. With request sampling, \n                the only way to exclude fields is by disabling sampling in the web ACL visibility configuration. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs.</p>\n         <p>For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>REDACTED</code> for all rules that use the <code>SingleHeader</code>\n            <code>FieldToMatch</code> setting. </p>\n         <p>If you configure data protection for the web ACL, the protection applies to the data that WAF sends to the logs. </p>\n         <p>Redaction applies only to the component that's specified in the rule's <code>FieldToMatch</code> setting, so the <code>SingleHeader</code> redaction \n         doesn't apply to rules that use the <code>Headers</code>\n            <code>FieldToMatch</code>.</p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n         <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n         </note>\n         <note>\n            <p>This setting has no impact on request sampling. You can only exclude fields from request sampling by disabling sampling in the web ACL visibility configuration \n                      or by configuring data protection for the web ACL.</p>\n         </note>"
                     }
                 },
                 "ManagedByFirewallManager": {
@@ -8359,7 +8523,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an association between logging destinations and a web ACL resource, for logging\n         from WAF. As part of the association, you can specify parts of the standard logging\n         fields to keep out of the logs and you can specify filters so that you log only a subset of\n         the logging records. </p>\n         <note>\n            <p>You can define one logging destination per web ACL.</p>\n         </note>\n         <p>You can access information about the traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. </p>\n               <p>The name that you give the destination must start with <code>aws-waf-logs-</code>. Depending on the type of destination, you might need to configure additional settings or permissions. </p>\n               <p>For configuration requirements and pricing information for each destination type, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p>\n         <p>For additional information about web ACL logging, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Defines an association between logging destinations and a web ACL resource, for logging\n         from WAF. As part of the association, you can specify parts of the standard logging\n         fields to keep out of the logs and you can specify filters so that you log only a subset of\n         the logging records. </p>\n         <p>If you configure data protection for the web ACL, the protection applies to the data that WAF sends to the logs. </p>\n         <note>\n            <p>You can define one logging destination per web ACL.</p>\n         </note>\n         <p>You can access information about the traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. </p>\n               <p>The name that you give the destination must start with <code>aws-waf-logs-</code>. Depending on the type of destination, you might need to configure additional settings or permissions. </p>\n               <p>For configuration requirements and pricing information for each destination type, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p>\n         <p>For additional information about web ACL logging, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.wafv2#LoggingConfigurations": {
@@ -8582,7 +8746,7 @@
                 "RuleActionOverrides": {
                     "target": "com.amazonaws.wafv2#RuleActionOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Action settings to use in the place of the rule actions that are configured inside the rule group. You specify one override for each rule whose action you want to change. </p>\n         <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>"
+                        "smithy.api#documentation": "<p>Action settings to use in the place of the rule actions that are configured inside the rule group. You specify one override for each rule whose action you want to change. </p>\n         <note>\n            <p>Take care to verify the rule names in your overrides. If you provide a rule name that doesn't match the name of any rule in the rule group, WAF doesn't return an error and doesn't apply the override setting.</p>\n         </note>\n         <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>"
                     }
                 }
             },
@@ -9398,6 +9562,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ACP_RULE_SET_RESPONSE_INSPECTION"
                     }
+                },
+                "DATA_PROTECTION_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_PROTECTION_CONFIG"
+                    }
                 }
             }
         },
@@ -9612,7 +9782,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a\n         web ACL, according to the configuration provided. </p>\n         <note>\n            <p>This operation completely replaces any mutable specifications that you already have for a logging configuration with the ones that you provide to this call. </p>\n            <p>To modify an existing logging configuration, do the following: </p>\n            <ol>\n               <li>\n                  <p>Retrieve it by calling <a>GetLoggingConfiguration</a>\n                  </p>\n               </li>\n               <li>\n                  <p>Update its settings as needed</p>\n               </li>\n               <li>\n                  <p>Provide the complete logging configuration specification to this call</p>\n               </li>\n            </ol>\n         </note>\n         <note>\n            <p>You can define one logging destination per web ACL.</p>\n         </note>\n         <p>You can access information about the traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. </p>\n               <p>The name that you give the destination must start with <code>aws-waf-logs-</code>. Depending on the type of destination, you might need to configure additional settings or permissions. </p>\n               <p>For configuration requirements and pricing information for each destination type, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p>\n         <p>For additional information about web ACL logging, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a\n         web ACL, according to the configuration provided. </p>\n         <p>If you configure data protection for the web ACL, the protection applies to the data that WAF sends to the logs. </p>\n         <note>\n            <p>This operation completely replaces any mutable specifications that you already have for a logging configuration with the ones that you provide to this call. </p>\n            <p>To modify an existing logging configuration, do the following: </p>\n            <ol>\n               <li>\n                  <p>Retrieve it by calling <a>GetLoggingConfiguration</a>\n                  </p>\n               </li>\n               <li>\n                  <p>Update its settings as needed</p>\n               </li>\n               <li>\n                  <p>Provide the complete logging configuration specification to this call</p>\n               </li>\n            </ol>\n         </note>\n         <note>\n            <p>You can define one logging destination per web ACL.</p>\n         </note>\n         <p>You can access information about the traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. </p>\n               <p>The name that you give the destination must start with <code>aws-waf-logs-</code>. Depending on the type of destination, you might need to configure additional settings or permissions. </p>\n               <p>For configuration requirements and pricing information for each destination type, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p>\n         <p>For additional information about web ACL logging, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.wafv2#PutLoggingConfigurationRequest": {
@@ -9686,7 +9856,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9803,7 +9973,7 @@
                 "Limit": {
                     "target": "com.amazonaws.wafv2#RateLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The limit on requests per 5-minute period for a single aggregation instance for the rate-based rule. \n       If the rate-based statement includes a <code>ScopeDownStatement</code>, this limit is applied only to the\n         requests that match the statement.</p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>If you aggregate on just the IP address, this is the limit on requests from any single IP address. </p>\n            </li>\n            <li>\n               <p>If you aggregate on the HTTP method and the query argument name \"city\", then this is the limit on\n             requests for any single method, city pair. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The limit on requests during the specified evaluation window for a single aggregation instance for the rate-based rule. \n       If the rate-based statement includes a <code>ScopeDownStatement</code>, this limit is applied only to the\n         requests that match the statement.</p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>If you aggregate on just the IP address, this is the limit on requests from any single IP address. </p>\n            </li>\n            <li>\n               <p>If you aggregate on the HTTP method and the query argument name \"city\", then this is the limit on\n             requests for any single method, city pair. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10809,7 +10979,7 @@
                 "RuleLabels": {
                     "target": "com.amazonaws.wafv2#Labels",
                     "traits": {
-                        "smithy.api#documentation": "<p>Labels to apply to web requests that match the rule match statement. WAF applies\n         fully qualified labels to matching web requests. A fully qualified label is the\n         concatenation of a label namespace and a rule label. The rule's rule group or web ACL\n         defines the label namespace. </p>\n         <p>Rules that run after this rule in the web ACL can match against these labels using a\n            <code>LabelMatchStatement</code>.</p>\n         <p>For each label, provide a case-sensitive string containing optional namespaces and a\n         label name, according to the following guidelines:</p>\n         <ul>\n            <li>\n               <p>Separate each component of the label with a colon. </p>\n            </li>\n            <li>\n               <p>Each namespace or name can have up to 128 characters.</p>\n            </li>\n            <li>\n               <p>You can specify up to 5 namespaces in a label.</p>\n            </li>\n            <li>\n               <p>Don't use the following reserved words in your label specification:\n                  <code>aws</code>, <code>waf</code>, <code>managed</code>, <code>rulegroup</code>,\n                  <code>webacl</code>, <code>regexpatternset</code>, or <code>ipset</code>.</p>\n            </li>\n         </ul>\n         <p>For example, <code>myLabelName</code> or <code>nameSpace1:nameSpace2:myLabelName</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>Labels to apply to web requests that match the rule match statement. WAF applies\n         fully qualified labels to matching web requests. A fully qualified label is the\n         concatenation of a label namespace and a rule label. The rule's rule group or web ACL\n         defines the label namespace. </p>\n         <note>\n            <p>Any rule that isn't a rule group reference statement or managed rule group statement can add labels to matching web requests.</p>\n         </note>\n         <p>Rules that run after this rule in the web ACL can match against these labels using a\n            <code>LabelMatchStatement</code>.</p>\n         <p>For each label, provide a case-sensitive string containing optional namespaces and a\n         label name, according to the following guidelines:</p>\n         <ul>\n            <li>\n               <p>Separate each component of the label with a colon. </p>\n            </li>\n            <li>\n               <p>Each namespace or name can have up to 128 characters.</p>\n            </li>\n            <li>\n               <p>You can specify up to 5 namespaces in a label.</p>\n            </li>\n            <li>\n               <p>Don't use the following reserved words in your label specification:\n                  <code>aws</code>, <code>waf</code>, <code>managed</code>, <code>rulegroup</code>,\n                  <code>webacl</code>, <code>regexpatternset</code>, or <code>ipset</code>.</p>\n            </li>\n         </ul>\n         <p>For example, <code>myLabelName</code> or <code>nameSpace1:nameSpace2:myLabelName</code>.\n      </p>"
                     }
                 },
                 "VisibilityConfig": {
@@ -10880,7 +11050,7 @@
                 "Name": {
                     "target": "com.amazonaws.wafv2#EntityName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the rule to override.</p>",
+                        "smithy.api#documentation": "<p>The name of the rule to override.</p>\n         <note>\n            <p>Take care to verify the rule names in your overrides. If you provide a rule name that doesn't match the name of any rule in the rule group, WAF doesn't return an error and doesn't apply the override setting.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10893,7 +11063,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Action setting to use in the place of a rule action that is configured inside the rule group. You specify one override for each rule whose action you want to change. </p>\n         <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>"
+                "smithy.api#documentation": "<p>Action setting to use in the place of a rule action that is configured inside the rule group. You specify one override for each rule whose action you want to change. </p>\n         <note>\n            <p>Take care to verify the rule names in your overrides. If you provide a rule name that doesn't match the name of any rule in the rule group, WAF doesn't return an error and doesn't apply the override setting.</p>\n         </note>\n         <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>"
             }
         },
         "com.amazonaws.wafv2#RuleActionOverrides": {
@@ -11006,7 +11176,7 @@
                 "RuleActionOverrides": {
                     "target": "com.amazonaws.wafv2#RuleActionOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Action settings to use in the place of the rule actions that are configured inside the rule group. You specify one override for each rule whose action you want to change. </p>\n         <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>"
+                        "smithy.api#documentation": "<p>Action settings to use in the place of the rule actions that are configured inside the rule group. You specify one override for each rule whose action you want to change. </p>\n         <note>\n            <p>Take care to verify the rule names in your overrides. If you provide a rule name that doesn't match the name of any rule in the rule group, WAF doesn't return an error and doesn't apply the override setting.</p>\n         </note>\n         <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>"
                     }
                 }
             },
@@ -11997,7 +12167,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12089,7 +12259,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12200,7 +12370,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12307,7 +12477,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12416,7 +12586,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified <a>WebACL</a>. While updating a web ACL, WAF provides\n         continuous coverage to the resources that you have associated with the web ACL. </p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. </p>\n            <p>To modify a web ACL, do the following: </p>\n            <ol>\n               <li>\n                  <p>Retrieve it by calling <a>GetWebACL</a>\n                  </p>\n               </li>\n               <li>\n                  <p>Update its settings as needed</p>\n               </li>\n               <li>\n                  <p>Provide the complete web ACL specification to this call</p>\n               </li>\n            </ol>\n         </note>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>\n            <b>Temporary inconsistencies during updates</b>\n         </p>\n         <p>When you create or change a web ACL or other WAF resources, the changes take a small amount of time to propagate to all areas where the resources are stored. The propagation time can be from a few seconds to a number of minutes. </p>\n         <p>The following are examples of the temporary inconsistencies that you might notice during change propagation: </p>\n         <ul>\n            <li>\n               <p>After you create a web ACL, if you try to associate it with a resource, you might get an exception indicating that the web ACL is unavailable. </p>\n            </li>\n            <li>\n               <p>After you add a rule group to a web ACL, the new rule group rules might be in effect in one area where the web ACL is used and not in another.</p>\n            </li>\n            <li>\n               <p>After you change a rule action setting, you might see the old action in some places and the new action in others. </p>\n            </li>\n            <li>\n               <p>After you add an IP address to an IP set that is in use in a blocking rule, the new address might be blocked in one area while still allowed in another.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Updates the specified <a>WebACL</a>. While updating a web ACL, WAF provides\n         continuous coverage to the resources that you have associated with the web ACL. </p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. </p>\n            <p>To modify a web ACL, do the following: </p>\n            <ol>\n               <li>\n                  <p>Retrieve it by calling <a>GetWebACL</a>\n                  </p>\n               </li>\n               <li>\n                  <p>Update its settings as needed</p>\n               </li>\n               <li>\n                  <p>Provide the complete web ACL specification to this call</p>\n               </li>\n            </ol>\n         </note>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, and Amazon Web Services Verified Access instance.  </p>\n         <p>\n            <b>Temporary inconsistencies during updates</b>\n         </p>\n         <p>When you create or change a web ACL or other WAF resources, the changes take a small amount of time to propagate to all areas where the resources are stored. The propagation time can be from a few seconds to a number of minutes. </p>\n         <p>The following are examples of the temporary inconsistencies that you might notice during change propagation: </p>\n         <ul>\n            <li>\n               <p>After you create a web ACL, if you try to associate it with a resource, you might get an exception indicating that the web ACL is unavailable. </p>\n            </li>\n            <li>\n               <p>After you add a rule group to a web ACL, the new rule group rules might be in effect in one area where the web ACL is used and not in another.</p>\n            </li>\n            <li>\n               <p>After you change a rule action setting, you might see the old action in some places and the new action in others. </p>\n            </li>\n            <li>\n               <p>After you add an IP address to an IP set that is in use in a blocking rule, the new address might be blocked in one area while still allowed in another.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.wafv2#UpdateWebACLRequest": {
@@ -12432,7 +12602,7 @@
                 "Scope": {
                     "target": "com.amazonaws.wafv2#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution. </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12467,6 +12637,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Defines and enables Amazon CloudWatch metrics and web request sample collection.  </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DataProtectionConfig": {
+                    "target": "com.amazonaws.wafv2#DataProtectionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies data protection to apply to the web request data that WAF stores for the web ACL. This is a web ACL level data protection option. </p>\n         <p>The data protection that you configure for the web ACL alters the data that's available for any other data collection activity, \n  including WAF logging, web ACL request sampling, Amazon Web Services Managed Rules, and Amazon Security Lake data collection and management. Your other option for data protection is in the logging configuration, which only affects logging. </p>"
                     }
                 },
                 "LockToken": {
@@ -12603,7 +12779,7 @@
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether WAF should store a sampling of the web requests that\n         match the rules. You can view the sampled requests through the WAF console. </p>\n         <note>\n            <p>Request sampling doesn't provide a field redaction option, and any field redaction that you specify in your logging configuration doesn't affect sampling. \n                  The only way to exclude fields from request sampling is by disabling sampling in the web ACL visibility configuration. </p>\n         </note>",
+                        "smithy.api#documentation": "<p>Indicates whether WAF should store a sampling of the web requests that\n         match the rules. You can view the sampled requests through the WAF console. </p>\n         <p>If you configure data protection for the web ACL, the protection applies to the web ACL's sampled web request data. </p>\n         <note>\n            <p>Request sampling doesn't provide a field redaction option, and any field redaction that you specify in your logging configuration doesn't affect sampling. \n                You can only exclude fields from request sampling by disabling sampling in the web ACL visibility configuration \n                      or by configuring data protection for the web ACL.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12863,7 +13039,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>WAF couldn’t retrieve a resource that you specified for this operation. \n       If you've just created a resource that you're using in this operation, you might \n       just need to wait a few minutes. It can take from a few seconds to a number of minutes \n       for changes to propagate. Verify the resources that you are specifying in your request \n       parameters and then retry the operation.</p>",
+                "smithy.api#documentation": "<p>WAF couldn’t retrieve a resource that you specified for this operation. \n       If you've just created a resource that you're using in this operation, you might \n       just need to wait a few minutes. It can take from a few seconds to a number of minutes \n       for changes to propagate. Verify the resource specifications in your request \n       parameters and then retry the operation.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -12927,6 +13103,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Defines and enables Amazon CloudWatch metrics and web request sample collection.  </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DataProtectionConfig": {
+                    "target": "com.amazonaws.wafv2#DataProtectionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies data protection to apply to the web request data that WAF stores for the web ACL. This is a web ACL level data protection option. </p>\n         <p>The data protection that you configure for the web ACL alters the data that's available for any other data collection activity, \n  including WAF logging, web ACL request sampling, Amazon Web Services Managed Rules, and Amazon Security Lake data collection and management. Your other option for data protection is in the logging configuration, which only affects logging. </p>"
                     }
                 },
                 "Capacity": {
@@ -13000,7 +13182,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>"
+                "smithy.api#documentation": "<p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, and Amazon Web Services Verified Access instance.  </p>"
             }
         },
         "com.amazonaws.wafv2#WebACLSummaries": {

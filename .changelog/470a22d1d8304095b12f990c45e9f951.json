@@ -1,0 +1,8 @@
+{
+    "id": "470a22d1-d830-4095-b12f-990c45e9f951",
+    "type": "bugfix",
+    "description": "Add missing AccountIDEndpointMode binding to endpoint resolution.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

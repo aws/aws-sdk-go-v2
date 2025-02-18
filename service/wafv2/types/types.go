@@ -865,6 +865,70 @@ type CustomResponseBody struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the protection behavior for a field type. This is part of the data
+// protection configuration for a web ACL.
+type DataProtection struct {
+
+	// Specifies how to protect the field. WAF can apply a one-way hash to the field
+	// or hard code a string substitution.
+	//
+	//   - One-way hash example:
+	//   ade099751dEXAMPLEHASH2ea9f3393f80dd5d3bEXAMPLEHASH966ae0d3cd5a1e
+	//
+	//   - Substitution example: REDACTED
+	//
+	// This member is required.
+	Action DataProtectionAction
+
+	// Specifies the field type and optional keys to apply the protection behavior to.
+	//
+	// This member is required.
+	Field *FieldToProtect
+
+	// Specifies whether to also protect any rate-based rule details from the web ACL
+	// logs when applying data protection for this field type and keys. For additional
+	// information, see the log field rateBasedRuleList at [Log fields for web ACL traffic] in the WAF Developer Guide.
+	//
+	// Default: FALSE
+	//
+	// [Log fields for web ACL traffic]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
+	ExcludeRateBasedDetails bool
+
+	// Specifies whether to also protect any rule match details from the web ACL logs
+	// when applying data protection this field type and keys. WAF logs these details
+	// for non-terminating matching rules and for the terminating matching rule. For
+	// additional information, see [Log fields for web ACL traffic]in the WAF Developer Guide.
+	//
+	// Default: FALSE
+	//
+	// [Log fields for web ACL traffic]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
+	ExcludeRuleMatchDetails bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies data protection to apply to the web request data that WAF stores for
+// the web ACL. This is a web ACL level data protection option.
+//
+// The data protection that you configure for the web ACL alters the data that's
+// available for any other data collection activity, including WAF logging, web ACL
+// request sampling, Amazon Web Services Managed Rules, and Amazon Security Lake
+// data collection and management. Your other option for data protection is in the
+// logging configuration, which only affects logging.
+//
+// This is part of the data protection configuration for a web ACL.
+type DataProtectionConfig struct {
+
+	// An array of data protection configurations for specific web request field
+	// types. This is defined for each web ACL. WAF applies the specified protection to
+	// all web requests that the web ACL inspects.
+	//
+	// This member is required.
+	DataProtections []DataProtection
+
+	noSmithyDocumentSerde
+}
+
 // In a WebACL, this is the action that you want WAF to perform when a web request
 // doesn't match any of the rules in the WebACL . The default action must be a
 // terminating action.
@@ -954,8 +1018,9 @@ type ExcludedRule struct {
 //     are specifying the component type to redact from the logs.
 //
 //   - If you have request sampling enabled, the redacted fields configuration for
-//     logging has no impact on sampling. The only way to exclude fields from request
-//     sampling is by disabling sampling in the web ACL visibility configuration.
+//     logging has no impact on sampling. You can only exclude fields from request
+//     sampling by disabling sampling in the web ACL visibility configuration or by
+//     configuring data protection for the web ACL.
 type FieldToMatch struct {
 
 	// Inspect all query arguments.
@@ -1083,6 +1148,22 @@ type FieldToMatch struct {
 	// Inspect the request URI path. This is the part of the web request that
 	// identifies a resource, for example, /images/daily-ad.jpg .
 	UriPath *UriPath
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a field type and keys to protect in stored web request data. This is
+// part of the data protection configuration for a web ACL.
+type FieldToProtect struct {
+
+	// Specifies the web request component type to protect.
+	//
+	// This member is required.
+	FieldType FieldToProtectType
+
+	// Specifies the keys to protect for the specified field type. If you don't
+	// specify any key, then all keys for the field type are protected.
+	FieldKeys []string
 
 	noSmithyDocumentSerde
 }
@@ -1890,6 +1971,9 @@ type LabelSummary struct {
 // standard logging fields to keep out of the logs and you can specify filters so
 // that you log only a subset of the logging records.
 //
+// If you configure data protection for the web ACL, the protection applies to the
+// data that WAF sends to the logs.
+//
 // You can define one logging destination per web ACL.
 //
 // You can access information about the traffic that WAF inspects using the
@@ -1981,6 +2065,9 @@ type LoggingConfiguration struct {
 	// For example, if you redact the SingleHeader field, the HEADER field in the logs
 	// will be REDACTED for all rules that use the SingleHeader FieldToMatch setting.
 	//
+	// If you configure data protection for the web ACL, the protection applies to the
+	// data that WAF sends to the logs.
+	//
 	// Redaction applies only to the component that's specified in the rule's
 	// FieldToMatch setting, so the SingleHeader redaction doesn't apply to rules that
 	// use the Headers FieldToMatch .
@@ -1988,9 +2075,9 @@ type LoggingConfiguration struct {
 	// You can specify only the following fields for redaction: UriPath , QueryString ,
 	// SingleHeader , and Method .
 	//
-	// This setting has no impact on request sampling. With request sampling, the only
-	// way to exclude fields is by disabling sampling in the web ACL visibility
-	// configuration.
+	// This setting has no impact on request sampling. You can only exclude fields
+	// from request sampling by disabling sampling in the web ACL visibility
+	// configuration or by configuring data protection for the web ACL.
 	RedactedFields []FieldToMatch
 
 	noSmithyDocumentSerde
@@ -2217,6 +2304,10 @@ type ManagedRuleGroupStatement struct {
 	// Action settings to use in the place of the rule actions that are configured
 	// inside the rule group. You specify one override for each rule whose action you
 	// want to change.
+	//
+	// Take care to verify the rule names in your overrides. If you provide a rule
+	// name that doesn't match the name of any rule in the rule group, WAF doesn't
+	// return an error and doesn't apply the override setting.
 	//
 	// You can use overrides for testing, for example you can override all of rule
 	// actions to Count and then monitor the resulting count metrics to understand how
@@ -2763,9 +2854,10 @@ type RateBasedStatement struct {
 	// This member is required.
 	AggregateKeyType RateBasedStatementAggregateKeyType
 
-	// The limit on requests per 5-minute period for a single aggregation instance for
-	// the rate-based rule. If the rate-based statement includes a ScopeDownStatement ,
-	// this limit is applied only to the requests that match the statement.
+	// The limit on requests during the specified evaluation window for a single
+	// aggregation instance for the rate-based rule. If the rate-based statement
+	// includes a ScopeDownStatement , this limit is applied only to the requests that
+	// match the statement.
 	//
 	// Examples:
 	//
@@ -3745,6 +3837,9 @@ type Rule struct {
 	// is the concatenation of a label namespace and a rule label. The rule's rule
 	// group or web ACL defines the label namespace.
 	//
+	// Any rule that isn't a rule group reference statement or managed rule group
+	// statement can add labels to matching web requests.
+	//
 	// Rules that run after this rule in the web ACL can match against these labels
 	// using a LabelMatchStatement .
 	//
@@ -3793,6 +3888,10 @@ type RuleAction struct {
 // the rule group. You specify one override for each rule whose action you want to
 // change.
 //
+// Take care to verify the rule names in your overrides. If you provide a rule
+// name that doesn't match the name of any rule in the rule group, WAF doesn't
+// return an error and doesn't apply the override setting.
+//
 // You can use overrides for testing, for example you can override all of rule
 // actions to Count and then monitor the resulting count metrics to understand how
 // the rule group would handle your web traffic. You can also permanently override
@@ -3806,6 +3905,10 @@ type RuleActionOverride struct {
 	ActionToUse *RuleAction
 
 	// The name of the rule to override.
+	//
+	// Take care to verify the rule names in your overrides. If you provide a rule
+	// name that doesn't match the name of any rule in the rule group, WAF doesn't
+	// return an error and doesn't apply the override setting.
 	//
 	// This member is required.
 	Name *string
@@ -3938,6 +4041,10 @@ type RuleGroupReferenceStatement struct {
 	// Action settings to use in the place of the rule actions that are configured
 	// inside the rule group. You specify one override for each rule whose action you
 	// want to change.
+	//
+	// Take care to verify the rule names in your overrides. If you provide a rule
+	// name that doesn't match the name of any rule in the rule group, WAF doesn't
+	// return an error and doesn't apply the override setting.
 	//
 	// You can use overrides for testing, for example you can override all of rule
 	// actions to Count and then monitor the resulting count metrics to understand how
@@ -4635,10 +4742,14 @@ type VisibilityConfig struct {
 	// Indicates whether WAF should store a sampling of the web requests that match
 	// the rules. You can view the sampled requests through the WAF console.
 	//
+	// If you configure data protection for the web ACL, the protection applies to the
+	// web ACL's sampled web request data.
+	//
 	// Request sampling doesn't provide a field redaction option, and any field
 	// redaction that you specify in your logging configuration doesn't affect
-	// sampling. The only way to exclude fields from request sampling is by disabling
-	// sampling in the web ACL visibility configuration.
+	// sampling. You can only exclude fields from request sampling by disabling
+	// sampling in the web ACL visibility configuration or by configuring data
+	// protection for the web ACL.
 	//
 	// This member is required.
 	SampledRequestsEnabled bool
@@ -4653,10 +4764,10 @@ type VisibilityConfig struct {
 // the web ACL, you assign a default action to take (allow, block) for any request
 // that does not match any of the rules. The rules in a web ACL can be a
 // combination of the types Rule, RuleGroup, and managed rule group. You can associate a web
-// ACL with one or more Amazon Web Services resources to protect. The resources can
-// be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an
-// Application Load Balancer, an AppSync GraphQL API, an Amazon Cognito user pool,
-// an App Runner service, or an Amazon Web Services Verified Access instance.
+// ACL with one or more Amazon Web Services resources to protect. The resource
+// types include Amazon CloudFront distribution, Amazon API Gateway REST API,
+// Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App
+// Runner service, and Amazon Web Services Verified Access instance.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with
@@ -4743,6 +4854,16 @@ type WebACL struct {
 	// [WAF quotas]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
 	// [Customizing web requests and responses in WAF]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
 	CustomResponseBodies map[string]CustomResponseBody
+
+	// Specifies data protection to apply to the web request data that WAF stores for
+	// the web ACL. This is a web ACL level data protection option.
+	//
+	// The data protection that you configure for the web ACL alters the data that's
+	// available for any other data collection activity, including WAF logging, web ACL
+	// request sampling, Amazon Web Services Managed Rules, and Amazon Security Lake
+	// data collection and management. Your other option for data protection is in the
+	// logging configuration, which only affects logging.
+	DataProtectionConfig *DataProtectionConfig
 
 	// A description of the web ACL that helps with identification.
 	Description *string

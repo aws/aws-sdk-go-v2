@@ -1,3 +1,7 @@
+# v1.125.0 (2025-02-14)
+
+* **Feature**: Release Notes: 1) Analytics API enhancements: Added new ListAnalyticsDataLakeDataSets API. 2)  Onboarding API Idempotency: Adds ClientToken to instance creation and management APIs to support idempotency.
+
 # v1.124.5 (2025-02-10)
 
 * **Documentation**: Updated the CreateContact API documentation to indicate that it only applies to EMAIL contacts.

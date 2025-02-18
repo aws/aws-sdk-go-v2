@@ -66,6 +66,9 @@ type GetDbInstanceOutput struct {
 	// The Availability Zone in which the DB instance resides.
 	AvailabilityZone *string
 
+	// Specifies the DbCluster to which this DbInstance belongs to.
+	DbClusterId *string
+
 	// The Timestream for InfluxDB instance type that InfluxDB runs on.
 	DbInstanceType types.DbInstanceType
 
@@ -87,6 +90,9 @@ type GetDbInstanceOutput struct {
 	// value is a JSON formatted key-value pair holding InfluxDB authorization values:
 	// organization, bucket, username, and password.
 	InfluxAuthParametersSecretArn *string
+
+	// Specifies the DbInstance's role in the cluster.
+	InstanceMode types.InstanceMode
 
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration

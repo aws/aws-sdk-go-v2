@@ -1,3 +1,7 @@
+# v1.29.0 (2025-02-17)
+
+* **Feature**: Add ComputeRoleArn to CreateApp, UpdateApp, CreateBranch, and UpdateBranch, allowing caller to specify a role to be assumed by Amplify Hosting for server-side rendered applications.
+
 # v1.28.8 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

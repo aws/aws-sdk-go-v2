@@ -1,3 +1,7 @@
+# v1.37.0 (2025-02-13)
+
+* **Feature**: This release introduces the getFindingsStatistics API, enabling users to retrieve aggregated finding statistics for IAM Access Analyzer's external access and unused access analysis features. Updated service API and documentation.
+
 # v1.36.13 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

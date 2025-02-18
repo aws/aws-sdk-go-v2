@@ -14664,10 +14664,25 @@ type ProductionVariant struct {
 	//
 	//   - NVIDIA driver version: 535.54.03
 	//
+	//   - CUDA version: 12.2
+	//
+	// al2-ami-sagemaker-inference-gpu-2-1
+	//   - Accelerator: GPU
+	//
+	//   - NVIDIA driver version: 535.54.03
+	//
 	//   - CUDA driver version: 12.2
 	//
-	//   - Supported instance types: ml.g4dn.*, ml.g5.*, ml.g6.*, ml.p3.*, ml.p4d.*,
-	//   ml.p4de.*, ml.p5.*
+	//   - CUDA Container Toolkit with disabled CUDA-compat mounting
+	//
+	// al2-ami-sagemaker-inference-gpu-3-1
+	//   - Accelerator: GPU
+	//
+	//   - NVIDIA driver version: 550.144.01
+	//
+	//   - CUDA version: 12.4
+	//
+	//   - Container Toolkit with disabled CUDA-compat mounting
 	InferenceAmiVersion ProductionVariantInferenceAmiVersion
 
 	// Number of instances to launch initially.

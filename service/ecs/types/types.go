@@ -2496,8 +2496,13 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 //   - Container health checks aren't supported for tasks that are part of a
 //     service that's configured to use a Classic Load Balancer.
 //
+// For an example of how to specify a task definition with multiple containers
+// where container dependency is specified, see [Container dependency]in the Amazon Elastic Container
+// Service Developer Guide.
+//
 // [Updating the Amazon ECS container agent]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
 // [Fargate platform versions]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+// [Container dependency]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency
 type HealthCheck struct {
 
 	// A string array representing the command that the container runs to determine if
@@ -2523,17 +2528,19 @@ type HealthCheck struct {
 	Command []string
 
 	// The time period in seconds between each health check execution. You may specify
-	// between 5 and 300 seconds. The default value is 30 seconds.
+	// between 5 and 300 seconds. The default value is 30 seconds. This value applies
+	// only when you specify a command .
 	Interval *int32
 
 	// The number of times to retry a failed health check before the container is
 	// considered unhealthy. You may specify between 1 and 10 retries. The default
-	// value is 3.
+	// value is 3. This value applies only when you specify a command .
 	Retries *int32
 
 	// The optional grace period to provide containers time to bootstrap before failed
 	// health checks count towards the maximum number of retries. You can specify
-	// between 0 and 300 seconds. By default, the startPeriod is off.
+	// between 0 and 300 seconds. By default, the startPeriod is off. This value
+	// applies only when you specify a command .
 	//
 	// If a health check succeeds within the startPeriod , then the container is
 	// considered healthy and any subsequent failures count toward the maximum number
@@ -2542,7 +2549,7 @@ type HealthCheck struct {
 
 	// The time period in seconds to wait for a health check to succeed before it is
 	// considered a failure. You may specify between 2 and 60 seconds. The default
-	// value is 5.
+	// value is 5. This value applies only when you specify a command .
 	Timeout *int32
 
 	noSmithyDocumentSerde
@@ -2649,6 +2656,30 @@ type InstanceHealthCheckResult struct {
 // for a container defined in the task definition. For more detailed information
 // about these Linux capabilities, see the [capabilities(7)]Linux manual page.
 //
+// The following describes how Docker processes the Linux capabilities specified
+// in the add and drop request parameters. For information about the latest
+// behavior, see [Docker Compose: order of cap_drop and cap_add]in the Docker Community Forum.
+//
+//   - When the container is a privleged container, the container capabilities are
+//     all of the default Docker capabilities. The capabilities specified in the add
+//     request parameter, and the drop request parameter are ignored.
+//
+//   - When the add request parameter is set to ALL, the container capabilities are
+//     all of the default Docker capabilities, excluding those specified in the drop
+//     request parameter.
+//
+//   - When the drop request parameter is set to ALL, the container capabilities
+//     are the capabilities specified in the add request parameter.
+//
+//   - When the add request parameter and the drop request parameter are both
+//     empty, the capabilities the container capabilities are all of the default Docker
+//     capabilities.
+//
+//   - The default is to first drop the capabilities specified in the drop request
+//     parameter, and then add the capabilities specified in the add request
+//     parameter.
+//
+// [Docker Compose: order of cap_drop and cap_add]: https://forums.docker.com/t/docker-compose-order-of-cap-drop-and-cap-add/97136/1
 // [capabilities(7)]: http://man7.org/linux/man-pages/man7/capabilities.7.html
 type KernelCapabilities struct {
 
@@ -3162,9 +3193,13 @@ type ManagedScaling struct {
 type ManagedStorageConfiguration struct {
 
 	// Specify the Key Management Service key ID for the Fargate ephemeral storage.
+	//
+	// The key must be a single Region key.
 	FargateEphemeralStorageKmsKeyId *string
 
 	// Specify a Key Management Service key ID to encrypt the managed storage.
+	//
+	// The key must be a single Region key.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -3791,7 +3826,7 @@ type Service struct {
 	// Indicates whether to use Availability Zone rebalancing for the service.
 	//
 	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
-	// Guide.
+	// Guide .
 	//
 	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
 	AvailabilityZoneRebalancing AvailabilityZoneRebalancing

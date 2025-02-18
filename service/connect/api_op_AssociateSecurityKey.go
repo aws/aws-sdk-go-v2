@@ -43,6 +43,13 @@ type AssociateSecurityKeyInput struct {
 	// This member is required.
 	Key *string
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -125,6 +132,9 @@ func (c *Client) addOperationAssociateSecurityKeyMiddlewares(stack *middleware.S
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opAssociateSecurityKeyMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateSecurityKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,6 +169,39 @@ func (c *Client) addOperationAssociateSecurityKeyMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpAssociateSecurityKey struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpAssociateSecurityKey) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpAssociateSecurityKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*AssociateSecurityKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *AssociateSecurityKeyInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opAssociateSecurityKeyMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateSecurityKey{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opAssociateSecurityKey(region string) *awsmiddleware.RegisterServiceMetadata {

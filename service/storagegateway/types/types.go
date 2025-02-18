@@ -221,6 +221,86 @@ type CachediSCSIVolume struct {
 	noSmithyDocumentSerde
 }
 
+// A list of filter parameters and associated values that determine which files
+// are included or excluded from a cache report created by a StartCacheReport
+// request. Multiple instances of the same filter parameter are combined with an OR
+// operation, while different parameters are combined with an AND operation.
+type CacheReportFilter struct {
+
+	// The parameter name for a filter that determines which files are included or
+	// excluded from a cache report.
+	//
+	// Valid Names:
+	//
+	// UploadFailureReason | UploadState
+	//
+	// This member is required.
+	Name CacheReportFilterName
+
+	// The parameter value for a filter that determines which files are included or
+	// excluded from a cache report.
+	//
+	// Valid UploadFailureReason Values:
+	//
+	// InaccessibleStorageClass | InvalidObjectState | ObjectMissing | S3AccessDenied
+	//
+	// Valid UploadState Values:
+	//
+	//     FailingUpload
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains all informational fields associated with a cache report. Includes
+// name, ARN, tags, status, progress, filters, start time, and end time.
+type CacheReportInfo struct {
+
+	// The Amazon Resource Name (ARN) of the cache report you want to describe.
+	CacheReportARN *string
+
+	// The status of the specified cache report.
+	CacheReportStatus CacheReportStatus
+
+	// The time at which the gateway stopped generating the cache report.
+	EndTime *time.Time
+
+	// The list of filters and parameters that determine which files are excluded from
+	// the report.
+	ExclusionFilters []CacheReportFilter
+
+	// The Amazon Resource Name (ARN) of the file share.
+	FileShareARN *string
+
+	// The list of filters and parameters that determine which files are included in
+	// the report.
+	InclusionFilters []CacheReportFilter
+
+	// The ARN of the Amazon S3 bucket location where the cache report is saved.
+	LocationARN *string
+
+	// The percentage of the report generation process that has been completed at time
+	// of inquiry.
+	ReportCompletionPercent *int32
+
+	// The file name of the completed cache report object stored in Amazon S3.
+	ReportName *string
+
+	// The ARN of the IAM role that an S3 File Gateway assumes when it accesses the
+	// underlying storage.
+	Role *string
+
+	// The time at which the gateway started generating the cache report.
+	StartTime *time.Time
+
+	// The list of key/value tags associated with the report.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // Describes Challenge-Handshake Authentication Protocol (CHAP) information that
 // supports authentication between your gateway and iSCSI initiators.
 type ChapInfo struct {

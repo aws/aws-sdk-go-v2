@@ -12464,6 +12464,15 @@ func awsAwsjson11_deserializeDocumentTestCase(v **types.TestCase, value interfac
 				sv.TestRawDataPath = ptr.String(jtv)
 			}
 
+		case "testSuiteName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TestSuiteName = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

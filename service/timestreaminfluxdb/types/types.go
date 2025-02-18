@@ -6,6 +6,109 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Describes a summary of a Timestream for InfluxDB cluster.
+type DbClusterSummary struct {
+
+	// The Amazon Resource Name (ARN) of the DB cluster.
+	//
+	// This member is required.
+	Arn *string
+
+	// Service-generated unique identifier of the DB cluster to retrieve.
+	//
+	// This member is required.
+	Id *string
+
+	// Customer supplied name of the Timestream for InfluxDB cluster.
+	//
+	// This member is required.
+	Name *string
+
+	// The amount of storage allocated for your DB storage type (in gibibytes).
+	AllocatedStorage *int32
+
+	// The Timestream for InfluxDB DB instance type that InfluxDB runs on.
+	DbInstanceType DbInstanceType
+
+	// The Timestream for InfluxDB DB storage type that InfluxDB stores data on.
+	DbStorageType DbStorageType
+
+	// Deployment type of the DB cluster
+	DeploymentType ClusterDeploymentType
+
+	// The endpoint used to connect to the Timestream for InfluxDB cluster for write
+	// and read operations.
+	Endpoint *string
+
+	// Specifies whether the network type of the Timestream for InfluxDB Cluster is
+	// IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
+	// communicate over both IPv4 and IPv6 protocols.
+	NetworkType NetworkType
+
+	// The port number on which InfluxDB accepts connections.
+	Port *int32
+
+	// The endpoint used to connect to the Timestream for InfluxDB cluster for
+	// read-only operations.
+	ReaderEndpoint *string
+
+	// The status of the DB cluster.
+	Status ClusterStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains a summary of a DB instance belonging to a DB cluster.
+type DbInstanceForClusterSummary struct {
+
+	// The Amazon Resource Name (ARN) of the DB instance.
+	//
+	// This member is required.
+	Arn *string
+
+	// The service-generated unique identifier of the DB instance.
+	//
+	// This member is required.
+	Id *string
+
+	// A service-generated name for the DB instance based on the customer-supplied
+	// name for the DB cluster.
+	//
+	// This member is required.
+	Name *string
+
+	// The amount of storage allocated for your DB storage type in GiB (gibibytes).
+	AllocatedStorage *int32
+
+	// The Timestream for InfluxDB instance type to run InfluxDB on.
+	DbInstanceType DbInstanceType
+
+	// The storage type for your DB instance.
+	DbStorageType DbStorageType
+
+	// Specifies the deployment type if applicable.
+	DeploymentType DeploymentType
+
+	// The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.
+	Endpoint *string
+
+	// Specifies the DB instance's role in the cluster.
+	InstanceMode InstanceMode
+
+	// Specifies whether the network type of the Timestream for InfluxDB instance is
+	// IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
+	// communicate over both IPv4 and IPv6 protocols.
+	NetworkType NetworkType
+
+	// The port number on which InfluxDB accepts connections.
+	Port *int32
+
+	// The status of the DB instance.
+	Status Status
+
+	noSmithyDocumentSerde
+}
+
 // Contains a summary of a DB instance.
 type DbInstanceSummary struct {
 

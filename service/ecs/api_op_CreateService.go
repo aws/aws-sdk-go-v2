@@ -142,7 +142,7 @@ type CreateServiceInput struct {
 	// Indicates whether to use Availability Zone rebalancing for the service.
 	//
 	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
-	// Guide.
+	// Guide .
 	//
 	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
 	AvailabilityZoneRebalancing types.AvailabilityZoneRebalancing

@@ -19,14 +19,15 @@
 // to this version, see the [WAF Developer Guide].
 //
 // WAF is a web application firewall that lets you monitor the HTTP and HTTPS
-// requests that are forwarded to an Amazon CloudFront distribution, Amazon API
-// Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito
-// user pool, App Runner service, or Amazon Web Services Verified Access instance.
-// WAF also lets you control access to your content, to protect the Amazon Web
-// Services resource that WAF is monitoring. Based on conditions that you specify,
-// such as the IP addresses that requests originate from or the values of query
-// strings, the protected resource responds to requests with either the requested
-// content, an HTTP 403 status code (Forbidden), or with a custom response.
+// requests that are forwarded to a protected resource. Protected resource types
+// include Amazon CloudFront distribution, Amazon API Gateway REST API, Application
+// Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner
+// service, and Amazon Web Services Verified Access instance. WAF also lets you
+// control access to your content, to protect the Amazon Web Services resource that
+// WAF is monitoring. Based on conditions that you specify, such as the IP
+// addresses that requests originate from or the values of query strings, the
+// protected resource responds to requests with either the requested content, an
+// HTTP 403 status code (Forbidden), or with a custom response.
 //
 // This API guide is for developers who need detailed information about WAF API
 // actions, data types, and errors. For detailed information about WAF features and
@@ -34,13 +35,13 @@
 //
 // You can make calls using the endpoints listed in [WAF endpoints and quotas].
 //
-//   - For regional applications, you can use any of the endpoints in the list. A
+//   - For regional resources, you can use any of the endpoints in the list. A
 //     regional application can be an Application Load Balancer (ALB), an Amazon API
 //     Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App
 //     Runner service, or an Amazon Web Services Verified Access instance.
 //
-//   - For Amazon CloudFront applications, you must use the API endpoint listed
-//     for US East (N. Virginia): us-east-1.
+//   - For Amazon CloudFront, you must use the API endpoint listed for US East (N.
+//     Virginia): us-east-1.
 //
 // Alternatively, you can use one of the Amazon Web Services SDKs to access an API
 // that's tailored to the programming language or platform that you're using. For

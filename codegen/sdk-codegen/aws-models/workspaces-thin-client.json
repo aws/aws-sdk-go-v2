@@ -722,7 +722,10 @@
         "com.amazonaws.workspacesthinclient#DeviceName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9\\p{IsAlphabetic}+:,.@'\" -]{1,64}$",
+                "smithy.api#length": {
+                    "max": 64
+                },
+                "smithy.api#pattern": "^$|^[0-9\\p{IsAlphabetic}+:,.@'\" -]*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1019,7 +1022,10 @@
         "com.amazonaws.workspacesthinclient#EnvironmentName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9\\p{IsAlphabetic}+:,.@'\" -][0-9\\p{IsAlphabetic}+=:,.@'\" -]{0,63}$",
+                "smithy.api#length": {
+                    "max": 64
+                },
+                "smithy.api#pattern": "^$|^[0-9\\p{IsAlphabetic}+:,.@'\" -][0-9\\p{IsAlphabetic}+=:,.@'\" -]*$",
                 "smithy.api#sensitive": {}
             }
         },

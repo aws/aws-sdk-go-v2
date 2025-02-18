@@ -143,6 +143,7 @@
         "api_op_ImportPhoneNumber.go",
         "api_op_ListAgentStatuses.go",
         "api_op_ListAnalyticsDataAssociations.go",
+        "api_op_ListAnalyticsDataLakeDataSets.go",
         "api_op_ListApprovedOrigins.go",
         "api_op_ListAssociatedContacts.go",
         "api_op_ListAuthenticationProfiles.go",
@@ -308,7 +309,7 @@
         "types/types_exported_test.go",
         "validators.go"
     ],
-    "go": "1.15",
+    "go": "1.22",
     "module": "github.com/aws/aws-sdk-go-v2/service/connect",
     "unstable": false
 }

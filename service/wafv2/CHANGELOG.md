@@ -1,3 +1,7 @@
+# v1.56.0 (2025-02-14)
+
+* **Feature**: The WAFv2 API now supports configuring data protection in webACLs.
+
 # v1.55.14 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

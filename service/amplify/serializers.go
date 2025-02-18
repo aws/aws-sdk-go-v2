@@ -125,6 +125,11 @@ func awsRestjson1_serializeOpDocumentCreateAppInput(v *CreateAppInput, value smi
 		}
 	}
 
+	if v.ComputeRoleArn != nil {
+		ok := object.Key("computeRoleArn")
+		ok.String(*v.ComputeRoleArn)
+	}
+
 	if v.CustomHeaders != nil {
 		ok := object.Key("customHeaders")
 		ok.String(*v.CustomHeaders)
@@ -419,6 +424,11 @@ func awsRestjson1_serializeOpDocumentCreateBranchInput(v *CreateBranchInput, val
 	if v.BuildSpec != nil {
 		ok := object.Key("buildSpec")
 		ok.String(*v.BuildSpec)
+	}
+
+	if v.ComputeRoleArn != nil {
+		ok := object.Key("computeRoleArn")
+		ok.String(*v.ComputeRoleArn)
 	}
 
 	if v.Description != nil {
@@ -3210,6 +3220,11 @@ func awsRestjson1_serializeOpDocumentUpdateAppInput(v *UpdateAppInput, value smi
 		}
 	}
 
+	if v.ComputeRoleArn != nil {
+		ok := object.Key("computeRoleArn")
+		ok.String(*v.ComputeRoleArn)
+	}
+
 	if v.CustomHeaders != nil {
 		ok := object.Key("customHeaders")
 		ok.String(*v.CustomHeaders)
@@ -3397,6 +3412,11 @@ func awsRestjson1_serializeOpDocumentUpdateBranchInput(v *UpdateBranchInput, val
 	if v.BuildSpec != nil {
 		ok := object.Key("buildSpec")
 		ok.String(*v.BuildSpec)
+	}
+
+	if v.ComputeRoleArn != nil {
+		ok := object.Key("computeRoleArn")
+		ok.String(*v.ComputeRoleArn)
 	}
 
 	if v.Description != nil {

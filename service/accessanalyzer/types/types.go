@@ -874,6 +874,26 @@ type ExternalAccessDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Provides aggregate statistics about the findings for the specified external
+// access analyzer.
+type ExternalAccessFindingsStatistics struct {
+
+	// The total number of active cross-account and public findings for each resource
+	// type of the specified external access analyzer.
+	ResourceTypeStatistics map[string]ResourceTypeDetails
+
+	// The number of active findings for the specified external access analyzer.
+	TotalActiveFindings *int32
+
+	// The number of archived findings for the specified external access analyzer.
+	TotalArchivedFindings *int32
+
+	// The number of resolved findings for the specified external access analyzer.
+	TotalResolvedFindings *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a finding.
 type Finding struct {
 
@@ -941,6 +961,25 @@ type Finding struct {
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.
 	Sources []FindingSource
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the findings for an Amazon Web Services account in
+// an organization unused access analyzer.
+type FindingAggregationAccountDetails struct {
+
+	// The ID of the Amazon Web Services account for which unused access finding
+	// details are provided.
+	Account *string
+
+	// Provides the number of active findings for each type of unused access for the
+	// specified Amazon Web Services account.
+	Details map[string]int32
+
+	// The number of active unused access findings for the specified Amazon Web
+	// Services account.
+	NumberOfActiveFindings *int32
 
 	noSmithyDocumentSerde
 }
@@ -1037,6 +1076,35 @@ type FindingSourceDetail struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains information about the aggregate statistics for an external or unused
+// access analyzer. Only one parameter can be used in a FindingsStatistics object.
+//
+// The following types satisfy this interface:
+//
+//	FindingsStatisticsMemberExternalAccessFindingsStatistics
+//	FindingsStatisticsMemberUnusedAccessFindingsStatistics
+type FindingsStatistics interface {
+	isFindingsStatistics()
+}
+
+// The aggregate statistics for an external access analyzer.
+type FindingsStatisticsMemberExternalAccessFindingsStatistics struct {
+	Value ExternalAccessFindingsStatistics
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingsStatisticsMemberExternalAccessFindingsStatistics) isFindingsStatistics() {}
+
+// The aggregate statistics for an unused access analyzer.
+type FindingsStatisticsMemberUnusedAccessFindingsStatistics struct {
+	Value UnusedAccessFindingsStatistics
+
+	noSmithyDocumentSerde
+}
+
+func (*FindingsStatisticsMemberUnusedAccessFindingsStatistics) isFindingsStatistics() {}
 
 // Contains information about a finding.
 type FindingSummary struct {
@@ -1735,6 +1803,19 @@ type RecommendedStepMemberUnusedPermissionsRecommendedStep struct {
 
 func (*RecommendedStepMemberUnusedPermissionsRecommendedStep) isRecommendedStep() {}
 
+// Contains information about the total number of active cross-account and public
+// findings for a resource type of an external access analyzer.
+type ResourceTypeDetails struct {
+
+	// The total number of active cross-account findings for the resource type.
+	TotalActiveCrossAccount *int32
+
+	// The total number of active public findings for the resource type.
+	TotalActivePublic *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for an Amazon S3 access point or multi-region access point
 // for the bucket. You can propose up to 10 access points or multi-region access
 // points per bucket. If the proposed Amazon S3 access point configuration is for
@@ -2051,6 +2132,43 @@ type UnusedAccessConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Provides aggregate statistics about the findings for the specified unused
+// access analyzer.
+type UnusedAccessFindingsStatistics struct {
+
+	// A list of one to ten Amazon Web Services accounts that have the most active
+	// findings for the unused access analyzer.
+	TopAccounts []FindingAggregationAccountDetails
+
+	// The total number of active findings for the unused access analyzer.
+	TotalActiveFindings *int32
+
+	// The total number of archived findings for the unused access analyzer.
+	TotalArchivedFindings *int32
+
+	// The total number of resolved findings for the unused access analyzer.
+	TotalResolvedFindings *int32
+
+	// A list of details about the total number of findings for each type of unused
+	// access for the analyzer.
+	UnusedAccessTypeStatistics []UnusedAccessTypeStatistics
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the total number of findings for a type of unused
+// access.
+type UnusedAccessTypeStatistics struct {
+
+	// The total number of findings for the specified unused access type.
+	Total *int32
+
+	// The type of unused access.
+	UnusedAccessType *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an unused access finding for an action. IAM Access
 // Analyzer charges for unused access analysis based on the number of IAM roles and
 // users analyzed per month. For more details on pricing, see [IAM Access Analyzer pricing].
@@ -2253,6 +2371,7 @@ func (*UnknownUnionMember) isAclGrantee()                         {}
 func (*UnknownUnionMember) isAnalyzerConfiguration()              {}
 func (*UnknownUnionMember) isConfiguration()                      {}
 func (*UnknownUnionMember) isFindingDetails()                     {}
+func (*UnknownUnionMember) isFindingsStatistics()                 {}
 func (*UnknownUnionMember) isNetworkOriginConfiguration()         {}
 func (*UnknownUnionMember) isPathElement()                        {}
 func (*UnknownUnionMember) isRdsDbClusterSnapshotAttributeValue() {}

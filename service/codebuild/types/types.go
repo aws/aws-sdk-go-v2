@@ -2581,6 +2581,9 @@ type TestCase struct {
 	//  The path to the raw data file that contains the test result.
 	TestRawDataPath *string
 
+	// The name of the test suite that the test case is a part of.
+	TestSuiteName *string
+
 	noSmithyDocumentSerde
 }
 

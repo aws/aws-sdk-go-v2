@@ -1,3 +1,50 @@
+# Release (2025-02-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.29.0](service/amplify/CHANGELOG.md#v1290-2025-02-17)
+  * **Feature**: Add ComputeRoleArn to CreateApp, UpdateApp, CreateBranch, and UpdateBranch, allowing caller to specify a role to be assumed by Amplify Hosting for server-side rendered applications.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.49.0](service/databasemigrationservice/CHANGELOG.md#v1490-2025-02-17)
+  * **Feature**: Support replicationConfigArn in DMS DescribeApplicableIndividualAssessments API.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.9.0](service/timestreaminfluxdb/CHANGELOG.md#v190-2025-02-17)
+  * **Feature**: This release introduces APIs to manage DbClusters and adds support for read replicas
+
+# Release (2025-02-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream`: [v1.6.9](aws/protocol/eventstream/CHANGELOG.md#v169-2025-02-14)
+  * **Bug Fix**: Remove max limit on event stream messages
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.52.0](service/codebuild/CHANGELOG.md#v1520-2025-02-14)
+  * **Feature**: Added test suite names to test case metadata
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.125.0](service/connect/CHANGELOG.md#v11250-2025-02-14)
+  * **Feature**: Release Notes: 1) Analytics API enhancements: Added new ListAnalyticsDataLakeDataSets API. 2)  Onboarding API Idempotency: Adds ClientToken to instance creation and management APIs to support idempotency.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.48.0](service/databasemigrationservice/CHANGELOG.md#v1480-2025-02-14)
+  * **Feature**: Introduces premigration assessment feature to DMS Serverless API for start-replication and describe-replications
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.27.0](service/rdsdata/CHANGELOG.md#v1270-2025-02-14)
+  * **Feature**: Add support for Stop DB feature.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.77.0](service/s3/CHANGELOG.md#v1770-2025-02-14)
+  * **Feature**: Added support for Content-Range header in HeadObject response.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.56.0](service/wafv2/CHANGELOG.md#v1560-2025-02-14)
+  * **Feature**: The WAFv2 API now supports configuring data protection in webACLs.
+
+# Release (2025-02-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.37.0](service/accessanalyzer/CHANGELOG.md#v1370-2025-02-13)
+  * **Feature**: This release introduces the getFindingsStatistics API, enabling users to retrieve aggregated finding statistics for IAM Access Analyzer's external access and unused access analysis features. Updated service API and documentation.
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.38.1](service/acmpca/CHANGELOG.md#v1381-2025-02-13)
+  * **Documentation**: Private Certificate Authority (PCA) documentation updates
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.53.14](service/ecs/CHANGELOG.md#v15314-2025-02-13)
+  * **Documentation**: This is a documentation only release to support migrating Amazon ECS service ARNs to the long ARN format.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.32.0](service/fis/CHANGELOG.md#v1320-2025-02-13)
+  * **Feature**: Adds auto-pagination for the following operations: ListActions, ListExperimentTemplates, ListTargetAccountConfigurations, ListExperiments, ListExperimentResolvedTargets, ListTargetResourceTypes. Reduces length constraints of prefixes for logConfiguration and experimentReportConfiguration.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.175.0](service/sagemaker/CHANGELOG.md#v11750-2025-02-13)
+  * **Feature**: Adds additional values to the InferenceAmiVersion parameter in the ProductionVariant data type.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.35.0](service/storagegateway/CHANGELOG.md#v1350-2025-02-13)
+  * **Feature**: This release adds support for generating cache reports on S3 File Gateways for files that fail to upload.
+
 # Release (2025-02-12)
 
 ## Module Highlights

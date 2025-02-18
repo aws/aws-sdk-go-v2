@@ -1,3 +1,7 @@
+# v1.53.14 (2025-02-13)
+
+* **Documentation**: This is a documentation only release to support migrating Amazon ECS service ARNs to the long ARN format.
+
 # v1.53.13 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.32.0 (2025-02-13)
+
+* **Feature**: Adds auto-pagination for the following operations: ListActions, ListExperimentTemplates, ListTargetAccountConfigurations, ListExperiments, ListExperimentResolvedTargets, ListTargetResourceTypes. Reduces length constraints of prefixes for logConfiguration and experimentReportConfiguration.
+
 # v1.31.10 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

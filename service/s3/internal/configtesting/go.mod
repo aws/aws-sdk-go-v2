@@ -1,6 +1,6 @@
 module github.com/aws/aws-sdk-go-v2/service/s3/internal/configtesting
 
-go 1.21
+go 1.22
 
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.29.6

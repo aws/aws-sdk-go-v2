@@ -49,6 +49,13 @@ type DisassociateLexBotInput struct {
 	// This member is required.
 	LexRegion *string
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -126,6 +133,9 @@ func (c *Client) addOperationDisassociateLexBotMiddlewares(stack *middleware.Sta
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opDisassociateLexBotMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateLexBotValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,6 +170,39 @@ func (c *Client) addOperationDisassociateLexBotMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpDisassociateLexBot struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpDisassociateLexBot) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpDisassociateLexBot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*DisassociateLexBotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *DisassociateLexBotInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opDisassociateLexBotMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDisassociateLexBot{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDisassociateLexBot(region string) *awsmiddleware.RegisterServiceMetadata {

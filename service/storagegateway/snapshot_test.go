@@ -170,6 +170,18 @@ func TestCheckSnapshot_CancelArchival(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelCacheReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelCacheReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelCacheReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelRetrieval(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelRetrieval(context.Background(), nil, func(o *Options) {
@@ -307,6 +319,18 @@ func TestCheckSnapshot_DeleteBandwidthRateLimit(t *testing.T) {
 	_, err := svc.DeleteBandwidthRateLimit(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteBandwidthRateLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCacheReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCacheReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCacheReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -463,6 +487,18 @@ func TestCheckSnapshot_DescribeCachediSCSIVolumes(t *testing.T) {
 	_, err := svc.DescribeCachediSCSIVolumes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCachediSCSIVolumes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCacheReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCacheReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCacheReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -710,6 +746,18 @@ func TestCheckSnapshot_ListAutomaticTapeCreationPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCacheReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCacheReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCacheReports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListFileShares(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFileShares(context.Background(), nil, func(o *Options) {
@@ -943,6 +991,18 @@ func TestCheckSnapshot_StartAvailabilityMonitorTest(t *testing.T) {
 	_, err := svc.StartAvailabilityMonitorTest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartAvailabilityMonitorTest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartCacheReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCacheReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCacheReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1249,6 +1309,18 @@ func TestUpdateSnapshot_CancelArchival(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelCacheReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelCacheReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelCacheReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelRetrieval(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelRetrieval(context.Background(), nil, func(o *Options) {
@@ -1386,6 +1458,18 @@ func TestUpdateSnapshot_DeleteBandwidthRateLimit(t *testing.T) {
 	_, err := svc.DeleteBandwidthRateLimit(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBandwidthRateLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCacheReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCacheReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCacheReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1542,6 +1626,18 @@ func TestUpdateSnapshot_DescribeCachediSCSIVolumes(t *testing.T) {
 	_, err := svc.DescribeCachediSCSIVolumes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCachediSCSIVolumes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCacheReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCacheReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCacheReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1789,6 +1885,18 @@ func TestUpdateSnapshot_ListAutomaticTapeCreationPolicies(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCacheReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCacheReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCacheReports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListFileShares(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFileShares(context.Background(), nil, func(o *Options) {
@@ -2022,6 +2130,18 @@ func TestUpdateSnapshot_StartAvailabilityMonitorTest(t *testing.T) {
 	_, err := svc.StartAvailabilityMonitorTest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAvailabilityMonitorTest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartCacheReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCacheReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCacheReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -62,6 +62,14 @@ type CreateBranchInput struct {
 	//  The build specification (build spec) for the branch.
 	BuildSpec *string
 
+	// The Amazon Resource Name (ARN) of the IAM role to assign to a branch of an SSR
+	// app. The SSR Compute role allows the Amplify Hosting compute service to securely
+	// access specific Amazon Web Services resources based on the role's permissions.
+	// For more information about the SSR Compute role, see [Adding an SSR Compute role]in the Amplify User Guide.
+	//
+	// [Adding an SSR Compute role]: https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html
+	ComputeRoleArn *string
+
 	// The description for the branch.
 	Description *string
 

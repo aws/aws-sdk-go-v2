@@ -1111,10 +1111,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "computeRoleArn": {
+                    "target": "com.amazonaws.amplify#ComputeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for an SSR app. The Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources\n            based on the role's permissions. For more information about the SSR Compute role, see\n            <a href=\"https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>Amplify User\n                    Guide</i>.</p>"
+                    }
+                },
                 "iamServiceRoleArn": {
                     "target": "com.amazonaws.amplify#ServiceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (IAM) service role for the Amazon Resource Name\n            (ARN) of the Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name\n            (ARN) of the IAM service role for the Amplify app.</p>"
                     }
                 },
                 "environmentVariables": {
@@ -1729,6 +1735,12 @@
                 },
                 "backend": {
                     "target": "com.amazonaws.amplify#Backend"
+                },
+                "computeRoleArn": {
+                    "target": "com.amazonaws.amplify#ComputeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for a branch of an SSR app. The Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources\n            based on the role's permissions. For more information about the SSR Compute role, see\n            <a href=\"https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>Amplify User\n                    Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1921,6 +1933,16 @@
         "com.amazonaws.amplify#CommitTime": {
             "type": "timestamp"
         },
+        "com.amazonaws.amplify#ComputeRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^(?s)"
+            }
+        },
         "com.amazonaws.amplify#Condition": {
             "type": "string",
             "traits": {
@@ -1996,10 +2018,16 @@
                         "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to\n                <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform\n            type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR\n            support only, set the platform type to <code>WEB_DYNAMIC</code>.</p>\n         <p>If you are deploying an SSG only app with Next.js version 14 or later, you must set\n            the platform type to <code>WEB_COMPUTE</code> and set the artifacts\n                <code>baseDirectory</code> to <code>.next</code> in the application's build\n            settings. For an example of the build specification settings, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/deploy-nextjs-app.html#build-setting-detection-ssg-14\">Amplify build\n                settings for a Next.js 14 SSG application</a> in the <i>Amplify Hosting User Guide</i>.</p>"
                     }
                 },
+                "computeRoleArn": {
+                    "target": "com.amazonaws.amplify#ComputeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app. The SSR Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources\n            based on the role's permissions. For more information about the SSR Compute role, see\n                <a href=\"https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>Amplify User\n                Guide</i>.</p>"
+                    }
+                },
                 "iamServiceRoleArn": {
                     "target": "com.amazonaws.amplify#ServiceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (IAM) service role for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name\n            (ARN) of the IAM service role for the Amplify app.</p>"
                     }
                 },
                 "oauthToken": {
@@ -2353,6 +2381,12 @@
                     "target": "com.amazonaws.amplify#Backend",
                     "traits": {
                         "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a\n            backend created from an CloudFormation stack.</p>\n         <p>This field is available to Amplify Gen 2 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
+                    }
+                },
+                "computeRoleArn": {
+                    "target": "com.amazonaws.amplify#ComputeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to a branch of an SSR app. The SSR Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources\n            based on the role's permissions. For more information about the SSR Compute role, see\n            <a href=\"https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>Amplify User\n                    Guide</i>.</p>"
                     }
                 }
             },
@@ -6169,10 +6203,16 @@
                         "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to\n                <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform\n            type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR\n            support only, set the platform type to <code>WEB_DYNAMIC</code>.</p>\n         <p>If you are deploying an SSG only app with Next.js version 14 or later, you must set\n            the platform type to <code>WEB_COMPUTE</code>.</p>"
                     }
                 },
+                "computeRoleArn": {
+                    "target": "com.amazonaws.amplify#ComputeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app. The SSR Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources\n            based on the role's permissions. For more information about the SSR Compute role, see\n            <a href=\"https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>Amplify User\n                    Guide</i>.</p>"
+                    }
+                },
                 "iamServiceRoleArn": {
                     "target": "com.amazonaws.amplify#ServiceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (IAM) service role for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name\n            (ARN) of the IAM service role for the Amplify app.</p>"
                     }
                 },
                 "environmentVariables": {
@@ -6434,6 +6474,12 @@
                     "target": "com.amazonaws.amplify#Backend",
                     "traits": {
                         "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a\n            backend created from an CloudFormation stack.</p>\n         <p>This field is available to Amplify Gen 2 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
+                    }
+                },
+                "computeRoleArn": {
+                    "target": "com.amazonaws.amplify#ComputeRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to assign to a branch of an SSR app. The SSR Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources\n            based on the role's permissions. For more information about the SSR Compute role, see\n            <a href=\"https://docs.aws.amazon.com/latest/userguide/amplify-SSR-compute-role.html\">Adding an SSR Compute role</a> in the <i>Amplify User\n                    Guide</i>.</p>"
                     }
                 }
             },

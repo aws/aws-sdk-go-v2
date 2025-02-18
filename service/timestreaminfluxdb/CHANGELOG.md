@@ -1,3 +1,7 @@
+# v1.9.0 (2025-02-17)
+
+* **Feature**: This release introduces APIs to manage DbClusters and adds support for read replicas
+
 # v1.8.3 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

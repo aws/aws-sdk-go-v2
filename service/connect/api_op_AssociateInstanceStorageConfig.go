@@ -70,6 +70,13 @@ type AssociateInstanceStorageConfigInput struct {
 	// This member is required.
 	StorageConfig *types.InstanceStorageConfig
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -152,6 +159,9 @@ func (c *Client) addOperationAssociateInstanceStorageConfigMiddlewares(stack *mi
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opAssociateInstanceStorageConfigMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateInstanceStorageConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -186,6 +196,39 @@ func (c *Client) addOperationAssociateInstanceStorageConfigMiddlewares(stack *mi
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpAssociateInstanceStorageConfig struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpAssociateInstanceStorageConfig) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpAssociateInstanceStorageConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*AssociateInstanceStorageConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *AssociateInstanceStorageConfigInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opAssociateInstanceStorageConfigMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateInstanceStorageConfig{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opAssociateInstanceStorageConfig(region string) *awsmiddleware.RegisterServiceMetadata {

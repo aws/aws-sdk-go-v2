@@ -44,6 +44,10 @@ type DescribeSMBSettingsOutput struct {
 	// Indicates the status of a gateway that is a member of the Active Directory
 	// domain.
 	//
+	// This field is only used as part of a JoinDomain request. It is not affected by
+	// Active Directory connectivity changes that occur after the JoinDomain request
+	// succeeds.
+	//
 	//   - ACCESS_DENIED : Indicates that the JoinDomain operation failed due to an
 	//   authentication error.
 	//

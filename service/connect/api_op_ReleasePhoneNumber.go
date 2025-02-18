@@ -20,7 +20,7 @@ import (
 // After releasing a phone number, the phone number enters into a cooldown period
 // for up to 180 days. It cannot be searched for or claimed again until the period
 // has ended. If you accidentally release a phone number, contact Amazon Web
-// Services Support.
+// ServicesSupport.
 //
 // If you plan to claim and release numbers frequently, contact us for a service
 // quota exception. Otherwise, it is possible you will be blocked from claiming and

@@ -151,6 +151,28 @@ var _ *types.UnusedPermissionDetails
 var _ *types.UnusedIamUserAccessKeyDetails
 var _ *types.UnusedIamUserPasswordDetails
 
+func ExampleFindingsStatistics_outputUsage() {
+	var union types.FindingsStatistics
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FindingsStatisticsMemberExternalAccessFindingsStatistics:
+		_ = v.Value // Value is types.ExternalAccessFindingsStatistics
+
+	case *types.FindingsStatisticsMemberUnusedAccessFindingsStatistics:
+		_ = v.Value // Value is types.UnusedAccessFindingsStatistics
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ExternalAccessFindingsStatistics
+var _ *types.UnusedAccessFindingsStatistics
+
 func ExampleNetworkOriginConfiguration_outputUsage() {
 	var union types.NetworkOriginConfiguration
 	// type switches can be used to check the union value

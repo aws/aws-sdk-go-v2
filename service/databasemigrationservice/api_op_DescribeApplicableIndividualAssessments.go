@@ -63,6 +63,10 @@ type DescribeApplicableIndividualAssessmentsInput struct {
 	// support.
 	MigrationType types.MigrationTypeValue
 
+	// Amazon Resource Name (ARN) of a serverless replication on which you want to
+	// base the default list of individual assessments.
+	ReplicationConfigArn *string
+
 	// ARN of a replication instance on which you want to base the default list of
 	// individual assessments.
 	ReplicationInstanceArn *string

@@ -33,7 +33,7 @@ import (
 // level quota of 99 phone numbers, and in any 180 day period you release 99, claim
 // 99, and then release 99, you will have exceeded the 200% limit. At that point
 // you are blocked from claiming any more numbers until you open an Amazon Web
-// Services Support ticket.
+// ServicesSupport ticket.
 //
 // [DescribePhoneNumber]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
 func (c *Client) ImportPhoneNumber(ctx context.Context, params *ImportPhoneNumberInput, optFns ...func(*Options)) (*ImportPhoneNumberOutput, error) {

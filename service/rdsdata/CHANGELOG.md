@@ -1,3 +1,7 @@
+# v1.27.0 (2025-02-14)
+
+* **Feature**: Add support for Stop DB feature.
+
 # v1.26.9 (2025-02-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -72,6 +72,50 @@ func (AvailabilityMonitorTestStatus) Values() []AvailabilityMonitorTestStatus {
 	}
 }
 
+type CacheReportFilterName string
+
+// Enum values for CacheReportFilterName
+const (
+	CacheReportFilterNameUploadState         CacheReportFilterName = "UploadState"
+	CacheReportFilterNameUploadFailureReason CacheReportFilterName = "UploadFailureReason"
+)
+
+// Values returns all known values for CacheReportFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CacheReportFilterName) Values() []CacheReportFilterName {
+	return []CacheReportFilterName{
+		"UploadState",
+		"UploadFailureReason",
+	}
+}
+
+type CacheReportStatus string
+
+// Enum values for CacheReportStatus
+const (
+	CacheReportStatusInProgress CacheReportStatus = "IN_PROGRESS"
+	CacheReportStatusCompleted  CacheReportStatus = "COMPLETED"
+	CacheReportStatusCanceled   CacheReportStatus = "CANCELED"
+	CacheReportStatusFailed     CacheReportStatus = "FAILED"
+	CacheReportStatusError      CacheReportStatus = "ERROR"
+)
+
+// Values returns all known values for CacheReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CacheReportStatus) Values() []CacheReportStatus {
+	return []CacheReportStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"CANCELED",
+		"FAILED",
+		"ERROR",
+	}
+}
+
 type CaseSensitivity string
 
 // Enum values for CaseSensitivity

@@ -1,3 +1,7 @@
+# v1.175.0 (2025-02-13)
+
+* **Feature**: Adds additional values to the InferenceAmiVersion parameter in the ProductionVariant data type.
+
 # v1.174.3 (2025-02-06)
 
 * No change notes available for this release.

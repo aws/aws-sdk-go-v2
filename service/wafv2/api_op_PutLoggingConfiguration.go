@@ -14,6 +14,9 @@ import (
 // Enables the specified LoggingConfiguration, to start logging from a web ACL, according to the
 // configuration provided.
 //
+// If you configure data protection for the web ACL, the protection applies to the
+// data that WAF sends to the logs.
+//
 // This operation completely replaces any mutable specifications that you already
 // have for a logging configuration with the ones that you provide to this call.
 //

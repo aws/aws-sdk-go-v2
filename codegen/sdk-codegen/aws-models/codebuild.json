@@ -8735,6 +8735,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The date and time a test case expires. A test case expires 30 days after it is\n            created. An expired test case is not available to view in CodeBuild. </p>"
                     }
+                },
+                "testSuiteName": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the test suite that the test case is a part of.</p>"
+                    }
                 }
             },
             "traits": {

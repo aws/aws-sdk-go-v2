@@ -707,7 +707,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the training algorithm to use in a <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> request.</p>\n         <important>\n            <p>SageMaker uses its own SageMaker account credentials to pull and access built-in algorithms\n                so built-in algorithms are universally accessible across all Amazon Web Services accounts. As a\n                result, built-in algorithms have standard, unrestricted access. You cannot restrict\n                built-in algorithms using IAM roles. Use custom algorithms if you require specific\n                access controls.</p>\n         </important>\n         <p>For more information about algorithms provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For\n            information about using your own algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with\n                Amazon SageMaker</a>. </p>"
+                "smithy.api#documentation": "<p>Specifies the training algorithm to use in a <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> request.</p>\n         <important>\n            <p>SageMaker uses its own SageMaker account credentials to pull and access built-in algorithms\n                so built-in algorithms are universally accessible across all Amazon Web Services accounts. As a result, built-in algorithms have standard,\n                unrestricted access. You cannot restrict built-in algorithms using IAM roles. Use\n                custom algorithms if you require specific access controls.</p>\n         </important>\n         <p>For more information about algorithms provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For\n            information about using your own algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with\n                Amazon SageMaker</a>. </p>"
             }
         },
         "com.amazonaws.sagemaker#AlgorithmStatus": {
@@ -55717,7 +55717,7 @@
                 "InferenceAmiVersion": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantInferenceAmiVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an option from a collection of preconfigured Amazon Machine Image (AMI)\n            images. Each image is configured by Amazon Web Services with a set of software and driver\n            versions. Amazon Web Services optimizes these configurations for different machine\n            learning workloads.</p>\n         <p>By selecting an AMI version, you can ensure that your inference environment is\n            compatible with specific software requirements, such as CUDA driver versions, Linux\n            kernel versions, or Amazon Web Services Neuron driver versions.</p>\n         <p>The AMI version names, and their configurations, are the following:</p>\n         <dl>\n            <dt>al2-ami-sagemaker-inference-gpu-2</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 535.54.03</p>\n                  </li>\n                  <li>\n                     <p>CUDA driver version: 12.2</p>\n                  </li>\n                  <li>\n                     <p>Supported instance types: ml.g4dn.*, ml.g5.*, ml.g6.*, ml.p3.*,\n                                ml.p4d.*, ml.p4de.*, ml.p5.*</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>Specifies an option from a collection of preconfigured Amazon Machine Image (AMI)\n            images. Each image is configured by Amazon Web Services with a set of software and driver\n            versions. Amazon Web Services optimizes these configurations for different machine\n            learning workloads.</p>\n         <p>By selecting an AMI version, you can ensure that your inference environment is\n            compatible with specific software requirements, such as CUDA driver versions, Linux\n            kernel versions, or Amazon Web Services Neuron driver versions.</p>\n         <p>The AMI version names, and their configurations, are the following:</p>\n         <dl>\n            <dt>al2-ami-sagemaker-inference-gpu-2</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 535.54.03</p>\n                  </li>\n                  <li>\n                     <p>CUDA version: 12.2</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>al2-ami-sagemaker-inference-gpu-2-1</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 535.54.03</p>\n                  </li>\n                  <li>\n                     <p>CUDA driver version: 12.2</p>\n                  </li>\n                  <li>\n                     <p>CUDA Container Toolkit with disabled CUDA-compat mounting</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>al2-ami-sagemaker-inference-gpu-3-1</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 550.144.01</p>\n                  </li>\n                  <li>\n                     <p>CUDA version: 12.4</p>\n                  </li>\n                  <li>\n                     <p>Container Toolkit with disabled CUDA-compat mounting</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -55804,6 +55804,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "al2-ami-sagemaker-inference-gpu-2"
+                    }
+                },
+                "AL2_GPU_2_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "al2-ami-sagemaker-inference-gpu-2-1"
+                    }
+                },
+                "AL2_GPU_3_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "al2-ami-sagemaker-inference-gpu-3-1"
                     }
                 }
             }
@@ -60654,7 +60666,7 @@
                     "target": "com.amazonaws.sagemaker#S3DataType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix.\n            SageMaker uses all objects that match the specified key name prefix for model training. </p>\n         <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that\n            is a manifest file containing a list of object keys that you want SageMaker to use for model\n            training. </p>\n         <p>If you choose <code>AugmentedManifestFile</code>, <code>S3Uri</code> identifies an object that is\n            an augmented manifest file in JSON lines format. This file contains the data you want to\n            use for model training. <code>AugmentedManifestFile</code> can only be used if the\n            Channel's input mode is <code>Pipe</code>.</p>",
+                        "smithy.api#documentation": "<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix.\n            SageMaker uses all objects that match the specified key name prefix for model training. </p>\n         <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that\n            is a manifest file containing a list of object keys that you want SageMaker to use for model\n            training. </p>\n         <p>If you choose <code>AugmentedManifestFile</code>, <code>S3Uri</code> identifies an\n            object that is an augmented manifest file in JSON lines format. This file contains the\n            data you want to use for model training. <code>AugmentedManifestFile</code> can only be\n            used if the Channel's input mode is <code>Pipe</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
