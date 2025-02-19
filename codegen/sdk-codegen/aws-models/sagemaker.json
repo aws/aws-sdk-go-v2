@@ -6962,7 +6962,7 @@
                 "OverrideVpcConfig": {
                     "target": "com.amazonaws.sagemaker#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customized VPC configuration at the instance group level that overrides the default\n         VPC configuration of the SageMaker HyperPod cluster.</p>"
+                        "smithy.api#documentation": "<p>The customized Amazon VPC configuration at the instance group level that\n         overrides the default Amazon VPC configuration of the SageMaker HyperPod cluster.</p>"
                     }
                 }
             },
@@ -7056,7 +7056,7 @@
                 "OverrideVpcConfig": {
                     "target": "com.amazonaws.sagemaker#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>To configure multi-AZ deployments, customize the VPC configuration at the instance group\n         level. You can specify different subnets and security groups across different AZs in the\n         instance group specification to override a SageMaker HyperPod cluster's default VPC configuration. For\n         more information about deploying a cluster in multiple AZs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-multiple-availability-zones\">Setting up SageMaker HyperPod clusters across multiple AZs</a>.</p>\n         <note>\n            <p> If you configure your VPC with IPv6 support and specify subnets with IPv6 addressing\n            enabled in your instance group VPC configuration, the nodes automatically use IPv6\n            addressing for network communication.</p>\n            <p> For information about adding IPv6 support for your VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html\">IPv6 support\n               for your VPC</a>.</p>\n            <p> For information about creating a new VPC for use with IPv6, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html\">Create a\n            VPC</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>To configure multi-AZ deployments, customize the Amazon VPC configuration at the\n         instance group level. You can specify different subnets and security groups across\n         different AZs in the instance group specification to override a SageMaker HyperPod cluster's default\n            Amazon VPC configuration. For more information about deploying a cluster in\n         multiple AZs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-multiple-availability-zones\">Setting up SageMaker HyperPod clusters across multiple AZs</a>.</p>\n         <note>\n            <p>When your Amazon VPC and subnets support IPv6, network communications differ\n            based on the cluster orchestration platform:</p>\n            <ul>\n               <li>\n                  <p>Slurm-orchestrated clusters automatically configure nodes with dual IPv6 and\n                  IPv4 addresses, allowing immediate IPv6 network communications.</p>\n               </li>\n               <li>\n                  <p>In Amazon EKS-orchestrated clusters, nodes receive dual-stack\n                  addressing, but pods can only use IPv6 when the Amazon EKS cluster is\n                  explicitly IPv6-enabled. For information about deploying an IPv6 Amazon EKS cluster, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/deploy-ipv6-cluster.html#_deploy_an_ipv6_cluster_with_eksctl\">Amazon EKS IPv6 Cluster Deployment</a>.</p>\n               </li>\n            </ul>\n            <p>Additional resources for IPv6 configuration:</p>\n            <ul>\n               <li>\n                  <p>For information about adding IPv6 support to your VPC, see to <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html\">IPv6\n                     Support for VPC</a>.</p>\n               </li>\n               <li>\n                  <p>For information about creating a new IPv6-compatible VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html\">Amazon VPC Creation Guide</a>.</p>\n               </li>\n               <li>\n                  <p>To configure SageMaker HyperPod with a custom Amazon VPC, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-optional-vpc\">Custom Amazon VPC Setup for SageMaker HyperPod</a>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -7802,7 +7802,7 @@
                 "OverrideVpcConfig": {
                     "target": "com.amazonaws.sagemaker#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customized VPC configuration at the instance group level that overrides the default\n         VPC configuration of the SageMaker HyperPod cluster.</p>"
+                        "smithy.api#documentation": "<p>The customized Amazon VPC configuration at the instance group level that\n         overrides the default Amazon VPC configuration of the SageMaker HyperPod cluster.</p>"
                     }
                 },
                 "ThreadsPerCore": {
@@ -7826,7 +7826,7 @@
                 "PrivatePrimaryIpv6": {
                     "target": "com.amazonaws.sagemaker#ClusterPrivatePrimaryIpv6",
                     "traits": {
-                        "smithy.api#documentation": "<p>The private primary IPv6 address of the SageMaker HyperPod cluster node when configured with an\n            Amazon VPC that supports IPv6 and includes subnets with IPv6 addressing enabled\n         in either the cluster VPC configuration or the instance group VPC configuration.</p>"
+                        "smithy.api#documentation": "<p>The private primary IPv6 address of the SageMaker HyperPod cluster node when configured with an\n            Amazon VPC that supports IPv6 and includes subnets with IPv6 addressing enabled\n         in either the cluster Amazon VPC configuration or the instance group Amazon VPC configuration.</p>"
                     }
                 },
                 "PrivateDnsHostname": {
@@ -10204,7 +10204,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.sagemaker#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Virtual Private Cloud (VPC) that is associated with the Amazon SageMaker HyperPod cluster. You\n         can control access to and from your resources by configuring your VPC. For more\n         information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html\">Give SageMaker access to resources\n            in your Amazon VPC</a>.</p>\n         <note>\n            <p> If you configure your VPC with IPv6 support and specify subnets with IPv6 addressing\n            enabled in your VPC configuration, the cluster automatically uses IPv6 addressing for\n            network communication.</p>\n            <p> For information about adding IPv6 support for your VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html\">IPv6 support\n               for your VPC</a>.</p>\n            <p> For information about creating a new VPC for use with IPv6, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html\">Create a\n            VPC</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon Virtual Private Cloud (VPC) that is associated with the Amazon SageMaker HyperPod cluster. You\n         can control access to and from your resources by configuring your VPC. For more\n         information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html\">Give SageMaker access to resources\n            in your Amazon VPC</a>.</p>\n         <note>\n            <p>When your Amazon VPC and subnets support IPv6, network communications differ\n            based on the cluster orchestration platform:</p>\n            <ul>\n               <li>\n                  <p>Slurm-orchestrated clusters automatically configure nodes with dual IPv6 and\n                  IPv4 addresses, allowing immediate IPv6 network communications.</p>\n               </li>\n               <li>\n                  <p>In Amazon EKS-orchestrated clusters, nodes receive dual-stack\n                  addressing, but pods can only use IPv6 when the Amazon EKS cluster is\n                  explicitly IPv6-enabled. For information about deploying an IPv6 Amazon EKS cluster, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/deploy-ipv6-cluster.html#_deploy_an_ipv6_cluster_with_eksctl\">Amazon EKS IPv6 Cluster Deployment</a>.</p>\n               </li>\n            </ul>\n            <p>Additional resources for IPv6 configuration:</p>\n            <ul>\n               <li>\n                  <p>For information about adding IPv6 support to your VPC, see to <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html\">IPv6\n                     Support for VPC</a>.</p>\n               </li>\n               <li>\n                  <p>For information about creating a new IPv6-compatible VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html\">Amazon VPC Creation Guide</a>.</p>\n               </li>\n               <li>\n                  <p>To configure SageMaker HyperPod with a custom Amazon VPC, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-optional-vpc\">Custom Amazon VPC Setup for SageMaker HyperPod</a>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "Tags": {
@@ -55717,7 +55717,7 @@
                 "InferenceAmiVersion": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantInferenceAmiVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an option from a collection of preconfigured Amazon Machine Image (AMI)\n            images. Each image is configured by Amazon Web Services with a set of software and driver\n            versions. Amazon Web Services optimizes these configurations for different machine\n            learning workloads.</p>\n         <p>By selecting an AMI version, you can ensure that your inference environment is\n            compatible with specific software requirements, such as CUDA driver versions, Linux\n            kernel versions, or Amazon Web Services Neuron driver versions.</p>\n         <p>The AMI version names, and their configurations, are the following:</p>\n         <dl>\n            <dt>al2-ami-sagemaker-inference-gpu-2</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 535.54.03</p>\n                  </li>\n                  <li>\n                     <p>CUDA version: 12.2</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>al2-ami-sagemaker-inference-gpu-2-1</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 535.54.03</p>\n                  </li>\n                  <li>\n                     <p>CUDA driver version: 12.2</p>\n                  </li>\n                  <li>\n                     <p>CUDA Container Toolkit with disabled CUDA-compat mounting</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>al2-ami-sagemaker-inference-gpu-3-1</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 550.144.01</p>\n                  </li>\n                  <li>\n                     <p>CUDA version: 12.4</p>\n                  </li>\n                  <li>\n                     <p>Container Toolkit with disabled CUDA-compat mounting</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>Specifies an option from a collection of preconfigured Amazon Machine Image (AMI)\n            images. Each image is configured by Amazon Web Services with a set of software and driver\n            versions. Amazon Web Services optimizes these configurations for different machine\n            learning workloads.</p>\n         <p>By selecting an AMI version, you can ensure that your inference environment is\n            compatible with specific software requirements, such as CUDA driver versions, Linux\n            kernel versions, or Amazon Web Services Neuron driver versions.</p>\n         <p>The AMI version names, and their configurations, are the following:</p>\n         <dl>\n            <dt>al2-ami-sagemaker-inference-gpu-2</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 535</p>\n                  </li>\n                  <li>\n                     <p>CUDA version: 12.2</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>al2-ami-sagemaker-inference-gpu-2-1</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 535</p>\n                  </li>\n                  <li>\n                     <p>CUDA version: 12.2</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA Container Toolkit with disabled CUDA-compat mounting</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>al2-ami-sagemaker-inference-gpu-3-1</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>Accelerator: GPU</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA driver version: 550</p>\n                  </li>\n                  <li>\n                     <p>CUDA version: 12.4</p>\n                  </li>\n                  <li>\n                     <p>NVIDIA Container Toolkit with disabled CUDA-compat mounting</p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -56481,6 +56481,66 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.g6.48xlarge"
+                    }
+                },
+                "ML_R8G_MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.medium"
+                    }
+                },
+                "ML_R8G_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.large"
+                    }
+                },
+                "ML_R8G_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.xlarge"
+                    }
+                },
+                "ML_R8G_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.2xlarge"
+                    }
+                },
+                "ML_R8G_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.4xlarge"
+                    }
+                },
+                "ML_R8G_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.8xlarge"
+                    }
+                },
+                "ML_R8G_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.12xlarge"
+                    }
+                },
+                "ML_R8G_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.16xlarge"
+                    }
+                },
+                "ML_R8G_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.24xlarge"
+                    }
+                },
+                "ML_R8G_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r8g.48xlarge"
                     }
                 },
                 "ML_G6E_XLARGE": {

@@ -129,6 +129,30 @@
         "com.amazonaws.sesv2#AmazonResourceName": {
             "type": "string"
         },
+        "com.amazonaws.sesv2#ArchiveArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-[a-z-]+):ses:[a-z]{2}-[a-z-]+-[0-9]:[0-9]{1,20}:mailmanager-archive/a-[a-z0-9]{24,62}$"
+            }
+        },
+        "com.amazonaws.sesv2#ArchivingOptions": {
+            "type": "structure",
+            "members": {
+                "ArchiveArn": {
+                    "target": "com.amazonaws.sesv2#ArchiveArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the MailManager archive where the Amazon SES API v2 will archive sent\n        emails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Used to associate a configuration set with a MailManager archive.</p>"
+            }
+        },
         "com.amazonaws.sesv2#AttributesData": {
             "type": "string"
         },
@@ -1089,6 +1113,12 @@
                     "target": "com.amazonaws.sesv2#VdmOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that defines the VDM options for emails that you send using the\n            configuration set.</p>"
+                    }
+                },
+                "ArchivingOptions": {
+                    "target": "com.amazonaws.sesv2#ArchivingOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that defines the MailManager archiving options for emails that you send\n            using the configuration set.</p>"
                     }
                 }
             },
@@ -4576,6 +4606,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains information about the VDM preferences for your configuration\n            set.</p>"
                     }
+                },
+                "ArchivingOptions": {
+                    "target": "com.amazonaws.sesv2#ArchivingOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that defines the MailManager archive where sent emails are archived that you send\n            using the configuration set.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7672,7 +7708,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListRecommendations</code> filter type. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TYPE</code> – The recommendation type, with values like <code>DKIM</code>,\n                    <code>SPF</code>, <code>DMARC</code> or <code>BIMI</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPACT</code> – The recommendation impact, with values like\n                    <code>HIGH</code> or <code>LOW</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATUS</code> – The recommendation status, with values like\n                    <code>OPEN</code> or <code>FIXED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE_ARN</code> – The resource affected by the recommendation,\n                    with values like <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The <code>ListRecommendations</code> filter type. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TYPE</code> – The recommendation type, with values like <code>DKIM</code>,\n                    <code>SPF</code>, <code>DMARC</code>, <code>BIMI</code>, or <code>COMPLAINT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPACT</code> – The recommendation impact, with values like\n                    <code>HIGH</code> or <code>LOW</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATUS</code> – The recommendation status, with values like\n                    <code>OPEN</code> or <code>FIXED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE_ARN</code> – The resource affected by the recommendation,\n                    with values like <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#ListRecommendationsRequest": {
@@ -8994,6 +9030,77 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#PutConfigurationSetArchivingOptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#PutConfigurationSetArchivingOptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#PutConfigurationSetArchivingOptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate the configuration set with a MailManager archive. When you send email using the\n        <code>SendEmail</code> or <code>SendBulkEmail</code> operations the message as it will be given\n        to the receiving SMTP server will be archived, along with the recipient information.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Used to associate an MailManager archive with a ConfigurationSet.",
+                        "documentation": "This example associates an archive arn with a configuration set.",
+                        "input": {
+                            "ConfigurationSetName": "sample-configuration-name",
+                            "ArchiveArn": "arn:aws:ses:us-west-2:123456789012:mailmanager-archive/a-abcdefghijklmnopqrstuvwxyz"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/email/configuration-sets/{ConfigurationSetName}/archiving-options",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.sesv2#PutConfigurationSetArchivingOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.sesv2#ConfigurationSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration set to associate with a MailManager archive.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ArchiveArn": {
+                    "target": "com.amazonaws.sesv2#ArchiveArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the MailManager archive that the Amazon SES API v2 sends email\n            to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to associate a configuration set with a MailManager archive.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#PutConfigurationSetArchivingOptionsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#PutConfigurationSetDeliveryOptions": {
             "type": "operation",
             "input": {
@@ -10072,7 +10179,7 @@
                 "Type": {
                     "target": "com.amazonaws.sesv2#RecommendationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The recommendation type, with values like <code>DKIM</code>,\n            <code>SPF</code>, <code>DMARC</code> or <code>BIMI</code>.</p>"
+                        "smithy.api#documentation": "<p>The recommendation type, with values like <code>DKIM</code>,\n            <code>SPF</code>, <code>DMARC</code>, <code>BIMI</code>, or <code>COMPLAINT</code>.</p>"
                     }
                 },
                 "Description": {
@@ -11061,6 +11168,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutAccountVdmAttributes"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#PutConfigurationSetArchivingOptions"
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutConfigurationSetDeliveryOptions"
@@ -13692,7 +13802,7 @@
                 "ErrorType": {
                     "target": "com.amazonaws.sesv2#VerificationError",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the reason for the failure describing why Amazon SES was not able to successfully\n            verify the identity. Below are the possible values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>INVALID_VALUE</code> – Amazon SES was able to find the record, but the\n                    value contained within the record was invalid. Ensure you have published the\n                    correct values for the record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TYPE_NOT_FOUND</code> – The queried hostname exists but does not\n                    have the requested type of DNS record. Ensure that you have published the\n                    correct type of DNS record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOST_NOT_FOUND</code> – The queried hostname does not exist or was\n                    not reachable at the time of the request. Ensure that you have published the\n                    required DNS record(s). </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_ERROR</code> – A temporary issue is preventing Amazon SES from\n                    determining the verification status of the domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_SERVER_ERROR</code> – The DNS server encountered an issue and\n                    was unable to complete the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_ACCESS_DENIED</code> – The verification failed because the user does not\n                    have the required permissions to replicate the DKIM key from the primary region. Ensure you have the\n                    necessary permissions in both primary and replica regions.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_NOT_FOUND</code> – The verification failed because no corresponding\n                    identity was found in the specified primary region. Ensure the identity exists in the primary region\n                    before attempting replication.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED</code> – The verification failed because the\n                    identity in the primary region is configured with Bring Your Own DKIM (BYODKIM). DKIM key\n                    replication is only supported for identities using Easy DKIM.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED</code> – The verification failed because\n                    the specified primary identity is a replica of another identity, and multi-level replication is not\n                    supported; the primary identity must be a non-replica identity.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_INVALID_REGION</code> – The verification failed due to an invalid\n                    primary region specified. Ensure you provide a valid AWS region where Amazon SES is available and different\n                    from the replica region.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Provides the reason for the failure describing why Amazon SES was not able to successfully\n            verify the identity. Below are the possible values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>INVALID_VALUE</code> – Amazon SES was able to find the record, but the\n                    value contained within the record was invalid. Ensure you have published the\n                    correct values for the record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TYPE_NOT_FOUND</code> – The queried hostname exists but does not\n                    have the requested type of DNS record. Ensure that you have published the\n                    correct type of DNS record.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOST_NOT_FOUND</code> – The queried hostname does not exist or was\n                    not reachable at the time of the request. Ensure that you have published the\n                    required DNS record(s). </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_ERROR</code> – A temporary issue is preventing Amazon SES from\n                    determining the verification status of the domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_SERVER_ERROR</code> – The DNS server encountered an issue and\n                    was unable to complete the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_ACCESS_DENIED</code> – The verification failed because the user does not\n                    have the required permissions to replicate the DKIM key from the primary region. Ensure you have the\n                    necessary permissions in both primary and replica regions.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_NOT_FOUND</code> – The verification failed because no corresponding\n                    identity was found in the specified primary region. Ensure the identity exists in the primary region\n                    before attempting replication.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED</code> – The verification failed because the\n                    identity in the primary region is configured with Bring Your Own DKIM (BYODKIM). DKIM key\n                    replication is only supported for identities using Easy DKIM.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED</code> – The verification failed because\n                    the specified primary identity is a replica of another identity, and multi-level replication is not\n                    supported; the primary identity must be a non-replica identity.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>REPLICATION_PRIMARY_INVALID_REGION</code> – The verification failed due to an invalid\n                    primary region specified. Ensure you provide a valid Amazon Web Services region where Amazon SES is available and different\n                    from the replica region.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "SOARecord": {

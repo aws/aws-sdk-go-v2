@@ -6462,6 +6462,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The TLS protocol used to communicate with the host from which the email was received.</p>"
                     }
+                },
+                "SendingMethod": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API call used when sent through a configuration set with archiving enabled.</p>"
+                    }
+                },
+                "SourceIdentity": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity name used to authorize the sending action when sent through a configuration set with\n        archiving enabled.</p>"
+                    }
+                },
+                "SendingPool": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dedicated IP pool used when sent through a configuration set with archiving\n        enabled.</p>"
+                    }
+                },
+                "ConfigurationSet": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration set used when sent through a configuration set with archiving\n        enabled.</p>"
+                    }
+                },
+                "SourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the archived email source, identified by either a Rule Set's ARN with an Archive action, or a\n        Configuration Set's Archive ARN.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7096,13 +7126,19 @@
                 "SenderIpAddress": {
                     "target": "com.amazonaws.mailmanager#SenderIpAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address of the host from which the email was received.</p>"
+                        "smithy.api#documentation": "<ul>\n            <li>\n               <p>Mail archived with Mail Manager: The IP address of the client that connects to\n        the ingress endpoint.</p>\n            </li>\n            <li>\n               <p>Mail sent through a configuration set with the\n        archiving option enabled: The IP address of the client that makes the SendEmail API call.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Envelope": {
                     "target": "com.amazonaws.mailmanager#Envelope",
                     "traits": {
                         "smithy.api#documentation": "<p>The SMTP envelope information of the email.</p>"
+                    }
+                },
+                "SourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the archived email source, identified by either a Rule Set's ARN with an Archive action, or a\n        Configuration Set's Archive ARN.</p>"
                     }
                 }
             },

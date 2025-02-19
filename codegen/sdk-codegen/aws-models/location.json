@@ -101,7 +101,7 @@
                         "smithy.api#documentation": "<p>A list of allowed actions that an API key resource grants permissions to\n            perform. You must have at least one action for each type of resource. For example,\n            if you have a place resource, you must include at least one place action.</p>\n         <p>The following are valid values for the actions.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Map actions</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>geo:GetMap*</code> - Allows all actions needed for map rendering.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Place actions</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>geo:SearchPlaceIndexForText</code> - Allows geocoding.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>geo:SearchPlaceIndexForPosition</code> - Allows reverse \n                            geocoding.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>geo:SearchPlaceIndexForSuggestions</code> - Allows generating\n                            suggestions from text.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>GetPlace</code> - Allows finding a place by place ID.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Route actions</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>geo:CalculateRoute</code> - Allows point to point routing.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>geo:CalculateRouteMatrix</code> - Allows calculating a matrix of\n                            routes.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <note>\n            <p>You must use these strings exactly. For example, to provide access to map \n                rendering, the only valid action is <code>geo:GetMap*</code> as an input to \n                the list. <code>[\"geo:GetMap*\"]</code> is valid but\n                    <code>[\"geo:GetMapTile\"]</code> is not. Similarly, you cannot use\n                <code>[\"geo:SearchPlaceIndexFor*\"]</code> - you must list each of the Place\n                actions separately.</p>\n         </note>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 7
+                            "max": 24
                         },
                         "smithy.api#required": {}
                     }
@@ -112,7 +112,7 @@
                         "smithy.api#documentation": "<p>A list of allowed resource ARNs that a API key bearer can perform actions on.</p>\n         <ul>\n            <li>\n               <p>The ARN must be the correct ARN for a map, place, or route ARN. You may \n                    include wildcards in the resource-id to match multiple resources of the \n                    same type.</p>\n            </li>\n            <li>\n               <p>The resources must be in the same <code>partition</code>, \n                    <code>region</code>, and <code>account-id</code> as the key that is being \n                    created.</p>\n            </li>\n            <li>\n               <p>Other than wildcards, you must include the full ARN, including the \n                    <code>arn</code>, <code>partition</code>, <code>service</code>,\n                    <code>region</code>, <code>account-id</code> and <code>resource-id</code>\n                    delimited by colons (:).</p>\n            </li>\n            <li>\n               <p>No spaces allowed, even with wildcards. For example,\n                    <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names\n            (ARNs)</a>.</p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 5
+                            "max": 8
                         },
                         "smithy.api#required": {}
                     }
@@ -180,6 +180,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Creates an association between a geofence collection and a tracker resource. This\n            allows the tracker resource to communicate location data to the linked geofence\n            collection. </p>\n         <p>You can associate up to five geofence collections to each tracker resource.</p>\n         <note>\n            <p>Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.tracking."
@@ -249,6 +250,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Deletes the position history of one or more devices from a tracker resource.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
@@ -348,6 +350,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Deletes a batch of geofences from a geofence collection.</p>\n         <note>\n            <p>This operation deletes the resource permanently.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
@@ -448,6 +451,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Evaluates device positions against the geofence geometries from a given geofence\n            collection.</p>\n         <p>This operation always returns an empty response because geofences are asynchronously\n            evaluated. The evaluation determines if the device has entered or exited a geofenced\n            area, and then publishes one of the following events to Amazon EventBridge:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENTER</code> if Amazon Location determines that the tracked device has entered\n                    a geofenced area.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXIT</code> if Amazon Location determines that the tracked device has exited a\n                    geofenced area.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The last geofence that a device was observed within is tracked for 30 days after\n                the most recent device position update.</p>\n         </note>\n         <note>\n            <p>Geofence evaluation uses the given device position. It does not account for the\n                optional <code>Accuracy</code> of a <code>DevicePositionUpdate</code>.</p>\n         </note>\n         <note>\n            <p>The <code>DeviceID</code> is used as a string to represent the device. You do not\n                need to have a <code>Tracker</code> associated with the <code>DeviceID</code>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
@@ -555,6 +559,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Lists the latest device positions for requested devices.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
@@ -717,6 +722,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>A batch request for storing geofence geometries into a given geofence collection, or\n            updates the geometry of an existing geofence if a geofence ID is included in the request.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
@@ -893,6 +899,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Uploads position update data for one or more devices to a tracker resource (up to \n           10 devices per batch). Amazon Location uses the data when it reports the last known device \n           position and position history. Amazon Location retains location data for 30 days.</p>\n         <note>\n            <p>Position updates are handled based on the <code>PositionFiltering</code> \n               property of the tracker. When <code>PositionFiltering</code> is set to \n               <code>TimeBased</code>, updates are evaluated against linked geofence collections, \n               and location data is stored at a maximum of one position per 30 second interval. \n               If your update frequency is more often than every 30 seconds, only one update per \n               30 seconds is stored for each unique device ID.</p>\n            <p>When <code>PositionFiltering</code> is set to <code>DistanceBased</code> \n                filtering, location data is stored and evaluated against linked geofence \n                collections only if the device has moved more than 30 m (98.4 ft).</p>\n            <p>When <code>PositionFiltering</code> is set to <code>AccuracyBased</code> \n                filtering, location data is stored and evaluated against linked geofence \n                collections only if the device has moved more than the measured accuracy. For \n                example, if two consecutive updates from a device have a horizontal accuracy of \n                5 m and 10 m, the second update is neither stored or evaluated if the device has \n                moved less than 15 m. If <code>PositionFiltering</code> is set to \n                <code>AccuracyBased</code> filtering, Amazon Location uses the default value \n                <code>{ \"Horizontal\": 0}</code> when accuracy is not provided on a\n                <code>DevicePositionUpdate</code>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
@@ -1568,6 +1575,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Creates a geofence collection, which manages and stores geofences.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.geofencing."
@@ -1685,6 +1693,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Creates an API key resource in your Amazon Web Services account, which lets you grant\n            actions for Amazon Location resources to the API key bearer.</p>\n         <note>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">Using API keys</a>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.metadata."
@@ -2132,6 +2141,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and\n            historical location of devices.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.tracking."
@@ -2299,6 +2309,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Deletes a geofence collection from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the geofence collection is the\n                target of a tracker resource, the devices will no longer be monitored.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.geofencing."
@@ -2353,6 +2364,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Deletes the specified API key. The API key must have been deactivated more than\n            90 days previously.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.metadata."
@@ -2579,6 +2591,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Deletes a tracker resource from your Amazon Web Services account.</p>\n         <note>\n            <p>This operation deletes the resource permanently. If the tracker resource is in use, you may\n                encounter an error. Make sure that the target resource isn't a dependency for your\n                applications.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.tracking."
@@ -2633,6 +2646,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Retrieves the geofence collection details.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.geofencing."
@@ -2765,6 +2779,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Retrieves the API key resource details.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.metadata."
@@ -3235,6 +3250,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Retrieves the tracker resource details.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.tracking."
@@ -3393,7 +3409,7 @@
                     }
                 },
                 "PositionProperties": {
-                    "target": "com.amazonaws.location#PropertyMap",
+                    "target": "com.amazonaws.location#PositionPropertyMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The properties associated with the position.</p>"
                     }
@@ -3440,7 +3456,7 @@
                     }
                 },
                 "PositionProperties": {
-                    "target": "com.amazonaws.location#PropertyMap",
+                    "target": "com.amazonaws.location#PositionPropertyMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Associates one of more properties with the position update. A property is a key-value\n            pair stored with the position update and added to any geofence event the update may\n            trigger.</p>\n         <p>Format: <code>\"key\" : \"value\"</code>\n         </p>"
                     }
@@ -3546,6 +3562,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Removes the association between a tracker resource and a geofence collection.</p>\n         <note>\n            <p>Once you unlink a tracker resource from a geofence collection, the tracker\n                positions will no longer be automatically evaluated against geofences.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.tracking."
@@ -3652,6 +3669,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Evaluates device positions against\n      geofence geometries from a given geofence collection. The event forecasts three states for which\n      a device can be in relative to a geofence:</p>\n         <p>\n            <code>ENTER</code>: If a device is outside of a geofence, but would breach the fence if the device is moving at its current speed within time horizon window.</p>\n         <p>\n            <code>EXIT</code>: If a device is inside of a geofence, but would breach the fence if the device is moving at its current speed within time horizon window.</p>\n         <p>\n            <code>IDLE</code>: If a device is inside of a geofence, and the device is not moving.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
@@ -4026,6 +4044,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Retrieves a device's most recent position according to its sample time.</p>\n         <note>\n            <p>Device positions are deleted after 30 days.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
@@ -4063,6 +4082,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Retrieves the device position history from a tracker resource within a specified range\n            of time.</p>\n         <note>\n            <p>Device positions are deleted after 30 days.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
@@ -4206,7 +4226,7 @@
                     }
                 },
                 "PositionProperties": {
-                    "target": "com.amazonaws.location#PropertyMap",
+                    "target": "com.amazonaws.location#PositionPropertyMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The properties associated with the position.</p>"
                     }
@@ -4239,6 +4259,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Retrieves the geofence details from a geofence collection.</p>\n         <note>\n            <p>The returned geometry will always match the geometry format used when the geofence was created.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
@@ -5040,6 +5061,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>A batch request to retrieve all device positions.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
@@ -5142,7 +5164,7 @@
                     }
                 },
                 "PositionProperties": {
-                    "target": "com.amazonaws.location#PropertyMap",
+                    "target": "com.amazonaws.location#PositionPropertyMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The properties associated with the position.</p>"
                     }
@@ -5181,6 +5203,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Lists geofence collections in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.geofencing."
@@ -5381,6 +5404,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Lists geofences stored in a given geofence collection.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
@@ -5469,6 +5493,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Lists API key resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.metadata."
@@ -6029,6 +6054,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Returns a list of tags that are applied to the specified Amazon Location resource.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.metadata."
@@ -6090,6 +6116,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Lists geofence collections currently associated to the given tracker resource.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.tracking."
@@ -6178,6 +6205,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Lists tracker resources in your Amazon Web Services account.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.tracking."
@@ -7534,6 +7562,34 @@
                 "target": "com.amazonaws.location#Position"
             }
         },
+        "com.amazonaws.location#PositionPropertyMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 20
+                    }
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 150
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.location#PositionalAccuracy": {
             "type": "structure",
             "members": {
@@ -7629,6 +7685,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Stores a geofence geometry in a given geofence collection, or updates the geometry of\n            an existing geofence if a geofence ID is included in the request. </p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
@@ -8638,7 +8695,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z+-=._:/]+$"
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.,:/=+\\-@]*)$"
             }
         },
         "com.amazonaws.location#TagKeys": {
@@ -8693,6 +8750,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon Location Service\n            resource.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to\n            scope user permissions, by granting a user permission to access or change only resources\n            with certain tag values.</p>\n         <p>You can use the <code>TagResource</code> operation with an Amazon Location Service\n            resource that already has tags. If you specify a new tag key for the resource, this tag\n            is appended to the tags already associated with the resource. If you specify a tag key\n            that's already associated with the resource, the new tag value that you specify replaces\n            the previous value for that tag. </p>\n         <p>You can associate up to 50 tags with a resource.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.metadata."
@@ -8734,7 +8792,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]*$"
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.,:/=+\\-@]*)$"
             }
         },
         "com.amazonaws.location#ThrottlingException": {
@@ -8981,6 +9039,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Removes one or more tags from the specified Amazon Location resource.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.metadata."
@@ -9043,6 +9102,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Updates the specified properties of a given geofence collection.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.geofencing."
@@ -9145,6 +9205,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Updates the specified properties of a given API key resource.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.metadata."
@@ -9541,6 +9602,7 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "smithy.api#documentation": "<p>Updates the specified properties of a given tracker resource.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp.tracking."
@@ -9727,6 +9789,10 @@
                     {
                         "value": "Other",
                         "documentation": "The input is invalid but no more specific reason is applicable."
+                    },
+                    {
+                        "value": "UnknownField",
+                        "documentation": "No such field is supported."
                     }
                 ]
             }
@@ -9770,6 +9836,7 @@
                 }
             ],
             "traits": {
+                "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p>Verifies the integrity of the device's position by determining if it was reported behind a proxy, and by comparing it to an inferred position estimated based on the device's state.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
@@ -9869,7 +9936,7 @@
                             "min": 12,
                             "max": 17
                         },
-                        "smithy.api#pattern": "^([0-9A-Fa-f]{2}[:-]?){5}([0-9A-Fa-f]{2})$",
+                        "smithy.api#pattern": "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$",
                         "smithy.api#required": {}
                     }
                 },
