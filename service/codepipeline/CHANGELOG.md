@@ -1,3 +1,7 @@
+# v1.39.0 (2025-02-19)
+
+* **Feature**: Add environment variables to codepipeline action declaration.
+
 # v1.38.10 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

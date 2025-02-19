@@ -1,3 +1,7 @@
+# v1.45.0 (2025-02-19)
+
+* **Feature**: This release introduces Network Firewall's Automated Domain List feature. New APIs include UpdateFirewallAnalysisSettings, StartAnalysisReport, GetAnalysisReportResults, and ListAnalysisReports. These allow customers to enable analysis on firewalls to identify and report frequently accessed domain.
+
 # v1.44.15 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

@@ -1,3 +1,7 @@
+# v1.176.0 (2025-02-19)
+
+* **Feature**: Adds r8g instance type support to SageMaker Realtime Endpoints
+
 # v1.175.1 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

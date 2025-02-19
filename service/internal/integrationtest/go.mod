@@ -19,7 +19,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.52.1
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.16
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.19
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.38.10
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.49.5
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.13
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.16
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.40.2
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.203.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.41.1
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.15
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.16
 	github.com/aws/aws-sdk-go-v2/service/efs v1.34.12
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.44.13
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.17
@@ -51,7 +51,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.32.20
 	github.com/aws/aws-sdk-go-v2/service/kms v1.37.19
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.69.14
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.42.16
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.42.17
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.24.16
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.35.18
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.23.16

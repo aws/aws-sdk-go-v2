@@ -1,8 +1,0 @@
-{
-    "id": "98be17d1-6338-4db3-b397-47a875a5517b",
-    "type": "feature",
-    "description": "This release introduces Network Firewall's Automated Domain List feature. New APIs include UpdateFirewallAnalysisSettings, StartAnalysisReport, GetAnalysisReportResults, and ListAnalysisReports. These allow customers to enable analysis on firewalls to identify and report frequently accessed domain.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

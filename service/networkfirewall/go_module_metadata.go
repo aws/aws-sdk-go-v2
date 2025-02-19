@@ -3,4 +3,4 @@
 package networkfirewall
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.44.15"
+const goModuleVersion = "1.45.0"

@@ -1,3 +1,7 @@
+# v1.53.16 (2025-02-19)
+
+* **Documentation**: This is a documentation only release for Amazon ECS that supports the CPU task limit increase.
+
 # v1.53.15 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

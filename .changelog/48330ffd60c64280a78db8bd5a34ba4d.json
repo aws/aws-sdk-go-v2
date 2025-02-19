@@ -1,8 +1,0 @@
-{
-    "id": "48330ffd-60c6-4280-a78d-b8bd5a34ba4d",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon Lightsail.",
-    "modules": [
-        "service/lightsail"
-    ]
-}

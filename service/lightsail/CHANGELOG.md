@@ -1,3 +1,7 @@
+# v1.42.17 (2025-02-19)
+
+* **Documentation**: Documentation updates for Amazon Lightsail.
+
 # v1.42.16 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

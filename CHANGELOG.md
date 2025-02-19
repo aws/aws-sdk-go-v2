@@ -1,3 +1,23 @@
+# Release (2025-02-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.39.0](service/codepipeline/CHANGELOG.md#v1390-2025-02-19)
+  * **Feature**: Add environment variables to codepipeline action declaration.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.53.16](service/ecs/CHANGELOG.md#v15316-2025-02-19)
+  * **Documentation**: This is a documentation only release for Amazon ECS that supports the CPU task limit increase.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.42.17](service/lightsail/CHANGELOG.md#v14217-2025-02-19)
+  * **Documentation**: Documentation updates for Amazon Lightsail.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.43.0](service/location/CHANGELOG.md#v1430-2025-02-19)
+  * **Feature**: Adds support for larger property maps for tracking and geofence positions changes. It increases the maximum number of items from 3 to 4, and the maximum value length from 40 to 150.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.9.0](service/mailmanager/CHANGELOG.md#v190-2025-02-19)
+  * **Feature**: This release adds additional metadata fields in Mail Manager archive searches to show email source and details about emails that were archived when being sent with SES.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.45.0](service/networkfirewall/CHANGELOG.md#v1450-2025-02-19)
+  * **Feature**: This release introduces Network Firewall's Automated Domain List feature. New APIs include UpdateFirewallAnalysisSettings, StartAnalysisReport, GetAnalysisReportResults, and ListAnalysisReports. These allow customers to enable analysis on firewalls to identify and report frequently accessed domain.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.176.0](service/sagemaker/CHANGELOG.md#v11760-2025-02-19)
+  * **Feature**: Adds r8g instance type support to SageMaker Realtime Endpoints
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.42.0](service/sesv2/CHANGELOG.md#v1420-2025-02-19)
+  * **Feature**: This release adds the ability for outbound email sent with SES to preserve emails to a Mail Manager archive.
+
 # Release (2025-02-18)
 
 ## General Highlights

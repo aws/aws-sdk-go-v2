@@ -1,8 +1,0 @@
-{
-    "id": "8e6af065-4d6e-4b0f-b245-2b8ca96d1f6f",
-    "type": "feature",
-    "description": "This release adds additional metadata fields in Mail Manager archive searches to show email source and details about emails that were archived when being sent with SES.",
-    "modules": [
-        "service/mailmanager"
-    ]
-}

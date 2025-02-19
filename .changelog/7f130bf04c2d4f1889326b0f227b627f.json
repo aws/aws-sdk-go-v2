@@ -1,8 +1,0 @@
-{
-    "id": "7f130bf0-4c2d-4f18-8932-6b0f227b627f",
-    "type": "feature",
-    "description": "This release adds the ability for outbound email sent with SES to preserve emails to a Mail Manager archive.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

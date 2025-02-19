@@ -1,3 +1,7 @@
+# v1.43.0 (2025-02-19)
+
+* **Feature**: Adds support for larger property maps for tracking and geofence positions changes. It increases the maximum number of items from 3 to 4, and the maximum value length from 40 to 150.
+
 # v1.42.17 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

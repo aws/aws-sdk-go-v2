@@ -1,3 +1,7 @@
+# v1.42.0 (2025-02-19)
+
+* **Feature**: This release adds the ability for outbound email sent with SES to preserve emails to a Mail Manager archive.
+
 # v1.41.6 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

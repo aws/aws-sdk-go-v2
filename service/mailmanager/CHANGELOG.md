@@ -1,3 +1,7 @@
+# v1.9.0 (2025-02-19)
+
+* **Feature**: This release adds additional metadata fields in Mail Manager archive searches to show email source and details about emails that were archived when being sent with SES.
+
 # v1.8.4 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22
