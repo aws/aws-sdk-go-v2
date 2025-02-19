@@ -19,7 +19,7 @@ import (
 // and resource tags applied to the resource identified by resource name . For more
 // information, see the [Amazon Lightsail Developer Guide].
 //
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

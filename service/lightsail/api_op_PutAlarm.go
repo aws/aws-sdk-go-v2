@@ -26,7 +26,7 @@ import (
 // completely overwrites the previous configuration of the alarm. The alarm is then
 // evaluated with the updated configuration.
 //
-// [Alarms in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms
+// [Alarms in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms
 func (c *Client) PutAlarm(ctx context.Context, params *PutAlarmInput, optFns ...func(*Options)) (*PutAlarmOutput, error) {
 	if params == nil {
 		params = &PutAlarmInput{}
@@ -94,7 +94,7 @@ type PutAlarmInput struct {
 	//
 	// For more information about these metrics, see [Metrics available in Lightsail].
 	//
-	// [Metrics available in Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-resource-health-metrics#available-metrics
+	// [Metrics available in Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-resource-health-metrics#available-metrics
 	//
 	// This member is required.
 	MetricName types.MetricName

@@ -1,0 +1,8 @@
+{
+    "id": "38b91eec-c282-4a0f-b838-c2cab7819210",
+    "type": "documentation",
+    "description": "This is a documentation only release for Amazon ECS that supports the CPU task limit increase.",
+    "modules": [
+        "service/ecs"
+    ]
+}

@@ -18,7 +18,7 @@ import (
 // resource tags applied to the resource identified by relationalDatabaseName. For
 // more information, see the [Amazon Lightsail Developer Guide].
 //
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) StartRelationalDatabase(ctx context.Context, params *StartRelationalDatabaseInput, optFns ...func(*Options)) (*StartRelationalDatabaseOutput, error) {
 	if params == nil {
 		params = &StartRelationalDatabaseInput{}

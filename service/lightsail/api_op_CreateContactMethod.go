@@ -19,7 +19,7 @@ import (
 // supported in some Amazon Web Services Regions, and SMS text messages cannot be
 // sent to some countries/regions. For more information, see [Notifications in Amazon Lightsail].
 //
-// [Notifications in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications
+// [Notifications in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications
 func (c *Client) CreateContactMethod(ctx context.Context, params *CreateContactMethodInput, optFns ...func(*Options)) (*CreateContactMethodOutput, error) {
 	if params == nil {
 		params = &CreateContactMethodInput{}
@@ -75,7 +75,7 @@ type CreateContactMethodInput struct {
 	// For more information about notifications in Amazon Lightsail, see [Notifications in Amazon Lightsail].
 	//
 	// [Supported Regions and Countries]: https://docs.aws.amazon.com/sns/latest/dg/sns-supported-regions-countries.html
-	// [Notifications in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications
+	// [Notifications in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications
 	//
 	// This member is required.
 	Protocol types.ContactProtocol

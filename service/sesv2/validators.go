@@ -1010,6 +1010,26 @@ func (m *validateOpPutAccountVdmAttributes) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutConfigurationSetArchivingOptions struct {
+}
+
+func (*validateOpPutConfigurationSetArchivingOptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutConfigurationSetArchivingOptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutConfigurationSetArchivingOptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutConfigurationSetArchivingOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutConfigurationSetDeliveryOptions struct {
 }
 
@@ -1768,6 +1788,10 @@ func addOpPutAccountDetailsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutAccountVdmAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAccountVdmAttributes{}, middleware.After)
+}
+
+func addOpPutConfigurationSetArchivingOptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutConfigurationSetArchivingOptions{}, middleware.After)
 }
 
 func addOpPutConfigurationSetDeliveryOptionsValidationMiddleware(stack *middleware.Stack) error {
@@ -3573,6 +3597,21 @@ func validateOpPutAccountVdmAttributesInput(v *PutAccountVdmAttributesInput) err
 		if err := validateVdmAttributes(v.VdmAttributes); err != nil {
 			invalidParams.AddNested("VdmAttributes", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutConfigurationSetArchivingOptionsInput(v *PutConfigurationSetArchivingOptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutConfigurationSetArchivingOptionsInput"}
+	if v.ConfigurationSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

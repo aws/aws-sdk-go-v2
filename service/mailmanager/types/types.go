@@ -802,6 +802,10 @@ type MessageBody struct {
 // The metadata about the email.
 type Metadata struct {
 
+	// The name of the configuration set used when sent through a configuration set
+	// with archiving enabled.
+	ConfigurationSet *string
+
 	// The ID of the ingress endpoint through which the email was received.
 	IngressPointId *string
 
@@ -813,6 +817,22 @@ type Metadata struct {
 
 	// The IP address of the host from which the email was received.
 	SenderIpAddress *string
+
+	// The name of the API call used when sent through a configuration set with
+	// archiving enabled.
+	SendingMethod *string
+
+	// The name of the dedicated IP pool used when sent through a configuration set
+	// with archiving enabled.
+	SendingPool *string
+
+	// Specifies the archived email source, identified by either a Rule Set's ARN with
+	// an Archive action, or a Configuration Set's Archive ARN.
+	SourceArn *string
+
+	// The identity name used to authorize the sending action when sent through a
+	// configuration set with archiving enabled.
+	SourceIdentity *string
 
 	// The timestamp of when the email was received.
 	Timestamp *time.Time
@@ -1032,8 +1052,16 @@ type Row struct {
 	// The name of the host from which the email was received.
 	SenderHostname *string
 
-	// The IP address of the host from which the email was received.
+	//   - Mail archived with Mail Manager: The IP address of the client that connects
+	//   to the ingress endpoint.
+	//
+	//   - Mail sent through a configuration set with the archiving option enabled:
+	//   The IP address of the client that makes the SendEmail API call.
 	SenderIpAddress *string
+
+	// Specifies the archived email source, identified by either a Rule Set's ARN with
+	// an Archive action, or a Configuration Set's Archive ARN.
+	SourceArn *string
 
 	// The subject header value of the email.
 	Subject *string

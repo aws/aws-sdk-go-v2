@@ -5771,6 +5771,16 @@ const (
 	ProductionVariantInstanceTypeMlG616xlarge    ProductionVariantInstanceType = "ml.g6.16xlarge"
 	ProductionVariantInstanceTypeMlG624xlarge    ProductionVariantInstanceType = "ml.g6.24xlarge"
 	ProductionVariantInstanceTypeMlG648xlarge    ProductionVariantInstanceType = "ml.g6.48xlarge"
+	ProductionVariantInstanceTypeMlR8gMedium     ProductionVariantInstanceType = "ml.r8g.medium"
+	ProductionVariantInstanceTypeMlR8gLarge      ProductionVariantInstanceType = "ml.r8g.large"
+	ProductionVariantInstanceTypeMlR8gXlarge     ProductionVariantInstanceType = "ml.r8g.xlarge"
+	ProductionVariantInstanceTypeMlR8g2xlarge    ProductionVariantInstanceType = "ml.r8g.2xlarge"
+	ProductionVariantInstanceTypeMlR8g4xlarge    ProductionVariantInstanceType = "ml.r8g.4xlarge"
+	ProductionVariantInstanceTypeMlR8g8xlarge    ProductionVariantInstanceType = "ml.r8g.8xlarge"
+	ProductionVariantInstanceTypeMlR8g12xlarge   ProductionVariantInstanceType = "ml.r8g.12xlarge"
+	ProductionVariantInstanceTypeMlR8g16xlarge   ProductionVariantInstanceType = "ml.r8g.16xlarge"
+	ProductionVariantInstanceTypeMlR8g24xlarge   ProductionVariantInstanceType = "ml.r8g.24xlarge"
+	ProductionVariantInstanceTypeMlR8g48xlarge   ProductionVariantInstanceType = "ml.r8g.48xlarge"
 	ProductionVariantInstanceTypeMlG6eXlarge     ProductionVariantInstanceType = "ml.g6e.xlarge"
 	ProductionVariantInstanceTypeMlG6e2xlarge    ProductionVariantInstanceType = "ml.g6e.2xlarge"
 	ProductionVariantInstanceTypeMlG6e4xlarge    ProductionVariantInstanceType = "ml.g6e.4xlarge"
@@ -5994,6 +6004,16 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.g6.16xlarge",
 		"ml.g6.24xlarge",
 		"ml.g6.48xlarge",
+		"ml.r8g.medium",
+		"ml.r8g.large",
+		"ml.r8g.xlarge",
+		"ml.r8g.2xlarge",
+		"ml.r8g.4xlarge",
+		"ml.r8g.8xlarge",
+		"ml.r8g.12xlarge",
+		"ml.r8g.16xlarge",
+		"ml.r8g.24xlarge",
+		"ml.r8g.48xlarge",
 		"ml.g6e.xlarge",
 		"ml.g6e.2xlarge",
 		"ml.g6e.4xlarge",

@@ -27,7 +27,7 @@ import (
 // Notifications are not sent to an email contact method until after it is
 // verified, and confirmed as valid.
 //
-// [Notifications in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications
+// [Notifications in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications
 func (c *Client) SendContactMethodVerification(ctx context.Context, params *SendContactMethodVerificationInput, optFns ...func(*Options)) (*SendContactMethodVerificationOutput, error) {
 	if params == nil {
 		params = &SendContactMethodVerificationInput{}

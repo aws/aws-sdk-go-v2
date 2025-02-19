@@ -5194,7 +5194,7 @@ func awsRestjson1_deserializeOpDocumentGetDevicePositionOutput(v **GetDevicePosi
 			}
 
 		case "PositionProperties":
-			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.PositionProperties, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentPositionPropertyMap(&sv.PositionProperties, value); err != nil {
 				return err
 			}
 
@@ -11912,7 +11912,7 @@ func awsRestjson1_deserializeDocumentDevicePosition(v **types.DevicePosition, va
 			}
 
 		case "PositionProperties":
-			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.PositionProperties, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentPositionPropertyMap(&sv.PositionProperties, value); err != nil {
 				return err
 			}
 
@@ -12715,7 +12715,7 @@ func awsRestjson1_deserializeDocumentListDevicePositionsResponseEntry(v **types.
 			}
 
 		case "PositionProperties":
-			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.PositionProperties, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentPositionPropertyMap(&sv.PositionProperties, value); err != nil {
 				return err
 			}
 
@@ -14141,6 +14141,42 @@ func awsRestjson1_deserializeDocumentPositionList(v *[][]float64, value interfac
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPositionPropertyMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

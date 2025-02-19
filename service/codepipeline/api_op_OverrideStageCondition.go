@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used to override a stage condition.
+// Used to override a stage condition. For more information about conditions, see [Stage conditions]
+// and [How do stage conditions work?].
+//
+// [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+// [How do stage conditions work?]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html
 func (c *Client) OverrideStageCondition(ctx context.Context, params *OverrideStageConditionInput, optFns ...func(*Options)) (*OverrideStageConditionOutput, error) {
 	if params == nil {
 		params = &OverrideStageConditionInput{}

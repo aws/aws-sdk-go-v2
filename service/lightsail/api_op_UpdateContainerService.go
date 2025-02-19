@@ -56,7 +56,7 @@ type UpdateContainerServiceInput struct {
 	//
 	// For more information, see [Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service] in the Amazon Lightsail Developer Guide.
 	//
-	// [Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+	// [Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-container-service-ecr-private-repo-access
 	PrivateRegistryAccess *types.PrivateRegistryAccessRequest
 
 	// The public domain names to use with the container service, such as example.com

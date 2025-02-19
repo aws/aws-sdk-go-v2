@@ -58,9 +58,9 @@ type PutApprovalResultInput struct {
 	// valid.
 	//
 	// For a pipeline where the execution mode is set to PARALLEL, the token required
-	// to approve/reject approval request as detailed above is not available. Instead,
-	// use the externalExecutionId from the GetPipelineState action as the token in
-	// the approval request.
+	// to approve/reject an approval request as detailed above is not available.
+	// Instead, use the externalExecutionId in the response output from the ListActionExecutions action as
+	// the token in the approval request.
 	//
 	// This member is required.
 	Token *string

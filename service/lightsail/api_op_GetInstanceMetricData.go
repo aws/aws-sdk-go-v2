@@ -140,7 +140,7 @@ type GetInstanceMetricDataInput struct {
 	//
 	// Unit : The published unit is Count .
 	//
-	// [Viewing instance burst capacity in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-viewing-instance-burst-capacity
+	// [Viewing instance burst capacity in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-burst-capacity
 	//
 	// This member is required.
 	MetricName types.InstanceMetricName

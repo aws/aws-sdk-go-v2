@@ -9846,6 +9846,15 @@ func awsAwsjson10_deserializeDocumentMetadata(v **types.Metadata, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "ConfigurationSet":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ConfigurationSet = ptr.String(jtv)
+			}
+
 		case "IngressPointId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9880,6 +9889,42 @@ func awsAwsjson10_deserializeDocumentMetadata(v **types.Metadata, value interfac
 					return fmt.Errorf("expected SenderIpAddress to be of type string, got %T instead", value)
 				}
 				sv.SenderIpAddress = ptr.String(jtv)
+			}
+
+		case "SendingMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SendingMethod = ptr.String(jtv)
+			}
+
+		case "SendingPool":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SendingPool = ptr.String(jtv)
+			}
+
+		case "SourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SourceArn = ptr.String(jtv)
+			}
+
+		case "SourceIdentity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SourceIdentity = ptr.String(jtv)
 			}
 
 		case "Timestamp":
@@ -10603,6 +10648,15 @@ func awsAwsjson10_deserializeDocumentRow(v **types.Row, value interface{}) error
 					return fmt.Errorf("expected SenderIpAddress to be of type string, got %T instead", value)
 				}
 				sv.SenderIpAddress = ptr.String(jtv)
+			}
+
+		case "SourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SourceArn = ptr.String(jtv)
 			}
 
 		case "Subject":

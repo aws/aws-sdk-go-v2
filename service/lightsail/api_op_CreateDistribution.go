@@ -17,7 +17,7 @@ import (
 // improve the performance of your website or web application hosted on a Lightsail
 // instance. For more information, see [Content delivery networks in Amazon Lightsail].
 //
-// [Content delivery networks in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions
+// [Content delivery networks in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-content-delivery-network-distributions
 func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistributionInput, optFns ...func(*Options)) (*CreateDistributionOutput, error) {
 	if params == nil {
 		params = &CreateDistributionInput{}

@@ -28,6 +28,9 @@ import (
 // tagging operations, ListTagsForResource, TagResource, and UntagResource.
 //
 // To retrieve information about firewalls, use ListFirewalls and DescribeFirewall.
+//
+// To generate a report on the last 30 days of traffic monitored by a firewall,
+// use StartAnalysisReport.
 func (c *Client) CreateFirewall(ctx context.Context, params *CreateFirewallInput, optFns ...func(*Options)) (*CreateFirewallOutput, error) {
 	if params == nil {
 		params = &CreateFirewallInput{}
@@ -56,21 +59,6 @@ type CreateFirewallInput struct {
 	// This member is required.
 	FirewallPolicyArn *string
 
-	// The public subnets to use for your Network Firewall firewalls. Each subnet must
-	// belong to a different Availability Zone in the VPC. Network Firewall creates a
-	// firewall endpoint in each subnet.
-	//
-	// This member is required.
-	SubnetMappings []types.SubnetMapping
-
-	// The unique identifier of the VPC where Network Firewall should create the
-	// firewall.
-	//
-	// You can't change this setting after you create the firewall.
-	//
-	// This member is required.
-	VpcId *string
-
 	// A flag indicating whether it is possible to delete the firewall. A setting of
 	// TRUE indicates that the firewall is protected against deletion. Use this setting
 	// to protect against accidentally deleting a firewall that is in use. When you
@@ -79,6 +67,10 @@ type CreateFirewallInput struct {
 
 	// A description of the firewall.
 	Description *string
+
+	// An optional setting indicating the specific traffic analysis types to enable on
+	// the firewall.
+	EnabledAnalysisTypes []types.EnabledAnalysisType
 
 	// A complex type that contains settings for encryption of your firewall resources.
 	EncryptionConfiguration *types.EncryptionConfiguration
@@ -95,8 +87,19 @@ type CreateFirewallInput struct {
 	// firewall, the operation initializes this setting to TRUE .
 	SubnetChangeProtection bool
 
+	// The public subnets to use for your Network Firewall firewalls. Each subnet must
+	// belong to a different Availability Zone in the VPC. Network Firewall creates a
+	// firewall endpoint in each subnet.
+	SubnetMappings []types.SubnetMapping
+
 	// The key:value pairs to associate with the resource.
 	Tags []types.Tag
+
+	// The unique identifier of the VPC where Network Firewall should create the
+	// firewall.
+	//
+	// You can't change this setting after you create the firewall.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

@@ -12,9 +12,9 @@ import (
 )
 
 // Creates two URLs that are used to access a virtual computer’s graphical user
-// interface (GUI) session. The primary URL initiates a web-based NICE DCV session
-// to the virtual computer's application. The secondary URL initiates a web-based
-// NICE DCV session to the virtual computer's operating session.
+// interface (GUI) session. The primary URL initiates a web-based Amazon DCV
+// session to the virtual computer's application. The secondary URL initiates a
+// web-based Amazon DCV session to the virtual computer's operating session.
 //
 // Use StartGUISession to open the session.
 func (c *Client) CreateGUISessionAccessDetails(ctx context.Context, params *CreateGUISessionAccessDetailsInput, optFns ...func(*Options)) (*CreateGUISessionAccessDetailsOutput, error) {
@@ -53,7 +53,7 @@ type CreateGUISessionAccessDetailsOutput struct {
 	// The resource name.
 	ResourceName *string
 
-	// Returns information about the specified NICE DCV GUI session.
+	// Returns information about the specified Amazon DCV GUI session.
 	Sessions []types.Session
 
 	// The status of the operation.

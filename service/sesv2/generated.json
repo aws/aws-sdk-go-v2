@@ -77,6 +77,7 @@
         "api_op_PutAccountSendingAttributes.go",
         "api_op_PutAccountSuppressionAttributes.go",
         "api_op_PutAccountVdmAttributes.go",
+        "api_op_PutConfigurationSetArchivingOptions.go",
         "api_op_PutConfigurationSetDeliveryOptions.go",
         "api_op_PutConfigurationSetReputationOptions.go",
         "api_op_PutConfigurationSetSendingOptions.go",

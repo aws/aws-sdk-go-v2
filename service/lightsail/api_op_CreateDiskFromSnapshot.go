@@ -19,7 +19,7 @@ import (
 // request tags and resource tags applied to the resource identified by disk
 // snapshot name . For more information, see the [Amazon Lightsail Developer Guide].
 //
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateDiskFromSnapshot(ctx context.Context, params *CreateDiskFromSnapshotInput, optFns ...func(*Options)) (*CreateDiskFromSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateDiskFromSnapshotInput{}
@@ -84,7 +84,7 @@ type CreateDiskFromSnapshotInput struct {
 	//   - Define this parameter only when creating a new disk from an automatic
 	//   snapshot. For more information, see the [Amazon Lightsail Developer Guide].
 	//
-	// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+	// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots
 	RestoreDate *string
 
 	// The name of the source disk from which the source automatic snapshot was
@@ -99,7 +99,7 @@ type CreateDiskFromSnapshotInput struct {
 	//   - Define this parameter only when creating a new disk from an automatic
 	//   snapshot. For more information, see the [Amazon Lightsail Developer Guide].
 	//
-	// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+	// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots
 	SourceDiskName *string
 
 	// The tag keys and optional values to add to the resource during create.
@@ -119,7 +119,7 @@ type CreateDiskFromSnapshotInput struct {
 	//   - Define this parameter only when creating a new disk from an automatic
 	//   snapshot. For more information, see the [Amazon Lightsail Developer Guide].
 	//
-	// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+	// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots
 	UseLatestRestorableAutoSnapshot *bool
 
 	noSmithyDocumentSerde

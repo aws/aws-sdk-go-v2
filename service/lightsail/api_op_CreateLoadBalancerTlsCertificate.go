@@ -19,7 +19,7 @@ import (
 // control via resource tags applied to the resource identified by load balancer
 // name . For more information, see the [Amazon Lightsail Developer Guide].
 //
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateLoadBalancerTlsCertificate(ctx context.Context, params *CreateLoadBalancerTlsCertificateInput, optFns ...func(*Options)) (*CreateLoadBalancerTlsCertificateOutput, error) {
 	if params == nil {
 		params = &CreateLoadBalancerTlsCertificateInput{}

@@ -25,7 +25,7 @@ import (
 // [ImportKeyPair]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_ImportKeyPair.html
 // [CreateKeyPair]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateKeyPair.html
 // [DownloadDefaultKeyPair]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) DeleteKeyPair(ctx context.Context, params *DeleteKeyPairInput, optFns ...func(*Options)) (*DeleteKeyPairOutput, error) {
 	if params == nil {
 		params = &DeleteKeyPairInput{}

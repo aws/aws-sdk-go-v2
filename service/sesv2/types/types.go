@@ -43,6 +43,16 @@ type AccountDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Used to associate a configuration set with a MailManager archive.
+type ArchivingOptions struct {
+
+	// The Amazon Resource Name (ARN) of the MailManager archive where the Amazon SES
+	// API v2 will archive sent emails.
+	ArchiveArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a single metric data query to include in a batch.
 type BatchGetMetricDataQuery struct {
 
@@ -2107,7 +2117,8 @@ type Recommendation struct {
 	// The recommendation status, with values like OPEN or FIXED .
 	Status RecommendationStatus
 
-	// The recommendation type, with values like DKIM , SPF , DMARC or BIMI .
+	// The recommendation type, with values like DKIM , SPF , DMARC , BIMI , or
+	// COMPLAINT .
 	Type RecommendationType
 
 	noSmithyDocumentSerde
@@ -2620,8 +2631,8 @@ type VerificationInfo struct {
 	//   non-replica identity.
 	//
 	//   - REPLICATION_PRIMARY_INVALID_REGION – The verification failed due to an
-	//   invalid primary region specified. Ensure you provide a valid AWS region where
-	//   Amazon SES is available and different from the replica region.
+	//   invalid primary region specified. Ensure you provide a valid Amazon Web Services
+	//   region where Amazon SES is available and different from the replica region.
 	ErrorType VerificationError
 
 	// The last time a verification attempt was made for this identity.

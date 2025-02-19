@@ -1,0 +1,8 @@
+{
+    "id": "1150a983-32d6-4443-ad39-bae58482077a",
+    "type": "feature",
+    "description": "Add environment variables to codepipeline action declaration.",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

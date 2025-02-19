@@ -22,5 +22,5 @@
 // Lightsail service, see [Amazon Lightsail Endpoints and Quotas]in the Amazon Web Services General Reference.
 //
 // [Amazon Lightsail Endpoints and Quotas]: https://docs.aws.amazon.com/general/latest/gr/lightsail.html
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli
 package lightsail

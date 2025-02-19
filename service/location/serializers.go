@@ -6034,7 +6034,7 @@ func awsRestjson1_serializeDocumentDevicePositionUpdate(v *types.DevicePositionU
 
 	if v.PositionProperties != nil {
 		ok := object.Key("PositionProperties")
-		if err := awsRestjson1_serializeDocumentPropertyMap(v.PositionProperties, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentPositionPropertyMap(v.PositionProperties, ok); err != nil {
 			return err
 		}
 	}
@@ -6499,6 +6499,17 @@ func awsRestjson1_serializeDocumentPositionList(v [][]float64, value smithyjson.
 		if err := awsRestjson1_serializeDocumentPosition(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPositionPropertyMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

@@ -16,7 +16,7 @@ import (
 // The create instances operation supports tag-based access control via request
 // tags. For more information, see the [Lightsail Developer Guide].
 //
-// [Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateInstances(ctx context.Context, params *CreateInstancesInput, optFns ...func(*Options)) (*CreateInstancesOutput, error) {
 	if params == nil {
 		params = &CreateInstancesInput{}
@@ -103,7 +103,7 @@ type CreateInstancesInput struct {
 	// instance varies. Amazon Linux and CentOS use yum , Debian and Ubuntu use apt-get
 	// , and FreeBSD uses pkg . For a complete list, see the [Amazon Lightsail Developer Guide].
 	//
-	// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image
+	// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image
 	UserData *string
 
 	noSmithyDocumentSerde

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Terminates a web-based NICE DCV session that’s used to access a virtual
+// Terminates a web-based Amazon DCV session that’s used to access a virtual
 // computer’s operating system or application. The session will close and any
 // unsaved data will be lost.
 func (c *Client) StopGUISession(ctx context.Context, params *StopGUISessionInput, optFns ...func(*Options)) (*StopGUISessionOutput, error) {

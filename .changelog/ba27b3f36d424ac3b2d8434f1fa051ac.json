@@ -1,0 +1,8 @@
+{
+    "id": "ba27b3f3-6d42-4ac3-b2d8-434f1fa051ac",
+    "type": "feature",
+    "description": "Adds support for larger property maps for tracking and geofence positions changes. It increases the maximum number of items from 3 to 4, and the maximum value length from 40 to 150.",
+    "modules": [
+        "service/location"
+    ]
+}

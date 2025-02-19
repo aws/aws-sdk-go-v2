@@ -17,7 +17,7 @@ import (
 // For more information about load balancer TLS security policies, see [Configuring TLS security policies on your Amazon Lightsail load balancers] in the
 // Amazon Lightsail Developer Guide.
 //
-// [Configuring TLS security policies on your Amazon Lightsail load balancers]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy
+// [Configuring TLS security policies on your Amazon Lightsail load balancers]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configure-load-balancer-tls-security-policy
 func (c *Client) GetLoadBalancerTlsPolicies(ctx context.Context, params *GetLoadBalancerTlsPoliciesInput, optFns ...func(*Options)) (*GetLoadBalancerTlsPoliciesOutput, error) {
 	if params == nil {
 		params = &GetLoadBalancerTlsPoliciesInput{}

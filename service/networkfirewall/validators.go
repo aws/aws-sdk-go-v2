@@ -190,6 +190,26 @@ func (m *validateOpDisassociateSubnets) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAnalysisReportResults struct {
+}
+
+func (*validateOpGetAnalysisReportResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAnalysisReportResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAnalysisReportResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAnalysisReportResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartAnalysisReport struct {
+}
+
+func (*validateOpStartAnalysisReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAnalysisReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAnalysisReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAnalysisReportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -466,12 +506,20 @@ func addOpDisassociateSubnetsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDisassociateSubnets{}, middleware.After)
 }
 
+func addOpGetAnalysisReportResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAnalysisReportResults{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
+}
+
+func addOpStartAnalysisReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAnalysisReport{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1472,12 +1520,7 @@ func validateOpCreateFirewallInput(v *CreateFirewallInput) error {
 	if v.FirewallPolicyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FirewallPolicyArn"))
 	}
-	if v.VpcId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
-	}
-	if v.SubnetMappings == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetMappings"))
-	} else if v.SubnetMappings != nil {
+	if v.SubnetMappings != nil {
 		if err := validateSubnetMappings(v.SubnetMappings); err != nil {
 			invalidParams.AddNested("SubnetMappings", err.(smithy.InvalidParamsError))
 		}
@@ -1644,6 +1687,21 @@ func validateOpDisassociateSubnetsInput(v *DisassociateSubnetsInput) error {
 	}
 }
 
+func validateOpGetAnalysisReportResultsInput(v *GetAnalysisReportResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAnalysisReportResultsInput"}
+	if v.AnalysisReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisReportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1669,6 +1727,21 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAnalysisReportInput(v *StartAnalysisReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAnalysisReportInput"}
+	if len(v.AnalysisType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

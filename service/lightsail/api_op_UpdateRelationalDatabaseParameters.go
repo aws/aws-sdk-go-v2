@@ -24,7 +24,7 @@ import (
 // control via resource tags applied to the resource identified by
 // relationalDatabaseName. For more information, see the [Amazon Lightsail Developer Guide].
 //
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) UpdateRelationalDatabaseParameters(ctx context.Context, params *UpdateRelationalDatabaseParametersInput, optFns ...func(*Options)) (*UpdateRelationalDatabaseParametersOutput, error) {
 	if params == nil {
 		params = &UpdateRelationalDatabaseParametersInput{}

@@ -114,6 +114,9 @@ type ActionDeclaration struct {
 	// [Configuration Properties Reference]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
 	Configuration map[string]string
 
+	// The environment variables for the action.
+	EnvironmentVariables []EnvironmentVariable
+
 	// The name or ID of the artifact consumed by the action, such as a test or build
 	// artifact.
 	InputArtifacts []InputArtifact
@@ -852,7 +855,11 @@ type AWSSessionCredentials struct {
 	noSmithyDocumentSerde
 }
 
-// The conditions for making checks for entry to a stage.
+// The conditions for making checks for entry to a stage. For more information
+// about conditions, see [Stage conditions]and [How do stage conditions work?].
+//
+// [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+// [How do stage conditions work?]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html
 type BeforeEntryConditions struct {
 
 	// The conditions that are configured as entry conditions.
@@ -880,10 +887,11 @@ type BlockerDeclaration struct {
 }
 
 // The condition for the stage. A condition is made up of the rules and the result
-// for the condition. For more information about conditions, see [Stage conditions]. For more
+// for the condition. For more information about conditions, see [Stage conditions]and [How do stage conditions work?].. For more
 // information about rules, see the [CodePipeline rule reference].
 //
 // [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+// [How do stage conditions work?]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html
 // [CodePipeline rule reference]: https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html
 type Condition struct {
 
@@ -973,6 +981,22 @@ type EncryptionKey struct {
 	noSmithyDocumentSerde
 }
 
+// The environment variables for the action.
+type EnvironmentVariable struct {
+
+	// The environment variable name in the key-value pair.
+	//
+	// This member is required.
+	Name *string
+
+	// The environment variable value in the key-value pair.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents information about an error in CodePipeline.
 type ErrorDetails struct {
 
@@ -1033,10 +1057,17 @@ type ExecutorConfiguration struct {
 }
 
 // The configuration that specifies the result, such as rollback, to occur upon
-// stage failure.
+// stage failure. For more information about conditions, see [Stage conditions]and [How do stage conditions work?].
+//
+// [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+// [How do stage conditions work?]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html
 type FailureConditions struct {
 
-	// The conditions that are configured as failure conditions.
+	// The conditions that are configured as failure conditions. For more information
+	// about conditions, see [Stage conditions]and [How do stage conditions work?].
+	//
+	// [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+	// [How do stage conditions work?]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html
 	Conditions []Condition
 
 	// The specified result for when the failure conditions are met, such as rolling
@@ -1127,14 +1158,22 @@ type GitFilePathFilterCriteria struct {
 
 // The event criteria for the pull request trigger configuration, such as the
 // lists of branches or file paths to include and exclude.
+//
+// The following are valid values for the events for this filter:
+//
+//   - CLOSED
+//
+//   - OPEN
+//
+//   - UPDATED
 type GitPullRequestFilter struct {
 
 	// The field that specifies to filter on branches for the pull request trigger
 	// configuration.
 	Branches *GitBranchFilterCriteria
 
-	// The field that specifies which pull request events to filter on (opened,
-	// updated, closed) for the trigger configuration.
+	// The field that specifies which pull request events to filter on (OPEN, UPDATED,
+	// CLOSED) for the trigger configuration.
 	Events []GitPullRequestEventType
 
 	// The field that specifies to filter on file paths for the pull request trigger
@@ -1853,10 +1892,11 @@ type RuleConfigurationProperty struct {
 // Represents information about the rule to be created for an associated
 // condition. An example would be creating a new rule for an entry condition, such
 // as a rule that checks for a test result before allowing the run to enter the
-// deployment stage. For more information about conditions, see [Stage conditions]. For more
+// deployment stage. For more information about conditions, see [Stage conditions]and [How do stage conditions work?]. For more
 // information about rules, see the [CodePipeline rule reference].
 //
 // [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+// [How do stage conditions work?]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html
 // [CodePipeline rule reference]: https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html
 type RuleDeclaration struct {
 
@@ -2012,7 +2052,11 @@ type RuleExecutionInput struct {
 	RoleArn *string
 
 	// The ID for the rule type, which is made up of the combined values for category,
-	// owner, provider, and version.
+	// owner, provider, and version. For more information about conditions, see [Stage conditions]. For
+	// more information about rules, see the [CodePipeline rule reference].
+	//
+	// [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+	// [CodePipeline rule reference]: https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html
 	RuleTypeId *RuleTypeId
 
 	noSmithyDocumentSerde
@@ -2120,7 +2164,11 @@ type RuleType struct {
 }
 
 // The ID for the rule type, which is made up of the combined values for category,
-// owner, provider, and version.
+// owner, provider, and version. For more information about conditions, see [Stage conditions]. For
+// more information about rules, see the [CodePipeline rule reference].
+//
+// [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+// [CodePipeline rule reference]: https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html
 type RuleTypeId struct {
 
 	// A category defines what kind of rule can be run in the stage, and constrains
@@ -2129,7 +2177,10 @@ type RuleTypeId struct {
 	// This member is required.
 	Category RuleCategory
 
-	// The rule provider, such as the DeploymentWindow rule.
+	// The rule provider, such as the DeploymentWindow rule. For a list of rule
+	// provider names, see the rules listed in the [CodePipeline rule reference].
+	//
+	// [CodePipeline rule reference]: https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html
 	//
 	// This member is required.
 	Provider *string
@@ -2402,7 +2453,11 @@ type SucceededInStageFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The conditions for making checks that, if met, succeed a stage.
+// The conditions for making checks that, if met, succeed a stage. For more
+// information about conditions, see [Stage conditions]and [How do stage conditions work?].
+//
+// [Stage conditions]: https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html
+// [How do stage conditions work?]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html
 type SuccessConditions struct {
 
 	// The conditions that are success conditions.

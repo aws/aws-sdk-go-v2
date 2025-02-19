@@ -23,7 +23,7 @@ import (
 // a public registry such as Amazon ECR Public, or from your local machine. For
 // more information, see [Creating container images for your Amazon Lightsail container services]in the Amazon Lightsail Developer Guide.
 //
-// [Creating container images for your Amazon Lightsail container services]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images
+// [Creating container images for your Amazon Lightsail container services]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-creating-container-images
 func (c *Client) CreateContainerServiceDeployment(ctx context.Context, params *CreateContainerServiceDeploymentInput, optFns ...func(*Options)) (*CreateContainerServiceDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateContainerServiceDeploymentInput{}

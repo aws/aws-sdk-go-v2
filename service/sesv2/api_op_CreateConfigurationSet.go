@@ -40,6 +40,10 @@ type CreateConfigurationSetInput struct {
 	// This member is required.
 	ConfigurationSetName *string
 
+	// An object that defines the MailManager archiving options for emails that you
+	// send using the configuration set.
+	ArchivingOptions *types.ArchivingOptions
+
 	// An object that defines the dedicated IP pool that is used to send emails that
 	// you send using the configuration set.
 	DeliveryOptions *types.DeliveryOptions

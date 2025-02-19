@@ -18,7 +18,7 @@ import (
 // via request tags and resource tags applied to the resource identified by
 // instance snapshot name . For more information, see the [Amazon Lightsail Developer Guide].
 //
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateInstancesFromSnapshot(ctx context.Context, params *CreateInstancesFromSnapshotInput, optFns ...func(*Options)) (*CreateInstancesFromSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateInstancesFromSnapshotInput{}
@@ -100,7 +100,7 @@ type CreateInstancesFromSnapshotInput struct {
 	//   - Define this parameter only when creating a new instance from an automatic
 	//   snapshot. For more information, see the [Amazon Lightsail Developer Guide].
 	//
-	// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+	// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots
 	RestoreDate *string
 
 	// The name of the source instance from which the source automatic snapshot was
@@ -115,7 +115,7 @@ type CreateInstancesFromSnapshotInput struct {
 	//   - Define this parameter only when creating a new instance from an automatic
 	//   snapshot. For more information, see the [Amazon Lightsail Developer Guide].
 	//
-	// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+	// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots
 	SourceInstanceName *string
 
 	// The tag keys and optional values to add to the resource during create.
@@ -135,7 +135,7 @@ type CreateInstancesFromSnapshotInput struct {
 	//   - Define this parameter only when creating a new instance from an automatic
 	//   snapshot. For more information, see the [Amazon Lightsail Developer Guide].
 	//
-	// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+	// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots
 	UseLatestRestorableAutoSnapshot *bool
 
 	// You can create a launch script that configures a server with additional user
@@ -145,7 +145,7 @@ type CreateInstancesFromSnapshotInput struct {
 	// instance varies. Amazon Linux and CentOS use yum , Debian and Ubuntu use apt-get
 	// , and FreeBSD uses pkg . For a complete list, see the [Amazon Lightsail Developer Guide].
 	//
-	// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image
+	// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/compare-options-choose-lightsail-instance-image
 	UserData *string
 
 	noSmithyDocumentSerde

@@ -29,7 +29,7 @@ import (
 // Use the get instance snapshots or get disk snapshots operations to get a list
 // of snapshots that you can export to Amazon EC2.
 //
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) ExportSnapshot(ctx context.Context, params *ExportSnapshotInput, optFns ...func(*Options)) (*ExportSnapshotOutput, error) {
 	if params == nil {
 		params = &ExportSnapshotInput{}

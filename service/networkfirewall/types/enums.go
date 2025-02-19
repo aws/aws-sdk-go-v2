@@ -50,6 +50,25 @@ func (ConfigurationSyncState) Values() []ConfigurationSyncState {
 	}
 }
 
+type EnabledAnalysisType string
+
+// Enum values for EnabledAnalysisType
+const (
+	EnabledAnalysisTypeTlsSni   EnabledAnalysisType = "TLS_SNI"
+	EnabledAnalysisTypeHttpHost EnabledAnalysisType = "HTTP_HOST"
+)
+
+// Values returns all known values for EnabledAnalysisType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnabledAnalysisType) Values() []EnabledAnalysisType {
+	return []EnabledAnalysisType{
+		"TLS_SNI",
+		"HTTP_HOST",
+	}
+}
+
 type EncryptionType string
 
 // Enum values for EncryptionType

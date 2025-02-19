@@ -20,7 +20,7 @@ import (
 // control via resource tags applied to the resource identified by load balancer
 // name . For more information, see the [Lightsail Developer Guide].
 //
-// [Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+// [Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 func (c *Client) AttachInstancesToLoadBalancer(ctx context.Context, params *AttachInstancesToLoadBalancerInput, optFns ...func(*Options)) (*AttachInstancesToLoadBalancerOutput, error) {
 	if params == nil {
 		params = &AttachInstancesToLoadBalancerInput{}

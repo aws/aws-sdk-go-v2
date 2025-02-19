@@ -14,7 +14,7 @@ import (
 // Returns the available automatic snapshots for an instance or disk. For more
 // information, see the [Amazon Lightsail Developer Guide].
 //
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots
 func (c *Client) GetAutoSnapshots(ctx context.Context, params *GetAutoSnapshotsInput, optFns ...func(*Options)) (*GetAutoSnapshotsOutput, error) {
 	if params == nil {
 		params = &GetAutoSnapshotsInput{}

@@ -14,7 +14,7 @@ import (
 // Enables or modifies an add-on for an Amazon Lightsail resource. For more
 // information, see the [Amazon Lightsail Developer Guide].
 //
-// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+// [Amazon Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots
 func (c *Client) EnableAddOn(ctx context.Context, params *EnableAddOnInput, optFns ...func(*Options)) (*EnableAddOnOutput, error) {
 	if params == nil {
 		params = &EnableAddOnInput{}

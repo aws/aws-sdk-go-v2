@@ -20,7 +20,7 @@ import (
 // and a banner displayed on the Amazon Lightsail console. For more information,
 // see [Alarms in Amazon Lightsail].
 //
-// [Alarms in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms
+// [Alarms in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms
 func (c *Client) GetAlarms(ctx context.Context, params *GetAlarmsInput, optFns ...func(*Options)) (*GetAlarmsOutput, error) {
 	if params == nil {
 		params = &GetAlarmsInput{}

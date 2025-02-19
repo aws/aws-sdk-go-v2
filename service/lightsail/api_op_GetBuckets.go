@@ -19,7 +19,7 @@ import (
 // For more information about buckets, see [Buckets in Amazon Lightsail] in the Amazon Lightsail Developer
 // Guide.
 //
-// [Buckets in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail
+// [Buckets in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/buckets-in-amazon-lightsail
 func (c *Client) GetBuckets(ctx context.Context, params *GetBucketsInput, optFns ...func(*Options)) (*GetBucketsOutput, error) {
 	if params == nil {
 		params = &GetBucketsInput{}
@@ -67,7 +67,7 @@ type GetBucketsOutput struct {
 	// For more information about this feature and how it affects Lightsail buckets,
 	// see [Block public access for buckets in Amazon Lightsail].
 	//
-	// [Block public access for buckets in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-block-public-access-for-buckets
+	// [Block public access for buckets in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-block-public-access-for-buckets
 	AccountLevelBpaSync *types.AccountLevelBpaSync
 
 	// An array of objects that describe buckets.

@@ -6635,6 +6635,11 @@ func awsAwsjson11_deserializeDocumentActionDeclaration(v **types.ActionDeclarati
 				return err
 			}
 
+		case "environmentVariables":
+			if err := awsAwsjson11_deserializeDocumentEnvironmentVariableList(&sv.EnvironmentVariables, value); err != nil {
+				return err
+			}
+
 		case "inputArtifacts":
 			if err := awsAwsjson11_deserializeDocumentInputArtifactList(&sv.InputArtifacts, value); err != nil {
 				return err
@@ -9391,6 +9396,89 @@ func awsAwsjson11_deserializeDocumentEncryptionKey(v **types.EncryptionKey, valu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEnvironmentVariable(v **types.EnvironmentVariable, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EnvironmentVariable
+	if *v == nil {
+		sv = &types.EnvironmentVariable{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentVariableName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentVariableValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEnvironmentVariableList(v *[]types.EnvironmentVariable, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EnvironmentVariable
+	if *v == nil {
+		cv = []types.EnvironmentVariable{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EnvironmentVariable
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEnvironmentVariable(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

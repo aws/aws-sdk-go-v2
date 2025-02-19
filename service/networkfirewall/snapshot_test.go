@@ -290,6 +290,30 @@ func TestCheckSnapshot_DisassociateSubnets(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAnalysisReportResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAnalysisReportResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAnalysisReportResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAnalysisReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnalysisReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAnalysisReports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListFirewallPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFirewallPolicies(context.Background(), nil, func(o *Options) {
@@ -362,6 +386,18 @@ func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartAnalysisReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAnalysisReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAnalysisReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -379,6 +415,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateFirewallAnalysisSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFirewallAnalysisSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateFirewallAnalysisSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -721,6 +769,30 @@ func TestUpdateSnapshot_DisassociateSubnets(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAnalysisReportResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAnalysisReportResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAnalysisReportResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAnalysisReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnalysisReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAnalysisReports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListFirewallPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFirewallPolicies(context.Background(), nil, func(o *Options) {
@@ -793,6 +865,18 @@ func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartAnalysisReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAnalysisReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAnalysisReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -810,6 +894,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateFirewallAnalysisSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFirewallAnalysisSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateFirewallAnalysisSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

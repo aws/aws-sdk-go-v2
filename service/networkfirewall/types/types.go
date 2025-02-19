@@ -59,6 +59,32 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+// A report that captures key activity from the last 30 days of network traffic
+// monitored by your firewall.
+//
+// You can generate up to one report per traffic type, per 30 day period. For
+// example, when you successfully create an HTTP traffic report, you cannot create
+// another HTTP traffic report until 30 days pass. Alternatively, if you generate a
+// report that combines metrics on both HTTP and HTTPS traffic, you cannot create
+// another report for either traffic type until 30 days pass.
+type AnalysisReport struct {
+
+	// The unique ID of the query that ran when you requested an analysis report.
+	AnalysisReportId *string
+
+	// The type of traffic that will be used to generate a report.
+	AnalysisType EnabledAnalysisType
+
+	// The date and time the analysis report was ran.
+	ReportTime *time.Time
+
+	// The status of the analysis report you specify. Statuses include RUNNING ,
+	// COMPLETED , or FAILED .
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // The analysis result for Network Firewall's stateless rule group analyzer. Every
 // time you call CreateRuleGroup, UpdateRuleGroup, or DescribeRuleGroup on a stateless rule group, Network Firewall analyzes the
 // stateless rule groups in your account and identifies the rules that might
@@ -66,6 +92,9 @@ type Address struct {
 // detects a rule that's routing traffic asymmetrically, which impacts the
 // service's ability to properly process traffic, the service includes the rule in
 // a list of analysis results.
+//
+// The AnalysisResult data type is not related to traffic analysis reports you
+// generate using StartAnalysisReport. For information on traffic analysis report results, see AnalysisTypeReportResult.
 type AnalysisResult struct {
 
 	// Provides analysis details for the identified rule.
@@ -103,6 +132,32 @@ type AnalysisResult struct {
 	//   for changes in TCP flags throughout the TCP connection cycle, for example SYN
 	//   and ACK flags used in a 3-way TCP handshake.
 	IdentifiedType IdentifiedType
+
+	noSmithyDocumentSerde
+}
+
+// The results of a COMPLETED analysis report generated with StartAnalysisReport.
+//
+// For an example of traffic analysis report results, see the response syntax of GetAnalysisReportResults.
+type AnalysisTypeReportResult struct {
+
+	// The most frequently accessed domains.
+	Domain *string
+
+	// The date and time any domain was first accessed (within the last 30 day period).
+	FirstAccessed *time.Time
+
+	// The number of attempts made to access a observed domain.
+	Hits *Hits
+
+	// The date and time any domain was last accessed (within the last 30 day period).
+	LastAccessed *time.Time
+
+	// The type of traffic captured by the analysis report.
+	Protocol *string
+
+	// The number of unique source IP addresses that connected to a domain.
+	UniqueSources *UniqueSources
 
 	noSmithyDocumentSerde
 }
@@ -335,6 +390,10 @@ type Firewall struct {
 
 	// A description of the firewall.
 	Description *string
+
+	// An optional setting indicating the specific traffic analysis types to enable on
+	// the firewall.
+	EnabledAnalysisTypes []EnabledAnalysisType
 
 	// A complex type that contains the Amazon Web Services KMS encryption
 	// configuration settings for your firewall.
@@ -693,6 +752,15 @@ type Header struct {
 	//
 	// This member is required.
 	SourcePort *string
+
+	noSmithyDocumentSerde
+}
+
+// Attempts made to a access domain.
+type Hits struct {
+
+	// The number of attempts made to access a domain.
+	Count int32
 
 	noSmithyDocumentSerde
 }
@@ -1128,7 +1196,7 @@ type RuleOption struct {
 	// (signature ID), and can optionally include other keywords. For information about
 	// Suricata compatible keywords, see [Rule options]in the Suricata documentation.
 	//
-	// [Rule options]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
 	//
 	// This member is required.
 	Keyword *string
@@ -1138,7 +1206,7 @@ type RuleOption struct {
 	// the Keyword . For more information about the settings for specific options, see [Rule options]
 	// .
 	//
-	// [Rule options]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
 	Settings []string
 
 	noSmithyDocumentSerde
@@ -1169,7 +1237,7 @@ type RulesSource struct {
 	// protocol, source and destination, ports, direction, and rule options. For
 	// information about the Suricata Rules format, see [Rules Format].
 	//
-	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
+	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
 	StatefulRules []StatefulRule
 
 	// Stateless inspection criteria to be used in a stateless rule group.
@@ -1410,7 +1478,7 @@ type StatefulEngineOptions struct {
 // destination, ports, direction, and rule options. For information about the
 // Suricata Rules format, see [Rules Format].
 //
-// [Rules Format]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
+// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
 type StatefulRule struct {
 
 	// Defines what Network Firewall should do with the packets in a traffic flow when
@@ -1785,6 +1853,15 @@ type TLSInspectionConfigurationResponse struct {
 
 	// The key:value pairs to associate with the resource.
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// A unique source IP address that connected to a domain.
+type UniqueSources struct {
+
+	// The number of unique source IP addresses that connected to a domain.
+	Count int32
 
 	noSmithyDocumentSerde
 }

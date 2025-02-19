@@ -955,6 +955,11 @@ func validateActionDeclaration(v *types.ActionDeclaration) error {
 			invalidParams.AddNested("InputArtifacts", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EnvironmentVariables != nil {
+		if err := validateEnvironmentVariableList(v.EnvironmentVariables); err != nil {
+			invalidParams.AddNested("EnvironmentVariables", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1349,6 +1354,41 @@ func validateEncryptionKey(v *types.EncryptionKey) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEnvironmentVariable(v *types.EnvironmentVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentVariable"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEnvironmentVariableList(v []types.EnvironmentVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentVariableList"}
+	for i := range v {
+		if err := validateEnvironmentVariable(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

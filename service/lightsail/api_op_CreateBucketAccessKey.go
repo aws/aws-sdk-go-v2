@@ -24,7 +24,7 @@ import (
 // first create an access key; you cannot get the secret access key later. If you
 // lose the secret access key, you must create a new access key.
 //
-// [Creating access keys for a bucket in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
+// [Creating access keys for a bucket in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-creating-bucket-access-keys
 // [GetBucketAccessKeys]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html
 func (c *Client) CreateBucketAccessKey(ctx context.Context, params *CreateBucketAccessKeyInput, optFns ...func(*Options)) (*CreateBucketAccessKeyOutput, error) {
 	if params == nil {

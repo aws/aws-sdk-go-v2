@@ -67,17 +67,30 @@ type CreateClusterInput struct {
 	// Amazon SageMaker HyperPod cluster. You can control access to and from your
 	// resources by configuring your VPC. For more information, see [Give SageMaker access to resources in your Amazon VPC].
 	//
-	// If you configure your VPC with IPv6 support and specify subnets with IPv6
-	// addressing enabled in your VPC configuration, the cluster automatically uses
-	// IPv6 addressing for network communication.
+	// When your Amazon VPC and subnets support IPv6, network communications differ
+	// based on the cluster orchestration platform:
 	//
-	// For information about adding IPv6 support for your VPC, see [IPv6 support for your VPC].
+	//   - Slurm-orchestrated clusters automatically configure nodes with dual IPv6
+	//   and IPv4 addresses, allowing immediate IPv6 network communications.
 	//
-	// For information about creating a new VPC for use with IPv6, see [Create a VPC].
+	//   - In Amazon EKS-orchestrated clusters, nodes receive dual-stack addressing,
+	//   but pods can only use IPv6 when the Amazon EKS cluster is explicitly
+	//   IPv6-enabled. For information about deploying an IPv6 Amazon EKS cluster, see [Amazon EKS IPv6 Cluster Deployment]
+	//   .
+	//
+	// Additional resources for IPv6 configuration:
+	//
+	//   - For information about adding IPv6 support to your VPC, see to [IPv6 Support for VPC].
+	//
+	//   - For information about creating a new IPv6-compatible VPC, see [Amazon VPC Creation Guide].
+	//
+	//   - To configure SageMaker HyperPod with a custom Amazon VPC, see [Custom Amazon VPC Setup for SageMaker HyperPod].
 	//
 	// [Give SageMaker access to resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
-	// [Create a VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html
-	// [IPv6 support for your VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html
+	// [IPv6 Support for VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html
+	// [Amazon EKS IPv6 Cluster Deployment]: https://docs.aws.amazon.com/eks/latest/userguide/deploy-ipv6-cluster.html#_deploy_an_ipv6_cluster_with_eksctl
+	// [Amazon VPC Creation Guide]: https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html
+	// [Custom Amazon VPC Setup for SageMaker HyperPod]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-optional-vpc
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

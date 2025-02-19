@@ -185,6 +185,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"CannotParse",
 		"FieldValidationFailed",
 		"Other",
+		"UnknownField",
 	}
 }
 

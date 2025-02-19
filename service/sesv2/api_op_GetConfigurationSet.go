@@ -49,6 +49,10 @@ type GetConfigurationSetInput struct {
 // Information about a configuration set.
 type GetConfigurationSetOutput struct {
 
+	// An object that defines the MailManager archive where sent emails are archived
+	// that you send using the configuration set.
+	ArchivingOptions *types.ArchivingOptions
+
 	// The name of the configuration set.
 	ConfigurationSetName *string
 

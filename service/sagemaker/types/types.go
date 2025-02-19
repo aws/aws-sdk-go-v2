@@ -3289,8 +3289,9 @@ type ClusterInstanceGroupDetails struct {
 	// cluster instance group is created or updated.
 	OnStartDeepHealthChecks []DeepHealthCheckType
 
-	// The customized VPC configuration at the instance group level that overrides the
-	// default VPC configuration of the SageMaker HyperPod cluster.
+	// The customized Amazon VPC configuration at the instance group level that
+	// overrides the default Amazon VPC configuration of the SageMaker HyperPod
+	// cluster.
 	OverrideVpcConfig *VpcConfig
 
 	// The current status of the cluster instance group.
@@ -3375,23 +3376,36 @@ type ClusterInstanceGroupSpecification struct {
 	// cluster instance group is created or updated.
 	OnStartDeepHealthChecks []DeepHealthCheckType
 
-	// To configure multi-AZ deployments, customize the VPC configuration at the
-	// instance group level. You can specify different subnets and security groups
+	// To configure multi-AZ deployments, customize the Amazon VPC configuration at
+	// the instance group level. You can specify different subnets and security groups
 	// across different AZs in the instance group specification to override a SageMaker
-	// HyperPod cluster's default VPC configuration. For more information about
+	// HyperPod cluster's default Amazon VPC configuration. For more information about
 	// deploying a cluster in multiple AZs, see [Setting up SageMaker HyperPod clusters across multiple AZs].
 	//
-	// If you configure your VPC with IPv6 support and specify subnets with IPv6
-	// addressing enabled in your instance group VPC configuration, the nodes
-	// automatically use IPv6 addressing for network communication.
+	// When your Amazon VPC and subnets support IPv6, network communications differ
+	// based on the cluster orchestration platform:
 	//
-	// For information about adding IPv6 support for your VPC, see [IPv6 support for your VPC].
+	//   - Slurm-orchestrated clusters automatically configure nodes with dual IPv6
+	//   and IPv4 addresses, allowing immediate IPv6 network communications.
 	//
-	// For information about creating a new VPC for use with IPv6, see [Create a VPC].
+	//   - In Amazon EKS-orchestrated clusters, nodes receive dual-stack addressing,
+	//   but pods can only use IPv6 when the Amazon EKS cluster is explicitly
+	//   IPv6-enabled. For information about deploying an IPv6 Amazon EKS cluster, see [Amazon EKS IPv6 Cluster Deployment]
+	//   .
+	//
+	// Additional resources for IPv6 configuration:
+	//
+	//   - For information about adding IPv6 support to your VPC, see to [IPv6 Support for VPC].
+	//
+	//   - For information about creating a new IPv6-compatible VPC, see [Amazon VPC Creation Guide].
+	//
+	//   - To configure SageMaker HyperPod with a custom Amazon VPC, see [Custom Amazon VPC Setup for SageMaker HyperPod].
 	//
 	// [Setting up SageMaker HyperPod clusters across multiple AZs]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-multiple-availability-zones
-	// [Create a VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html
-	// [IPv6 support for your VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html
+	// [IPv6 Support for VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html
+	// [Amazon EKS IPv6 Cluster Deployment]: https://docs.aws.amazon.com/eks/latest/userguide/deploy-ipv6-cluster.html#_deploy_an_ipv6_cluster_with_eksctl
+	// [Amazon VPC Creation Guide]: https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html
+	// [Custom Amazon VPC Setup for SageMaker HyperPod]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-optional-vpc
 	OverrideVpcConfig *VpcConfig
 
 	// Specifies the value for Threads per core. For instance types that support
@@ -3519,8 +3533,9 @@ type ClusterNodeDetails struct {
 	// The LifeCycle configuration applied to the instance.
 	LifeCycleConfig *ClusterLifeCycleConfig
 
-	// The customized VPC configuration at the instance group level that overrides the
-	// default VPC configuration of the SageMaker HyperPod cluster.
+	// The customized Amazon VPC configuration at the instance group level that
+	// overrides the default Amazon VPC configuration of the SageMaker HyperPod
+	// cluster.
 	OverrideVpcConfig *VpcConfig
 
 	// The placement details of the SageMaker HyperPod cluster node.
@@ -3534,8 +3549,8 @@ type ClusterNodeDetails struct {
 
 	// The private primary IPv6 address of the SageMaker HyperPod cluster node when
 	// configured with an Amazon VPC that supports IPv6 and includes subnets with IPv6
-	// addressing enabled in either the cluster VPC configuration or the instance group
-	// VPC configuration.
+	// addressing enabled in either the cluster Amazon VPC configuration or the
+	// instance group Amazon VPC configuration.
 	PrivatePrimaryIpv6 *string
 
 	// The number of threads per CPU core you specified under CreateCluster .
@@ -14662,27 +14677,27 @@ type ProductionVariant struct {
 	// al2-ami-sagemaker-inference-gpu-2
 	//   - Accelerator: GPU
 	//
-	//   - NVIDIA driver version: 535.54.03
+	//   - NVIDIA driver version: 535
 	//
 	//   - CUDA version: 12.2
 	//
 	// al2-ami-sagemaker-inference-gpu-2-1
 	//   - Accelerator: GPU
 	//
-	//   - NVIDIA driver version: 535.54.03
+	//   - NVIDIA driver version: 535
 	//
-	//   - CUDA driver version: 12.2
+	//   - CUDA version: 12.2
 	//
-	//   - CUDA Container Toolkit with disabled CUDA-compat mounting
+	//   - NVIDIA Container Toolkit with disabled CUDA-compat mounting
 	//
 	// al2-ami-sagemaker-inference-gpu-3-1
 	//   - Accelerator: GPU
 	//
-	//   - NVIDIA driver version: 550.144.01
+	//   - NVIDIA driver version: 550
 	//
 	//   - CUDA version: 12.4
 	//
-	//   - Container Toolkit with disabled CUDA-compat mounting
+	//   - NVIDIA Container Toolkit with disabled CUDA-compat mounting
 	InferenceAmiVersion ProductionVariantInferenceAmiVersion
 
 	// Number of instances to launch initially.

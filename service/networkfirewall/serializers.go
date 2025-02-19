@@ -1175,6 +1175,128 @@ func (m *awsAwsjson10_serializeOpDisassociateSubnets) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetAnalysisReportResults struct {
+}
+
+func (*awsAwsjson10_serializeOpGetAnalysisReportResults) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetAnalysisReportResults) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAnalysisReportResultsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.GetAnalysisReportResults")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetAnalysisReportResultsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpListAnalysisReports struct {
+}
+
+func (*awsAwsjson10_serializeOpListAnalysisReports) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListAnalysisReports) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAnalysisReportsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.ListAnalysisReports")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListAnalysisReportsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListFirewallPolicies struct {
 }
 
@@ -1541,6 +1663,67 @@ func (m *awsAwsjson10_serializeOpPutResourcePolicy) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpStartAnalysisReport struct {
+}
+
+func (*awsAwsjson10_serializeOpStartAnalysisReport) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpStartAnalysisReport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartAnalysisReportInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.StartAnalysisReport")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentStartAnalysisReportInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpTagResource struct {
 }
 
@@ -1646,6 +1829,67 @@ func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpUpdateFirewallAnalysisSettings struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateFirewallAnalysisSettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateFirewallAnalysisSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateFirewallAnalysisSettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.UpdateFirewallAnalysisSettings")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateFirewallAnalysisSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2331,6 +2575,17 @@ func awsAwsjson10_serializeDocumentDimensions(v []types.Dimension, value smithyj
 		if err := awsAwsjson10_serializeDocumentDimension(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentEnabledAnalysisTypes(v []types.EnabledAnalysisType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -3540,6 +3795,13 @@ func awsAwsjson10_serializeOpDocumentCreateFirewallInput(v *CreateFirewallInput,
 		ok.String(*v.Description)
 	}
 
+	if v.EnabledAnalysisTypes != nil {
+		ok := object.Key("EnabledAnalysisTypes")
+		if err := awsAwsjson10_serializeDocumentEnabledAnalysisTypes(v.EnabledAnalysisTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EncryptionConfiguration != nil {
 		ok := object.Key("EncryptionConfiguration")
 		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
@@ -3983,6 +4245,65 @@ func awsAwsjson10_serializeOpDocumentDisassociateSubnetsInput(v *DisassociateSub
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentGetAnalysisReportResultsInput(v *GetAnalysisReportResultsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisReportId != nil {
+		ok := object.Key("AnalysisReportId")
+		ok.String(*v.AnalysisReportId)
+	}
+
+	if v.FirewallArn != nil {
+		ok := object.Key("FirewallArn")
+		ok.String(*v.FirewallArn)
+	}
+
+	if v.FirewallName != nil {
+		ok := object.Key("FirewallName")
+		ok.String(*v.FirewallName)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListAnalysisReportsInput(v *ListAnalysisReportsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FirewallArn != nil {
+		ok := object.Key("FirewallArn")
+		ok.String(*v.FirewallArn)
+	}
+
+	if v.FirewallName != nil {
+		ok := object.Key("FirewallName")
+		ok.String(*v.FirewallName)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentListFirewallPoliciesInput(v *ListFirewallPoliciesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4112,6 +4433,28 @@ func awsAwsjson10_serializeOpDocumentPutResourcePolicyInput(v *PutResourcePolicy
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentStartAnalysisReportInput(v *StartAnalysisReportInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AnalysisType) > 0 {
+		ok := object.Key("AnalysisType")
+		ok.String(string(v.AnalysisType))
+	}
+
+	if v.FirewallArn != nil {
+		ok := object.Key("FirewallArn")
+		ok.String(*v.FirewallArn)
+	}
+
+	if v.FirewallName != nil {
+		ok := object.Key("FirewallName")
+		ok.String(*v.FirewallName)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4145,6 +4488,35 @@ func awsAwsjson10_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 		if err := awsAwsjson10_serializeDocumentTagKeyList(v.TagKeys, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateFirewallAnalysisSettingsInput(v *UpdateFirewallAnalysisSettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnabledAnalysisTypes != nil {
+		ok := object.Key("EnabledAnalysisTypes")
+		if err := awsAwsjson10_serializeDocumentEnabledAnalysisTypes(v.EnabledAnalysisTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FirewallArn != nil {
+		ok := object.Key("FirewallArn")
+		ok.String(*v.FirewallArn)
+	}
+
+	if v.FirewallName != nil {
+		ok := object.Key("FirewallName")
+		ok.String(*v.FirewallName)
+	}
+
+	if v.UpdateToken != nil {
+		ok := object.Key("UpdateToken")
+		ok.String(*v.UpdateToken)
 	}
 
 	return nil

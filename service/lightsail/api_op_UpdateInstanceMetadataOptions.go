@@ -18,7 +18,7 @@ import (
 // changes to applied in subsequent GetInstance or GetInstances API calls. For
 // more information, see [Use IMDSv2 with an Amazon Lightsail instance]in the Amazon Lightsail Developer Guide.
 //
-// [Use IMDSv2 with an Amazon Lightsail instance]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-instance-metadata-service
+// [Use IMDSv2 with an Amazon Lightsail instance]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-instance-metadata-service
 func (c *Client) UpdateInstanceMetadataOptions(ctx context.Context, params *UpdateInstanceMetadataOptionsInput, optFns ...func(*Options)) (*UpdateInstanceMetadataOptionsOutput, error) {
 	if params == nil {
 		params = &UpdateInstanceMetadataOptionsInput{}

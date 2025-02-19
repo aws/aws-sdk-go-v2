@@ -1,0 +1,8 @@
+{
+    "id": "a12f5105-7e52-49b2-941a-8762a9942e76",
+    "type": "feature",
+    "description": "Adds r8g instance type support to SageMaker Realtime Endpoints",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

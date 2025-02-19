@@ -878,6 +878,18 @@ func TestCheckSnapshot_PutAccountVdmAttributes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutConfigurationSetArchivingOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutConfigurationSetArchivingOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutConfigurationSetArchivingOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutConfigurationSetDeliveryOptions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutConfigurationSetDeliveryOptions(context.Background(), nil, func(o *Options) {
@@ -2022,6 +2034,18 @@ func TestUpdateSnapshot_PutAccountVdmAttributes(t *testing.T) {
 	_, err := svc.PutAccountVdmAttributes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAccountVdmAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutConfigurationSetArchivingOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutConfigurationSetArchivingOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutConfigurationSetArchivingOptions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

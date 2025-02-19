@@ -19,7 +19,7 @@ import (
 // For more information about access keys, see [Creating access keys for a bucket in Amazon Lightsail] in the Amazon Lightsail Developer
 // Guide.
 //
-// [Creating access keys for a bucket in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
+// [Creating access keys for a bucket in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-creating-bucket-access-keys
 func (c *Client) DeleteBucketAccessKey(ctx context.Context, params *DeleteBucketAccessKeyInput, optFns ...func(*Options)) (*DeleteBucketAccessKeyOutput, error) {
 	if params == nil {
 		params = &DeleteBucketAccessKeyInput{}
