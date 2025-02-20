@@ -1,6 +1,9 @@
 package transfermanager
 
-import "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+import (
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+	"github.com/aws/smithy-go/logging"
+)
 
 // Options provides params needed for transfer api calls
 type Options struct {
@@ -16,7 +19,7 @@ type Options struct {
 	MultipartUploadThreshold int64
 
 	// Option to disable checksum validation for download
-	DisableChecksum bool
+	DisableChecksumValidation bool
 
 	// Checksum algorithm to use for upload
 	ChecksumAlgorithm types.ChecksumAlgorithm
@@ -27,6 +30,15 @@ type Options struct {
 	//
 	// The concurrency pool is not shared between calls to Upload.
 	Concurrency int
+
+	// The type indicating if object is multi-downloaded in parts or ranges
+	MultipartDownloadType types.MultipartDownloadType
+
+	// PartBodyMaxRetries is the number of retry attempts to make for failed part downloads.
+	PartBodyMaxRetries int
+
+	// Logger to send logging message to
+	Logger logging.Logger
 }
 
 func (o *Options) init() {
@@ -53,6 +65,18 @@ func resolveChecksumAlgorithm(o *Options) {
 func resolveMultipartUploadThreshold(o *Options) {
 	if o.MultipartUploadThreshold == 0 {
 		o.MultipartUploadThreshold = defaultMultipartUploadThreshold
+	}
+}
+
+func resolveMultipartDownloadType(o *Options) {
+	if o.MultipartDownloadType == "" {
+		o.MultipartDownloadType = types.MultipartDownloadTypePart
+	}
+}
+
+func resolvePartBodyMaxRetries(o *Options) {
+	if o.PartBodyMaxRetries == 0 {
+		o.PartBodyMaxRetries = defaultPartBodyMaxRetries
 	}
 }
 
