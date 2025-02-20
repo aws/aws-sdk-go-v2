@@ -2684,6 +2684,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the user can use deep links that open automatically when connecting to\n         a session.</p>"
                     }
+                },
+                "toolbarConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#ToolbarConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4833,6 +4839,12 @@
                 }
             }
         },
+        "com.amazonaws.workspacesweb#HiddenToolbarItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesweb#ToolbarItem"
+            }
+        },
         "com.amazonaws.workspacesweb#IdentityProvider": {
             "type": "structure",
             "members": {
@@ -6419,6 +6431,45 @@
                 }
             }
         },
+        "com.amazonaws.workspacesweb#MaxDisplayResolution": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "size4096X2160",
+                        "name": "RESOLUTION_DCI_4K"
+                    },
+                    {
+                        "value": "size3840X2160",
+                        "name": "RESOLUTION_UHD_4K"
+                    },
+                    {
+                        "value": "size3440X1440",
+                        "name": "RESOLUTION_1440P_ULTRA_WIDE"
+                    },
+                    {
+                        "value": "size2560X1440",
+                        "name": "RESOLUTION_1440P"
+                    },
+                    {
+                        "value": "size1920X1080",
+                        "name": "RESOLUTION_1080P"
+                    },
+                    {
+                        "value": "size1280X720",
+                        "name": "RESOLUTION_720P"
+                    },
+                    {
+                        "value": "size1024X768",
+                        "name": "RESOLUTION_768P"
+                    },
+                    {
+                        "value": "size800X600",
+                        "name": "RESOLUTION_600P"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.workspacesweb#MaxResults": {
             "type": "integer",
             "traits": {
@@ -7587,6 +7638,80 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.workspacesweb#ToolbarConfiguration": {
+            "type": "structure",
+            "members": {
+                "toolbarType": {
+                    "target": "com.amazonaws.workspacesweb#ToolbarType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of toolbar displayed during the session.</p>"
+                    }
+                },
+                "visualMode": {
+                    "target": "com.amazonaws.workspacesweb#VisualMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visual mode of the toolbar.</p>"
+                    }
+                },
+                "hiddenToolbarItems": {
+                    "target": "com.amazonaws.workspacesweb#HiddenToolbarItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of toolbar items to be hidden.</p>"
+                    }
+                },
+                "maxDisplayResolution": {
+                    "target": "com.amazonaws.workspacesweb#MaxDisplayResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum display resolution that is allowed for the session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>"
+            }
+        },
+        "com.amazonaws.workspacesweb#ToolbarItem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Windows",
+                        "name": "WINDOWS"
+                    },
+                    {
+                        "value": "DualMonitor",
+                        "name": "DUAL_MONITOR"
+                    },
+                    {
+                        "value": "FullScreen",
+                        "name": "FULL_SCREEN"
+                    },
+                    {
+                        "value": "Webcam",
+                        "name": "WEBCAM"
+                    },
+                    {
+                        "value": "Microphone",
+                        "name": "MICROPHONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workspacesweb#ToolbarType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Floating",
+                        "name": "FLOATING"
+                    },
+                    {
+                        "value": "Docked",
+                        "name": "DOCKED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.workspacesweb#TrustStore": {
             "type": "structure",
             "members": {
@@ -8566,6 +8691,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the user can use deep links that open automatically when connecting to\n         a session.</p>"
                     }
+                },
+                "toolbarConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#ToolbarConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8774,6 +8905,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the user can use deep links that open automatically when connecting to\n         a session.</p>"
                     }
+                },
+                "toolbarConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#ToolbarConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8832,6 +8969,9 @@
                 },
                 "deepLinkAllowed": {
                     "target": "com.amazonaws.workspacesweb#EnabledType"
+                },
+                "toolbarConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#ToolbarConfiguration"
                 }
             },
             "create": {
@@ -8928,6 +9068,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the user can use deep links that open automatically when connecting to\n         a session.</p>"
                     }
+                },
+                "toolbarConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#ToolbarConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9017,6 +9163,21 @@
                     {
                         "value": "other",
                         "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workspacesweb#VisualMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Dark",
+                        "name": "DARK"
+                    },
+                    {
+                        "value": "Light",
+                        "name": "LIGHT"
                     }
                 ]
             }

@@ -4480,7 +4480,7 @@
                 "DatabaseInsightsMode": {
                     "target": "com.amazonaws.rds#DatabaseInsightsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode of Database Insights to enable for the DB cluster.</p>\n         <p>If you set this value to <code>advanced</code>, you must also set the <code>PerformanceInsightsEnabled</code>\n            parameter to <code>true</code> and the <code>PerformanceInsightsRetentionPeriod</code> parameter to 465.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The mode of Database Insights to enable for the DB cluster.</p>\n         <p>If you set this value to <code>advanced</code>, you must also set the <code>PerformanceInsightsEnabled</code>\n            parameter to <code>true</code> and the <code>PerformanceInsightsRetentionPeriod</code> parameter to 465.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -5232,7 +5232,7 @@
                 "DatabaseInsightsMode": {
                     "target": "com.amazonaws.rds#DatabaseInsightsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode of Database Insights to enable for the DB instance.</p>\n         <p>This setting only applies to Amazon Aurora DB instances.</p>\n         <note>\n            <p>Currently, this value is inherited from the DB cluster and can't be changed.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The mode of Database Insights to enable for the DB instance.</p>\n         <note>\n            <p>Aurora DB instances inherit this value from the DB cluster, so you can't change this value.</p>\n         </note>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -5591,7 +5591,7 @@
                 "DatabaseInsightsMode": {
                     "target": "com.amazonaws.rds#DatabaseInsightsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode of Database Insights to enable for the read replica.</p>\n         <note>\n            <p>Currently, this setting is not supported.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The mode of Database Insights to enable for the read replica.</p>\n         <note>\n            <p>This setting isn't supported.</p>\n         </note>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -21889,7 +21889,7 @@
                 "DatabaseInsightsMode": {
                     "target": "com.amazonaws.rds#DatabaseInsightsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB cluster.</p>\n         <p>If you change the value from <code>standard</code> to <code>advanced</code>, you must set the \n            <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> and the \n            <code>PerformanceInsightsRetentionPeriod</code> parameter to 465.</p>\n         <p>If you change the value from <code>advanced</code> to <code>standard</code>, you must \n            set the <code>PerformanceInsightsEnabled</code> parameter to <code>false</code>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB cluster.</p>\n         <p>If you change the value from <code>standard</code> to <code>advanced</code>, you must set the \n            <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> and the \n            <code>PerformanceInsightsRetentionPeriod</code> parameter to 465.</p>\n         <p>If you change the value from <code>advanced</code> to <code>standard</code>, you must \n            set the <code>PerformanceInsightsEnabled</code> parameter to <code>false</code>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -22514,7 +22514,7 @@
                 "DatabaseInsightsMode": {
                     "target": "com.amazonaws.rds#DatabaseInsightsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB instance.</p>\n         <p>This setting only applies to Amazon Aurora DB instances.</p>\n         <note>\n            <p>Currently, this value is inherited from the DB cluster and can't be changed.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB instance.</p>\n         <note>\n            <p>Aurora DB instances inherit this value from the DB cluster, so you can't change this value.</p>\n         </note>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -28634,7 +28634,7 @@
                 "DatabaseInsightsMode": {
                     "target": "com.amazonaws.rds#DatabaseInsightsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB instance.</p>\n         <p>This setting only applies to Amazon Aurora DB instances.</p>\n         <note>\n            <p>Currently, this value is inherited from the DB cluster and can't be changed.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB instance.</p>\n         <note>\n            <p>Aurora DB instances inherit this value from the DB cluster, so you can't change this value.</p>\n         </note>"
                     }
                 },
                 "EnablePerformanceInsights": {

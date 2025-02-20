@@ -9401,6 +9401,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The scope configuration for global or organization webhooks.</p>\n         <note>\n            <p>Global or organization webhooks are only available for GitHub and Github Enterprise webhooks.</p>\n         </note>"
                     }
+                },
+                "status": {
+                    "target": "com.amazonaws.codebuild#WebhookStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the webhook. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code>: The webhook is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code>: The webhook has failed to create.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code>: The webhook has succeeded and is active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>: The webhook is being deleted.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message associated with the status of a webhook.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9542,6 +9554,35 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GITLAB_GROUP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#WebhookStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
                     }
                 }
             }

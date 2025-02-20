@@ -443,7 +443,7 @@
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | \n<code>REMOTE_DESKTOP_SERVICES</code>\n         </p>"
                     }
                 },
                 "IdentityProviderArn": {
@@ -2069,7 +2069,7 @@
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | \n<code>REMOTE_DESKTOP_SERVICES</code>\n         </p>"
                     }
                 },
                 "IdentityProvider": {
@@ -2427,7 +2427,7 @@
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | \n<code>REMOTE_DESKTOP_SERVICES</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2646,7 +2646,7 @@
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | \n<code>REMOTE_DESKTOP_SERVICES</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2740,7 +2740,7 @@
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | \n<code>REMOTE_DESKTOP_SERVICES</code>\n         </p>"
                     }
                 },
                 "ProductUserArn": {
@@ -2989,7 +2989,7 @@
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | \n<code>REMOTE_DESKTOP_SERVICES</code>\n         </p>"
                     }
                 },
                 "IdentityProviderArn": {

@@ -7076,6 +7076,18 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ClusterInstanceGroupsToDelete": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ClusterInstancePlacement": {
             "type": "structure",
             "members": {
@@ -72206,6 +72218,12 @@
                     "target": "com.amazonaws.sagemaker#ClusterNodeRecovery",
                     "traits": {
                         "smithy.api#documentation": "<p>The node recovery mode to be applied to the SageMaker HyperPod cluster.</p>"
+                    }
+                },
+                "InstanceGroupsToDelete": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupsToDelete",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the names of the instance groups to delete. \n      Use a single <code>,</code> as the separator between multiple names.</p>"
                     }
                 }
             },
