@@ -1,3 +1,7 @@
+# v1.93.14 (2025-02-20)
+
+* **Documentation**: CloudWatch Database Insights now supports Amazon RDS.
+
 # v1.93.13 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

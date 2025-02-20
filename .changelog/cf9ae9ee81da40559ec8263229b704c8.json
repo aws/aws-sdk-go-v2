@@ -1,8 +1,0 @@
-{
-    "id": "cf9ae9ee-81da-4055-9ec8-263229b704c8",
-    "type": "feature",
-    "description": "Add webhook status and status message to AWS CodeBuild webhooks",
-    "modules": [
-        "service/codebuild"
-    ]
-}

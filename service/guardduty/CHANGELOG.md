@@ -1,3 +1,7 @@
+# v1.53.0 (2025-02-20)
+
+* **Feature**: Reduce the minimum number of required attack sequence signals from 2 to 1
+
 # v1.52.11 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

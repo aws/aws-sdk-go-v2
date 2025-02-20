@@ -1,3 +1,7 @@
+# v1.53.0 (2025-02-20)
+
+* **Feature**: Add webhook status and status message to AWS CodeBuild webhooks
+
 # v1.52.1 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

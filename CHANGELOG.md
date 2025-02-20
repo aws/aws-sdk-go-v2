@@ -1,3 +1,19 @@
+# Release (2025-02-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.53.0](service/codebuild/CHANGELOG.md#v1530-2025-02-20)
+  * **Feature**: Add webhook status and status message to AWS CodeBuild webhooks
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.53.0](service/guardduty/CHANGELOG.md#v1530-2025-02-20)
+  * **Feature**: Reduce the minimum number of required attack sequence signals from 2 to 1
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.14.12](service/licensemanagerusersubscriptions/CHANGELOG.md#v11412-2025-02-20)
+  * **Documentation**: Updates entity to include Microsoft RDS SAL as a valid type of user subscription.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.93.14](service/rds/CHANGELOG.md#v19314-2025-02-20)
+  * **Documentation**: CloudWatch Database Insights now supports Amazon RDS.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.177.0](service/sagemaker/CHANGELOG.md#v11770-2025-02-20)
+  * **Feature**: Added new capability in the UpdateCluster operation to remove instance groups from your SageMaker HyperPod cluster.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.26.0](service/workspacesweb/CHANGELOG.md#v1260-2025-02-20)
+  * **Feature**: Add support for toolbar configuration under user settings.
+
 # Release (2025-02-19)
 
 ## Module Highlights

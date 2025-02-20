@@ -1,8 +1,0 @@
-{
-    "id": "0a667fe9-7116-41e6-9801-17af0e599421",
-    "type": "documentation",
-    "description": "Updates entity to include Microsoft RDS SAL as a valid type of user subscription.",
-    "modules": [
-        "service/licensemanagerusersubscriptions"
-    ]
-}

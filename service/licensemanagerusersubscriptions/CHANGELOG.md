@@ -1,3 +1,7 @@
+# v1.14.12 (2025-02-20)
+
+* **Documentation**: Updates entity to include Microsoft RDS SAL as a valid type of user subscription.
+
 # v1.14.11 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

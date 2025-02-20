@@ -1,3 +1,7 @@
+# v1.26.0 (2025-02-20)
+
+* **Feature**: Add support for toolbar configuration under user settings.
+
 # v1.25.10 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

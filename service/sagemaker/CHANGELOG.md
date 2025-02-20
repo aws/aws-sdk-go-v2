@@ -1,3 +1,7 @@
+# v1.177.0 (2025-02-20)
+
+* **Feature**: Added new capability in the UpdateCluster operation to remove instance groups from your SageMaker HyperPod cluster.
+
 # v1.176.0 (2025-02-19)
 
 * **Feature**: Adds r8g instance type support to SageMaker Realtime Endpoints
