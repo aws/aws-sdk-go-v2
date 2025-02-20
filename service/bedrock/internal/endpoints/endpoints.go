@@ -146,7 +146,13 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-northeast-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "ap-northeast-3",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-south-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
@@ -171,11 +177,27 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "bedrock-ap-northeast-3",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock.ap-northeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-3",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "bedrock-ap-south-1",
 			}: endpoints.Endpoint{
 				Hostname: "bedrock.ap-south-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-ap-south-2",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock.ap-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-2",
 				},
 			},
 			endpoints.EndpointKey{
@@ -291,11 +313,27 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "bedrock-runtime-ap-northeast-3",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime.ap-northeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-3",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "bedrock-runtime-ap-south-1",
 			}: endpoints.Endpoint{
 				Hostname: "bedrock-runtime.ap-south-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-runtime-ap-south-2",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime.ap-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-2",
 				},
 			},
 			endpoints.EndpointKey{

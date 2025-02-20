@@ -1,0 +1,8 @@
+{
+    "id": "1faa95ee-641a-4fcd-88ad-7d519cea524f",
+    "type": "feature",
+    "description": "Add support for toolbar configuration under user settings.",
+    "modules": [
+        "service/workspacesweb"
+    ]
+}

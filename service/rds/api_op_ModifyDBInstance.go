@@ -328,9 +328,8 @@ type ModifyDBInstanceInput struct {
 
 	// Specifies the mode of Database Insights to enable for the DB instance.
 	//
-	// This setting only applies to Amazon Aurora DB instances.
-	//
-	// Currently, this value is inherited from the DB cluster and can't be changed.
+	// Aurora DB instances inherit this value from the DB cluster, so you can't change
+	// this value.
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.

@@ -176,7 +176,7 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The mode of Database Insights to enable for the read replica.
 	//
-	// Currently, this setting is not supported.
+	// This setting isn't supported.
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// Indicates whether the DB instance has a dedicated log volume (DLV) enabled.

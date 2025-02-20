@@ -1542,7 +1542,10 @@ type ImpersonatedUser struct {
 // observed in an attack sequence.
 type Indicator struct {
 
-	// Specific indicator keys observed in the attack sequence.
+	// Specific indicator keys observed in the attack sequence. For description of the
+	// valid values for key, see [Attack sequence finding details]in the Amazon GuardDuty User Guide.
+	//
+	// [Attack sequence finding details]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#guardduty-extended-threat-detection-attack-sequence-finding-details
 	//
 	// This member is required.
 	Key IndicatorType
@@ -1554,9 +1557,6 @@ type Indicator struct {
 	// SUSPICIOUS_NETWORK , then the value will be the name of the network. If the
 	// indicator key is ATTACK_TACTIC , then the value will be one of the MITRE
 	// tactics.
-	//
-	// For more information about the values associated with the key, see GuardDuty
-	// Extended Threat Detection in the GuardDuty User Guide.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -2030,7 +2030,7 @@ type MalwareProtectionPlanStatusReason struct {
 	Code *string
 
 	// Issue message that specifies the reason. For information about potential
-	// troubleshooting steps, see [Troubleshooting Malware Protection for S3 status issues]in the GuardDuty User Guide.
+	// troubleshooting steps, see [Troubleshooting Malware Protection for S3 status issues]in the Amazon GuardDuty User Guide.
 	//
 	// [Troubleshooting Malware Protection for S3 status issues]: https://docs.aws.amazon.com/guardduty/latest/ug/troubleshoot-s3-malware-protection-status-errors.html
 	Message *string
@@ -3873,7 +3873,8 @@ type Signal struct {
 	// The type of the signal used to identify an attack sequence.
 	//
 	// Signals can be GuardDuty findings or activities observed in data sources that
-	// GuardDuty monitors. For more information, see [Foundational data sources]in the GuardDuty User Guide.
+	// GuardDuty monitors. For more information, see [Foundational data sources]in the Amazon GuardDuty User
+	// Guide.
 	//
 	// A signal type can be one of the valid values listed in this API. Here are the
 	// related descriptions:
@@ -3885,7 +3886,7 @@ type Signal struct {
 	//   - S3_DATA_EVENTS - Activity observed from CloudTrail data events for S3.
 	//   Activities associated with this type will show up only when you have enabled
 	//   GuardDuty S3 Protection feature in your account. For more information about S3
-	//   Protection and steps to enable it, see [S3 Protection]in the GuardDuty User Guide.
+	//   Protection and steps to enable it, see [S3 Protection]in the Amazon GuardDuty User Guide.
 	//
 	// [S3 Protection]: https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html
 	// [Foundational data sources]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html
@@ -3917,7 +3918,7 @@ type Signal struct {
 	ResourceUids []string
 
 	// The severity associated with the signal. For more information about severity,
-	// see [Findings severity levels]in the GuardDuty User Guide.
+	// see [Findings severity levels]in the Amazon GuardDuty User Guide.
 	//
 	// [Findings severity levels]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html
 	Severity *float64

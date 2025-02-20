@@ -248,6 +248,15 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "cloudcontrolapi.ap-southeast-5.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-7",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-7",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "cloudcontrolapi.ap-southeast-7.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -441,6 +450,15 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "cloudcontrolapi.me-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "mx-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "cloudcontrolapi.mx-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",

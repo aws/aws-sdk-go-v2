@@ -214,7 +214,7 @@ type ModifyDBClusterInput struct {
 	// If you change the value from advanced to standard , you must set the
 	// PerformanceInsightsEnabled parameter to false .
 	//
-	// Valid for Cluster Type: Aurora DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// Specifies whether the DB cluster has deletion protection enabled. The database

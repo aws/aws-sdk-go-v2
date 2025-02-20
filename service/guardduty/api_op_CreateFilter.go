@@ -248,7 +248,7 @@ type CreateFilterInput struct {
 	//
 	//   - service.runtimeDetails.process.name
 	//
-	//   - service.runtimeDetails.process.name
+	//   - service.runtimeDetails.process.executablePath
 	//
 	//   - resource.lambdaDetails.functionName
 	//

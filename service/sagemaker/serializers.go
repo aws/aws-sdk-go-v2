@@ -23598,6 +23598,17 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecifications(v []types.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterInstanceGroupsToDelete(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterInstanceStorageConfig(v types.ClusterInstanceStorageConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -43527,6 +43538,13 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 	if v.InstanceGroups != nil {
 		ok := object.Key("InstanceGroups")
 		if err := awsAwsjson11_serializeDocumentClusterInstanceGroupSpecifications(v.InstanceGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceGroupsToDelete != nil {
+		ok := object.Key("InstanceGroupsToDelete")
+		if err := awsAwsjson11_serializeDocumentClusterInstanceGroupsToDelete(v.InstanceGroupsToDelete, ok); err != nil {
 			return err
 		}
 	}

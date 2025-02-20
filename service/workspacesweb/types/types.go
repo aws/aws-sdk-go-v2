@@ -723,6 +723,28 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of the toolbar. This allows administrators to select the
+// toolbar type and visual mode, set maximum display resolution for sessions, and
+// choose which items are visible to end users during their sessions. If
+// administrators do not modify these settings, end users retain control over their
+// toolbar preferences.
+type ToolbarConfiguration struct {
+
+	// The list of toolbar items to be hidden.
+	HiddenToolbarItems []ToolbarItem
+
+	// The maximum display resolution that is allowed for the session.
+	MaxDisplayResolution MaxDisplayResolution
+
+	// The type of toolbar displayed during the session.
+	ToolbarType ToolbarType
+
+	// The visual mode of the toolbar.
+	VisualMode VisualMode
+
+	noSmithyDocumentSerde
+}
+
 // A trust store that can be associated with a web portal. A trust store contains
 // certificate authority (CA) certificates. Once associated with a web portal, the
 // browser in a streaming session will recognize certificates that have been issued
@@ -836,6 +858,13 @@ type UserSettings struct {
 	// Specifies whether the user can print to the local device.
 	PrintAllowed EnabledType
 
+	// The configuration of the toolbar. This allows administrators to select the
+	// toolbar type and visual mode, set maximum display resolution for sessions, and
+	// choose which items are visible to end users during their sessions. If
+	// administrators do not modify these settings, end users retain control over their
+	// toolbar preferences.
+	ToolbarConfiguration *ToolbarConfiguration
+
 	// Specifies whether the user can upload files from the local device to the
 	// streaming session.
 	UploadAllowed EnabledType
@@ -882,6 +911,13 @@ type UserSettingsSummary struct {
 
 	// Specifies whether the user can print to the local device.
 	PrintAllowed EnabledType
+
+	// The configuration of the toolbar. This allows administrators to select the
+	// toolbar type and visual mode, set maximum display resolution for sessions, and
+	// choose which items are visible to end users during their sessions. If
+	// administrators do not modify these settings, end users retain control over their
+	// toolbar preferences.
+	ToolbarConfiguration *ToolbarConfiguration
 
 	// Specifies whether the user can upload files from the local device to the
 	// streaming session.

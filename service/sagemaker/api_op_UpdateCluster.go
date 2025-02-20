@@ -39,6 +39,10 @@ type UpdateClusterInput struct {
 	// This member is required.
 	InstanceGroups []types.ClusterInstanceGroupSpecification
 
+	// Specify the names of the instance groups to delete. Use a single , as the
+	// separator between multiple names.
+	InstanceGroupsToDelete []string
+
 	// The node recovery mode to be applied to the SageMaker HyperPod cluster.
 	NodeRecovery types.ClusterNodeRecovery
 

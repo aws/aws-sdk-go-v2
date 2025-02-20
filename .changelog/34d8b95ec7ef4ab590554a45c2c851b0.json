@@ -1,0 +1,8 @@
+{
+    "id": "34d8b95e-c7ef-4ab5-9055-4a45c2c851b0",
+    "type": "documentation",
+    "description": "CloudWatch Database Insights now supports Amazon RDS.",
+    "modules": [
+        "service/rds"
+    ]
+}

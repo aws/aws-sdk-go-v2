@@ -1119,3 +1119,26 @@ func (WebhookScopeType) Values() []WebhookScopeType {
 		"GITLAB_GROUP",
 	}
 }
+
+type WebhookStatus string
+
+// Enum values for WebhookStatus
+const (
+	WebhookStatusCreating     WebhookStatus = "CREATING"
+	WebhookStatusCreateFailed WebhookStatus = "CREATE_FAILED"
+	WebhookStatusActive       WebhookStatus = "ACTIVE"
+	WebhookStatusDeleting     WebhookStatus = "DELETING"
+)
+
+// Values returns all known values for WebhookStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookStatus) Values() []WebhookStatus {
+	return []WebhookStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"ACTIVE",
+		"DELETING",
+	}
+}

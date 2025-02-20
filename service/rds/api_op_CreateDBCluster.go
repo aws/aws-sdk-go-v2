@@ -219,7 +219,7 @@ type CreateDBClusterInput struct {
 	// PerformanceInsightsEnabled parameter to true and the
 	// PerformanceInsightsRetentionPeriod parameter to 465.
 	//
-	// Valid for Cluster Type: Aurora DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	DatabaseInsightsMode types.DatabaseInsightsMode
 
 	// The name for your database of up to 64 alphanumeric characters. A database

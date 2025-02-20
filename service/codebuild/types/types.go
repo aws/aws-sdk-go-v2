@@ -2705,6 +2705,20 @@ type Webhook struct {
 	// A Bitbucket webhook does not support secret .
 	Secret *string
 
+	// The status of the webhook. Valid values include:
+	//
+	//   - CREATING : The webhook is being created.
+	//
+	//   - CREATE_FAILED : The webhook has failed to create.
+	//
+	//   - ACTIVE : The webhook has succeeded and is active.
+	//
+	//   - DELETING : The webhook is being deleted.
+	Status WebhookStatus
+
+	// A message associated with the status of a webhook.
+	StatusMessage *string
+
 	// The URL to the webhook.
 	Url *string
 

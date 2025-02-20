@@ -11612,6 +11612,42 @@ func awsRestjson1_deserializeDocumentGlobalInlineRedactionUrls(v *[]string, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHiddenToolbarItemList(v *[]types.ToolbarItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ToolbarItem
+	if *v == nil {
+		cv = []types.ToolbarItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ToolbarItem
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ToolbarItem to be of type string, got %T instead", value)
+			}
+			col = types.ToolbarItem(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdentityProvider(v **types.IdentityProvider, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13623,6 +13659,69 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentToolbarConfiguration(v **types.ToolbarConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ToolbarConfiguration
+	if *v == nil {
+		sv = &types.ToolbarConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "hiddenToolbarItems":
+			if err := awsRestjson1_deserializeDocumentHiddenToolbarItemList(&sv.HiddenToolbarItems, value); err != nil {
+				return err
+			}
+
+		case "maxDisplayResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaxDisplayResolution to be of type string, got %T instead", value)
+				}
+				sv.MaxDisplayResolution = types.MaxDisplayResolution(jtv)
+			}
+
+		case "toolbarType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ToolbarType to be of type string, got %T instead", value)
+				}
+				sv.ToolbarType = types.ToolbarType(jtv)
+			}
+
+		case "visualMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VisualMode to be of type string, got %T instead", value)
+				}
+				sv.VisualMode = types.VisualMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTooManyTagsException(v **types.TooManyTagsException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14045,6 +14144,11 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 				sv.PrintAllowed = types.EnabledType(jtv)
 			}
 
+		case "toolbarConfiguration":
+			if err := awsRestjson1_deserializeDocumentToolbarConfiguration(&sv.ToolbarConfiguration, value); err != nil {
+				return err
+			}
+
 		case "uploadAllowed":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14202,6 +14306,11 @@ func awsRestjson1_deserializeDocumentUserSettingsSummary(v **types.UserSettingsS
 					return fmt.Errorf("expected EnabledType to be of type string, got %T instead", value)
 				}
 				sv.PrintAllowed = types.EnabledType(jtv)
+			}
+
+		case "toolbarConfiguration":
+			if err := awsRestjson1_deserializeDocumentToolbarConfiguration(&sv.ToolbarConfiguration, value); err != nil {
+				return err
 			}
 
 		case "uploadAllowed":

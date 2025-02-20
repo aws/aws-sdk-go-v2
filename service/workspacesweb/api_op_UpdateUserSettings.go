@@ -78,6 +78,13 @@ type UpdateUserSettingsInput struct {
 	// Specifies whether the user can print to the local device.
 	PrintAllowed types.EnabledType
 
+	// The configuration of the toolbar. This allows administrators to select the
+	// toolbar type and visual mode, set maximum display resolution for sessions, and
+	// choose which items are visible to end users during their sessions. If
+	// administrators do not modify these settings, end users retain control over their
+	// toolbar preferences.
+	ToolbarConfiguration *types.ToolbarConfiguration
+
 	// Specifies whether the user can upload files from the local device to the
 	// streaming session.
 	UploadAllowed types.EnabledType

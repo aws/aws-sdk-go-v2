@@ -1543,6 +1543,13 @@ func awsRestjson1_serializeOpDocumentCreateUserSettingsInput(v *CreateUserSettin
 		}
 	}
 
+	if v.ToolbarConfiguration != nil {
+		ok := object.Key("toolbarConfiguration")
+		if err := awsRestjson1_serializeDocumentToolbarConfiguration(v.ToolbarConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.UploadAllowed) > 0 {
 		ok := object.Key("uploadAllowed")
 		ok.String(string(v.UploadAllowed))
@@ -5688,6 +5695,13 @@ func awsRestjson1_serializeOpDocumentUpdateUserSettingsInput(v *UpdateUserSettin
 		ok.String(string(v.PrintAllowed))
 	}
 
+	if v.ToolbarConfiguration != nil {
+		ok := object.Key("toolbarConfiguration")
+		if err := awsRestjson1_serializeDocumentToolbarConfiguration(v.ToolbarConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.UploadAllowed) > 0 {
 		ok := object.Key("uploadAllowed")
 		ok.String(string(v.UploadAllowed))
@@ -5822,6 +5836,17 @@ func awsRestjson1_serializeDocumentGlobalInlineRedactionUrls(v []string, value s
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHiddenToolbarItemList(v []types.ToolbarItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -6035,5 +6060,34 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentToolbarConfiguration(v *types.ToolbarConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HiddenToolbarItems != nil {
+		ok := object.Key("hiddenToolbarItems")
+		if err := awsRestjson1_serializeDocumentHiddenToolbarItemList(v.HiddenToolbarItems, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MaxDisplayResolution) > 0 {
+		ok := object.Key("maxDisplayResolution")
+		ok.String(string(v.MaxDisplayResolution))
+	}
+
+	if len(v.ToolbarType) > 0 {
+		ok := object.Key("toolbarType")
+		ok.String(string(v.ToolbarType))
+	}
+
+	if len(v.VisualMode) > 0 {
+		ok := object.Key("visualMode")
+		ok.String(string(v.VisualMode))
+	}
+
 	return nil
 }

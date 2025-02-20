@@ -12721,6 +12721,24 @@ func awsAwsjson11_deserializeDocumentWebhook(v **types.Webhook, value interface{
 				sv.Secret = ptr.String(jtv)
 			}
 
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebhookStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.WebhookStatus(jtv)
+			}
+
+		case "statusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)

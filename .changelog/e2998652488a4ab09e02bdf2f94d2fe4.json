@@ -1,0 +1,8 @@
+{
+    "id": "e2998652-488a-4ab0-9e02-bdf2f94d2fe4",
+    "type": "feature",
+    "description": "Reduce the minimum number of required attack sequence signals from 2 to 1",
+    "modules": [
+        "service/guardduty"
+    ]
+}
