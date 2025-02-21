@@ -140,9 +140,6 @@ func (c *Client) addOperationGetLicenseEndpointMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetLicenseEndpointMiddleware(stack); err != nil {
 		return err
 	}

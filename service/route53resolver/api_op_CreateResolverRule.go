@@ -159,9 +159,6 @@ func (c *Client) addOperationCreateResolverRuleMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateResolverRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

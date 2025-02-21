@@ -127,9 +127,6 @@ func (c *Client) addOperationGetArchitectureRecommendationsMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetArchitectureRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -154,9 +154,6 @@ func (c *Client) addOperationListConformancePackComplianceScoresMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListConformancePackComplianceScoresValidationMiddleware(stack); err != nil {
 		return err
 	}

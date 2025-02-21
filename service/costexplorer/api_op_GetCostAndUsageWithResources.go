@@ -207,9 +207,6 @@ func (c *Client) addOperationGetCostAndUsageWithResourcesMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCostAndUsageWithResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -166,9 +166,6 @@ func (c *Client) addOperationGetAssociatedPackageGroupMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetAssociatedPackageGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

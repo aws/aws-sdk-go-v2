@@ -118,9 +118,6 @@ func (c *Client) addOperationPutProtocolsListMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutProtocolsListValidationMiddleware(stack); err != nil {
 		return err
 	}

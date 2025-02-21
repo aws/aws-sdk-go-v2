@@ -103,9 +103,6 @@ func (c *Client) addOperationMalformedUnionMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedUnion(options.Region), middleware.Before); err != nil {
 		return err
 	}

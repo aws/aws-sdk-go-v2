@@ -109,9 +109,6 @@ func (c *Client) addOperationStopAccessLoggingMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStopAccessLoggingValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -192,9 +192,6 @@ func (c *Client) addOperationDescribeDBSnapshotTenantDatabasesMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDBSnapshotTenantDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}

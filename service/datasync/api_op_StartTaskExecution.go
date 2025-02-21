@@ -183,9 +183,6 @@ func (c *Client) addOperationStartTaskExecutionMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartTaskExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -131,9 +131,6 @@ func (c *Client) addOperationUpdateLocationFsxOntapMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateLocationFsxOntapValidationMiddleware(stack); err != nil {
 		return err
 	}

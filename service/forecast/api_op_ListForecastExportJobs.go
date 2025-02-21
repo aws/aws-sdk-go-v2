@@ -146,9 +146,6 @@ func (c *Client) addOperationListForecastExportJobsMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListForecastExportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}

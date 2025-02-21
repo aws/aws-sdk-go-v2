@@ -116,9 +116,6 @@ func (c *Client) addOperationDeleteDBProxyEndpointMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteDBProxyEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

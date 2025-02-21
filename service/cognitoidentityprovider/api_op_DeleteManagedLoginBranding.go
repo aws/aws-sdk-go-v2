@@ -130,9 +130,6 @@ func (c *Client) addOperationDeleteManagedLoginBrandingMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteManagedLoginBrandingValidationMiddleware(stack); err != nil {
 		return err
 	}

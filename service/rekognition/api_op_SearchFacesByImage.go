@@ -199,9 +199,6 @@ func (c *Client) addOperationSearchFacesByImageMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSearchFacesByImageValidationMiddleware(stack); err != nil {
 		return err
 	}

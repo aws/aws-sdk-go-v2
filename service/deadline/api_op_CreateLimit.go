@@ -156,9 +156,6 @@ func (c *Client) addOperationCreateLimitMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opCreateLimitMiddleware(stack); err != nil {
 		return err
 	}

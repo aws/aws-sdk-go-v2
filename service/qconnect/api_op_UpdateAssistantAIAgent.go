@@ -126,9 +126,6 @@ func (c *Client) addOperationUpdateAssistantAIAgentMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateAssistantAIAgentValidationMiddleware(stack); err != nil {
 		return err
 	}

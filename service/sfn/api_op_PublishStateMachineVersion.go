@@ -156,9 +156,6 @@ func (c *Client) addOperationPublishStateMachineVersionMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPublishStateMachineVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

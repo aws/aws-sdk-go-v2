@@ -14,7 +14,6 @@ ExportEC2InstanceRecommendations
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

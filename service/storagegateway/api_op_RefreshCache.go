@@ -171,9 +171,6 @@ func (c *Client) addOperationRefreshCacheMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRefreshCacheValidationMiddleware(stack); err != nil {
 		return err
 	}

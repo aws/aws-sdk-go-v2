@@ -133,9 +133,6 @@ func (c *Client) addOperationRetrieveTapeArchiveMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRetrieveTapeArchiveValidationMiddleware(stack); err != nil {
 		return err
 	}

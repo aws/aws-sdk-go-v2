@@ -137,9 +137,6 @@ func (c *Client) addOperationCreateShareMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opCreateShareMiddleware(stack); err != nil {
 		return err
 	}

@@ -174,9 +174,6 @@ func (c *Client) addOperationDescribeDBInstanceAutomatedBackupsMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDBInstanceAutomatedBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}

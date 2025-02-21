@@ -123,9 +123,6 @@ func (c *Client) addOperationDescribeElasticsearchDomainConfigMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeElasticsearchDomainConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

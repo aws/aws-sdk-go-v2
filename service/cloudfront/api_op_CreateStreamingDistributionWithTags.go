@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateStreamingDistributionWithTagsMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateStreamingDistributionWithTagsValidationMiddleware(stack); err != nil {
 		return err
 	}

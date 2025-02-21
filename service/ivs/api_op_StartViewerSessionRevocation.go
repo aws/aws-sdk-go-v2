@@ -123,9 +123,6 @@ func (c *Client) addOperationStartViewerSessionRevocationMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartViewerSessionRevocationValidationMiddleware(stack); err != nil {
 		return err
 	}

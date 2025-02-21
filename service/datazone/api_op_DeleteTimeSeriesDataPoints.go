@@ -128,9 +128,6 @@ func (c *Client) addOperationDeleteTimeSeriesDataPointsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteTimeSeriesDataPointsMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -205,9 +205,6 @@ func (c *Client) addOperationCreateVocabularyFilterMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateVocabularyFilterValidationMiddleware(stack); err != nil {
 		return err
 	}

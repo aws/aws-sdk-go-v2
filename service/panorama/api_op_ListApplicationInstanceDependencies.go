@@ -123,9 +123,6 @@ func (c *Client) addOperationListApplicationInstanceDependenciesMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListApplicationInstanceDependenciesValidationMiddleware(stack); err != nil {
 		return err
 	}

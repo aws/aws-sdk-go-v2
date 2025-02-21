@@ -185,9 +185,6 @@ func (c *Client) addOperationUpdateSizeConstraintSetMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateSizeConstraintSetValidationMiddleware(stack); err != nil {
 		return err
 	}

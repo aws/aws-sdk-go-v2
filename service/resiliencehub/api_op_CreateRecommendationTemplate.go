@@ -154,9 +154,6 @@ func (c *Client) addOperationCreateRecommendationTemplateMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateRecommendationTemplateMiddleware(stack, options); err != nil {
 		return err
 	}

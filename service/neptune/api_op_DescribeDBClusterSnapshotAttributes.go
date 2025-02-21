@@ -128,9 +128,6 @@ func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDBClusterSnapshotAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

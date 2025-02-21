@@ -143,9 +143,6 @@ func (c *Client) addOperationCreateCertificateAuthorityAuditReportMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateCertificateAuthorityAuditReportValidationMiddleware(stack); err != nil {
 		return err
 	}

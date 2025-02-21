@@ -275,9 +275,6 @@ func (c *Client) addOperationCreateContainerGroupDefinitionMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateContainerGroupDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

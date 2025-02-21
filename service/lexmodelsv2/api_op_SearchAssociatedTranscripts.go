@@ -179,9 +179,6 @@ func (c *Client) addOperationSearchAssociatedTranscriptsMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSearchAssociatedTranscriptsValidationMiddleware(stack); err != nil {
 		return err
 	}

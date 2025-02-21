@@ -145,9 +145,6 @@ func (c *Client) addOperationDescribeFleetLocationCapacityMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeFleetLocationCapacityValidationMiddleware(stack); err != nil {
 		return err
 	}

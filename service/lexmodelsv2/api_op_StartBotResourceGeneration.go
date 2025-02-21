@@ -154,9 +154,6 @@ func (c *Client) addOperationStartBotResourceGenerationMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartBotResourceGenerationValidationMiddleware(stack); err != nil {
 		return err
 	}

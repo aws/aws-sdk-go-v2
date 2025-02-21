@@ -161,9 +161,6 @@ func (c *Client) addOperationGetQueueEnvironmentMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetQueueEnvironmentMiddleware(stack); err != nil {
 		return err
 	}

@@ -24,7 +24,6 @@ PutBucketTagging
 		ClientRequestID
 		ComputeContentLength
 		AWSChecksum:RequestMetricsTracking
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

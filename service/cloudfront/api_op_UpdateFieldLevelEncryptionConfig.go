@@ -125,9 +125,6 @@ func (c *Client) addOperationUpdateFieldLevelEncryptionConfigMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateFieldLevelEncryptionConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

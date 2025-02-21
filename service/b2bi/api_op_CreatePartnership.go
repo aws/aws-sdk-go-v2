@@ -183,9 +183,6 @@ func (c *Client) addOperationCreatePartnershipMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreatePartnershipMiddleware(stack, options); err != nil {
 		return err
 	}

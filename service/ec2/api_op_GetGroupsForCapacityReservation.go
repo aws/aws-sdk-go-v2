@@ -135,9 +135,6 @@ func (c *Client) addOperationGetGroupsForCapacityReservationMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetGroupsForCapacityReservationValidationMiddleware(stack); err != nil {
 		return err
 	}

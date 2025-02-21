@@ -126,9 +126,6 @@ func (c *Client) addOperationPutBlockPublicAccessConfigurationMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutBlockPublicAccessConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

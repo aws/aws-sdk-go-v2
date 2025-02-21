@@ -139,9 +139,6 @@ func (c *Client) addOperationListObjectParentPathsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListObjectParentPathsValidationMiddleware(stack); err != nil {
 		return err
 	}

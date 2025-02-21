@@ -123,9 +123,6 @@ func (c *Client) addOperationListIdentityResolutionJobsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListIdentityResolutionJobsValidationMiddleware(stack); err != nil {
 		return err
 	}

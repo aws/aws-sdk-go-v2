@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteTransitGatewayPolicyTableMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteTransitGatewayPolicyTableValidationMiddleware(stack); err != nil {
 		return err
 	}

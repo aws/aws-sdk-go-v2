@@ -122,9 +122,6 @@ func (c *Client) addOperationDeleteEnvironmentAccountConnectionMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

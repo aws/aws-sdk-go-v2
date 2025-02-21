@@ -190,9 +190,6 @@ func (c *Client) addOperationGetPackageVersionReadmeMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetPackageVersionReadmeValidationMiddleware(stack); err != nil {
 		return err
 	}

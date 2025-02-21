@@ -139,9 +139,6 @@ func (c *Client) addOperationPromoteReadReplicaDBClusterMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPromoteReadReplicaDBClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

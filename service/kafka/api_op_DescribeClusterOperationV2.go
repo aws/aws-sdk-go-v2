@@ -112,9 +112,6 @@ func (c *Client) addOperationDescribeClusterOperationV2Middlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeClusterOperationV2ValidationMiddleware(stack); err != nil {
 		return err
 	}

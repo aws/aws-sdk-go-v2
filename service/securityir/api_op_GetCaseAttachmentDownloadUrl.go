@@ -122,9 +122,6 @@ func (c *Client) addOperationGetCaseAttachmentDownloadUrlMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCaseAttachmentDownloadUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

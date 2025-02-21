@@ -133,9 +133,6 @@ func (c *Client) addOperationDeleteServiceLinkedRoleMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteServiceLinkedRoleValidationMiddleware(stack); err != nil {
 		return err
 	}

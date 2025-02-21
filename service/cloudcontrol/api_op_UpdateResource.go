@@ -203,9 +203,6 @@ func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateResourceMiddleware(stack, options); err != nil {
 		return err
 	}

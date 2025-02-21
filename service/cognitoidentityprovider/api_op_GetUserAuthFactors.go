@@ -128,9 +128,6 @@ func (c *Client) addOperationGetUserAuthFactorsMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetUserAuthFactorsValidationMiddleware(stack); err != nil {
 		return err
 	}

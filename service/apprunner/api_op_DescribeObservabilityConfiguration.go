@@ -120,9 +120,6 @@ func (c *Client) addOperationDescribeObservabilityConfigurationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeObservabilityConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

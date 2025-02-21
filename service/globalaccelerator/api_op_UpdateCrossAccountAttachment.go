@@ -153,9 +153,6 @@ func (c *Client) addOperationUpdateCrossAccountAttachmentMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateCrossAccountAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}

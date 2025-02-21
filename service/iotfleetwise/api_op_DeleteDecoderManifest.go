@@ -120,9 +120,6 @@ func (c *Client) addOperationDeleteDecoderManifestMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteDecoderManifestValidationMiddleware(stack); err != nil {
 		return err
 	}

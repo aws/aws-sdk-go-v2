@@ -116,9 +116,6 @@ func (c *Client) addOperationDeleteGlobalClusterMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteGlobalClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

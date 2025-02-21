@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteTrainingDatasetMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteTrainingDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -136,9 +136,6 @@ func (c *Client) addOperationAssociateProtectConfigurationMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociateProtectConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

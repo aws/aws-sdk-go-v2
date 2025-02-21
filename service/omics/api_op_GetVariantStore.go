@@ -173,9 +173,6 @@ func (c *Client) addOperationGetVariantStoreMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opGetVariantStoreMiddleware(stack); err != nil {
 		return err
 	}

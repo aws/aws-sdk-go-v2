@@ -133,9 +133,6 @@ func (c *Client) addOperationGetHostReservationPurchasePreviewMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetHostReservationPurchasePreviewValidationMiddleware(stack); err != nil {
 		return err
 	}

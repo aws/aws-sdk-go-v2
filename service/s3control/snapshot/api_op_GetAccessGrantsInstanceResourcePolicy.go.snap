@@ -21,7 +21,6 @@ GetAccessGrantsInstanceResourcePolicy
 		ContentChecksum
 		ClientRequestID
 		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

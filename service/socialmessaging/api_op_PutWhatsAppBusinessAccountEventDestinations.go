@@ -119,9 +119,6 @@ func (c *Client) addOperationPutWhatsAppBusinessAccountEventDestinationsMiddlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutWhatsAppBusinessAccountEventDestinationsValidationMiddleware(stack); err != nil {
 		return err
 	}

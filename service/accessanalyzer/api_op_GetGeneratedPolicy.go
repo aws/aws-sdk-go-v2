@@ -138,9 +138,6 @@ func (c *Client) addOperationGetGeneratedPolicyMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetGeneratedPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

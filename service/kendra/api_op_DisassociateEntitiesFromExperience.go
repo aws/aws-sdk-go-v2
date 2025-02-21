@@ -128,9 +128,6 @@ func (c *Client) addOperationDisassociateEntitiesFromExperienceMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateEntitiesFromExperienceValidationMiddleware(stack); err != nil {
 		return err
 	}

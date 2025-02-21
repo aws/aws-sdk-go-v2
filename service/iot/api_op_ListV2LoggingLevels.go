@@ -125,9 +125,6 @@ func (c *Client) addOperationListV2LoggingLevelsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListV2LoggingLevels(options.Region), middleware.Before); err != nil {
 		return err
 	}

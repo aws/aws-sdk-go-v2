@@ -130,9 +130,6 @@ func (c *Client) addOperationUpdateClusterSchedulerConfigMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateClusterSchedulerConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

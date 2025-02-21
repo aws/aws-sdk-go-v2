@@ -139,9 +139,6 @@ func (c *Client) addOperationStartWirelessDeviceImportTaskMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartWirelessDeviceImportTaskMiddleware(stack, options); err != nil {
 		return err
 	}

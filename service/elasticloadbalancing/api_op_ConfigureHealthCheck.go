@@ -124,9 +124,6 @@ func (c *Client) addOperationConfigureHealthCheckMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpConfigureHealthCheckValidationMiddleware(stack); err != nil {
 		return err
 	}

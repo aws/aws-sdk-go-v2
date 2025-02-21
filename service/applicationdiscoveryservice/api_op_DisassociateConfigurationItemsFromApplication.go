@@ -112,9 +112,6 @@ func (c *Client) addOperationDisassociateConfigurationItemsFromApplicationMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateConfigurationItemsFromApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

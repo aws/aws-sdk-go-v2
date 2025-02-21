@@ -127,9 +127,6 @@ func (c *Client) addOperationSetDataRetrievalPolicyMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSetDataRetrievalPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

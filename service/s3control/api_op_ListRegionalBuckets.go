@@ -154,9 +154,6 @@ func (c *Client) addOperationListRegionalBucketsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListRegionalBucketsMiddleware(stack); err != nil {
 		return err
 	}

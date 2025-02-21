@@ -127,9 +127,6 @@ func (c *Client) addOperationCancelMLDataProcessingJobMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCancelMLDataProcessingJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -125,9 +125,6 @@ func (c *Client) addOperationCreateMediaConcatenationPipelineMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateMediaConcatenationPipelineMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -113,9 +113,6 @@ func (c *Client) addOperationDeleteDocumentationPartMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteDocumentationPartValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -139,9 +139,6 @@ func (c *Client) addOperationSearchDashboardsMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSearchDashboardsValidationMiddleware(stack); err != nil {
 		return err
 	}

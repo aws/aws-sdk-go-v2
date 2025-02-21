@@ -175,9 +175,6 @@ func (c *Client) addOperationUpdateDomainContactPrivacyMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateDomainContactPrivacyValidationMiddleware(stack); err != nil {
 		return err
 	}

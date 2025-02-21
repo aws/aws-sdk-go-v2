@@ -131,9 +131,6 @@ func (c *Client) addOperationGetExternalDataViewAccessDetailsMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetExternalDataViewAccessDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

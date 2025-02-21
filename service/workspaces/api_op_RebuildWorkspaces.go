@@ -123,9 +123,6 @@ func (c *Client) addOperationRebuildWorkspacesMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRebuildWorkspacesValidationMiddleware(stack); err != nil {
 		return err
 	}

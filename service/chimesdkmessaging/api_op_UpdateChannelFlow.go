@@ -122,9 +122,6 @@ func (c *Client) addOperationUpdateChannelFlowMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateChannelFlowValidationMiddleware(stack); err != nil {
 		return err
 	}

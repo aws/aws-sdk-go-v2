@@ -123,9 +123,6 @@ func (c *Client) addOperationEnableStageTransitionMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpEnableStageTransitionValidationMiddleware(stack); err != nil {
 		return err
 	}

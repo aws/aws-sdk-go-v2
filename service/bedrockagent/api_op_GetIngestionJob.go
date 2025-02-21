@@ -127,9 +127,6 @@ func (c *Client) addOperationGetIngestionJobMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetIngestionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

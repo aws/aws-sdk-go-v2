@@ -161,9 +161,6 @@ func (c *Client) addOperationBatchGetDeploymentTargetsMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchGetDeploymentTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}

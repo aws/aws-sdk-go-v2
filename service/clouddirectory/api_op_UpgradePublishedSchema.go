@@ -129,9 +129,6 @@ func (c *Client) addOperationUpgradePublishedSchemaMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpgradePublishedSchemaValidationMiddleware(stack); err != nil {
 		return err
 	}

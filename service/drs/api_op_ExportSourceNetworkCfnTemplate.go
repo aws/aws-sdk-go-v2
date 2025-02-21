@@ -111,9 +111,6 @@ func (c *Client) addOperationExportSourceNetworkCfnTemplateMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpExportSourceNetworkCfnTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

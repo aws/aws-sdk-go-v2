@@ -156,9 +156,6 @@ func (c *Client) addOperationCreateDataAccessorMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateDataAccessorMiddleware(stack, options); err != nil {
 		return err
 	}

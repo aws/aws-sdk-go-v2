@@ -125,9 +125,6 @@ func (c *Client) addOperationGetRepositorySyncStatusMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetRepositorySyncStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

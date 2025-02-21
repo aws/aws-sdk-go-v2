@@ -162,9 +162,6 @@ func (c *Client) addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opUpdateJobPriorityMiddleware(stack); err != nil {
 		return err
 	}

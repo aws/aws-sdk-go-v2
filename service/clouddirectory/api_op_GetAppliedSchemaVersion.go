@@ -112,9 +112,6 @@ func (c *Client) addOperationGetAppliedSchemaVersionMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetAppliedSchemaVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

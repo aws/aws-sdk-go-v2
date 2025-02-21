@@ -130,9 +130,6 @@ func (c *Client) addOperationCreateTopicRuleMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateTopicRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

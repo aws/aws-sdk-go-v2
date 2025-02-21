@@ -128,9 +128,6 @@ func (c *Client) addOperationGetSignalingChannelEndpointMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetSignalingChannelEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

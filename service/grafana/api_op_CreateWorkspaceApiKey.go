@@ -149,9 +149,6 @@ func (c *Client) addOperationCreateWorkspaceApiKeyMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateWorkspaceApiKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

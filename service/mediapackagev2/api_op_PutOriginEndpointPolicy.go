@@ -128,9 +128,6 @@ func (c *Client) addOperationPutOriginEndpointPolicyMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutOriginEndpointPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

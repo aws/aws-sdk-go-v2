@@ -111,9 +111,6 @@ func (c *Client) addOperationVerifyEmailAddressMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpVerifyEmailAddressValidationMiddleware(stack); err != nil {
 		return err
 	}

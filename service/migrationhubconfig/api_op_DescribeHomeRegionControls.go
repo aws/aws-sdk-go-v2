@@ -131,9 +131,6 @@ func (c *Client) addOperationDescribeHomeRegionControlsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeHomeRegionControlsValidationMiddleware(stack); err != nil {
 		return err
 	}

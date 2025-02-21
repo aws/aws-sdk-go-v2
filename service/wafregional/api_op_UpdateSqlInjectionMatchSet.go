@@ -180,9 +180,6 @@ func (c *Client) addOperationUpdateSqlInjectionMatchSetMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateSqlInjectionMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

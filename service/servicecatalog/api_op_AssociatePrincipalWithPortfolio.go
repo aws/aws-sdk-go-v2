@@ -193,9 +193,6 @@ func (c *Client) addOperationAssociatePrincipalWithPortfolioMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociatePrincipalWithPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}

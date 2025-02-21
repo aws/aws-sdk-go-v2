@@ -119,9 +119,6 @@ func (c *Client) addOperationBatchPutMetricsMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchPutMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -126,9 +126,6 @@ func (c *Client) addOperationDescribeWorkspacesPoolSessionsMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeWorkspacesPoolSessionsValidationMiddleware(stack); err != nil {
 		return err
 	}

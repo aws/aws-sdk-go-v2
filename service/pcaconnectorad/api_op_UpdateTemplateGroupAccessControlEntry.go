@@ -126,9 +126,6 @@ func (c *Client) addOperationUpdateTemplateGroupAccessControlEntryMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateTemplateGroupAccessControlEntryValidationMiddleware(stack); err != nil {
 		return err
 	}

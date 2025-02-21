@@ -125,9 +125,6 @@ func (c *Client) addOperationListPhoneNumbersOptedOutMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPhoneNumbersOptedOut(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -127,9 +127,6 @@ func (c *Client) addOperationCreateLoggerDefinitionVersionMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateLoggerDefinitionVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

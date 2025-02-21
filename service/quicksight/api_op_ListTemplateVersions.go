@@ -134,9 +134,6 @@ func (c *Client) addOperationListTemplateVersionsMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListTemplateVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

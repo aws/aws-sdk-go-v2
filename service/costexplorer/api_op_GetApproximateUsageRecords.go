@@ -131,9 +131,6 @@ func (c *Client) addOperationGetApproximateUsageRecordsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetApproximateUsageRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}

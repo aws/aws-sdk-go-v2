@@ -107,9 +107,6 @@ func (c *Client) addOperationDeleteClusterSchedulerConfigMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteClusterSchedulerConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

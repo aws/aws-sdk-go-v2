@@ -172,9 +172,6 @@ func (c *Client) addOperationUpdateFirewallEncryptionConfigurationMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateFirewallEncryptionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

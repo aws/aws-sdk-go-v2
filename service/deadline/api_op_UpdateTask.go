@@ -136,9 +136,6 @@ func (c *Client) addOperationUpdateTaskMiddlewares(stack *middleware.Stack, opti
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opUpdateTaskMiddleware(stack); err != nil {
 		return err
 	}

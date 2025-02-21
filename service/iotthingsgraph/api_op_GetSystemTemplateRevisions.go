@@ -132,9 +132,6 @@ func (c *Client) addOperationGetSystemTemplateRevisionsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetSystemTemplateRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}

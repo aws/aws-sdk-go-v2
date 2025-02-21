@@ -117,9 +117,6 @@ func (c *Client) addOperationReleaseFileSystemNfsV3LocksMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opReleaseFileSystemNfsV3LocksMiddleware(stack, options); err != nil {
 		return err
 	}

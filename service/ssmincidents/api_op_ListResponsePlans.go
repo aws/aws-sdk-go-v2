@@ -120,9 +120,6 @@ func (c *Client) addOperationListResponsePlansMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResponsePlans(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -128,9 +128,6 @@ func (c *Client) addOperationGetEnvironmentTemplateVersionMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetEnvironmentTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

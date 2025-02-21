@@ -247,9 +247,6 @@ func (c *Client) addOperationCreateCanaryMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateCanaryValidationMiddleware(stack); err != nil {
 		return err
 	}

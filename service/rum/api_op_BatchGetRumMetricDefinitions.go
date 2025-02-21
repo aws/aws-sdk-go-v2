@@ -142,9 +142,6 @@ func (c *Client) addOperationBatchGetRumMetricDefinitionsMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchGetRumMetricDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}

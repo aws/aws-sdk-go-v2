@@ -128,9 +128,6 @@ func (c *Client) addOperationGetIntegrationTablePropertiesMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetIntegrationTablePropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

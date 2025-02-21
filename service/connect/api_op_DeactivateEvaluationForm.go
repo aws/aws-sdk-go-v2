@@ -139,9 +139,6 @@ func (c *Client) addOperationDeactivateEvaluationFormMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeactivateEvaluationFormValidationMiddleware(stack); err != nil {
 		return err
 	}

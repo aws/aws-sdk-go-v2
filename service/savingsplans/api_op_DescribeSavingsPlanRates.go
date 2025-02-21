@@ -129,9 +129,6 @@ func (c *Client) addOperationDescribeSavingsPlanRatesMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeSavingsPlanRatesValidationMiddleware(stack); err != nil {
 		return err
 	}

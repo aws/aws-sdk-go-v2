@@ -152,9 +152,6 @@ func (c *Client) addOperationAssignIpv6AddressesMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssignIpv6AddressesValidationMiddleware(stack); err != nil {
 		return err
 	}

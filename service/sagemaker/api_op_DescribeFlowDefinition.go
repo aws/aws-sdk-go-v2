@@ -155,9 +155,6 @@ func (c *Client) addOperationDescribeFlowDefinitionMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeFlowDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

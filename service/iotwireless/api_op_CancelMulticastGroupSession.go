@@ -107,9 +107,6 @@ func (c *Client) addOperationCancelMulticastGroupSessionMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCancelMulticastGroupSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

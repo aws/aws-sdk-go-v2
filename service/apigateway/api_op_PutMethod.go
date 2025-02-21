@@ -236,9 +236,6 @@ func (c *Client) addOperationPutMethodMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutMethodValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,9 +120,6 @@ func (c *Client) addOperationConfigureLogsForChannelMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpConfigureLogsForChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

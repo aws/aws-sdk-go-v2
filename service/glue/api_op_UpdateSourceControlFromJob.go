@@ -142,9 +142,6 @@ func (c *Client) addOperationUpdateSourceControlFromJobMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSourceControlFromJob(options.Region), middleware.Before); err != nil {
 		return err
 	}

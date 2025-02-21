@@ -126,9 +126,6 @@ func (c *Client) addOperationUpdateQPersonalizationConfigurationMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateQPersonalizationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

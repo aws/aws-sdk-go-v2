@@ -179,9 +179,6 @@ func (c *Client) addOperationGetPackageVersionAssetMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetPackageVersionAssetValidationMiddleware(stack); err != nil {
 		return err
 	}

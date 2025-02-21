@@ -160,9 +160,6 @@ func (c *Client) addOperationStartMatchmakingMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartMatchmakingValidationMiddleware(stack); err != nil {
 		return err
 	}

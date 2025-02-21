@@ -156,9 +156,6 @@ func (c *Client) addOperationListPreviewRotationShiftsMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListPreviewRotationShiftsValidationMiddleware(stack); err != nil {
 		return err
 	}

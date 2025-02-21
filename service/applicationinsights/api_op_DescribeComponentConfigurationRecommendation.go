@@ -130,9 +130,6 @@ func (c *Client) addOperationDescribeComponentConfigurationRecommendationMiddlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeComponentConfigurationRecommendationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,9 +120,6 @@ func (c *Client) addOperationDescribeCachediSCSIVolumesMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeCachediSCSIVolumesValidationMiddleware(stack); err != nil {
 		return err
 	}

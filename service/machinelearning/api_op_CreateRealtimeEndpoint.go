@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateRealtimeEndpointMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateRealtimeEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

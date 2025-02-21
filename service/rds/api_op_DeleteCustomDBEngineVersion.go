@@ -306,9 +306,6 @@ func (c *Client) addOperationDeleteCustomDBEngineVersionMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteCustomDBEngineVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -156,9 +156,6 @@ func (c *Client) addOperationAssociateVPCWithHostedZoneMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociateVPCWithHostedZoneValidationMiddleware(stack); err != nil {
 		return err
 	}

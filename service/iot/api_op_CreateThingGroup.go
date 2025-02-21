@@ -138,9 +138,6 @@ func (c *Client) addOperationCreateThingGroupMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateThingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

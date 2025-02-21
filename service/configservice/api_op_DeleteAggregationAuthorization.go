@@ -113,9 +113,6 @@ func (c *Client) addOperationDeleteAggregationAuthorizationMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteAggregationAuthorizationValidationMiddleware(stack); err != nil {
 		return err
 	}

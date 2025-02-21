@@ -254,9 +254,6 @@ func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpTransferDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

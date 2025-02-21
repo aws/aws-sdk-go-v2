@@ -116,9 +116,6 @@ func (c *Client) addOperationBatchResetAlarmMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchResetAlarmValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -155,9 +155,6 @@ func (c *Client) addOperationUpdateKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateKnowledgeBaseValidationMiddleware(stack); err != nil {
 		return err
 	}

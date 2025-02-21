@@ -136,9 +136,6 @@ func (c *Client) addOperationDeleteStorageLensGroupMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDeleteStorageLensGroupMiddleware(stack); err != nil {
 		return err
 	}

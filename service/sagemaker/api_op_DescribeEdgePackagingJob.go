@@ -164,9 +164,6 @@ func (c *Client) addOperationDescribeEdgePackagingJobMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeEdgePackagingJobValidationMiddleware(stack); err != nil {
 		return err
 	}

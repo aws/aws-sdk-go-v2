@@ -149,9 +149,6 @@ func (c *Client) addOperationGetEnvironmentBlueprintConfigurationMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetEnvironmentBlueprintConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

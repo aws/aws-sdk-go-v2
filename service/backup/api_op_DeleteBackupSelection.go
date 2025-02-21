@@ -114,9 +114,6 @@ func (c *Client) addOperationDeleteBackupSelectionMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteBackupSelectionValidationMiddleware(stack); err != nil {
 		return err
 	}

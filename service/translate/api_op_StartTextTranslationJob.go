@@ -235,9 +235,6 @@ func (c *Client) addOperationStartTextTranslationJobMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartTextTranslationJobMiddleware(stack, options); err != nil {
 		return err
 	}

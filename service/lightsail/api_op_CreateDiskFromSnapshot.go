@@ -202,9 +202,6 @@ func (c *Client) addOperationCreateDiskFromSnapshotMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateDiskFromSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

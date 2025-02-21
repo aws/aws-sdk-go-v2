@@ -129,9 +129,6 @@ func (c *Client) addOperationBatchRemoveRoleMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchRemoveRoleValidationMiddleware(stack); err != nil {
 		return err
 	}

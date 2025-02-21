@@ -130,9 +130,6 @@ func (c *Client) addOperationGetCampaignVersionsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCampaignVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

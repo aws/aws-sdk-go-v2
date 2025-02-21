@@ -129,9 +129,6 @@ func (c *Client) addOperationImportDecoderManifestMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpImportDecoderManifestValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -332,9 +332,6 @@ func (c *Client) addOperationStartCallAnalyticsStreamTranscriptionMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartCallAnalyticsStreamTranscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

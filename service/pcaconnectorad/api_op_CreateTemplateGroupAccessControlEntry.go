@@ -133,9 +133,6 @@ func (c *Client) addOperationCreateTemplateGroupAccessControlEntryMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateTemplateGroupAccessControlEntryMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -106,9 +106,6 @@ func (c *Client) addOperationDisassociateServiceRoleFromAccountMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateServiceRoleFromAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}

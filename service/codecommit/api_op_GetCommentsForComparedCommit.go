@@ -138,9 +138,6 @@ func (c *Client) addOperationGetCommentsForComparedCommitMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCommentsForComparedCommitValidationMiddleware(stack); err != nil {
 		return err
 	}

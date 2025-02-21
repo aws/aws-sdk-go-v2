@@ -239,9 +239,6 @@ func (c *Client) addOperationInvokeEndpointWithResponseStreamMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpInvokeEndpointWithResponseStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

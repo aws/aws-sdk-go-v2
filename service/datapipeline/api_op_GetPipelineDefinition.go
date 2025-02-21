@@ -148,9 +148,6 @@ func (c *Client) addOperationGetPipelineDefinitionMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetPipelineDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

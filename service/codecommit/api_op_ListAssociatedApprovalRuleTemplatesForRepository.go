@@ -124,9 +124,6 @@ func (c *Client) addOperationListAssociatedApprovalRuleTemplatesForRepositoryMid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListAssociatedApprovalRuleTemplatesForRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}

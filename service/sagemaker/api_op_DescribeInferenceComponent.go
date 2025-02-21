@@ -157,9 +157,6 @@ func (c *Client) addOperationDescribeInferenceComponentMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeInferenceComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

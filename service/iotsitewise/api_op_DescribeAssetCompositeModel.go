@@ -180,9 +180,6 @@ func (c *Client) addOperationDescribeAssetCompositeModelMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeAssetCompositeModelMiddleware(stack); err != nil {
 		return err
 	}

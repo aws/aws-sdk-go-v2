@@ -178,9 +178,6 @@ func (c *Client) addOperationCreateHostedConfigurationVersionMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateHostedConfigurationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteMedicalTranscriptionJobMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteMedicalTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -151,9 +151,6 @@ func (c *Client) addOperationGetWebACLForResourceMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetWebACLForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

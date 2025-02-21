@@ -175,9 +175,6 @@ func (c *Client) addOperationCreatePortfolioShareMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreatePortfolioShareValidationMiddleware(stack); err != nil {
 		return err
 	}

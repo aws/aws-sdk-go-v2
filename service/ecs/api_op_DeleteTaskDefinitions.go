@@ -144,9 +144,6 @@ func (c *Client) addOperationDeleteTaskDefinitionsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteTaskDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}

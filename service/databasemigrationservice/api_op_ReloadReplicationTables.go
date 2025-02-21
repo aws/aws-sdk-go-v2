@@ -126,9 +126,6 @@ func (c *Client) addOperationReloadReplicationTablesMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpReloadReplicationTablesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -185,9 +185,6 @@ func (c *Client) addOperationPublishLayerVersionMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPublishLayerVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

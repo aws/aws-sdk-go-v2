@@ -113,9 +113,6 @@ func (c *Client) addOperationDeleteCisScanConfigurationMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteCisScanConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,9 +120,6 @@ func (c *Client) addOperationDetachManagedPolicyFromPermissionSetMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDetachManagedPolicyFromPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

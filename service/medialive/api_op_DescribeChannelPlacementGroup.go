@@ -144,9 +144,6 @@ func (c *Client) addOperationDescribeChannelPlacementGroupMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeChannelPlacementGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

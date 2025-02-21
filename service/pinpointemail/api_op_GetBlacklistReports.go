@@ -120,9 +120,6 @@ func (c *Client) addOperationGetBlacklistReportsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetBlacklistReportsValidationMiddleware(stack); err != nil {
 		return err
 	}

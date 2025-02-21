@@ -144,9 +144,6 @@ func (c *Client) addOperationGetTerminologyMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetTerminologyValidationMiddleware(stack); err != nil {
 		return err
 	}

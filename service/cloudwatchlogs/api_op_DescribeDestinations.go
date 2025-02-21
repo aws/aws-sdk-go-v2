@@ -121,9 +121,6 @@ func (c *Client) addOperationDescribeDestinationsMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDestinations(options.Region), middleware.Before); err != nil {
 		return err
 	}

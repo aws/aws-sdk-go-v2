@@ -115,9 +115,6 @@ func (c *Client) addOperationReturnSavingsPlanMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opReturnSavingsPlanMiddleware(stack, options); err != nil {
 		return err
 	}

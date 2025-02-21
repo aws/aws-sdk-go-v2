@@ -161,9 +161,6 @@ func (c *Client) addOperationListServerCertificateTagsMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListServerCertificateTagsValidationMiddleware(stack); err != nil {
 		return err
 	}

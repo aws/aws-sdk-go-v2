@@ -122,9 +122,6 @@ func (c *Client) addOperationDeleteAwsLogSourceMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteAwsLogSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -185,9 +185,6 @@ func (c *Client) addOperationSendChannelMessageMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opSendChannelMessageMiddleware(stack, options); err != nil {
 		return err
 	}

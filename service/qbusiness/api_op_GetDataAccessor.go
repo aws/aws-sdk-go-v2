@@ -151,9 +151,6 @@ func (c *Client) addOperationGetDataAccessorMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetDataAccessorValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,9 +120,6 @@ func (c *Client) addOperationDescribeTimeToLiveMiddlewares(stack *middleware.Sta
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeTimeToLiveValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -157,9 +157,6 @@ func (c *Client) addOperationListLineageNodeHistoryMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListLineageNodeHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}

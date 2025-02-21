@@ -205,9 +205,6 @@ func (c *Client) addOperationGetMLTransformMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetMLTransformValidationMiddleware(stack); err != nil {
 		return err
 	}

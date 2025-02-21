@@ -122,9 +122,6 @@ func (c *Client) addOperationDeleteQueueMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteQueueMiddleware(stack, options); err != nil {
 		return err
 	}

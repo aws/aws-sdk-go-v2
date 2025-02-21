@@ -130,9 +130,6 @@ func (c *Client) addOperationDescribeInboundConnectionsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInboundConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}

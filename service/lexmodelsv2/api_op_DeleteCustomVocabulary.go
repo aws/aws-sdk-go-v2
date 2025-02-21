@@ -133,9 +133,6 @@ func (c *Client) addOperationDeleteCustomVocabularyMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteCustomVocabularyValidationMiddleware(stack); err != nil {
 		return err
 	}

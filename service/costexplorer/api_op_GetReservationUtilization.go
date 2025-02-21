@@ -231,9 +231,6 @@ func (c *Client) addOperationGetReservationUtilizationMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetReservationUtilizationValidationMiddleware(stack); err != nil {
 		return err
 	}

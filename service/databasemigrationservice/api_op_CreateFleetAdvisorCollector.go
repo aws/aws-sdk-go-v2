@@ -138,9 +138,6 @@ func (c *Client) addOperationCreateFleetAdvisorCollectorMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateFleetAdvisorCollectorValidationMiddleware(stack); err != nil {
 		return err
 	}

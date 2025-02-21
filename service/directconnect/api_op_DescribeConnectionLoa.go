@@ -132,9 +132,6 @@ func (c *Client) addOperationDescribeConnectionLoaMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeConnectionLoaValidationMiddleware(stack); err != nil {
 		return err
 	}

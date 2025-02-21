@@ -137,9 +137,6 @@ func (c *Client) addOperationListResourceScanRelatedResourcesMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListResourceScanRelatedResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}

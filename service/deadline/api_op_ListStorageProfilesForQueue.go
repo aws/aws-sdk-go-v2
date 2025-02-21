@@ -134,9 +134,6 @@ func (c *Client) addOperationListStorageProfilesForQueueMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListStorageProfilesForQueueMiddleware(stack); err != nil {
 		return err
 	}

@@ -280,9 +280,6 @@ func (c *Client) addOperationSignMiddlewares(stack *middleware.Stack, options Op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSignValidationMiddleware(stack); err != nil {
 		return err
 	}

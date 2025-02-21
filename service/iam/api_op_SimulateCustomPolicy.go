@@ -343,9 +343,6 @@ func (c *Client) addOperationSimulateCustomPolicyMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSimulateCustomPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

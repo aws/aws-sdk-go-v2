@@ -109,9 +109,6 @@ func (c *Client) addOperationDeleteApiCacheMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteApiCacheValidationMiddleware(stack); err != nil {
 		return err
 	}

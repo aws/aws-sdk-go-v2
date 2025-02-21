@@ -178,9 +178,6 @@ func (c *Client) addOperationGetAudienceGenerationJobMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetAudienceGenerationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -153,9 +153,6 @@ func (c *Client) addOperationGetTablesMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetTablesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -144,9 +144,6 @@ func (c *Client) addOperationUpdateQueueOutboundCallerConfigMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateQueueOutboundCallerConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

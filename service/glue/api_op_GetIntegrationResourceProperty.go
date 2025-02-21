@@ -119,9 +119,6 @@ func (c *Client) addOperationGetIntegrationResourcePropertyMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetIntegrationResourcePropertyValidationMiddleware(stack); err != nil {
 		return err
 	}

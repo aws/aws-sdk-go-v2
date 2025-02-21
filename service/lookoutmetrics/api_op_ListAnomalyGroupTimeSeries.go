@@ -141,9 +141,6 @@ func (c *Client) addOperationListAnomalyGroupTimeSeriesMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListAnomalyGroupTimeSeriesValidationMiddleware(stack); err != nil {
 		return err
 	}

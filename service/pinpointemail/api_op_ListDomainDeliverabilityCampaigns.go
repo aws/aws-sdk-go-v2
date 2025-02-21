@@ -156,9 +156,6 @@ func (c *Client) addOperationListDomainDeliverabilityCampaignsMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListDomainDeliverabilityCampaignsValidationMiddleware(stack); err != nil {
 		return err
 	}

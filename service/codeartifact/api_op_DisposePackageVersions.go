@@ -194,9 +194,6 @@ func (c *Client) addOperationDisposePackageVersionsMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisposePackageVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -160,9 +160,6 @@ func (c *Client) addOperationCreateDBClusterParameterGroupMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateDBClusterParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

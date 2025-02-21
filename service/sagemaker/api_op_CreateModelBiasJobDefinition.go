@@ -156,9 +156,6 @@ func (c *Client) addOperationCreateModelBiasJobDefinitionMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateModelBiasJobDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

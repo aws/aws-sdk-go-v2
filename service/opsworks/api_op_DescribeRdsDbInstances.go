@@ -125,9 +125,6 @@ func (c *Client) addOperationDescribeRdsDbInstancesMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeRdsDbInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}

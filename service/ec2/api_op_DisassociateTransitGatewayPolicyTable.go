@@ -123,9 +123,6 @@ func (c *Client) addOperationDisassociateTransitGatewayPolicyTableMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateTransitGatewayPolicyTableValidationMiddleware(stack); err != nil {
 		return err
 	}

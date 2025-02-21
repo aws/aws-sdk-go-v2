@@ -139,9 +139,6 @@ func (c *Client) addOperationDescribeMetadataModelImportsMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeMetadataModelImportsValidationMiddleware(stack); err != nil {
 		return err
 	}

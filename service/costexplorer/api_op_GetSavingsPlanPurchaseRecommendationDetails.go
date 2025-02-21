@@ -117,9 +117,6 @@ func (c *Client) addOperationGetSavingsPlanPurchaseRecommendationDetailsMiddlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetSavingsPlanPurchaseRecommendationDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

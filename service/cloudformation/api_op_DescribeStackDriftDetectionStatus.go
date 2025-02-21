@@ -189,9 +189,6 @@ func (c *Client) addOperationDescribeStackDriftDetectionStatusMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeStackDriftDetectionStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

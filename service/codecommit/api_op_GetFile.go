@@ -157,9 +157,6 @@ func (c *Client) addOperationGetFileMiddlewares(stack *middleware.Stack, options
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetFileValidationMiddleware(stack); err != nil {
 		return err
 	}

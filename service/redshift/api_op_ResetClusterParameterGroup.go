@@ -132,9 +132,6 @@ func (c *Client) addOperationResetClusterParameterGroupMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpResetClusterParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

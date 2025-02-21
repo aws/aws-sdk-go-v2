@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteMultiRegionClusterMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteMultiRegionClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

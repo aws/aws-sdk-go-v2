@@ -128,9 +128,6 @@ func (c *Client) addOperationGetBasePathMappingsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetBasePathMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}

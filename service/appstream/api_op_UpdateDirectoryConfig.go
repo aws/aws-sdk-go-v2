@@ -132,9 +132,6 @@ func (c *Client) addOperationUpdateDirectoryConfigMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateDirectoryConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

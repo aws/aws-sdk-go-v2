@@ -141,9 +141,6 @@ func (c *Client) addOperationDescribeLakeFormationIdentityCenterConfigurationMid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLakeFormationIdentityCenterConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}

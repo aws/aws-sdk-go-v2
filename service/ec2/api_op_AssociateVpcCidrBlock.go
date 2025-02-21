@@ -182,9 +182,6 @@ func (c *Client) addOperationAssociateVpcCidrBlockMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociateVpcCidrBlockValidationMiddleware(stack); err != nil {
 		return err
 	}

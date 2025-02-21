@@ -161,9 +161,6 @@ func (c *Client) addOperationDetectProtectiveEquipmentMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDetectProtectiveEquipmentValidationMiddleware(stack); err != nil {
 		return err
 	}

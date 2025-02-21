@@ -148,9 +148,6 @@ func (c *Client) addOperationDeleteContainerGroupDefinitionMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteContainerGroupDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

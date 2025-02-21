@@ -104,9 +104,6 @@ func (c *Client) addOperationDeregisterDataLakeDelegatedAdministratorMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterDataLakeDelegatedAdministrator(options.Region), middleware.Before); err != nil {
 		return err
 	}

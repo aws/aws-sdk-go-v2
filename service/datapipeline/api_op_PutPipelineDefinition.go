@@ -203,9 +203,6 @@ func (c *Client) addOperationPutPipelineDefinitionMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutPipelineDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

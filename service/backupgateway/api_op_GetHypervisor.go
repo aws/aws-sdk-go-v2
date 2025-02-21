@@ -114,9 +114,6 @@ func (c *Client) addOperationGetHypervisorMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetHypervisorValidationMiddleware(stack); err != nil {
 		return err
 	}

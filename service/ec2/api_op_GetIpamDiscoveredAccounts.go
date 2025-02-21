@@ -141,9 +141,6 @@ func (c *Client) addOperationGetIpamDiscoveredAccountsMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetIpamDiscoveredAccountsValidationMiddleware(stack); err != nil {
 		return err
 	}

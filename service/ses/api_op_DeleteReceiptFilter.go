@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteReceiptFilterMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteReceiptFilterValidationMiddleware(stack); err != nil {
 		return err
 	}

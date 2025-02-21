@@ -161,9 +161,6 @@ func (c *Client) addOperationUpdateFirewallDescriptionMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFirewallDescription(options.Region), middleware.Before); err != nil {
 		return err
 	}

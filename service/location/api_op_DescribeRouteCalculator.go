@@ -173,9 +173,6 @@ func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeRouteCalculatorMiddleware(stack); err != nil {
 		return err
 	}

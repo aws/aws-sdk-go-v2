@@ -129,9 +129,6 @@ func (c *Client) addOperationBatchAssociateApprovalRuleTemplateWithRepositoriesM
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchAssociateApprovalRuleTemplateWithRepositoriesValidationMiddleware(stack); err != nil {
 		return err
 	}

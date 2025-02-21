@@ -146,9 +146,6 @@ func (c *Client) addOperationRecordHandlerProgressMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRecordHandlerProgressValidationMiddleware(stack); err != nil {
 		return err
 	}

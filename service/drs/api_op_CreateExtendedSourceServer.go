@@ -117,9 +117,6 @@ func (c *Client) addOperationCreateExtendedSourceServerMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateExtendedSourceServerValidationMiddleware(stack); err != nil {
 		return err
 	}

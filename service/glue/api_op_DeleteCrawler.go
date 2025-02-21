@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteCrawlerMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteCrawlerValidationMiddleware(stack); err != nil {
 		return err
 	}

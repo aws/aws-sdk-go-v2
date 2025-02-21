@@ -183,9 +183,6 @@ func (c *Client) addOperationCreateOTAUpdateMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateOTAUpdateValidationMiddleware(stack); err != nil {
 		return err
 	}

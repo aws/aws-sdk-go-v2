@@ -159,9 +159,6 @@ func (c *Client) addOperationDescribeClusterParametersMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeClusterParametersValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,9 +123,6 @@ func (c *Client) addOperationBatchDescribeSimulationJobMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchDescribeSimulationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

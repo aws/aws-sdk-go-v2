@@ -145,9 +145,6 @@ func (c *Client) addOperationStartICD10CMInferenceJobMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartICD10CMInferenceJobMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -143,9 +143,6 @@ func (c *Client) addOperationGetAttributeGroupMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetAttributeGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

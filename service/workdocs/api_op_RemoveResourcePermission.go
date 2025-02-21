@@ -120,9 +120,6 @@ func (c *Client) addOperationRemoveResourcePermissionMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRemoveResourcePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}

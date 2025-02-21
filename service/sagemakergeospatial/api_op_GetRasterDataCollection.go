@@ -147,9 +147,6 @@ func (c *Client) addOperationGetRasterDataCollectionMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetRasterDataCollectionValidationMiddleware(stack); err != nil {
 		return err
 	}

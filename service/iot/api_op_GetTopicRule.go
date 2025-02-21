@@ -121,9 +121,6 @@ func (c *Client) addOperationGetTopicRuleMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetTopicRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

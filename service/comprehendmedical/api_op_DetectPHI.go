@@ -131,9 +131,6 @@ func (c *Client) addOperationDetectPHIMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDetectPHIValidationMiddleware(stack); err != nil {
 		return err
 	}

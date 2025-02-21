@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteLicenseManagerReportGeneratorMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteLicenseManagerReportGeneratorValidationMiddleware(stack); err != nil {
 		return err
 	}

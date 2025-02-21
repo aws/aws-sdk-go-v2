@@ -133,9 +133,6 @@ func (c *Client) addOperationEnableImageDeprecationMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpEnableImageDeprecationValidationMiddleware(stack); err != nil {
 		return err
 	}

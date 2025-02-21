@@ -139,9 +139,6 @@ func (c *Client) addOperationListAssetModelsMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListAssetModelsMiddleware(stack); err != nil {
 		return err
 	}

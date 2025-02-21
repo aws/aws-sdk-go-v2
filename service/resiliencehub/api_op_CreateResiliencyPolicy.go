@@ -150,9 +150,6 @@ func (c *Client) addOperationCreateResiliencyPolicyMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateResiliencyPolicyMiddleware(stack, options); err != nil {
 		return err
 	}

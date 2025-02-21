@@ -133,9 +133,6 @@ func (c *Client) addOperationHttpRequestWithLabelsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpHttpRequestWithLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}

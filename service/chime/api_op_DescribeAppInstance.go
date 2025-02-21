@@ -125,9 +125,6 @@ func (c *Client) addOperationDescribeAppInstanceMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeAppInstanceMiddleware(stack); err != nil {
 		return err
 	}

@@ -133,9 +133,6 @@ func (c *Client) addOperationUpdateLicenseConfigurationMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateLicenseConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

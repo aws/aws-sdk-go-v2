@@ -107,9 +107,6 @@ func (c *Client) addOperationCancelVariantImportJobMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opCancelVariantImportJobMiddleware(stack); err != nil {
 		return err
 	}

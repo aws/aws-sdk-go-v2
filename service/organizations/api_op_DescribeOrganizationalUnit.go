@@ -124,9 +124,6 @@ func (c *Client) addOperationDescribeOrganizationalUnitMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeOrganizationalUnitValidationMiddleware(stack); err != nil {
 		return err
 	}

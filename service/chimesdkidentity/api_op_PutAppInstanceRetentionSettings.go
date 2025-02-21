@@ -121,9 +121,6 @@ func (c *Client) addOperationPutAppInstanceRetentionSettingsMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutAppInstanceRetentionSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

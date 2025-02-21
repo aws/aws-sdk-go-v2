@@ -187,9 +187,6 @@ func (c *Client) addOperationUpdateQualificationTypeMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateQualificationTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

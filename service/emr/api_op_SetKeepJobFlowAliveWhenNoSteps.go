@@ -126,9 +126,6 @@ func (c *Client) addOperationSetKeepJobFlowAliveWhenNoStepsMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSetKeepJobFlowAliveWhenNoStepsValidationMiddleware(stack); err != nil {
 		return err
 	}

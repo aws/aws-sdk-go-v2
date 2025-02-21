@@ -115,9 +115,6 @@ func (c *Client) addOperationDeleteParallelDataMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteParallelDataValidationMiddleware(stack); err != nil {
 		return err
 	}

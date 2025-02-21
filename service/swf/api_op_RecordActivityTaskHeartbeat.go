@@ -165,9 +165,6 @@ func (c *Client) addOperationRecordActivityTaskHeartbeatMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRecordActivityTaskHeartbeatValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteKeyValueStoreMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteKeyValueStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

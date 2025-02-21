@@ -123,9 +123,6 @@ func (c *Client) addOperationCreateMediaLiveConnectorPipelineMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateMediaLiveConnectorPipelineMiddleware(stack, options); err != nil {
 		return err
 	}

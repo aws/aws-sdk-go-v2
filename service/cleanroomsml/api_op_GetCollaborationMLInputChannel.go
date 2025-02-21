@@ -176,9 +176,6 @@ func (c *Client) addOperationGetCollaborationMLInputChannelMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCollaborationMLInputChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

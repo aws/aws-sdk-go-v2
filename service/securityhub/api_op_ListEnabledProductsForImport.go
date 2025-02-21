@@ -121,9 +121,6 @@ func (c *Client) addOperationListEnabledProductsForImportMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnabledProductsForImport(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -203,9 +203,6 @@ func (c *Client) addOperationGetModelCustomizationJobMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetModelCustomizationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

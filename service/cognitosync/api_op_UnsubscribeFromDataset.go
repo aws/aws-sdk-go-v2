@@ -149,9 +149,6 @@ func (c *Client) addOperationUnsubscribeFromDatasetMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUnsubscribeFromDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}

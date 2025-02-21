@@ -130,9 +130,6 @@ func (c *Client) addOperationStartPipeMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartPipeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -141,9 +141,6 @@ func (c *Client) addOperationAssociateClientVpnTargetNetworkMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opAssociateClientVpnTargetNetworkMiddleware(stack, options); err != nil {
 		return err
 	}

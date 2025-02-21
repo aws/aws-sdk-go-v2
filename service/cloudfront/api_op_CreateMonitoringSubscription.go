@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateMonitoringSubscriptionMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateMonitoringSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

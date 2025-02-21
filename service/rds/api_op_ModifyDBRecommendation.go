@@ -129,9 +129,6 @@ func (c *Client) addOperationModifyDBRecommendationMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifyDBRecommendationValidationMiddleware(stack); err != nil {
 		return err
 	}

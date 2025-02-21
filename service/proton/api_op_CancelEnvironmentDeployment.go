@@ -128,9 +128,6 @@ func (c *Client) addOperationCancelEnvironmentDeploymentMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCancelEnvironmentDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}

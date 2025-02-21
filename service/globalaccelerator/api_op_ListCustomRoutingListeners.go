@@ -124,9 +124,6 @@ func (c *Client) addOperationListCustomRoutingListenersMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListCustomRoutingListenersValidationMiddleware(stack); err != nil {
 		return err
 	}

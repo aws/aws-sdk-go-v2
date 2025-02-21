@@ -122,9 +122,6 @@ func (c *Client) addOperationAcknowledgeJobMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAcknowledgeJobValidationMiddleware(stack); err != nil {
 		return err
 	}

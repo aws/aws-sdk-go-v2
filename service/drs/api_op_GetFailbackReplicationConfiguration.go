@@ -124,9 +124,6 @@ func (c *Client) addOperationGetFailbackReplicationConfigurationMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetFailbackReplicationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteWorkspaceMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDeleteWorkspaceMiddleware(stack); err != nil {
 		return err
 	}

@@ -147,9 +147,6 @@ func (c *Client) addOperationListAppVersionAppComponentsMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListAppVersionAppComponentsValidationMiddleware(stack); err != nil {
 		return err
 	}

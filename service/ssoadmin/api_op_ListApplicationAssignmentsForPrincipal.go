@@ -151,9 +151,6 @@ func (c *Client) addOperationListApplicationAssignmentsForPrincipalMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListApplicationAssignmentsForPrincipalValidationMiddleware(stack); err != nil {
 		return err
 	}

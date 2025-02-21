@@ -150,9 +150,6 @@ func (c *Client) addOperationCreateDetectorVersionMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateDetectorVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -142,9 +142,6 @@ func (c *Client) addOperationPostTimeSeriesDataPointsMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opPostTimeSeriesDataPointsMiddleware(stack, options); err != nil {
 		return err
 	}

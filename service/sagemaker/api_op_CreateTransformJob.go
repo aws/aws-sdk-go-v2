@@ -248,9 +248,6 @@ func (c *Client) addOperationCreateTransformJobMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateTransformJobValidationMiddleware(stack); err != nil {
 		return err
 	}

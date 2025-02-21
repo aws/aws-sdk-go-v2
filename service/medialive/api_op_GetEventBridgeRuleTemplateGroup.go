@@ -135,9 +135,6 @@ func (c *Client) addOperationGetEventBridgeRuleTemplateGroupMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetEventBridgeRuleTemplateGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

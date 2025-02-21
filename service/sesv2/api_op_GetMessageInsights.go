@@ -134,9 +134,6 @@ func (c *Client) addOperationGetMessageInsightsMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetMessageInsightsValidationMiddleware(stack); err != nil {
 		return err
 	}

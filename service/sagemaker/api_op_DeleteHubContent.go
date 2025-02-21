@@ -123,9 +123,6 @@ func (c *Client) addOperationDeleteHubContentMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteHubContentValidationMiddleware(stack); err != nil {
 		return err
 	}

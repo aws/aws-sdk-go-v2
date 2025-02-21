@@ -171,9 +171,6 @@ func (c *Client) addOperationCreatePermissionVersionMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreatePermissionVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

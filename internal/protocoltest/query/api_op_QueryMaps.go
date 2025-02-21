@@ -118,9 +118,6 @@ func (c *Client) addOperationQueryMapsMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryMaps(options.Region), middleware.Before); err != nil {
 		return err
 	}

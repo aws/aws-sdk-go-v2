@@ -141,9 +141,6 @@ func (c *Client) addOperationBatchUpdateRecommendationStatusMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchUpdateRecommendationStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

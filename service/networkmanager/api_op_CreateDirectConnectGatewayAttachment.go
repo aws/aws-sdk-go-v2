@@ -131,9 +131,6 @@ func (c *Client) addOperationCreateDirectConnectGatewayAttachmentMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateDirectConnectGatewayAttachmentMiddleware(stack, options); err != nil {
 		return err
 	}

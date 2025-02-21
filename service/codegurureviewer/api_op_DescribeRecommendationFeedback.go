@@ -130,9 +130,6 @@ func (c *Client) addOperationDescribeRecommendationFeedbackMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeRecommendationFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}

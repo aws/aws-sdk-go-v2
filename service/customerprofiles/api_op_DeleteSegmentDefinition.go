@@ -116,9 +116,6 @@ func (c *Client) addOperationDeleteSegmentDefinitionMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteSegmentDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

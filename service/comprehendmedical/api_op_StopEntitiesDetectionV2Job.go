@@ -111,9 +111,6 @@ func (c *Client) addOperationStopEntitiesDetectionV2JobMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStopEntitiesDetectionV2JobValidationMiddleware(stack); err != nil {
 		return err
 	}

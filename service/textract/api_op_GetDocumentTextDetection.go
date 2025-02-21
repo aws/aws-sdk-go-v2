@@ -176,9 +176,6 @@ func (c *Client) addOperationGetDocumentTextDetectionMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetDocumentTextDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}

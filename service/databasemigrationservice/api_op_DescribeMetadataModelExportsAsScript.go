@@ -141,9 +141,6 @@ func (c *Client) addOperationDescribeMetadataModelExportsAsScriptMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeMetadataModelExportsAsScriptValidationMiddleware(stack); err != nil {
 		return err
 	}

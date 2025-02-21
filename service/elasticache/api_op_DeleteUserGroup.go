@@ -142,9 +142,6 @@ func (c *Client) addOperationDeleteUserGroupMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteUserGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

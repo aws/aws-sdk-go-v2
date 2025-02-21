@@ -188,9 +188,6 @@ func (c *Client) addOperationStartReplicationTaskAssessmentRunMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartReplicationTaskAssessmentRunValidationMiddleware(stack); err != nil {
 		return err
 	}

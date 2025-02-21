@@ -154,9 +154,6 @@ func (c *Client) addOperationCreateProtectionGroupMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateProtectionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

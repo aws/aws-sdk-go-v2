@@ -150,9 +150,6 @@ func (c *Client) addOperationMoveAccountMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpMoveAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

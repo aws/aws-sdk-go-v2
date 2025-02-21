@@ -130,9 +130,6 @@ func (c *Client) addOperationCreateInstanceSnapshotMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateInstanceSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

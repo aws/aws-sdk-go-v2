@@ -126,9 +126,6 @@ func (c *Client) addOperationPutHypervisorPropertyMappingsMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutHypervisorPropertyMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}

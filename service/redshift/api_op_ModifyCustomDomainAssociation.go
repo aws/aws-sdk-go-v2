@@ -135,9 +135,6 @@ func (c *Client) addOperationModifyCustomDomainAssociationMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifyCustomDomainAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,9 +123,6 @@ func (c *Client) addOperationCreateModelPackageGroupMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateModelPackageGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

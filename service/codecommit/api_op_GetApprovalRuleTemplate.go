@@ -114,9 +114,6 @@ func (c *Client) addOperationGetApprovalRuleTemplateMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetApprovalRuleTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

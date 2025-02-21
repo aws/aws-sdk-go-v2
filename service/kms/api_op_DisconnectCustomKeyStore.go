@@ -155,9 +155,6 @@ func (c *Client) addOperationDisconnectCustomKeyStoreMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisconnectCustomKeyStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -121,9 +121,6 @@ func (c *Client) addOperationSendMessagesMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSendMessagesValidationMiddleware(stack); err != nil {
 		return err
 	}

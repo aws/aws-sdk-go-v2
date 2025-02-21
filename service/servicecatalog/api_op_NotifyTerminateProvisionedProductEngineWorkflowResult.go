@@ -127,9 +127,6 @@ func (c *Client) addOperationNotifyTerminateProvisionedProductEngineWorkflowResu
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opNotifyTerminateProvisionedProductEngineWorkflowResultMiddleware(stack, options); err != nil {
 		return err
 	}

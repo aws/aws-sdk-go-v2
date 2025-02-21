@@ -125,9 +125,6 @@ func (c *Client) addOperationGetSolFunctionPackageContentMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetSolFunctionPackageContentValidationMiddleware(stack); err != nil {
 		return err
 	}

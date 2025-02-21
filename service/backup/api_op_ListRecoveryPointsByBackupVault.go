@@ -190,9 +190,6 @@ func (c *Client) addOperationListRecoveryPointsByBackupVaultMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListRecoveryPointsByBackupVaultValidationMiddleware(stack); err != nil {
 		return err
 	}

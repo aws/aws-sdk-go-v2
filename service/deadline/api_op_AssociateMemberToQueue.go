@@ -133,9 +133,6 @@ func (c *Client) addOperationAssociateMemberToQueueMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opAssociateMemberToQueueMiddleware(stack); err != nil {
 		return err
 	}

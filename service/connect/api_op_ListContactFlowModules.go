@@ -129,9 +129,6 @@ func (c *Client) addOperationListContactFlowModulesMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListContactFlowModulesValidationMiddleware(stack); err != nil {
 		return err
 	}

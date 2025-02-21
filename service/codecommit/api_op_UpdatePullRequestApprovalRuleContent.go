@@ -158,9 +158,6 @@ func (c *Client) addOperationUpdatePullRequestApprovalRuleContentMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdatePullRequestApprovalRuleContentValidationMiddleware(stack); err != nil {
 		return err
 	}

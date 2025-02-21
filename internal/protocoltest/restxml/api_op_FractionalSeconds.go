@@ -103,9 +103,6 @@ func (c *Client) addOperationFractionalSecondsMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opFractionalSeconds(options.Region), middleware.Before); err != nil {
 		return err
 	}

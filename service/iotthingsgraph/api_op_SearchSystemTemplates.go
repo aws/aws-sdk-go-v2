@@ -126,9 +126,6 @@ func (c *Client) addOperationSearchSystemTemplatesMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSearchSystemTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}

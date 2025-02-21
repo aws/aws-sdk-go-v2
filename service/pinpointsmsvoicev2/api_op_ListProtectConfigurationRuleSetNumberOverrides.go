@@ -138,9 +138,6 @@ func (c *Client) addOperationListProtectConfigurationRuleSetNumberOverridesMiddl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListProtectConfigurationRuleSetNumberOverridesValidationMiddleware(stack); err != nil {
 		return err
 	}

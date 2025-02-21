@@ -131,9 +131,6 @@ func (c *Client) addOperationDescribeLanguageModelMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeLanguageModelValidationMiddleware(stack); err != nil {
 		return err
 	}

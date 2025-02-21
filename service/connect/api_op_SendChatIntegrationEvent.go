@@ -156,9 +156,6 @@ func (c *Client) addOperationSendChatIntegrationEventMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSendChatIntegrationEventValidationMiddleware(stack); err != nil {
 		return err
 	}

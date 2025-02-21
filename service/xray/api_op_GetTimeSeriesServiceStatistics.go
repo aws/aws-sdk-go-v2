@@ -147,9 +147,6 @@ func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetTimeSeriesServiceStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}

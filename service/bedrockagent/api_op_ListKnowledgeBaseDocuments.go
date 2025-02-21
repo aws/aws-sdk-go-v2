@@ -140,9 +140,6 @@ func (c *Client) addOperationListKnowledgeBaseDocumentsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListKnowledgeBaseDocumentsValidationMiddleware(stack); err != nil {
 		return err
 	}

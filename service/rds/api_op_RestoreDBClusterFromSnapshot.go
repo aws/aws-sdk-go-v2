@@ -611,9 +611,6 @@ func (c *Client) addOperationRestoreDBClusterFromSnapshotMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRestoreDBClusterFromSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

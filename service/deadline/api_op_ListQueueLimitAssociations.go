@@ -139,9 +139,6 @@ func (c *Client) addOperationListQueueLimitAssociationsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListQueueLimitAssociationsMiddleware(stack); err != nil {
 		return err
 	}

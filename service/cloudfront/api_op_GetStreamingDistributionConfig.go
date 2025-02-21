@@ -117,9 +117,6 @@ func (c *Client) addOperationGetStreamingDistributionConfigMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetStreamingDistributionConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

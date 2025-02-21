@@ -154,9 +154,6 @@ func (c *Client) addOperationUpdateQueueMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opUpdateQueueMiddleware(stack); err != nil {
 		return err
 	}

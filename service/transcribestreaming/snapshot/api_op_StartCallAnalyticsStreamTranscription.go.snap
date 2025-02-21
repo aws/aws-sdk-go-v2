@@ -13,7 +13,6 @@ StartCallAnalyticsStreamTranscription
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

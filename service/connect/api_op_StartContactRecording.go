@@ -147,9 +147,6 @@ func (c *Client) addOperationStartContactRecordingMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartContactRecordingValidationMiddleware(stack); err != nil {
 		return err
 	}

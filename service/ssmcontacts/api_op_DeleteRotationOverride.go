@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteRotationOverrideMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteRotationOverrideValidationMiddleware(stack); err != nil {
 		return err
 	}

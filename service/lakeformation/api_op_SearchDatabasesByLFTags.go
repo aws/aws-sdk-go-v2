@@ -131,9 +131,6 @@ func (c *Client) addOperationSearchDatabasesByLFTagsMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSearchDatabasesByLFTagsValidationMiddleware(stack); err != nil {
 		return err
 	}

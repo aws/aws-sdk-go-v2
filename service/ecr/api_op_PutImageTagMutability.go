@@ -133,9 +133,6 @@ func (c *Client) addOperationPutImageTagMutabilityMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutImageTagMutabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

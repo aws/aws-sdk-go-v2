@@ -124,9 +124,6 @@ func (c *Client) addOperationAssociateProductWithPortfolioMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociateProductWithPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}

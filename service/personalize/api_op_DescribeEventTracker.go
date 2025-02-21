@@ -115,9 +115,6 @@ func (c *Client) addOperationDescribeEventTrackerMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeEventTrackerValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -137,9 +137,6 @@ func (c *Client) addOperationStartColumnStatisticsTaskRunMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartColumnStatisticsTaskRunValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -144,9 +144,6 @@ func (c *Client) addOperationStartRxNormInferenceJobMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartRxNormInferenceJobMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -131,9 +131,6 @@ func (c *Client) addOperationDisassociateGlobalReplicationGroupMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateGlobalReplicationGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

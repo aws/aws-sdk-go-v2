@@ -173,9 +173,6 @@ func (c *Client) addOperationDeleteRegistrationMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}

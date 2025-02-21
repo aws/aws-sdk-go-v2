@@ -132,9 +132,6 @@ func (c *Client) addOperationAssociateProactiveEngagementDetailsMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociateProactiveEngagementDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

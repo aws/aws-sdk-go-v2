@@ -115,9 +115,6 @@ func (c *Client) addOperationDeleteOutboundCrossClusterSearchConnectionMiddlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteOutboundCrossClusterSearchConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

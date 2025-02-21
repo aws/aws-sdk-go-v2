@@ -138,9 +138,6 @@ func (c *Client) addOperationShutdownGatewayMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpShutdownGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

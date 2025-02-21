@@ -182,9 +182,6 @@ func (c *Client) addOperationModifyInstanceMetadataOptionsMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifyInstanceMetadataOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

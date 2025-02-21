@@ -115,9 +115,6 @@ func (c *Client) addOperationUpdateContactChannelMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateContactChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

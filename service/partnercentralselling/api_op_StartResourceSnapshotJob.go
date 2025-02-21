@@ -117,9 +117,6 @@ func (c *Client) addOperationStartResourceSnapshotJobMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartResourceSnapshotJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -115,9 +115,6 @@ func (c *Client) addOperationStopGameSessionPlacementMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStopGameSessionPlacementValidationMiddleware(stack); err != nil {
 		return err
 	}

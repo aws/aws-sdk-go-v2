@@ -122,9 +122,6 @@ func (c *Client) addOperationDeleteMeetingMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteMeetingValidationMiddleware(stack); err != nil {
 		return err
 	}

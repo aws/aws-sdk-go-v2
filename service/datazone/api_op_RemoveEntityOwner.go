@@ -127,9 +127,6 @@ func (c *Client) addOperationRemoveEntityOwnerMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opRemoveEntityOwnerMiddleware(stack, options); err != nil {
 		return err
 	}

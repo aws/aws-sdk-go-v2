@@ -139,9 +139,6 @@ func (c *Client) addOperationGetPerformanceAnalysisReportMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetPerformanceAnalysisReportValidationMiddleware(stack); err != nil {
 		return err
 	}

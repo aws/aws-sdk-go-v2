@@ -141,9 +141,6 @@ func (c *Client) addOperationDescribeNetworkInterfaceAttributeMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeNetworkInterfaceAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}

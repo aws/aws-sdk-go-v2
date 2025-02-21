@@ -135,9 +135,6 @@ func (c *Client) addOperationListTableStorageOptimizersMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListTableStorageOptimizersValidationMiddleware(stack); err != nil {
 		return err
 	}

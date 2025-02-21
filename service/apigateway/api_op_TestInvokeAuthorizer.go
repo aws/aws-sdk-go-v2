@@ -162,9 +162,6 @@ func (c *Client) addOperationTestInvokeAuthorizerMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpTestInvokeAuthorizerValidationMiddleware(stack); err != nil {
 		return err
 	}

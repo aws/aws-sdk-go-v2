@@ -121,9 +121,6 @@ func (c *Client) addOperationRemoveRoleFromDBInstanceMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRemoveRoleFromDBInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

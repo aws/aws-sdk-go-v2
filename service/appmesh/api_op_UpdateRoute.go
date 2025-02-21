@@ -140,9 +140,6 @@ func (c *Client) addOperationUpdateRouteMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateRouteMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -154,9 +154,6 @@ func (c *Client) addOperationGetStateTemplateMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetStateTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

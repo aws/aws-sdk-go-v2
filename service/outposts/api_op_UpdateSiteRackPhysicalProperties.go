@@ -208,9 +208,6 @@ func (c *Client) addOperationUpdateSiteRackPhysicalPropertiesMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateSiteRackPhysicalPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

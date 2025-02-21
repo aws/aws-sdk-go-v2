@@ -150,9 +150,6 @@ func (c *Client) addOperationCreateMeetingMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateMeetingMiddleware(stack, options); err != nil {
 		return err
 	}

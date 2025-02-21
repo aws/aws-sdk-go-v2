@@ -129,9 +129,6 @@ func (c *Client) addOperationBatchDeleteWorkloadEstimateUsageMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchDeleteWorkloadEstimateUsageValidationMiddleware(stack); err != nil {
 		return err
 	}

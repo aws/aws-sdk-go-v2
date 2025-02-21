@@ -144,9 +144,6 @@ func (c *Client) addOperationCreateParallelDataMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateParallelDataMiddleware(stack, options); err != nil {
 		return err
 	}

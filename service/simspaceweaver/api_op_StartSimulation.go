@@ -184,9 +184,6 @@ func (c *Client) addOperationStartSimulationMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartSimulationMiddleware(stack, options); err != nil {
 		return err
 	}

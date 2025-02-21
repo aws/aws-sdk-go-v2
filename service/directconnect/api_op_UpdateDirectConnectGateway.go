@@ -118,9 +118,6 @@ func (c *Client) addOperationUpdateDirectConnectGatewayMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateDirectConnectGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}

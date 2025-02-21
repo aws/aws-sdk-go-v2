@@ -140,9 +140,6 @@ func (c *Client) addOperationStartReadSetActivationJobMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opStartReadSetActivationJobMiddleware(stack); err != nil {
 		return err
 	}

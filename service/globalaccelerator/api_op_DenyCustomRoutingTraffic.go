@@ -148,9 +148,6 @@ func (c *Client) addOperationDenyCustomRoutingTrafficMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDenyCustomRoutingTrafficValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -13,7 +13,6 @@ DescribeEC2InstanceLimits
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

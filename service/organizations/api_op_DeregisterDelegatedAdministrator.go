@@ -133,9 +133,6 @@ func (c *Client) addOperationDeregisterDelegatedAdministratorMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeregisterDelegatedAdministratorValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,9 +123,6 @@ func (c *Client) addOperationAttachManagedPolicyToPermissionSetMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAttachManagedPolicyToPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

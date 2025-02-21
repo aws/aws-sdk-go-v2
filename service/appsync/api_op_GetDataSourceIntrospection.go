@@ -146,9 +146,6 @@ func (c *Client) addOperationGetDataSourceIntrospectionMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetDataSourceIntrospectionValidationMiddleware(stack); err != nil {
 		return err
 	}

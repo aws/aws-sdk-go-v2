@@ -119,9 +119,6 @@ func (c *Client) addOperationPutApplicationAccessScopeMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutApplicationAccessScopeValidationMiddleware(stack); err != nil {
 		return err
 	}

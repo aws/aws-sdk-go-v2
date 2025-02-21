@@ -195,9 +195,6 @@ func (c *Client) addOperationAssociateKmsKeyMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociateKmsKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

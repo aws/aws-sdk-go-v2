@@ -123,9 +123,6 @@ func (c *Client) addOperationModifySecurityGroupRulesMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifySecurityGroupRulesValidationMiddleware(stack); err != nil {
 		return err
 	}

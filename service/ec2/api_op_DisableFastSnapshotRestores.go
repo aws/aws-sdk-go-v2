@@ -129,9 +129,6 @@ func (c *Client) addOperationDisableFastSnapshotRestoresMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisableFastSnapshotRestoresValidationMiddleware(stack); err != nil {
 		return err
 	}

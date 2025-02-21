@@ -116,9 +116,6 @@ func (c *Client) addOperationDescribeDetectorModelMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDetectorModelValidationMiddleware(stack); err != nil {
 		return err
 	}

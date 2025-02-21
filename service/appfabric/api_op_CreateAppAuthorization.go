@@ -186,9 +186,6 @@ func (c *Client) addOperationCreateAppAuthorizationMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateAppAuthorizationMiddleware(stack, options); err != nil {
 		return err
 	}

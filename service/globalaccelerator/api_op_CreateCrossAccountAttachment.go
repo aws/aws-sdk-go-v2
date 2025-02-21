@@ -158,9 +158,6 @@ func (c *Client) addOperationCreateCrossAccountAttachmentMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateCrossAccountAttachmentMiddleware(stack, options); err != nil {
 		return err
 	}

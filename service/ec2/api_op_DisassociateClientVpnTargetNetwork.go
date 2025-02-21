@@ -135,9 +135,6 @@ func (c *Client) addOperationDisassociateClientVpnTargetNetworkMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateClientVpnTargetNetworkValidationMiddleware(stack); err != nil {
 		return err
 	}

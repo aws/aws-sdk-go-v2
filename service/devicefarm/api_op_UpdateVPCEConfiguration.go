@@ -130,9 +130,6 @@ func (c *Client) addOperationUpdateVPCEConfigurationMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateVPCEConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

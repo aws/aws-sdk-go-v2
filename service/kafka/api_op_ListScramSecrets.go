@@ -120,9 +120,6 @@ func (c *Client) addOperationListScramSecretsMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListScramSecretsValidationMiddleware(stack); err != nil {
 		return err
 	}

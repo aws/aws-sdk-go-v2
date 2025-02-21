@@ -109,9 +109,6 @@ func (c *Client) addOperationDeleteCloudWatchAlarmTemplateMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteCloudWatchAlarmTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -122,9 +122,6 @@ func (c *Client) addOperationGrantAccessMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGrantAccessValidationMiddleware(stack); err != nil {
 		return err
 	}

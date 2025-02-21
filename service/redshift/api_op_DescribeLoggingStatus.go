@@ -139,9 +139,6 @@ func (c *Client) addOperationDescribeLoggingStatusMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeLoggingStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

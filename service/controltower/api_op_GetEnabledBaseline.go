@@ -112,9 +112,6 @@ func (c *Client) addOperationGetEnabledBaselineMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetEnabledBaselineValidationMiddleware(stack); err != nil {
 		return err
 	}

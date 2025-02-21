@@ -206,9 +206,6 @@ func (c *Client) addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeOrderableDBInstanceOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

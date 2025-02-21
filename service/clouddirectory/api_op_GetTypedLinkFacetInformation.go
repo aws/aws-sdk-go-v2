@@ -129,9 +129,6 @@ func (c *Client) addOperationGetTypedLinkFacetInformationMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetTypedLinkFacetInformationValidationMiddleware(stack); err != nil {
 		return err
 	}

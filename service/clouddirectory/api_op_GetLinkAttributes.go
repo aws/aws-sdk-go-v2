@@ -128,9 +128,6 @@ func (c *Client) addOperationGetLinkAttributesMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetLinkAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

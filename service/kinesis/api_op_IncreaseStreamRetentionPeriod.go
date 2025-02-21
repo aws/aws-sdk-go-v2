@@ -136,9 +136,6 @@ func (c *Client) addOperationIncreaseStreamRetentionPeriodMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpIncreaseStreamRetentionPeriodValidationMiddleware(stack); err != nil {
 		return err
 	}

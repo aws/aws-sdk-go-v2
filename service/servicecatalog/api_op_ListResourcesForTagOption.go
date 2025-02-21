@@ -130,9 +130,6 @@ func (c *Client) addOperationListResourcesForTagOptionMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListResourcesForTagOptionValidationMiddleware(stack); err != nil {
 		return err
 	}

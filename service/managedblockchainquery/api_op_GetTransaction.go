@@ -128,9 +128,6 @@ func (c *Client) addOperationGetTransactionMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetTransactionValidationMiddleware(stack); err != nil {
 		return err
 	}

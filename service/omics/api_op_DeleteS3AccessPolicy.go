@@ -107,9 +107,6 @@ func (c *Client) addOperationDeleteS3AccessPolicyMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDeleteS3AccessPolicyMiddleware(stack); err != nil {
 		return err
 	}

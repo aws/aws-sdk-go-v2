@@ -119,9 +119,6 @@ func (c *Client) addOperationAcceptAccountLinkInvitationMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAcceptAccountLinkInvitationValidationMiddleware(stack); err != nil {
 		return err
 	}

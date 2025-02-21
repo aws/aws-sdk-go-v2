@@ -159,9 +159,6 @@ func (c *Client) addOperationUpdateCrawlerMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateCrawlerValidationMiddleware(stack); err != nil {
 		return err
 	}

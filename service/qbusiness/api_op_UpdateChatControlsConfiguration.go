@@ -134,9 +134,6 @@ func (c *Client) addOperationUpdateChatControlsConfigurationMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateChatControlsConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -107,9 +107,6 @@ func (c *Client) addOperationDeleteLicenseEndpointMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDeleteLicenseEndpointMiddleware(stack); err != nil {
 		return err
 	}

@@ -164,9 +164,6 @@ func (c *Client) addOperationUpdateFleetAttributesMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateFleetAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

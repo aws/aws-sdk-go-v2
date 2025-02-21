@@ -146,9 +146,6 @@ func (c *Client) addOperationGetTemporaryGluePartitionCredentialsMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetTemporaryGluePartitionCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

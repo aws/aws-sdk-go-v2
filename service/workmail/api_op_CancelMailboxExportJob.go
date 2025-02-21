@@ -120,9 +120,6 @@ func (c *Client) addOperationCancelMailboxExportJobMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCancelMailboxExportJobMiddleware(stack, options); err != nil {
 		return err
 	}
