@@ -133,9 +133,6 @@ func (c *Client) addOperationAssociateMemberToFleetMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opAssociateMemberToFleetMiddleware(stack); err != nil {
 		return err
 	}

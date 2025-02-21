@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteWorkGroupMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteWorkGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

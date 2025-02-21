@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteVerifiedEmailAddressMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteVerifiedEmailAddressValidationMiddleware(stack); err != nil {
 		return err
 	}

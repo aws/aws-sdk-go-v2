@@ -170,9 +170,6 @@ func (c *Client) addOperationUpdateAppBlockBuilderMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateAppBlockBuilderValidationMiddleware(stack); err != nil {
 		return err
 	}

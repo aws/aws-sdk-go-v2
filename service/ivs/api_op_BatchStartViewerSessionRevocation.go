@@ -113,9 +113,6 @@ func (c *Client) addOperationBatchStartViewerSessionRevocationMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchStartViewerSessionRevocationValidationMiddleware(stack); err != nil {
 		return err
 	}

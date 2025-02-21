@@ -123,9 +123,6 @@ func (c *Client) addOperationUntagMFADeviceMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUntagMFADeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

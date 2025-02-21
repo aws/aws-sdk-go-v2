@@ -163,9 +163,6 @@ func (c *Client) addOperationUpdateSourceLocationMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateSourceLocationValidationMiddleware(stack); err != nil {
 		return err
 	}

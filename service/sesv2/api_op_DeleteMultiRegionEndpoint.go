@@ -127,9 +127,6 @@ func (c *Client) addOperationDeleteMultiRegionEndpointMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteMultiRegionEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

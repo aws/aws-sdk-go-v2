@@ -212,9 +212,6 @@ func (c *Client) addOperationDescribeKeyMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

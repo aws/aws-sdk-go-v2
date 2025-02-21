@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteDashboardsMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteDashboardsValidationMiddleware(stack); err != nil {
 		return err
 	}

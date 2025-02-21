@@ -141,9 +141,6 @@ func (c *Client) addOperationUpdateAssumeRolePolicyMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateAssumeRolePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

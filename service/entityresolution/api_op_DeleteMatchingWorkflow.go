@@ -114,9 +114,6 @@ func (c *Client) addOperationDeleteMatchingWorkflowMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteMatchingWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,9 +120,6 @@ func (c *Client) addOperationDeregisterNamespaceMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeregisterNamespaceValidationMiddleware(stack); err != nil {
 		return err
 	}

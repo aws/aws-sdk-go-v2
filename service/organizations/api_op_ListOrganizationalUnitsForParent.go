@@ -156,9 +156,6 @@ func (c *Client) addOperationListOrganizationalUnitsForParentMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListOrganizationalUnitsForParentValidationMiddleware(stack); err != nil {
 		return err
 	}

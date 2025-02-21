@@ -121,9 +121,6 @@ func (c *Client) addOperationCreatePartnerInputMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreatePartnerInputMiddleware(stack, options); err != nil {
 		return err
 	}

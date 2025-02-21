@@ -159,9 +159,6 @@ func (c *Client) addOperationCheckoutBorrowLicenseMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCheckoutBorrowLicenseValidationMiddleware(stack); err != nil {
 		return err
 	}

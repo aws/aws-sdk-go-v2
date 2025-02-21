@@ -157,9 +157,6 @@ func (c *Client) addOperationModifyTenantDatabaseMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifyTenantDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}

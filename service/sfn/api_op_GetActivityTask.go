@@ -138,9 +138,6 @@ func (c *Client) addOperationGetActivityTaskMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetActivityTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

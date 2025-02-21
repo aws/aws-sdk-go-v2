@@ -154,9 +154,6 @@ func (c *Client) addOperationSearchTransitGatewayMulticastGroupsMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSearchTransitGatewayMulticastGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

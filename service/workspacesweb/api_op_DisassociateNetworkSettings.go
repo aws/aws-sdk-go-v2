@@ -107,9 +107,6 @@ func (c *Client) addOperationDisassociateNetworkSettingsMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateNetworkSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

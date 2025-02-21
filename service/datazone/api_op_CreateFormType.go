@@ -161,9 +161,6 @@ func (c *Client) addOperationCreateFormTypeMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateFormTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

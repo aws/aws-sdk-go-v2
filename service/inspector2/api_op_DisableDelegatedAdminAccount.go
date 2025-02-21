@@ -115,9 +115,6 @@ func (c *Client) addOperationDisableDelegatedAdminAccountMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisableDelegatedAdminAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

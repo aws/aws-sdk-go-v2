@@ -151,9 +151,6 @@ func (c *Client) addOperationShareDirectoryMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpShareDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}

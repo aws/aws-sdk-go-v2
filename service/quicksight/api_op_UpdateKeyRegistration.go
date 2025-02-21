@@ -125,9 +125,6 @@ func (c *Client) addOperationUpdateKeyRegistrationMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateKeyRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}

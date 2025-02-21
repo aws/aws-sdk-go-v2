@@ -154,9 +154,6 @@ func (c *Client) addOperationListRealtimeContactAnalysisSegmentsV2Middlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListRealtimeContactAnalysisSegmentsV2ValidationMiddleware(stack); err != nil {
 		return err
 	}

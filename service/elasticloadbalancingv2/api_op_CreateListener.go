@@ -183,9 +183,6 @@ func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateListenerValidationMiddleware(stack); err != nil {
 		return err
 	}

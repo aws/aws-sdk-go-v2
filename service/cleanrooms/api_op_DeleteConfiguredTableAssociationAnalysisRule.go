@@ -120,9 +120,6 @@ func (c *Client) addOperationDeleteConfiguredTableAssociationAnalysisRuleMiddlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteConfiguredTableAssociationAnalysisRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

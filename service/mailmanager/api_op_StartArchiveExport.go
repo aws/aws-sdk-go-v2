@@ -139,9 +139,6 @@ func (c *Client) addOperationStartArchiveExportMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartArchiveExportValidationMiddleware(stack); err != nil {
 		return err
 	}

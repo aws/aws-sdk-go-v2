@@ -147,9 +147,6 @@ func (c *Client) addOperationCopyOptionGroupMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCopyOptionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

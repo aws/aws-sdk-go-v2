@@ -205,9 +205,6 @@ func (c *Client) addOperationCreateIdentityPoolMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateIdentityPoolValidationMiddleware(stack); err != nil {
 		return err
 	}

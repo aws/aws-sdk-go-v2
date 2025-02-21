@@ -128,9 +128,6 @@ func (c *Client) addOperationPostWhatsAppMessageMediaMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPostWhatsAppMessageMediaValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -150,9 +150,6 @@ func (c *Client) addOperationGetLayerVersionByArnMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetLayerVersionByArnValidationMiddleware(stack); err != nil {
 		return err
 	}

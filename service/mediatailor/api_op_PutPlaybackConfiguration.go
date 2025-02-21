@@ -308,9 +308,6 @@ func (c *Client) addOperationPutPlaybackConfigurationMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutPlaybackConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

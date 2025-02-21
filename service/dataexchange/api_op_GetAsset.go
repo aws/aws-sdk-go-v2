@@ -158,9 +158,6 @@ func (c *Client) addOperationGetAssetMiddlewares(stack *middleware.Stack, option
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetAssetValidationMiddleware(stack); err != nil {
 		return err
 	}

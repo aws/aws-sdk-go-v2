@@ -164,9 +164,6 @@ func (c *Client) addOperationDisconnectSourceServerMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisconnectSourceServerValidationMiddleware(stack); err != nil {
 		return err
 	}

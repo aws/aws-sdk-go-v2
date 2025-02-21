@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteBlueprintMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteBlueprintValidationMiddleware(stack); err != nil {
 		return err
 	}

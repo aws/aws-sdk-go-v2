@@ -120,9 +120,6 @@ func (c *Client) addOperationCreateLocationMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateLocationValidationMiddleware(stack); err != nil {
 		return err
 	}

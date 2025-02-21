@@ -148,9 +148,6 @@ func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCopyProductMiddleware(stack, options); err != nil {
 		return err
 	}

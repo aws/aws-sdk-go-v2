@@ -113,9 +113,6 @@ func (c *Client) addOperationDeleteWebExperienceMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteWebExperienceValidationMiddleware(stack); err != nil {
 		return err
 	}

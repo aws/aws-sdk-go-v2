@@ -113,9 +113,6 @@ func (c *Client) addOperationCancelFindingsReportMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCancelFindingsReportValidationMiddleware(stack); err != nil {
 		return err
 	}

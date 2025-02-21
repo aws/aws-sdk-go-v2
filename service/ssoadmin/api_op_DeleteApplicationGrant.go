@@ -113,9 +113,6 @@ func (c *Client) addOperationDeleteApplicationGrantMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteApplicationGrantValidationMiddleware(stack); err != nil {
 		return err
 	}

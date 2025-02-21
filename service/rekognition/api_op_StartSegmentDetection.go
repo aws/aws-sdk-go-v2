@@ -162,9 +162,6 @@ func (c *Client) addOperationStartSegmentDetectionMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartSegmentDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}

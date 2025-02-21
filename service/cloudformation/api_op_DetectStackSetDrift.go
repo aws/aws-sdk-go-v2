@@ -174,9 +174,6 @@ func (c *Client) addOperationDetectStackSetDriftMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDetectStackSetDriftMiddleware(stack, options); err != nil {
 		return err
 	}

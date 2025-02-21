@@ -122,9 +122,6 @@ func (c *Client) addOperationStopCisSessionMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStopCisSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

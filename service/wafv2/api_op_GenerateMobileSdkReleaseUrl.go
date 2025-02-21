@@ -124,9 +124,6 @@ func (c *Client) addOperationGenerateMobileSdkReleaseUrlMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGenerateMobileSdkReleaseUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

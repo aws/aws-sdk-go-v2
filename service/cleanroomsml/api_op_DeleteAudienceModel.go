@@ -109,9 +109,6 @@ func (c *Client) addOperationDeleteAudienceModelMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteAudienceModelValidationMiddleware(stack); err != nil {
 		return err
 	}

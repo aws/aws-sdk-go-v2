@@ -119,9 +119,6 @@ func (c *Client) addOperationDescribeDashboardsQAConfigurationMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDashboardsQAConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

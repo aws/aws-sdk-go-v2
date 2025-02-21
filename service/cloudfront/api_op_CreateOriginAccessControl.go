@@ -128,9 +128,6 @@ func (c *Client) addOperationCreateOriginAccessControlMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateOriginAccessControlValidationMiddleware(stack); err != nil {
 		return err
 	}

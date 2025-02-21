@@ -128,9 +128,6 @@ func (c *Client) addOperationGetSetupHistoryMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetSetupHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}

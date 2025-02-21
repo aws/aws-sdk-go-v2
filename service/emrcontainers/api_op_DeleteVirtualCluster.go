@@ -115,9 +115,6 @@ func (c *Client) addOperationDeleteVirtualClusterMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteVirtualClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -107,9 +107,6 @@ func (c *Client) addOperationDisassociateWirelessGatewayFromThingMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateWirelessGatewayFromThingValidationMiddleware(stack); err != nil {
 		return err
 	}

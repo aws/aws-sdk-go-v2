@@ -228,9 +228,6 @@ func (c *Client) addOperationGetBucketLifecycleConfigurationMiddlewares(stack *m
 	if err = addIsExpressUserAgent(stack); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetBucketLifecycleConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,9 +117,6 @@ func (c *Client) addOperationDeleteVirtualMFADeviceMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteVirtualMFADeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

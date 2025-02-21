@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteProtocolsListMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteProtocolsListValidationMiddleware(stack); err != nil {
 		return err
 	}

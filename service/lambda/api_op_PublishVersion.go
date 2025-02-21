@@ -311,9 +311,6 @@ func (c *Client) addOperationPublishVersionMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPublishVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

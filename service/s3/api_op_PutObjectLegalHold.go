@@ -199,9 +199,6 @@ func (c *Client) addOperationPutObjectLegalHoldMiddlewares(stack *middleware.Sta
 	if err = addRequestChecksumMetricsTracking(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutObjectLegalHoldValidationMiddleware(stack); err != nil {
 		return err
 	}

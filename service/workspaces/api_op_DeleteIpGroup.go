@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteIpGroupMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteIpGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

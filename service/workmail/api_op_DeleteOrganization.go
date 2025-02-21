@@ -135,9 +135,6 @@ func (c *Client) addOperationDeleteOrganizationMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteOrganizationMiddleware(stack, options); err != nil {
 		return err
 	}

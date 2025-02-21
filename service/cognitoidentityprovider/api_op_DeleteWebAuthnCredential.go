@@ -125,9 +125,6 @@ func (c *Client) addOperationDeleteWebAuthnCredentialMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteWebAuthnCredentialValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,9 +118,6 @@ func (c *Client) addOperationResetNetworkInterfaceAttributeMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpResetNetworkInterfaceAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}

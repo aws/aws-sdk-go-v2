@@ -130,9 +130,6 @@ func (c *Client) addOperationUpdateIdentityPropagationConfigMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateIdentityPropagationConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

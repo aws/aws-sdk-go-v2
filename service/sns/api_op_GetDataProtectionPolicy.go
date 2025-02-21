@@ -117,9 +117,6 @@ func (c *Client) addOperationGetDataProtectionPolicyMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetDataProtectionPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

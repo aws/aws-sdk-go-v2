@@ -159,9 +159,6 @@ func (c *Client) addOperationStartCalculationExecutionMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartCalculationExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

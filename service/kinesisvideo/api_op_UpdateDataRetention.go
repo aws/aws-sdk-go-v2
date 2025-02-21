@@ -147,9 +147,6 @@ func (c *Client) addOperationUpdateDataRetentionMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateDataRetentionValidationMiddleware(stack); err != nil {
 		return err
 	}

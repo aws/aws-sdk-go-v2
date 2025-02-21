@@ -143,9 +143,6 @@ func (c *Client) addOperationCreateCapacityReservationBySplittingMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateCapacityReservationBySplittingMiddleware(stack, options); err != nil {
 		return err
 	}

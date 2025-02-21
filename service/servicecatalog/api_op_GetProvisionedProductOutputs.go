@@ -139,9 +139,6 @@ func (c *Client) addOperationGetProvisionedProductOutputsMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProvisionedProductOutputs(options.Region), middleware.Before); err != nil {
 		return err
 	}

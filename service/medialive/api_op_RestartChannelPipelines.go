@@ -181,9 +181,6 @@ func (c *Client) addOperationRestartChannelPipelinesMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRestartChannelPipelinesValidationMiddleware(stack); err != nil {
 		return err
 	}

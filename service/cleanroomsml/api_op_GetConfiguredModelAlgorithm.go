@@ -181,9 +181,6 @@ func (c *Client) addOperationGetConfiguredModelAlgorithmMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetConfiguredModelAlgorithmValidationMiddleware(stack); err != nil {
 		return err
 	}

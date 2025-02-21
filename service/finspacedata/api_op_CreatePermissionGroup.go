@@ -153,9 +153,6 @@ func (c *Client) addOperationCreatePermissionGroupMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreatePermissionGroupMiddleware(stack, options); err != nil {
 		return err
 	}

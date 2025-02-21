@@ -139,9 +139,6 @@ func (c *Client) addOperationRemoveAccountFromOrganizationMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRemoveAccountFromOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,9 +123,6 @@ func (c *Client) addOperationDeleteDefaultSenderIdMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteDefaultSenderIdValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -130,9 +130,6 @@ func (c *Client) addOperationResetInstanceAttributeMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpResetInstanceAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}

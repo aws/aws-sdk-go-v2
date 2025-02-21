@@ -126,9 +126,6 @@ func (c *Client) addOperationPutRegistryScanningConfigurationMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutRegistryScanningConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

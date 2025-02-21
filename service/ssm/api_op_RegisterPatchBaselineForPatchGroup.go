@@ -119,9 +119,6 @@ func (c *Client) addOperationRegisterPatchBaselineForPatchGroupMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRegisterPatchBaselineForPatchGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

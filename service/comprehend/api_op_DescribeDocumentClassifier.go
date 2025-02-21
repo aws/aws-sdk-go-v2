@@ -113,9 +113,6 @@ func (c *Client) addOperationDescribeDocumentClassifierMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDocumentClassifierValidationMiddleware(stack); err != nil {
 		return err
 	}

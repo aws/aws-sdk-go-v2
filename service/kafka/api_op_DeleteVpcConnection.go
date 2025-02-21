@@ -115,9 +115,6 @@ func (c *Client) addOperationDeleteVpcConnectionMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteVpcConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

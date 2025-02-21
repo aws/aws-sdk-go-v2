@@ -130,9 +130,6 @@ func (c *Client) addOperationListAnomalyGroupSummariesMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListAnomalyGroupSummariesValidationMiddleware(stack); err != nil {
 		return err
 	}

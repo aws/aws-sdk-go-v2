@@ -183,9 +183,6 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutAnomalyDetectorValidationMiddleware(stack); err != nil {
 		return err
 	}

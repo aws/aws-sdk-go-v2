@@ -126,9 +126,6 @@ func (c *Client) addOperationUpdateHttpNamespaceMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateHttpNamespaceMiddleware(stack, options); err != nil {
 		return err
 	}

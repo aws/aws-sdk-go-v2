@@ -121,9 +121,6 @@ func (c *Client) addOperationCreatePresignedMlflowTrackingServerUrlMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreatePresignedMlflowTrackingServerUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

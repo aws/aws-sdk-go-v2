@@ -126,9 +126,6 @@ func (c *Client) addOperationVerifySMSSandboxPhoneNumberMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpVerifySMSSandboxPhoneNumberValidationMiddleware(stack); err != nil {
 		return err
 	}

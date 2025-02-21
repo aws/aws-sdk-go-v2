@@ -133,9 +133,6 @@ func (c *Client) addOperationAcceptDirectConnectGatewayAssociationProposalMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAcceptDirectConnectGatewayAssociationProposalValidationMiddleware(stack); err != nil {
 		return err
 	}

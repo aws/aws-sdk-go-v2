@@ -137,9 +137,6 @@ func (c *Client) addOperationAuthorizeCacheSecurityGroupIngressMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAuthorizeCacheSecurityGroupIngressValidationMiddleware(stack); err != nil {
 		return err
 	}

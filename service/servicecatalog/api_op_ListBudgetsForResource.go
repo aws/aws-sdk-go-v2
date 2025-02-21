@@ -130,9 +130,6 @@ func (c *Client) addOperationListBudgetsForResourceMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListBudgetsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

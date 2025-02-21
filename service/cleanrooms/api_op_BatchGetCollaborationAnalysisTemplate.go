@@ -129,9 +129,6 @@ func (c *Client) addOperationBatchGetCollaborationAnalysisTemplateMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchGetCollaborationAnalysisTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

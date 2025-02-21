@@ -119,9 +119,6 @@ func (c *Client) addOperationGetCSVHeaderMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCSVHeaderValidationMiddleware(stack); err != nil {
 		return err
 	}

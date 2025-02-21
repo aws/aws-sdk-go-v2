@@ -155,9 +155,6 @@ func (c *Client) addOperationDescribeFleetEventsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeFleetEventsValidationMiddleware(stack); err != nil {
 		return err
 	}

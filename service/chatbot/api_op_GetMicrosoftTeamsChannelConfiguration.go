@@ -113,9 +113,6 @@ func (c *Client) addOperationGetMicrosoftTeamsChannelConfigurationMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetMicrosoftTeamsChannelConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

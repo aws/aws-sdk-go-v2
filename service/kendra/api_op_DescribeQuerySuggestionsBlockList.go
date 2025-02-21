@@ -169,9 +169,6 @@ func (c *Client) addOperationDescribeQuerySuggestionsBlockListMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeQuerySuggestionsBlockListValidationMiddleware(stack); err != nil {
 		return err
 	}

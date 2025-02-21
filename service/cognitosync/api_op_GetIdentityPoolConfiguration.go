@@ -146,9 +146,6 @@ func (c *Client) addOperationGetIdentityPoolConfigurationMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetIdentityPoolConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

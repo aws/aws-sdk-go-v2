@@ -310,9 +310,6 @@ func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateFileSystemMiddleware(stack, options); err != nil {
 		return err
 	}

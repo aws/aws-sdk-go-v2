@@ -128,9 +128,6 @@ func (c *Client) addOperationGetCelebrityInfoMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCelebrityInfoValidationMiddleware(stack); err != nil {
 		return err
 	}

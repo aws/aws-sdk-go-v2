@@ -129,9 +129,6 @@ func (c *Client) addOperationDisassociateTrialComponentMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateTrialComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

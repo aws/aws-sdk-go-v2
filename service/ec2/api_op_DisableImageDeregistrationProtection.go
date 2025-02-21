@@ -126,9 +126,6 @@ func (c *Client) addOperationDisableImageDeregistrationProtectionMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisableImageDeregistrationProtectionValidationMiddleware(stack); err != nil {
 		return err
 	}

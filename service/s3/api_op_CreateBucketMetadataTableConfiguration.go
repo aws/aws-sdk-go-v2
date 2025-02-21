@@ -173,9 +173,6 @@ func (c *Client) addOperationCreateBucketMetadataTableConfigurationMiddlewares(s
 	if err = addRequestChecksumMetricsTracking(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateBucketMetadataTableConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

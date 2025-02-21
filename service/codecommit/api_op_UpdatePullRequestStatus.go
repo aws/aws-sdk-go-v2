@@ -120,9 +120,6 @@ func (c *Client) addOperationUpdatePullRequestStatusMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdatePullRequestStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -158,9 +158,6 @@ func (c *Client) addOperationDescribeScalingPoliciesMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeScalingPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}

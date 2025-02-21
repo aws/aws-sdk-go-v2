@@ -132,9 +132,6 @@ func (c *Client) addOperationStartSpeakerSearchTaskMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartSpeakerSearchTaskMiddleware(stack, options); err != nil {
 		return err
 	}

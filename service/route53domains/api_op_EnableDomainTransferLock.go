@@ -118,9 +118,6 @@ func (c *Client) addOperationEnableDomainTransferLockMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpEnableDomainTransferLockValidationMiddleware(stack); err != nil {
 		return err
 	}

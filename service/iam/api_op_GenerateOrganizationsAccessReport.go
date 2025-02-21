@@ -234,9 +234,6 @@ func (c *Client) addOperationGenerateOrganizationsAccessReportMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGenerateOrganizationsAccessReportValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -134,9 +134,6 @@ func (c *Client) addOperationUpdateThemeAliasMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateThemeAliasValidationMiddleware(stack); err != nil {
 		return err
 	}

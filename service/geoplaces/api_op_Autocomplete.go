@@ -170,9 +170,6 @@ func (c *Client) addOperationAutocompleteMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAutocompleteValidationMiddleware(stack); err != nil {
 		return err
 	}

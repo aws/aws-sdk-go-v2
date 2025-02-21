@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteConnectorProfileMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteConnectorProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

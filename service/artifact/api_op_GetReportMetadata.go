@@ -115,9 +115,6 @@ func (c *Client) addOperationGetReportMetadataMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetReportMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

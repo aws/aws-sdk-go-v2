@@ -113,9 +113,6 @@ func (c *Client) addOperationStopVoiceToneAnalysisTaskMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStopVoiceToneAnalysisTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

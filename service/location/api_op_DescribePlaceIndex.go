@@ -172,9 +172,6 @@ func (c *Client) addOperationDescribePlaceIndexMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribePlaceIndexMiddleware(stack); err != nil {
 		return err
 	}

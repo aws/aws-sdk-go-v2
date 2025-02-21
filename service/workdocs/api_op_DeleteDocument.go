@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteDocumentMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteDocumentValidationMiddleware(stack); err != nil {
 		return err
 	}

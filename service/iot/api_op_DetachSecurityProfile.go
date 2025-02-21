@@ -117,9 +117,6 @@ func (c *Client) addOperationDetachSecurityProfileMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDetachSecurityProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -189,9 +189,6 @@ func (c *Client) addOperationCreateTLSInspectionConfigurationMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateTLSInspectionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

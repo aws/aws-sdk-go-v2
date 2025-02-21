@@ -134,9 +134,6 @@ func (c *Client) addOperationGetTableMetadataLocationMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetTableMetadataLocationValidationMiddleware(stack); err != nil {
 		return err
 	}

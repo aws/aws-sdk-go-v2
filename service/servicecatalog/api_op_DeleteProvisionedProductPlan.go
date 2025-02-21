@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteProvisionedProductPlanMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteProvisionedProductPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

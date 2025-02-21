@@ -219,9 +219,6 @@ func (c *Client) addOperationCreateHyperParameterTuningJobMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateHyperParameterTuningJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -228,9 +228,6 @@ func (c *Client) addOperationTestStateMiddlewares(stack *middleware.Stack, optio
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opTestStateMiddleware(stack); err != nil {
 		return err
 	}

@@ -148,9 +148,6 @@ func (c *Client) addOperationGetTokenBalanceMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetTokenBalanceValidationMiddleware(stack); err != nil {
 		return err
 	}

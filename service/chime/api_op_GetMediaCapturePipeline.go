@@ -124,9 +124,6 @@ func (c *Client) addOperationGetMediaCapturePipelineMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetMediaCapturePipelineValidationMiddleware(stack); err != nil {
 		return err
 	}

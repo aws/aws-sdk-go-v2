@@ -121,9 +121,6 @@ func (c *Client) addOperationGetBillOfMaterialsImportJobMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetBillOfMaterialsImportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -136,9 +136,6 @@ func (c *Client) addOperationDeleteKnowledgeBaseDocumentsMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opDeleteKnowledgeBaseDocumentsMiddleware(stack, options); err != nil {
 		return err
 	}

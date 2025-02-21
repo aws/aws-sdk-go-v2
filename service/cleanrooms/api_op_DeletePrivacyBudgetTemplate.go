@@ -114,9 +114,6 @@ func (c *Client) addOperationDeletePrivacyBudgetTemplateMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeletePrivacyBudgetTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

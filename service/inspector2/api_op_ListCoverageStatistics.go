@@ -131,9 +131,6 @@ func (c *Client) addOperationListCoverageStatisticsMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListCoverageStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}

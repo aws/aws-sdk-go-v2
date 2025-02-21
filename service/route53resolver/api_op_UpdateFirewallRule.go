@@ -245,9 +245,6 @@ func (c *Client) addOperationUpdateFirewallRuleMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateFirewallRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

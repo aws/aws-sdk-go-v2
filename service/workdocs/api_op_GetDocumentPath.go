@@ -132,9 +132,6 @@ func (c *Client) addOperationGetDocumentPathMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetDocumentPathValidationMiddleware(stack); err != nil {
 		return err
 	}

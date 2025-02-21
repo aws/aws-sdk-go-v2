@@ -128,9 +128,6 @@ func (c *Client) addOperationGetRouteResponsesMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetRouteResponsesValidationMiddleware(stack); err != nil {
 		return err
 	}

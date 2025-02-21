@@ -162,9 +162,6 @@ func (c *Client) addOperationListTrafficPolicyVersionsMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListTrafficPolicyVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

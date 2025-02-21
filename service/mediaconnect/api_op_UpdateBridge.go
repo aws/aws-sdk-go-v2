@@ -122,9 +122,6 @@ func (c *Client) addOperationUpdateBridgeMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateBridgeValidationMiddleware(stack); err != nil {
 		return err
 	}

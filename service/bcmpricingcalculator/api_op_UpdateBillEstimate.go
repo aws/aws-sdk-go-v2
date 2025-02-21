@@ -142,9 +142,6 @@ func (c *Client) addOperationUpdateBillEstimateMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateBillEstimateValidationMiddleware(stack); err != nil {
 		return err
 	}

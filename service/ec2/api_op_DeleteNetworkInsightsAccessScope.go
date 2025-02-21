@@ -117,9 +117,6 @@ func (c *Client) addOperationDeleteNetworkInsightsAccessScopeMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteNetworkInsightsAccessScopeValidationMiddleware(stack); err != nil {
 		return err
 	}

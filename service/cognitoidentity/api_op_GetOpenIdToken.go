@@ -127,9 +127,6 @@ func (c *Client) addOperationGetOpenIdTokenMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetOpenIdTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

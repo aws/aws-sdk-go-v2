@@ -183,9 +183,6 @@ func (c *Client) addOperationModifyCurrentDBClusterCapacityMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifyCurrentDBClusterCapacityValidationMiddleware(stack); err != nil {
 		return err
 	}

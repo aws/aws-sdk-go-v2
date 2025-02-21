@@ -128,9 +128,6 @@ func (c *Client) addOperationGetCampaignActivitiesMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCampaignActivitiesValidationMiddleware(stack); err != nil {
 		return err
 	}

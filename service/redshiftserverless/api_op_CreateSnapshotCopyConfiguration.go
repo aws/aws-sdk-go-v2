@@ -128,9 +128,6 @@ func (c *Client) addOperationCreateSnapshotCopyConfigurationMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateSnapshotCopyConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

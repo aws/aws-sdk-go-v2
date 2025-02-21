@@ -218,9 +218,6 @@ func (c *Client) addOperationInvokeModelWithResponseStreamMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpInvokeModelWithResponseStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

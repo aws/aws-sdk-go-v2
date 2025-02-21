@@ -202,9 +202,6 @@ func (c *Client) addOperationGetCostAndUsageMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCostAndUsageValidationMiddleware(stack); err != nil {
 		return err
 	}

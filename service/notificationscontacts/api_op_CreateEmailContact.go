@@ -125,9 +125,6 @@ func (c *Client) addOperationCreateEmailContactMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateEmailContactValidationMiddleware(stack); err != nil {
 		return err
 	}

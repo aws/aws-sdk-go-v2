@@ -135,9 +135,6 @@ func (c *Client) addOperationDescribeChannelBanMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeChannelBanMiddleware(stack); err != nil {
 		return err
 	}

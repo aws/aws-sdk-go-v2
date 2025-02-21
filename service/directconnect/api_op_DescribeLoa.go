@@ -135,9 +135,6 @@ func (c *Client) addOperationDescribeLoaMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeLoaValidationMiddleware(stack); err != nil {
 		return err
 	}

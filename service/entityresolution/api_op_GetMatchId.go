@@ -126,9 +126,6 @@ func (c *Client) addOperationGetMatchIdMiddlewares(stack *middleware.Stack, opti
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetMatchIdValidationMiddleware(stack); err != nil {
 		return err
 	}

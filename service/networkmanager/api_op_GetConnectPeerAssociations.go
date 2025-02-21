@@ -124,9 +124,6 @@ func (c *Client) addOperationGetConnectPeerAssociationsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetConnectPeerAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

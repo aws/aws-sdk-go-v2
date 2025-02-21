@@ -127,9 +127,6 @@ func (c *Client) addOperationAssociateDefaultViewMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociateDefaultViewValidationMiddleware(stack); err != nil {
 		return err
 	}

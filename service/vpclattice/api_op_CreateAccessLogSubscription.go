@@ -163,9 +163,6 @@ func (c *Client) addOperationCreateAccessLogSubscriptionMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateAccessLogSubscriptionMiddleware(stack, options); err != nil {
 		return err
 	}

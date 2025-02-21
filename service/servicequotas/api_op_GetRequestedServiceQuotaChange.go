@@ -112,9 +112,6 @@ func (c *Client) addOperationGetRequestedServiceQuotaChangeMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetRequestedServiceQuotaChangeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -20,7 +20,6 @@ CreateStorageLensGroup
 		stashOperationInput
 		ClientRequestID
 		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

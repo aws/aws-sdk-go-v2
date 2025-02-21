@@ -164,9 +164,6 @@ func (c *Client) addOperationUpdateGameServerMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateGameServerValidationMiddleware(stack); err != nil {
 		return err
 	}

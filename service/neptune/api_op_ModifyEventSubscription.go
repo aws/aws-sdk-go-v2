@@ -137,9 +137,6 @@ func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifyEventSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

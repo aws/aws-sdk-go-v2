@@ -124,9 +124,6 @@ func (c *Client) addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCancelQuantumTaskMiddleware(stack, options); err != nil {
 		return err
 	}

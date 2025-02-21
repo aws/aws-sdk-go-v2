@@ -192,9 +192,6 @@ func (c *Client) addOperationGetEngagementInvitationMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetEngagementInvitationValidationMiddleware(stack); err != nil {
 		return err
 	}

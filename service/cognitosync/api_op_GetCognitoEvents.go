@@ -117,9 +117,6 @@ func (c *Client) addOperationGetCognitoEventsMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCognitoEventsValidationMiddleware(stack); err != nil {
 		return err
 	}

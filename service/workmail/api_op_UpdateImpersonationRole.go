@@ -131,9 +131,6 @@ func (c *Client) addOperationUpdateImpersonationRoleMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateImpersonationRoleValidationMiddleware(stack); err != nil {
 		return err
 	}

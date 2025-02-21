@@ -117,9 +117,6 @@ func (c *Client) addOperationDeleteCustomLineItemMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteCustomLineItemValidationMiddleware(stack); err != nil {
 		return err
 	}

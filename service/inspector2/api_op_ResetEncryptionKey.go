@@ -114,9 +114,6 @@ func (c *Client) addOperationResetEncryptionKeyMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpResetEncryptionKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

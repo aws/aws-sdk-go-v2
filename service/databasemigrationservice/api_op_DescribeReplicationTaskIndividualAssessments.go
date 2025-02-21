@@ -133,9 +133,6 @@ func (c *Client) addOperationDescribeReplicationTaskIndividualAssessmentsMiddlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeReplicationTaskIndividualAssessmentsValidationMiddleware(stack); err != nil {
 		return err
 	}

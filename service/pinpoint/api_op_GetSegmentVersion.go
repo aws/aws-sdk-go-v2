@@ -127,9 +127,6 @@ func (c *Client) addOperationGetSegmentVersionMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetSegmentVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

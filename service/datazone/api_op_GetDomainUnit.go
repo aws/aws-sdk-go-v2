@@ -153,9 +153,6 @@ func (c *Client) addOperationGetDomainUnitMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetDomainUnitValidationMiddleware(stack); err != nil {
 		return err
 	}

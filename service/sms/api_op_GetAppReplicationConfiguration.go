@@ -112,9 +112,6 @@ func (c *Client) addOperationGetAppReplicationConfigurationMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAppReplicationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}

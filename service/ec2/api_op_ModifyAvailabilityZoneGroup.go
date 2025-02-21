@@ -126,9 +126,6 @@ func (c *Client) addOperationModifyAvailabilityZoneGroupMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifyAvailabilityZoneGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

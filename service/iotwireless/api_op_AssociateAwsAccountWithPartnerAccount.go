@@ -130,9 +130,6 @@ func (c *Client) addOperationAssociateAwsAccountWithPartnerAccountMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opAssociateAwsAccountWithPartnerAccountMiddleware(stack, options); err != nil {
 		return err
 	}

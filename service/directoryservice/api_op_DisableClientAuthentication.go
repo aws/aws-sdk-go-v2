@@ -114,9 +114,6 @@ func (c *Client) addOperationDisableClientAuthenticationMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisableClientAuthenticationValidationMiddleware(stack); err != nil {
 		return err
 	}

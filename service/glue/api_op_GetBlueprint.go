@@ -118,9 +118,6 @@ func (c *Client) addOperationGetBlueprintMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetBlueprintValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -137,9 +137,6 @@ func (c *Client) addOperationListSbomValidationResultsMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListSbomValidationResultsValidationMiddleware(stack); err != nil {
 		return err
 	}

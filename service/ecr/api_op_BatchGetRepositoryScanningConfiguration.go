@@ -115,9 +115,6 @@ func (c *Client) addOperationBatchGetRepositoryScanningConfigurationMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchGetRepositoryScanningConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

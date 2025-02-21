@@ -153,9 +153,6 @@ func (c *Client) addOperationCreateOutboundConnectionMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateOutboundConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

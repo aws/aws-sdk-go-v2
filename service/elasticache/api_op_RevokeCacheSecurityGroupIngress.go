@@ -132,9 +132,6 @@ func (c *Client) addOperationRevokeCacheSecurityGroupIngressMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRevokeCacheSecurityGroupIngressValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -122,9 +122,6 @@ func (c *Client) addOperationJsonMapsMiddlewares(stack *middleware.Stack, option
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJsonMaps(options.Region), middleware.Before); err != nil {
 		return err
 	}

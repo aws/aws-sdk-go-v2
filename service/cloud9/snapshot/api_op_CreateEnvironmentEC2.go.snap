@@ -14,7 +14,6 @@ CreateEnvironmentEC2
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

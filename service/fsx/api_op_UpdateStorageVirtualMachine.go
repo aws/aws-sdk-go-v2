@@ -124,9 +124,6 @@ func (c *Client) addOperationUpdateStorageVirtualMachineMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opUpdateStorageVirtualMachineMiddleware(stack, options); err != nil {
 		return err
 	}

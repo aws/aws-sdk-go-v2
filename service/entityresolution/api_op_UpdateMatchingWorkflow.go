@@ -176,9 +176,6 @@ func (c *Client) addOperationUpdateMatchingWorkflowMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateMatchingWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}

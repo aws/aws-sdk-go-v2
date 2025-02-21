@@ -125,9 +125,6 @@ func (c *Client) addOperationListConfiguredModelAlgorithmAssociationsMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListConfiguredModelAlgorithmAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

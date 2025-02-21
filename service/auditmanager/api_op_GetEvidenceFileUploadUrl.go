@@ -134,9 +134,6 @@ func (c *Client) addOperationGetEvidenceFileUploadUrlMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetEvidenceFileUploadUrlValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -136,9 +136,6 @@ func (c *Client) addOperationAssociatePhoneNumbersWithVoiceConnectorGroupMiddlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociatePhoneNumbersWithVoiceConnectorGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

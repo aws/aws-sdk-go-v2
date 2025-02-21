@@ -203,9 +203,6 @@ func (c *Client) addOperationUpdatePrimaryRegionMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdatePrimaryRegionValidationMiddleware(stack); err != nil {
 		return err
 	}

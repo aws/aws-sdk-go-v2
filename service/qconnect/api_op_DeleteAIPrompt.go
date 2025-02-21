@@ -114,9 +114,6 @@ func (c *Client) addOperationDeleteAIPromptMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteAIPromptValidationMiddleware(stack); err != nil {
 		return err
 	}

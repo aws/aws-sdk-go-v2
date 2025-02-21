@@ -181,9 +181,6 @@ func (c *Client) addOperationStartDominantLanguageDetectionJobMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartDominantLanguageDetectionJobMiddleware(stack, options); err != nil {
 		return err
 	}

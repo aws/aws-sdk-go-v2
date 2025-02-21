@@ -114,9 +114,6 @@ func (c *Client) addOperationGetOnPremisesInstanceMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetOnPremisesInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

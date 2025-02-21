@@ -147,9 +147,6 @@ func (c *Client) addOperationSearchAvailablePhoneNumbersMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSearchAvailablePhoneNumbersValidationMiddleware(stack); err != nil {
 		return err
 	}

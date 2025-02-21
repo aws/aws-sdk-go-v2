@@ -124,9 +124,6 @@ func (c *Client) addOperationDescribeDataDeletionJobMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDataDeletionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -330,9 +330,6 @@ func (c *Client) addOperationGenerateDataKeyPairMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGenerateDataKeyPairValidationMiddleware(stack); err != nil {
 		return err
 	}

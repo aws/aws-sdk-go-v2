@@ -161,9 +161,6 @@ func (c *Client) addOperationGetIndexMiddlewares(stack *middleware.Stack, option
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetIndexValidationMiddleware(stack); err != nil {
 		return err
 	}

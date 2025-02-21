@@ -114,9 +114,6 @@ func (c *Client) addOperationStopTrainingEntityRecognizerMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStopTrainingEntityRecognizerValidationMiddleware(stack); err != nil {
 		return err
 	}

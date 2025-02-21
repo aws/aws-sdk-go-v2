@@ -134,9 +134,6 @@ func (c *Client) addOperationDescribeGlobalTableSettingsMiddlewares(stack *middl
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeGlobalTableSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

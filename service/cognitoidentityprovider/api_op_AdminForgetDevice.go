@@ -143,9 +143,6 @@ func (c *Client) addOperationAdminForgetDeviceMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAdminForgetDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

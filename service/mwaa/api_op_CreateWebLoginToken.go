@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateWebLoginTokenMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opCreateWebLoginTokenMiddleware(stack); err != nil {
 		return err
 	}

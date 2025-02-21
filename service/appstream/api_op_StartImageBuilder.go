@@ -116,9 +116,6 @@ func (c *Client) addOperationStartImageBuilderMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartImageBuilderValidationMiddleware(stack); err != nil {
 		return err
 	}

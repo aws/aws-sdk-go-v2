@@ -122,9 +122,6 @@ func (c *Client) addOperationDescribeDefaultEncryptionConfigurationMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDescribeDefaultEncryptionConfigurationMiddleware(stack); err != nil {
 		return err
 	}

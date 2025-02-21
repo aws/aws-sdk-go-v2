@@ -144,9 +144,6 @@ func (c *Client) addOperationListStepConsumersMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListStepConsumersMiddleware(stack); err != nil {
 		return err
 	}

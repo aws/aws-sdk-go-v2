@@ -112,9 +112,6 @@ func (c *Client) addOperationListSupportedPhoneNumberCountriesMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListSupportedPhoneNumberCountriesValidationMiddleware(stack); err != nil {
 		return err
 	}

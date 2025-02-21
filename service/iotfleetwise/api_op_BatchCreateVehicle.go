@@ -126,9 +126,6 @@ func (c *Client) addOperationBatchCreateVehicleMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchCreateVehicleValidationMiddleware(stack); err != nil {
 		return err
 	}

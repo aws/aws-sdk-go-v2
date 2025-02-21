@@ -132,9 +132,6 @@ func (c *Client) addOperationCreateEdgeDeploymentPlanMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateEdgeDeploymentPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

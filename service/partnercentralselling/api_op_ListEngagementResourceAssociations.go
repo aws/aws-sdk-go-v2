@@ -151,9 +151,6 @@ func (c *Client) addOperationListEngagementResourceAssociationsMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListEngagementResourceAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

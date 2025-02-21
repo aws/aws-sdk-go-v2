@@ -120,9 +120,6 @@ func (c *Client) addOperationStartBatchDeleteConfigurationTaskMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartBatchDeleteConfigurationTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

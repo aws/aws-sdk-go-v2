@@ -140,9 +140,6 @@ func (c *Client) addOperationModifyDefaultCreditSpecificationMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifyDefaultCreditSpecificationValidationMiddleware(stack); err != nil {
 		return err
 	}

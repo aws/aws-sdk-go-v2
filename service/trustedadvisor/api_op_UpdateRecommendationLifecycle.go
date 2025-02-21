@@ -120,9 +120,6 @@ func (c *Client) addOperationUpdateRecommendationLifecycleMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateRecommendationLifecycleValidationMiddleware(stack); err != nil {
 		return err
 	}

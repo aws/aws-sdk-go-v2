@@ -139,9 +139,6 @@ func (c *Client) addOperationListHumanLoopsMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListHumanLoopsValidationMiddleware(stack); err != nil {
 		return err
 	}

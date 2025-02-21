@@ -148,9 +148,6 @@ func (c *Client) addOperationRegisterContainerImageMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRegisterContainerImageValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -135,9 +135,6 @@ func (c *Client) addOperationListPermissionSetsProvisionedToAccountMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListPermissionSetsProvisionedToAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

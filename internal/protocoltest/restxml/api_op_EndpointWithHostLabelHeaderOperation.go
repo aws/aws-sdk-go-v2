@@ -106,9 +106,6 @@ func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opEndpointWithHostLabelHeaderOperationMiddleware(stack); err != nil {
 		return err
 	}

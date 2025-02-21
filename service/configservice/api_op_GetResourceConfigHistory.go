@@ -165,9 +165,6 @@ func (c *Client) addOperationGetResourceConfigHistoryMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetResourceConfigHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -315,9 +315,6 @@ func (c *Client) addOperationStartMedicalTranscriptionJobMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartMedicalTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

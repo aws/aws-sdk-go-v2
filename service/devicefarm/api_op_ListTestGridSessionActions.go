@@ -121,9 +121,6 @@ func (c *Client) addOperationListTestGridSessionActionsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListTestGridSessionActionsValidationMiddleware(stack); err != nil {
 		return err
 	}

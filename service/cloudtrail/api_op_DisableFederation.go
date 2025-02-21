@@ -123,9 +123,6 @@ func (c *Client) addOperationDisableFederationMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisableFederationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -162,9 +162,6 @@ func (c *Client) addOperationStartDICOMImportJobMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartDICOMImportJobMiddleware(stack, options); err != nil {
 		return err
 	}

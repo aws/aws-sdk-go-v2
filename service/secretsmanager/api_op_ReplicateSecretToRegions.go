@@ -139,9 +139,6 @@ func (c *Client) addOperationReplicateSecretToRegionsMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpReplicateSecretToRegionsValidationMiddleware(stack); err != nil {
 		return err
 	}

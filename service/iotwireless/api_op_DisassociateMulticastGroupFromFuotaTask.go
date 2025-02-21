@@ -112,9 +112,6 @@ func (c *Client) addOperationDisassociateMulticastGroupFromFuotaTaskMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateMulticastGroupFromFuotaTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

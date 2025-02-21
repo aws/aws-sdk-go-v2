@@ -192,9 +192,6 @@ func (c *Client) addOperationPutSourceServerActionMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutSourceServerActionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -150,9 +150,6 @@ func (c *Client) addOperationDescribeKeyValueStoreMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeKeyValueStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -247,9 +247,6 @@ func (c *Client) addOperationDescribeDimensionKeysMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDimensionKeysValidationMiddleware(stack); err != nil {
 		return err
 	}

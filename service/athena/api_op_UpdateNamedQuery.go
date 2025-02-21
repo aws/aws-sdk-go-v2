@@ -120,9 +120,6 @@ func (c *Client) addOperationUpdateNamedQueryMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateNamedQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

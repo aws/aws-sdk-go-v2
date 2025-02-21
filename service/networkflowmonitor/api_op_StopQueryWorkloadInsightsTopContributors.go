@@ -121,9 +121,6 @@ func (c *Client) addOperationStopQueryWorkloadInsightsTopContributorsMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStopQueryWorkloadInsightsTopContributorsValidationMiddleware(stack); err != nil {
 		return err
 	}

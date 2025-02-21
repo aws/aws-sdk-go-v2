@@ -125,9 +125,6 @@ func (c *Client) addOperationCreateAddonInstanceMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateAddonInstanceMiddleware(stack, options); err != nil {
 		return err
 	}

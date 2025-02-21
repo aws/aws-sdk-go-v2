@@ -130,9 +130,6 @@ func (c *Client) addOperationDisassociateSecurityGroupVpcMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateSecurityGroupVpcValidationMiddleware(stack); err != nil {
 		return err
 	}

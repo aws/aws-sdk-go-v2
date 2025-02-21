@@ -107,9 +107,6 @@ func (c *Client) addOperationDeleteLoggingConfigurationMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

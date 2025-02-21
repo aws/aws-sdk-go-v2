@@ -163,9 +163,6 @@ func (c *Client) addOperationCreateFeaturedResultsSetMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateFeaturedResultsSetValidationMiddleware(stack); err != nil {
 		return err
 	}

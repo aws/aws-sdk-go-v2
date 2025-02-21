@@ -118,9 +118,6 @@ func (c *Client) addOperationDeleteAIGuardrailVersionMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteAIGuardrailVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

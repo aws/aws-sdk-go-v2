@@ -121,9 +121,6 @@ func (c *Client) addOperationDeleteServiceQuotaIncreaseRequestFromTemplateMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteServiceQuotaIncreaseRequestFromTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

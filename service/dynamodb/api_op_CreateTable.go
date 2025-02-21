@@ -335,9 +335,6 @@ func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateTableValidationMiddleware(stack); err != nil {
 		return err
 	}

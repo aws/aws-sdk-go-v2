@@ -137,9 +137,6 @@ func (c *Client) addOperationUpdateChimeWebhookConfigurationMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateChimeWebhookConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

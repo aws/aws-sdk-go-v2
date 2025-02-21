@@ -113,9 +113,6 @@ func (c *Client) addOperationUpdateLabelGroupMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateLabelGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

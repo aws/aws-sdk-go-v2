@@ -135,9 +135,6 @@ func (c *Client) addOperationSubmitContainerStateChangeMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitContainerStateChange(options.Region), middleware.Before); err != nil {
 		return err
 	}

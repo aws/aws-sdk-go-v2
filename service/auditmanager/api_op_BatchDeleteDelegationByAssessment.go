@@ -117,9 +117,6 @@ func (c *Client) addOperationBatchDeleteDelegationByAssessmentMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchDeleteDelegationByAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}

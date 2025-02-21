@@ -164,9 +164,6 @@ func (c *Client) addOperationStartQueryMonitorTopContributorsMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartQueryMonitorTopContributorsValidationMiddleware(stack); err != nil {
 		return err
 	}

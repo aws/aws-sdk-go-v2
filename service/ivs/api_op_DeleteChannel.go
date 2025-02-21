@@ -114,9 +114,6 @@ func (c *Client) addOperationDeleteChannelMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

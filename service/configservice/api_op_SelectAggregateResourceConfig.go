@@ -153,9 +153,6 @@ func (c *Client) addOperationSelectAggregateResourceConfigMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSelectAggregateResourceConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

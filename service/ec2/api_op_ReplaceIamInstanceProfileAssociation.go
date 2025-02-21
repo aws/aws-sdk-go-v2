@@ -121,9 +121,6 @@ func (c *Client) addOperationReplaceIamInstanceProfileAssociationMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpReplaceIamInstanceProfileAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

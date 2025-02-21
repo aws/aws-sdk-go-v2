@@ -124,9 +124,6 @@ func (c *Client) addOperationOverridePullRequestApprovalRulesMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpOverridePullRequestApprovalRulesValidationMiddleware(stack); err != nil {
 		return err
 	}

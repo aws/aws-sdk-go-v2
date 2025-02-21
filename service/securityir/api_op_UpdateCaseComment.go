@@ -128,9 +128,6 @@ func (c *Client) addOperationUpdateCaseCommentMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateCaseCommentValidationMiddleware(stack); err != nil {
 		return err
 	}

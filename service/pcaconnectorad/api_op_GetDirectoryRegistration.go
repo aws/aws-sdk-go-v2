@@ -115,9 +115,6 @@ func (c *Client) addOperationGetDirectoryRegistrationMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetDirectoryRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}

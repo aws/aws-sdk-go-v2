@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteTrackerMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opDeleteTrackerMiddleware(stack); err != nil {
 		return err
 	}

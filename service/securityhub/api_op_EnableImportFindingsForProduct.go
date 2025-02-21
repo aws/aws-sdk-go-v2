@@ -115,9 +115,6 @@ func (c *Client) addOperationEnableImportFindingsForProductMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpEnableImportFindingsForProductValidationMiddleware(stack); err != nil {
 		return err
 	}

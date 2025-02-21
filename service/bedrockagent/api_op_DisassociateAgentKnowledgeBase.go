@@ -118,9 +118,6 @@ func (c *Client) addOperationDisassociateAgentKnowledgeBaseMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateAgentKnowledgeBaseValidationMiddleware(stack); err != nil {
 		return err
 	}

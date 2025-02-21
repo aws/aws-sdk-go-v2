@@ -117,9 +117,6 @@ func (c *Client) addOperationDescribeBundleAssociationsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeBundleAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

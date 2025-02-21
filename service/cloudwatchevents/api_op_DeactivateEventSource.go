@@ -115,9 +115,6 @@ func (c *Client) addOperationDeactivateEventSourceMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeactivateEventSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

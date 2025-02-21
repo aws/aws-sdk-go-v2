@@ -160,9 +160,6 @@ func (c *Client) addOperationDescribeSimulationApplicationMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeSimulationApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

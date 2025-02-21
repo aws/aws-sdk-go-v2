@@ -152,9 +152,6 @@ func (c *Client) addOperationCreateVirtualRouterMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateVirtualRouterMiddleware(stack, options); err != nil {
 		return err
 	}

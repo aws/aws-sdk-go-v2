@@ -140,9 +140,6 @@ func (c *Client) addOperationDeleteChannelPlacementGroupMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteChannelPlacementGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

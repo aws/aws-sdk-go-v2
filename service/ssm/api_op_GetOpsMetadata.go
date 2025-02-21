@@ -126,9 +126,6 @@ func (c *Client) addOperationGetOpsMetadataMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetOpsMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

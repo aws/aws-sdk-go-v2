@@ -115,9 +115,6 @@ func (c *Client) addOperationModifyCertificateBasedAuthPropertiesMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpModifyCertificateBasedAuthPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

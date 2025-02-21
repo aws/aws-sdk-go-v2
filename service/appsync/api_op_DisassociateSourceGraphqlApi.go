@@ -122,9 +122,6 @@ func (c *Client) addOperationDisassociateSourceGraphqlApiMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateSourceGraphqlApiValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,9 +128,6 @@ func (c *Client) addOperationUpdateMailboxQuotaMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateMailboxQuotaValidationMiddleware(stack); err != nil {
 		return err
 	}

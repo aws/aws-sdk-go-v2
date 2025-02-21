@@ -134,9 +134,6 @@ func (c *Client) addOperationBatchCheckLayerAvailabilityMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchCheckLayerAvailabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

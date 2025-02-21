@@ -129,9 +129,6 @@ func (c *Client) addOperationDescribeContainerFleetMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeContainerFleetValidationMiddleware(stack); err != nil {
 		return err
 	}

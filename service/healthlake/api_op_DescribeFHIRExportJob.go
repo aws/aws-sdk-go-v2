@@ -122,9 +122,6 @@ func (c *Client) addOperationDescribeFHIRExportJobMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeFHIRExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

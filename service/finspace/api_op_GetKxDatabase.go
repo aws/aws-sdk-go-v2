@@ -151,9 +151,6 @@ func (c *Client) addOperationGetKxDatabaseMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetKxDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}

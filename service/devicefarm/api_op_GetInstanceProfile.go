@@ -112,9 +112,6 @@ func (c *Client) addOperationGetInstanceProfileMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetInstanceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

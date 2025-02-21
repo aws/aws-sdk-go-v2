@@ -117,9 +117,6 @@ func (c *Client) addOperationRejectDomainNameAccessAssociationMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRejectDomainNameAccessAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

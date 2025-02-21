@@ -113,9 +113,6 @@ func (c *Client) addOperationDescribeTopicsDetectionJobMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeTopicsDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

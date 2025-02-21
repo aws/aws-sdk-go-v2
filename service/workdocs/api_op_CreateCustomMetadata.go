@@ -121,9 +121,6 @@ func (c *Client) addOperationCreateCustomMetadataMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateCustomMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

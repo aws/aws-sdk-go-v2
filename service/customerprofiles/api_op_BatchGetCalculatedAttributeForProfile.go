@@ -133,9 +133,6 @@ func (c *Client) addOperationBatchGetCalculatedAttributeForProfileMiddlewares(st
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchGetCalculatedAttributeForProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

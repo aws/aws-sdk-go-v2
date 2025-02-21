@@ -172,9 +172,6 @@ func (c *Client) addOperationDescribeDashboardSnapshotJobMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDashboardSnapshotJobValidationMiddleware(stack); err != nil {
 		return err
 	}

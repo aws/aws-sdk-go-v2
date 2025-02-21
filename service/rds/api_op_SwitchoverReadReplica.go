@@ -125,9 +125,6 @@ func (c *Client) addOperationSwitchoverReadReplicaMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSwitchoverReadReplicaValidationMiddleware(stack); err != nil {
 		return err
 	}

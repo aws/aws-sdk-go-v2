@@ -129,9 +129,6 @@ func (c *Client) addOperationDescribeVerifiedDestinationNumbersMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeVerifiedDestinationNumbersValidationMiddleware(stack); err != nil {
 		return err
 	}

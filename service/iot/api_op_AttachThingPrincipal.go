@@ -131,9 +131,6 @@ func (c *Client) addOperationAttachThingPrincipalMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAttachThingPrincipalValidationMiddleware(stack); err != nil {
 		return err
 	}

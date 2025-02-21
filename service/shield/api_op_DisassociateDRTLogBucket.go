@@ -108,9 +108,6 @@ func (c *Client) addOperationDisassociateDRTLogBucketMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateDRTLogBucketValidationMiddleware(stack); err != nil {
 		return err
 	}

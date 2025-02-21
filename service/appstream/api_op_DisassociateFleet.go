@@ -112,9 +112,6 @@ func (c *Client) addOperationDisassociateFleetMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateFleetValidationMiddleware(stack); err != nil {
 		return err
 	}

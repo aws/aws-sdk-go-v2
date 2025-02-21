@@ -112,9 +112,6 @@ func (c *Client) addOperationDisassociateWirelessDeviceFromFuotaTaskMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateWirelessDeviceFromFuotaTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -127,9 +127,6 @@ func (c *Client) addOperationUpdateBrokerStorageMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateBrokerStorageValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -124,9 +124,6 @@ func (c *Client) addOperationCreateAwsLogSourceMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateAwsLogSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

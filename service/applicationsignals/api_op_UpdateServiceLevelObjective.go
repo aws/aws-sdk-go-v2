@@ -142,9 +142,6 @@ func (c *Client) addOperationUpdateServiceLevelObjectiveMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateServiceLevelObjectiveValidationMiddleware(stack); err != nil {
 		return err
 	}

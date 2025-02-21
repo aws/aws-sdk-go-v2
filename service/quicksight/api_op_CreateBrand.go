@@ -129,9 +129,6 @@ func (c *Client) addOperationCreateBrandMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateBrandValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,9 +114,6 @@ func (c *Client) addOperationDeleteEventsByEventTypeMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteEventsByEventTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

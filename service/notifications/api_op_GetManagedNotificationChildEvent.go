@@ -135,9 +135,6 @@ func (c *Client) addOperationGetManagedNotificationChildEventMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetManagedNotificationChildEventValidationMiddleware(stack); err != nil {
 		return err
 	}

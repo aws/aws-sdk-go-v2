@@ -133,9 +133,6 @@ func (c *Client) addOperationListProvisionedConcurrencyConfigsMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListProvisionedConcurrencyConfigsValidationMiddleware(stack); err != nil {
 		return err
 	}

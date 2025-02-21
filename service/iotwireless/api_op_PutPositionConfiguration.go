@@ -129,9 +129,6 @@ func (c *Client) addOperationPutPositionConfigurationMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutPositionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

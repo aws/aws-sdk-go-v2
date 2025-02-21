@@ -213,9 +213,6 @@ func (c *Client) addOperationDescribeDatasetImportJobMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeDatasetImportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -124,9 +124,6 @@ func (c *Client) addOperationListClientDevicesAssociatedWithCoreDeviceMiddleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListClientDevicesAssociatedWithCoreDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

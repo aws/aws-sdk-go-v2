@@ -137,9 +137,6 @@ func (c *Client) addOperationRotateChannelCredentialsMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRotateChannelCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

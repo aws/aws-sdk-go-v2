@@ -132,9 +132,6 @@ func (c *Client) addOperationListLexBotsMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListLexBotsValidationMiddleware(stack); err != nil {
 		return err
 	}

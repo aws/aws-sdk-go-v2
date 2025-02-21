@@ -122,9 +122,6 @@ func (c *Client) addOperationGetKeyGroupConfigMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetKeyGroupConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

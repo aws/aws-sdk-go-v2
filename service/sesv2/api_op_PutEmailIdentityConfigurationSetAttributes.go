@@ -113,9 +113,6 @@ func (c *Client) addOperationPutEmailIdentityConfigurationSetAttributesMiddlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutEmailIdentityConfigurationSetAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

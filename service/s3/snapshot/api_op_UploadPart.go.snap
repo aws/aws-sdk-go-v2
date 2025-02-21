@@ -24,7 +24,6 @@ UploadPart
 		ClientRequestID
 		ComputeContentLength
 		AWSChecksum:RequestMetricsTracking
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		S3100Continue

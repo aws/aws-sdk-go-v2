@@ -117,9 +117,6 @@ func (c *Client) addOperationUpdateImageGenerationConfigurationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateImageGenerationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

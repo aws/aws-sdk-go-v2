@@ -140,9 +140,6 @@ func (c *Client) addOperationListReportsForReportGroupMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListReportsForReportGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

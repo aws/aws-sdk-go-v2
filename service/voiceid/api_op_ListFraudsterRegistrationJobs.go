@@ -134,9 +134,6 @@ func (c *Client) addOperationListFraudsterRegistrationJobsMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListFraudsterRegistrationJobsValidationMiddleware(stack); err != nil {
 		return err
 	}

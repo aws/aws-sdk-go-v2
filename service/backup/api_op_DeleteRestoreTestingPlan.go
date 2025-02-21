@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteRestoreTestingPlanMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteRestoreTestingPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

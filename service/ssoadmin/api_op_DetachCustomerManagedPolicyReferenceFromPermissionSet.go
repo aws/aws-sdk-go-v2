@@ -121,9 +121,6 @@ func (c *Client) addOperationDetachCustomerManagedPolicyReferenceFromPermissionS
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDetachCustomerManagedPolicyReferenceFromPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

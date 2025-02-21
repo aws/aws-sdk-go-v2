@@ -144,9 +144,6 @@ func (c *Client) addOperationConfirmPublicVirtualInterfaceMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpConfirmPublicVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}

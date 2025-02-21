@@ -130,9 +130,6 @@ func (c *Client) addOperationDescribeLocationNfsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeLocationNfsValidationMiddleware(stack); err != nil {
 		return err
 	}

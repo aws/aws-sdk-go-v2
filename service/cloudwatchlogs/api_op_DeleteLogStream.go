@@ -113,9 +113,6 @@ func (c *Client) addOperationDeleteLogStreamMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteLogStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

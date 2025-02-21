@@ -152,9 +152,6 @@ func (c *Client) addOperationCreateTemplateShareMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateTemplateShareMiddleware(stack, options); err != nil {
 		return err
 	}

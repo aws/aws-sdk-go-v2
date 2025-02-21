@@ -148,9 +148,6 @@ func (c *Client) addOperationGetQuerySuggestionsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetQuerySuggestionsValidationMiddleware(stack); err != nil {
 		return err
 	}

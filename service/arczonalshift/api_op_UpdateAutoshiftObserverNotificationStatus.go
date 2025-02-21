@@ -130,9 +130,6 @@ func (c *Client) addOperationUpdateAutoshiftObserverNotificationStatusMiddleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateAutoshiftObserverNotificationStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -139,9 +139,6 @@ func (c *Client) addOperationDescribeManagedJobTemplateMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeManagedJobTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

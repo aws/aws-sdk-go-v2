@@ -154,9 +154,6 @@ func (c *Client) addOperationDescribeGameServerInstancesMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeGameServerInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}

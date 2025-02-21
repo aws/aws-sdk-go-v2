@@ -161,9 +161,6 @@ func (c *Client) addOperationUpdateGlobalTableMiddlewares(stack *middleware.Stac
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateGlobalTableValidationMiddleware(stack); err != nil {
 		return err
 	}

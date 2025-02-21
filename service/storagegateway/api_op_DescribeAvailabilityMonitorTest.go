@@ -125,9 +125,6 @@ func (c *Client) addOperationDescribeAvailabilityMonitorTestMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeAvailabilityMonitorTestValidationMiddleware(stack); err != nil {
 		return err
 	}

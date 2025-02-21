@@ -117,9 +117,6 @@ func (c *Client) addOperationAssociatePhoneNumberWithUserMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociatePhoneNumberWithUserValidationMiddleware(stack); err != nil {
 		return err
 	}

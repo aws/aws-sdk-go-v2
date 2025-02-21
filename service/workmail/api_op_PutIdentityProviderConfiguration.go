@@ -128,9 +128,6 @@ func (c *Client) addOperationPutIdentityProviderConfigurationMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutIdentityProviderConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

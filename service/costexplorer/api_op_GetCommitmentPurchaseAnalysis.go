@@ -143,9 +143,6 @@ func (c *Client) addOperationGetCommitmentPurchaseAnalysisMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetCommitmentPurchaseAnalysisValidationMiddleware(stack); err != nil {
 		return err
 	}

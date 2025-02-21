@@ -122,9 +122,6 @@ func (c *Client) addOperationUpdateHostedZoneCommentMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateHostedZoneCommentValidationMiddleware(stack); err != nil {
 		return err
 	}

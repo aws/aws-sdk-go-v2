@@ -153,9 +153,6 @@ func (c *Client) addOperationListIntentPathsMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListIntentPathsValidationMiddleware(stack); err != nil {
 		return err
 	}

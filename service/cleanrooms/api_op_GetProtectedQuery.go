@@ -119,9 +119,6 @@ func (c *Client) addOperationGetProtectedQueryMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetProtectedQueryValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -111,9 +111,6 @@ func (c *Client) addOperationPutAccountVdmAttributesMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutAccountVdmAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

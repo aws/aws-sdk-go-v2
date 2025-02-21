@@ -172,9 +172,6 @@ func (c *Client) addOperationUpdateMaintenanceStartTimeMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateMaintenanceStartTimeValidationMiddleware(stack); err != nil {
 		return err
 	}

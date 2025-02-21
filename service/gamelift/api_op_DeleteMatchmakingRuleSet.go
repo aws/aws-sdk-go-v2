@@ -117,9 +117,6 @@ func (c *Client) addOperationDeleteMatchmakingRuleSetMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteMatchmakingRuleSetValidationMiddleware(stack); err != nil {
 		return err
 	}

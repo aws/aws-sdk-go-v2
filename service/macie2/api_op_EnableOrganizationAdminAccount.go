@@ -113,9 +113,6 @@ func (c *Client) addOperationEnableOrganizationAdminAccountMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opEnableOrganizationAdminAccountMiddleware(stack, options); err != nil {
 		return err
 	}

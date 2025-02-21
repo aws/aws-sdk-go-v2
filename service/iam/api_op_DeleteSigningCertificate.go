@@ -128,9 +128,6 @@ func (c *Client) addOperationDeleteSigningCertificateMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteSigningCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}

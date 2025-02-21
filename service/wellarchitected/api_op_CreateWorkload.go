@@ -288,9 +288,6 @@ func (c *Client) addOperationCreateWorkloadMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateWorkloadMiddleware(stack, options); err != nil {
 		return err
 	}

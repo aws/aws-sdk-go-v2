@@ -113,9 +113,6 @@ func (c *Client) addOperationDisassociatePhoneNumberFromUserMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociatePhoneNumberFromUserValidationMiddleware(stack); err != nil {
 		return err
 	}

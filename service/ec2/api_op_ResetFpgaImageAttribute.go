@@ -122,9 +122,6 @@ func (c *Client) addOperationResetFpgaImageAttributeMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpResetFpgaImageAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}

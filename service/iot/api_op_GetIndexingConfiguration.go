@@ -113,9 +113,6 @@ func (c *Client) addOperationGetIndexingConfigurationMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIndexingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}

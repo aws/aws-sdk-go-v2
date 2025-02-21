@@ -113,9 +113,6 @@ func (c *Client) addOperationDeleteMLInputChannelDataMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteMLInputChannelDataValidationMiddleware(stack); err != nil {
 		return err
 	}

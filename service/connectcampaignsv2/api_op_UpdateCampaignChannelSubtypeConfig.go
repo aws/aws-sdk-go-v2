@@ -114,9 +114,6 @@ func (c *Client) addOperationUpdateCampaignChannelSubtypeConfigMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateCampaignChannelSubtypeConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

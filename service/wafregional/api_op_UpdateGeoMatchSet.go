@@ -172,9 +172,6 @@ func (c *Client) addOperationUpdateGeoMatchSetMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateGeoMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}

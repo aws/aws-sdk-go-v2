@@ -194,9 +194,6 @@ func (c *Client) addOperationCreateMultipartReadSetUploadMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opCreateMultipartReadSetUploadMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,9 +119,6 @@ func (c *Client) addOperationBatchPutScheduledUpdateGroupActionMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchPutScheduledUpdateGroupActionValidationMiddleware(stack); err != nil {
 		return err
 	}

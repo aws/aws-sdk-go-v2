@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteRestApiMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteRestApiValidationMiddleware(stack); err != nil {
 		return err
 	}

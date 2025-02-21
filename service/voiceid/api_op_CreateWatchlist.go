@@ -127,9 +127,6 @@ func (c *Client) addOperationCreateWatchlistMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateWatchlistMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -164,9 +164,6 @@ func (c *Client) addOperationFinalizeCutoverMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpFinalizeCutoverValidationMiddleware(stack); err != nil {
 		return err
 	}

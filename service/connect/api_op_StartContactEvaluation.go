@@ -145,9 +145,6 @@ func (c *Client) addOperationStartContactEvaluationMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opStartContactEvaluationMiddleware(stack, options); err != nil {
 		return err
 	}

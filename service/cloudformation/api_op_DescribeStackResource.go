@@ -133,9 +133,6 @@ func (c *Client) addOperationDescribeStackResourceMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeStackResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

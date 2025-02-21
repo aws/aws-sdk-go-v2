@@ -137,9 +137,6 @@ func (c *Client) addOperationPutRolePermissionsBoundaryMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutRolePermissionsBoundaryValidationMiddleware(stack); err != nil {
 		return err
 	}

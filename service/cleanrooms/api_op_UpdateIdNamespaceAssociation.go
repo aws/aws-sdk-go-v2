@@ -129,9 +129,6 @@ func (c *Client) addOperationUpdateIdNamespaceAssociationMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateIdNamespaceAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

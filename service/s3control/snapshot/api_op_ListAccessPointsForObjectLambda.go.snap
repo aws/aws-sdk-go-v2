@@ -20,7 +20,6 @@ ListAccessPointsForObjectLambda
 		stashOperationInput
 		ClientRequestID
 		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

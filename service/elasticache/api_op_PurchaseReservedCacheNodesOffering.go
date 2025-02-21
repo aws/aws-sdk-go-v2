@@ -136,9 +136,6 @@ func (c *Client) addOperationPurchaseReservedCacheNodesOfferingMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPurchaseReservedCacheNodesOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}

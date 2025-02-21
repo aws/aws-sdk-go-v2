@@ -122,9 +122,6 @@ func (c *Client) addOperationSendDataToMulticastGroupMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpSendDataToMulticastGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

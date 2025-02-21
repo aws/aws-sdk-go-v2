@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteCidrCollectionMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteCidrCollectionValidationMiddleware(stack); err != nil {
 		return err
 	}

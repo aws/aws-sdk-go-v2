@@ -167,9 +167,6 @@ func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeExportTasksValidationMiddleware(stack); err != nil {
 		return err
 	}

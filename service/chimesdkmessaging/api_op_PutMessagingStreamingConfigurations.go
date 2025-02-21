@@ -120,9 +120,6 @@ func (c *Client) addOperationPutMessagingStreamingConfigurationsMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutMessagingStreamingConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}

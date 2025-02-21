@@ -129,9 +129,6 @@ func (c *Client) addOperationRegisterIdentityProviderMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpRegisterIdentityProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

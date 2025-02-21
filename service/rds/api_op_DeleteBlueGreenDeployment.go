@@ -133,9 +133,6 @@ func (c *Client) addOperationDeleteBlueGreenDeploymentMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteBlueGreenDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}

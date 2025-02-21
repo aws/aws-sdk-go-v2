@@ -174,9 +174,6 @@ func (c *Client) addOperationPutGraphqlApiEnvironmentVariablesMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutGraphqlApiEnvironmentVariablesValidationMiddleware(stack); err != nil {
 		return err
 	}

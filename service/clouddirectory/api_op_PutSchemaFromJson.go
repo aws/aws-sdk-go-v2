@@ -119,9 +119,6 @@ func (c *Client) addOperationPutSchemaFromJsonMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutSchemaFromJsonValidationMiddleware(stack); err != nil {
 		return err
 	}

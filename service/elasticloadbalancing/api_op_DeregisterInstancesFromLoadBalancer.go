@@ -126,9 +126,6 @@ func (c *Client) addOperationDeregisterInstancesFromLoadBalancerMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeregisterInstancesFromLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}

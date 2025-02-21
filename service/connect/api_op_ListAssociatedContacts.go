@@ -137,9 +137,6 @@ func (c *Client) addOperationListAssociatedContactsMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListAssociatedContactsValidationMiddleware(stack); err != nil {
 		return err
 	}

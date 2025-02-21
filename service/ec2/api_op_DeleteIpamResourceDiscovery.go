@@ -120,9 +120,6 @@ func (c *Client) addOperationDeleteIpamResourceDiscoveryMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteIpamResourceDiscoveryValidationMiddleware(stack); err != nil {
 		return err
 	}

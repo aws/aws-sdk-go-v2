@@ -120,9 +120,6 @@ func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

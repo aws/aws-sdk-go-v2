@@ -146,9 +146,6 @@ func (c *Client) addOperationUpgradeLensReviewMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpgradeLensReviewValidationMiddleware(stack); err != nil {
 		return err
 	}

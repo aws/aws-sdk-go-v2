@@ -207,9 +207,6 @@ func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateIdentityProviderMiddleware(stack, options); err != nil {
 		return err
 	}

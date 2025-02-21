@@ -112,9 +112,6 @@ func (c *Client) addOperationCancelPipelineReprocessingMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCancelPipelineReprocessingValidationMiddleware(stack); err != nil {
 		return err
 	}

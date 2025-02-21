@@ -124,9 +124,6 @@ func (c *Client) addOperationPutWorkflowRunPropertiesMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutWorkflowRunPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

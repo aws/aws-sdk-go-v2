@@ -146,9 +146,6 @@ func (c *Client) addOperationSendDataIntegrationEventMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opSendDataIntegrationEventMiddleware(stack, options); err != nil {
 		return err
 	}

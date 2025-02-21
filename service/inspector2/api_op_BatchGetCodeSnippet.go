@@ -118,9 +118,6 @@ func (c *Client) addOperationBatchGetCodeSnippetMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchGetCodeSnippetValidationMiddleware(stack); err != nil {
 		return err
 	}

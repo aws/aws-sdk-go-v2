@@ -140,9 +140,6 @@ func (c *Client) addOperationDescribeCustomVocabularyMetadataMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeCustomVocabularyMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

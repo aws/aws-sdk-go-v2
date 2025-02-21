@@ -113,9 +113,6 @@ func (c *Client) addOperationDeleteBackupVaultLockConfigurationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteBackupVaultLockConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

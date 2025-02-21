@@ -112,9 +112,6 @@ func (c *Client) addOperationDeleteStorageConfigurationMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteStorageConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -107,9 +107,6 @@ func (c *Client) addOperationStopVectorEnrichmentJobMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStopVectorEnrichmentJobValidationMiddleware(stack); err != nil {
 		return err
 	}

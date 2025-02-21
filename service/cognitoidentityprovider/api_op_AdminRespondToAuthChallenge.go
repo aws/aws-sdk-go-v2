@@ -363,9 +363,6 @@ func (c *Client) addOperationAdminRespondToAuthChallengeMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAdminRespondToAuthChallengeValidationMiddleware(stack); err != nil {
 		return err
 	}

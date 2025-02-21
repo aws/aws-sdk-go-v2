@@ -114,9 +114,6 @@ func (c *Client) addOperationPutDataQualityProfileAnnotationMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutDataQualityProfileAnnotationValidationMiddleware(stack); err != nil {
 		return err
 	}

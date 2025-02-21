@@ -132,9 +132,6 @@ func (c *Client) addOperationListAIGuardrailVersionsMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListAIGuardrailVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

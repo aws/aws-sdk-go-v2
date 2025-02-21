@@ -136,9 +136,6 @@ func (c *Client) addOperationListIAMPolicyAssignmentsMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListIAMPolicyAssignmentsValidationMiddleware(stack); err != nil {
 		return err
 	}

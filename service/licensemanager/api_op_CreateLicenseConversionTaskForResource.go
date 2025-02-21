@@ -130,9 +130,6 @@ func (c *Client) addOperationCreateLicenseConversionTaskForResourceMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateLicenseConversionTaskForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -155,9 +155,6 @@ func (c *Client) addOperationCreateTrustedTokenIssuerMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opCreateTrustedTokenIssuerMiddleware(stack, options); err != nil {
 		return err
 	}

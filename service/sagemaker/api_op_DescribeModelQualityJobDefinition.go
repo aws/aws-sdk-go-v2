@@ -162,9 +162,6 @@ func (c *Client) addOperationDescribeModelQualityJobDefinitionMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeModelQualityJobDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

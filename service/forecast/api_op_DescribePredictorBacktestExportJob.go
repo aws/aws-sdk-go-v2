@@ -170,9 +170,6 @@ func (c *Client) addOperationDescribePredictorBacktestExportJobMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribePredictorBacktestExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

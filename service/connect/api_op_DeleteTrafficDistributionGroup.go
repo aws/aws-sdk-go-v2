@@ -114,9 +114,6 @@ func (c *Client) addOperationDeleteTrafficDistributionGroupMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteTrafficDistributionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

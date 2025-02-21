@@ -123,9 +123,6 @@ func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opListWorkflowsMiddleware(stack); err != nil {
 		return err
 	}

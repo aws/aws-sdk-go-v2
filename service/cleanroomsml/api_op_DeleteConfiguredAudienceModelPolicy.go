@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteConfiguredAudienceModelPolicyMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteConfiguredAudienceModelPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

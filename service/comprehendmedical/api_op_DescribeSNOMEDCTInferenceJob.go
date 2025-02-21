@@ -115,9 +115,6 @@ func (c *Client) addOperationDescribeSNOMEDCTInferenceJobMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDescribeSNOMEDCTInferenceJobValidationMiddleware(stack); err != nil {
 		return err
 	}

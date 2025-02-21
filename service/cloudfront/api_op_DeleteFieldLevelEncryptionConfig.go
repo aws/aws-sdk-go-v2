@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteFieldLevelEncryptionConfigMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteFieldLevelEncryptionConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -174,9 +174,6 @@ func (c *Client) addOperationPutBotAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutBotAliasValidationMiddleware(stack); err != nil {
 		return err
 	}

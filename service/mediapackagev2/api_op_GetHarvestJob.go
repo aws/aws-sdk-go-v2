@@ -200,9 +200,6 @@ func (c *Client) addOperationGetHarvestJobMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetHarvestJobValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -157,9 +157,6 @@ func (c *Client) addOperationUpdateLoadBalancerAttributeMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateLoadBalancerAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}

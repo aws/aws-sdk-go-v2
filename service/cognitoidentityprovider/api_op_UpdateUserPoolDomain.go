@@ -190,9 +190,6 @@ func (c *Client) addOperationUpdateUserPoolDomainMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateUserPoolDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

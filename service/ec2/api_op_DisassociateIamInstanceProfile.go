@@ -114,9 +114,6 @@ func (c *Client) addOperationDisassociateIamInstanceProfileMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDisassociateIamInstanceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -128,9 +128,6 @@ func (c *Client) addOperationListPredefinedAttributesMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpListPredefinedAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

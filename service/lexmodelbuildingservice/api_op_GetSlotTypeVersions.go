@@ -139,9 +139,6 @@ func (c *Client) addOperationGetSlotTypeVersionsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetSlotTypeVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

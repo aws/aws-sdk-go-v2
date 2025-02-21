@@ -14,7 +14,6 @@ DescribeScraper
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

@@ -133,9 +133,6 @@ func (c *Client) addOperationBatchUpdateRuleMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpBatchUpdateRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

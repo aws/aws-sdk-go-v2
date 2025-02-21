@@ -110,9 +110,6 @@ func (c *Client) addOperationDeletePolicyStoreMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeletePolicyStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

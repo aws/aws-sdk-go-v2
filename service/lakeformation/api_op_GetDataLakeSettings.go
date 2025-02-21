@@ -115,9 +115,6 @@ func (c *Client) addOperationGetDataLakeSettingsMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataLakeSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}

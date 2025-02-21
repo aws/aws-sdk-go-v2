@@ -112,9 +112,6 @@ func (c *Client) addOperationAssociateConfigurationItemsToApplicationMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addOpAssociateConfigurationItemsToApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

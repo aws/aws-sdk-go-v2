@@ -150,9 +150,6 @@ func (c *Client) addOperationSendOutboundEmailMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opSendOutboundEmailMiddleware(stack, options); err != nil {
 		return err
 	}
