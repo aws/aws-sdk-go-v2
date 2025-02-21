@@ -8773,6 +8773,9 @@ func awsAwsjson11_deserializeOpErrorUpdateDirectoryConfig(response *smithyhttp.R
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
 
+	case strings.EqualFold("IncompatibleImageException", errorCode):
+		return awsAwsjson11_deserializeErrorIncompatibleImageException(response, errorBody)
+
 	case strings.EqualFold("InvalidRoleException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidRoleException(response, errorBody)
 

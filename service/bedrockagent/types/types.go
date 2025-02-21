@@ -869,14 +869,10 @@ type BedrockEmbeddingModelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for a foundation model or [inference profile] used to parse documents for a data source.
-//
-// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
+// Settings for a foundation model used to parse documents for a data source.
 type BedrockFoundationModelConfiguration struct {
 
-	// The ARN of the foundation model or [inference profile] to use for parsing.
-	//
-	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
+	// The ARN of the foundation model to use for parsing.
 	//
 	// This member is required.
 	ModelArn *string
@@ -5156,8 +5152,8 @@ type VectorIngestionConfiguration struct {
 // knowledge base.
 type VectorKnowledgeBaseConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the model or inference profile used to create
-	// vector embeddings for the knowledge base.
+	// The Amazon Resource Name (ARN) of the model used to create vector embeddings
+	// for the knowledge base.
 	//
 	// This member is required.
 	EmbeddingModelArn *string
@@ -5206,11 +5202,15 @@ type WebCrawlerConfiguration struct {
 	// "docs.aws.amazon.com".
 	Scope WebScopeType
 
-	// A string used for identifying the crawler or a bot when it accesses a web
-	// server. By default, this is set to bedrockbot_UUID for your crawler. You can
-	// optionally append a custom string to bedrockbot_UUID to allowlist a specific
-	// user agent permitted to access your source URLs.
+	// Returns the user agent suffix for your web crawler.
 	UserAgent *string
+
+	// A string used for identifying the crawler or bot when it accesses a web server.
+	// The user agent header value consists of the bedrockbot , UUID, and a user agent
+	// suffix for your crawler (if one is provided). By default, it is set to
+	// bedrockbot_UUID . You can optionally append a custom suffix to bedrockbot_UUID
+	// to allowlist a specific user agent permitted to access your source URLs.
+	UserAgentHeader *string
 
 	noSmithyDocumentSerde
 }

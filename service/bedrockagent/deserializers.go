@@ -26614,6 +26614,15 @@ func awsRestjson1_deserializeDocumentWebCrawlerConfiguration(v **types.WebCrawle
 				sv.UserAgent = ptr.String(jtv)
 			}
 
+		case "userAgentHeader":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserAgentHeader to be of type string, got %T instead", value)
+				}
+				sv.UserAgentHeader = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

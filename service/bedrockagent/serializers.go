@@ -10827,6 +10827,11 @@ func awsRestjson1_serializeDocumentWebCrawlerConfiguration(v *types.WebCrawlerCo
 		ok.String(*v.UserAgent)
 	}
 
+	if v.UserAgentHeader != nil {
+		ok := object.Key("userAgentHeader")
+		ok.String(*v.UserAgentHeader)
+	}
+
 	return nil
 }
 
