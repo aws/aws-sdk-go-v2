@@ -2457,7 +2457,7 @@
                 "modelArn": {
                     "target": "com.amazonaws.bedrockagent#BedrockModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the foundation model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> to use for parsing.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the foundation model to use for parsing.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2475,7 +2475,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for a foundation model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> used to parse documents for a data source.</p>"
+                "smithy.api#documentation": "<p>Settings for a foundation model used to parse documents for a data source.</p>"
             }
         },
         "com.amazonaws.bedrockagent#BedrockModelArn": {
@@ -17513,6 +17513,16 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagent#UserAgentHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 61,
+                    "max": 86
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagent#ValidateFlowDefinition": {
             "type": "operation",
             "input": {
@@ -17657,7 +17667,7 @@
                 "embeddingModelArn": {
                     "target": "com.amazonaws.bedrockagent#BedrockEmbeddingModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model or inference profile used to create vector embeddings for the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model used to create vector embeddings for the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17732,7 +17742,13 @@
                 "userAgent": {
                     "target": "com.amazonaws.bedrockagent#UserAgent",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string used for identifying the crawler or a bot when it accesses a web server. By default, \n            this is set to <code>bedrockbot_UUID</code> for your crawler.  You can optionally append a custom \n            string to <code>bedrockbot_UUID</code> to allowlist a specific user agent permitted to access your source URLs.            \n        </p>"
+                        "smithy.api#documentation": "<p>Returns the user agent suffix for your web crawler.</p>"
+                    }
+                },
+                "userAgentHeader": {
+                    "target": "com.amazonaws.bedrockagent#UserAgentHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string used for identifying the crawler or bot when it accesses a web server. The user agent header value\n        consists of the <code>bedrockbot</code>, UUID, and a user agent suffix for your crawler (if one is provided).\n        By default, it is set to <code>bedrockbot_UUID</code>. You can optionally append a custom \n        suffix to <code>bedrockbot_UUID</code> to allowlist a specific user agent permitted to access your source URLs. </p>"
                     }
                 }
             },

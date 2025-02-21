@@ -9901,6 +9901,9 @@
                     "target": "com.amazonaws.appstream#ConcurrentModificationException"
                 },
                 {
+                    "target": "com.amazonaws.appstream#IncompatibleImageException"
+                },
+                {
                     "target": "com.amazonaws.appstream#InvalidRoleException"
                 },
                 {
