@@ -116,6 +116,9 @@ func (c *Client) addOperationListDocumentClassifierSummariesMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDocumentClassifierSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}

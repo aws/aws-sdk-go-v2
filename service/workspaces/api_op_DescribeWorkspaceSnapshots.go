@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeWorkspaceSnapshotsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeWorkspaceSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}

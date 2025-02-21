@@ -156,6 +156,9 @@ func (c *Client) addOperationDescribeCreateCaseOptionsMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCreateCaseOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}

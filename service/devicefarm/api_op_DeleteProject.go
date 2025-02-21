@@ -111,6 +111,9 @@ func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteProjectValidationMiddleware(stack); err != nil {
 		return err
 	}

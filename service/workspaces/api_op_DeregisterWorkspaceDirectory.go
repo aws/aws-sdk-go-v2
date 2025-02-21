@@ -124,6 +124,9 @@ func (c *Client) addOperationDeregisterWorkspaceDirectoryMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterWorkspaceDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}

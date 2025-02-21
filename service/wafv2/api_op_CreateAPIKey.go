@@ -142,6 +142,9 @@ func (c *Client) addOperationCreateAPIKeyMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateAPIKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

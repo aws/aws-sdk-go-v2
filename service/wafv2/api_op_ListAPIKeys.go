@@ -150,6 +150,9 @@ func (c *Client) addOperationListAPIKeysMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAPIKeysValidationMiddleware(stack); err != nil {
 		return err
 	}

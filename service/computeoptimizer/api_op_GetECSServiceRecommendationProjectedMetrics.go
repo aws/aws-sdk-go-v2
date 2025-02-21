@@ -137,6 +137,9 @@ func (c *Client) addOperationGetECSServiceRecommendationProjectedMetricsMiddlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetECSServiceRecommendationProjectedMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

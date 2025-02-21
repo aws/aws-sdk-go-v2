@@ -124,6 +124,9 @@ func (c *Client) addOperationDeleteColumnStatisticsForTableMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteColumnStatisticsForTableValidationMiddleware(stack); err != nil {
 		return err
 	}

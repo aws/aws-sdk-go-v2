@@ -139,6 +139,9 @@ func (c *Client) addOperationDescribeDBProxyEndpointsMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBProxyEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}

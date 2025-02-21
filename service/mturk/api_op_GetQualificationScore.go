@@ -127,6 +127,9 @@ func (c *Client) addOperationGetQualificationScoreMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetQualificationScoreValidationMiddleware(stack); err != nil {
 		return err
 	}

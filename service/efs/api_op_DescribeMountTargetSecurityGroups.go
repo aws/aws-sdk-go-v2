@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeMountTargetSecurityGroupsMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMountTargetSecurityGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

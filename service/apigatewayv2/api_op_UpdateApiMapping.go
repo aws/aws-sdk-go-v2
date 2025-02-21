@@ -137,6 +137,9 @@ func (c *Client) addOperationUpdateApiMappingMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateApiMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

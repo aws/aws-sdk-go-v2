@@ -169,6 +169,9 @@ func (c *Client) addOperationGetRelationalDatabaseLogEventsMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRelationalDatabaseLogEventsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -183,6 +183,9 @@ func (c *Client) addOperationCreateIPSetMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateIPSetValidationMiddleware(stack); err != nil {
 		return err
 	}

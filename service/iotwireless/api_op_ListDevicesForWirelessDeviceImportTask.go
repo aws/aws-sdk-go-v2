@@ -131,6 +131,9 @@ func (c *Client) addOperationListDevicesForWirelessDeviceImportTaskMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDevicesForWirelessDeviceImportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

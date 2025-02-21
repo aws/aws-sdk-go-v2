@@ -161,6 +161,9 @@ func (c *Client) addOperationListCommandExecutionsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCommandExecutions(options.Region), middleware.Before); err != nil {
 		return err
 	}

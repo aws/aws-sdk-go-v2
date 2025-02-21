@@ -230,6 +230,9 @@ func (c *Client) addOperationPutRuleMiddlewares(stack *middleware.Stack, options
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

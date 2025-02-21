@@ -133,6 +133,9 @@ func (c *Client) addOperationListConstraintsForPortfolioMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListConstraintsForPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}

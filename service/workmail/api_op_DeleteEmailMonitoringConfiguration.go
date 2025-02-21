@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteEmailMonitoringConfigurationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteEmailMonitoringConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

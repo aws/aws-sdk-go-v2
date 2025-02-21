@@ -117,6 +117,9 @@ func (c *Client) addOperationRemoveWorkloadMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveWorkloadValidationMiddleware(stack); err != nil {
 		return err
 	}

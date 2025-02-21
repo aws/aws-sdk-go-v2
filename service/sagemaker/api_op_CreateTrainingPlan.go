@@ -167,6 +167,9 @@ func (c *Client) addOperationCreateTrainingPlanMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateTrainingPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,6 +112,9 @@ func (c *Client) addOperationDescribeEndpointGroupMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeEndpointGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

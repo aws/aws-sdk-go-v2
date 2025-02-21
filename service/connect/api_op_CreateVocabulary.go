@@ -166,6 +166,9 @@ func (c *Client) addOperationCreateVocabularyMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateVocabularyMiddleware(stack, options); err != nil {
 		return err
 	}

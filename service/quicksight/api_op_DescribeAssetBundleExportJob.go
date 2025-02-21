@@ -206,6 +206,9 @@ func (c *Client) addOperationDescribeAssetBundleExportJobMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAssetBundleExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

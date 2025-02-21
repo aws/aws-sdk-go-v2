@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteOutpostResolverMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteOutpostResolverValidationMiddleware(stack); err != nil {
 		return err
 	}

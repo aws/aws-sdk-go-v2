@@ -132,6 +132,9 @@ func (c *Client) addOperationUpdateMonitoringAlertMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateMonitoringAlertValidationMiddleware(stack); err != nil {
 		return err
 	}

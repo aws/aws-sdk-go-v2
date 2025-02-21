@@ -114,6 +114,9 @@ func (c *Client) addOperationDescribeICD10CMInferenceJobMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeICD10CMInferenceJobValidationMiddleware(stack); err != nil {
 		return err
 	}

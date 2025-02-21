@@ -120,6 +120,9 @@ func (c *Client) addOperationListSlackChannelConfigurationsMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSlackChannelConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}

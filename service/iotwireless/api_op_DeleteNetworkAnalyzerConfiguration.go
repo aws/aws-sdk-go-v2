@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteNetworkAnalyzerConfigurationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteNetworkAnalyzerConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

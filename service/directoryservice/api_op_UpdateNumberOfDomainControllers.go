@@ -118,6 +118,9 @@ func (c *Client) addOperationUpdateNumberOfDomainControllersMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateNumberOfDomainControllersValidationMiddleware(stack); err != nil {
 		return err
 	}

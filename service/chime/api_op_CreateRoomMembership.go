@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateRoomMembershipMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRoomMembershipValidationMiddleware(stack); err != nil {
 		return err
 	}

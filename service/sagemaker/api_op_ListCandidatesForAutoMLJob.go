@@ -137,6 +137,9 @@ func (c *Client) addOperationListCandidatesForAutoMLJobMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCandidatesForAutoMLJobValidationMiddleware(stack); err != nil {
 		return err
 	}

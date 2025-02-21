@@ -128,6 +128,9 @@ func (c *Client) addOperationListBranchesMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBranchesValidationMiddleware(stack); err != nil {
 		return err
 	}

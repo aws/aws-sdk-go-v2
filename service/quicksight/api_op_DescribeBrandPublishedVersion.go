@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeBrandPublishedVersionMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBrandPublishedVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

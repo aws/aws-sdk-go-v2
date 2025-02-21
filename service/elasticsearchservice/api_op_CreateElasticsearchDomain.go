@@ -183,6 +183,9 @@ func (c *Client) addOperationCreateElasticsearchDomainMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateElasticsearchDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -120,6 +120,9 @@ func (c *Client) addOperationDeleteVoiceConnectorEmergencyCallingConfigurationMi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

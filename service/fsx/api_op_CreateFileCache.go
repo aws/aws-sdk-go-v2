@@ -199,6 +199,9 @@ func (c *Client) addOperationCreateFileCacheMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateFileCacheMiddleware(stack, options); err != nil {
 		return err
 	}

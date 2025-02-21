@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeAccountAssignmentDeletionStatusMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAccountAssignmentDeletionStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

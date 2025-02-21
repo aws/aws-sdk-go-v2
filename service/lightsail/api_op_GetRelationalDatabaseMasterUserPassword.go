@@ -132,6 +132,9 @@ func (c *Client) addOperationGetRelationalDatabaseMasterUserPasswordMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRelationalDatabaseMasterUserPasswordValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateAssessmentFrameworkMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateAssessmentFrameworkValidationMiddleware(stack); err != nil {
 		return err
 	}

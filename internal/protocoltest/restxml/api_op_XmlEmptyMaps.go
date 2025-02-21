@@ -105,6 +105,9 @@ func (c *Client) addOperationXmlEmptyMapsMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opXmlEmptyMaps(options.Region), middleware.Before); err != nil {
 		return err
 	}

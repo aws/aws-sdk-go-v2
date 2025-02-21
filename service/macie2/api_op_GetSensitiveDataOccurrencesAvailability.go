@@ -173,6 +173,9 @@ func (c *Client) addOperationGetSensitiveDataOccurrencesAvailabilityMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSensitiveDataOccurrencesAvailabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

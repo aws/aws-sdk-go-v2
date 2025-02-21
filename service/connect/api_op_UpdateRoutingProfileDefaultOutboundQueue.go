@@ -120,6 +120,9 @@ func (c *Client) addOperationUpdateRoutingProfileDefaultOutboundQueueMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateRoutingProfileDefaultOutboundQueueValidationMiddleware(stack); err != nil {
 		return err
 	}

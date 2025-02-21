@@ -119,6 +119,9 @@ func (c *Client) addOperationGetIdentityProviderByIdentifierMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetIdentityProviderByIdentifierValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -157,6 +157,9 @@ func (c *Client) addOperationUpdateCalculatedAttributeDefinitionMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCalculatedAttributeDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

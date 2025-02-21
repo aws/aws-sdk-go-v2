@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeLDAPSSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

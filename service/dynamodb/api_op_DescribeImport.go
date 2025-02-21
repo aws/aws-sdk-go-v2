@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeImportMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeImportValidationMiddleware(stack); err != nil {
 		return err
 	}

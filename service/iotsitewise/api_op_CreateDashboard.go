@@ -154,6 +154,9 @@ func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateDashboardMiddleware(stack); err != nil {
 		return err
 	}

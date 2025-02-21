@@ -159,6 +159,9 @@ func (c *Client) addOperationBatchMeterUsageMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchMeterUsageValidationMiddleware(stack); err != nil {
 		return err
 	}

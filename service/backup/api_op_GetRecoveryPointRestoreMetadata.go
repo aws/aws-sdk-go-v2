@@ -138,6 +138,9 @@ func (c *Client) addOperationGetRecoveryPointRestoreMetadataMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRecoveryPointRestoreMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

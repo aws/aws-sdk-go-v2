@@ -156,6 +156,9 @@ func (c *Client) addOperationCreateAccessPointForObjectLambdaMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateAccessPointForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}

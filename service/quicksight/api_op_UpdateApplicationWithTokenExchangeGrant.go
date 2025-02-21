@@ -122,6 +122,9 @@ func (c *Client) addOperationUpdateApplicationWithTokenExchangeGrantMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateApplicationWithTokenExchangeGrantValidationMiddleware(stack); err != nil {
 		return err
 	}

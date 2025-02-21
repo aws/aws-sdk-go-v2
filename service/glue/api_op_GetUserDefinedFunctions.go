@@ -131,6 +131,9 @@ func (c *Client) addOperationGetUserDefinedFunctionsMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetUserDefinedFunctionsValidationMiddleware(stack); err != nil {
 		return err
 	}

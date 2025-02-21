@@ -115,6 +115,9 @@ func (c *Client) addOperationDeleteReportDefinitionMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteReportDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

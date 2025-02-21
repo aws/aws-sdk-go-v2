@@ -135,6 +135,9 @@ func (c *Client) addOperationUpdateProvisioningTemplateMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateProvisioningTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

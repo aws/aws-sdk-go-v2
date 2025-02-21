@@ -139,6 +139,9 @@ func (c *Client) addOperationUpdateDataAutomationProjectMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDataAutomationProjectValidationMiddleware(stack); err != nil {
 		return err
 	}

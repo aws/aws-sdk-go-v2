@@ -167,6 +167,9 @@ func (c *Client) addOperationGetResourceShareAssociationsMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetResourceShareAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

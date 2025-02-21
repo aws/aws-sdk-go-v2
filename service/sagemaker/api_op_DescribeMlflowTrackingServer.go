@@ -162,6 +162,9 @@ func (c *Client) addOperationDescribeMlflowTrackingServerMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMlflowTrackingServerValidationMiddleware(stack); err != nil {
 		return err
 	}

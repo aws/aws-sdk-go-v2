@@ -122,6 +122,9 @@ func (c *Client) addOperationBatchDeleteFeaturedResultsSetMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDeleteFeaturedResultsSetValidationMiddleware(stack); err != nil {
 		return err
 	}

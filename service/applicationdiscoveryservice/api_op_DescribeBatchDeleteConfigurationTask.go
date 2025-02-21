@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribeBatchDeleteConfigurationTaskMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBatchDeleteConfigurationTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

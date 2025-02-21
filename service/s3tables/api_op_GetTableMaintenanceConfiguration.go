@@ -135,6 +135,9 @@ func (c *Client) addOperationGetTableMaintenanceConfigurationMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTableMaintenanceConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

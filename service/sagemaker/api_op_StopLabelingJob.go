@@ -109,6 +109,9 @@ func (c *Client) addOperationStopLabelingJobMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopLabelingJobValidationMiddleware(stack); err != nil {
 		return err
 	}

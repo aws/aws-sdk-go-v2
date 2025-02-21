@@ -20,6 +20,7 @@ ListRegionalBuckets
 		stashOperationInput
 		ClientRequestID
 		ComputeContentLength
+		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection

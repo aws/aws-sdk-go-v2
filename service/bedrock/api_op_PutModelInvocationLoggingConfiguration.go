@@ -108,6 +108,9 @@ func (c *Client) addOperationPutModelInvocationLoggingConfigurationMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

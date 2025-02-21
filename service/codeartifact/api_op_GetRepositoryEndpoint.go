@@ -148,6 +148,9 @@ func (c *Client) addOperationGetRepositoryEndpointMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRepositoryEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

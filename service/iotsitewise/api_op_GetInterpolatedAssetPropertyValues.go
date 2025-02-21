@@ -231,6 +231,9 @@ func (c *Client) addOperationGetInterpolatedAssetPropertyValuesMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetInterpolatedAssetPropertyValuesMiddleware(stack); err != nil {
 		return err
 	}

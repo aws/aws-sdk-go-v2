@@ -403,6 +403,9 @@ func (c *Client) addOperationUpdateItemMiddlewares(stack *middleware.Stack, opti
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateItemValidationMiddleware(stack); err != nil {
 		return err
 	}

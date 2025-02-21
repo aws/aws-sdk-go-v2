@@ -136,6 +136,9 @@ func (c *Client) addOperationGetGatewayResponseMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetGatewayResponseValidationMiddleware(stack); err != nil {
 		return err
 	}

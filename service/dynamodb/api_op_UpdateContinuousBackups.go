@@ -138,6 +138,9 @@ func (c *Client) addOperationUpdateContinuousBackupsMiddlewares(stack *middlewar
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateContinuousBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}

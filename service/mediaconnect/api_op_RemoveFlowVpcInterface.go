@@ -126,6 +126,9 @@ func (c *Client) addOperationRemoveFlowVpcInterfaceMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveFlowVpcInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}

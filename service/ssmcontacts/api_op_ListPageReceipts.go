@@ -121,6 +121,9 @@ func (c *Client) addOperationListPageReceiptsMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPageReceiptsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -132,6 +132,9 @@ func (c *Client) addOperationUpdateCallAnalyticsCategoryMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCallAnalyticsCategoryValidationMiddleware(stack); err != nil {
 		return err
 	}

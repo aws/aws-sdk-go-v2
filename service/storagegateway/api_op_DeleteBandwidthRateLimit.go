@@ -131,6 +131,9 @@ func (c *Client) addOperationDeleteBandwidthRateLimitMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteBandwidthRateLimitValidationMiddleware(stack); err != nil {
 		return err
 	}

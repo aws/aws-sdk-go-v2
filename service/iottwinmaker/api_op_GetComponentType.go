@@ -183,6 +183,9 @@ func (c *Client) addOperationGetComponentTypeMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetComponentTypeMiddleware(stack); err != nil {
 		return err
 	}

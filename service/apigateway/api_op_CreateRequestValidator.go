@@ -135,6 +135,9 @@ func (c *Client) addOperationCreateRequestValidatorMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRequestValidatorValidationMiddleware(stack); err != nil {
 		return err
 	}

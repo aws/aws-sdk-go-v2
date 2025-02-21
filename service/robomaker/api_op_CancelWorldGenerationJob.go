@@ -115,6 +115,9 @@ func (c *Client) addOperationCancelWorldGenerationJobMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelWorldGenerationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

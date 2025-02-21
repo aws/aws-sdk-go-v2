@@ -121,6 +121,9 @@ func (c *Client) addOperationBatchDisassociateScramSecretMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDisassociateScramSecretValidationMiddleware(stack); err != nil {
 		return err
 	}

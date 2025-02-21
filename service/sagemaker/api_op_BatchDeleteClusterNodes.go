@@ -138,6 +138,9 @@ func (c *Client) addOperationBatchDeleteClusterNodesMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDeleteClusterNodesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -121,6 +121,9 @@ func (c *Client) addOperationListScenesMiddlewares(stack *middleware.Stack, opti
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListScenesMiddleware(stack); err != nil {
 		return err
 	}

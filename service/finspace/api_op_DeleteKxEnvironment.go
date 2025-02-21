@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteKxEnvironmentMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteKxEnvironmentMiddleware(stack, options); err != nil {
 		return err
 	}

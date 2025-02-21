@@ -228,6 +228,9 @@ func (c *Client) addOperationCreateDeploymentGroupMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDeploymentGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

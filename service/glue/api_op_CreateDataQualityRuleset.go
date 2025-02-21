@@ -139,6 +139,9 @@ func (c *Client) addOperationCreateDataQualityRulesetMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDataQualityRulesetValidationMiddleware(stack); err != nil {
 		return err
 	}

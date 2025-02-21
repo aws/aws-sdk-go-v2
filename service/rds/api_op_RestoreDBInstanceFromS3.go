@@ -609,6 +609,9 @@ func (c *Client) addOperationRestoreDBInstanceFromS3Middlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRestoreDBInstanceFromS3ValidationMiddleware(stack); err != nil {
 		return err
 	}

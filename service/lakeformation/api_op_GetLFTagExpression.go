@@ -127,6 +127,9 @@ func (c *Client) addOperationGetLFTagExpressionMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLFTagExpressionValidationMiddleware(stack); err != nil {
 		return err
 	}
