@@ -1,3 +1,11 @@
+# Release (2025-02-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.44.0](service/appstream/CHANGELOG.md#v1440-2025-02-21)
+  * **Feature**: Added support for Certificate-Based Authentication on AppStream 2.0 multi-session fleets.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.36.0](service/bedrockagent/CHANGELOG.md#v1360-2025-02-21)
+  * **Feature**: Introduce a new parameter which represents the user-agent header value used by the Bedrock Knowledge Base Web Connector.
+
 # Release (2025-02-20)
 
 ## Module Highlights

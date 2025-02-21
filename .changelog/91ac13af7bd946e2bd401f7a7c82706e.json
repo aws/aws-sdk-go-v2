@@ -1,8 +1,0 @@
-{
-    "id": "91ac13af-7bd9-46e2-bd40-1f7a7c82706e",
-    "type": "feature",
-    "description": "Introduce a new parameter which represents the user-agent header value used by the Bedrock Knowledge Base Web Connector.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

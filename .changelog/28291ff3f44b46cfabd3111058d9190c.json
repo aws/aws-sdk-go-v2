@@ -1,8 +1,0 @@
-{
-    "id": "28291ff3-f44b-46cf-abd3-111058d9190c",
-    "type": "feature",
-    "description": "Added support for Certificate-Based Authentication on AppStream 2.0 multi-session fleets.",
-    "modules": [
-        "service/appstream"
-    ]
-}

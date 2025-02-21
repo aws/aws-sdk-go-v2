@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.28.12
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.34.14
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.29.10
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.43.3
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.49.11
 	github.com/aws/aws-sdk-go-v2/service/batch v1.49.13
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.57.1
@@ -21,7 +21,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.19
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.49.5
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.13
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.14
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.16
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.49.1
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.28.16

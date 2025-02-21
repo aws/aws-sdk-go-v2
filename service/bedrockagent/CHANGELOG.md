@@ -1,3 +1,7 @@
+# v1.36.0 (2025-02-21)
+
+* **Feature**: Introduce a new parameter which represents the user-agent header value used by the Bedrock Knowledge Base Web Connector.
+
 # v1.35.1 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22
