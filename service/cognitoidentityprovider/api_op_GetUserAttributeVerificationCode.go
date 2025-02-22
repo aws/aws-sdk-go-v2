@@ -182,6 +182,9 @@ func (c *Client) addOperationGetUserAttributeVerificationCodeMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetUserAttributeVerificationCodeValidationMiddleware(stack); err != nil {
 		return err
 	}

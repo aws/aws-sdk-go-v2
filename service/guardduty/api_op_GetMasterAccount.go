@@ -122,6 +122,9 @@ func (c *Client) addOperationGetMasterAccountMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMasterAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

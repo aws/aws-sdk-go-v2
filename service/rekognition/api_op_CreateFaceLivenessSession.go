@@ -138,6 +138,9 @@ func (c *Client) addOperationCreateFaceLivenessSessionMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateFaceLivenessSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

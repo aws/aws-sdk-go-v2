@@ -119,6 +119,9 @@ func (c *Client) addOperationGetPendingJobExecutionsMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPendingJobExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -199,6 +199,9 @@ func (c *Client) addOperationExecuteStatementMiddlewares(stack *middleware.Stack
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExecuteStatementValidationMiddleware(stack); err != nil {
 		return err
 	}

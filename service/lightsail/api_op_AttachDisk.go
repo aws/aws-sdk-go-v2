@@ -137,6 +137,9 @@ func (c *Client) addOperationAttachDiskMiddlewares(stack *middleware.Stack, opti
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAttachDiskValidationMiddleware(stack); err != nil {
 		return err
 	}

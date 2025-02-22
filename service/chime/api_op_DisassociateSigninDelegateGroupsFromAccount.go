@@ -113,6 +113,9 @@ func (c *Client) addOperationDisassociateSigninDelegateGroupsFromAccountMiddlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateSigninDelegateGroupsFromAccountValidationMiddleware(stack); err != nil {
 		return err
 	}

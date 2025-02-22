@@ -136,6 +136,9 @@ func (c *Client) addOperationUpdateInstanceStorageConfigMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateInstanceStorageConfigMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -177,6 +177,9 @@ func (c *Client) addOperationDescribeExplainabilityMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeExplainabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

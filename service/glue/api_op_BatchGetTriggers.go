@@ -119,6 +119,9 @@ func (c *Client) addOperationBatchGetTriggersMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetTriggersValidationMiddleware(stack); err != nil {
 		return err
 	}

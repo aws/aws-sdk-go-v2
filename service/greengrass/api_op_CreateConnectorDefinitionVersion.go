@@ -128,6 +128,9 @@ func (c *Client) addOperationCreateConnectorDefinitionVersionMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateConnectorDefinitionVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

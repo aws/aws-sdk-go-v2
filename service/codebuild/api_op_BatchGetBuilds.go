@@ -115,6 +115,9 @@ func (c *Client) addOperationBatchGetBuildsMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetBuildsValidationMiddleware(stack); err != nil {
 		return err
 	}

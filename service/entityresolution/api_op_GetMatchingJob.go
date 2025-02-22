@@ -144,6 +144,9 @@ func (c *Client) addOperationGetMatchingJobMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMatchingJobValidationMiddleware(stack); err != nil {
 		return err
 	}

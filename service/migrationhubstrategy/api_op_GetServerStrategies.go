@@ -112,6 +112,9 @@ func (c *Client) addOperationGetServerStrategiesMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetServerStrategiesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -145,6 +145,9 @@ func (c *Client) addOperationUpdateDashboardPermissionsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDashboardPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

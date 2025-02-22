@@ -111,6 +111,9 @@ func (c *Client) addOperationRemoveBackendConfigMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveBackendConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

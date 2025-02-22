@@ -145,6 +145,9 @@ func (c *Client) addOperationPutDeliveryDestinationPolicyMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutDeliveryDestinationPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

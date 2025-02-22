@@ -118,6 +118,9 @@ func (c *Client) addOperationGetMessagingSessionEndpointMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetMessagingSessionEndpointMiddleware(stack); err != nil {
 		return err
 	}

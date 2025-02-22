@@ -135,6 +135,9 @@ func (c *Client) addOperationAssociateAnalyticsDataSetMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateAnalyticsDataSetValidationMiddleware(stack); err != nil {
 		return err
 	}

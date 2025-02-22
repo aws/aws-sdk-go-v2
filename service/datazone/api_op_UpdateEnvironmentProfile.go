@@ -185,6 +185,9 @@ func (c *Client) addOperationUpdateEnvironmentProfileMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateEnvironmentProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

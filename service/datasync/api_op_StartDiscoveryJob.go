@@ -137,6 +137,9 @@ func (c *Client) addOperationStartDiscoveryJobMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opStartDiscoveryJobMiddleware(stack); err != nil {
 		return err
 	}

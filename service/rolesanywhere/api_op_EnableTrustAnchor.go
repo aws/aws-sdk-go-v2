@@ -117,6 +117,9 @@ func (c *Client) addOperationEnableTrustAnchorMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpEnableTrustAnchorValidationMiddleware(stack); err != nil {
 		return err
 	}

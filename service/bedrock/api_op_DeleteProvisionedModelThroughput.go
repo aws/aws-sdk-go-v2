@@ -111,6 +111,9 @@ func (c *Client) addOperationDeleteProvisionedModelThroughputMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteProvisionedModelThroughputValidationMiddleware(stack); err != nil {
 		return err
 	}

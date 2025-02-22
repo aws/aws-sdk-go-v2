@@ -124,6 +124,9 @@ func (c *Client) addOperationCancelDomainConfigChangeMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelDomainConfigChangeValidationMiddleware(stack); err != nil {
 		return err
 	}

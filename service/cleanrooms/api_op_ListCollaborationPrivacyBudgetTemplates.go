@@ -128,6 +128,9 @@ func (c *Client) addOperationListCollaborationPrivacyBudgetTemplatesMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCollaborationPrivacyBudgetTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}

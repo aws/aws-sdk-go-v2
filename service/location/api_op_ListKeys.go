@@ -128,6 +128,9 @@ func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, option
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListKeysMiddleware(stack); err != nil {
 		return err
 	}

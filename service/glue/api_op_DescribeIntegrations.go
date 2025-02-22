@@ -126,6 +126,9 @@ func (c *Client) addOperationDescribeIntegrationsMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeIntegrations(options.Region), middleware.Before); err != nil {
 		return err
 	}

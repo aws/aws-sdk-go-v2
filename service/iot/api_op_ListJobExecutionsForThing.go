@@ -146,6 +146,9 @@ func (c *Client) addOperationListJobExecutionsForThingMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListJobExecutionsForThingValidationMiddleware(stack); err != nil {
 		return err
 	}

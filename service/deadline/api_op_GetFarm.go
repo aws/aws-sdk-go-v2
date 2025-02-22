@@ -151,6 +151,9 @@ func (c *Client) addOperationGetFarmMiddlewares(stack *middleware.Stack, options
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetFarmMiddleware(stack); err != nil {
 		return err
 	}

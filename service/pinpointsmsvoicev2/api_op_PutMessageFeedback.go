@@ -130,6 +130,9 @@ func (c *Client) addOperationPutMessageFeedbackMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutMessageFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}

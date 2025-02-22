@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteCaseRuleMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCaseRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

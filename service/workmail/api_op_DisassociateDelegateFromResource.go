@@ -136,6 +136,9 @@ func (c *Client) addOperationDisassociateDelegateFromResourceMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateDelegateFromResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

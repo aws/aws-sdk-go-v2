@@ -161,6 +161,9 @@ func (c *Client) addOperationGetDevicePositionHistoryMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetDevicePositionHistoryMiddleware(stack); err != nil {
 		return err
 	}

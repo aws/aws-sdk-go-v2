@@ -150,6 +150,9 @@ func (c *Client) addOperationAddProfilePermissionMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAddProfilePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}

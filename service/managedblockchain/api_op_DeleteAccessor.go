@@ -114,6 +114,9 @@ func (c *Client) addOperationDeleteAccessorMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteAccessorValidationMiddleware(stack); err != nil {
 		return err
 	}

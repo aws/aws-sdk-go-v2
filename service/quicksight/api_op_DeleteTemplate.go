@@ -130,6 +130,9 @@ func (c *Client) addOperationDeleteTemplateMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

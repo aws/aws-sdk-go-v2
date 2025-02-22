@@ -131,6 +131,9 @@ func (c *Client) addOperationAssociateThirdPartyFirewallMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateThirdPartyFirewallValidationMiddleware(stack); err != nil {
 		return err
 	}

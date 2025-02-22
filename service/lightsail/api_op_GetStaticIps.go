@@ -123,6 +123,9 @@ func (c *Client) addOperationGetStaticIpsMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetStaticIps(options.Region), middleware.Before); err != nil {
 		return err
 	}

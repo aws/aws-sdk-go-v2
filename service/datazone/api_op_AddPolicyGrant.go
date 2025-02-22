@@ -138,6 +138,9 @@ func (c *Client) addOperationAddPolicyGrantMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAddPolicyGrantMiddleware(stack, options); err != nil {
 		return err
 	}

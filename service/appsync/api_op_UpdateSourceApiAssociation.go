@@ -128,6 +128,9 @@ func (c *Client) addOperationUpdateSourceApiAssociationMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateSourceApiAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

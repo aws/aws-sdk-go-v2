@@ -151,6 +151,9 @@ func (c *Client) addOperationGetRoutingControlStateMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRoutingControlStateValidationMiddleware(stack); err != nil {
 		return err
 	}

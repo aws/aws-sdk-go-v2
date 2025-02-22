@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteControlPanelMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteControlPanelValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -199,6 +199,9 @@ func (c *Client) addOperationDescribeAutoPredictorMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAutoPredictorValidationMiddleware(stack); err != nil {
 		return err
 	}

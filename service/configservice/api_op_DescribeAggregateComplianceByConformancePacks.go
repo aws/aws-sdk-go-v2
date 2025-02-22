@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeAggregateComplianceByConformancePacksMiddle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAggregateComplianceByConformancePacksValidationMiddleware(stack); err != nil {
 		return err
 	}

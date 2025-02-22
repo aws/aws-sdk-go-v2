@@ -199,6 +199,9 @@ func (c *Client) addOperationCreatePersistentContactAssociationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreatePersistentContactAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

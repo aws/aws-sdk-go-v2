@@ -145,6 +145,9 @@ func (c *Client) addOperationListWorkflowStepExecutionsMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWorkflowStepExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}

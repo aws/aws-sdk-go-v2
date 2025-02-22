@@ -162,6 +162,9 @@ func (c *Client) addOperationUpdateLocationObjectStorageMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateLocationObjectStorageValidationMiddleware(stack); err != nil {
 		return err
 	}

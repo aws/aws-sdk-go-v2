@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteTextMessageSpendLimitOverrideMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTextMessageSpendLimitOverride(options.Region), middleware.Before); err != nil {
 		return err
 	}

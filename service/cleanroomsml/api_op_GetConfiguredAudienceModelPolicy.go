@@ -125,6 +125,9 @@ func (c *Client) addOperationGetConfiguredAudienceModelPolicyMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetConfiguredAudienceModelPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

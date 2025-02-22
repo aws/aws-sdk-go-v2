@@ -132,6 +132,9 @@ func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateWorkspaceMiddleware(stack); err != nil {
 		return err
 	}

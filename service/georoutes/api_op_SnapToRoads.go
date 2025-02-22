@@ -158,6 +158,9 @@ func (c *Client) addOperationSnapToRoadsMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSnapToRoadsValidationMiddleware(stack); err != nil {
 		return err
 	}

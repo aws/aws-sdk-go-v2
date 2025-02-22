@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeRootFoldersMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRootFoldersValidationMiddleware(stack); err != nil {
 		return err
 	}

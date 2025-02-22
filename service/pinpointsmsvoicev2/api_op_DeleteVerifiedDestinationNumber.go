@@ -131,6 +131,9 @@ func (c *Client) addOperationDeleteVerifiedDestinationNumberMiddlewares(stack *m
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteVerifiedDestinationNumberValidationMiddleware(stack); err != nil {
 		return err
 	}

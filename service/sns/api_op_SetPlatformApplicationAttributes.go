@@ -182,6 +182,9 @@ func (c *Client) addOperationSetPlatformApplicationAttributesMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetPlatformApplicationAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

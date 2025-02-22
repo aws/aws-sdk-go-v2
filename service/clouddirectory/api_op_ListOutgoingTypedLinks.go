@@ -143,6 +143,9 @@ func (c *Client) addOperationListOutgoingTypedLinksMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListOutgoingTypedLinksValidationMiddleware(stack); err != nil {
 		return err
 	}

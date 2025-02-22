@@ -119,6 +119,9 @@ func (c *Client) addOperationGetSolNetworkPackageDescriptorMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSolNetworkPackageDescriptorValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -174,6 +174,9 @@ func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpVerifyCardValidationDataValidationMiddleware(stack); err != nil {
 		return err
 	}

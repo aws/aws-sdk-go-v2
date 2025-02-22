@@ -120,6 +120,9 @@ func (c *Client) addOperationDeletePushNotificationRegistrationMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeletePushNotificationRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}

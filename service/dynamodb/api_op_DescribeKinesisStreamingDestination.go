@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeKinesisStreamingDestinationMiddlewares(stac
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeKinesisStreamingDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}

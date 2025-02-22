@@ -130,6 +130,9 @@ func (c *Client) addOperationCreateVolumeFromBackupMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateVolumeFromBackupMiddleware(stack, options); err != nil {
 		return err
 	}

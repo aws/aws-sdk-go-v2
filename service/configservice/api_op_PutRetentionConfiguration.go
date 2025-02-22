@@ -121,6 +121,9 @@ func (c *Client) addOperationPutRetentionConfigurationMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutRetentionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

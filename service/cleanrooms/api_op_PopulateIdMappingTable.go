@@ -120,6 +120,9 @@ func (c *Client) addOperationPopulateIdMappingTableMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPopulateIdMappingTableValidationMiddleware(stack); err != nil {
 		return err
 	}

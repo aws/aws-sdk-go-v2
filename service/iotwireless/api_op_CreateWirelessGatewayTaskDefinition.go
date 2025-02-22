@@ -138,6 +138,9 @@ func (c *Client) addOperationCreateWirelessGatewayTaskDefinitionMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateWirelessGatewayTaskDefinitionMiddleware(stack, options); err != nil {
 		return err
 	}

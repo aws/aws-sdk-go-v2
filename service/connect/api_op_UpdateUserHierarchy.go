@@ -118,6 +118,9 @@ func (c *Client) addOperationUpdateUserHierarchyMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateUserHierarchyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -177,6 +177,9 @@ func (c *Client) addOperationGetDimensionKeyDetailsMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDimensionKeyDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

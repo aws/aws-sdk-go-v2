@@ -154,6 +154,9 @@ func (c *Client) addOperationCreateSizeConstraintSetMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateSizeConstraintSetValidationMiddleware(stack); err != nil {
 		return err
 	}

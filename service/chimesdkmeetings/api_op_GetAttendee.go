@@ -122,6 +122,9 @@ func (c *Client) addOperationGetAttendeeMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAttendeeValidationMiddleware(stack); err != nil {
 		return err
 	}

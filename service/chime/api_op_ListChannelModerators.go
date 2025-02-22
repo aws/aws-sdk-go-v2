@@ -144,6 +144,9 @@ func (c *Client) addOperationListChannelModeratorsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListChannelModeratorsMiddleware(stack); err != nil {
 		return err
 	}

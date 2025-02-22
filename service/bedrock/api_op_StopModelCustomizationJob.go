@@ -110,6 +110,9 @@ func (c *Client) addOperationStopModelCustomizationJobMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopModelCustomizationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

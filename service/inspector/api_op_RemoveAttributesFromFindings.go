@@ -122,6 +122,9 @@ func (c *Client) addOperationRemoveAttributesFromFindingsMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveAttributesFromFindingsValidationMiddleware(stack); err != nil {
 		return err
 	}

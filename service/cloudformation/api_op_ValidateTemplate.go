@@ -146,6 +146,9 @@ func (c *Client) addOperationValidateTemplateMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opValidateTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
