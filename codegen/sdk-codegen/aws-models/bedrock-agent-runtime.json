@@ -5507,7 +5507,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 4096
+                    "max": 8192
                 }
             }
         },
@@ -6191,6 +6191,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the foundation model output from the orchestration step.</p>"
                     }
+                },
+                "reasoningContent": {
+                    "target": "com.amazonaws.bedrockagentruntime#ReasoningContentBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains content about the reasoning that the model made during the orchestration step. </p>"
+                    }
                 }
             },
             "traits": {
@@ -6517,6 +6523,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Contains information about the foundation model output from the post-processing step.\n        </p>"
                     }
+                },
+                "reasoningContent": {
+                    "target": "com.amazonaws.bedrockagentruntime#ReasoningContentBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains content about the reasoning that the model made during the post-processing step.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6585,6 +6597,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#Metadata",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Contains information about the foundation model output from the pre-processing step.\n        </p>"
+                    }
+                },
+                "reasoningContent": {
+                    "target": "com.amazonaws.bedrockagentruntime#ReasoningContentBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains content about the reasoning that the model made during the pre-processing step. </p>"
                     }
                 }
             },
@@ -6671,7 +6689,7 @@
                 "parserMode": {
                     "target": "com.amazonaws.bedrockagentruntime#CreationMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to override the default parser Lambda function when parsing the raw foundation model output in the part of the agent sequence defined by the <code>promptType</code>. If you set the field as <code>OVERRIDEN</code>, the <code>overrideLambda</code> field in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html\">PromptOverrideConfiguration</a> must be specified with the ARN of a Lambda function.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to override the default parser Lambda function when parsing the raw foundation model output in the part of the agent sequence defined by the <code>promptType</code>. If you set the field as <code>OVERRIDDEN</code>, the <code>overrideLambda</code> field in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html\">PromptOverrideConfiguration</a> must be specified with the ARN of a Lambda function.</p>"
                     }
                 },
                 "additionalModelRequestFields": {
@@ -6934,6 +6952,49 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the raw output from the foundation model.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ReasoningContentBlock": {
+            "type": "union",
+            "members": {
+                "reasoningText": {
+                    "target": "com.amazonaws.bedrockagentruntime#ReasoningTextBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the reasoning that the model used to return the content in\n            the content block.</p>"
+                    }
+                },
+                "redactedContent": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content in the reasoning that was encrypted by the model provider for trust and safety reasons.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains content regarding the reasoning that the foundation model made with respect\n            to the content in the content block. Reasoning refers to a Chain of Thought (CoT) that\n            the model generates to enhance the accuracy of its final response.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ReasoningTextBlock": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Text describing the reasoning that the model used to return the content in the content block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "signature": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A hash of all the messages in the conversation to ensure that the content in the\n            reasoning text block isn't tampered with. You must submit the signature in subsequent\n                <code>Converse</code> requests, in addition to the previous messages. If the\n            previous messages are tampered with, the response throws an error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the reasoning that the model used to return the content in the content block.</p>",
                 "smithy.api#sensitive": {}
             }
         },
