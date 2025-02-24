@@ -15,6 +15,8 @@ import (
 //
 // Describes the locations in which a given accelerator type or set of types is
 // present in a given region.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeAcceleratorOfferings(ctx context.Context, params *DescribeAcceleratorOfferingsInput, optFns ...func(*Options)) (*DescribeAcceleratorOfferingsOutput, error) {
 	if params == nil {
 		params = &DescribeAcceleratorOfferingsInput{}
@@ -40,9 +42,13 @@ type DescribeAcceleratorOfferingsInput struct {
 	// availability zone id.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LocationType types.LocationType
 
 	//  The list of accelerator types to describe.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorTypes []string
 
 	noSmithyDocumentSerde
@@ -51,6 +57,8 @@ type DescribeAcceleratorOfferingsInput struct {
 type DescribeAcceleratorOfferingsOutput struct {
 
 	//  The list of accelerator type offerings for a specific location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorTypeOfferings []types.AcceleratorTypeOffering
 
 	// Metadata pertaining to the operation's result.

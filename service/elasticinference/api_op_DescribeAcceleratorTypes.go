@@ -15,6 +15,8 @@ import (
 //
 // Describes the accelerator types available in a given region, as well as their
 // characteristics, such as memory and throughput.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeAcceleratorTypes(ctx context.Context, params *DescribeAcceleratorTypesInput, optFns ...func(*Options)) (*DescribeAcceleratorTypesOutput, error) {
 	if params == nil {
 		params = &DescribeAcceleratorTypesInput{}
@@ -37,6 +39,8 @@ type DescribeAcceleratorTypesInput struct {
 type DescribeAcceleratorTypesOutput struct {
 
 	//  The available accelerator types.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorTypes []types.AcceleratorType
 
 	// Metadata pertaining to the operation's result.

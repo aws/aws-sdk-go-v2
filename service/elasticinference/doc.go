@@ -6,4 +6,6 @@
 // Amazon Elastic Inference is no longer available.
 //
 // Elastic Inference public APIs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package elasticinference

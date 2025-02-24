@@ -1,0 +1,8 @@
+{
+    "id": "1f9c081a-d17c-42e3-9471-a56168f624f3",
+    "type": "feature",
+    "description": "Mark service/elasticinference as deprecated. This service is no longer available for use.",
+    "modules": [
+        "service/elasticinference"
+    ]
+}

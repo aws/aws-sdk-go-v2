@@ -13,6 +13,8 @@ import (
 // Amazon Elastic Inference is no longer available.
 //
 // Returns all tags of an Elastic Inference Accelerator.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -33,6 +35,8 @@ type ListTagsForResourceInput struct {
 	//  The ARN of the Elastic Inference Accelerator to list the tags for.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -41,6 +45,8 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	//  The tags of the Elastic Inference Accelerator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

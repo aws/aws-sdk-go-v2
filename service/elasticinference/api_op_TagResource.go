@@ -13,6 +13,8 @@ import (
 // Amazon Elastic Inference is no longer available.
 //
 // Adds the specified tags to an Elastic Inference Accelerator.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -33,11 +35,15 @@ type TagResourceInput struct {
 	//  The ARN of the Elastic Inference Accelerator to tag.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	//  The tags to add to the Elastic Inference Accelerator.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

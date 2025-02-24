@@ -15,6 +15,8 @@ import (
 //
 // Describes information over a provided set of accelerators belonging to an
 // account.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeAccelerators(ctx context.Context, params *DescribeAcceleratorsInput, optFns ...func(*Options)) (*DescribeAcceleratorsOutput, error) {
 	if params == nil {
 		params = &DescribeAcceleratorsInput{}
@@ -33,11 +35,15 @@ func (c *Client) DescribeAccelerators(ctx context.Context, params *DescribeAccel
 type DescribeAcceleratorsInput struct {
 
 	//  The IDs of the accelerators to describe.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorIds []string
 
 	//  One or more filters. Filter names and values are case-sensitive. Valid filter
 	// names are: accelerator-types: can provide a list of accelerator type names to
 	// filter for. instance-id: can provide a list of EC2 instance ids to filter for.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters []types.Filter
 
 	//  The total number of items to return in the command's output. If the total
@@ -45,10 +51,14 @@ type DescribeAcceleratorsInput struct {
 	// provided in the command's output. To resume pagination, provide the NextToken
 	// value in the starting-token argument of a subsequent command. Do not use the
 	// NextToken response element directly outside of the AWS CLI.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	//  A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -57,10 +67,14 @@ type DescribeAcceleratorsInput struct {
 type DescribeAcceleratorsOutput struct {
 
 	//  The details of the Elastic Inference Accelerators.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorSet []types.ElasticInferenceAccelerator
 
 	//  A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
