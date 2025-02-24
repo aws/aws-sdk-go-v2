@@ -1,3 +1,7 @@
+# v1.25.0 (2025-02-24)
+
+* **Feature**: This release adds Reasoning Content support to Converse and ConverseStream APIs
+
 # v1.24.6 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

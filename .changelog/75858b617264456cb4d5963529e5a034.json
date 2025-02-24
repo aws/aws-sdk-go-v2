@@ -1,8 +1,0 @@
-{
-    "id": "75858b61-7264-456c-b4d5-963529e5a034",
-    "type": "feature",
-    "description": "This release improves support for newer models in Amazon Bedrock Flows.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

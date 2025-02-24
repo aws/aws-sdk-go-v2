@@ -1,8 +1,0 @@
-{
-    "id": "4dd8f496-3442-4a62-83f5-0ccabf418fb8",
-    "type": "documentation",
-    "description": "Documentation update, adding clarity and rephrasing.",
-    "modules": [
-        "service/elasticache"
-    ]
-}

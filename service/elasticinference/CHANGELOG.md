@@ -1,3 +1,7 @@
+# v1.24.0 (2025-02-24)
+
+* **Feature**: Mark service/elasticinference as deprecated. This service is no longer available for use.
+
 # v1.23.17 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

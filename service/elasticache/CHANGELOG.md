@@ -1,3 +1,7 @@
+# v1.44.14 (2025-02-24)
+
+* **Documentation**: Documentation update, adding clarity and rephrasing.
+
 # v1.44.13 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22
