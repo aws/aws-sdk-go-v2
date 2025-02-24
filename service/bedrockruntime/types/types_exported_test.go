@@ -39,6 +39,9 @@ func ExampleContentBlock_outputUsage() {
 	case *types.ContentBlockMemberImage:
 		_ = v.Value // Value is types.ImageBlock
 
+	case *types.ContentBlockMemberReasoningContent:
+		_ = v.Value // Value is types.ReasoningContentBlock
+
 	case *types.ContentBlockMemberText:
 		_ = v.Value // Value is string
 
@@ -62,6 +65,7 @@ func ExampleContentBlock_outputUsage() {
 
 var _ *types.DocumentBlock
 var _ *string
+var _ types.ReasoningContentBlock
 var _ types.GuardrailConverseContentBlock
 var _ *types.ImageBlock
 var _ *types.ToolResultBlock
@@ -72,6 +76,9 @@ func ExampleContentBlockDelta_outputUsage() {
 	var union types.ContentBlockDelta
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ContentBlockDeltaMemberReasoningContent:
+		_ = v.Value // Value is types.ReasoningContentBlockDelta
+
 	case *types.ContentBlockDeltaMemberText:
 		_ = v.Value // Value is string
 
@@ -87,6 +94,7 @@ func ExampleContentBlockDelta_outputUsage() {
 	}
 }
 
+var _ types.ReasoningContentBlockDelta
 var _ *types.ToolUseBlockDelta
 var _ *string
 
@@ -297,6 +305,53 @@ func ExamplePromptVariableValues_outputUsage() {
 }
 
 var _ *string
+
+func ExampleReasoningContentBlock_outputUsage() {
+	var union types.ReasoningContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReasoningContentBlockMemberReasoningText:
+		_ = v.Value // Value is types.ReasoningTextBlock
+
+	case *types.ReasoningContentBlockMemberRedactedContent:
+		_ = v.Value // Value is []byte
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ReasoningTextBlock
+var _ []byte
+
+func ExampleReasoningContentBlockDelta_outputUsage() {
+	var union types.ReasoningContentBlockDelta
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReasoningContentBlockDeltaMemberRedactedContent:
+		_ = v.Value // Value is []byte
+
+	case *types.ReasoningContentBlockDeltaMemberSignature:
+		_ = v.Value // Value is string
+
+	case *types.ReasoningContentBlockDeltaMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []byte
 
 func ExampleResponseStream_outputUsage() {
 	var union types.ResponseStream

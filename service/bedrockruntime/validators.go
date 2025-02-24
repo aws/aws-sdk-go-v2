@@ -233,6 +233,11 @@ func validateContentBlock(v types.ContentBlock) error {
 			invalidParams.AddNested("[image]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ContentBlockMemberReasoningContent:
+		if err := validateReasoningContentBlock(uv.Value); err != nil {
+			invalidParams.AddNested("[reasoningContent]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ContentBlockMemberToolResult:
 		if err := validateToolResultBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[toolResult]", err.(smithy.InvalidParamsError))
@@ -510,6 +515,40 @@ func validateMessages(v []types.Message) error {
 		if err := validateMessage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReasoningContentBlock(v types.ReasoningContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReasoningContentBlock"}
+	switch uv := v.(type) {
+	case *types.ReasoningContentBlockMemberReasoningText:
+		if err := validateReasoningTextBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[reasoningText]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReasoningTextBlock(v *types.ReasoningTextBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReasoningTextBlock"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

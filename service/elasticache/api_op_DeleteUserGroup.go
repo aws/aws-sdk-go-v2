@@ -46,7 +46,7 @@ type DeleteUserGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the user group.
 	ARN *string
 
-	// The current supported value is Redis user.
+	// The options are valkey or redis.
 	Engine *string
 
 	// The minimum engine version required, which is Redis OSS 6.0

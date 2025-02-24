@@ -1,0 +1,8 @@
+{
+    "id": "09031b4a-3ba3-47b0-9b39-3070c45e8b30",
+    "type": "feature",
+    "description": "This release adds Reasoning Content support to Converse and ConverseStream APIs",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

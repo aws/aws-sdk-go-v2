@@ -2456,6 +2456,14 @@ loop:
 			continue
 		}
 		switch key {
+		case "reasoningContent":
+			var mv types.ReasoningContentBlockDelta
+			if err := awsRestjson1_deserializeDocumentReasoningContentBlockDelta(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.ContentBlockDeltaMemberReasoningContent{Value: mv}
+			break loop
+
 		case "text":
 			var mv string
 			if value != nil {
@@ -4437,6 +4445,76 @@ func awsRestjson1_deserializeDocumentPromptRouterTrace(v **types.PromptRouterTra
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentReasoningContentBlockDelta(v *types.ReasoningContentBlockDelta, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ReasoningContentBlockDelta
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "redactedContent":
+			var mv []byte
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Blob to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode Blob, %w", err)
+				}
+				mv = dv
+			}
+			uv = &types.ReasoningContentBlockDeltaMemberRedactedContent{Value: mv}
+			break loop
+
+		case "signature":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.ReasoningContentBlockDeltaMemberSignature{Value: mv}
+			break loop
+
+		case "text":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.ReasoningContentBlockDeltaMemberText{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTokenUsage(v **types.TokenUsage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5416,6 +5494,14 @@ loop:
 			uv = &types.ContentBlockMemberImage{Value: mv}
 			break loop
 
+		case "reasoningContent":
+			var mv types.ReasoningContentBlock
+			if err := awsRestjson1_deserializeDocumentReasoningContentBlock(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.ContentBlockMemberReasoningContent{Value: mv}
+			break loop
+
 		case "text":
 			var mv string
 			if value != nil {
@@ -6248,6 +6334,111 @@ func awsRestjson1_deserializeDocumentModelNotReadyException(v **types.ModelNotRe
 					return fmt.Errorf("expected NonBlankString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReasoningContentBlock(v *types.ReasoningContentBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ReasoningContentBlock
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "reasoningText":
+			var mv types.ReasoningTextBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentReasoningTextBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ReasoningContentBlockMemberReasoningText{Value: mv}
+			break loop
+
+		case "redactedContent":
+			var mv []byte
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Blob to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode Blob, %w", err)
+				}
+				mv = dv
+			}
+			uv = &types.ReasoningContentBlockMemberRedactedContent{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReasoningTextBlock(v **types.ReasoningTextBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReasoningTextBlock
+	if *v == nil {
+		sv = &types.ReasoningTextBlock{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "signature":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Signature = ptr.String(jtv)
+			}
+
+		case "text":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Text = ptr.String(jtv)
 			}
 
 		default:

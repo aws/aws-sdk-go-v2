@@ -217,8 +217,8 @@ type CacheCluster struct {
 
 	// The network type associated with the cluster, either ipv4 | ipv6 . IPv6 is
 	// supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2
-	// and above or Memcached engine version 1.6.6 and above on all instances built on
-	// the [Nitro system].
+	// to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the
+	// [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery IpDiscovery
@@ -227,7 +227,7 @@ type CacheCluster struct {
 	LogDeliveryConfigurations []LogDeliveryConfiguration
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
-	// Valkey 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// Valkey 7.2 and above, Redis OSS engine version 6.2 7.1 or Memcached engine
 	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
@@ -674,8 +674,8 @@ type CacheSubnetGroup struct {
 	Subnets []Subnet
 
 	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Valkey
-	// 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
-	// version 1.6.6 and above on all instances built on the [Nitro system].
+	// 7.2 and above, Redis OSS engine version 6.2 to 7.1 or Memcached engine version
+	// 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	SupportedNetworkTypes []NetworkType
@@ -1502,8 +1502,8 @@ type ReplicationGroup struct {
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
 	// is supported for workloads using Valkey 7.2 and above, Redis OSS engine version
-	// 6.2 and above or Memcached engine version 1.6.6 and above on all instances built
-	// on the [Nitro system].
+	// 6.2 to 7.1 or Memcached engine version 1.6.6 and above on all instances built on
+	// the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery IpDiscovery
@@ -1527,7 +1527,7 @@ type ReplicationGroup struct {
 	MultiAZ MultiAZStatus
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
-	// Valkey 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// Valkey 7.2 and above, Redis OSS engine version 6.2 to 7.1 or Memcached engine
 	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
@@ -2381,8 +2381,8 @@ type Subnet struct {
 	SubnetOutpost *SubnetOutpost
 
 	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Valkey
-	// 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
-	// version 1.6.6 and above on all instances built on the [Nitro system].
+	// 7.2 and above, Redis OSS engine version 6.2 to 7.1 or Memcached engine version
+	// 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	SupportedNetworkTypes []NetworkType
@@ -2525,7 +2525,7 @@ type User struct {
 	// Denotes whether the user requires a password to authenticate.
 	Authentication *Authentication
 
-	// The current supported value is Redis.
+	// The options are valkey or redis.
 	Engine *string
 
 	// The minimum engine version required, which is Redis OSS 6.0
@@ -2551,7 +2551,7 @@ type UserGroup struct {
 	// The Amazon Resource Name (ARN) of the user group.
 	ARN *string
 
-	// The current supported value is Redis user.
+	// The options are valkey or redis.
 	Engine *string
 
 	// The minimum engine version required, which is Redis OSS 6.0

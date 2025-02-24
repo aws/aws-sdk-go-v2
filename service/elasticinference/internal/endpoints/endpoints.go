@@ -138,38 +138,6 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{
-				Hostname: "api.elastic-inference.ap-northeast-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{
-				Hostname: "api.elastic-inference.ap-northeast-2.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "eu-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "api.elastic-inference.eu-west-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "api.elastic-inference.us-east-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-east-2",
-			}: endpoints.Endpoint{
-				Hostname: "api.elastic-inference.us-east-2.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-west-2",
-			}: endpoints.Endpoint{
-				Hostname: "api.elastic-inference.us-west-2.amazonaws.com",
-			},
-		},
 	},
 	{
 		ID: "aws-cn",

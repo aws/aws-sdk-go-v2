@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For Valkey engine version 7.2 onwards and Redis OSS 6.0 onwards: Creates a user
+// For Valkey engine version 7.2 onwards and Redis OSS 6.0 to 7.1: Creates a user
 // group. For more information, see [Using Role Based Access Control (RBAC)]
 //
 // [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html
@@ -32,7 +32,7 @@ func (c *Client) CreateUserGroup(ctx context.Context, params *CreateUserGroupInp
 
 type CreateUserGroupInput struct {
 
-	// The current supported value is Redis user.
+	// Sets the engine listed in a user group. The options are valkey or redis.
 	//
 	// This member is required.
 	Engine *string
@@ -58,7 +58,7 @@ type CreateUserGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the user group.
 	ARN *string
 
-	// The current supported value is Redis user.
+	// The options are valkey or redis.
 	Engine *string
 
 	// The minimum engine version required, which is Redis OSS 6.0

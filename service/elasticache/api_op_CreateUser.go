@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For Valkey engine version 7.2 onwards and Redis OSS 6.0 and onwards: Creates a
-// user. For more information, see [Using Role Based Access Control (RBAC)].
+// For Valkey engine version 7.2 onwards and Redis OSS 6.0 to 7.1: Creates a user.
+// For more information, see [Using Role Based Access Control (RBAC)].
 //
 // [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
@@ -37,7 +37,7 @@ type CreateUserInput struct {
 	// This member is required.
 	AccessString *string
 
-	// The current supported value is Redis.
+	// The options are valkey or redis.
 	//
 	// This member is required.
 	Engine *string
@@ -79,7 +79,7 @@ type CreateUserOutput struct {
 	// Denotes whether the user requires a password to authenticate.
 	Authentication *types.Authentication
 
-	// The current supported value is Redis.
+	// The options are valkey or redis.
 	Engine *string
 
 	// The minimum engine version required, which is Redis OSS 6.0

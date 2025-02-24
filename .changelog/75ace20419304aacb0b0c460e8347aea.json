@@ -1,0 +1,8 @@
+{
+    "id": "75ace204-1930-4aac-b0b0-c460e8347aea",
+    "type": "feature",
+    "description": "Adding support for ReasoningContent fields in Pre-Processing, Post-Processing and Orchestration Trace outputs.",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}
