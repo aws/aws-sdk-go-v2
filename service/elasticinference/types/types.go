@@ -10,12 +10,18 @@ import (
 type AcceleratorType struct {
 
 	//  The name of the Elastic Inference Accelerator type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorTypeName *string
 
 	//  The memory information of the Elastic Inference Accelerator type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MemoryInfo *MemoryInfo
 
 	//  The throughput information of the Elastic Inference Accelerator type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThroughputInfo []KeyValuePair
 
 	noSmithyDocumentSerde
@@ -25,11 +31,15 @@ type AcceleratorType struct {
 type AcceleratorTypeOffering struct {
 
 	//  The name of the Elastic Inference Accelerator type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorType *string
 
 	//  The location for the offering. It will return either the region, availability
 	// zone or availability zone id for the offering depending on the locationType
 	// value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Location *string
 
 	//  The location type for the offering. It can assume the following values:
@@ -37,6 +47,8 @@ type AcceleratorTypeOffering struct {
 	// defines that the offering is at the availability zone level.
 	// availability-zone-id: defines that the offering is at the availability zone
 	// level, defined by the availability zone id.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LocationType LocationType
 
 	noSmithyDocumentSerde
@@ -46,18 +58,28 @@ type AcceleratorTypeOffering struct {
 type ElasticInferenceAccelerator struct {
 
 	//  The health of the Elastic Inference Accelerator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorHealth *ElasticInferenceAcceleratorHealth
 
 	//  The ID of the Elastic Inference Accelerator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorId *string
 
 	//  The type of the Elastic Inference Accelerator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceleratorType *string
 
 	//  The ARN of the resource that the Elastic Inference Accelerator is attached to.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttachedResource *string
 
 	//  The availability zone where the Elastic Inference Accelerator is present.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZone *string
 
 	noSmithyDocumentSerde
@@ -67,6 +89,8 @@ type ElasticInferenceAccelerator struct {
 type ElasticInferenceAcceleratorHealth struct {
 
 	//  The health status of the Elastic Inference Accelerator.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -78,9 +102,13 @@ type Filter struct {
 	//  The filter name for the Elastic Inference Accelerator list. It can assume the
 	// following values: accelerator-type: the type of Elastic Inference Accelerator to
 	// filter for. instance-id: an EC2 instance id to filter for.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	//  The values for the filter of the Elastic Inference Accelerator list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -92,9 +120,13 @@ type KeyValuePair struct {
 	//  The throughput value of the Elastic Inference Accelerator type. It can assume
 	// the following values: TFLOPS16bit: the throughput expressed in 16bit TeraFLOPS.
 	// TFLOPS32bit: the throughput expressed in 32bit TeraFLOPS.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	//  The throughput value of the Elastic Inference Accelerator type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value int32
 
 	noSmithyDocumentSerde
@@ -104,6 +136,8 @@ type KeyValuePair struct {
 type MemoryInfo struct {
 
 	//  The size in mebibytes of the Elastic Inference Accelerator type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SizeInMiB int32
 
 	noSmithyDocumentSerde
