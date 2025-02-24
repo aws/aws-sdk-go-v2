@@ -68,14 +68,14 @@ type WebIdentityRoleOptions struct {
 
 // IdentityTokenRetriever is an interface for retrieving a JWT
 type IdentityTokenRetriever interface {
-	GetIdentityToken() ([]byte, error)
+	GetIdentityToken(ctx context.Context) ([]byte, error)
 }
 
 // IdentityTokenFile is for retrieving an identity token from the given file name
 type IdentityTokenFile string
 
 // GetIdentityToken retrieves the JWT token from the file and returns the contents as a []byte
-func (j IdentityTokenFile) GetIdentityToken() ([]byte, error) {
+func (j IdentityTokenFile) GetIdentityToken(context.Context) ([]byte, error) {
 	b, err := ioutil.ReadFile(string(j))
 	if err != nil {
 		return nil, fmt.Errorf("unable to read file at %s: %v", string(j), err)
@@ -104,7 +104,7 @@ func NewWebIdentityRoleProvider(client AssumeRoleWithWebIdentityAPIClient, roleA
 // 'WebIdentityTokenFilePath' specified destination and if that is empty an
 // error will be returned.
 func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, error) {
-	b, err := p.options.TokenRetriever.GetIdentityToken()
+	b, err := p.options.TokenRetriever.GetIdentityToken(ctx)
 	if err != nil {
 		return aws.Credentials{}, fmt.Errorf("failed to retrieve jwt from provide source, %w", err)
 	}
