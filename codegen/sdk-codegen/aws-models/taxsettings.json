@@ -12,7 +12,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The access is denied for the Amazon Web Services Support API.\n    </p>",
+                "smithy.api#documentation": "<p>The access is denied for the Amazon Web ServicesSupport API.\n    </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 401
             }
@@ -206,6 +206,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      Additional tax information associated with your TRN in Saudi Arabia.\n    </p>"
                     }
+                },
+                "vietnamAdditionalInfo": {
+                    "target": "com.amazonaws.taxsettings#VietnamAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Vietnam.\n    </p>"
+                    }
+                },
+                "egyptAdditionalInfo": {
+                    "target": "com.amazonaws.taxsettings#EgyptAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Egypt.\n    </p>"
+                    }
+                },
+                "greeceAdditionalInfo": {
+                    "target": "com.amazonaws.taxsettings#GreeceAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Greece.</p>"
+                    }
                 }
             },
             "traits": {
@@ -309,6 +327,24 @@
                     "target": "com.amazonaws.taxsettings#IndiaAdditionalInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      Additional tax information in India. \n    </p>"
+                    }
+                },
+                "vietnamAdditionalInfo": {
+                    "target": "com.amazonaws.taxsettings#VietnamAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Vietnam.\n    </p>"
+                    }
+                },
+                "egyptAdditionalInfo": {
+                    "target": "com.amazonaws.taxsettings#EgyptAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Egypt.\n    </p>"
+                    }
+                },
+                "greeceAdditionalInfo": {
+                    "target": "com.amazonaws.taxsettings#GreeceAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Greece.\n    </p>"
                     }
                 }
             },
@@ -449,7 +485,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Failed to upload the tax exemption document to Amazon Web Services Support case.\n    </p>",
+                "smithy.api#documentation": "<p>Failed to upload the tax exemption document to Amazon Web ServicesSupport case.\n    </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -602,7 +638,7 @@
                     ],
                     "documentation": "Grants batch get active tax exemptions for a given list of accounts permission"
                 },
-                "smithy.api#documentation": "<p>Get the active tax exemptions for a given list of accounts.\n    </p>",
+                "smithy.api#documentation": "<p>Get the active tax exemptions for a given list of accounts. The IAM action is <code>tax:GetExemptions</code>.\n    </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -858,7 +894,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You've exceeded the Amazon Web Services Support case creation limit for your account.\n    </p>",
+                "smithy.api#documentation": "<p>You've exceeded the Amazon Web ServicesSupport case creation limit for your account.\n    </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 413
             }
@@ -917,6 +953,12 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.taxsettings#ContractingAuthorityCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{4}\\.[A-Z]\\d{5}\\.\\d{4}$"
+            }
+        },
         "com.amazonaws.taxsettings#CountryCode": {
             "type": "string",
             "traits": {
@@ -940,6 +982,12 @@
                     "min": 10,
                     "max": 10
                 },
+                "smithy.api#pattern": "^(\\d{4}-(0[0-9]|1[0-2])-([0-2][0-9]|3[0-1]))$"
+            }
+        },
+        "com.amazonaws.taxsettings#DateString": {
+            "type": "string",
+            "traits": {
                 "smithy.api#pattern": "^(\\d{4}-(0[0-9]|1[0-2])-([0-2][0-9]|3[0-1]))$"
             }
         },
@@ -1099,6 +1147,38 @@
                     "max": 50
                 },
                 "smithy.api#pattern": "^(?!\\s*$)[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.taxsettings#EgyptAdditionalInfo": {
+            "type": "structure",
+            "members": {
+                "uniqueIdentificationNumber": {
+                    "target": "com.amazonaws.taxsettings#UniqueIdentificationNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identification number provided by the Egypt Tax Authority.</p>"
+                    }
+                },
+                "uniqueIdentificationNumberExpirationDate": {
+                    "target": "com.amazonaws.taxsettings#DateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration date of the unique identification number provided by the Egypt Tax Authority.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Egypt.</p>"
+            }
+        },
+        "com.amazonaws.taxsettings#ElectronicTransactionCodeNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{17}$"
+            }
+        },
+        "com.amazonaws.taxsettings#EnterpriseIdentificationNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(\\d{10}|(\\d{10}-\\d{3}))$"
             }
         },
         "com.amazonaws.taxsettings#EntityExemptionAccountStatus": {
@@ -1273,7 +1353,7 @@
                     ],
                     "documentation": "Grants get supported tax exemption types permission"
                 },
-                "smithy.api#documentation": "<p>Get supported tax exemption types.\n    </p>",
+                "smithy.api#documentation": "<p>Get supported tax exemption types. The IAM action is <code>tax:GetExemptions</code>.\n    </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1484,6 +1564,20 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GreeceAdditionalInfo": {
+            "type": "structure",
+            "members": {
+                "contractingAuthorityCode": {
+                    "target": "com.amazonaws.taxsettings#ContractingAuthorityCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code of contracting authority for e-invoicing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Greece.\n    </p>"
             }
         },
         "com.amazonaws.taxsettings#HeritageStatus": {
@@ -1867,7 +1961,7 @@
                     ],
                     "documentation": "Grants list the active tax exemptions for a CB family permission"
                 },
-                "smithy.api#documentation": "<p>Retrieves the tax exemption of accounts listed in a consolidated billing family.\n    </p>",
+                "smithy.api#documentation": "<p>Retrieves the tax exemption of accounts listed in a consolidated billing family. The IAM action is <code>tax:GetExemptions</code>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2095,6 +2189,12 @@
                 "smithy.api#pattern": "^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
             }
         },
+        "com.amazonaws.taxsettings#PaymentVoucherNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{17}$"
+            }
+        },
         "com.amazonaws.taxsettings#PersonType": {
             "type": "enum",
             "members": {
@@ -2253,7 +2353,7 @@
                     ],
                     "documentation": "Grants create customer tax exemption case permission"
                 },
-                "smithy.api#documentation": "<p>Adds the tax exemption for a single account or all accounts listed in a consolidated billing family.\n    </p>",
+                "smithy.api#documentation": "<p>Adds the tax exemption for a single account or all accounts listed in a consolidated billing family. The IAM action is <code>tax:UpdateExemptions</code>.\n    </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4415,6 +4515,12 @@
                 }
             }
         },
+        "com.amazonaws.taxsettings#UniqueIdentificationNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9]{39}$"
+            }
+        },
         "com.amazonaws.taxsettings#Url": {
             "type": "string",
             "traits": {
@@ -4528,6 +4634,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Required information to verify your TRN.</p>"
+            }
+        },
+        "com.amazonaws.taxsettings#VietnamAdditionalInfo": {
+            "type": "structure",
+            "members": {
+                "enterpriseIdentificationNumber": {
+                    "target": "com.amazonaws.taxsettings#EnterpriseIdentificationNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enterprise identification number for tax registration.</p>"
+                    }
+                },
+                "electronicTransactionCodeNumber": {
+                    "target": "com.amazonaws.taxsettings#ElectronicTransactionCodeNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The electronic transaction code number on the tax return document.</p>"
+                    }
+                },
+                "paymentVoucherNumber": {
+                    "target": "com.amazonaws.taxsettings#PaymentVoucherNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment voucher number on the tax return payment document.</p>"
+                    }
+                },
+                "paymentVoucherNumberDate": {
+                    "target": "com.amazonaws.taxsettings#DateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on the tax return payment document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Vietnam.</p>"
             }
         }
     }

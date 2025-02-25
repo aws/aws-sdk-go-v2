@@ -3346,6 +3346,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if this audit check is enabled for this account.</p>"
                     }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.iot#CheckCustomConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing the configName and corresponding configValue for configuring audit checks.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5943,6 +5949,15 @@
         "com.amazonaws.iot#CheckCompliant": {
             "type": "boolean"
         },
+        "com.amazonaws.iot#CheckCustomConfiguration": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot#ConfigName"
+            },
+            "value": {
+                "target": "com.amazonaws.iot#ConfigValue"
+            }
+        },
         "com.amazonaws.iot#Cidr": {
             "type": "string",
             "traits": {
@@ -6764,6 +6779,32 @@
                     "traits": {
                         "smithy.api#enumValue": "HIGH"
                     }
+                }
+            }
+        },
+        "com.amazonaws.iot#ConfigName": {
+            "type": "enum",
+            "members": {
+                "CERT_AGE_THRESHOLD_IN_DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CERT_AGE_THRESHOLD_IN_DAYS"
+                    }
+                },
+                "CERT_EXPIRATION_THRESHOLD_IN_DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CERT_EXPIRATION_THRESHOLD_IN_DAYS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#ConfigValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
                 }
             }
         },

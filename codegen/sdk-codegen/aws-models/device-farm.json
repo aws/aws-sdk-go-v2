@@ -934,6 +934,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of ARNs included in the VPC endpoint configuration.</p>"
                     }
+                },
+                "deviceProxy": {
+                    "target": "com.amazonaws.devicefarm#DeviceProxy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device proxy to be configured on the device for the remote access session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3332,6 +3338,48 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.devicefarm#DevicePool"
+            }
+        },
+        "com.amazonaws.devicefarm#DeviceProxy": {
+            "type": "structure",
+            "members": {
+                "host": {
+                    "target": "com.amazonaws.devicefarm#DeviceProxyHost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Hostname or IPv4 address of the proxy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.devicefarm#DeviceProxyPort",
+                    "traits": {
+                        "smithy.api#default": 3128,
+                        "smithy.api#documentation": "<p>The port number on which the http/s proxy is listening.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the http/s proxy configuration that will be applied to a device during a run.</p>"
+            }
+        },
+        "com.amazonaws.devicefarm#DeviceProxyHost": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9])([a-zA-Z0-9-.]+)([a-zA-Z0-9])$"
+            }
+        },
+        "com.amazonaws.devicefarm#DeviceProxyPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65535
+                }
             }
         },
         "com.amazonaws.devicefarm#DeviceSelectionConfiguration": {
@@ -7991,6 +8039,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
                     }
+                },
+                "deviceProxy": {
+                    "target": "com.amazonaws.devicefarm#DeviceProxy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device proxy configured for the remote access session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8302,6 +8356,12 @@
                     "target": "com.amazonaws.devicefarm#NetworkProfile",
                     "traits": {
                         "smithy.api#documentation": "<p>The network profile being used for a test run.</p>"
+                    }
+                },
+                "deviceProxy": {
+                    "target": "com.amazonaws.devicefarm#DeviceProxy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device proxy configured for the devices in the run.</p>"
                     }
                 },
                 "parsingResultUrl": {
@@ -8628,6 +8688,12 @@
                     "target": "com.amazonaws.devicefarm#AmazonResourceNames",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of ARNs for your VPC endpoint configurations.</p>"
+                    }
+                },
+                "deviceProxy": {
+                    "target": "com.amazonaws.devicefarm#DeviceProxy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device proxy to be configured on the device for the run.</p>"
                     }
                 },
                 "customerArtifactPaths": {
