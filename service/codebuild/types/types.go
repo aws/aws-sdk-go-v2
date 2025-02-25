@@ -392,6 +392,10 @@ type BuildBatch struct {
 	// queued before it times out.
 	QueuedTimeoutInMinutes *int32
 
+	// An array that contains the ARNs of reports created by merging reports from
+	// builds associated with this batch build.
+	ReportArns []string
+
 	// The identifier of the resolved version of this batch build's source code.
 	//
 	//   - For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.

@@ -23924,6 +23924,13 @@ func awsRestjson1_serializeDocumentAuditCheckConfiguration(v *types.AuditCheckCo
 	object := value.Object()
 	defer object.Close()
 
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentCheckCustomConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Enabled {
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
@@ -24388,6 +24395,17 @@ func awsRestjson1_serializeDocumentCertificateProviderAccountDefaultForOperation
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCheckCustomConfiguration(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

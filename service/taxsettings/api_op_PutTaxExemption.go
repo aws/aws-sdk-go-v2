@@ -12,7 +12,7 @@ import (
 )
 
 // Adds the tax exemption for a single account or all accounts listed in a
-// consolidated billing family.
+// consolidated billing family. The IAM action is tax:UpdateExemptions .
 func (c *Client) PutTaxExemption(ctx context.Context, params *PutTaxExemptionInput, optFns ...func(*Options)) (*PutTaxExemptionOutput, error) {
 	if params == nil {
 		params = &PutTaxExemptionInput{}

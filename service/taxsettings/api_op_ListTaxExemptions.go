@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves the tax exemption of accounts listed in a consolidated billing
-// family.
+// family. The IAM action is tax:GetExemptions .
 func (c *Client) ListTaxExemptions(ctx context.Context, params *ListTaxExemptionsInput, optFns ...func(*Options)) (*ListTaxExemptionsOutput, error) {
 	if params == nil {
 		params = &ListTaxExemptionsInput{}

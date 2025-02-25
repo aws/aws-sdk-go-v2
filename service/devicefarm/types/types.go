@@ -165,6 +165,9 @@ type CreateRemoteAccessSessionConfiguration struct {
 	// The billing method for the remote access session.
 	BillingMethod BillingMethod
 
+	// The device proxy to be configured on the device for the remote access session.
+	DeviceProxy *DeviceProxy
+
 	// An array of ARNs included in the VPC endpoint configuration.
 	VpceConfigurationArns []string
 
@@ -476,6 +479,23 @@ type DevicePoolCompatibilityResult struct {
 
 	// Information about the compatibility.
 	IncompatibilityMessages []IncompatibilityMessage
+
+	noSmithyDocumentSerde
+}
+
+// Represents the http/s proxy configuration that will be applied to a device
+// during a run.
+type DeviceProxy struct {
+
+	// Hostname or IPv4 address of the proxy.
+	//
+	// This member is required.
+	Host *string
+
+	// The port number on which the http/s proxy is listening.
+	//
+	// This member is required.
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -1084,6 +1104,9 @@ type RemoteAccessSession struct {
 	// setup and teardown minutes).
 	DeviceMinutes *DeviceMinutes
 
+	// The device proxy configured for the remote access session.
+	DeviceProxy *DeviceProxy
+
 	// Unique device identifier for the remote device. Only returned if remote
 	// debugging is enabled for the remote access session.
 	//
@@ -1326,6 +1349,9 @@ type Run struct {
 	// The ARN of the device pool for the run.
 	DevicePoolArn *string
 
+	// The device proxy configured for the devices in the run.
+	DeviceProxy *DeviceProxy
+
 	// The results of a device filter used to select the devices for a test run.
 	DeviceSelectionResult *DeviceSelectionResult
 
@@ -1555,6 +1581,9 @@ type ScheduleRunConfiguration struct {
 
 	// Input CustomerArtifactPaths object for the scheduled run configuration.
 	CustomerArtifactPaths *CustomerArtifactPaths
+
+	// The device proxy to be configured on the device for the run.
+	DeviceProxy *DeviceProxy
 
 	// The ARN of the extra data for the run. The extra data is a .zip file that AWS
 	// Device Farm extracts to external data for Android or the app's sandbox for iOS.

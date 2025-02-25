@@ -1,0 +1,8 @@
+{
+    "id": "d0c80265-fbf0-4d62-8d2c-d45f58cd2fc0",
+    "type": "feature",
+    "description": "Adds support for time-based EBS-backed AMI copy operations. Time-based copy ensures that EBS-backed AMIs are copied within and across Regions in a specified timeframe.",
+    "modules": [
+        "service/ec2"
+    ]
+}

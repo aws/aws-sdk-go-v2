@@ -1,0 +1,8 @@
+{
+    "id": "4687f7a1-8aed-45d0-93b4-9d6c09050544",
+    "type": "feature",
+    "description": "PutTaxRegistration API changes for Egypt, Greece, Vietnam countries",
+    "modules": [
+        "service/taxsettings"
+    ]
+}

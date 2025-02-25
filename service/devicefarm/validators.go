@@ -1594,6 +1594,23 @@ func addOpUpdateVPCEConfigurationValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpUpdateVPCEConfiguration{}, middleware.After)
 }
 
+func validateCreateRemoteAccessSessionConfiguration(v *types.CreateRemoteAccessSessionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRemoteAccessSessionConfiguration"}
+	if v.DeviceProxy != nil {
+		if err := validateDeviceProxy(v.DeviceProxy); err != nil {
+			invalidParams.AddNested("DeviceProxy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeviceFilter(v *types.DeviceFilter) error {
 	if v == nil {
 		return nil
@@ -1624,6 +1641,24 @@ func validateDeviceFilters(v []types.DeviceFilter) error {
 		if err := validateDeviceFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeviceProxy(v *types.DeviceProxy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeviceProxy"}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1680,6 +1715,11 @@ func validateScheduleRunConfiguration(v *types.ScheduleRunConfiguration) error {
 	if v.Location != nil {
 		if err := validateLocation(v.Location); err != nil {
 			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeviceProxy != nil {
+		if err := validateDeviceProxy(v.DeviceProxy); err != nil {
+			invalidParams.AddNested("DeviceProxy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1865,6 +1905,11 @@ func validateOpCreateRemoteAccessSessionInput(v *CreateRemoteAccessSessionInput)
 	}
 	if v.DeviceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceArn"))
+	}
+	if v.Configuration != nil {
+		if err := validateCreateRemoteAccessSessionConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
