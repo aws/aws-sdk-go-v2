@@ -480,6 +480,28 @@ func ExamplePreProcessingTrace_outputUsage() {
 var _ *types.ModelInvocationInput
 var _ *types.PreProcessingModelInvocationOutput
 
+func ExampleReasoningContentBlock_outputUsage() {
+	var union types.ReasoningContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReasoningContentBlockMemberReasoningText:
+		_ = v.Value // Value is types.ReasoningTextBlock
+
+	case *types.ReasoningContentBlockMemberRedactedContent:
+		_ = v.Value // Value is []byte
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ReasoningTextBlock
+var _ []byte
+
 func ExampleRerankingMetadataSelectiveModeConfiguration_outputUsage() {
 	var union types.RerankingMetadataSelectiveModeConfiguration
 	// type switches can be used to check the union value

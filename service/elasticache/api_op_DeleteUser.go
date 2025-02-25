@@ -52,7 +52,7 @@ type DeleteUserOutput struct {
 	// Denotes whether the user requires a password to authenticate.
 	Authentication *types.Authentication
 
-	// The current supported value is Redis.
+	// The options are valkey or redis.
 	Engine *string
 
 	// The minimum engine version required, which is Redis OSS 6.0

@@ -34,7 +34,7 @@ type ModifyUserGroupInput struct {
 	// This member is required.
 	UserGroupId *string
 
-	// The engine for a user group.
+	// Modifies the engine listed in a user group. The options are valkey or redis.
 	Engine *string
 
 	// The list of user IDs to add to the user group.
@@ -51,7 +51,7 @@ type ModifyUserGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the user group.
 	ARN *string
 
-	// The current supported value is Redis user.
+	// The options are valkey or redis.
 	Engine *string
 
 	// The minimum engine version required, which is Redis OSS 6.0

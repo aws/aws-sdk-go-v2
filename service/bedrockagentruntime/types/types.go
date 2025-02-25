@@ -2484,6 +2484,10 @@ type OrchestrationModelInvocationOutput struct {
 	// Contains details of the raw response from the foundation model output.
 	RawResponse *RawResponse
 
+	// Contains content about the reasoning that the model made during the
+	// orchestration step.
+	ReasoningContent ReasoningContentBlock
+
 	// The unique identifier of the trace.
 	TraceId *string
 
@@ -2646,6 +2650,10 @@ type PostProcessingModelInvocationOutput struct {
 	//  Details of the raw response from the foundation model output.
 	RawResponse *RawResponse
 
+	// Contains content about the reasoning that the model made during the
+	// post-processing step.
+	ReasoningContent ReasoningContentBlock
+
 	// The unique identifier of the trace.
 	TraceId *string
 
@@ -2712,6 +2720,10 @@ type PreProcessingModelInvocationOutput struct {
 
 	//  Details of the raw response from the foundation model output.
 	RawResponse *RawResponse
+
+	// Contains content about the reasoning that the model made during the
+	// pre-processing step.
+	ReasoningContent ReasoningContentBlock
 
 	// The unique identifier of the trace.
 	TraceId *string
@@ -2804,7 +2816,7 @@ type PromptConfiguration struct {
 
 	// Specifies whether to override the default parser Lambda function when parsing
 	// the raw foundation model output in the part of the agent sequence defined by the
-	// promptType . If you set the field as OVERRIDEN , the overrideLambda field in
+	// promptType . If you set the field as OVERRIDDEN , the overrideLambda field in
 	// the [PromptOverrideConfiguration]must be specified with the ARN of a Lambda function.
 	//
 	// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
@@ -2946,6 +2958,58 @@ type RawResponse struct {
 
 	// The foundation model's raw output content.
 	Content *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains content regarding the reasoning that the foundation model made with
+// respect to the content in the content block. Reasoning refers to a Chain of
+// Thought (CoT) that the model generates to enhance the accuracy of its final
+// response.
+//
+// The following types satisfy this interface:
+//
+//	ReasoningContentBlockMemberReasoningText
+//	ReasoningContentBlockMemberRedactedContent
+type ReasoningContentBlock interface {
+	isReasoningContentBlock()
+}
+
+// Contains information about the reasoning that the model used to return the
+// content in the content block.
+type ReasoningContentBlockMemberReasoningText struct {
+	Value ReasoningTextBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ReasoningContentBlockMemberReasoningText) isReasoningContentBlock() {}
+
+// The content in the reasoning that was encrypted by the model provider for trust
+// and safety reasons.
+type ReasoningContentBlockMemberRedactedContent struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*ReasoningContentBlockMemberRedactedContent) isReasoningContentBlock() {}
+
+// Contains information about the reasoning that the model used to return the
+// content in the content block.
+type ReasoningTextBlock struct {
+
+	// Text describing the reasoning that the model used to return the content in the
+	// content block.
+	//
+	// This member is required.
+	Text *string
+
+	// A hash of all the messages in the conversation to ensure that the content in
+	// the reasoning text block isn't tampered with. You must submit the signature in
+	// subsequent Converse requests, in addition to the previous messages. If the
+	// previous messages are tampered with, the response throws an error.
+	Signature *string
 
 	noSmithyDocumentSerde
 }
@@ -4301,6 +4365,7 @@ func (*UnknownUnionMember) isOptimizedPromptStream()                       {}
 func (*UnknownUnionMember) isOrchestrationTrace()                          {}
 func (*UnknownUnionMember) isPostProcessingTrace()                         {}
 func (*UnknownUnionMember) isPreProcessingTrace()                          {}
+func (*UnknownUnionMember) isReasoningContentBlock()                       {}
 func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration() {}
 func (*UnknownUnionMember) isResponseStream()                              {}
 func (*UnknownUnionMember) isRetrievalFilter()                             {}

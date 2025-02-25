@@ -2045,13 +2045,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6\n            is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6\n            is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type associated with the cluster, either <code>ipv4</code> |\n                <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type associated with the cluster, either <code>ipv4</code> |\n                <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "TransitEncryptionMode": {
@@ -2826,7 +2826,7 @@
                 "SupportedNetworkTypes": {
                     "target": "com.amazonaws.elasticache#NetworkTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is\n            supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is\n            supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 }
             },
@@ -3666,13 +3666,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6\n            is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>. </p>"
+                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6\n            is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2 to 7.1\n            and Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>. </p>"
                     }
                 },
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> |\n            <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> |\n            <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 and Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 }
             },
@@ -4303,7 +4303,7 @@
                 "Engine": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cache engine to be used for the clusters in this replication group.\n            The value must be set to <code>Redis</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the cache engine to be used for the clusters in this replication group.\n            The value must be set to <code>valkey</code> or <code>redis</code>.</p>"
                     }
                 },
                 "EngineVersion": {
@@ -4405,7 +4405,7 @@
                 "AtRestEncryptionEnabled": {
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag that enables encryption at rest when set to <code>true</code>.</p>\n         <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the\n            replication group is created. To enable encryption at rest on a replication group you\n            must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create the\n            replication group. </p>\n         <p>\n            <b>Required:</b> Only available when creating a replication\n            group in an Amazon VPC using Redis OSS version <code>3.2.6</code>, <code>4.x</code> or\n            later.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A flag that enables encryption at rest when set to <code>true</code>.</p>\n         <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the\n            replication group is created. To enable encryption at rest on a replication group you\n            must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create the\n            replication group. </p>\n         <p>\n            <b>Required:</b> Only available when creating a replication\n            group in an Amazon VPC using Valkey 7.2 and later, Redis OSS version <code>3.2.6</code>, or Redis OSS <code>4.x</code> and\n            later.</p>\n         <p>Default: <code>true</code> when using Valkey, <code>false</code> when using Redis OSS</p>"
                     }
                 },
                 "KmsKeyId": {
@@ -4435,13 +4435,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6\n            is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6\n            is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 and Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when creating a replication group, either\n            <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on\n            the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when creating a replication group, either\n            <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 or Memcached engine version 1.6.6 and above on all instances built on\n            the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "TransitEncryptionMode": {
@@ -4962,7 +4962,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>For Valkey engine version 7.2 onwards and Redis OSS 6.0 and onwards: Creates a user. For more information, see\n                <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html\">Using Role Based Access Control (RBAC)</a>.</p>"
+                "smithy.api#documentation": "<p>For Valkey engine version 7.2 onwards and Redis OSS 6.0 to 7.1: Creates a user. For more information, see\n                <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html\">Using Role Based Access Control (RBAC)</a>.</p>"
             }
         },
         "com.amazonaws.elasticache#CreateUserGroup": {
@@ -5000,7 +5000,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>For Valkey engine version 7.2 onwards and Redis OSS 6.0 onwards: Creates a user group. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html\">Using Role Based Access Control (RBAC)</a>\n         </p>"
+                "smithy.api#documentation": "<p>For Valkey engine version 7.2 onwards and Redis OSS 6.0 to 7.1: Creates a user group. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html\">Using Role Based Access Control (RBAC)</a>\n         </p>"
             }
         },
         "com.amazonaws.elasticache#CreateUserGroupMessage": {
@@ -5018,7 +5018,7 @@
                     "target": "com.amazonaws.elasticache#EngineType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The current supported value is Redis user. </p>",
+                        "smithy.api#documentation": "<p>Sets the engine listed in a user group. The options are valkey or redis.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5062,7 +5062,7 @@
                     "target": "com.amazonaws.elasticache#EngineType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The current supported value is Redis. </p>",
+                        "smithy.api#documentation": "<p>The options are valkey or redis. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11401,7 +11401,7 @@
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> |\n            <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> |\n            <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 }
             },
@@ -12008,7 +12008,7 @@
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> |\n            <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> |\n            <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 and Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "TransitEncryptionEnabled": {
@@ -12367,7 +12367,7 @@
                 "Engine": {
                     "target": "com.amazonaws.elasticache#EngineType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine for a user group. </p>"
+                        "smithy.api#documentation": "<p>Modifies the engine listed in a user group. The options are valkey or redis.</p>"
                     }
                 }
             },
@@ -12419,7 +12419,7 @@
                 "Engine": {
                     "target": "com.amazonaws.elasticache#EngineType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine for a specific user. </p>"
+                        "smithy.api#documentation": "<p>Modifies the engine listed for a user. The options are valkey or redis.</p>"
                     }
                 }
             },
@@ -13910,13 +13910,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6\n            is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6\n            is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> |\n            <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> |\n            <code>ipv6</code>. IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "TransitEncryptionMode": {
@@ -15599,7 +15599,7 @@
                 "SupportedNetworkTypes": {
                     "target": "com.amazonaws.elasticache#NetworkTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is\n            supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            and above or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is\n            supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2\n            to 7.1 or Memcached engine version 1.6.6 and above on all instances built on the <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 }
             },
@@ -16263,7 +16263,7 @@
                 "Engine": {
                     "target": "com.amazonaws.elasticache#EngineType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current supported value is Redis.</p>"
+                        "smithy.api#documentation": "<p>The options are valkey or redis.</p>"
                     }
                 },
                 "MinimumEngineVersion": {
@@ -16333,7 +16333,7 @@
                 "Engine": {
                     "target": "com.amazonaws.elasticache#EngineType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current supported value is Redis user. </p>"
+                        "smithy.api#documentation": "<p>The options are valkey or redis.</p>"
                     }
                 },
                 "UserIds": {

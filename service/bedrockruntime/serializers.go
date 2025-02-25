@@ -1029,6 +1029,12 @@ func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smit
 			return err
 		}
 
+	case *types.ContentBlockMemberReasoningContent:
+		av := object.Key("reasoningContent")
+		if err := awsRestjson1_serializeDocumentReasoningContentBlock(uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ContentBlockMemberText:
 		av := object.Key("text")
 		av.String(uv.Value)
@@ -1546,6 +1552,45 @@ func awsRestjson1_serializeDocumentPromptVariableValues(v types.PromptVariableVa
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReasoningContentBlock(v types.ReasoningContentBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ReasoningContentBlockMemberReasoningText:
+		av := object.Key("reasoningText")
+		if err := awsRestjson1_serializeDocumentReasoningTextBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ReasoningContentBlockMemberRedactedContent:
+		av := object.Key("redactedContent")
+		av.Base64EncodeBytes(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReasoningTextBlock(v *types.ReasoningTextBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Signature != nil {
+		ok := object.Key("signature")
+		ok.String(*v.Signature)
+	}
+
+	if v.Text != nil {
+		ok := object.Key("text")
+		ok.String(*v.Text)
+	}
+
 	return nil
 }
 

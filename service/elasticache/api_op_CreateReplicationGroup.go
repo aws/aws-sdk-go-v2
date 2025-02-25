@@ -95,9 +95,10 @@ type CreateReplicationGroupInput struct {
 	// set AtRestEncryptionEnabled to true when you create the replication group.
 	//
 	// Required: Only available when creating a replication group in an Amazon VPC
-	// using Redis OSS version 3.2.6 , 4.x or later.
+	// using Valkey 7.2 and later, Redis OSS version 3.2.6 , or Redis OSS 4.x and
+	// later.
 	//
-	// Default: false
+	// Default: true when using Valkey, false when using Redis OSS
 	AtRestEncryptionEnabled *bool
 
 	//  Reserved parameter. The password used to access a password protected server.
@@ -278,7 +279,7 @@ type CreateReplicationGroupInput struct {
 	DataTieringEnabled *bool
 
 	// The name of the cache engine to be used for the clusters in this replication
-	// group. The value must be set to Redis .
+	// group. The value must be set to valkey or redis .
 	Engine *string
 
 	// The version number of the cache engine to be used for the clusters in this
@@ -298,7 +299,7 @@ type CreateReplicationGroupInput struct {
 
 	// The network type you choose when creating a replication group, either ipv4 |
 	// ipv6 . IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS
-	// engine version 6.2 and above or Memcached engine version 1.6.6 and above on all
+	// engine version 6.2 to 7.1 or Memcached engine version 1.6.6 and above on all
 	// instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
@@ -317,7 +318,7 @@ type CreateReplicationGroupInput struct {
 	MultiAZEnabled *bool
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
-	// Valkey 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// Valkey 7.2 and above, Redis OSS engine version 6.2 to 7.1 and Memcached engine
 	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/

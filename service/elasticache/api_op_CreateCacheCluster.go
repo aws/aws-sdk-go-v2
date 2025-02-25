@@ -220,7 +220,7 @@ type CreateCacheClusterInput struct {
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
 	// is supported for workloads using Valkey 7.2 and above, Redis OSS engine version
-	// 6.2 and above or Memcached engine version 1.6.6 and above on all instances built
+	// 6.2 to 7.1 and Memcached engine version 1.6.6 and above on all instances built
 	// on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
@@ -230,7 +230,7 @@ type CreateCacheClusterInput struct {
 	LogDeliveryConfigurations []types.LogDeliveryConfigurationRequest
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
-	// Valkey 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// Valkey 7.2 and above, Redis OSS engine version 6.2 to 7.1 and Memcached engine
 	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/

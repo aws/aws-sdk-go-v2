@@ -1,3 +1,15 @@
+# Release (2025-02-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.37.0](service/bedrockagentruntime/CHANGELOG.md#v1370-2025-02-24)
+  * **Feature**: Adding support for ReasoningContent fields in Pre-Processing, Post-Processing and Orchestration Trace outputs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.25.0](service/bedrockruntime/CHANGELOG.md#v1250-2025-02-24)
+  * **Feature**: This release adds Reasoning Content support to Converse and ConverseStream APIs
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.44.14](service/elasticache/CHANGELOG.md#v14414-2025-02-24)
+  * **Documentation**: Documentation update, adding clarity and rephrasing.
+* `github.com/aws/aws-sdk-go-v2/service/elasticinference`: [v1.24.0](service/elasticinference/CHANGELOG.md#v1240-2025-02-24)
+  * **Feature**: Mark service/elasticinference as deprecated. This service is no longer available for use.
+
 # Release (2025-02-21)
 
 ## Module Highlights

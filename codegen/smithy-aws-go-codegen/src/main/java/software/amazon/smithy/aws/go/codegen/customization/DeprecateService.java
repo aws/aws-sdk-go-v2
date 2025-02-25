@@ -19,7 +19,8 @@ public class DeprecateService implements GoIntegration {
     private static final Set<String> DEPRECATED = Set.of(
             "com.amazonaws.nimble#nimble",
             "com.amazonaws.iot1clickdevicesservice#IoT1ClickDevicesService",
-            "com.amazonaws.iot1clickprojects#AWSIoT1ClickProjects"
+            "com.amazonaws.iot1clickprojects#AWSIoT1ClickProjects",
+            "com.amazonaws.elasticinference#EC2MatterhornCfSoothsayerApiGatewayLambda"
     );
 
     @Override
