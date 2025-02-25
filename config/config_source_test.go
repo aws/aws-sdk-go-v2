@@ -156,7 +156,7 @@ func (f ssoForwarder) Do(r *http.Request) (*http.Response, error) {
 func TestUserAgentCredentials(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
-	
+
 	cases := map[string]struct {
 		// given
 		ExtraLoadFunctions []func(*LoadOptions) error
