@@ -1,3 +1,7 @@
+# v1.68.1 (2025-02-25)
+
+* No change notes available for this release.
+
 # v1.68.0 (2025-02-18)
 
 * **Feature**: Adds support for creating CloudWatchAlarmTemplates for AWS Elemental MediaTailor Playback Configuration resources.

@@ -1,8 +1,0 @@
-{
-    "id": "019b73e2-25f0-4342-a28d-5f0420d07936",
-    "type": "feature",
-    "description": "Add an optional configuration to the ScheduleRun and CreateRemoteAccessSession API to set a device level http/s proxy.",
-    "modules": [
-        "service/devicefarm"
-    ]
-}

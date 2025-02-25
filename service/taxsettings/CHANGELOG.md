@@ -1,3 +1,7 @@
+# v1.8.0 (2025-02-25)
+
+* **Feature**: PutTaxRegistration API changes for Egypt, Greece, Vietnam countries
+
 # v1.7.10 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

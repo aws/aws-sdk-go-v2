@@ -1,3 +1,17 @@
+# Release (2025-02-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.54.0](service/codebuild/CHANGELOG.md#v1540-2025-02-25)
+  * **Feature**: Adding "reportArns" field in output of BatchGetBuildBatches API. "reportArns" is an array that contains the ARNs of reports created by merging reports from builds associated with the batch build.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.29.0](service/devicefarm/CHANGELOG.md#v1290-2025-02-25)
+  * **Feature**: Add an optional configuration to the ScheduleRun and CreateRemoteAccessSession API to set a device level http/s proxy.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.204.0](service/ec2/CHANGELOG.md#v12040-2025-02-25)
+  * **Feature**: Adds support for time-based EBS-backed AMI copy operations. Time-based copy ensures that EBS-backed AMIs are copied within and across Regions in a specified timeframe.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.63.0](service/iot/CHANGELOG.md#v1630-2025-02-25)
+  * **Feature**: AWS IoT - AWS IoT Device Defender adds support for a new Device Defender Audit Check that monitors device certificate age and custom threshold configurations for both the new device certificate age check and existing device certificate expiry check.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.8.0](service/taxsettings/CHANGELOG.md#v180-2025-02-25)
+  * **Feature**: PutTaxRegistration API changes for Egypt, Greece, Vietnam countries
+
 # Release (2025-02-24)
 
 ## Module Highlights

@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.29.8
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.47.5
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.43.15
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.53.0
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.54.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.16
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.19
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.39.0
@@ -24,12 +24,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.51.14
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.16
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.49.1
-	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.28.16
+	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.30.13
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.18
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.40.11
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.40.2
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.203.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.204.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.16
 	github.com/aws/aws-sdk-go-v2/service/efs v1.34.12
@@ -47,7 +47,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.29.10
 	github.com/aws/aws-sdk-go-v2/service/iam v1.39.2
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.25.16
-	github.com/aws/aws-sdk-go-v2/service/iot v1.62.9
+	github.com/aws/aws-sdk-go-v2/service/iot v1.63.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.32.20
 	github.com/aws/aws-sdk-go-v2/service/kms v1.37.19
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.69.14
