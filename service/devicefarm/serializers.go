@@ -4745,6 +4745,13 @@ func awsAwsjson11_serializeDocumentCreateRemoteAccessSessionConfiguration(v *typ
 		ok.String(string(v.BillingMethod))
 	}
 
+	if v.DeviceProxy != nil {
+		ok := object.Key("deviceProxy")
+		if err := awsAwsjson11_serializeDocumentDeviceProxy(v.DeviceProxy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VpceConfigurationArns != nil {
 		ok := object.Key("vpceConfigurationArns")
 		if err := awsAwsjson11_serializeDocumentAmazonResourceNames(v.VpceConfigurationArns, ok); err != nil {
@@ -4839,6 +4846,23 @@ func awsAwsjson11_serializeDocumentDeviceHostPaths(v []string, value smithyjson.
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeviceProxy(v *types.DeviceProxy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Host != nil {
+		ok := object.Key("host")
+		ok.String(*v.Host)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
+	}
+
 	return nil
 }
 
@@ -5050,6 +5074,13 @@ func awsAwsjson11_serializeDocumentScheduleRunConfiguration(v *types.ScheduleRun
 	if v.CustomerArtifactPaths != nil {
 		ok := object.Key("customerArtifactPaths")
 		if err := awsAwsjson11_serializeDocumentCustomerArtifactPaths(v.CustomerArtifactPaths, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeviceProxy != nil {
+		ok := object.Key("deviceProxy")
+		if err := awsAwsjson11_serializeDocumentDeviceProxy(v.DeviceProxy, ok); err != nil {
 			return err
 		}
 	}

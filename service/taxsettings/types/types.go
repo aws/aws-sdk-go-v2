@@ -63,11 +63,17 @@ type AdditionalInfoRequest struct {
 	//  Additional tax information associated with your TRN in Canada.
 	CanadaAdditionalInfo *CanadaAdditionalInfo
 
+	// Additional tax information to specify for a TRN in Egypt.
+	EgyptAdditionalInfo *EgyptAdditionalInfo
+
 	//  Additional tax information to specify for a TRN in Estonia.
 	EstoniaAdditionalInfo *EstoniaAdditionalInfo
 
 	//  Additional tax information to specify for a TRN in Georgia.
 	GeorgiaAdditionalInfo *GeorgiaAdditionalInfo
+
+	// Additional tax information to specify for a TRN in Greece.
+	GreeceAdditionalInfo *GreeceAdditionalInfo
 
 	//  Additional tax information to specify for a TRN in Israel.
 	IsraelAdditionalInfo *IsraelAdditionalInfo
@@ -102,6 +108,9 @@ type AdditionalInfoRequest struct {
 	//  Additional tax information associated with your TRN in Ukraine.
 	UkraineAdditionalInfo *UkraineAdditionalInfo
 
+	// Additional tax information to specify for a TRN in Vietnam.
+	VietnamAdditionalInfo *VietnamAdditionalInfo
+
 	noSmithyDocumentSerde
 }
 
@@ -119,11 +128,17 @@ type AdditionalInfoResponse struct {
 	// Additional tax information associated with your TRN in Canada.
 	CanadaAdditionalInfo *CanadaAdditionalInfo
 
+	// Additional tax information to specify for a TRN in Egypt.
+	EgyptAdditionalInfo *EgyptAdditionalInfo
+
 	//  Additional tax information associated with your TRN in Estonia.
 	EstoniaAdditionalInfo *EstoniaAdditionalInfo
 
 	//  Additional tax information associated with your TRN in Georgia.
 	GeorgiaAdditionalInfo *GeorgiaAdditionalInfo
+
+	// Additional tax information to specify for a TRN in Greece.
+	GreeceAdditionalInfo *GreeceAdditionalInfo
 
 	//  Additional tax information in India.
 	IndiaAdditionalInfo *IndiaAdditionalInfo
@@ -160,6 +175,9 @@ type AdditionalInfoResponse struct {
 
 	//  Additional tax information associated with your TRN in Ukraine.
 	UkraineAdditionalInfo *UkraineAdditionalInfo
+
+	// Additional tax information to specify for a TRN in Vietnam.
+	VietnamAdditionalInfo *VietnamAdditionalInfo
 
 	noSmithyDocumentSerde
 }
@@ -345,6 +363,19 @@ type DestinationS3Location struct {
 	noSmithyDocumentSerde
 }
 
+// Additional tax information to specify for a TRN in Egypt.
+type EgyptAdditionalInfo struct {
+
+	// The unique identification number provided by the Egypt Tax Authority.
+	UniqueIdentificationNumber *string
+
+	// The expiration date of the unique identification number provided by the Egypt
+	// Tax Authority.
+	UniqueIdentificationNumberExpirationDate *string
+
+	noSmithyDocumentSerde
+}
+
 // Additional tax information associated with your TRN in Estonia.
 type EstoniaAdditionalInfo struct {
 
@@ -380,6 +411,15 @@ type GeorgiaAdditionalInfo struct {
 	//
 	// This member is required.
 	PersonType PersonType
+
+	noSmithyDocumentSerde
+}
+
+// Additional tax information to specify for a TRN in Greece.
+type GreeceAdditionalInfo struct {
+
+	// The code of contracting authority for e-invoicing.
+	ContractingAuthorityCode *string
 
 	noSmithyDocumentSerde
 }
@@ -990,6 +1030,24 @@ type VerificationDetails struct {
 	// The tax registration document, which is required for specific countries such as
 	// Bangladesh, Kenya, South Korea and Spain.
 	TaxRegistrationDocuments []TaxRegistrationDocument
+
+	noSmithyDocumentSerde
+}
+
+// Additional tax information to specify for a TRN in Vietnam.
+type VietnamAdditionalInfo struct {
+
+	// The electronic transaction code number on the tax return document.
+	ElectronicTransactionCodeNumber *string
+
+	// The enterprise identification number for tax registration.
+	EnterpriseIdentificationNumber *string
+
+	// The payment voucher number on the tax return payment document.
+	PaymentVoucherNumber *string
+
+	// The date on the tax return payment document.
+	PaymentVoucherNumberDate *string
 
 	noSmithyDocumentSerde
 }

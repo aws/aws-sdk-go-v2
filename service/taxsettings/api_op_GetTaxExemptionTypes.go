@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get supported tax exemption types.
+// Get supported tax exemption types. The IAM action is tax:GetExemptions .
 func (c *Client) GetTaxExemptionTypes(ctx context.Context, params *GetTaxExemptionTypesInput, optFns ...func(*Options)) (*GetTaxExemptionTypesOutput, error) {
 	if params == nil {
 		params = &GetTaxExemptionTypesInput{}

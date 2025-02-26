@@ -58203,6 +58203,11 @@ func awsEc2query_serializeOpDocumentCopyImageInput(v *CopyImageInput, value quer
 		objectKey.String(*v.Name)
 	}
 
+	if v.SnapshotCopyCompletionDurationMinutes != nil {
+		objectKey := object.Key("SnapshotCopyCompletionDurationMinutes")
+		objectKey.Long(*v.SnapshotCopyCompletionDurationMinutes)
+	}
+
 	if v.SourceImageId != nil {
 		objectKey := object.Key("SourceImageId")
 		objectKey.String(*v.SourceImageId)

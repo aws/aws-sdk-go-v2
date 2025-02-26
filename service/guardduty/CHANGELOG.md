@@ -1,3 +1,7 @@
+# v1.53.1 (2025-02-25)
+
+* No change notes available for this release.
+
 # v1.53.0 (2025-02-20)
 
 * **Feature**: Reduce the minimum number of required attack sequence signals from 2 to 1

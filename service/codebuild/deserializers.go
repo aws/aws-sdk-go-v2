@@ -6648,6 +6648,11 @@ func awsAwsjson11_deserializeDocumentBuildBatch(v **types.BuildBatch, value inte
 				sv.QueuedTimeoutInMinutes = ptr.Int32(int32(i64))
 			}
 
+		case "reportArns":
+			if err := awsAwsjson11_deserializeDocumentBuildReportArns(&sv.ReportArns, value); err != nil {
+				return err
+			}
+
 		case "resolvedSourceVersion":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -11067,6 +11067,59 @@ func awsAwsjson11_deserializeDocumentDevicePools(v *[]types.DevicePool, value in
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDeviceProxy(v **types.DeviceProxy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeviceProxy
+	if *v == nil {
+		sv = &types.DeviceProxy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "host":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeviceProxyHost to be of type string, got %T instead", value)
+				}
+				sv.Host = ptr.String(jtv)
+			}
+
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DeviceProxyPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDevices(v *[]types.Device, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13278,6 +13331,11 @@ func awsAwsjson11_deserializeDocumentRemoteAccessSession(v **types.RemoteAccessS
 				return err
 			}
 
+		case "deviceProxy":
+			if err := awsAwsjson11_deserializeDocumentDeviceProxy(&sv.DeviceProxy, value); err != nil {
+				return err
+			}
+
 		case "deviceUdid":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13724,6 +13782,11 @@ func awsAwsjson11_deserializeDocumentRun(v **types.Run, value interface{}) error
 					return fmt.Errorf("expected AmazonResourceName to be of type string, got %T instead", value)
 				}
 				sv.DevicePoolArn = ptr.String(jtv)
+			}
+
+		case "deviceProxy":
+			if err := awsAwsjson11_deserializeDocumentDeviceProxy(&sv.DeviceProxy, value); err != nil {
+				return err
 			}
 
 		case "deviceSelectionResult":

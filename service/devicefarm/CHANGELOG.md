@@ -1,3 +1,7 @@
+# v1.29.0 (2025-02-25)
+
+* **Feature**: Add an optional configuration to the ScheduleRun and CreateRemoteAccessSession API to set a device level http/s proxy.
+
 # v1.28.16 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

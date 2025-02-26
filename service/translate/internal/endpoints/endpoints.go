@@ -143,38 +143,110 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.ap-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.ap-northeast-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-northeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.ap-northeast-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-south-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.ap-south-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-southeast-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.ap-southeast-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.ap-southeast-2.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.eu-central-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "eu-north-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.eu-north-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.eu-west-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "eu-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "eu-west-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.eu-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-west-3",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-west-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.eu-west-3.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "us-east-1",
 			}: endpoints.Endpoint{},
@@ -183,6 +255,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "translate-fips.us-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.us-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-1-fips",
@@ -203,6 +287,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "translate-fips.us-east-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate-fips.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-2-fips",
 			}: endpoints.Endpoint{
 				Hostname: "translate-fips.us-east-2.amazonaws.com",
@@ -221,6 +317,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "translate-fips.us-west-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate-fips.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-1-fips",
 			}: endpoints.Endpoint{
 				Hostname: "translate-fips.us-west-1.amazonaws.com",
@@ -237,6 +345,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "translate-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate-fips.us-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.us-west-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-2-fips",
@@ -439,6 +559,18 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "translate-fips.us-gov-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate-fips.us-gov-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "translate.us-gov-west-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1-fips",

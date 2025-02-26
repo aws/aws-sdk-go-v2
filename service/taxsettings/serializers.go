@@ -1354,6 +1354,13 @@ func awsRestjson1_serializeDocumentAdditionalInfoRequest(v *types.AdditionalInfo
 		}
 	}
 
+	if v.EgyptAdditionalInfo != nil {
+		ok := object.Key("egyptAdditionalInfo")
+		if err := awsRestjson1_serializeDocumentEgyptAdditionalInfo(v.EgyptAdditionalInfo, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EstoniaAdditionalInfo != nil {
 		ok := object.Key("estoniaAdditionalInfo")
 		if err := awsRestjson1_serializeDocumentEstoniaAdditionalInfo(v.EstoniaAdditionalInfo, ok); err != nil {
@@ -1364,6 +1371,13 @@ func awsRestjson1_serializeDocumentAdditionalInfoRequest(v *types.AdditionalInfo
 	if v.GeorgiaAdditionalInfo != nil {
 		ok := object.Key("georgiaAdditionalInfo")
 		if err := awsRestjson1_serializeDocumentGeorgiaAdditionalInfo(v.GeorgiaAdditionalInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GreeceAdditionalInfo != nil {
+		ok := object.Key("greeceAdditionalInfo")
+		if err := awsRestjson1_serializeDocumentGreeceAdditionalInfo(v.GreeceAdditionalInfo, ok); err != nil {
 			return err
 		}
 	}
@@ -1441,6 +1455,13 @@ func awsRestjson1_serializeDocumentAdditionalInfoRequest(v *types.AdditionalInfo
 	if v.UkraineAdditionalInfo != nil {
 		ok := object.Key("ukraineAdditionalInfo")
 		if err := awsRestjson1_serializeDocumentUkraineAdditionalInfo(v.UkraineAdditionalInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VietnamAdditionalInfo != nil {
+		ok := object.Key("vietnamAdditionalInfo")
+		if err := awsRestjson1_serializeDocumentVietnamAdditionalInfo(v.VietnamAdditionalInfo, ok); err != nil {
 			return err
 		}
 	}
@@ -1556,6 +1577,23 @@ func awsRestjson1_serializeDocumentDestinationS3Location(v *types.DestinationS3L
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEgyptAdditionalInfo(v *types.EgyptAdditionalInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UniqueIdentificationNumber != nil {
+		ok := object.Key("uniqueIdentificationNumber")
+		ok.String(*v.UniqueIdentificationNumber)
+	}
+
+	if v.UniqueIdentificationNumberExpirationDate != nil {
+		ok := object.Key("uniqueIdentificationNumberExpirationDate")
+		ok.String(*v.UniqueIdentificationNumberExpirationDate)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEstoniaAdditionalInfo(v *types.EstoniaAdditionalInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1592,6 +1630,18 @@ func awsRestjson1_serializeDocumentGeorgiaAdditionalInfo(v *types.GeorgiaAdditio
 	if len(v.PersonType) > 0 {
 		ok := object.Key("personType")
 		ok.String(string(v.PersonType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGreeceAdditionalInfo(v *types.GreeceAdditionalInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContractingAuthorityCode != nil {
+		ok := object.Key("contractingAuthorityCode")
+		ok.String(*v.ContractingAuthorityCode)
 	}
 
 	return nil
@@ -1983,6 +2033,33 @@ func awsRestjson1_serializeDocumentVerificationDetails(v *types.VerificationDeta
 		if err := awsRestjson1_serializeDocumentTaxRegistrationDocuments(v.TaxRegistrationDocuments, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVietnamAdditionalInfo(v *types.VietnamAdditionalInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ElectronicTransactionCodeNumber != nil {
+		ok := object.Key("electronicTransactionCodeNumber")
+		ok.String(*v.ElectronicTransactionCodeNumber)
+	}
+
+	if v.EnterpriseIdentificationNumber != nil {
+		ok := object.Key("enterpriseIdentificationNumber")
+		ok.String(*v.EnterpriseIdentificationNumber)
+	}
+
+	if v.PaymentVoucherNumber != nil {
+		ok := object.Key("paymentVoucherNumber")
+		ok.String(*v.PaymentVoucherNumber)
+	}
+
+	if v.PaymentVoucherNumberDate != nil {
+		ok := object.Key("paymentVoucherNumberDate")
+		ok.String(*v.PaymentVoucherNumberDate)
 	}
 
 	return nil

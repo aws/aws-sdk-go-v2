@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the active tax exemptions for a given list of accounts.
+// Get the active tax exemptions for a given list of accounts. The IAM action is
+// tax:GetExemptions .
 func (c *Client) BatchGetTaxExemptions(ctx context.Context, params *BatchGetTaxExemptionsInput, optFns ...func(*Options)) (*BatchGetTaxExemptionsOutput, error) {
 	if params == nil {
 		params = &BatchGetTaxExemptionsInput{}

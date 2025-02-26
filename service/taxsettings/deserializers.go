@@ -2976,6 +2976,11 @@ func awsRestjson1_deserializeDocumentAdditionalInfoResponse(v **types.Additional
 				return err
 			}
 
+		case "egyptAdditionalInfo":
+			if err := awsRestjson1_deserializeDocumentEgyptAdditionalInfo(&sv.EgyptAdditionalInfo, value); err != nil {
+				return err
+			}
+
 		case "estoniaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentEstoniaAdditionalInfo(&sv.EstoniaAdditionalInfo, value); err != nil {
 				return err
@@ -2983,6 +2988,11 @@ func awsRestjson1_deserializeDocumentAdditionalInfoResponse(v **types.Additional
 
 		case "georgiaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentGeorgiaAdditionalInfo(&sv.GeorgiaAdditionalInfo, value); err != nil {
+				return err
+			}
+
+		case "greeceAdditionalInfo":
+			if err := awsRestjson1_deserializeDocumentGreeceAdditionalInfo(&sv.GreeceAdditionalInfo, value); err != nil {
 				return err
 			}
 
@@ -3043,6 +3053,11 @@ func awsRestjson1_deserializeDocumentAdditionalInfoResponse(v **types.Additional
 
 		case "ukraineAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentUkraineAdditionalInfo(&sv.UkraineAdditionalInfo, value); err != nil {
+				return err
+			}
+
+		case "vietnamAdditionalInfo":
+			if err := awsRestjson1_deserializeDocumentVietnamAdditionalInfo(&sv.VietnamAdditionalInfo, value); err != nil {
 				return err
 			}
 
@@ -3705,6 +3720,55 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEgyptAdditionalInfo(v **types.EgyptAdditionalInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EgyptAdditionalInfo
+	if *v == nil {
+		sv = &types.EgyptAdditionalInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "uniqueIdentificationNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UniqueIdentificationNumber to be of type string, got %T instead", value)
+				}
+				sv.UniqueIdentificationNumber = ptr.String(jtv)
+			}
+
+		case "uniqueIdentificationNumberExpirationDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateString to be of type string, got %T instead", value)
+				}
+				sv.UniqueIdentificationNumberExpirationDate = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEstoniaAdditionalInfo(v **types.EstoniaAdditionalInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3774,6 +3838,46 @@ func awsRestjson1_deserializeDocumentGeorgiaAdditionalInfo(v **types.GeorgiaAddi
 					return fmt.Errorf("expected PersonType to be of type string, got %T instead", value)
 				}
 				sv.PersonType = types.PersonType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGreeceAdditionalInfo(v **types.GreeceAdditionalInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GreeceAdditionalInfo
+	if *v == nil {
+		sv = &types.GreeceAdditionalInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "contractingAuthorityCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContractingAuthorityCode to be of type string, got %T instead", value)
+				}
+				sv.ContractingAuthorityCode = ptr.String(jtv)
 			}
 
 		default:
@@ -5442,5 +5546,72 @@ func awsRestjson1_deserializeDocumentValidationExceptionFieldList(v *[]types.Val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVietnamAdditionalInfo(v **types.VietnamAdditionalInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VietnamAdditionalInfo
+	if *v == nil {
+		sv = &types.VietnamAdditionalInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "electronicTransactionCodeNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ElectronicTransactionCodeNumber to be of type string, got %T instead", value)
+				}
+				sv.ElectronicTransactionCodeNumber = ptr.String(jtv)
+			}
+
+		case "enterpriseIdentificationNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnterpriseIdentificationNumber to be of type string, got %T instead", value)
+				}
+				sv.EnterpriseIdentificationNumber = ptr.String(jtv)
+			}
+
+		case "paymentVoucherNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaymentVoucherNumber to be of type string, got %T instead", value)
+				}
+				sv.PaymentVoucherNumber = ptr.String(jtv)
+			}
+
+		case "paymentVoucherNumberDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateString to be of type string, got %T instead", value)
+				}
+				sv.PaymentVoucherNumberDate = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }

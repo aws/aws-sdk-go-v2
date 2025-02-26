@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The access is denied for the Amazon Web Services Support API.
+// The access is denied for the Amazon Web ServicesSupport API.
 type AccessDeniedException struct {
 	Message *string
 
@@ -33,8 +33,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Failed to upload the tax exemption document to Amazon Web Services Support
-// case.
+// Failed to upload the tax exemption document to Amazon Web ServicesSupport case.
 type AttachmentUploadException struct {
 	Message *string
 
@@ -60,7 +59,7 @@ func (e *AttachmentUploadException) ErrorCode() string {
 }
 func (e *AttachmentUploadException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've exceeded the Amazon Web Services Support case creation limit for your
+// You've exceeded the Amazon Web ServicesSupport case creation limit for your
 // account.
 type CaseCreationLimitExceededException struct {
 	Message *string

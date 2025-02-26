@@ -343,6 +343,10 @@ type AttributePayload struct {
 // Which audit checks are enabled and disabled for this account.
 type AuditCheckConfiguration struct {
 
+	// A structure containing the configName and corresponding configValue for
+	// configuring audit checks.
+	Configuration map[string]string
+
 	// True if this audit check is enabled for this account.
 	Enabled bool
 

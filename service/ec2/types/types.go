@@ -2922,7 +2922,7 @@ type CreateVerifiedAccessEndpointLoadBalancerOptions struct {
 	// The IP protocol.
 	Protocol VerifiedAccessEndpointProtocol
 
-	// The IDs of the subnets.
+	// The IDs of the subnets. You can specify only one subnet per Availability Zone.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
@@ -2961,7 +2961,7 @@ type CreateVerifiedAccessEndpointRdsOptions struct {
 	// The RDS endpoint.
 	RdsEndpoint *string
 
-	// The IDs of the subnets.
+	// The IDs of the subnets. You can specify only one subnet per Availability Zone.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
@@ -16470,8 +16470,6 @@ type SecurityGroupReference struct {
 	// The ID of the VPC with the referencing security group.
 	ReferencingVpcId *string
 
-	// This parameter is in preview and may not be available for your account.
-	//
 	// The ID of the transit gateway (if applicable).
 	TransitGatewayId *string
 

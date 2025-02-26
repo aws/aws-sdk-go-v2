@@ -667,6 +667,25 @@ func (ConfidenceLevel) Values() []ConfidenceLevel {
 	}
 }
 
+type ConfigName string
+
+// Enum values for ConfigName
+const (
+	ConfigNameCertAgeThresholdInDays        ConfigName = "CERT_AGE_THRESHOLD_IN_DAYS"
+	ConfigNameCertExpirationThresholdInDays ConfigName = "CERT_EXPIRATION_THRESHOLD_IN_DAYS"
+)
+
+// Values returns all known values for ConfigName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigName) Values() []ConfigName {
+	return []ConfigName{
+		"CERT_AGE_THRESHOLD_IN_DAYS",
+		"CERT_EXPIRATION_THRESHOLD_IN_DAYS",
+	}
+}
+
 type CustomMetricType string
 
 // Enum values for CustomMetricType
