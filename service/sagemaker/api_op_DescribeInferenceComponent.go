@@ -77,6 +77,10 @@ type DescribeInferenceComponentOutput struct {
 	// The status of the inference component.
 	InferenceComponentStatus types.InferenceComponentStatus
 
+	// The deployment and rollback settings that you assigned to the inference
+	// component.
+	LastDeploymentConfig *types.InferenceComponentDeploymentConfig
+
 	// Details about the runtime settings for the model that is deployed with the
 	// inference component.
 	RuntimeConfig *types.InferenceComponentRuntimeConfigSummary

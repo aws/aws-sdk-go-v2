@@ -3296,6 +3296,8 @@ type MonitoringSubscription struct {
 //   - Use S3OriginConfig to specify an Amazon S3 bucket that is not configured
 //     with static website hosting.
 //
+//   - Use VpcOriginConfig to specify a VPC origin.
+//
 //   - Use CustomOriginConfig to specify all other kinds of origins, including:
 //
 //   - An Amazon S3 bucket that is configured with static website hosting
@@ -5758,14 +5760,14 @@ type ViewerCertificate struct {
 	//
 	//   - static-ip - Do not specify this value unless your distribution has been
 	//   enabled for this feature by the CloudFront team. If you have a use case that
-	//   requires static IP addresses for a distribution, contact CloudFront through the [Amazon Web Services Support Center]
+	//   requires static IP addresses for a distribution, contact CloudFront through the [Amazon Web ServicesSupport Center]
 	//   .
 	//
 	// If the distribution uses the CloudFront domain name such as
 	// d111111abcdef8.cloudfront.net , don't set a value for this field.
 	//
+	// [Amazon Web ServicesSupport Center]: https://console.aws.amazon.com/support/home
 	// [server name indication (SNI)]: https://en.wikipedia.org/wiki/Server_Name_Indication
-	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home
 	SSLSupportMethod SSLSupportMethod
 
 	noSmithyDocumentSerde

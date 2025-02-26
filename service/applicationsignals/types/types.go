@@ -15,7 +15,7 @@ import (
 // For example, if you specify 60 as the number of minutes in the look-back
 // window, the burn rate is calculated as the following:
 //
-// burn rate = error rate over the look-back window / (1 - attainment goal
+// burn rate = error rate over the look-back window / (100% - attainment goal
 // percentage)
 //
 // For more information about burn rates, see [Calculate burn rates].
@@ -289,6 +289,9 @@ type MetricReference struct {
 	//
 	// This member is required.
 	Namespace *string
+
+	// Amazon Web Services account ID.
+	AccountId *string
 
 	// An array of one or more dimensions that further define the metric. For more
 	// information, see [CloudWatchDimensions].

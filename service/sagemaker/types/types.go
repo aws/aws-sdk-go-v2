@@ -6102,8 +6102,10 @@ type ErrorInfo struct {
 	noSmithyDocumentSerde
 }
 
-// The properties of an experiment as returned by the [Search] API.
+// The properties of an experiment as returned by the [Search] API. For information about
+// experiments, see the [CreateExperiment]API.
 //
+// [CreateExperiment]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateExperiment.html
 // [Search]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
 type Experiment struct {
 
@@ -9161,6 +9163,39 @@ type ImageVersion struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the type and size of the endpoint capacity to activate for a rolling
+// deployment or a rollback strategy. You can specify your batches as either of the
+// following:
+//
+//   - A count of inference component copies
+//
+//   - The overall percentage or your fleet
+//
+// For a rollback strategy, if you don't specify the fields in this object, or if
+// you set the Value parameter to 100%, then SageMaker AI uses a blue/green
+// rollback strategy and rolls all traffic back to the blue fleet.
+type InferenceComponentCapacitySize struct {
+
+	// Specifies the endpoint capacity type.
+	//
+	// COPY_COUNT The endpoint activates based on the number of inference component
+	// copies.
+	//
+	// CAPACITY_PERCENT The endpoint activates based on the specified percentage of
+	// capacity.
+	//
+	// This member is required.
+	Type InferenceComponentCapacitySizeType
+
+	// Defines the capacity size, either as a number of inference component copies or
+	// a capacity percentage.
+	//
+	// This member is required.
+	Value *int32
+
+	noSmithyDocumentSerde
+}
+
 // Defines the compute resources to allocate to run a model, plus any adapter
 // models, that you assign to an inference component. These resources include CPU
 // cores, accelerators, and memory.
@@ -9230,6 +9265,53 @@ type InferenceComponentContainerSpecificationSummary struct {
 
 	// The environment variables to set in the Docker container.
 	Environment map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The deployment configuration for an endpoint that hosts inference components.
+// The configuration includes the desired deployment strategy and rollback
+// settings.
+type InferenceComponentDeploymentConfig struct {
+
+	// Specifies a rolling deployment strategy for updating a SageMaker AI endpoint.
+	//
+	// This member is required.
+	RollingUpdatePolicy *InferenceComponentRollingUpdatePolicy
+
+	// Automatic rollback configuration for handling endpoint deployment failures and
+	// recovery.
+	AutoRollbackConfiguration *AutoRollbackConfig
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a rolling deployment strategy for updating a SageMaker AI inference
+// component.
+type InferenceComponentRollingUpdatePolicy struct {
+
+	// The batch size for each rolling step in the deployment process. For each step,
+	// SageMaker AI provisions capacity on the new endpoint fleet, routes traffic to
+	// that fleet, and terminates capacity on the old endpoint fleet. The value must be
+	// between 5% to 50% of the copy count of the inference component.
+	//
+	// This member is required.
+	MaximumBatchSize *InferenceComponentCapacitySize
+
+	// The length of the baking period, during which SageMaker AI monitors alarms for
+	// each batch on the new fleet.
+	//
+	// This member is required.
+	WaitIntervalInSeconds *int32
+
+	// The time limit for the total deployment. Exceeding this limit causes a timeout.
+	MaximumExecutionTimeoutInSeconds *int32
+
+	// The batch size for a rollback to the old endpoint fleet. If this field is
+	// absent, the value is set to the default, which is 100% of the total capacity.
+	// When the default is used, SageMaker AI provisions the entire capacity of the old
+	// fleet at once during rollback.
+	RollbackMaximumBatchSize *InferenceComponentCapacitySize
 
 	noSmithyDocumentSerde
 }
@@ -11493,7 +11575,18 @@ type ModelMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// A versioned model that can be deployed for SageMaker inference.
+// A container for your trained model that can be deployed for SageMaker
+// inference. This can include inference code, artifacts, and metadata. The model
+// package type can be one of the following.
+//
+//   - Versioned model: A part of a model package group in Model Registry.
+//
+//   - Unversioned model: Not part of a model package group and used in Amazon Web
+//     Services Marketplace.
+//
+// For more information, see [CreateModelPackage]CreateModelPackage .
+//
+// [CreateModelPackage]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModelPackage.html
 type ModelPackage struct {
 
 	// An array of additional Inference Specification objects.
@@ -11577,7 +11670,13 @@ type ModelPackage struct {
 	// The model group to which the model belongs.
 	ModelPackageGroupName *string
 
-	// The name of the model.
+	// The name of the model package. The name can be as follows:
+	//
+	//   - For a versioned model, the name is automatically generated by SageMaker
+	//   Model Registry and follows the format '
+	//   ModelPackageGroupName/ModelPackageVersion '.
+	//
+	//   - For an unversioned model, you must provide the name.
 	ModelPackageName *string
 
 	// The status of the model package. This can be one of the following values.
@@ -11699,7 +11798,7 @@ type ModelPackageContainerDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// A group of versioned models in the model registry.
+// A group of versioned models in the Model Registry.
 type ModelPackageGroup struct {
 
 	// Information about the user who created or modified an experiment, trial, trial
@@ -16901,10 +17000,21 @@ type SearchRecord struct {
 	// model.
 	ModelCard *ModelCard
 
-	// A versioned model that can be deployed for SageMaker inference.
+	// A container for your trained model that can be deployed for SageMaker
+	// inference. This can include inference code, artifacts, and metadata. The model
+	// package type can be one of the following.
+	//
+	//   - Versioned model: A part of a model package group in Model Registry.
+	//
+	//   - Unversioned model: Not part of a model package group and used in Amazon Web
+	//   Services Marketplace.
+	//
+	// For more information, see [CreateModelPackage]CreateModelPackage .
+	//
+	// [CreateModelPackage]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModelPackage.html
 	ModelPackage *ModelPackage
 
-	// A group of versioned models in the model registry.
+	// A group of versioned models in the Model Registry.
 	ModelPackageGroup *ModelPackageGroup
 
 	// A SageMaker Model Building Pipeline instance.

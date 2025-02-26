@@ -1,3 +1,7 @@
+# v1.8.0 (2025-02-26)
+
+* **Feature**: This release adds API support for reading Service Level Objectives and Services from monitoring accounts, from SLO and Service-scoped operations, including ListServices and ListServiceLevelObjectives.
+
 # v1.7.11 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

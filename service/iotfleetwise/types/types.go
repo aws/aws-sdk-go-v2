@@ -1482,7 +1482,7 @@ type SignalInformation struct {
 // [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
 type StateTemplateAssociation struct {
 
-	// A unique, service-generated identifier.
+	// The unique ID of the state template.
 	//
 	// This member is required.
 	Identifier *string

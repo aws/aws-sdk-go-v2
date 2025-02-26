@@ -35,7 +35,7 @@ func (c *Client) GetStateTemplate(ctx context.Context, params *GetStateTemplateI
 
 type GetStateTemplateInput struct {
 
-	// A unique, service-generated identifier.
+	// The unique ID of the state template.
 	//
 	// This member is required.
 	Identifier *string

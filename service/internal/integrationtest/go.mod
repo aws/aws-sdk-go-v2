@@ -10,9 +10,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.29.10
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.49.11
-	github.com/aws/aws-sdk-go-v2/service/batch v1.49.13
+	github.com/aws/aws-sdk-go-v2/service/batch v1.50.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.57.1
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.44.11
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.44.12
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.29.8
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.47.5
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.43.15
@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.18
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.40.11
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.40.2
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.204.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.205.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.53.16
 	github.com/aws/aws-sdk-go-v2/service/efs v1.34.12

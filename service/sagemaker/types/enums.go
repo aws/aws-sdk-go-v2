@@ -3227,6 +3227,26 @@ func (ImageVersionStatus) Values() []ImageVersionStatus {
 	}
 }
 
+type InferenceComponentCapacitySizeType string
+
+// Enum values for InferenceComponentCapacitySizeType
+const (
+	InferenceComponentCapacitySizeTypeCopyCount       InferenceComponentCapacitySizeType = "COPY_COUNT"
+	InferenceComponentCapacitySizeTypeCapacityPercent InferenceComponentCapacitySizeType = "CAPACITY_PERCENT"
+)
+
+// Values returns all known values for InferenceComponentCapacitySizeType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceComponentCapacitySizeType) Values() []InferenceComponentCapacitySizeType {
+	return []InferenceComponentCapacitySizeType{
+		"COPY_COUNT",
+		"CAPACITY_PERCENT",
+	}
+}
+
 type InferenceComponentSortKey string
 
 // Enum values for InferenceComponentSortKey

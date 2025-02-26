@@ -6127,6 +6127,11 @@ func awsAwsjson10_serializeOpDocumentListCampaignsInput(v *ListCampaignsInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ListResponseScope) > 0 {
+		ok := object.Key("listResponseScope")
+		ok.String(string(v.ListResponseScope))
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -6193,6 +6198,11 @@ func awsAwsjson10_serializeOpDocumentListDecoderManifestsInput(v *ListDecoderMan
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ListResponseScope) > 0 {
+		ok := object.Key("listResponseScope")
+		ok.String(string(v.ListResponseScope))
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -6237,6 +6247,11 @@ func awsAwsjson10_serializeOpDocumentListFleetsInput(v *ListFleetsInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ListResponseScope) > 0 {
+		ok := object.Key("listResponseScope")
+		ok.String(string(v.ListResponseScope))
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -6275,6 +6290,11 @@ func awsAwsjson10_serializeOpDocumentListModelManifestNodesInput(v *ListModelMan
 func awsAwsjson10_serializeOpDocumentListModelManifestsInput(v *ListModelManifestsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ListResponseScope) > 0 {
+		ok := object.Key("listResponseScope")
+		ok.String(string(v.ListResponseScope))
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
@@ -6342,6 +6362,11 @@ func awsAwsjson10_serializeOpDocumentListStateTemplatesInput(v *ListStateTemplat
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ListResponseScope) > 0 {
+		ok := object.Key("listResponseScope")
+		ok.String(string(v.ListResponseScope))
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -6405,6 +6430,11 @@ func awsAwsjson10_serializeOpDocumentListVehiclesInput(v *ListVehiclesInput, val
 		if err := awsAwsjson10_serializeDocumentAttributeValuesList(v.AttributeValues, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ListResponseScope) > 0 {
+		ok := object.Key("listResponseScope")
+		ok.String(string(v.ListResponseScope))
 	}
 
 	if v.MaxResults != nil {

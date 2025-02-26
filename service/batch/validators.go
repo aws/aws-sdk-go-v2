@@ -50,6 +50,26 @@ func (m *validateOpCreateComputeEnvironment) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConsumableResource struct {
+}
+
+func (*validateOpCreateConsumableResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConsumableResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConsumableResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConsumableResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateJobQueue struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpDeleteComputeEnvironment) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteComputeEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConsumableResource struct {
+}
+
+func (*validateOpDeleteConsumableResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConsumableResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConsumableResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConsumableResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +210,26 @@ func (m *validateOpDeregisterJobDefinition) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeConsumableResource struct {
+}
+
+func (*validateOpDescribeConsumableResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeConsumableResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeConsumableResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeConsumableResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeJobs struct {
 }
 
@@ -225,6 +285,26 @@ func (m *validateOpGetJobQueueSnapshot) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetJobQueueSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListJobsByConsumableResource struct {
+}
+
+func (*validateOpListJobsByConsumableResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListJobsByConsumableResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListJobsByConsumableResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListJobsByConsumableResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +450,26 @@ func (m *validateOpUpdateComputeEnvironment) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConsumableResource struct {
+}
+
+func (*validateOpUpdateConsumableResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConsumableResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConsumableResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConsumableResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateJobQueue struct {
 }
 
@@ -418,6 +518,10 @@ func addOpCreateComputeEnvironmentValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateComputeEnvironment{}, middleware.After)
 }
 
+func addOpCreateConsumableResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConsumableResource{}, middleware.After)
+}
+
 func addOpCreateJobQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJobQueue{}, middleware.After)
 }
@@ -428,6 +532,10 @@ func addOpCreateSchedulingPolicyValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteComputeEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteComputeEnvironment{}, middleware.After)
+}
+
+func addOpDeleteConsumableResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConsumableResource{}, middleware.After)
 }
 
 func addOpDeleteJobQueueValidationMiddleware(stack *middleware.Stack) error {
@@ -442,6 +550,10 @@ func addOpDeregisterJobDefinitionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeregisterJobDefinition{}, middleware.After)
 }
 
+func addOpDescribeConsumableResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeConsumableResource{}, middleware.After)
+}
+
 func addOpDescribeJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJobs{}, middleware.After)
 }
@@ -452,6 +564,10 @@ func addOpDescribeSchedulingPoliciesValidationMiddleware(stack *middleware.Stack
 
 func addOpGetJobQueueSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJobQueueSnapshot{}, middleware.After)
+}
+
+func addOpListJobsByConsumableResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListJobsByConsumableResource{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -480,6 +596,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateComputeEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateComputeEnvironment{}, middleware.After)
+}
+
+func addOpUpdateConsumableResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConsumableResource{}, middleware.After)
 }
 
 func addOpUpdateJobQueueValidationMiddleware(stack *middleware.Stack) error {
@@ -1811,6 +1931,21 @@ func validateOpCreateComputeEnvironmentInput(v *CreateComputeEnvironmentInput) e
 	}
 }
 
+func validateOpCreateConsumableResourceInput(v *CreateConsumableResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConsumableResourceInput"}
+	if v.ConsumableResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumableResourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateJobQueueInput(v *CreateJobQueueInput) error {
 	if v == nil {
 		return nil
@@ -1876,6 +2011,21 @@ func validateOpDeleteComputeEnvironmentInput(v *DeleteComputeEnvironmentInput) e
 	}
 }
 
+func validateOpDeleteConsumableResourceInput(v *DeleteConsumableResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConsumableResourceInput"}
+	if v.ConsumableResource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumableResource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteJobQueueInput(v *DeleteJobQueueInput) error {
 	if v == nil {
 		return nil
@@ -1921,6 +2071,21 @@ func validateOpDeregisterJobDefinitionInput(v *DeregisterJobDefinitionInput) err
 	}
 }
 
+func validateOpDescribeConsumableResourceInput(v *DescribeConsumableResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeConsumableResourceInput"}
+	if v.ConsumableResource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumableResource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeJobsInput(v *DescribeJobsInput) error {
 	if v == nil {
 		return nil
@@ -1958,6 +2123,21 @@ func validateOpGetJobQueueSnapshotInput(v *GetJobQueueSnapshotInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetJobQueueSnapshotInput"}
 	if v.JobQueue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListJobsByConsumableResourceInput(v *ListJobsByConsumableResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListJobsByConsumableResourceInput"}
+	if v.ConsumableResource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumableResource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2136,6 +2316,21 @@ func validateOpUpdateComputeEnvironmentInput(v *UpdateComputeEnvironmentInput) e
 		if err := validateComputeResourceUpdate(v.ComputeResources); err != nil {
 			invalidParams.AddNested("ComputeResources", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConsumableResourceInput(v *UpdateConsumableResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConsumableResourceInput"}
+	if v.ConsumableResource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumableResource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

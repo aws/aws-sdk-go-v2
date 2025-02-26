@@ -462,8 +462,14 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 3
+                    "max": 4
                 }
+            }
+        },
+        "com.amazonaws.applicationsignals#AwsAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.applicationsignals#BatchGetServiceLevelObjectiveBudgetReport": {
@@ -560,7 +566,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This object defines the length of the look-back window used to calculate one burn rate metric\n         for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO. A burn rate of\n      exactly 1 indicates that the SLO goal will be met exactly.</p>\n         <p>For example, if you specify 60 as the number of minutes in the look-back window, the burn rate is calculated as the following:</p>\n         <p>\n            <i>burn rate = error rate over the look-back window / (1 - attainment goal percentage)</i>\n         </p>\n         <p>For more information about burn rates, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-burn\">Calculate burn rates</a>.</p>"
+                "smithy.api#documentation": "<p>This object defines the length of the look-back window used to calculate one burn rate metric\n         for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO. A burn rate of\n      exactly 1 indicates that the SLO goal will be met exactly.</p>\n         <p>For example, if you specify 60 as the number of minutes in the look-back window, the burn rate is calculated as the following:</p>\n         <p>\n            <i>burn rate = error rate over the look-back window / (100% - attainment goal percentage)</i>\n         </p>\n         <p>For more information about burn rates, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-burn\">Calculate burn rates</a>.</p>"
             }
         },
         "com.amazonaws.applicationsignals#BurnRateConfigurations": {
@@ -662,7 +668,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a service level objective (SLO), which can help you ensure that your critical business operations are \n      meeting customer expectations. Use SLOs to set and track specific target levels for the\n      reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to \n      calculate whether the application is performing at the level that you want.</p>\n         <p>Create an SLO to set a target for a service or operation’s availability or latency. CloudWatch\n      measures this target frequently you can find whether it has been breached. </p>\n         <p>The target performance quality that is defined for an SLO is the <i>attainment goal</i>.</p>\n         <p>You can set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. \n        You can also set SLOs against any CloudWatch metric or math expression that produces a time series.</p>\n         <p>When you create an SLO, you specify whether it is a <i>period-based SLO</i>\n       or a <i>request-based SLO</i>. Each type of SLO has a different way of evaluating \n    your application's performance against its attainment goal.</p>\n         <ul>\n            <li>\n               <p>A <i>period-based SLO</i> uses defined <i>periods</i> of time within \n        a specified total time interval. For each period of time, Application Signals determines whether the \n        application met its goal. The attainment rate is calculated as the <code>number of good periods/number of total periods</code>.</p>\n               <p>For example, for a period-based SLO, meeting an attainment goal of 99.9% means that within your interval, your application must meet its\n              performance goal during at least 99.9% of the \n              time periods.</p>\n            </li>\n            <li>\n               <p>A <i>request-based SLO</i> doesn't use pre-defined periods of time. Instead, \n           the SLO measures <code>number of good requests/number of total requests</code> during the interval. At any time, you can find the ratio of \n           good requests to total requests for the interval up to the time stamp that you specify, and measure that ratio against the goal set in your SLO.</p>\n            </li>\n         </ul>\n         <p>After you have created an SLO, you can retrieve error budget reports for it. \n      An <i>error budget</i> is the amount of time or amount of requests that your application can be non-compliant\n       with the SLO's goal, and still have your application meet the goal.</p>\n         <ul>\n            <li>\n               <p>For a period-based SLO, the error budget starts at a number defined by the highest number of periods that can fail to meet the threshold, \n           while still meeting the overall goal. The <i>remaining error budget</i> decreases with every failed period\n        that is recorded. The error budget within one interval can never increase.</p>\n               <p>For example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month \n              translates to an error budget of 21.9 minutes of downtime per month.</p>\n            </li>\n            <li>\n               <p>For a request-based SLO, the remaining error budget is dynamic and can increase or decrease, depending on \n           the ratio of good requests to total requests.</p>\n            </li>\n         </ul>\n         <p>For more information about SLOs, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html\">\n      Service level objectives (SLOs)</a>.\n    </p>\n         <p>When you perform a <code>CreateServiceLevelObjective</code> operation, Application Signals creates the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role, \n        if it doesn't already exist in your account. This service-\n        linked role has the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>xray:GetServiceGraph</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>logs:StartQuery</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>logs:GetQueryResults</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudwatch:GetMetricData</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudwatch:ListMetrics</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>autoscaling:DescribeAutoScalingGroups</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a service level objective (SLO), which can help you ensure that your critical business operations are \n      meeting customer expectations. Use SLOs to set and track specific target levels for the\n      reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to \n      calculate whether the application is performing at the level that you want.</p>\n         <p>Create an SLO to set a target for a service or operation’s availability or latency. CloudWatch\n      measures this target frequently you can find whether it has been breached. </p>\n         <p>The target performance quality that is defined for an SLO is the <i>attainment goal</i>.</p>\n         <p>You can set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. \n        You can also set SLOs against any CloudWatch metric or math expression that produces a time series.</p>\n         <note>\n            <p>You can't create an SLO for a service operation that was discovered by Application Signals until after that operation has reported standard\n     metrics to Application Signals.</p>\n         </note>\n         <p>When you create an SLO, you specify whether it is a <i>period-based SLO</i>\n       or a <i>request-based SLO</i>. Each type of SLO has a different way of evaluating \n    your application's performance against its attainment goal.</p>\n         <ul>\n            <li>\n               <p>A <i>period-based SLO</i> uses defined <i>periods</i> of time within \n        a specified total time interval. For each period of time, Application Signals determines whether the \n        application met its goal. The attainment rate is calculated as the <code>number of good periods/number of total periods</code>.</p>\n               <p>For example, for a period-based SLO, meeting an attainment goal of 99.9% means that within your interval, your application must meet its\n              performance goal during at least 99.9% of the \n              time periods.</p>\n            </li>\n            <li>\n               <p>A <i>request-based SLO</i> doesn't use pre-defined periods of time. Instead, \n           the SLO measures <code>number of good requests/number of total requests</code> during the interval. At any time, you can find the ratio of \n           good requests to total requests for the interval up to the time stamp that you specify, and measure that ratio against the goal set in your SLO.</p>\n            </li>\n         </ul>\n         <p>After you have created an SLO, you can retrieve error budget reports for it. \n      An <i>error budget</i> is the amount of time or amount of requests that your application can be non-compliant\n       with the SLO's goal, and still have your application meet the goal.</p>\n         <ul>\n            <li>\n               <p>For a period-based SLO, the error budget starts at a number defined by the highest number of periods that can fail to meet the threshold, \n           while still meeting the overall goal. The <i>remaining error budget</i> decreases with every failed period\n        that is recorded. The error budget within one interval can never increase.</p>\n               <p>For example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month \n              translates to an error budget of 21.9 minutes of downtime per month.</p>\n            </li>\n            <li>\n               <p>For a request-based SLO, the remaining error budget is dynamic and can increase or decrease, depending on \n           the ratio of good requests to total requests.</p>\n            </li>\n         </ul>\n         <p>For more information about SLOs, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html\">\n      Service level objectives (SLOs)</a>.\n    </p>\n         <p>When you perform a <code>CreateServiceLevelObjective</code> operation, Application Signals creates the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role, \n        if it doesn't already exist in your account. This service-\n        linked role has the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>xray:GetServiceGraph</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>logs:StartQuery</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>logs:GetQueryResults</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudwatch:GetMetricData</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudwatch:ListMetrics</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>autoscaling:DescribeAutoScalingGroups</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/slo",
@@ -1408,6 +1414,21 @@
                         "smithy.api#documentation": "<p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives.</p>",
                         "smithy.api#httpQuery": "NextToken"
                     }
+                },
+                "IncludeLinkedAccounts": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If you are using this operation in a monitoring account, specify <code>true</code> to include SLO from source accounts in the returned data.\n         \n      </p>\n         <p>When you are monitoring an account, you can use Amazon Web Services account ID in <code>KeyAttribute</code> filter for service source account and <code>SloOwnerawsaccountID</code> for SLO source account with <code>IncludeLinkedAccounts</code> to filter the returned data to only a single source account.\n         \n      </p>",
+                        "smithy.api#httpQuery": "IncludeLinkedAccounts"
+                    }
+                },
+                "SloOwnerAwsAccountId": {
+                    "target": "com.amazonaws.applicationsignals#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>SLO's Amazon Web Services account ID.</p>",
+                        "smithy.api#httpQuery": "SloOwnerAwsAccountId"
+                    }
                 }
             },
             "traits": {
@@ -1629,6 +1650,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Include this value, if it was returned by the previous operation, to get the next set of services.</p>",
                         "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "IncludeLinkedAccounts": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If you are using this operation in a monitoring account, specify <code>true</code> to include services from source accounts in the returned data.\n         \n      </p>",
+                        "smithy.api#httpQuery": "IncludeLinkedAccounts"
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.applicationsignals#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services Account ID.</p>",
+                        "smithy.api#httpQuery": "AwsAccountId"
                     }
                 }
             },
@@ -1885,6 +1921,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the metric.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationsignals#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services account ID.</p>"
                     }
                 }
             },

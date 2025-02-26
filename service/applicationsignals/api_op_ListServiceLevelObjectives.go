@@ -29,6 +29,15 @@ func (c *Client) ListServiceLevelObjectives(ctx context.Context, params *ListSer
 
 type ListServiceLevelObjectivesInput struct {
 
+	// If you are using this operation in a monitoring account, specify true to
+	// include SLO from source accounts in the returned data.
+	//
+	// When you are monitoring an account, you can use Amazon Web Services account ID
+	// in KeyAttribute filter for service source account and SloOwnerawsaccountID for
+	// SLO source account with IncludeLinkedAccounts to filter the returned data to
+	// only a single source account.
+	IncludeLinkedAccounts bool
+
 	// You can use this optional field to specify which services you want to retrieve
 	// SLO information for.
 	//
@@ -59,6 +68,9 @@ type ListServiceLevelObjectivesInput struct {
 
 	// The name of the operation that this SLO is associated with.
 	OperationName *string
+
+	// SLO's Amazon Web Services account ID.
+	SloOwnerAwsAccountId *string
 
 	noSmithyDocumentSerde
 }

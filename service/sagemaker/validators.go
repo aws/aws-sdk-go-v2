@@ -9962,6 +9962,24 @@ func validateImageConfig(v *types.ImageConfig) error {
 	}
 }
 
+func validateInferenceComponentCapacitySize(v *types.InferenceComponentCapacitySize) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentCapacitySize"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInferenceComponentComputeResourceRequirements(v *types.InferenceComponentComputeResourceRequirements) error {
 	if v == nil {
 		return nil
@@ -9969,6 +9987,52 @@ func validateInferenceComponentComputeResourceRequirements(v *types.InferenceCom
 	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentComputeResourceRequirements"}
 	if v.MinMemoryRequiredInMb == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinMemoryRequiredInMb"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceComponentDeploymentConfig(v *types.InferenceComponentDeploymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentDeploymentConfig"}
+	if v.RollingUpdatePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RollingUpdatePolicy"))
+	} else if v.RollingUpdatePolicy != nil {
+		if err := validateInferenceComponentRollingUpdatePolicy(v.RollingUpdatePolicy); err != nil {
+			invalidParams.AddNested("RollingUpdatePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceComponentRollingUpdatePolicy(v *types.InferenceComponentRollingUpdatePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentRollingUpdatePolicy"}
+	if v.MaximumBatchSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumBatchSize"))
+	} else if v.MaximumBatchSize != nil {
+		if err := validateInferenceComponentCapacitySize(v.MaximumBatchSize); err != nil {
+			invalidParams.AddNested("MaximumBatchSize", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WaitIntervalInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaitIntervalInSeconds"))
+	}
+	if v.RollbackMaximumBatchSize != nil {
+		if err := validateInferenceComponentCapacitySize(v.RollbackMaximumBatchSize); err != nil {
+			invalidParams.AddNested("RollbackMaximumBatchSize", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -19183,6 +19247,11 @@ func validateOpUpdateInferenceComponentInput(v *UpdateInferenceComponentInput) e
 	if v.RuntimeConfig != nil {
 		if err := validateInferenceComponentRuntimeConfig(v.RuntimeConfig); err != nil {
 			invalidParams.AddNested("RuntimeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentConfig != nil {
+		if err := validateInferenceComponentDeploymentConfig(v.DeploymentConfig); err != nil {
+			invalidParams.AddNested("DeploymentConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

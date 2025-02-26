@@ -739,6 +739,10 @@ func awsRestjson1_serializeOpHttpBindingsListServiceLevelObjectivesInput(v *List
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.IncludeLinkedAccounts {
+		encoder.SetQuery("IncludeLinkedAccounts").Boolean(v.IncludeLinkedAccounts)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
@@ -749,6 +753,10 @@ func awsRestjson1_serializeOpHttpBindingsListServiceLevelObjectivesInput(v *List
 
 	if v.OperationName != nil {
 		encoder.SetQuery("OperationName").String(*v.OperationName)
+	}
+
+	if v.SloOwnerAwsAccountId != nil {
+		encoder.SetQuery("SloOwnerAwsAccountId").String(*v.SloOwnerAwsAccountId)
 	}
 
 	return nil
@@ -930,8 +938,16 @@ func awsRestjson1_serializeOpHttpBindingsListServicesInput(v *ListServicesInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AwsAccountId != nil {
+		encoder.SetQuery("AwsAccountId").String(*v.AwsAccountId)
+	}
+
 	if v.EndTime != nil {
 		encoder.SetQuery("EndTime").String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.IncludeLinkedAccounts {
+		encoder.SetQuery("IncludeLinkedAccounts").Boolean(v.IncludeLinkedAccounts)
 	}
 
 	if v.MaxResults != nil {

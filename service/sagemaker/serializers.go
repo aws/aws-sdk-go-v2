@@ -26912,6 +26912,23 @@ func awsAwsjson11_serializeDocumentImageDeletePropertyList(v []string, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInferenceComponentCapacitySize(v *types.InferenceComponentCapacitySize, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.Integer(*v.Value)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInferenceComponentComputeResourceRequirements(v *types.InferenceComponentComputeResourceRequirements, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26984,6 +27001,58 @@ func awsAwsjson11_serializeDocumentInferenceComponentContainerSpecification(v *t
 	if v.Image != nil {
 		ok := object.Key("Image")
 		ok.String(*v.Image)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInferenceComponentDeploymentConfig(v *types.InferenceComponentDeploymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoRollbackConfiguration != nil {
+		ok := object.Key("AutoRollbackConfiguration")
+		if err := awsAwsjson11_serializeDocumentAutoRollbackConfig(v.AutoRollbackConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RollingUpdatePolicy != nil {
+		ok := object.Key("RollingUpdatePolicy")
+		if err := awsAwsjson11_serializeDocumentInferenceComponentRollingUpdatePolicy(v.RollingUpdatePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInferenceComponentRollingUpdatePolicy(v *types.InferenceComponentRollingUpdatePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaximumBatchSize != nil {
+		ok := object.Key("MaximumBatchSize")
+		if err := awsAwsjson11_serializeDocumentInferenceComponentCapacitySize(v.MaximumBatchSize, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaximumExecutionTimeoutInSeconds != nil {
+		ok := object.Key("MaximumExecutionTimeoutInSeconds")
+		ok.Integer(*v.MaximumExecutionTimeoutInSeconds)
+	}
+
+	if v.RollbackMaximumBatchSize != nil {
+		ok := object.Key("RollbackMaximumBatchSize")
+		if err := awsAwsjson11_serializeDocumentInferenceComponentCapacitySize(v.RollbackMaximumBatchSize, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WaitIntervalInSeconds != nil {
+		ok := object.Key("WaitIntervalInSeconds")
+		ok.Integer(*v.WaitIntervalInSeconds)
 	}
 
 	return nil
@@ -44085,6 +44154,13 @@ func awsAwsjson11_serializeOpDocumentUpdateImageVersionInput(v *UpdateImageVersi
 func awsAwsjson11_serializeOpDocumentUpdateInferenceComponentInput(v *UpdateInferenceComponentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DeploymentConfig != nil {
+		ok := object.Key("DeploymentConfig")
+		if err := awsAwsjson11_serializeDocumentInferenceComponentDeploymentConfig(v.DeploymentConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.InferenceComponentName != nil {
 		ok := object.Key("InferenceComponentName")

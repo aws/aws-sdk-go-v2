@@ -11,6 +11,8 @@ const (
 	ResourceTypeAwsXrayTrace                      ResourceType = "AWS::XRay::Trace"
 	ResourceTypeAwsApplicationinsightsApplication ResourceType = "AWS::ApplicationInsights::Application"
 	ResourceTypeAwsInternetmonitorMonitor         ResourceType = "AWS::InternetMonitor::Monitor"
+	ResourceTypeAwsApplicationSignalsService      ResourceType = "AWS::ApplicationSignals::Service"
+	ResourceTypeAwsApplicationSignalsSlo          ResourceType = "AWS::ApplicationSignals::ServiceLevelObjective"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -24,5 +26,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::XRay::Trace",
 		"AWS::ApplicationInsights::Application",
 		"AWS::InternetMonitor::Monitor",
+		"AWS::ApplicationSignals::Service",
+		"AWS::ApplicationSignals::ServiceLevelObjective",
 	}
 }

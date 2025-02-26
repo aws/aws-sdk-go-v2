@@ -1338,6 +1338,18 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS::InternetMonitor::Monitor"
                     }
+                },
+                "AWS_APPLICATION_SIGNALS_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ApplicationSignals::Service"
+                    }
+                },
+                "AWS_APPLICATION_SIGNALS_SLO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ApplicationSignals::ServiceLevelObjective"
+                    }
                 }
             }
         },
@@ -1800,7 +1812,7 @@
                         "X-Amz-Requested-Operation"
                     ]
                 },
-                "smithy.api#documentation": "<p>Use Amazon CloudWatch Observability Access Manager to create and manage links between source accounts and\n      monitoring accounts by using <i>CloudWatch cross-account observability</i>. With\n        CloudWatch cross-account observability, you can monitor and troubleshoot applications that span\n      multiple accounts within a Region. Seamlessly search, visualize, and analyze your metrics,\n      logs, traces, and Application Insights applications in any of the linked accounts without account boundaries.</p>\n         <p>Set up one or more Amazon Web Services accounts as <i>monitoring\n        accounts</i> and link them with multiple <i>source accounts</i>. A\n      monitoring account is a central Amazon Web Services account that can view and interact with\n      observability data generated from source accounts. A source account is an individual Amazon Web Services account that generates observability data for the resources that reside in it.\n      Source accounts share their observability data with the monitoring account. The shared\n      observability data can include metrics in Amazon CloudWatch, logs in Amazon CloudWatch Logs, traces in X-Ray, and applications in Amazon CloudWatch Application Insights.</p>",
+                "smithy.api#documentation": "<p>Use Amazon CloudWatch Observability Access Manager to create and manage links between source accounts and\n      monitoring accounts by using <i>CloudWatch cross-account observability</i>. With\n        CloudWatch cross-account observability, you can monitor and troubleshoot applications that span\n      multiple accounts within a Region. Seamlessly search, visualize, and analyze your metrics,\n      logs, traces, Application Signals services, service level objectives (SLOs), Application Insights applications, and internet monitors in any of the linked accounts without account boundaries.</p>\n         <p>Set up one or more Amazon Web Services accounts as <i>monitoring\n        accounts</i> and link them with multiple <i>source accounts</i>. A\n      monitoring account is a central Amazon Web Services account that can view and interact with\n      observability data generated from source accounts. A source account is an individual Amazon Web Services account that generates observability data for the resources that reside in it.\n      Source accounts share their observability data with the monitoring account. The shared\n      observability data can include metrics in Amazon CloudWatch, logs in Amazon CloudWatch Logs, traces in X-Ray,  Application Signals services, service level objectives (SLOs), applications in Amazon CloudWatch Application Insights, and internet monitors\n       in CloudWatch Internet Monitor.</p>\n         <p>When you set up a link, you can choose to share the metrics from all namespaces with the monitoring account, or filter to a subset of namespaces. \n       And for CloudWatch Logs, you can choose to share all log groups with the monitoring account, or filter to a subset of log groups.\n     </p>",
                 "smithy.api#title": "CloudWatch Observability Access Manager",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",

@@ -41,7 +41,7 @@ type GetJobQueueSnapshotOutput struct {
 
 	// The list of the first 100 RUNNABLE jobs in each job queue. For
 	// first-in-first-out (FIFO) job queues, jobs are ordered based on their submission
-	// time. For fair-share scheduling (FSS) job queues, jobs are ordered based on
+	// time. For fair share scheduling (FSS) job queues, jobs are ordered based on
 	// their job priority and share usage.
 	FrontOfQueue *types.FrontOfQueueDetail
 
