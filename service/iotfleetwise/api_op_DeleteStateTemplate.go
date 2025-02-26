@@ -28,7 +28,7 @@ func (c *Client) DeleteStateTemplate(ctx context.Context, params *DeleteStateTem
 
 type DeleteStateTemplateInput struct {
 
-	// A unique, service-generated identifier.
+	// The unique ID of the state template.
 	//
 	// This member is required.
 	Identifier *string

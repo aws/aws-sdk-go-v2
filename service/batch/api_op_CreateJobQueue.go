@@ -76,21 +76,20 @@ type CreateJobQueueInput struct {
 	// maxTimeSeconds is 600 (10 minutes) and its maximum value is 86,400 (24 hours).)
 	JobStateTimeLimitActions []types.JobStateTimeLimitAction
 
-	// The Amazon Resource Name (ARN) of the fair-share scheduling policy. Job queues
-	// that don't have a fair-share scheduling policy are scheduled in a first-in,
-	// first-out (FIFO) model. After a job queue has a fair-share scheduling policy, it
-	// can be replaced but can't be removed.
+	// The Amazon Resource Name (ARN) of the fair share scheduling policy. Job queues
+	// that don't have a scheduling policy are scheduled in a first-in, first-out
+	// (FIFO) model. After a job queue has a scheduling policy, it can be replaced but
+	// can't be removed.
 	//
 	// The format is aws:Partition:batch:Region:Account:scheduling-policy/Name .
 	//
 	// An example is
 	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .
 	//
-	// A job queue without a fair-share scheduling policy is scheduled as a FIFO job
-	// queue and can't have a fair-share scheduling policy added. Jobs queues with a
-	// fair-share scheduling policy can have a maximum of 500 active share identifiers.
-	// When the limit has been reached, submissions of any jobs that add a new share
-	// identifier fail.
+	// A job queue without a scheduling policy is scheduled as a FIFO job queue and
+	// can't have a scheduling policy added. Jobs queues with a scheduling policy can
+	// have a maximum of 500 active fair share identifiers. When the limit has been
+	// reached, submissions of any jobs that add a new fair share identifier fail.
 	SchedulingPolicyArn *string
 
 	// The state of the job queue. If the job queue state is ENABLED , it is able to

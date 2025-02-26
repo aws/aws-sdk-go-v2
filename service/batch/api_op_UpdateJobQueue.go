@@ -62,8 +62,8 @@ type UpdateJobQueueInput struct {
 	// FARGATE_SPOT ). EC2 and Fargate compute environments can't be mixed.
 	Priority *int32
 
-	// Amazon Resource Name (ARN) of the fair-share scheduling policy. Once a job
-	// queue is created, the fair-share scheduling policy can be replaced but not
+	// Amazon Resource Name (ARN) of the fair share scheduling policy. Once a job
+	// queue is created, the fair share scheduling policy can be replaced but not
 	// removed. The format is
 	// aws:Partition:batch:Region:Account:scheduling-policy/Name . For example,
 	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .

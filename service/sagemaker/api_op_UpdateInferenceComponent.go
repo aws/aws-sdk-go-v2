@@ -34,6 +34,10 @@ type UpdateInferenceComponentInput struct {
 	// This member is required.
 	InferenceComponentName *string
 
+	// The deployment configuration for the inference component. The configuration
+	// contains the desired deployment strategy and rollback settings.
+	DeploymentConfig *types.InferenceComponentDeploymentConfig
+
 	// Runtime settings for a model that is deployed with an inference component.
 	RuntimeConfig *types.InferenceComponentRuntimeConfig
 

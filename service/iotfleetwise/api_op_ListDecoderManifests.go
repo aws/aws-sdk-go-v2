@@ -32,6 +32,11 @@ func (c *Client) ListDecoderManifests(ctx context.Context, params *ListDecoderMa
 
 type ListDecoderManifestsInput struct {
 
+	// When you set the listResponseScope parameter to METADATA_ONLY , the list
+	// response includes: decoder manifest name, Amazon Resource Name (ARN), creation
+	// time, and last modification time.
+	ListResponseScope types.ListResponseScope
+
 	// The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 

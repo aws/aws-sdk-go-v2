@@ -35,7 +35,7 @@ type UpdateSchedulingPolicyInput struct {
 	// This member is required.
 	Arn *string
 
-	// The fair-share policy scheduling details.
+	// The fair share policy.
 	FairsharePolicy *types.FairsharePolicy
 
 	noSmithyDocumentSerde

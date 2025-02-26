@@ -52,6 +52,9 @@ type RegisterJobDefinitionInput struct {
 	// This member is required.
 	Type types.JobDefinitionType
 
+	// Contains a list of consumable resources required by the job.
+	ConsumableResourceProperties *types.ConsumableResourceProperties
+
 	// An object with properties specific to Amazon ECS-based single-node
 	// container-based jobs. If the job definition's type parameter is container , then
 	// you must specify either containerProperties or nodeProperties . This must not be
@@ -113,7 +116,7 @@ type RegisterJobDefinitionInput struct {
 	RetryStrategy *types.RetryStrategy
 
 	// The scheduling priority for jobs that are submitted with this job definition.
-	// This only affects jobs in job queues with a fair-share policy. Jobs with a
+	// This only affects jobs in job queues with a fair share policy. Jobs with a
 	// higher scheduling priority are scheduled before jobs with a lower scheduling
 	// priority.
 	//

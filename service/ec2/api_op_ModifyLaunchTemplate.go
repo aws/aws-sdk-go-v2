@@ -32,11 +32,11 @@ func (c *Client) ModifyLaunchTemplate(ctx context.Context, params *ModifyLaunchT
 type ModifyLaunchTemplateInput struct {
 
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
-	// request. For more information, see [Ensuring idempotency].
+	// request. For more information, see [Ensuring idempotency in Amazon EC2 API requests].
 	//
 	// Constraint: Maximum 128 ASCII characters.
 	//
-	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+	// [Ensuring idempotency in Amazon EC2 API requests]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// The version number of the launch template to set as the default version.

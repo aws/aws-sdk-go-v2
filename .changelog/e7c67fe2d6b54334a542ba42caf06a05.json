@@ -1,0 +1,8 @@
+{
+    "id": "e7c67fe2-d6b5-4334-a542-ba42caf06a05",
+    "type": "feature",
+    "description": "This release adds an optional listResponseScope request parameter in certain list API requests to limit the response to metadata only.",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

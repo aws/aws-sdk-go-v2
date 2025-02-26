@@ -34,7 +34,7 @@ func (c *Client) UpdateStateTemplate(ctx context.Context, params *UpdateStateTem
 
 type UpdateStateTemplateInput struct {
 
-	// A unique, service-generated identifier.
+	// The unique ID of the state template.
 	//
 	// This member is required.
 	Identifier *string

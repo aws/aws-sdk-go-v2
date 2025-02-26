@@ -59250,6 +59250,59 @@ func awsAwsjson11_deserializeDocumentImageVersions(v *[]types.ImageVersion, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInferenceComponentCapacitySize(v **types.InferenceComponentCapacitySize, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceComponentCapacitySize
+	if *v == nil {
+		sv = &types.InferenceComponentCapacitySize{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InferenceComponentCapacitySizeType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.InferenceComponentCapacitySizeType(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CapacitySizeValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInferenceComponentComputeResourceRequirements(v **types.InferenceComponentComputeResourceRequirements, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -59414,6 +59467,114 @@ func awsAwsjson11_deserializeDocumentInferenceComponentContainerSpecificationSum
 		case "Environment":
 			if err := awsAwsjson11_deserializeDocumentEnvironmentMap(&sv.Environment, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInferenceComponentDeploymentConfig(v **types.InferenceComponentDeploymentConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceComponentDeploymentConfig
+	if *v == nil {
+		sv = &types.InferenceComponentDeploymentConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutoRollbackConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAutoRollbackConfig(&sv.AutoRollbackConfiguration, value); err != nil {
+				return err
+			}
+
+		case "RollingUpdatePolicy":
+			if err := awsAwsjson11_deserializeDocumentInferenceComponentRollingUpdatePolicy(&sv.RollingUpdatePolicy, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInferenceComponentRollingUpdatePolicy(v **types.InferenceComponentRollingUpdatePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceComponentRollingUpdatePolicy
+	if *v == nil {
+		sv = &types.InferenceComponentRollingUpdatePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaximumBatchSize":
+			if err := awsAwsjson11_deserializeDocumentInferenceComponentCapacitySize(&sv.MaximumBatchSize, value); err != nil {
+				return err
+			}
+
+		case "MaximumExecutionTimeoutInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaximumExecutionTimeoutInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumExecutionTimeoutInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "RollbackMaximumBatchSize":
+			if err := awsAwsjson11_deserializeDocumentInferenceComponentCapacitySize(&sv.RollbackMaximumBatchSize, value); err != nil {
+				return err
+			}
+
+		case "WaitIntervalInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WaitIntervalInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WaitIntervalInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -96173,6 +96334,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeInferenceComponentOutput(v **Desc
 					return fmt.Errorf("expected InferenceComponentStatus to be of type string, got %T instead", value)
 				}
 				sv.InferenceComponentStatus = types.InferenceComponentStatus(jtv)
+			}
+
+		case "LastDeploymentConfig":
+			if err := awsAwsjson11_deserializeDocumentInferenceComponentDeploymentConfig(&sv.LastDeploymentConfig, value); err != nil {
+				return err
 			}
 
 		case "LastModifiedTime":

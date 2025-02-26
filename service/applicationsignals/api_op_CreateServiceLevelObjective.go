@@ -29,6 +29,10 @@ import (
 // You can also set SLOs against any CloudWatch metric or math expression that
 // produces a time series.
 //
+// You can't create an SLO for a service operation that was discovered by
+// Application Signals until after that operation has reported standard metrics to
+// Application Signals.
+//
 // When you create an SLO, you specify whether it is a period-based SLO or a
 // request-based SLO. Each type of SLO has a different way of evaluating your
 // application's performance against its attainment goal.

@@ -86,6 +86,18 @@ func TestCheckSnapshot_CreateComputeEnvironment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConsumableResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateJobQueue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateJobQueue(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_DeleteComputeEnvironment(t *testing.T) {
 	_, err := svc.DeleteComputeEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteComputeEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConsumableResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -163,6 +187,18 @@ func TestCheckSnapshot_DescribeComputeEnvironments(t *testing.T) {
 	_, err := svc.DescribeComputeEnvironments(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeComputeEnvironments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeConsumableResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,11 +266,35 @@ func TestCheckSnapshot_GetJobQueueSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConsumableResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConsumableResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConsumableResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListJobsByConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobsByConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListJobsByConsumableResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -338,6 +398,18 @@ func TestCheckSnapshot_UpdateComputeEnvironment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConsumableResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateJobQueue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateJobQueue(context.Background(), nil, func(o *Options) {
@@ -385,6 +457,18 @@ func TestUpdateSnapshot_CreateComputeEnvironment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConsumableResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateJobQueue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateJobQueue(context.Background(), nil, func(o *Options) {
@@ -414,6 +498,18 @@ func TestUpdateSnapshot_DeleteComputeEnvironment(t *testing.T) {
 	_, err := svc.DeleteComputeEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteComputeEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConsumableResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -462,6 +558,18 @@ func TestUpdateSnapshot_DescribeComputeEnvironments(t *testing.T) {
 	_, err := svc.DescribeComputeEnvironments(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeComputeEnvironments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeConsumableResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -529,11 +637,35 @@ func TestUpdateSnapshot_GetJobQueueSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConsumableResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConsumableResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConsumableResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListJobsByConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobsByConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListJobsByConsumableResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -630,6 +762,18 @@ func TestUpdateSnapshot_UpdateComputeEnvironment(t *testing.T) {
 	_, err := svc.UpdateComputeEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateComputeEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateConsumableResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConsumableResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConsumableResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

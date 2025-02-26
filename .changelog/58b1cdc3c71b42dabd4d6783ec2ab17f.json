@@ -1,0 +1,8 @@
+{
+    "id": "58b1cdc3-c71b-42da-bd4d-6783ec2ab17f",
+    "type": "feature",
+    "description": "This release adds API support for reading Service Level Objectives and Services from monitoring accounts, from SLO and Service-scoped operations, including ListServices and ListServiceLevelObjectives.",
+    "modules": [
+        "service/applicationsignals"
+    ]
+}

@@ -855,6 +855,57 @@ type ComputeResourceUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// Contains a list of consumable resources required by a job.
+type ConsumableResourceProperties struct {
+
+	// The list of consumable resources required by a job.
+	ConsumableResourceList []ConsumableResourceRequirement
+
+	noSmithyDocumentSerde
+}
+
+// Information about a consumable resource required to run a job.
+type ConsumableResourceRequirement struct {
+
+	// The name or ARN of the consumable resource.
+	ConsumableResource *string
+
+	// The quantity of the consumable resource that is needed.
+	Quantity *int64
+
+	noSmithyDocumentSerde
+}
+
+// Current information about a consumable resource.
+type ConsumableResourceSummary struct {
+
+	// The Amazon Resource Name (ARN) of the consumable resource.
+	//
+	// This member is required.
+	ConsumableResourceArn *string
+
+	// The name of the consumable resource.
+	//
+	// This member is required.
+	ConsumableResourceName *string
+
+	// The amount of the consumable resource that is currently in use.
+	InUseQuantity *int64
+
+	// Indicates whether the resource is available to be re-used after a job
+	// completes. Can be one of:
+	//
+	//   - REPLENISHABLE
+	//
+	//   - NON_REPLENISHABLE
+	ResourceType *string
+
+	// The total amount of the consumable resource that is available.
+	TotalQuantity *int64
+
+	noSmithyDocumentSerde
+}
+
 // An object that represents the details of a container that's part of a job.
 type ContainerDetail struct {
 
@@ -2435,9 +2486,9 @@ type EksPodPropertiesOverride struct {
 	Containers []EksContainerOverride
 
 	// The overrides for the initContainers defined in the Amazon EKS pod. These
-	// containers run before application containers, always run to completion, and must
-	// complete successfully before the next container starts. These containers are
-	// registered with the Amazon EKS Connector agent and persists the registration
+	// containers run before application containers, always runs to completion, and
+	// must complete successfully before the next container starts. These containers
+	// are registered with the Amazon EKS Connector agent and persists the registration
 	// information in the Kubernetes backend data store. For more information, see [Init Containers]in
 	// the Kubernetes documentation.
 	//
@@ -2586,29 +2637,30 @@ type EvaluateOnExit struct {
 	noSmithyDocumentSerde
 }
 
-// The fair-share scheduling policy details.
+// The fair share policy for a scheduling policy.
 type FairsharePolicy struct {
 
-	// A value used to reserve some of the available maximum vCPU for share
+	// A value used to reserve some of the available maximum vCPU for fair share
 	// identifiers that aren't already used.
 	//
 	// The reserved ratio is (computeReservation/100)^ActiveFairShares  where
-	// ActiveFairShares is the number of active share identifiers.
+	// ActiveFairShares is the number of active fair share identifiers.
 	//
 	// For example, a computeReservation value of 50 indicates that Batch reserves 50%
-	// of the maximum available vCPU if there's only one share identifier. It reserves
-	// 25% if there are two share identifiers. It reserves 12.5% if there are three
-	// share identifiers. A computeReservation value of 25 indicates that Batch should
-	// reserve 25% of the maximum available vCPU if there's only one share identifier,
-	// 6.25% if there are two fair share identifiers, and 1.56% if there are three
-	// share identifiers.
+	// of the maximum available vCPU if there's only one fair share identifier. It
+	// reserves 25% if there are two fair share identifiers. It reserves 12.5% if there
+	// are three fair share identifiers. A computeReservation value of 25 indicates
+	// that Batch should reserve 25% of the maximum available vCPU if there's only one
+	// fair share identifier, 6.25% if there are two fair share identifiers, and 1.56%
+	// if there are three fair share identifiers.
 	//
 	// The minimum value is 0 and the maximum value is 99.
 	ComputeReservation *int32
 
-	// The amount of time (in seconds) to use to calculate a fair-share percentage for
-	// each share identifier in use. A value of zero (0) indicates the default minimum
-	// time window (600 seconds). The maximum supported value is 604800 (1 week).
+	// The amount of time (in seconds) to use to calculate a fair share percentage for
+	// each fair share identifier in use. A value of zero (0) indicates the default
+	// minimum time window (600 seconds). The maximum supported value is 604800 (1
+	// week).
 	//
 	// The decay allows for more recently run jobs to have more weight than jobs that
 	// ran earlier. Consider adjusting this number if you have jobs that (on average)
@@ -2617,9 +2669,9 @@ type FairsharePolicy struct {
 	// needs.
 	ShareDecaySeconds *int32
 
-	// An array of SharedIdentifier objects that contain the weights for the share
-	// identifiers for the fair-share policy. Share identifiers that aren't included
-	// have a default weight of 1.0 .
+	// An array of SharedIdentifier objects that contain the weights for the fair
+	// share identifiers for the fair share policy. Fair share identifiers that aren't
+	// included have a default weight of 1.0 .
 	ShareDistribution []ShareAttributes
 
 	noSmithyDocumentSerde
@@ -2646,7 +2698,7 @@ type FrontOfQueueDetail struct {
 
 	// The Amazon Resource Names (ARNs) of the first 100 RUNNABLE jobs in a named job
 	// queue. For first-in-first-out (FIFO) job queues, jobs are ordered based on their
-	// submission time. For fair-share scheduling (FSS) job queues, jobs are ordered
+	// submission time. For fair share scheduling (FSS) job queues, jobs are ordered
 	// based on their job priority and share usage.
 	Jobs []FrontOfQueueJobSummary
 
@@ -2733,6 +2785,9 @@ type JobDefinition struct {
 	// This member is required.
 	Type *string
 
+	// Contains a list of consumable resources required by the job.
+	ConsumableResourceProperties *ConsumableResourceProperties
+
 	// The orchestration type of the compute environment. The valid values are ECS
 	// (default) or EKS .
 	ContainerOrchestrationType OrchestrationType
@@ -2786,7 +2841,7 @@ type JobDefinition struct {
 	RetryStrategy *RetryStrategy
 
 	// The scheduling priority of the job definition. This only affects jobs in job
-	// queues with a fair-share policy. Jobs with a higher scheduling priority are
+	// queues with a fair share policy. Jobs with a higher scheduling priority are
 	// scheduled before jobs with a lower scheduling priority.
 	SchedulingPriority *int32
 
@@ -2862,6 +2917,9 @@ type JobDetail struct {
 	// A list of job attempts that are associated with this job.
 	Attempts []AttemptDetail
 
+	// Contains a list of consumable resources required by the job.
+	ConsumableResourceProperties *ConsumableResourceProperties
+
 	// An object that represents the details for the container that's associated with
 	// the job. If the details are for a multiple-container job, this object will be
 	// empty.
@@ -2926,7 +2984,7 @@ type JobDetail struct {
 	RetryStrategy *RetryStrategy
 
 	// The scheduling policy of the job definition. This only affects jobs in job
-	// queues with a fair-share policy. Jobs with a higher scheduling priority are
+	// queues with a fair share policy. Jobs with a higher scheduling priority are
 	// scheduled before jobs with a lower scheduling priority.
 	SchedulingPriority *int32
 
@@ -3163,7 +3221,7 @@ type KeyValuePair struct {
 }
 
 // A filter name and value pair that's used to return a more specific list of
-// results from a ListJobs API operation.
+// results from a ListJobs or ListJobsByConsumableResource API operation.
 type KeyValuesPair struct {
 
 	// The name of the filter. Filter names are case sensitive.
@@ -3345,8 +3403,9 @@ type LinuxParameters struct {
 	//
 	// If a maxSwap value of 0 is specified, the container doesn't use swap. Accepted
 	// values are 0 or any positive integer. If the maxSwap parameter is omitted, the
-	// container doesn't use the swap configuration for the container instance on which
-	// it runs. A maxSwap value must be set for the swappiness parameter to be used.
+	// container doesn't use the swap configuration for the container instance that
+	// it's running on. A maxSwap value must be set for the swappiness parameter to be
+	// used.
 	//
 	// This parameter isn't applicable to jobs that are running on Fargate resources.
 	// Don't provide it for these jobs.
@@ -3404,6 +3463,76 @@ type LinuxParameters struct {
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
 	Tmpfs []Tmpfs
+
+	noSmithyDocumentSerde
+}
+
+// Current information about a consumable resource required by a job.
+type ListJobsByConsumableResourceSummary struct {
+
+	// Contains a list of consumable resources required by the job.
+	//
+	// This member is required.
+	ConsumableResourceProperties *ConsumableResourceProperties
+
+	// The Unix timestamp (in milliseconds) for when the consumable resource was
+	// created.
+	//
+	// This member is required.
+	CreatedAt *int64
+
+	// The Amazon Resource Name (ARN) of the job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// The name of the job.
+	//
+	// This member is required.
+	JobName *string
+
+	// The Amazon Resource Name (ARN) of the job queue.
+	//
+	// This member is required.
+	JobQueueArn *string
+
+	// The status of the job. Can be one of:
+	//
+	//   - SUBMITTED
+	//
+	//   - PENDING
+	//
+	//   - RUNNABLE
+	//
+	//   - STARTING
+	//
+	//   - RUNNING
+	//
+	//   - SUCCEEDED
+	//
+	//   - FAILED
+	//
+	// This member is required.
+	JobStatus *string
+
+	// The total amount of the consumable resource that is available.
+	//
+	// This member is required.
+	Quantity *int64
+
+	// The Amazon Resource Name (ARN) of the job definition.
+	JobDefinitionArn *string
+
+	// The fair-share scheduling policy identifier for the job.
+	ShareIdentifier *string
+
+	// The Unix timestamp for when the job was started. More specifically, it's when
+	// the job transitioned from the STARTING state to the RUNNING state.
+	StartedAt *int64
+
+	// A short, human-readable string to provide more details for the current status
+	// of the job.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -3638,6 +3767,9 @@ type NodePropertyOverride struct {
 	// This member is required.
 	TargetNodes *string
 
+	// An object that contains overrides for the consumable resources of a job.
+	ConsumableResourcePropertiesOverride *ConsumableResourceProperties
+
 	// The overrides that are sent to a node range.
 	ContainerOverrides *ContainerOverrides
 
@@ -3670,6 +3802,9 @@ type NodeRangeProperty struct {
 	//
 	// This member is required.
 	TargetNodes *string
+
+	// Contains a list of consumable resources required by a job.
+	ConsumableResourceProperties *ConsumableResourceProperties
 
 	// The container details for the node range.
 	Container *ContainerProperties
@@ -3885,17 +4020,17 @@ type SchedulingPolicyDetail struct {
 	// This member is required.
 	Arn *string
 
-	// The name of the fair-share scheduling policy.
+	// The name of the scheduling policy.
 	//
 	// This member is required.
 	Name *string
 
-	// The fair-share scheduling policy details.
+	// The fair share policy for the scheduling policy.
 	FairsharePolicy *FairsharePolicy
 
-	// The tags that you apply to the fair-share scheduling policy to categorize and
-	// organize your resources. Each tag consists of a key and an optional value. For
-	// more information, see [Tagging Amazon Web Services resources]in Amazon Web Services General Reference.
+	// The tags that you apply to the scheduling policy to categorize and organize
+	// your resources. Each tag consists of a key and an optional value. For more
+	// information, see [Tagging Amazon Web Services resources]in Amazon Web Services General Reference.
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
@@ -3949,18 +4084,18 @@ type Secret struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the weights for the share identifiers for the fair-share policy.
-// Share identifiers that aren't included have a default weight of 1.0 .
+// Specifies the weights for the fair share identifiers for the fair share policy.
+// Fair share identifiers that aren't included have a default weight of 1.0 .
 type ShareAttributes struct {
 
-	// A share identifier or share identifier prefix. If the string ends with an
-	// asterisk (*), this entry specifies the weight factor to use for share
-	// identifiers that start with that prefix. The list of share identifiers in a
-	// fair-share policy can't overlap. For example, you can't have one that specifies
-	// a shareIdentifier of UserA* and another that specifies a shareIdentifier of
-	// UserA-1 .
+	// A fair share identifier or fair share identifier prefix. If the string ends
+	// with an asterisk (*), this entry specifies the weight factor to use for fair
+	// share identifiers that start with that prefix. The list of fair share
+	// identifiers in a fair share policy can't overlap. For example, you can't have
+	// one that specifies a shareIdentifier of UserA* and another that specifies a
+	// shareIdentifier of UserA-1 .
 	//
-	// There can be no more than 500 share identifiers active in a job queue.
+	// There can be no more than 500 fair share identifiers active in a job queue.
 	//
 	// The string is limited to 255 alphanumeric characters, and can be followed by an
 	// asterisk (*).
@@ -3968,10 +4103,10 @@ type ShareAttributes struct {
 	// This member is required.
 	ShareIdentifier *string
 
-	// The weight factor for the share identifier. The default value is 1.0. A lower
-	// value has a higher priority for compute resources. For example, jobs that use a
-	// share identifier with a weight factor of 0.125 (1/8) get 8 times the compute
-	// resources of jobs that use a share identifier with a weight factor of 1.
+	// The weight factor for the fair share identifier. The default value is 1.0. A
+	// lower value has a higher priority for compute resources. For example, jobs that
+	// use a share identifier with a weight factor of 0.125 (1/8) get 8 times the
+	// compute resources of jobs that use a share identifier with a weight factor of 1.
 	//
 	// The smallest supported value is 0.0001, and the largest supported value is
 	// 999.9999.

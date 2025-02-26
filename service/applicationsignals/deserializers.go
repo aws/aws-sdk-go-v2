@@ -3374,6 +3374,15 @@ func awsRestjson1_deserializeDocumentMetricReference(v **types.MetricReference, 
 
 	for key, value := range shape {
 		switch key {
+		case "AccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
 		case "Dimensions":
 			if err := awsRestjson1_deserializeDocumentDimensions(&sv.Dimensions, value); err != nil {
 				return err

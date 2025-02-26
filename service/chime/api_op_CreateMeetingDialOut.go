@@ -19,7 +19,7 @@ import (
 // CreateSipMediaApplicationCall action with the corresponding SIP media
 // application ID.
 //
-// This API is is not available in a dedicated namespace.
+// This API is not available in a dedicated namespace.
 func (c *Client) CreateMeetingDialOut(ctx context.Context, params *CreateMeetingDialOutInput, optFns ...func(*Options)) (*CreateMeetingDialOutOutput, error) {
 	if params == nil {
 		params = &CreateMeetingDialOutInput{}

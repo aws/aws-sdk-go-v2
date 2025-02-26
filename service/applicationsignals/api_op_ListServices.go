@@ -51,6 +51,13 @@ type ListServicesInput struct {
 	// This member is required.
 	StartTime *time.Time
 
+	// Amazon Web Services Account ID.
+	AwsAccountId *string
+
+	// If you are using this operation in a monitoring account, specify true to
+	// include services from source accounts in the returned data.
+	IncludeLinkedAccounts bool
+
 	//  The maximum number of results to return in one operation. If you omit this
 	// parameter, the default of 50 is used.
 	MaxResults *int32

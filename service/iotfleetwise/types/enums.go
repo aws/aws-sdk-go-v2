@@ -140,6 +140,23 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type ListResponseScope string
+
+// Enum values for ListResponseScope
+const (
+	ListResponseScopeMetadataOnly ListResponseScope = "METADATA_ONLY"
+)
+
+// Values returns all known values for ListResponseScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListResponseScope) Values() []ListResponseScope {
+	return []ListResponseScope{
+		"METADATA_ONLY",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType

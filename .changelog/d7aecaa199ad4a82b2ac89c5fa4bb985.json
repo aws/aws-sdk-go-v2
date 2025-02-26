@@ -1,0 +1,8 @@
+{
+    "id": "d7aecaa1-99ad-4a82-b2ac-89c5fa4bb985",
+    "type": "feature",
+    "description": "Amazon EC2 Fleet customers can now override the Block Device Mapping specified in the Launch Template when creating a new Fleet request, saving the effort of creating and associating new Launch Templates to customize the Block Device Mapping.",
+    "modules": [
+        "service/ec2"
+    ]
+}

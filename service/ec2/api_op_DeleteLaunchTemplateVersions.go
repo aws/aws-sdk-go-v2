@@ -24,7 +24,7 @@ import (
 //
 // For more information, see [Delete a launch template version] in the Amazon EC2 User Guide.
 //
-// [Delete a launch template version]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-launch-template-versions.html#delete-launch-template-version
+// [Delete a launch template version]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/delete-launch-template.html#delete-launch-template-version
 func (c *Client) DeleteLaunchTemplateVersions(ctx context.Context, params *DeleteLaunchTemplateVersionsInput, optFns ...func(*Options)) (*DeleteLaunchTemplateVersionsOutput, error) {
 	if params == nil {
 		params = &DeleteLaunchTemplateVersionsInput{}

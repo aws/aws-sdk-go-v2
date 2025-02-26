@@ -51,8 +51,12 @@ type BatchDeleteClusterNodesInput struct {
 
 	// A list of node IDs to be deleted from the specified cluster.
 	//
-	// For SageMaker HyperPod clusters using the Slurm workload manager, you cannot
-	// remove instances that are configured as Slurm controller nodes.
+	//   - For SageMaker HyperPod clusters using the Slurm workload manager, you
+	//   cannot remove instances that are configured as Slurm controller nodes.
+	//
+	//   - If you need to delete more than 99 instances, contact [Support]for assistance.
+	//
+	// [Support]: http://aws.amazon.com/contact-us/
 	//
 	// This member is required.
 	NodeIds []string

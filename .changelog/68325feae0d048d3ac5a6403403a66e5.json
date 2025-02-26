@@ -1,0 +1,8 @@
+{
+    "id": "68325fea-e0d0-48d3-ac5a-6403403a66e5",
+    "type": "feature",
+    "description": "AWS SageMaker InferenceComponents now support rolling update deployments for Inference Components.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}
