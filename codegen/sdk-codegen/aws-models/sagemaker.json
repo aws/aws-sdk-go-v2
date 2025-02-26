@@ -4821,7 +4821,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 99
+                    "max": 3000
                 }
             }
         },
@@ -4840,7 +4840,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterNodeIds",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A list of node IDs to be deleted from the specified cluster.</p>\n         <note>\n            <p>For SageMaker HyperPod clusters using the Slurm workload manager, you cannot remove instances\n            that are configured as Slurm controller nodes.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A list of node IDs to be deleted from the specified cluster.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>For SageMaker HyperPod clusters using the Slurm workload manager, you cannot remove\n                  instances that are configured as Slurm controller nodes.</p>\n               </li>\n               <li>\n                  <p>If you need to delete more than 99 instances, contact <a href=\"http://aws.amazon.com/contact-us/\">Support</a> for assistance.</p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4942,7 +4942,7 @@
                 "BatchDescribeModelPackageErrorMap": {
                     "target": "com.amazonaws.sagemaker#BatchDescribeModelPackageErrorMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of the resource and BatchDescribeModelPackageError objects \n            reporting the error associated with describing the model package.</p>"
+                        "smithy.api#documentation": "<p>A map of the resource and BatchDescribeModelPackageError objects reporting the error\n            associated with describing the model package.</p>"
                     }
                 }
             },
@@ -6011,24 +6011,24 @@
                 "CheckJobArn": {
                     "target": "com.amazonaws.sagemaker#String256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the check processing job that was run by this step's execution.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the check processing job that was run by this step's\n            execution.</p>"
                     }
                 },
                 "SkipCheck": {
                     "target": "com.amazonaws.sagemaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This flag indicates if the drift check against the previous baseline will be skipped or not. \n            If it is set to <code>False</code>, the previous baseline of the configured check type must be available.</p>"
+                        "smithy.api#documentation": "<p>This flag indicates if the drift check against the previous baseline will be skipped\n            or not. If it is set to <code>False</code>, the previous baseline of the configured\n            check type must be available.</p>"
                     }
                 },
                 "RegisterNewBaseline": {
                     "target": "com.amazonaws.sagemaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This flag indicates if a newly calculated baseline can be accessed through step properties \n            <code>BaselineUsedForDriftCheckConstraints</code> and <code>BaselineUsedForDriftCheckStatistics</code>. \n            If it is set to <code>False</code>, the previous baseline of the configured check type must also be available. \n            These can be accessed through the <code>BaselineUsedForDriftCheckConstraints</code> property. </p>"
+                        "smithy.api#documentation": "<p>This flag indicates if a newly calculated baseline can be accessed through step\n            properties <code>BaselineUsedForDriftCheckConstraints</code> and\n                <code>BaselineUsedForDriftCheckStatistics</code>. If it is set to\n            <code>False</code>, the previous baseline of the configured check type must also be\n            available. These can be accessed through the\n                <code>BaselineUsedForDriftCheckConstraints</code> property. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The container for the metadata for the ClarifyCheck step. For more information, \n            see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check\">ClarifyCheck step</a> in the <i>Amazon SageMaker Developer Guide</i>.\n        </p>"
+                "smithy.api#documentation": "<p>The container for the metadata for the ClarifyCheck step. For more information, see\n            the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check\">ClarifyCheck step</a> in the <i>Amazon SageMaker Developer\n                Guide</i>. </p>"
             }
         },
         "com.amazonaws.sagemaker#ClarifyContentTemplate": {
@@ -7876,7 +7876,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 99
+                    "max": 3000
                 }
             }
         },
@@ -13168,7 +13168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a model package that you can use to create SageMaker models or list on Amazon Web Services\n            Marketplace, or a versioned model that is part of a model group. Buyers can subscribe to\n            model packages listed on Amazon Web Services Marketplace to create models in SageMaker.</p>\n         <p>To create a model package by specifying a Docker container that contains your\n            inference code and the Amazon S3 location of your model artifacts, provide values for\n            <code>InferenceSpecification</code>. To create a model from an algorithm resource\n            that you created or subscribed to in Amazon Web Services Marketplace, provide a value for\n            <code>SourceAlgorithmSpecification</code>.</p>\n         <note>\n            <p>There are two types of model packages:</p>\n            <ul>\n               <li>\n                  <p>Versioned - a model that is part of a model group in the model\n                        registry.</p>\n               </li>\n               <li>\n                  <p>Unversioned - a model package that is not part of a model group.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a model package that you can use to create SageMaker models or list on Amazon Web Services Marketplace, or a versioned model that is part of a model group. Buyers\n            can subscribe to model packages listed on Amazon Web Services Marketplace to create\n            models in SageMaker.</p>\n         <p>To create a model package by specifying a Docker container that contains your\n            inference code and the Amazon S3 location of your model artifacts, provide values for\n                <code>InferenceSpecification</code>. To create a model from an algorithm resource\n            that you created or subscribed to in Amazon Web Services Marketplace, provide a value for\n                <code>SourceAlgorithmSpecification</code>.</p>\n         <note>\n            <p>There are two types of model packages:</p>\n            <ul>\n               <li>\n                  <p>Versioned - a model that is part of a model group in the model\n                        registry.</p>\n               </li>\n               <li>\n                  <p>Unversioned - a model package that is not part of a model group.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateModelPackageGroup": {
@@ -13208,7 +13208,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key value pairs associated with the model group. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key value pairs associated with the model group. For more information, see\n                <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General\n                Reference Guide</i>.</p>"
                     }
                 }
             },
@@ -13244,7 +13244,7 @@
                 "ModelPackageGroupName": {
                     "target": "com.amazonaws.sagemaker#ArnOrName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package group that this model version belongs to.</p>\n         <p>This parameter is required for versioned models, and does not apply to unversioned\n            models.</p>"
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package group that this model version belongs\n            to.</p>\n         <p>This parameter is required for versioned models, and does not apply to unversioned\n            models.</p>"
                     }
                 },
                 "ModelPackageDescription": {
@@ -13256,7 +13256,7 @@
                 "InferenceSpecification": {
                     "target": "com.amazonaws.sagemaker#InferenceSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies details about inference jobs that you can run with models based on this model\n            package, including the following information:</p>\n         <ul>\n            <li>\n               <p>The Amazon ECR paths of containers that contain the inference code and model\n                    artifacts.</p>\n            </li>\n            <li>\n               <p>The instance types that the model package supports for transform jobs and\n                    real-time endpoints used for inference.</p>\n            </li>\n            <li>\n               <p>The input and output content formats that the model package supports for\n                    inference.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies details about inference jobs that you can run with models based on this\n            model package, including the following information:</p>\n         <ul>\n            <li>\n               <p>The Amazon ECR paths of containers that contain the inference code and model\n                    artifacts.</p>\n            </li>\n            <li>\n               <p>The instance types that the model package supports for transform jobs and\n                    real-time endpoints used for inference.</p>\n            </li>\n            <li>\n               <p>The input and output content formats that the model package supports for\n                    inference.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ValidationSpecification": {
@@ -13274,19 +13274,19 @@
                 "CertifyForMarketplace": {
                     "target": "com.amazonaws.sagemaker#CertifyForMarketplace",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to certify the model package for listing on Amazon Web Services Marketplace.</p>\n         <p>This parameter is optional for unversioned models, and does not apply to versioned\n            models.</p>"
+                        "smithy.api#documentation": "<p>Whether to certify the model package for listing on Amazon Web Services\n            Marketplace.</p>\n         <p>This parameter is optional for unversioned models, and does not apply to versioned\n            models.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key value pairs associated with the model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>\n         <p>If you supply <code>ModelPackageGroupName</code>, your model package belongs to the model group\n\t    you specify and uses the tags associated with the model group. In this case, you cannot\n\t    supply a <code>tag</code> argument.\n</p>"
+                        "smithy.api#documentation": "<p>A list of key value pairs associated with the model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General\n                Reference Guide</i>.</p>\n         <p>If you supply <code>ModelPackageGroupName</code>, your model package belongs to the\n            model group you specify and uses the tags associated with the model group. In this case,\n            you cannot supply a <code>tag</code> argument. </p>"
                     }
                 },
                 "ModelApprovalStatus": {
                     "target": "com.amazonaws.sagemaker#ModelApprovalStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the model is approved for deployment.</p>\n         <p>This parameter is optional for versioned models, and does not apply to unversioned\n            models.</p>\n         <p>For versioned models, the value of this parameter must be set to <code>Approved</code>\n        to deploy the model.</p>"
+                        "smithy.api#documentation": "<p>Whether the model is approved for deployment.</p>\n         <p>This parameter is optional for versioned models, and does not apply to unversioned\n            models.</p>\n         <p>For versioned models, the value of this parameter must be set to <code>Approved</code>\n            to deploy the model.</p>"
                     }
                 },
                 "MetadataProperties": {
@@ -13308,19 +13308,19 @@
                 "Domain": {
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The machine learning domain of your model package and its components. Common\n            machine learning domains include computer vision and natural language processing.</p>"
+                        "smithy.api#documentation": "<p>The machine learning domain of your model package and its components. Common machine\n            learning domains include computer vision and natural language processing.</p>"
                     }
                 },
                 "Task": {
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The machine learning task your model package accomplishes. Common machine\n            learning tasks include object detection and image classification. The following\n            tasks are supported by Inference Recommender:\n            <code>\"IMAGE_CLASSIFICATION\"</code> | <code>\"OBJECT_DETECTION\"</code> | <code>\"TEXT_GENERATION\"</code> |<code>\"IMAGE_SEGMENTATION\"</code> |\n            <code>\"FILL_MASK\"</code> | <code>\"CLASSIFICATION\"</code> | <code>\"REGRESSION\"</code> | <code>\"OTHER\"</code>.</p>\n         <p>Specify \"OTHER\" if none of the tasks listed fit your use case.</p>"
+                        "smithy.api#documentation": "<p>The machine learning task your model package accomplishes. Common machine learning\n            tasks include object detection and image classification. The following tasks are\n            supported by Inference Recommender: <code>\"IMAGE_CLASSIFICATION\"</code> |\n                <code>\"OBJECT_DETECTION\"</code> | <code>\"TEXT_GENERATION\"</code>\n                |<code>\"IMAGE_SEGMENTATION\"</code> | <code>\"FILL_MASK\"</code> |\n                <code>\"CLASSIFICATION\"</code> | <code>\"REGRESSION\"</code> |\n            <code>\"OTHER\"</code>.</p>\n         <p>Specify \"OTHER\" if none of the tasks listed fit your use case.</p>"
                     }
                 },
                 "SamplePayloadUrl": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point\n            to a single gzip compressed tar archive (.tar.gz suffix). This archive can hold multiple files\n            that are all equally used in the load test. Each file in the archive must satisfy the size constraints of the\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax\">InvokeEndpoint</a> call.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point to a\n            single gzip compressed tar archive (.tar.gz suffix). This archive can hold multiple\n            files that are all equally used in the load test. Each file in the archive must satisfy\n            the size constraints of the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax\">InvokeEndpoint</a> call.</p>"
                     }
                 },
                 "CustomerMetadataProperties": {
@@ -13332,13 +13332,13 @@
                 "DriftCheckBaselines": {
                     "target": "com.amazonaws.sagemaker#DriftCheckBaselines",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set using the model package.\n            For more information, see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection\">Drift Detection against Previous Baselines in SageMaker Pipelines</a> in the <i>Amazon SageMaker Developer Guide</i>.\n        </p>"
+                        "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set\n            using the model package. For more information, see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection\">Drift Detection against Previous Baselines in SageMaker\n                Pipelines</a> in the <i>Amazon SageMaker Developer Guide</i>. </p>"
                     }
                 },
                 "AdditionalInferenceSpecifications": {
                     "target": "com.amazonaws.sagemaker#AdditionalInferenceSpecifications",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of additional Inference Specification objects. Each additional\n            Inference Specification specifies artifacts based on this model package that can\n            be used on inference endpoints. Generally used with SageMaker Neo to store the\n            compiled artifacts. </p>"
+                        "smithy.api#documentation": "<p>An array of additional Inference Specification objects. Each additional Inference\n            Specification specifies artifacts based on this model package that can be used on\n            inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.\n        </p>"
                     }
                 },
                 "SkipModelValidation": {
@@ -13350,25 +13350,25 @@
                 "SourceUri": {
                     "target": "com.amazonaws.sagemaker#ModelPackageSourceUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the source for the model package. If you want to clone a model package,\n                set it to the model package Amazon Resource Name (ARN). If you want to register a model,\n                set it to the model ARN.</p>"
+                        "smithy.api#documentation": "<p>The URI of the source for the model package. If you want to clone a model package, set\n            it to the model package Amazon Resource Name (ARN). If you want to register a model, set\n            it to the model ARN.</p>"
                     }
                 },
                 "SecurityConfig": {
                     "target": "com.amazonaws.sagemaker#ModelPackageSecurityConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model package information.</p>"
+                        "smithy.api#documentation": "<p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model\n            package information.</p>"
                     }
                 },
                 "ModelCard": {
                     "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n           tied to a model package, it is a specific usage of a model card and its schema is\n           simplified compared to the schema of <code>ModelCard</code>. The \n           <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n           and <code>model_overview</code> is composed of the <code>model_creator</code> and\n           <code>model_artifact</code> properties. For more information about the model package model\n           card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n               package model card schema</a>. For more information about\n           the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n               the Details of a Model Version</a>.</p>"
+                        "smithy.api#documentation": "<p>The model card associated with the model package. Since\n                <code>ModelPackageModelCard</code> is tied to a model package, it is a specific\n            usage of a model card and its schema is simplified compared to the schema of\n                <code>ModelCard</code>. The <code>ModelPackageModelCard</code> schema does not\n            include <code>model_package_details</code>, and <code>model_overview</code> is composed\n            of the <code>model_creator</code> and <code>model_artifact</code> properties. For more\n            information about the model package model card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about the model card\n            associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View the Details of a Model\n                Version</a>.</p>"
                     }
                 },
                 "ModelLifeCycle": {
                     "target": "com.amazonaws.sagemaker#ModelLifeCycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+                        "smithy.api#documentation": "<p> A structure describing the current state of the model in its life cycle. </p>"
                     }
                 }
             },
@@ -17876,7 +17876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a model package.</p>\n         <p>A model package is used to create SageMaker models or list on Amazon Web Services Marketplace. Buyers can\n            subscribe to model packages listed on Amazon Web Services Marketplace to create models in SageMaker.</p>"
+                "smithy.api#documentation": "<p>Deletes a model package.</p>\n         <p>A model package is used to create SageMaker models or list on Amazon Web Services\n            Marketplace. Buyers can subscribe to model packages listed on Amazon Web Services\n            Marketplace to create models in SageMaker.</p>"
             }
         },
         "com.amazonaws.sagemaker#DeleteModelPackageGroup": {
@@ -17947,7 +17947,7 @@
                     "target": "com.amazonaws.sagemaker#VersionedArnOrName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to delete.</p>\n         <p>When you specify a name, the name must have 1 to 63 characters. Valid\n            characters are a-z, A-Z, 0-9, and - (hyphen).</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to delete.</p>\n         <p>When you specify a name, the name must have 1 to 63 characters. Valid characters are\n            a-z, A-Z, 0-9, and - (hyphen).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -23177,6 +23177,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the inference component.</p>"
                     }
+                },
+                "LastDeploymentConfig": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentDeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment and rollback settings that you assigned to the inference\n         component.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24439,7 +24445,7 @@
                 "target": "com.amazonaws.sagemaker#DescribeModelPackageOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a description of the specified model package, which is used to create SageMaker\n            models or list them on Amazon Web Services Marketplace.</p>\n         <important>\n            <p>If you provided a KMS Key ID when you created your model package,\n            you will see the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html\">KMS\n                Decrypt</a> API call in your CloudTrail logs when you use this API.</p>\n         </important>\n         <p>To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services\n            Marketplace.</p>"
+                "smithy.api#documentation": "<p>Returns a description of the specified model package, which is used to create SageMaker\n            models or list them on Amazon Web Services Marketplace.</p>\n         <important>\n            <p>If you provided a KMS Key ID when you created your model package,\n                you will see the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html\">KMS Decrypt</a> API call in\n                your CloudTrail logs when you use this API.</p>\n         </important>\n         <p>To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.</p>"
             }
         },
         "com.amazonaws.sagemaker#DescribeModelPackageGroup": {
@@ -24530,7 +24536,7 @@
                     "target": "com.amazonaws.sagemaker#VersionedArnOrName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to describe.</p>\n         <p>When you specify a name, the name must have 1 to 63 characters. Valid\n            characters are a-z, A-Z, 0-9, and - (hyphen).</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to describe.</p>\n         <p>When you specify a name, the name must have 1 to 63 characters. Valid characters are\n            a-z, A-Z, 0-9, and - (hyphen).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -24621,7 +24627,7 @@
                 "CertifyForMarketplace": {
                     "target": "com.amazonaws.sagemaker#CertifyForMarketplace",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the model package is certified for listing on Amazon Web Services Marketplace.</p>"
+                        "smithy.api#documentation": "<p>Whether the model package is certified for listing on Amazon Web Services\n            Marketplace.</p>"
                     }
                 },
                 "ModelApprovalStatus": {
@@ -24666,13 +24672,13 @@
                 "Task": {
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The machine learning task you specified that your model package accomplishes.\n            Common machine learning tasks include object detection and image classification.</p>"
+                        "smithy.api#documentation": "<p>The machine learning task you specified that your model package accomplishes. Common\n            machine learning tasks include object detection and image classification.</p>"
                     }
                 },
                 "SamplePayloadUrl": {
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path points to a single\n            gzip compressed tar archive (.tar.gz suffix).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path points to a\n            single gzip compressed tar archive (.tar.gz suffix).</p>"
                     }
                 },
                 "CustomerMetadataProperties": {
@@ -24684,13 +24690,13 @@
                 "DriftCheckBaselines": {
                     "target": "com.amazonaws.sagemaker#DriftCheckBaselines",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set using the model package. \n            For more information, see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection\">Drift Detection against Previous Baselines in SageMaker Pipelines</a> in the <i>Amazon SageMaker Developer Guide</i>.\n        </p>"
+                        "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set\n            using the model package. For more information, see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection\">Drift Detection against Previous Baselines in SageMaker\n                Pipelines</a> in the <i>Amazon SageMaker Developer Guide</i>. </p>"
                     }
                 },
                 "AdditionalInferenceSpecifications": {
                     "target": "com.amazonaws.sagemaker#AdditionalInferenceSpecifications",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of additional Inference Specification objects. Each additional\n            Inference Specification specifies artifacts based on this model package that can\n            be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.</p>"
+                        "smithy.api#documentation": "<p>An array of additional Inference Specification objects. Each additional Inference\n            Specification specifies artifacts based on this model package that can be used on\n            inference endpoints. Generally used with SageMaker Neo to store the compiled\n            artifacts.</p>"
                     }
                 },
                 "SkipModelValidation": {
@@ -24708,19 +24714,19 @@
                 "SecurityConfig": {
                     "target": "com.amazonaws.sagemaker#ModelPackageSecurityConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model package information.</p>"
+                        "smithy.api#documentation": "<p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model\n            package information.</p>"
                     }
                 },
                 "ModelCard": {
                     "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about the model package model\n            card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
+                        "smithy.api#documentation": "<p>The model card associated with the model package. Since\n                <code>ModelPackageModelCard</code> is tied to a model package, it is a specific\n            usage of a model card and its schema is simplified compared to the schema of\n                <code>ModelCard</code>. The <code>ModelPackageModelCard</code> schema does not\n            include <code>model_package_details</code>, and <code>model_overview</code> is composed\n            of the <code>model_creator</code> and <code>model_artifact</code> properties. For more\n            information about the model package model card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about the model card\n            associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View the Details of a Model\n                Version</a>.</p>"
                     }
                 },
                 "ModelLifeCycle": {
                     "target": "com.amazonaws.sagemaker#ModelLifeCycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+                        "smithy.api#documentation": "<p> A structure describing the current state of the model in its life cycle. </p>"
                     }
                 }
             },
@@ -28558,30 +28564,30 @@
                 "Bias": {
                     "target": "com.amazonaws.sagemaker#DriftCheckBias",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the drift check bias baselines that can be used when the model monitor is set using the model \n            package. </p>"
+                        "smithy.api#documentation": "<p>Represents the drift check bias baselines that can be used when the model monitor is\n            set using the model package. </p>"
                     }
                 },
                 "Explainability": {
                     "target": "com.amazonaws.sagemaker#DriftCheckExplainability",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the drift check explainability baselines that can be used when the model monitor is set using \n            the model package. </p>"
+                        "smithy.api#documentation": "<p>Represents the drift check explainability baselines that can be used when the model\n            monitor is set using the model package. </p>"
                     }
                 },
                 "ModelQuality": {
                     "target": "com.amazonaws.sagemaker#DriftCheckModelQuality",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the drift check model quality baselines that can be used when the model monitor is set using \n            the model package.</p>"
+                        "smithy.api#documentation": "<p>Represents the drift check model quality baselines that can be used when the model\n            monitor is set using the model package.</p>"
                     }
                 },
                 "ModelDataQuality": {
                     "target": "com.amazonaws.sagemaker#DriftCheckModelDataQuality",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the drift check model data quality baselines that can be used when the model monitor is set \n            using the model package.</p>"
+                        "smithy.api#documentation": "<p>Represents the drift check model data quality baselines that can be used when the\n            model monitor is set using the model package.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set using the model \n            package. </p>"
+                "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set\n            using the model package. </p>"
             }
         },
         "com.amazonaws.sagemaker#DriftCheckBias": {
@@ -28607,7 +28613,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the drift check bias baselines that can be used when the model monitor is set using the \n            model package.</p>"
+                "smithy.api#documentation": "<p>Represents the drift check bias baselines that can be used when the model monitor is\n            set using the model package.</p>"
             }
         },
         "com.amazonaws.sagemaker#DriftCheckExplainability": {
@@ -28627,7 +28633,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the drift check explainability baselines that can be used when the model monitor is set \n            using the model package. </p>"
+                "smithy.api#documentation": "<p>Represents the drift check explainability baselines that can be used when the model\n            monitor is set using the model package. </p>"
             }
         },
         "com.amazonaws.sagemaker#DriftCheckModelDataQuality": {
@@ -28647,7 +28653,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the drift check data quality baselines that can be used when the model monitor is set using \n            the model package. </p>"
+                "smithy.api#documentation": "<p>Represents the drift check data quality baselines that can be used when the model\n            monitor is set using the model package. </p>"
             }
         },
         "com.amazonaws.sagemaker#DriftCheckModelQuality": {
@@ -28667,7 +28673,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the drift check model quality baselines that can be used when the model monitor is set using \n            the model package. </p>"
+                "smithy.api#documentation": "<p>Represents the drift check model quality baselines that can be used when the model\n            monitor is set using the model package. </p>"
             }
         },
         "com.amazonaws.sagemaker#DynamicScalingConfiguration": {
@@ -30418,7 +30424,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The properties of an experiment as returned by the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html\">Search</a> API.</p>"
+                "smithy.api#documentation": "<p>The properties of an experiment as returned by the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html\">Search</a> API.\n      For information about experiments, see the \n      <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateExperiment.html\">CreateExperiment</a> API.</p>"
             }
         },
         "com.amazonaws.sagemaker#ExperimentArn": {
@@ -32102,7 +32108,7 @@
                 "target": "com.amazonaws.sagemaker#GetModelPackageGroupPolicyOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets a resource policy that manages access for a model group. For information about\n            resource policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html\">Identity-based\n                policies and resource-based policies</a> in the <i>Amazon Web Services Identity and\n                    Access Management User Guide.</i>.</p>"
+                "smithy.api#documentation": "<p>Gets a resource policy that manages access for a model group. For information about\n            resource policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html\">Identity-based\n                policies and resource-based policies</a> in the <i>Amazon Web Services\n                Identity and Access Management User Guide.</i>.</p>"
             }
         },
         "com.amazonaws.sagemaker#GetModelPackageGroupPolicyInput": {
@@ -35199,6 +35205,47 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#InferenceComponentCapacitySize": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentCapacitySizeType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the endpoint capacity type.</p>\n         <dl>\n            <dt>COPY_COUNT</dt>\n            <dd>\n               <p>The endpoint activates based on the number of inference component\n                  copies.</p>\n            </dd>\n            <dt>CAPACITY_PERCENT</dt>\n            <dd>\n               <p>The endpoint activates based on the specified percentage of capacity.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#CapacitySizeValue",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Defines the capacity size, either as a number of inference component copies or a\n         capacity percentage.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the type and size of the endpoint capacity to activate for a rolling\n         deployment or a rollback strategy. You can specify your batches as either of the\n         following:</p>\n         <ul>\n            <li>\n               <p>A count of inference component copies </p>\n            </li>\n            <li>\n               <p>The overall percentage or your fleet </p>\n            </li>\n         </ul>\n         <p>For a rollback strategy, if you don't specify the fields in this object, or if you set\n         the <code>Value</code> parameter to 100%, then SageMaker AI uses a blue/green rollback\n         strategy and rolls all traffic back to the blue fleet.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#InferenceComponentCapacitySizeType": {
+            "type": "enum",
+            "members": {
+                "COPY_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COPY_COUNT"
+                    }
+                },
+                "CAPACITY_PERCENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAPACITY_PERCENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#InferenceComponentComputeResourceRequirements": {
             "type": "structure",
             "members": {
@@ -35290,6 +35337,25 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#InferenceComponentDeploymentConfig": {
+            "type": "structure",
+            "members": {
+                "RollingUpdatePolicy": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentRollingUpdatePolicy",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies a rolling deployment strategy for updating a SageMaker AI\n         endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutoRollbackConfiguration": {
+                    "target": "com.amazonaws.sagemaker#AutoRollbackConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deployment configuration for an endpoint that hosts inference components. The\n         configuration includes the desired deployment strategy and rollback settings.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#InferenceComponentName": {
             "type": "string",
             "traits": {
@@ -35308,6 +35374,42 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#InferenceComponentRollingUpdatePolicy": {
+            "type": "structure",
+            "members": {
+                "MaximumBatchSize": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentCapacitySize",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The batch size for each rolling step in the deployment process. For each step, SageMaker AI provisions capacity on the new endpoint fleet, routes traffic to that fleet,\n         and terminates capacity on the old endpoint fleet. The value must be between 5% to 50% of\n         the copy count of the inference component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WaitIntervalInSeconds": {
+                    "target": "com.amazonaws.sagemaker#WaitIntervalInSeconds",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The length of the baking period, during which SageMaker AI monitors alarms for each\n         batch on the new fleet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaximumExecutionTimeoutInSeconds": {
+                    "target": "com.amazonaws.sagemaker#MaximumExecutionTimeoutInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time limit for the total deployment. Exceeding this limit causes a timeout.</p>"
+                    }
+                },
+                "RollbackMaximumBatchSize": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentCapacitySize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The batch size for a rollback to the old endpoint fleet. If this field is absent, the\n         value is set to the default, which is 100% of the total capacity. When the default is used,\n            SageMaker AI provisions the entire capacity of the old fleet at once during\n         rollback.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a rolling deployment strategy for updating a SageMaker AI inference\n         component.</p>"
             }
         },
         "com.amazonaws.sagemaker#InferenceComponentRuntimeConfig": {
@@ -43586,7 +43688,7 @@
                 "CrossAccountFilterOption": {
                     "target": "com.amazonaws.sagemaker#CrossAccountFilterOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that returns either model groups shared with you or model groups in\n\t  your own account. When the value is <code>CrossAccount</code>, the results show\n\t  the resources made discoverable to you from other accounts. When the value is\n          <code>SameAccount</code> or <code>null</code>, the results show resources from your\n \t  account. The default is <code>SameAccount</code>.</p>"
+                        "smithy.api#documentation": "<p>A filter that returns either model groups shared with you or model groups in your own\n            account. When the value is <code>CrossAccount</code>, the results show the resources\n            made discoverable to you from other accounts. When the value is <code>SameAccount</code>\n            or <code>null</code>, the results show resources from your account. The default is\n                <code>SameAccount</code>.</p>"
                     }
                 }
             },
@@ -43608,7 +43710,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker returns this token. To retrieve the next set\n            of model groups, use it in the subsequent request.</p>"
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker returns this token. To retrieve the next set of\n            model groups, use it in the subsequent request.</p>"
                     }
                 }
             },
@@ -43670,13 +43772,13 @@
                 "ModelPackageGroupName": {
                     "target": "com.amazonaws.sagemaker#ArnOrName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that returns only model versions that belong to the specified model group.</p>"
+                        "smithy.api#documentation": "<p>A filter that returns only model versions that belong to the specified model\n            group.</p>"
                     }
                 },
                 "ModelPackageType": {
                     "target": "com.amazonaws.sagemaker#ModelPackageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that returns only the model packages of the specified type. This can be one\n            of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UNVERSIONED</code> - List only unversioined models. \n                    This is the default value if no <code>ModelPackageType</code> is specified.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VERSIONED</code> - List only versioned models.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOTH</code> - List both versioned and unversioned models.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A filter that returns only the model packages of the specified type. This can be one\n            of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UNVERSIONED</code> - List only unversioined models. This is the default\n                    value if no <code>ModelPackageType</code> is specified.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VERSIONED</code> - List only versioned models.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOTH</code> - List both versioned and unversioned models.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -48687,7 +48789,7 @@
                     "target": "com.amazonaws.sagemaker#EntityName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n            The current stage in the model life cycle.\n        </p>",
+                        "smithy.api#documentation": "<p> The current stage in the model life cycle. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -48695,19 +48797,19 @@
                     "target": "com.amazonaws.sagemaker#EntityName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n            The current status of a stage in model life cycle.\n        </p>",
+                        "smithy.api#documentation": "<p> The current status of a stage in model life cycle. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StageDescription": {
                     "target": "com.amazonaws.sagemaker#StageDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the stage related details.\n        </p>"
+                        "smithy.api#documentation": "<p> Describes the stage related details. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+                "smithy.api#documentation": "<p> A structure describing the current state of the model in its life cycle. </p>"
             }
         },
         "com.amazonaws.sagemaker#ModelMetadataFilter": {
@@ -48901,7 +49003,7 @@
                 "ModelPackageName": {
                     "target": "com.amazonaws.sagemaker#EntityName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model.</p>"
+                        "smithy.api#documentation": "<p>The name of the model package. The name can be as follows:</p>\n         <ul>\n            <li>\n               <p>For a versioned model, the name is automatically generated by SageMaker Model Registry and\n                    follows the format\n                    '<code>ModelPackageGroupName/ModelPackageVersion</code>'.</p>\n            </li>\n            <li>\n               <p>For an unversioned model, you must provide the name.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ModelPackageGroupName": {
@@ -48949,13 +49051,13 @@
                 "ValidationSpecification": {
                     "target": "com.amazonaws.sagemaker#ModelPackageValidationSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies batch transform jobs that SageMaker runs to validate your model package.</p>"
+                        "smithy.api#documentation": "<p>Specifies batch transform jobs that SageMaker runs to validate your model\n            package.</p>"
                     }
                 },
                 "ModelPackageStatus": {
                     "target": "com.amazonaws.sagemaker#ModelPackageStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the model package. This can be one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The model package is pending being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The model package is in the process of being\n                    created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The model package was successfully created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The model package failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The model package is in the process of being deleted.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the model package. This can be one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The model package is pending being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The model package is in the process of being\n                    created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The model package was successfully created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The model package failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The model package is in the process of being\n                    deleted.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ModelPackageStatusDetails": {
@@ -48967,7 +49069,7 @@
                 "CertifyForMarketplace": {
                     "target": "com.amazonaws.sagemaker#CertifyForMarketplace",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the model package is to be certified to be listed on Amazon Web Services Marketplace. For\n            information about listing model packages on Amazon Web Services Marketplace, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html\">List Your\n                Algorithm or Model Package on Amazon Web Services Marketplace</a>.</p>"
+                        "smithy.api#documentation": "<p>Whether the model package is to be certified to be listed on Amazon Web Services\n            Marketplace. For information about listing model packages on Amazon Web Services\n            Marketplace, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html\">List Your Algorithm or Model\n                Package on Amazon Web Services Marketplace</a>.</p>"
                     }
                 },
                 "ModelApprovalStatus": {
@@ -48979,7 +49081,7 @@
                 "CreatedBy": {
                     "target": "com.amazonaws.sagemaker#UserContext",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.</p>"
+                        "smithy.api#documentation": "<p>Information about the user who created or modified an experiment, trial, trial\n            component, lineage group, or project.</p>"
                     }
                 },
                 "MetadataProperties": {
@@ -49003,7 +49105,7 @@
                 "LastModifiedBy": {
                     "target": "com.amazonaws.sagemaker#UserContext",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.</p>"
+                        "smithy.api#documentation": "<p>Information about the user who created or modified an experiment, trial, trial\n            component, lineage group, or project.</p>"
                     }
                 },
                 "ApprovalDescription": {
@@ -49015,19 +49117,19 @@
                 "Domain": {
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The machine learning domain of your model package and its components. Common\n            machine learning domains include computer vision and natural language processing.</p>"
+                        "smithy.api#documentation": "<p>The machine learning domain of your model package and its components. Common machine\n            learning domains include computer vision and natural language processing.</p>"
                     }
                 },
                 "Task": {
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The machine learning task your model package accomplishes. Common machine\n            learning tasks include object detection and image classification.</p>"
+                        "smithy.api#documentation": "<p>The machine learning task your model package accomplishes. Common machine learning\n            tasks include object detection and image classification.</p>"
                     }
                 },
                 "SamplePayloadUrl": {
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service path where the sample payload are stored. This path must point to\n           a single gzip compressed tar archive (.tar.gz suffix).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service path where the sample payload are stored. This path must point to a\n            single gzip compressed tar archive (.tar.gz suffix).</p>"
                     }
                 },
                 "AdditionalInferenceSpecifications": {
@@ -49051,13 +49153,13 @@
                 "ModelLifeCycle": {
                     "target": "com.amazonaws.sagemaker#ModelLifeCycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+                        "smithy.api#documentation": "<p> A structure describing the current state of the model in its life cycle. </p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the tags associated with the model package. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of the tags associated with the model package. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General\n                Reference Guide</i>.</p>"
                     }
                 },
                 "CustomerMetadataProperties": {
@@ -49069,7 +49171,7 @@
                 "DriftCheckBaselines": {
                     "target": "com.amazonaws.sagemaker#DriftCheckBaselines",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set using the model package.</p>"
+                        "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set\n            using the model package.</p>"
                     }
                 },
                 "SkipModelValidation": {
@@ -49080,7 +49182,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A versioned model that can be deployed for SageMaker inference.</p>"
+                "smithy.api#documentation": "<p>A container for your trained model that can be deployed for SageMaker inference. This can\n            include inference code, artifacts, and metadata. The model package type can be one of\n            the following.</p>\n         <ul>\n            <li>\n               <p>Versioned model: A part of a model package group in Model Registry.</p>\n            </li>\n            <li>\n               <p>Unversioned model: Not part of a model package group and used in Amazon Web Services Marketplace.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModelPackage.html\">\n               <code>CreateModelPackage</code>\n            </a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageArn": {
@@ -49118,7 +49220,7 @@
                     "target": "com.amazonaws.sagemaker#ContainerImage",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Elastic Container Registry (Amazon ECR) path where inference code is stored.</p>\n         <p>If you are using your own custom algorithm instead of an algorithm provided by SageMaker,\n            the inference code must meet SageMaker requirements. SageMaker supports both\n            <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code>\n            image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon\n                SageMaker</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Elastic Container Registry (Amazon ECR) path where inference code is stored.</p>\n         <p>If you are using your own custom algorithm instead of an algorithm provided by SageMaker,\n            the inference code must meet SageMaker requirements. SageMaker supports both\n                <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code>\n            image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon\n                SageMaker</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -49131,7 +49233,7 @@
                 "ModelDataUrl": {
                     "target": "com.amazonaws.sagemaker#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single <code>gzip</code> compressed tar archive\n            (<code>.tar.gz</code> suffix).</p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                model package.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single <code>gzip</code> compressed tar archive\n                (<code>.tar.gz</code> suffix).</p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                model package.</p>\n         </note>"
                     }
                 },
                 "ModelDataSource": {
@@ -49149,7 +49251,7 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#EnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container. Each key and value in the\n            <code>Environment</code> string to string map can have length of up to 1024. We\n            support up to 16 entries in the map.</p>"
+                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container. Each key and value in the\n                <code>Environment</code> string to string map can have length of up to 1024. We\n            support up to 16 entries in the map.</p>"
                     }
                 },
                 "ModelInput": {
@@ -49248,18 +49350,18 @@
                 "ModelPackageGroupStatus": {
                     "target": "com.amazonaws.sagemaker#ModelPackageGroupStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the model group. This can be one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The model group is pending being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The model group is in the process of being\n                    created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The model group was successfully created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The model group failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The model group is in the process of being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> - SageMaker failed to delete the model group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the model group. This can be one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The model group is pending being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The model group is in the process of being\n                    created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The model group was successfully created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The model group failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The model group is in the process of being\n                    deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> - SageMaker failed to delete the model group.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the tags associated with the model group. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of the tags associated with the model group. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General\n                Reference Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A group of versioned models in the model registry.</p>"
+                "smithy.api#documentation": "<p>A group of versioned models in the Model Registry.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageGroupArn": {
@@ -49388,18 +49490,18 @@
                 "ModelCardContent": {
                     "target": "com.amazonaws.sagemaker#ModelCardContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the model card. The content must follow the schema described\n           in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n               Package Model Card Schema</a>.</p>"
+                        "smithy.api#documentation": "<p>The content of the model card. The content must follow the schema described in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                Package Model Card Schema</a>.</p>"
                     }
                 },
                 "ModelCardStatus": {
                     "target": "com.amazonaws.sagemaker#ModelCardStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Draft</code>: The model card is a work in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PendingReview</code>: The model card is pending review.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Approved</code>: The model card is approved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Archived</code>: The model card is archived. No more updates can be made to the model\n               card content. If you try to update the model card content, you will receive the message <code>Model Card\n \t       is in Archived state</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The approval status of the model card within your organization. Different\n            organizations might have different criteria for model card review and approval.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Draft</code>: The model card is a work in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PendingReview</code>: The model card is pending review.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Approved</code>: The model card is approved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Archived</code>: The model card is archived. No more updates can be made\n                    to the model card content. If you try to update the model card content, you will\n                    receive the message <code>Model Card is in Archived state</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about the model package model\n            card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
+                "smithy.api#documentation": "<p>The model card associated with the model package. Since\n                <code>ModelPackageModelCard</code> is tied to a model package, it is a specific\n            usage of a model card and its schema is simplified compared to the schema of\n                <code>ModelCard</code>. The <code>ModelPackageModelCard</code> schema does not\n            include <code>model_package_details</code>, and <code>model_overview</code> is composed\n            of the <code>model_creator</code> and <code>model_artifact</code> properties. For more\n            information about the model package model card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about the model card\n            associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View the Details of a Model\n                Version</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageSecurityConfig": {
@@ -49409,13 +49511,13 @@
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model package information.</p>",
+                        "smithy.api#documentation": "<p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model\n            package information.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An optional Key Management Service\n         key to encrypt, decrypt, and re-encrypt model package information for regulated workloads with\n         highly sensitive data.</p>"
+                "smithy.api#documentation": "<p>An optional Key Management Service key to encrypt, decrypt, and re-encrypt model\n            package information for regulated workloads with highly sensitive data.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageSortBy": {
@@ -49659,7 +49761,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains data, such as the inputs and targeted instance types that are used in the\n            process of validating the model package.</p>\n         <p>The data provided in the validation profile is made available to your buyers on Amazon Web Services\n            Marketplace.</p>"
+                "smithy.api#documentation": "<p>Contains data, such as the inputs and targeted instance types that are used in the\n            process of validating the model package.</p>\n         <p>The data provided in the validation profile is made available to your buyers on\n                Amazon Web Services Marketplace.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageValidationProfiles": {
@@ -51063,12 +51165,12 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the tags associated with the monitoring schedlue. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of the tags associated with the monitoring schedlue. For more information, see\n                <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General\n                Reference Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A schedule for a model monitoring job. For information about model monitor, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html\">Amazon SageMaker Model\n                Monitor</a>.</p>"
+                "smithy.api#documentation": "<p>A schedule for a model monitoring job. For information about model monitor, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html\">Amazon SageMaker Model\n                Monitor</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#MonitoringScheduleArn": {
@@ -58044,7 +58146,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a resouce policy to control access to a model group. For information about\n            resoure policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html\">Identity-based\n                policies and resource-based policies</a> in the <i>Amazon Web Services Identity and Access Management User Guide.</i>.</p>"
+                "smithy.api#documentation": "<p>Adds a resouce policy to control access to a model group. For information about\n            resoure policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html\">Identity-based\n                policies and resource-based policies</a> in the <i>Amazon Web Services\n                Identity and Access Management User Guide.</i>.</p>"
             }
         },
         "com.amazonaws.sagemaker#PutModelPackageGroupPolicyInput": {
@@ -68058,7 +68160,7 @@
                     "target": "com.amazonaws.sagemaker#TrafficRoutingConfigType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Traffic routing strategy type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_AT_ONCE</code>: Endpoint traffic shifts to the new fleet\n                in a single step.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>CANARY</code>: Endpoint traffic shifts to the new fleet\n                in two steps. The first step is the canary, which is a small portion of the traffic. The\n                second step is the remainder of the traffic.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINEAR</code>: Endpoint traffic shifts to the new fleet in\n                n steps of a configurable size.\n            </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Traffic routing strategy type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_AT_ONCE</code>: Endpoint traffic shifts to the new fleet in a single\n                    step. </p>\n            </li>\n            <li>\n               <p>\n                  <code>CANARY</code>: Endpoint traffic shifts to the new fleet in two steps.\n                    The first step is the canary, which is a small portion of the traffic. The\n                    second step is the remainder of the traffic. </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINEAR</code>: Endpoint traffic shifts to the new fleet in n steps of a\n                    configurable size. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -68066,25 +68168,25 @@
                     "target": "com.amazonaws.sagemaker#WaitIntervalInSeconds",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The waiting time (in seconds) between incremental steps to turn on traffic on the\n            new endpoint fleet.</p>",
+                        "smithy.api#documentation": "<p>The waiting time (in seconds) between incremental steps to turn on traffic on the new\n            endpoint fleet.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CanarySize": {
                     "target": "com.amazonaws.sagemaker#CapacitySize",
                     "traits": {
-                        "smithy.api#documentation": "<p>Batch size for the first step to turn on traffic on the new endpoint fleet. <code>Value</code> must be less than\n            or equal to 50% of the variant's total instance count.</p>"
+                        "smithy.api#documentation": "<p>Batch size for the first step to turn on traffic on the new endpoint fleet.\n                <code>Value</code> must be less than or equal to 50% of the variant's total instance\n            count.</p>"
                     }
                 },
                 "LinearStepSize": {
                     "target": "com.amazonaws.sagemaker#CapacitySize",
                     "traits": {
-                        "smithy.api#documentation": "<p>Batch size for each step to turn on traffic on the new endpoint fleet. <code>Value</code> must be\n            10-50% of the variant's total instance count.</p>"
+                        "smithy.api#documentation": "<p>Batch size for each step to turn on traffic on the new endpoint fleet.\n                <code>Value</code> must be 10-50% of the variant's total instance count.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the traffic routing strategy during an endpoint deployment to shift traffic from the\n            old fleet to the new fleet.</p>"
+                "smithy.api#documentation": "<p>Defines the traffic routing strategy during an endpoint deployment to shift traffic\n            from the old fleet to the new fleet.</p>"
             }
         },
         "com.amazonaws.sagemaker#TrafficRoutingConfigType": {
@@ -73412,6 +73514,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Runtime settings for a model that is deployed with an inference component.</p>"
                     }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentDeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for the inference component. The configuration contains the\n         desired deployment strategy and rollback settings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -73778,7 +73886,7 @@
                 "InferenceSpecification": {
                     "target": "com.amazonaws.sagemaker#InferenceSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies details about inference jobs that you can run with models based on this model\n            package, including the following information:</p>\n         <ul>\n            <li>\n               <p>The Amazon ECR paths of containers that contain the inference code and model\n                    artifacts.</p>\n            </li>\n            <li>\n               <p>The instance types that the model package supports for transform jobs and\n                    real-time endpoints used for inference.</p>\n            </li>\n            <li>\n               <p>The input and output content formats that the model package supports for\n                    inference.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies details about inference jobs that you can run with models based on this\n            model package, including the following information:</p>\n         <ul>\n            <li>\n               <p>The Amazon ECR paths of containers that contain the inference code and model\n                    artifacts.</p>\n            </li>\n            <li>\n               <p>The instance types that the model package supports for transform jobs and\n                    real-time endpoints used for inference.</p>\n            </li>\n            <li>\n               <p>The input and output content formats that the model package supports for\n                    inference.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SourceUri": {
@@ -73790,19 +73898,19 @@
                 "ModelCard": {
                     "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about the model package model\n            card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
+                        "smithy.api#documentation": "<p>The model card associated with the model package. Since\n                <code>ModelPackageModelCard</code> is tied to a model package, it is a specific\n            usage of a model card and its schema is simplified compared to the schema of\n                <code>ModelCard</code>. The <code>ModelPackageModelCard</code> schema does not\n            include <code>model_package_details</code>, and <code>model_overview</code> is composed\n            of the <code>model_creator</code> and <code>model_artifact</code> properties. For more\n            information about the model package model card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about the model card\n            associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View the Details of a Model\n                Version</a>.</p>"
                     }
                 },
                 "ModelLifeCycle": {
                     "target": "com.amazonaws.sagemaker#ModelLifeCycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+                        "smithy.api#documentation": "<p> A structure describing the current state of the model in its life cycle. </p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.sagemaker#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A unique token that guarantees that the call to this API is idempotent.\n        </p>"
+                        "smithy.api#documentation": "<p> A unique token that guarantees that the call to this API is idempotent. </p>"
                     }
                 }
             },

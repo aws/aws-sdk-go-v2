@@ -1896,7 +1896,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1
+                    "max": 3
                 }
             }
         },
@@ -2528,7 +2528,7 @@
                 "identifier": {
                     "target": "com.amazonaws.iotfleetwise#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, service-generated identifier.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the state template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3700,7 +3700,7 @@
                 "identifier": {
                     "target": "com.amazonaws.iotfleetwise#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, service-generated identifier.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the state template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5175,6 +5175,13 @@
                         "smithy.api#documentation": "<p>An optional parameter to filter the results by the status of each created campaign in\n            your account. The status can be one of: <code>CREATING</code>,\n                <code>WAITING_FOR_APPROVAL</code>, <code>RUNNING</code>, or\n            <code>SUSPENDED</code>.</p>",
                         "smithy.api#httpQuery": "status"
                     }
+                },
+                "listResponseScope": {
+                    "target": "com.amazonaws.iotfleetwise#ListResponseScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: campaign name, Amazon Resource Name (ARN), creation time, and last modification time.</p>",
+                        "smithy.api#httpQuery": "listResponseScope"
+                    }
                 }
             }
         },
@@ -5426,6 +5433,13 @@
                         "smithy.api#documentation": "<p>The maximum number of items to return, between 1 and 100, inclusive.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "listResponseScope": {
+                    "target": "com.amazonaws.iotfleetwise#ListResponseScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: decoder manifest name, Amazon Resource Name (ARN), creation time, and last modification time.</p>",
+                        "smithy.api#httpQuery": "listResponseScope"
+                    }
                 }
             }
         },
@@ -5587,6 +5601,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return, between 1 and 100, inclusive.</p>",
                         "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "listResponseScope": {
+                    "target": "com.amazonaws.iotfleetwise#ListResponseScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: fleet ID, Amazon Resource Name (ARN), creation time, and last modification time.</p>",
+                        "smithy.api#httpQuery": "listResponseScope"
                     }
                 }
             }
@@ -5757,6 +5778,13 @@
                         "smithy.api#documentation": "<p>The maximum number of items to return, between 1 and 100, inclusive.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "listResponseScope": {
+                    "target": "com.amazonaws.iotfleetwise#ListResponseScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: model manifest name, Amazon Resource Name (ARN), creation time, and last modification time.</p>",
+                        "smithy.api#httpQuery": "listResponseScope"
+                    }
                 }
             }
         },
@@ -5773,6 +5801,17 @@
                     "target": "com.amazonaws.iotfleetwise#nextToken",
                     "traits": {
                         "smithy.api#documentation": "<p> The token to retrieve the next set of results, or <code>null</code> if there are no more results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleetwise#ListResponseScope": {
+            "type": "enum",
+            "members": {
+                "METADATA_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA_ONLY"
                     }
                 }
             }
@@ -5999,6 +6038,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return, between 1 and 100, inclusive.</p>",
                         "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "listResponseScope": {
+                    "target": "com.amazonaws.iotfleetwise#ListResponseScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: state template ID, Amazon Resource Name (ARN), creation time, and last modification time.</p>",
+                        "smithy.api#httpQuery": "listResponseScope"
                     }
                 }
             },
@@ -6244,6 +6290,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return, between 1 and 100, inclusive.</p>",
                         "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "listResponseScope": {
+                    "target": "com.amazonaws.iotfleetwise#ListResponseScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you set the <code>listResponseScope</code> parameter to <code>METADATA_ONLY</code>, the list response includes: vehicle name, Amazon Resource Name (ARN), creation time, and last modification time.</p>",
+                        "smithy.api#httpQuery": "listResponseScope"
                     }
                 }
             }
@@ -8085,10 +8138,12 @@
                 "target": "com.amazonaws.iotfleetwise#SignalFetchInformation"
             },
             "traits": {
+                "aws.api#data": "content",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.iotfleetwise#SignalInformation": {
@@ -8202,7 +8257,7 @@
                 "identifier": {
                     "target": "com.amazonaws.iotfleetwise#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, service-generated identifier.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the state template.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9672,7 +9727,7 @@
                 "identifier": {
                     "target": "com.amazonaws.iotfleetwise#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, service-generated identifier.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the state template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
