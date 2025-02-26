@@ -301,6 +301,108 @@ func TestBuildOperand(t *testing.T) {
 			expected: exprNode{},
 			err:      invalidName,
 		},
+		{
+			name:  "no split name name with nested indices",
+			input: NameNoDotSplit("foo.bar[0][0]"),
+			expected: exprNode{
+				names:   []string{"foo.bar"},
+				fmtExpr: "$n[0][0]",
+			},
+		},
+		{
+			name:  "name with nested indices and property",
+			input: Name("foo[1][2].bar"),
+			expected: exprNode{
+				names:   []string{"foo", "bar"},
+				fmtExpr: "$n[1][2].$n",
+			},
+		},
+		{
+			name:  "names with nested indices",
+			input: Name("foo[1][2].bar[3][4]"),
+			expected: exprNode{
+				names:   []string{"foo", "bar"},
+				fmtExpr: "$n[1][2].$n[3][4]",
+			},
+		},
+		{
+			name:  "very log name with nested indices",
+			input: Name("foo[1][2][3][4][5][6][7][8][9][10].bar[11][12][13][14][15][16][17][18]"),
+			expected: exprNode{
+				names:   []string{"foo", "bar"},
+				fmtExpr: "$n[1][2][3][4][5][6][7][8][9][10].$n[11][12][13][14][15][16][17][18]",
+			},
+		},
+		{
+			name:  "very log name with nested indices",
+			input: Name("foo[1][2][3][4][5][6][7][8][9][10].bar[11][12][13][14][15][16][17][18]"),
+			expected: exprNode{
+				names:   []string{"foo", "bar"},
+				fmtExpr: "$n[1][2][3][4][5][6][7][8][9][10].$n[11][12][13][14][15][16][17][18]",
+			},
+		},
+		{
+			name:     "invalid name when bracket is missing",
+			input:    Name("foo["),
+			expected: exprNode{},
+			err:      invalidName,
+		},
+		{
+			name:     "invalid name when bracket is missing",
+			input:    Name("foo]"),
+			expected: exprNode{},
+			err:      invalidName,
+		},
+		{
+			name:     "invalid name when ending with dot",
+			input:    Name("foo."),
+			expected: exprNode{},
+			err:      invalidName,
+		},
+		{
+			name:     "invalid name when alpha index",
+			input:    Name("foo[a]"),
+			expected: exprNode{},
+			err:      invalidName,
+		},
+		{
+			name:     "invalid name when weird brackets",
+			input:    Name("foo]1["),
+			expected: exprNode{},
+			err:      invalidName,
+		},
+		{
+			name: "no split name append name with nested list index",
+			input: NameNoDotSplit("foo.bar").
+				AppendName(Name("foo.bar")).
+				AppendName(Name("[0][1]")).
+				AppendName(Name("abc123")),
+			expected: exprNode{
+				names:   []string{"foo.bar", "foo", "bar", "abc123"},
+				fmtExpr: "$n.$n.$n[0][1].$n",
+			},
+		},
+		{
+			name: "no split name append name with bad nested list index",
+			input: NameNoDotSplit("foo.bar").
+				AppendName(Name("foo.bar")).
+				AppendName(Name("[0][a]")).
+				AppendName(Name("abc123")),
+			expected: exprNode{},
+			err:      invalidName,
+		},
+		{
+			name:     "bad input left bracket only",
+			input:    Name("foo").AppendName(Name("[")),
+			expected: exprNode{},
+			err:      invalidName,
+		},
+		{
+			name:     "bad input right bracket only",
+			input:    Name("foo").AppendName(Name("]")),
+			expected: exprNode{},
+			err:      invalidName,
+		},
 	}
 
 	for _, c := range cases {
