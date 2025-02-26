@@ -1,3 +1,7 @@
+# v1.4.17 (2025-02-26)
+
+* No change notes available for this release.
+
 # v1.4.16 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

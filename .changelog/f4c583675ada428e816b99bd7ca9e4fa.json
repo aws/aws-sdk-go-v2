@@ -1,8 +1,0 @@
-{
-    "id": "f4c58367-5ada-428e-816b-99bd7ca9e4fa",
-    "type": "feature",
-    "description": "AWS Batch: Resource Aware Scheduling feature support",
-    "modules": [
-        "service/batch"
-    ]
-}

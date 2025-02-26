@@ -1,3 +1,7 @@
+# v1.205.0 (2025-02-26)
+
+* **Feature**: Amazon EC2 Fleet customers can now override the Block Device Mapping specified in the Launch Template when creating a new Fleet request, saving the effort of creating and associating new Launch Templates to customize the Block Device Mapping.
+
 # v1.204.0 (2025-02-25)
 
 * **Feature**: Adds support for time-based EBS-backed AMI copy operations. Time-based copy ensures that EBS-backed AMIs are copied within and across Regions in a specified timeframe.

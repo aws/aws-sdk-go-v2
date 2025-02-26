@@ -1,3 +1,7 @@
+# v1.44.12 (2025-02-26)
+
+* **Documentation**: Documentation update for VPC origin config.
+
 # v1.44.11 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

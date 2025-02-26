@@ -1,3 +1,7 @@
+# v1.50.0 (2025-02-26)
+
+* **Feature**: AWS Batch: Resource Aware Scheduling feature support
+
 # v1.49.13 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

@@ -1,3 +1,7 @@
+# v1.16.0 (2025-02-26)
+
+* **Feature**: This release adds support for sharing AWS::ApplicationSignals::Service and AWS::ApplicationSignals::ServiceLevelObjective resources.
+
 # v1.15.19 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

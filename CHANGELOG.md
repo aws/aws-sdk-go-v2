@@ -1,3 +1,23 @@
+# Release (2025-02-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.8.0](service/applicationsignals/CHANGELOG.md#v180-2025-02-26)
+  * **Feature**: This release adds API support for reading Service Level Objectives and Services from monitoring accounts, from SLO and Service-scoped operations, including ListServices and ListServiceLevelObjectives.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.50.0](service/batch/CHANGELOG.md#v1500-2025-02-26)
+  * **Feature**: AWS Batch: Resource Aware Scheduling feature support
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.35.0](service/chime/CHANGELOG.md#v1350-2025-02-26)
+  * **Feature**: Removes the Amazon Chime SDK APIs from the "chime" namespace.  Amazon Chime SDK APIs continue to be available in the AWS SDK via the dedicated Amazon Chime SDK namespaces: chime-sdk-identity, chime-sdk-mediapipelines, chime-sdk-meetings, chime-sdk-messaging, and chime-sdk-voice.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.44.12](service/cloudfront/CHANGELOG.md#v14412-2025-02-26)
+  * **Documentation**: Documentation update for VPC origin config.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.205.0](service/ec2/CHANGELOG.md#v12050-2025-02-26)
+  * **Feature**: Amazon EC2 Fleet customers can now override the Block Device Mapping specified in the Launch Template when creating a new Fleet request, saving the effort of creating and associating new Launch Templates to customize the Block Device Mapping.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.23.0](service/iotfleetwise/CHANGELOG.md#v1230-2025-02-26)
+  * **Feature**: This release adds an optional listResponseScope request parameter in certain list API requests to limit the response to metadata only.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.16.0](service/oam/CHANGELOG.md#v1160-2025-02-26)
+  * **Feature**: This release adds support for sharing AWS::ApplicationSignals::Service and AWS::ApplicationSignals::ServiceLevelObjective resources.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.178.0](service/sagemaker/CHANGELOG.md#v11780-2025-02-26)
+  * **Feature**: AWS SageMaker InferenceComponents now support rolling update deployments for Inference Components.
+
 # Release (2025-02-25)
 
 ## Module Highlights

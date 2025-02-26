@@ -1,3 +1,7 @@
+# v1.23.0 (2025-02-26)
+
+* **Feature**: This release adds an optional listResponseScope request parameter in certain list API requests to limit the response to metadata only.
+
 # v1.22.11 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22
