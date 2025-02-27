@@ -1,3 +1,8 @@
+# v1.26.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2025-02-24)
 
 * **Feature**: This release adds Reasoning Content support to Converse and ConverseStream APIs

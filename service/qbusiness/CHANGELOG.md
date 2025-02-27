@@ -1,3 +1,9 @@
+# v1.22.0 (2025-02-27)
+
+* **Feature**: This release supports deleting attachments from conversations.
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.3 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

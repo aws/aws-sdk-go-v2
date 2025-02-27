@@ -1,3 +1,8 @@
+# v1.42.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.1 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

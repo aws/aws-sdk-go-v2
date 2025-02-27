@@ -1,3 +1,8 @@
+# v1.40.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2025-02-19)
 
 * **Feature**: Add environment variables to codepipeline action declaration.

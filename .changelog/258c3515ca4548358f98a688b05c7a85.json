@@ -1,8 +1,0 @@
-{
-    "id": "258c3515-ca45-4835-8f98-a688b05c7a85",
-    "type": "feature",
-    "description": "Introduces Sessions (preview) to enable stateful conversations in GenAI applications.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

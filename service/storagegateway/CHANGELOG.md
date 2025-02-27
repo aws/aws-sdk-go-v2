@@ -1,3 +1,9 @@
+# v1.36.0 (2025-02-27)
+
+* **Feature**: This release adds support to invoke a process that cleans the specified file share's cache of file entries that are failing upload to Amazon S3.
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.2 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

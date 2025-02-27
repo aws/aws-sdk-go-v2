@@ -1,3 +1,9 @@
+# v1.38.0 (2025-02-27)
+
+* **Feature**: Introduces Sessions (preview) to enable stateful conversations in GenAI applications.
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2025-02-24)
 
 * **Feature**: Adding support for ReasoningContent fields in Pre-Processing, Post-Processing and Orchestration Trace outputs.

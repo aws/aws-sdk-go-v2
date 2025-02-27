@@ -1,3 +1,8 @@
+# v1.54.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.16 (2025-02-19)
 
 * **Documentation**: This is a documentation only release for Amazon ECS that supports the CPU task limit increase.

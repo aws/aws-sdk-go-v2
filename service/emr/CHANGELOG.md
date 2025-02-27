@@ -1,3 +1,9 @@
+# v1.48.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Documentation**: Definition update for EbsConfiguration.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.13 (2025-02-18)
 
 * **Bug Fix**: Bump go version to 1.22

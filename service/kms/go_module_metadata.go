@@ -3,4 +3,4 @@
 package kms
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.37.19"
+const goModuleVersion = "1.38.0"

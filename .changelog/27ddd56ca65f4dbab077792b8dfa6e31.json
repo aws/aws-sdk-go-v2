@@ -1,8 +1,0 @@
-{
-    "id": "27ddd56c-a65f-4dba-b077-792b8dfa6e31",
-    "type": "feature",
-    "description": "Add track support for Redshift Serverless workgroup.",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

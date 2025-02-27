@@ -1,3 +1,8 @@
+# v1.52.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.14 (2025-02-21)
 
 * No change notes available for this release.

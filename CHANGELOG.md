@@ -1,3 +1,23 @@
+# Release (2025-02-27)
+
+## General Highlights
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.38.0](service/bedrockagentruntime/CHANGELOG.md#v1380-2025-02-27)
+  * **Feature**: Introduces Sessions (preview) to enable stateful conversations in GenAI applications.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.48.0](service/emr/CHANGELOG.md#v1480-2025-02-27)
+  * **Documentation**: Definition update for EbsConfiguration.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.22.0](service/qbusiness/CHANGELOG.md#v1220-2025-02-27)
+  * **Feature**: This release supports deleting attachments from conversations.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.26.0](service/redshiftserverless/CHANGELOG.md#v1260-2025-02-27)
+  * **Feature**: Add track support for Redshift Serverless workgroup.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.179.0](service/sagemaker/CHANGELOG.md#v11790-2025-02-27)
+  * **Feature**: SageMaker HubService is introducing support for creating Training Jobs in Curated Hub (Private Hub). Additionally, it is introducing two new APIs: UpdateHubContent and UpdateHubContentReference.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.36.0](service/storagegateway/CHANGELOG.md#v1360-2025-02-27)
+  * **Feature**: This release adds support to invoke a process that cleans the specified file share's cache of file entries that are failing upload to Amazon S3.
+
 # Release (2025-02-26)
 
 ## Module Highlights

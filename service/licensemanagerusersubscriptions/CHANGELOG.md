@@ -1,3 +1,8 @@
+# v1.15.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.12 (2025-02-20)
 
 * **Documentation**: Updates entity to include Microsoft RDS SAL as a valid type of user subscription.

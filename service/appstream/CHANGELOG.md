@@ -1,3 +1,8 @@
+# v1.45.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2025-02-21)
 
 * **Feature**: Added support for Certificate-Based Authentication on AppStream 2.0 multi-session fleets.

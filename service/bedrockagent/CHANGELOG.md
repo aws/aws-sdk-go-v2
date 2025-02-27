@@ -1,3 +1,8 @@
+# v1.37.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-02-21)
 
 * **Feature**: Introduce a new parameter which represents the user-agent header value used by the Bedrock Knowledge Base Web Connector.

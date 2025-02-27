@@ -1,3 +1,8 @@
+# v1.24.0 (2025-02-27)
+
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2025-02-26)
 
 * **Feature**: This release adds an optional listResponseScope request parameter in certain list API requests to limit the response to metadata only.

@@ -1,3 +1,9 @@
+# v1.179.0 (2025-02-27)
+
+* **Feature**: SageMaker HubService is introducing support for creating Training Jobs in Curated Hub (Private Hub). Additionally, it is introducing two new APIs: UpdateHubContent and UpdateHubContentReference.
+* **Feature**: Track credential providers via User-Agent Feature ids
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.178.0 (2025-02-26)
 
 * **Feature**: AWS SageMaker InferenceComponents now support rolling update deployments for Inference Components.
