@@ -52,6 +52,28 @@ func ExampleAPISchema_outputUsage() {
 var _ *types.S3Identifier
 var _ *string
 
+func ExampleBedrockSessionContentBlock_outputUsage() {
+	var union types.BedrockSessionContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.BedrockSessionContentBlockMemberImage:
+		_ = v.Value // Value is types.ImageBlock
+
+	case *types.BedrockSessionContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *types.ImageBlock
+
 func ExampleCaller_outputUsage() {
 	var union types.Caller
 	// type switches can be used to check the union value
@@ -252,6 +274,28 @@ func ExampleFunctionSchema_outputUsage() {
 
 var _ []types.FunctionDefinition
 
+func ExampleImageSource_outputUsage() {
+	var union types.ImageSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ImageSourceMemberBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.ImageSourceMemberS3Location:
+		_ = v.Value // Value is types.S3Location
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3Location
+var _ []byte
+
 func ExampleInlineAgentResponseStream_outputUsage() {
 	var union types.InlineAgentResponseStream
 	// type switches can be used to check the union value
@@ -343,6 +387,24 @@ func ExampleInvocationResultMember_outputUsage() {
 
 var _ *types.ApiResult
 var _ *types.FunctionResult
+
+func ExampleInvocationStepPayload_outputUsage() {
+	var union types.InvocationStepPayload
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvocationStepPayloadMemberContentBlocks:
+		_ = v.Value // Value is []types.BedrockSessionContentBlock
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.BedrockSessionContentBlock
 
 func ExampleMemory_outputUsage() {
 	var union types.Memory

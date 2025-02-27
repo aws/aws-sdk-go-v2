@@ -5310,6 +5310,46 @@ func (m *validateOpUpdateFeatureMetadata) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateHubContent struct {
+}
+
+func (*validateOpUpdateHubContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHubContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHubContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHubContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateHubContentReference struct {
+}
+
+func (*validateOpUpdateHubContentReference) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHubContentReference) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHubContentReferenceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHubContentReferenceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateHub struct {
 }
 
@@ -6848,6 +6888,14 @@ func addOpUpdateFeatureGroupValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateFeatureMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFeatureMetadata{}, middleware.After)
+}
+
+func addOpUpdateHubContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHubContent{}, middleware.After)
+}
+
+func addOpUpdateHubContentReferenceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHubContentReference{}, middleware.After)
 }
 
 func addOpUpdateHubValidationMiddleware(stack *middleware.Stack) error {
@@ -9534,6 +9582,21 @@ func validateGitConfig(v *types.GitConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GitConfig"}
 	if v.RepositoryUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHubAccessConfig(v *types.HubAccessConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HubAccessConfig"}
+	if v.HubContentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12492,6 +12555,16 @@ func validateS3DataSource(v *types.S3DataSource) error {
 	}
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if v.ModelAccessConfig != nil {
+		if err := validateModelAccessConfig(v.ModelAccessConfig); err != nil {
+			invalidParams.AddNested("ModelAccessConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HubAccessConfig != nil {
+		if err := validateHubAccessConfig(v.HubAccessConfig); err != nil {
+			invalidParams.AddNested("HubAccessConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -19178,6 +19251,51 @@ func validateOpUpdateFeatureMetadataInput(v *UpdateFeatureMetadataInput) error {
 	}
 	if v.FeatureName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FeatureName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateHubContentInput(v *UpdateHubContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHubContentInput"}
+	if v.HubName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubName"))
+	}
+	if v.HubContentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentName"))
+	}
+	if len(v.HubContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentType"))
+	}
+	if v.HubContentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateHubContentReferenceInput(v *UpdateHubContentReferenceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHubContentReferenceInput"}
+	if v.HubName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubName"))
+	}
+	if v.HubContentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentName"))
+	}
+	if len(v.HubContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

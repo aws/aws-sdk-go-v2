@@ -4058,6 +4058,30 @@ func TestCheckSnapshot_UpdateHub(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateHubContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHubContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateHubContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateHubContentReference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHubContentReference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateHubContentReference")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateImage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateImage(context.Background(), nil, func(o *Options) {
@@ -8322,6 +8346,30 @@ func TestUpdateSnapshot_UpdateHub(t *testing.T) {
 	_, err := svc.UpdateHub(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateHub")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateHubContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHubContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateHubContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateHubContentReference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHubContentReference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateHubContentReference")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

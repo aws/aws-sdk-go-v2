@@ -98,6 +98,10 @@ type UpdateWorkgroupInput struct {
 	// An array of VPC subnet IDs to associate with the workgroup.
 	SubnetIds []string
 
+	// An optional parameter for the name of the track for the workgroup. If you don't
+	// provide a track name, the workgroup is assigned to the current track.
+	TrackName *string
+
 	noSmithyDocumentSerde
 }
 

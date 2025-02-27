@@ -510,6 +510,26 @@ func (m *validateOpGetTableRestoreStatus) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTrack struct {
+}
+
+func (*validateOpGetTrack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetUsageLimit struct {
 }
 
@@ -968,6 +988,10 @@ func addOpGetScheduledActionValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetTableRestoreStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableRestoreStatus{}, middleware.After)
+}
+
+func addOpGetTrackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrack{}, middleware.After)
 }
 
 func addOpGetUsageLimitValidationMiddleware(stack *middleware.Stack) error {
@@ -1558,6 +1582,21 @@ func validateOpGetTableRestoreStatusInput(v *GetTableRestoreStatusInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableRestoreStatusInput"}
 	if v.TableRestoreRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableRestoreRequestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrackInput(v *GetTrackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrackInput"}
+	if v.TrackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrackName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

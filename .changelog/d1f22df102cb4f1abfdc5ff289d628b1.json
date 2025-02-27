@@ -1,0 +1,8 @@
+{
+    "id": "d1f22df1-02cb-4f1a-bfdc-5ff289d628b1",
+    "type": "feature",
+    "description": "This release adds support to invoke a process that cleans the specified file share's cache of file entries that are failing upload to Amazon S3.",
+    "modules": [
+        "service/storagegateway"
+    ]
+}

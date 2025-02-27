@@ -71,6 +71,9 @@ type ImportHubContentInput struct {
 	// The version of the hub content to import.
 	HubContentVersion *string
 
+	// The status of the hub content resource.
+	SupportStatus types.HubContentSupportStatus
+
 	// Any tags associated with the hub content.
 	Tags []types.Tag
 

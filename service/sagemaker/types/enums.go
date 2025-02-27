@@ -2831,6 +2831,7 @@ type HubContentSupportStatus string
 const (
 	HubContentSupportStatusSupported  HubContentSupportStatus = "Supported"
 	HubContentSupportStatusDeprecated HubContentSupportStatus = "Deprecated"
+	HubContentSupportStatusRestricted HubContentSupportStatus = "Restricted"
 )
 
 // Values returns all known values for HubContentSupportStatus. Note that this can
@@ -2841,6 +2842,7 @@ func (HubContentSupportStatus) Values() []HubContentSupportStatus {
 	return []HubContentSupportStatus{
 		"Supported",
 		"Deprecated",
+		"Restricted",
 	}
 }
 

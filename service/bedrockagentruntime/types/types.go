@@ -418,6 +418,42 @@ type BedrockRerankingModelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A block of content that you pass to, or receive from, a Amazon Bedrock session
+// in an invocation step. You pass the content to a session in the payLoad of the [PutInvocationStep]
+// API operation. You retrieve the content with the [GetInvocationStep]API operation.
+//
+// For more information about sessions, see [Store and retrieve conversation history and context with Amazon Bedrock sessions].
+//
+// The following types satisfy this interface:
+//
+//	BedrockSessionContentBlockMemberImage
+//	BedrockSessionContentBlockMemberText
+//
+// [Store and retrieve conversation history and context with Amazon Bedrock sessions]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+// [GetInvocationStep]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetInvocationStep.html
+// [PutInvocationStep]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_PutInvocationStep.html
+type BedrockSessionContentBlock interface {
+	isBedrockSessionContentBlock()
+}
+
+// The image in the invocation step.
+type BedrockSessionContentBlockMemberImage struct {
+	Value ImageBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*BedrockSessionContentBlockMemberImage) isBedrockSessionContentBlock() {}
+
+// The text in the invocation step.
+type BedrockSessionContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*BedrockSessionContentBlockMemberText) isBedrockSessionContentBlock() {}
+
 // This property contains the document to chat with, along with its attributes.
 type ByteContentDoc struct {
 
@@ -1578,6 +1614,52 @@ type GuardrailWordPolicyAssessment struct {
 	noSmithyDocumentSerde
 }
 
+// Image content for an invocation step.
+type ImageBlock struct {
+
+	// The format of the image.
+	//
+	// This member is required.
+	Format ImageFormat
+
+	// The source for the image.
+	//
+	// This member is required.
+	Source ImageSource
+
+	noSmithyDocumentSerde
+}
+
+// The source for an image.
+//
+// The following types satisfy this interface:
+//
+//	ImageSourceMemberBytes
+//	ImageSourceMemberS3Location
+type ImageSource interface {
+	isImageSource()
+}
+
+//	The raw image bytes for the image. If you use an Amazon Web Services SDK, you
+//
+// don't need to encode the image bytes in base64.
+type ImageSourceMemberBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageSourceMemberBytes) isImageSource() {}
+
+// The path to the Amazon S3 bucket where the image is stored.
+type ImageSourceMemberS3Location struct {
+	Value S3Location
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageSourceMemberS3Location) isImageSource() {}
+
 // Settings for implicit filtering, where a model generates a metadata filter
 // based on the prompt.
 type ImplicitFilterConfiguration struct {
@@ -1955,6 +2037,113 @@ type InvocationResultMemberMemberFunctionResult struct {
 }
 
 func (*InvocationResultMemberMemberFunctionResult) isInvocationResultMember() {}
+
+// Stores fine-grained state checkpoints, including text and images, for each
+// interaction in an invocation in a session. For more information about sessions,
+// see [Store and retrieve conversation history and context with Amazon Bedrock sessions].
+//
+// [Store and retrieve conversation history and context with Amazon Bedrock sessions]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+type InvocationStep struct {
+
+	// The unique identifier (in UUID format) for the invocation that includes the
+	// invocation step.
+	//
+	// This member is required.
+	InvocationId *string
+
+	// The unique identifier (in UUID format) for the invocation step.
+	//
+	// This member is required.
+	InvocationStepId *string
+
+	// The timestamp for when the invocation step was created.
+	//
+	// This member is required.
+	InvocationStepTime *time.Time
+
+	// Payload content, such as text and images, for the invocation step.
+	//
+	// This member is required.
+	Payload InvocationStepPayload
+
+	// The unique identifier of the session containing the invocation step.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Payload content, such as text and images, for the invocation step.
+//
+// The following types satisfy this interface:
+//
+//	InvocationStepPayloadMemberContentBlocks
+type InvocationStepPayload interface {
+	isInvocationStepPayload()
+}
+
+// The content for the invocation step.
+type InvocationStepPayloadMemberContentBlocks struct {
+	Value []BedrockSessionContentBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationStepPayloadMemberContentBlocks) isInvocationStepPayload() {}
+
+// Contains details about an invocation step within an invocation in a session.
+// For more information about sessions, see [Store and retrieve conversation history and context with Amazon Bedrock sessions].
+//
+// [Store and retrieve conversation history and context with Amazon Bedrock sessions]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+type InvocationStepSummary struct {
+
+	// A unique identifier for the invocation in UUID format.
+	//
+	// This member is required.
+	InvocationId *string
+
+	// The unique identifier (in UUID format) for the invocation step.
+	//
+	// This member is required.
+	InvocationStepId *string
+
+	// The timestamp for when the invocation step was created.
+	//
+	// This member is required.
+	InvocationStepTime *time.Time
+
+	// The unique identifier for the session associated with the invocation step.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about an invocation in a session. For more information about
+// sessions, see [Store and retrieve conversation history and context with Amazon Bedrock sessions].
+//
+// [Store and retrieve conversation history and context with Amazon Bedrock sessions]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+type InvocationSummary struct {
+
+	// The timestamp for when the invocation was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A unique identifier for the invocation in UUID format.
+	//
+	// This member is required.
+	InvocationId *string
+
+	// The unique identifier for the session associated with the invocation.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
 
 // Details of the knowledge base associated withe inline agent.
 type KnowledgeBase struct {
@@ -3663,8 +3852,8 @@ type RetrieveAndGenerateConfiguration struct {
 	// The type of resource that contains your data for retrieving information and
 	// generating responses.
 	//
-	// If you choose ot use EXTERNAL_SOURCES , then currently only Claude 3 Sonnet
-	// models for knowledge bases are supported.
+	// If you choose to use EXTERNAL_SOURCES , then currently only Anthropic Claude 3
+	// Sonnet models for knowledge bases are supported.
 	//
 	// This member is required.
 	Type RetrieveAndGenerateType
@@ -3923,6 +4112,17 @@ type S3Identifier struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the Amazon S3 bucket where the image is stored.
+type S3Location struct {
+
+	// The path to the Amazon S3 bucket where the image is stored.
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // The unique wrapper object of the document from the S3 location.
 type S3ObjectDoc struct {
 
@@ -3995,6 +4195,39 @@ type SessionState struct {
 	// Contains attributes that persist across a session and the values of those
 	// attributes.
 	SessionAttributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a session. For more information about sessions, see [Store and retrieve conversation history and context with Amazon Bedrock sessions].
+//
+// [Store and retrieve conversation history and context with Amazon Bedrock sessions]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+type SessionSummary struct {
+
+	// The timestamp for when the session was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The timestamp for when the session was last modified.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the session.
+	//
+	// This member is required.
+	SessionArn *string
+
+	// The unique identifier for the session.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The current status of the session.
+	//
+	// This member is required.
+	SessionStatus SessionStatus
 
 	noSmithyDocumentSerde
 }
@@ -4345,6 +4578,7 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isActionGroupExecutor()                         {}
 func (*UnknownUnionMember) isAPISchema()                                   {}
+func (*UnknownUnionMember) isBedrockSessionContentBlock()                  {}
 func (*UnknownUnionMember) isCaller()                                      {}
 func (*UnknownUnionMember) isContentBlock()                                {}
 func (*UnknownUnionMember) isFlowInputContent()                            {}
@@ -4355,10 +4589,12 @@ func (*UnknownUnionMember) isFlowTrace()                                   {}
 func (*UnknownUnionMember) isFlowTraceNodeInputContent()                   {}
 func (*UnknownUnionMember) isFlowTraceNodeOutputContent()                  {}
 func (*UnknownUnionMember) isFunctionSchema()                              {}
+func (*UnknownUnionMember) isImageSource()                                 {}
 func (*UnknownUnionMember) isInlineAgentResponseStream()                   {}
 func (*UnknownUnionMember) isInputPrompt()                                 {}
 func (*UnknownUnionMember) isInvocationInputMember()                       {}
 func (*UnknownUnionMember) isInvocationResultMember()                      {}
+func (*UnknownUnionMember) isInvocationStepPayload()                       {}
 func (*UnknownUnionMember) isMemory()                                      {}
 func (*UnknownUnionMember) isOptimizedPrompt()                             {}
 func (*UnknownUnionMember) isOptimizedPromptStream()                       {}

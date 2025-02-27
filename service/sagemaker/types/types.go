@@ -6844,6 +6844,23 @@ type HolidayConfigAttributes struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a private hub model reference that points to a public
+// SageMaker JumpStart model.
+//
+// For more information about private hubs, see [Private curated hubs for foundation model access control in JumpStart].
+//
+// [Private curated hubs for foundation model access control in JumpStart]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-curated-hubs.html
+type HubAccessConfig struct {
+
+	// The ARN of your private model hub content. This should be a ModelReference
+	// resource type that points to a SageMaker JumpStart public hub model.
+	//
+	// This member is required.
+	HubContentArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Any dependencies related to hub content, such as scripts, model artifacts,
 // datasets, or notebooks.
 type HubContentDependency struct {
@@ -16613,8 +16630,26 @@ type S3DataSource struct {
 	// augmented manifest file.
 	AttributeNames []string
 
+	// The configuration for a private hub model reference that points to a SageMaker
+	// JumpStart public hub model.
+	HubAccessConfig *HubAccessConfig
+
 	// A list of names of instance groups that get data from the S3 data source.
 	InstanceGroupNames []string
+
+	// The access configuration file to control access to the ML model. You can
+	// explicitly accept the model end-user license agreement (EULA) within the
+	// ModelAccessConfig .
+	//
+	//   - If you are a Jumpstart user, see the [End-user license agreements]section for more details on accepting
+	//   the EULA.
+	//
+	//   - If you are an AutoML user, see the Optional Parameters section of Create an
+	//   AutoML job to fine-tune text generation models using the API for details on [How to set the EULA acceptance when fine-tuning a model using the AutoML API].
+	//
+	// [End-user license agreements]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula
+	// [How to set the EULA acceptance when fine-tuning a model using the AutoML API]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-finetune-llms.html#autopilot-llms-finetuning-api-optional-params
+	ModelAccessConfig *ModelAccessConfig
 
 	// If you want SageMaker to replicate the entire dataset on each ML compute
 	// instance that is launched for model training, specify FullyReplicated .

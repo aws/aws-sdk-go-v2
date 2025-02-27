@@ -25,6 +25,7 @@
         "api_op_CreateUser.go",
         "api_op_CreateWebExperience.go",
         "api_op_DeleteApplication.go",
+        "api_op_DeleteAttachment.go",
         "api_op_DeleteChatControlsConfiguration.go",
         "api_op_DeleteConversation.go",
         "api_op_DeleteDataAccessor.go",

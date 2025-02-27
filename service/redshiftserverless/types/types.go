@@ -394,6 +394,24 @@ type ScheduledActionResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Defines a track that determines which Amazon Redshift version to apply after a
+// new version is released. If the value for ServerlessTrack is current , the
+// workgroup is updated to the most recently certified release. If the value is
+// trailing , the workgroup is updated to the previously certified release.
+type ServerlessTrack struct {
+
+	// The name of the track. Valid values are current and trailing .
+	TrackName *string
+
+	// An array of UpdateTarget objects to update with the track.
+	UpdateTargets []UpdateTarget
+
+	// The workgroup version number for the workgroup release.
+	WorkgroupVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // A snapshot object that contains databases.
 type Snapshot struct {
 
@@ -597,6 +615,18 @@ type TargetActionMemberCreateSnapshot struct {
 
 func (*TargetActionMemberCreateSnapshot) isTargetAction() {}
 
+// A track that you can switch the current track to.
+type UpdateTarget struct {
+
+	// The name of the new track.
+	TrackName *string
+
+	// The workgroup version for the new track.
+	WorkgroupVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // The usage limit object.
 type UsageLimit struct {
 
@@ -716,6 +746,11 @@ type Workgroup struct {
 	// [Cluster versions for Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
 	PatchVersion *string
 
+	// The name for the track that you want to assign to the workgroup. When the track
+	// changes, the workgroup is switched to the latest workgroup release available for
+	// the track. At this point, the track name is applied.
+	PendingTrackName *string
+
 	// The custom port to use when connecting to a workgroup. Valid port ranges are
 	// 5431-5455 and 8191-8215. The default is 5439.
 	Port *int32
@@ -736,6 +771,9 @@ type Workgroup struct {
 
 	// An array of subnet IDs the workgroup is associated with.
 	SubnetIds []string
+
+	// The name of the track for the workgroup.
+	TrackName *string
 
 	// The Amazon Resource Name (ARN) that links to the workgroup.
 	WorkgroupArn *string

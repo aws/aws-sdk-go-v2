@@ -1090,6 +1090,26 @@ func (m *validateOpDisassociateFileSystem) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpEvictFilesFailingUpload struct {
+}
+
+func (*validateOpEvictFilesFailingUpload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEvictFilesFailingUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EvictFilesFailingUploadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEvictFilesFailingUploadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpJoinDomain struct {
 }
 
@@ -1944,6 +1964,10 @@ func addOpDisableGatewayValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDisassociateFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateFileSystem{}, middleware.After)
+}
+
+func addOpEvictFilesFailingUploadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEvictFilesFailingUpload{}, middleware.After)
 }
 
 func addOpJoinDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -3210,6 +3234,21 @@ func validateOpDisassociateFileSystemInput(v *DisassociateFileSystemInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateFileSystemInput"}
 	if v.FileSystemAssociationARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemAssociationARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEvictFilesFailingUploadInput(v *EvictFilesFailingUploadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvictFilesFailingUploadInput"}
+	if v.FileShareARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileShareARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

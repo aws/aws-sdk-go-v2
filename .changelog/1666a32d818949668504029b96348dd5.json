@@ -1,0 +1,8 @@
+{
+    "id": "1666a32d-8189-4966-8504-029b96348dd5",
+    "type": "feature",
+    "description": "This release supports deleting attachments from conversations.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

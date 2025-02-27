@@ -1,0 +1,8 @@
+{
+    "id": "606f5a24-1d0b-4894-9d92-55b3b54e453e",
+    "type": "documentation",
+    "description": "Definition update for EbsConfiguration.",
+    "modules": [
+        "service/emr"
+    ]
+}

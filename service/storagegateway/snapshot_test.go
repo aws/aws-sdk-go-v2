@@ -722,6 +722,18 @@ func TestCheckSnapshot_DisassociateFileSystem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_EvictFilesFailingUpload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EvictFilesFailingUpload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EvictFilesFailingUpload")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_JoinDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.JoinDomain(context.Background(), nil, func(o *Options) {
@@ -1854,6 +1866,18 @@ func TestUpdateSnapshot_DisassociateFileSystem(t *testing.T) {
 	_, err := svc.DisassociateFileSystem(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateFileSystem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EvictFilesFailingUpload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EvictFilesFailingUpload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EvictFilesFailingUpload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

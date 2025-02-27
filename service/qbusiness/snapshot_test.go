@@ -254,6 +254,18 @@ func TestCheckSnapshot_DeleteApplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteChatControlsConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteChatControlsConfiguration(context.Background(), nil, func(o *Options) {
@@ -1134,6 +1146,18 @@ func TestUpdateSnapshot_DeleteApplication(t *testing.T) {
 	_, err := svc.DeleteApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

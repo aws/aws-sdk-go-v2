@@ -63,6 +63,7 @@
         "api_op_DetachVolume.go",
         "api_op_DisableGateway.go",
         "api_op_DisassociateFileSystem.go",
+        "api_op_EvictFilesFailingUpload.go",
         "api_op_JoinDomain.go",
         "api_op_ListAutomaticTapeCreationPolicies.go",
         "api_op_ListCacheReports.go",

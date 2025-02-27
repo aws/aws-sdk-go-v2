@@ -124,6 +124,9 @@ type DescribeHubContentOutput struct {
 	// The searchable keywords for the hub content.
 	HubContentSearchKeywords []string
 
+	// The last modified time of the hub content.
+	LastModifiedTime *time.Time
+
 	// The minimum version of the hub content.
 	ReferenceMinVersion *string
 

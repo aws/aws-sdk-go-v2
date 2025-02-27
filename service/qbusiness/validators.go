@@ -330,6 +330,26 @@ func (m *validateOpDeleteApplication) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAttachment struct {
+}
+
+func (*validateOpDeleteAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteChatControlsConfiguration struct {
 }
 
@@ -1512,6 +1532,10 @@ func addOpCreateWebExperienceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteApplication{}, middleware.After)
+}
+
+func addOpDeleteAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAttachment{}, middleware.After)
 }
 
 func addOpDeleteChatControlsConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -3871,6 +3895,27 @@ func validateOpDeleteApplicationInput(v *DeleteApplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAttachmentInput(v *DeleteAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAttachmentInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.ConversationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConversationId"))
+	}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -241,6 +241,14 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "bedrock-eu-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "bedrock-eu-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "bedrock.eu-west-1.amazonaws.com",
@@ -377,6 +385,14 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "bedrock-runtime-eu-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "bedrock-runtime-eu-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "bedrock-runtime.eu-west-1.amazonaws.com",
@@ -504,6 +520,9 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-central-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-north-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",

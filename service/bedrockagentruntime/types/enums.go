@@ -523,6 +523,29 @@ func (GuardrailWordPolicyAction) Values() []GuardrailWordPolicyAction {
 	}
 }
 
+type ImageFormat string
+
+// Enum values for ImageFormat
+const (
+	ImageFormatPng  ImageFormat = "png"
+	ImageFormatJpeg ImageFormat = "jpeg"
+	ImageFormatGif  ImageFormat = "gif"
+	ImageFormatWebp ImageFormat = "webp"
+)
+
+// Values returns all known values for ImageFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageFormat) Values() []ImageFormat {
+	return []ImageFormat{
+		"png",
+		"jpeg",
+		"gif",
+		"webp",
+	}
+}
+
 type InputQueryType string
 
 // Enum values for InputQueryType
@@ -995,6 +1018,27 @@ func (SearchType) Values() []SearchType {
 	return []SearchType{
 		"HYBRID",
 		"SEMANTIC",
+	}
+}
+
+type SessionStatus string
+
+// Enum values for SessionStatus
+const (
+	SessionStatusActive  SessionStatus = "ACTIVE"
+	SessionStatusExpired SessionStatus = "EXPIRED"
+	SessionStatusEnded   SessionStatus = "ENDED"
+)
+
+// Values returns all known values for SessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionStatus) Values() []SessionStatus {
+	return []SessionStatus{
+		"ACTIVE",
+		"EXPIRED",
+		"ENDED",
 	}
 }
 
