@@ -108,6 +108,9 @@ func (c *Client) addOperationPutWithContentEncodingMiddlewares(stack *middleware
 	if err = addIsRequestCompressionUserAgent(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOperationPutWithContentEncodingRequestCompressionMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -180,6 +180,9 @@ func (c *Client) addOperationPutJobTaggingMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutJobTaggingMiddleware(stack); err != nil {
 		return err
 	}

@@ -122,6 +122,9 @@ func (c *Client) addOperationListBillScenarioCommitmentModificationsMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBillScenarioCommitmentModificationsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -179,6 +179,9 @@ func (c *Client) addOperationPutPackageOriginConfigurationMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutPackageOriginConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

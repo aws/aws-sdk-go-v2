@@ -124,6 +124,9 @@ func (c *Client) addOperationAuthorizeVpcEndpointAccessMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAuthorizeVpcEndpointAccessValidationMiddleware(stack); err != nil {
 		return err
 	}

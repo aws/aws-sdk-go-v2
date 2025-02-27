@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteBillScenarioMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteBillScenarioValidationMiddleware(stack); err != nil {
 		return err
 	}

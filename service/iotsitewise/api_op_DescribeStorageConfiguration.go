@@ -161,6 +161,9 @@ func (c *Client) addOperationDescribeStorageConfigurationMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeStorageConfigurationMiddleware(stack); err != nil {
 		return err
 	}

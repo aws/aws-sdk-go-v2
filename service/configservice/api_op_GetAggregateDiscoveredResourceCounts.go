@@ -149,6 +149,9 @@ func (c *Client) addOperationGetAggregateDiscoveredResourceCountsMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAggregateDiscoveredResourceCountsValidationMiddleware(stack); err != nil {
 		return err
 	}

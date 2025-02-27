@@ -133,6 +133,9 @@ func (c *Client) addOperationDeleteAppAssessmentMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteAppAssessmentMiddleware(stack, options); err != nil {
 		return err
 	}

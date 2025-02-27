@@ -132,6 +132,9 @@ func (c *Client) addOperationListAssetBundleExportJobsMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssetBundleExportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}

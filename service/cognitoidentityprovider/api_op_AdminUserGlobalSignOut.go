@@ -159,6 +159,9 @@ func (c *Client) addOperationAdminUserGlobalSignOutMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAdminUserGlobalSignOutValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -129,6 +129,9 @@ func (c *Client) addOperationListCollaborationTrainedModelInferenceJobsMiddlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCollaborationTrainedModelInferenceJobsValidationMiddleware(stack); err != nil {
 		return err
 	}

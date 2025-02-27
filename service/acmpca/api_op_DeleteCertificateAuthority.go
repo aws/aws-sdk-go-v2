@@ -144,6 +144,9 @@ func (c *Client) addOperationDeleteCertificateAuthorityMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}

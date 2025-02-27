@@ -109,6 +109,9 @@ func (c *Client) addOperationDeleteInputSecurityGroupMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteInputSecurityGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

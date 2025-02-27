@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeMultiplexProgramMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMultiplexProgramValidationMiddleware(stack); err != nil {
 		return err
 	}

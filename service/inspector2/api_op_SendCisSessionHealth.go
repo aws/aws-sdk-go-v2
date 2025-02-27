@@ -116,6 +116,9 @@ func (c *Client) addOperationSendCisSessionHealthMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSendCisSessionHealthValidationMiddleware(stack); err != nil {
 		return err
 	}

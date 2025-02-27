@@ -174,6 +174,9 @@ func (c *Client) addOperationDeleteDBShardGroupMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDBShardGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

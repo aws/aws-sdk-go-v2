@@ -141,6 +141,9 @@ func (c *Client) addOperationCreateRegexPatternSetMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRegexPatternSetValidationMiddleware(stack); err != nil {
 		return err
 	}

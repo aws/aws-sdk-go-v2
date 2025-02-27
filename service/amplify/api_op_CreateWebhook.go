@@ -124,6 +124,9 @@ func (c *Client) addOperationCreateWebhookMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateWebhookValidationMiddleware(stack); err != nil {
 		return err
 	}

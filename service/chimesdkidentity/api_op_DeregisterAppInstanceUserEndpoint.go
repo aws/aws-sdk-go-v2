@@ -112,6 +112,9 @@ func (c *Client) addOperationDeregisterAppInstanceUserEndpointMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterAppInstanceUserEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

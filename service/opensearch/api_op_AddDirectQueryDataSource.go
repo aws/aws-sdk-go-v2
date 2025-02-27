@@ -134,6 +134,9 @@ func (c *Client) addOperationAddDirectQueryDataSourceMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAddDirectQueryDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

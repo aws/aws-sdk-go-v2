@@ -156,6 +156,9 @@ func (c *Client) addOperationCreateServiceNetworkServiceAssociationMiddlewares(s
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateServiceNetworkServiceAssociationMiddleware(stack, options); err != nil {
 		return err
 	}

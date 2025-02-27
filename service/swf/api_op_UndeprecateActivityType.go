@@ -142,6 +142,9 @@ func (c *Client) addOperationUndeprecateActivityTypeMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUndeprecateActivityTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

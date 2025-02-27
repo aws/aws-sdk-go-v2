@@ -128,6 +128,9 @@ func (c *Client) addOperationUpdateServiceSyncBlockerMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateServiceSyncBlockerValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -183,6 +183,9 @@ func (c *Client) addOperationUpdateChangesetMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateChangesetMiddleware(stack, options); err != nil {
 		return err
 	}

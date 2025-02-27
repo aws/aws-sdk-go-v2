@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteCallAnalyticsCategoryMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCallAnalyticsCategoryValidationMiddleware(stack); err != nil {
 		return err
 	}

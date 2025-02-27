@@ -155,6 +155,9 @@ func (c *Client) addOperationSetVaultNotificationsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetVaultNotificationsValidationMiddleware(stack); err != nil {
 		return err
 	}

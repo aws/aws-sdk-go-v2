@@ -109,6 +109,9 @@ func (c *Client) addOperationCancelInputDeviceTransferMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelInputDeviceTransferValidationMiddleware(stack); err != nil {
 		return err
 	}

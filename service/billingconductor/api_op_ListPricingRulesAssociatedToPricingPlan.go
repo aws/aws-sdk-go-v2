@@ -132,6 +132,9 @@ func (c *Client) addOperationListPricingRulesAssociatedToPricingPlanMiddlewares(
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPricingRulesAssociatedToPricingPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

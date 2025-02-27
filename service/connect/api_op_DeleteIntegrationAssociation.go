@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteIntegrationAssociationMiddlewares(stack *midd
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteIntegrationAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

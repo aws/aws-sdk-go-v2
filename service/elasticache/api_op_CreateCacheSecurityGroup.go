@@ -140,6 +140,9 @@ func (c *Client) addOperationCreateCacheSecurityGroupMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateCacheSecurityGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

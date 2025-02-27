@@ -286,6 +286,9 @@ func (c *Client) addOperationUpdateSMBFileShareMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateSMBFileShareValidationMiddleware(stack); err != nil {
 		return err
 	}

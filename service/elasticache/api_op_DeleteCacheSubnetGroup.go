@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteCacheSubnetGroupMiddlewares(stack *middleware
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCacheSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

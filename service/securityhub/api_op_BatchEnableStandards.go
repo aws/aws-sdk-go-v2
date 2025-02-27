@@ -117,6 +117,9 @@ func (c *Client) addOperationBatchEnableStandardsMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchEnableStandardsValidationMiddleware(stack); err != nil {
 		return err
 	}

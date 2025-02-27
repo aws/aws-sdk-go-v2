@@ -209,6 +209,9 @@ func (c *Client) addOperationCreateStorediSCSIVolumeMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateStorediSCSIVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}

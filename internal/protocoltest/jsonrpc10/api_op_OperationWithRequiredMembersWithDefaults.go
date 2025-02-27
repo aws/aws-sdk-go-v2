@@ -145,6 +145,9 @@ func (c *Client) addOperationOperationWithRequiredMembersWithDefaultsMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithRequiredMembersWithDefaults(options.Region), middleware.Before); err != nil {
 		return err
 	}

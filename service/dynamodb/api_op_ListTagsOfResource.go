@@ -135,6 +135,9 @@ func (c *Client) addOperationListTagsOfResourceMiddlewares(stack *middleware.Sta
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTagsOfResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -189,6 +189,9 @@ func (c *Client) addOperationCreateBillEstimateMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateBillEstimateMiddleware(stack, options); err != nil {
 		return err
 	}

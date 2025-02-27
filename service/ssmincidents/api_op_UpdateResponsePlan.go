@@ -167,6 +167,9 @@ func (c *Client) addOperationUpdateResponsePlanMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateResponsePlanMiddleware(stack, options); err != nil {
 		return err
 	}

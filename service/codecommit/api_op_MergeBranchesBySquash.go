@@ -162,6 +162,9 @@ func (c *Client) addOperationMergeBranchesBySquashMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpMergeBranchesBySquashValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -122,6 +122,9 @@ func (c *Client) addOperationListMicrosoftTeamsConfiguredTeamsMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMicrosoftTeamsConfiguredTeams(options.Region), middleware.Before); err != nil {
 		return err
 	}

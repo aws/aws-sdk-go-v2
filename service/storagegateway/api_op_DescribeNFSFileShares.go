@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeNFSFileSharesMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeNFSFileSharesValidationMiddleware(stack); err != nil {
 		return err
 	}

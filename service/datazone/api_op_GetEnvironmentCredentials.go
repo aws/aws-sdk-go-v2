@@ -127,6 +127,9 @@ func (c *Client) addOperationGetEnvironmentCredentialsMiddlewares(stack *middlew
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEnvironmentCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}

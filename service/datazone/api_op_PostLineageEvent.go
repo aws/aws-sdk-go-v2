@@ -124,6 +124,9 @@ func (c *Client) addOperationPostLineageEventMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opPostLineageEventMiddleware(stack, options); err != nil {
 		return err
 	}

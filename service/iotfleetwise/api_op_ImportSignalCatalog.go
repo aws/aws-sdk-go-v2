@@ -131,6 +131,9 @@ func (c *Client) addOperationImportSignalCatalogMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpImportSignalCatalogValidationMiddleware(stack); err != nil {
 		return err
 	}

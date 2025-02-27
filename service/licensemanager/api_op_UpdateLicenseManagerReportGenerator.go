@@ -146,6 +146,9 @@ func (c *Client) addOperationUpdateLicenseManagerReportGeneratorMiddlewares(stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateLicenseManagerReportGeneratorValidationMiddleware(stack); err != nil {
 		return err
 	}

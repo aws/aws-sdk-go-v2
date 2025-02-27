@@ -114,6 +114,9 @@ func (c *Client) addOperationDescribeCacheReportMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCacheReportValidationMiddleware(stack); err != nil {
 		return err
 	}

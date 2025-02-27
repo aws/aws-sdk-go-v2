@@ -89,3 +89,4 @@ software.amazon.smithy.aws.go.codegen.customization.DeprecateService
 software.amazon.smithy.aws.go.codegen.customization.BasicUserAgentFeatures
 software.amazon.smithy.aws.go.codegen.customization.ChecksumMetricsTracking
 software.amazon.smithy.aws.go.codegen.customization.AccountIdEndpointModeUserAgent
+software.amazon.smithy.aws.go.codegen.CredentialSourceFeatureTrackerGenerator

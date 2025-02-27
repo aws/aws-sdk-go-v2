@@ -141,6 +141,9 @@ func (c *Client) addOperationUpdateBackendAPIMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateBackendAPIValidationMiddleware(stack); err != nil {
 		return err
 	}

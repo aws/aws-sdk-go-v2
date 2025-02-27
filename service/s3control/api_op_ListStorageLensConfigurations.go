@@ -144,6 +144,9 @@ func (c *Client) addOperationListStorageLensConfigurationsMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListStorageLensConfigurationsMiddleware(stack); err != nil {
 		return err
 	}

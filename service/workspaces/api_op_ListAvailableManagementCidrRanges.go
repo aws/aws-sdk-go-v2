@@ -135,6 +135,9 @@ func (c *Client) addOperationListAvailableManagementCidrRangesMiddlewares(stack 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAvailableManagementCidrRangesValidationMiddleware(stack); err != nil {
 		return err
 	}

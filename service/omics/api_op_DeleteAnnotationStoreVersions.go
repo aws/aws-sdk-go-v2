@@ -121,6 +121,9 @@ func (c *Client) addOperationDeleteAnnotationStoreVersionsMiddlewares(stack *mid
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAnnotationStoreVersionsMiddleware(stack); err != nil {
 		return err
 	}

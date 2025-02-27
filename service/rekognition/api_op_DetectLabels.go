@@ -279,6 +279,9 @@ func (c *Client) addOperationDetectLabelsMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetectLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}

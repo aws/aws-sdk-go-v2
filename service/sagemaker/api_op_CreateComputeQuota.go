@@ -149,6 +149,9 @@ func (c *Client) addOperationCreateComputeQuotaMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateComputeQuotaValidationMiddleware(stack); err != nil {
 		return err
 	}

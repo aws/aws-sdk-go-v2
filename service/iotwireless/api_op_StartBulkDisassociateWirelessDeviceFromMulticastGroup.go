@@ -117,6 +117,9 @@ func (c *Client) addOperationStartBulkDisassociateWirelessDeviceFromMulticastGro
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartBulkDisassociateWirelessDeviceFromMulticastGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

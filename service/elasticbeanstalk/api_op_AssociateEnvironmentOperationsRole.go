@@ -119,6 +119,9 @@ func (c *Client) addOperationAssociateEnvironmentOperationsRoleMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateEnvironmentOperationsRoleValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -230,6 +230,9 @@ func (c *Client) addOperationCreateServiceLevelObjectiveMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateServiceLevelObjectiveValidationMiddleware(stack); err != nil {
 		return err
 	}

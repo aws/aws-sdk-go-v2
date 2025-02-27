@@ -153,6 +153,9 @@ func (c *Client) addOperationPutMailboxPermissionsMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutMailboxPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

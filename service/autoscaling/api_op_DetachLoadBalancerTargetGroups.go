@@ -132,6 +132,9 @@ func (c *Client) addOperationDetachLoadBalancerTargetGroupsMiddlewares(stack *mi
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetachLoadBalancerTargetGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

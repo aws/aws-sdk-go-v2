@@ -128,6 +128,9 @@ func (c *Client) addOperationUpdateConfiguredTableAssociationMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateConfiguredTableAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -127,6 +127,9 @@ func (c *Client) addOperationCreateTransitGatewayRouteTableAttachmentMiddlewares
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTransitGatewayRouteTableAttachmentMiddleware(stack, options); err != nil {
 		return err
 	}

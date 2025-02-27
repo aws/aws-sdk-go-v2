@@ -153,6 +153,9 @@ func (c *Client) addOperationGetQueueFleetAssociationMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetQueueFleetAssociationMiddleware(stack); err != nil {
 		return err
 	}

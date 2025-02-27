@@ -133,6 +133,9 @@ func (c *Client) addOperationListFolderMembersMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFolderMembersValidationMiddleware(stack); err != nil {
 		return err
 	}

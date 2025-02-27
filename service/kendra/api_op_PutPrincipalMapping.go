@@ -178,6 +178,9 @@ func (c *Client) addOperationPutPrincipalMappingMiddlewares(stack *middleware.St
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutPrincipalMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

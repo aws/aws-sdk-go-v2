@@ -137,6 +137,9 @@ func (c *Client) addOperationRenderUiTemplateMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRenderUiTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

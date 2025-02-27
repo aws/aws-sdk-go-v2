@@ -137,6 +137,9 @@ func (c *Client) addOperationCreateCustomPluginMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateCustomPluginValidationMiddleware(stack); err != nil {
 		return err
 	}

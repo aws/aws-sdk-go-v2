@@ -125,6 +125,9 @@ func (c *Client) addOperationUpdateGatewayInstanceMiddlewares(stack *middleware.
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateGatewayInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -135,6 +135,9 @@ func (c *Client) addOperationStopCalculationExecutionMiddlewares(stack *middlewa
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopCalculationExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

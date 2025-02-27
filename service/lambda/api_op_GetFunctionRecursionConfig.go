@@ -123,6 +123,9 @@ func (c *Client) addOperationGetFunctionRecursionConfigMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFunctionRecursionConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
