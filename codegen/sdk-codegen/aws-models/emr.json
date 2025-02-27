@@ -2562,7 +2562,7 @@
                 "EbsOptimized": {
                     "target": "com.amazonaws.emr#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether an Amazon EBS volume is EBS-optimized.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether an Amazon EBS volume is EBS-optimized. The default is false. You should explicitly set this value to true to enable the Amazon EBS-optimized setting \n         for an EC2 instance.</p>"
                     }
                 }
             },

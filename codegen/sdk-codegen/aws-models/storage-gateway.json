@@ -5983,6 +5983,62 @@
                 }
             }
         },
+        "com.amazonaws.storagegateway#EvictFilesFailingUpload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#EvictFilesFailingUploadInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#EvictFilesFailingUploadOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a process that cleans the specified file share's cache of file entries that are\n         failing upload to Amazon S3. This API operation reports success if the request is\n         received with valid arguments, and there are no other cache clean operations currently\n         in-progress for the specified file share. After a successful request, the cache clean\n         operation occurs asynchronously and reports progress using CloudWatch logs and\n         notifications.</p>\n         <important>\n            <p>If <code>ForceRemove</code> is set to <code>True</code>, the cache clean operation\n            will delete file data from the gateway which might otherwise be recoverable. We\n            recommend using this operation only after all other methods to clear files failing\n            upload have been exhausted, and if your business need outweighs the potential data\n            loss.</p>\n         </important>"
+            }
+        },
+        "com.amazonaws.storagegateway#EvictFilesFailingUploadInput": {
+            "type": "structure",
+            "members": {
+                "FileShareARN": {
+                    "target": "com.amazonaws.storagegateway#FileShareARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the file share for which you want to start the cache\n         clean operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ForceRemove": {
+                    "target": "com.amazonaws.storagegateway#Boolean2",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether cache entries with full or partial file data currently stored on the\n         gateway will be forcibly removed by the cache clean operation.</p>\n         <p>Valid arguments:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>False</code> - The cache clean operation skips cache entries failing upload\n               if they are associated with data currently stored on the gateway. This preserves the\n               cached data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>True</code> - The cache clean operation removes cache entries failing upload\n               even if they are associated with data currently stored on the gateway. This deletes\n               the cached data.</p>\n               <important>\n                  <p>If <code>ForceRemove</code> is set to <code>True</code>, the cache clean\n                  operation will delete file data from the gateway which might otherwise be\n                  recoverable.</p>\n               </important>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.storagegateway#EvictFilesFailingUploadOutput": {
+            "type": "structure",
+            "members": {
+                "NotificationId": {
+                    "target": "com.amazonaws.storagegateway#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The randomly generated ID of the CloudWatch notification associated with the\n         cache clean operation. This ID is in UUID format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.storagegateway#FileShareARN": {
             "type": "string",
             "traits": {
@@ -9469,6 +9525,9 @@
                 },
                 {
                     "target": "com.amazonaws.storagegateway#DisassociateFileSystem"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#EvictFilesFailingUpload"
                 },
                 {
                     "target": "com.amazonaws.storagegateway#JoinDomain"

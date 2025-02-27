@@ -437,6 +437,12 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentruntime#RetrieveResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#TaggingResource"
                 }
             ],
             "traits": {
@@ -1460,6 +1466,41 @@
                 "smithy.api#documentation": "<p>Contains configurations for a reranker model.</p>"
             }
         },
+        "com.amazonaws.bedrockagentruntime#BedrockSessionContentBlock": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text in the invocation step.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        }
+                    }
+                },
+                "image": {
+                    "target": "com.amazonaws.bedrockagentruntime#ImageBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image in the invocation step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A block of content that you pass to, or receive from, a Amazon Bedrock session in an invocation step. You pass the content to a\n         session in the <code>payLoad</code> of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_PutInvocationStep.html\">PutInvocationStep</a> API operation.\n         You retrieve the content with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetInvocationStep.html\">GetInvocationStep</a> API operation.</p>\n         <p>For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#BedrockSessionContentBlocks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#BedrockSessionContentBlock"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.bedrockagentruntime#ByteContentBlob": {
             "type": "blob",
             "traits": {
@@ -1760,6 +1801,204 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#CreateInvocation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#CreateInvocationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#CreateInvocationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new invocation within a session. An invocation groups the related invocation steps that store the content from\n         a conversation. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>\n         <p>Related APIs</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocations.html\">ListInvocations</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListSessions.html\">ListSessions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html\">GetSession</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "PUT",
+                    "uri": "/sessions/{sessionIdentifier}/invocations/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CreateInvocationRequest": {
+            "type": "structure",
+            "members": {
+                "invocationId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the invocation in UUID format.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the interactions in the invocation. For example, \"User asking about weather in Seattle\".</p>"
+                    }
+                },
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the associated session for the invocation. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).\n      </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CreateInvocationResponse": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session associated with the invocation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the invocation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the invocation was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CreateSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#CreateSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#CreateSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a session to temporarily store conversations for generative AI (GenAI) applications built with open-source\n         frameworks such as LangGraph and LlamaIndex. Sessions enable you to save the state of\n         conversations at checkpoints, with the added security and infrastructure of Amazon Web Services. For more information, see\n         <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>\n         <p>By default, Amazon Bedrock uses Amazon Web Services-managed keys for session encryption, including session metadata,\n         or you can use your own KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html\">Amazon Bedrock session encryption</a>.</p>\n         <note>\n            <p>\n            You use a session to store state and conversation history for generative AI applications built with open-source frameworks. \n            For Amazon Bedrock Agents, the service automatically manages conversation context and associates them with the agent-specific sessionId you specify in the \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a> API operation.\n         </p>\n         </note>\n         <p>Related APIs:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListSessions.html\">ListSessions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html\">GetSession</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html\">EndSession</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_DeleteSession.html\">DeleteSession</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "PUT",
+                    "uri": "/sessions/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CreateSessionRequest": {
+            "type": "structure",
+            "members": {
+                "sessionMetadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs containing attributes to be persisted across the session. For example, the user's ID, their language preference, \n         and the type of device they are using.</p>"
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to use to encrypt the session data. The user or role creating the session must have permission to use the key.\n         For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html\">Amazon Bedrock session encryption</a>.\n      </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockagentruntime#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the key-value pairs for the tags that you want to attach to the session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CreateSessionResponse": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionStatus": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the session was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#CreationMode": {
             "type": "enum",
             "members": {
@@ -1923,6 +2162,67 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentruntime#DeleteSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#DeleteSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#DeleteSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a session that you ended. You can't delete a session with an <code>ACTIVE</code> status. To delete an active session, you must first end it with the \n         <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html\">EndSession</a> API operation.\n         For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/sessions/{sessionIdentifier}/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#DeleteSessionRequest": {
+            "type": "structure",
+            "members": {
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session to be deleted. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#DeleteSessionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#DependencyFailedException": {
             "type": "structure",
             "members": {
@@ -1940,6 +2240,89 @@
                 "smithy.api#documentation": "<p>There was an issue with a dependency. Check the resource configurations and retry the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 424
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#EndSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#EndSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#EndSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Ends the session. \n         After you end a session, you can still access its content but you can’t add to it. To delete the session and it's content, you use the DeleteSession API operation.\n         For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/sessions/{sessionIdentifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#EndSessionRequest": {
+            "type": "structure",
+            "members": {
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session to end. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#EndSessionResponse": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session you ended.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the session you ended.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionStatus": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the session you ended.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentruntime#ExecutionType": {
@@ -3351,6 +3734,193 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentruntime#GetInvocationStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#GetInvocationStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#GetInvocationStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a specific invocation step within an invocation in a session. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/sessions/{sessionIdentifier}/invocationSteps/{invocationStepId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GetInvocationStepRequest": {
+            "type": "structure",
+            "members": {
+                "invocationIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the invocation in UUID format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationStepId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (in UUID format) for the specific invocation step to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the invocation step's associated session. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GetInvocationStepResponse": {
+            "type": "structure",
+            "members": {
+                "invocationStep": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationStep",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The complete details of the requested invocation step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GetSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#GetSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#GetSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details about a specific session. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/sessions/{sessionIdentifier}/"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GetSessionRequest": {
+            "type": "structure",
+            "members": {
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the session to retrieve. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GetSessionResponse": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session in UUID format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionStatus": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the session was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the session was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionMetadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs containing attributes persisted across the session.</p>"
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the session data.\n         For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html\">Amazon Bedrock session encryption</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#GuadrailAction": {
             "type": "enum",
             "members": {
@@ -4174,6 +4744,80 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentruntime#ImageBlock": {
+            "type": "structure",
+            "members": {
+                "format": {
+                    "target": "com.amazonaws.bedrockagentruntime#ImageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockagentruntime#ImageSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source for the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Image content for an invocation step.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ImageFormat": {
+            "type": "enum",
+            "members": {
+                "PNG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "png"
+                    }
+                },
+                "JPEG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jpeg"
+                    }
+                },
+                "GIF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gif"
+                    }
+                },
+                "WEBP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "webp"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ImageSource": {
+            "type": "union",
+            "members": {
+                "bytes": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The raw image bytes for the image. If you use an Amazon Web Services SDK, you don't need to encode the image bytes in base64.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        }
+                    }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.bedrockagentruntime#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the image is stored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source for an image.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#ImplicitFilterConfiguration": {
             "type": "structure",
             "members": {
@@ -4577,6 +5221,21 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.bedrockagentruntime#InvocationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#InvocationInput": {
             "type": "structure",
             "members": {
@@ -4654,6 +5313,23 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#InvocationResource": {
+            "type": "resource",
+            "identifiers": {
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier"
+                },
+                "invocationIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationIdentifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.bedrockagentruntime#CreateInvocation"
+            },
+            "list": {
+                "target": "com.amazonaws.bedrockagentruntime#ListInvocations"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#InvocationResultMember": {
             "type": "union",
             "members": {
@@ -4672,6 +5348,163 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A result from the invocation of an action. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html\">Return control to the agent developer</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html\">Control session context</a>.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax\">InvokeAgent request</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationStep": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session containing the invocation step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (in UUID format) for the invocation that includes the invocation step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationStepId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (in UUID format) for the invocation step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationStepTime": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the invocation step was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationStepPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Payload content, such as text and images, for the invocation step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores fine-grained state checkpoints, including text and images, for each interaction in an invocation in a session. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>. </p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationStepPayload": {
+            "type": "union",
+            "members": {
+                "contentBlocks": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockSessionContentBlocks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content for the invocation step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Payload content, such as text and images, for the invocation step.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationStepResource": {
+            "type": "resource",
+            "identifiers": {
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier"
+                },
+                "invocationIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationIdentifier"
+                },
+                "invocationStepId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.bedrockagentruntime#PutInvocationStep"
+            },
+            "read": {
+                "target": "com.amazonaws.bedrockagentruntime#GetInvocationStep"
+            },
+            "list": {
+                "target": "com.amazonaws.bedrockagentruntime#ListInvocationSteps"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationStepSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#InvocationStepSummary"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationStepSummary": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session associated with the invocation step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the invocation in UUID format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationStepId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (in UUID format) for the invocation step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationStepTime": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the invocation step was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an invocation step within an invocation in a session. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#InvocationSummary"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationSummary": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session associated with the invocation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the invocation in UUID format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the invocation was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an invocation in a session. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#InvocationType": {
@@ -5481,6 +6314,345 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListInvocationSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#ListInvocationStepsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#ListInvocationStepsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all invocation steps associated with a session and optionally, an invocation within the session. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/sessions/{sessionIdentifier}/invocationSteps/"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "invocationStepSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListInvocationStepsRequest": {
+            "type": "structure",
+            "members": {
+                "invocationIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (in UUID format) for the invocation to list invocation steps for.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the\n         token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.\n      </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentruntime#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If the total number of results is greater than this value,\n         use the token returned in the response in the <code>nextToken</code> field when making another request to return the next\n         batch of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session associated with the invocation steps. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListInvocationStepsResponse": {
+            "type": "structure",
+            "members": {
+                "invocationStepSummaries": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationStepSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of summaries for each invocation step associated with a session and if you specified it, an invocation within the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListInvocations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#ListInvocationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#ListInvocationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all invocations associated with a specific session. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/sessions/{sessionIdentifier}/invocations/"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "invocationSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListInvocationsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the\n         token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.\n      </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentruntime#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If the total number of results is greater than this value,\n         use the token returned in the response in the <code>nextToken</code> field when making another request to return the next\n         batch of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session to list invocations for. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListInvocationsResponse": {
+            "type": "structure",
+            "members": {
+                "invocationSummaries": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of invocation summaries associated with the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#ListSessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#ListSessionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all sessions in your Amazon Web Services account. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/sessions/"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "sessionSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListSessionsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentruntime#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If the total number of results is greater than this value,\n         use the token returned in the response in the <code>nextToken</code> field when making another request to return the next\n         batch of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the\n         token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.\n      </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListSessionsResponse": {
+            "type": "structure",
+            "members": {
+                "sessionSummaries": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of summaries for each session in your Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentruntime#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all the tags for the resource you specify.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#TaggableResourcesArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to list tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.bedrockagentruntime#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pairs for the tags associated with the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentruntime#MaxResults": {
@@ -6831,6 +8003,105 @@
                 "smithy.api#documentation": "<p>Contains the parameters in the request body.</p>"
             }
         },
+        "com.amazonaws.bedrockagentruntime#PutInvocationStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#PutInvocationStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#PutInvocationStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add an invocation step to an invocation in a session. An invocation step stores fine-grained state checkpoints, including text and images, for each interaction. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>\n         <p>Related APIs:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetInvocationStep.html\">GetInvocationStep</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocationSteps.html\">ListInvocationSteps</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocations.html\">ListInvocations</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocations.html\">ListSessions</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "PUT",
+                    "uri": "/sessions/{sessionIdentifier}/invocationSteps/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PutInvocationStepRequest": {
+            "type": "structure",
+            "members": {
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session to add the invocation step to. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (in UUID format) of the invocation to add the invocation step to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationStepTime": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the invocation step occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationStepPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payload for the invocation step, including text and images for the interaction.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationStepId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the invocation step in UUID format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#PutInvocationStepResponse": {
+            "type": "structure",
+            "members": {
+                "invocationStepId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the invocation step in UUID format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#QueryGenerationInput": {
             "type": "structure",
             "members": {
@@ -7351,7 +8622,7 @@
                         "smithy.api#documentation": "<p>The text of the document.</p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 9000
+                            "max": 32000
                         }
                     }
                 }
@@ -8174,7 +9445,7 @@
                 "type": {
                     "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource that contains your data for retrieving information and generating responses.</p>\n         <p>If you choose ot use <code>EXTERNAL_SOURCES</code>, then currently only Claude 3 Sonnet models for knowledge bases are supported.</p>",
+                        "smithy.api#documentation": "<p>The type of resource that contains your data for retrieving information and generating responses.</p>\n         <p>If you choose to use <code>EXTERNAL_SOURCES</code>, then currently only Anthropic Claude 3 Sonnet models for knowledge bases are supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8796,6 +10067,21 @@
                 "smithy.api#documentation": "<p>\n            The identifier information for an Amazon S3 bucket.\n        </p>"
             }
         },
+        "com.amazonaws.bedrockagentruntime#S3Location": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "com.amazonaws.bedrockagentruntime#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the image is stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the Amazon S3 bucket where the image is stored.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#S3ObjectDoc": {
             "type": "structure",
             "members": {
@@ -8876,6 +10162,12 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.bedrockagentruntime#SessionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]+:[0-9]{12}:session/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#SessionAttributesMap": {
             "type": "map",
             "key": {
@@ -8894,6 +10186,81 @@
                 },
                 "smithy.api#pattern": "^[0-9a-zA-Z._:-]+$"
             }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]+:[0-9]{12}:session/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})|([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionMetadataKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionMetadataMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagentruntime#SessionMetadataKey"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentruntime#SessionMetadataValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionMetadataValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5000
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionResource": {
+            "type": "resource",
+            "identifiers": {
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.bedrockagentruntime#CreateSession"
+            },
+            "read": {
+                "target": "com.amazonaws.bedrockagentruntime#GetSession"
+            },
+            "update": {
+                "target": "com.amazonaws.bedrockagentruntime#UpdateSession"
+            },
+            "delete": {
+                "target": "com.amazonaws.bedrockagentruntime#DeleteSession"
+            },
+            "list": {
+                "target": "com.amazonaws.bedrockagentruntime#ListSessions"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#EndSession"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationStepResource"
+                }
+            ]
         },
         "com.amazonaws.bedrockagentruntime#SessionState": {
             "type": "structure",
@@ -8943,6 +10310,78 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains parameters that specify various attributes that persist across a session or prompt. You can define session state attributes as key-value pairs when writing a <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html\">Lambda function</a> for an action group or pass them when making an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a> request. Use session state attributes to control and provide conversational context for your agent and to help customize your agent's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html\">Control session context</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "ENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#SessionSummary"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#SessionSummary": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionStatus": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the session was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the session was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a session. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#SessionTTL": {
@@ -9048,6 +10487,149 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 25000000
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Key of a tag",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#TagKey"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Tag Keys",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate tags with a resource. For more information, see  <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html\">Tagging resources</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#TaggableResourcesArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to tag.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockagentruntime#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing key-value pairs that define the tags to attach to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Value of a tag",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TaggableResourcesArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN of Taggable resources: [session]",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "(^arn:aws(-[^:]+)?:bedrock:[a-zA-Z0-9-]+:[0-9]{12}:(session)/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$)"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#TaggingResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#UntagResource"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentruntime#TagsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagentruntime#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentruntime#TagValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "A map of tag keys and values",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
                 }
             }
         },
@@ -9400,6 +10982,175 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove tags from a resource.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#TaggableResourcesArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to remove tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.bedrockagentruntime#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of keys of the tags to remove from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#UpdateSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentruntime#UpdateSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentruntime#UpdateSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the metadata or encryption settings of a session. For more information about sessions, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html\">Store and retrieve conversation history and context with Amazon Bedrock sessions</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/sessions/{sessionIdentifier}/"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#UpdateSessionRequest": {
+            "type": "structure",
+            "members": {
+                "sessionMetadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs containing attributes to be persisted across the session. For example the user's ID, their language preference, \n         and the type of device they are using.</p>"
+                    }
+                },
+                "sessionIdentifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session to modify. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#UpdateSessionResponse": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentruntime#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session you updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the session that was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionStatus": {
+                    "target": "com.amazonaws.bedrockagentruntime#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the session you updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the session was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the session was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#Usage": {
             "type": "structure",
             "members": {
@@ -9419,6 +11170,12 @@
             "traits": {
                 "smithy.api#documentation": "<p>Contains information of the usage of the foundation model.</p>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Uuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.bedrockagentruntime#ValidationException": {

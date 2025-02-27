@@ -22330,6 +22330,12 @@
                         "smithy.api#documentation": "<p>The date and time that hub content was created.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the hub content.</p>"
+                    }
                 }
             },
             "traits": {
@@ -32529,6 +32535,22 @@
         "com.amazonaws.sagemaker#Horovod": {
             "type": "boolean"
         },
+        "com.amazonaws.sagemaker#HubAccessConfig": {
+            "type": "structure",
+            "members": {
+                "HubContentArn": {
+                    "target": "com.amazonaws.sagemaker#HubContentArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of your private model hub content. This should be a <code>ModelReference</code>\n         resource type that points to a SageMaker JumpStart public hub model.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a private hub model reference that points to a public SageMaker JumpStart model.</p>\n         <p>For more information about private hubs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-curated-hubs.html\">Private curated hubs for foundation model access control in JumpStart</a>.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#HubArn": {
             "type": "string",
             "traits": {
@@ -32819,6 +32841,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Deprecated"
+                    }
+                },
+                "RESTRICTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Restricted"
                     }
                 }
             }
@@ -35145,6 +35173,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The hub content document that describes information about the hub content such as type, associated containers, scripts, and more.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "SupportStatus": {
+                    "target": "com.amazonaws.sagemaker#HubContentSupportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the hub content resource.</p>"
                     }
                 },
                 "HubContentSearchKeywords": {
@@ -60869,6 +60903,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of names of instance groups that get data from the S3 data source.</p>"
                     }
+                },
+                "ModelAccessConfig": {
+                    "target": "com.amazonaws.sagemaker#ModelAccessConfig"
+                },
+                "HubAccessConfig": {
+                    "target": "com.amazonaws.sagemaker#HubAccessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a private hub model reference that points to a SageMaker JumpStart public hub model.</p>"
+                    }
                 }
             },
             "traits": {
@@ -62051,6 +62094,12 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateHub"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#UpdateHubContent"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#UpdateHubContentReference"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateImage"
@@ -73233,6 +73282,202 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Update a hub.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateHubContent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdateHubContentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#UpdateHubContentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates SageMaker hub content (either a <code>Model</code> or <code>Notebook</code>\n         resource).</p>\n         <p>You can update the metadata that describes the resource. In addition to the required request\n         fields, specify at least one of the following fields to update:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HubContentDescription</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HubContentDisplayName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HubContentMarkdown</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HubContentSearchKeywords</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SupportStatus</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about hubs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-curated-hubs.html\">Private curated hubs for foundation model access control in JumpStart</a>.</p>\n         <note>\n            <p>If you want to update a <code>ModelReference</code> resource in your hub, use the\n         <code>UpdateHubContentResource</code> API instead.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateHubContentReference": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdateHubContentReferenceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#UpdateHubContentReferenceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the contents of a SageMaker hub for a <code>ModelReference</code> resource.\n         A <code>ModelReference</code> allows you to access public SageMaker JumpStart\n         models from within your private hub.</p>\n         <p>When using this API, you can update the\n         <code>MinVersion</code> field for additional flexibility in the model version. You shouldn't update\n         any additional fields when using this API, because the metadata in your private hub\n         should match the public JumpStart model's metadata.</p>\n         <note>\n            <p>If you want to update a <code>Model</code> or <code>Notebook</code>\n         resource in your hub, use the <code>UpdateHubContent</code> API instead.</p>\n         </note>\n         <p>For more information about adding model references to your hub, see\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-curated-hubs-admin-guide-add-models.html\">\n            Add models to a private hub</a>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateHubContentReferenceRequest": {
+            "type": "structure",
+            "members": {
+                "HubName": {
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the SageMaker hub that contains the hub content you want to update. You can optionally use the hub ARN instead.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentName": {
+                    "target": "com.amazonaws.sagemaker#HubContentName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub content resource that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentType": {
+                    "target": "com.amazonaws.sagemaker#HubContentType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The content type of the resource that you want to update. Only specify a\n         <code>ModelReference</code> resource for this API. To update a <code>Model</code>\n         or <code>Notebook</code> resource, use the <code>UpdateHubContent</code> API instead.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinVersion": {
+                    "target": "com.amazonaws.sagemaker#HubContentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum hub content version of the referenced model that you want to use.\n         The minimum version must be older than the latest available version of the referenced model.\n         To support all versions of a model, set the value to <code>1.0.0</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateHubContentReferenceResponse": {
+            "type": "structure",
+            "members": {
+                "HubArn": {
+                    "target": "com.amazonaws.sagemaker#HubArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the private model hub that contains the updated hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentArn": {
+                    "target": "com.amazonaws.sagemaker#HubContentArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the hub content resource that was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateHubContentRequest": {
+            "type": "structure",
+            "members": {
+                "HubName": {
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the SageMaker hub that contains the hub content you want to update.\n         You can optionally use the hub ARN instead.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentName": {
+                    "target": "com.amazonaws.sagemaker#HubContentName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub content resource that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentType": {
+                    "target": "com.amazonaws.sagemaker#HubContentType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The content type of the resource that you want to update. Only specify a\n         <code>Model</code> or <code>Notebook</code> resource for this API. To\n         update a <code>ModelReference</code>, use the\n         <code>UpdateHubContentReference</code> API instead.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentVersion": {
+                    "target": "com.amazonaws.sagemaker#HubContentVersion",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The hub content version that you want to update. For example, if you have\n         two versions of a resource in your hub, you can update the second version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentDisplayName": {
+                    "target": "com.amazonaws.sagemaker#HubContentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the hub content.</p>"
+                    }
+                },
+                "HubContentDescription": {
+                    "target": "com.amazonaws.sagemaker#HubContentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the hub content.</p>"
+                    }
+                },
+                "HubContentMarkdown": {
+                    "target": "com.amazonaws.sagemaker#HubContentMarkdown",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that provides a description of the hub content. This string can include links, tables, and standard markdown formatting.</p>"
+                    }
+                },
+                "HubContentSearchKeywords": {
+                    "target": "com.amazonaws.sagemaker#HubContentSearchKeywordList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The searchable keywords of the hub content.</p>"
+                    }
+                },
+                "SupportStatus": {
+                    "target": "com.amazonaws.sagemaker#HubContentSupportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the current status of the hub content resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateHubContentResponse": {
+            "type": "structure",
+            "members": {
+                "HubArn": {
+                    "target": "com.amazonaws.sagemaker#HubArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the private model hub that contains the updated hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentArn": {
+                    "target": "com.amazonaws.sagemaker#HubContentArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the hub content resource that was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sagemaker#UpdateHubRequest": {

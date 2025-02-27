@@ -4245,6 +4245,89 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qbusiness#DeleteAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#DeleteAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#DeleteAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#LicenseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an attachment associated with a specific Amazon Q Business conversation.</p>",
+                "smithy.api#http": {
+                    "uri": "/applications/{applicationId}/conversations/{conversationId}/attachments/{attachmentId}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qbusiness#DeleteAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Q Business application environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "conversationId": {
+                    "target": "com.amazonaws.qbusiness#ConversationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the conversation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "attachmentId": {
+                    "target": "com.amazonaws.qbusiness#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the attachment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.qbusiness#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the user involved in the conversation.</p>",
+                        "smithy.api#httpQuery": "userId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#DeleteAttachmentResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qbusiness#DeleteChatControlsConfiguration": {
             "type": "operation",
             "input": {
@@ -5799,6 +5882,9 @@
                 },
                 {
                     "target": "com.amazonaws.qbusiness#CreateUser"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#DeleteAttachment"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#DeleteChatControlsConfiguration"
