@@ -1,8 +1,0 @@
-{
-    "id": "9f5e8d29-6eef-4e5d-8d2f-64d2f0bedaae",
-    "type": "feature",
-    "description": "Added a mandatory parameter DataAutomationProfileArn to support for cross region inference for InvokeDataAutomationAsync API. Renamed DataAutomationArn to DataAutomationProjectArn. Added APIs to support tagging.",
-    "modules": [
-        "service/bedrockdataautomationruntime"
-    ]
-}

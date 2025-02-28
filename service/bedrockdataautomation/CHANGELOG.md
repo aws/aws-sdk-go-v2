@@ -1,3 +1,7 @@
+# v1.2.0 (2025-02-28)
+
+* **Feature**: Renamed and added new StandardConfiguration enums. Added support to update EncryptionConfiguration in UpdateBlueprint and UpdateDataAutomation APIs. Changed HttpStatus code for DeleteBlueprint and DeleteDataAutomationProject APIs to 200 from 204. Added APIs to support tagging.
+
 # v1.1.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids

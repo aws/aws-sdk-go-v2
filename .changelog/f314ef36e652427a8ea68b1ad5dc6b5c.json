@@ -1,8 +1,0 @@
-{
-    "id": "f314ef36-e652-427a-8ea6-8b1ad5dc6b5c",
-    "type": "feature",
-    "description": "Add skipped status to the Result Statistics of an Assessment Run",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

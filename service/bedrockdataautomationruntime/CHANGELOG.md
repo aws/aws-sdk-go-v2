@@ -1,3 +1,7 @@
+# v1.2.0 (2025-02-28)
+
+* **Feature**: Added a mandatory parameter DataAutomationProfileArn to support for cross region inference for InvokeDataAutomationAsync API. Renamed DataAutomationArn to DataAutomationProjectArn. Added APIs to support tagging.
+
 # v1.1.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids

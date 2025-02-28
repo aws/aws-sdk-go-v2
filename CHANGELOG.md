@@ -1,3 +1,21 @@
+# Release (2025-02-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.2.0](service/bedrockdataautomation/CHANGELOG.md#v120-2025-02-28)
+  * **Feature**: Renamed and added new StandardConfiguration enums. Added support to update EncryptionConfiguration in UpdateBlueprint and UpdateDataAutomation APIs. Changed HttpStatus code for DeleteBlueprint and DeleteDataAutomationProject APIs to 200 from 204. Added APIs to support tagging.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.2.0](service/bedrockdataautomationruntime/CHANGELOG.md#v120-2025-02-28)
+  * **Feature**: Added a mandatory parameter DataAutomationProfileArn to support for cross region inference for InvokeDataAutomationAsync API. Renamed DataAutomationArn to DataAutomationProjectArn. Added APIs to support tagging.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.51.0](service/databasemigrationservice/CHANGELOG.md#v1510-2025-02-28)
+  * **Feature**: Add skipped status to the Result Statistics of an Assessment Run
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.60.0](service/eks/CHANGELOG.md#v1600-2025-02-28)
+  * **Feature**: Adding licenses to EKS Anywhere Subscription operations response.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.69.0](service/mediaconvert/CHANGELOG.md#v1690-2025-02-28)
+  * **Feature**: The AWS MediaConvert Probe API allows you to analyze media files and retrieve detailed metadata about their content, format, and structure.
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.34.0](service/pricing/CHANGELOG.md#v1340-2025-02-28)
+  * **Feature**: Update GetProducts and DescribeServices API request input validations.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.57.1](service/ssm/CHANGELOG.md#v1571-2025-02-28)
+  * **Documentation**: Systems Manager doc-only updates for Feb. 2025.
+
 # Release (2025-02-27)
 
 ## General Highlights

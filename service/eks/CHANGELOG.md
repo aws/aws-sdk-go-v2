@@ -1,3 +1,7 @@
+# v1.60.0 (2025-02-28)
+
+* **Feature**: Adding licenses to EKS Anywhere Subscription operations response.
+
 # v1.59.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids

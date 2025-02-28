@@ -1,3 +1,7 @@
+# v1.34.0 (2025-02-28)
+
+* **Feature**: Update GetProducts and DescribeServices API request input validations.
+
 # v1.33.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids
