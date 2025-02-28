@@ -4203,7 +4203,8 @@ type ReplicationTaskAssessmentRun struct {
 	//   provisioned for individual assessments.
 	//
 	//   - "warning" – At least one individual assessment completed with a warning
-	//   status.
+	//   status or all individual assessments were skipped (completed with a skipped
+	//   status).
 	Status *string
 
 	noSmithyDocumentSerde
@@ -4239,6 +4240,10 @@ type ReplicationTaskAssessmentRunResultStatistic struct {
 	// The number of individual assessments that successfully passed all checks in the
 	// assessment run.
 	Passed int32
+
+	// The number of individual assessments that were skipped during the assessment
+	// run.
+	Skipped int32
 
 	// Indicates that the recent completed AssessmentRun triggered a warning.
 	Warning int32
@@ -4277,6 +4282,8 @@ type ReplicationTaskIndividualAssessment struct {
 	//   - "passed"
 	//
 	//   - "pending"
+	//
+	//   - "skipped"
 	//
 	//   - "running"
 	Status *string

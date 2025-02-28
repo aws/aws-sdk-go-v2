@@ -2144,6 +2144,65 @@ func (CmfcTimedMetadataBoxVersion) Values() []CmfcTimedMetadataBoxVersion {
 	}
 }
 
+type Codec string
+
+// Enum values for Codec
+const (
+	CodecUnknown Codec = "UNKNOWN"
+	CodecAac     Codec = "AAC"
+	CodecAc3     Codec = "AC3"
+	CodecEac3    Codec = "EAC3"
+	CodecFlac    Codec = "FLAC"
+	CodecMp3     Codec = "MP3"
+	CodecOpus    Codec = "OPUS"
+	CodecPcm     Codec = "PCM"
+	CodecVorbis  Codec = "VORBIS"
+	CodecAv1     Codec = "AV1"
+	CodecAvc     Codec = "AVC"
+	CodecHevc    Codec = "HEVC"
+	CodecMjpeg   Codec = "MJPEG"
+	CodecMp4v    Codec = "MP4V"
+	CodecMpeg2   Codec = "MPEG2"
+	CodecProres  Codec = "PRORES"
+	CodecTheora  Codec = "THEORA"
+	CodecVp8     Codec = "VP8"
+	CodecVp9     Codec = "VP9"
+	CodecC608    Codec = "C608"
+	CodecC708    Codec = "C708"
+	CodecWebvtt  Codec = "WEBVTT"
+)
+
+// Values returns all known values for Codec. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Codec) Values() []Codec {
+	return []Codec{
+		"UNKNOWN",
+		"AAC",
+		"AC3",
+		"EAC3",
+		"FLAC",
+		"MP3",
+		"OPUS",
+		"PCM",
+		"VORBIS",
+		"AV1",
+		"AVC",
+		"HEVC",
+		"MJPEG",
+		"MP4V",
+		"MPEG2",
+		"PRORES",
+		"THEORA",
+		"VP8",
+		"VP9",
+		"C608",
+		"C708",
+		"WEBVTT",
+	}
+}
+
 type ColorMetadata string
 
 // Enum values for ColorMetadata
@@ -2160,6 +2219,53 @@ func (ColorMetadata) Values() []ColorMetadata {
 	return []ColorMetadata{
 		"IGNORE",
 		"INSERT",
+	}
+}
+
+type ColorPrimaries string
+
+// Enum values for ColorPrimaries
+const (
+	ColorPrimariesItu709       ColorPrimaries = "ITU_709"
+	ColorPrimariesUnspecified  ColorPrimaries = "UNSPECIFIED"
+	ColorPrimariesReserved     ColorPrimaries = "RESERVED"
+	ColorPrimariesItu470m      ColorPrimaries = "ITU_470M"
+	ColorPrimariesItu470bg     ColorPrimaries = "ITU_470BG"
+	ColorPrimariesSmpte170m    ColorPrimaries = "SMPTE_170M"
+	ColorPrimariesSmpte240m    ColorPrimaries = "SMPTE_240M"
+	ColorPrimariesGenericFilm  ColorPrimaries = "GENERIC_FILM"
+	ColorPrimariesItu2020      ColorPrimaries = "ITU_2020"
+	ColorPrimariesSmpte4281    ColorPrimaries = "SMPTE_428_1"
+	ColorPrimariesSmpte4312    ColorPrimaries = "SMPTE_431_2"
+	ColorPrimariesSmpteEg4321  ColorPrimaries = "SMPTE_EG_432_1"
+	ColorPrimariesIpt          ColorPrimaries = "IPT"
+	ColorPrimariesSmpte2067xyz ColorPrimaries = "SMPTE_2067XYZ"
+	ColorPrimariesEbu3213E     ColorPrimaries = "EBU_3213_E"
+	ColorPrimariesLast         ColorPrimaries = "LAST"
+)
+
+// Values returns all known values for ColorPrimaries. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ColorPrimaries) Values() []ColorPrimaries {
+	return []ColorPrimaries{
+		"ITU_709",
+		"UNSPECIFIED",
+		"RESERVED",
+		"ITU_470M",
+		"ITU_470BG",
+		"SMPTE_170M",
+		"SMPTE_240M",
+		"GENERIC_FILM",
+		"ITU_2020",
+		"SMPTE_428_1",
+		"SMPTE_431_2",
+		"SMPTE_EG_432_1",
+		"IPT",
+		"SMPTE_2067XYZ",
+		"EBU_3213_E",
+		"LAST",
 	}
 }
 
@@ -3691,6 +3797,29 @@ func (FontScript) Values() []FontScript {
 		"AUTOMATIC",
 		"HANS",
 		"HANT",
+	}
+}
+
+type Format string
+
+// Enum values for Format
+const (
+	FormatMp4       Format = "mp4"
+	FormatQuicktime Format = "quicktime"
+	FormatMatroska  Format = "matroska"
+	FormatWebm      Format = "webm"
+)
+
+// Values returns all known values for Format. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Format) Values() []Format {
+	return []Format{
+		"mp4",
+		"quicktime",
+		"matroska",
+		"webm",
 	}
 }
 
@@ -6550,6 +6679,57 @@ func (M3u8Scte35Source) Values() []M3u8Scte35Source {
 	}
 }
 
+type MatrixCoefficients string
+
+// Enum values for MatrixCoefficients
+const (
+	MatrixCoefficientsRgb          MatrixCoefficients = "RGB"
+	MatrixCoefficientsItu709       MatrixCoefficients = "ITU_709"
+	MatrixCoefficientsUnspecified  MatrixCoefficients = "UNSPECIFIED"
+	MatrixCoefficientsReserved     MatrixCoefficients = "RESERVED"
+	MatrixCoefficientsFcc          MatrixCoefficients = "FCC"
+	MatrixCoefficientsItu470bg     MatrixCoefficients = "ITU_470BG"
+	MatrixCoefficientsSmpte170m    MatrixCoefficients = "SMPTE_170M"
+	MatrixCoefficientsSmpte240m    MatrixCoefficients = "SMPTE_240M"
+	MatrixCoefficientsYCgCo        MatrixCoefficients = "YCgCo"
+	MatrixCoefficientsItu2020Ncl   MatrixCoefficients = "ITU_2020_NCL"
+	MatrixCoefficientsItu2020Cl    MatrixCoefficients = "ITU_2020_CL"
+	MatrixCoefficientsSmpte2085    MatrixCoefficients = "SMPTE_2085"
+	MatrixCoefficientsCdNcl        MatrixCoefficients = "CD_NCL"
+	MatrixCoefficientsCdCl         MatrixCoefficients = "CD_CL"
+	MatrixCoefficientsItu2100ICtCp MatrixCoefficients = "ITU_2100ICtCp"
+	MatrixCoefficientsIpt          MatrixCoefficients = "IPT"
+	MatrixCoefficientsEbu3213      MatrixCoefficients = "EBU3213"
+	MatrixCoefficientsLast         MatrixCoefficients = "LAST"
+)
+
+// Values returns all known values for MatrixCoefficients. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MatrixCoefficients) Values() []MatrixCoefficients {
+	return []MatrixCoefficients{
+		"RGB",
+		"ITU_709",
+		"UNSPECIFIED",
+		"RESERVED",
+		"FCC",
+		"ITU_470BG",
+		"SMPTE_170M",
+		"SMPTE_240M",
+		"YCgCo",
+		"ITU_2020_NCL",
+		"ITU_2020_CL",
+		"SMPTE_2085",
+		"CD_NCL",
+		"CD_CL",
+		"ITU_2100ICtCp",
+		"IPT",
+		"EBU3213",
+		"LAST",
+	}
+}
+
 type MotionImageInsertionMode string
 
 // Enum values for MotionImageInsertionMode
@@ -8456,6 +8636,80 @@ func (TimedMetadata) Values() []TimedMetadata {
 	return []TimedMetadata{
 		"PASSTHROUGH",
 		"NONE",
+	}
+}
+
+type TrackType string
+
+// Enum values for TrackType
+const (
+	TrackTypeVideo TrackType = "video"
+	TrackTypeAudio TrackType = "audio"
+	TrackTypeData  TrackType = "data"
+)
+
+// Values returns all known values for TrackType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrackType) Values() []TrackType {
+	return []TrackType{
+		"video",
+		"audio",
+		"data",
+	}
+}
+
+type TransferCharacteristics string
+
+// Enum values for TransferCharacteristics
+const (
+	TransferCharacteristicsItu709       TransferCharacteristics = "ITU_709"
+	TransferCharacteristicsUnspecified  TransferCharacteristics = "UNSPECIFIED"
+	TransferCharacteristicsReserved     TransferCharacteristics = "RESERVED"
+	TransferCharacteristicsItu470m      TransferCharacteristics = "ITU_470M"
+	TransferCharacteristicsItu470bg     TransferCharacteristics = "ITU_470BG"
+	TransferCharacteristicsSmpte170m    TransferCharacteristics = "SMPTE_170M"
+	TransferCharacteristicsSmpte240m    TransferCharacteristics = "SMPTE_240M"
+	TransferCharacteristicsLinear       TransferCharacteristics = "LINEAR"
+	TransferCharacteristicsLog102       TransferCharacteristics = "LOG10_2"
+	TransferCharacteristicsLoc1025      TransferCharacteristics = "LOC10_2_5"
+	TransferCharacteristicsIec6196624   TransferCharacteristics = "IEC_61966_2_4"
+	TransferCharacteristicsItu1361      TransferCharacteristics = "ITU_1361"
+	TransferCharacteristicsIec6196621   TransferCharacteristics = "IEC_61966_2_1"
+	TransferCharacteristicsItu202010bit TransferCharacteristics = "ITU_2020_10bit"
+	TransferCharacteristicsItu202012bit TransferCharacteristics = "ITU_2020_12bit"
+	TransferCharacteristicsSmpte2084    TransferCharacteristics = "SMPTE_2084"
+	TransferCharacteristicsSmpte4281    TransferCharacteristics = "SMPTE_428_1"
+	TransferCharacteristicsAribB67      TransferCharacteristics = "ARIB_B67"
+	TransferCharacteristicsLast         TransferCharacteristics = "LAST"
+)
+
+// Values returns all known values for TransferCharacteristics. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransferCharacteristics) Values() []TransferCharacteristics {
+	return []TransferCharacteristics{
+		"ITU_709",
+		"UNSPECIFIED",
+		"RESERVED",
+		"ITU_470M",
+		"ITU_470BG",
+		"SMPTE_170M",
+		"SMPTE_240M",
+		"LINEAR",
+		"LOG10_2",
+		"LOC10_2_5",
+		"IEC_61966_2_4",
+		"ITU_1361",
+		"IEC_61966_2_1",
+		"ITU_2020_10bit",
+		"ITU_2020_12bit",
+		"SMPTE_2084",
+		"SMPTE_428_1",
+		"ARIB_B67",
+		"LAST",
 	}
 }
 

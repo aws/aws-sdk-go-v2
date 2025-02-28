@@ -338,6 +338,18 @@ func TestCheckSnapshot_ListVersions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_Probe(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Probe(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "Probe")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutPolicy(context.Background(), nil, func(o *Options) {
@@ -690,6 +702,18 @@ func TestUpdateSnapshot_ListVersions(t *testing.T) {
 	_, err := svc.ListVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_Probe(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Probe(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "Probe")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

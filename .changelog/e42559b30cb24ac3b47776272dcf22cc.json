@@ -1,0 +1,8 @@
+{
+    "id": "e42559b3-0cb2-4ac3-b477-76272dcf22cc",
+    "type": "feature",
+    "description": "Adding licenses to EKS Anywhere Subscription operations response.",
+    "modules": [
+        "service/eks"
+    ]
+}

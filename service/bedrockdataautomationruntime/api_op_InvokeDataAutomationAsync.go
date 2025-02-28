@@ -30,6 +30,11 @@ func (c *Client) InvokeDataAutomationAsync(ctx context.Context, params *InvokeDa
 // Invoke Data Automation Async Request
 type InvokeDataAutomationAsyncInput struct {
 
+	// Data automation profile ARN
+	//
+	// This member is required.
+	DataAutomationProfileArn *string
+
 	// Input configuration.
 	//
 	// This member is required.
@@ -54,6 +59,9 @@ type InvokeDataAutomationAsyncInput struct {
 
 	// Notification configuration.
 	NotificationConfiguration *types.NotificationConfiguration
+
+	// List of tags.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

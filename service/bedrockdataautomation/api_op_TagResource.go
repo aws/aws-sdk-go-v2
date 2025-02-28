@@ -11,71 +11,57 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Bedrock Data Automation Blueprint
-func (c *Client) UpdateBlueprint(ctx context.Context, params *UpdateBlueprintInput, optFns ...func(*Options)) (*UpdateBlueprintOutput, error) {
+// Tag an Amazon Bedrock Data Automation resource
+func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
-		params = &UpdateBlueprintInput{}
+		params = &TagResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBlueprint", params, optFns, c.addOperationUpdateBlueprintMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagResource", params, optFns, c.addOperationTagResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateBlueprintOutput)
+	out := result.(*TagResourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// Update Blueprint Request
-type UpdateBlueprintInput struct {
+type TagResourceInput struct {
 
-	// ARN generated at the server side when a Blueprint is created
+	// ARN of a taggable resource
 	//
 	// This member is required.
-	BlueprintArn *string
+	ResourceARN *string
 
-	// Schema of the blueprint
+	// List of tags
 	//
 	// This member is required.
-	Schema *string
-
-	// Stage of the Blueprint
-	BlueprintStage types.BlueprintStage
-
-	// KMS Encryption Configuration
-	EncryptionConfiguration *types.EncryptionConfiguration
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
-// Update Blueprint Response
-type UpdateBlueprintOutput struct {
-
-	// Contains the information of a Blueprint.
-	//
-	// This member is required.
-	Blueprint *types.Blueprint
-
+type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBlueprint{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpTagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBlueprint{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBlueprint"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "TagResource"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -130,10 +116,10 @@ func (c *Client) addOperationUpdateBlueprintMiddlewares(stack *middleware.Stack,
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpUpdateBlueprintValidationMiddleware(stack); err != nil {
+	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBlueprint(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -166,10 +152,10 @@ func (c *Client) addOperationUpdateBlueprintMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateBlueprint(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opTagResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "UpdateBlueprint",
+		OperationName: "TagResource",
 	}
 }

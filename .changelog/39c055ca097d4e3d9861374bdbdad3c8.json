@@ -1,0 +1,8 @@
+{
+    "id": "39c055ca-097d-4e3d-9861-374bdbdad3c8",
+    "type": "feature",
+    "description": "The AWS MediaConvert Probe API allows you to analyze media files and retrieve detailed metadata about their content, format, and structure.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "22d574b2-e23a-4b18-b9eb-af7408298f9f",
+    "type": "feature",
+    "description": "Renamed and added new StandardConfiguration enums. Added support to update EncryptionConfiguration in UpdateBlueprint and UpdateDataAutomation APIs. Changed HttpStatus code for DeleteBlueprint and DeleteDataAutomationProject APIs to 200 from 204. Added APIs to support tagging.",
+    "modules": [
+        "service/bedrockdataautomation"
+    ]
+}

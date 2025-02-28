@@ -6,9 +6,9 @@ type AudioExtractionCategoryType string
 
 // Enum values for AudioExtractionCategoryType
 const (
-	AudioExtractionCategoryTypeAudioContentModeration   AudioExtractionCategoryType = "AUDIO_CONTENT_MODERATION"
-	AudioExtractionCategoryTypeChapterContentModeration AudioExtractionCategoryType = "CHAPTER_CONTENT_MODERATION"
-	AudioExtractionCategoryTypeTranscript               AudioExtractionCategoryType = "TRANSCRIPT"
+	AudioExtractionCategoryTypeAudioContentModeration AudioExtractionCategoryType = "AUDIO_CONTENT_MODERATION"
+	AudioExtractionCategoryTypeTranscript             AudioExtractionCategoryType = "TRANSCRIPT"
+	AudioExtractionCategoryTypeTopicContentModeration AudioExtractionCategoryType = "TOPIC_CONTENT_MODERATION"
 )
 
 // Values returns all known values for AudioExtractionCategoryType. Note that this
@@ -18,8 +18,8 @@ const (
 func (AudioExtractionCategoryType) Values() []AudioExtractionCategoryType {
 	return []AudioExtractionCategoryType{
 		"AUDIO_CONTENT_MODERATION",
-		"CHAPTER_CONTENT_MODERATION",
 		"TRANSCRIPT",
+		"TOPIC_CONTENT_MODERATION",
 	}
 }
 
@@ -27,9 +27,9 @@ type AudioStandardGenerativeFieldType string
 
 // Enum values for AudioStandardGenerativeFieldType
 const (
-	AudioStandardGenerativeFieldTypeAudioSummary   AudioStandardGenerativeFieldType = "AUDIO_SUMMARY"
-	AudioStandardGenerativeFieldTypeChapterSummary AudioStandardGenerativeFieldType = "CHAPTER_SUMMARY"
-	AudioStandardGenerativeFieldTypeIab            AudioStandardGenerativeFieldType = "IAB"
+	AudioStandardGenerativeFieldTypeAudioSummary AudioStandardGenerativeFieldType = "AUDIO_SUMMARY"
+	AudioStandardGenerativeFieldTypeIab          AudioStandardGenerativeFieldType = "IAB"
+	AudioStandardGenerativeFieldTypeTopicSummary AudioStandardGenerativeFieldType = "TOPIC_SUMMARY"
 )
 
 // Values returns all known values for AudioStandardGenerativeFieldType. Note that
@@ -40,8 +40,8 @@ const (
 func (AudioStandardGenerativeFieldType) Values() []AudioStandardGenerativeFieldType {
 	return []AudioStandardGenerativeFieldType{
 		"AUDIO_SUMMARY",
-		"CHAPTER_SUMMARY",
 		"IAB",
+		"TOPIC_SUMMARY",
 	}
 }
 
@@ -203,6 +203,7 @@ type ImageExtractionCategoryType string
 const (
 	ImageExtractionCategoryTypeContentModeration ImageExtractionCategoryType = "CONTENT_MODERATION"
 	ImageExtractionCategoryTypeTextDetection     ImageExtractionCategoryType = "TEXT_DETECTION"
+	ImageExtractionCategoryTypeLogos             ImageExtractionCategoryType = "LOGOS"
 )
 
 // Values returns all known values for ImageExtractionCategoryType. Note that this
@@ -213,6 +214,7 @@ func (ImageExtractionCategoryType) Values() []ImageExtractionCategoryType {
 	return []ImageExtractionCategoryType{
 		"CONTENT_MODERATION",
 		"TEXT_DETECTION",
+		"LOGOS",
 	}
 }
 
@@ -300,6 +302,7 @@ const (
 	VideoExtractionCategoryTypeContentModeration VideoExtractionCategoryType = "CONTENT_MODERATION"
 	VideoExtractionCategoryTypeTextDetection     VideoExtractionCategoryType = "TEXT_DETECTION"
 	VideoExtractionCategoryTypeTranscript        VideoExtractionCategoryType = "TRANSCRIPT"
+	VideoExtractionCategoryTypeLogos             VideoExtractionCategoryType = "LOGOS"
 )
 
 // Values returns all known values for VideoExtractionCategoryType. Note that this
@@ -311,6 +314,7 @@ func (VideoExtractionCategoryType) Values() []VideoExtractionCategoryType {
 		"CONTENT_MODERATION",
 		"TEXT_DETECTION",
 		"TRANSCRIPT",
+		"LOGOS",
 	}
 }
 
@@ -318,9 +322,9 @@ type VideoStandardGenerativeFieldType string
 
 // Enum values for VideoStandardGenerativeFieldType
 const (
-	VideoStandardGenerativeFieldTypeVideoSummary VideoStandardGenerativeFieldType = "VIDEO_SUMMARY"
-	VideoStandardGenerativeFieldTypeSceneSummary VideoStandardGenerativeFieldType = "SCENE_SUMMARY"
-	VideoStandardGenerativeFieldTypeIab          VideoStandardGenerativeFieldType = "IAB"
+	VideoStandardGenerativeFieldTypeVideoSummary   VideoStandardGenerativeFieldType = "VIDEO_SUMMARY"
+	VideoStandardGenerativeFieldTypeIab            VideoStandardGenerativeFieldType = "IAB"
+	VideoStandardGenerativeFieldTypeChapterSummary VideoStandardGenerativeFieldType = "CHAPTER_SUMMARY"
 )
 
 // Values returns all known values for VideoStandardGenerativeFieldType. Note that
@@ -331,7 +335,7 @@ const (
 func (VideoStandardGenerativeFieldType) Values() []VideoStandardGenerativeFieldType {
 	return []VideoStandardGenerativeFieldType{
 		"VIDEO_SUMMARY",
-		"SCENE_SUMMARY",
 		"IAB",
+		"CHAPTER_SUMMARY",
 	}
 }

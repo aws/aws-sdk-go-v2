@@ -12221,6 +12221,11 @@ func awsRestjson1_deserializeDocumentEksAnywhereSubscription(v **types.EksAnywhe
 				sv.LicenseQuantity = int32(i64)
 			}
 
+		case "licenses":
+			if err := awsRestjson1_deserializeDocumentLicenseList(&sv.Licenses, value); err != nil {
+				return err
+			}
+
 		case "licenseType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13919,6 +13924,89 @@ func awsRestjson1_deserializeDocumentLaunchTemplateSpecification(v **types.Launc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLicense(v **types.License, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.License
+	if *v == nil {
+		sv = &types.License{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "token":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Token = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLicenseList(v *[]types.License, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.License
+	if *v == nil {
+		cv = []types.License{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.License
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLicense(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

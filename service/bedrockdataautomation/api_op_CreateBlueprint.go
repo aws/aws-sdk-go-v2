@@ -54,6 +54,9 @@ type CreateBlueprintInput struct {
 	// KMS Encryption Configuration
 	EncryptionConfiguration *types.EncryptionConfiguration
 
+	// List of tags
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

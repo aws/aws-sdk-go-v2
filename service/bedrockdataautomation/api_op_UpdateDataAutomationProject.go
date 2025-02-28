@@ -43,6 +43,9 @@ type UpdateDataAutomationProjectInput struct {
 	// Custom output configuration
 	CustomOutputConfiguration *types.CustomOutputConfiguration
 
+	// KMS Encryption Configuration
+	EncryptionConfiguration *types.EncryptionConfiguration
+
 	// Override configuration
 	OverrideConfiguration *types.OverrideConfiguration
 

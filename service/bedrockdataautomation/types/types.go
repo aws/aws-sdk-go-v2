@@ -489,6 +489,22 @@ type StandardOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Key value pair of a tag
+type Tag struct {
+
+	// Defines the context of the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// Defines the value within the context. e.g. <key=reason, value=training>.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Stores information about a field passed inside a request that resulted in an
 // exception
 type ValidationExceptionField struct {

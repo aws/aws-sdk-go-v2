@@ -1,0 +1,8 @@
+{
+    "id": "f7109105-0ef8-47d9-b696-a450a7351ab0",
+    "type": "feature",
+    "description": "Update GetProducts and DescribeServices API request input validations.",
+    "modules": [
+        "service/pricing"
+    ]
+}

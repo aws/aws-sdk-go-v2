@@ -58,6 +58,9 @@ type CreateDataAutomationProjectInput struct {
 	// Stage of the Project
 	ProjectStage types.DataAutomationProjectStage
 
+	// List of tags
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

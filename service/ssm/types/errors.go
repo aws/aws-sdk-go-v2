@@ -2795,6 +2795,10 @@ func (e *ParameterMaxVersionLimitExceeded) ErrorCode() string {
 func (e *ParameterMaxVersionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The parameter couldn't be found. Verify the name and try again.
+//
+// For the DeleteParameter and GetParameter actions, if the specified parameter
+// doesn't exist, the ParameterNotFound exception is not recorded in CloudTrail
+// event logs.
 type ParameterNotFound struct {
 	Message *string
 

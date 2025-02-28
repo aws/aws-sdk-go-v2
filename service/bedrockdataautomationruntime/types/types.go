@@ -26,10 +26,10 @@ type Blueprint struct {
 // Data automation configuration.
 type DataAutomationConfiguration struct {
 
-	// Data automation arn.
+	// Data automation project arn.
 	//
 	// This member is required.
-	DataAutomationArn *string
+	DataAutomationProjectArn *string
 
 	// Data automation stage.
 	Stage DataAutomationStage
@@ -40,7 +40,7 @@ type DataAutomationConfiguration struct {
 // Encryption configuration.
 type EncryptionConfiguration struct {
 
-	// KMS key id.
+	// Customer KMS key used for encryption
 	//
 	// This member is required.
 	KmsKeyId *string
@@ -91,6 +91,22 @@ type OutputConfiguration struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Key value pair of a tag
+type Tag struct {
+
+	// Defines the context of the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// Defines the value within the context. e.g. <key=reason, value=training>.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

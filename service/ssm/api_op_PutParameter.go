@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add a parameter to the system.
+// Create or update a parameter in Parameter Store.
 func (c *Client) PutParameter(ctx context.Context, params *PutParameterInput, optFns ...func(*Options)) (*PutParameterOutput, error) {
 	if params == nil {
 		params = &PutParameterInput{}
@@ -29,7 +29,7 @@ func (c *Client) PutParameter(ctx context.Context, params *PutParameterInput, op
 
 type PutParameterInput struct {
 
-	// The fully qualified name of the parameter that you want to add to the system.
+	// The fully qualified name of the parameter that you want to create or update.
 	//
 	// You can't enter the Amazon Resource Name (ARN) for a parameter, only the
 	// parameter name itself.
@@ -130,7 +130,7 @@ type PutParameterInput struct {
 	// use the SecureString data type.
 	//
 	// If you don't specify a key ID, the system uses the default key associated with
-	// your Amazon Web Services account which is not as secure as using a custom key.
+	// your Amazon Web Services account, which is not as secure as using a custom key.
 	//
 	//   - To use a custom KMS key, choose the SecureString data type with the Key ID
 	//   parameter.
@@ -248,7 +248,7 @@ type PutParameterInput struct {
 	// [Managing parameter tiers]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
 	Tier types.ParameterTier
 
-	// The type of parameter that you want to add to the system.
+	// The type of parameter that you want to create.
 	//
 	// SecureString isn't currently supported for CloudFormation templates.
 	//

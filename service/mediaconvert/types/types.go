@@ -457,6 +457,30 @@ type AudioNormalizationSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Properties specific to audio tracks.
+type AudioProperties struct {
+
+	// The bit depth of the audio track.
+	BitDepth *int32
+
+	// The bit rate of the audio track in bits per second.
+	BitRate *int32
+
+	// The number of audio channels.
+	Channels *int32
+
+	// the calculated frame rate of the asset.
+	FrameRate *FrameRate
+
+	// the language code of the track
+	LanguageCode *string
+
+	// The sample rate of the audio track.
+	SampleRate *int32
+
+	noSmithyDocumentSerde
+}
+
 // Use Audio selectors to specify a track or set of tracks from the input that you
 // will use in your outputs. You can use multiple Audio selectors per input.
 type AudioSelector struct {
@@ -1996,6 +2020,21 @@ type ColorCorrector struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the container format of the media file.
+type Container struct {
+
+	// The duration of the media file in seconds.
+	Duration *float64
+
+	// The format of the container
+	Format Format
+
+	// List of Track objects.
+	Tracks []Track
+
+	noSmithyDocumentSerde
+}
+
 // Container specific settings.
 type ContainerSettings struct {
 
@@ -2280,6 +2319,15 @@ type DashIsoImageBasedTrickPlaySettings struct {
 
 	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
 	TileWidth *int32
+
+	noSmithyDocumentSerde
+}
+
+// Properties specific to data tracks.
+type DataProperties struct {
+
+	// the language code of the track
+	LanguageCode *string
 
 	noSmithyDocumentSerde
 }
@@ -3280,6 +3328,18 @@ type FrameCaptureSettings struct {
 
 	// JPEG Quality - a higher value equals higher quality.
 	Quality *int32
+
+	noSmithyDocumentSerde
+}
+
+// the calculated frame rate of the asset.
+type FrameRate struct {
+
+	// the denominator of the frame rate of the asset.
+	Denominator *int32
+
+	// the numerator of the frame rate of the asset.
+	Numerator *int32
 
 	noSmithyDocumentSerde
 }
@@ -6053,6 +6113,24 @@ type M3u8Settings struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata about the file.
+type Metadata struct {
+
+	// The ETag of the file.
+	ETag *string
+
+	// The size of the file in bytes.
+	FileSize *int64
+
+	// The last modification time of the file.
+	LastModified *time.Time
+
+	// The MIME type of the file.
+	MimeType *string
+
+	noSmithyDocumentSerde
+}
+
 // Use Min bottom rendition size to specify a minimum size for the lowest
 // resolution in your ABR stack. * The lowest resolution in your ABR stack will be
 // equal to or greater than the value that you enter. For example: If you specify
@@ -7252,6 +7330,31 @@ type PresetSettings struct {
 	noSmithyDocumentSerde
 }
 
+// The input file that needs to be analyzed.
+type ProbeInputFile struct {
+
+	// The URI to your input file(s) that is stored in Amazon S3 or on an HTTP(S)
+	// server.
+	FileUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata and analysis results for a media file.
+type ProbeResult struct {
+
+	// Information about the container format of the media file.
+	Container *Container
+
+	// Metadata about the file.
+	Metadata *Metadata
+
+	// List of Track mapping objects.
+	TrackMappings []TrackMapping
+
+	noSmithyDocumentSerde
+}
+
 // Required when you set Codec to the value PRORES.
 type ProresSettings struct {
 
@@ -7945,6 +8048,48 @@ type Timing struct {
 	noSmithyDocumentSerde
 }
 
+// The track information such as codec, duration, etc.
+type Track struct {
+
+	// Properties specific to audio tracks.
+	AudioProperties *AudioProperties
+
+	// The codec used for the track.
+	Codec Codec
+
+	// Properties specific to data tracks.
+	DataProperties *DataProperties
+
+	// The duration of the track in seconds.
+	Duration *float64
+
+	// The index of the track.
+	Index *int32
+
+	// The type of the track (video, audio, or data).
+	TrackType TrackType
+
+	// Properties specific to video tracks.
+	VideoProperties *VideoProperties
+
+	noSmithyDocumentSerde
+}
+
+// Track mapping information.
+type TrackMapping struct {
+
+	// The indexes of the audio tracks.
+	AudioTrackIndexes []int32
+
+	// The indexes of the data tracks.
+	DataTrackIndexes []int32
+
+	// The indexes of the video tracks.
+	VideoTrackIndexes []int32
+
+	noSmithyDocumentSerde
+}
+
 // Settings specific to caption sources that are specified by track number.
 // Currently, this is only IMSC captions in an IMF package. If your caption source
 // is IMSC 1.1 in a separate xml file, use FileSourceSettings instead of
@@ -8565,6 +8710,36 @@ type VideoPreprocessor struct {
 
 	// Settings for burning the output timecode and specified prefix into the output.
 	TimecodeBurnin *TimecodeBurnin
+
+	noSmithyDocumentSerde
+}
+
+// Properties specific to video tracks.
+type VideoProperties struct {
+
+	// The bit depth of the video track.
+	BitDepth *int32
+
+	// The bit rate of the video track in bits per second.
+	BitRate *int32
+
+	// the color primaries.
+	ColorPrimaries ColorPrimaries
+
+	// the calculated frame rate of the asset.
+	FrameRate *FrameRate
+
+	// The height of the video track in pixels.
+	Height *int32
+
+	// the matrix coefficients.
+	MatrixCoefficients MatrixCoefficients
+
+	// the transfer characteristics.
+	TransferCharacteristics TransferCharacteristics
+
+	// The width of the video track in pixels.
+	Width *int32
 
 	noSmithyDocumentSerde
 }
