@@ -2273,7 +2273,7 @@
                 "CalendarNames": {
                     "target": "com.amazonaws.ssm#CalendarNameOrARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your\n   associations are gated under. The associations only run when that change calendar is open. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a>.</p>"
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your\n   associations are gated under. The associations only run when that change calendar is open. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TargetLocations": {
@@ -3037,13 +3037,13 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter isn't supported for rate\n   expressions.</p>"
+                        "smithy.api#documentation": "<p>By default, when you create new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter isn't supported for rate\n   expressions.</p>"
                     }
                 },
                 "CalendarNames": {
                     "target": "com.amazonaws.ssm#CalendarNameOrARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your\n   associations are gated under. The associations for this version only run when that Change\n   Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a>.</p>"
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your\n   associations are gated under. The associations for this version only run when that Change\n   Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TargetLocations": {
@@ -6049,13 +6049,13 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter isn't supported for rate\n   expressions.</p>"
+                        "smithy.api#documentation": "<p>By default, when you create a new association, the system runs it immediately after it is\n   created and then according to the schedule you specified and when target changes are detected.\n   Specify <code>true</code> for <code>ApplyOnlyAtCronInterval</code> if you want the association to\n   run only according to the schedule you specified.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#state-manager-about-scheduling\">Understanding when associations are applied to resources</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#runbook-target-updates\">>About\n    target updates with Automation runbooks</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>This parameter isn't supported for rate expressions.</p>"
                     }
                 },
                 "CalendarNames": {
                     "target": "com.amazonaws.ssm#CalendarNameOrARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your\n   associations are gated under. The associations only run when that Change Calendar is open. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a>.</p>"
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your\n   associations are gated under. The associations only run when that Change Calendar is open. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TargetLocations": {
@@ -6196,13 +6196,13 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default, when you create a new association, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter isn't supported for rate\n   expressions.</p>"
+                        "smithy.api#documentation": "<p>By default, when you create a new association, the system runs it immediately after it is\n   created and then according to the schedule you specified and when target changes are detected.\n   Specify <code>true</code> for <code>ApplyOnlyAtCronInterval</code>if you want the association to\n   run only according to the schedule you specified.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#state-manager-about-scheduling\">Understanding when associations are applied to resources</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#runbook-target-updates\">>About\n    target updates with Automation runbooks</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>This parameter isn't supported for rate expressions.</p>"
                     }
                 },
                 "CalendarNames": {
                     "target": "com.amazonaws.ssm#CalendarNameOrARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents you want to\n   gate your associations under. The associations only run when that change calendar is open. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a>.</p>"
+                        "smithy.api#documentation": "<p>The names of Amazon Resource Names (ARNs) of the Change Calendar type documents you want to\n   gate your associations under. The associations only run when that change calendar is open. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TargetLocations": {
@@ -7639,7 +7639,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the server or virtual machine from the list of registered servers. You can\n   reregister the node again at any time. If you don't plan to use Run Command on the server, we\n   suggest uninstalling SSM Agent first.</p>"
+                "smithy.api#documentation": "<p>Removes the server or virtual machine from the list of registered servers.</p>\n         <p>If you want to reregister an on-premises server, edge device, or VM, you must use a\n   different Activation Code and Activation ID than used to register the machine previously. The\n   Activation Code and Activation ID must not have already been used on the maximum number of\n   activations specified when they were created. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/fleet-manager-deregister-hybrid-nodes.html\">Deregistering\n    managed nodes in a hybrid and multicloud environment</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssm#DeregisterManagedInstanceRequest": {
@@ -12229,7 +12229,7 @@
                 "CalendarNames": {
                     "target": "com.amazonaws.ssm#CalendarNameOrARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager documents (SSM documents) that\n   represent the calendar entries for which you want to get the state.</p>",
+                        "smithy.api#documentation": "<p>The names of Amazon Resource Names (ARNs) of the Systems Manager documents (SSM documents) that\n   represent the calendar entries for which you want to get the state.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18744,7 +18744,7 @@
                 "SyncName": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the resource data sync to retrieve information about. Required for\n   cross-account/cross-Region configurations. Optional for single account/single-Region\n   configurations.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services managed resource data sync to retrieve information about.</p>\n         <p>For cross-account/cross-Region configurations, this parameter is required, and the name of\n   the supported resource data sync is <code>AWS-QuickSetup-ManagedNode</code>.</p>\n         <p>For single account/single-Region configurations, the parameter is not required.</p>"
                     }
                 },
                 "Filters": {
@@ -18873,7 +18873,7 @@
                 "SyncName": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the resource data sync to retrieve information about. Required for\n   cross-account/cross-Region configuration. Optional for single account/single-Region\n   configurations.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services managed resource data sync to retrieve information about.</p>\n         <p>For cross-account/cross-Region configurations, this parameter is required, and the name of\n   the supported resource data sync is <code>AWS-QuickSetup-ManagedNode</code>.</p>\n         <p>For single account/single-Region configurations, the parameter is not required.</p>"
                     }
                 },
                 "Filters": {
@@ -20768,13 +20768,13 @@
                 "AccountIdsToAdd": {
                     "target": "com.amazonaws.ssm#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services users that should have access to the document. The account IDs can either be a\n   group of account IDs or <i>All</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services users that should have access to the document. The account IDs can either be a\n   group of account IDs or <i>All</i>. </p>"
                     }
                 },
                 "AccountIdsToRemove": {
                     "target": "com.amazonaws.ssm#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services users that should no longer have access to the document. The Amazon Web Services user\n   can either be a group of account IDs or <i>All</i>. This action has a higher\n   priority than <code>AccountIdsToAdd</code>. If you specify an ID to add and the same ID to\n   remove, the system removes access to the document.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services users that should no longer have access to the document. The Amazon Web Services user\n   can either be a group of account IDs or <i>All</i>. This action has a higher\n   priority than <code>AccountIdsToAdd</code>. If you specify an ID to add and the same ID to\n   remove, the system removes access to the document. </p>"
                     }
                 },
                 "SharedDocumentVersion": {
@@ -23814,7 +23814,7 @@
                     "code": "ParameterNotFound",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p>The parameter couldn't be found. Verify the name and try again.</p>",
+                "smithy.api#documentation": "<p>The parameter couldn't be found. Verify the name and try again.</p>\n         <note>\n            <p>For the <code>DeleteParameter</code> and <code>GetParameter</code> actions, if the\n    specified parameter doesn't exist, the <code>ParameterNotFound</code> exception is\n     <i>not</i> recorded in CloudTrail event logs.</p>\n         </note>",
                 "smithy.api#error": "client"
             }
         },
@@ -25668,7 +25668,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Add a parameter to the system.</p>"
+                "smithy.api#documentation": "<p>Create or update a parameter in Parameter Store.</p>"
             }
         },
         "com.amazonaws.ssm#PutParameterRequest": {
@@ -25677,7 +25677,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fully qualified name of the parameter that you want to add to the system.</p>\n         <note>\n            <p>You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name\n    itself.</p>\n         </note>\n         <p>The fully qualified name includes the complete hierarchy of the parameter path and name. For\n   parameters in a hierarchy, you must include a leading forward slash character (/) when you create\n   or reference a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code>\n         </p>\n         <p>Naming Constraints:</p>\n         <ul>\n            <li>\n               <p>Parameter names are case sensitive.</p>\n            </li>\n            <li>\n               <p>A parameter name must be unique within an Amazon Web Services Region</p>\n            </li>\n            <li>\n               <p>A parameter name can't be prefixed with \"<code>aws</code>\" or \"<code>ssm</code>\"\n     (case-insensitive).</p>\n            </li>\n            <li>\n               <p>Parameter names can include only the following symbols and letters:\n      <code>a-zA-Z0-9_.-</code>\n               </p>\n               <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter\n     names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code>\n               </p>\n            </li>\n            <li>\n               <p>A parameter name can't include spaces.</p>\n            </li>\n            <li>\n               <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p>\n            </li>\n         </ul>\n         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>The maximum length constraint of 2048 characters listed below includes 1037 characters\n    reserved for internal use by Systems Manager. The maximum length for a parameter name that you create is\n    1011 characters. This includes the characters in the ARN that precede the name you specify, such\n    as <code>arn:aws:ssm:us-east-2:111122223333:parameter/</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The fully qualified name of the parameter that you want to create or update.</p>\n         <note>\n            <p>You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name\n    itself.</p>\n         </note>\n         <p>The fully qualified name includes the complete hierarchy of the parameter path and name. For\n   parameters in a hierarchy, you must include a leading forward slash character (/) when you create\n   or reference a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code>\n         </p>\n         <p>Naming Constraints:</p>\n         <ul>\n            <li>\n               <p>Parameter names are case sensitive.</p>\n            </li>\n            <li>\n               <p>A parameter name must be unique within an Amazon Web Services Region</p>\n            </li>\n            <li>\n               <p>A parameter name can't be prefixed with \"<code>aws</code>\" or \"<code>ssm</code>\"\n     (case-insensitive).</p>\n            </li>\n            <li>\n               <p>Parameter names can include only the following symbols and letters:\n      <code>a-zA-Z0-9_.-</code>\n               </p>\n               <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter\n     names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code>\n               </p>\n            </li>\n            <li>\n               <p>A parameter name can't include spaces.</p>\n            </li>\n            <li>\n               <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p>\n            </li>\n         </ul>\n         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>The maximum length constraint of 2048 characters listed below includes 1037 characters\n    reserved for internal use by Systems Manager. The maximum length for a parameter name that you create is\n    1011 characters. This includes the characters in the ARN that precede the name you specify, such\n    as <code>arn:aws:ssm:us-east-2:111122223333:parameter/</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -25697,13 +25697,13 @@
                 "Type": {
                     "target": "com.amazonaws.ssm#ParameterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of parameter that you want to add to the system.</p>\n         <note>\n            <p>\n               <code>SecureString</code> isn't currently supported for CloudFormation templates.</p>\n         </note>\n         <p>Items in a <code>StringList</code> must be separated by a comma (,). You can't\n   use other punctuation or special character to escape items in the list. If you have a parameter\n   value that requires a comma, then use the <code>String</code> data type.</p>\n         <important>\n            <p>Specifying a parameter type isn't required when updating a parameter. You must specify a\n    parameter type when creating a parameter.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The type of parameter that you want to create.</p>\n         <note>\n            <p>\n               <code>SecureString</code> isn't currently supported for CloudFormation templates.</p>\n         </note>\n         <p>Items in a <code>StringList</code> must be separated by a comma (,). You can't\n   use other punctuation or special character to escape items in the list. If you have a parameter\n   value that requires a comma, then use the <code>String</code> data type.</p>\n         <important>\n            <p>Specifying a parameter type isn't required when updating a parameter. You must specify a\n    parameter type when creating a parameter.</p>\n         </important>"
                     }
                 },
                 "KeyId": {
                     "target": "com.amazonaws.ssm#ParameterKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Key Management Service (KMS) ID that you want to use to encrypt a\n   parameter. Use a custom key for better security. Required for parameters that use the <code>SecureString</code> data type.</p>\n         <p>If you don't specify a key ID, the system uses the default key associated with your\n   Amazon Web Services account which is not as secure as using a custom key.</p>\n         <ul>\n            <li>\n               <p>To use a custom KMS key, choose the <code>SecureString</code>\n     data type with the <code>Key ID</code> parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Key Management Service (KMS) ID that you want to use to encrypt a\n   parameter. Use a custom key for better security. Required for parameters that use the <code>SecureString</code> data type.</p>\n         <p>If you don't specify a key ID, the system uses the default key associated with your\n   Amazon Web Services account, which is not as secure as using a custom key.</p>\n         <ul>\n            <li>\n               <p>To use a custom KMS key, choose the <code>SecureString</code>\n     data type with the <code>Key ID</code> parameter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Overwrite": {
@@ -30220,13 +30220,13 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default, when you update an association, the system runs it immediately after it is\n   updated and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you update it. This parameter isn't supported for rate\n   expressions.</p>\n         <p>If you chose this option when you created an association and later you edit that association\n   or you make changes to the SSM document on which that association is based (by using the\n   Documents page in the console), State Manager applies the association at the next specified cron\n   interval. For example, if you chose the <code>Latest</code> version of an SSM document when you\n   created an association and you edit the association by choosing a different document version on\n   the Documents page, State Manager applies the association at the next specified cron interval if\n   you previously selected this option. If this option wasn't selected, State Manager immediately\n   runs the association.</p>\n         <p>You can reset this option. To do so, specify the <code>no-apply-only-at-cron-interval</code>\n   parameter when you update the association from the command line. This parameter forces the\n   association to run immediately after updating it and according to the interval specified.</p>"
+                        "smithy.api#documentation": "<p>By default, when you update an association, the system runs it immediately after it is\n   updated and then according to the schedule you specified. Specify <code>true</code> for\n    <code>ApplyOnlyAtCronInterval</code> if you want the association to run only according to the\n   schedule you specified.</p>\n         <p>If you chose this option when you created an association and later you edit that association\n   or you make changes to the Automation runbook or SSM document on which that association is based,\n   State Manager applies the association at the next specified cron interval. For example, if you\n   chose the <code>Latest</code> version of an SSM document when you created an association and you\n   edit the association by choosing a different document version on the Documents page, State\n   Manager applies the association at the next specified cron interval if you previously set\n    <code>ApplyOnlyAtCronInterval</code> to <code>true</code>. If this option wasn't selected, State\n   Manager immediately runs the association.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#state-manager-about-scheduling\">Understanding when associations are applied to resources</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#runbook-target-updates\">About\n    target updates with Automation runbooks</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>This parameter isn't supported for rate expressions.</p>\n         <p>You can reset this parameter. To do so, specify the\n    <code>no-apply-only-at-cron-interval</code> parameter when you update the association from the\n   command line. This parameter forces the association to run immediately after updating it and\n   according to the interval specified.</p>"
                     }
                 },
                 "CalendarNames": {
                     "target": "com.amazonaws.ssm#CalendarNameOrARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents you want to\n   gate your associations under. The associations only run when that change calendar is open. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a>.</p>"
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents you want to\n   gate your associations under. The associations only run when that change calendar is open. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change\n    Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TargetLocations": {

@@ -1689,6 +1689,56 @@
                 "smithy.api#documentation": "Advanced audio normalization settings. Ignore these settings unless you need to comply with a loudness standard."
             }
         },
+        "com.amazonaws.mediaconvert#AudioProperties": {
+            "type": "structure",
+            "members": {
+                "BitDepth": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The bit depth of the audio track.",
+                        "smithy.api#jsonName": "bitDepth"
+                    }
+                },
+                "BitRate": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The bit rate of the audio track in bits per second.",
+                        "smithy.api#jsonName": "bitRate"
+                    }
+                },
+                "Channels": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The number of audio channels.",
+                        "smithy.api#jsonName": "channels"
+                    }
+                },
+                "FrameRate": {
+                    "target": "com.amazonaws.mediaconvert#FrameRate",
+                    "traits": {
+                        "smithy.api#documentation": "the calculated frame rate of the asset.",
+                        "smithy.api#jsonName": "frameRate"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "the language code of the track",
+                        "smithy.api#jsonName": "languageCode"
+                    }
+                },
+                "SampleRate": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The sample rate of the audio track.",
+                        "smithy.api#jsonName": "sampleRate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Properties specific to audio tracks."
+            }
+        },
         "com.amazonaws.mediaconvert#AudioSelector": {
             "type": "structure",
             "members": {
@@ -4857,6 +4907,143 @@
                 "smithy.api#documentation": "Specify the event message box (eMSG) version for ID3 timed metadata in your output.\nFor more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.3 Syntax.\nLeave blank to use the default value Version 0.\nWhen you specify Version 1, you must also set ID3 metadata to Passthrough."
             }
         },
+        "com.amazonaws.mediaconvert#Codec": {
+            "type": "enum",
+            "members": {
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                },
+                "AAC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AAC"
+                    }
+                },
+                "AC3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AC3"
+                    }
+                },
+                "EAC3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EAC3"
+                    }
+                },
+                "FLAC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLAC"
+                    }
+                },
+                "MP3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MP3"
+                    }
+                },
+                "OPUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPUS"
+                    }
+                },
+                "PCM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCM"
+                    }
+                },
+                "VORBIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VORBIS"
+                    }
+                },
+                "AV1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AV1"
+                    }
+                },
+                "AVC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVC"
+                    }
+                },
+                "HEVC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEVC"
+                    }
+                },
+                "MJPEG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MJPEG"
+                    }
+                },
+                "MP4V": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MP4V"
+                    }
+                },
+                "MPEG2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MPEG2"
+                    }
+                },
+                "PRORES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRORES"
+                    }
+                },
+                "THEORA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THEORA"
+                    }
+                },
+                "VP8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VP8"
+                    }
+                },
+                "VP9": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VP9"
+                    }
+                },
+                "C608": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "C608"
+                    }
+                },
+                "C708": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "C708"
+                    }
+                },
+                "WEBVTT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBVTT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#ColorConversion3DLUTSetting": {
             "type": "structure",
             "members": {
@@ -5003,6 +5190,110 @@
             },
             "traits": {
                 "smithy.api#documentation": "Choose Insert for this setting to include color metadata in this output. Choose Ignore to exclude color metadata from this output. If you don't specify a value, the service sets this to Insert by default."
+            }
+        },
+        "com.amazonaws.mediaconvert#ColorPrimaries": {
+            "type": "enum",
+            "members": {
+                "ITU_709": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_709"
+                    }
+                },
+                "UNSPECIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSPECIFIED"
+                    }
+                },
+                "RESERVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESERVED"
+                    }
+                },
+                "ITU_470M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_470M"
+                    }
+                },
+                "ITU_470BG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_470BG"
+                    }
+                },
+                "SMPTE_170M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_170M"
+                    }
+                },
+                "SMPTE_240M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_240M"
+                    }
+                },
+                "GENERIC_FILM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERIC_FILM"
+                    }
+                },
+                "ITU_2020": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_2020"
+                    }
+                },
+                "SMPTE_428_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_428_1"
+                    }
+                },
+                "SMPTE_431_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_431_2"
+                    }
+                },
+                "SMPTE_EG_432_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_EG_432_1"
+                    }
+                },
+                "IPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPT"
+                    }
+                },
+                "SMPTE_2067XYZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_2067XYZ"
+                    }
+                },
+                "EBU_3213_E": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBU_3213_E"
+                    }
+                },
+                "LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "the color primaries."
             }
         },
         "com.amazonaws.mediaconvert#ColorSpace": {
@@ -5165,6 +5456,35 @@
                 "smithy.api#documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.mediaconvert#Container": {
+            "type": "structure",
+            "members": {
+                "Duration": {
+                    "target": "com.amazonaws.mediaconvert#__double",
+                    "traits": {
+                        "smithy.api#documentation": "The duration of the media file in seconds.",
+                        "smithy.api#jsonName": "duration"
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.mediaconvert#Format",
+                    "traits": {
+                        "smithy.api#documentation": "The format of the container",
+                        "smithy.api#jsonName": "format"
+                    }
+                },
+                "Tracks": {
+                    "target": "com.amazonaws.mediaconvert#__listOfTrack",
+                    "traits": {
+                        "smithy.api#documentation": "List of Track objects.",
+                        "smithy.api#jsonName": "tracks"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Information about the container format of the media file."
             }
         },
         "com.amazonaws.mediaconvert#ContainerSettings": {
@@ -6389,6 +6709,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "Specify how MediaConvert writes SegmentTimeline in your output DASH manifest. To write a SegmentTimeline in each video Representation: Keep the default value, Basic. To write a common SegmentTimeline in the video AdaptationSet: Choose Compact. Note that MediaConvert will still write a SegmentTimeline in any Representation that does not share a common timeline. To write a video AdaptationSet for each different output framerate, and a common SegmentTimeline in each AdaptationSet: Choose Distinct."
+            }
+        },
+        "com.amazonaws.mediaconvert#DataProperties": {
+            "type": "structure",
+            "members": {
+                "LanguageCode": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "the language code of the track",
+                        "smithy.api#jsonName": "languageCode"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Properties specific to data tracks."
             }
         },
         "com.amazonaws.mediaconvert#DecryptionMode": {
@@ -9266,6 +9601,35 @@
                 "smithy.api#documentation": "Use Force include renditions to specify one or more resolutions to include your ABR stack. * (Recommended) To optimize automated ABR, specify as few resolutions as possible. * (Required) The number of resolutions that you specify must be equal to, or less than, the Max renditions setting. * If you specify a Min top rendition size rule, specify at least one resolution that is equal to, or greater than, Min top rendition size. * If you specify a Min bottom rendition size rule, only specify resolutions that are equal to, or greater than, Min bottom rendition size. * If you specify a Force include renditions rule, do not specify a separate rule for Allowed renditions. * Note: The ABR stack may include other resolutions that you do not specify here, depending on the Max renditions setting."
             }
         },
+        "com.amazonaws.mediaconvert#Format": {
+            "type": "enum",
+            "members": {
+                "mp4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mp4"
+                    }
+                },
+                "quicktime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "quicktime"
+                    }
+                },
+                "matroska": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "matroska"
+                    }
+                },
+                "webm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "webm"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#FrameCaptureSettings": {
             "type": "structure",
             "members": {
@@ -9300,6 +9664,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "Required when you set Codec to the value FRAME_CAPTURE."
+            }
+        },
+        "com.amazonaws.mediaconvert#FrameRate": {
+            "type": "structure",
+            "members": {
+                "Denominator": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "the denominator of the frame rate of the asset.",
+                        "smithy.api#jsonName": "denominator"
+                    }
+                },
+                "Numerator": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "the numerator of the frame rate of the asset.",
+                        "smithy.api#jsonName": "numerator"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "the calculated frame rate of the asset."
             }
         },
         "com.amazonaws.mediaconvert#GetJob": {
@@ -17431,6 +17817,122 @@
                 "smithy.api#documentation": "These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for the MPEG2-TS segments in your HLS outputs."
             }
         },
+        "com.amazonaws.mediaconvert#MatrixCoefficients": {
+            "type": "enum",
+            "members": {
+                "RGB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RGB"
+                    }
+                },
+                "ITU_709": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_709"
+                    }
+                },
+                "UNSPECIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSPECIFIED"
+                    }
+                },
+                "RESERVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESERVED"
+                    }
+                },
+                "FCC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FCC"
+                    }
+                },
+                "ITU_470BG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_470BG"
+                    }
+                },
+                "SMPTE_170M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_170M"
+                    }
+                },
+                "SMPTE_240M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_240M"
+                    }
+                },
+                "YCgCo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YCgCo"
+                    }
+                },
+                "ITU_2020_NCL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_2020_NCL"
+                    }
+                },
+                "ITU_2020_CL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_2020_CL"
+                    }
+                },
+                "SMPTE_2085": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_2085"
+                    }
+                },
+                "CD_NCL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CD_NCL"
+                    }
+                },
+                "CD_CL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CD_CL"
+                    }
+                },
+                "ITU_2100ICtCp": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_2100ICtCp"
+                    }
+                },
+                "IPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPT"
+                    }
+                },
+                "EBU3213": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBU3213"
+                    }
+                },
+                "LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "the matrix coefficients."
+            }
+        },
         "com.amazonaws.mediaconvert#MediaConvert": {
             "type": "service",
             "version": "2017-08-29",
@@ -17503,6 +18005,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediaconvert#ListVersions"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#Probe"
                 },
                 {
                     "target": "com.amazonaws.mediaconvert#PutPolicy"
@@ -18501,6 +19006,42 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.mediaconvert#Metadata": {
+            "type": "structure",
+            "members": {
+                "ETag": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ETag of the file.",
+                        "smithy.api#jsonName": "eTag"
+                    }
+                },
+                "FileSize": {
+                    "target": "com.amazonaws.mediaconvert#__long",
+                    "traits": {
+                        "smithy.api#documentation": "The size of the file in bytes.",
+                        "smithy.api#jsonName": "fileSize"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.mediaconvert#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "The last modification time of the file.",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "MimeType": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The MIME type of the file.",
+                        "smithy.api#jsonName": "mimeType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Metadata about the file."
             }
         },
         "com.amazonaws.mediaconvert#MinBottomRenditionSize": {
@@ -21410,6 +21951,117 @@
                 "smithy.api#documentation": "Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment."
             }
         },
+        "com.amazonaws.mediaconvert#Probe": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediaconvert#ProbeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediaconvert#ProbeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediaconvert#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "The Probe operation analyzes the provided media file and returns comprehensive metadata about its container format, tracks, and any encountered errors.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2017-08-29/probe",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#ProbeInputFile": {
+            "type": "structure",
+            "members": {
+                "FileUrl": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The URI to your input file(s) that is stored in Amazon S3 or on an HTTP(S) server.",
+                        "smithy.api#jsonName": "fileUrl"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The input file that needs to be analyzed."
+            }
+        },
+        "com.amazonaws.mediaconvert#ProbeRequest": {
+            "type": "structure",
+            "members": {
+                "InputFiles": {
+                    "target": "com.amazonaws.mediaconvert#__listOfProbeInputFile",
+                    "traits": {
+                        "smithy.api#documentation": "The list of input media files to be probed.",
+                        "smithy.api#jsonName": "inputFiles"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediaconvert#ProbeResponse": {
+            "type": "structure",
+            "members": {
+                "ProbeResults": {
+                    "target": "com.amazonaws.mediaconvert#__listOfProbeResult",
+                    "traits": {
+                        "smithy.api#documentation": "List of probe results for the input media file(s).",
+                        "smithy.api#jsonName": "probeResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mediaconvert#ProbeResult": {
+            "type": "structure",
+            "members": {
+                "Container": {
+                    "target": "com.amazonaws.mediaconvert#Container",
+                    "traits": {
+                        "smithy.api#documentation": "Information about the container format of the media file.",
+                        "smithy.api#jsonName": "container"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.mediaconvert#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "Metadata about the file.",
+                        "smithy.api#jsonName": "metadata"
+                    }
+                },
+                "TrackMappings": {
+                    "target": "com.amazonaws.mediaconvert#__listOfTrackMapping",
+                    "traits": {
+                        "smithy.api#documentation": "List of Track mapping objects.",
+                        "smithy.api#jsonName": "trackMappings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The metadata and analysis results for a media file."
+            }
+        },
         "com.amazonaws.mediaconvert#ProresChromaSampling": {
             "type": "enum",
             "members": {
@@ -23429,6 +24081,92 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.mediaconvert#Track": {
+            "type": "structure",
+            "members": {
+                "AudioProperties": {
+                    "target": "com.amazonaws.mediaconvert#AudioProperties",
+                    "traits": {
+                        "smithy.api#documentation": "Properties specific to audio tracks.",
+                        "smithy.api#jsonName": "audioProperties"
+                    }
+                },
+                "Codec": {
+                    "target": "com.amazonaws.mediaconvert#Codec",
+                    "traits": {
+                        "smithy.api#documentation": "The codec used for the track.",
+                        "smithy.api#jsonName": "codec"
+                    }
+                },
+                "DataProperties": {
+                    "target": "com.amazonaws.mediaconvert#DataProperties",
+                    "traits": {
+                        "smithy.api#documentation": "Properties specific to data tracks.",
+                        "smithy.api#jsonName": "dataProperties"
+                    }
+                },
+                "Duration": {
+                    "target": "com.amazonaws.mediaconvert#__double",
+                    "traits": {
+                        "smithy.api#documentation": "The duration of the track in seconds.",
+                        "smithy.api#jsonName": "duration"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The index of the track.",
+                        "smithy.api#jsonName": "index"
+                    }
+                },
+                "TrackType": {
+                    "target": "com.amazonaws.mediaconvert#TrackType",
+                    "traits": {
+                        "smithy.api#documentation": "The type of the track (video, audio, or data).",
+                        "smithy.api#jsonName": "trackType"
+                    }
+                },
+                "VideoProperties": {
+                    "target": "com.amazonaws.mediaconvert#VideoProperties",
+                    "traits": {
+                        "smithy.api#documentation": "Properties specific to video tracks.",
+                        "smithy.api#jsonName": "videoProperties"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The track information such as codec, duration, etc."
+            }
+        },
+        "com.amazonaws.mediaconvert#TrackMapping": {
+            "type": "structure",
+            "members": {
+                "AudioTrackIndexes": {
+                    "target": "com.amazonaws.mediaconvert#__listOf__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The indexes of the audio tracks.",
+                        "smithy.api#jsonName": "audioTrackIndexes"
+                    }
+                },
+                "DataTrackIndexes": {
+                    "target": "com.amazonaws.mediaconvert#__listOf__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The indexes of the data tracks.",
+                        "smithy.api#jsonName": "dataTrackIndexes"
+                    }
+                },
+                "VideoTrackIndexes": {
+                    "target": "com.amazonaws.mediaconvert#__listOf__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The indexes of the video tracks.",
+                        "smithy.api#jsonName": "videoTrackIndexes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Track mapping information."
+            }
+        },
         "com.amazonaws.mediaconvert#TrackSourceSettings": {
             "type": "structure",
             "members": {
@@ -23442,6 +24180,151 @@
             },
             "traits": {
                 "smithy.api#documentation": "Settings specific to caption sources that are specified by track number. Currently, this is only IMSC captions in an IMF package. If your caption source is IMSC 1.1 in a separate xml file, use FileSourceSettings instead of TrackSourceSettings."
+            }
+        },
+        "com.amazonaws.mediaconvert#TrackType": {
+            "type": "enum",
+            "members": {
+                "video": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "video"
+                    }
+                },
+                "audio": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "audio"
+                    }
+                },
+                "data": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "data"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#TransferCharacteristics": {
+            "type": "enum",
+            "members": {
+                "ITU_709": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_709"
+                    }
+                },
+                "UNSPECIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSPECIFIED"
+                    }
+                },
+                "RESERVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESERVED"
+                    }
+                },
+                "ITU_470M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_470M"
+                    }
+                },
+                "ITU_470BG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_470BG"
+                    }
+                },
+                "SMPTE_170M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_170M"
+                    }
+                },
+                "SMPTE_240M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_240M"
+                    }
+                },
+                "LINEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINEAR"
+                    }
+                },
+                "LOG10_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOG10_2"
+                    }
+                },
+                "LOC10_2_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOC10_2_5"
+                    }
+                },
+                "IEC_61966_2_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IEC_61966_2_4"
+                    }
+                },
+                "ITU_1361": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_1361"
+                    }
+                },
+                "IEC_61966_2_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IEC_61966_2_1"
+                    }
+                },
+                "ITU_2020_10bit": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_2020_10bit"
+                    }
+                },
+                "ITU_2020_12bit": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_2020_12bit"
+                    }
+                },
+                "SMPTE_2084": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_2084"
+                    }
+                },
+                "SMPTE_428_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMPTE_428_1"
+                    }
+                },
+                "ARIB_B67": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARIB_B67"
+                    }
+                },
+                "LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "the transfer characteristics."
             }
         },
         "com.amazonaws.mediaconvert#TsPtsOffset": {
@@ -24999,6 +25882,70 @@
             },
             "traits": {
                 "smithy.api#documentation": "Find additional transcoding features under Preprocessors. Enable the features at each output individually. These features are disabled by default."
+            }
+        },
+        "com.amazonaws.mediaconvert#VideoProperties": {
+            "type": "structure",
+            "members": {
+                "BitDepth": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The bit depth of the video track.",
+                        "smithy.api#jsonName": "bitDepth"
+                    }
+                },
+                "BitRate": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The bit rate of the video track in bits per second.",
+                        "smithy.api#jsonName": "bitRate"
+                    }
+                },
+                "ColorPrimaries": {
+                    "target": "com.amazonaws.mediaconvert#ColorPrimaries",
+                    "traits": {
+                        "smithy.api#documentation": "the color primaries.",
+                        "smithy.api#jsonName": "colorPrimaries"
+                    }
+                },
+                "FrameRate": {
+                    "target": "com.amazonaws.mediaconvert#FrameRate",
+                    "traits": {
+                        "smithy.api#documentation": "the calculated frame rate of the asset.",
+                        "smithy.api#jsonName": "frameRate"
+                    }
+                },
+                "Height": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The height of the video track in pixels.",
+                        "smithy.api#jsonName": "height"
+                    }
+                },
+                "MatrixCoefficients": {
+                    "target": "com.amazonaws.mediaconvert#MatrixCoefficients",
+                    "traits": {
+                        "smithy.api#documentation": "the matrix coefficients.",
+                        "smithy.api#jsonName": "matrixCoefficients"
+                    }
+                },
+                "TransferCharacteristics": {
+                    "target": "com.amazonaws.mediaconvert#TransferCharacteristics",
+                    "traits": {
+                        "smithy.api#documentation": "the transfer characteristics.",
+                        "smithy.api#jsonName": "transferCharacteristics"
+                    }
+                },
+                "Width": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The width of the video track in pixels.",
+                        "smithy.api#jsonName": "width"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Properties specific to video tracks."
             }
         },
         "com.amazonaws.mediaconvert#VideoSelector": {
@@ -26600,6 +27547,9 @@
                 "smithy.api#documentation": "The best way to set up adaptive quantization is to keep the default value, Auto, for the setting Adaptive quantization. When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. For this setting, keep the default value, Enabled, to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren't moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn't take into account where the viewer's attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn't have moving objects with sharp edges, such as sports athletes' faces, you might choose to disable this feature. Related setting: When you enable temporal adaptive quantization, adjust the strength of the filter with the setting Adaptive quantization."
             }
         },
+        "com.amazonaws.mediaconvert#__double": {
+            "type": "double"
+        },
         "com.amazonaws.mediaconvert#__doubleMin0": {
             "type": "double"
         },
@@ -27719,6 +28669,18 @@
                 "target": "com.amazonaws.mediaconvert#Preset"
             }
         },
+        "com.amazonaws.mediaconvert#__listOfProbeInputFile": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#ProbeInputFile"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfProbeResult": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#ProbeResult"
+            }
+        },
         "com.amazonaws.mediaconvert#__listOfQueue": {
             "type": "list",
             "member": {
@@ -27741,6 +28703,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#TeletextPageType"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfTrack": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#Track"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfTrackMapping": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#TrackMapping"
             }
         },
         "com.amazonaws.mediaconvert#__listOfVideoOverlay": {
@@ -27771,6 +28745,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#__doubleMinNegative60Max6"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOf__integer": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#__integer"
             }
         },
         "com.amazonaws.mediaconvert#__listOf__integerMin1Max2147483647": {
@@ -27820,6 +28800,9 @@
             "member": {
                 "target": "com.amazonaws.mediaconvert#__stringPatternS3ASSETMAPXml"
             }
+        },
+        "com.amazonaws.mediaconvert#__long": {
+            "type": "long"
         },
         "com.amazonaws.mediaconvert#__mapOfAudioSelector": {
             "type": "map",

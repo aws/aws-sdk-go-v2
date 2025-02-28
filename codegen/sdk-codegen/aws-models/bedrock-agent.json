@@ -6996,7 +6996,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "max": 5
+                    "max": 20
                 }
             }
         },
@@ -11954,8 +11954,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 0,
-                    "max": 8192
+                    "min": 0
                 }
             }
         },
@@ -13341,7 +13340,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "max": 10
+                    "max": 20
                 },
                 "smithy.api#sensitive": {}
             }

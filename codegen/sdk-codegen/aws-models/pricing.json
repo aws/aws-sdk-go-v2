@@ -833,7 +833,7 @@
                     }
                 },
                 "FormatVersion": {
-                    "target": "com.amazonaws.pricing#String",
+                    "target": "com.amazonaws.pricing#FormatVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The format version that you want the response to be in.</p>\n         <p>Valid values are: <code>aws_v1</code>\n         </p>"
                     }
@@ -866,7 +866,7 @@
                     }
                 },
                 "FormatVersion": {
-                    "target": "com.amazonaws.pricing#String",
+                    "target": "com.amazonaws.pricing#FormatVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The format version of the response. For example, <code>aws_v1</code>.</p>"
                     }
@@ -898,6 +898,15 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.pricing#Field": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.pricing#FileFormat": {
             "type": "string",
             "traits": {
@@ -924,14 +933,14 @@
                     }
                 },
                 "Field": {
-                    "target": "com.amazonaws.pricing#String",
+                    "target": "com.amazonaws.pricing#Field",
                     "traits": {
                         "smithy.api#documentation": "<p>The product metadata field that you want to filter on. You can filter by just the \n         service code to see all products for a specific service, filter \n         by just the attribute name to see a specific attribute for multiple services, or use both a service code\n         and an attribute name to retrieve only products that match both fields.</p>\n         <p>Valid values include: <code>ServiceCode</code>, and all attribute names</p>\n         <p>For example, you can filter by the <code>AmazonEC2</code> service code and the \n         <code>volumeType</code> attribute name to get the prices for only Amazon EC2 volumes.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
-                    "target": "com.amazonaws.pricing#String",
+                    "target": "com.amazonaws.pricing#Value",
                     "traits": {
                         "smithy.api#documentation": "<p>The service code or attribute value that you want to filter by. If you're filtering\n         by service code this is the actual service code, such as <code>AmazonEC2</code>. If you're\n         filtering by attribute name, this is the attribute value that you want the returned\n         products to match, such as a <code>Provisioned IOPS</code> volume.</p>",
                         "smithy.api#required": {}
@@ -957,6 +966,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.pricing#Filter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.pricing#FormatVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
             }
         },
         "com.amazonaws.pricing#GetAttributeValues": {
@@ -1197,7 +1221,7 @@
                     }
                 },
                 "FormatVersion": {
-                    "target": "com.amazonaws.pricing#String",
+                    "target": "com.amazonaws.pricing#FormatVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The format version that you want the response to be in.</p>\n         <p>Valid values are: <code>aws_v1</code>\n         </p>"
                     }
@@ -1224,7 +1248,7 @@
             "type": "structure",
             "members": {
                 "FormatVersion": {
-                    "target": "com.amazonaws.pricing#String",
+                    "target": "com.amazonaws.pricing#FormatVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The format version of the response. For example, aws_v1.</p>"
                     }
@@ -1555,6 +1579,15 @@
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {
                     "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.pricing#Value": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
                 }
             }
         },

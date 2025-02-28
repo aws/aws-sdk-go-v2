@@ -20,6 +20,15 @@
             "operations": [
                 {
                     "target": "com.amazonaws.bedrockdataautomation#CreateBlueprintVersion"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#UntagResource"
                 }
             ],
             "resources": [
@@ -735,16 +744,16 @@
                         "smithy.api#enumValue": "AUDIO_CONTENT_MODERATION"
                     }
                 },
-                "CHAPTER_CONTENT_MODERATION": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CHAPTER_CONTENT_MODERATION"
-                    }
-                },
                 "TRANSCRIPT": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "TRANSCRIPT"
+                    }
+                },
+                "TOPIC_CONTENT_MODERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOPIC_CONTENT_MODERATION"
                     }
                 }
             }
@@ -798,16 +807,16 @@
                         "smithy.api#enumValue": "AUDIO_SUMMARY"
                     }
                 },
-                "CHAPTER_SUMMARY": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CHAPTER_SUMMARY"
-                    }
-                },
                 "IAB": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IAB"
+                    }
+                },
+                "TOPIC_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOPIC_SUMMARY"
                     }
                 }
             }
@@ -993,7 +1002,6 @@
                     "min": 1,
                     "max": 100000
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\s!\"\\#\\$%'&\\(\\)\\*\\+\\,\\-\\./:;=\\?@\\[\\\\\\]\\^_`\\{\\|\\}~><]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1189,6 +1197,9 @@
                 },
                 "encryptionConfiguration": {
                     "target": "com.amazonaws.bedrockdataautomation#EncryptionConfiguration"
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockdataautomation#TagList"
                 }
             },
             "traits": {
@@ -1362,6 +1373,9 @@
                 },
                 "encryptionConfiguration": {
                     "target": "com.amazonaws.bedrockdataautomation#EncryptionConfiguration"
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockdataautomation#TagList"
                 }
             },
             "traits": {
@@ -1474,6 +1488,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "Description of the DataAutomationProject",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                },
                 "smithy.api#sensitive": {}
             }
         },
@@ -1671,7 +1689,7 @@
             "traits": {
                 "smithy.api#documentation": "Deletes an existing Amazon Bedrock Data Automation Blueprint",
                 "smithy.api#http": {
-                    "code": 204,
+                    "code": 200,
                     "method": "DELETE",
                     "uri": "/blueprints/{blueprintArn}/"
                 },
@@ -1738,7 +1756,7 @@
             "traits": {
                 "smithy.api#documentation": "Deletes an existing Amazon Bedrock Data Automation Project",
                 "smithy.api#http": {
-                    "code": 204,
+                    "code": 200,
                     "method": "DELETE",
                     "uri": "/data-automation-projects/{projectArn}/"
                 },
@@ -2011,6 +2029,28 @@
                 "smithy.api#documentation": "KMS Encryption Configuration"
             }
         },
+        "com.amazonaws.bedrockdataautomation#EncryptionContextKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Encryption context key.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^.*\\S.*$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#EncryptionContextValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Encryption context value.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^.*\\S.*$"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#GetBlueprint": {
             "type": "operation",
             "input": {
@@ -2210,6 +2250,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TEXT_DETECTION"
                     }
+                },
+                "LOGOS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOGOS"
+                    }
                 }
             }
         },
@@ -2315,10 +2361,10 @@
         "com.amazonaws.bedrockdataautomation#KmsEncryptionContext": {
             "type": "map",
             "key": {
-                "target": "smithy.api#String"
+                "target": "com.amazonaws.bedrockdataautomation#EncryptionContextKey"
             },
             "value": {
-                "target": "smithy.api#String"
+                "target": "com.amazonaws.bedrockdataautomation#EncryptionContextValue"
             },
             "traits": {
                 "smithy.api#documentation": "KMS Encryption Context",
@@ -2334,7 +2380,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]+$"
             }
         },
         "com.amazonaws.bedrockdataautomation#ListBlueprints": {
@@ -2506,6 +2553,65 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockdataautomation#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "List tags for an Amazon Bedrock Data Automation resource",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listTagsForResource"
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceARN": {
+                    "target": "com.amazonaws.bedrockdataautomation#TaggableResourceArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.bedrockdataautomation#TagList"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockdataautomation#MaxResults": {
             "type": "integer",
             "traits": {
@@ -2642,6 +2748,147 @@
                 "smithy.api#documentation": "State"
             }
         },
+        "com.amazonaws.bedrockdataautomation#Tag": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.bedrockdataautomation#TagKey",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.bedrockdataautomation#TagValue",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Key value pair of a tag"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Defines the context of the tag.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#TagKey"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of tag keys",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#Tag"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of tags",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Tag an Amazon Bedrock Data Automation resource",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/tagResource"
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceARN": {
+                    "target": "com.amazonaws.bedrockdataautomation#TaggableResourceArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockdataautomation#TagList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Defines the value within the context. e.g. <key=reason, value=training>.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#TaggableResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN of a taggable resource",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]*:[0-9]{12}:(blueprint|data-automation-project)/[a-zA-Z0-9-]{12,36}$"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -2673,6 +2920,67 @@
             },
             "traits": {
                 "smithy.api#documentation": "Type"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockdataautomation#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockdataautomation#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Untag an Amazon Bedrock Data Automation resource",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/untagResource"
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceARN": {
+                    "target": "com.amazonaws.bedrockdataautomation#TaggableResourceArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.bedrockdataautomation#TagKeyList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockdataautomation#UpdateBlueprint": {
@@ -2732,6 +3040,9 @@
                 },
                 "blueprintStage": {
                     "target": "com.amazonaws.bedrockdataautomation#BlueprintStage"
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#EncryptionConfiguration"
                 }
             },
             "traits": {
@@ -2774,6 +3085,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockdataautomation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockdataautomation#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.bedrockdataautomation#ThrottlingException"
@@ -2820,6 +3134,9 @@
                 },
                 "overrideConfiguration": {
                     "target": "com.amazonaws.bedrockdataautomation#OverrideConfiguration"
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#EncryptionConfiguration"
                 }
             },
             "traits": {
@@ -2944,6 +3261,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TRANSCRIPT"
                     }
+                },
+                "LOGOS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOGOS"
+                    }
                 }
             }
         },
@@ -3002,16 +3325,16 @@
                         "smithy.api#enumValue": "VIDEO_SUMMARY"
                     }
                 },
-                "SCENE_SUMMARY": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "SCENE_SUMMARY"
-                    }
-                },
                 "IAB": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IAB"
+                    }
+                },
+                "CHAPTER_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHAPTER_SUMMARY"
                     }
                 }
             }
