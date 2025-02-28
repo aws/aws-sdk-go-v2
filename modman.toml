@@ -59,6 +59,9 @@
   [modules."internal/protocoltest/smithyrpcv2cbor"]
     no_tag = true
 
+  [modules."internal/kitchensinktest"]
+    no_tag = true
+
   [modules."internal/repotools"]
     no_tag = true
 
