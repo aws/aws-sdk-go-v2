@@ -14,19 +14,21 @@ import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 public class SraOperationOrderTest implements GoIntegration {
     @Override
     public void writeAdditionalFiles(GoCodegenContext ctx) {
-        var model = ctx.model();
-        TopDownIndex.of(model)
-                .getContainedOperations(ctx.settings().getService(model))
-                .forEach(it -> {
-                    var operationName = ctx.symbolProvider().toSymbol(it).getName();
-                    var filename = "api_op_" + operationName + "_sra_operation_order_test.go";
-                    ctx.writerDelegator().useFileWriter(filename, ctx.settings().getModuleName(), renderTest(operationName));
-                });
+        ctx.writerDelegator().useFileWriter("sra_operation_order_test.go", ctx.settings().getModuleName(), writer -> {
+            writer.write(renderCommonTestSource());
+
+            TopDownIndex.of(ctx.model())
+                    .getContainedOperations(ctx.settings().getService(ctx.model()))
+                    .forEach(it -> {
+                        var operationName = ctx.symbolProvider().toSymbol(it).getName();
+                        writer.write(renderTest(operationName));
+                    });
+        });
     }
 
-    private GoWriter.Writable renderTest(String operationName) {
+    private GoWriter.Writable renderCommonTestSource() {
         return goTemplate("""
-                $D $D $D $D $D $D
+                $D $D
                 var errTestReturnEarly = errors.New("errTestReturnEarly")
 
                 func captureMiddlewareStack(stack *middleware.Stack) func(*middleware.Stack) error {
@@ -35,8 +37,13 @@ public class SraOperationOrderTest implements GoIntegration {
                 		return errTestReturnEarly
                 	}
                 }
+                """, SmithyGoDependency.ERRORS, SmithyGoDependency.SMITHY_MIDDLEWARE);
+    }
 
-                func TestSRAOperationOrder(t *testing.T) {
+    private GoWriter.Writable renderTest(String operationName) {
+        return goTemplate("""
+                $1D $2D $3D $4D $5D $6D
+                func TestOp$7LSRAOperationOrder(t *testing.T) {
                 	expect := []string{
                 		"OperationSerializer",
                 		"Retry",
@@ -53,7 +60,7 @@ public class SraOperationOrderTest implements GoIntegration {
                 			captureMiddlewareStack(&captured),
                 		},
                 	})
-                	_, err := svc.$L(context.Background(), nil)
+                	_, err := svc.$7L(context.Background(), nil)
                 	if err != nil && !errors.Is(err, errTestReturnEarly) {
                 		t.Fatalf("unexpected error: %v", err)
                 	}
