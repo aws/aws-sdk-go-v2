@@ -10,6 +10,8 @@
         "api_client_test.go",
         "api_op_JoinStorageSession.go",
         "api_op_JoinStorageSessionAsViewer.go",
+        "api_op_JoinStorageSessionAsViewer_sra_operation_order_test.go",
+        "api_op_JoinStorageSession_sra_operation_order_test.go",
         "auth.go",
         "deserializers.go",
         "doc.go",

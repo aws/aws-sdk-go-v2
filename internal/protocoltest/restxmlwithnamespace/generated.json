@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_SimpleScalarProperties.go",
+        "api_op_SimpleScalarProperties_sra_operation_order_test.go",
         "api_op_SimpleScalarProperties_test.go",
         "auth.go",
         "deserializers.go",
