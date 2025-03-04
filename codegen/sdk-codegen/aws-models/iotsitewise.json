@@ -4773,6 +4773,29 @@
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
+        "com.amazonaws.iotsitewise#CoreDeviceOperatingSystem": {
+            "type": "enum",
+            "members": {
+                "LINUX_AARCH64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX_AARCH64"
+                    }
+                },
+                "LINUX_AMD64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX_AMD64"
+                    }
+                },
+                "WINDOWS_AMD64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_AMD64"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotsitewise#CoreDeviceThingName": {
             "type": "string",
             "traits": {
@@ -5724,6 +5747,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The gateway's platform. You can only specify one platform in a gateway.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "gatewayVersion": {
+                    "target": "com.amazonaws.iotsitewise#GatewayVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the gateway to create. Specify <code>3</code> to create an MQTT-enabled, V3\n      gateway and <code>2</code> To create a Classic streams, V2 gateway. If the version isn't\n      specified, a Classic streams, V2 gateway is created by default.</p>\n         <p> We recommend creating an MQTT-enabled, V3 gateway for self-hosted gateways. SiteWise Edge\n      gateways on Siemens Industrial Edge should use gateway version <code>2</code>. For more information on\n      gateway versions, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gw-self-host-gg2.html\"> Self-host a SiteWise Edge\n        gateway with IoT Greengrass V2</a>.</p>"
                     }
                 },
                 "tags": {
@@ -8709,6 +8738,12 @@
                         "smithy.api#documentation": "<p>The gateway's platform.</p>"
                     }
                 },
+                "gatewayVersion": {
+                    "target": "com.amazonaws.iotsitewise#GatewayVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the gateway. A value of <code>3</code> indicates an MQTT-enabled, V3\n      gateway, while <code>2</code> indicates a Classic streams, V2 gateway.</p>"
+                    }
+                },
                 "gatewayCapabilitySummaries": {
                     "target": "com.amazonaws.iotsitewise#GatewayCapabilitySummaries",
                     "traits": {
@@ -10124,6 +10159,12 @@
                 "gatewayPlatform": {
                     "target": "com.amazonaws.iotsitewise#GatewayPlatform"
                 },
+                "gatewayVersion": {
+                    "target": "com.amazonaws.iotsitewise#GatewayVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the gateway. A value of <code>3</code> indicates an MQTT-enabled, V3\n      gateway, while <code>2</code> indicates a Classic streams, V2 gateway.</p>"
+                    }
+                },
                 "gatewayCapabilitySummaries": {
                     "target": "com.amazonaws.iotsitewise#GatewayCapabilitySummaries",
                     "traits": {
@@ -10147,6 +10188,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains a summary of a gateway.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#GatewayVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[0-9]+$"
             }
         },
         "com.amazonaws.iotsitewise#GetAssetPropertyAggregates": {
@@ -10724,6 +10775,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the IoT thing for your IoT Greengrass V2 core device.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "coreDeviceOperatingSystem": {
+                    "target": "com.amazonaws.iotsitewise#CoreDeviceOperatingSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system of the core device in IoT Greengrass V2.</p>"
                     }
                 }
             },
