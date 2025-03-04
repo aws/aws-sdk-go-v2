@@ -1,3 +1,7 @@
+# v1.36.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.36.0 (2025-02-27)
 
 * **Feature**: This release adds support to invoke a process that cleans the specified file share's cache of file entries that are failing upload to Amazon S3.

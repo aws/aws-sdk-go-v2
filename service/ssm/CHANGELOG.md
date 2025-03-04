@@ -1,3 +1,7 @@
+# v1.57.2 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.57.1 (2025-02-28)
 
 * **Documentation**: Systems Manager doc-only updates for Feb. 2025.

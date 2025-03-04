@@ -1,8 +1,0 @@
-{
-    "id": "5090aec6-d174-4442-a684-00193c61386a",
-    "type": "documentation",
-    "description": "Doc only update, listing 'valkey7' and 'valkey8' as engine options for parameter groups.",
-    "modules": [
-        "service/elasticache"
-    ]
-}

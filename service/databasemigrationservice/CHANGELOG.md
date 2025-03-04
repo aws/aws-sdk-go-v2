@@ -1,3 +1,7 @@
+# v1.51.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.51.0 (2025-02-28)
 
 * **Feature**: Add skipped status to the Result Statistics of an Assessment Run

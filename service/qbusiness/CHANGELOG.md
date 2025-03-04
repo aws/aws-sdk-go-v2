@@ -1,3 +1,7 @@
+# v1.23.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.23.0 (2025-03-04)
 
 * **Feature**: Adds support for the ingestion of audio and video files by Q Business, which can be configured with the mediaExtractionConfiguration parameter.

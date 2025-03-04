@@ -1,3 +1,7 @@
+# v1.23.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.23.0 (2025-03-04)
 
 * **Feature**: Add support for PutResourcePolicy, GetResourcePolicy and DeleteResourcePolicy to support resource based policies for AWS CloudWatch RUM

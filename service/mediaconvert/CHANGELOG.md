@@ -1,3 +1,7 @@
+# v1.69.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.69.0 (2025-02-28)
 
 * **Feature**: The AWS MediaConvert Probe API allows you to analyze media files and retrieve detailed metadata about their content, format, and structure.

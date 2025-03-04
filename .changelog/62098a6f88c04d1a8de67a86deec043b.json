@@ -1,8 +1,0 @@
-{
-    "id": "62098a6f-88c0-4d1a-8de6-7a86deec043b",
-    "type": "documentation",
-    "description": "Note support for Database Insights for Amazon RDS.",
-    "modules": [
-        "service/rds"
-    ]
-}

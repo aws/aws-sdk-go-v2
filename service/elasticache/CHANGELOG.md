@@ -1,3 +1,8 @@
+# v1.45.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+* **Documentation**: Doc only update, listing 'valkey7' and 'valkey8' as engine options for parameter groups.
+
 # v1.45.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids

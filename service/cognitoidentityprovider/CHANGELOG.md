@@ -1,3 +1,7 @@
+# v1.51.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.51.0 (2025-03-04)
 
 * **Feature**: Added the capacity to return available challenges in admin authentication and to set version 3 of the pre token generation event for M2M ATC.

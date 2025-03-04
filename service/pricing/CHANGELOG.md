@@ -1,3 +1,7 @@
+# v1.34.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.34.0 (2025-02-28)
 
 * **Feature**: Update GetProducts and DescribeServices API request input validations.

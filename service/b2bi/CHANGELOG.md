@@ -1,3 +1,7 @@
+# v1.0.0-preview.66 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.0.0-preview.65 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids

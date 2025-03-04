@@ -1,3 +1,7 @@
+# v1.44.2 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.44.1 (2025-03-04)
 
 * **Documentation**: Updating documentation for post call analytics job queueing.

@@ -1,3 +1,7 @@
+# v1.180.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.180.0 (2025-03-04)
 
 * **Feature**: Add DomainId to CreateDomainResponse

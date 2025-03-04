@@ -1,3 +1,7 @@
+# v1.60.1 (2025-03-04.2)
+
+* **Bug Fix**: Add assurance test for operation order.
+
 # v1.60.0 (2025-02-28)
 
 * **Feature**: Adding licenses to EKS Anywhere Subscription operations response.

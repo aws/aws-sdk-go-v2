@@ -1,3 +1,20 @@
+# Release (2025-03-04.2)
+
+## General Highlights
+* **Bug Fix**: Add assurance test for operation order.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.45.1](service/elasticache/CHANGELOG.md#v1451-2025-03-042)
+  * **Documentation**: Doc only update, listing 'valkey7' and 'valkey8' as engine options for parameter groups.
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.0.0](service/iotmanagedintegrations/CHANGELOG.md#v100-2025-03-042)
+  * **Release**: New AWS service client module
+  * **Feature**: Adding managed integrations APIs for IoT Device Management to setup and control devices across different manufacturers and connectivity protocols. APIs include managedthing operations, credential and provisioning profile management, notification configuration, and OTA update.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.47.0](service/iotsitewise/CHANGELOG.md#v1470-2025-03-042)
+  * **Feature**: AWS IoT SiteWise now supports MQTT-enabled, V3 gateways. Configure data destinations for real-time ingestion into AWS IoT SiteWise or buffered ingestion using Amazon S3 storage. You can also use path filters for precise data collection from specific MQTT topics.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.94.1](service/rds/CHANGELOG.md#v1941-2025-03-042)
+  * **Documentation**: Note support for Database Insights for Amazon RDS.
+
 # Release (2025-03-04)
 
 ## Module Highlights
