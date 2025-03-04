@@ -70,6 +70,9 @@ func (c *Client) addOperationGetItemMiddlewares(stack *middleware.Stack, options
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addComputePayloadSHA256(stack); err != nil {
+		return err
+	}
 	if err = addRetry(stack, options); err != nil {
 		return err
 	}
@@ -98,6 +101,9 @@ func (c *Client) addOperationGetItemMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetItem(options.Region), middleware.Before); err != nil {
