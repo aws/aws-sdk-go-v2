@@ -43,6 +43,17 @@ type CreateGatewayInput struct {
 	// This member is required.
 	GatewayPlatform *types.GatewayPlatform
 
+	// The version of the gateway to create. Specify 3 to create an MQTT-enabled, V3
+	// gateway and 2 To create a Classic streams, V2 gateway. If the version isn't
+	// specified, a Classic streams, V2 gateway is created by default.
+	//
+	// We recommend creating an MQTT-enabled, V3 gateway for self-hosted gateways.
+	// SiteWise Edge gateways on Siemens Industrial Edge should use gateway version 2 .
+	// For more information on gateway versions, see [Self-host a SiteWise Edge gateway with IoT Greengrass V2].
+	//
+	// [Self-host a SiteWise Edge gateway with IoT Greengrass V2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gw-self-host-gg2.html
+	GatewayVersion *string
+
 	// A list of key-value pairs that contain metadata for the gateway. For more
 	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
 	//

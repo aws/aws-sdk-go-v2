@@ -2022,6 +2022,10 @@ type GatewaySummary struct {
 	// Contains a gateway's platform information.
 	GatewayPlatform *GatewayPlatform
 
+	// The version of the gateway. A value of 3 indicates an MQTT-enabled, V3 gateway,
+	// while 2 indicates a Classic streams, V2 gateway.
+	GatewayVersion *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2060,6 +2064,9 @@ type GreengrassV2 struct {
 	//
 	// This member is required.
 	CoreDeviceThingName *string
+
+	// The operating system of the core device in IoT Greengrass V2.
+	CoreDeviceOperatingSystem CoreDeviceOperatingSystem
 
 	noSmithyDocumentSerde
 }

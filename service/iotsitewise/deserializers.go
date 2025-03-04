@@ -7236,6 +7236,15 @@ func awsRestjson1_deserializeOpDocumentDescribeGatewayOutput(v **DescribeGateway
 				return err
 			}
 
+		case "gatewayVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GatewayVersion to be of type string, got %T instead", value)
+				}
+				sv.GatewayVersion = ptr.String(jtv)
+			}
+
 		case "lastUpdateDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -23139,6 +23148,15 @@ func awsRestjson1_deserializeDocumentGatewaySummary(v **types.GatewaySummary, va
 				return err
 			}
 
+		case "gatewayVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GatewayVersion to be of type string, got %T instead", value)
+				}
+				sv.GatewayVersion = ptr.String(jtv)
+			}
+
 		case "lastUpdateDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -23226,6 +23244,15 @@ func awsRestjson1_deserializeDocumentGreengrassV2(v **types.GreengrassV2, value 
 
 	for key, value := range shape {
 		switch key {
+		case "coreDeviceOperatingSystem":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoreDeviceOperatingSystem to be of type string, got %T instead", value)
+				}
+				sv.CoreDeviceOperatingSystem = types.CoreDeviceOperatingSystem(jtv)
+			}
+
 		case "coreDeviceThingName":
 			if value != nil {
 				jtv, ok := value.(string)

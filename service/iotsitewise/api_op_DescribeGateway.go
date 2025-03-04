@@ -81,6 +81,10 @@ type DescribeGatewayOutput struct {
 	// The gateway's platform.
 	GatewayPlatform *types.GatewayPlatform
 
+	// The version of the gateway. A value of 3 indicates an MQTT-enabled, V3 gateway,
+	// while 2 indicates a Classic streams, V2 gateway.
+	GatewayVersion *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

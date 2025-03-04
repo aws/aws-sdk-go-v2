@@ -154,19 +154,20 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//
 	// RDS for MySQL
 	//
-	// Possible values are error , general , and slowquery .
+	// Possible values are error , general , slowquery , and iam-db-auth-error .
 	//
 	// RDS for PostgreSQL
 	//
-	// Possible values are postgresql and upgrade .
+	// Possible values are postgresql , upgrade , and iam-db-auth-error .
 	//
 	// Aurora MySQL
 	//
-	// Possible values are audit , error , general , instance , and slowquery .
+	// Possible values are audit , error , general , instance , slowquery , and
+	// iam-db-auth-error .
 	//
 	// Aurora PostgreSQL
 	//
-	// Possible value are instance and postgresql .
+	// Possible value are instance , postgresql , and iam-db-auth-error .
 	//
 	// For more information about exporting CloudWatch Logs for Amazon RDS, see [Publishing Database Logs to Amazon CloudWatch Logs] in
 	// the Amazon RDS User Guide.

@@ -1707,6 +1707,11 @@ func awsRestjson1_serializeOpDocumentCreateGatewayInput(v *CreateGatewayInput, v
 		}
 	}
 
+	if v.GatewayVersion != nil {
+		ok := object.Key("gatewayVersion")
+		ok.String(*v.GatewayVersion)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -9006,6 +9011,11 @@ func awsRestjson1_serializeDocumentGreengrass(v *types.Greengrass, value smithyj
 func awsRestjson1_serializeDocumentGreengrassV2(v *types.GreengrassV2, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.CoreDeviceOperatingSystem) > 0 {
+		ok := object.Key("coreDeviceOperatingSystem")
+		ok.String(string(v.CoreDeviceOperatingSystem))
+	}
 
 	if v.CoreDeviceThingName != nil {
 		ok := object.Key("coreDeviceThingName")

@@ -1,0 +1,8 @@
+{
+    "id": "aca5416a-49fb-4cb8-ba06-1f07548ad8df",
+    "type": "feature",
+    "description": "AWS IoT SiteWise now supports MQTT-enabled, V3 gateways. Configure data destinations for real-time ingestion into AWS IoT SiteWise or buffered ingestion using Amazon S3 storage. You can also use path filters for precise data collection from specific MQTT topics.",
+    "modules": [
+        "service/iotsitewise"
+    ]
+}

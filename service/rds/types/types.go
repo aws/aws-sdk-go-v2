@@ -420,11 +420,16 @@ type ConnectionPoolConfiguration struct {
 	//   - Must be between 0 and 3600.
 	ConnectionBorrowTimeout *int32
 
-	// One or more SQL statements for the proxy to run when opening each new database
-	// connection. Typically used with SET statements to make sure that each
-	// connection has identical settings such as time zone and character set. For
-	// multiple statements, use semicolons as the separator. You can also include
-	// multiple variables in a single SET statement, such as SET x=1, y=2 .
+	// Add an initialization query, or modify the current one. You can specify one or
+	// more SQL statements for the proxy to run when opening each new database
+	// connection. The setting is typically used with SET statements to make sure that
+	// each connection has identical settings. Make sure that the query you add is
+	// valid. To include multiple variables in a single SET statement, use comma
+	// separators.
+	//
+	// For example: SET variable1=value1, variable2=value2
+	//
+	// For multiple statements, use semicolons as the separator.
 	//
 	// Default: no initialization query
 	InitQuery *string
@@ -5309,8 +5314,7 @@ type UserAuthConfigInfo struct {
 	Description *string
 
 	// Whether to require or disallow Amazon Web Services Identity and Access
-	// Management (IAM) authentication for connections to the proxy. The ENABLED value
-	// is valid only for proxies with RDS for Microsoft SQL Server.
+	// Management (IAM) authentication for connections to the proxy.
 	IAMAuth IAMAuthMode
 
 	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to

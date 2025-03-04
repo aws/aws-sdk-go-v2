@@ -521,7 +521,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// If you specify io1 , io2 , or gp3 , you must also include a value for the Iops
 	// parameter.
 	//
-	// Default: io1 if the Iops parameter is specified, otherwise gp2
+	// Default: io1 if the Iops parameter is specified, otherwise gp3
 	StorageType *string
 
 	// A list of tags.

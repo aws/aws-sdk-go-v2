@@ -576,17 +576,17 @@ type CreateDBInstanceInput struct {
 	//
 	// The following values are valid for each DB engine:
 	//
-	//   - RDS for Db2 - diag.log | notify.log
+	//   - RDS for Db2 - diag.log | notify.log | iam-db-auth-error
 	//
-	//   - RDS for MariaDB - audit | error | general | slowquery
+	//   - RDS for MariaDB - audit | error | general | slowquery | iam-db-auth-error
 	//
 	//   - RDS for Microsoft SQL Server - agent | error
 	//
-	//   - RDS for MySQL - audit | error | general | slowquery
+	//   - RDS for MySQL - audit | error | general | slowquery | iam-db-auth-error
 	//
 	//   - RDS for Oracle - alert | audit | listener | trace | oemagent
 	//
-	//   - RDS for PostgreSQL - postgresql | upgrade
+	//   - RDS for PostgreSQL - postgresql | upgrade | iam-db-auth-error
 	//
 	// [Publishing Database Logs to Amazon CloudWatch Logs]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
 	EnableCloudwatchLogsExports []string
@@ -1120,7 +1120,7 @@ type CreateDBInstanceInput struct {
 	//
 	// Valid Values: gp2 | gp3 | io1 | io2 | standard
 	//
-	// Default: io1 , if the Iops parameter is specified. Otherwise, gp2 .
+	// Default: io1 , if the Iops parameter is specified. Otherwise, gp3 .
 	StorageType *string
 
 	// Tags to assign to the DB instance.

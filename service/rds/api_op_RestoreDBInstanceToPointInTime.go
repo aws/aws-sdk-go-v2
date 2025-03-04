@@ -514,7 +514,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	//
 	// Valid Values: gp2 | gp3 | io1 | io2 | standard
 	//
-	// Default: io1 , if the Iops parameter is specified. Otherwise, gp2 .
+	// Default: io1 , if the Iops parameter is specified. Otherwise, gp3 .
 	//
 	// Constraints:
 	//

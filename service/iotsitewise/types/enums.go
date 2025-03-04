@@ -387,6 +387,27 @@ func (ConfigurationState) Values() []ConfigurationState {
 	}
 }
 
+type CoreDeviceOperatingSystem string
+
+// Enum values for CoreDeviceOperatingSystem
+const (
+	CoreDeviceOperatingSystemLinuxAarch64 CoreDeviceOperatingSystem = "LINUX_AARCH64"
+	CoreDeviceOperatingSystemLinuxAmd64   CoreDeviceOperatingSystem = "LINUX_AMD64"
+	CoreDeviceOperatingSystemWindowsAmd64 CoreDeviceOperatingSystem = "WINDOWS_AMD64"
+)
+
+// Values returns all known values for CoreDeviceOperatingSystem. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CoreDeviceOperatingSystem) Values() []CoreDeviceOperatingSystem {
+	return []CoreDeviceOperatingSystem{
+		"LINUX_AARCH64",
+		"LINUX_AMD64",
+		"WINDOWS_AMD64",
+	}
+}
+
 type DatasetSourceFormat string
 
 // Enum values for DatasetSourceFormat

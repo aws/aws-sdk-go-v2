@@ -62,9 +62,8 @@ type DecreaseReplicaCountInput struct {
 	NewReplicaCount *int32
 
 	// A list of ConfigureShard objects that can be used to configure each shard in a
-	// Valkey or Redis OSS (cluster mode enabled) replication group. The ConfigureShard
-	// has three members: NewReplicaCount , NodeGroupId , and
-	// PreferredAvailabilityZones .
+	// Valkey or Redis OSS replication group. The ConfigureShard has three members:
+	// NewReplicaCount , NodeGroupId , and PreferredAvailabilityZones .
 	ReplicaConfiguration []types.ConfigureShard
 
 	// A list of the node ids to remove from the replication group or node group

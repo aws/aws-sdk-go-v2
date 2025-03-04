@@ -259,13 +259,14 @@ type CreateDBClusterInput struct {
 	//
 	// The following values are valid for each DB engine:
 	//
-	//   - Aurora MySQL - audit | error | general | instance | slowquery
+	//   - Aurora MySQL - audit | error | general | instance | slowquery |
+	//   iam-db-auth-error
 	//
-	//   - Aurora PostgreSQL - instance | postgresql
+	//   - Aurora PostgreSQL - instance | postgresql | iam-db-auth-error
 	//
-	//   - RDS for MySQL - error | general | slowquery
+	//   - RDS for MySQL - error | general | slowquery | iam-db-auth-error
 	//
-	//   - RDS for PostgreSQL - postgresql | upgrade
+	//   - RDS for PostgreSQL - postgresql | upgrade | iam-db-auth-error
 	//
 	// For more information about exporting CloudWatch Logs for Amazon RDS, see [Publishing Database Logs to Amazon CloudWatch Logs] in
 	// the Amazon RDS User Guide.
