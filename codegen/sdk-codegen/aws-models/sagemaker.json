@@ -10994,6 +10994,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created domain.</p>"
                     }
                 },
+                "DomainId": {
+                    "target": "com.amazonaws.sagemaker#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the created domain.</p>"
+                    }
+                },
                 "Url": {
                     "target": "com.amazonaws.sagemaker#String1024",
                     "traits": {
@@ -37966,7 +37972,7 @@
                 "CustomImages": {
                     "target": "com.amazonaws.sagemaker#CustomImages",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of custom SageMaker AI images that are configured to run as a KernelGateway\n      app.</p>"
+                        "smithy.api#documentation": "<p>A list of custom SageMaker AI images that are configured to run as a KernelGateway\n      app.</p>\n         <p>The maximum number of custom images are as follows.</p>\n         <ul>\n            <li>\n               <p>On a domain level: 200</p>\n            </li>\n            <li>\n               <p>On a space level: 5</p>\n            </li>\n            <li>\n               <p>On a user profile level: 5</p>\n            </li>\n         </ul>"
                     }
                 },
                 "LifecycleConfigArns": {

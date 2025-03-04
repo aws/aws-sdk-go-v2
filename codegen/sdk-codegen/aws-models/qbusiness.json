@@ -1151,6 +1151,93 @@
                 }
             }
         },
+        "com.amazonaws.qbusiness#AudioExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "audioExtractionStatus": {
+                    "target": "com.amazonaws.qbusiness#AudioExtractionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of audio extraction (ENABLED or DISABLED) for processing audio content from files.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for audio content extraction and processing.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#AudioExtractionStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#AudioExtractionType": {
+            "type": "enum",
+            "members": {
+                "TRANSCRIPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSCRIPT"
+                    }
+                },
+                "SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUMMARY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#AudioSourceDetails": {
+            "type": "structure",
+            "members": {
+                "mediaId": {
+                    "target": "com.amazonaws.qbusiness#MediaId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the audio media file.</p>"
+                    }
+                },
+                "mediaMimeType": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the audio file (e.g., audio/mp3, audio/wav).</p>"
+                    }
+                },
+                "startTimeMilliseconds": {
+                    "target": "com.amazonaws.qbusiness#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting timestamp in milliseconds for the relevant audio segment.</p>"
+                    }
+                },
+                "endTimeMilliseconds": {
+                    "target": "com.amazonaws.qbusiness#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending timestamp in milliseconds for the relevant audio segment.</p>"
+                    }
+                },
+                "audioExtractionType": {
+                    "target": "com.amazonaws.qbusiness#AudioExtractionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of audio extraction performed on the content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an audio source, including its identifier, format, and time information.</p>"
+            }
+        },
         "com.amazonaws.qbusiness#AuthChallengeRequest": {
             "type": "structure",
             "members": {
@@ -8271,6 +8358,26 @@
                 }
             }
         },
+        "com.amazonaws.qbusiness#ImageSourceDetails": {
+            "type": "structure",
+            "members": {
+                "mediaId": {
+                    "target": "com.amazonaws.qbusiness#MediaId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the image file.</p>"
+                    }
+                },
+                "mediaMimeType": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the image file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an image source, including its identifier and format.</p>"
+            }
+        },
         "com.amazonaws.qbusiness#Index": {
             "type": "structure",
             "members": {
@@ -10539,6 +10646,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for extracting semantic meaning from images in documents. \n            For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html\">Extracting semantic meaning from images and visuals</a>. </p>"
                     }
+                },
+                "audioExtractionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#AudioExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for extracting and processing audio content from media files.</p>"
+                    }
+                },
+                "videoExtractionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#VideoExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for extracting and processing video content from media files.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12712,6 +12831,32 @@
                 "smithy.api#sparse": {}
             }
         },
+        "com.amazonaws.qbusiness#SourceDetails": {
+            "type": "union",
+            "members": {
+                "imageSourceDetails": {
+                    "target": "com.amazonaws.qbusiness#ImageSourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details specific to image content within the source.</p>"
+                    }
+                },
+                "audioSourceDetails": {
+                    "target": "com.amazonaws.qbusiness#AudioSourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details specific to audio content within the source.</p>"
+                    }
+                },
+                "videoSourceDetails": {
+                    "target": "com.amazonaws.qbusiness#VideoSourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details specific to video content within the source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for details about different types of media sources (image, audio, or video).</p>"
+            }
+        },
         "com.amazonaws.qbusiness#StartDataSourceSyncJob": {
             "type": "operation",
             "input": {
@@ -13372,13 +13517,27 @@
                 "mediaId": {
                     "target": "com.amazonaws.qbusiness#SourceAttributionMediaId",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "2025-02-28",
+                            "message": "Deprecated in favor of using mediaId within the respective sourceDetails field."
+                        },
                         "smithy.api#documentation": "<p>The identifier of the media object associated with the text segment in the source attribution.</p>"
                     }
                 },
                 "mediaMimeType": {
                     "target": "com.amazonaws.qbusiness#String",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "2025-02-28",
+                            "message": "Deprecated in favor of using mediaMimeType within the respective sourceDetails field."
+                        },
                         "smithy.api#documentation": "<p>The MIME type (image/png) of the media object associated with the text segment in the source attribution.</p>"
+                    }
+                },
+                "sourceDetails": {
+                    "target": "com.amazonaws.qbusiness#SourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source information for a segment of extracted text, including its media type.</p>"
                     }
                 }
             },
@@ -14802,6 +14961,93 @@
                         "smithy.api#enumValue": "UNKNOWN_OPERATION"
                     }
                 }
+            }
+        },
+        "com.amazonaws.qbusiness#VideoExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "videoExtractionStatus": {
+                    "target": "com.amazonaws.qbusiness#VideoExtractionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of video extraction (ENABLED or DISABLED) for processing video content from files.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for video content extraction and processing.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#VideoExtractionStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#VideoExtractionType": {
+            "type": "enum",
+            "members": {
+                "TRANSCRIPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSCRIPT"
+                    }
+                },
+                "SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUMMARY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#VideoSourceDetails": {
+            "type": "structure",
+            "members": {
+                "mediaId": {
+                    "target": "com.amazonaws.qbusiness#MediaId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the video media file.</p>"
+                    }
+                },
+                "mediaMimeType": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the video file (e.g., video/mp4, video/avi).</p>"
+                    }
+                },
+                "startTimeMilliseconds": {
+                    "target": "com.amazonaws.qbusiness#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting timestamp in milliseconds for the relevant video segment.</p>"
+                    }
+                },
+                "endTimeMilliseconds": {
+                    "target": "com.amazonaws.qbusiness#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending timestamp in milliseconds for the relevant video segment.</p>"
+                    }
+                },
+                "videoExtractionType": {
+                    "target": "com.amazonaws.qbusiness#VideoExtractionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of video extraction performed on the content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a video source, including its identifier, format, and time information.</p>"
             }
         },
         "com.amazonaws.qbusiness#WebExperience": {

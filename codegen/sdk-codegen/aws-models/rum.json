@@ -17,6 +17,15 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.rum#Alias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.rum#AppMonitor": {
             "type": "structure",
             "members": {
@@ -181,7 +190,7 @@
                     "min": 1,
                     "max": 253
                 },
-                "smithy.api#pattern": "^(localhost)|^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^(?![-.])([A-Za-z0-9-\\.\\-]{0,63})((?![-])([a-zA-Z0-9]{1}|^[a-zA-Z0-9]{0,1}))\\.(?![-])[A-Za-z-0-9]{1,63}((?![-])([a-zA-Z0-9]{1}|^[a-zA-Z0-9]{0,1}))|^(\\*\\.)(?![-.])([A-Za-z0-9-\\.\\-]{0,63})((?![-])([a-zA-Z0-9]{1}|^[a-zA-Z0-9]{0,1}))\\.(?![-])[A-Za-z-0-9]{1,63}((?![-])([a-zA-Z0-9]{1}|^[a-zA-Z0-9]{0,1}))"
+                "smithy.api#pattern": "^(localhost)$|^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|(?=^[a-zA-Z0-9\\.\\*-]{4,253}$)(?!.*\\.-)(?!.*-\\.)(?!.*\\.\\.)(?!.*[^\\.]{64,})^(\\*\\.)?(?![-\\.\\*])[^\\*]{1,}\\.(?!.*--)(?=.*[a-zA-Z])[^\\*]{1,}[^\\*-]$"
             }
         },
         "com.amazonaws.rum#AppMonitorId": {
@@ -237,13 +246,22 @@
                     "target": "com.amazonaws.rum#CreateAppMonitor"
                 },
                 {
+                    "target": "com.amazonaws.rum#DeleteResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.rum#DeleteRumMetricsDestination"
                 },
                 {
                     "target": "com.amazonaws.rum#GetAppMonitorData"
                 },
                 {
+                    "target": "com.amazonaws.rum#GetResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.rum#ListRumMetricsDestinations"
+                },
+                {
+                    "target": "com.amazonaws.rum#PutResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.rum#PutRumMetricsDestination"
@@ -916,6 +934,87 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.rum#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#DeleteResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InvalidPolicyRevisionIdException"
+                },
+                {
+                    "target": "com.amazonaws.rum#PolicyNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the association of a resource-based policy from an app monitor.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/appmonitor/{Name}/policy"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rum#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app monitor that you want to remove the resource policy from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.rum#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a specific policy revision to delete. Provide a <code>PolicyRevisionId</code> to ensure an atomic delete operation. \n         If the revision ID that you provide doesn't match the latest policy revision ID, the request will be rejected with an <code>InvalidPolicyRevisionIdException</code> error.</p>",
+                        "smithy.api#httpQuery": "policyRevisionId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rum#DeleteResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.rum#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the policy that was removed, if it had one.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.rum#DeleteRumMetricsDestination": {
             "type": "operation",
             "input": {
@@ -1217,6 +1316,83 @@
                 }
             }
         },
+        "com.amazonaws.rum#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#GetResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#PolicyNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation to retrieve information about a resource-based policy that is attached to an app monitor.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/appmonitor/{Name}/policy"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.rum#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app monitor that is associated with the resource-based policy that you want to view.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rum#GetResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "PolicyDocument": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON policy document that you requested.</p>"
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.rum#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID information for this version of the policy document that you requested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.rum#ISOTimestampString": {
             "type": "string",
             "traits": {
@@ -1264,6 +1440,22 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.rum#InvalidPolicyRevisionIdException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy revision ID that you provided doeesn't match the latest policy revision ID.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.rum#JsonValue": {
@@ -1489,6 +1681,22 @@
                 }
             }
         },
+        "com.amazonaws.rum#MalformedPolicyDocumentException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy document that you specified is not formatted correctly.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.rum#MaxQueryResults": {
             "type": "integer",
             "traits": {
@@ -1710,6 +1918,143 @@
                 }
             }
         },
+        "com.amazonaws.rum#PolicyNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource-based policy doesn't exist on this app monitor.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.rum#PolicyRevisionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.rum#PolicySizeLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy document is too large. The limit is 4 KB.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rum#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InvalidPolicyRevisionIdException"
+                },
+                {
+                    "target": "com.amazonaws.rum#MalformedPolicyDocumentException"
+                },
+                {
+                    "target": "com.amazonaws.rum#PolicySizeLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation to assign a resource-based policy to a CloudWatch RUM app monitor to control access to it. Each app monitor can \n         have one resource-based policy. The maximum size of the policy is 4 KB. To learn more about using resource policies with RUM, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html\">Using resource-based policies with CloudWatch RUM</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/appmonitor/{Name}/policy"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rum#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app monitor that you want to apply this resource-based policy to. To find the names of your app monitors, you can use\n         the <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_ListAppMonitors.html\">ListAppMonitors</a> operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON to use as the resource policy. The document can be up to 4 KB in size. For more information about the contents and syntax \n         for this policy, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html\">Using resource-based policies with CloudWatch RUM</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.rum#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy.</p>\n         <p>When you assign a policy revision ID, then later requests about that policy will be rejected with an <code>InvalidPolicyRevisionIdException</code> error\n         if they don't provide the correct current revision ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rum#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "PolicyDocument": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON policy document that you specified.</p>"
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.rum#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy revision ID information that you specified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.rum#PutRumEvents": {
             "type": "operation",
             "input": {
@@ -1794,6 +2139,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of structures that contain the telemetry event data.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.rum#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the app monitor uses a resource-based policy that requires <code>PutRumEvents</code> requests to specify a certain alias,\n         specify that alias here. This alias will be compared to the <code>rum:alias</code> context key in the resource-based policy.  For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html\">Using resource-based policies with CloudWatch RUM</a>.</p>"
                     }
                 }
             }
