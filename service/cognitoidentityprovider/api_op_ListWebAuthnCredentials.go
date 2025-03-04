@@ -11,8 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a list of the current user's registered passkey, or webauthN,
-// credentials.
+// Generates a list of the currently signed-in user's registered passkey, or
+// WebAuthn, credentials.
+//
+// Authorize this action with a signed-in user's access token. It must include the
+// scope aws.cognito.signin.user.admin .
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 func (c *Client) ListWebAuthnCredentials(ctx context.Context, params *ListWebAuthnCredentialsInput, optFns ...func(*Options)) (*ListWebAuthnCredentialsOutput, error) {
 	if params == nil {
 		params = &ListWebAuthnCredentialsInput{}
@@ -30,8 +41,8 @@ func (c *Client) ListWebAuthnCredentials(ctx context.Context, params *ListWebAut
 
 type ListWebAuthnCredentialsInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose registered
-	// passkeys you want to list.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string
@@ -39,8 +50,12 @@ type ListWebAuthnCredentialsInput struct {
 	// The maximum number of the user's passkey credentials that you want to return.
 	MaxResults *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,8 +68,10 @@ type ListWebAuthnCredentialsOutput struct {
 	// This member is required.
 	Credentials []types.WebAuthnCredentialDescription
 
-	// An identifier that you can use in a later request to return the next set of
-	// items in the list.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

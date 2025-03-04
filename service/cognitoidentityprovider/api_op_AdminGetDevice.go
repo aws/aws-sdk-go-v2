@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Given the device key, returns details for a user' device. For more information,
-// see [Working with devices].
+// Given the device key, returns details for a user's device. For more
+// information, see [Working with devices].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -46,10 +46,7 @@ func (c *Client) AdminGetDevice(ctx context.Context, params *AdminGetDeviceInput
 // Represents the request to get the device, as an administrator.
 type AdminGetDeviceInput struct {
 
-	// The key of the device that you want to delete. You can get device IDs in the
-	// response to an [AdminListDevices]request.
-	//
-	// [AdminListDevices]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminListDevices.html
+	// The key of the device that you want to delete.
 	//
 	// This member is required.
 	DeviceKey *string
@@ -59,7 +56,7 @@ type AdminGetDeviceInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party

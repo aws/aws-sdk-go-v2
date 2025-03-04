@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a user attribute verification code for the specified attribute name.
-// Sends a message to a user with a code that they must return in a
-// VerifyUserAttribute request.
+// Given an attribute name, sends a user attribute verification code for the
+// specified attribute name to the currently signed-in user.
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
@@ -61,14 +60,13 @@ func (c *Client) GetUserAttributeVerificationCode(ctx context.Context, params *G
 // Represents the request to get user attribute verification.
 type GetUserAttributeVerificationCodeInput struct {
 
-	// A non-expired access token for the user whose attribute verification code you
-	// want to generate.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string
 
-	// The attribute name returned by the server response to get the user attribute
-	// verification code.
+	// The name of the attribute that the user wants to verify, for example email .
 	//
 	// This member is required.
 	AttributeName *string
@@ -86,7 +84,7 @@ type GetUserAttributeVerificationCodeInput struct {
 	// you can process the clientMetadata value to enhance your workflow for your
 	// specific needs.
 	//
-	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	// For more information, see [Using Lambda triggers] in the Amazon Cognito Developer Guide.
 	//
 	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
 	// the following:
@@ -101,7 +99,7 @@ type GetUserAttributeVerificationCodeInput struct {
 	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
 	//   parameter.
 	//
-	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+	// [Using Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde
@@ -111,8 +109,8 @@ type GetUserAttributeVerificationCodeInput struct {
 // attribute verification code.
 type GetUserAttributeVerificationCodeOutput struct {
 
-	// The code delivery details returned by the server in response to the request to
-	// get the user attribute verification code.
+	// Information about the delivery destination of the user attribute verification
+	// code.
 	CodeDeliveryDetails *types.CodeDeliveryDetailsType
 
 	// Metadata pertaining to the operation's result.

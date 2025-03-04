@@ -10,12 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags that are assigned to an Amazon Cognito user pool.
+// Lists the tags that are assigned to an Amazon Cognito user pool. For more
+// information, see [Tagging resources].
 //
-// A tag is a label that you can apply to user pools to categorize and manage them
-// in different ways, such as by purpose, owner, environment, or other criteria.
-//
-// You can use this action up to 10 times per second, per account.
+// [Tagging resources]: https://docs.aws.amazon.com/cognito/latest/developerguide/tagging.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

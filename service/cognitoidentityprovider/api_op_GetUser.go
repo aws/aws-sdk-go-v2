@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the user attributes and metadata for a user.
+// Gets user attributes and and MFA settings for the currently signed-in user.
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
@@ -41,7 +41,8 @@ func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...fu
 // Represents the request to get information about the user.
 type GetUserInput struct {
 
-	// A non-expired access token for the user whose information you want to query.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string
@@ -55,13 +56,12 @@ type GetUserOutput struct {
 
 	// An array of name-value pairs representing user attributes.
 	//
-	// For custom attributes, you must prepend the custom: prefix to the attribute
-	// name.
+	// Custom attributes are prepended with the custom: prefix.
 	//
 	// This member is required.
 	UserAttributes []types.AttributeType
 
-	// The username of the user that you requested.
+	// The name of the user that you requested.
 	//
 	// This member is required.
 	Username *string
@@ -73,7 +73,8 @@ type GetUserOutput struct {
 	// instead.
 	MFAOptions []types.MFAOptionType
 
-	// The user's preferred MFA setting.
+	// The user's preferred MFA. Users can prefer SMS message, email message, or TOTP
+	// MFA.
 	PreferredMfaSetting *string
 
 	// The MFA options that are activated for the user. The possible values in this

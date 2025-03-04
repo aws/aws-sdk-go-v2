@@ -10,12 +10,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This method takes a user pool ID, and returns the signing certificate. The
-// issued certificate is valid for 10 years from the date of issue.
+// Given a user pool ID, returns the signing certificate for SAML 2.0 federation.
 //
-// Amazon Cognito issues and assigns a new signing certificate annually. This
+// Issued certificates are valid for 10 years from the date of issue. Amazon
+// Cognito issues and assigns a new signing certificate annually. This renewal
 // process returns a new value in the response to GetSigningCertificate , but
 // doesn't invalidate the original certificate.
+//
+// For more information, see [Signing SAML requests].
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing SAML requests]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-SAML-signing-encryption.html#cognito-user-pools-SAML-signing
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) GetSigningCertificate(ctx context.Context, params *GetSigningCertificateInput, optFns ...func(*Options)) (*GetSigningCertificateOutput, error) {
 	if params == nil {
 		params = &GetSigningCertificateInput{}
@@ -34,7 +51,7 @@ func (c *Client) GetSigningCertificate(ctx context.Context, params *GetSigningCe
 // Request to get a signing certificate from Amazon Cognito.
 type GetSigningCertificateInput struct {
 
-	// The user pool ID.
+	// The ID of the user pool where you want to view the signing certificate.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -45,7 +62,8 @@ type GetSigningCertificateInput struct {
 // Response from Amazon Cognito for a signing certificate request.
 type GetSigningCertificateOutput struct {
 
-	// The signing certificate.
+	// The x.509 certificate that signs SAML 2.0 authentication requests for your user
+	// pool.
 	Certificate *string
 
 	// Metadata pertaining to the operation's result.

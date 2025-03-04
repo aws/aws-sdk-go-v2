@@ -11,6 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates a new Amazon Cognito user pool. This operation sets basic and advanced
+// configuration options.
+//
+// If you don't provide a value for an attribute, Amazon Cognito sets it to its
+// default value.
+//
 // This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in
@@ -26,14 +32,6 @@ import (
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
 // Cognito Developer Guide.
 //
-// Creates a new Amazon Cognito user pool. This operation sets basic and advanced
-// configuration options. You can create a user pool in the Amazon Cognito console
-// to your preferences and use the output of [DescribeUserPool]to generate requests from that
-// baseline.
-//
-// If you don't provide a value for an attribute, Amazon Cognito sets it to its
-// default value.
-//
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
 // credentials to authorize requests, and you must grant yourself the corresponding
@@ -47,7 +45,6 @@ import (
 //
 // [SMS message settings for Amazon Cognito user pools]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
-// [DescribeUserPool]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html
 // [sandbox mode]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 // [Amazon Pinpoint]: https://console.aws.amazon.com/pinpoint/home/
@@ -69,7 +66,7 @@ func (c *Client) CreateUserPool(ctx context.Context, params *CreateUserPoolInput
 // Represents the request to create a user pool.
 type CreateUserPoolInput struct {
 
-	// A friendlhy name for your user pool.
+	// A friendly name for your user pool.
 	//
 	// This member is required.
 	PoolName *string
@@ -78,27 +75,28 @@ type CreateUserPoolInput struct {
 	// they call ForgotPassword . You can use this setting to define a preferred method
 	// when a user has more than one method available. With this setting, SMS doesn't
 	// qualify for a valid password recovery mechanism if the user also has SMS
-	// multi-factor authentication (MFA) activated. In the absence of this setting,
-	// Amazon Cognito uses the legacy behavior to determine the recovery method where
-	// SMS is preferred through email.
+	// multi-factor authentication (MFA) activated. Email MFA is also disqualifying for
+	// account recovery with email. In the absence of this setting, Amazon Cognito uses
+	// the legacy behavior to determine the recovery method where SMS is preferred over
+	// email.
+	//
+	// As a best practice, configure both verified_email and verified_phone_number ,
+	// with one having a higher priority than the other.
 	AccountRecoverySetting *types.AccountRecoverySettingType
 
-	// The configuration for [AdminCreateUser] requests. Includes the template for the invitation
-	// message for new users, the duration of temporary passwords, and permitting
-	// self-service sign-up.
-	//
-	// [AdminCreateUser]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminCreateUser.html
+	// The configuration for administrative creation of users. Includes the template
+	// for the invitation message for new users, the duration of temporary passwords,
+	// and permitting self-service sign-up.
 	AdminCreateUserConfig *types.AdminCreateUserConfigType
 
-	// Attributes supported as an alias for this user pool. Possible values:
-	// phone_number, email, or preferred_username. For more information about alias
-	// attributes, see [Customizing sign-in attributes].
+	// Attributes supported as an alias for this user pool. For more information about
+	// alias attributes, see [Customizing sign-in attributes].
 	//
 	// [Customizing sign-in attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-aliases
 	AliasAttributes []types.AliasAttributeType
 
-	// The attributes that you want your user pool to automatically verify. Possible
-	// values: email, phone_number. For more information see [Verifying contact information at sign-up].
+	// The attributes that you want your user pool to automatically verify. For more
+	// information, see [Verifying contact information at sign-up].
 	//
 	// [Verifying contact information at sign-up]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#allowing-users-to-sign-up-and-confirm-themselves
 	AutoVerifiedAttributes []types.VerifiedAttributeType
@@ -131,14 +129,10 @@ type CreateUserPoolInput struct {
 	// messages from your user pool.
 	EmailConfiguration *types.EmailConfigurationType
 
-	// This parameter is no longer used. See [VerificationMessageTemplateType].
-	//
-	// [VerificationMessageTemplateType]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
+	// This parameter is no longer used.
 	EmailVerificationMessage *string
 
-	// This parameter is no longer used. See [VerificationMessageTemplateType].
-	//
-	// [VerificationMessageTemplateType]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
+	// This parameter is no longer used.
 	EmailVerificationSubject *string
 
 	// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at
@@ -151,6 +145,11 @@ type CreateUserPoolInput struct {
 	// must make a client-side determination of whether a user wants to register an MFA
 	// device. For user pools with adaptive authentication with threat protection,
 	// choose OPTIONAL .
+	//
+	// When MfaConfiguration is OPTIONAL , managed login doesn't automatically prompt
+	// users to set up MFA. Amazon Cognito generates MFA prompts in API responses and
+	// in managed login for users who have chosen and configured a preferred MFA
+	// factor.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The password policy and sign-in policy in the user pool. The password policy
@@ -168,11 +167,11 @@ type CreateUserPoolInput struct {
 	// [Working with user attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html
 	Schema []types.SchemaAttributeType
 
-	// A string representing the SMS authentication message.
+	// The contents of the SMS message that your user pool sends to users in SMS OTP
+	// and MFA authentication.
 	SmsAuthenticationMessage *string
 
-	// The SMS configuration with the settings that your Amazon Cognito user pool must
-	// use to send an SMS message from your Amazon Web Services account through Amazon
+	// The settings for your Amazon Cognito user pool to send SMS messages with Amazon
 	// Simple Notification Service. To send SMS messages with Amazon SNS in the Amazon
 	// Web Services Region that you want, the Amazon Cognito user pool uses an Identity
 	// and Access Management (IAM) role in your Amazon Web Services account. For more
@@ -181,9 +180,7 @@ type CreateUserPoolInput struct {
 	// [SMS message settings]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
 	SmsConfiguration *types.SmsConfigurationType
 
-	// This parameter is no longer used. See [VerificationMessageTemplateType].
-	//
-	// [VerificationMessageTemplateType]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
+	// This parameter is no longer used.
 	SmsVerificationMessage *string
 
 	// The settings for updates to user attributes. These settings include the
@@ -194,13 +191,15 @@ type CreateUserPoolInput struct {
 	// [Verifying updates to email addresses and phone numbers]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates
 	UserAttributeUpdateSettings *types.UserAttributeUpdateSettingsType
 
-	// User pool add-ons. Contains settings for activation of advanced security
-	// features. To log user security information but take no action, set to AUDIT . To
-	// configure automatic security responses to risky traffic to your user pool, set
-	// to ENFORCED .
+	// Contains settings for activation of threat protection, including the operating
+	// mode and additional authentication types. To log user security information but
+	// take no action, set to AUDIT . To configure automatic security responses to
+	// potentially unwanted traffic to your user pool, set to ENFORCED .
 	//
-	// For more information, see [Adding advanced security to a user pool].
+	// For more information, see [Adding advanced security to a user pool]. To activate this setting, your user pool must be on
+	// the [Plus tier].
 	//
+	// [Plus tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
 	// [Adding advanced security to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
 	UserPoolAddOns *types.UserPoolAddOnsType
 

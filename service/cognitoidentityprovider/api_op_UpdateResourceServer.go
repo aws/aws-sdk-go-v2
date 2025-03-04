@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the name and scopes of resource server. All other fields are read-only.
+// Updates the name and scopes of a resource server. All other fields are
+// read-only. For more information about resource servers, see [Access control with resource servers].
 //
 // If you don't provide a value for an attribute, it is set to the default value.
 //
@@ -27,6 +28,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Access control with resource servers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) UpdateResourceServer(ctx context.Context, params *UpdateResourceServerInput, optFns ...func(*Options)) (*UpdateResourceServerOutput, error) {
 	if params == nil {
@@ -56,17 +58,19 @@ type UpdateResourceServerInput struct {
 	// This member is required.
 	Identifier *string
 
-	// The name of the resource server.
+	// The updated name of the resource server.
 	//
 	// This member is required.
 	Name *string
 
-	// The ID of the user pool.
+	// The ID of the user pool that contains the resource server that you want to
+	// update.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// The scope values to be set for the resource server.
+	// An array of updated custom scope names and descriptions that you want to
+	// associate with your resource server.
 	Scopes []types.ResourceServerScopeType
 
 	noSmithyDocumentSerde
@@ -74,7 +78,7 @@ type UpdateResourceServerInput struct {
 
 type UpdateResourceServerOutput struct {
 
-	// The resource server.
+	// The updated details of the requested resource server.
 	//
 	// This member is required.
 	ResourceServer *types.ResourceServerType

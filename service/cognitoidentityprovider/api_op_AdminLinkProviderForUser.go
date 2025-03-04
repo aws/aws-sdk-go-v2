@@ -11,23 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Links an existing user account in a user pool ( DestinationUser ) to an identity
-// from an external IdP ( SourceUser ) based on a specified attribute name and
-// value from the external IdP. This allows you to create a link from the existing
-// user account to an external federated user identity that has not yet been used
-// to sign in. You can then use the federated user identity to sign in as the
-// existing user account.
+// Links an existing user account in a user pool, or DestinationUser , to an
+// identity from an external IdP, or SourceUser , based on a specified attribute
+// name and value from the external IdP.
 //
-// For example, if there is an existing user with a username and password, this
-// API links that user to a federated user identity. When the user signs in with a
-// federated user identity, they sign in as the existing user account.
+// This operation connects a local user profile with a user identity who hasn't
+// yet signed in from their third-party IdP. When the user signs in with their IdP,
+// they get access-control configuration from the local user profile. Linked local
+// users can also sign in with SDK-based API operations like InitiateAuth after
+// they sign in at least once through their IdP. For more information, see [Linking federated users].
 //
 // The maximum number of federated identities linked to a user is five.
 //
 // Because this API allows a user with an external federated identity to sign in
-// as an existing user in the user pool, it is critical that it only be used with
-// external IdPs and provider attributes that have been trusted by the application
-// owner.
+// as a local user, it is critical that it only be used with external IdPs and
+// linked attributes that you trust.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -41,6 +39,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Linking federated users]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation-consolidate-users.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminLinkProviderForUser(ctx context.Context, params *AdminLinkProviderForUserInput, optFns ...func(*Options)) (*AdminLinkProviderForUserOutput, error) {
 	if params == nil {

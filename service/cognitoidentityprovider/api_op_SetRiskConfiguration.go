@@ -11,11 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures actions on detected risks. To delete the risk configuration for
-// UserPoolId or ClientId , pass null values for all four configuration types.
+// Configures threat protection for a user pool or app client. Sets configuration
+// for the following.
 //
-// To activate Amazon Cognito advanced security features, update the user pool to
-// include the UserPoolAddOns key AdvancedSecurityMode .
+//   - Responses to risks with adaptive authentication
+//
+//   - Responses to vulnerable passwords with compromised-credentials detection
+//
+//   - Notifications to users who have had risky activity detected
+//
+//   - IP-address denylist and allowlist
+//
+// To set the risk configuration for the user pool to defaults, send this request
+// with only the UserPoolId parameter. To reset the threat protection settings of
+// an app client to be inherited from the user pool, send UserPoolId and ClientId
+// parameters only. To change threat protection to audit-only or off, update the
+// value of UserPoolAddOns in an UpdateUserPool request. To activate this setting,
+// your user pool must be on the [Plus tier].
+//
+// [Plus tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
 func (c *Client) SetRiskConfiguration(ctx context.Context, params *SetRiskConfigurationInput, optFns ...func(*Options)) (*SetRiskConfigurationOutput, error) {
 	if params == nil {
 		params = &SetRiskConfigurationInput{}
@@ -33,27 +47,36 @@ func (c *Client) SetRiskConfiguration(ctx context.Context, params *SetRiskConfig
 
 type SetRiskConfigurationInput struct {
 
-	// The user pool ID.
+	// The ID of the user pool where you want to set a risk configuration. If you
+	// include UserPoolId in your request, don't include ClientId . When the client ID
+	// is null, the same risk configuration is applied to all the clients in the
+	// userPool. When you include both ClientId and UserPoolId , Amazon Cognito maps
+	// the configuration to the app client only.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// The account takeover risk configuration.
+	// The settings for automated responses and notification templates for adaptive
+	// authentication with threat protection.
 	AccountTakeoverRiskConfiguration *types.AccountTakeoverRiskConfigurationType
 
-	// The app client ID. If ClientId is null, then the risk configuration is mapped
-	// to userPoolId . When the client ID is null, the same risk configuration is
-	// applied to all the clients in the userPool.
+	// The ID of the app client where you want to set a risk configuration. If ClientId
+	// is null, then the risk configuration is mapped to UserPoolId . When the client
+	// ID is null, the same risk configuration is applied to all the clients in the
+	// userPool.
 	//
-	// Otherwise, ClientId is mapped to the client. When the client ID isn't null, the
-	// user pool configuration is overridden and the risk configuration for the client
-	// is used instead.
+	// When you include a ClientId parameter, Amazon Cognito maps the configuration to
+	// the app client. When you include both ClientId and UserPoolId , Amazon Cognito
+	// maps the configuration to the app client only.
 	ClientId *string
 
-	// The compromised credentials risk configuration.
+	// The configuration of automated reactions to detected compromised credentials.
+	// Includes settings for blocking future sign-in requests and for the types of
+	// password-submission events you want to monitor.
 	CompromisedCredentialsRiskConfiguration *types.CompromisedCredentialsRiskConfigurationType
 
-	// The configuration to override the risk decision.
+	// A set of IP-address overrides to threat protection. You can set up IP-address
+	// always-block and always-allow lists.
 	RiskExceptionConfiguration *types.RiskExceptionConfigurationType
 
 	noSmithyDocumentSerde
@@ -61,7 +84,8 @@ type SetRiskConfigurationInput struct {
 
 type SetRiskConfigurationOutput struct {
 
-	// The risk configuration.
+	// The API response that contains the risk configuration that you set and the
+	// timestamp of the most recent change.
 	//
 	// This member is required.
 	RiskConfiguration *types.RiskConfigurationType

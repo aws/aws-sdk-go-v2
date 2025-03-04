@@ -11,18 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests credential creation options from your user pool for registration of a
-// passkey authenticator. Returns information about the user pool, the user
-// profile, and authentication requirements. Users must provide this information in
-// their request to enroll your application with their passkey provider.
-//
-// After users present this data and register with their passkey provider, return
-// the response to your user pool in a [CompleteWebAuthnRegistration]API request.
+// Requests credential creation options from your user pool for the currently
+// signed-in user. Returns information about the user pool, the user profile, and
+// authentication requirements. Users must provide this information in their
+// request to enroll your application with their passkey provider.
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
-//
-// [CompleteWebAuthnRegistration]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CompleteWebAuthnRegistration.html
 func (c *Client) StartWebAuthnRegistration(ctx context.Context, params *StartWebAuthnRegistrationInput, optFns ...func(*Options)) (*StartWebAuthnRegistrationOutput, error) {
 	if params == nil {
 		params = &StartWebAuthnRegistrationInput{}
@@ -40,8 +35,8 @@ func (c *Client) StartWebAuthnRegistration(ctx context.Context, params *StartWeb
 
 type StartWebAuthnRegistrationInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose passkey
-	// metadata you want to generate.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string

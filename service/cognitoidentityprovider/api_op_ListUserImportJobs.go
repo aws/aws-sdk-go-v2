@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists user import jobs for a user pool.
+// Given a user pool ID, returns user import jobs and their details. Import jobs
+// are retained in user pool configuration so that you can stage, stop, start,
+// review, and delete them. For more information about user import, see [Importing users from a CSV file].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -25,6 +27,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Importing users from a CSV file]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-using-import-tool.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) ListUserImportJobs(ctx context.Context, params *ListUserImportJobsInput, optFns ...func(*Options)) (*ListUserImportJobsOutput, error) {
 	if params == nil {
@@ -44,12 +47,13 @@ func (c *Client) ListUserImportJobs(ctx context.Context, params *ListUserImportJ
 // Represents the request to list the user import jobs.
 type ListUserImportJobsInput struct {
 
-	// The maximum number of import jobs you want the request to return.
+	// The maximum number of import jobs that you want Amazon Cognito to return in the
+	// response.
 	//
 	// This member is required.
 	MaxResults *int32
 
-	// The ID of the user pool that the users are being imported into.
+	// The ID of the user pool where you want to list import jobs.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -75,7 +79,9 @@ type ListUserImportJobsOutput struct {
 	// paginate through the full list of items.
 	PaginationToken *string
 
-	// The user import jobs.
+	// An array of user import jobs from the requested user pool. For each, the
+	// response includes logging destination, status, and the Amazon S3 pre-signed URL
+	// for CSV upload.
 	UserImportJobs []types.UserImportJobType
 
 	// Metadata pertaining to the operation's result.

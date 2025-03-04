@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified group with the specified attributes.
+// Given the name of a user pool group, updates any of the properties for
+// precedence, IAM role, or description. For more information about user pool
+// groups, see [Adding groups to a user pool].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -25,6 +27,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Adding groups to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-user-groups.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optFns ...func(*Options)) (*UpdateGroupOutput, error) {
 	if params == nil {
@@ -43,27 +46,39 @@ func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optF
 
 type UpdateGroupInput struct {
 
-	// The name of the group.
+	// The name of the group that you want to update.
 	//
 	// This member is required.
 	GroupName *string
 
-	// The ID of the user pool.
+	// The ID of the user pool that contains the group you want to update.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// A string containing the new description of the group.
+	// A new description of the existing group.
 	Description *string
 
-	// The new precedence value for the group. For more information about this
-	// parameter, see [CreateGroup].
+	// A non-negative integer value that specifies the precedence of this group
+	// relative to the other groups that a user can belong to in the user pool. Zero is
+	// the highest precedence value. Groups with lower Precedence values take
+	// precedence over groups with higher or null Precedence values. If a user belongs
+	// to two or more groups, it is the group with the lowest precedence value whose
+	// role ARN is given in the user's tokens for the cognito:roles and
+	// cognito:preferred_role claims.
 	//
-	// [CreateGroup]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateGroup.html
+	// Two groups can have the same Precedence value. If this happens, neither group
+	// takes precedence over the other. If two groups with the same Precedence have
+	// the same role ARN, that role is used in the cognito:preferred_role claim in
+	// tokens for users in each group. If the two groups have different role ARNs, the
+	// cognito:preferred_role claim isn't set in users' tokens.
+	//
+	// The default Precedence value is null. The maximum Precedence value is 2^31-1 .
 	Precedence *int32
 
-	// The new role Amazon Resource Name (ARN) for the group. This is used for setting
-	// the cognito:roles and cognito:preferred_role claims in the token.
+	// The Amazon Resource Name (ARN) of an IAM role that you want to associate with
+	// the group. The role assignment contributes to the cognito:roles and
+	// cognito:preferred_role claims in group members' tokens.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -71,7 +86,8 @@ type UpdateGroupInput struct {
 
 type UpdateGroupOutput struct {
 
-	// The group object for the group.
+	// Contains the updated details of the group, including precedence, IAM role, and
+	// description.
 	Group *types.GroupType
 
 	// Metadata pertaining to the operation's result.

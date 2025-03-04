@@ -16,8 +16,18 @@ import (
 //
 //   - The user's multi-factor authentication (MFA) preferences.
 //
-//   - The user's options in the USER_AUTH flow that they can select in a
-//     SELECT_CHALLENGE response or request in a PREFERRED_CHALLENGE request.
+//   - The user's options for choice-based authentication with the USER_AUTH flow.
+//
+// Authorize this action with a signed-in user's access token. It must include the
+// scope aws.cognito.signin.user.admin .
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 func (c *Client) GetUserAuthFactors(ctx context.Context, params *GetUserAuthFactorsInput, optFns ...func(*Options)) (*GetUserAuthFactorsOutput, error) {
 	if params == nil {
 		params = &GetUserAuthFactorsInput{}
@@ -35,8 +45,8 @@ func (c *Client) GetUserAuthFactors(ctx context.Context, params *GetUserAuthFact
 
 type GetUserAuthFactorsInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose
-	// authentication factors you want to view.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string
@@ -46,15 +56,18 @@ type GetUserAuthFactorsInput struct {
 
 type GetUserAuthFactorsOutput struct {
 
-	// The username of the currently sign-in user.
+	// The name of the user who is eligible for the authentication factors in the
+	// response.
 	//
 	// This member is required.
 	Username *string
 
-	// The authentication types that are available to the user with USER_AUTH sign-in.
+	// The authentication types that are available to the user with USER_AUTH sign-in,
+	// for example ["PASSWORD", "WEB_AUTHN"] .
 	ConfiguredUserAuthFactors []types.AuthFactorType
 
-	// The user's preferred MFA setting.
+	// The challenge method that Amazon Cognito returns to the user in response to
+	// sign-in requests. Users can prefer SMS message, email message, or TOTP MFA.
 	PreferredMfaSetting *string
 
 	// The MFA options that are activated for the user. The possible values in this

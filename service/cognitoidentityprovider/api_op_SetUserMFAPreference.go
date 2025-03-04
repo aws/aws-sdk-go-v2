@@ -22,9 +22,6 @@ import (
 // assessed risk level of sign-in attempts, deactivate MFA for users and turn on
 // Adaptive Authentication for the user pool.
 //
-// This operation doesn't reset an existing TOTP MFA for a user. To register a new
-// TOTP factor for a user, make an [AssociateSoftwareToken]request. For more information, see [TOTP software token MFA].
-//
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
 //
@@ -34,9 +31,7 @@ import (
 // policies. For more information about authorization models in Amazon Cognito, see
 // [Using the Amazon Cognito user pools API and user pool endpoints].
 //
-// [AssociateSoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
-// [TOTP software token MFA]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa-totp.html
 func (c *Client) SetUserMFAPreference(ctx context.Context, params *SetUserMFAPreferenceInput, optFns ...func(*Options)) (*SetUserMFAPreferenceOutput, error) {
 	if params == nil {
 		params = &SetUserMFAPreferenceInput{}
@@ -54,17 +49,17 @@ func (c *Client) SetUserMFAPreference(ctx context.Context, params *SetUserMFAPre
 
 type SetUserMFAPreferenceInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose MFA
-	// preference you want to set.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string
 
 	// User preferences for email message MFA. Activates or deactivates email MFA and
 	// sets it as the preferred MFA method when multiple methods are available. To
-	// activate this setting, [advanced security features]must be active in your user pool.
+	// activate this setting, your user pool must be in the [Essentials tier]or higher.
 	//
-	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
 	EmailMfaSettings *types.EmailMfaSettingsType
 
 	// User preferences for SMS message MFA. Activates or deactivates SMS MFA and sets

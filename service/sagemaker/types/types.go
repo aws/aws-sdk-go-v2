@@ -10160,6 +10160,14 @@ type KernelGatewayAppSettings struct {
 
 	// A list of custom SageMaker AI images that are configured to run as a
 	// KernelGateway app.
+	//
+	// The maximum number of custom images are as follows.
+	//
+	//   - On a domain level: 200
+	//
+	//   - On a space level: 5
+	//
+	//   - On a user profile level: 5
 	CustomImages []CustomImage
 
 	// The default instance type and the Amazon Resource Name (ARN) of the default

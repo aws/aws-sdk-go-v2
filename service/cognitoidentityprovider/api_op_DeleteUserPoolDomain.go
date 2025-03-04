@@ -31,8 +31,8 @@ func (c *Client) DeleteUserPoolDomain(ctx context.Context, params *DeleteUserPoo
 type DeleteUserPoolDomainInput struct {
 
 	// The domain that you want to delete. For custom domains, this is the
-	// fully-qualified domain name, such as auth.example.com . For Amazon Cognito
-	// prefix domains, this is the prefix alone, such as auth .
+	// fully-qualified domain name like auth.example.com . For Amazon Cognito prefix
+	// domains, this is the prefix alone, like myprefix .
 	//
 	// This member is required.
 	Domain *string

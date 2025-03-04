@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Self-deletes a user profile. A deleted user profile can no longer be used to
-// sign in and can't be restored.
+// Deletes the profile of the currently signed-in user. A deleted user profile can
+// no longer be used to sign in and can't be restored.
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
@@ -41,8 +41,8 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 // Represents the request to delete a user.
 type DeleteUserInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose user profile
-	// you want to delete.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string

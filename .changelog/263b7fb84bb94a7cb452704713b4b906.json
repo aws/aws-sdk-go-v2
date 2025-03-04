@@ -1,0 +1,8 @@
+{
+    "id": "263b7fb8-4bb9-4a7c-b452-704713b4b906",
+    "type": "feature",
+    "description": "Added the capacity to return available challenges in admin authentication and to set version 3 of the pre token generation event for M2M ATC.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

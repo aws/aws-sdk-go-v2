@@ -526,6 +526,40 @@ type AttributeFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for audio content extraction and processing.
+type AudioExtractionConfiguration struct {
+
+	// The status of audio extraction (ENABLED or DISABLED) for processing audio
+	// content from files.
+	//
+	// This member is required.
+	AudioExtractionStatus AudioExtractionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Details about an audio source, including its identifier, format, and time
+// information.
+type AudioSourceDetails struct {
+
+	// The type of audio extraction performed on the content.
+	AudioExtractionType AudioExtractionType
+
+	// The ending timestamp in milliseconds for the relevant audio segment.
+	EndTimeMilliseconds *int64
+
+	// Unique identifier for the audio media file.
+	MediaId *string
+
+	// The MIME type of the audio file (e.g., audio/mp3, audio/wav).
+	MediaMimeType *string
+
+	// The starting timestamp in milliseconds for the relevant audio segment.
+	StartTimeMilliseconds *int64
+
+	noSmithyDocumentSerde
+}
+
 // A request made by Amazon Q Business to a third paty authentication server to
 // authenticate a custom plugin user.
 type AuthChallengeRequest struct {
@@ -1802,6 +1836,18 @@ type ImageExtractionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Details about an image source, including its identifier and format.
+type ImageSourceDetails struct {
+
+	// Unique identifier for the image file.
+	MediaId *string
+
+	// The MIME type of the image file.
+	MediaMimeType *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary information for your Amazon Q Business index.
 type Index struct {
 
@@ -1911,11 +1957,19 @@ type KendraIndexConfiguration struct {
 // The configuration for extracting information from media in documents.
 type MediaExtractionConfiguration struct {
 
+	// Configuration settings for extracting and processing audio content from media
+	// files.
+	AudioExtractionConfiguration *AudioExtractionConfiguration
+
 	// The configuration for extracting semantic meaning from images in documents. For
 	// more information, see [Extracting semantic meaning from images and visuals].
 	//
 	// [Extracting semantic meaning from images and visuals]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html
 	ImageExtractionConfiguration *ImageExtractionConfiguration
+
+	// Configuration settings for extracting and processing video content from media
+	// files.
+	VideoExtractionConfiguration *VideoExtractionConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2601,6 +2655,45 @@ type SourceAttribution struct {
 	noSmithyDocumentSerde
 }
 
+// Container for details about different types of media sources (image, audio, or
+// video).
+//
+// The following types satisfy this interface:
+//
+//	SourceDetailsMemberAudioSourceDetails
+//	SourceDetailsMemberImageSourceDetails
+//	SourceDetailsMemberVideoSourceDetails
+type SourceDetails interface {
+	isSourceDetails()
+}
+
+// Details specific to audio content within the source.
+type SourceDetailsMemberAudioSourceDetails struct {
+	Value AudioSourceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceDetailsMemberAudioSourceDetails) isSourceDetails() {}
+
+// Details specific to image content within the source.
+type SourceDetailsMemberImageSourceDetails struct {
+	Value ImageSourceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceDetailsMemberImageSourceDetails) isSourceDetails() {}
+
+// Details specific to video content within the source.
+type SourceDetailsMemberVideoSourceDetails struct {
+	Value VideoSourceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceDetailsMemberVideoSourceDetails) isSourceDetails() {}
+
 // Provides information on boosting STRING type document attributes.
 //
 // For STRING and STRING_LIST type document attributes to be used for boosting on
@@ -2799,15 +2892,24 @@ type TextSegment struct {
 
 	// The identifier of the media object associated with the text segment in the
 	// source attribution.
+	//
+	// Deprecated: Deprecated in favor of using mediaId within the respective
+	// sourceDetails field.
 	MediaId *string
 
 	// The MIME type (image/png) of the media object associated with the text segment
 	// in the source attribution.
+	//
+	// Deprecated: Deprecated in favor of using mediaMimeType within the respective
+	// sourceDetails field.
 	MediaMimeType *string
 
 	// The relevant text excerpt from a source that was used to generate a citation
 	// text segment in an Amazon Q Business chat response.
 	SnippetExcerpt *SnippetExcerpt
+
+	// Source information for a segment of extracted text, including its media type.
+	SourceDetails SourceDetails
 
 	noSmithyDocumentSerde
 }
@@ -2883,6 +2985,40 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for video content extraction and processing.
+type VideoExtractionConfiguration struct {
+
+	// The status of video extraction (ENABLED or DISABLED) for processing video
+	// content from files.
+	//
+	// This member is required.
+	VideoExtractionStatus VideoExtractionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Details about a video source, including its identifier, format, and time
+// information.
+type VideoSourceDetails struct {
+
+	// The ending timestamp in milliseconds for the relevant video segment.
+	EndTimeMilliseconds *int64
+
+	// Unique identifier for the video media file.
+	MediaId *string
+
+	// The MIME type of the video file (e.g., video/mp4, video/avi).
+	MediaMimeType *string
+
+	// The starting timestamp in milliseconds for the relevant video segment.
+	StartTimeMilliseconds *int64
+
+	// The type of video extraction performed on the content.
+	VideoExtractionType VideoExtractionType
+
+	noSmithyDocumentSerde
+}
+
 // Provides information for an Amazon Q Business web experience.
 type WebExperience struct {
 
@@ -2951,5 +3087,6 @@ func (*UnknownUnionMember) isPluginAuthConfiguration()                {}
 func (*UnknownUnionMember) isPrincipal()                              {}
 func (*UnknownUnionMember) isRetrieverConfiguration()                 {}
 func (*UnknownUnionMember) isRuleConfiguration()                      {}
+func (*UnknownUnionMember) isSourceDetails()                          {}
 func (*UnknownUnionMember) isSubscriptionPrincipal()                  {}
 func (*UnknownUnionMember) isWebExperienceAuthConfiguration()         {}

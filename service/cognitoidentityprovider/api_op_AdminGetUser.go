@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Given the username, returns details about a user profile in a user pool. This
-// operation contributes to your monthly active user (MAU) count for the purpose of
-// billing. You can specify alias attributes in the Username parameter.
+// Given a username, returns details about a user profile in a user pool. You can
+// specify alias attributes in the Username request parameter.
+//
+// This operation contributes to your monthly active user (MAU) count for the
+// purpose of billing.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -52,7 +54,7 @@ type AdminGetUserInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party
@@ -73,11 +75,7 @@ type AdminGetUserOutput struct {
 	// This member is required.
 	Username *string
 
-	// Indicates whether the user is activated for sign-in. The [AdminDisableUser] and [AdminEnableUser] API operations
-	// deactivate and activate user sign-in, respectively.
-	//
-	// [AdminDisableUser]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminDisableUser.html
-	// [AdminEnableUser]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminEnableUser.html
+	// Indicates whether the user is activated for sign-in.
 	Enabled bool
 
 	//  This response parameter is no longer supported. It provides information only
@@ -106,11 +104,7 @@ type AdminGetUserOutput struct {
 	UserLastModifiedDate *time.Time
 
 	// The MFA options that are activated for the user. The possible values in this
-	// list are SMS_MFA , EMAIL_OTP , and SOFTWARE_TOKEN_MFA . You can change the MFA
-	// preference for users who have more than one available MFA factor with [AdminSetUserMFAPreference]or [SetUserMFAPreference].
-	//
-	// [AdminSetUserMFAPreference]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserMFAPreference.html
-	// [SetUserMFAPreference]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserMFAPreference.html
+	// list are SMS_MFA , EMAIL_OTP , and SOFTWARE_TOKEN_MFA .
 	UserMFASettingList []string
 
 	// The user's status. Can be one of the following:

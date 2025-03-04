@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Initiates sign-in for a user in the Amazon Cognito user directory. You can't
-// sign in a user with a federated IdP with InitiateAuth . For more information,
-// see [Adding user pool sign-in through a third party].
+// Declares an authentication flow and initiates sign-in for a user in the Amazon
+// Cognito user directory. Amazon Cognito might respond with an additional
+// challenge or an AuthenticationResult that contains the outcome of a successful
+// authentication. You can't sign in a user with a federated IdP with InitiateAuth
+// . For more information, see [Authentication].
 //
 // Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
 // in requests for this API operation. For this operation, you can't use IAM
@@ -36,9 +38,9 @@ import (
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
 // Cognito Developer Guide.
 //
-// [Adding user pool sign-in through a third party]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html
 // [SMS message settings for Amazon Cognito user pools]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Authentication]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication.html
 // [sandbox mode]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
 // [Amazon Pinpoint]: https://console.aws.amazon.com/pinpoint/home/
 func (c *Client) InitiateAuth(ctx context.Context, params *InitiateAuthInput, optFns ...func(*Options)) (*InitiateAuthOutput, error) {
@@ -60,83 +62,76 @@ func (c *Client) InitiateAuth(ctx context.Context, params *InitiateAuthInput, op
 type InitiateAuthInput struct {
 
 	// The authentication flow that you want to initiate. Each AuthFlow has linked
-	// AuthParameters that you must submit. The following are some example flows and
-	// their parameters.
+	// AuthParameters that you must submit. The following are some example flows.
 	//
-	//   - USER_AUTH : Request a preferred authentication type or review available
-	//   authentication types. From the offered authentication types, select one in a
-	//   challenge response and then authenticate with that method in an additional
-	//   challenge response.
-	//
-	//   - REFRESH_TOKEN_AUTH : Receive new ID and access tokens when you pass a
-	//   REFRESH_TOKEN parameter with a valid refresh token as the value.
-	//
-	//   - USER_SRP_AUTH : Receive secure remote password (SRP) variables for the next
-	//   challenge, PASSWORD_VERIFIER , when you pass USERNAME and SRP_A parameters.
-	//
-	//   - USER_PASSWORD_AUTH : Receive new tokens or the next challenge, for example
-	//   SOFTWARE_TOKEN_MFA , when you pass USERNAME and PASSWORD parameters.
-	//
-	// All flows
-	//
-	// USER_AUTH The entry point for sign-in with passwords, one-time passwords, and
-	// WebAuthN authenticators.
+	// USER_AUTH The entry point for [choice-based authentication] with passwords, one-time passwords, and WebAuthn
+	// authenticators. Request a preferred authentication type or review available
+	// authentication types. From the offered authentication types, select one in a
+	// challenge response and then authenticate with that method in an additional
+	// challenge response. To activate this setting, your user pool must be in the [Essentials tier]or
+	// higher.
 	//
 	// USER_SRP_AUTH Username-password authentication with the Secure Remote Password
 	// (SRP) protocol. For more information, see [Use SRP password verification in custom authentication flow].
 	//
-	// REFRESH_TOKEN_AUTH and REFRESH_TOKEN Provide a valid refresh token and receive
-	// new ID and access tokens. For more information, see [Using the refresh token].
+	// REFRESH_TOKEN_AUTH and REFRESH_TOKEN Receive new ID and access tokens when you
+	// pass a REFRESH_TOKEN parameter with a valid refresh token as the value. For
+	// more information, see [Using the refresh token].
 	//
 	// CUSTOM_AUTH Custom authentication with Lambda triggers. For more information,
 	// see [Custom authentication challenge Lambda triggers].
 	//
-	// USER_PASSWORD_AUTH Username-password authentication with the password sent
-	// directly in the request. For more information, see [Admin authentication flow].
+	// USER_PASSWORD_AUTH Client-side username-password authentication with the
+	// password sent directly in the request. For more information about client-side
+	// and server-side authentication, see [SDK authorization models].
 	//
-	// ADMIN_USER_PASSWORD_AUTH is a flow type of [AdminInitiateAuth] and isn't valid for InitiateAuth.
-	// ADMIN_NO_SRP_AUTH is a legacy server-side username-password flow and isn't valid
-	// for InitiateAuth.
+	// ADMIN_USER_PASSWORD_AUTH is a flow type of AdminInitiateAuth and isn't valid
+	// for InitiateAuth. ADMIN_NO_SRP_AUTH is a legacy server-side username-password
+	// flow and isn't valid for InitiateAuth.
 	//
+	// [SDK authorization models]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-public-server-side.html
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
 	// [Use SRP password verification in custom authentication flow]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow.html#Using-SRP-password-verification-in-custom-authentication-flow
-	// [AdminInitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html
 	// [Using the refresh token]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-the-refresh-token.html
-	// [Admin authentication flow]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow.html#Built-in-authentication-flow-and-challenges
+	// [choice-based authentication]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice
 	// [Custom authentication challenge Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html
 	//
 	// This member is required.
 	AuthFlow types.AuthFlowType
 
-	// The app client ID.
+	// The ID of the app client that your user wants to sign in to.
 	//
 	// This member is required.
 	ClientId *string
 
-	// The Amazon Pinpoint analytics metadata that contributes to your metrics for
-	// InitiateAuth calls.
+	// Information that supports analytics outcomes with Amazon Pinpoint, including
+	// the user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint
+	// push notifications, for example a device identifier, email address, or phone
+	// number.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
-	// that you're invoking. The required values depend on the value of AuthFlow :
+	// that you're invoking.
 	//
-	//   - For USER_AUTH : USERNAME (required), PREFERRED_CHALLENGE . If you don't
-	//   provide a value for PREFERRED_CHALLENGE , Amazon Cognito responds with the
+	// The required values are specific to the InitiateAuthRequest$AuthFlow.
+	//
+	// The following are some authentication flows and their parameters. Add a
+	// SECRET_HASH parameter if your app client has a client secret.
+	//
+	//   - USER_AUTH : USERNAME (required), PREFERRED_CHALLENGE . If you don't provide
+	//   a value for PREFERRED_CHALLENGE , Amazon Cognito responds with the
 	//   AvailableChallenges parameter that specifies the available sign-in methods.
 	//
-	//   - For USER_SRP_AUTH : USERNAME (required), SRP_A (required), SECRET_HASH
-	//   (required if the app client is configured with a client secret), DEVICE_KEY .
+	//   - USER_SRP_AUTH : USERNAME (required), SRP_A (required), DEVICE_KEY .
 	//
-	//   - For USER_PASSWORD_AUTH : USERNAME (required), PASSWORD (required),
-	//   SECRET_HASH (required if the app client is configured with a client secret),
-	//   DEVICE_KEY .
+	//   - USER_PASSWORD_AUTH : USERNAME (required), PASSWORD (required), DEVICE_KEY .
 	//
-	//   - For REFRESH_TOKEN_AUTH/REFRESH_TOKEN : REFRESH_TOKEN (required), SECRET_HASH
-	//   (required if the app client is configured with a client secret), DEVICE_KEY .
+	//   - REFRESH_TOKEN_AUTH/REFRESH_TOKEN : REFRESH_TOKEN (required), DEVICE_KEY .
 	//
-	//   - For CUSTOM_AUTH : USERNAME (required), SECRET_HASH (if app client is
-	//   configured with client secret), DEVICE_KEY . To start the authentication flow
-	//   with password verification, include ChallengeName: SRP_A and SRP_A: (The
-	//   SRP_A Value) .
+	//   - CUSTOM_AUTH : USERNAME (required), SECRET_HASH (if app client is configured
+	//   with client secret), DEVICE_KEY . To start the authentication flow with
+	//   password verification, include ChallengeName: SRP_A and SRP_A: (The SRP_A
+	//   Value) .
 	//
 	// For more information about SECRET_HASH , see [Computing secret hash values]. For information about DEVICE_KEY
 	// , see [Working with user devices in your user pool].
@@ -149,26 +144,24 @@ type InitiateAuthInput struct {
 	// custom workflows that this action triggers.
 	//
 	// You create custom workflows by assigning Lambda functions to user pool
-	// triggers. When you use the InitiateAuth API action, Amazon Cognito invokes the
+	// triggers. When you send an InitiateAuth request, Amazon Cognito invokes the
 	// Lambda functions that are specified for various triggers. The ClientMetadata
-	// value is passed as input to the functions for only the following triggers:
+	// value is passed as input to the functions for only the following triggers.
 	//
-	//   - Pre signup
+	//   - Pre sign-up
 	//
 	//   - Pre authentication
 	//
 	//   - User migration
 	//
 	// When Amazon Cognito invokes the functions for these triggers, it passes a JSON
-	// payload, which the function receives as input. This payload contains a
-	// validationData attribute, which provides the data that you assigned to the
-	// ClientMetadata parameter in your InitiateAuth request. In your function code in
-	// Lambda, you can process the validationData value to enhance your workflow for
-	// your specific needs.
+	// payload as input to the function. This payload contains a validationData
+	// attribute with the data that you assigned to the ClientMetadata parameter in
+	// your InitiateAuth request. In your function, validationData can contribute to
+	// operations that require data that isn't in the default payload.
 	//
-	// When you use the InitiateAuth API action, Amazon Cognito also invokes the
-	// functions for the following triggers, but it doesn't provide the ClientMetadata
-	// value as input:
+	// InitiateAuth requests invokes the following triggers without ClientMetadata as
+	// input.
 	//
 	//   - Post authentication
 	//
@@ -184,7 +177,7 @@ type InitiateAuthInput struct {
 	//
 	//   - Custom SMS sender
 	//
-	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	// For more information, see [Using Lambda triggers] in the Amazon Cognito Developer Guide.
 	//
 	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
 	// the following:
@@ -199,15 +192,21 @@ type InitiateAuthInput struct {
 	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
 	//   parameter.
 	//
-	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+	// [Using Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	// The optional session ID from a ConfirmSignUp API request. You can sign in a
 	// user directly from the sign-up process with the USER_AUTH authentication flow.
+	// When you pass the session ID to InitiateAuth , Amazon Cognito assumes the SMS or
+	// email message one-time verification password from ConfirmSignUp as the primary
+	// authentication factor. You're not required to submit this code a second time.
+	// This option is only valid for users who have confirmed their sign-up and are
+	// signing in for the first time within the authentication flow session duration of
+	// the session ID.
 	Session *string
 
-	// Contextual data about your user session, such as the device fingerprint, IP
-	// address, or location. Amazon Cognito advanced security evaluates the risk of an
+	// Contextual data about your user session like the device fingerprint, IP
+	// address, or location. Amazon Cognito threat protection evaluates the risk of an
 	// authentication event based on the context that your app generates and passes to
 	// Amazon Cognito when it makes API requests.
 	//
@@ -222,29 +221,31 @@ type InitiateAuthInput struct {
 // Initiates the authentication response.
 type InitiateAuthOutput struct {
 
-	// The result of the authentication response. This result is only returned if the
-	// caller doesn't need to pass another challenge. If the caller does need to pass
-	// another challenge before it gets tokens, ChallengeName , ChallengeParameters ,
-	// and Session are returned.
+	// The result of a successful and complete authentication request. This result is
+	// only returned if the user doesn't need to pass another challenge. If they must
+	// pass another challenge before they get tokens, Amazon Cognito returns a
+	// challenge in ChallengeName , ChallengeParameters , and Session response
+	// parameters.
 	AuthenticationResult *types.AuthenticationResultType
 
-	// This response parameter prompts a user to select from multiple available
-	// challenges that they can complete authentication with. For example, they might
-	// be able to continue with passwordless authentication or with a one-time password
-	// from an SMS message.
+	// This response parameter lists the available authentication challenges that
+	// users can select from in [choice-based authentication]. For example, they might be able to choose between
+	// passkey authentication, a one-time password from an SMS message, and a
+	// traditional password.
+	//
+	// [choice-based authentication]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice
 	AvailableChallenges []types.ChallengeNameType
 
-	// The name of the challenge that you're responding to with this call. This name
-	// is returned in the InitiateAuth response if you must pass another challenge.
+	// The name of an additional authentication challenge that you must respond to.
 	//
-	// Valid values include the following:
+	// Possible challenges include the following:
 	//
-	// All of the following challenges require USERNAME and SECRET_HASH (if
-	// applicable) in the parameters.
+	// All of the following challenges require USERNAME and, when the app client has a
+	// client secret, SECRET_HASH in the parameters.
 	//
 	//   - WEB_AUTHN : Respond to the challenge with the results of a successful
-	//   authentication with a passkey, or webauthN, factor. These are typically
-	//   biometric devices or security keys.
+	//   authentication with a WebAuthn authenticator, or passkey. Examples of WebAuthn
+	//   authenticators include biometric devices and security keys.
 	//
 	//   - PASSWORD : Respond with USER_PASSWORD_AUTH parameters: USERNAME (required),
 	//   PASSWORD (required), SECRET_HASH (required if the app client is configured
@@ -258,74 +259,69 @@ type InitiateAuthOutput struct {
 	//   matches one of the challenge types in the AvailableChallenges response
 	//   parameter.
 	//
-	//   - SMS_MFA : Next challenge is to supply an SMS_MFA_CODE that your user pool
-	//   delivered in an SMS message.
+	//   - SMS_MFA : Respond with an SMS_MFA_CODE that your user pool delivered in an
+	//   SMS message.
 	//
-	//   - EMAIL_OTP : Next challenge is to supply an EMAIL_OTP_CODE that your user
-	//   pool delivered in an email message.
+	//   - EMAIL_OTP : Respond with an EMAIL_OTP_CODE that your user pool delivered in
+	//   an email message.
 	//
-	//   - PASSWORD_VERIFIER : Next challenge is to supply PASSWORD_CLAIM_SIGNATURE ,
-	//   PASSWORD_CLAIM_SECRET_BLOCK , and TIMESTAMP after the client-side SRP
-	//   calculations.
+	//   - PASSWORD_VERIFIER : Respond with PASSWORD_CLAIM_SIGNATURE ,
+	//   PASSWORD_CLAIM_SECRET_BLOCK , and TIMESTAMP after client-side SRP calculations.
 	//
 	//   - CUSTOM_CHALLENGE : This is returned if your custom authentication flow
 	//   determines that the user should pass another challenge before tokens are issued.
+	//   The parameters of the challenge are determined by your Lambda function.
 	//
-	//   - DEVICE_SRP_AUTH : If device tracking was activated on your user pool and the
-	//   previous challenges were passed, this challenge is returned so that Amazon
-	//   Cognito can start tracking this device.
+	//   - DEVICE_SRP_AUTH : Respond with the initial parameters of device SRP
+	//   authentication. For more information, see [Signing in with a device].
 	//
-	//   - DEVICE_PASSWORD_VERIFIER : Similar to PASSWORD_VERIFIER , but for devices
-	//   only.
+	//   - DEVICE_PASSWORD_VERIFIER : Respond with PASSWORD_CLAIM_SIGNATURE ,
+	//   PASSWORD_CLAIM_SECRET_BLOCK , and TIMESTAMP after client-side SRP
+	//   calculations. For more information, see [Signing in with a device].
 	//
 	//   - NEW_PASSWORD_REQUIRED : For users who are required to change their passwords
-	//   after successful first login.
-	//
-	// Respond to this challenge with NEW_PASSWORD and any required attributes that
-	//   Amazon Cognito returned in the requiredAttributes parameter. You can also set
-	//   values for attributes that aren't required by your user pool and that your app
-	//   client can write. For more information, see [RespondToAuthChallenge].
+	//   after successful first login. Respond to this challenge with NEW_PASSWORD and
+	//   any required attributes that Amazon Cognito returned in the requiredAttributes
+	//   parameter. You can also set values for attributes that aren't required by your
+	//   user pool and that your app client can write.
 	//
 	// Amazon Cognito only returns this challenge for users who have temporary
-	//   passwords. Because of this, and because in some cases you can create users who
-	//   don't have values for required attributes, take care to collect and submit
-	//   required-attribute values for all users who don't have passwords. You can create
-	//   a user in the Amazon Cognito console without, for example, a required
-	//   birthdate attribute. The API response from Amazon Cognito won't prompt you to
-	//   submit a birthdate for the user if they don't have a password.
+	//   passwords. When you create passwordless users, you must provide values for all
+	//   required attributes.
 	//
 	// In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required
-	//   attribute that already has a value. In RespondToAuthChallenge , set a value
-	//   for any keys that Amazon Cognito returned in the requiredAttributes parameter,
-	//   then use the UpdateUserAttributes API operation to modify the value of any
-	//   additional attributes.
+	//   attribute that already has a value. In AdminRespondToAuthChallenge or
+	//   RespondToAuthChallenge , set a value for any keys that Amazon Cognito returned
+	//   in the requiredAttributes parameter, then use the AdminUpdateUserAttributes or
+	//   UpdateUserAttributes API operation to modify the value of any additional
+	//   attributes.
 	//
 	//   - MFA_SETUP : For users who are required to setup an MFA factor before they
 	//   can sign in. The MFA types activated for the user pool will be listed in the
 	//   challenge parameters MFAS_CAN_SETUP value.
 	//
-	// To set up software token MFA, use the session returned here from InitiateAuth as
-	//   an input to AssociateSoftwareToken . Use the session returned by
-	//   VerifySoftwareToken as an input to RespondToAuthChallenge with challenge name
-	//   MFA_SETUP to complete sign-in. To set up SMS MFA, an administrator should help
-	//   the user to add a phone number to their account, and then the user should call
-	//   InitiateAuth again to restart sign-in.
+	// To set up time-based one-time password (TOTP) MFA, use the session returned in
+	//   this challenge from InitiateAuth or AdminInitiateAuth as an input to
+	//   AssociateSoftwareToken . Then, use the session returned by VerifySoftwareToken
+	//   as an input to RespondToAuthChallenge or AdminRespondToAuthChallenge with
+	//   challenge name MFA_SETUP to complete sign-in.
 	//
-	// [RespondToAuthChallenge]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RespondToAuthChallenge.html
+	// To set up SMS or email MFA, collect a phone_number or email attribute for the
+	//   user. Then restart the authentication flow with an InitiateAuth or
+	//   AdminInitiateAuth request.
+	//
+	// [Signing in with a device]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html#user-pools-remembered-devices-signing-in-with-a-device
 	ChallengeName types.ChallengeNameType
 
-	// The challenge parameters. These are returned in the InitiateAuth response if
-	// you must pass another challenge. The responses in this parameter should be used
-	// to compute inputs to the next call ( RespondToAuthChallenge ).
+	// The required parameters of the ChallengeName challenge.
 	//
 	// All challenges require USERNAME . They also require SECRET_HASH if your app
 	// client has a client secret.
 	ChallengeParameters map[string]string
 
-	// The session that should pass both ways in challenge-response calls to the
-	// service. If the caller must pass another challenge, they return a session with
-	// other challenge parameters. Include this session identifier in a
-	// RespondToAuthChallenge API request.
+	// The session identifier that links a challenge response to the initial
+	// authentication request. If the user must pass another challenge, Amazon Cognito
+	// returns a session ID and challenge parameters.
 	Session *string
 
 	// Metadata pertaining to the operation's result.

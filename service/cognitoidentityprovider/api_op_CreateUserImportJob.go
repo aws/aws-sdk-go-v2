@@ -13,8 +13,7 @@ import (
 
 // Creates a user import job. You can import users into user pools from a
 // comma-separated values (CSV) file without adding Amazon Cognito MAU costs to
-// your Amazon Web Services bill. To generate a template for your import, see [GetCSVHeader]. To
-// learn more about CSV import, see [Importing users from a CSV file].
+// your Amazon Web Services bill.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -28,9 +27,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
-// [Importing users from a CSV file]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-using-import-tool.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
-// [GetCSVHeader]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_GetCSVHeader.html
 func (c *Client) CreateUserImportJob(ctx context.Context, params *CreateUserImportJobInput, optFns ...func(*Options)) (*CreateUserImportJobOutput, error) {
 	if params == nil {
 		params = &CreateUserImportJobInput{}
@@ -72,7 +69,8 @@ type CreateUserImportJobInput struct {
 // import job.
 type CreateUserImportJobOutput struct {
 
-	// The details of the user import job.
+	// The details of the user import job. Includes logging destination, status, and
+	// the Amazon S3 pre-signed URL for CSV upload.
 	UserImportJob *types.UserImportJobType
 
 	// Metadata pertaining to the operation's result.

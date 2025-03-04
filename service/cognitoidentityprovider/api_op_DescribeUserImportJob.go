@@ -49,7 +49,8 @@ type DescribeUserImportJobInput struct {
 // import job.
 type DescribeUserImportJobOutput struct {
 
-	// The details of the user import job.
+	// The details of the user import job. Includes logging destination, status, and
+	// the Amazon S3 pre-signed URL for CSV upload.
 	UserImportJob *types.UserImportJobType
 
 	// Metadata pertaining to the operation's result.

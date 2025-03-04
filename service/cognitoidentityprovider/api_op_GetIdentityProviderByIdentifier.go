@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the specified IdP.
+// Given the identifier of an identity provider (IdP), for example examplecorp ,
+// returns information about the user pool configuration for that IdP. For more
+// information about IdPs, see [Third-party IdP sign-in].
+//
+// [Third-party IdP sign-in]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html
 func (c *Client) GetIdentityProviderByIdentifier(ctx context.Context, params *GetIdentityProviderByIdentifierInput, optFns ...func(*Options)) (*GetIdentityProviderByIdentifierOutput, error) {
 	if params == nil {
 		params = &GetIdentityProviderByIdentifierInput{}
@@ -29,12 +33,15 @@ func (c *Client) GetIdentityProviderByIdentifier(ctx context.Context, params *Ge
 
 type GetIdentityProviderByIdentifierInput struct {
 
-	// The IdP identifier.
+	// The identifier that you assigned to your user pool. The identifier is an
+	// alternative name for an IdP that is distinct from the IdP name. For example, an
+	// IdP with a name of MyIdP might have an identifier of the email domain
+	// example.com .
 	//
 	// This member is required.
 	IdpIdentifier *string
 
-	// The user pool ID.
+	// The ID of the user pool where you want to get information about the IdP.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -44,7 +51,9 @@ type GetIdentityProviderByIdentifierInput struct {
 
 type GetIdentityProviderByIdentifierOutput struct {
 
-	// The identity provider details.
+	// The configuration of the IdP in your user pool. Includes additional
+	// identifiers, the IdP name and type, and trust-relationship details like the
+	// issuer URL.
 	//
 	// This member is required.
 	IdentityProvider *types.IdentityProviderType

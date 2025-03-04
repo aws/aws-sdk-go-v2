@@ -747,6 +747,7 @@ type PreTokenGenerationLambdaVersionType string
 const (
 	PreTokenGenerationLambdaVersionTypeV10 PreTokenGenerationLambdaVersionType = "V1_0"
 	PreTokenGenerationLambdaVersionTypeV20 PreTokenGenerationLambdaVersionType = "V2_0"
+	PreTokenGenerationLambdaVersionTypeV30 PreTokenGenerationLambdaVersionType = "V3_0"
 )
 
 // Values returns all known values for PreTokenGenerationLambdaVersionType. Note
@@ -758,6 +759,7 @@ func (PreTokenGenerationLambdaVersionType) Values() []PreTokenGenerationLambdaVe
 	return []PreTokenGenerationLambdaVersionType{
 		"V1_0",
 		"V2_0",
+		"V3_0",
 	}
 }
 

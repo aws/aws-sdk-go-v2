@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new group in the specified user pool. For more information about user
-// pool groups see [Adding groups to a user pool].
+// pool groups, see [Adding groups to a user pool].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM

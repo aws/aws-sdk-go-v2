@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resends the confirmation (for confirmation of registration) to a specific user
-// in the user pool.
+// Resends the code that confirms a new account for a user who has signed up in
+// your user pool. Amazon Cognito sends confirmation codes to the user attribute in
+// the AutoVerifiedAttributes property of your user pool. When you prompt new
+// users for the confirmation code, include a "Resend code" option that generates a
+// call to this API operation.
 //
 // Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
 // in requests for this API operation. For this operation, you can't use IAM
@@ -57,12 +60,12 @@ func (c *Client) ResendConfirmationCode(ctx context.Context, params *ResendConfi
 // Represents the request to resend the confirmation code.
 type ResendConfirmationCodeInput struct {
 
-	// The ID of the client associated with the user pool.
+	// The ID of the user pool app client where the user signed up.
 	//
 	// This member is required.
 	ClientId *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party
@@ -71,8 +74,10 @@ type ResendConfirmationCodeInput struct {
 	// This member is required.
 	Username *string
 
-	// The Amazon Pinpoint analytics metadata that contributes to your metrics for
-	// ResendConfirmationCode calls.
+	// Information that supports analytics outcomes with Amazon Pinpoint, including
+	// the user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint
+	// push notifications, for example a device identifier, email address, or phone
+	// number.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
@@ -87,7 +92,7 @@ type ResendConfirmationCodeInput struct {
 	// ResendConfirmationCode request. In your function code in Lambda, you can process
 	// the clientMetadata value to enhance your workflow for your specific needs.
 	//
-	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	// For more information, see [Using Lambda triggers] in the Amazon Cognito Developer Guide.
 	//
 	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
 	// the following:
@@ -102,7 +107,7 @@ type ResendConfirmationCodeInput struct {
 	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
 	//   parameter.
 	//
-	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+	// [Using Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
@@ -112,8 +117,8 @@ type ResendConfirmationCodeInput struct {
 	// [Computing secret hash values]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
 	SecretHash *string
 
-	// Contextual data about your user session, such as the device fingerprint, IP
-	// address, or location. Amazon Cognito advanced security evaluates the risk of an
+	// Contextual data about your user session like the device fingerprint, IP
+	// address, or location. Amazon Cognito threat protection evaluates the risk of an
 	// authentication event based on the context that your app generates and passes to
 	// Amazon Cognito when it makes API requests.
 	//
@@ -129,8 +134,8 @@ type ResendConfirmationCodeInput struct {
 // confirmation code.
 type ResendConfirmationCodeOutput struct {
 
-	// The code delivery details returned by the server in response to the request to
-	// resend the confirmation code.
+	// Information about the phone number or email address that Amazon Cognito sent
+	// the confirmation code to.
 	CodeDeliveryDetails *types.CodeDeliveryDetailsType
 
 	// Metadata pertaining to the operation's result.

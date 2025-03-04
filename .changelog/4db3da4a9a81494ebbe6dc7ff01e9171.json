@@ -1,0 +1,8 @@
+{
+    "id": "4db3da4a-9a81-494e-bbe6-dc7ff01e9171",
+    "type": "feature",
+    "description": "Update the DescribeVpcs response",
+    "modules": [
+        "service/ec2"
+    ]
+}

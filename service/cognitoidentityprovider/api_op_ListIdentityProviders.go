@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists information about all IdPs for a user pool.
+// Given a user pool ID, returns information about configured identity providers
+// (IdPs). For more information about IdPs, see [Third-party IdP sign-in].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -25,6 +26,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Third-party IdP sign-in]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) ListIdentityProviders(ctx context.Context, params *ListIdentityProvidersInput, optFns ...func(*Options)) (*ListIdentityProvidersOutput, error) {
 	if params == nil {
@@ -43,15 +45,21 @@ func (c *Client) ListIdentityProviders(ctx context.Context, params *ListIdentity
 
 type ListIdentityProvidersInput struct {
 
-	// The user pool ID.
+	// The ID of the user pool where you want to list IdPs.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// The maximum number of IdPs to return.
+	// The maximum number of IdPs that you want Amazon Cognito to return in the
+	// response.
 	MaxResults *int32
 
-	// A pagination token.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,12 +67,17 @@ type ListIdentityProvidersInput struct {
 
 type ListIdentityProvidersOutput struct {
 
-	// A list of IdP objects.
+	// An array of the IdPs in your user pool. For each, the response includes
+	// identifiers, the IdP name and type, and trust-relationship details like the
+	// issuer URL.
 	//
 	// This member is required.
 	Providers []types.ProviderDescription
 
-	// A pagination token.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -179,7 +192,8 @@ func (c *Client) addOperationListIdentityProvidersMiddlewares(stack *middleware.
 // ListIdentityProvidersPaginatorOptions is the paginator options for
 // ListIdentityProviders
 type ListIdentityProvidersPaginatorOptions struct {
-	// The maximum number of IdPs to return.
+	// The maximum number of IdPs that you want Amazon Cognito to return in the
+	// response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -117,6 +117,33 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when a user attempts to confirm a device with a device
+// key that already exists.
+type DeviceKeyExistsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DeviceKeyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DeviceKeyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DeviceKeyExistsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DeviceKeyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DeviceKeyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when the provider is already supported by the user
 // pool.
 type DuplicateProviderException struct {

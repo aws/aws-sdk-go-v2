@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the device. For more information about device authentication, see [Working with user devices in your user pool].
+// Given a device key, returns information about a remembered device for the
+// current user. For more information about device authentication, see [Working with user devices in your user pool].
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
@@ -42,13 +43,13 @@ func (c *Client) GetDevice(ctx context.Context, params *GetDeviceInput, optFns .
 // Represents the request to get the device.
 type GetDeviceInput struct {
 
-	// The device key.
+	// The key of the device that you want to get information about.
 	//
 	// This member is required.
 	DeviceKey *string
 
-	// A valid access token that Amazon Cognito issued to the user whose device
-	// information you want to request.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	AccessToken *string
 
 	noSmithyDocumentSerde
@@ -57,7 +58,8 @@ type GetDeviceInput struct {
 // Gets the device response.
 type GetDeviceOutput struct {
 
-	// The device.
+	// Details of the requested device. Includes device information, last-accessed and
+	// created dates, and the device key.
 	//
 	// This member is required.
 	Device *types.DeviceType

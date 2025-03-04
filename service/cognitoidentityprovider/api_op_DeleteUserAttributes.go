@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Self-deletes attributes for a user. For example, your application can submit a
-// request to this operation when a user wants to remove their birthdate attribute
-// value.
+// Deletes attributes from the currently signed-in user. For example, your
+// application can submit a request to this operation when a user wants to remove
+// their birthdate attribute value.
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
@@ -42,8 +42,8 @@ func (c *Client) DeleteUserAttributes(ctx context.Context, params *DeleteUserAtt
 // Represents the request to delete user attributes.
 type DeleteUserAttributesInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose attributes
-	// you want to delete.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string

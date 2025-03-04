@@ -67,33 +67,28 @@ func (c *Client) UpdateUserPoolDomain(ctx context.Context, params *UpdateUserPoo
 // The UpdateUserPoolDomain request input.
 type UpdateUserPoolDomainInput struct {
 
-	// The domain name for the custom domain that hosts the sign-up and sign-in pages
-	// for your application. One example might be auth.example.com .
-	//
-	// This string can include only lowercase letters, numbers, and hyphens. Don't use
-	// a hyphen for the first or last character. Use periods to separate subdomain
-	// names.
+	// The name of the domain that you want to update. For custom domains, this is the
+	// fully-qualified domain name, for example auth.example.com . For prefix domains,
+	// this is the prefix alone, such as myprefix .
 	//
 	// This member is required.
 	Domain *string
 
-	// The ID of the user pool that is associated with the custom domain whose
-	// certificate you're updating.
+	// The ID of the user pool that is associated with the domain you're updating.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// The configuration for a custom domain that hosts the sign-up and sign-in pages
-	// for your application. Use this object to specify an SSL certificate that is
-	// managed by ACM.
+	// The configuration for a custom domain that hosts managed login for your
+	// application. In an UpdateUserPoolDomain request, this parameter specifies an
+	// SSL certificate for the managed login hosted webserver. The certificate must be
+	// an ACM ARN in us-east-1 .
 	//
 	// When you create a custom domain, the passkey RP ID defaults to the custom
 	// domain. If you had a prefix domain active, this will cause passkey integration
 	// for your prefix domain to stop working due to a mismatch in RP ID. To keep the
 	// prefix domain passkey integration working, you can explicitly set RP ID to the
-	// prefix domain. Update the RP ID in a [SetUserPoolMfaConfig]request.
-	//
-	// [SetUserPoolMfaConfig]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
+	// prefix domain.
 	CustomDomainConfig *types.CustomDomainConfigType
 
 	// A version number that indicates the state of managed login for your domain.
@@ -109,8 +104,12 @@ type UpdateUserPoolDomainInput struct {
 // The UpdateUserPoolDomain response output.
 type UpdateUserPoolDomainOutput struct {
 
-	// The Amazon CloudFront endpoint that Amazon Cognito set up when you added the
-	// custom domain to your user pool.
+	// The fully-qualified domain name (FQDN) of the Amazon CloudFront distribution
+	// that hosts your managed login or classic hosted UI pages. You domain-name
+	// authority must have an alias record that points requests for your custom domain
+	// to this FQDN. Amazon Cognito returns this value if you set a custom domain with
+	// CustomDomainConfig . If you set an Amazon Cognito prefix domain, this operation
+	// returns a blank response.
 	CloudFrontDomain *string
 
 	// A version number that indicates the state of managed login for your domain.

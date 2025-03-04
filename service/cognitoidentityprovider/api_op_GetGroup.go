@@ -11,9 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a group.
+// Given a user pool ID and a group name, returns information about the user group.
 //
-// Calling this action requires developer credentials.
+// For more information about user pool groups, see [Adding groups to a user pool].
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Adding groups to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-user-groups.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...func(*Options)) (*GetGroupOutput, error) {
 	if params == nil {
 		params = &GetGroupInput{}
@@ -31,12 +46,12 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 
 type GetGroupInput struct {
 
-	// The name of the group.
+	// The name of the group that you want to get information about.
 	//
 	// This member is required.
 	GroupName *string
 
-	// The ID of the user pool.
+	// The ID of the user pool that contains the group that you want to query.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -46,7 +61,8 @@ type GetGroupInput struct {
 
 type GetGroupOutput struct {
 
-	// The group object for the group.
+	// A container for the requested group. Includes description, precedence, and IAM
+	// role values.
 	Group *types.GroupType
 
 	// Metadata pertaining to the operation's result.

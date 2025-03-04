@@ -12722,6 +12722,90 @@ func awsRestjson1_deserializeDocumentAttachmentOutput(v **types.AttachmentOutput
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioSourceDetails(v **types.AudioSourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioSourceDetails
+	if *v == nil {
+		sv = &types.AudioSourceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioExtractionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioExtractionType to be of type string, got %T instead", value)
+				}
+				sv.AudioExtractionType = types.AudioExtractionType(jtv)
+			}
+
+		case "endTimeMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndTimeMilliseconds = ptr.Int64(i64)
+			}
+
+		case "mediaId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaId to be of type string, got %T instead", value)
+				}
+				sv.MediaId = ptr.String(jtv)
+			}
+
+		case "mediaMimeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MediaMimeType = ptr.String(jtv)
+			}
+
+		case "startTimeMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartTimeMilliseconds = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAuthChallengeRequestEvent(v **types.AuthChallengeRequestEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12863,6 +12947,55 @@ func awsRestjson1_deserializeDocumentFailedAttachmentEvent(v **types.FailedAttac
 					return fmt.Errorf("expected MessageId to be of type string, got %T instead", value)
 				}
 				sv.UserMessageId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageSourceDetails(v **types.ImageSourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageSourceDetails
+	if *v == nil {
+		sv = &types.ImageSourceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mediaId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaId to be of type string, got %T instead", value)
+				}
+				sv.MediaId = ptr.String(jtv)
+			}
+
+		case "mediaMimeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MediaMimeType = ptr.String(jtv)
 			}
 
 		default:
@@ -13110,6 +13243,66 @@ func awsRestjson1_deserializeDocumentSourceAttributions(v *[]*types.SourceAttrib
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSourceDetails(v *types.SourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.SourceDetails
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "audioSourceDetails":
+			var mv types.AudioSourceDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAudioSourceDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SourceDetailsMemberAudioSourceDetails{Value: mv}
+			break loop
+
+		case "imageSourceDetails":
+			var mv types.ImageSourceDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentImageSourceDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SourceDetailsMemberImageSourceDetails{Value: mv}
+			break loop
+
+		case "videoSourceDetails":
+			var mv types.VideoSourceDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVideoSourceDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SourceDetailsMemberVideoSourceDetails{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTextOutputEvent(v **types.TextOutputEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13248,6 +13441,11 @@ func awsRestjson1_deserializeDocumentTextSegment(v **types.TextSegment, value in
 				return err
 			}
 
+		case "sourceDetails":
+			if err := awsRestjson1_deserializeDocumentSourceDetails(&sv.SourceDetails, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -13288,6 +13486,90 @@ func awsRestjson1_deserializeDocumentTextSegmentList(v *[]types.TextSegment, val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoSourceDetails(v **types.VideoSourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoSourceDetails
+	if *v == nil {
+		sv = &types.VideoSourceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endTimeMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndTimeMilliseconds = ptr.Int64(i64)
+			}
+
+		case "mediaId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaId to be of type string, got %T instead", value)
+				}
+				sv.MediaId = ptr.String(jtv)
+			}
+
+		case "mediaMimeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MediaMimeType = ptr.String(jtv)
+			}
+
+		case "startTimeMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartTimeMilliseconds = ptr.Int64(i64)
+			}
+
+		case "videoExtractionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoExtractionType to be of type string, got %T instead", value)
+				}
+				sv.VideoExtractionType = types.VideoExtractionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -14709,6 +14991,46 @@ func awsRestjson1_deserializeDocumentAttributeFilters(v *[]types.AttributeFilter
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioExtractionConfiguration(v **types.AudioExtractionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioExtractionConfiguration
+	if *v == nil {
+		sv = &types.AudioExtractionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioExtractionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioExtractionStatus to be of type string, got %T instead", value)
+				}
+				sv.AudioExtractionStatus = types.AudioExtractionStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -17861,8 +18183,18 @@ func awsRestjson1_deserializeDocumentMediaExtractionConfiguration(v **types.Medi
 
 	for key, value := range shape {
 		switch key {
+		case "audioExtractionConfiguration":
+			if err := awsRestjson1_deserializeDocumentAudioExtractionConfiguration(&sv.AudioExtractionConfiguration, value); err != nil {
+				return err
+			}
+
 		case "imageExtractionConfiguration":
 			if err := awsRestjson1_deserializeDocumentImageExtractionConfiguration(&sv.ImageExtractionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "videoExtractionConfiguration":
+			if err := awsRestjson1_deserializeDocumentVideoExtractionConfiguration(&sv.VideoExtractionConfiguration, value); err != nil {
 				return err
 			}
 
@@ -20402,6 +20734,46 @@ func awsRestjson1_deserializeDocumentValidationExceptionFields(v *[]types.Valida
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoExtractionConfiguration(v **types.VideoExtractionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoExtractionConfiguration
+	if *v == nil {
+		sv = &types.VideoExtractionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "videoExtractionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoExtractionStatus to be of type string, got %T instead", value)
+				}
+				sv.VideoExtractionStatus = types.VideoExtractionStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

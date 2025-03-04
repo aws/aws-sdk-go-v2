@@ -11,18 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the user interface (UI) customization information for a user pool's
-// built-in app UI.
+// Configures UI branding settings for domains with the hosted UI (classic)
+// branding version. Your user pool must have a domain. Configure a domain with .
 //
-// You can specify app UI customization settings for a single client (with a
-// specific clientId ) or for all clients (by setting the clientId to ALL ). If you
-// specify ALL , the default configuration is used for every client that has no
-// previously set UI customization. If you specify UI customization settings for a
-// particular client, it will no longer return to the ALL configuration.
+// Set the default configuration for all clients with a ClientId of ALL . When the
+// ClientId value is an app client ID, the settings you pass in this request apply
+// to that app client and override the default ALL configuration.
 //
-// To use this API, your user pool must have a domain associated with it.
-// Otherwise, there is no place to host the app's pages, and the service will throw
-// an error.
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) SetUICustomization(ctx context.Context, params *SetUICustomizationInput, optFns ...func(*Options)) (*SetUICustomizationOutput, error) {
 	if params == nil {
 		params = &SetUICustomizationInput{}
@@ -40,18 +48,25 @@ func (c *Client) SetUICustomization(ctx context.Context, params *SetUICustomizat
 
 type SetUICustomizationInput struct {
 
-	// The ID of the user pool.
+	// The ID of the user pool where you want to apply branding to the classic hosted
+	// UI.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// The CSS values in the UI customization.
+	// A plaintext CSS file that contains the custom fields that you want to apply to
+	// your user pool or app client. To download a template, go to the Amazon Cognito
+	// console. Navigate to your user pool App clients tab, select Login pages, edit
+	// Hosted UI (classic) style, and select the link to CSS template.css .
 	CSS *string
 
-	// The client ID for the client app.
+	// The ID of the app client that you want to customize. To apply a default style
+	// to all app clients not configured with client-level branding, set this parameter
+	// value to ALL .
 	ClientId *string
 
-	// The uploaded logo image for the UI customization.
+	// The image that you want to set as your login in the classic hosted UI, as a
+	// Base64-formatted binary object.
 	ImageFile []byte
 
 	noSmithyDocumentSerde
@@ -59,7 +74,7 @@ type SetUICustomizationInput struct {
 
 type SetUICustomizationOutput struct {
 
-	// The UI customization information.
+	// Information about the hosted UI branding that you applied.
 	//
 	// This member is required.
 	UICustomization *types.UICustomizationType

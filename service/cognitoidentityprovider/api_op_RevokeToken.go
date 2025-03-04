@@ -39,7 +39,7 @@ func (c *Client) RevokeToken(ctx context.Context, params *RevokeTokenInput, optF
 
 type RevokeTokenInput struct {
 
-	// The client ID for the token that you want to revoke.
+	// The ID of the app client where the token that you want to revoke was issued.
 	//
 	// This member is required.
 	ClientId *string
@@ -49,8 +49,7 @@ type RevokeTokenInput struct {
 	// This member is required.
 	Token *string
 
-	// The secret for the client ID. This is required only if the client ID has a
-	// secret.
+	// The client secret of the requested app client, if the client has a secret.
 	ClientSecret *string
 
 	noSmithyDocumentSerde

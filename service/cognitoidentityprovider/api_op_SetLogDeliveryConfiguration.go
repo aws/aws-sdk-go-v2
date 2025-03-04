@@ -12,7 +12,8 @@ import (
 )
 
 // Sets up or modifies the logging configuration of a user pool. User pools can
-// export user notification logs and advanced security features user activity logs.
+// export user notification logs and, when threat protection is active,
+// user-activity logs. For more information, see Exporting user pool logs.
 func (c *Client) SetLogDeliveryConfiguration(ctx context.Context, params *SetLogDeliveryConfigurationInput, optFns ...func(*Options)) (*SetLogDeliveryConfigurationOutput, error) {
 	if params == nil {
 		params = &SetLogDeliveryConfigurationInput{}
@@ -45,8 +46,7 @@ type SetLogDeliveryConfigurationInput struct {
 
 type SetLogDeliveryConfigurationOutput struct {
 
-	// The detailed activity logging configuration that you applied to the requested
-	// user pool.
+	// The logging configuration that you applied to the requested user pool.
 	LogDeliveryConfiguration *types.LogDeliveryConfigurationType
 
 	// Metadata pertaining to the operation's result.

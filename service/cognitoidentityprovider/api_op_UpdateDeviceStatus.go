@@ -11,8 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the device status. For more information about device authentication,
-// see [Working with user devices in your user pool].
+// Updates the status of a the currently signed-in user's device so that it is
+// marked as remembered or not remembered for the purpose of device authentication.
+// Device authentication is a "remember me" mechanism that silently completes
+// sign-in from trusted devices with a device key instead of a user-provided MFA
+// code. This operation changes the status of a device without deleting it, so you
+// can enable it again later. For more information about device authentication, see
+// [Working with devices].
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
@@ -23,8 +28,8 @@ import (
 // policies. For more information about authorization models in Amazon Cognito, see
 // [Using the Amazon Cognito user pools API and user pool endpoints].
 //
+// [Working with devices]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
-// [Working with user devices in your user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 func (c *Client) UpdateDeviceStatus(ctx context.Context, params *UpdateDeviceStatusInput, optFns ...func(*Options)) (*UpdateDeviceStatusOutput, error) {
 	if params == nil {
 		params = &UpdateDeviceStatusInput{}
@@ -43,18 +48,20 @@ func (c *Client) UpdateDeviceStatus(ctx context.Context, params *UpdateDeviceSta
 // Represents the request to update the device status.
 type UpdateDeviceStatusInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose device status
-	// you want to update.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string
 
-	// The device key.
+	// The device key of the device you want to update, for example
+	// us-west-2_a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
 	//
 	// This member is required.
 	DeviceKey *string
 
-	// The status of whether a device is remembered.
+	// To enable device authentication with the specified device, set to remembered .To
+	// disable, set to not_remembered .
 	DeviceRememberedStatus types.DeviceRememberedStatusType
 
 	noSmithyDocumentSerde

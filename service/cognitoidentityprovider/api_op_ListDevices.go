@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the sign-in devices that Amazon Cognito has registered to the current
+// Lists the devices that Amazon Cognito has registered to the currently signed-in
 // user. For more information about device authentication, see [Working with user devices in your user pool].
 //
 // Authorize this action with a signed-in user's access token. It must include the
@@ -43,13 +43,14 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 // Represents the request to list the devices.
 type ListDevicesInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose list of
-	// devices you want to view.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string
 
-	// The limit of the device request.
+	// The maximum number of devices that you want Amazon Cognito to return in the
+	// response.
 	Limit *int32
 
 	// This API operation returns a limited number of results. The pagination token is
@@ -66,7 +67,8 @@ type ListDevicesInput struct {
 // Represents the response to list devices.
 type ListDevicesOutput struct {
 
-	// The devices returned in the list devices response.
+	// An array of devices and their details. Each entry that's returned includes
+	// device information, last-accessed and created dates, and the device key.
 	Devices []types.DeviceType
 
 	// The identifier that Amazon Cognito returned with the previous request to this

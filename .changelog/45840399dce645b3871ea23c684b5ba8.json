@@ -1,0 +1,8 @@
+{
+    "id": "45840399-dce6-45b3-871e-a23c684b5ba8",
+    "type": "documentation",
+    "description": "Updating documentation for post call analytics job queueing.",
+    "modules": [
+        "service/transcribe"
+    ]
+}

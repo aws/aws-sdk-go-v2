@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the user pools associated with an Amazon Web Services account.
+// Lists user pools and their details in the current Amazon Web Services account.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -44,14 +44,18 @@ func (c *Client) ListUserPools(ctx context.Context, params *ListUserPoolsInput, 
 // Represents the request to list user pools.
 type ListUserPoolsInput struct {
 
-	// The maximum number of results you want the request to return when listing the
-	// user pools.
+	// The maximum number of user pools that you want Amazon Cognito to return in the
+	// response.
 	//
 	// This member is required.
 	MaxResults *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -60,11 +64,13 @@ type ListUserPoolsInput struct {
 // Represents the response to list user pools.
 type ListUserPoolsOutput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	NextToken *string
 
-	// The user pools from the response to list users.
+	// An array of user pools and their configuration details.
 	UserPools []types.UserPoolDescriptionType
 
 	// Metadata pertaining to the operation's result.
@@ -178,8 +184,8 @@ func (c *Client) addOperationListUserPoolsMiddlewares(stack *middleware.Stack, o
 
 // ListUserPoolsPaginatorOptions is the paginator options for ListUserPools
 type ListUserPoolsPaginatorOptions struct {
-	// The maximum number of results you want the request to return when listing the
-	// user pools.
+	// The maximum number of user pools that you want Amazon Cognito to return in the
+	// response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

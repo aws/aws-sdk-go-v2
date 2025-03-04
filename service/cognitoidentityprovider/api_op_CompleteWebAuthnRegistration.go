@@ -11,14 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Completes registration of a passkey authenticator for the current user. Your
-// application provides data from a successful registration request with the data
-// from the output of a [StartWebAuthnRegistration].
+// Completes registration of a passkey authenticator for the currently signed-in
+// user.
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
-//
-// [StartWebAuthnRegistration]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_StartWebAuthnRegistration.html
 func (c *Client) CompleteWebAuthnRegistration(ctx context.Context, params *CompleteWebAuthnRegistrationInput, optFns ...func(*Options)) (*CompleteWebAuthnRegistrationOutput, error) {
 	if params == nil {
 		params = &CompleteWebAuthnRegistrationInput{}
@@ -36,15 +33,15 @@ func (c *Client) CompleteWebAuthnRegistration(ctx context.Context, params *Compl
 
 type CompleteWebAuthnRegistrationInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose passkey
-	// registration you want to complete.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	//
 	// This member is required.
 	AccessToken *string
 
 	// A [RegistrationResponseJSON] public-key credential response from the user's passkey provider.
 	//
-	// [RegistrationResponseJSON]: https://www.w3.org/TR/webauthn-3/#dictdef-registrationresponsejson
+	// [RegistrationResponseJSON]: https://www.w3.org/TR/WebAuthn-3/#dictdef-registrationresponsejson
 	//
 	// This member is required.
 	Credential document.Interface

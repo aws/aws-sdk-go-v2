@@ -1,0 +1,8 @@
+{
+    "id": "8ebe37d8-a7f5-4ee7-a311-2f2b0fdb4c45",
+    "type": "feature",
+    "description": "Add support for PutResourcePolicy, GetResourcePolicy and DeleteResourcePolicy to support resource based policies for AWS CloudWatch RUM",
+    "modules": [
+        "service/rum"
+    ]
+}

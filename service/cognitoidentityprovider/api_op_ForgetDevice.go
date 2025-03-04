@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Forgets the specified device. For more information about device authentication,
-// see [Working with user devices in your user pool].
+// Given a device key, deletes a remembered device as the currently signed-in
+// user. For more information about device authentication, see [Working with user devices in your user pool].
 //
 // Authorize this action with a signed-in user's access token. It must include the
 // scope aws.cognito.signin.user.admin .
@@ -42,13 +42,14 @@ func (c *Client) ForgetDevice(ctx context.Context, params *ForgetDeviceInput, op
 // Represents the request to forget the device.
 type ForgetDeviceInput struct {
 
-	// The device key.
+	// The unique identifier, or device key, of the device that the user wants to
+	// forget.
 	//
 	// This member is required.
 	DeviceKey *string
 
-	// A valid access token that Amazon Cognito issued to the user whose registered
-	// device you want to forget.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	AccessToken *string
 
 	noSmithyDocumentSerde

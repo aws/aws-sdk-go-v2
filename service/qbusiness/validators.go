@@ -2120,6 +2120,21 @@ func validateAttributeFilters(v []types.AttributeFilter) error {
 	}
 }
 
+func validateAudioExtractionConfiguration(v *types.AudioExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioExtractionConfiguration"}
+	if len(v.AudioExtractionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AudioExtractionStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAuthChallengeResponse(v *types.AuthChallengeResponse) error {
 	if v == nil {
 		return nil
@@ -2826,6 +2841,16 @@ func validateMediaExtractionConfiguration(v *types.MediaExtractionConfiguration)
 			invalidParams.AddNested("ImageExtractionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AudioExtractionConfiguration != nil {
+		if err := validateAudioExtractionConfiguration(v.AudioExtractionConfiguration); err != nil {
+			invalidParams.AddNested("AudioExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VideoExtractionConfiguration != nil {
+		if err := validateVideoExtractionConfiguration(v.VideoExtractionConfiguration); err != nil {
+			invalidParams.AddNested("VideoExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3429,6 +3454,21 @@ func validateUserAliases(v []types.UserAlias) error {
 		if err := validateUserAlias(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVideoExtractionConfiguration(v *types.VideoExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoExtractionConfiguration"}
+	if len(v.VideoExtractionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VideoExtractionStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

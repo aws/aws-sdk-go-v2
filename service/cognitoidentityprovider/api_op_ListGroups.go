@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the groups associated with a user pool.
+// Given a user pool ID, returns user pool groups and their details.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -43,16 +43,21 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 
 type ListGroupsInput struct {
 
-	// The ID of the user pool.
+	// The ID of the user pool where you want to list user groups.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// The limit of the request to list groups.
+	// The maximum number of groups that you want Amazon Cognito to return in the
+	// response.
 	Limit *int32
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -60,11 +65,14 @@ type ListGroupsInput struct {
 
 type ListGroupsOutput struct {
 
-	// The group objects for the groups.
+	// An array of groups and their details. Each entry that's returned includes
+	// description, precedence, and IAM role values.
 	Groups []types.GroupType
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -178,7 +186,8 @@ func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, opti
 
 // ListGroupsPaginatorOptions is the paginator options for ListGroups
 type ListGroupsPaginatorOptions struct {
-	// The limit of the request to list groups.
+	// The maximum number of groups that you want Amazon Cognito to return in the
+	// response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -1,0 +1,8 @@
+{
+    "id": "c1a07804-df89-473a-8edc-a2ba1da5a5c8",
+    "type": "feature",
+    "description": "Add DomainId to CreateDomainResponse",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

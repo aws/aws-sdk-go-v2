@@ -13,10 +13,10 @@ import (
 
 // A user pool domain hosts managed login, an authorization server and web server
 // for authentication in your application. This operation creates a new user pool
-// prefix or custom domain and sets the managed login branding version. Set the
-// branding version to 1 for hosted UI (classic) or 2 for managed login. When you
-// choose a custom domain, you must provide an SSL certificate in the US East (N.
-// Virginia) Amazon Web Services Region in your request.
+// prefix domain or custom domain and sets the managed login branding version. Set
+// the branding version to 1 for hosted UI (classic) or 2 for managed login. When
+// you choose a custom domain, you must provide an SSL certificate in the US East
+// (N. Virginia) Amazon Web Services Region in your request.
 //
 // Your prefix domain might take up to one minute to take effect. Your custom
 // domain is online within five minutes, but it can take up to one hour to
@@ -71,12 +71,16 @@ type CreateUserPoolDomainInput struct {
 	// The configuration for a custom domain. Configures your domain with an
 	// Certificate Manager certificate in the us-east-1 Region.
 	//
-	// Provide this parameter only if you want to use a custom domain for your user
-	// pool. Otherwise, you can exclude this parameter and use a prefix domain instead.
+	// Provide this parameter only if you want to use a [custom domain] for your user pool.
+	// Otherwise, you can omit this parameter and use a prefix domaininstead.
 	//
-	// For more information about the hosted domain and custom domains, see [Configuring a User Pool Domain].
+	// When you create a custom domain, the passkey RP ID defaults to the custom
+	// domain. If you had a prefix domain active, this will cause passkey integration
+	// for your prefix domain to stop working due to a mismatch in RP ID. To keep the
+	// prefix domain passkey integration working, you can explicitly set RP ID to the
+	// prefix domain.
 	//
-	// [Configuring a User Pool Domain]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
+	// [custom domain]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
 	CustomDomainConfig *types.CustomDomainConfigType
 
 	// The version of managed login branding that you want to apply to your domain. A
@@ -94,10 +98,12 @@ type CreateUserPoolDomainInput struct {
 
 type CreateUserPoolDomainOutput struct {
 
-	// The Amazon CloudFront endpoint that you use as the target of the alias that you
-	// set up with your Domain Name Service (DNS) provider. Amazon Cognito returns this
-	// value if you set a custom domain with CustomDomainConfig . If you set an Amazon
-	// Cognito prefix domain, this operation returns a blank response.
+	// The fully-qualified domain name (FQDN) of the Amazon CloudFront distribution
+	// that hosts your managed login or classic hosted UI pages. Your domain-name
+	// authority must have an alias record that points requests for your custom domain
+	// to this FQDN. Amazon Cognito returns this value if you set a custom domain with
+	// CustomDomainConfig . If you set an Amazon Cognito prefix domain, this parameter
+	// returns null.
 	CloudFrontDomain *string
 
 	// The version of managed login branding applied your domain. A value of 1

@@ -11,21 +11,10 @@ import (
 )
 
 // Resets the specified user's password in a user pool. This operation doesn't
-// change the user's password, but sends a password-reset code. This operation is
-// the administrative authentication API equivalent to [ForgotPassword].
-//
-// This operation deactivates a user's password, requiring them to change it. If a
-// user tries to sign in after the API request, Amazon Cognito responds with a
-// PasswordResetRequiredException error. Your app must then complete the
-// forgot-password flow by prompting the user for their code and a new password,
-// then submitting those values in a [ConfirmForgotPassword]request. In addition, if the user pool has
-// phone verification selected and a verified phone number exists for the user, or
-// if email verification is selected and a verified email exists for the user,
-// calling this API will also result in sending a message to the end user with the
-// code to change their password.
+// change the user's password, but sends a password-reset code.
 //
 // To use this API operation, your user pool must have self-service account
-// recovery configured. Use [AdminSetUserPassword]if you manage passwords as an administrator.
+// recovery configured.
 //
 // This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
@@ -54,10 +43,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [SMS message settings for Amazon Cognito user pools]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
-// [ConfirmForgotPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
-// [AdminSetUserPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html
-// [ForgotPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html
 // [sandbox mode]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 // [Amazon Pinpoint]: https://console.aws.amazon.com/pinpoint/home/
@@ -84,7 +70,7 @@ type AdminResetUserPasswordInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party
@@ -105,7 +91,7 @@ type AdminResetUserPasswordInput struct {
 	// In your function code in Lambda, you can process the clientMetadata value to
 	// enhance your workflow for your specific needs.
 	//
-	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	// For more information, see [Using Lambda triggers] in the Amazon Cognito Developer Guide.
 	//
 	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
 	// the following:
@@ -120,7 +106,7 @@ type AdminResetUserPasswordInput struct {
 	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
 	//   parameter.
 	//
-	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+	// [Using Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde

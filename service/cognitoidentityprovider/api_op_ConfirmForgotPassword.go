@@ -41,16 +41,14 @@ type ConfirmForgotPasswordInput struct {
 
 	// The ID of the app client where the user wants to reset their password. This
 	// parameter is an identifier of the client application that users are resetting
-	// their password from, but this operation resets users' passwords for all app
-	// clients in the user pool.
+	// their password from, but this operation resets users' irrespective of the app
+	// clients they sign in to.
 	//
 	// This member is required.
 	ClientId *string
 
-	// The confirmation code that your user pool sent in response to an [AdminResetUserPassword] or a [ForgotPassword] request.
-	//
-	// [AdminResetUserPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminResetUserPassword.html
-	// [ForgotPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html
+	// The confirmation code that your user pool delivered when your user requested to
+	// reset their password.
 	//
 	// This member is required.
 	ConfirmationCode *string
@@ -60,7 +58,7 @@ type ConfirmForgotPasswordInput struct {
 	// This member is required.
 	Password *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party
@@ -69,8 +67,10 @@ type ConfirmForgotPasswordInput struct {
 	// This member is required.
 	Username *string
 
-	// The Amazon Pinpoint analytics metadata for collecting metrics for
-	// ConfirmForgotPassword calls.
+	// Information that supports analytics outcomes with Amazon Pinpoint, including
+	// the user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint
+	// push notifications, for example a device identifier, email address, or phone
+	// number.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
@@ -86,7 +86,7 @@ type ConfirmForgotPasswordInput struct {
 	// process the clientMetadata value to enhance your workflow for your specific
 	// needs.
 	//
-	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	// For more information, see [Using Lambda triggers] in the Amazon Cognito Developer Guide.
 	//
 	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
 	// the following:
@@ -101,7 +101,7 @@ type ConfirmForgotPasswordInput struct {
 	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
 	//   parameter.
 	//
-	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+	// [Using Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
@@ -111,8 +111,8 @@ type ConfirmForgotPasswordInput struct {
 	// [Computing secret hash values]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
 	SecretHash *string
 
-	// Contextual data about your user session, such as the device fingerprint, IP
-	// address, or location. Amazon Cognito advanced security evaluates the risk of an
+	// Contextual data about your user session like the device fingerprint, IP
+	// address, or location. Amazon Cognito threat protection evaluates the risk of an
 	// authentication event based on the context that your app generates and passes to
 	// Amazon Cognito when it makes API requests.
 	//

@@ -18,9 +18,6 @@ import (
 // preference is set, a challenge to choose an MFA option will be returned during
 // sign-in.
 //
-// This operation doesn't reset an existing TOTP MFA for a user. To register a new
-// TOTP factor for a user, make an [AssociateSoftwareToken]request. For more information, see [TOTP software token MFA].
-//
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
 // credentials to authorize requests, and you must grant yourself the corresponding
@@ -32,10 +29,8 @@ import (
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
-// [AssociateSoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
-// [TOTP software token MFA]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa-totp.html
 func (c *Client) AdminSetUserMFAPreference(ctx context.Context, params *AdminSetUserMFAPreferenceInput, optFns ...func(*Options)) (*AdminSetUserMFAPreferenceOutput, error) {
 	if params == nil {
 		params = &AdminSetUserMFAPreferenceInput{}
@@ -58,7 +53,7 @@ type AdminSetUserMFAPreferenceInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party
@@ -69,9 +64,9 @@ type AdminSetUserMFAPreferenceInput struct {
 
 	// User preferences for email message MFA. Activates or deactivates email MFA and
 	// sets it as the preferred MFA method when multiple methods are available. To
-	// activate this setting, [advanced security features]must be active in your user pool.
+	// activate this setting, your user pool must be in the [Essentials tier]or higher.
 	//
-	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
 	EmailMfaSettings *types.EmailMfaSettingsType
 
 	// User preferences for SMS message MFA. Activates or deactivates SMS MFA and sets

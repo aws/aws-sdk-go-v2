@@ -47,10 +47,7 @@ func (c *Client) AdminForgetDevice(ctx context.Context, params *AdminForgetDevic
 // Sends the forgot device request, as an administrator.
 type AdminForgetDeviceInput struct {
 
-	// The key ID of the device that you want to delete. You can get device keys in
-	// the response to an [AdminListDevices]request.
-	//
-	// [AdminListDevices]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminListDevices.html
+	// The key ID of the device that you want to delete.
 	//
 	// This member is required.
 	DeviceKey *string
@@ -60,7 +57,7 @@ type AdminForgetDeviceInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party

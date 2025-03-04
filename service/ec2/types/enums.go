@@ -9690,6 +9690,78 @@ func (VpcCidrBlockStateCode) Values() []VpcCidrBlockStateCode {
 	}
 }
 
+type VpcEncryptionControlExclusionState string
+
+// Enum values for VpcEncryptionControlExclusionState
+const (
+	VpcEncryptionControlExclusionStateEnabling  VpcEncryptionControlExclusionState = "enabling"
+	VpcEncryptionControlExclusionStateEnabled   VpcEncryptionControlExclusionState = "enabled"
+	VpcEncryptionControlExclusionStateDisabling VpcEncryptionControlExclusionState = "disabling"
+	VpcEncryptionControlExclusionStateDisabled  VpcEncryptionControlExclusionState = "disabled"
+)
+
+// Values returns all known values for VpcEncryptionControlExclusionState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcEncryptionControlExclusionState) Values() []VpcEncryptionControlExclusionState {
+	return []VpcEncryptionControlExclusionState{
+		"enabling",
+		"enabled",
+		"disabling",
+		"disabled",
+	}
+}
+
+type VpcEncryptionControlMode string
+
+// Enum values for VpcEncryptionControlMode
+const (
+	VpcEncryptionControlModeMonitor VpcEncryptionControlMode = "monitor"
+	VpcEncryptionControlModeEnforce VpcEncryptionControlMode = "enforce"
+)
+
+// Values returns all known values for VpcEncryptionControlMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcEncryptionControlMode) Values() []VpcEncryptionControlMode {
+	return []VpcEncryptionControlMode{
+		"monitor",
+		"enforce",
+	}
+}
+
+type VpcEncryptionControlState string
+
+// Enum values for VpcEncryptionControlState
+const (
+	VpcEncryptionControlStateEnforceInProgress VpcEncryptionControlState = "enforce-in-progress"
+	VpcEncryptionControlStateMonitorInProgress VpcEncryptionControlState = "monitor-in-progress"
+	VpcEncryptionControlStateEnforceFailed     VpcEncryptionControlState = "enforce-failed"
+	VpcEncryptionControlStateMonitorFailed     VpcEncryptionControlState = "monitor-failed"
+	VpcEncryptionControlStateDeleting          VpcEncryptionControlState = "deleting"
+	VpcEncryptionControlStateDeleted           VpcEncryptionControlState = "deleted"
+	VpcEncryptionControlStateAvailable         VpcEncryptionControlState = "available"
+)
+
+// Values returns all known values for VpcEncryptionControlState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcEncryptionControlState) Values() []VpcEncryptionControlState {
+	return []VpcEncryptionControlState{
+		"enforce-in-progress",
+		"monitor-in-progress",
+		"enforce-failed",
+		"monitor-failed",
+		"deleting",
+		"deleted",
+		"available",
+	}
+}
+
 type VpcEndpointType string
 
 // Enum values for VpcEndpointType

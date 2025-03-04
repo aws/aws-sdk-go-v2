@@ -11,19 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This public API operation submits a code that Amazon Cognito sent to your user
-// when they signed up in your user pool via the [SignUp]API operation. After your user
-// enters their code, they confirm ownership of the email address or phone number
-// that they provided, and their user account becomes active. Depending on your
-// user pool configuration, your users will receive their confirmation code in an
-// email or SMS message.
+// Confirms the account of a new user. This public API operation submits a code
+// that Amazon Cognito sent to your user when they signed up in your user pool.
+// After your user enters their code, they confirm ownership of the email address
+// or phone number that they provided, and their user account becomes active.
+// Depending on your user pool configuration, your users will receive their
+// confirmation code in an email or SMS message.
 //
 // Local users who signed up in your user pool are the only type of user who can
 // confirm sign-up with a code. Users who federate through an external identity
-// provider (IdP) have already been confirmed by their IdP. Administrator-created
-// users, users created with the [AdminCreateUser]API operation, confirm their accounts when they
-// respond to their invitation email message and choose a password. They do not
-// receive a confirmation code. Instead, they receive a temporary password.
+// provider (IdP) have already been confirmed by their IdP.
 //
 // Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
 // in requests for this API operation. For this operation, you can't use IAM
@@ -31,9 +28,7 @@ import (
 // policies. For more information about authorization models in Amazon Cognito, see
 // [Using the Amazon Cognito user pools API and user pool endpoints].
 //
-// [SignUp]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SignUp.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
-// [AdminCreateUser]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminCreateUser.html
 func (c *Client) ConfirmSignUp(ctx context.Context, params *ConfirmSignUpInput, optFns ...func(*Options)) (*ConfirmSignUpOutput, error) {
 	if params == nil {
 		params = &ConfirmSignUpInput{}
@@ -63,7 +58,7 @@ type ConfirmSignUpInput struct {
 	// This member is required.
 	ConfirmationCode *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party
@@ -72,8 +67,10 @@ type ConfirmSignUpInput struct {
 	// This member is required.
 	Username *string
 
-	// The Amazon Pinpoint analytics metadata for collecting metrics for ConfirmSignUp
-	// calls.
+	// Information that supports analytics outcomes with Amazon Pinpoint, including
+	// the user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint
+	// push notifications, for example a device identifier, email address, or phone
+	// number.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
@@ -88,7 +85,7 @@ type ConfirmSignUpInput struct {
 	// request. In your function code in Lambda, you can process the clientMetadata
 	// value to enhance your workflow for your specific needs.
 	//
-	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	// For more information, see [Using Lambda triggers] in the Amazon Cognito Developer Guide.
 	//
 	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
 	// the following:
@@ -103,7 +100,7 @@ type ConfirmSignUpInput struct {
 	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
 	//   parameter.
 	//
-	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+	// [Using Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	// When true , forces user confirmation despite any existing aliases. Defaults to
@@ -136,8 +133,8 @@ type ConfirmSignUpInput struct {
 	// directly from the sign-up process with the USER_AUTH authentication flow.
 	Session *string
 
-	// Contextual data about your user session, such as the device fingerprint, IP
-	// address, or location. Amazon Cognito advanced security evaluates the risk of an
+	// Contextual data about your user session like the device fingerprint, IP
+	// address, or location. Amazon Cognito threat protection evaluates the risk of an
 	// authentication event based on the context that your app generates and passes to
 	// Amazon Cognito when it makes API requests.
 	//
@@ -154,11 +151,7 @@ type ConfirmSignUpOutput struct {
 
 	// A session identifier that you can use to immediately sign in the confirmed
 	// user. You can automatically sign users in with the one-time password that they
-	// provided in a successful ConfirmSignUp request. To do this, pass the Session
-	// parameter from this response in the Session parameter of an [InitiateAuth] or [AdminInitiateAuth] request.
-	//
-	// [AdminInitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html
-	// [InitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html
+	// provided in a successful ConfirmSignUp request.
 	Session *string
 
 	// Metadata pertaining to the operation's result.

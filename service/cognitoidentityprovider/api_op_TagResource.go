@@ -50,7 +50,7 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The tags to assign to the user pool.
+	// An array of tag keys and values that you want to assign to the user pool.
 	//
 	// This member is required.
 	Tags map[string]string

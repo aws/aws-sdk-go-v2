@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists users and their basic details in a user pool.
+// Given a user pool ID, returns a list of users and their basic details in a user
+// pool.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -44,7 +45,7 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 // Represents the request to list users.
 type ListUsersInput struct {
 
-	// The ID of the user pool on which the search should be performed.
+	// The ID of the user pool where you want to display or search for users.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -118,7 +119,8 @@ type ListUsersInput struct {
 	// [Examples of Using the ListUsers API]: https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples
 	Filter *string
 
-	// Maximum number of users to be returned.
+	// The maximum number of users that you want Amazon Cognito to return in the
+	// response.
 	Limit *int32
 
 	// This API operation returns a limited number of results. The pagination token is
@@ -141,16 +143,7 @@ type ListUsersOutput struct {
 	// paginate through the full list of items.
 	PaginationToken *string
 
-	// A list of the user pool users, and their attributes, that match your query.
-	//
-	// Amazon Cognito creates a profile in your user pool for each native user in your
-	// user pool, and each unique user ID from your third-party identity providers
-	// (IdPs). When you link users with the [AdminLinkProviderForUser]API operation, the output of ListUsers
-	// displays both the IdP user and the native user that you linked. You can identify
-	// IdP users in the Users object of this API response by the IdP prefix that
-	// Amazon Cognito appends to Username .
-	//
-	// [AdminLinkProviderForUser]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminLinkProviderForUser.html
+	// An array of user pool users who match your query, and their attributes.
 	Users []types.UserType
 
 	// Metadata pertaining to the operation's result.
@@ -264,7 +257,8 @@ func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, optio
 
 // ListUsersPaginatorOptions is the paginator options for ListUsers
 type ListUsersPaginatorOptions struct {
-	// Maximum number of users to be returned.
+	// The maximum number of users that you want Amazon Cognito to return in the
+	// response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

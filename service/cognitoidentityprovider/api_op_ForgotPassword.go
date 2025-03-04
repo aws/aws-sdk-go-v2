@@ -11,21 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Calling this API causes a message to be sent to the end user with a
-// confirmation code that is required to change the user's password. For the
-// Username parameter, you can use the username or user alias. The method used to
-// send the confirmation code is sent according to the specified
-// AccountRecoverySetting. For more information, see [Recovering User Accounts]in the Amazon Cognito
-// Developer Guide. To use the confirmation code for resetting the password, call [ConfirmForgotPassword]
-// .
+// Sends a password-reset confirmation code for the currently signed-in user.
 //
-// If neither a verified phone number nor a verified email exists, this API
-// returns InvalidParameterException . If your app client has a client secret and
-// you don't provide a SECRET_HASH parameter, this API returns
+// For the Username parameter, you can use the username or user alias.
+//
+// If neither a verified phone number nor a verified email exists, Amazon Cognito
+// responds with an InvalidParameterException error . If your app client has a
+// client secret and you don't provide a SECRET_HASH parameter, this API returns
 // NotAuthorizedException .
-//
-// To use this API operation, your user pool must have self-service account
-// recovery configured. Use [AdminSetUserPassword]if you manage passwords as an administrator.
 //
 // Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
 // in requests for this API operation. For this operation, you can't use IAM
@@ -49,10 +42,7 @@ import (
 // Cognito Developer Guide.
 //
 // [SMS message settings for Amazon Cognito user pools]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
-// [ConfirmForgotPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
-// [AdminSetUserPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html
-// [Recovering User Accounts]: https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html
 // [sandbox mode]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
 // [Amazon Pinpoint]: https://console.aws.amazon.com/pinpoint/home/
 func (c *Client) ForgotPassword(ctx context.Context, params *ForgotPasswordInput, optFns ...func(*Options)) (*ForgotPasswordOutput, error) {
@@ -73,12 +63,12 @@ func (c *Client) ForgotPassword(ctx context.Context, params *ForgotPasswordInput
 // Represents the request to reset a user's password.
 type ForgotPasswordInput struct {
 
-	// The ID of the client associated with the user pool.
+	// The ID of the user pool app client associated with the current signed-in user.
 	//
 	// This member is required.
 	ClientId *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party
@@ -87,8 +77,10 @@ type ForgotPasswordInput struct {
 	// This member is required.
 	Username *string
 
-	// The Amazon Pinpoint analytics metadata that contributes to your metrics for
-	// ForgotPassword calls.
+	// Information that supports analytics outcomes with Amazon Pinpoint, including
+	// the user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint
+	// push notifications, for example a device identifier, email address, or phone
+	// number.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
@@ -104,7 +96,7 @@ type ForgotPasswordInput struct {
 	// code in Lambda, you can process the clientMetadata value to enhance your
 	// workflow for your specific needs.
 	//
-	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	// For more information, see [Using Lambda triggers] in the Amazon Cognito Developer Guide.
 	//
 	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
 	// the following:
@@ -119,7 +111,7 @@ type ForgotPasswordInput struct {
 	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
 	//   parameter.
 	//
-	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+	// [Using Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
@@ -129,8 +121,8 @@ type ForgotPasswordInput struct {
 	// [Computing secret hash values]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
 	SecretHash *string
 
-	// Contextual data about your user session, such as the device fingerprint, IP
-	// address, or location. Amazon Cognito advanced security evaluates the risk of an
+	// Contextual data about your user session like the device fingerprint, IP
+	// address, or location. Amazon Cognito threat protection evaluates the risk of an
 	// authentication event based on the context that your app generates and passes to
 	// Amazon Cognito when it makes API requests.
 	//
@@ -145,8 +137,8 @@ type ForgotPasswordInput struct {
 // The response from Amazon Cognito to a request to reset a password.
 type ForgotPasswordOutput struct {
 
-	// The code delivery details returned by the server in response to the request to
-	// reset a password.
+	// Information about the phone number or email address that Amazon Cognito sent
+	// the password-recovery code to.
 	CodeDeliveryDetails *types.CodeDeliveryDetailsType
 
 	// Metadata pertaining to the operation's result.

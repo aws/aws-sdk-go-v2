@@ -16,17 +16,6 @@ import (
 // request with either the user's access token, or a session string from a
 // challenge response that you received from Amazon Cognito.
 //
-// Amazon Cognito disassociates an existing software token when you verify the new
-// token in a [VerifySoftwareToken]API request. If you don't verify the software token and your user
-// pool doesn't require MFA, the user can then authenticate with user name and
-// password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito
-// generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user
-// signs in. Complete setup with AssociateSoftwareToken and VerifySoftwareToken .
-//
-// After you set up software token MFA for your user, Amazon Cognito generates a
-// SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge
-// with your user's TOTP.
-//
 // Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
 // in requests for this API operation. For this operation, you can't use IAM
 // credentials to authorize requests, and you can't grant IAM permissions in
@@ -37,7 +26,6 @@ import (
 // scope aws.cognito.signin.user.admin .
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
-// [VerifySoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html
 func (c *Client) AssociateSoftwareToken(ctx context.Context, params *AssociateSoftwareTokenInput, optFns ...func(*Options)) (*AssociateSoftwareTokenOutput, error) {
 	if params == nil {
 		params = &AssociateSoftwareTokenInput{}
@@ -55,9 +43,10 @@ func (c *Client) AssociateSoftwareToken(ctx context.Context, params *AssociateSo
 
 type AssociateSoftwareTokenInput struct {
 
-	// A valid access token that Amazon Cognito issued to the user whose software
-	// token you want to generate. You can provide either an access token or a session
-	// ID in the request.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
+	//
+	// You can provide either an access token or a session ID in the request.
 	AccessToken *string
 
 	// The session identifier that maintains the state of authentication requests and
@@ -76,10 +65,7 @@ type AssociateSoftwareTokenOutput struct {
 	SecretCode *string
 
 	// The session identifier that maintains the state of authentication requests and
-	// challenge responses. This session ID is valid for the next request in this flow,
-	// [VerifySoftwareToken].
-	//
-	// [VerifySoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html
+	// challenge responses.
 	Session *string
 
 	// Metadata pertaining to the operation's result.

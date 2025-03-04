@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates IdP information for a user pool.
+// Modifies the configuration and trust relationship between a third-party
+// identity provider (IdP) and a user pool. Amazon Cognito accepts sign-in with
+// third-party identity providers through managed login and OIDC relying-party
+// libraries. For more information, see [Third-party IdP sign-in].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -25,6 +28,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Third-party IdP sign-in]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) UpdateIdentityProvider(ctx context.Context, params *UpdateIdentityProviderInput, optFns ...func(*Options)) (*UpdateIdentityProviderOutput, error) {
 	if params == nil {
@@ -43,20 +47,32 @@ func (c *Client) UpdateIdentityProvider(ctx context.Context, params *UpdateIdent
 
 type UpdateIdentityProviderInput struct {
 
-	// The IdP name.
+	// The name of the IdP that you want to update. You can pass the identity provider
+	// name in the identity_provider query parameter of requests to the [Authorize endpoint] to silently
+	// redirect to sign-in with the associated IdP.
+	//
+	// [Authorize endpoint]: https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html
 	//
 	// This member is required.
 	ProviderName *string
 
-	// The user pool ID.
+	// The Id of the user pool where you want to update your IdP.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// The IdP attribute mapping to be changed.
+	// A mapping of IdP attributes to standard and custom user pool attributes.
+	// Specify a user pool attribute as the key of the key-value pair, and the IdP
+	// attribute claim name as the value.
 	AttributeMapping map[string]string
 
-	// A list of IdP identifiers.
+	// An array of IdP identifiers, for example "IdPIdentifiers": [ "MyIdP", "MyIdP2" ]
+	// . Identifiers are friendly names that you can pass in the idp_identifier query
+	// parameter of requests to the [Authorize endpoint]to silently redirect to sign-in with the
+	// associated IdP. Identifiers in a domain format also enable the use of [email-address matching with SAML providers].
+	//
+	// [Authorize endpoint]: https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html
+	// [email-address matching with SAML providers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managing-saml-idp-naming.html
 	IdpIdentifiers []string
 
 	// The scopes, URLs, and identifiers for your external identity provider. The

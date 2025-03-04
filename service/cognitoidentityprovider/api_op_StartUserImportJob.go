@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the user import.
+// Instructs your user pool to start importing users from a CSV file that contains
+// their usernames and attributes. For more information about importing users from
+// a CSV file, see [Importing users from a CSV file].
+//
+// [Importing users from a CSV file]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-using-import-tool.html
 func (c *Client) StartUserImportJob(ctx context.Context, params *StartUserImportJobInput, optFns ...func(*Options)) (*StartUserImportJobOutput, error) {
 	if params == nil {
 		params = &StartUserImportJobInput{}
@@ -30,12 +34,12 @@ func (c *Client) StartUserImportJob(ctx context.Context, params *StartUserImport
 // Represents the request to start the user import job.
 type StartUserImportJobInput struct {
 
-	// The job ID for the user import job.
+	// The ID of a user import job that you previously created.
 	//
 	// This member is required.
 	JobId *string
 
-	// The ID of the user pool that the users are being imported into.
+	// The ID of the user pool that you want to start importing users into.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -47,7 +51,8 @@ type StartUserImportJobInput struct {
 // job.
 type StartUserImportJobOutput struct {
 
-	// The job object that represents the user import job.
+	// The details of the user import job. Includes logging destination, status, and
+	// the Amazon S3 pre-signed URL for CSV upload.
 	UserImportJob *types.UserImportJobType
 
 	// Metadata pertaining to the operation's result.

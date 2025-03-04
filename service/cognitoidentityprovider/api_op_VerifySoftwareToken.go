@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this API to register a user's entered time-based one-time password (TOTP)
-// code and mark the user's software token MFA status as "verified" if successful.
-// The request takes an access token or a session string, but not both.
+// Registers the current user's time-based one-time password (TOTP) authenticator
+// with a code generated in their authenticator app from a private key that's
+// supplied by your user pool. Marks the user's software token MFA status as
+// "verified" if successful. The request takes an access token or a session string,
+// but not both.
 //
 // Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
 // in requests for this API operation. For this operation, you can't use IAM
@@ -39,22 +41,19 @@ func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftware
 
 type VerifySoftwareTokenInput struct {
 
-	// The one- time password computed using the secret code returned by [AssociateSoftwareToken].
-	//
-	// [AssociateSoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html
+	// A TOTP that the user generated in their configured authenticator app.
 	//
 	// This member is required.
 	UserCode *string
 
-	// A valid access token that Amazon Cognito issued to the user whose software
-	// token you want to verify.
+	// A valid access token that Amazon Cognito issued to the currently signed-in
+	// user. Must include a scope claim for aws.cognito.signin.user.admin .
 	AccessToken *string
 
-	// The friendly device name.
+	// A friendly name for the device that's running the TOTP authenticator.
 	FriendlyDeviceName *string
 
-	// The session that should be passed both ways in challenge-response calls to the
-	// service.
+	// The session ID from an AssociateSoftwareToken request.
 	Session *string
 
 	noSmithyDocumentSerde
@@ -62,11 +61,14 @@ type VerifySoftwareTokenInput struct {
 
 type VerifySoftwareTokenOutput struct {
 
-	// The session that should be passed both ways in challenge-response calls to the
-	// service.
+	// This session ID satisfies an MFA_SETUP challenge. Supply the session ID in your
+	// challenge response.
 	Session *string
 
-	// The status of the verify software token.
+	// Amazon Cognito can accept or reject the code that you provide. This response
+	// parameter indicates the success of TOTP verification. Some reasons that this
+	// operation might return an error are clock skew on the user's device and
+	// excessive retries.
 	Status types.VerifySoftwareTokenResponseType
 
 	// Metadata pertaining to the operation's result.

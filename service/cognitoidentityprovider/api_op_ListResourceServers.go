@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the resource servers for a user pool.
+// Given a user pool ID, returns all resource servers and their details. For more
+// information about resource servers, see [Access control with resource servers].
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -25,6 +26,7 @@ import (
 // [Using the Amazon Cognito user pools API and user pool endpoints]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Access control with resource servers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) ListResourceServers(ctx context.Context, params *ListResourceServersInput, optFns ...func(*Options)) (*ListResourceServersOutput, error) {
 	if params == nil {
@@ -43,15 +45,21 @@ func (c *Client) ListResourceServers(ctx context.Context, params *ListResourceSe
 
 type ListResourceServersInput struct {
 
-	// The ID of the user pool.
+	// The ID of the user pool where you want to list resource servers.
 	//
 	// This member is required.
 	UserPoolId *string
 
-	// The maximum number of resource servers to return.
+	// The maximum number of resource servers that you want Amazon Cognito to return
+	// in the response.
 	MaxResults *int32
 
-	// A pagination token.
+	// This API operation returns a limited number of results. The pagination token is
+	// an identifier that you can present in an additional API request with the same
+	// parameters. When you include the pagination token, Amazon Cognito returns the
+	// next set of items after the current list. Subsequent requests return a new
+	// pagination token. By use of this token, you can paginate through the full list
+	// of items.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,12 +67,16 @@ type ListResourceServersInput struct {
 
 type ListResourceServersOutput struct {
 
-	// The resource servers.
+	// An array of resource servers and the details of their configuration. For each,
+	// the response includes names, identifiers, and custom scopes.
 	//
 	// This member is required.
 	ResourceServers []types.ResourceServerType
 
-	// A pagination token.
+	// The identifier that Amazon Cognito returned with the previous request to this
+	// operation. When you include a pagination token in your request, Amazon Cognito
+	// returns the next set of items in the list. By use of this token, you can
+	// paginate through the full list of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -179,7 +191,8 @@ func (c *Client) addOperationListResourceServersMiddlewares(stack *middleware.St
 // ListResourceServersPaginatorOptions is the paginator options for
 // ListResourceServers
 type ListResourceServersPaginatorOptions struct {
-	// The maximum number of resource servers to return.
+	// The maximum number of resource servers that you want Amazon Cognito to return
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -4054,6 +4054,9 @@ func awsAwsjson11_deserializeOpErrorConfirmDevice(response *smithyhttp.Response,
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("DeviceKeyExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorDeviceKeyExistsException(response, errorBody)
+
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
 
@@ -14819,6 +14822,41 @@ func awsAwsjson11_deserializeErrorConcurrentModificationException(response *smit
 	return output
 }
 
+func awsAwsjson11_deserializeErrorDeviceKeyExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.DeviceKeyExistsException{}
+	err := awsAwsjson11_deserializeDocumentDeviceKeyExistsException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorDuplicateProviderException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -18247,6 +18285,46 @@ func awsAwsjson11_deserializeDocumentDeviceConfigurationType(v **types.DeviceCon
 					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
 				sv.DeviceOnlyRememberedOnUserPrompt = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDeviceKeyExistsException(v **types.DeviceKeyExistsException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeviceKeyExistsException
+	if *v == nil {
+		sv = &types.DeviceKeyExistsException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageType to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -25480,6 +25558,11 @@ func awsAwsjson11_deserializeOpDocumentAdminInitiateAuthOutput(v **AdminInitiate
 		switch key {
 		case "AuthenticationResult":
 			if err := awsAwsjson11_deserializeDocumentAuthenticationResultType(&sv.AuthenticationResult, value); err != nil {
+				return err
+			}
+
+		case "AvailableChallenges":
+			if err := awsAwsjson11_deserializeDocumentAvailableChallengeListType(&sv.AvailableChallenges, value); err != nil {
 				return err
 			}
 

@@ -156,6 +156,9 @@ type CreateDomainOutput struct {
 	// The Amazon Resource Name (ARN) of the created domain.
 	DomainArn *string
 
+	// The ID of the created domain.
+	DomainId *string
+
 	// The URL to the created domain.
 	Url *string
 

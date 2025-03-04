@@ -11,26 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action might generate an SMS text message. Starting June 1, 2021, US
-// telecom carriers require you to register an origination phone number before you
-// can send SMS messages to US phone numbers. If you use SMS text messages in
-// Amazon Cognito, you must register a phone number with [Amazon Pinpoint]. Amazon Cognito uses the
-// registered number automatically. Otherwise, Amazon Cognito users who must
-// receive SMS messages might not be able to sign up, activate their accounts, or
-// sign in.
-//
-// If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Services service, Amazon Simple Notification Service might place your
-// account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
-// numbers. After you test your app while in the sandbox environment, you can move
-// out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
-// Cognito Developer Guide.
-//
 // Updates the specified user's attributes. To delete an attribute from your user,
 // submit the attribute in your API request with a blank value.
 //
-// For custom attributes, you must prepend the custom: prefix to the attribute
-// name.
+// For custom attributes, you must add a custom: prefix to the attribute name, for
+// example custom:department .
 //
 // This operation can set a user's email address or phone number as verified and
 // permit immediate sign-in in user pools that require verification of these
@@ -47,6 +32,21 @@ import (
 // [Signing Amazon Web Services API Requests]
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// This action might generate an SMS text message. Starting June 1, 2021, US
+// telecom carriers require you to register an origination phone number before you
+// can send SMS messages to US phone numbers. If you use SMS text messages in
+// Amazon Cognito, you must register a phone number with [Amazon Pinpoint]. Amazon Cognito uses the
+// registered number automatically. Otherwise, Amazon Cognito users who must
+// receive SMS messages might not be able to sign up, activate their accounts, or
+// sign in.
+//
+// If you have never used SMS text messages with Amazon Cognito or any other
+// Amazon Web Services service, Amazon Simple Notification Service might place your
+// account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
+// numbers. After you test your app while in the sandbox environment, you can move
+// out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
+// Cognito Developer Guide.
 //
 // [SMS message settings for Amazon Cognito user pools]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
@@ -98,7 +98,7 @@ type AdminUpdateUserAttributesInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party
@@ -120,7 +120,7 @@ type AdminUpdateUserAttributesInput struct {
 	// process the clientMetadata value to enhance your workflow for your specific
 	// needs.
 	//
-	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	// For more information, see [Using Lambda triggers] in the Amazon Cognito Developer Guide.
 	//
 	// When you use the ClientMetadata parameter, note that Amazon Cognito won't do
 	// the following:
@@ -135,7 +135,7 @@ type AdminUpdateUserAttributesInput struct {
 	//   - Encrypt the ClientMetadata value. Don't send sensitive information in this
 	//   parameter.
 	//
-	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+	// [Using Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde

@@ -89354,6 +89354,15 @@ func awsAwsjson11_deserializeOpDocumentCreateDomainOutput(v **CreateDomainOutput
 				sv.DomainArn = ptr.String(jtv)
 			}
 
+		case "DomainId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainId to be of type string, got %T instead", value)
+				}
+				sv.DomainId = ptr.String(jtv)
+			}
+
 		case "Url":
 			if value != nil {
 				jtv, ok := value.(string)

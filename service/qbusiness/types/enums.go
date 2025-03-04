@@ -145,6 +145,44 @@ func (AttributeValueOperator) Values() []AttributeValueOperator {
 	}
 }
 
+type AudioExtractionStatus string
+
+// Enum values for AudioExtractionStatus
+const (
+	AudioExtractionStatusEnabled  AudioExtractionStatus = "ENABLED"
+	AudioExtractionStatusDisabled AudioExtractionStatus = "DISABLED"
+)
+
+// Values returns all known values for AudioExtractionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioExtractionStatus) Values() []AudioExtractionStatus {
+	return []AudioExtractionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type AudioExtractionType string
+
+// Enum values for AudioExtractionType
+const (
+	AudioExtractionTypeTranscript AudioExtractionType = "TRANSCRIPT"
+	AudioExtractionTypeSummary    AudioExtractionType = "SUMMARY"
+)
+
+// Values returns all known values for AudioExtractionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioExtractionType) Values() []AudioExtractionType {
+	return []AudioExtractionType{
+		"TRANSCRIPT",
+		"SUMMARY",
+	}
+}
+
 type AutoSubscriptionStatus string
 
 // Enum values for AutoSubscriptionStatus
@@ -1079,6 +1117,44 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"CANNOT_PARSE",
 		"FIELD_VALIDATION_FAILED",
 		"UNKNOWN_OPERATION",
+	}
+}
+
+type VideoExtractionStatus string
+
+// Enum values for VideoExtractionStatus
+const (
+	VideoExtractionStatusEnabled  VideoExtractionStatus = "ENABLED"
+	VideoExtractionStatusDisabled VideoExtractionStatus = "DISABLED"
+)
+
+// Values returns all known values for VideoExtractionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoExtractionStatus) Values() []VideoExtractionStatus {
+	return []VideoExtractionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type VideoExtractionType string
+
+// Enum values for VideoExtractionType
+const (
+	VideoExtractionTypeTranscript VideoExtractionType = "TRANSCRIPT"
+	VideoExtractionTypeSummary    VideoExtractionType = "SUMMARY"
+)
+
+// Values returns all known values for VideoExtractionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoExtractionType) Values() []VideoExtractionType {
+	return []VideoExtractionType{
+		"TRANSCRIPT",
+		"SUMMARY",
 	}
 }
 

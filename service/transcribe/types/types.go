@@ -438,11 +438,11 @@ type ClinicalNoteGenerationSettings struct {
 	// The default is HISTORY_AND_PHYSICAL .
 	//
 	//   - HISTORY_AND_PHYSICAL: Provides summaries for key sections of the clinical
-	//   documentation. Sections include Chief Complaint, History of Present Illness,
-	//   Review of Systems, Past Medical History, Assessment, and Plan.
+	//   documentation. Examples of sections include Chief Complaint, History of Present
+	//   Illness, Review of Systems, Past Medical History, Assessment, and Plan.
 	//
 	//   - GIRPP: Provides summaries based on the patients progress toward goals.
-	//   Sections include Goal, Intervention, Response, Progress, and Plan.
+	//   Examples of sections include Goal, Intervention, Response, Progress, and Plan.
 	NoteTemplate MedicalScribeNoteTemplate
 
 	noSmithyDocumentSerde

@@ -8079,6 +8079,18 @@ func awsRestjson1_serializeDocumentAttachmentsInput(v []types.AttachmentInput, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioExtractionConfiguration(v *types.AudioExtractionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AudioExtractionStatus) > 0 {
+		ok := object.Key("audioExtractionStatus")
+		ok.String(string(v.AudioExtractionStatus))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAuthChallengeResponse(v *types.AuthChallengeResponse, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8883,9 +8895,23 @@ func awsRestjson1_serializeDocumentMediaExtractionConfiguration(v *types.MediaEx
 	object := value.Object()
 	defer object.Close()
 
+	if v.AudioExtractionConfiguration != nil {
+		ok := object.Key("audioExtractionConfiguration")
+		if err := awsRestjson1_serializeDocumentAudioExtractionConfiguration(v.AudioExtractionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ImageExtractionConfiguration != nil {
 		ok := object.Key("imageExtractionConfiguration")
 		if err := awsRestjson1_serializeDocumentImageExtractionConfiguration(v.ImageExtractionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VideoExtractionConfiguration != nil {
+		ok := object.Key("videoExtractionConfiguration")
+		if err := awsRestjson1_serializeDocumentVideoExtractionConfiguration(v.VideoExtractionConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -9639,6 +9665,18 @@ func awsRestjson1_serializeDocumentUsersAndGroups(v *types.UsersAndGroups, value
 		if err := awsRestjson1_serializeDocumentUserIds(v.UserIds, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoExtractionConfiguration(v *types.VideoExtractionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.VideoExtractionStatus) > 0 {
+		ok := object.Key("videoExtractionStatus")
+		ok.String(string(v.VideoExtractionStatus))
 	}
 
 	return nil

@@ -12,7 +12,7 @@ import (
 
 // Deletes attribute values from a user. This operation doesn't affect tokens for
 // existing user sessions. The next ID token that the user receives will no longer
-// have this attribute.
+// have the deleted attributes.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -58,7 +58,7 @@ type AdminDeleteUserAttributesInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The username of the user that you want to query or modify. The value of this
+	// The name of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
 	// attributes. If username isn't an alias attribute in your user pool, this value
 	// must be the sub of a local user or the username of a user from a third-party
