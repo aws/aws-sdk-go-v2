@@ -1,3 +1,19 @@
+# Release (2025-03-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.51.0](service/cognitoidentityprovider/CHANGELOG.md#v1510-2025-03-04)
+  * **Feature**: Added the capacity to return available challenges in admin authentication and to set version 3 of the pre token generation event for M2M ATC.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.207.0](service/ec2/CHANGELOG.md#v12070-2025-03-04)
+  * **Feature**: Update the DescribeVpcs response
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.23.0](service/qbusiness/CHANGELOG.md#v1230-2025-03-04)
+  * **Feature**: Adds support for the ingestion of audio and video files by Q Business, which can be configured with the mediaExtractionConfiguration parameter.
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.23.0](service/rum/CHANGELOG.md#v1230-2025-03-04)
+  * **Feature**: Add support for PutResourcePolicy, GetResourcePolicy and DeleteResourcePolicy to support resource based policies for AWS CloudWatch RUM
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.180.0](service/sagemaker/CHANGELOG.md#v11800-2025-03-04)
+  * **Feature**: Add DomainId to CreateDomainResponse
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.44.1](service/transcribe/CHANGELOG.md#v1441-2025-03-04)
+  * **Documentation**: Updating documentation for post call analytics job queueing.
+
 # Release (2025-02-28)
 
 ## Module Highlights

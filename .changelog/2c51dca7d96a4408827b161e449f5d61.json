@@ -1,8 +1,0 @@
-{
-    "id": "2c51dca7-d96a-4408-827b-161e449f5d61",
-    "type": "feature",
-    "description": "Adds support for the ingestion of audio and video files by Q Business, which can be configured with the mediaExtractionConfiguration parameter.",
-    "modules": [
-        "service/qbusiness"
-    ]
-}

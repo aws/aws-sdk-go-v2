@@ -1,3 +1,7 @@
+# v1.23.0 (2025-03-04)
+
+* **Feature**: Adds support for the ingestion of audio and video files by Q Business, which can be configured with the mediaExtractionConfiguration parameter.
+
 # v1.22.0 (2025-02-27)
 
 * **Feature**: This release supports deleting attachments from conversations.

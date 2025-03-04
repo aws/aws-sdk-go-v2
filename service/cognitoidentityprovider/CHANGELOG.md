@@ -1,3 +1,7 @@
+# v1.51.0 (2025-03-04)
+
+* **Feature**: Added the capacity to return available challenges in admin authentication and to set version 3 of the pre token generation event for M2M ATC.
+
 # v1.50.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids

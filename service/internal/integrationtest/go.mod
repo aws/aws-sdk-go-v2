@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.40.0
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.50.0
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.51.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.52.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.51.0
@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.41.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.206.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.207.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.54.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.35.0

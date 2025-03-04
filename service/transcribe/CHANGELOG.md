@@ -1,3 +1,7 @@
+# v1.44.1 (2025-03-04)
+
+* **Documentation**: Updating documentation for post call analytics job queueing.
+
 # v1.44.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids

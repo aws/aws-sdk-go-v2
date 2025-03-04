@@ -1,3 +1,7 @@
+# v1.23.0 (2025-03-04)
+
+* **Feature**: Add support for PutResourcePolicy, GetResourcePolicy and DeleteResourcePolicy to support resource based policies for AWS CloudWatch RUM
+
 # v1.22.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids

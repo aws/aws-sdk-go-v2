@@ -1,3 +1,7 @@
+# v1.84.1 (2025-03-04)
+
+* No change notes available for this release.
+
 # v1.84.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids

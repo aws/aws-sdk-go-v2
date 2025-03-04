@@ -1,3 +1,7 @@
+# v1.207.0 (2025-03-04)
+
+* **Feature**: Update the DescribeVpcs response
+
 # v1.206.0 (2025-02-27)
 
 * **Feature**: Track credential providers via User-Agent Feature ids
