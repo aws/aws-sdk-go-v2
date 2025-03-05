@@ -10226,6 +10226,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether users can use Linux clients to access their WorkSpaces.</p>"
                     }
+                },
+                "DeviceTypeWorkSpacesThinClient": {
+                    "target": "com.amazonaws.workspaces#AccessPropertyValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether users can access their WorkSpaces through a WorkSpaces Thin Client.</p>"
+                    }
                 }
             },
             "traits": {

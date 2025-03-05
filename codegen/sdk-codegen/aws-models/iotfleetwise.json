@@ -608,7 +608,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Whether the message data is specified as a signed value.</p>",
+                        "smithy.api#documentation": "<p>Determines whether the message is signed (<code>true</code>) or not (<code>false</code>). If it's signed, the message can represent both positive and negative numbers. The <code>isSigned</code> parameter only applies to the <code>INTEGER</code> raw signal type, and it doesn't affect the <code>FLOATING_POINT</code> raw signal type.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -646,6 +646,12 @@
                     "target": "com.amazonaws.iotfleetwise#CanSignalName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the signal.</p>"
+                    }
+                },
+                "signalValueType": {
+                    "target": "com.amazonaws.iotfleetwise#SignalValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value type of the signal. The default value is <code>INTEGER</code>.</p>"
                     }
                 }
             },
@@ -7172,6 +7178,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of bits to mask in a message.</p>"
                     }
+                },
+                "isSigned": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Determines whether the message is signed (<code>true</code>) or not (<code>false</code>). If it's signed, the message can represent both positive and negative numbers. The <code>isSigned</code> parameter only applies to the <code>INTEGER</code> raw signal type, and it doesn't affect the <code>FLOATING_POINT</code> raw signal type. The default value is <code>false</code>.</p>"
+                    }
+                },
+                "signalValueType": {
+                    "target": "com.amazonaws.iotfleetwise#SignalValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value type of the signal. The default value is <code>INTEGER</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8230,6 +8249,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CUSTOM_PROPERTY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleetwise#SignalValueType": {
+            "type": "enum",
+            "members": {
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGER"
+                    }
+                },
+                "FLOATING_POINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOATING_POINT"
                     }
                 }
             }

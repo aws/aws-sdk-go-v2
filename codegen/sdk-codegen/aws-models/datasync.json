@@ -1149,7 +1149,7 @@
                 "ServerHostname": {
                     "target": "com.amazonaws.datasync#ServerHostname",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Domain Name System (DNS) name or IP version 4 address of the NFS file\n      server that your DataSync agent connects to.</p>",
+                        "smithy.api#documentation": "<p>Specifies the DNS name or IP version 4 address of the NFS file\n      server that your DataSync agent connects to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1219,7 +1219,7 @@
                 "ServerHostname": {
                     "target": "com.amazonaws.datasync#ServerHostname",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the domain name or IP address of the object storage server. A DataSync\n      agent uses this hostname to mount the object storage server in a network.</p>",
+                        "smithy.api#documentation": "<p>Specifies the domain name or IP version 4 (IPv4) address of the object storage server that your DataSync\n      agent connects to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1414,7 +1414,7 @@
                 "ServerHostname": {
                     "target": "com.amazonaws.datasync#ServerHostname",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the domain name or IP address of the SMB file server that your DataSync agent will mount.</p>\n         <p>Remember the following when configuring this parameter:</p>\n         <ul>\n            <li>\n               <p>You can't specify an IP version 6 (IPv6) address.</p>\n            </li>\n            <li>\n               <p>If you're using Kerberos authentication, you must specify a domain name.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the domain name or IP address of the SMB file server that your DataSync agent connects to.</p>\n         <p>Remember the following when configuring this parameter:</p>\n         <ul>\n            <li>\n               <p>You can't specify an IP version 6 (IPv6) address.</p>\n            </li>\n            <li>\n               <p>If you're using Kerberos authentication, you must specify a domain name.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1458,7 +1458,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.datasync#SmbAuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the authentication protocol that DataSync uses to connect to your SMB\n      file server. DataSync supports <code>NTLM</code> (default) and <code>KERBEROS</code>\n      authentication.</p>"
+                        "smithy.api#documentation": "<p>Specifies the authentication protocol that DataSync uses to connect to your SMB\n      file server. DataSync supports <code>NTLM</code> (default) and <code>KERBEROS</code>\n      authentication.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">Providing DataSync access to SMB file servers</a>.</p>"
                     }
                 },
                 "DnsIpAddresses": {
@@ -1470,7 +1470,7 @@
                 "KerberosPrincipal": {
                     "target": "com.amazonaws.datasync#KerberosPrincipal",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a Kerberos prinicpal, which is an identity in your Kerberos realm that has\n      permission to access the files, folders, and file metadata in your SMB file server.</p>\n         <p>A Kerberos principal might look like <code>HOST/kerberosuser@EXAMPLE.COM</code>.</p>\n         <p>Principal names are case sensitive. Your DataSync task execution will fail if\n      the principal that you specify for this parameter doesn’t exactly match the principal that you\n      use to create the keytab file.</p>"
+                        "smithy.api#documentation": "<p>Specifies a Kerberos prinicpal, which is an identity in your Kerberos realm that has\n      permission to access the files, folders, and file metadata in your SMB file server.</p>\n         <p>A Kerberos principal might look like <code>HOST/kerberosuser@MYDOMAIN.ORG</code>.</p>\n         <p>Principal names are case sensitive. Your DataSync task execution will fail if\n      the principal that you specify for this parameter doesn’t exactly match the principal that you\n      use to create the keytab file.</p>"
                     }
                 },
                 "KerberosKeytab": {
@@ -9819,6 +9819,12 @@
                         "smithy.api#documentation": "<p>Specifies the export path in your NFS file server that you want DataSync to\n      mount.</p>\n         <p>This path (or a subdirectory of the path) is where DataSync transfers data to\n      or from. For information on configuring an export for DataSync, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs\">Accessing NFS file servers</a>.</p>"
                     }
                 },
+                "ServerHostname": {
+                    "target": "com.amazonaws.datasync#ServerHostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DNS name or IP version 4 (IPv4) address of the NFS file\n      server that your DataSync agent connects to.</p>"
+                    }
+                },
                 "OnPremConfig": {
                     "target": "com.amazonaws.datasync#OnPremConfig"
                 },
@@ -9883,6 +9889,12 @@
                     "target": "com.amazonaws.datasync#S3Subdirectory",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the object prefix for your object storage server. If this is a source location,\n      DataSync only copies objects with this prefix. If this is a destination location, DataSync\n      writes all objects with this prefix.</p>"
+                    }
+                },
+                "ServerHostname": {
+                    "target": "com.amazonaws.datasync#ServerHostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the domain name or IP version 4 (IPv4) address of the object storage server that your DataSync\n      agent connects to.</p>"
                     }
                 },
                 "AccessKey": {
@@ -10014,6 +10026,12 @@
                         "smithy.api#documentation": "<p>Specifies the name of the share exported by your SMB file server where DataSync\n      will read or write data. You can include a subdirectory in the share path (for example,\n      <code>/path/to/subdirectory</code>). Make sure that other SMB clients in your network can\n      also mount this path.</p>\n         <p>To copy all data in the specified subdirectory, DataSync must be able to mount\n      the SMB share and access all of its data. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">Providing DataSync access to SMB file servers</a>.</p>"
                     }
                 },
+                "ServerHostname": {
+                    "target": "com.amazonaws.datasync#ServerHostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the domain name or IP address of the SMB file server that your DataSync agent connects to.</p>\n         <p>Remember the following when configuring this parameter:</p>\n         <ul>\n            <li>\n               <p>You can't specify an IP version 6 (IPv6) address.</p>\n            </li>\n            <li>\n               <p>If you're using Kerberos authentication, you must specify a domain name.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
@@ -10044,7 +10062,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.datasync#SmbAuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the authentication protocol that DataSync uses to connect to your SMB\n      file server. DataSync supports <code>NTLM</code> (default) and <code>KERBEROS</code>\n      authentication.</p>"
+                        "smithy.api#documentation": "<p>Specifies the authentication protocol that DataSync uses to connect to your SMB\n      file server. DataSync supports <code>NTLM</code> (default) and <code>KERBEROS</code>\n      authentication.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions\">Providing DataSync access to SMB file servers</a>.</p>"
                     }
                 },
                 "DnsIpAddresses": {
@@ -10056,7 +10074,7 @@
                 "KerberosPrincipal": {
                     "target": "com.amazonaws.datasync#KerberosPrincipal",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a Kerberos prinicpal, which is an identity in your Kerberos realm that has\n      permission to access the files, folders, and file metadata in your SMB file server.</p>\n         <p>A Kerberos principal might look like <code>HOST/kerberosuser@EXAMPLE.COM</code>.</p>\n         <p>Principal names are case sensitive. Your DataSync task execution will fail if\n      the principal that you specify for this parameter doesn’t exactly match the principal that you\n      use to create the keytab file.</p>"
+                        "smithy.api#documentation": "<p>Specifies a Kerberos prinicpal, which is an identity in your Kerberos realm that has\n      permission to access the files, folders, and file metadata in your SMB file server.</p>\n         <p>A Kerberos principal might look like <code>HOST/kerberosuser@MYDOMAIN.ORG</code>.</p>\n         <p>Principal names are case sensitive. Your DataSync task execution will fail if\n      the principal that you specify for this parameter doesn’t exactly match the principal that you\n      use to create the keytab file.</p>"
                     }
                 },
                 "KerberosKeytab": {
