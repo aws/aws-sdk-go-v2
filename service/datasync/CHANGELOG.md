@@ -1,3 +1,7 @@
+# v1.47.0 (2025-03-05)
+
+* **Feature**: AWS DataSync now supports modifying ServerHostname while updating locations SMB, NFS, and ObjectStorage.
+
 # v1.46.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

@@ -1,8 +1,0 @@
-{
-    "id": "1e3e3079-f624-4a22-9b1e-641dbafc2eb4",
-    "type": "feature",
-    "description": "AWS DataSync now supports modifying ServerHostname while updating locations SMB, NFS, and ObjectStorage.",
-    "modules": [
-        "service/datasync"
-    ]
-}

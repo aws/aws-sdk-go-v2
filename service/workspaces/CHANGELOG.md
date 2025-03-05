@@ -1,3 +1,7 @@
+# v1.54.0 (2025-03-05)
+
+* **Feature**: Added DeviceTypeWorkSpacesThinClient type to allow users to access their WorkSpaces through a WorkSpaces Thin Client.
+
 # v1.53.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

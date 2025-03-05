@@ -1,8 +1,0 @@
-{
-    "id": "a870cd3b-3d4b-40ec-852a-303b39b9eb73",
-    "type": "feature",
-    "description": "Added DeviceTypeWorkSpacesThinClient type to allow users to access their WorkSpaces through a WorkSpaces Thin Client.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

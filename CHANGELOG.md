@@ -1,3 +1,16 @@
+# Release (2025-03-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.47.0](service/datasync/CHANGELOG.md#v1470-2025-03-05)
+  * **Feature**: AWS DataSync now supports modifying ServerHostname while updating locations SMB, NFS, and ObjectStorage.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.0.0](service/gameliftstreams/CHANGELOG.md#v100-2025-03-05)
+  * **Release**: New AWS service client module
+  * **Feature**: New Service: Amazon GameLift Streams delivers low-latency game streaming from AWS global infrastructure to virtually any device with a browser at up to 1080p resolution and 60 fps.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.25.0](service/iotfleetwise/CHANGELOG.md#v1250-2025-03-05)
+  * **Feature**: This release adds floating point support for CAN/OBD signals and adds support for signed OBD signals.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.54.0](service/workspaces/CHANGELOG.md#v1540-2025-03-05)
+  * **Feature**: Added DeviceTypeWorkSpacesThinClient type to allow users to access their WorkSpaces through a WorkSpaces Thin Client.
+
 # Release (2025-03-04.2)
 
 ## General Highlights
