@@ -1,0 +1,8 @@
+{
+    "id": "33b1033b-d0d0-402c-97f8-f6d16d9eef0c",
+    "type": "feature",
+    "description": "This releases adds support for Custom Prompt Router ARN",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

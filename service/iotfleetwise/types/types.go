@@ -229,7 +229,10 @@ type CanSignal struct {
 	// This member is required.
 	IsBigEndian bool
 
-	// Whether the message data is specified as a signed value.
+	// Determines whether the message is signed ( true ) or not ( false ). If it's
+	// signed, the message can represent both positive and negative numbers. The
+	// isSigned parameter only applies to the INTEGER raw signal type, and it doesn't
+	// affect the FLOATING_POINT raw signal type.
 	//
 	// This member is required.
 	IsSigned bool
@@ -263,6 +266,9 @@ type CanSignal struct {
 
 	// The name of the signal.
 	Name *string
+
+	// The value type of the signal. The default value is INTEGER .
+	SignalValueType SignalValueType
 
 	noSmithyDocumentSerde
 }
@@ -1146,6 +1152,15 @@ type ObdSignal struct {
 
 	// The number of positions to shift bits in the message.
 	BitRightShift int32
+
+	// Determines whether the message is signed ( true ) or not ( false ). If it's
+	// signed, the message can represent both positive and negative numbers. The
+	// isSigned parameter only applies to the INTEGER raw signal type, and it doesn't
+	// affect the FLOATING_POINT raw signal type. The default value is false .
+	IsSigned *bool
+
+	// The value type of the signal. The default value is INTEGER .
+	SignalValueType SignalValueType
 
 	noSmithyDocumentSerde
 }

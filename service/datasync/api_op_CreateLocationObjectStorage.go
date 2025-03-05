@@ -47,9 +47,8 @@ type CreateLocationObjectStorageInput struct {
 	// This member is required.
 	BucketName *string
 
-	// Specifies the domain name or IP address of the object storage server. A
-	// DataSync agent uses this hostname to mount the object storage server in a
-	// network.
+	// Specifies the domain name or IP version 4 (IPv4) address of the object storage
+	// server that your DataSync agent connects to.
 	//
 	// This member is required.
 	ServerHostname *string

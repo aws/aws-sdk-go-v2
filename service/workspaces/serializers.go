@@ -6401,6 +6401,11 @@ func awsAwsjson11_serializeDocumentWorkspaceAccessProperties(v *types.WorkspaceA
 		ok.String(string(v.DeviceTypeWindows))
 	}
 
+	if len(v.DeviceTypeWorkSpacesThinClient) > 0 {
+		ok := object.Key("DeviceTypeWorkSpacesThinClient")
+		ok.String(string(v.DeviceTypeWorkSpacesThinClient))
+	}
+
 	if len(v.DeviceTypeZeroClient) > 0 {
 		ok := object.Key("DeviceTypeZeroClient")
 		ok.String(string(v.DeviceTypeZeroClient))

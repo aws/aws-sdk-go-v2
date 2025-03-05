@@ -1,0 +1,8 @@
+{
+    "id": "81474938-f606-4cdc-a219-04b5001b9ee3",
+    "type": "feature",
+    "description": "New Service: Amazon GameLift Streams delivers low-latency game streaming from AWS global infrastructure to virtually any device with a browser at up to 1080p resolution and 60 fps.",
+    "modules": [
+        "service/gameliftstreams"
+    ]
+}

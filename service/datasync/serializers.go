@@ -6544,6 +6544,11 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationNfsInput(v *UpdateLocationNfs
 		}
 	}
 
+	if v.ServerHostname != nil {
+		ok := object.Key("ServerHostname")
+		ok.String(*v.ServerHostname)
+	}
+
 	if v.Subdirectory != nil {
 		ok := object.Key("Subdirectory")
 		ok.String(*v.Subdirectory)
@@ -6581,6 +6586,11 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationObjectStorageInput(v *UpdateL
 	if v.ServerCertificate != nil {
 		ok := object.Key("ServerCertificate")
 		ok.Base64EncodeBytes(v.ServerCertificate)
+	}
+
+	if v.ServerHostname != nil {
+		ok := object.Key("ServerHostname")
+		ok.String(*v.ServerHostname)
 	}
 
 	if v.ServerPort != nil {
@@ -6688,6 +6698,11 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationSmbInput(v *UpdateLocationSmb
 	if v.Password != nil {
 		ok := object.Key("Password")
 		ok.String(*v.Password)
+	}
+
+	if v.ServerHostname != nil {
+		ok := object.Key("ServerHostname")
+		ok.String(*v.ServerHostname)
 	}
 
 	if v.Subdirectory != nil {

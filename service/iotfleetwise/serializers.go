@@ -3847,6 +3847,11 @@ func awsAwsjson10_serializeDocumentCanSignal(v *types.CanSignal, value smithyjso
 		}
 	}
 
+	if len(v.SignalValueType) > 0 {
+		ok := object.Key("signalValueType")
+		ok.String(string(v.SignalValueType))
+	}
+
 	{
 		ok := object.Key("startBit")
 		ok.Integer(v.StartBit)
@@ -4594,6 +4599,11 @@ func awsAwsjson10_serializeDocumentObdSignal(v *types.ObdSignal, value smithyjso
 		ok.Integer(*v.ByteLength)
 	}
 
+	if v.IsSigned != nil {
+		ok := object.Key("isSigned")
+		ok.Boolean(*v.IsSigned)
+	}
+
 	if v.Offset != nil {
 		ok := object.Key("offset")
 		switch {
@@ -4643,6 +4653,11 @@ func awsAwsjson10_serializeDocumentObdSignal(v *types.ObdSignal, value smithyjso
 	{
 		ok := object.Key("serviceMode")
 		ok.Integer(v.ServiceMode)
+	}
+
+	if len(v.SignalValueType) > 0 {
+		ok := object.Key("signalValueType")
+		ok.String(string(v.SignalValueType))
 	}
 
 	{

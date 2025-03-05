@@ -16747,6 +16747,15 @@ func awsAwsjson11_deserializeDocumentWorkspaceAccessProperties(v **types.Workspa
 				sv.DeviceTypeWindows = types.AccessPropertyValue(jtv)
 			}
 
+		case "DeviceTypeWorkSpacesThinClient":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessPropertyValue to be of type string, got %T instead", value)
+				}
+				sv.DeviceTypeWorkSpacesThinClient = types.AccessPropertyValue(jtv)
+			}
+
 		case "DeviceTypeZeroClient":
 			if value != nil {
 				jtv, ok := value.(string)

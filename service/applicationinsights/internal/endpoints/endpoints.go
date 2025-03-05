@@ -141,91 +141,236 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
 				Region: "af-south-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.af-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-east-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-east-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-3",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-northeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-3",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-south-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-south-2",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-2",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-southeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-2",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-southeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-2",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-3",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-southeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-3",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-4",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ap-southeast-4.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-4",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ca-central-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "ca-west-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.ca-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.eu-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "eu-central-2",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.eu-central-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-2",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "eu-north-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "eu-south-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.eu-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "eu-south-2",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.eu-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-2",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.eu-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "eu-west-2",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.eu-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-2",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "eu-west-3",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.eu-west-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-3",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "il-central-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.il-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "il-central-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "me-central-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.me-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-central-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "me-south-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.me-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-south-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.sa-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "sa-east-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "us-east-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "us-east-2",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "us-west-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "us-west-2",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{
@@ -265,10 +410,20 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
 				Region: "cn-north-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.cn-north-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-north-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "cn-northwest-1",
-			}: endpoints.Endpoint{},
+			}: endpoints.Endpoint{
+				Hostname: "applicationinsights.cn-northwest-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
 		},
 	},
 	{

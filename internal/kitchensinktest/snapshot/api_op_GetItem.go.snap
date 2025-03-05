@@ -13,6 +13,7 @@ GetItem
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
+		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
@@ -25,6 +26,7 @@ GetItem
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
+		ComputePayloadHash
 		setLegacyContextSigningOptions
 		Signing
 	Deserialize stack step

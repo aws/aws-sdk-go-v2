@@ -47,6 +47,10 @@ type UpdateLocationNfsInput struct {
 	// server.
 	OnPremConfig *types.OnPremConfig
 
+	// Specifies the DNS name or IP version 4 (IPv4) address of the NFS file server
+	// that your DataSync agent connects to.
+	ServerHostname *string
+
 	// Specifies the export path in your NFS file server that you want DataSync to
 	// mount.
 	//

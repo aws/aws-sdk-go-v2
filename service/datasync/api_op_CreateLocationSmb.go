@@ -43,7 +43,7 @@ type CreateLocationSmbInput struct {
 	AgentArns []string
 
 	// Specifies the domain name or IP address of the SMB file server that your
-	// DataSync agent will mount.
+	// DataSync agent connects to.
 	//
 	// Remember the following when configuring this parameter:
 	//
@@ -69,6 +69,10 @@ type CreateLocationSmbInput struct {
 
 	// Specifies the authentication protocol that DataSync uses to connect to your SMB
 	// file server. DataSync supports NTLM (default) and KERBEROS authentication.
+	//
+	// For more information, see [Providing DataSync access to SMB file servers].
+	//
+	// [Providing DataSync access to SMB file servers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
 	AuthenticationType types.SmbAuthenticationType
 
 	// Specifies the IPv4 addresses for the DNS servers that your SMB file server
@@ -108,7 +112,7 @@ type CreateLocationSmbInput struct {
 	// that has permission to access the files, folders, and file metadata in your SMB
 	// file server.
 	//
-	// A Kerberos principal might look like HOST/kerberosuser@EXAMPLE.COM .
+	// A Kerberos principal might look like HOST/kerberosuser@MYDOMAIN.ORG .
 	//
 	// Principal names are case sensitive. Your DataSync task execution will fail if
 	// the principal that you specify for this parameter doesn’t exactly match the

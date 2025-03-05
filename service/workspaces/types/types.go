@@ -1363,6 +1363,10 @@ type WorkspaceAccessProperties struct {
 	// Indicates whether users can use Windows clients to access their WorkSpaces.
 	DeviceTypeWindows AccessPropertyValue
 
+	// Indicates whether users can access their WorkSpaces through a WorkSpaces Thin
+	// Client.
+	DeviceTypeWorkSpacesThinClient AccessPropertyValue
+
 	// Indicates whether users can use zero client devices to access their WorkSpaces.
 	DeviceTypeZeroClient AccessPropertyValue
 

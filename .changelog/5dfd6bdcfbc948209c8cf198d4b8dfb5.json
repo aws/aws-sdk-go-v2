@@ -1,0 +1,8 @@
+{
+    "id": "5dfd6bdc-fbc9-4820-9c8c-f198d4b8dfb5",
+    "type": "feature",
+    "description": "This release adds floating point support for CAN/OBD signals and adds support for signed OBD signals.",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

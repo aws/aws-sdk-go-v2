@@ -76,6 +76,10 @@ type UpdateLocationObjectStorageInput struct {
 	// Updating this parameter doesn't interfere with tasks that you have in progress.
 	ServerCertificate []byte
 
+	// Specifies the domain name or IP version 4 (IPv4) address of the object storage
+	// server that your DataSync agent connects to.
+	ServerHostname *string
+
 	// Specifies the port that your object storage server accepts inbound network
 	// traffic on (for example, port 443).
 	ServerPort *int32

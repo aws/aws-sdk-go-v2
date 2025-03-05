@@ -509,6 +509,25 @@ func (SignalNodeType) Values() []SignalNodeType {
 	}
 }
 
+type SignalValueType string
+
+// Enum values for SignalValueType
+const (
+	SignalValueTypeInteger       SignalValueType = "INTEGER"
+	SignalValueTypeFloatingPoint SignalValueType = "FLOATING_POINT"
+)
+
+// Values returns all known values for SignalValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SignalValueType) Values() []SignalValueType {
+	return []SignalValueType{
+		"INTEGER",
+		"FLOATING_POINT",
+	}
+}
+
 type SpoolingMode string
 
 // Enum values for SpoolingMode

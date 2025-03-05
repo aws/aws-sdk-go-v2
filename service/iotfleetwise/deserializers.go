@@ -8340,6 +8340,15 @@ func awsAwsjson10_deserializeDocumentCanSignal(v **types.CanSignal, value interf
 				}
 			}
 
+		case "signalValueType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SignalValueType to be of type string, got %T instead", value)
+				}
+				sv.SignalValueType = types.SignalValueType(jtv)
+			}
+
 		case "startBit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11141,6 +11150,15 @@ func awsAwsjson10_deserializeDocumentObdSignal(v **types.ObdSignal, value interf
 				sv.ByteLength = ptr.Int32(int32(i64))
 			}
 
+		case "isSigned":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsSigned = ptr.Bool(jtv)
+			}
+
 		case "offset":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11246,6 +11264,15 @@ func awsAwsjson10_deserializeDocumentObdSignal(v **types.ObdSignal, value interf
 					return err
 				}
 				sv.ServiceMode = int32(i64)
+			}
+
+		case "signalValueType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SignalValueType to be of type string, got %T instead", value)
+				}
+				sv.SignalValueType = types.SignalValueType(jtv)
 			}
 
 		case "startByte":

@@ -45,8 +45,8 @@ type CreateLocationNfsInput struct {
 	// This member is required.
 	OnPremConfig *types.OnPremConfig
 
-	// Specifies the Domain Name System (DNS) name or IP version 4 address of the NFS
-	// file server that your DataSync agent connects to.
+	// Specifies the DNS name or IP version 4 address of the NFS file server that your
+	// DataSync agent connects to.
 	//
 	// This member is required.
 	ServerHostname *string
