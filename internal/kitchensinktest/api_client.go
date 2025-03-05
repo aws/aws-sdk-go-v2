@@ -10,7 +10,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	smithy "github.com/aws/smithy-go"
@@ -178,6 +181,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveHTTPClient(&options)
 
+	resolveHTTPSignerV4(&options)
+
 	resolveEndpointResolverV2(&options)
 
 	resolveTracerProvider(&options)
@@ -191,6 +196,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	}
 
 	finalizeRetryMaxAttempts(&options)
+
+	ignoreAnonymousAuth(&options)
 
 	wrapWithAnonymousAuth(&options)
 
@@ -346,7 +353,13 @@ func resolveAuthSchemeResolver(options *Options) {
 
 func resolveAuthSchemes(options *Options) {
 	if options.AuthSchemes == nil {
-		options.AuthSchemes = []smithyhttp.AuthScheme{}
+		options.AuthSchemes = []smithyhttp.AuthScheme{
+			internalauth.NewHTTPAuthScheme("aws.auth#sigv4", &internalauthsmithy.V4SignerAdapter{
+				Signer:     options.HTTPSignerV4,
+				Logger:     options.Logger,
+				LogSigning: options.ClientLogMode.IsSigning(),
+			}),
+		}
 	}
 }
 
@@ -409,6 +422,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		DefaultsMode:       cfg.DefaultsMode,
 		RuntimeEnvironment: cfg.RuntimeEnvironment,
 		HTTPClient:         cfg.HTTPClient,
+		Credentials:        cfg.Credentials,
 		APIOptions:         cfg.APIOptions,
 		Logger:             cfg.Logger,
 		ClientLogMode:      cfg.ClientLogMode,
@@ -567,6 +581,24 @@ func getOrAddRequestUserAgent(stack *middleware.Stack) (*awsmiddleware.RequestUs
 	return ua, nil
 }
 
+type HTTPSignerV4 interface {
+	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time, optFns ...func(*v4.SignerOptions)) error
+}
+
+func resolveHTTPSignerV4(o *Options) {
+	if o.HTTPSignerV4 != nil {
+		return
+	}
+	o.HTTPSignerV4 = newDefaultV4Signer(*o)
+}
+
+func newDefaultV4Signer(o Options) *v4.Signer {
+	return v4.NewSigner(func(so *v4.SignerOptions) {
+		so.Logger = o.Logger
+		so.LogSigning = o.ClientLogMode.IsSigning()
+	})
+}
+
 func addClientRequestID(stack *middleware.Stack) error {
 	return stack.Build.Add(&awsmiddleware.ClientRequestID{}, middleware.After)
 }
@@ -605,6 +637,21 @@ func (m *spanRetryLoop) HandleFinalize(
 	defer span.End()
 
 	return next.HandleFinalize(ctx, in)
+}
+func addStreamingEventsPayload(stack *middleware.Stack) error {
+	return stack.Finalize.Add(&v4.StreamingEventsPayload{}, middleware.Before)
+}
+
+func addUnsignedPayload(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&v4.UnsignedPayload{}, "ResolveEndpointV2", middleware.After)
+}
+
+func addComputePayloadSHA256(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&v4.ComputePayloadSHA256{}, "ResolveEndpointV2", middleware.After)
+}
+
+func addContentSHA256Header(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&v4.ContentSHA256Header{}, (*v4.ComputePayloadSHA256)(nil).ID(), middleware.After)
 }
 
 func addIsWaiterUserAgent(o *Options) {
@@ -699,6 +746,37 @@ func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
 		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeAdaptive)
 	}
 	return nil
+}
+
+type setCredentialSourceMiddleware struct {
+	ua      *awsmiddleware.RequestUserAgent
+	options Options
+}
+
+func (m setCredentialSourceMiddleware) ID() string { return "SetCredentialSourceMiddleware" }
+
+func (m setCredentialSourceMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
+	asProviderSource, ok := m.options.Credentials.(aws.CredentialProviderSource)
+	if !ok {
+		return next.HandleBuild(ctx, in)
+	}
+	providerSources := asProviderSource.ProviderSources()
+	for _, source := range providerSources {
+		m.ua.AddCredentialsSource(source)
+	}
+	return next.HandleBuild(ctx, in)
+}
+
+func addCredentialSource(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	mw := setCredentialSourceMiddleware{ua: ua, options: options}
+	return stack.Build.Insert(&mw, "UserAgent", middleware.Before)
 }
 
 func resolveTracerProvider(options *Options) {

@@ -14,6 +14,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+func bindAuthParamsRegion(_ interface{}, params *AuthResolverParameters, _ interface{}, options Options) {
+	params.Region = options.Region
+}
+
 type setLegacyContextSigningOptionsMiddleware struct {
 }
 
@@ -83,12 +87,17 @@ func wrapWithAnonymousAuth(options *Options) {
 type AuthResolverParameters struct {
 	// The name of the operation being invoked.
 	Operation string
+
+	// The region in which the operation is being invoked.
+	Region string
 }
 
 func bindAuthResolverParams(ctx context.Context, operation string, input interface{}, options Options) *AuthResolverParameters {
 	params := &AuthResolverParameters{
 		Operation: operation,
 	}
+
+	bindAuthParamsRegion(ctx, params, input, options)
 
 	return params
 }
@@ -114,7 +123,15 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 
 func serviceAuthOptions(params *AuthResolverParameters) []*smithyauth.Option {
 	return []*smithyauth.Option{
-		{SchemeID: smithyauth.SchemeIDAnonymous},
+		{
+			SchemeID: smithyauth.SchemeIDSigV4,
+			SignerProperties: func() smithy.Properties {
+				var props smithy.Properties
+				smithyhttp.SetSigV4SigningName(&props, "awsjson1kitchensink")
+				smithyhttp.SetSigV4SigningRegion(&props, params.Region)
+				return props
+			}(),
+		},
 	}
 }
 
