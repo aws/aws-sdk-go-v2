@@ -2258,6 +2258,119 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#CreatePromptRouter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#CreatePromptRouterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#CreatePromptRouterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a prompt router that manages the routing of requests between multiple foundation models based on the routing criteria.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/prompt-routers"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreatePromptRouterRequest": {
+            "type": "structure",
+            "members": {
+                "clientRequestToken": {
+                    "target": "com.amazonaws.bedrock#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure idempotency of your requests. If not specified, the Amazon Web Services SDK\n            automatically generates one for you.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "promptRouterName": {
+                    "target": "com.amazonaws.bedrock#PromptRouterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prompt router. The name must be unique within your Amazon Web Services account in the current region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "models": {
+                    "target": "com.amazonaws.bedrock#PromptRouterTargetModels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of foundation models that the prompt router can route requests to. At least one model must be specified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrock#PromptRouterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the prompt router to help identify its purpose.</p>"
+                    }
+                },
+                "routingCriteria": {
+                    "target": "com.amazonaws.bedrock#RoutingCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria, which is the response quality difference, used to determine how incoming requests are routed to different models.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fallbackModel": {
+                    "target": "com.amazonaws.bedrock#PromptRouterTargetModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default model to use when the routing criteria is not met.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrock#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs to apply to this resource as tags. You can use tags to categorize and manage your Amazon Web Services resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreatePromptRouterResponse": {
+            "type": "structure",
+            "members": {
+                "promptRouterArn": {
+                    "target": "com.amazonaws.bedrock#PromptRouterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the prompt router.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#CreateProvisionedModelThroughput": {
             "type": "operation",
             "input": {
@@ -2826,6 +2939,64 @@
             }
         },
         "com.amazonaws.bedrock#DeleteModelInvocationLoggingConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeletePromptRouter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#DeletePromptRouterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#DeletePromptRouterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specified prompt router. This action cannot be undone.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/prompt-routers/{promptRouterArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeletePromptRouterRequest": {
+            "type": "structure",
+            "members": {
+                "promptRouterArn": {
+                    "target": "com.amazonaws.bedrock#PromptRouterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prompt router to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeletePromptRouterResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -9185,6 +9356,14 @@
                         "smithy.api#documentation": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrock#PromptRouterType",
+                    "traits": {
+                        "smithy.api#default": "default",
+                        "smithy.api#documentation": "<p>The type of the prompt routers, such as whether it's default or custom.</p>",
+                        "smithy.api#httpQuery": "type"
+                    }
                 }
             },
             "traits": {
@@ -10619,8 +10798,14 @@
                     "target": "com.amazonaws.bedrock#PromptRouterArn"
                 }
             },
+            "create": {
+                "target": "com.amazonaws.bedrock#CreatePromptRouter"
+            },
             "read": {
                 "target": "com.amazonaws.bedrock#GetPromptRouter"
+            },
+            "delete": {
+                "target": "com.amazonaws.bedrock#DeletePromptRouter"
             },
             "list": {
                 "target": "com.amazonaws.bedrock#ListPromptRouters"
@@ -10724,7 +10909,9 @@
                 "modelArn": {
                     "target": "com.amazonaws.bedrock#PromptRouterTargetModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target model's ARN.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The target model's ARN.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -10739,7 +10926,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})|(^arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{0,20}):(|[0-9]{12}):inference-profile/[a-zA-Z0-9-:.]+)$"
+                "smithy.api#pattern": "(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})|(^arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{0,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)$"
             }
         },
         "com.amazonaws.bedrock#PromptRouterTargetModels": {
@@ -11453,7 +11640,7 @@
                         "smithy.api#documentation": "<p>The criteria's response quality difference.</p>",
                         "smithy.api#range": {
                             "min": 0,
-                            "max": 1
+                            "max": 100
                         },
                         "smithy.api#required": {}
                     }
@@ -12060,7 +12247,7 @@
                     "min": 20,
                     "max": 1011
                 },
-                "smithy.api#pattern": "(^[a-zA-Z0-9][a-zA-Z0-9\\-]*$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:([0-9]{12}|)((:(fine-tuning-job|model-customization-job|custom-model)/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12})$)|(:guardrail/[a-z0-9]+$)|(:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$)|(:(provisioned-model|model-invocation-job|model-evaluation-job|evaluation-job|model-import-job|imported-model|async-invoke)/[a-z0-9]{12}$)))"
+                "smithy.api#pattern": "(^[a-zA-Z0-9][a-zA-Z0-9\\-]*$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:([0-9]{12}|)((:(fine-tuning-job|model-customization-job|custom-model)/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12})$)|(:guardrail/[a-z0-9]+$)|(:automated-reasoning-policy/[a-zA-Z0-9]+(:[a-zA-Z0-9]+)?$)|(:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$)|(:(provisioned-model|model-invocation-job|model-evaluation-job|evaluation-job|model-import-job|imported-model|async-invoke|provisioned-model-v2|provisioned-model-reservation|prompt-router)/[a-z0-9]{12}$)))"
             }
         },
         "com.amazonaws.bedrock#TaggingResource": {

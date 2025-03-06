@@ -1444,7 +1444,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List of SQL statements. By default, only finished statements are shown. \n        A token is returned to page through the statement list. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>List of SQL statements. By default, only finished statements are shown. \n        A token is returned to page through the statement list. </p>\n         <p>When you use identity-enhanced role sessions to list statements, you must provide either the \n     <code>cluster-identifier</code> or <code>workgroup-name</code> parameter. This ensures that the IdC user\n     can only access the Amazon Redshift IdC applications they are assigned. For more information, see \n       <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html\">\n         Trusted identity propagation overview</a>.</p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1496,6 +1496,24 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that filters which statements to return in the response. If true, all statements run by the caller's IAM role are returned. \n      If false, only statements run by the caller's IAM role in the current IAM session are returned.  The default is true. </p>"
+                    }
+                },
+                "Database": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database when listing statements run against a <code>ClusterIdentifier</code> or <code>WorkgroupName</code>. \n       </p>"
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshiftdata#ClusterIdentifierString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier. Only statements that ran on this cluster are returned. \n      When providing <code>ClusterIdentifier</code>, then <code>WorkgroupName</code> can't be specified.</p>"
+                    }
+                },
+                "WorkgroupName": {
+                    "target": "com.amazonaws.redshiftdata#WorkgroupNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serverless workgroup name or Amazon Resource Name (ARN). Only statements that ran on this workgroup are returned. \n      When providing <code>WorkgroupName</code>, then <code>ClusterIdentifier</code> can't be specified.</p>"
                     }
                 }
             },
@@ -2556,16 +2574,16 @@
                         "smithy.api#documentation": "<p>A value that indicates whether the statement is a batch query request.</p>"
                     }
                 },
-                "SessionId": {
-                    "target": "com.amazonaws.redshiftdata#UUID",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The session identifier of the query.</p>"
-                    }
-                },
                 "ResultFormat": {
                     "target": "com.amazonaws.redshiftdata#ResultFormatString",
                     "traits": {
                         "smithy.api#documentation": "<p>The data format of the result of the SQL statement.</p>"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.redshiftdata#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session identifier of the query.</p>"
                     }
                 }
             },
@@ -2811,7 +2829,7 @@
                     "min": 3,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(([a-z0-9-]+)|(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))$"
+                "smithy.api#pattern": "^(([a-z0-9-]+)|(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov|(-iso[a-z]?))?-[a-z]+-\\d{1}:\\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))$"
             }
         },
         "com.amazonaws.redshiftdata#bool": {

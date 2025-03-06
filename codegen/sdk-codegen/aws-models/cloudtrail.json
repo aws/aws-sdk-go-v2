@@ -2555,7 +2555,7 @@
                 "SnsTopicName": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the Amazon SNS topic defined for notification of log file\n         delivery. The maximum length is 256 characters.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name or ARN of the Amazon SNS topic defined for notification of log file\n         delivery. The maximum length is 256 characters.</p>"
                     }
                 },
                 "IncludeGlobalServiceEvents": {
@@ -11111,7 +11111,7 @@
                 "SnsTopicName": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the Amazon SNS topic defined for notification of log file\n         delivery. The maximum length is 256 characters.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name or ARN of the Amazon SNS topic defined for notification of log file\n         delivery. The maximum length is 256 characters.</p>"
                     }
                 },
                 "IncludeGlobalServiceEvents": {

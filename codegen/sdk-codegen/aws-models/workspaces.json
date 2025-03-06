@@ -1793,7 +1793,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Copies the specified image from the specified Region to the current Region. For more\n         information about copying images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html\"> Copy a Custom WorkSpaces\n            Image</a>.</p>\n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p>\n         <important>\n            <p>Before copying a shared image, be sure to verify that it has been shared from the\n            correct Amazon Web Services account. To determine if an image has been shared and to see\n            the ID of the Amazon Web Services account that owns an image, use the <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html\">DescribeWorkSpaceImages</a> and <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html\">DescribeWorkspaceImagePermissions</a> API operations. </p>\n         </important>"
+                "smithy.api#documentation": "<p>Copies the specified image from the specified Region to the current Region. For more\n         information about copying images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html\"> Copy a Custom WorkSpaces\n            Image</a>.</p>\n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web ServicesSupport.</p>\n         <important>\n            <p>Before copying a shared image, be sure to verify that it has been shared from the\n            correct Amazon Web Services account. To determine if an image has been shared and to see\n            the ID of the Amazon Web Services account that owns an image, use the <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html\">DescribeWorkSpaceImages</a> and <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html\">DescribeWorkspaceImagePermissions</a> API operations. </p>\n         </important>"
             }
         },
         "com.amazonaws.workspaces#CopyWorkspaceImageRequest": {
@@ -5040,7 +5040,7 @@
                 "Limit": {
                     "target": "com.amazonaws.workspaces#Limit50",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum size of each page of results. The default value is 20 and the maximum value\n         is 50.</p>"
                     }
                 },
                 "NextToken": {
@@ -5563,6 +5563,23 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^ami\\-([a-f0-9]{8}|[a-f0-9]{17})$"
+            }
+        },
+        "com.amazonaws.workspaces#EndpointEncryptionMode": {
+            "type": "enum",
+            "members": {
+                "STANDARD_TLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD_TLS"
+                    }
+                },
+                "FIPS_VALIDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIPS_VALIDATED"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#ErrorDetails": {
@@ -6973,6 +6990,58 @@
             }
         },
         "com.amazonaws.workspaces#ModifyClientPropertiesResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#ModifyEndpointEncryptionMode": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#ModifyEndpointEncryptionModeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#ModifyEndpointEncryptionModeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the endpoint encryption mode that allows you to configure the specified\n         directory between Standard TLS and FIPS 140-2 validated mode. </p>"
+            }
+        },
+        "com.amazonaws.workspaces#ModifyEndpointEncryptionModeRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.workspaces#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the directory.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndpointEncryptionMode": {
+                    "target": "com.amazonaws.workspaces#EndpointEncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption mode used for endpoint connections when streaming to WorkSpaces Personal\n         or WorkSpace Pools.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#ModifyEndpointEncryptionModeResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -9111,7 +9180,7 @@
                 "target": "com.amazonaws.workspaces#TerminateWorkspacesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the specified WorkSpaces.</p>\n         <important>\n            <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data\n            is destroyed. If you need to archive any user data, contact Amazon Web Services Support before\n            terminating the WorkSpace.</p>\n         </important>\n         <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have been completely\n         terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned\n         only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely\n         returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using\n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n            DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace has\n         been successfully terminated.</p>\n         <note>\n            <p>Simple AD and AD Connector are made available to you free of charge to use with\n            WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector\n            directory for 30 consecutive days, this directory will be automatically deregistered for\n            use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href=\"http://aws.amazon.com/directoryservice/pricing/\">Directory Service pricing\n               terms</a>.</p>\n            <p>To delete empty directories, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html\"> Delete the\n               Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector\n            directory, you can always create a new one when you want to start using WorkSpaces\n            again.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Terminates the specified WorkSpaces.</p>\n         <important>\n            <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data\n            is destroyed. If you need to archive any user data, contact Amazon Web ServicesSupport before\n            terminating the WorkSpace.</p>\n         </important>\n         <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have been completely\n         terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned\n         only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely\n         returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using\n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n            DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace has\n         been successfully terminated.</p>\n         <note>\n            <p>Simple AD and AD Connector are made available to you free of charge to use with\n            WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector\n            directory for 30 consecutive days, this directory will be automatically deregistered for\n            use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href=\"http://aws.amazon.com/directoryservice/pricing/\">Directory Service pricing\n               terms</a>.</p>\n            <p>To delete empty directories, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html\"> Delete the\n               Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector\n            directory, you can always create a new one when you want to start using WorkSpaces\n            again.</p>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#TerminateWorkspacesPool": {
@@ -9596,7 +9665,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Shares or unshares an image with one account in the same Amazon Web Services Region by\n         specifying whether that account has permission to copy the image. If the copy image\n         permission is granted, the image is shared with that account. If the copy image permission\n         is revoked, the image is unshared with the account.</p>\n         <p>After an image has been shared, the recipient account can copy the image to other\n         Regions as needed.</p>\n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p>\n         <p>For more information about sharing images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\"> Share or Unshare a Custom\n            WorkSpaces Image</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>To delete an image that has been shared, you must unshare the image before you\n                  delete it.</p>\n               </li>\n               <li>\n                  <p>Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts\n                  isn't supported at this time in Amazon Web Services GovCloud (US). To share BYOL images\n                  across accounts in Amazon Web Services GovCloud (US), contact Amazon Web Services Support.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Shares or unshares an image with one account in the same Amazon Web Services Region by\n         specifying whether that account has permission to copy the image. If the copy image\n         permission is granted, the image is shared with that account. If the copy image permission\n         is revoked, the image is unshared with the account.</p>\n         <p>After an image has been shared, the recipient account can copy the image to other\n         Regions as needed.</p>\n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web ServicesSupport.</p>\n         <p>For more information about sharing images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\"> Share or Unshare a Custom\n            WorkSpaces Image</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>To delete an image that has been shared, you must unshare the image before you\n                  delete it.</p>\n               </li>\n               <li>\n                  <p>Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts\n                  isn't supported at this time in Amazon Web Services GovCloud (US). To share BYOL images\n                  across accounts in Amazon Web Services GovCloud (US), contact Amazon Web ServicesSupport.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#UpdateWorkspaceImagePermissionRequest": {
@@ -10558,6 +10627,12 @@
                     "target": "com.amazonaws.workspaces#CertificateBasedAuthProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP)\n         user identities to Active Directory for WorkSpaces login.</p>"
+                    }
+                },
+                "EndpointEncryptionMode": {
+                    "target": "com.amazonaws.workspaces#EndpointEncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Endpoint encryption mode that allows you to configure the specified directory between\n         Standard TLS and FIPS 140-2 validated mode.</p>"
                     }
                 },
                 "MicrosoftEntraConfig": {
@@ -12303,6 +12378,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#ModifyClientProperties"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ModifyEndpointEncryptionMode"
                 },
                 {
                     "target": "com.amazonaws.workspaces#ModifySamlProperties"

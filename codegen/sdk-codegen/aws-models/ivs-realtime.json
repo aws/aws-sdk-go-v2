@@ -4,6 +4,62 @@
         "com.amazonaws.ivsrealtime#AccessDeniedException": {
             "type": "structure",
             "members": {
+                "accessControlAllowOrigin": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Allow-Origin"
+                    }
+                },
+                "accessControlExposeHeaders": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Expose-Headers"
+                    }
+                },
+                "cacheControl": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "contentSecurityPolicy": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Content-Security-Policy"
+                    }
+                },
+                "strictTransportSecurity": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Strict-Transport-Security"
+                    }
+                },
+                "xContentTypeOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Content-Type-Options"
+                    }
+                },
+                "xFrameOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Frame-Options"
+                    }
+                },
+                "xAmznErrorType": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                },
                 "exceptionMessage": {
                     "target": "com.amazonaws.ivsrealtime#errorMessage",
                     "traits": {
@@ -845,7 +901,7 @@
                 "storageConfigurationArn": {
                     "target": "com.amazonaws.ivsrealtime#AutoParticipantRecordingStorageConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN of the <a>StorageConfiguration</a> resource to use for individual participant recording. Default: <code>\"\"</code> (empty string, no storage configuration is specified). Individual participant recording cannot be started unless a storage configuration is specified, when a  <a>Stage</a> is created or updated.</p>",
+                        "smithy.api#documentation": "<p>ARN of the <a>StorageConfiguration</a> resource to use for individual\n         participant recording. Default: <code>\"\"</code> (empty string, no storage configuration is\n         specified). Individual participant recording cannot be started unless a storage\n         configuration is specified, when a <a>Stage</a> is created or updated. To\n         disable individual participant recording, set this to <code>\"\"</code>; other fields in this object will\n         get reset to their defaults when sending <code>\"\"</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -858,7 +914,14 @@
                 "thumbnailConfiguration": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantThumbnailConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A complex type that allows you to enable/disable the recording of thumbnails for individual participant recording\n            and modify the interval at which thumbnails are generated for the live session.</p>"
+                        "smithy.api#documentation": "<p>A complex type that allows you to enable/disable the recording of thumbnails for\n         individual participant recording and modify the interval at which thumbnails are generated\n         for the live session.</p>"
+                    }
+                },
+                "recordingReconnectWindowSeconds": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantRecordingReconnectWindowSeconds",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>If a stage publisher disconnects and then reconnects within the specified interval, \n\t  the multiple recordings will be considered a single recording and merged together.</p>\n         <p>The default value is 0, which disables merging.</p>"
                     }
                 }
             },
@@ -956,26 +1019,26 @@
                 "destinations": {
                     "target": "com.amazonaws.ivsrealtime#DestinationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of Destination objects. A Composition can contain either one destination \n\t        (<code>channel</code> or <code>s3</code>) or two (one <code>channel</code> and one <code>s3</code>).</p>",
+                        "smithy.api#documentation": "<p>Array of Destination objects. A Composition can contain either one destination\n            (<code>channel</code> or <code>s3</code>) or two (one <code>channel</code> and one\n            <code>s3</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 },
                 "startTime": {
                     "target": "com.amazonaws.ivsrealtime#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>UTC time of the Composition start. This is an ISO 8601 timestamp; <i>note that\n         this is returned as a string</i>.</p>"
+                        "smithy.api#documentation": "<p>UTC time of the Composition start. This is an ISO 8601 timestamp; <i>note that\n            this is returned as a string</i>.</p>"
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.ivsrealtime#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>UTC time of the Composition end. This is an ISO 8601 timestamp; <i>note that\n         this is returned as a string</i>.</p>"
+                        "smithy.api#documentation": "<p>UTC time of the Composition end. This is an ISO 8601 timestamp; <i>note that this\n            is returned as a string</i>.</p>"
                     }
                 }
             },
@@ -1064,19 +1127,19 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 },
                 "startTime": {
                     "target": "com.amazonaws.ivsrealtime#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>UTC time of the Composition start. This is an ISO 8601 timestamp; <i>note that\n         this is returned as a string</i>.</p>"
+                        "smithy.api#documentation": "<p>UTC time of the Composition start. This is an ISO 8601 timestamp; <i>note that\n            this is returned as a string</i>.</p>"
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.ivsrealtime#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>UTC time of the Composition end. This is an ISO 8601 timestamp; <i>note that\n         this is returned as a string</i>.</p>"
+                        "smithy.api#documentation": "<p>UTC time of the Composition end. This is an ISO 8601 timestamp; <i>note that this\n            is returned as a string</i>.</p>"
                     }
                 }
             },
@@ -1102,7 +1165,7 @@
                 "storage": {
                     "target": "com.amazonaws.ivsrealtime#ThumbnailStorageTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all generated thumbnails\n            in a serial manner, to the media/thumbnails/(width)x(height) directory, where (width) and (height) are the width\n\t    and height of the thumbnail. <code>LATEST</code> saves the latest thumbnail in\n\t    media/latest_thumbnail/(width)x(height)/thumb.jpg and overwrites it at the interval specified by\n\t    <code>targetIntervalSeconds</code>.  You can enable both <code>SEQUENTIAL</code> and <code>LATEST</code>.\n\t    Default: <code>SEQUENTIAL</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records\n         all generated thumbnails in a serial manner, to the media/thumbnails/(width)x(height)\n         directory, where (width) and (height) are the width and height of the thumbnail.\n            <code>LATEST</code> saves the latest thumbnail in\n         media/latest_thumbnail/(width)x(height)/thumb.jpg and overwrites it at the interval\n         specified by <code>targetIntervalSeconds</code>. You can enable both\n            <code>SEQUENTIAL</code> and <code>LATEST</code>. Default:\n         <code>SEQUENTIAL</code>.</p>"
                     }
                 }
             },
@@ -1125,6 +1188,62 @@
         "com.amazonaws.ivsrealtime#ConflictException": {
             "type": "structure",
             "members": {
+                "accessControlAllowOrigin": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Allow-Origin"
+                    }
+                },
+                "accessControlExposeHeaders": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Expose-Headers"
+                    }
+                },
+                "cacheControl": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "contentSecurityPolicy": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Content-Security-Policy"
+                    }
+                },
+                "strictTransportSecurity": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Strict-Transport-Security"
+                    }
+                },
+                "xContentTypeOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Content-Type-Options"
+                    }
+                },
+                "xFrameOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Frame-Options"
+                    }
+                },
+                "xAmznErrorType": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                },
                 "exceptionMessage": {
                     "target": "com.amazonaws.ivsrealtime#errorMessage",
                     "traits": {
@@ -1890,13 +2009,13 @@
                 "channel": {
                     "target": "com.amazonaws.ivsrealtime#ChannelDestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IVS channel to be used for broadcasting, for server-side composition. Either a <code>channel</code> or an \n\t  <code>s3</code> must be specified. </p>"
+                        "smithy.api#documentation": "<p>An IVS channel to be used for broadcasting, for server-side composition. Either a\n            <code>channel</code> or an <code>s3</code> must be specified. </p>"
                     }
                 },
                 "s3": {
                     "target": "com.amazonaws.ivsrealtime#S3DestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 storage configuration to be used for recording video data. Either a <code>channel</code> \n\t  or an <code>s3</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>An S3 storage configuration to be used for recording video data. Either a\n            <code>channel</code> or an <code>s3</code> must be specified.</p>"
                     }
                 }
             },
@@ -2125,7 +2244,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -2184,7 +2303,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -2228,7 +2347,7 @@
                 "errorCode": {
                     "target": "com.amazonaws.ivsrealtime#EventErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the event is an error event, the error code is provided to give insight into the\n         specific error that occurred. If the event is not an error event, this field is null.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>B_FRAME_PRESENT</code> —\n\t\t     The participant's stream includes B-frames.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\">\n\t\t     IVS RTMP Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BITRATE_EXCEEDED</code> —\n\t\t     The participant exceeded the maximum supported bitrate.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n\t\t     Service Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CAPABILITIES</code> —\n\t\t     The participant tried to take an action\n\t\t     that the participant’s token is not allowed to do. For details on participant capabilities, see\n\t\t     the <code>capabilities</code> field in <a>CreateParticipantToken</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVER_EXCEPTION</code> —\n\t\t     The participant failed to publish to the stage due to an internal server error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_AUDIO_CODEC</code> —\n\t\t     The participant is using an invalid audio codec.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html\">\n\t\t     Stream Ingest</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_INPUT</code> —\n\t\t     The participant is using an invalid input stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_PROTOCOL</code> —\n\t\t     The participant's IngestConfiguration resource is configured for RTMPS but they tried streaming with RTMP.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\">\n\t\t     IVS RTMP Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_STREAM_KEY</code> —\n\t\t     The participant is using an invalid stream key.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\">\n\t\t     IVS RTMP Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_VIDEO_CODEC</code> —\n\t\t     The participant is using an invalid video codec.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html\">\n\t\t     Stream Ingest</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLISHER_NOT_FOUND</code> —\n\t\t     The participant tried to subscribe to a publisher that doesn’t exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code> —\n\t\t     The number of participants who want to publish/subscribe to a stage exceeds the quota.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n\t\t     Service Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLUTION_EXCEEDED</code> —\n\t\t     The participant exceeded the maximum supported resolution.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n\t\t     Service Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REUSE_OF_STREAM_KEY</code> —\n\t\t     The participant tried to use a stream key that is associated with another active stage session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STREAM_DURATION_EXCEEDED</code> —\n\t\t     The participant exceeded the maximum allowed stream duration.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n\t\t     Service Quotas</a>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>If the event is an error event, the error code is provided to give insight into the\n         specific error that occurred. If the event is not an error event, this field is\n         null.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>B_FRAME_PRESENT</code> — The participant's stream includes B-frames.\n               For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\"> IVS RTMP\n                  Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BITRATE_EXCEEDED</code> — The participant exceeded the maximum\n               supported bitrate. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\"> Service\n               Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CAPABILITIES</code> — The participant tried to take an\n               action that the participant’s token is not allowed to do. For details on participant\n               capabilities, see the <code>capabilities</code> field in <a>CreateParticipantToken</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVER_EXCEPTION</code> — The participant failed to publish\n               to the stage due to an internal server error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_AUDIO_CODEC</code> — The participant is using an invalid audio\n               codec. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html\"> Stream\n               Ingest</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_INPUT</code> — The participant is using an invalid input\n               stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_PROTOCOL</code> — The participant's IngestConfiguration\n               resource is configured for RTMPS but they tried streaming with RTMP. For details, see\n                  <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\"> IVS RTMP\n                  Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_STREAM_KEY</code> — The participant is using an invalid stream\n               key. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\"> IVS RTMP\n                  Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_VIDEO_CODEC</code> — The participant is using an invalid video\n               codec. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html\"> Stream\n               Ingest</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLISHER_NOT_FOUND</code> — The participant tried to subscribe to a\n               publisher that doesn’t exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code> — The number of participants who want to\n               publish/subscribe to a stage exceeds the quota. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n                  Service Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLUTION_EXCEEDED</code> — The participant exceeded the maximum\n               supported resolution. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\"> Service\n               Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REUSE_OF_STREAM_KEY</code> — The participant tried to use a stream key\n               that is associated with another active stage session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STREAM_DURATION_EXCEEDED</code> — The participant exceeded the maximum\n               allowed stream duration. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\"> Service\n               Quotas</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2887,33 +3006,33 @@
                 "featuredParticipantAttribute": {
                     "target": "com.amazonaws.ivsrealtime#AttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>This attribute name identifies the featured slot. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured\n         slot. Default: <code>\"\"</code> (no featured participant).</p>"
+                        "smithy.api#documentation": "<p>This attribute name identifies the featured slot. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured slot. Default: <code>\"\"</code> (no featured\n         participant).</p>"
                     }
                 },
                 "omitStoppedVideo": {
                     "target": "com.amazonaws.ivsrealtime#OmitStoppedVideo",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Determines whether to omit participants with stopped video in the composition. Default: <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Determines whether to omit participants with stopped video in the composition. Default:\n            <code>false</code>.</p>"
                     }
                 },
                 "videoAspectRatio": {
                     "target": "com.amazonaws.ivsrealtime#VideoAspectRatio",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the non-featured participant display mode, to control the aspect ratio of video tiles. <code>VIDEO</code> is 16:9, <code>SQUARE</code> is 1:1, and <code>PORTRAIT</code> is 3:4. Default: <code>VIDEO</code>.</p>"
+                        "smithy.api#documentation": "<p>Sets the non-featured participant display mode, to control the aspect ratio of video\n         tiles. <code>VIDEO</code> is 16:9, <code>SQUARE</code> is 1:1, and <code>PORTRAIT</code> is\n         3:4. Default: <code>VIDEO</code>.</p>"
                     }
                 },
                 "videoFillMode": {
                     "target": "com.amazonaws.ivsrealtime#VideoFillMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines how video content fits within the participant tile: <code>FILL</code> (stretched), <code>COVER</code> (cropped),\n      or <code>CONTAIN</code> (letterboxed). When not set, \n      <code>videoFillMode</code> defaults to <code>COVER</code> fill mode for participants in the grid \n      and to <code>CONTAIN</code> fill mode for featured participants.</p>"
+                        "smithy.api#documentation": "<p>Defines how video content fits within the participant tile: <code>FILL</code>\n         (stretched), <code>COVER</code> (cropped), or <code>CONTAIN</code> (letterboxed). When not\n         set, <code>videoFillMode</code> defaults to <code>COVER</code> fill mode for participants\n         in the grid and to <code>CONTAIN</code> fill mode for featured participants.</p>"
                     }
                 },
                 "gridGap": {
                     "target": "com.amazonaws.ivsrealtime#GridGap",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies the spacing between participant tiles in pixels. Default: <code>2</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the spacing between participant tiles in pixels. Default:\n         <code>2</code>.</p>"
                     }
                 }
             },
@@ -3061,26 +3180,26 @@
                 "state": {
                     "target": "com.amazonaws.ivsrealtime#IngestConfigurationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is publishing to the stage associated with the ingest configuration.</p>",
+                        "smithy.api#documentation": "<p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is\n         publishing to the stage associated with the ingest configuration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "userId": {
                     "target": "com.amazonaws.ivsrealtime#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.\n      <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>Customer-assigned name to help identify the participant using the IngestConfiguration;\n         this can be used to link a participant to a user in the customer’s own systems. This can be\n         any UTF-8 encoded text. <i>This field is exposed to all stage participants and\n            should not be used for personally identifying, confidential, or sensitive\n            information.</i>\n         </p>"
                     }
                 },
                 "attributes": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Application-provided attributes to to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.\n      <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>Application-provided attributes to to store in the IngestConfiguration and attach to a\n         stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field\n         is 1 KB total. <i>This field is exposed to all stage participants and should not be\n            used for personally identifying, confidential, or sensitive\n         information.</i>\n         </p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -3179,14 +3298,14 @@
                 "state": {
                     "target": "com.amazonaws.ivsrealtime#IngestConfigurationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is publishing to the stage associated with the ingest configuration.</p>",
+                        "smithy.api#documentation": "<p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is\n         publishing to the stage associated with the ingest configuration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "userId": {
                     "target": "com.amazonaws.ivsrealtime#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.\n      <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>Customer-assigned name to help identify the participant using the IngestConfiguration;\n         this can be used to link a participant to a user in the customer’s own systems. This can be\n         any UTF-8 encoded text. <i>This field is exposed to all stage participants and\n            should not be used for personally identifying, confidential, or sensitive\n            information.</i>\n         </p>"
                     }
                 }
             },
@@ -3220,6 +3339,62 @@
         "com.amazonaws.ivsrealtime#InternalServerException": {
             "type": "structure",
             "members": {
+                "accessControlAllowOrigin": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Allow-Origin"
+                    }
+                },
+                "accessControlExposeHeaders": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Expose-Headers"
+                    }
+                },
+                "cacheControl": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "contentSecurityPolicy": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Content-Security-Policy"
+                    }
+                },
+                "strictTransportSecurity": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Strict-Transport-Security"
+                    }
+                },
+                "xContentTypeOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Content-Type-Options"
+                    }
+                },
+                "xFrameOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Frame-Options"
+                    }
+                },
+                "xAmznErrorType": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                },
                 "exceptionMessage": {
                     "target": "com.amazonaws.ivsrealtime#errorMessage",
                     "traits": {
@@ -4238,13 +4413,13 @@
                 "recordingS3BucketName": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantRecordingS3BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not enabled.</p>"
+                        "smithy.api#documentation": "<p>Name of the S3 bucket to where the participant is being recorded, if individual\n         participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not\n         enabled.</p>"
                     }
                 },
                 "recordingS3Prefix": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantRecordingS3Prefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>S3 prefix of the S3 bucket where the participant is being recorded, if individual participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not enabled.</p>"
+                        "smithy.api#documentation": "<p>S3 prefix of the S3 bucket where the participant is being recorded, if individual\n         participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not\n         enabled. If individual participant recording merge is enabled, and if a stage publisher \n\t\t disconnects from a stage and then reconnects, IVS tries to record to the same S3 prefix as \n\t\t the previous session. See \n\t\t <a href=\"/ivs/latest/RealTimeUserGuide/rt-individual-participant-recording.html#ind-part-rec-merge-frag\">\n\t\t Merge Fragmented Individual Participant Recordings</a>.</p>"
                     }
                 },
                 "recordingState": {
@@ -4390,6 +4565,16 @@
                 }
             }
         },
+        "com.amazonaws.ivsrealtime#ParticipantRecordingReconnectWindowSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 300
+                }
+            }
+        },
         "com.amazonaws.ivsrealtime#ParticipantRecordingS3BucketName": {
             "type": "string",
             "traits": {
@@ -4513,7 +4698,7 @@
                 "storage": {
                     "target": "com.amazonaws.ivsrealtime#ThumbnailStorageTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all generated thumbnails\n            in a serial manner, to the media/thumbnails/high directory. <code>LATEST</code> saves the latest thumbnail\n\t    in media/latest_thumbnail/high/thumb.jpg and overwrites it at the interval specified by\n\t    <code>targetIntervalSeconds</code>. You can enable both <code>SEQUENTIAL</code> and <code>LATEST</code>.\n\t    Default: <code>SEQUENTIAL</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records\n         all generated thumbnails in a serial manner, to the media/thumbnails/high directory.\n            <code>LATEST</code> saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg\n         and overwrites it at the interval specified by <code>targetIntervalSeconds</code>. You can\n         enable both <code>SEQUENTIAL</code> and <code>LATEST</code>. Default:\n            <code>SEQUENTIAL</code>.</p>"
                     }
                 },
                 "recordingMode": {
@@ -4524,7 +4709,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing a configuration of thumbnails for recorded video from an individual participant.</p>"
+                "smithy.api#documentation": "<p>An object representing a configuration of thumbnails for recorded video from an\n         individual participant.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantToken": {
@@ -4574,7 +4759,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object specifying a participant token in a stage.</p>\n         <p>\n            <b>Important</b>: Treat tokens as opaque; i.e., do not build functionality\n         based on token contents. The format of tokens could change in the future.</p>"
+                "smithy.api#documentation": "<p>Object specifying a participant token in a stage.</p>\n         <p>\n            <b>Important</b>: Treat tokens as opaque; i.e., do not build\n         functionality based on token contents. The format of tokens could change in the\n         future.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantTokenAttributes": {
@@ -4699,6 +4884,62 @@
         "com.amazonaws.ivsrealtime#PendingVerification": {
             "type": "structure",
             "members": {
+                "accessControlAllowOrigin": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Allow-Origin"
+                    }
+                },
+                "accessControlExposeHeaders": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Expose-Headers"
+                    }
+                },
+                "cacheControl": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "contentSecurityPolicy": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Content-Security-Policy"
+                    }
+                },
+                "strictTransportSecurity": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Strict-Transport-Security"
+                    }
+                },
+                "xContentTypeOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Content-Type-Options"
+                    }
+                },
+                "xFrameOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Frame-Options"
+                    }
+                },
+                "xAmznErrorType": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                },
                 "exceptionMessage": {
                     "target": "com.amazonaws.ivsrealtime#errorMessage",
                     "traits": {
@@ -4735,69 +4976,69 @@
                 "featuredParticipantAttribute": {
                     "target": "com.amazonaws.ivsrealtime#AttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>This attribute name identifies the featured slot. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured\n         slot. Default: <code>\"\"</code> (no featured participant).</p>"
+                        "smithy.api#documentation": "<p>This attribute name identifies the featured slot. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured slot. Default: <code>\"\"</code> (no featured\n         participant).</p>"
                     }
                 },
                 "omitStoppedVideo": {
                     "target": "com.amazonaws.ivsrealtime#OmitStoppedVideo",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Determines whether to omit participants with stopped video in the composition. Default: <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Determines whether to omit participants with stopped video in the composition. Default:\n            <code>false</code>.</p>"
                     }
                 },
                 "videoFillMode": {
                     "target": "com.amazonaws.ivsrealtime#VideoFillMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines how video content fits within the participant tile: <code>FILL</code> (stretched), \n\t  <code>COVER</code> (cropped), or <code>CONTAIN</code> (letterboxed). Default: <code>COVER</code>.</p>"
+                        "smithy.api#documentation": "<p>Defines how video content fits within the participant tile: <code>FILL</code>\n         (stretched), <code>COVER</code> (cropped), or <code>CONTAIN</code> (letterboxed). Default:\n            <code>COVER</code>.</p>"
                     }
                 },
                 "gridGap": {
                     "target": "com.amazonaws.ivsrealtime#GridGap",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies the spacing between participant tiles in pixels. Default: <code>0</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the spacing between participant tiles in pixels. Default:\n         <code>0</code>.</p>"
                     }
                 },
                 "pipParticipantAttribute": {
                     "target": "com.amazonaws.ivsrealtime#AttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the participant for the PiP window. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> \n\t is placed in the PiP slot. Default: <code>\"\"</code> (no PiP participant).</p>"
+                        "smithy.api#documentation": "<p>Specifies the participant for the PiP window. A participant with this attribute set to\n            <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the PiP slot. Default: <code>\"\"</code> (no PiP participant).</p>"
                     }
                 },
                 "pipBehavior": {
                     "target": "com.amazonaws.ivsrealtime#PipBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines PiP behavior when all participants have left: <code>STATIC</code> (maintains original position/size) or <code>DYNAMIC</code> (expands to full composition). Default: <code>STATIC</code>.</p>"
+                        "smithy.api#documentation": "<p>Defines PiP behavior when all participants have left: <code>STATIC</code> (maintains\n         original position/size) or <code>DYNAMIC</code> (expands to full composition). Default:\n            <code>STATIC</code>.</p>"
                     }
                 },
                 "pipOffset": {
                     "target": "com.amazonaws.ivsrealtime#PipOffset",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Sets the PiP window’s offset position in pixels from the closest edges determined by <code>PipPosition</code>. \n\t  Default: <code>0</code>.</p>"
+                        "smithy.api#documentation": "<p>Sets the PiP window’s offset position in pixels from the closest edges determined by\n            <code>PipPosition</code>. Default: <code>0</code>.</p>"
                     }
                 },
                 "pipPosition": {
                     "target": "com.amazonaws.ivsrealtime#PipPosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines the corner position of the PiP window. Default: <code>BOTTOM_RIGHT</code>.</p>"
+                        "smithy.api#documentation": "<p>Determines the corner position of the PiP window. Default:\n         <code>BOTTOM_RIGHT</code>.</p>"
                     }
                 },
                 "pipWidth": {
                     "target": "com.amazonaws.ivsrealtime#PipWidth",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the width of the PiP window in pixels. When this is not set explicitly, \n\t        <code>pipWidth</code>’s value will be based on the size of the composition and the \n\t\t\taspect ratio of the participant’s video.</p>"
+                        "smithy.api#documentation": "<p>Specifies the width of the PiP window in pixels. When this is not set explicitly,\n            <code>pipWidth</code>’s value will be based on the size of the composition and the\n         aspect ratio of the participant’s video.</p>"
                     }
                 },
                 "pipHeight": {
                     "target": "com.amazonaws.ivsrealtime#PipHeight",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the height of the PiP window in pixels. When this is not set explicitly, \n\t        <code>pipHeight</code>’s value will be based on the size of the composition and the\n\t\t\taspect ratio of the participant’s video.</p>"
+                        "smithy.api#documentation": "<p>Specifies the height of the PiP window in pixels. When this is not set explicitly,\n            <code>pipHeight</code>’s value will be based on the size of the composition and the\n         aspect ratio of the participant’s video.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information specific to Picture-in-Picture (PiP) layout, \n\t        for <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html\">server-side composition</a>.\n\t  </p>"
+                "smithy.api#documentation": "<p>Configuration information specific to Picture-in-Picture (PiP) layout, for <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html\">server-side composition</a>. </p>"
             }
         },
         "com.amazonaws.ivsrealtime#PipHeight": {
@@ -4878,13 +5119,13 @@
                 "fingerprint": {
                     "target": "com.amazonaws.ivsrealtime#PublicKeyFingerprint",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public key fingerprint, a short string used to identify or verify the full public key.</p>"
+                        "smithy.api#documentation": "<p>The public key fingerprint, a short string used to identify or verify the full public\n         key.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -4945,7 +5186,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -4997,6 +5238,62 @@
         "com.amazonaws.ivsrealtime#ResourceNotFoundException": {
             "type": "structure",
             "members": {
+                "accessControlAllowOrigin": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Allow-Origin"
+                    }
+                },
+                "accessControlExposeHeaders": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Expose-Headers"
+                    }
+                },
+                "cacheControl": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "contentSecurityPolicy": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Content-Security-Policy"
+                    }
+                },
+                "strictTransportSecurity": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Strict-Transport-Security"
+                    }
+                },
+                "xContentTypeOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Content-Type-Options"
+                    }
+                },
+                "xFrameOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Frame-Options"
+                    }
+                },
+                "xAmznErrorType": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                },
                 "exceptionMessage": {
                     "target": "com.amazonaws.ivsrealtime#errorMessage",
                     "traits": {
@@ -5026,32 +5323,32 @@
                 "storageConfigurationArn": {
                     "target": "com.amazonaws.ivsrealtime#StorageConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN of the <a>StorageConfiguration</a> where recorded videos will be stored.</p>",
+                        "smithy.api#documentation": "<p>ARN of the <a>StorageConfiguration</a> where recorded videos will be\n         stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "encoderConfigurationArns": {
                     "target": "com.amazonaws.ivsrealtime#EncoderConfigurationArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARNs of the <a>EncoderConfiguration</a> resource. The encoder configuration and stage resources \n\t  must be in the same AWS account and region. </p>",
+                        "smithy.api#documentation": "<p>ARNs of the <a>EncoderConfiguration</a> resource. The encoder configuration\n         and stage resources must be in the same AWS account and region. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "recordingConfiguration": {
                     "target": "com.amazonaws.ivsrealtime#RecordingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of maps, each of the form <code>string:string (key:value)</code>. \n\t  This is an optional customer specification, currently used only to specify \n\t  the recording format for storing a recording in Amazon S3.</p>"
+                        "smithy.api#documentation": "<p>Array of maps, each of the form <code>string:string (key:value)</code>. This is an\n         optional customer specification, currently used only to specify the recording format for\n         storing a recording in Amazon S3.</p>"
                     }
                 },
                 "thumbnailConfigurations": {
                     "target": "com.amazonaws.ivsrealtime#CompositionThumbnailConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A complex type that allows you to enable/disable the recording of thumbnails for a <a>Composition</a>\n            and modify the interval at which thumbnails are generated for the live session.</p>"
+                        "smithy.api#documentation": "<p>A complex type that allows you to enable/disable the recording of thumbnails for a <a>Composition</a> and modify the interval at which thumbnails are generated for\n         the live session.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that describes an S3 location where recorded videos will be stored.</p>"
+                "smithy.api#documentation": "<p>A complex type that describes an S3 location where recorded videos will be\n         stored.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#S3Detail": {
@@ -5075,18 +5372,74 @@
                 "bucketName": {
                     "target": "com.amazonaws.ivsrealtime#S3BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location (S3 bucket name) where recorded videos will be stored.  Note that the StorageConfiguration \n\t  and S3 bucket must be in the same region as the Composition.</p>",
+                        "smithy.api#documentation": "<p>Location (S3 bucket name) where recorded videos will be stored. Note that the\n         StorageConfiguration and S3 bucket must be in the same region as the Composition.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that describes an S3 location where recorded videos will be stored.</p>"
+                "smithy.api#documentation": "<p>A complex type that describes an S3 location where recorded videos will be\n         stored.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
+                "accessControlAllowOrigin": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Allow-Origin"
+                    }
+                },
+                "accessControlExposeHeaders": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Expose-Headers"
+                    }
+                },
+                "cacheControl": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "contentSecurityPolicy": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Content-Security-Policy"
+                    }
+                },
+                "strictTransportSecurity": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Strict-Transport-Security"
+                    }
+                },
+                "xContentTypeOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Content-Type-Options"
+                    }
+                },
+                "xFrameOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Frame-Options"
+                    }
+                },
+                "xAmznErrorType": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                },
                 "exceptionMessage": {
                     "target": "com.amazonaws.ivsrealtime#errorMessage",
                     "traits": {
@@ -5125,7 +5478,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 },
                 "autoParticipantRecordingConfiguration": {
@@ -5193,7 +5546,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about various endpoints for a stage. We recommend that you cache these values at stage\n            creation; the values can be cached for up to 14 days.</p>"
+                "smithy.api#documentation": "<p>Summary information about various endpoints for a stage. We recommend that you cache\n         these values at stage creation; the values can be cached for up to 14 days.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#StageName": {
@@ -5299,7 +5652,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -5490,7 +5843,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -5543,7 +5896,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n\t limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag\n            Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -5766,7 +6119,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.ivsrealtime#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of tags to be removed. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>",
+                        "smithy.api#documentation": "<p>Array of tag keys (strings) for the tags to be removed.\n         See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -5928,6 +6281,62 @@
         "com.amazonaws.ivsrealtime#ValidationException": {
             "type": "structure",
             "members": {
+                "accessControlAllowOrigin": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Allow-Origin"
+                    }
+                },
+                "accessControlExposeHeaders": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Access-Control-Expose-Headers"
+                    }
+                },
+                "cacheControl": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "contentSecurityPolicy": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Content-Security-Policy"
+                    }
+                },
+                "strictTransportSecurity": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "Strict-Transport-Security"
+                    }
+                },
+                "xContentTypeOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Content-Type-Options"
+                    }
+                },
+                "xFrameOptions": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "X-Frame-Options"
+                    }
+                },
+                "xAmznErrorType": {
+                    "target": "com.amazonaws.ivsrealtime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                },
                 "exceptionMessage": {
                     "target": "com.amazonaws.ivsrealtime#errorMessage",
                     "traits": {
@@ -5947,13 +6356,13 @@
                 "width": {
                     "target": "com.amazonaws.ivsrealtime#Width",
                     "traits": {
-                        "smithy.api#documentation": "<p>Video-resolution width. This must be an even number. Note that the maximum value is determined by <code>width</code>\n         times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or\n         1080x1920). Default: 1280.</p>"
+                        "smithy.api#documentation": "<p>Video-resolution width. This must be an even number. Note that the maximum value is\n         determined by <code>width</code> times <code>height</code>, such that the maximum total\n         pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.</p>"
                     }
                 },
                 "height": {
                     "target": "com.amazonaws.ivsrealtime#Height",
                     "traits": {
-                        "smithy.api#documentation": "<p>Video-resolution height. This must be an even number. Note that the maximum value is determined by <code>width</code>\n         times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or\n         1080x1920). Default: 720.</p>"
+                        "smithy.api#documentation": "<p>Video-resolution height. This must be an even number. Note that the maximum value is\n         determined by <code>width</code> times <code>height</code>, such that the maximum total\n         pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.</p>"
                     }
                 },
                 "framerate": {
