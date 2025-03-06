@@ -1,3 +1,7 @@
+# v1.58.0 (2025-03-06)
+
+* **Feature**: You can now perform an exact match or rate limit aggregation against the web request's JA4 fingerprint.
+
 # v1.57.2 (2025-03-05)
 
 * No change notes available for this release.

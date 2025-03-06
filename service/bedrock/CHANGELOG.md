@@ -1,3 +1,7 @@
+# v1.28.0 (2025-03-06)
+
+* **Feature**: This releases adds support for Custom Prompt Router
+
 # v1.27.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

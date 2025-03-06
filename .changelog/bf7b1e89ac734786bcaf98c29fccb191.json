@@ -1,8 +1,0 @@
-{
-    "id": "bf7b1e89-ac73-4786-bcaf-98c29fccb191",
-    "type": "documentation",
-    "description": "Doc-only update for CloudTrail.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

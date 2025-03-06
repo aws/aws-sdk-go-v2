@@ -1,3 +1,7 @@
+# v1.23.0 (2025-03-06)
+
+* **Feature**: IVS Real-Time now offers customers the ability to merge fragmented recordings in the event of a participant disconnect.
+
 # v1.22.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

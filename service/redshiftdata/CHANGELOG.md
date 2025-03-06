@@ -1,3 +1,7 @@
+# v1.33.0 (2025-03-06)
+
+* **Feature**: This release adds support for ListStatements API to filter statements by ClusterIdentifier, WorkgroupName, and Database.
+
 # v1.32.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

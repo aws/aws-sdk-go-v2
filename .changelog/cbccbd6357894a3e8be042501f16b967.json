@@ -1,8 +1,0 @@
-{
-    "id": "cbccbd63-5789-4a3e-8be0-42501f16b967",
-    "type": "feature",
-    "description": "IVS Real-Time now offers customers the ability to merge fragmented recordings in the event of a participant disconnect.",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

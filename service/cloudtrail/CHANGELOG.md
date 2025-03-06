@@ -1,3 +1,7 @@
+# v1.48.2 (2025-03-06)
+
+* **Documentation**: Doc-only update for CloudTrail.
+
 # v1.48.1 (2025-03-04.2)
 
 * **Bug Fix**: Add assurance test for operation order.

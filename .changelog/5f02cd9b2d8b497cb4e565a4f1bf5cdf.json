@@ -1,8 +1,0 @@
-{
-    "id": "5f02cd9b-2d8b-497c-b4e5-65a4f1bf5cdf",
-    "type": "feature",
-    "description": "Added a new ModifyEndpointEncryptionMode API for managing endpoint encryption settings.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

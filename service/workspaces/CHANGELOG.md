@@ -1,3 +1,7 @@
+# v1.55.0 (2025-03-06)
+
+* **Feature**: Added a new ModifyEndpointEncryptionMode API for managing endpoint encryption settings.
+
 # v1.54.0 (2025-03-05)
 
 * **Feature**: Added DeviceTypeWorkSpacesThinClient type to allow users to access their WorkSpaces through a WorkSpaces Thin Client.

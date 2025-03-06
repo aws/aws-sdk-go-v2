@@ -1,8 +1,0 @@
-{
-    "id": "6b0d843a-2541-4e39-bc10-2be5a23333ac",
-    "type": "feature",
-    "description": "You can now perform an exact match or rate limit aggregation against the web request's JA4 fingerprint.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

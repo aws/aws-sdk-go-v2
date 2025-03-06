@@ -1,3 +1,21 @@
+# Release (2025-03-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.28.0](service/bedrock/CHANGELOG.md#v1280-2025-03-06)
+  * **Feature**: This releases adds support for Custom Prompt Router
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.48.2](service/cloudtrail/CHANGELOG.md#v1482-2025-03-06)
+  * **Documentation**: Doc-only update for CloudTrail.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.23.0](service/ivsrealtime/CHANGELOG.md#v1230-2025-03-06)
+  * **Feature**: IVS Real-Time now offers customers the ability to merge fragmented recordings in the event of a participant disconnect.
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.2.0](service/networkflowmonitor/CHANGELOG.md#v120-2025-03-06)
+  * **Feature**: This release contains 2 changes. 1: DeleteScope/GetScope/UpdateScope operations now return 404 instead of 500 when the resource does not exist. 2: Expected string format for clientToken fields of CreateMonitorInput/CreateScopeInput/UpdateMonitorInput have been updated to be an UUID based string.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.33.0](service/redshiftdata/CHANGELOG.md#v1330-2025-03-06)
+  * **Feature**: This release adds support for ListStatements API to filter statements by ClusterIdentifier, WorkgroupName, and Database.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.58.0](service/wafv2/CHANGELOG.md#v1580-2025-03-06)
+  * **Feature**: You can now perform an exact match or rate limit aggregation against the web request's JA4 fingerprint.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.55.0](service/workspaces/CHANGELOG.md#v1550-2025-03-06)
+  * **Feature**: Added a new ModifyEndpointEncryptionMode API for managing endpoint encryption settings.
+
 # Release (2025-03-05)
 
 ## Module Highlights

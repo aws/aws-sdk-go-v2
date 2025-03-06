@@ -14,7 +14,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.58.1
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.1
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.48.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.44.1
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.55.1
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.28.1
@@ -64,7 +64,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.78.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.54.1
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.1
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/ses v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.1
@@ -79,7 +79,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/waf v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.26.1
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.54.0
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.55.0
 	github.com/aws/smithy-go v1.22.2
 )
 
