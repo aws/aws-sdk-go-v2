@@ -150,6 +150,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "gameliftstreams.ap-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-northeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "gameliftstreams.ap-northeast-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
 			}: endpoints.Endpoint{
 				Hostname: "gameliftstreams.ap-northeast-2.api.aws",
@@ -208,6 +213,11 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ca-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "gameliftstreams.ca-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "eu-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "gameliftstreams.eu-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-central-2",
@@ -275,9 +285,19 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "gameliftstreams.us-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "us-east-2",
+			}: endpoints.Endpoint{
+				Hostname: "gameliftstreams.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "gameliftstreams.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "gameliftstreams.us-west-2.api.aws",
 			},
 		},
 	},

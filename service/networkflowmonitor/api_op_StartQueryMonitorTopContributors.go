@@ -46,8 +46,9 @@ type StartQueryMonitorTopContributorsInput struct {
 	//
 	//   - INTER_VPC : Top contributor network flows between VPCs
 	//
-	//   - AWS_SERVICES : Top contributor network flows to or from Amazon Web Services
-	//   services
+	//   - AMAZON_S3 : Top contributor network flows to or from Amazon S3
+	//
+	//   - AMAZON_DYNAMODB : Top contributor network flows to or from Amazon Dynamo DB
 	//
 	//   - UNCLASSIFIED : Top contributor network flows that do not have a bucket
 	//   classification

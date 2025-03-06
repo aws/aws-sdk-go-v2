@@ -1567,6 +1567,10 @@ type WorkspaceDirectory struct {
 	// The IP addresses of the DNS servers for the directory.
 	DnsIpAddresses []string
 
+	// Endpoint encryption mode that allows you to configure the specified directory
+	// between Standard TLS and FIPS 140-2 validated mode.
+	EndpointEncryptionMode EndpointEncryptionMode
+
 	// The error message returned.
 	ErrorMessage *string
 

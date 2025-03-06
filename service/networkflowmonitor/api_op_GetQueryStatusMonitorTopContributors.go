@@ -16,7 +16,8 @@ import (
 // status for the top contributors for a monitor.
 //
 // When you start a query, use this call to check the status of the query to make
-// sure that it has has SUCCEEDED before you review the results. Use the same
+// sure that it has has SUCCEEDED before you
+// reviewStartQueryWorkloadInsightsTopContributorsData the results. Use the same
 // query ID that you used for the corresponding API call to start the query,
 // StartQueryMonitorTopContributors .
 //

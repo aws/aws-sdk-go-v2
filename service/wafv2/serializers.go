@@ -3992,6 +3992,13 @@ func awsAwsjson11_serializeDocumentFieldToMatch(v *types.FieldToMatch, value smi
 		}
 	}
 
+	if v.JA4Fingerprint != nil {
+		ok := object.Key("JA4Fingerprint")
+		if err := awsAwsjson11_serializeDocumentJA4Fingerprint(v.JA4Fingerprint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JsonBody != nil {
 		ok := object.Key("JsonBody")
 		if err := awsAwsjson11_serializeDocumentJsonBody(v.JsonBody, ok); err != nil {
@@ -4282,6 +4289,18 @@ func awsAwsjson11_serializeDocumentIPSetReferenceStatement(v *types.IPSetReferen
 }
 
 func awsAwsjson11_serializeDocumentJA3Fingerprint(v *types.JA3Fingerprint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FallbackBehavior) > 0 {
+		ok := object.Key("FallbackBehavior")
+		ok.String(string(v.FallbackBehavior))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentJA4Fingerprint(v *types.JA4Fingerprint, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4790,6 +4809,20 @@ func awsAwsjson11_serializeDocumentRateBasedStatementCustomKey(v *types.RateBase
 		}
 	}
 
+	if v.JA3Fingerprint != nil {
+		ok := object.Key("JA3Fingerprint")
+		if err := awsAwsjson11_serializeDocumentRateLimitJA3Fingerprint(v.JA3Fingerprint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JA4Fingerprint != nil {
+		ok := object.Key("JA4Fingerprint")
+		if err := awsAwsjson11_serializeDocumentRateLimitJA4Fingerprint(v.JA4Fingerprint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LabelNamespace != nil {
 		ok := object.Key("LabelNamespace")
 		if err := awsAwsjson11_serializeDocumentRateLimitLabelNamespace(v.LabelNamespace, ok); err != nil {
@@ -4889,6 +4922,30 @@ func awsAwsjson11_serializeDocumentRateLimitHTTPMethod(v *types.RateLimitHTTPMet
 func awsAwsjson11_serializeDocumentRateLimitIP(v *types.RateLimitIP, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitJA3Fingerprint(v *types.RateLimitJA3Fingerprint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FallbackBehavior) > 0 {
+		ok := object.Key("FallbackBehavior")
+		ok.String(string(v.FallbackBehavior))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitJA4Fingerprint(v *types.RateLimitJA4Fingerprint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FallbackBehavior) > 0 {
+		ok := object.Key("FallbackBehavior")
+		ok.String(string(v.FallbackBehavior))
+	}
 
 	return nil
 }

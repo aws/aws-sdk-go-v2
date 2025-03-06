@@ -1923,6 +1923,11 @@ func validateFieldToMatch(v *types.FieldToMatch) error {
 			invalidParams.AddNested("JA3Fingerprint", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.JA4Fingerprint != nil {
+		if err := validateJA4Fingerprint(v.JA4Fingerprint); err != nil {
+			invalidParams.AddNested("JA4Fingerprint", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2119,6 +2124,21 @@ func validateJA3Fingerprint(v *types.JA3Fingerprint) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "JA3Fingerprint"}
+	if len(v.FallbackBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FallbackBehavior"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJA4Fingerprint(v *types.JA4Fingerprint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JA4Fingerprint"}
 	if len(v.FallbackBehavior) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FallbackBehavior"))
 	}
@@ -2524,6 +2544,16 @@ func validateRateBasedStatementCustomKey(v *types.RateBasedStatementCustomKey) e
 			invalidParams.AddNested("UriPath", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.JA3Fingerprint != nil {
+		if err := validateRateLimitJA3Fingerprint(v.JA3Fingerprint); err != nil {
+			invalidParams.AddNested("JA3Fingerprint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JA4Fingerprint != nil {
+		if err := validateRateLimitJA4Fingerprint(v.JA4Fingerprint); err != nil {
+			invalidParams.AddNested("JA4Fingerprint", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2584,6 +2614,36 @@ func validateRateLimitHeader(v *types.RateLimitHeader) error {
 		if err := validateTextTransformations(v.TextTransformations); err != nil {
 			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRateLimitJA3Fingerprint(v *types.RateLimitJA3Fingerprint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RateLimitJA3Fingerprint"}
+	if len(v.FallbackBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FallbackBehavior"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRateLimitJA4Fingerprint(v *types.RateLimitJA4Fingerprint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RateLimitJA4Fingerprint"}
+	if len(v.FallbackBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FallbackBehavior"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

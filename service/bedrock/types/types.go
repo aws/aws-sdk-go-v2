@@ -2292,6 +2292,8 @@ type PromptRouterSummary struct {
 type PromptRouterTargetModel struct {
 
 	// The target model's ARN.
+	//
+	// This member is required.
 	ModelArn *string
 
 	noSmithyDocumentSerde

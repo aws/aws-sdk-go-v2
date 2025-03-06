@@ -519,8 +519,26 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "us-iso-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "us-iso-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {},
+			endpoints.EndpointKey{
+				Region: "us-iso-east-1-fips",
+			}: endpoints.Endpoint{
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-iso-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-iso-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {},
+			endpoints.EndpointKey{
+				Region: "us-iso-west-1-fips",
+			}: endpoints.Endpoint{
+				Deprecated: aws.TrueTernary,
+			},
 		},
 	},
 	{
@@ -547,6 +565,15 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-isob-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isob-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {},
+			endpoints.EndpointKey{
+				Region: "us-isob-east-1-fips",
+			}: endpoints.Endpoint{
+				Deprecated: aws.TrueTernary,
+			},
 		},
 	},
 	{

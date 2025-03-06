@@ -990,6 +990,26 @@ func (m *validateOpModifyClientProperties) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyEndpointEncryptionMode struct {
+}
+
+func (*validateOpModifyEndpointEncryptionMode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyEndpointEncryptionMode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyEndpointEncryptionModeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyEndpointEncryptionModeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifySamlProperties struct {
 }
 
@@ -1684,6 +1704,10 @@ func addOpModifyCertificateBasedAuthPropertiesValidationMiddleware(stack *middle
 
 func addOpModifyClientPropertiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyClientProperties{}, middleware.After)
+}
+
+func addOpModifyEndpointEncryptionModeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyEndpointEncryptionMode{}, middleware.After)
 }
 
 func addOpModifySamlPropertiesValidationMiddleware(stack *middleware.Stack) error {
@@ -3224,6 +3248,24 @@ func validateOpModifyClientPropertiesInput(v *ModifyClientPropertiesInput) error
 	}
 	if v.ClientProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientProperties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyEndpointEncryptionModeInput(v *ModifyEndpointEncryptionModeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyEndpointEncryptionModeInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if len(v.EndpointEncryptionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointEncryptionMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

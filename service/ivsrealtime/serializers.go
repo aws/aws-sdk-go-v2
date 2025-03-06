@@ -3251,6 +3251,11 @@ func awsRestjson1_serializeDocumentAutoParticipantRecordingConfiguration(v *type
 		}
 	}
 
+	if v.RecordingReconnectWindowSeconds != 0 {
+		ok := object.Key("recordingReconnectWindowSeconds")
+		ok.Integer(v.RecordingReconnectWindowSeconds)
+	}
+
 	if v.StorageConfigurationArn != nil {
 		ok := object.Key("storageConfigurationArn")
 		ok.String(*v.StorageConfigurationArn)

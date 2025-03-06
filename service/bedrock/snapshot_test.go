@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreateModelInvocationJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePromptRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePromptRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePromptRouter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateProvisionedModelThroughput(context.Background(), nil, func(o *Options) {
@@ -259,6 +271,18 @@ func TestCheckSnapshot_DeleteModelInvocationLoggingConfiguration(t *testing.T) {
 	_, err := svc.DeleteModelInvocationLoggingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteModelInvocationLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePromptRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePromptRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePromptRouter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -865,6 +889,18 @@ func TestUpdateSnapshot_CreateModelInvocationJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePromptRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePromptRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePromptRouter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateProvisionedModelThroughput(context.Background(), nil, func(o *Options) {
@@ -942,6 +978,18 @@ func TestUpdateSnapshot_DeleteModelInvocationLoggingConfiguration(t *testing.T) 
 	_, err := svc.DeleteModelInvocationLoggingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteModelInvocationLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePromptRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePromptRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePromptRouter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

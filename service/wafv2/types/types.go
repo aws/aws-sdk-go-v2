@@ -885,18 +885,19 @@ type DataProtection struct {
 	// This member is required.
 	Field *FieldToProtect
 
-	// Specifies whether to also protect any rate-based rule details from the web ACL
-	// logs when applying data protection for this field type and keys. For additional
-	// information, see the log field rateBasedRuleList at [Log fields for web ACL traffic] in the WAF Developer Guide.
+	// Specifies whether to also exclude any rate-based rule details from the data
+	// protection you have enabled for a given field. If you specify this exception,
+	// RateBasedDetails will show the value of the field. For additional information,
+	// see the log field rateBasedRuleList at [Log fields for web ACL traffic] in the WAF Developer Guide.
 	//
 	// Default: FALSE
 	//
 	// [Log fields for web ACL traffic]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 	ExcludeRateBasedDetails bool
 
-	// Specifies whether to also protect any rule match details from the web ACL logs
-	// when applying data protection this field type and keys. WAF logs these details
-	// for non-terminating matching rules and for the terminating matching rule. For
+	// Specifies whether to also exclude any rule match details from the data
+	// protection you have enabled for a given field. WAF logs these details for
+	// non-terminating matching rules and for the terminating matching rule. For
 	// additional information, see [Log fields for web ACL traffic]in the WAF Developer Guide.
 	//
 	// Default: FALSE
@@ -907,14 +908,14 @@ type DataProtection struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies data protection to apply to the web request data that WAF stores for
-// the web ACL. This is a web ACL level data protection option.
+// Specifies data protection to apply to the web request data for the web ACL.
+// This is a web ACL level data protection option.
 //
 // The data protection that you configure for the web ACL alters the data that's
-// available for any other data collection activity, including WAF logging, web ACL
-// request sampling, Amazon Web Services Managed Rules, and Amazon Security Lake
-// data collection and management. Your other option for data protection is in the
-// logging configuration, which only affects logging.
+// available for any other data collection activity, including your WAF logging
+// destinations, web ACL request sampling, and Amazon Security Lake data collection
+// and management. Your other option for data protection is in the logging
+// configuration, which only affects logging.
 //
 // This is part of the data protection configuration for a web ACL.
 type DataProtectionConfig struct {
@@ -1098,6 +1099,28 @@ type FieldToMatch struct {
 	//
 	// [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 	JA3Fingerprint *JA3Fingerprint
+
+	// Available for use with Amazon CloudFront distributions and Application Load
+	// Balancers. Match against the request's JA4 fingerprint. The JA4 fingerprint is a
+	// 36-character hash derived from the TLS Client Hello of an incoming request. This
+	// fingerprint serves as a unique identifier for the client's TLS configuration.
+	// WAF calculates and logs this fingerprint for each request that has enough TLS
+	// Client Hello information for the calculation. Almost all web requests include
+	// this information.
+	//
+	// You can use this choice only with a string match ByteMatchStatement with the
+	// PositionalConstraint set to EXACTLY .
+	//
+	// You can obtain the JA4 fingerprint for client requests from the web ACL logs.
+	// If WAF is able to calculate the fingerprint, it includes it in the logs. For
+	// information about the logging fields, see [Log fields]in the WAF Developer Guide.
+	//
+	// Provide the JA4 fingerprint string from the logs in your string match statement
+	// specification, to match with any future requests that have the same TLS
+	// configuration.
+	//
+	// [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
+	JA4Fingerprint *JA4Fingerprint
 
 	// Inspect the request body as JSON. The request body immediately follows the
 	// request headers. This is the part of a request that contains any additional data
@@ -1752,6 +1775,44 @@ type IPSetSummary struct {
 type JA3Fingerprint struct {
 
 	// The match status to assign to the web request if the request doesn't have a JA3
+	// fingerprint.
+	//
+	// You can specify the following fallback behaviors:
+	//
+	//   - MATCH - Treat the web request as matching the rule statement. WAF applies
+	//   the rule action to the request.
+	//
+	//   - NO_MATCH - Treat the web request as not matching the rule statement.
+	//
+	// This member is required.
+	FallbackBehavior FallbackBehavior
+
+	noSmithyDocumentSerde
+}
+
+// Available for use with Amazon CloudFront distributions and Application Load
+// Balancers. Match against the request's JA4 fingerprint. The JA4 fingerprint is a
+// 36-character hash derived from the TLS Client Hello of an incoming request. This
+// fingerprint serves as a unique identifier for the client's TLS configuration.
+// WAF calculates and logs this fingerprint for each request that has enough TLS
+// Client Hello information for the calculation. Almost all web requests include
+// this information.
+//
+// You can use this choice only with a string match ByteMatchStatement with the
+// PositionalConstraint set to EXACTLY .
+//
+// You can obtain the JA4 fingerprint for client requests from the web ACL logs.
+// If WAF is able to calculate the fingerprint, it includes it in the logs. For
+// information about the logging fields, see [Log fields]in the WAF Developer Guide.
+//
+// Provide the JA4 fingerprint string from the logs in your string match statement
+// specification, to match with any future requests that have the same TLS
+// configuration.
+//
+// [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
+type JA4Fingerprint struct {
+
+	// The match status to assign to the web request if the request doesn't have a JA4
 	// fingerprint.
 	//
 	// You can specify the following fallback behaviors:
@@ -2950,6 +3011,16 @@ type RateBasedStatementCustomKey struct {
 	// address by specifying IP in your rate-based statement's AggregateKeyType .
 	IP *RateLimitIP
 
+	//  Use the request's JA3 fingerprint as an aggregate key. If you use a single JA3
+	// fingerprint as your custom key, then each value fully defines an aggregation
+	// instance.
+	JA3Fingerprint *RateLimitJA3Fingerprint
+
+	// Use the request's JA4 fingerprint as an aggregate key. If you use a single JA4
+	// fingerprint as your custom key, then each value fully defines an aggregation
+	// instance.
+	JA4Fingerprint *RateLimitJA4Fingerprint
+
 	// Use the specified label namespace as an aggregate key. Each distinct fully
 	// qualified label name that has the specified label namespace contributes to the
 	// aggregation instance. If you use just one label namespace as your custom key,
@@ -3105,6 +3176,49 @@ type RateLimitHTTPMethod struct {
 //
 // JSON specification: "RateLimitIP": {}
 type RateLimitIP struct {
+	noSmithyDocumentSerde
+}
+
+//	Use the request's JA3 fingerprint derived from the TLS Client Hello of an
+//
+// incoming request as an aggregate key. If you use a single JA3 fingerprint as
+// your custom key, then each value fully defines an aggregation instance.
+type RateLimitJA3Fingerprint struct {
+
+	// The match status to assign to the web request if there is insufficient TSL
+	// Client Hello information to compute the JA3 fingerprint.
+	//
+	// You can specify the following fallback behaviors:
+	//
+	//   - MATCH - Treat the web request as matching the rule statement. WAF applies
+	//   the rule action to the request.
+	//
+	//   - NO_MATCH - Treat the web request as not matching the rule statement.
+	//
+	// This member is required.
+	FallbackBehavior FallbackBehavior
+
+	noSmithyDocumentSerde
+}
+
+// Use the request's JA4 fingerprint derived from the TLS Client Hello of an
+// incoming request as an aggregate key. If you use a single JA4 fingerprint as
+// your custom key, then each value fully defines an aggregation instance.
+type RateLimitJA4Fingerprint struct {
+
+	// The match status to assign to the web request if there is insufficient TSL
+	// Client Hello information to compute the JA4 fingerprint.
+	//
+	// You can specify the following fallback behaviors:
+	//
+	//   - MATCH - Treat the web request as matching the rule statement. WAF applies
+	//   the rule action to the request.
+	//
+	//   - NO_MATCH - Treat the web request as not matching the rule statement.
+	//
+	// This member is required.
+	FallbackBehavior FallbackBehavior
+
 	noSmithyDocumentSerde
 }
 
@@ -4855,14 +4969,14 @@ type WebACL struct {
 	// [Customizing web requests and responses in WAF]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
 	CustomResponseBodies map[string]CustomResponseBody
 
-	// Specifies data protection to apply to the web request data that WAF stores for
-	// the web ACL. This is a web ACL level data protection option.
+	// Specifies data protection to apply to the web request data for the web ACL.
+	// This is a web ACL level data protection option.
 	//
 	// The data protection that you configure for the web ACL alters the data that's
-	// available for any other data collection activity, including WAF logging, web ACL
-	// request sampling, Amazon Web Services Managed Rules, and Amazon Security Lake
-	// data collection and management. Your other option for data protection is in the
-	// logging configuration, which only affects logging.
+	// available for any other data collection activity, including your WAF logging
+	// destinations, web ACL request sampling, and Amazon Security Lake data collection
+	// and management. Your other option for data protection is in the logging
+	// configuration, which only affects logging.
 	DataProtectionConfig *DataProtectionConfig
 
 	// A description of the web ACL that helps with identification.

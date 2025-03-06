@@ -34,7 +34,8 @@ type DescribeWorkspacesPoolSessionsInput struct {
 	// This member is required.
 	PoolId *string
 
-	// The maximum number of items to return.
+	// The maximum size of each page of results. The default value is 20 and the
+	// maximum value is 50.
 	Limit *int32
 
 	// If you received a NextToken from a previous call that was paginated, provide

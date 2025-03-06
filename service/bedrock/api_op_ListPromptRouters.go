@@ -36,6 +36,9 @@ type ListPromptRoutersInput struct {
 	// of results.
 	NextToken *string
 
+	// The type of the prompt routers, such as whether it's default or custom.
+	Type types.PromptRouterType
+
 	noSmithyDocumentSerde
 }
 

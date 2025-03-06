@@ -1,0 +1,8 @@
+{
+    "id": "33caa859-0635-4b9b-8307-1a66c057084e",
+    "type": "feature",
+    "description": "This releases adds support for Custom Prompt Router",
+    "modules": [
+        "service/bedrock"
+    ]
+}

@@ -648,6 +648,25 @@ func (DescribeWorkspacesPoolsFilterOperator) Values() []DescribeWorkspacesPoolsF
 	}
 }
 
+type EndpointEncryptionMode string
+
+// Enum values for EndpointEncryptionMode
+const (
+	EndpointEncryptionModeStandardTls   EndpointEncryptionMode = "STANDARD_TLS"
+	EndpointEncryptionModeFipsValidated EndpointEncryptionMode = "FIPS_VALIDATED"
+)
+
+// Values returns all known values for EndpointEncryptionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointEncryptionMode) Values() []EndpointEncryptionMode {
+	return []EndpointEncryptionMode{
+		"STANDARD_TLS",
+		"FIPS_VALIDATED",
+	}
+}
+
 type ImageAssociatedResourceType string
 
 // Enum values for ImageAssociatedResourceType

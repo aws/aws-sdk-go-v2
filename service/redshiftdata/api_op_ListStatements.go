@@ -14,10 +14,16 @@ import (
 // List of SQL statements. By default, only finished statements are shown. A token
 // is returned to page through the statement list.
 //
+// When you use identity-enhanced role sessions to list statements, you must
+// provide either the cluster-identifier or workgroup-name parameter. This ensures
+// that the IdC user can only access the Amazon Redshift IdC applications they are
+// assigned. For more information, see [Trusted identity propagation overview].
+//
 // For more information about the Amazon Redshift Data API and CLI usage examples,
 // see [Using the Amazon Redshift Data API]in the Amazon Redshift Management Guide.
 //
 // [Using the Amazon Redshift Data API]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+// [Trusted identity propagation overview]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html
 func (c *Client) ListStatements(ctx context.Context, params *ListStatementsInput, optFns ...func(*Options)) (*ListStatementsOutput, error) {
 	if params == nil {
 		params = &ListStatementsInput{}
@@ -34,6 +40,14 @@ func (c *Client) ListStatements(ctx context.Context, params *ListStatementsInput
 }
 
 type ListStatementsInput struct {
+
+	// The cluster identifier. Only statements that ran on this cluster are returned.
+	// When providing ClusterIdentifier , then WorkgroupName can't be specified.
+	ClusterIdentifier *string
+
+	// The name of the database when listing statements run against a ClusterIdentifier
+	// or WorkgroupName .
+	Database *string
 
 	// The maximum number of SQL statements to return in the response. If more SQL
 	// statements exist than fit in one response, then NextToken is returned to page
@@ -78,6 +92,11 @@ type ListStatementsInput struct {
 	//
 	//   - SUBMITTED - The query was submitted, but not yet processed.
 	Status types.StatusString
+
+	// The serverless workgroup name or Amazon Resource Name (ARN). Only statements
+	// that ran on this workgroup are returned. When providing WorkgroupName , then
+	// ClusterIdentifier can't be specified.
+	WorkgroupName *string
 
 	noSmithyDocumentSerde
 }

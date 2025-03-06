@@ -9267,6 +9267,11 @@ func awsAwsjson11_deserializeDocumentFieldToMatch(v **types.FieldToMatch, value 
 				return err
 			}
 
+		case "JA4Fingerprint":
+			if err := awsAwsjson11_deserializeDocumentJA4Fingerprint(&sv.JA4Fingerprint, value); err != nil {
+				return err
+			}
+
 		case "JsonBody":
 			if err := awsAwsjson11_deserializeDocumentJsonBody(&sv.JsonBody, value); err != nil {
 				return err
@@ -10438,6 +10443,46 @@ func awsAwsjson11_deserializeDocumentJA3Fingerprint(v **types.JA3Fingerprint, va
 	var sv *types.JA3Fingerprint
 	if *v == nil {
 		sv = &types.JA3Fingerprint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FallbackBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FallbackBehavior to be of type string, got %T instead", value)
+				}
+				sv.FallbackBehavior = types.FallbackBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentJA4Fingerprint(v **types.JA4Fingerprint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JA4Fingerprint
+	if *v == nil {
+		sv = &types.JA4Fingerprint{}
 	} else {
 		sv = *v
 	}
@@ -12435,6 +12480,16 @@ func awsAwsjson11_deserializeDocumentRateBasedStatementCustomKey(v **types.RateB
 				return err
 			}
 
+		case "JA3Fingerprint":
+			if err := awsAwsjson11_deserializeDocumentRateLimitJA3Fingerprint(&sv.JA3Fingerprint, value); err != nil {
+				return err
+			}
+
+		case "JA4Fingerprint":
+			if err := awsAwsjson11_deserializeDocumentRateLimitJA4Fingerprint(&sv.JA4Fingerprint, value); err != nil {
+				return err
+			}
+
 		case "LabelNamespace":
 			if err := awsAwsjson11_deserializeDocumentRateLimitLabelNamespace(&sv.LabelNamespace, value); err != nil {
 				return err
@@ -12717,6 +12772,86 @@ func awsAwsjson11_deserializeDocumentRateLimitIP(v **types.RateLimitIP, value in
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitJA3Fingerprint(v **types.RateLimitJA3Fingerprint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitJA3Fingerprint
+	if *v == nil {
+		sv = &types.RateLimitJA3Fingerprint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FallbackBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FallbackBehavior to be of type string, got %T instead", value)
+				}
+				sv.FallbackBehavior = types.FallbackBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitJA4Fingerprint(v **types.RateLimitJA4Fingerprint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitJA4Fingerprint
+	if *v == nil {
+		sv = &types.RateLimitJA4Fingerprint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FallbackBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FallbackBehavior to be of type string, got %T instead", value)
+				}
+				sv.FallbackBehavior = types.FallbackBehavior(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

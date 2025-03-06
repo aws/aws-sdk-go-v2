@@ -140,8 +140,8 @@ type UpdateTrailInput struct {
 	// [Finding Your CloudTrail Log Files]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
 	S3KeyPrefix *string
 
-	// Specifies the name of the Amazon SNS topic defined for notification of log file
-	// delivery. The maximum length is 256 characters.
+	// Specifies the name or ARN of the Amazon SNS topic defined for notification of
+	// log file delivery. The maximum length is 256 characters.
 	SnsTopicName *string
 
 	noSmithyDocumentSerde

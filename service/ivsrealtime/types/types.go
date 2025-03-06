@@ -13,13 +13,22 @@ type AutoParticipantRecordingConfiguration struct {
 	// ARN of the StorageConfiguration resource to use for individual participant recording. Default: ""
 	// (empty string, no storage configuration is specified). Individual participant
 	// recording cannot be started unless a storage configuration is specified, when a Stage
-	// is created or updated.
+	// is created or updated. To disable individual participant recording, set this to
+	// "" ; other fields in this object will get reset to their defaults when sending
+	// "" .
 	//
 	// This member is required.
 	StorageConfigurationArn *string
 
 	// Types of media to be recorded. Default: AUDIO_VIDEO .
 	MediaTypes []ParticipantRecordingMediaType
+
+	// If a stage publisher disconnects and then reconnects within the specified
+	// interval, the multiple recordings will be considered a single recording and
+	// merged together.
+	//
+	// The default value is 0, which disables merging.
+	RecordingReconnectWindowSeconds int32
 
 	// A complex type that allows you to enable/disable the recording of thumbnails
 	// for individual participant recording and modify the interval at which thumbnails
@@ -552,7 +561,9 @@ type Participant struct {
 
 	// S3 prefix of the S3 bucket where the participant is being recorded, if
 	// individual participant recording is enabled, or "" (empty string), if recording
-	// is not enabled.
+	// is not enabled. If individual participant recording merge is enabled, and if a
+	// stage publisher disconnects from a stage and then reconnects, IVS tries to
+	// record to the same S3 prefix as the previous session. See Merge Fragmented Individual Participant Recordings.
 	RecordingS3Prefix *string
 
 	// The participant’s recording state.

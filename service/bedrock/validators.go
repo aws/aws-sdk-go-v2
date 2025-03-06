@@ -210,6 +210,26 @@ func (m *validateOpCreateModelInvocationJob) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePromptRouter struct {
+}
+
+func (*validateOpCreatePromptRouter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePromptRouter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePromptRouterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePromptRouterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateProvisionedModelThroughput struct {
 }
 
@@ -325,6 +345,26 @@ func (m *validateOpDeleteMarketplaceModelEndpoint) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMarketplaceModelEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePromptRouter struct {
+}
+
+func (*validateOpDeletePromptRouter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePromptRouter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePromptRouterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePromptRouterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -890,6 +930,10 @@ func addOpCreateModelInvocationJobValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateModelInvocationJob{}, middleware.After)
 }
 
+func addOpCreatePromptRouterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePromptRouter{}, middleware.After)
+}
+
 func addOpCreateProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProvisionedModelThroughput{}, middleware.After)
 }
@@ -912,6 +956,10 @@ func addOpDeleteInferenceProfileValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMarketplaceModelEndpoint{}, middleware.After)
+}
+
+func addOpDeletePromptRouterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePromptRouter{}, middleware.After)
 }
 
 func addOpDeleteProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
@@ -2183,6 +2231,38 @@ func validateOutputDataConfig(v *types.OutputDataConfig) error {
 	}
 }
 
+func validatePromptRouterTargetModel(v *types.PromptRouterTargetModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptRouterTargetModel"}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePromptRouterTargetModels(v []types.PromptRouterTargetModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptRouterTargetModels"}
+	for i := range v {
+		if err := validatePromptRouterTargetModel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateQueryTransformationConfiguration(v *types.QueryTransformationConfiguration) error {
 	if v == nil {
 		return nil
@@ -2369,6 +2449,21 @@ func validateRetrieveConfig(v *types.RetrieveConfig) error {
 		if err := validateKnowledgeBaseRetrievalConfiguration(v.KnowledgeBaseRetrievalConfiguration); err != nil {
 			invalidParams.AddNested("KnowledgeBaseRetrievalConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingCriteria(v *types.RoutingCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingCriteria"}
+	if v.ResponseQualityDifference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseQualityDifference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2936,6 +3031,47 @@ func validateOpCreateModelInvocationJobInput(v *CreateModelInvocationJobInput) e
 	}
 }
 
+func validateOpCreatePromptRouterInput(v *CreatePromptRouterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePromptRouterInput"}
+	if v.PromptRouterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptRouterName"))
+	}
+	if v.Models == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Models"))
+	} else if v.Models != nil {
+		if err := validatePromptRouterTargetModels(v.Models); err != nil {
+			invalidParams.AddNested("Models", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoutingCriteria == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingCriteria"))
+	} else if v.RoutingCriteria != nil {
+		if err := validateRoutingCriteria(v.RoutingCriteria); err != nil {
+			invalidParams.AddNested("RoutingCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FallbackModel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FallbackModel"))
+	} else if v.FallbackModel != nil {
+		if err := validatePromptRouterTargetModel(v.FallbackModel); err != nil {
+			invalidParams.AddNested("FallbackModel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateProvisionedModelThroughputInput(v *CreateProvisionedModelThroughputInput) error {
 	if v == nil {
 		return nil
@@ -3029,6 +3165,21 @@ func validateOpDeleteMarketplaceModelEndpointInput(v *DeleteMarketplaceModelEndp
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMarketplaceModelEndpointInput"}
 	if v.EndpointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePromptRouterInput(v *DeletePromptRouterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePromptRouterInput"}
+	if v.PromptRouterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptRouterArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

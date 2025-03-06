@@ -1226,6 +1226,125 @@ func awsRestjson1_serializeOpDocumentCreateModelInvocationJobInput(v *CreateMode
 	return nil
 }
 
+type awsRestjson1_serializeOpCreatePromptRouter struct {
+}
+
+func (*awsRestjson1_serializeOpCreatePromptRouter) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreatePromptRouter) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreatePromptRouterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prompt-routers")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreatePromptRouterInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreatePromptRouterInput(v *CreatePromptRouterInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreatePromptRouterInput(v *CreatePromptRouterInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("clientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.FallbackModel != nil {
+		ok := object.Key("fallbackModel")
+		if err := awsRestjson1_serializeDocumentPromptRouterTargetModel(v.FallbackModel, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Models != nil {
+		ok := object.Key("models")
+		if err := awsRestjson1_serializeDocumentPromptRouterTargetModels(v.Models, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PromptRouterName != nil {
+		ok := object.Key("promptRouterName")
+		ok.String(*v.PromptRouterName)
+	}
+
+	if v.RoutingCriteria != nil {
+		ok := object.Key("routingCriteria")
+		if err := awsRestjson1_serializeDocumentRoutingCriteria(v.RoutingCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateProvisionedModelThroughput struct {
 }
 
@@ -1746,6 +1865,77 @@ func (m *awsRestjson1_serializeOpDeleteModelInvocationLoggingConfiguration) Hand
 func awsRestjson1_serializeOpHttpBindingsDeleteModelInvocationLoggingConfigurationInput(v *DeleteModelInvocationLoggingConfigurationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeletePromptRouter struct {
+}
+
+func (*awsRestjson1_serializeOpDeletePromptRouter) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeletePromptRouter) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeletePromptRouterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prompt-routers/{promptRouterArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeletePromptRouterInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeletePromptRouterInput(v *DeletePromptRouterInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.PromptRouterArn == nil || len(*v.PromptRouterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member promptRouterArn must not be empty")}
+	}
+	if v.PromptRouterArn != nil {
+		if err := encoder.SetURI("promptRouterArn").String(*v.PromptRouterArn); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3917,6 +4107,10 @@ func awsRestjson1_serializeOpHttpBindingsListPromptRoutersInput(v *ListPromptRou
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if len(v.Type) > 0 {
+		encoder.SetQuery("type").String(string(v.Type))
 	}
 
 	return nil
@@ -6407,6 +6601,31 @@ func awsRestjson1_serializeDocumentPerformanceConfiguration(v *types.Performance
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPromptRouterTargetModel(v *types.PromptRouterTargetModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelArn != nil {
+		ok := object.Key("modelArn")
+		ok.String(*v.ModelArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromptRouterTargetModels(v []types.PromptRouterTargetModel, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPromptRouterTargetModel(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPromptTemplate(v *types.PromptTemplate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6702,6 +6921,31 @@ func awsRestjson1_serializeDocumentRetrieveConfig(v *types.RetrieveConfig, value
 		ok := object.Key("knowledgeBaseRetrievalConfiguration")
 		if err := awsRestjson1_serializeDocumentKnowledgeBaseRetrievalConfiguration(v.KnowledgeBaseRetrievalConfiguration, ok); err != nil {
 			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRoutingCriteria(v *types.RoutingCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResponseQualityDifference != nil {
+		ok := object.Key("responseQualityDifference")
+		switch {
+		case math.IsNaN(*v.ResponseQualityDifference):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ResponseQualityDifference, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ResponseQualityDifference, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ResponseQualityDifference)
+
 		}
 	}
 

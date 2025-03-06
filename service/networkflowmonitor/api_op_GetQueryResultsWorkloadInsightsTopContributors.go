@@ -13,8 +13,12 @@ import (
 
 // Return the data for a query with the Network Flow Monitor query interface. You
 // specify the query that you want to return results for by providing a query ID
-// and a monitor name. This query returns the top contributors for a specific
-// monitor.
+// and a monitor name.
+//
+// This query returns the top contributors for a scope for workload insights.
+// Workload insights provide a high level view of network flow performance data
+// collected by agents. To return the data for the top contributors, see
+// GetQueryResultsWorkloadInsightsTopContributorsData .
 //
 // Create a query ID for this call by calling the corresponding API call to start
 // the query, StartQueryWorkloadInsightsTopContributors . Use the scope ID that was

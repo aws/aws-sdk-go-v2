@@ -1083,6 +1083,16 @@ func awsAwsjson11_serializeOpDocumentListStatementsInput(v *ListStatementsInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClusterIdentifier != nil {
+		ok := object.Key("ClusterIdentifier")
+		ok.String(*v.ClusterIdentifier)
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
 	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
 		ok.Integer(v.MaxResults)
@@ -1106,6 +1116,11 @@ func awsAwsjson11_serializeOpDocumentListStatementsInput(v *ListStatementsInput,
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	if v.WorkgroupName != nil {
+		ok := object.Key("WorkgroupName")
+		ok.String(*v.WorkgroupName)
 	}
 
 	return nil

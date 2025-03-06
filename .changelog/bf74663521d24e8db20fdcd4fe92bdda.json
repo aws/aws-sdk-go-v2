@@ -1,0 +1,8 @@
+{
+    "id": "bf746635-21d2-4e8d-b20f-dcd4fe92bdda",
+    "type": "feature",
+    "description": "This release contains 2 changes. 1: DeleteScope/GetScope/UpdateScope operations now return 404 instead of 500 when the resource does not exist. 2: Expected string format for clientToken fields of CreateMonitorInput/CreateScopeInput/UpdateMonitorInput have been updated to be an UUID based string.",
+    "modules": [
+        "service/networkflowmonitor"
+    ]
+}

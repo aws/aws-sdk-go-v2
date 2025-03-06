@@ -12,7 +12,15 @@ type AccessDeniedException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -39,7 +47,15 @@ type ConflictException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -66,7 +82,15 @@ type InternalServerException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -93,7 +117,15 @@ type PendingVerification struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -120,7 +152,15 @@ type ResourceNotFoundException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -147,7 +187,15 @@ type ServiceQuotaExceededException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -174,7 +222,15 @@ type ValidationException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
